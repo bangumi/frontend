@@ -1,0 +1,12 @@
+.pol-main {
+  margin: 300px auto 0 auto;
+  width: 500px;
+  text-align: center;
+}
+.pol-count {
+  margin: 30px;
+  font-size: 60px;
+}
+.pol-button {
+  margin-right: 20px;
+}

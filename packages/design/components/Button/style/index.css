@@ -1,0 +1,15 @@
+/* 
+    Better to use SASS / LESS
+*/
+.bgm-button {
+  width: 100px;
+  height: 50px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #fd979b;
+  color: white;
+  cursor: pointer;
+}
+.bgm-button__disabled {
+  cursor: default;
+}
