@@ -25,6 +25,4 @@ jobs:
         run: pnpm install
 
       - name: Unit test
-        uses: mattallty/jest-github-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: pnpm jest
