@@ -10,6 +10,7 @@
   color: white;
   cursor: pointer;
 }
+
 .bgm-button__disabled {
   cursor: default;
 }
