@@ -30,12 +30,12 @@ jobs:
         with:
           node-version: '16.x'
           
-      - name: Install yarn
-        run: npm install -g yarn
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       # Runs a set of commands using the runners shell
       - name: Install Dependencies
-        run: yarn
+        run: pnpm install
         
       - name: Lint Code
-        run: yarn lint
+        run: pnpm lint
