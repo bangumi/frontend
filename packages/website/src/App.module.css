@@ -1,12 +1,12 @@
-.chii-main {
+.main {
   margin: 300px auto 0 auto;
   width: 500px;
   text-align: center;
 }
-.chii-count {
+.count {
   margin: 30px;
   font-size: 60px;
 }
-.chii-button {
+.button {
   margin-right: 20px;
 }
