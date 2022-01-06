@@ -28,7 +28,7 @@ jobs:
         run: pnpm jest
       
       - name: Generate Coverage report
-        run: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
         with:
           github-token:  ${{ secrets.GITHUB_TOKEN }}
           test-script: pnpm jest --silent --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
