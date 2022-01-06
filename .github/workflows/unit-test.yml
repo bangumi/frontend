@@ -24,5 +24,8 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Unit test
-        run: pnpm jest
+      - name: Unit Test
+        run: pnpm test -- --coverage
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v2
