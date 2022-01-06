@@ -5,10 +5,11 @@ import { render } from '@testing-library/react'
 describe('App', () => {
   it('should increase counter by 1 after clicking count button', () => {
     const { getByText } = render(<App />)
+    expect(getByText('0'))
 
-    const countButton = getByText('count is: 0')
+    const countButton = getByText('Increase')
     countButton.click()
 
-    expect(getByText('count is: 1'))
+    expect(getByText('1'))
   })
 })
