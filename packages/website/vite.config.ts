@@ -6,13 +6,14 @@ export default defineConfig({
   plugins: [
     react(),
     styleImport({
-      // libs: [
-      //   {
-      //     libraryName: '@bangumi/design',
-      //     ensureStyleFile: true,
-      //     resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`
-      //   }
-      // ]
+      libs: [
+        {
+          libraryName: '@bangumi/design',
+          libraryNameChangeCase: 'capitalCase',
+          ensureStyleFile: true,
+          resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`
+        }
+      ]
     })
   ]
 })
