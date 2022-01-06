@@ -26,6 +26,7 @@ jobs:
       
       - name: Generate Coverage report
         uses: mattallty/jest-github-action@v1
-        with:
+        env:
           GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
+        with:
           test-command: "pnpm test"
