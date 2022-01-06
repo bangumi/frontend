@@ -31,3 +31,5 @@ jobs:
         uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
         with:
           github-token:  ${{ secrets.GITHUB_TOKEN }}
+          skip-step: all
+          test-script: pnpx jest --silent --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
