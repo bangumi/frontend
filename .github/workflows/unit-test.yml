@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    permission:
+      pull_request: write
     steps:
       - uses: actions/checkout@v2
 
