@@ -23,6 +23,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install Dependencies
         run: pnpm install
+
+      - name: Run Test
+        run: pnpm jest --testLocationInResults --json --coverage --outputFile="jest.results.json"
       
       - name: Generate Coverage report
         uses: mattallty/jest-github-action@v1
