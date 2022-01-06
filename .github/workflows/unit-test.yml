@@ -1,9 +1,10 @@
 name: Unit Test
 
 on:
-  pull_request_target:
+  push:
     branches: [ master ]
-    types: [ opened, synchronize, reopened ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   test:
