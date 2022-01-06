@@ -20,16 +20,16 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm
 
-      # Runs a set of commands using the runners shell
       - name: Install Dependencies
         run: pnpm install
 
+      # Workaround for https://github.com/mattallty/jest-github-action/issues/8
       - name: Run Test
-        run: pnpm jest --testLocationInResults --json --coverage --outputFile="jest.results.json"
+        run: pnpm jest --json --coverage --outputFile="/home/runner/work/_actions/mattallty/jest-github-action/v1/dist/jest.results.json"
       
       - name: Generate Coverage report
         uses: mattallty/jest-github-action@v1
         env:
           GITHUB_TOKEN:  ${{ secrets.GITHUB_TOKEN }}
         with:
-          test-command: pnpm jest --testLocationInResults --json --coverage --outputFile="jest.results.json"
+          test-command: "echo done"
