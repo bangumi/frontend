@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     permissions:
-      pull_request: write
+      pull_requests: write
     steps:
       - uses: actions/checkout@v2
 
