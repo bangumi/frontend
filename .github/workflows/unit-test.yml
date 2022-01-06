@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,13 +23,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Install Dependencies
         run: pnpm install
-
-      - name: Unit test
-        run: pnpm jest
       
       - name: Generate Coverage report
-        uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
+        uses: mattallty/jest-github-action@v1
         with:
           github-token:  ${{ secrets.GITHUB_TOKEN }}
-          skip-step: all
-          test-script: pnpx jest --silent --ci --coverage --coverageReporters="text" --coverageReporters="text-summary"
+          test-command: "pnpm test"
