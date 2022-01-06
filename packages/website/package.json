@@ -5,7 +5,6 @@
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
-    "lint": "eslint src --ext .js,jsx,ts,tsx",
     "preview": "vite preview"
   },
   "dependencies": {

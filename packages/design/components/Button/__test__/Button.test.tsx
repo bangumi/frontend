@@ -3,5 +3,6 @@ import Button from '../index'
 import { render } from '@testing-library/react'
 
 it('Button', () => {
-    expect(true).toBe(true)
+  render(<Button />)
+  expect(true).toBe(true)
 })
