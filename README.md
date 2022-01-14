@@ -24,3 +24,9 @@ lint 代码风格
 ```bash
 pnpm lint
 ```
+
+### 对于使用 Windows 的开发者
+
+由于 pnpm 对 exFAT 格式的硬盘支持不佳，见 [issue](https://github.com/pnpm/pnpm/issues/3952)，
+在 exFAT 格式的分区上启动项目可能报 `ENOENT: no such file or directory` 错误。
+在上游修复之前，建议在 NTFS 格式的硬盘上存储本项目。
