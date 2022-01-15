@@ -23,10 +23,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: "${{ env.GITHUB_REPOSITORY }}"
 
-      - run: unzip sites
-
       - run: ls
-
+      - run: unzip sites
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
       - name: Install pnpm
