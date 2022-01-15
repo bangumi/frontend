@@ -25,11 +25,34 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Install pnpm
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+
+      - name: Install netlify-cli
         run: npm install -g netlify-cli
 
-      - name: Install Dependencies
+      - name: Upload Deploy
         run: netlify deploy --dir=sites --alias="pr-$PR_NUMBER"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
+
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ env.PR_NUMBER }}
+          comment-author: 'github-actions[bot]'
+          body-includes: '<!-- preview comment -->'
+
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          issue-number: ${{ env.PR_NUMBER }}
+          body: |
+            preview url: <https://pr-${{ env.PR_NUMBER }}--bangumi-next.netlify.app>
+            <!-- preview comment -->
+          edit-mode: replace
