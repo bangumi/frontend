@@ -7,7 +7,7 @@ const App: FC = () => {
   const [count, setCount] = useState(0)
   const [detail, setDetail] = useState<CharacterDetail|null>(null)
   useEffect(() => {
-    getCharacterDetail(39115).then(res => {
+    getCharacterDetail('39115').then(res => {
       setDetail(res.data)
     })
   }, [])
