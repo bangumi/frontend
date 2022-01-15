@@ -6,6 +6,8 @@ const api = {
   getCharacterDetail: '/v0/characters/'
 }
 
-export const getCharacterDetail = (characterId:string|number):AxiosPromise<CharacterDetail> => {
+type CharacterId = string|number;
+
+export const getCharacterDetail = (characterId:CharacterId):AxiosPromise<CharacterDetail> => {
   return request(api.getCharacterDetail + characterId)
 }

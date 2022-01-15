@@ -5,8 +5,7 @@ type infoBox = {
     v:string
   }[]
 }[]
-/* eslint-disable camelcase */
-// 不知道后端会不会改字段
+
 export type CharacterDetail={
   id: number
   name: string
@@ -21,10 +20,10 @@ export type CharacterDetail={
   locked: boolean
   infobox: infoBox
   gender: string
-  blood_type: number
-  birth_year: number
-  birth_mon: number
-  birth_day: number
+  blooType: number
+  birthYear: number
+  birthMon: number
+  birthDay: number
   stat: {
     comments: number
     collects: number
