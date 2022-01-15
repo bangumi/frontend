@@ -27,6 +27,12 @@ jobs:
       - run: unzip sites
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+
       - name: Install pnpm
         run: npm install -g netlify-cli
 
