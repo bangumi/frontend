@@ -25,13 +25,16 @@ jobs:
         with:
           node-version: '16.x'
 
+      - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
           path: ~/.npm
+          key: npm-${{ env.CLI_VER }}
 
       - name: Install netlify-cli
-        run: npm install -g netlify-cli
+        run: npm install -g 'netlify-cli@${{ env.CLI_VER }}'
 
       - name: Upload Deploy
         run: netlify deploy --dir=sites --alias="pr-$PR_NUMBER"
