@@ -18,10 +18,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Download Atifact
-        run: gh run download ${{github.event.workflow_run.id }} -n sites.zip
+        run: gh run download ${{github.event.workflow_run.id }} -n sites
         env:
           GH_TOKEN: ${{ github.token }}
-      - run: unzip sites.zip
+
+      - run: unzip sites
 
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 

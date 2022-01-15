@@ -32,5 +32,5 @@ jobs:
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
-          name: sites.zip
+          name: sites
           path: packages/website/dist
