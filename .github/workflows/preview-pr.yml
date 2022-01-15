@@ -1,0 +1,34 @@
+# 把 PR 构建的页面推送到 Netlify
+# 由于涉及 secrets，所以不能直接在 build.yml 中配置
+name: Build Preview
+
+on:
+  workflow_run:
+    workflows: [ "Build" ]
+    types:
+      - completed
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    if: >
+      ${{ github.event.workflow_run.event == 'pull_request'
+        && github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download Atifact
+        run: gh run download ${{github.event.workflow_run.id }} -n sites.zip
+
+      - run: unzip sites.zip
+
+      - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
+
+      - name: Install pnpm
+        run: npm install -g netlify-cli
+
+      - name: Install Dependencies
+        run: netlify deploy --dir=sites --alias="pr-$PR_NUMBER"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
