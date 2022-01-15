@@ -15,16 +15,12 @@ jobs:
       ${{ github.event.workflow_run.event == 'pull_request'
         && github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/checkout@v2
-
       - name: Download Atifact
-        run: gh run download ${{github.event.workflow_run.id }} -n sites
+        run: gh run download ${{github.event.workflow_run.id }} -n sites -d sites
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: "${{ env.GITHUB_REPOSITORY }}"
 
-      - run: ls
-      - run: unzip sites
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
       - name: Setup Node
