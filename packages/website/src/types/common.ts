@@ -5,6 +5,8 @@ type infoBox = {
     v:string
   }[]
 }[]
+/* eslint-disable camelcase */
+// 不知道后端会不会改字段
 export type CharacterDetail={
   id: number
   name: string
