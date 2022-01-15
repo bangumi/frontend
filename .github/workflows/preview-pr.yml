@@ -16,10 +16,9 @@ jobs:
         && github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Download Atifact
-        run: gh run download ${{github.event.workflow_run.id }} --name sites --dir sites
+        run: gh --repo $GITHUB_REPOSITORY run download ${{github.event.workflow_run.id }} --name sites --dir sites
         env:
           GH_TOKEN: ${{ github.token }}
-          GH_REPO: "${{ env.GITHUB_REPOSITORY }}"
 
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
