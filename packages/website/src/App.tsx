@@ -24,7 +24,7 @@ const App: FC = () => {
       </Button>
       <Button disabled>Disabled</Button>
       { detail
-        ? <div>
+        ? <div data-testid='fetched-character-detail'>
         <h1>{detail.name}</h1>
             {
               detail.infobox.map(el =>
