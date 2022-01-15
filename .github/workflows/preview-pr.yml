@@ -1,6 +1,6 @@
 # 把 PR 构建的页面推送到 Netlify
 # 由于涉及 secrets，所以不能直接在 build.yml 中配置
-name: Build Preview
+name: Upload Preview
 
 on:
   workflow_run:
