@@ -9,5 +9,5 @@ const api = {
 type CharacterId = string;
 
 export const getCharacterDetail = (characterId:CharacterId):AxiosPromise<CharacterDetail> => {
-  return request(api.getCharacterDetail + characterId)
+  return request(`/v0/characters/${characterId}`)
 }
