@@ -19,7 +19,8 @@ jobs:
 
       - name: Download Atifact
         run: gh run download ${{github.event.workflow_run.id }} -n sites.zip
-
+        env:
+          GH_TOKEN: ${{ github.token }}
       - run: unzip sites.zip
 
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
