@@ -29,13 +29,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '16.x'
-          
+          cache: 'pnpm'
+
       - name: Install pnpm
         run: npm install -g pnpm
 
       # Runs a set of commands using the runners shell
       - name: Install Dependencies
         run: pnpm install
-        
+
       - name: Lint Code
         run: pnpm lint
