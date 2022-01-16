@@ -68,7 +68,9 @@ importers:
       less-loader: ^10.2.0
       react: ^17.0.2
       react-dom: ^17.0.2
+      storybook-builder-vite: ^0.1.13
       style-loader: ^3.3.1
+      vite: ^2.7.10
       webpack: ^5.66.0
     dependencies:
       react: 17.0.2
@@ -88,7 +90,9 @@ importers:
       css-loader: r2.cnpmjs.org/css-loader/6.5.1_webpack@5.66.0
       less: r2.cnpmjs.org/less/4.1.2
       less-loader: r2.cnpmjs.org/less-loader/10.2.0_less@4.1.2+webpack@5.66.0
+      storybook-builder-vite: 0.1.13_01fb002df1ec4dabbb6d90fbc34c3408
       style-loader: r2.cnpmjs.org/style-loader/3.3.1_webpack@5.66.0
+      vite: 2.7.10_less@4.1.2
       webpack: 5.66.0
 
   packages/server:
@@ -4274,30 +4278,6 @@ packages:
     resolution: {integrity: sha512-1HQ2M2sPtxwnvOvT1ZClHyQDiggdNjURWpY2we6aMKCQiUVxTmVs2UYPLIrD84sS+kMdUwfBSylbJPwNnBrnHQ==}
     dev: true
 
-  /esbuild/0.13.15:
-    resolution: {integrity: sha512-raCxt02HBKv8RJxE8vkTSCXGIyKHdEdGfUmiYb8wnabnaEmHzyW7DCHb5tEN0xU8ryqg5xw54mcwnYkC4x3AIw==}
-    hasBin: true
-    requiresBuild: true
-    optionalDependencies:
-      esbuild-android-arm64: r2.cnpmjs.org/esbuild-android-arm64/0.13.15
-      esbuild-darwin-64: r2.cnpmjs.org/esbuild-darwin-64/0.13.15
-      esbuild-darwin-arm64: r2.cnpmjs.org/esbuild-darwin-arm64/0.13.15
-      esbuild-freebsd-64: r2.cnpmjs.org/esbuild-freebsd-64/0.13.15
-      esbuild-freebsd-arm64: r2.cnpmjs.org/esbuild-freebsd-arm64/0.13.15
-      esbuild-linux-32: r2.cnpmjs.org/esbuild-linux-32/0.13.15
-      esbuild-linux-64: r2.cnpmjs.org/esbuild-linux-64/0.13.15
-      esbuild-linux-arm: r2.cnpmjs.org/esbuild-linux-arm/0.13.15
-      esbuild-linux-arm64: r2.cnpmjs.org/esbuild-linux-arm64/0.13.15
-      esbuild-linux-mips64le: r2.cnpmjs.org/esbuild-linux-mips64le/0.13.15
-      esbuild-linux-ppc64le: r2.cnpmjs.org/esbuild-linux-ppc64le/0.13.15
-      esbuild-netbsd-64: r2.cnpmjs.org/esbuild-netbsd-64/0.13.15
-      esbuild-openbsd-64: r2.cnpmjs.org/esbuild-openbsd-64/0.13.15
-      esbuild-sunos-64: r2.cnpmjs.org/esbuild-sunos-64/0.13.15
-      esbuild-windows-32: r2.cnpmjs.org/esbuild-windows-32/0.13.15
-      esbuild-windows-64: r2.cnpmjs.org/esbuild-windows-64/0.13.15
-      esbuild-windows-arm64: r2.cnpmjs.org/esbuild-windows-arm64/0.13.15
-    dev: true
-
   /escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
     engines: {node: '>=6'}
@@ -5478,12 +5458,6 @@ packages:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
 
-  /nanoid/3.1.30:
-    resolution: {integrity: sha512-zJpuPDwOv8D2zq2WRoMe1HsfZthVewpel9CAvTfc/2mBD1uUT/agc5f7GHGWXlYkFvi1mVxe4IjvP2HNrop7nQ==}
-    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
-    hasBin: true
-    dev: true
-
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
@@ -5646,15 +5620,6 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 4.1.0
-    dev: true
-
-  /postcss/8.4.5:
-    resolution: {integrity: sha512-jBDboWM8qpaqwkMwItqTQTiFikhs/67OYVvblFFTM7MrZjt6yMKd6r2kgXizEbTTljacm4NldIlZnhbjr84QYg==}
-    engines: {node: ^10 || ^12 || >=14}
-    dependencies:
-      nanoid: 3.1.30
-      picocolors: 1.0.0
-      source-map-js: 1.0.1
     dev: true
 
   /prelude-ls/1.1.2:
@@ -5913,11 +5878,6 @@ packages:
       tslib: 2.3.1
     dev: true
 
-  /source-map-js/1.0.1:
-    resolution: {integrity: sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
   /source-map-support/0.5.21:
     resolution: {integrity: sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==}
     dependencies:
@@ -5948,6 +5908,26 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       escape-string-regexp: 2.0.0
+    dev: true
+
+  /storybook-builder-vite/0.1.13_01fb002df1ec4dabbb6d90fbc34c3408:
+    resolution: {integrity: sha512-eSfCluvVFit46iaYYyv9l/WhHuztHQflN6EvjPc63yr5PESVQawEDZnmVPvcLxO1r7NOOJGVO4LtSPJmGIg0Qw==}
+    peerDependencies:
+      vite: '>=2.6.7'
+    dependencies:
+      '@mdx-js/mdx': r2.cnpmjs.org/@mdx-js/mdx/1.6.22
+      '@storybook/csf-tools': 6.4.13
+      '@storybook/source-loader': 6.4.13_react-dom@17.0.2+react@17.0.2
+      '@vitejs/plugin-react': 1.1.4
+      es-module-lexer: r2.cnpmjs.org/es-module-lexer/0.9.3
+      glob: r2.cnpmjs.org/glob/7.2.0
+      glob-promise: r2.cnpmjs.org/glob-promise/4.2.2_glob@7.2.0
+      vite: 2.7.10_less@4.1.2
+      vite-plugin-mdx: r2.cnpmjs.org/vite-plugin-mdx/3.5.10_@mdx-js+mdx@1.6.22+vite@2.7.10
+    transitivePeerDependencies:
+      - react
+      - react-dom
+      - supports-color
     dev: true
 
   /string-length/4.0.2:
@@ -6196,8 +6176,33 @@ packages:
       stylus:
         optional: true
     dependencies:
-      esbuild: 0.13.15
-      postcss: 8.4.5
+      esbuild: r2.cnpmjs.org/esbuild/0.13.15
+      postcss: r2.cnpmjs.org/postcss/8.4.5
+      resolve: 1.21.0
+      rollup: 2.63.0
+    optionalDependencies:
+      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+    dev: true
+
+  /vite/2.7.10_less@4.1.2:
+    resolution: {integrity: sha512-KEY96ntXUid1/xJihJbgmLZx7QSC2D4Tui0FdS0Old5OokYzFclcofhtxtjDdGOk/fFpPbHv9yw88+rB93Tb8w==}
+    engines: {node: '>=12.2.0'}
+    hasBin: true
+    peerDependencies:
+      less: '*'
+      sass: '*'
+      stylus: '*'
+    peerDependenciesMeta:
+      less:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+    dependencies:
+      esbuild: r2.cnpmjs.org/esbuild/0.13.15
+      less: r2.cnpmjs.org/less/4.1.2
+      postcss: r2.cnpmjs.org/postcss/8.4.5
       resolve: 1.21.0
       rollup: 2.63.0
     optionalDependencies:
@@ -6391,6 +6396,13 @@ packages:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 20.2.9
+    dev: true
+
+  r2.cnpmjs.org/@alloc/quick-lru/5.2.0:
+    resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz}
+    name: '@alloc/quick-lru'
+    version: 5.2.0
+    engines: {node: '>=10'}
     dev: true
 
   r2.cnpmjs.org/@babel/code-frame/7.12.11:
@@ -10038,10 +10050,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-android-arm64/0.13.8:
+    resolution: {integrity: sha512-AilbChndywpk7CdKkNSZ9klxl+9MboLctXd9LwLo3b0dawmOF/i/t2U5d8LM6SbT1Xw36F8yngSUPrd8yPs2RA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-android-arm64/-/esbuild-android-arm64-0.13.8.tgz}
+    name: esbuild-android-arm64
+    version: 0.13.8
+    cpu: [arm64]
+    os: [android]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-darwin-64/0.13.15:
     resolution: {integrity: sha512-ihOQRGs2yyp7t5bArCwnvn2Atr6X4axqPpEdCFPVp7iUj4cVSdisgvEKdNR7yH3JDjW6aQDw40iQFoTqejqxvQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-darwin-64/-/esbuild-darwin-64-0.13.15.tgz}
     name: esbuild-darwin-64
     version: 0.13.15
+    cpu: [x64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-darwin-64/0.13.8:
+    resolution: {integrity: sha512-b6sdiT84zV5LVaoF+UoMVGJzR/iE2vNUfUDfFQGrm4LBwM/PWXweKpuu6RD9mcyCq18cLxkP6w/LD/w9DtX3ng==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-darwin-64/-/esbuild-darwin-64-0.13.8.tgz}
+    name: esbuild-darwin-64
+    version: 0.13.8
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
@@ -10058,10 +10090,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-darwin-arm64/0.13.8:
+    resolution: {integrity: sha512-R8YuPiiJayuJJRUBG4H0VwkEKo6AvhJs2m7Tl0JaIer3u1FHHXwGhMxjJDmK+kXwTFPriSysPvcobXC/UrrZCQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.13.8.tgz}
+    name: esbuild-darwin-arm64
+    version: 0.13.8
+    cpu: [arm64]
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-freebsd-64/0.13.15:
     resolution: {integrity: sha512-G3dLBXUI6lC6Z09/x+WtXBXbOYQZ0E8TDBqvn7aMaOCzryJs8LyVXKY4CPnHFXZAbSwkCbqiPuSQ1+HhrNk7EA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-freebsd-64/-/esbuild-freebsd-64-0.13.15.tgz}
     name: esbuild-freebsd-64
     version: 0.13.15
+    cpu: [x64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-freebsd-64/0.13.8:
+    resolution: {integrity: sha512-zBn6urrn8FnKC+YSgDxdof9jhPCeU8kR/qaamlV4gI8R3KUaUK162WYM7UyFVAlj9N0MyD3AtB+hltzu4cysTw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-freebsd-64/-/esbuild-freebsd-64-0.13.8.tgz}
+    name: esbuild-freebsd-64
+    version: 0.13.8
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
@@ -10078,10 +10130,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-freebsd-arm64/0.13.8:
+    resolution: {integrity: sha512-pWW2slN7lGlkx0MOEBoUGwRX5UgSCLq3dy2c8RIOpiHtA87xAUpDBvZK10MykbT+aMfXc0NI2lu1X+6kI34xng==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-freebsd-arm64/-/esbuild-freebsd-arm64-0.13.8.tgz}
+    name: esbuild-freebsd-arm64
+    version: 0.13.8
+    cpu: [arm64]
+    os: [freebsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-linux-32/0.13.15:
     resolution: {integrity: sha512-ZvTBPk0YWCLMCXiFmD5EUtB30zIPvC5Itxz0mdTu/xZBbbHJftQgLWY49wEPSn2T/TxahYCRDWun5smRa0Tu+g==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-32/-/esbuild-linux-32-0.13.15.tgz}
     name: esbuild-linux-32
     version: 0.13.15
+    cpu: [ia32]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-linux-32/0.13.8:
+    resolution: {integrity: sha512-T0I0ueeKVO/Is0CAeSEOG9s2jeNNb8jrrMwG9QBIm3UU18MRB60ERgkS2uV3fZ1vP2F8i3Z2e3Zju4lg9dhVmw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-32/-/esbuild-linux-32-0.13.8.tgz}
+    name: esbuild-linux-32
+    version: 0.13.8
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
@@ -10098,10 +10170,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-linux-64/0.13.8:
+    resolution: {integrity: sha512-Bm8SYmFtvfDCIu9sjKppFXzRXn2BVpuCinU1ChTuMtdKI/7aPpXIrkqBNOgPTOQO9AylJJc1Zw6EvtKORhn64w==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-64/-/esbuild-linux-64-0.13.8.tgz}
+    name: esbuild-linux-64
+    version: 0.13.8
+    cpu: [x64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-linux-arm/0.13.15:
     resolution: {integrity: sha512-wUHttDi/ol0tD8ZgUMDH8Ef7IbDX+/UsWJOXaAyTdkT7Yy9ZBqPg8bgB/Dn3CZ9SBpNieozrPRHm0BGww7W/jA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-arm/-/esbuild-linux-arm-0.13.15.tgz}
     name: esbuild-linux-arm
     version: 0.13.15
+    cpu: [arm]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-linux-arm/0.13.8:
+    resolution: {integrity: sha512-4/HfcC40LJ4GPyboHA+db0jpFarTB628D1ifU+/5bunIgY+t6mHkJWyxWxAAE8wl/ZIuRYB9RJFdYpu1AXGPdg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-arm/-/esbuild-linux-arm-0.13.8.tgz}
+    name: esbuild-linux-arm
+    version: 0.13.8
     cpu: [arm]
     os: [linux]
     requiresBuild: true
@@ -10118,10 +10210,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-linux-arm64/0.13.8:
+    resolution: {integrity: sha512-X4pWZ+SL+FJ09chWFgRNO3F+YtvAQRcWh0uxKqZSWKiWodAB20flsW/OWFYLXBKiVCTeoGMvENZS/GeVac7+tQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-arm64/-/esbuild-linux-arm64-0.13.8.tgz}
+    name: esbuild-linux-arm64
+    version: 0.13.8
+    cpu: [arm64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-linux-mips64le/0.13.15:
     resolution: {integrity: sha512-KlVjIG828uFPyJkO/8gKwy9RbXhCEUeFsCGOJBepUlpa7G8/SeZgncUEz/tOOUJTcWMTmFMtdd3GElGyAtbSWg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-mips64le/-/esbuild-linux-mips64le-0.13.15.tgz}
     name: esbuild-linux-mips64le
     version: 0.13.15
+    cpu: [mips64el]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-linux-mips64le/0.13.8:
+    resolution: {integrity: sha512-o7e0D+sqHKT31v+mwFircJFjwSKVd2nbkHEn4l9xQ1hLR+Bv8rnt3HqlblY3+sBdlrOTGSwz0ReROlKUMJyldA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-mips64le/-/esbuild-linux-mips64le-0.13.8.tgz}
+    name: esbuild-linux-mips64le
+    version: 0.13.8
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
@@ -10138,10 +10250,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-linux-ppc64le/0.13.8:
+    resolution: {integrity: sha512-eZSQ0ERsWkukJp2px/UWJHVNuy0lMoz/HZcRWAbB6reoaBw7S9vMzYNUnflfL3XA6WDs+dZn3ekHE4Y2uWLGig==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-linux-ppc64le/-/esbuild-linux-ppc64le-0.13.8.tgz}
+    name: esbuild-linux-ppc64le
+    version: 0.13.8
+    cpu: [ppc64]
+    os: [linux]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-netbsd-64/0.13.15:
     resolution: {integrity: sha512-3+yE9emwoevLMyvu+iR3rsa+Xwhie7ZEHMGDQ6dkqP/ndFzRHkobHUKTe+NCApSqG5ce2z4rFu+NX/UHnxlh3w==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-netbsd-64/-/esbuild-netbsd-64-0.13.15.tgz}
     name: esbuild-netbsd-64
     version: 0.13.15
+    cpu: [x64]
+    os: [netbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-netbsd-64/0.13.8:
+    resolution: {integrity: sha512-gZX4kP7gVvOrvX0ZwgHmbuHczQUwqYppxqtoyC7VNd80t5nBHOFXVhWo2Ad/Lms0E8b+wwgI/WjZFTCpUHOg9Q==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-netbsd-64/-/esbuild-netbsd-64-0.13.8.tgz}
+    name: esbuild-netbsd-64
+    version: 0.13.8
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
@@ -10158,10 +10290,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-openbsd-64/0.13.8:
+    resolution: {integrity: sha512-afzza308X4WmcebexbTzAgfEWt9MUkdTvwIa8xOu4CM2qGbl2LanqEl8/LUs8jh6Gqw6WsicEK52GPrS9wvkcw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-openbsd-64/-/esbuild-openbsd-64-0.13.8.tgz}
+    name: esbuild-openbsd-64
+    version: 0.13.8
+    cpu: [x64]
+    os: [openbsd]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-sunos-64/0.13.15:
     resolution: {integrity: sha512-lbivT9Bx3t1iWWrSnGyBP9ODriEvWDRiweAs69vI+miJoeKwHWOComSRukttbuzjZ8r1q0mQJ8Z7yUsDJ3hKdw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-sunos-64/-/esbuild-sunos-64-0.13.15.tgz}
     name: esbuild-sunos-64
     version: 0.13.15
+    cpu: [x64]
+    os: [sunos]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-sunos-64/0.13.8:
+    resolution: {integrity: sha512-mWPZibmBbuMKD+LDN23LGcOZ2EawMYBONMXXHmbuxeT0XxCNwadbCVwUQ/2p5Dp5Kvf6mhrlIffcnWOiCBpiVw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-sunos-64/-/esbuild-sunos-64-0.13.8.tgz}
+    name: esbuild-sunos-64
+    version: 0.13.8
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
@@ -10178,10 +10330,30 @@ packages:
     dev: true
     optional: true
 
+  r2.cnpmjs.org/esbuild-windows-32/0.13.8:
+    resolution: {integrity: sha512-QsZ1HnWIcnIEApETZWw8HlOhDSWqdZX2SylU7IzGxOYyVcX7QI06ety/aDcn437mwyO7Ph4RrbhB+2ntM8kX8A==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-windows-32/-/esbuild-windows-32-0.13.8.tgz}
+    name: esbuild-windows-32
+    version: 0.13.8
+    cpu: [ia32]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
   r2.cnpmjs.org/esbuild-windows-64/0.13.15:
     resolution: {integrity: sha512-9aMsPRGDWCd3bGjUIKG/ZOJPKsiztlxl/Q3C1XDswO6eNX/Jtwu4M+jb6YDH9hRSUflQWX0XKAfWzgy5Wk54JQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.13.15.tgz}
     name: esbuild-windows-64
     version: 0.13.15
+    cpu: [x64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild-windows-64/0.13.8:
+    resolution: {integrity: sha512-76Fb57B9eE/JmJi1QmUW0tRLQZfGo0it+JeYoCDTSlbTn7LV44ecOHIMJSSgZADUtRMWT9z0Kz186bnaB3amSg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-windows-64/-/esbuild-windows-64-0.13.8.tgz}
+    name: esbuild-windows-64
+    version: 0.13.8
     cpu: [x64]
     os: [win32]
     requiresBuild: true
@@ -10197,6 +10369,68 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  r2.cnpmjs.org/esbuild-windows-arm64/0.13.8:
+    resolution: {integrity: sha512-HW6Mtq5eTudllxY2YgT62MrVcn7oq2o8TAoAvDUhyiEmRmDY8tPwAhb1vxw5/cdkbukM3KdMYtksnUhF/ekWeg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild-windows-arm64/-/esbuild-windows-arm64-0.13.8.tgz}
+    name: esbuild-windows-arm64
+    version: 0.13.8
+    cpu: [arm64]
+    os: [win32]
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  r2.cnpmjs.org/esbuild/0.13.15:
+    resolution: {integrity: sha512-raCxt02HBKv8RJxE8vkTSCXGIyKHdEdGfUmiYb8wnabnaEmHzyW7DCHb5tEN0xU8ryqg5xw54mcwnYkC4x3AIw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild/-/esbuild-0.13.15.tgz}
+    name: esbuild
+    version: 0.13.15
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      esbuild-android-arm64: r2.cnpmjs.org/esbuild-android-arm64/0.13.15
+      esbuild-darwin-64: r2.cnpmjs.org/esbuild-darwin-64/0.13.15
+      esbuild-darwin-arm64: r2.cnpmjs.org/esbuild-darwin-arm64/0.13.15
+      esbuild-freebsd-64: r2.cnpmjs.org/esbuild-freebsd-64/0.13.15
+      esbuild-freebsd-arm64: r2.cnpmjs.org/esbuild-freebsd-arm64/0.13.15
+      esbuild-linux-32: r2.cnpmjs.org/esbuild-linux-32/0.13.15
+      esbuild-linux-64: r2.cnpmjs.org/esbuild-linux-64/0.13.15
+      esbuild-linux-arm: r2.cnpmjs.org/esbuild-linux-arm/0.13.15
+      esbuild-linux-arm64: r2.cnpmjs.org/esbuild-linux-arm64/0.13.15
+      esbuild-linux-mips64le: r2.cnpmjs.org/esbuild-linux-mips64le/0.13.15
+      esbuild-linux-ppc64le: r2.cnpmjs.org/esbuild-linux-ppc64le/0.13.15
+      esbuild-netbsd-64: r2.cnpmjs.org/esbuild-netbsd-64/0.13.15
+      esbuild-openbsd-64: r2.cnpmjs.org/esbuild-openbsd-64/0.13.15
+      esbuild-sunos-64: r2.cnpmjs.org/esbuild-sunos-64/0.13.15
+      esbuild-windows-32: r2.cnpmjs.org/esbuild-windows-32/0.13.15
+      esbuild-windows-64: r2.cnpmjs.org/esbuild-windows-64/0.13.15
+      esbuild-windows-arm64: r2.cnpmjs.org/esbuild-windows-arm64/0.13.15
+    dev: true
+
+  r2.cnpmjs.org/esbuild/0.13.8:
+    resolution: {integrity: sha512-A4af7G7YZLfG5OnARJRMtlpEsCkq/zHZQXewgPA864l9D6VjjbH1SuFYK/OSV6BtHwDGkdwyRrX0qQFLnMfUcw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/esbuild/-/esbuild-0.13.8.tgz}
+    name: esbuild
+    version: 0.13.8
+    hasBin: true
+    requiresBuild: true
+    optionalDependencies:
+      esbuild-android-arm64: r2.cnpmjs.org/esbuild-android-arm64/0.13.8
+      esbuild-darwin-64: r2.cnpmjs.org/esbuild-darwin-64/0.13.8
+      esbuild-darwin-arm64: r2.cnpmjs.org/esbuild-darwin-arm64/0.13.8
+      esbuild-freebsd-64: r2.cnpmjs.org/esbuild-freebsd-64/0.13.8
+      esbuild-freebsd-arm64: r2.cnpmjs.org/esbuild-freebsd-arm64/0.13.8
+      esbuild-linux-32: r2.cnpmjs.org/esbuild-linux-32/0.13.8
+      esbuild-linux-64: r2.cnpmjs.org/esbuild-linux-64/0.13.8
+      esbuild-linux-arm: r2.cnpmjs.org/esbuild-linux-arm/0.13.8
+      esbuild-linux-arm64: r2.cnpmjs.org/esbuild-linux-arm64/0.13.8
+      esbuild-linux-mips64le: r2.cnpmjs.org/esbuild-linux-mips64le/0.13.8
+      esbuild-linux-ppc64le: r2.cnpmjs.org/esbuild-linux-ppc64le/0.13.8
+      esbuild-netbsd-64: r2.cnpmjs.org/esbuild-netbsd-64/0.13.8
+      esbuild-openbsd-64: r2.cnpmjs.org/esbuild-openbsd-64/0.13.8
+      esbuild-sunos-64: r2.cnpmjs.org/esbuild-sunos-64/0.13.8
+      esbuild-windows-32: r2.cnpmjs.org/esbuild-windows-32/0.13.8
+      esbuild-windows-64: r2.cnpmjs.org/esbuild-windows-64/0.13.8
+      esbuild-windows-arm64: r2.cnpmjs.org/esbuild-windows-arm64/0.13.8
+    dev: true
 
   r2.cnpmjs.org/escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/escalade/-/escalade-3.1.1.tgz}
@@ -11288,6 +11522,19 @@ packages:
     engines: {node: '>=4'}
     peerDependencies:
       glob: '*'
+    dependencies:
+      '@types/glob': r2.cnpmjs.org/@types/glob/7.2.0
+      glob: r2.cnpmjs.org/glob/7.2.0
+    dev: true
+
+  r2.cnpmjs.org/glob-promise/4.2.2_glob@7.2.0:
+    resolution: {integrity: sha512-xcUzJ8NWN5bktoTIX7eOclO1Npxd/dyVqUJxlLIDasT4C7KZyqlPIwkdJ0Ypiy3p2ZKahTjK4M9uC3sNSfNMzw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/glob-promise/-/glob-promise-4.2.2.tgz}
+    id: r2.cnpmjs.org/glob-promise/4.2.2
+    name: glob-promise
+    version: 4.2.2
+    engines: {node: '>=12'}
+    peerDependencies:
+      glob: ^7.1.6
     dependencies:
       '@types/glob': r2.cnpmjs.org/@types/glob/7.2.0
       glob: r2.cnpmjs.org/glob/7.2.0
@@ -16635,6 +16882,19 @@ packages:
       vfile: r2.cnpmjs.org/vfile/4.2.1
     dev: true
 
+  r2.cnpmjs.org/unified/9.2.2:
+    resolution: {integrity: sha512-Sg7j110mtefBD+qunSLO1lqOEKdrwBFBrR6Qd8f4uwkhWNlbkaqwHse6e7QvD3AP/MNoJdEDLaf8OxYyoWgorQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/unified/-/unified-9.2.2.tgz}
+    name: unified
+    version: 9.2.2
+    dependencies:
+      bail: r2.cnpmjs.org/bail/1.0.5
+      extend: r2.cnpmjs.org/extend/3.0.2
+      is-buffer: r2.cnpmjs.org/is-buffer/2.0.5
+      is-plain-obj: r2.cnpmjs.org/is-plain-obj/2.1.0
+      trough: r2.cnpmjs.org/trough/1.0.5
+      vfile: r2.cnpmjs.org/vfile/4.2.1
+    dev: true
+
   r2.cnpmjs.org/union-value/1.0.1:
     resolution: {integrity: sha512-tJfXmxMeWYnczCVs7XAEvIV7ieppALdyepWMkHkwciRpZraG/xwT+s2JN8+pr1+8jCRf80FFzvr+MpQeeoF4Xg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/union-value/-/union-value-1.0.1.tgz}
     name: union-value
@@ -16972,6 +17232,23 @@ packages:
       is-buffer: r2.cnpmjs.org/is-buffer/2.0.5
       unist-util-stringify-position: r2.cnpmjs.org/unist-util-stringify-position/2.0.3
       vfile-message: r2.cnpmjs.org/vfile-message/2.0.4
+    dev: true
+
+  r2.cnpmjs.org/vite-plugin-mdx/3.5.10_@mdx-js+mdx@1.6.22+vite@2.7.10:
+    resolution: {integrity: sha512-tfGNRwkO23pln9EYqhbsOLEx9Qot5+enl+727gop7+HGEoC87+88hLRWGL+FU/It1Y0a5P3OAyDbTKKHX6tEJw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/vite-plugin-mdx/-/vite-plugin-mdx-3.5.10.tgz}
+    id: r2.cnpmjs.org/vite-plugin-mdx/3.5.10
+    name: vite-plugin-mdx
+    version: 3.5.10
+    peerDependencies:
+      '@mdx-js/mdx': '*'
+      vite: '*'
+    dependencies:
+      '@alloc/quick-lru': r2.cnpmjs.org/@alloc/quick-lru/5.2.0
+      '@mdx-js/mdx': r2.cnpmjs.org/@mdx-js/mdx/1.6.22
+      esbuild: r2.cnpmjs.org/esbuild/0.13.8
+      resolve: 1.21.0
+      unified: r2.cnpmjs.org/unified/9.2.2
+      vite: 2.7.10_less@4.1.2
     dev: true
 
   r2.cnpmjs.org/vm-browserify/1.1.2:

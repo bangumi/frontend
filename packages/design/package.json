@@ -22,7 +22,9 @@
     "css-loader": "^6.5.1",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "storybook-builder-vite": "^0.1.13",
     "style-loader": "^3.3.1",
+    "vite": "^2.7.10",
     "webpack": "^5.66.0"
   },
   "scripts": {

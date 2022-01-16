@@ -8,15 +8,15 @@ module.exports = {
     "@storybook/addon-essentials"
   ],
   "framework": "@storybook/react",
-  webpackFinal: async (webpackConfig, {configType}) => {
-    webpackConfig.module.rules.push({
-      test: /.less$/,
-      use: ['style-loader', 'css-loader', 'less-loader']
-    })
+  // webpackFinal: async (webpackConfig, {configType}) => {
+  //   webpackConfig.module.rules.push({
+  //     test: /.less$/,
+  //     use: ['style-loader', 'css-loader', 'less-loader']
+  //   })
 
-    return webpackConfig
-  },
+  //   return webpackConfig
+  // },
   core: {
-    builder: 'webpack5',
+    builder: 'storybook-builder-vite',
   },
 }
