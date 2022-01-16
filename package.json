@@ -6,6 +6,7 @@
     "build": "pnpm website build",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design storybook",
+    "design:build-doc": "pnpm design build-storybook",
     "dev": "pnpm dev:csr",
     "dev:csr": "pnpm website dev",
     "dev:ssr": "pnpm server dev",
