@@ -22,4 +22,4 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
       - name: Build Storybook
-        run: pnpm design 
+        run: pnpm design:build-doc
