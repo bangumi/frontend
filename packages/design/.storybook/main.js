@@ -1,3 +1,5 @@
+const { dirname } = require("path");
+
 module.exports = {
   "stories": [
     "../components/**/*.stories.mdx",
@@ -8,14 +10,12 @@ module.exports = {
     "@storybook/addon-essentials"
   ],
   "framework": "@storybook/react",
-  // webpackFinal: async (webpackConfig, {configType}) => {
-  //   webpackConfig.module.rules.push({
-  //     test: /.less$/,
-  //     use: ['style-loader', 'css-loader', 'less-loader']
-  //   })
-
-  //   return webpackConfig
-  // },
+  viteFinal: async (viteConfig) => {
+    // workaround for vite build
+    // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
+    viteConfig.root = dirname(require.resolve("storybook-builder-vite"))
+    return viteConfig
+  },
   core: {
     builder: 'storybook-builder-vite',
   },
