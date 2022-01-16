@@ -1,5 +1,5 @@
 import React, { useState, FC, useEffect } from 'react'
-import { Button } from '@bangumi/design'
+import { Button, Typography } from '@bangumi/design'
 import style from './App.module.css'
 import { getCharacterDetail } from './api/character'
 import { CharacterDetail } from './types/common'
@@ -25,7 +25,7 @@ const App: FC = () => {
       <Button disabled>Disabled</Button>
       { detail
         ? <div>
-        <h1>{detail.name}</h1>
+        <Typography.Link href="https://bgm.tv/character/39115"><h1>{detail.name}</h1></Typography.Link>
             {
               detail.infobox.map(el =>
                 <tr key={el.key}>
