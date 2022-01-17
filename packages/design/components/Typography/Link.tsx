@@ -1,5 +1,4 @@
 import React from 'react'
-import './style/Link.less'
 
 export interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 
