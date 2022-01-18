@@ -4,7 +4,8 @@
 
 ## 开始
 
-- 通过右上角的 Fork 按钮将这个 [repo](https://github.com/bangumi/frontend) fork 到自己的账号下面。
+- 通过右上角的 Fork 按钮或者点击[这个链接](https://github.com/bangumi/frontend)
+  将 [repo](https://github.com/bangumi/frontend) fork 到自己的账号下面。
 - 通过 SSH，GitHub CLI 或者 HTTP clone 你的 fork。
 
 ```bash
@@ -38,8 +39,8 @@ pnpm test
 pnpm lint
 ```
 
-- Commit 你的工作，commit message 需要遵守 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) 规范
-- Push 到你的分支上
+- Commit 你的工作
+- 开发完成后，Push 到你的分支上
 
 ```bash
 git push -u origin <YOUR_BRANCH>
