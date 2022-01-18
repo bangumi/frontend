@@ -1,4 +1,4 @@
-# Bangumi Front-end Project
+# Bangumi Frontend Project
 
 Bangumi 新前端项目，基于 React/TypeScript/Vite。
 
@@ -30,3 +30,9 @@ pnpm lint
 由于 pnpm 对 exFAT 格式的硬盘支持不佳，见 [issue](https://github.com/pnpm/pnpm/issues/3952)，
 在 exFAT 格式的分区上启动项目可能报 `ENOENT: no such file or directory` 错误。
 在上游修复之前，建议在 NTFS 格式的硬盘上存储本项目。
+
+## 项目成员
+
+### Collaborators
+
+- [Ayase-252](https://github.com/Ayase-252)<<i@ayase-lab.com>>
