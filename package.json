@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "preinstall": "node ./scripts/preinstall.js",
     "build": "pnpm website build",
     "dev": "pnpm dev:csr",
     "dev:csr": "pnpm website dev",
