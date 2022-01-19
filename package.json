@@ -19,11 +19,6 @@
     "website": "pnpm --filter=@bangumi/website",
     "lint-staged": "lint-staged"
   },
-  "config": {
-    "commitizen": {
-      "path": "git-cz"
-    }
-  },
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "eslint --fix"
@@ -34,8 +29,6 @@
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.16.7",
-    "@commitlint/cli": "^16.0.2",
-    "@commitlint/config-conventional": "^16.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.4.0",
