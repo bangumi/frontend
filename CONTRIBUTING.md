@@ -61,6 +61,7 @@ git push -u origin <YOUR_BRANCH>
   - PR 只包括测试用例的变更；
 - 在 48 小时之内，没有 Collaborator 要求更改；
 - 所有关于新特性与缺陷修复的 PR 都必须包含对应测试用例；
+- 如果在 `packages/design` 下面添加新的组件，需要包含一个 storybook 作为组件文档；
 
 ## 如何成为 Collaborator
 
