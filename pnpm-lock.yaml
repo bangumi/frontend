@@ -22,7 +22,6 @@ importers:
       eslint-plugin-node: ^11.1.0
       eslint-plugin-promise: ^5.2.0
       eslint-plugin-react: ^7.28.0
-      git-cz: ^4.8.0
       husky: ^7.0.4
       jest: ^27.4.6
       jest-transform-stub: ^2.0.0
@@ -49,7 +48,6 @@ importers:
       eslint-plugin-node: r2.cnpmjs.org/eslint-plugin-node/11.1.0_eslint@7.32.0
       eslint-plugin-promise: r2.cnpmjs.org/eslint-plugin-promise/5.2.0_eslint@7.32.0
       eslint-plugin-react: r2.cnpmjs.org/eslint-plugin-react/7.28.0_eslint@7.32.0
-      git-cz: 4.8.0
       husky: 7.0.4
       jest: 27.4.6_@babel+core@7.16.7
       jest-transform-stub: 2.0.0
@@ -4498,11 +4496,6 @@ packages:
   /get-stream/6.0.1:
     resolution: {integrity: sha512-ts6Wi+2j3jQjqi70w5AlN8DFnkSwC+MqmxEzdEALB2qXZYV3X/b1CTfgPLGJNMeAWxdPfU8FO1ms3NUfaHCPYg==}
     engines: {node: '>=10'}
-    dev: true
-
-  /git-cz/4.8.0:
-    resolution: {integrity: sha512-2muVkIcT6cT/9eXuxztlKQSRiOy/oHhFldCySOi1xuRJ9T5yHlg3SRQhVLoY9BVu9kxSE3YcHYp0KgQW0vUf4A==}
-    hasBin: true
     dev: true
 
   /glob-parent/5.1.2:
