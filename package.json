@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm website build",
     "design": "pnpm --filter=@bangumi/design",
@@ -15,7 +16,13 @@
     "lint:fix": "pnpm lint -- --fix",
     "server": "pnpm --filter=@bangumi/server",
     "test": "jest",
-    "website": "pnpm --filter=@bangumi/website"
+    "website": "pnpm --filter=@bangumi/website",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
@@ -25,6 +32,7 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@types/jest": "^27.4.0",
+    "@types/node": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "babel-jest": "^27.4.6",
@@ -35,8 +43,10 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.2.0",
     "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
     "jest": "^27.4.6",
     "jest-transform-stub": "^2.0.0",
+    "lint-staged": "^12.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "typescript": "^4.4.4"
