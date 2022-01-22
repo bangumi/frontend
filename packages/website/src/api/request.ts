@@ -15,10 +15,24 @@ const errorHandler = (error:any) => {
   return Promise.reject(error)
 }
 
+const underscodeToCamelcase = (data:{ [k: string]: any }) => {
+  const newData: { [k: string]: any } = {}
+  for (const key in data) {
+    const newKey = key.replace(/_[a-z]/, (str):string => {
+      const char = str[1]
+      return char.toUpperCase()
+    })
+    newData[newKey] = data[key]
+  }
+  return newData
+}
+
 request.interceptors.request.use(config => {
   return config
 }, errorHandler)
 
 request.interceptors.response.use((response) => {
+  response.data = underscodeToCamelcase(response.data)
+  console.log(response)
   return response
 }, errorHandler)
