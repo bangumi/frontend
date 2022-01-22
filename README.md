@@ -31,6 +31,10 @@ pnpm lint
 在 exFAT 格式的分区上启动项目可能报 `ENOENT: no such file or directory` 错误。
 在上游修复之前，建议在 NTFS 格式的硬盘上存储本项目。
 
+## 如何参与开发
+
+见[贡献指南](./CONTRIBUTING.md)。
+
 ## 项目成员
 
 ### Collaborators
