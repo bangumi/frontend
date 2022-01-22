@@ -15,16 +15,29 @@ const errorHandler = (error:any) => {
   return Promise.reject(error)
 }
 
-const underscodeToCamelcase = (data:{ [k: string]: any }) => {
-  const newData: { [k: string]: any } = {}
-  for (const key in data) {
-    const newKey = key.replace(/_[a-z]/, (str):string => {
+const underscodeToCamelcase = (data:any) => {
+  if (Array.isArray(data)) {
+    data.forEach((value) => {
+      value = underscodeToCamelcase(value)
+    })
+  } else if (data !== null && typeof data === 'object') {
+    for (const key in data) {
+      if (typeof key === 'string') {
+        const newKey = underscodeToCamelcase(key)
+        if (key !== newKey) {
+          data[newKey] = data[key]
+          delete data[key]
+        }
+      }
+      if (typeof data[key] === 'object') data[key] = underscodeToCamelcase(data[key])
+    }
+  } else if (typeof data === 'string') {
+    data = data.replace(/_[a-z]/g, (str:string):string => {
       const char = str[1]
       return char.toUpperCase()
     })
-    newData[newKey] = data[key]
   }
-  return newData
+  return data
 }
 
 request.interceptors.request.use(config => {
@@ -33,6 +46,5 @@ request.interceptors.request.use(config => {
 
 request.interceptors.response.use((response) => {
   response.data = underscodeToCamelcase(response.data)
-  console.log(response)
   return response
 }, errorHandler)
