@@ -15,10 +15,36 @@ const errorHandler = (error:any) => {
   return Promise.reject(error)
 }
 
+const underscodeToCamelcase = (data:any) => {
+  if (Array.isArray(data)) {
+    data.forEach((value) => {
+      value = underscodeToCamelcase(value)
+    })
+  } else if (data !== null && typeof data === 'object') {
+    for (const key in data) {
+      if (typeof key === 'string') {
+        const newKey = underscodeToCamelcase(key)
+        if (key !== newKey) {
+          data[newKey] = data[key]
+          delete data[key]
+        }
+      }
+      if (typeof data[key] === 'object') data[key] = underscodeToCamelcase(data[key])
+    }
+  } else if (typeof data === 'string') {
+    data = data.replace(/_[a-z]/g, (str:string):string => {
+      const char = str[1]
+      return char.toUpperCase()
+    })
+  }
+  return data
+}
+
 request.interceptors.request.use(config => {
   return config
 }, errorHandler)
 
 request.interceptors.response.use((response) => {
+  response.data = underscodeToCamelcase(response.data)
   return response
 }, errorHandler)
