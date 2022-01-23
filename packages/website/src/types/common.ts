@@ -2,7 +2,7 @@
 type infoBox = {
   key:string,
   value:string | {
-    k:string // this can be undefined, see https://api.bgm.tv/v0/characters/321
+    k?: string
     v:string
   }[]
 }[]
@@ -48,7 +48,7 @@ type tag = {
   count: number
 }
 
-export type CharacterDetail={
+export type CharacterDetail = {
   id: number
   name: string
   type: number
@@ -72,7 +72,7 @@ export type CharacterDetail={
   }
 }
 
-export type Subject={
+export type Subject = {
   id: number
   name: string
   type: number
