@@ -1,27 +1,13 @@
-import { rest } from 'msw'
-import SubjectResponse from './fixtures/subject.json'
-import CharacterOfPersonResponse from './fixtures/character.json'
-import CharacterResponse from './fixtures/characters-39115.json'
+import { mockAPI } from './utils'
+
+const BASE_URL = 'https://api.bgm.tv'
+
+function buildAPIURL (path: string) {
+  return `${BASE_URL}${path}`
+}
 
 export const handlers = [
-  rest.get('https://api.bgm.tv/v0/subjects/:subjectId', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(SubjectResponse)
-    )
-  }),
-
-  rest.get('https://api.bgm.tv/v0/persons/123/characters', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(CharacterOfPersonResponse)
-    )
-  }),
-
-  rest.get('https://api.bgm.tv/v0/characters/:characterId', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json(CharacterResponse)
-    )
-  })
+  mockAPI(buildAPIURL('/v0/subjects/:subjectId'), 'get'),
+  mockAPI(buildAPIURL('/v0/persons/:personId/characters'), 'get'),
+  mockAPI(buildAPIURL('/v0/characters/:characterId'), 'get')
 ]
