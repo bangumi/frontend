@@ -1,0 +1,53 @@
+{
+  "id": 39115,
+  "name": "うずまきボルト",
+  "type": 1,
+  "images": {
+      "large": "https://lain.bgm.tv/pic/crt/l/5d/1a/39115_crt_LaZlL.jpg?r=1456220512",
+      "medium": "https://lain.bgm.tv/pic/crt/m/5d/1a/39115_crt_LaZlL.jpg?r=1456220512",
+      "small": "https://lain.bgm.tv/pic/crt/s/5d/1a/39115_crt_LaZlL.jpg?r=1456220512",
+      "grid": "https://lain.bgm.tv/pic/crt/g/5d/1a/39115_crt_LaZlL.jpg?r=1456220512"
+  },
+  "summary": "うずまきボルトとは、七代目火影に就任したうずまきナルトと彼の妻となった日向ヒナタの息子である。妹にヒマワリが居る。 \r\n父親であるナルトに似て金髪碧眼で頬には2本のヒゲのような模様がある。 \r\n頭頂部にヘタのような短い毛があるのが特徴。",
+  "locked": false,
+  "infobox": [
+      {
+          "key": "简体中文名",
+          "value": "漩涡博人"
+      },
+      {
+          "key": "别名",
+          "value": [
+              {
+                  "k": "第二中文名",
+                  "v": "漩涡慕留人"
+              },
+              {
+                  "k": "罗马字",
+                  "v": "Uzumaki Boruto "
+              },
+              {
+                  "k": "昵称",
+                  "v": "涡卷螺丝钉"
+              }
+          ]
+      },
+      {
+          "key": "性别",
+          "value": "男"
+      },
+      {
+          "key": "生日",
+          "value": "3月27日"
+      }
+  ],
+  "gender": "male",
+  "blood_type": null,
+  "birth_year": null,
+  "birth_mon": 3,
+  "birth_day": 27,
+  "stat": {
+      "comments": 10,
+      "collects": 12
+  }
+}
