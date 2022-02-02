@@ -57,7 +57,7 @@ const App: FC = () => {
                   <td>{el.key}</td>
                   <tr>
                     { Array.isArray(el.value)
-                      ? el.value.map(val => <p key={val.k}>{`${val.k}:${val.v}`}</p>)
+                      ? el.value.map(val => <p key={val.v}>{`${val.v}`}</p>)
                       : el.value }
                   </tr>
                 </tr>
