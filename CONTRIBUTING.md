@@ -4,7 +4,7 @@
 
 ## 开始
 
-- 通过右上角的 Fork 按钮或者点击[这个链接](https://github.com/bangumi/frontend)
+- 通过右上角的 Fork 按钮或者点击[这个链接](https://github.com/bangumi/frontend/fork)
   将 [repo](https://github.com/bangumi/frontend) fork 到自己的账号下面。
 - 通过 SSH，GitHub CLI 或者 HTTP clone 你的 fork。
 
