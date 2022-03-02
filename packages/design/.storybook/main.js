@@ -1,4 +1,5 @@
 const { dirname } = require("path")
+const svgr = require('vite-plugin-svgr')
 
 module.exports = {
   "stories": [
@@ -14,14 +15,19 @@ module.exports = {
     // workaround for vite build
     // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
     viteConfig.root = dirname(require.resolve("storybook-builder-vite"))
-    viteConfig.plugins.push({
+    viteConfig.server.fsServe = undefined;
+    const customStyleTransformPlugin = {
       transform(source, id) {
         if (id.endsWith('.stories.tsx')) {
           return `${source}
           import './style'`
         }
-      }
-    })
+      },
+    }
+    viteConfig.plugins.push(
+      customStyleTransformPlugin,
+      svgr()
+    )
     return viteConfig
   },
   core: {
