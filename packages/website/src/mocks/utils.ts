@@ -26,11 +26,11 @@ async function loadFixture (pathname: string, requestMethod: string): Promise<st
 
 type HTTPMethods = 'get' | 'post' | 'put' | 'delete' | 'options'
 
-export function mockAPI (url: string, method: HTTPMethods) {
-  return rest[method](url, async (req, res, ctx) => {
-    return res(
+export function mockAPI (url: string, method: HTTPMethods): any {
+  return rest[method](url, (req, res, ctx) =>
+    loadFixture(req.url.pathname, req.method).then(data => res(
       ctx.status(200),
-      ctx.json(await loadFixture(req.url.pathname, req.method))
-    )
-  })
+      ctx.json(data)
+    ))
+  )
 }
