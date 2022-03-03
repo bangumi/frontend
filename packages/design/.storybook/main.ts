@@ -1,16 +1,19 @@
-const { dirname } = require("path")
-const reactDocgenTypescript = require("@joshwooding/vite-plugin-react-docgen-typescript").default
+import { dirname } from 'path'
+import reactDocgenTypescript from '@joshwooding/vite-plugin-react-docgen-typescript'
+import type { StorybookConfig } from '@storybook/react/types'
+import type { UserConfig, PluginOption } from 'vite'
 
-module.exports = {
-  "stories": [
+
+const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise<UserConfig> } = {
+  stories: [
     "../components/**/*.stories.mdx",
     "../components/**/*.stories.@(js|jsx|ts|tsx)"
   ],
-  "addons": [
+  addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
   ],
-  "framework": "@storybook/react",
+  framework: "@storybook/react",
   viteFinal: async (viteConfig) => {
     // workaround for vite build
     // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
@@ -21,6 +24,7 @@ module.exports = {
     * https://github.com/styleguidist/react-docgen-typescript/issues/323
     * https://github.com/styleguidist/react-docgen-typescript/issues/393
     * */
+    !viteConfig.plugins && (viteConfig.plugins = [])
     viteConfig.plugins.push(reactDocgenTypescript())
     /* WIP: Temporary patch for style */
     viteConfig.plugins.push({
@@ -29,11 +33,13 @@ module.exports = {
           return `${source}
           import './style'`
         }
+        return source
       }
-    })
+    } as PluginOption)
     return viteConfig
   },
   core: {
     builder: 'storybook-builder-vite',
   },
 }
+export default config;
