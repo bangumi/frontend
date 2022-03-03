@@ -51,8 +51,7 @@ export default {
     },
     items: {
       control: { type: 'array' }
-    },
-    onClick: { action: 'clicked' }
+    }
   },
   parameters: {
     backgrounds: {
