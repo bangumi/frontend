@@ -4,11 +4,11 @@ import { useMenuContext } from '.'
 
 export interface MenuItemProps {
   /* MenuItem 的唯一标识 */
-  id: string,
+  id: string
   /* 自定义类名，大多数情况下应该尽可能为父组件设置样式 */
-  className?: string,
+  className?: string
   /* 覆盖父组件 Menu 的默认 Click 事件, 但大多数情况下应该尽可能使用父组件的 Click 事件 */
-  onClick?: MouseEventHandler,
+  onClick?: MouseEventHandler
 }
 
 const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className }) => {
@@ -21,7 +21,7 @@ const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className }) => {
         circle: isActive && activeType === 'circle',
         underline: isActive && activeType === 'underline'
       }, className)}
-      onClick={onClick || (e => onClickEmit?.(id, e))}
+      onClick={onClick ?? (e => onClickEmit?.(id, e))}
     >
       {children}
     </li>

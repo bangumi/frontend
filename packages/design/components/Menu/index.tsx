@@ -6,15 +6,15 @@ export interface MenuProps {
   /* 单击事件，对每一个 MenuItem 都生效 */
   onClick?: (key: string, e: React.MouseEvent<HTMLElement>) => void
   /* 自定义类名 */
-  className?: string,
+  className?: string
   /* 菜单类型，支持水平、垂直 */
-  mode?: 'vertical' | 'horizontal',
+  mode?: 'vertical' | 'horizontal'
   /* 最外层节点样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties
   /* 选中节点的 Key */
-  activeKey?: string,
+  activeKey?: string
   /* 节点数组，设置可以自动设置 MenuItem 节点，如果有其它特殊需求也可以手动添加到 children/slots */
-  items?: { key: string, label: string }[]
+  items?: Array<{ key: string, label: string }>
   /* 选中时的样式 */
   activeType?: 'circle' | 'underline' | 'none'
 }
@@ -42,7 +42,7 @@ const Menu: FC<MenuProps> = ({
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, activeType }}>
         {
-          children || items?.map(item => (
+          children ?? items?.map(item => (
             <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem>
           ))
         }
@@ -58,7 +58,7 @@ Menu.defaultProps = {
 
 export default Menu
 
-export const useMenuContext = () => useContext<MenuContextType>(MenuContext)
+export const useMenuContext = (): MenuContextType => useContext<MenuContextType>(MenuContext)
 
 export { default as MenuItem } from './MenuItem'
 export type { MenuItemProps } from './MenuItem'
