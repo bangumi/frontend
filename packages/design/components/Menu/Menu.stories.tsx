@@ -5,9 +5,6 @@ import Menu, { MenuItem, MenuProps } from '.'
 type IItems = MenuProps['items']
 
 const items: IItems = [{
-  key: 'all',
-  label: '全部条目'
-}, {
   key: 'animation',
   label: '动画'
 }, {
@@ -67,10 +64,8 @@ export default {
   }
 }
 
-type TArgs = { items: IItems, itemsVertical: IItems, activeKey: string, mode: MenuProps['mode'], onClick: MenuProps['onClick'] }
-
 // eslint-disable-next-line react/prop-types
-const Template: Story<TArgs> = ({ items, activeKey, mode, onClick }) => {
+const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick }) => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
       <Menu
