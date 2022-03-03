@@ -11,6 +11,7 @@
   color: #777272;
   font-style: normal;
   font-weight: 500;
+  line-height: 21px;
 
   &--horizontal {
     flex-direction: row;
@@ -44,8 +45,26 @@
   cursor: pointer;
   font-size: 1em;
 
-  &--active {
-    // todo currently for test only!!!
-    border-bottom: #f09199 solid 1px;
+  &--active.circle {
+    padding: 6px 10px;
+    background-color: #f09199;
+    color: #fff;
+    border-radius: 17px;
+  }
+
+  &--active.underline {
+    color: #F09199;
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background-color: #F09199;
+      border-radius: 2px;
+    }
   }
 }

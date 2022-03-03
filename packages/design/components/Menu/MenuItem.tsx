@@ -12,11 +12,14 @@ export interface MenuItemProps {
 }
 
 const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className }) => {
-  const { onClick: onClickEmit, activeKey } = useMenuContext()
+  const { onClick: onClickEmit, activeKey, activeType } = useMenuContext()
+  const isActive = id === activeKey
   return (
     <li
       className={classnames('bgm-menu-item', {
-        'bgm-menu-item--active': id === activeKey
+        'bgm-menu-item--active': isActive,
+        circle: isActive && activeType === 'circle',
+        underline: isActive && activeType === 'underline'
       }, className)}
       onClick={onClick || (e => onClickEmit?.(id, e))}
     >

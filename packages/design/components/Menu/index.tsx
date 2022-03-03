@@ -15,9 +15,11 @@ export interface MenuProps {
   activeKey?: string,
   /* 节点数组，设置可以自动设置 MenuItem 节点，如果有其它特殊需求也可以手动添加到 children/slots */
   items?: { key: string, label: string }[]
+  /* 选中时的样式 */
+  activeType?: 'circle' | 'underline' | 'none'
 }
 
-type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey'>
+type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'activeType'>
 
 const MenuContext = createContext<MenuContextType>({})
 
@@ -28,6 +30,7 @@ const Menu: FC<MenuProps> = ({
   mode,
   style,
   activeKey,
+  activeType,
   items
 }) => {
   const className = classnames('bgm-menu', customClassName, {
@@ -37,7 +40,7 @@ const Menu: FC<MenuProps> = ({
 
   return (
     <ul className={className} style={style}>
-      <MenuContext.Provider value={{ onClick, activeKey }}>
+      <MenuContext.Provider value={{ onClick, activeKey, activeType }}>
         {
           children || items?.map(item => (
             <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem>
@@ -49,7 +52,8 @@ const Menu: FC<MenuProps> = ({
 }
 
 Menu.defaultProps = {
-  mode: 'horizontal'
+  mode: 'horizontal',
+  activeType: 'none'
 }
 
 export default Menu
