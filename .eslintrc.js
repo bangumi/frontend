@@ -33,10 +33,12 @@ module.exports = {
     '@typescript-eslint/promise-function-async': 'off',
     '@typescript-eslint/no-floating-promises': 'off',
     'react/jsx-closing-tag-location': 'off',
+    /* https://github.com/yannickcr/eslint-plugin-react/issues/3097 */
     'react/jsx-curly-newline': ['error', {
       multiline: 'consistent',
       singleline: 'consistent'
-    }]
+    }],
+    'jsx-quotes': ['error', 'prefer-double']
   },
   settings: {
     react: {

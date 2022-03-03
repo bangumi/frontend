@@ -36,7 +36,7 @@ const App: FC = () => {
       <Button disabled>Disabled</Button>
       {detail
         ? <div>
-          <Typography.Link href='https://bgm.tv/character/39115'><h1>{detail.name}</h1></Typography.Link>
+          <Typography.Link href="https://bgm.tv/character/39115"><h1>{detail.name}</h1></Typography.Link>
           {
             detail.infobox.map(el =>
               <tr key={el.key}>
@@ -54,7 +54,7 @@ const App: FC = () => {
         : <div>loading</div>}
       {subjectDetail
         ? <div>
-          <Typography.Link href='https://bgm.tv/subject/39115'><h1>{subjectDetail.name}</h1></Typography.Link>
+          <Typography.Link href="https://bgm.tv/subject/39115"><h1>{subjectDetail.name}</h1></Typography.Link>
           {
             subjectDetail.infobox.map(el =>
               <tr key={el.key}>

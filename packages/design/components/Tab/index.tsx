@@ -29,7 +29,7 @@ interface TabProps {
 
 export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange }) => {
   return (
-    <ul className='tab'>
+    <ul className="tab">
       {
       items.map((item) => {
         return (

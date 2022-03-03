@@ -25,8 +25,8 @@ const Divider: FC<DividerProps> = (props) => {
   return (
     <>
       {isListItem
-        ? <li className={classes} role='separator' />
-        : <hr className={classes} role='separator' />}
+        ? <li className={classes} role="separator" />
+        : <hr className={classes} role="separator" />}
     </>
   )
 }
