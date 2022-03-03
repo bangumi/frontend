@@ -1,13 +1,13 @@
-import React from 'react'
+import React, { FC } from 'react'
 import classnames from 'classnames'
 
 interface DividerProps {
-  orientation?: 'horizontal' | 'vertical';
-  isListItem?: boolean;
-  className?: string;
+  orientation?: 'horizontal' | 'vertical'
+  isListItem?: boolean
+  className?: string
 }
 
-const Divider = (props: DividerProps) => {
+const Divider: FC<DividerProps> = (props) => {
   const {
     orientation = 'horizontal',
     isListItem = false,
@@ -26,8 +26,7 @@ const Divider = (props: DividerProps) => {
     <>
       {isListItem
         ? <li className={classes} role='separator' />
-        : <hr className={classes} role='separator' />
-      }
+        : <hr className={classes} role='separator' />}
     </>
   )
 }

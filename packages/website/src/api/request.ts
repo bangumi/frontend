@@ -9,30 +9,28 @@ export const request = axios.create({
 })
 
 // 异常拦截处理器
-const errorHandler = (error:any) => {
+const errorHandler = async (error: any): Promise<never> => {
   console.log(error)
 
-  return Promise.reject(error)
+  return await Promise.reject(error)
 }
 
-const underscodeToCamelcase = (data:any) => {
+const underscodeToCamelcase = (data: any): string | any[] => {
   if (Array.isArray(data)) {
     data.forEach((value) => {
       value = underscodeToCamelcase(value)
     })
   } else if (data !== null && typeof data === 'object') {
     for (const key in data) {
-      if (typeof key === 'string') {
-        const newKey = underscodeToCamelcase(key)
-        if (key !== newKey) {
-          data[newKey] = data[key]
-          delete data[key]
-        }
+      const newKey = underscodeToCamelcase(key) as string
+      if (key !== newKey) {
+        data[newKey] = data[key]
+        delete data?.key
       }
       if (typeof data[key] === 'object') data[key] = underscodeToCamelcase(data[key])
     }
   } else if (typeof data === 'string') {
-    data = data.replace(/_[a-z]/g, (str:string):string => {
+    data = data.replace(/_[a-z]/g, (str: string): string => {
       const char = str[1]
       return char.toUpperCase()
     })

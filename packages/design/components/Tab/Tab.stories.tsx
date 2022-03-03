@@ -1,5 +1,6 @@
 import React from 'react'
 import Tab from '.'
+import type { Story } from '@storybook/react'
 
 export default {
   title: 'modern/Tabs',
@@ -15,7 +16,8 @@ export default {
   }
 }
 
-const Template = ({ activeKey }: {activeKey: string}) => {
+// eslint-disable-next-line react/prop-types
+const Template: Story<{ activeKey: string }> = ({ activeKey }) => {
   const items = [{
     key: 'all',
     label: '全部条目'
@@ -36,8 +38,7 @@ const Template = ({ activeKey }: {activeKey: string}) => {
     label: '三次元'
   }]
   return (
-    <Tab items={items} activeKey={activeKey}>
-    </Tab>
+    <Tab items={items} activeKey={activeKey} />
   )
 }
 
