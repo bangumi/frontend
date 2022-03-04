@@ -14,7 +14,7 @@ export default {
 }
 
 const Template: ComponentStory<typeof Rate> = (args) => {
-  return <Rate {...args}></Rate>
+  return <Rate {...args} />
 }
 
 export const UsedAsRateIndicate = Template.bind({})
