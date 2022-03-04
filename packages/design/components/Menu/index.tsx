@@ -17,7 +17,6 @@ export interface MenuProps {
   items?: Array<{ key: string, label: string }>
   /* 选中时的样式 */
   activeType?: 'circle' | 'underline' | 'none'
-
   /* Render Props, 你可以使用自定义的 Item 组件 */
   children?: (items: MenuProps['items']) => React.ReactElement
 }
