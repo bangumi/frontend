@@ -3,21 +3,20 @@ import reactDocgenTypescript from '@joshwooding/vite-plugin-react-docgen-typescr
 import type { StorybookConfig } from '@storybook/react/types'
 import type { UserConfig, PluginOption } from 'vite'
 
-
 const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise<UserConfig> } = {
   stories: [
-    "../components/**/*.stories.mdx",
-    "../components/**/*.stories.@(js|jsx|ts|tsx)"
+    '../components/**/*.stories.mdx',
+    '../components/**/*.stories.@(js|jsx|ts|tsx)'
   ],
   addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
+    '@storybook/addon-links',
+    '@storybook/addon-essentials'
   ],
-  framework: "@storybook/react",
+  framework: '@storybook/react',
   viteFinal: async (viteConfig) => {
     // workaround for vite build
     // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
-    viteConfig.root = dirname(require.resolve("storybook-builder-vite"))
+    viteConfig.root = dirname(require.resolve('storybook-builder-vite'))
     /*
     * About auto-generated component docs:
     * Please use FC<Props> instead of React.FC<Props> to declare component.
@@ -27,8 +26,9 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
     !viteConfig.plugins && (viteConfig.plugins = [])
     viteConfig.plugins.push(reactDocgenTypescript())
     /* WIP: Temporary patch for style */
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     viteConfig.plugins.push({
-      transform(source, id) {
+      transform (source, id) {
         if (id.endsWith('.stories.tsx')) {
           return `${source}
           import './style'`
@@ -39,7 +39,7 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
     return viteConfig
   },
   core: {
-    builder: 'storybook-builder-vite',
-  },
+    builder: 'storybook-builder-vite'
+  }
 }
-export default config;
+export default config
