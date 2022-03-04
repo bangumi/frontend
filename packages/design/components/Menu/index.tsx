@@ -17,6 +17,9 @@ export interface MenuProps {
   items?: Array<{ key: string, label: string }>
   /* 选中时的样式 */
   activeType?: 'circle' | 'underline' | 'none'
+
+  /* Render Props, 你可以使用自定义的 Item 组件 */
+  children?: (items: MenuProps['items']) => React.ReactElement
 }
 
 type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'activeType'>
@@ -42,9 +45,11 @@ const Menu: FC<MenuProps> = ({
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, activeType }}>
         {
-          children ?? items?.map(item => (
-            <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem>
-          ))
+          children
+            ? children(items)
+            : items?.map(item => (
+              <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem>
+            ))
         }
       </MenuContext.Provider>
     </ul>
