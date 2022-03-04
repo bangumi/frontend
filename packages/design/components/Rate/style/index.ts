@@ -1,1 +1,1 @@
-import './index.module.less'
+import './index.less'
