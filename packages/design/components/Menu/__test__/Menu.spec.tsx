@@ -36,16 +36,10 @@ it('should trigger custom trigger instead of default trigger', () => {
   const { getByText } = render(
     <Menu onClick={handleChange} items={items}>
       {
-        items => (
-          <>
-            {
-              items!.map(item =>
-                <MenuItem key={item.key} id={item.key} onClick={item.key === '1' ? handleChangeSingle : undefined}>
-                  {item.label}
-                </MenuItem>
-              )
-            }
-          </>
+        item => (
+          <MenuItem key={item.key} id={item.key} onClick={item.key === '1' ? handleChangeSingle : undefined}>
+            {item.label}
+          </MenuItem>
         )
       }
     </Menu>
@@ -60,15 +54,7 @@ it('Render Props', () => {
   const { getByText } = render(
     <Menu items={items}>
       {
-        items => (
-          <>
-            {
-              items!.map(item =>
-                <Comp label={item.label} key={item.key} />
-              )
-            }
-          </>
-        )
+        item => <Comp label={item.label} key={item.key} />
       }
     </Menu>
   )
