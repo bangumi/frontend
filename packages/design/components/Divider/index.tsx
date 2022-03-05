@@ -17,7 +17,7 @@ const Divider: FC<DividerProps> = (props) => {
   const classes = classnames(
     'divider',
     {
-      'divider-vertical': orientation === 'vertical'
+      'bgm-divider--vertical': orientation === 'vertical'
     },
     className
   )
