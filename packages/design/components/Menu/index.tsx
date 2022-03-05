@@ -44,11 +44,11 @@ const Menu: FC<MenuProps> = ({
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, activeType }}>
         {
-          children
-            ? children(items)
-            : items?.map(item => (
-              <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem>
-            ))
+           items?.map(item => {
+              return children? children(item) : ( 
+                <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem> 
+                )
+            })
         }
       </MenuContext.Provider>
     </ul>
