@@ -6,13 +6,13 @@ import classNames from 'classnames'
 /*
   Prop type moves to outer
 */
-interface IButton {
+export interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
   className?: string
 }
 
-const Button: FC<IButton> = ({ disabled, children, onClick, className }) => {
+const Button: FC<ButtonProps> = ({ disabled, children, onClick, className }) => {
   return (
     <button
       disabled={disabled}

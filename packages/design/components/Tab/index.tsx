@@ -21,7 +21,7 @@ interface ItemType {
   label: string
 }
 
-interface TabProps {
+export interface TabProps {
   items: ItemType[]
   activeKey: string
   onChange?: (key: string) => void
