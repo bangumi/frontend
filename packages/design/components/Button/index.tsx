@@ -7,9 +7,9 @@ import classNames from 'classnames'
   Prop type moves to outer
 */
 interface IButton {
-  disabled?: boolean;
-  onClick?: () => void;
-  className?: string;
+  disabled?: boolean
+  onClick?: () => void
+  className?: string
 }
 
 const Button: FC<IButton> = ({ disabled, children, onClick, className }) => {
@@ -19,7 +19,8 @@ const Button: FC<IButton> = ({ disabled, children, onClick, className }) => {
       className={
         classNames('bgm-button', className, {
           'bgm-button__disabled': disabled
-        })}
+        })
+}
       onClick={onClick}
     >
       {children}

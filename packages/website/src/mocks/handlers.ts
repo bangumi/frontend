@@ -2,7 +2,7 @@ import { mockAPI } from './utils'
 
 const BASE_URL = 'https://api.bgm.tv'
 
-function buildAPIURL (path: string) {
+function buildAPIURL (path: string): string {
   return `${BASE_URL}${path}`
 }
 

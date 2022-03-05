@@ -23,6 +23,8 @@
   },
   "include": [
     "./packages",
-    "./jest-setup.ts"
+    "./jest-setup.ts",
+    ".eslintrc.js",
+    "./packages/design/.storybook/*"
   ]
 }
