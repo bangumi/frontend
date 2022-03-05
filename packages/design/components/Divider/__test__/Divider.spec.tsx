@@ -15,7 +15,7 @@ describe('<Divider />', () => {
     const { getByRole } = render(<Divider orientation={orientation} />)
 
     expect(getByRole('separator')).toBeInTheDocument()
-    expect(getByRole('separator')).toHaveClass('divider-vertical')
+    expect(getByRole('separator')).toHaveClass('bgm-divider--vertical')
   })
 
   it('should be list item', () => {
