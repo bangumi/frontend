@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import classnames from 'classnames'
 
-interface DividerProps {
+export interface DividerProps {
   orientation?: 'horizontal' | 'vertical'
   isListItem?: boolean
   className?: string
