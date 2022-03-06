@@ -2,6 +2,7 @@ import { dirname } from 'path'
 import reactDocgenTypescript from '@joshwooding/vite-plugin-react-docgen-typescript'
 import type { StorybookConfig } from '@storybook/react/types'
 import type { UserConfig, PluginOption } from 'vite'
+import svgr from 'vite-plugin-svgr'
 
 const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise<UserConfig> } = {
   stories: [
@@ -36,6 +37,8 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
         return source
       }
     } as PluginOption)
+
+    viteConfig.plugins.push(svgr())
     return viteConfig
   },
   core: {
