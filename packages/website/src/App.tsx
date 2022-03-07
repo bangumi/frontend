@@ -1,5 +1,6 @@
 import React, { useState, FC, useEffect } from 'react'
 import { Button, Typography } from '@bangumi/design'
+import { Notification } from '@bangumi/icons'
 import style from './App.module.css'
 import { getCharacterDetail } from './api/character'
 import { getSubject } from './api/subject'
@@ -24,6 +25,7 @@ const App: FC = () => {
 
   return (
     <div className={style.main}>
+      <Notification />
       <div className={style.count}>
         {count}
       </div>

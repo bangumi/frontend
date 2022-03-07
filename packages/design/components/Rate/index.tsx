@@ -1,7 +1,5 @@
 import React from 'react'
-import { ReactComponent as FilledStar } from './assets/filled-star.svg'
-import { ReactComponent as HalfStar } from './assets/half-star.svg'
-import { ReactComponent as EmptyStar } from './assets/empty-star.svg'
+import { FilledStar, HalfStar, EmptyStar } from '@bangumi/icons'
 
 export interface RateProps {
   value: number
