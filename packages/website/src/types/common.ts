@@ -1,13 +1,13 @@
 // using camelcase api
-type infoBox = {
-  key:string,
-  value:string | {
+type infoBox = Array<{
+  key: string
+  value: string | Array<{
     k?: string
-    v:string
-  }[]
-}[]
+    v: string
+  }>
+}>
 
-type images = {
+interface images {
   large: string
   common: string
   medium: string
@@ -15,7 +15,7 @@ type images = {
   grid: string
 }
 
-type count = {
+interface count {
   '1': number
   '2': number
   '3': number
@@ -28,14 +28,14 @@ type count = {
   '10': number
 }
 
-type rating = {
+interface rating {
   rank: number
   total: number
   count: count
   score: number
 }
 
-type collection = {
+interface collection {
   wish: number
   collect: number
   doing: number
@@ -43,12 +43,12 @@ type collection = {
   dropped: number
 }
 
-type tag = {
+interface tag {
   name: string
   count: number
 }
 
-export type CharacterDetail = {
+export interface CharacterDetail {
   id: number
   name: string
   type: number
@@ -57,7 +57,7 @@ export type CharacterDetail = {
     medium: string
     small: string
     grid: string
-  },
+  }
   summary: string
   locked: boolean
   infobox: infoBox
@@ -72,7 +72,7 @@ export type CharacterDetail = {
   }
 }
 
-export type Subject = {
+export interface Subject {
   id: number
   name: string
   type: number

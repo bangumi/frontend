@@ -1,9 +1,9 @@
 import { request } from './request'
 import { Subject } from '../types/common'
-import { AxiosPromise } from 'axios'
+import { AxiosResponse } from 'axios'
 
-type SubjectId = string;
+type SubjectId = string
 
-export const getSubject = (subjectId:SubjectId):AxiosPromise<Subject> => {
+export const getSubject = (subjectId: SubjectId): Promise<AxiosResponse<Subject>> => {
   return request(`/v0/subjects/${subjectId}`)
 }
