@@ -1,18 +1,14 @@
 import React from 'react'
 import type { Story, ComponentMeta } from '@storybook/react'
-import { FilledStar, EmptyStar, HalfStar, Notification, Delete, Setting, Search } from '.'
+import * as Icons from '.'
 
-const componentMeta: ComponentMeta<typeof FilledStar> = {
+type IComponent = React.FC<React.SVGProps<SVGSVGElement> & {
+  title?: string
+}>
+
+const componentMeta: ComponentMeta<IComponent> = {
   title: 'Icons',
-  subcomponents: {
-    FilledStar,
-    EmptyStar,
-    HalfStar,
-    Notification,
-    Delete,
-    Setting,
-    Search
-  },
+  subcomponents: Icons,
   decorators: [
     story => (
       <div
@@ -46,40 +42,15 @@ export default componentMeta
 // eslint-disable-next-line react/prop-types
 const Template: Story<{ height: number, width: number, style: React.CSSProperties }> = ({ height, width, style }) => <>
   {
-    [
-      {
-        Component: FilledStar,
-        name: 'FilledStar'
-      },
-      {
-        Component: EmptyStar,
-        name: 'EmptyStar'
-      },
-      {
-        Component: HalfStar,
-        name: 'HalfStar'
-      },
-      {
-        Component: Notification,
-        name: 'Notification'
-      },
-      {
-        Component: Delete,
-        name: 'Delete'
-      },
-      {
-        Component: Setting,
-        name: 'Setting'
-      },
-      {
-        Component: Search,
-        name: 'Search'
-      }
-    ].map(Icon =>
-      <div key={Icon.name} style={{ textAlign: 'center', width: 120 }}>
-        <p>{Icon.name}</p>
-        <Icon.Component height={height} width={width} style={style} />
-      </div>
+    Object.keys(Icons).map(iconName => {
+      const Icon = (Icons as any)[iconName] as IComponent
+      return (
+        <div key={iconName} style={{ textAlign: 'center', width: 120 }}>
+          <p>{iconName}</p>
+          <Icon height={height} width={width} style={style} />
+        </div>
+      )
+    }
     )
   }
 </>
