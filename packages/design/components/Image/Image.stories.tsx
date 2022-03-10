@@ -21,7 +21,7 @@ Loaded.args = {
   alt: 'vanilla',
   width: 136,
   height: 200,
-  wrapperstyle: {
+  wrapperStyle: {
     borderRadius: '6px'
   }
 }
