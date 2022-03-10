@@ -8,7 +8,7 @@ interface IItem {
 }
 
 export interface MenuProps {
-  /* 单击事件，对每一个 MenuItem 都生效 */
+  /* 点击事件，对每一个 MenuItem 都生效 */
   onClick?: (key: string, e: React.MouseEvent<HTMLElement>) => void
   /* 自定义类名 */
   className?: string

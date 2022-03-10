@@ -22,8 +22,11 @@ interface ItemType {
 }
 
 export interface TabProps {
+  /* 节点数组 */
   items: ItemType[]
+  /* 选中节点的 Key */
   activeKey: string
+  /* 点击切换事件回调，对每一个 Item 都生效 */
   onChange?: (key: string) => void
 }
 
