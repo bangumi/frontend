@@ -6,7 +6,7 @@ export interface ImageProps
   /* 图像的 URL */
   src: string
   /* 图像的备用文本描述 */
-  alt: string
+  alt?: string
   /* 自定义最外层类名 */
   wrapperClass?: string
   /* 自定义最外层样式 */
