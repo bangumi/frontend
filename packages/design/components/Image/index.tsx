@@ -10,7 +10,7 @@ export interface ImageProps
   /* 自定义最外层类名 */
   wrapperClass?: string
   /* 自定义最外层样式 */
-  wrapperstyle?: CSSProperties
+  wrapperStyle?: CSSProperties
   /* 是否增加 box-shadow */
   withBoxShadow?: boolean
 }
