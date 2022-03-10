@@ -28,7 +28,7 @@ Loaded.args = {
 
 export const Loading = Template.bind({})
 Loading.args = {
-  src: 'http://www.deelay.me/3500/https://lain.bgm.tv/pic/cover/c/c2/4c/253_t3XWb.jpg',
+  src: 'https://www.deelay.me/3500/https://lain.bgm.tv/pic/cover/c/c2/4c/253_t3XWb.jpg',
   alt: 'vanilla',
   width: 150,
   height: 205
