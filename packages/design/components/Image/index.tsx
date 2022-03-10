@@ -20,7 +20,7 @@ const Image: FC<ImageProps> = ({
   width,
   height,
   wrapperClass,
-  wrapperstyle,
+  wrapperStyle,
   withBoxShadow,
   ...rest
 }) => {
@@ -32,7 +32,7 @@ const Image: FC<ImageProps> = ({
       style={{
         width,
         height,
-        ...wrapperstyle
+        ...wrapperStyle
       }}
       data-testid="img-wrapper"
     >
