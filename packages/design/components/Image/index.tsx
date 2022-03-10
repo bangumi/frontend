@@ -13,6 +13,8 @@ export interface ImageProps
   wrapperStyle?: CSSProperties
   /* 是否增加 box-shadow */
   withBoxShadow?: boolean
+  /* 自定义最外层圆角 , 默认为 6px */
+  borderRadius?: CSSProperties['borderRadius']
 }
 
 const Image: FC<ImageProps> = ({
@@ -22,6 +24,7 @@ const Image: FC<ImageProps> = ({
   wrapperClass,
   wrapperStyle,
   withBoxShadow,
+  borderRadius = '6px',
   ...rest
 }) => {
   return (
@@ -32,6 +35,7 @@ const Image: FC<ImageProps> = ({
       style={{
         width,
         height,
+        borderRadius,
         ...wrapperStyle
       }}
       data-testid="img-wrapper"

@@ -20,10 +20,7 @@ Loaded.args = {
   src: src,
   alt: 'vanilla',
   width: 136,
-  height: 200,
-  wrapperStyle: {
-    borderRadius: '6px'
-  }
+  height: 200
 }
 
 export const Loading = Template.bind({})

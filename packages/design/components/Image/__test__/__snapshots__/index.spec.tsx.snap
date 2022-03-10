@@ -4,6 +4,7 @@ exports[`<Image /> should render box-shadow properly 1`] = `
 <div
   class="bgm-image bgm-image--withBoxShadow"
   data-testid="img-wrapper"
+  style="border-radius: 6px;"
 >
   <img
     alt="vanilla"
@@ -16,6 +17,7 @@ exports[`<Image /> should render correctly 1`] = `
 <div
   class="bgm-image"
   data-testid="img-wrapper"
+  style="border-radius: 6px;"
 >
   <img
     alt="vanilla"
@@ -28,6 +30,7 @@ exports[`<Image /> should render hovering styles properly 1`] = `
 <div
   class="bgm-image bgm-image--withBoxShadow"
   data-testid="img-wrapper"
+  style="border-radius: 6px;"
 >
   <img
     alt="vanilla"
