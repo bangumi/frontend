@@ -33,8 +33,6 @@ const Image: FC<ImageProps> = ({
         'bgm-image--withBoxShadow': withBoxShadow
       })}
       style={{
-        width,
-        height,
         borderRadius,
         ...wrapperStyle
       }}
