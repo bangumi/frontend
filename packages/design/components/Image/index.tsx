@@ -13,8 +13,8 @@ export interface ImageProps
   wrapperStyle?: CSSProperties
   /* 是否增加 box-shadow */
   withBoxShadow?: boolean
-  /* 自定义最外层圆角 , 默认为 6px */
-  borderRadius?: CSSProperties['borderRadius']
+  /* 形状, 矩形或圆形, 默认为矩形 */
+  shape?: 'rect' | 'circle'
 }
 
 const Image: FC<ImageProps> = ({
@@ -24,16 +24,17 @@ const Image: FC<ImageProps> = ({
   wrapperClass,
   wrapperStyle,
   withBoxShadow,
-  borderRadius = '6px',
+  shape = 'rect',
   ...rest
 }) => {
   return (
     <div
       className={classnames('bgm-image', wrapperClass, {
-        'bgm-image--withBoxShadow': withBoxShadow
+        'bgm-image--withBoxShadow': withBoxShadow,
+        'bgm-image--rect': shape === 'rect',
+        'bgm-image--circle': shape === 'circle'
       })}
       style={{
-        borderRadius,
         ...wrapperStyle
       }}
       data-testid="img-wrapper"

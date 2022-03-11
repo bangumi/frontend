@@ -30,4 +30,12 @@ describe('<Image />', () => {
 
     expect(Img).toMatchSnapshot()
   })
+
+  it('should render circle shape properly', () => {
+    const { getByTestId } = render(
+      <Image src={src} alt="vanilla" withBoxShadow shape="circle" />
+    )
+
+    expect(getByTestId('img-wrapper')).toMatchSnapshot()
+  })
 })
