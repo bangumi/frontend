@@ -34,9 +34,7 @@ const Image: FC<ImageProps> = ({
         'bgm-image--rect': shape === 'rect',
         'bgm-image--circle': shape === 'circle'
       })}
-      style={{
-        ...wrapperStyle
-      }}
+      style={wrapperStyle}
       data-testid="img-wrapper"
     >
       <img src={src} width={width} height={height} {...rest} />
