@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Image /> should render box-shadow properly 1`] = `
+<div
+  class="bgm-image bgm-image--withBoxShadow bgm-image--rect"
+  data-testid="img-wrapper"
+>
+  <img
+    alt="vanilla"
+    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
+  />
+</div>
+`;
+
+exports[`<Image /> should render circle shape properly 1`] = `
+<div
+  class="bgm-image bgm-image--withBoxShadow bgm-image--circle"
+  data-testid="img-wrapper"
+>
+  <img
+    alt="vanilla"
+    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
+  />
+</div>
+`;
+
+exports[`<Image /> should render correctly 1`] = `
+<div
+  class="bgm-image bgm-image--rect"
+  data-testid="img-wrapper"
+>
+  <img
+    alt="vanilla"
+    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
+  />
+</div>
+`;
+
+exports[`<Image /> should render hovering styles properly 1`] = `
+<div
+  class="bgm-image bgm-image--withBoxShadow bgm-image--rect"
+  data-testid="img-wrapper"
+>
+  <img
+    alt="vanilla"
+    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
+  />
+</div>
+`;
