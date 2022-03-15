@@ -15,20 +15,16 @@ export interface AvatarProps {
 }
 
 const Avatar: FC<AvatarProps> = ({
-  size = 'small' 
+  size = 'small',
   src,
   alt,
   wrapperClass,
   wrapperStyle
 }) => {
   return (
-    <div className={classNames('bgm-avatar', `bgm-avatar--${size!}`, wrapperClass)} style={wrapperStyle}>
+    <div className={classNames('bgm-avatar', `bgm-avatar--${size}`, wrapperClass)} style={wrapperStyle}>
       <img src={src} alt={alt} />
     </div>
   )
-}
-
-Avatar.defaultProps = {
-  size: 'small'
 }
 export default Avatar
