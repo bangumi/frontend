@@ -15,7 +15,7 @@ export interface AvatarProps {
 }
 
 const Avatar: FC<AvatarProps> = ({
-  size,
+  size = 'small' 
   src,
   alt,
   wrapperClass,
