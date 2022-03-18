@@ -18,6 +18,10 @@ export default function parse (s: string): Wiki {
 
   const strTrim = s.trim().replace(/\r\n/g, '\n')
 
+  if (strTrim === '') {
+    return wiki
+  }
+
   if (!strTrim.startsWith(prefix)) {
     throw new WikiSyntaxError(null, null, GlobalPrefixError)
   }
