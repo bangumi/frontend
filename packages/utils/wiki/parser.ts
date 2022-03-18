@@ -25,10 +25,11 @@ export default function parse (s: string): Wiki {
     throw new WikiSyntaxError(null, null, GlobalSuffixError)
   }
 
-  wiki.type = parseType(strTrim)
+  const arr = strTrim.split('\n')
+  wiki.type = parseType(arr[0])
 
   /* split content between {{Infobox xxx and }} */
-  const fields = strTrim.split('\n').slice(1, -1)
+  const fields = arr.slice(1, -1)
 
   let inArray = false
   for (let i = 0; i < fields.length; ++i) {
@@ -68,12 +69,8 @@ export default function parse (s: string): Wiki {
   return wiki
 }
 
-const parseType = (s: string): string => {
-  let index = s.indexOf('\n')
-  if (index === -1) {
-    index = s.indexOf('}') // {{Infobox Crt}}
-  }
-  return s.slice(prefix.length, index).trim()
+const parseType = (line: string): string => {
+  return line.slice(prefix.length, !line.includes('}}') ? undefined : line.indexOf('}}')).trim()
 }
 
 const parseNewField = (lino: number, line: string): [string, string, WikiItemType] => {
