@@ -7,7 +7,7 @@ const suffix = '}}'
 export default function parse (s: string): Wiki {
   const wiki: Wiki = { type: '', data: [] }
 
-  const strTrim = s.trim()
+  const strTrim = s.trim().replace(/\r\n/g, '\n')
 
   if (!strTrim.startsWith(prefix)) {
     throw (new Error('missing prefix \'{{Infobox\' at the start'))
@@ -18,33 +18,42 @@ export default function parse (s: string): Wiki {
 
   wiki.type = parseType(strTrim)
 
-  const fields = strTrim.slice(prefix.length, strTrim.length - suffix.length).trim().split('\n')
+  /* split content between {{Infobox xxx and }} */
+  const fields = strTrim.split('\n').slice(1, -1)
 
   let inArray = false
-  for (let line of fields) {
-    line = line.trim()
+  for (let i = 0; i < fields.length; ++i) {
+    const line = fields[i].trim()
+
     if (line === '') {
       continue
     }
     /* new field */
     if (line[0] === '|') {
       if (inArray) {
-        throw (new Error("array should be closed by '}'"))
+        throw new Error("array should be closed by '}'")
       }
       const meta = parseNewField(line)
       inArray = meta[2] === 'array'
       const field = new WikiItem(...meta)
       wiki.data.push(field)
+      /* is Array item */
     } else if (inArray) {
       if (line[0] === '}') {
         inArray = false
         continue
+      }
+      if (i === fields.length - 1) {
+        throw new Error("array should be closed by '}'")
       }
       wiki.data[wiki.data.length - 1]!.values!.push(
         new WikiArrayItem(
           ...parseArrayItem(line)
         )
       )
+    } else {
+      console.log('line is ', line)
+      throw new Error("missing '=' to separate field name and value")
     }
   }
   return wiki
