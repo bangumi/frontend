@@ -3,7 +3,7 @@ export interface Wiki {
   data: WikiItem[]
 }
 
-export type WikiItemType = 'array' | 'object' | 'null'
+export type WikiItemType = 'array' | 'object'
 
 export class WikiArrayItem {
   k?: string
@@ -18,7 +18,6 @@ export class WikiArrayItem {
 export class WikiItem {
   key?: string
   value?: string
-  null?: boolean
   array?: boolean
   values?: WikiArrayItem[]
 
@@ -31,9 +30,6 @@ export class WikiItem {
         break
       case 'object':
         this.value = value
-        break
-      case 'null':
-        this.null = true
         break
     }
   }

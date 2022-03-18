@@ -65,8 +65,6 @@ const parseNewField = (line: string): [string, string, WikiItemType] => {
   const key = str.slice(0, index).trim()
   const value = str.slice(index + 1).trim()
   switch (value) {
-    case '':
-      return [key, '', 'null']
     case '{':
       return [key, '', 'array']
     default :
@@ -81,7 +79,7 @@ const parseArrayItem = (line: string): [string, string] => {
   const content = line.slice(1, line.length - 1)
   const index = content.indexOf('|')
   if (index === -1) {
-    return ['', content]
+    return ['', content.trim()]
   }
   return [content.slice(0, index).trim(), content.slice(index + 1).trim()]
 }
