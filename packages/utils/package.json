@@ -2,6 +2,7 @@
   "name": "@bangumi/utils",
   "version": "0.0.0",
   "private": true,
+  "main": "index.ts",
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
     "js-yaml": "^4.1.0"
