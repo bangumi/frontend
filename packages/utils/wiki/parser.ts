@@ -1,4 +1,11 @@
 import { Wiki, WikiArrayItem, WikiItem, WikiItemType } from './types'
+import {
+  ArrayItemWrappedError,
+  ArrayNoCloseError,
+  ExpectingSignEqualError,
+  GlobalPrefixError,
+  GlobalSuffixError, WikiSyntaxError
+} from './error'
 
 /* should start with `{{Infobox` and end with `}}` */
 const prefix = '{{Infobox'
@@ -10,10 +17,10 @@ export default function parse (s: string): Wiki {
   const strTrim = s.trim().replace(/\r\n/g, '\n')
 
   if (!strTrim.startsWith(prefix)) {
-    throw (new Error('missing prefix \'{{Infobox\' at the start'))
+    throw new WikiSyntaxError(strTrim[0], 0, GlobalPrefixError)
   }
   if (!strTrim.endsWith(suffix)) {
-    throw (new Error('missing \'}}\' at the end'))
+    throw new WikiSyntaxError(strTrim[strTrim.length - 1], strTrim.length - 1, GlobalSuffixError)
   }
 
   wiki.type = parseType(strTrim)
@@ -31,7 +38,7 @@ export default function parse (s: string): Wiki {
     /* new field */
     if (line[0] === '|') {
       if (inArray) {
-        throw new Error("array should be closed by '}'")
+        throw new WikiSyntaxError(line, i, ArrayNoCloseError)
       }
       const meta = parseNewField(line)
       inArray = meta[2] === 'array'
@@ -44,16 +51,15 @@ export default function parse (s: string): Wiki {
         continue
       }
       if (i === fields.length - 1) {
-        throw new Error("array should be closed by '}'")
+        throw new WikiSyntaxError(line, i, ArrayNoCloseError)
       }
       wiki.data[wiki.data.length - 1]!.values!.push(
         new WikiArrayItem(
-          ...parseArrayItem(line)
+          ...parseArrayItem(line, i)
         )
       )
     } else {
-      console.log('line is ', line)
-      throw new Error("missing '=' to separate field name and value")
+      throw new WikiSyntaxError(line, i, ExpectingSignEqualError)
     }
   }
   return wiki
@@ -80,9 +86,9 @@ const parseNewField = (line: string): [string, string, WikiItemType] => {
   }
 }
 
-const parseArrayItem = (line: string): [string, string] => {
+const parseArrayItem = (line: string, lino: number): [string, string] => {
   if (line[0] !== '[' || line[line.length - 1] !== ']') {
-    throw (new Error('array item should be wrapped by \'[]\''))
+    throw new WikiSyntaxError(line, lino, ArrayItemWrappedError)
   }
   const content = line.slice(1, line.length - 1)
   const index = content.indexOf('|')
