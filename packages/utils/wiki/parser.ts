@@ -47,7 +47,6 @@ export default function parse (s: string): Wiki {
       )
     }
   }
-  console.log(JSON.stringify(wiki, null, 2))
   return wiki
 }
 
