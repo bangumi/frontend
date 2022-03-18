@@ -3,6 +3,7 @@ import {
   ArrayItemWrappedError,
   ArrayNoCloseError,
   ExpectingNewFieldError,
+  ExpectingSignEqualError,
   GlobalPrefixError,
   GlobalSuffixError,
   WikiSyntaxError
@@ -80,7 +81,7 @@ const parseNewField = (lino: number, line: string): [string, string, WikiItemTyp
   const index = str.indexOf('=')
 
   if (index === -1) {
-    throw new WikiSyntaxError(lino, line, ExpectingNewFieldError)
+    throw new WikiSyntaxError(lino, line, ExpectingSignEqualError)
   }
 
   const key = str.slice(0, index).trim()
