@@ -2,9 +2,10 @@ import { Wiki, WikiArrayItem, WikiItem, WikiItemType } from './types'
 import {
   ArrayItemWrappedError,
   ArrayNoCloseError,
-  ExpectingSignEqualError,
+  ExpectingNewFieldError,
   GlobalPrefixError,
-  GlobalSuffixError, WikiSyntaxError
+  GlobalSuffixError,
+  WikiSyntaxError
 } from './error'
 
 /* should start with `{{Infobox` and end with `}}` */
@@ -17,10 +18,10 @@ export default function parse (s: string): Wiki {
   const strTrim = s.trim().replace(/\r\n/g, '\n')
 
   if (!strTrim.startsWith(prefix)) {
-    throw new WikiSyntaxError(strTrim[0], 0, GlobalPrefixError)
+    throw new WikiSyntaxError(null, null, GlobalPrefixError)
   }
   if (!strTrim.endsWith(suffix)) {
-    throw new WikiSyntaxError(strTrim[strTrim.length - 1], strTrim.length - 1, GlobalSuffixError)
+    throw new WikiSyntaxError(null, null, GlobalSuffixError)
   }
 
   wiki.type = parseType(strTrim)
@@ -31,6 +32,7 @@ export default function parse (s: string): Wiki {
   let inArray = false
   for (let i = 0; i < fields.length; ++i) {
     const line = fields[i].trim()
+    const lino = i + 1
 
     if (line === '') {
       continue
@@ -38,9 +40,9 @@ export default function parse (s: string): Wiki {
     /* new field */
     if (line[0] === '|') {
       if (inArray) {
-        throw new WikiSyntaxError(line, i, ArrayNoCloseError)
+        throw new WikiSyntaxError(lino, line, ArrayNoCloseError)
       }
-      const meta = parseNewField(line)
+      const meta = parseNewField(lino, line)
       inArray = meta[2] === 'array'
       const field = new WikiItem(...meta)
       wiki.data.push(field)
@@ -51,15 +53,15 @@ export default function parse (s: string): Wiki {
         continue
       }
       if (i === fields.length - 1) {
-        throw new WikiSyntaxError(line, i, ArrayNoCloseError)
+        throw new WikiSyntaxError(lino, line, ArrayNoCloseError)
       }
       wiki.data[wiki.data.length - 1]!.values!.push(
         new WikiArrayItem(
-          ...parseArrayItem(line, i)
+          ...parseArrayItem(lino, line)
         )
       )
     } else {
-      throw new WikiSyntaxError(line, i, ExpectingSignEqualError)
+      throw new WikiSyntaxError(lino, line, ExpectingNewFieldError)
     }
   }
   return wiki
@@ -73,9 +75,14 @@ const parseType = (s: string): string => {
   return s.slice(prefix.length, index).trim()
 }
 
-const parseNewField = (line: string): [string, string, WikiItemType] => {
+const parseNewField = (lino: number, line: string): [string, string, WikiItemType] => {
   const str = line.slice(1)
   const index = str.indexOf('=')
+
+  if (index === -1) {
+    throw new WikiSyntaxError(lino, line, ExpectingNewFieldError)
+  }
+
   const key = str.slice(0, index).trim()
   const value = str.slice(index + 1).trim()
   switch (value) {
@@ -86,9 +93,9 @@ const parseNewField = (line: string): [string, string, WikiItemType] => {
   }
 }
 
-const parseArrayItem = (line: string, lino: number): [string, string] => {
+const parseArrayItem = (lino: number, line: string): [string, string] => {
   if (line[0] !== '[' || line[line.length - 1] !== ']') {
-    throw new WikiSyntaxError(line, lino, ArrayItemWrappedError)
+    throw new WikiSyntaxError(lino, line, ArrayItemWrappedError)
   }
   const content = line.slice(1, line.length - 1)
   const index = content.indexOf('|')
