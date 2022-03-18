@@ -33,7 +33,7 @@ export default function parse (s: string): Wiki {
   let inArray = false
   for (let i = 0; i < fields.length; ++i) {
     const line = fields[i].trim()
-    const lino = i + 1
+    const lino = i + 2
 
     if (line === '') {
       continue
