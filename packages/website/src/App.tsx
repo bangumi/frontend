@@ -8,7 +8,6 @@ import { CharacterDetail, Subject } from './types/common'
 import Header from './components/Header'
 
 const App: FC = () => {
-  const [count, setCount] = useState(0)
   const [detail, setDetail] = useState<CharacterDetail | null>(null)
   const [subjectDetail, setSubjectDetail] = useState<Subject | null>(null)
 
@@ -28,17 +27,6 @@ const App: FC = () => {
     <>
       <Header />
       <div className={style.main}>
-        <Notification />
-        <div className={style.count}>
-          {count}
-        </div>
-        <Button
-          onClick={() => setCount(count => count + 1)}
-          className={style.button}
-        >
-          Increase
-        </Button>
-        <Button disabled>Disabled</Button>
         {detail
           ? <div>
             <Typography.Link href="https://bgm.tv/character/39115"><h1>{detail.name}</h1></Typography.Link>

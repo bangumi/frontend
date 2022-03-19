@@ -24,6 +24,13 @@
   height: @headerHeight + 1;
 }
 
+.logoMobile {
+  width: 126px;
+  height: @headerHeight + 1;
+  margin-left: 24px;
+  display: none;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -40,6 +47,7 @@
     color: #AAA6A6;
 
     /* Todo: use CSS var ? */
+
     :global(.bgm-menu-item--underline) {
       &:hover {
         color: #F9BCC1;
@@ -72,5 +80,58 @@
   .iconSetting {
     width: 18px;
     height: 18px;
+  }
+}
+
+/* 临时的移动端适配 */
+@media screen and  (max-width: 1440px) {
+  .avatar {
+    margin-right: 10px;
+  }
+
+  .nav {
+    margin: auto;
+
+    .divider {
+      margin: 0 10px;
+    }
+  }
+
+  .infoBox {
+    margin: auto;
+  }
+}
+
+/* 暂时还没有搜索框 */
+@media screen and  (max-width: 1200px) {
+  .search {
+    display: none;
+  }
+}
+
+/* 先隐藏，目前头部没有作用，等待具体设计 */
+@media screen and  (max-width: 992px) {
+  .nav .divider {
+    display: none;
+  }
+
+  .navRight {
+    display: none !important;
+  }
+}
+
+@media screen and  (max-width: 768px) {
+  .navLeft {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .logo {
+    display: none;
+  }
+
+  .logoMobile {
+    display: block;
   }
 }

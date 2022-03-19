@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import style from './style.module.less'
-import { BangumiLogo } from '@bangumi/icons/musume'
+import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
 import { Notification, Setting } from '@bangumi/icons'
 import { Avatar, Divider, Menu } from '@bangumi/design'
 import { AnimeSubMenu, BookSubMenu, MusicSubMenu, GameSubMenu, RealSubMenu, MonoSubMenu, GroupSubMenu } from './SubMenu'
@@ -64,6 +64,7 @@ const Header: FC = () => {
       <div className={style.main}>
         {/* Logo */}
         <BangumiLogo className={style.logo} />
+        <BangumiTextLogo className={style.logoMobile} />
         {/* Menu */}
         <div className={style.nav}>
           <Menu
@@ -81,7 +82,7 @@ const Header: FC = () => {
           <Setting className={style.iconSetting} />
         </div>
         {/* Avatar */}
-        <Avatar src="https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg" />
+        <Avatar src="https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg" wrapperClass={style.avatar} />
       </div>
     </div>
   )
