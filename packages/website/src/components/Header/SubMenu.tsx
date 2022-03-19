@@ -53,7 +53,7 @@ const AnimeSubMenuItems = [
   }
 ]
 
-const SubMenuBookItems = [
+const BookSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -72,7 +72,7 @@ const SubMenuBookItems = [
   }
 ]
 
-const SubMenuMusicItems = [
+const MusicSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -91,7 +91,7 @@ const SubMenuMusicItems = [
   }
 ]
 
-const SubMenuGameItems = [
+const GameSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -110,7 +110,7 @@ const SubMenuGameItems = [
   }
 ]
 
-const SubMenuRealItems = [
+const RealSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -132,6 +132,57 @@ const SubMenuRealItems = [
     label: '欧美剧'
   }
 ]
+
+const MonoSubMenuItems = [
+  {
+    key: 'character',
+    label: '虚构人物'
+  },
+  {
+    key: 'person',
+    label: '现实人物'
+  }
+]
+const MonoSubMenuBottom = [
+  {
+    key: 'update',
+    label: '关注人物更新'
+  },
+  {
+    key: 'character',
+    label: '收藏的角色'
+  },
+  {
+    key: 'person',
+    label: '收藏的人物'
+  }
+]
+
+const GroupSubMenuItems = [
+  {
+    key: '/group/discover',
+    label: '随便看看'
+  },
+  {
+    key: '/group/all',
+    label: '所有小组'
+  }
+]
+const GroupSubMenuBottom = [
+  {
+    key: '/group/my_topic',
+    label: '发表的话题'
+  },
+  {
+    key: '/group/my_reply',
+    label: '回复的话题'
+  },
+  {
+    key: '/group/mine',
+    label: '参加的小组'
+  }
+]
+
 // eslint-disable-next-line react/prop-types
 const SubMenu: VFC<{ itemsTop: Items, itemsBottom?: Items }> = ({ itemsTop, itemsBottom = SubMenuBottom }) => (
   <>
@@ -154,10 +205,14 @@ const SubMenu: VFC<{ itemsTop: Items, itemsBottom?: Items }> = ({ itemsTop, item
 
 export const AnimeSubMenu = <SubMenu itemsTop={AnimeSubMenuItems} />
 
-export const BookSubMenu = <SubMenu itemsTop={SubMenuBookItems} />
+export const BookSubMenu = <SubMenu itemsTop={BookSubMenuItems} />
 
-export const MusicSubMenu = <SubMenu itemsTop={SubMenuMusicItems} />
+export const MusicSubMenu = <SubMenu itemsTop={MusicSubMenuItems} />
 
-export const GameSubMenu = <SubMenu itemsTop={SubMenuGameItems} />
+export const GameSubMenu = <SubMenu itemsTop={GameSubMenuItems} />
 
-export const RealSubMenu = <SubMenu itemsTop={SubMenuRealItems} />
+export const RealSubMenu = <SubMenu itemsTop={RealSubMenuItems} />
+
+export const MonoSubMenu = <SubMenu itemsTop={MonoSubMenuItems} itemsBottom={MonoSubMenuBottom} />
+
+export const GroupSubMenu = <SubMenu itemsTop={GroupSubMenuItems} itemsBottom={GroupSubMenuBottom} />

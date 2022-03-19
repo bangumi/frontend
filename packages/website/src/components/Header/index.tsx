@@ -3,7 +3,7 @@ import style from './style.module.less'
 import { BangumiLogo } from '@bangumi/icons/musume'
 import { Notification, Setting } from '@bangumi/icons'
 import { Avatar, Divider, Menu } from '@bangumi/design'
-import { AnimeSubMenu, BookSubMenu, MusicSubMenu, GameSubMenu, RealSubMenu } from './SubMenu'
+import { AnimeSubMenu, BookSubMenu, MusicSubMenu, GameSubMenu, RealSubMenu, MonoSubMenu, GroupSubMenu } from './SubMenu'
 
 const navLeft = [
   {
@@ -36,7 +36,8 @@ const navLeft = [
 const navRight = [
   {
     key: 'mono',
-    label: '人物'
+    label: '人物',
+    SubMenu: MonoSubMenu
   },
   {
     key: 'rakuen',
@@ -44,7 +45,8 @@ const navRight = [
   },
   {
     key: 'group',
-    label: '小组'
+    label: '小组',
+    SubMenu: GroupSubMenu
   },
   {
     key: 'explore',
