@@ -1,6 +1,5 @@
 import React, { useState, FC, useEffect } from 'react'
-import { Button, Typography } from '@bangumi/design'
-import { Notification } from '@bangumi/icons'
+import { Typography } from '@bangumi/design'
 import style from './App.module.css'
 import { getCharacterDetail } from './api/character'
 import { getSubject } from './api/subject'
