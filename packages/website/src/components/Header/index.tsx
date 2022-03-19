@@ -67,11 +67,11 @@ const Header: FC = () => {
         {/* Menu */}
         <div className={style.nav}>
           <Menu
-            items={navLeft} className={style.navLeft}
+            items={navLeft} wrapperClass={style.navLeft}
           />
           <Divider orientation="vertical" className={style.divider} />
           <Menu
-            items={navRight} className={style.navRight}
+            items={navRight} wrapperClass={style.navRight}
           />
         </div>
         {/* Search Todo */}

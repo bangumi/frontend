@@ -186,9 +186,9 @@ const GroupSubMenuBottom = [
 // eslint-disable-next-line react/prop-types
 const SubMenu: VFC<{ itemsTop: Items, itemsBottom?: Items }> = ({ itemsTop, itemsBottom = SubMenuBottom }) => (
   <>
-    <Menu items={itemsTop} mode="vertical" className={style.subMenu} />
+    <Menu items={itemsTop} mode="vertical" wrapperClass={style.subMenu} />
     <Divider className={style.subMenuDivider} />
-    <Menu items={itemsBottom} mode="vertical" className={style.subMenu}>
+    <Menu items={itemsBottom} mode="vertical" wrapperClass={style.subMenu}>
       {
         item => (
           <MenuItem
