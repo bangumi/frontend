@@ -1,4 +1,5 @@
-@activeColor-light: #f09199;
+@hoverColor-light: #f09199;
+@textColor: #777272;
 
 .bgm-menu {
   display: inline-flex;
@@ -10,7 +11,7 @@
   padding: 0;
 
   list-style: none;
-  color: #777272;
+  color: @textColor;
   font-style: normal;
   font-weight: 500;
   line-height: 21px;
@@ -47,25 +48,25 @@
   cursor: pointer;
   font-size: 1em;
 
-  &--active.circle {
+  &--circle:hover {
     padding: 6px 10px;
-    background-color: @activeColor-light;
+    background-color: @hoverColor-light;
     color: #fff;
     border-radius: 17px;
   }
 
-  &--active.underline {
-    color: #F09199;
+  &--underline:hover {
+    color: @hoverColor-light;
     position: relative;
 
     &:after {
       content: '';
       position: absolute;
-      bottom: -3px;
+      bottom: -8px;
       left: 0;
       right: 0;
       height: 4px;
-      background-color: @activeColor-light;
+      background-color: @hoverColor-light;
       border-radius: 2px;
     }
   }

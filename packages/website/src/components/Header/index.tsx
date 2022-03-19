@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import style from './style.module.less'
 import { BangumiLogo } from '@bangumi/icons/musume'
 import { Notification, Setting } from '@bangumi/icons'
@@ -51,6 +51,8 @@ const navRight = [
 ]
 
 const Header: FC = () => {
+  const [leftNavActiveKey, setLeftNavActiveKey] = useState('')
+  const [rightNavActiveKey, setRightNavActiveKey] = useState('')
   return (
     <div className={style.container}>
       <div className={style.main}>
@@ -58,9 +60,13 @@ const Header: FC = () => {
         <BangumiLogo className={style.logo} />
         {/* Menu */}
         <div className={style.nav}>
-          <Menu items={navLeft} className={style.navLeft} />
+          <Menu
+            items={navLeft} className={style.navLeft} activeKey={leftNavActiveKey}
+          />
           <Divider orientation="vertical" className={style.divider} />
-          <Menu items={navRight} className={style.navRight} />
+          <Menu
+            items={navRight} className={style.navRight} activeKey={rightNavActiveKey}
+          />
         </div>
         {/* Search Todo */}
         <div className={style.infoBox}>

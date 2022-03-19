@@ -20,13 +20,11 @@ export interface MenuProps {
   activeKey?: string
   /* 节点数组，设置可以自动设置 MenuItem 节点，如果有其它特殊需求也可以手动添加到 children/slots */
   items?: IItem[]
-  /* 选中时的样式 */
-  activeType?: 'circle' | 'underline' | 'none'
   /* Render Props, 你可以使用自定义的 Item 组件 */
   children?: (items: IItem) => React.ReactElement
 }
 
-type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'activeType'>
+type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'mode'>
 
 const MenuContext = createContext<MenuContextType>({})
 
@@ -34,10 +32,9 @@ const Menu: FC<MenuProps> = ({
   className: customClassName,
   children,
   onClick,
-  mode,
+  mode = 'horizontal',
   style,
   activeKey,
-  activeType,
   items
 }) => {
   const className = classnames('bgm-menu', customClassName, {
@@ -47,7 +44,7 @@ const Menu: FC<MenuProps> = ({
 
   return (
     <ul className={className} style={style}>
-      <MenuContext.Provider value={{ onClick, activeKey, activeType }}>
+      <MenuContext.Provider value={{ onClick, activeKey, mode }}>
         {
           items?.map(item => {
             return children
@@ -60,11 +57,6 @@ const Menu: FC<MenuProps> = ({
       </MenuContext.Provider>
     </ul>
   )
-}
-
-Menu.defaultProps = {
-  mode: 'horizontal',
-  activeType: 'none'
 }
 
 export default Menu
