@@ -64,7 +64,7 @@ export default {
 }
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass, hoverStyle }) => {
+const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
     <div style={{
       display: 'flex',
@@ -78,7 +78,6 @@ const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wr
         items={items}
         onClick={onClick}
         style={style}
-        hoverStyle={hoverStyle}
         wrapperClass={wrapperClass}
       />
     </div>

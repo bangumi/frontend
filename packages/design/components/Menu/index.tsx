@@ -22,16 +22,11 @@ export interface MenuProps {
   activeKey?: string
   /* 节点数组，设置可以自动设置 MenuItem 节点 */
   items: IItem[]
-  /* 鼠标移动到菜单的样式
-  `vertical` 类型下默认为 `circle`
-  `horizontal` 类型下默认为 `underline`
-  */
-  hoverStyle?: 'circle' | 'underline'
   /* Render Props, 你可以使用自定义的 Item 组件 */
   children?: (items: IItem) => React.ReactElement
 }
 
-type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'hoverStyle'>
+type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'mode'>
 
 const MenuContext = createContext<MenuContextType>({})
 
@@ -42,10 +37,8 @@ const Menu: FC<MenuProps> = ({
   mode = 'horizontal',
   style,
   activeKey,
-  items,
-  hoverStyle: customHoverStyle
+  items
 }) => {
-  const hoverStyle = customHoverStyle ?? (mode === 'vertical' ? 'circle' : 'underline')
   const className = classnames(
     'bgm-menu',
     `bgm-menu--${mode}`,
@@ -53,7 +46,7 @@ const Menu: FC<MenuProps> = ({
   )
   return (
     <ul className={className} style={style}>
-      <MenuContext.Provider value={{ onClick, activeKey, hoverStyle }}>
+      <MenuContext.Provider value={{ onClick, activeKey, mode }}>
         {
           items.map(item => {
             return children

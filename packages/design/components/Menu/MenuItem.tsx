@@ -17,7 +17,7 @@ const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className: customC
   const {
     onClick: onClickEmit,
     activeKey,
-    hoverStyle
+    mode
   } = useMenuContext()
 
   const isActive = id === activeKey
@@ -27,7 +27,7 @@ const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className: customC
     {
       'bgm-menu-item--active': isActive
     },
-    `bgm-menu-item--${hoverStyle!}`,
+    `bgm-menu-item--${mode === 'horizontal' ? 'underline' : 'circle'}`,
     customClassName
   )
 
