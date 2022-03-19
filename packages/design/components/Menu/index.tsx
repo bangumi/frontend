@@ -5,6 +5,8 @@ import classnames from 'classnames'
 interface IItem {
   key: string
   label: string
+  /* 子菜单 */
+  SubMenu?: JSX.Element
 }
 
 export interface MenuProps {
@@ -50,7 +52,7 @@ const Menu: FC<MenuProps> = ({
             return children
               ? children(item)
               : (
-                <MenuItem key={item.key} id={item.key}>{item.label}</MenuItem>
+                <MenuItem key={item.key} id={item.key} SubMenu={item.SubMenu}>{item.label}</MenuItem>
                 )
           })
         }

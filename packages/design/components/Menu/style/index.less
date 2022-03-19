@@ -14,14 +14,17 @@
   color: @textColor;
   font-style: normal;
   font-weight: 500;
-  line-height: 21px;
 
   &--horizontal {
     flex-direction: row;
     height: 60px;
+    line-height: 21px;
 
-    .bgm-menu-item {
+    > .bgm-menu-item {
       margin-right: 20px;
+      height: 60px;
+      line-height: 60px;
+
 
       &:last-of-type {
         margin-right: 0;
@@ -33,9 +36,14 @@
     display: flex;
     flex-direction: column;
     width: 100px;
+    padding: 8px 8px;
+    box-sizing: border-box;
+    line-height: 14px;
 
     .bgm-menu-item {
-      margin-bottom: 10px;
+      width: 100%;
+      padding: 5px 0;
+      text-align: center;
 
       &:last-of-type {
         margin-bottom: 0;
@@ -47,9 +55,9 @@
 .bgm-menu-item {
   cursor: pointer;
   font-size: 1em;
+  position: relative;
 
   &--circle:hover {
-    padding: 6px 10px;
     background-color: @hoverColor-light;
     color: #fff;
     border-radius: 17px;
@@ -57,17 +65,33 @@
 
   &--underline:hover {
     color: @hoverColor-light;
-    position: relative;
 
     &:after {
       content: '';
       position: absolute;
-      bottom: -8px;
+      bottom: 12px;
       left: 0;
       right: 0;
       height: 4px;
       background-color: @hoverColor-light;
       border-radius: 2px;
     }
+  }
+
+  &__submenu {
+    display: none;
+    position: absolute;
+    top: 54px;
+    border: 1px solid #EDE9E9;
+    border-radius: 17px;
+    background-color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: 350;
+  }
+
+  &:hover .bgm-menu-item__submenu {
+    display: block;
   }
 }
