@@ -7,18 +7,18 @@ type Items = Array<{
   label: string
 }>
 
-const SubMenuBottom = [
+const subMenuBottomBuilder = (verb: '看' | '读' | '听' | '玩'): Items => [
   {
     key: 'do',
-    label: '在看'
+    label: `在${verb}`
   },
   {
     key: 'wish',
-    label: '想看'
+    label: `想${verb}`
   },
   {
     key: 'collect',
-    label: '看过'
+    label: `${verb}过`
   },
   {
     key: 'on_hold',
@@ -183,8 +183,29 @@ const GroupSubMenuBottom = [
   }
 ]
 
+const subMenuBottomWrapper = (type: string): Items => {
+  switch (type) {
+    case 'anime':
+      return subMenuBottomBuilder('看')
+    case 'book':
+      return subMenuBottomBuilder('读')
+    case 'music':
+      return subMenuBottomBuilder('听')
+    case 'game':
+      return subMenuBottomBuilder('玩')
+    case 'real':
+      return subMenuBottomBuilder('看')
+    case 'mono':
+      return MonoSubMenuBottom
+    case 'group':
+      return GroupSubMenuBottom
+    default:
+      return []
+  }
+}
+
 // eslint-disable-next-line react/prop-types
-const SubMenu: VFC<{ itemsTop: Items, itemsBottom?: Items }> = ({ itemsTop, itemsBottom = SubMenuBottom }) => (
+const SubMenu: VFC<{ itemsTop: Items, itemsBottom: Items }> = ({ itemsTop, itemsBottom }) => (
   <>
     <Menu items={itemsTop} mode="vertical" wrapperClass={style.subMenu} />
     <Divider className={style.subMenuDivider} />
@@ -203,16 +224,16 @@ const SubMenu: VFC<{ itemsTop: Items, itemsBottom?: Items }> = ({ itemsTop, item
   </>
 )
 
-export const AnimeSubMenu = <SubMenu itemsTop={AnimeSubMenuItems} />
+export const AnimeSubMenu = <SubMenu itemsTop={AnimeSubMenuItems} itemsBottom={subMenuBottomWrapper('anime')} />
 
-export const BookSubMenu = <SubMenu itemsTop={BookSubMenuItems} />
+export const BookSubMenu = <SubMenu itemsTop={BookSubMenuItems} itemsBottom={subMenuBottomWrapper('book')} />
 
-export const MusicSubMenu = <SubMenu itemsTop={MusicSubMenuItems} />
+export const MusicSubMenu = <SubMenu itemsTop={MusicSubMenuItems} itemsBottom={subMenuBottomWrapper('music')} />
 
-export const GameSubMenu = <SubMenu itemsTop={GameSubMenuItems} />
+export const GameSubMenu = <SubMenu itemsTop={GameSubMenuItems} itemsBottom={subMenuBottomWrapper('game')} />
 
-export const RealSubMenu = <SubMenu itemsTop={RealSubMenuItems} />
+export const RealSubMenu = <SubMenu itemsTop={RealSubMenuItems} itemsBottom={subMenuBottomWrapper('real')} />
 
-export const MonoSubMenu = <SubMenu itemsTop={MonoSubMenuItems} itemsBottom={MonoSubMenuBottom} />
+export const MonoSubMenu = <SubMenu itemsTop={MonoSubMenuItems} itemsBottom={subMenuBottomWrapper('mono')} />
 
-export const GroupSubMenu = <SubMenu itemsTop={GroupSubMenuItems} itemsBottom={GroupSubMenuBottom} />
+export const GroupSubMenu = <SubMenu itemsTop={GroupSubMenuItems} itemsBottom={subMenuBottomWrapper('group')} />
