@@ -27,7 +27,7 @@
 .logoMobile {
   width: 126px;
   height: @headerHeight + 1;
-  margin-left: 24px;
+  margin-left: 10px;
   display: none;
 }
 
@@ -85,16 +85,17 @@
 
 /* 临时的移动端适配 */
 @media screen and  (max-width: 1440px) {
+  /* 暂时还没有搜索框 */
+  .search {
+    display: none;
+  }
+
   .avatar {
     margin-right: 10px;
   }
 
   .nav {
     margin: auto;
-
-    .divider {
-      margin: 0 10px;
-    }
   }
 
   .infoBox {
@@ -102,10 +103,9 @@
   }
 }
 
-/* 暂时还没有搜索框 */
 @media screen and  (max-width: 1200px) {
-  .search {
-    display: none;
+  .nav .divider {
+    margin: 0 20px;
   }
 }
 
