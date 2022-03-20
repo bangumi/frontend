@@ -13,7 +13,7 @@ export default defineConfig({
           libraryName: '@bangumi/design',
           libraryNameChangeCase: 'capitalCase',
           ensureStyleFile: true,
-          resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`
+          resolveStyle: (name: string) => !name.includes('Item') ? `@bangumi/design/components/${name}/style/index.tsx` : ''
         }
       ]
     })

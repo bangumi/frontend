@@ -64,17 +64,21 @@ export default {
 }
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, activeType, style, className }) => {
+const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
+    >
       <Menu
         mode={mode}
         activeKey={activeKey}
         items={items}
         onClick={onClick}
-        activeType={activeType}
         style={style}
-        className={className}
+        wrapperClass={wrapperClass}
       />
     </div>
   )
@@ -95,5 +99,11 @@ Vertical.args = ({ items: itemsVertical, mode: 'vertical' })
 Vertical.argTypes = {
   activeKey: {
     options: itemsVertical.map(item => item.key)
+  },
+  style: {
+    defaultValue: {
+      fontSize: 12,
+      fontWeight: 400
+    }
   }
 }

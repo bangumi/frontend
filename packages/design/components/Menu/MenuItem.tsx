@@ -9,21 +9,40 @@ export interface MenuItemProps {
   className?: string
   /* 覆盖父组件 Menu 的默认 Click 事件, 但大多数情况下应该尽可能使用父组件的 Click 事件 */
   onClick?: MouseEventHandler
+  /* 子菜单，鼠标悬浮时显示 */
+  SubMenu?: JSX.Element
 }
 
-const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className }) => {
-  const { onClick: onClickEmit, activeKey, activeType } = useMenuContext()
+const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className: customClassName, SubMenu }) => {
+  const {
+    onClick: onClickEmit,
+    activeKey,
+    mode
+  } = useMenuContext()
+
   const isActive = id === activeKey
+
+  const className = classnames(
+    'bgm-menu-item',
+    {
+      'bgm-menu-item--active': isActive
+    },
+    `bgm-menu-item--${mode === 'horizontal' ? 'underline' : 'circle'}`,
+    customClassName
+  )
+
   return (
     <li
-      className={classnames('bgm-menu-item', {
-        'bgm-menu-item--active': isActive,
-        circle: isActive && activeType === 'circle',
-        underline: isActive && activeType === 'underline'
-      }, className)}
+      className={className}
       onClick={onClick ?? (e => onClickEmit?.(id, e))}
     >
       {children}
+      {
+        SubMenu &&
+          <div className="bgm-menu-item__submenu">
+            {SubMenu}
+          </div>
+      }
     </li>
   )
 }
