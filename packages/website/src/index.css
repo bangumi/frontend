@@ -1,6 +1,11 @@
 /* Todo */
+/*html {*/
+/*    font-family: 'Source Han Sans SC', 'Noto Sans SC',*/
+/*    system-ui, -apple-system, BlinkMacSystemFont,*/
+/*    Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;*/
+/*}*/
 html {
-    font-family: 'Source Han Sans SC', 'Noto Sans SC',
+    font-family: 'Noto Sans SC',
     system-ui, -apple-system, BlinkMacSystemFont,
     Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
