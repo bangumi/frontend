@@ -41,6 +41,7 @@ const aboutBlock: IBlockItem = {
     }
   ]
 }
+
 const helpBlock: IBlockItem = {
   title: '获得帮助',
   items: [
@@ -132,6 +133,10 @@ const Footer: FC = () => {
         <div className={style.inner}>
           <div className={style.footerLeft}>
             <BangumiTextLogo className={style.logo} />
+            <div className={style.copyright}>
+              <p>© 2008-2022 Bangumi (a.k.a.Chobits),</p>
+              <p>some rights reserved | ver. TBD</p>
+            </div>
           </div>
           <div className={style.footerRight}>
             <FooterBlockItem
