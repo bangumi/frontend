@@ -135,7 +135,7 @@ const Footer: FC = () => {
             <BangumiTextLogo className={style.logo} />
             <div className={style.copyright}>
               <p>© 2008-2022 Bangumi (a.k.a.Chobits),</p>
-              <p>some rights reserved | ver. TBD</p>
+              <p>some rights reserved | ver. 0.0.0</p>
             </div>
           </div>
           <div className={style.footerRight}>
