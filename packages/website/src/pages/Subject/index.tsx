@@ -1,12 +1,13 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import PageRoutes from '../../components/PageRoutes'
 import DetailEditor from './WikiEditor/DetailEdtor'
 
 const Subject: React.FC = () => {
   return (
-    <Routes>
+    <PageRoutes>
       <Route path="/:subjectId/edit-detail" element={<DetailEditor />} />
-    </Routes>
+    </PageRoutes>
   )
 }
 
