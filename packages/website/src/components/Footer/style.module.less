@@ -1,0 +1,173 @@
+@bgColorLeft: #F29BA3;
+@bgColorRight: #F64B51;
+@footerHeight: 220px;
+
+.footerContainer {
+  display: flex;
+  align-items: center;
+  height: @footerHeight;
+
+  /*左右无限延生的纯色*/
+
+  &:before {
+    content: '';
+    height: 100%;
+    flex: 1;
+    background-color: @bgColorLeft;
+  }
+
+  &:after {
+    content: '';
+    height: 100%;
+    flex: 1;
+    background-color: @bgColorRight;
+  }
+}
+
+
+.footerMain {
+  width: 1380px;
+  height: 100%;
+  background-color: #f47a81; // Fallback background color
+  background-image: url("../../assets/footer-cover.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  padding: 0 30px;
+  font-size: 14px;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 116px;
+    height: 100%;
+    left: 0;
+    top: 0;
+
+    background: linear-gradient(270deg, #F29BA3 41.38%, rgba(242, 155, 163, 0) 85.34%);
+    transform: rotate(-180deg);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 116px;
+    height: 100%;
+    right: 0;
+    top: 0;
+    background: linear-gradient(270deg, #F64B51 0%, rgba(246, 75, 81, 0) 100%);
+  }
+}
+
+.footerLeft {
+  z-index: 1;
+
+  .logo {
+    width: 186px;
+    height: 55px;
+    margin-bottom: 38px;
+
+    path {
+      fill: #FFFFFF;
+      stroke: #FFFFFF;
+    }
+  }
+
+  .copyright {
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1em;
+    line-height: 16px;
+    color: rgba(255, 255, 255, 0.4);
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.footerRight {
+  display: flex;
+  align-items: center;
+  z-index: 1;
+
+  .block {
+    text-align: right;
+    width: 160px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 9px 0;
+
+    .title {
+      color: #FFF7F7;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1em;
+      line-height: 20px;
+      margin-top: 0;
+      margin-bottom: 9px;
+    }
+
+    a {
+      color: #fff;
+      display: block;
+      text-decoration: none;
+      font-weight: 400;
+      font-size: 1em;
+      line-height: 21px;
+      margin-bottom: 9px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+/* 临时的移动端适配 */
+
+@media screen and  (max-width: 1200px) {
+  .footerRight .block {
+    width: 130px;
+  }
+}
+
+
+@media screen and  (max-width: 992px) {
+  .footerLeft {
+    display: none;
+  }
+}
+
+@media screen and  (max-width: 768px) {
+  .footerContainer {
+    height: 180px;
+  }
+
+  .footerMain {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .footerRight {
+    justify-content: space-between;
+    width: 100%;
+
+    .block {
+      text-align: left;
+      width: auto;
+    }
+  }
+}

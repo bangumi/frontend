@@ -15,6 +15,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.8.1
       '@typescript-eslint/parser': ^5.8.1
       babel-jest: ^27.4.6
+      babel-preset-vite: ^1.0.4
       eslint: ^7.32.0
       eslint-config-standard: ^16.0.3
       eslint-config-standard-jsx: ^10.0.0
@@ -45,6 +46,7 @@ importers:
       '@typescript-eslint/eslint-plugin': r2.cnpmjs.org/@typescript-eslint/eslint-plugin/5.8.1_c05e6fca5974c04442e7c260534af929
       '@typescript-eslint/parser': 5.9.0_eslint@7.32.0+typescript@4.5.4
       babel-jest: 27.4.6_@babel+core@7.16.7
+      babel-preset-vite: 1.0.4
       eslint: r2.cnpmjs.org/eslint/7.32.0
       eslint-config-standard: r2.cnpmjs.org/eslint-config-standard/16.0.3_6a48346ff31498e55146b31bc801dc94
       eslint-config-standard-jsx: 10.0.0_5429c46d75d8c18a8897a831475c306e
@@ -4402,6 +4404,21 @@ packages:
       - supports-color
     dev: true
 
+  /babel-plugin-transform-vite-meta-env/1.0.3:
+    resolution: {integrity: sha512-eyfuDEXrMu667TQpmctHeTlJrZA6jXYHyEJFjcM0yEa60LS/LXlOg2PBbMb8DVS+V9CnTj/j9itdlDVMcY2zEg==}
+    dependencies:
+      '@babel/runtime': 7.16.7
+      '@types/babel__core': 7.1.18
+    dev: true
+
+  /babel-plugin-transform-vite-meta-glob/1.0.3:
+    resolution: {integrity: sha512-JW3VnwUjJqpj0FM0vJFxrGdxSBcHOa0j5YMvvtXYPmFshroq53nbK9dqRETgjXlMrfIz0oU/6ki+u1GdVWdNHA==}
+    dependencies:
+      '@babel/runtime': 7.16.7
+      '@types/babel__core': 7.1.18
+      glob: 7.2.0
+    dev: true
+
   /babel-preset-current-node-syntax/1.0.1_@babel+core@7.16.7:
     resolution: {integrity: sha512-M7LQ0bxarkxQoN+vz5aJPsLBn77n8QgTFmo8WK0/44auK2xlCXrYcUxHFxgU7qW5Yzw/CjmLRK2uJzaCd7LvqQ==}
     peerDependencies:
@@ -4431,6 +4448,15 @@ packages:
       '@babel/core': 7.16.7
       babel-plugin-jest-hoist: 27.4.0
       babel-preset-current-node-syntax: 1.0.1_@babel+core@7.16.7
+    dev: true
+
+  /babel-preset-vite/1.0.4:
+    resolution: {integrity: sha512-RZS/wNfEUD8aMliObxqlPw4ZR7R5OsT1G2IHd5nuUmiYKS6zemur8aZ5WPbfQwPpTPe9VEjcrxQA/6PKBWRTkg==}
+    dependencies:
+      '@babel/runtime': 7.16.7
+      '@types/babel__core': 7.1.18
+      babel-plugin-transform-vite-meta-env: 1.0.3
+      babel-plugin-transform-vite-meta-glob: 1.0.3
     dev: true
 
   /balanced-match/1.0.2:
@@ -16550,7 +16576,7 @@ packages:
     version: 3.0.2
     hasBin: true
     dependencies:
-      glob: r2.cnpmjs.org/glob/7.2.0
+      glob: 7.2.0
     dev: true
 
   r2.cnpmjs.org/ripemd160/2.0.2:

@@ -5,6 +5,7 @@ import { getCharacterDetail } from './api/character'
 import { getSubject } from './api/subject'
 import { CharacterDetail, Subject } from './types/common'
 import Header from './components/Header'
+import Footer from './components/Footer'
 
 const App: FC = () => {
   const [detail, setDetail] = useState<CharacterDetail | null>(null)
@@ -63,6 +64,7 @@ const App: FC = () => {
           </div>
           : <div>loading</div>}
       </div>
+      <Footer />
     </>
   )
 }
