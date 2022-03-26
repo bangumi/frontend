@@ -1,11 +1,11 @@
 import React from 'react'
-import HomePage from '.'
+import Home from '.'
 import { render, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('HomePage', () => {
   it('should load character and subject', async () => {
-    const { getByText } = render(<HomePage />)
+    const { getByText } = render(<Home />)
     const characterName = 'うずまきボルト'
     await waitFor(() => getByText(characterName))
 
