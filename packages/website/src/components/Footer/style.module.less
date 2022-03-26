@@ -28,6 +28,7 @@
 .footerMain {
   width: 1380px;
   height: 100%;
+  background-color: #f47a81; /* Fallback background color*/
   background-image: url("../../assets/footer-cover.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -64,7 +65,8 @@
     right: 0;
     top: 0;
 
-    background: linear-gradient(270deg, #F64B51 31.03%, rgba(246, 75, 81, 0) 58.62%);
+    //background: linear-gradient(270deg, #F64B51 31.03%, rgba(246, 75, 81, 0) 58.62%);
+    background: linear-gradient(270deg, #F64B51 0%, rgba(246, 75, 81, 0) 100%);
   }
 }
 
@@ -152,7 +154,6 @@
 }
 
 @media screen and  (max-width: 768px) {
-
   .footerContainer {
     height: 180px;
   }
