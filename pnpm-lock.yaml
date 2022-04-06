@@ -145,6 +145,7 @@ importers:
       '@types/react-dom': ^17.0.10
       '@vitejs/plugin-react': ^1.0.7
       axios: ^0.24.0
+      bgm-types: ^2.0.2
       msw: ^0.36.5
       normalize.css: ^8.0.1
       react: ^17.0.2
@@ -166,6 +167,7 @@ importers:
       '@types/react': 17.0.38
       '@types/react-dom': 17.0.11
       '@vitejs/plugin-react': 1.1.4
+      bgm-types: 2.0.2
       msw: 0.36.5
       typescript: 4.5.4
       vite: 2.7.10
@@ -4462,6 +4464,10 @@ packages:
 
   /balanced-match/1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
+    dev: true
+
+  /bgm-types/2.0.2:
+    resolution: {integrity: sha512-+RzUrQ0ZIfN5hgqQ/9JGg6rs2/fy4de5b83ZZr4mqBlUaBsL93IOnbq97MmBg6VnCD3sp97Wuvm9ayBVYVl6qQ==}
     dev: true
 
   /bindings/1.5.0:
