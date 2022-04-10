@@ -1,7 +1,7 @@
 import { request } from './request'
-import { BGMUser } from 'bgm-types'
+import { User } from '../types/user'
 
-export async function getMe (): Promise<BGMUser.Me | null> {
+export async function getMe (): Promise< User | null> {
   try {
     const resp = await request('v0/me')
     return resp.data

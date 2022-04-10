@@ -1,23 +1,14 @@
 import React, { FC } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
-import { getMe } from './api/user'
 import GlobalLayout from './components/GlobalLayout'
 import PageRoutes from './components/PageRoutes'
-import { UserContext } from './hooks/useUser'
+import { UserProvider } from './hooks/use-user'
 import Home from './pages/Home'
 import Subject from './pages/Subject'
-import { BGMUser } from 'bgm-types'
 
 const App: FC = () => {
-  const [user, setUser] = React.useState<BGMUser.Me| null>(null)
-  React.useEffect(() => {
-    getMe().then((res) => {
-      setUser(res)
-    })
-  }, [])
-
   return (
-    <UserContext.Provider value={user}>
+    <UserProvider>
       <GlobalLayout>
         <BrowserRouter>
           <PageRoutes>
@@ -26,7 +17,7 @@ const App: FC = () => {
           </PageRoutes>
         </BrowserRouter>
       </GlobalLayout>
-    </UserContext.Provider>
+    </UserProvider>
   )
 }
 
