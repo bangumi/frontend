@@ -1,6 +1,6 @@
 import { mockAPI } from './utils'
 
-const BASE_URL = 'https://api.bgm.tv'
+const BASE_URL = (import.meta.env.VITE_APP_ROOT as string) ?? 'https://api.bgm.tv'
 
 function buildAPIURL (path: string): string {
   return `${BASE_URL}${path}`

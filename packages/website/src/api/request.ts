@@ -1,9 +1,8 @@
 import axios from 'axios'
 
-const baseURL = 'https://api.bgm.tv'
+const baseURL = (import.meta.env.VITE_APP_ROOT as string) ?? 'https://api.bgm.tv'
+
 export const request = axios.create({
-  // baseURL: import.meta.env.VITE_APP_ROOT as string,
-  // import.meta无法通过jest https://github.com/facebook/jest/issues/4842 可能需要改一下jest配置
   baseURL,
   timeout: 6000 // 请求超时时间
 })
@@ -15,19 +14,19 @@ const errorHandler = async (error: any): Promise<never> => {
   return await Promise.reject(error)
 }
 
-const underscodeToCamelcase = (data: any): string | any[] => {
+const underscoreToCamelcase = (data: any): string | any[] => {
   if (Array.isArray(data)) {
     data.forEach((value) => {
-      value = underscodeToCamelcase(value)
+      value = underscoreToCamelcase(value)
     })
   } else if (data !== null && typeof data === 'object') {
     for (const key in data) {
-      const newKey = underscodeToCamelcase(key) as string
+      const newKey = underscoreToCamelcase(key) as string
       if (key !== newKey) {
         data[newKey] = data[key]
         delete data?.key
       }
-      if (typeof data[key] === 'object') data[key] = underscodeToCamelcase(data[key])
+      if (typeof data[key] === 'object') data[key] = underscoreToCamelcase(data[key])
     }
   } else if (typeof data === 'string') {
     data = data.replace(/_[a-z]/g, (str: string): string => {
@@ -43,6 +42,6 @@ request.interceptors.request.use(config => {
 }, errorHandler)
 
 request.interceptors.response.use((response) => {
-  response.data = underscodeToCamelcase(response.data)
+  response.data = underscoreToCamelcase(response.data)
   return response
 }, errorHandler)
