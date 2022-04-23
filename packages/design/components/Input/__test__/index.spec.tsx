@@ -11,7 +11,7 @@ describe('Input', () => {
   })
 
   it('ref should forward to input tag', () => {
-    const ref = React.useRef<HTMLInputElement>(null)
+    const ref = React.createRef<HTMLInputElement>()
     render(
       <Input ref={ref} />
     )
