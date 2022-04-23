@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { forwardRef } from 'react'
 import classnames from 'classnames'
 
 export interface InputProps {
@@ -16,21 +16,23 @@ export interface InputProps {
   suffix?: React.ReactNode
 }
 
-const Input: FC<InputProps> = ({
+/* eslint-disable react/prop-types */
+// https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
+const Input = forwardRef<HTMLInputElement, InputProps>(({
   type = 'text',
   wrapperStyle,
   wrapperClass,
   prefix,
   suffix,
   placeholder
-}) => {
+}, ref) => {
   return (
     <div className={classnames('bgm-input__wrapper', wrapperClass)} style={wrapperStyle}>
       {prefix && prefix}
-      <input type={type} className="bgm-input__text" placeholder={placeholder} />
+      <input type={type} className="bgm-input__text" placeholder={placeholder} ref={ref} />
       {suffix && suffix}
     </div>
   )
-}
+})
 
 export default Input
