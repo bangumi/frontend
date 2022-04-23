@@ -1,7 +1,7 @@
 import React from 'react'
 import { ComponentMeta, Story } from '@storybook/react'
 import Input, { InputProps } from '.'
-import { UserLogin } from '@bangumi/icons'
+import { UserLogin, Search as SearchIcon } from '@bangumi/icons'
 
 const componentMeta: ComponentMeta<typeof Input> = {
   title: 'modern/Input',
@@ -48,4 +48,19 @@ Password.args = {
   wrapperStyle: loginStyle
 }
 
-export const Search = Template.bind({})
+export const NavSearch = Template.bind({})
+
+NavSearch.args = {
+  // 正式需要详细样式
+  prefix: (
+    <select name="select" style={{ outline: 'none', border: 'none', color: '#AAA6A6' }}>
+      <option value="value1" selected>全部条目</option>
+    </select>
+  ),
+  suffix: <SearchIcon style={{ flexShrink: 0 }} />,
+  wrapperStyle: {
+    width: 256,
+    height: 32,
+    padding: '5px 12px 7px 13px'
+  }
+}
