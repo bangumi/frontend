@@ -2,8 +2,8 @@ import React, { FC } from 'react'
 import classnames from 'classnames'
 
 export interface InputProps {
-  /* 同原生 `type` */
-  type?: HTMLInputElement['type']
+  /* 同原生 input 标签 `type` */
+  type?: string
   /* 同原生 `placeholder` */
   placeholder?: string
   /* 外层 wrapper 的样式 */
@@ -17,7 +17,7 @@ export interface InputProps {
 }
 
 const Input: FC<InputProps> = ({
-  type,
+  type = 'text',
   wrapperStyle,
   wrapperClass,
   prefix,

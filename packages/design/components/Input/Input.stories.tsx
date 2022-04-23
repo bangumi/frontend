@@ -23,6 +23,7 @@ export const Login = Template.bind({})
 
 Login.args = {
   placeholder: '你的 Email 地址',
+  type: 'email',
   prefix: <UserLogin />
 }
 
