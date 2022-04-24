@@ -17,4 +17,18 @@ describe('Input', () => {
     )
     expect(ref.current?.tagName).toBe('INPUT')
   })
+
+  it('prefix should be rendered', () => {
+    const { getByText } = render(
+      <Input prefix="$" />
+    )
+    expect(getByText('$')).toBeInTheDocument()
+  })
+
+  it('suffix should be rendered', () => {
+    const { getByText } = render(
+      <Input suffix="$" />
+    )
+    expect(getByText('$')).toBeInTheDocument()
+  })
 })
