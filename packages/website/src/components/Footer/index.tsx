@@ -126,7 +126,7 @@ const moreBlock: IBlockItem = {
   ]
 }
 
-const getThisYear = (): String => new Date().getFullYear().toString()
+const getThisYear = (): string => new Date().getFullYear().toString()
 
 const Footer: FC = () => {
   return (
