@@ -1,19 +1,14 @@
-import React, { FC } from 'react'
-import { BrowserRouter, Route } from 'react-router-dom'
+import React, { FC, Suspense } from 'react'
+import { useRoutes } from 'react-router-dom'
 import GlobalLayout from './components/GlobalLayout'
-import PageRoutes from './components/PageRoutes'
-import Home from './pages/Home'
-import Subject from './pages/Subject'
+import pageRoutes from '~react-pages'
 
 const App: FC = () => {
   return (
     <GlobalLayout>
-      <BrowserRouter>
-        <PageRoutes>
-          <Route path="subject/*" element={<Subject />} />
-          <Route index element={<Home />} />
-        </PageRoutes>
-      </BrowserRouter>
+      <Suspense fallback={<p>loading...</p>}>
+        {useRoutes(pageRoutes)}
+      </Suspense>
     </GlobalLayout>
   )
 }

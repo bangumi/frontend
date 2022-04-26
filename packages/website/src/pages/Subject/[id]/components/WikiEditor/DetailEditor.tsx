@@ -2,7 +2,7 @@ import React from 'react'
 
 const DetailEditor: React.FC = () => {
   return (
-    <div />
+    <div> 维基编辑组件 </div>
   )
 }
 
