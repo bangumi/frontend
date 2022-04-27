@@ -117,19 +117,27 @@
       line-height: 20px;
       margin-top: 0;
       margin-bottom: 9px;
+      cursor:Default;
+    }
+
+    div {
+      margin-bottom: 9px;
     }
 
     a {
       color: #fff;
-      display: block;
       text-decoration: none;
       font-weight: 400;
       font-size: 1em;
       line-height: 21px;
-      margin-bottom: 9px;
 
       &:last-of-type {
         margin-bottom: 0;
+      }
+
+      &:hover{
+        cursor: pointer;
+        text-decoration:underline;
       }
     }
   }

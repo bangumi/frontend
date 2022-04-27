@@ -13,7 +13,7 @@ const FooterBlockItem: FC<{ block: IBlockItem }> = ({ block }) => {
       <h2 className={style.title}>{block.title}</h2>
       {
         block.items.map(({ key, label }) => (
-          <a key={key} href={key}>{label}</a>
+          <div key={key}><a href={key}>{label}</a></div>
         ))
       }
     </div>
