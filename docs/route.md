@@ -6,7 +6,7 @@ website 项目使用约定式路由。由 [vite-plugin-pages](https://github.com
 简略来说，`src/pages` 下方的所有组件都会按照路由约定渲染为单独的页面。除了以下情况：
 
 - `components` 中的组件，例如 `src/pages/a-page/components/AwesomeComponents.tsx` 就不会被当成页面渲染；
-- 以 `*.spec.ts` / `*.spec.tsx` 结尾的测试文件；
+- 以 `*.spec.ts` / `*.spec.tsx` / `*.test.ts` / `*.test.tsx` 结尾的测试文件；
 
 路由有三种约定：
 

@@ -11,7 +11,7 @@ export default defineConfig({
     pages({
       extensions: ['tsx'],
       importMode: 'async',
-      exclude: ['**/components/**/*.tsx', '*.spec.ts', '*.spec.tsx']
+      exclude: ['**/components/**/*.tsx', '*.spec.ts', '*.spec.tsx', '*.test.ts', '*.test.tsx']
     }),
     styleImport({
       libs: [
