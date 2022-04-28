@@ -119,17 +119,24 @@
       margin-bottom: 9px;
     }
 
-    a {
-      color: #fff;
-      display: block;
-      text-decoration: none;
-      font-weight: 400;
-      font-size: 1em;
-      line-height: 21px;
+    div {
       margin-bottom: 9px;
 
       &:last-of-type {
         margin-bottom: 0;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 1em;
+        line-height: 21px;
+
+        &:hover {
+          text-decoration: underline;
+          text-underline-position: under;
+        }
       }
     }
   }
