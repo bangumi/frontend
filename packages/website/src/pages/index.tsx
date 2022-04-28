@@ -1,9 +1,9 @@
 import React, { useState, FC, useEffect } from 'react'
 import { Typography } from '@bangumi/design'
 import style from './home.module.css'
-import { getCharacterDetail } from '../../api/character'
-import { getSubject } from '../../api/subject'
-import { CharacterDetail, Subject } from '../../types/common'
+import { getCharacterDetail } from '../api/character'
+import { getSubject } from '../api/subject'
+import { CharacterDetail, Subject } from '../types/common'
 
 const Home: FC = () => {
   const [detail, setDetail] = useState<CharacterDetail | null>(null)
