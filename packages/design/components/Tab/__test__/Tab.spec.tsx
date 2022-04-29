@@ -13,7 +13,7 @@ it('should render all tab', () => {
   const { getByText } = render(<Tab items={items} activeKey="1" />)
   expect(getByText('1')).toBeInTheDocument()
   expect(getByText('2')).toBeInTheDocument()
-  expect(getByText('1')).toHaveClass('active')
+  expect(getByText('1')).toHaveClass('bgm-tab__item--active')
 })
 
 it('should trigger onChange when click tabs', () => {
