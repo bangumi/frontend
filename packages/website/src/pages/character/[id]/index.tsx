@@ -32,7 +32,7 @@ const CharacterPage: React.FC = () => {
       <Menu wrapperClass={styles.menu} items={menuItems} activeKey="overview" mode="horizontal" />
       <div className={styles.content}>
         <div className={styles.leftColumn}>
-          <Image src={character.images.large} width={290} height={426} />
+          <Image className={styles.characterThumbnail} src={character.images.large} width={290} height={426} />
         </div>
         <div className={styles.rightColumn} />
       </div>
