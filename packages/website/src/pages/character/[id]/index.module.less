@@ -1,0 +1,54 @@
+.pageContainer {
+  margin: 30px auto 0 auto;
+  max-width: 1440px;
+}
+
+.title {
+  font-size: 24px;
+  color: #4B4545;
+  line-height: 36px;
+  font-weight: 700;
+}
+
+.nameInSimplifiedChinese {
+  font-weight: 400;
+  color: #AAA6A6;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.menu {
+  :global(.bgm-menu-item) {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #777272;
+    height: auto;
+    text-align: center;
+    padding: 4px 20px;
+  }
+
+  :global(.bgm-menu-item--active) {
+    background-color: #f09199;
+    border-radius: 20px;
+    color: #fff;
+  }
+
+  // NOTE: 需要有方式关闭悬浮效果。下划线使用绝对定位效果不太好。
+  :global(.bgm-menu-item--underline:hover::after) {
+    display: none;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+}
+
+.leftColumn {
+  width: 290px;
+}
+
+.rightColumn {
+  flex: 1;
+}
