@@ -7,16 +7,16 @@
   align-items: center;
   height: @footerHeight;
 
-  /*左右无限延生的纯色*/
+  /* 左右无限延生的纯色 */
 
-  &:before {
+  &::before {
     content: '';
     height: 100%;
     flex: 1;
     background-color: @bgColorLeft;
   }
 
-  &:after {
+  &::after {
     content: '';
     height: 100%;
     flex: 1;
@@ -24,12 +24,11 @@
   }
 }
 
-
 .footerMain {
   width: 1380px;
   height: 100%;
   background-color: #f47a81; // Fallback background color
-  background-image: url("../../assets/footer-cover.png");
+  background-image: url('../../assets/footer-cover.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -45,26 +44,25 @@
     width: 100%;
   }
 
-  &:before {
+  &::before {
     content: '';
     position: absolute;
     width: 116px;
     height: 100%;
     left: 0;
     top: 0;
-
-    background: linear-gradient(270deg, #F29BA3 41.38%, rgba(242, 155, 163, 0) 85.34%);
+    background: linear-gradient(270deg, #f29ba3 41.38%, rgba(242, 155, 163, 0) 85.34%);
     transform: rotate(-180deg);
   }
 
-  &:after {
+  &::after {
     content: '';
     position: absolute;
     width: 116px;
     height: 100%;
     right: 0;
     top: 0;
-    background: linear-gradient(270deg, #F64B51 0%, rgba(246, 75, 81, 0) 100%);
+    background: linear-gradient(270deg, #f64b51 0%, rgba(246, 75, 81, 0) 100%);
   }
 }
 
@@ -77,8 +75,8 @@
     margin-bottom: 38px;
 
     path {
-      fill: #FFFFFF;
-      stroke: #FFFFFF;
+      fill: #fff;
+      stroke: #fff;
     }
   }
 
@@ -110,7 +108,7 @@
     margin: 9px 0;
 
     .title {
-      color: #FFF7F7;
+      color: #fff7f7;
       font-style: normal;
       font-weight: 700;
       font-size: 1em;
@@ -149,7 +147,6 @@
     width: 130px;
   }
 }
-
 
 @media screen and  (max-width: 992px) {
   .footerLeft {

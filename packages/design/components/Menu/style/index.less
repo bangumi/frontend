@@ -9,7 +9,6 @@
   font-size: 14px;
   margin: 0;
   padding: 0;
-
   list-style: none;
   color: @textColor;
   font-style: normal;
@@ -24,7 +23,6 @@
       margin-right: 20px;
       height: 60px;
       line-height: 60px;
-
 
       &:last-of-type {
         margin-right: 0;
@@ -66,7 +64,7 @@
   &--underline:hover {
     color: @hoverColor-light;
 
-    &:after {
+    &::after {
       content: '';
       position: absolute;
       bottom: 12px;
@@ -82,7 +80,7 @@
     display: none;
     position: absolute;
     top: 52px;
-    border: 1px solid #EDE9E9;
+    border: 1px solid #ede9e9;
     border-radius: 17px;
     background-color: #fff;
     left: 50%;
