@@ -6,14 +6,14 @@ import styles from './index.module.less'
 
 const CharacterPage: React.FC = () => {
   const { id } = useParams()
-  const { value: character, loading } = useCharacter(id as string)
+  const { data: character, isLoading } = useCharacter(id as string)
 
   const menuItems: MenuProps['items'] = [{
     key: 'overview',
     label: '概览'
   }]
 
-  if (loading) {
+  if (isLoading) {
     // TODO: loading
     return <div>LOADING</div>
   }

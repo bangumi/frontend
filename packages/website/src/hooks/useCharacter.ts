@@ -1,6 +1,7 @@
-import { useAsync } from 'react-use'
-import { getCharacterDetail } from '../api/character'
 import { CharacterDetail } from '../types/common'
+import useSWR from 'swr'
+import { request } from '../api/request'
+import { AxiosResponse } from 'axios'
 
 type AugmentedCharacterDetail = CharacterDetail & {
   nameInSimplifiedChinese?: string
@@ -17,15 +18,19 @@ function argumentCharacter (characterDetail: CharacterDetail): AugmentedCharacte
   }
 }
 
-export function useCharacter (id: string): {value?: AugmentedCharacterDetail, loading: boolean} {
-  const state = useAsync(
-    async () => {
-      const resp = await getCharacterDetail(id)
-
-      return argumentCharacter(resp.data)
-    },
-    [id]
+export function useCharacter (id: string): {data?: AugmentedCharacterDetail, isLoading: boolean, isError: any} {
+  const { data, error } = useSWR<AxiosResponse<CharacterDetail>>(
+    `v0/characters/${id}`,
+    request.get, {
+      revalidateOnFocus: false,
+      refreshWhenHidden: false,
+      refreshWhenOffline: false
+    }
   )
 
-  return state
+  return {
+    data: data ? argumentCharacter(data.data) : undefined,
+    isLoading: !error && !data,
+    isError: error
+  }
 }
