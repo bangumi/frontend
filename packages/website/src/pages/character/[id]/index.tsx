@@ -1,6 +1,7 @@
 import { Image, Menu, MenuProps } from '@bangumi/design'
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import InfoBoxComp from '../../../components/InfoBox'
 import { useCharacter } from '../../../hooks/useCharacter'
 import styles from './index.module.less'
 
@@ -33,6 +34,7 @@ const CharacterPage: React.FC = () => {
       <div className={styles.content}>
         <div className={styles.leftColumn}>
           <Image className={styles.characterThumbnail} src={character.images.large} width={290} height={426} />
+          <InfoBoxComp info={character.infobox} />
         </div>
         <div className={styles.rightColumn} />
       </div>

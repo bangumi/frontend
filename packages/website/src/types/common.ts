@@ -1,5 +1,5 @@
 // using camelcase api
-type infoBox = Array<{
+export type InfoBox = Array<{
   key: string
   value: string | Array<{
     k?: string
@@ -60,7 +60,7 @@ export interface CharacterDetail {
   }
   summary: string
   locked: boolean
-  infobox: infoBox
+  infobox: InfoBox
   gender: string
   blooType: number
   birthYear: number
