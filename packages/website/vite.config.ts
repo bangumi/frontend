@@ -30,6 +30,13 @@ export default defineConfig({
       ]
     })
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "${require.resolve('@bangumi/design')}/theme/variables.less;"`
+      }
+    }
+  },
   define: {
     'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version)
   }
