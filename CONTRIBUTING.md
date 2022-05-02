@@ -9,9 +9,9 @@
 - 通过 SSH，GitHub CLI 或者 HTTP clone 你的 fork。
 
 ```bash
-git clone git@github.com:<GITHUB_ID>/frontend # SSH
-gh repo clone <GITHUB_ID>/frontend # GitHub CLI
-git clone https://github.com/<GITHUB_ID>/frontend # HTTPS
+git clone --recursive git@github.com:<GITHUB_ID>/frontend # SSH
+gh repo clone <GITHUB_ID>/frontend -- --recursive # GitHub CLI
+git clone --recursive https://github.com/<GITHUB_ID>/frontend # HTTPS
 ```
 
 - 进入项目目录
