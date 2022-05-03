@@ -39,4 +39,4 @@ jobs:
         run: pnpm install
 
       - name: Lint Code
-        run: pnpm lint
+        run: pnpm lint && pnpm lint:style
