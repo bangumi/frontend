@@ -36,7 +36,11 @@ const CharacterPage: React.FC = () => {
           <Image className={styles.characterThumbnail} src={character.images.large} width={290} height={426} />
           <InfoBoxComp info={character.infobox} />
         </div>
-        <div className={styles.rightColumn} />
+        <div className={styles.rightColumn}>
+          <div className={styles.summary}>
+            {character.summary}
+          </div>
+        </div>
       </div>
     </main>
   )
