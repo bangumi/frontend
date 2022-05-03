@@ -83,7 +83,7 @@ export interface Subject {
   date: string // YYYY-MM-DD format
   platform: string
   images: images
-  infobox: infoBox
+  infobox: InfoBox
   volumes: number
   eps: number
   totalEpisodes: number
