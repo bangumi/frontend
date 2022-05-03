@@ -1,38 +1,41 @@
 import React from 'react'
 import { InfoBox } from '../../types/common'
+import styles from './index.module.less'
 
 export interface InfoBoxProps {
   info: InfoBox
 }
 
+const EntryContainer: React.FC = ({ children }) => {
+  return <div className={styles.entryContainer}>{children}</div>
+}
+
 const InfoBoxComp: React.FC<InfoBoxProps> = ({ info }) => {
   const SingleValueEntry: React.FC<{entryKey: string, value: string}> = ({ entryKey, value }) => {
     return (
-      <div>
+      <EntryContainer>
         <div>
           <span>{entryKey}:</span>
         </div>
         <div>
           <span>{value}</span>
         </div>
-      </div>
+      </EntryContainer>
     )
   }
 
   const MultiValueEntry: React.FC<{entryKey: string, value: Array<{k?: string, v: string}>}> = ({ entryKey, value }) => {
     return (
-      <div>
+      <EntryContainer>
         <div>
           <span>{entryKey}:</span>
         </div>
         <div>
-          <ul>
-            {value.map(({ k, v }) => {
-              return <li key={`${k ?? ''}-${v}`}>{v}</li>
-            })}
-          </ul>
+          {value.map(({ k, v }) => {
+            return <div key={`${k ?? ''}-${v}`}>{v}</div>
+          })}
         </div>
-      </div>
+      </EntryContainer>
     )
   }
 
