@@ -1,9 +1,11 @@
-import { Image, Menu, MenuProps } from '@bangumi/design'
+import { Image, Menu, MenuProps, Typography } from '@bangumi/design'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import InfoBoxComp from '../../../components/InfoBox'
 import { useCharacter } from '../../../hooks/useCharacter'
 import styles from './index.module.less'
+
+const { Text } = Typography
 
 const CharacterPage: React.FC = () => {
   const { id } = useParams()
@@ -38,7 +40,7 @@ const CharacterPage: React.FC = () => {
         </div>
         <div className={styles.rightColumn}>
           <div className={styles.summary}>
-            {character.summary}
+            <Text>{character.summary}</Text>
           </div>
         </div>
       </div>
