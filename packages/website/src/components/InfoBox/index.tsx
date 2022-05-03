@@ -14,11 +14,11 @@ const InfoBoxComp: React.FC<InfoBoxProps> = ({ info }) => {
   const SingleValueEntry: React.FC<{entryKey: string, value: string}> = ({ entryKey, value }) => {
     return (
       <EntryContainer>
-        <div>
-          <span>{entryKey}:</span>
+        <div className={styles.entryName}>
+          {entryKey}:
         </div>
-        <div>
-          <span>{value}</span>
+        <div className={styles.entryValue}>
+          {value}
         </div>
       </EntryContainer>
     )
@@ -27,12 +27,12 @@ const InfoBoxComp: React.FC<InfoBoxProps> = ({ info }) => {
   const MultiValueEntry: React.FC<{entryKey: string, value: Array<{k?: string, v: string}>}> = ({ entryKey, value }) => {
     return (
       <EntryContainer>
-        <div>
-          <span>{entryKey}:</span>
+        <div className={styles.entryName}>
+          {entryKey}:
         </div>
-        <div>
+        <div className={styles.entryValue}>
           {value.map(({ k, v }) => {
-            return <div key={`${k ?? ''}-${v}`}>{v}</div>
+            return <div className={styles.item} key={`${k ?? ''}-${v}`}>{v}</div>
           })}
         </div>
       </EntryContainer>
