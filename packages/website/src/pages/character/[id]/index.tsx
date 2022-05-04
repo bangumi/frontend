@@ -1,8 +1,10 @@
-import { Image, Menu, MenuProps, Typography } from '@bangumi/design'
+import { Divider, Image, Menu, MenuProps, Typography } from '@bangumi/design'
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import InfoBoxComp from '../../../components/InfoBox'
 import { useCharacter } from '../../../hooks/useCharacter'
+import { useRelatedSubjectsOfCharacters } from '../../../hooks/useRelatedSubjects'
+import RelatedSubject from './components/RelatedSubject'
 import styles from './index.module.less'
 
 const { Text } = Typography
@@ -10,6 +12,7 @@ const { Text } = Typography
 const CharacterPage: React.FC = () => {
   const { id } = useParams()
   const { data: character, isLoading } = useCharacter(id as string)
+  const { data: relatedSubjects } = useRelatedSubjectsOfCharacters(id as string)
 
   const menuItems: MenuProps['items'] = [{
     key: 'overview',
@@ -41,6 +44,18 @@ const CharacterPage: React.FC = () => {
         <div className={styles.rightColumn}>
           <div className={styles.summary}>
             <Text>{character.summary}</Text>
+          </div>
+          <div className={styles.section}>
+            <h3 className={styles.title}><Text type="secondary">出演</Text></h3>
+            <Divider className={styles.divider} />
+            <div className={styles.relatedSubjects}>
+              {relatedSubjects?.map((subject) => (
+                <RelatedSubject
+                  key={subject.id}
+                  subject={subject}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

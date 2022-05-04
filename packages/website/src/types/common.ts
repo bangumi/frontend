@@ -91,3 +91,11 @@ export interface Subject {
   collection: collection
   tags: tag[]
 }
+
+export interface RelatedSubject {
+  id: number
+  staff: string
+  name?: string
+  nameCn?: string
+  image: string
+}

@@ -21,7 +21,8 @@ function argumentCharacter (characterDetail: CharacterDetail): AugmentedCharacte
 export function useCharacter (id: string): {data?: AugmentedCharacterDetail, isLoading: boolean, isError: any} {
   const { data, error } = useSWR<AxiosResponse<CharacterDetail>>(
     `v0/characters/${id}`,
-    request.get, {
+    request.get,
+    {
       revalidateOnFocus: false,
       refreshWhenHidden: false,
       refreshWhenOffline: false
