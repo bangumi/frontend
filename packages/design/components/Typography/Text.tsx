@@ -3,21 +3,30 @@ import classNames from 'classnames'
 
 export interface TextProps {
   className?: string
-  styles?: React.CSSProperties
+  style?: React.CSSProperties
   type?: 'default' | 'secondary'
 }
 
-const Text: React.FC<TextProps> = ({ children, type = 'default' }) => {
+const Text: React.FC<TextProps> = ({
+  children,
+  className,
+  style,
+  type = 'default'
+}) => {
   return (
     <span
       className={
         classNames(
           'bgm-text', {
             'bgm-text--secondary': type === 'secondary'
-          }
+          },
+          className
         )
       }
-    >{children}</span>
+      style={style}
+    >
+      {children}
+    </span>
   )
 }
 
