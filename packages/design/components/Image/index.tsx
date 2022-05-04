@@ -24,21 +24,20 @@ const Image: FC<ImageProps> = ({
   wrapperClass,
   wrapperStyle,
   withBoxShadow,
+  className,
   shape = 'rect',
   ...rest
 }) => {
+  const actualClassnames = classnames('bgm-image',
+    wrapperClass,
+    className, {
+      'bgm-image--withBoxShadow': withBoxShadow,
+      'bgm-image--rect': shape === 'rect',
+      'bgm-image--circle': shape === 'circle'
+    }
+  )
   return (
-    <div
-      className={classnames('bgm-image', wrapperClass, {
-        'bgm-image--withBoxShadow': withBoxShadow,
-        'bgm-image--rect': shape === 'rect',
-        'bgm-image--circle': shape === 'circle'
-      })}
-      style={wrapperStyle}
-      data-testid="img-wrapper"
-    >
-      <img src={src} width={width} height={height} {...rest} />
-    </div>
+    <img className={actualClassnames} src={src} width={width} height={height} data-testid="img-wrapper" {...rest} />
   )
 }
 
