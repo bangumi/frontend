@@ -7,7 +7,7 @@ it.each`
   ${undefined}
   ${'default'}
   ${'secondary'}
-`('should render $type text', (type) => {
+`('should render $type text', ({ type }) => {
   const { container } = render(<Text type={type}>hello world</Text>)
   expect(container.firstChild).toMatchSnapshot()
 })

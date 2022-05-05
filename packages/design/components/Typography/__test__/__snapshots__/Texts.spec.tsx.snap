@@ -10,7 +10,7 @@ exports[`should render default text 1`] = `
 
 exports[`should render secondary text 1`] = `
 <span
-  class="bgm-text"
+  class="bgm-text bgm-text--secondary"
 >
   hello world
 </span>
