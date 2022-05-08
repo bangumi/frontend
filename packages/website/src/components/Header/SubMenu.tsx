@@ -1,31 +1,31 @@
 import React, { VFC } from 'react'
-import { Menu, Divider, MenuItem } from '@bangumi/design'
+import { Menu, Divider, MenuItemType } from '@bangumi/design'
 import style from './SubMenu.module.less'
 
-type Items = Array<{
-  key: string
-  label: string
-}>
-
-const subMenuBottomBuilder = (verb: '看' | '读' | '听' | '玩'): Items => [
+const subMenuBottomBuilder = (verb: '看' | '读' | '听' | '玩'): MenuItemType[] => [
   {
     key: 'do',
+    className: style['subMenuItem--do'],
     label: `在${verb}`
   },
   {
     key: 'wish',
+    className: style['subMenuItem--wish'],
     label: `想${verb}`
   },
   {
     key: 'collect',
+    className: style['subMenuItem--collect'],
     label: `${verb}过`
   },
   {
     key: 'on_hold',
+    className: style['subMenuItem--on_hold'],
     label: '搁置'
   },
   {
     key: 'dropped',
+    className: style['subMenuItem--dropped'],
     label: '抛弃'
   }
 ]
@@ -183,7 +183,7 @@ const GroupSubMenuBottom = [
   }
 ]
 
-const subMenuBottomWrapper = (type: string): Items => {
+const subMenuBottomWrapper = (type: string): MenuItemType[] => {
   switch (type) {
     case 'anime':
       return subMenuBottomBuilder('看')
@@ -205,22 +205,11 @@ const subMenuBottomWrapper = (type: string): Items => {
 }
 
 // eslint-disable-next-line react/prop-types
-const SubMenu: VFC<{ itemsTop: Items, itemsBottom: Items }> = ({ itemsTop, itemsBottom }) => (
+const SubMenu: VFC<{ itemsTop: MenuItemType[], itemsBottom: MenuItemType[] }> = ({ itemsTop, itemsBottom }) => (
   <>
     <Menu items={itemsTop} mode="vertical" wrapperClass={style.subMenu} />
     <Divider className={style.subMenuDivider} />
-    <Menu items={itemsBottom} mode="vertical" wrapperClass={style.subMenu}>
-      {
-        item => (
-          <MenuItem
-            key={item.key} id={item.key}
-            className={style[`subMenuItem--${item.key}`]}
-          >
-            {item.label}
-          </MenuItem>
-        )
-      }
-    </Menu>
+    <Menu items={itemsBottom} mode="vertical" wrapperClass={style.subMenu} />
   </>
 )
 

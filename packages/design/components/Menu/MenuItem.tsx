@@ -1,19 +1,19 @@
-import React, { FC, MouseEventHandler } from 'react'
+import React, { FC } from 'react'
 import classnames from 'classnames'
 import { useMenuContext } from '.'
 
 export interface MenuItemProps {
   /* MenuItem 的唯一标识 */
   id: string
-  /* 自定义类名，大多数情况下应该尽可能为父组件设置样式 */
+  /* 菜单标题 */
+  label: string
+  /* 自定义类名 */
   className?: string
-  /* 覆盖父组件 Menu 的默认 Click 事件, 但大多数情况下应该尽可能使用父组件的 Click 事件 */
-  onClick?: MouseEventHandler
   /* 子菜单，鼠标悬浮时显示 */
   SubMenu?: JSX.Element
 }
 
-const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className: customClassName, SubMenu }) => {
+const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, SubMenu }) => {
   const {
     onClick: onClickEmit,
     activeKey,
@@ -34,9 +34,9 @@ const MenuItem: FC<MenuItemProps> = ({ children, onClick, id, className: customC
   return (
     <li
       className={className}
-      onClick={onClick ?? (e => onClickEmit?.(id, e))}
+      onClick={e => onClickEmit?.(id, e)}
     >
-      {children}
+      {label}
       {
         SubMenu &&
           <div className="bgm-menu-item__submenu">

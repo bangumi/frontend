@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Story } from '@storybook/react'
-import Menu, { MenuItem, MenuProps } from '.'
+import Menu, { MenuProps } from '.'
 
 type IItems = MenuProps['items']
 
@@ -42,9 +42,6 @@ const itemsVertical: IItems = [{
 export default {
   title: 'modern/Menu',
   component: Menu,
-  subcomponents: {
-    MenuItem
-  },
   argTypes: {
     activeKey: {
       control: { type: 'select' }
