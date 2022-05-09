@@ -8,7 +8,7 @@ interface ItemProps {
 const Item: React.FC<ItemProps> = ({ children, isActive, onClick }) => {
   return (
     <li
-      className={classnames('tab-item', { active: isActive })}
+      className={classnames('bgm-tab__item', { 'bgm-tab__item--active': isActive })}
       onClick={onClick}
     >
       {children}
@@ -32,7 +32,7 @@ export interface TabProps {
 
 export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange }) => {
   return (
-    <ul className="tab">
+    <ul className="bgm-tab">
       {
       items.map((item) => {
         return (

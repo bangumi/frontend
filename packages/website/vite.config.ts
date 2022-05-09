@@ -2,11 +2,23 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import styleImport from 'vite-plugin-style-import'
 import svgr from 'vite-plugin-svgr'
+import pages from 'vite-plugin-pages'
 
 export default defineConfig({
   plugins: [
     react(),
     svgr(),
+    pages({
+      extensions: ['tsx'],
+      importMode: 'async',
+      exclude: [
+        '**/components/**/*.tsx',
+        '**/*.spec.ts',
+        '**/*.spec.tsx',
+        '**/*.test.ts',
+        '**/*.test.tsx'
+      ]
+    }),
     styleImport({
       libs: [
         {

@@ -13,7 +13,7 @@ const FooterBlockItem: FC<{ block: IBlockItem }> = ({ block }) => {
       <h2 className={style.title}>{block.title}</h2>
       {
         block.items.map(({ key, label }) => (
-          <a key={key} href={key}>{label}</a>
+          <div key={key}><a href={key}>{label}</a></div>
         ))
       }
     </div>
@@ -126,6 +126,8 @@ const moreBlock: IBlockItem = {
   ]
 }
 
+const getThisYear = (): string => new Date().getFullYear().toString()
+
 const Footer: FC = () => {
   return (
     <div className={style.footerContainer}>
@@ -134,7 +136,7 @@ const Footer: FC = () => {
           <div className={style.footerLeft}>
             <BangumiTextLogo className={style.logo} />
             <div className={style.copyright}>
-              <p>© 2008-2022 Bangumi (a.k.a.Chobits),</p>
+              <p>© 2008-{getThisYear()} Bangumi (a.k.a.Chobits),</p>
               <p>some rights reserved | ver. {import.meta.env.__APP_VERSION__}</p>
             </div>
           </div>

@@ -14,6 +14,8 @@
     "dev:ssr": "pnpm server dev",
     "lint": "eslint ./packages --ext .js,jsx,ts,tsx --ignore-pattern dist",
     "lint:fix": "pnpm lint -- --fix",
+    "lint:style": "stylelint \"./packages/**/*.{css,less}\" \"!**/dist/**\"",
+    "lint:style-fix": "pnpm lint:style -- --fix",
     "server": "pnpm --filter=@bangumi/server",
     "test": "jest",
     "website": "pnpm --filter=@bangumi/website",
@@ -22,6 +24,9 @@
   "lint-staged": {
     "*.{js,ts,tsx}": [
       "eslint --fix"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix"
     ]
   },
   "devDependencies": {
@@ -51,8 +56,13 @@
     "jest": "^27.4.6",
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^12.2.0",
+    "postcss": "^8.4.12",
+    "postcss-less": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "stylelint": "^14.8.0",
+    "stylelint-config-css-modules": "^4.1.0",
+    "stylelint-config-standard": "^25.0.0",
     "typescript": "^4.4.4",
     "vite-plugin-svgr": "^1.0.1"
   }
