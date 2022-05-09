@@ -2,7 +2,11 @@ import React from 'react'
 import Button from '../index'
 import { render } from '@testing-library/react'
 
-it('Button', () => {
-  render(<Button />)
-  expect(true).toBe(true)
+it.each`
+  type
+  ${'primary'}
+  ${'secondary'}
+`('should render button of type $type', ({ type }) => {
+  const { container } = render(<Button type={type}>hello world</Button>)
+  expect(container.firstChild).toMatchSnapshot()
 })
