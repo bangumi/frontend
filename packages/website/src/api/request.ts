@@ -45,3 +45,18 @@ request.interceptors.response.use((response) => {
   response.data = underscoreToCamelcase(response.data)
   return response
 }, errorHandler)
+
+const privateAPIRoot = 'https://next.bgm.tv'
+
+export const privateRequest = axios.create({
+  baseURL: privateAPIRoot
+})
+
+privateRequest.interceptors.request.use(config => {
+  return config
+}, errorHandler)
+
+privateRequest.interceptors.response.use((response) => {
+  response.data = underscoreToCamelcase(response.data)
+  return response
+}, errorHandler)
