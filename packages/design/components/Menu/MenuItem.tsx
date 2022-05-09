@@ -10,10 +10,10 @@ export interface MenuItemProps {
   /* 自定义类名 */
   className?: string
   /* 子菜单，鼠标悬浮时显示 */
-  SubMenu?: JSX.Element
+  subMenu?: JSX.Element
 }
 
-const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, SubMenu }) => {
+const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, subMenu }) => {
   const {
     onClick: onClickEmit,
     activeKey,
@@ -38,9 +38,9 @@ const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, Su
     >
       {label}
       {
-        SubMenu &&
+        subMenu &&
           <div className="bgm-menu-item__submenu">
-            {SubMenu}
+            {subMenu}
           </div>
       }
     </li>

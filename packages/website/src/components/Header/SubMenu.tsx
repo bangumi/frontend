@@ -2,7 +2,7 @@ import React, { VFC } from 'react'
 import { Menu, Divider, MenuItemType } from '@bangumi/design'
 import style from './SubMenu.module.less'
 
-const subMenuBottomBuilder = (verb: '看' | '读' | '听' | '玩'): MenuItemType[] => [
+const buildMenuBottom = (verb: '看' | '读' | '听' | '玩'): MenuItemType[] => [
   {
     key: 'do',
     className: style['subMenuItem--do'],
@@ -30,7 +30,7 @@ const subMenuBottomBuilder = (verb: '看' | '读' | '听' | '玩'): MenuItemType
   }
 ]
 
-const AnimeSubMenuItems = [
+const animeSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -53,7 +53,7 @@ const AnimeSubMenuItems = [
   }
 ]
 
-const BookSubMenuItems = [
+const bookSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -72,7 +72,7 @@ const BookSubMenuItems = [
   }
 ]
 
-const MusicSubMenuItems = [
+const musicSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -91,7 +91,7 @@ const MusicSubMenuItems = [
   }
 ]
 
-const GameSubMenuItems = [
+const gameSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -110,7 +110,7 @@ const GameSubMenuItems = [
   }
 ]
 
-const RealSubMenuItems = [
+const realSubMenuItems = [
   {
     key: 'chart',
     label: '排行榜'
@@ -133,7 +133,7 @@ const RealSubMenuItems = [
   }
 ]
 
-const MonoSubMenuItems = [
+const monoSubMenuItems = [
   {
     key: 'character',
     label: '虚构人物'
@@ -143,7 +143,7 @@ const MonoSubMenuItems = [
     label: '现实人物'
   }
 ]
-const MonoSubMenuBottom = [
+const monoSubMenuBottom = [
   {
     key: 'update',
     label: '关注人物更新'
@@ -158,7 +158,7 @@ const MonoSubMenuBottom = [
   }
 ]
 
-const GroupSubMenuItems = [
+const groupSubMenuItems = [
   {
     key: '/group/discover',
     label: '随便看看'
@@ -168,7 +168,7 @@ const GroupSubMenuItems = [
     label: '所有小组'
   }
 ]
-const GroupSubMenuBottom = [
+const groupSubMenuBottom = [
   {
     key: '/group/my_topic',
     label: '发表的话题'
@@ -186,19 +186,19 @@ const GroupSubMenuBottom = [
 const subMenuBottomWrapper = (type: string): MenuItemType[] => {
   switch (type) {
     case 'anime':
-      return subMenuBottomBuilder('看')
+      return buildMenuBottom('看')
     case 'book':
-      return subMenuBottomBuilder('读')
+      return buildMenuBottom('读')
     case 'music':
-      return subMenuBottomBuilder('听')
+      return buildMenuBottom('听')
     case 'game':
-      return subMenuBottomBuilder('玩')
+      return buildMenuBottom('玩')
     case 'real':
-      return subMenuBottomBuilder('看')
+      return buildMenuBottom('看')
     case 'mono':
-      return MonoSubMenuBottom
+      return monoSubMenuBottom
     case 'group':
-      return GroupSubMenuBottom
+      return groupSubMenuBottom
     default:
       return []
   }
@@ -213,16 +213,16 @@ const SubMenu: VFC<{ itemsTop: MenuItemType[], itemsBottom: MenuItemType[] }> = 
   </>
 )
 
-export const AnimeSubMenu = <SubMenu itemsTop={AnimeSubMenuItems} itemsBottom={subMenuBottomWrapper('anime')} />
+export const animeSubMenu = <SubMenu itemsTop={animeSubMenuItems} itemsBottom={subMenuBottomWrapper('anime')} />
 
-export const BookSubMenu = <SubMenu itemsTop={BookSubMenuItems} itemsBottom={subMenuBottomWrapper('book')} />
+export const bookSubMenu = <SubMenu itemsTop={bookSubMenuItems} itemsBottom={subMenuBottomWrapper('book')} />
 
-export const MusicSubMenu = <SubMenu itemsTop={MusicSubMenuItems} itemsBottom={subMenuBottomWrapper('music')} />
+export const musicSubMenu = <SubMenu itemsTop={musicSubMenuItems} itemsBottom={subMenuBottomWrapper('music')} />
 
-export const GameSubMenu = <SubMenu itemsTop={GameSubMenuItems} itemsBottom={subMenuBottomWrapper('game')} />
+export const gameSubMenu = <SubMenu itemsTop={gameSubMenuItems} itemsBottom={subMenuBottomWrapper('game')} />
 
-export const RealSubMenu = <SubMenu itemsTop={RealSubMenuItems} itemsBottom={subMenuBottomWrapper('real')} />
+export const realSubMenu = <SubMenu itemsTop={realSubMenuItems} itemsBottom={subMenuBottomWrapper('real')} />
 
-export const MonoSubMenu = <SubMenu itemsTop={MonoSubMenuItems} itemsBottom={subMenuBottomWrapper('mono')} />
+export const monoSubMenu = <SubMenu itemsTop={monoSubMenuItems} itemsBottom={subMenuBottomWrapper('mono')} />
 
-export const GroupSubMenu = <SubMenu itemsTop={GroupSubMenuItems} itemsBottom={subMenuBottomWrapper('group')} />
+export const groupSubMenu = <SubMenu itemsTop={groupSubMenuItems} itemsBottom={subMenuBottomWrapper('group')} />
