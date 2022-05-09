@@ -152,27 +152,48 @@
 
 @media screen and  (max-width: 992px) {
   .footerLeft {
-    display: none;
+    .copyright {
+      display: none;
+    }
+
+    .logo {
+      margin-bottom: 0;
+      width: 160px;
+    }
+  }
+
+  .footerRight {
+    .block {
+      width: 106px;
+    }
   }
 }
 
 @media screen and  (max-width: 768px) {
   .footerContainer {
-    height: 180px;
+    height: 160px;
   }
 
   .footerMain {
-    padding: 0 12px;
-    font-size: 12px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  .footerLeft {
+    display: none;
   }
 
   .footerRight {
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
 
     .block {
       text-align: left;
       width: auto;
+
+      div {
+        margin-bottom: 2px;
+      }
     }
   }
 }
