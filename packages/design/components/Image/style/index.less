@@ -1,7 +1,7 @@
 @import '../../../theme/base';
 
-@outlineColor: rgba(255, 255, 255, 0.4);
-@boxShadowColor: rgba(237, 233, 233, 0.8);
+@outline-color: rgba(255, 255, 255, 0.4);
+@box-shadow-color: rgba(237, 233, 233, 0.8);
 
 .bgm-image {
   display: inline-block;
@@ -11,12 +11,12 @@
   object-position: top left;
 
   &:hover {
-    outline: 2px solid @outlineColor;
+    outline: 2px solid @outline-color;
     outline-offset: -2px;
   }
 
   &--withBoxShadow {
-    box-shadow: 0 5px 10px 3px @boxShadowColor;
+    box-shadow: 0 5px 10px 3px @box-shadow-color;
   }
 
   &--rect {

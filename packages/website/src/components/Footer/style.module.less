@@ -1,13 +1,13 @@
 @import '@bangumi/design/theme/base';
 
-@bgColorLeft: #f29ba3;
-@bgColorRight: #f64b51;
-@footerHeight: 220px;
+@bg-left-color: #f29ba3;
+@bg-right-color: #f64b51;
+@footer-height: 220px;
 
 .footerContainer {
   display: flex;
   align-items: center;
-  height: @footerHeight;
+  height: @footer-height;
 
   /* 左右无限延生的纯色 */
 
@@ -15,14 +15,14 @@
     content: '';
     height: 100%;
     flex: 1;
-    background-color: @bgColorLeft;
+    background-color: @bg-left-color;
   }
 
   &::after {
     content: '';
     height: 100%;
     flex: 1;
-    background-color: @bgColorRight;
+    background-color: @bg-right-color;
   }
 }
 
@@ -53,7 +53,7 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: linear-gradient(270deg, @bgColorLeft 41.38%, rgba(242, 155, 163, 0) 85.34%);
+    background: linear-gradient(270deg, @bg-left-color 41.38%, rgba(242, 155, 163, 0) 85.34%);
     transform: rotate(-180deg);
   }
 
@@ -64,7 +64,7 @@
     height: 100%;
     right: 0;
     top: 0;
-    background: linear-gradient(270deg, @bgColorRight 0%, rgba(246, 75, 81, 0) 100%);
+    background: linear-gradient(270deg, @bg-right-color 0%, rgba(246, 75, 81, 0) 100%);
   }
 }
 
