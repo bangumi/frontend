@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { useMenuContext } from '.'
 
 export interface MenuItemProps {
-  /* MenuItem 的唯一标识 */
+  /* 唯一标识，不应该直接设置它 */
   id: string
   /* 菜单标题 */
   label: string
@@ -34,7 +34,7 @@ const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, su
   return (
     <li
       className={className}
-      onClick={e => onClickEmit?.(id, e)}
+      onClick={onClickEmit && (e => onClickEmit(id, e))}
     >
       {label}
       {
