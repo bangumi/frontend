@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render button of type primary 1`] = `
+<button
+  class="bgm-button bgm-button__primary"
+>
+  hello world
+</button>
+`;
+
+exports[`should render button of type secondary 1`] = `
+<button
+  class="bgm-button bgm-button__secondary"
+>
+  hello world
+</button>
+`;
