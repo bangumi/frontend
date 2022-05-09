@@ -39,7 +39,7 @@ const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, su
       {label}
       {
         subMenu &&
-          <div className="bgm-menu-item__submenu">
+          <div className="bgm-menu-item__submenu" data-testid="submenu">
             {subMenu}
           </div>
       }
