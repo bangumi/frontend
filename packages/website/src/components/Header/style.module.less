@@ -1,9 +1,10 @@
 @import '@bangumi/design/theme/base';
 
-@header-height: 59px;
+@header-height: 60px;
 
 .container {
   height: @header-height;
+  box-sizing: border-box;
   left: 0;
   top: 0;
   right: 0;
@@ -15,6 +16,7 @@
 .main {
   display: flex;
   align-items: center;
+  height: 100%;
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -23,13 +25,12 @@
   margin-left: 24px;
   flex-shrink: 0;
   width: 193px;
-  height: @header-height + 1;
 }
 
 .logoMobile {
   width: 126px;
   height: @header-height + 1;
-  margin-left: 10px;
+  margin-left: 12px;
   display: none;
 }
 
@@ -37,7 +38,6 @@
   display: flex;
   align-items: center;
   margin: 0 153px 0 63px;
-  height: @header-height;
 
   .divider {
     display: inline-block;
@@ -129,6 +129,10 @@
 }
 
 @media screen and (max-width: 576px) {
+  .container {
+    height: 50px;
+  }
+
   .logo {
     display: none;
   }
