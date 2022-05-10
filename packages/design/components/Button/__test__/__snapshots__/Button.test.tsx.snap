@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render button of shape rounded 1`] = `
+<button
+  class="bgm-button bgm-button__primary bgm-button__rounded bgm-button__normal"
+>
+  hello world
+</button>
+`;
+
+exports[`should render button of shape square 1`] = `
+<button
+  class="bgm-button bgm-button__primary bgm-button__square bgm-button__normal"
+>
+  hello world
+</button>
+`;
+
+exports[`should render button of type primary 1`] = `
+<button
+  class="bgm-button bgm-button__primary bgm-button__square bgm-button__normal"
+>
+  hello world
+</button>
+`;
+
+exports[`should render button of type secondary 1`] = `
+<button
+  class="bgm-button bgm-button__secondary bgm-button__square bgm-button__normal"
+>
+  hello world
+</button>
+`;
