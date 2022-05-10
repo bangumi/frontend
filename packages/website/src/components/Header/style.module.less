@@ -29,8 +29,14 @@
 
 .logoMobile {
   width: 126px;
-  height: @header-height + 1;
   margin-left: 12px;
+  display: none;
+}
+
+.mobileMenuToggle {
+  padding: 0 15px;
+  margin-left: 16px;
+  font-weight: bold;
   display: none;
 }
 
@@ -123,6 +129,10 @@
 }
 
 @media screen and  (max-width: 768px) {
+  .mobileMenuToggle {
+    display: block;
+  }
+
   .navLeft {
     display: none !important;
   }

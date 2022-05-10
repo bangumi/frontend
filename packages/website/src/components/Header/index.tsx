@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import style from './style.module.less'
 import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
 import { Notification, Setting } from '@bangumi/icons'
-import { Avatar, Divider, Menu } from '@bangumi/design'
+import { Avatar, Button, Divider, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
 
 const navLeft = [
@@ -59,12 +59,21 @@ const navRight = [
 ]
 
 const Header: FC = () => {
+  const [showMobileMenu, setShowMobileMenu] = useState(false)
   return (
     <div className={style.container}>
       <div className={style.main}>
         {/* Logo */}
         <BangumiLogo className={style.logo} />
+        {/* Mobile Logo */}
         <BangumiTextLogo className={style.logoMobile} />
+        {/* Mobile Menu Toggle Button */}
+        <Button
+          className={style.mobileMenuToggle} shape="rounded" type={showMobileMenu ? 'primary' : 'secondary'}
+          onClick={() => setShowMobileMenu(show => !show)}
+        >
+          {showMobileMenu ? '关闭' : '菜单'}
+        </Button>
         {/* Menu */}
         <div className={style.nav}>
           <Menu
