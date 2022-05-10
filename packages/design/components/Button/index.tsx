@@ -1,6 +1,3 @@
-/*
-  测试组件
-*/
 import React, { FC } from 'react'
 import classNames from 'classnames'
 /*
@@ -10,16 +7,31 @@ export interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
   className?: string
+  type: 'primary' | 'secondary'
+  shape?: 'square' | 'rounded'
+  size?: 'normal'
 }
 
-const Button: FC<ButtonProps> = ({ disabled, children, onClick, className }) => {
+const Button: FC<ButtonProps> = ({
+  disabled,
+  onClick,
+  className,
+  type = 'primary',
+  shape = 'square',
+  size = 'normal',
+  children
+}) => {
   return (
     <button
       disabled={disabled}
       className={
         classNames('bgm-button', className, {
           'bgm-button__disabled': disabled
-        })
+        },
+        `bgm-button__${type}`,
+        `bgm-button__${shape}`,
+        `bgm-button__${size}`
+        )
 }
       onClick={onClick}
     >

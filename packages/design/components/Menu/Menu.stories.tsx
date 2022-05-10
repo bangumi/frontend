@@ -1,10 +1,8 @@
 import React from 'react'
 import type { Story } from '@storybook/react'
-import Menu, { MenuItem, MenuProps } from '.'
+import Menu, { MenuProps, MenuItemType } from '.'
 
-type IItems = MenuProps['items']
-
-const items: IItems = [{
+const items: MenuItemType[] = [{
   key: 'animation',
   label: '动画'
 }, {
@@ -21,7 +19,7 @@ const items: IItems = [{
   label: '三次元'
 }]
 
-const itemsVertical: IItems = [{
+const itemsVertical: MenuItemType[] = [{
   key: 'rank',
   label: '排行榜'
 },
@@ -42,9 +40,6 @@ const itemsVertical: IItems = [{
 export default {
   title: 'modern/Menu',
   component: Menu,
-  subcomponents: {
-    MenuItem
-  },
   argTypes: {
     activeKey: {
       control: { type: 'select' }
