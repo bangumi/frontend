@@ -1,7 +1,9 @@
-@headerHeight: 59px;
+@import '@bangumi/design/theme/base';
+
+@header-height: 59px;
 
 .container {
-  height: @headerHeight;
+  height: @header-height;
   left: 0;
   top: 0;
   right: 0;
@@ -21,12 +23,12 @@
   margin-left: 24px;
   flex-shrink: 0;
   width: 193px;
-  height: @headerHeight + 1;
+  height: @header-height + 1;
 }
 
 .logoMobile {
   width: 126px;
-  height: @headerHeight + 1;
+  height: @header-height + 1;
   margin-left: 10px;
   display: none;
 }
@@ -35,7 +37,7 @@
   display: flex;
   align-items: center;
   margin: 0 153px 0 63px;
-  height: @headerHeight;
+  height: @header-height;
 
   .divider {
     display: inline-block;
@@ -50,10 +52,10 @@
 
     :global(.bgm-menu-item--underline) {
       &:hover {
-        color: #f9bcc1;
+        color: @pink-80;
 
         &::after {
-          background-color: #f9bcc1;
+          background-color: @pink-80;
         }
       }
     }
