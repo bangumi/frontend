@@ -1,3 +1,5 @@
+@import '../../../theme/base';
+
 .bgm-button {
   border: 0;
   cursor: pointer;
@@ -9,13 +11,13 @@
   }
 
   &__primary {
-    background-color: #f09199;
+    background-color: @primary-color;
     color: #fff;
   }
 
   &__secondary {
-    background-color: #ede9e9;
-    color: #777272;
+    background-color: @gray-10;
+    color: @gray-80;
   }
 
   &__normal&__rounded {
