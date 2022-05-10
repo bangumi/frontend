@@ -5,6 +5,14 @@ import svgr from 'vite-plugin-svgr'
 import pages from 'vite-plugin-pages'
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/p': {
+        target: 'https://next.bgm.tv',
+        changeOrigin: true
+      }
+    }
+  },
   plugins: [
     react(),
     svgr(),

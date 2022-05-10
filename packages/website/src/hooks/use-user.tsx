@@ -19,29 +19,42 @@ export enum LoginErrorCode {
 }
 
 export const UserProvider: React.FC = ({ children }) => {
-  const { data: user, mutate } = useSWR<AxiosResponse<User>>('/v0/me', request.get)
+  const { data: user, mutate } = useSWR<AxiosResponse<User>>(
+    '/v0/me',
+    request.get,
+    {
+      refreshWhenHidden: false,
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false
+    }
+  )
 
   const redirectToLogin: () => void = () => {
     console.log('redirectToLogin')
   }
 
   const login: (
-    username: string,
+    email: string,
     password: string,
     hCaptchaResp: string
   ) => Promise<void> =
-    async (username, password, hCaptchaResp) => {
+    async (email, password, hCaptchaResp) => {
       try {
-        const resp = await privateRequest.post('/p/login')
+        const resp = await privateRequest.post(
+          '/p/login', {
+            email,
+            password,
+            'h-captcha-response': hCaptchaResp
+          }
+        )
         if (resp.status === 200) {
           mutate()
         } else if (resp.status === 401) {
           throw new Error(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)
         } else {
-          console.error('未知错误', resp)
-          throw new Error(LoginErrorCode.E_UNKNOWN)
+          throw new Error(LoginErrorCode.E_NETWORK_ERROR)
         }
-      } catch {
+      } catch (e) {
         throw new Error(LoginErrorCode.E_NETWORK_ERROR)
       }
     }

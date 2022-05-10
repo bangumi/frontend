@@ -46,11 +46,7 @@ request.interceptors.response.use((response) => {
   return response
 }, errorHandler)
 
-const privateAPIRoot = 'https://next.bgm.tv'
-
-export const privateRequest = axios.create({
-  baseURL: privateAPIRoot
-})
+export const privateRequest = axios.create()
 
 privateRequest.interceptors.request.use(config => {
   return config
