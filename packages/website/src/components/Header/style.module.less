@@ -75,8 +75,23 @@
   margin-right: 16px;
 
   .search {
-    height: 32px;
-    width: 256px;
+    height: 36px;
+    width: 266px;
+    padding: 3px 10px 5px 11px;
+
+    .searchSelect {
+      outline: none;
+      border: none;
+      color: @gray-60;
+      background-color: transparent;
+    }
+
+    .searchDivider {
+      display: inline-block;
+      height: 14px;
+      margin: 0 9px 0 5px;
+      flex-shrink: 0;
+    }
   }
 
   .iconNotification {
@@ -93,9 +108,12 @@
 
 /* 临时的移动端适配 */
 @media screen and  (max-width: 1440px) {
-  /* 暂时还没有搜索框 */
-  .search {
-    display: none;
+  .infoBox {
+    margin: auto;
+
+    .search {
+      display: none;
+    }
   }
 
   .avatar {
@@ -103,10 +121,6 @@
   }
 
   .nav {
-    margin: auto;
-  }
-
-  .infoBox {
     margin: auto;
   }
 }

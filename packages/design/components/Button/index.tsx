@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
+
 /*
   Prop type moves to outer
 */
@@ -7,7 +8,7 @@ export interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
   className?: string
-  type: 'primary' | 'secondary'
+  type?: 'primary' | 'secondary'
   shape?: 'square' | 'rounded'
   size?: 'normal'
 }
@@ -28,11 +29,11 @@ const Button: FC<ButtonProps> = ({
         classNames('bgm-button', className, {
           'bgm-button__disabled': disabled
         },
-        `bgm-button__${type}`,
-        `bgm-button__${shape}`,
-        `bgm-button__${size}`
+          `bgm-button__${type}`,
+          `bgm-button__${shape}`,
+          `bgm-button__${size}`
         )
-}
+      }
       onClick={onClick}
     >
       {children}

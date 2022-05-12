@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
 import style from './style.module.less'
 import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
-import { Notification, Setting } from '@bangumi/icons'
-import { Avatar, Button, Divider, Menu } from '@bangumi/design'
+import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons'
+import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
 
 const navLeft = [
@@ -86,7 +86,23 @@ const Header: FC = () => {
         </div>
         {/* Search Todo */}
         <div className={style.infoBox}>
-          <div className={style.search} />
+          <Input
+            prefix={(
+              <>
+                <select name="select" className={style.searchSelect}>
+                  <option value="value1" selected>全部条目</option>
+                  <option value="value2">动画</option>
+                  <option value="value3">书籍</option>
+                  <option value="value4">游戏</option>
+                  <option value="value5">三次元</option>
+                  <option value="value6">人物</option>
+                </select>
+                <Divider orientation="vertical" className={style.searchDivider} />
+              </>
+            )}
+            suffix={<SearchIcon style={{ flexShrink: 0 }} />}
+            wrapperClass={style.search}
+          />
           <Notification className={style.iconNotification} />
           <Setting className={style.iconSetting} />
         </div>
