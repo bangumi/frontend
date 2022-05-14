@@ -9,6 +9,7 @@ export interface ButtonProps {
   className?: string
   type: 'primary' | 'secondary'
   shape?: 'square' | 'rounded'
+  size?: 'normal'
 }
 
 const Button: FC<ButtonProps> = ({
@@ -17,6 +18,7 @@ const Button: FC<ButtonProps> = ({
   className,
   type = 'primary',
   shape = 'square',
+  size = 'normal',
   children
 }) => {
   return (
@@ -24,12 +26,12 @@ const Button: FC<ButtonProps> = ({
       disabled={disabled}
       className={
         classNames('bgm-button', className, {
-          'bgm-button__disabled': disabled,
-          'bgm-button__primary': type === 'primary',
-          'bgm-button__secondary': type === 'secondary',
-          'bgm-button__square': shape === 'square',
-          'bgm-button__rounded': shape === 'rounded'
-        })
+          'bgm-button__disabled': disabled
+        },
+        `bgm-button__${type}`,
+        `bgm-button__${shape}`,
+        `bgm-button__${size}`
+        )
 }
       onClick={onClick}
     >

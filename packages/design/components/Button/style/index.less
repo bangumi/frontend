@@ -1,19 +1,27 @@
+@import '../../../theme/base';
+
 .bgm-button {
   border: 0;
   cursor: pointer;
 
+  &__normal {
+    height: 38px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
   &__primary {
-    background-color: #f09199;
+    background-color: @primary-color;
     color: #fff;
   }
 
   &__secondary {
-    background-color: #ede9e9;
-    color: #777272;
+    background-color: @gray-10;
+    color: @gray-80;
   }
 
-  &__rounded {
-    border-radius: 99999px;
+  &__normal&__rounded {
+    border-radius: 19px;
   }
 }
 

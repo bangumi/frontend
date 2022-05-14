@@ -3,33 +3,33 @@ import style from './style.module.less'
 import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
 import { Notification, Setting } from '@bangumi/icons'
 import { Avatar, Divider, Menu } from '@bangumi/design'
-import { AnimeSubMenu, BookSubMenu, MusicSubMenu, GameSubMenu, RealSubMenu, MonoSubMenu, GroupSubMenu } from './SubMenu'
+import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
 
 const navLeft = [
   {
     key: 'animation',
     label: '动画',
-    SubMenu: AnimeSubMenu
+    subMenu: animeSubMenu
   },
   {
     key: 'book',
     label: '书籍',
-    SubMenu: BookSubMenu
+    subMenu: bookSubMenu
   },
   {
     key: 'music',
     label: '音乐',
-    SubMenu: MusicSubMenu
+    subMenu: musicSubMenu
   },
   {
     key: 'game',
     label: '游戏',
-    SubMenu: GameSubMenu
+    subMenu: gameSubMenu
   },
   {
     key: 'drama',
     label: '三次元',
-    SubMenu: RealSubMenu
+    subMenu: realSubMenu
   }
 ]
 
@@ -37,7 +37,7 @@ const navRight = [
   {
     key: 'mono',
     label: '人物',
-    SubMenu: MonoSubMenu
+    subMenu: monoSubMenu
   },
   {
     key: 'rakuen',
@@ -46,7 +46,7 @@ const navRight = [
   {
     key: 'group',
     label: '小组',
-    SubMenu: GroupSubMenu
+    subMenu: groupSubMenu
   },
   {
     key: 'explore',
