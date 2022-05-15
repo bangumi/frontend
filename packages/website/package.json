@@ -20,6 +20,7 @@
   "devDependencies": {
     "@bangumi/design": "workspace:*",
     "@bangumi/icons": "workspace:*",
+    "@types/lodash": "^4.14.182",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
