@@ -5,6 +5,7 @@ import { useInput } from 'rooks'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import style from './index.module.less'
 import { useUser } from '../../hooks/use-user'
+import { ReactComponent as LoginLogo } from './assets/login-logo.svg'
 
 const Login: React.FC = () => {
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null)
@@ -20,15 +21,18 @@ const Login: React.FC = () => {
 
   return (
     <div className={style.container}>
+      <LoginLogo />
       <Input type="email" prefix={<UserLogin />} placeholder="你的 Email 地址" {...email} />
       <Input type="password" prefix={<Password />} placeholder="你的登录密码" {...password} />
-      <HCaptcha
-        sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
-        onVerify={(token: string) => setHCaptchaToken(token)}
-      />
+      <div>
+        <HCaptcha
+          sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
+          onVerify={(token: string) => setHCaptchaToken(token)}
+        />
+      </div>
       <div className={style.buttonGroup}>
-        <Button type="secondary" shape="rounded" disabled>注册新用户</Button>
-        <Button type="primary" shape="rounded" onClick={handleLogin}>登录</Button>
+        <Button className={style.button} type="secondary" shape="rounded" disabled>注册新用户</Button>
+        <Button className={style.button} type="primary" shape="rounded" onClick={handleLogin}>登录</Button>
       </div>
     </div>
   )
