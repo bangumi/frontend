@@ -6,17 +6,21 @@ import HCaptcha from '@hcaptcha/react-hcaptcha'
 import style from './index.module.less'
 import { useUser } from '../../hooks/use-user'
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg'
+import { useNavigate } from 'react-router-dom'
 
 const Login: React.FC = () => {
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null)
   const email = useInput('')
   const password = useInput('')
   const { login } = useUser()
-  const handleLogin: () => void = () => {
+  const navigate = useNavigate()
+
+  const handleLogin: () => void = async () => {
     if (!hCaptchaToken) {
       return
     }
-    login(email.value, password.value, hCaptchaToken)
+    await login(email.value, password.value, hCaptchaToken)
+    navigate('/', { replace: true })
   }
 
   return (
