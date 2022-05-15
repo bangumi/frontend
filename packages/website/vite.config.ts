@@ -4,12 +4,23 @@ import styleImport from 'vite-plugin-style-import'
 import svgr from 'vite-plugin-svgr'
 import pages from 'vite-plugin-pages'
 
+const privateAPIDomain = 'https://next.bgm.tv'
+const devDomain = 'http://dev.bgm.tv:3000'
+
 export default defineConfig({
   server: {
     proxy: {
       '/p': {
-        target: 'https://next.bgm.tv',
-        changeOrigin: true
+        target: privateAPIDomain,
+        changeOrigin: true,
+        configure (proxy) {
+          proxy.on('proxyReq', (proxyReq) => {
+            proxyReq.setHeader('Origin', privateAPIDomain)
+          })
+        },
+        cookieDomainRewrite: {
+          [privateAPIDomain]: devDomain
+        }
       }
     }
   },
