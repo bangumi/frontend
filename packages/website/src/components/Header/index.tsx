@@ -4,6 +4,7 @@ import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
 import { Notification, Setting } from '@bangumi/icons'
 import { Avatar, Divider, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
+import { useUser } from '../../hooks/use-user'
 
 const navLeft = [
   {
@@ -59,6 +60,7 @@ const navRight = [
 ]
 
 const Header: FC = () => {
+  const { user } = useUser()
   return (
     <div className={style.container}>
       <div className={style.main}>
@@ -82,7 +84,8 @@ const Header: FC = () => {
           <Setting className={style.iconSetting} />
         </div>
         {/* Avatar */}
-        <Avatar src="https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg" wrapperClass={style.avatar} />
+        {/* TODO: 未登录态 */}
+        {user?.avatar.small && <Avatar src={user?.avatar.small} wrapperClass={style.avatar} />}
       </div>
     </div>
   )
