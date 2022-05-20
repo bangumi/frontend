@@ -29,8 +29,6 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   )
 
-  console.log('🚀 ~ file: use-user.tsx ~ line 23 ~ data', user)
-
   const redirectToLogin: () => void = () => {
     console.log('redirectToLogin')
   }
