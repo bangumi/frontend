@@ -46,7 +46,9 @@ request.interceptors.response.use((response) => {
   return response
 }, errorHandler)
 
-export const privateRequest = axios.create()
+export const privateRequest = axios.create({
+  baseURL: import.meta.env.VITE_PRIVATE_API_ROOT
+})
 
 privateRequest.interceptors.request.use(config => {
   return config
