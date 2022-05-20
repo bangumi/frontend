@@ -1,7 +1,7 @@
 import React from 'react'
 import { User } from '../types/user'
 import useSWR from 'swr'
-import { privateRequest, request } from '../api/request'
+import { privateRequest } from '../api/request'
 import { AxiosResponse } from 'axios'
 
 interface UserContextType {
@@ -20,14 +20,16 @@ export enum LoginErrorCode {
 
 export const UserProvider: React.FC = ({ children }) => {
   const { data: user, mutate } = useSWR<AxiosResponse<User>>(
-    '/v0/me',
-    request.get,
+    '/p/me',
+    privateRequest.get,
     {
       refreshWhenHidden: false,
       revalidateOnFocus: false,
       revalidateOnReconnect: false
     }
   )
+
+  console.log('🚀 ~ file: use-user.tsx ~ line 23 ~ data', user)
 
   const redirectToLogin: () => void = () => {
     console.log('redirectToLogin')

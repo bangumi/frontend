@@ -5,8 +5,7 @@ import svgr from 'vite-plugin-svgr'
 import pages from 'vite-plugin-pages'
 
 const privateAPIDomain = 'https://next.bgm.tv'
-const productionDomain = 'https://next.bgm.tv/'
-const devDomain = 'http://dev.bgm.tv:3000'
+const productionRootURL = 'https://next.bgm.tv/'
 
 export default defineConfig({
   server: {
@@ -19,11 +18,23 @@ export default defineConfig({
             if (proxyReq.hasHeader('Origin')) {
               proxyReq.setHeader('Origin', privateAPIDomain)
             }
-            proxyReq.setHeader('Referer', productionDomain)
+            proxyReq.setHeader('Referer', productionRootURL)
+          })
+          proxy.on('proxyRes', (proxyRes) => {
+            // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
+            // 所以在本地开发时移除 secure attribute
+            const setCookies = proxyRes.headers['set-cookie']
+            if (Array.isArray(setCookies)) {
+              proxyRes.headers['set-cookie'] = setCookies.map(sc => {
+                return sc.split(';')
+                  .filter(v => v.trim().toLowerCase() !== 'secure')
+                  .join('; ')
+              })
+            }
           })
         },
         cookieDomainRewrite: {
-          [privateAPIDomain]: devDomain
+          'next.bgm.tv': 'dev.bgm.tv'
         }
       }
     }
