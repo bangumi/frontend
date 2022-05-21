@@ -108,26 +108,26 @@
 
 /* 临时的移动端适配 */
 @media screen and  (max-width: 1440px) {
-  .infoBox {
-    margin: auto;
-
-    .search {
-      display: none;
-    }
-  }
-
   .avatar {
     margin-right: 10px;
   }
 
   .nav {
     margin: auto;
+
+    .divider {
+      margin: 0 20px;
+    }
   }
 }
 
 @media screen and  (max-width: 1200px) {
-  .nav .divider {
-    margin: 0 20px;
+  .infoBox {
+    align-items: flex-end;
+
+    .search {
+      display: none;
+    }
   }
 }
 
