@@ -10,6 +10,7 @@ importers:
       '@babel/preset-typescript': ^7.16.7
       '@testing-library/jest-dom': ^5.16.1
       '@testing-library/react': ^12.1.2
+      '@testing-library/react-hooks': ^8.0.0
       '@types/jest': ^27.4.0
       '@types/node': ^17.0.10
       '@typescript-eslint/eslint-plugin': ^5.8.1
@@ -46,6 +47,7 @@ importers:
       '@babel/preset-typescript': 7.16.7_@babel+core@7.16.7
       '@testing-library/jest-dom': r2.cnpmjs.org/@testing-library/jest-dom/5.16.1
       '@testing-library/react': 12.1.2_react-dom@17.0.2+react@17.0.2
+      '@testing-library/react-hooks': 8.0.0_react-dom@17.0.2+react@17.0.2
       '@types/jest': 27.4.0
       '@types/node': 17.0.10
       '@typescript-eslint/eslint-plugin': r2.cnpmjs.org/@typescript-eslint/eslint-plugin/5.8.1_c05e6fca5974c04442e7c260534af929
@@ -1538,7 +1540,6 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: r2.cnpmjs.org/regenerator-runtime/0.13.9
-    dev: false
 
   /@babel/template/7.16.7:
     resolution: {integrity: sha512-I8j/x8kHUrbYRTUxXrrMbfCa7jxkE7tZre39x3kjr9hvI82cK1FfqLygotcWN5kdPGWcLdWMHpSBavse5tWw3w==}
@@ -3863,6 +3864,28 @@ packages:
       dom-accessibility-api: 0.5.10
       lz-string: 1.4.4
       pretty-format: 27.4.6
+    dev: true
+
+  /@testing-library/react-hooks/8.0.0_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-uZqcgtcUUtw7Z9N32W13qQhVAD+Xki2hxbTR461MKax8T6Jr8nsUvZB+vcBTkzY2nFvsUet434CsgF0ncW2yFw==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      '@types/react': ^16.9.0 || ^17.0.0
+      react: ^16.9.0 || ^17.0.0
+      react-dom: ^16.9.0 || ^17.0.0
+      react-test-renderer: ^16.9.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react-dom:
+        optional: true
+      react-test-renderer:
+        optional: true
+    dependencies:
+      '@babel/runtime': 7.17.9
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-error-boundary: r2.cnpmjs.org/react-error-boundary/3.1.4_react@17.0.2
     dev: true
 
   /@testing-library/react/12.1.2_react-dom@17.0.2+react@17.0.2:
@@ -17019,6 +17042,19 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-is: r2.cnpmjs.org/react-is/17.0.2
+    dev: true
+
+  r2.cnpmjs.org/react-error-boundary/3.1.4_react@17.0.2:
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/react-error-boundary/-/react-error-boundary-3.1.4.tgz}
+    id: r2.cnpmjs.org/react-error-boundary/3.1.4
+    name: react-error-boundary
+    version: 3.1.4
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.17.9
+      react: 17.0.2
     dev: true
 
   r2.cnpmjs.org/react-fast-compare/3.2.0:

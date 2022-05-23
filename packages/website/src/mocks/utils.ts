@@ -13,7 +13,7 @@ async function isFileExist (filePath: string): Promise<boolean> {
 }
 
 async function loadFixture (pathname: string, requestMethod: string): Promise<Record<string, any> | any[]> {
-  const fixturePath = path.join(__dirname, './fixtures', `${pathname}-GET.json`)
+  const fixturePath = path.join(__dirname, './fixtures', `${pathname}-${requestMethod.toUpperCase()}.json`)
 
   if (!(await isFileExist(fixturePath))) {
     const errMessage = `缺少对应 ${pathname} API Mock 文件。请创建 ${fixturePath} 添加 JSON mock`

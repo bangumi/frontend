@@ -4,9 +4,10 @@ import { UserLogin, Password } from '@bangumi/icons'
 import { useInput } from 'rooks'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import style from './index.module.less'
-import { useUser } from '../../hooks/use-user'
+import { LoginErrorCode, useUser } from '../../hooks/use-user'
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg'
 import { useNavigate } from 'react-router-dom'
+import ErrorMessage from './components/ErrorMessage'
 
 const Login: React.FC = () => {
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null)
@@ -15,17 +16,34 @@ const Login: React.FC = () => {
   const { login } = useUser()
   const navigate = useNavigate()
 
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null)
+
+  const errorMessageMap = {
+    [LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT]: '用户名与密码不正确，请检查后重试',
+    [LoginErrorCode.E_REQUEST_ERROR]: '请求错误',
+    [LoginErrorCode.E_NETWORK_ERROR]: '网络错误，请稍后重试',
+    [LoginErrorCode.E_UNKNOWN_ERROR]: '未知错误'
+  }
+
   const handleLogin: () => void = async () => {
     if (!hCaptchaToken) {
       return
     }
-    await login(email.value, password.value, hCaptchaToken)
-    navigate('/', { replace: true })
+    try {
+      await login(email.value, password.value, hCaptchaToken)
+      navigate('/', { replace: true })
+    } catch (error) {
+      const errorMsg = errorMessageMap[error.message]
+      if (errorMsg) {
+        setErrorMessage(errorMsg)
+      }
+    }
   }
 
   return (
     <div className={style.container}>
       <LoginLogo />
+      {errorMessage && <ErrorMessage message={errorMessage} />}
       <Input
         type="email"
         prefix={<UserLogin className={style.icon} />}

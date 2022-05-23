@@ -52,9 +52,9 @@ export const privateRequest = axios.create({
 
 privateRequest.interceptors.request.use(config => {
   return config
-}, errorHandler)
+})
 
 privateRequest.interceptors.response.use((response) => {
   response.data = underscoreToCamelcase(response.data)
   return response
-}, errorHandler)
+})
