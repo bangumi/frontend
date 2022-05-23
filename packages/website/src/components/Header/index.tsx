@@ -5,6 +5,7 @@ import { Notification, Setting } from '@bangumi/icons'
 import { Avatar, Divider, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
 import { useUser } from '../../hooks/use-user'
+import { Link } from 'react-router-dom'
 
 const navLeft = [
   {
@@ -61,6 +62,7 @@ const navRight = [
 
 const Header: FC = () => {
   const { user } = useUser()
+
   return (
     <div className={style.container}>
       <div className={style.main}>
@@ -85,7 +87,7 @@ const Header: FC = () => {
         </div>
         {/* Avatar */}
         {/* TODO: 未登录态 */}
-        {user?.avatar.small && <Avatar src={user?.avatar.small} wrapperClass={style.avatar} />}
+        {user ? <Avatar src={user?.avatar?.small} wrapperClass={style.avatar} /> : <Link className={style.link} to="/login">登录</Link>}
       </div>
     </div>
   )
