@@ -1,9 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
 
-/*
-  Prop type moves to outer
-*/
 export interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
@@ -14,7 +11,7 @@ export interface ButtonProps {
 }
 
 const Button: FC<ButtonProps> = ({
-  disabled,
+  disabled = false,
   onClick,
   className,
   type = 'primary',
@@ -39,10 +36,6 @@ const Button: FC<ButtonProps> = ({
       {children}
     </button>
   )
-}
-
-Button.defaultProps = {
-  disabled: false
 }
 
 export default Button
