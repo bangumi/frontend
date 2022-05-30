@@ -111,7 +111,6 @@ const Header: FC = () => {
           <Setting className={style.iconSetting} />
         </div>
         {/* Avatar */}
-        {/* TODO: 未登录态 */}
         {user ? <Avatar src={user?.avatar?.small} wrapperClass={style.avatar} /> : <Link className={style.link} to="/login">登录</Link>}
       </div>
     </div>
