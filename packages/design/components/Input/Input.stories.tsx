@@ -61,6 +61,6 @@ NavSearch.args = {
   wrapperStyle: {
     width: 256,
     height: 32,
-    padding: '5px 12px 7px 13px'
+    padding: '3px 12px 5px 13px'
   }
 }

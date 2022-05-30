@@ -1,9 +1,10 @@
 @import '@bangumi/design/theme/base';
 
-@header-height: 59px;
+@header-height: 60px;
 
 .container {
   height: @header-height;
+  box-sizing: border-box;
   left: 0;
   top: 0;
   right: 0;
@@ -15,6 +16,7 @@
 .main {
   display: flex;
   align-items: center;
+  height: 100%;
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -23,13 +25,18 @@
   margin-left: 24px;
   flex-shrink: 0;
   width: 193px;
-  height: @header-height + 1;
 }
 
 .logoMobile {
-  width: 126px;
-  height: @header-height + 1;
-  margin-left: 10px;
+  width: 110px;
+  margin-left: 12px;
+  display: none;
+}
+
+.mobileMenuToggle {
+  padding: 0 15px;
+  margin-left: 16px;
+  font-weight: bold;
   display: none;
 }
 
@@ -37,7 +44,6 @@
   display: flex;
   align-items: center;
   margin: 0 153px 0 63px;
-  height: @header-height;
 
   .divider {
     display: inline-block;
@@ -71,6 +77,21 @@
   .search {
     height: 32px;
     width: 256px;
+    padding: 3px 8px 5px;
+
+    .searchSelect {
+      outline: none;
+      border: none;
+      color: @gray-60;
+      background-color: transparent;
+    }
+
+    .searchDivider {
+      display: inline-block;
+      height: 14px;
+      margin: 0 9px 0 5px;
+      flex-shrink: 0;
+    }
   }
 
   .iconNotification {
@@ -95,27 +116,26 @@
 
 /* 临时的移动端适配 */
 @media screen and  (max-width: 1440px) {
-  /* 暂时还没有搜索框 */
-  .search {
-    display: none;
-  }
-
   .avatar {
     margin-right: 10px;
   }
 
   .nav {
     margin: auto;
-  }
 
-  .infoBox {
-    margin: auto;
+    .divider {
+      margin: 0 20px;
+    }
   }
 }
 
 @media screen and  (max-width: 1200px) {
-  .nav .divider {
-    margin: 0 20px;
+  .infoBox {
+    align-items: flex-end;
+
+    .search {
+      display: none;
+    }
   }
 }
 
@@ -131,12 +151,20 @@
 }
 
 @media screen and  (max-width: 768px) {
+  .mobileMenuToggle {
+    display: block;
+  }
+
   .navLeft {
     display: none !important;
   }
 }
 
 @media screen and (max-width: 576px) {
+  .container {
+    height: 50px;
+  }
+
   .logo {
     display: none;
   }
