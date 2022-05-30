@@ -19,7 +19,9 @@ it.each`
   statusCode | expectedError
   ${401} | ${new Error(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)}
   ${400} | ${new Error(LoginErrorCode.E_REQUEST_ERROR)}
-  ${500} | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
+  ${422} | ${new Error(LoginErrorCode.E_CLIENT_ERROR)}
+  ${418} | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
+  ${502} | ${new Error(LoginErrorCode.E_SERVER_ERROR)}
 `('should return error if request is failed with failed status $statusCode', async ({ statusCode, expectedError }) => {
   const { result } = renderHook(() => useUser(), { wrapper })
 

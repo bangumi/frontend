@@ -18,11 +18,13 @@ const Login: React.FC = () => {
 
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null)
 
-  const errorMessageMap = {
+  const errorMessageMap: Record<string, string> = {
     [LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT]: '用户名与密码不正确，请检查后重试',
-    [LoginErrorCode.E_REQUEST_ERROR]: '请求错误',
+    [LoginErrorCode.E_REQUEST_ERROR]: '验证码错误，请再试一遍',
     [LoginErrorCode.E_NETWORK_ERROR]: '网络错误，请稍后重试',
-    [LoginErrorCode.E_UNKNOWN_ERROR]: '未知错误'
+    [LoginErrorCode.E_UNKNOWN_ERROR]: '未知错误',
+    [LoginErrorCode.E_CLIENT_ERROR]: '请求错误',
+    [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试'
   }
 
   const handleLogin: () => void = async () => {
@@ -32,7 +34,7 @@ const Login: React.FC = () => {
     try {
       await login(email.value, password.value, hCaptchaToken)
       navigate('/', { replace: true })
-    } catch (error) {
+    } catch (error: any) {
       const errorMsg = errorMessageMap[error.message]
       if (errorMsg) {
         setErrorMessage(errorMsg)

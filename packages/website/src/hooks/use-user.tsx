@@ -17,6 +17,15 @@ export enum LoginErrorCode {
   E_REQUEST_ERROR = 'E_REQUEST_ERROR',
   E_NETWORK_ERROR = 'E_NETWORK_ERROR',
   E_UNKNOWN_ERROR = 'E_UNKNOWN_ERROR',
+  E_CLIENT_ERROR = 'E_CLIENT_ERROR',
+  E_SERVER_ERROR = 'E_SERVER_ERROR'
+}
+
+const ERROR_CODE_MAP: Record<number, LoginErrorCode> = {
+  400: LoginErrorCode.E_REQUEST_ERROR,
+  401: LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT,
+  422: LoginErrorCode.E_CLIENT_ERROR,
+  502: LoginErrorCode.E_SERVER_ERROR
 }
 
 export const UserProvider: React.FC = ({ children }) => {
@@ -50,13 +59,11 @@ export const UserProvider: React.FC = ({ children }) => {
         mutate()
       }).catch((error) => {
         if (error.response) {
-          if (error.response.status === 400) {
-            throw new Error(LoginErrorCode.E_REQUEST_ERROR)
-          } else if (error.response.status === 401) {
-            throw new Error(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)
-          } else {
-            throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
+          const errorCode = ERROR_CODE_MAP[error.response.status]
+          if (errorCode) {
+            throw new Error(errorCode)
           }
+          throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
         } else {
           throw new Error(LoginErrorCode.E_NETWORK_ERROR)
         }
