@@ -8,7 +8,7 @@ const App: FC = () => {
   return (
     <UserProvider>
       <GlobalLayout>
-        <Suspense fallback={<p>loading...</p>}>
+        <Suspense fallback={null}>
           {useRoutes(pageRoutes)}
         </Suspense>
       </GlobalLayout>
