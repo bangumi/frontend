@@ -43,29 +43,31 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className={style.container}>
-      <LoginLogo />
-      {errorMessage && <ErrorMessage message={errorMessage} />}
-      <Input
-        type="email"
-        prefix={<UserLogin className={style.icon} />}
-        placeholder="你的 Email 地址" {...email}
-      />
-      <Input
-        type="password"
-        prefix={<Password className={style.icon} />}
-        placeholder="你的登录密码"
-        {...password}
-      />
-      <div>
-        <HCaptcha
-          sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
-          onVerify={(token: string) => setHCaptchaToken(token)}
+    <div className={style.mask}>
+      <div className={style.container}>
+        <LoginLogo />
+        {errorMessage && <ErrorMessage message={errorMessage} />}
+        <Input
+          type="email"
+          prefix={<UserLogin className={style.icon} />}
+          placeholder="你的 Email 地址" {...email}
         />
-      </div>
-      <div className={style.buttonGroup}>
-        <Button className={style.button} type="secondary" shape="rounded" disabled>注册新用户</Button>
-        <Button className={style.button} type="primary" shape="rounded" onClick={handleLogin}>登录</Button>
+        <Input
+          type="password"
+          prefix={<Password className={style.icon} />}
+          placeholder="你的登录密码"
+          {...password}
+        />
+        <div>
+          <HCaptcha
+            sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
+            onVerify={(token: string) => setHCaptchaToken(token)}
+          />
+        </div>
+        <div className={style.buttonGroup}>
+          <Button className={style.button} type="secondary" shape="rounded" disabled>注册新用户</Button>
+          <Button className={style.button} type="primary" shape="rounded" onClick={handleLogin}>登录</Button>
+        </div>
       </div>
     </div>
   )
