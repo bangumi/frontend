@@ -29,8 +29,20 @@ const Login: React.FC = () => {
 
   const handleLogin: () => void = async () => {
     if (!hCaptchaToken) {
+      setErrorMessage('请完成验证')
       return
     }
+
+    if (!email.value) {
+      setErrorMessage('请输入 Email 地址')
+      return
+    }
+
+    if (!password.value) {
+      setErrorMessage('请输入密码')
+      return
+    }
+
     try {
       await login(email.value, password.value, hCaptchaToken)
       navigate('/', { replace: true })

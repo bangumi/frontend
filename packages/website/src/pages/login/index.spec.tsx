@@ -77,3 +77,26 @@ it.each`
     expect(getByText(expectedError)).toBeInTheDocument()
   })
 })
+
+it('should validate user input', async () => {
+  const { getByPlaceholderText, getByText } = render(
+    <UserProvider>
+      <LoginPage />
+    </UserProvider>
+  )
+
+  fireEvent.click(getByText('登录'))
+
+  await waitFor(() => {
+    expect(getByText('请输入 Email 地址'))
+  })
+
+  const fakeEmail = 'fake-email'
+  fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } })
+
+  fireEvent.click(getByText('登录'))
+
+  await waitFor(() => {
+    expect(getByText('请输入密码'))
+  })
+})
