@@ -111,7 +111,7 @@ const Header: FC = () => {
           <Setting className={style.iconSetting} />
         </div>
         {/* Avatar */}
-        {user ? <Avatar src={user?.avatar?.small} wrapperClass={style.avatar} /> : <Link className={style.link} to="/login">登录</Link>}
+        {user ? <Avatar src={user?.avatar?.large} wrapperClass={style.avatar} /> : <Link className={style.link} to="/login">登录</Link>}
       </div>
     </div>
   )
