@@ -43,7 +43,8 @@ export const UserProvider: React.FC = ({ children }) => {
     {
       refreshWhenHidden: false,
       revalidateOnFocus: false,
-      revalidateOnReconnect: false
+      revalidateOnReconnect: false,
+      shouldRetryOnError: false
     }
   )
 
