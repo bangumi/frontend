@@ -3,11 +3,11 @@ import { User } from '../types/user'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
 import axios, { AxiosResponse } from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 interface UserContextType {
   user?: User
   redirectToLogin: () => void
-  signout: () => void
   login: (username: string, password: string, hCaptchaResp: string) => Promise<void>
 }
 const UserContext = React.createContext<UserContextType>(null!)
@@ -48,8 +48,10 @@ export const UserProvider: React.FC = ({ children }) => {
     }
   )
 
-  const redirectToLogin: () => void = () => {
-    console.log('redirectToLogin')
+  const navigate = useNavigate()
+
+  function redirectToLogin (): void {
+    navigate('/login')
   }
 
   const login: (
@@ -82,11 +84,7 @@ export const UserProvider: React.FC = ({ children }) => {
       })
     }
 
-  const signout: () => void = () => {
-    console.log('signout')
-  }
-
-  const value: UserContextType = { redirectToLogin, signout, login, user: user?.data }
+  const value: UserContextType = { redirectToLogin, login, user: user?.data }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

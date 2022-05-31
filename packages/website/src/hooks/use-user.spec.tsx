@@ -4,6 +4,7 @@ import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './u
 import { server as mockServer } from '../mocks/server'
 import { rest } from 'msw'
 import { waitFor } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 
 function mockLogin (statusCode: number, response: Object = {}): void {
   mockServer.use(
@@ -13,7 +14,13 @@ function mockLogin (statusCode: number, response: Object = {}): void {
   )
 }
 
-const wrapper: React.FC = ({ children }) => <UserProvider>{children}</UserProvider>
+const wrapper: React.FC = ({ children }) => (
+  <MemoryRouter>
+    <UserProvider>
+      {children}
+    </UserProvider>
+  </MemoryRouter>
+)
 
 it.each`
   statusCode | resp | expectedError
