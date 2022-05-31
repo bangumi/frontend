@@ -21,10 +21,10 @@ jest.mock('@hcaptcha/react-hcaptcha', () => {
 jest.mock('react-router-dom')
 const mockedUseNavigate = jest.mocked(useNavigate)
 
-function mockLogin (statusCode: number): void {
+function mockLogin (statusCode: number, response: Object = {}): void {
   mockServer.use(
     rest.post('http://localhost/p/login', (req, res, ctx) => {
-      return res(ctx.status(statusCode))
+      return res(ctx.status(statusCode), ctx.json(response))
     })
   )
 }
@@ -53,13 +53,13 @@ it('should redirect user to homepage after success login', async () => {
 })
 
 it.each`
-  statusCode | expectedError
-  ${400} | ${'验证码错误，请再试一遍'}
-  ${401} | ${'用户名与密码不正确，请检查后重试'}
-  ${422} | ${'请求错误'}
-  ${502} | ${'服务器错误，请稍后重试'}
-`('should show error message when response is %statusCode}', async ({ statusCode, expectedError }) => {
-  mockLogin(statusCode)
+  statusCode | resp | expectedError
+  ${400} | ${{}} | ${'验证码错误，请再试一遍'}
+  ${401} | ${{ detail: { remain: 5 } }} | ${'用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试'}
+  ${422} | ${{}} | ${'请求错误'}
+  ${502} | ${{}} | ${'服务器错误，请稍后重试'}
+`('should show error message when response is %statusCode}', async ({ statusCode, resp, expectedError }) => {
+  mockLogin(statusCode, resp)
   const { getByPlaceholderText, getByText } = render(
     <UserProvider>
       <LoginPage />

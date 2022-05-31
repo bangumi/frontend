@@ -28,6 +28,14 @@ const ERROR_CODE_MAP: Record<number, LoginErrorCode> = {
   502: LoginErrorCode.E_SERVER_ERROR
 }
 
+export class PasswordUnMatchError extends Error {
+  remain: number
+  constructor (remain: number) {
+    super(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)
+    this.remain = remain
+  }
+}
+
 export const UserProvider: React.FC = ({ children }) => {
   const { data: user, mutate } = useSWR<AxiosResponse<User>>(
     '/p/me',
@@ -61,6 +69,9 @@ export const UserProvider: React.FC = ({ children }) => {
         if (error.response) {
           const errorCode = ERROR_CODE_MAP[error.response.status]
           if (errorCode) {
+            if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
+              throw new PasswordUnMatchError(error.response.data.detail.remain)
+            }
             throw new Error(errorCode)
           }
           throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)

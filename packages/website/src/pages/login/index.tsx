@@ -4,7 +4,7 @@ import { UserLogin, Password } from '@bangumi/icons'
 import { useInput } from 'rooks'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import style from './index.module.less'
-import { LoginErrorCode, useUser } from '../../hooks/use-user'
+import { LoginErrorCode, PasswordUnMatchError, useUser } from '../../hooks/use-user'
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg'
 import { useNavigate } from 'react-router-dom'
 import ErrorMessage from './components/ErrorMessage'
@@ -19,7 +19,6 @@ const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null)
 
   const errorMessageMap: Record<string, string> = {
-    [LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT]: '用户名与密码不正确，请检查后重试',
     [LoginErrorCode.E_REQUEST_ERROR]: '验证码错误，请再试一遍',
     [LoginErrorCode.E_NETWORK_ERROR]: '网络错误，请稍后重试',
     [LoginErrorCode.E_UNKNOWN_ERROR]: '未知错误',
@@ -47,6 +46,10 @@ const Login: React.FC = () => {
       await login(email.value, password.value, hCaptchaToken)
       navigate('/', { replace: true })
     } catch (error: any) {
+      if (error instanceof PasswordUnMatchError) {
+        setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`)
+        return
+      }
       const errorMsg = errorMessageMap[error.message]
       if (errorMsg) {
         setErrorMessage(errorMsg)

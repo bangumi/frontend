@@ -1,14 +1,14 @@
 import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
-import { useUser, UserProvider, LoginErrorCode } from './use-user'
+import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './use-user'
 import { server as mockServer } from '../mocks/server'
 import { rest } from 'msw'
 import { waitFor } from '@testing-library/react'
 
-function mockLogin (statusCode: number): void {
+function mockLogin (statusCode: number, response: Object = {}): void {
   mockServer.use(
     rest.post('http://localhost/p/login', (req, res, ctx) => {
-      return res(ctx.status(statusCode))
+      return res(ctx.status(statusCode), ctx.json(response))
     })
   )
 }
@@ -16,21 +16,23 @@ function mockLogin (statusCode: number): void {
 const wrapper: React.FC = ({ children }) => <UserProvider>{children}</UserProvider>
 
 it.each`
-  statusCode | expectedError
-  ${401} | ${new Error(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)}
-  ${400} | ${new Error(LoginErrorCode.E_REQUEST_ERROR)}
-  ${422} | ${new Error(LoginErrorCode.E_CLIENT_ERROR)}
-  ${418} | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
-  ${502} | ${new Error(LoginErrorCode.E_SERVER_ERROR)}
-`('should return error if request is failed with failed status $statusCode', async ({ statusCode, expectedError }) => {
+  statusCode | resp | expectedError
+  ${401} | ${{ detail: { remain: 4 } }} | ${new PasswordUnMatchError(4)}
+  ${400} | ${{}} | ${new Error(LoginErrorCode.E_REQUEST_ERROR)}
+  ${422} | ${{}} | ${new Error(LoginErrorCode.E_CLIENT_ERROR)}
+  ${418} | ${{}} | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
+  ${502} | ${{}} | ${new Error(LoginErrorCode.E_SERVER_ERROR)}
+`('should return error if request is failed with failed status $statusCode', async ({ statusCode, resp, expectedError }) => {
   const { result } = renderHook(() => useUser(), { wrapper })
 
-  mockLogin(statusCode)
+  mockLogin(statusCode, resp)
 
   expect.assertions(1)
   await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
     expectedError
   )
+
+  await waitFor(() => {})
 })
 
 it('should refresh me if login succeeded', async () => {
