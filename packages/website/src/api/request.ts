@@ -50,10 +50,6 @@ export const privateRequest = axios.create({
   baseURL: import.meta.env.VITE_PRIVATE_API_ROOT
 })
 
-privateRequest.interceptors.request.use(config => {
-  return config
-})
-
 privateRequest.interceptors.response.use((response) => {
   response.data = underscoreToCamelcase(response.data)
   return response
