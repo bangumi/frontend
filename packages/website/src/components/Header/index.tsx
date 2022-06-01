@@ -4,6 +4,8 @@ import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons'
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
+import { useUser } from '../../hooks/use-user'
+import { Link } from 'react-router-dom'
 
 const navLeft = [
   {
@@ -59,6 +61,8 @@ const navRight = [
 ]
 
 const Header: FC = () => {
+  const { user } = useUser()
+
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   return (
     <div className={style.container}>
@@ -107,7 +111,7 @@ const Header: FC = () => {
           <Setting className={style.iconSetting} />
         </div>
         {/* Avatar */}
-        <Avatar src="https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg" wrapperClass={style.avatar} />
+        {user ? <Avatar src={user?.avatar?.large} wrapperClass={style.avatar} /> : <Link className={style.link} to="/login">登录</Link>}
       </div>
     </div>
   )
