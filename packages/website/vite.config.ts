@@ -4,7 +4,41 @@ import styleImport from 'vite-plugin-style-import'
 import svgr from 'vite-plugin-svgr'
 import pages from 'vite-plugin-pages'
 
+const privateAPIDomain = 'https://next.bgm.tv'
+const productionRootURL = 'https://next.bgm.tv/'
+
 export default defineConfig({
+  server: {
+    proxy: {
+      '/p': {
+        target: privateAPIDomain,
+        changeOrigin: true,
+        configure (proxy) {
+          proxy.on('proxyReq', (proxyReq) => {
+            if (proxyReq.hasHeader('Origin')) {
+              proxyReq.setHeader('Origin', privateAPIDomain)
+            }
+            proxyReq.setHeader('Referer', productionRootURL)
+          })
+          proxy.on('proxyRes', (proxyRes) => {
+            // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
+            // 所以在本地开发时移除 secure attribute
+            const setCookies = proxyRes.headers['set-cookie']
+            if (Array.isArray(setCookies)) {
+              proxyRes.headers['set-cookie'] = setCookies.map(sc => {
+                return sc.split(';')
+                  .filter(v => v.trim().toLowerCase() !== 'secure')
+                  .join('; ')
+              })
+            }
+          })
+        },
+        cookieDomainRewrite: {
+          'next.bgm.tv': 'dev.bgm.tv'
+        }
+      }
+    }
+  },
   plugins: [
     react(),
     svgr(),
@@ -25,7 +59,7 @@ export default defineConfig({
           libraryName: '@bangumi/design',
           libraryNameChangeCase: 'capitalCase',
           ensureStyleFile: true,
-          resolveStyle: (name: string) => !name.includes('Item') ? `@bangumi/design/components/${name}/style/index.tsx` : ''
+          resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`
         }
       ]
     })

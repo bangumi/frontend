@@ -1,13 +1,8 @@
 import React, { FC, createContext, useContext } from 'react'
-import MenuItem from './MenuItem'
+import MenuItem, { MenuItemProps } from './MenuItem'
 import classnames from 'classnames'
 
-interface IItem {
-  key: string
-  label: string
-  /* 子菜单 */
-  SubMenu?: JSX.Element
-}
+export type MenuItemType = Omit<MenuItemProps, 'id'> & { key: string }
 
 export interface MenuProps {
   /* 点击事件，对每一个 MenuItem 都生效 */
@@ -21,9 +16,9 @@ export interface MenuProps {
   /* 选中节点的 Key */
   activeKey?: string
   /* 节点数组，设置可以自动设置 MenuItem 节点 */
-  items: IItem[]
+  items: MenuItemType[]
   /* Render Props, 你可以使用自定义的 Item 组件 */
-  children?: (items: IItem) => React.ReactElement
+  children?: (items: MenuItemType) => React.ReactElement
 }
 
 type MenuContextType = Pick<MenuProps, 'onClick' | 'activeKey' | 'mode'>
@@ -52,7 +47,7 @@ const Menu: FC<MenuProps> = ({
             return children
               ? children(item)
               : (
-                <MenuItem key={item.key} id={item.key} SubMenu={item.SubMenu}>{item.label}</MenuItem>
+                <MenuItem {...item} id={item.key} />
                 )
           })
         }
@@ -64,6 +59,3 @@ const Menu: FC<MenuProps> = ({
 export default Menu
 
 export const useMenuContext = (): MenuContextType => useContext<MenuContextType>(MenuContext)
-
-export { default as MenuItem } from './MenuItem'
-export type { MenuItemProps } from './MenuItem'

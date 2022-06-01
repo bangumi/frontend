@@ -45,3 +45,12 @@ request.interceptors.response.use((response) => {
   response.data = underscoreToCamelcase(response.data)
   return response
 }, errorHandler)
+
+export const privateRequest = axios.create({
+  baseURL: import.meta.env.VITE_PRIVATE_API_ROOT
+})
+
+privateRequest.interceptors.response.use((response) => {
+  response.data = underscoreToCamelcase(response.data)
+  return response
+})

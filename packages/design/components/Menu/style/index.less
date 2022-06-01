@@ -1,5 +1,4 @@
-@hoverColor-light: #f09199;
-@textColor: #777272;
+@import '../../../theme/base';
 
 .bgm-menu {
   display: inline-flex;
@@ -10,7 +9,7 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  color: @textColor;
+  color: @gray-80;
   font-style: normal;
   font-weight: 500;
 
@@ -56,13 +55,13 @@
   }
 
   &--circle:hover {
-    background-color: @hoverColor-light;
+    background-color: @primary-color;
     color: #fff;
     border-radius: 17px;
   }
 
   &--underline:hover {
-    color: @hoverColor-light;
+    color: @primary-color;
 
     &::after {
       content: '';
@@ -71,7 +70,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background-color: @hoverColor-light;
+      background-color: @primary-color;
       border-radius: 2px;
     }
   }
