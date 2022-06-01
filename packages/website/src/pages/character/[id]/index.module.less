@@ -1,17 +1,27 @@
+.font-bold() {
+  font-weight: 600;
+}
+
+.font-light() {
+  font-weight: 400;
+}
+
 .pageContainer {
   margin: 30px auto 0;
   max-width: 1440px;
 }
 
 .title {
+  .font-bold();
+
   font-size: 24px;
   color: #4b4545;
   line-height: 36px;
-  font-weight: 400;
 }
 
 .nameInSimplifiedChinese {
-  font-weight: 400;
+  .font-light();
+
   color: #aaa6a6;
   font-size: 16px;
   line-height: 24px;
@@ -76,8 +86,10 @@
 
 .section {
   .title {
+    .font-light();
+
     font-size: 18px;
-    font-weight: 2400;
+    margin-bottom: 15px;
   }
 
   .divider {
@@ -86,6 +98,7 @@
 }
 
 .relatedSubjects {
+  margin-top: 20px;
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
