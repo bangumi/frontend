@@ -20,8 +20,7 @@ const CharacterPage: React.FC = () => {
   }]
 
   if (isLoading) {
-    // TODO: loading
-    return <div>LOADING</div>
+    return null
   }
 
   if (!character) {
