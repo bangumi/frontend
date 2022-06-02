@@ -2,7 +2,7 @@ name: Upload Preview (storybook)
 
 on:
   workflow_run:
-    workflows: ["Storybook Build"]
+    workflows: [ "Storybook Build" ]
     types:
       - completed
 
@@ -60,7 +60,10 @@ jobs:
 
   upload-master:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.event != 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
+    if: |
+      github.event.workflow_run.event != 'pull_request' && 
+      github.event.workflow_run.head_branch == 'master' && 
+      github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Download Atifact
         run: gh --repo $GITHUB_REPOSITORY run download ${{github.event.workflow_run.id }} --name storybook --dir storybook

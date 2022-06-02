@@ -62,7 +62,10 @@ jobs:
 
   upload-master:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.event != 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
+    if: |
+      github.event.workflow_run.event != 'pull_request' && 
+      github.event.workflow_run.head_branch == 'master' && 
+      github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Download Atifact
         run: gh --repo $GITHUB_REPOSITORY run download ${{github.event.workflow_run.id }} --name sites --dir sites
