@@ -2,7 +2,7 @@ name: Upload Preview (storybook)
 
 on:
   workflow_run:
-    workflows: [ "Storybook Build" ]
+    workflows: ["Storybook Build"]
     types:
       - completed
 
