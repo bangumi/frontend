@@ -16,7 +16,7 @@
     "lint:fix": "pnpm lint -- --fix",
     "lint:style": "stylelint \"./packages/**/*.{css,less}\" \"!**/dist/**\"",
     "lint:style-fix": "pnpm lint:style -- --fix",
-    "prettier": "prettier --debug-check ./**/*.{yaml,yml}",
+    "prettier": "prettier --write --list-different ./**/*.{yaml,yml}",
     "prettier:check": "prettier --list-different ./**/*.{yaml,yml}",
     "server": "pnpm --filter=@bangumi/server",
     "test": "jest",
