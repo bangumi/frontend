@@ -17,7 +17,7 @@
     "lint:style": "stylelint \"./packages/**/*.{css,less}\" \"!**/dist/**\"",
     "lint:style-fix": "pnpm lint:style -- --fix",
     "prettier": "prettier --write --list-different ./",
-    "prettier:check": "prettier --list-different './",
+    "prettier:check": "prettier --list-different ./",
     "server": "pnpm --filter=@bangumi/server",
     "test": "jest",
     "website": "pnpm --filter=@bangumi/website",
