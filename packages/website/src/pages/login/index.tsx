@@ -73,7 +73,7 @@ const Login: React.FC = () => {
           placeholder="你的登录密码"
           {...password}
         />
-        <div>
+        <div className={style.hcaptcha}>
           <HCaptcha
             sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
             onVerify={(token: string) => setHCaptchaToken(token)}
