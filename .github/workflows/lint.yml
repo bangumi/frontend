@@ -31,10 +31,7 @@ jobs:
         with:
           node-version: "16.x"
           cache: "pnpm"
-      - name: Install Dependencies
-        run: pnpm install
 
-      # Runs a set of commands using the runners shell
       - name: Install Dependencies
         run: pnpm install
 
@@ -54,9 +51,6 @@ jobs:
         with:
           node-version: "16.x"
           cache: "pnpm"
-
-      - name: Install Dependencies
-        run: pnpm install
 
       - name: Install Dependencies
         run: pnpm install
