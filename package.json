@@ -24,7 +24,7 @@
     "lint-staged": "lint-staged"
   },
   "lint-staged": {
-    "*.{yaml,yml}": "prettier",
+    "*.{yaml,yml}": "prettier --write",
     "*.{js,ts,tsx}": [
       "eslint --fix"
     ],
