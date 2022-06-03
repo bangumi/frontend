@@ -1,3 +1,11 @@
+*.md
+*.js
+*.jsx
+*.ts
+*.tsx
+*.css
+*.less
+*.html
 pnpm-lock.yaml
 # submodules
 /packages/utils/wiki/__test__/wiki-syntax-spec/
