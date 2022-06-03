@@ -38,22 +38,5 @@ jobs:
       - name: Lint Code
         run: pnpm lint && pnpm lint:style
 
-  prettier:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - uses: pnpm/action-setup@v2.0.1
-        with:
-          version: "6"
-      - name: Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16.x"
-          cache: "pnpm"
-
-      - name: Install Dependencies
-        run: pnpm install
-
-      - name: Lint Code
+      - name: Prettier
         run: pnpm prettier:check
