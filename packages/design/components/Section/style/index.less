@@ -1,0 +1,26 @@
+@import '../../../theme/base';
+
+.font-light() {
+  font-weight: 400;
+}
+
+.bgm-section {
+  > * {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.bgm-section__title {
+  .font-light();
+
+  color: @gray-60;
+  font-size: 18px;
+}
+
+.bgm-section__divider {
+  width: 100%;
+}
