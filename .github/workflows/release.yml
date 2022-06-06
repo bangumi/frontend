@@ -1,0 +1,45 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: "6"
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: |
+          pnpm build
+          tar -czf bangumi-website.tar.gz  -C ./packages/website dist
+          openssl dgst -sha256 -r bangumi-website.tar.gz > bangumi-website.tar.gz.sha256
+
+      - id: get_version
+        uses: battila7/get-version-action@v2
+
+      - name: Create Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: ${{ steps.get_version.outputs.version }}
+          prerelease: false
+          title: ${{ steps.get_version.outputs.version }}
+          files: |
+            bangumi-website.tar.gz
+            bangumi-website.tar.gz.sha256
+            LICENSE
