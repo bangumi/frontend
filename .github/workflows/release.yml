@@ -26,8 +26,8 @@ jobs:
       - name: Build
         run: |
           pnpm build
-          tar -czf bangumi-website.tar.gz  -C ./packages/website dist
-          openssl dgst -sha256 -r bangumi-website.tar.gz > bangumi-website.tar.gz.sha256
+          tar -czf bangumi-website.tar.gz  -C ./packages/website/dist .
+          openssl dgst -sha256 bangumi-website.tar.gz > bangumi-website.tar.gz.sha256
 
       - id: get_version
         uses: battila7/get-version-action@v2
