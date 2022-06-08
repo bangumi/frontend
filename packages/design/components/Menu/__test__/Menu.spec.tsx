@@ -1,14 +1,19 @@
 import { render } from '@testing-library/react'
 import React from 'react'
-import Menu, { MenuItem } from '..'
+import Menu from '..'
 
-const items = [{
-  key: '1',
-  label: '1'
-}, {
-  key: '2',
-  label: '2'
-}]
+const items = [
+  {
+    key: '1',
+    label: '1',
+    className: 'class-1'
+  },
+  {
+    key: '2',
+    label: '2',
+    className: 'class-2'
+  }
+]
 
 it('should render all menu', () => {
   const { getByText, container } = render(
@@ -18,6 +23,7 @@ it('should render all menu', () => {
   expect(getByText('1')).toBeInTheDocument()
   expect(getByText('2')).toBeInTheDocument()
   expect(getByText('1')).toHaveClass('bgm-menu-item')
+  expect(getByText('2')).toHaveClass('class-2')
 })
 
 it('should trigger onChange when click menus', () => {
@@ -30,26 +36,7 @@ it('should trigger onChange when click menus', () => {
   expect(handleChange.mock.calls[0][0]).toBe('2')
 })
 
-it('should trigger custom trigger instead of default trigger', () => {
-  const handleChange = jest.fn()
-  const handleChangeSingle = jest.fn()
-  const { getByText } = render(
-    <Menu onClick={handleChange} items={items}>
-      {
-        item => (
-          <MenuItem key={item.key} id={item.key} onClick={item.key === '1' ? handleChangeSingle : undefined}>
-            {item.label}
-          </MenuItem>
-        )
-      }
-    </Menu>
-  )
-  getByText('1').click()
-  expect(handleChange.mock.calls.length).toBe(0)
-  expect(handleChangeSingle.mock.calls.length).toBe(1)
-})
-
-it('Render Props', () => {
+it('render props', () => {
   const Comp: React.FC<{ label: string }> = ({ label }) => <div>{`Custom:${label}`}</div>
   const { getByText } = render(
     <Menu items={items}>
@@ -59,4 +46,21 @@ it('Render Props', () => {
     </Menu>
   )
   expect(getByText('Custom:1')).toBeInTheDocument()
+})
+
+it('should render subMenu', () => {
+  const subMenu = <Menu items={items} mode="vertical" />
+  const menuItems = [
+    {
+      key: 'outer1',
+      label: 'outer1',
+      subMenu
+    }
+  ]
+  const { getByText, getByTestId } = render(
+    <Menu items={menuItems} />
+  )
+  expect(getByText('outer1')).toHaveClass('bgm-menu-item')
+  expect(getByText('1')).toHaveClass('class-1')
+  expect(getByTestId('submenu')).toBeInTheDocument()
 })

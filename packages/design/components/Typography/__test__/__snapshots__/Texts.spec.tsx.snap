@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render default text 1`] = `
+<span
+  class="bgm-text"
+>
+  hello world
+</span>
+`;
+
+exports[`should render secondary text 1`] = `
+<span
+  class="bgm-text bgm-text--secondary"
+>
+  hello world
+</span>
+`;
+
+exports[`should render undefined text 1`] = `
+<span
+  class="bgm-text"
+>
+  hello world
+</span>
+`;

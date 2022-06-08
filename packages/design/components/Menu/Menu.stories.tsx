@@ -1,10 +1,8 @@
 import React from 'react'
 import type { Story } from '@storybook/react'
-import Menu, { MenuItem, MenuProps } from '.'
+import Menu, { MenuProps, MenuItemType } from '.'
 
-type IItems = MenuProps['items']
-
-const items: IItems = [{
+const items: MenuItemType[] = [{
   key: 'animation',
   label: '动画'
 }, {
@@ -21,7 +19,7 @@ const items: IItems = [{
   label: '三次元'
 }]
 
-const itemsVertical: IItems = [{
+const itemsVertical: MenuItemType[] = [{
   key: 'rank',
   label: '排行榜'
 },
@@ -42,9 +40,6 @@ const itemsVertical: IItems = [{
 export default {
   title: 'modern/Menu',
   component: Menu,
-  subcomponents: {
-    MenuItem
-  },
   argTypes: {
     activeKey: {
       control: { type: 'select' }
@@ -64,17 +59,21 @@ export default {
 }
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, activeType, style, className }) => {
+const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }}
+    >
       <Menu
         mode={mode}
         activeKey={activeKey}
         items={items}
         onClick={onClick}
-        activeType={activeType}
         style={style}
-        className={className}
+        wrapperClass={wrapperClass}
       />
     </div>
   )
@@ -95,5 +94,11 @@ Vertical.args = ({ items: itemsVertical, mode: 'vertical' })
 Vertical.argTypes = {
   activeKey: {
     options: itemsVertical.map(item => item.key)
+  },
+  style: {
+    defaultValue: {
+      fontSize: 12,
+      fontWeight: 400
+    }
   }
 }

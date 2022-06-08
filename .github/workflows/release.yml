@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: "6"
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build
+        run: |
+          pnpm build
+          tar -czf bangumi-website.tar.gz  -C ./packages/website/dist .
+          openssl dgst -sha256 bangumi-website.tar.gz > bangumi-website.tar.gz.sha256
+
+      - name: Get Tag Name
+        run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Upload Github Release
+        run: gh release create "$TAG" bangumi-website.tar.gz bangumi-website.tar.gz.sha256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

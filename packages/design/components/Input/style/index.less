@@ -1,0 +1,27 @@
+@import '../../../theme/base';
+
+.bgm-input {
+  &__wrapper {
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 17px;
+    font-size: 14px;
+    border: 2px solid @gray-10;
+    border-radius: 19px;
+  }
+
+  font-size: 1em;
+  outline-style: none;
+  border: none;
+  color: @gray-100;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+
+  &::placeholder {
+    color: @gray-10;
+  }
+}

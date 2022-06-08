@@ -2,23 +2,25 @@ name: Unit Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
       - uses: pnpm/action-setup@v2.0.1
         with:
-          version: '6'
+          version: "6"
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
-          cache: 'pnpm'
+          node-version: "16.x"
+          cache: "pnpm"
       - name: Install Dependencies
         run: pnpm install
 

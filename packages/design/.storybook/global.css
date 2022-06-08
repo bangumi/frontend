@@ -1,5 +1,5 @@
-html {
-    font-family: 'Source Han Sans SC', 'Noto Sans SC',
-    system-ui, -apple-system, BlinkMacSystemFont,
-    Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    'SF Pro SC', 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei',
+    'Lucida Grande', 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, Verdana, sans-serif;
 }

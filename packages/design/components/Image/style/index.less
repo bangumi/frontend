@@ -1,0 +1,29 @@
+@import '../../../theme/base';
+
+@outline-color: rgba(255, 255, 255, 0.4);
+@box-shadow-color: rgba(237, 233, 233, 0.8);
+
+.bgm-image {
+  display: inline-block;
+  overflow: hidden;
+  background: @gray-10;
+  object-fit: cover;
+  object-position: top left;
+
+  &:hover {
+    outline: 2px solid @outline-color;
+    outline-offset: -2px;
+  }
+
+  &--withBoxShadow {
+    box-shadow: 0 5px 10px 3px @box-shadow-color;
+  }
+
+  &--rect {
+    border-radius: 6px;
+  }
+
+  &--circle {
+    border-radius: 50%;
+  }
+}

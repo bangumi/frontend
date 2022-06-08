@@ -1,30 +1,24 @@
-.tab {
+@import '../../../theme/base';
+
+.bgm-tab {
   display: inline-flex;
   flex-direction: row;
-
   padding: 4px;
-
   list-style: none;
-  background-color: #FACDD0;
+  background-color: @pink-60;
   border-radius: 19px;
-
-  // TODO: use normalize?
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
 }
 
-.tab-item {
+.bgm-tab__item {
   font-size: 14px;
   font-weight: bold;
   line-height: 14px;
   padding: 4px 6px;
-  font-family: 'Source Han Sans SC';
-  color: #FFFFFF;
+  color: #fff;
   cursor: pointer;
 
-  &.active {
-    background-color: #F09199;
+  &--active {
+    background-color: @primary-color;
     border-radius: 18px;
   }
 }

@@ -3,7 +3,7 @@ import Tab from '.'
 import type { Story } from '@storybook/react'
 
 export default {
-  title: 'modern/Tabs',
+  title: 'modern/Tab',
   component: Tab,
   argTypes: {
     activeKey: {

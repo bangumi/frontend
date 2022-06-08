@@ -1,4 +1,4 @@
-@activeColor-light: #f09199;
+@import '../../../theme/base';
 
 .bgm-menu {
   display: inline-flex;
@@ -8,19 +8,20 @@
   font-size: 14px;
   margin: 0;
   padding: 0;
-
   list-style: none;
-  color: #777272;
+  color: @gray-80;
   font-style: normal;
   font-weight: 500;
-  line-height: 21px;
 
   &--horizontal {
     flex-direction: row;
     height: 60px;
+    line-height: 21px;
 
-    .bgm-menu-item {
+    > .bgm-menu-item {
       margin-right: 20px;
+      height: 60px;
+      line-height: 60px;
 
       &:last-of-type {
         margin-right: 0;
@@ -32,13 +33,14 @@
     display: flex;
     flex-direction: column;
     width: 100px;
+    padding: 8px;
+    box-sizing: border-box;
+    line-height: 14px;
 
-    .bgm-menu-item {
-      margin-bottom: 10px;
-
-      &:last-of-type {
-        margin-bottom: 0;
-      }
+    > .bgm-menu-item {
+      width: 100%;
+      padding: 5px 0;
+      text-align: center;
     }
   }
 }
@@ -46,27 +48,45 @@
 .bgm-menu-item {
   cursor: pointer;
   font-size: 1em;
+  position: relative;
 
-  &--active.circle {
-    padding: 6px 10px;
-    background-color: @activeColor-light;
+  &--active {
+    //todo: add active class
+  }
+
+  &--circle:hover {
+    background-color: @primary-color;
     color: #fff;
     border-radius: 17px;
   }
 
-  &--active.underline {
-    color: #F09199;
-    position: relative;
+  &--underline:hover {
+    color: @primary-color;
 
-    &:after {
+    &::after {
       content: '';
       position: absolute;
-      bottom: -3px;
+      bottom: 12px;
       left: 0;
       right: 0;
       height: 4px;
-      background-color: @activeColor-light;
+      background-color: @primary-color;
       border-radius: 2px;
     }
+  }
+
+  &__submenu {
+    display: none;
+    position: absolute;
+    top: 52px;
+    border: 1px solid #ede9e9;
+    border-radius: 17px;
+    background-color: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &:hover .bgm-menu-item__submenu {
+    display: block;
   }
 }

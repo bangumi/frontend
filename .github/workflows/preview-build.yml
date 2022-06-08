@@ -1,15 +1,15 @@
 # 把 PR 构建的页面推送到 Netlify
 # 由于涉及 secrets，所以不能直接在 build.yml 中配置
-name: Upload Preview
+name: Upload Preview (build)
 
 on:
   workflow_run:
-    workflows: [ "Build" ]
+    workflows: ["Build"]
     types:
       - completed
 
 jobs:
-  upload:
+  upload-pr:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
     steps:
@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: "16.x"
 
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 
@@ -47,8 +47,8 @@ jobs:
         id: fc
         with:
           issue-number: ${{ env.PR_NUMBER }}
-          comment-author: 'github-actions[bot]'
-          body-includes: '<!-- preview comment -->'
+          comment-author: "github-actions[bot]"
+          body-includes: "<!-- build preview comment -->"
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v1
@@ -57,5 +57,39 @@ jobs:
           issue-number: ${{ env.PR_NUMBER }}
           body: |
             preview url: <https://pr-${{ env.PR_NUMBER }}--bangumi-next.netlify.app>
-            <!-- preview comment -->
+            <!-- build preview comment -->
           edit-mode: replace
+
+  upload-master:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.workflow_run.event == 'push' && 
+      github.event.workflow_run.head_branch == 'master' && 
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Download Atifact
+        run: gh --repo $GITHUB_REPOSITORY run download ${{github.event.workflow_run.id }} --name sites --dir sites
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16.x"
+
+      - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ env.CLI_VER }}
+
+      - name: Install netlify-cli
+        run: npm install -g 'netlify-cli@${{ env.CLI_VER }}'
+
+      - name: Upload Deploy
+        run: netlify deploy --dir=sites --alias="master"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}

@@ -22,6 +22,6 @@ describe('<Divider />', () => {
     const orientation = 'horizontal'
     const { getByRole } = render(<Divider orientation={orientation} isListItem />)
 
-    expect(getByRole('separator')).toContainHTML('<li class="divider" role="separator" />')
+    expect(getByRole('separator')).toContainHTML('<li class="bgm-divider" role="separator" />')
   })
 })

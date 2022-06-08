@@ -7,7 +7,8 @@ import svgr from 'vite-plugin-svgr'
 const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise<UserConfig> } = {
   stories: [
     '../components/**/*.stories.mdx',
-    '../components/**/*.stories.@(js|jsx|ts|tsx)'
+    '../components/**/*.stories.@(js|jsx|ts|tsx)',
+    '../../icons/index.stories.tsx'
   ],
   addons: [
     '@storybook/addon-links',
@@ -30,7 +31,7 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     viteConfig.plugins.push({
       transform (source, id) {
-        if (id.endsWith('.stories.tsx')) {
+        if (id.endsWith('.stories.tsx') && id.includes('components')) {
           return `${source}
           import './style'`
         }

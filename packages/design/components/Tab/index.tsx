@@ -8,7 +8,7 @@ interface ItemProps {
 const Item: React.FC<ItemProps> = ({ children, isActive, onClick }) => {
   return (
     <li
-      className={classnames('tab-item', { active: isActive })}
+      className={classnames('bgm-tab__item', { 'bgm-tab__item--active': isActive })}
       onClick={onClick}
     >
       {children}
@@ -22,14 +22,17 @@ interface ItemType {
 }
 
 export interface TabProps {
+  /* 节点数组 */
   items: ItemType[]
+  /* 选中节点的 Key */
   activeKey: string
+  /* 点击切换事件回调，对每一个 Item 都生效 */
   onChange?: (key: string) => void
 }
 
 export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange }) => {
   return (
-    <ul className="tab">
+    <ul className="bgm-tab">
       {
       items.map((item) => {
         return (
