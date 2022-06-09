@@ -14,10 +14,16 @@
 }
 
 .main {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 100%;
+  // 在style/utils.less 查看mixins，命名参考的tailwind-css
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // height: 100%;
+  .flex();
+  .items-center();
+  .justify-between();
+  .h-full();
+
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -120,9 +126,9 @@
   height: 32px;
   width: 117px;
   border-radius: 9999px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .flex();
+  .items-center();
+  .justify-center();
 
   &:hover {
     background-color: @primary-color;
