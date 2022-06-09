@@ -118,7 +118,7 @@ const Header: FC = () => {
               <Setting className={style.iconSetting} />
               <Avatar src={user?.avatar?.large} wrapperClass={style.avatar} />
             </>
-            : <span className={style['user-login']}>
+            : <span className={style.userLogin}>
               <Link className={style.link} to="/login">登录</Link>
               <Link className={style.link} to="/register">注册</Link>
             </span>}
