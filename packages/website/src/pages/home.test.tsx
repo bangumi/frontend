@@ -2,7 +2,7 @@ import React from 'react'
 import Home from '.'
 import { waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { renderPage } from '../utils/test'
+import { renderPage } from '../utils/test-utils'
 
 describe('HomePage', () => {
   it('should load character and subject', async () => {
