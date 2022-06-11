@@ -93,8 +93,12 @@ const Header: FC = () => {
           <Input
             prefix={(
               <>
-                <select name="select" className={style.searchSelect}>
-                  <option value="value1" selected>全部条目</option>
+                <select
+                  name="cat"
+                  className={style.searchSelect}
+                  defaultValue="value1"
+                >
+                  <option value="value1">全部条目</option>
                   <option value="value2">动画</option>
                   <option value="value3">书籍</option>
                   <option value="value4">游戏</option>
