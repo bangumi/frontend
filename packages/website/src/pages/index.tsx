@@ -4,6 +4,7 @@ import style from './home.module.css'
 import { getCharacterDetail } from '../api/character'
 import { getSubject } from '../api/subject'
 import { CharacterDetail, Subject } from '../types/common'
+import GlobalLayout from '../components/GlobalLayout'
 
 const Home: FC = () => {
   const [detail, setDetail] = useState<CharacterDetail | null>(null)
@@ -22,7 +23,7 @@ const Home: FC = () => {
   }, [])
 
   return (
-    <>
+    <GlobalLayout>
       <div className={style.main}>
         {detail
           ? <div>
@@ -61,7 +62,7 @@ const Home: FC = () => {
           </div>
           : <div>loading</div>}
       </div>
-    </>
+    </GlobalLayout>
   )
 }
 
