@@ -64,6 +64,14 @@ export default defineConfig({
       ]
     })
   ],
+  css: {
+    preprocessorOptions: {
+      less: {
+        charset: false,
+        additionalData: '@import "./src/style/utils.less";'
+      }
+    }
+  },
   define: {
     'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version)
   }
