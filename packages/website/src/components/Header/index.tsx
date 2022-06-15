@@ -90,7 +90,6 @@ const Header: FC = () => {
             />
           </div>
         </div>
-        {/* Search Todo */}
         <div className="flex items-center">
           <div className={style.infoBox}>
             {/* Search Todo */}
