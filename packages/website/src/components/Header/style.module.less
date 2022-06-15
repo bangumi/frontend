@@ -14,9 +14,16 @@
 }
 
 .main {
-  display: flex;
-  align-items: center;
-  height: 100%;
+  // 在style/utils.less 查看mixins，命名参考的tailwind-css
+  // display: flex;
+  // align-items: center;
+  // justify-content: space-between;
+  // height: 100%;
+  .flex();
+  .items-center();
+  .justify-between();
+  .h-full();
+
   max-width: 1440px;
   margin: 0 auto;
 }
@@ -43,7 +50,7 @@
 .nav {
   display: flex;
   align-items: center;
-  margin: 0 153px 0 63px;
+  margin: 0 0 0 63px;
 
   .divider {
     display: inline-block;
@@ -93,17 +100,18 @@
       flex-shrink: 0;
     }
   }
+}
 
-  .iconNotification {
-    margin: 0 25px 0 23px;
-    width: 16px;
-    height: 18px;
-  }
+.iconNotification {
+  margin-right: 25px;
+  width: 16px;
+  height: 18px;
+}
 
-  .iconSetting {
-    width: 18px;
-    height: 18px;
-  }
+.iconSetting {
+  margin-right: 25px;
+  width: 18px;
+  height: 18px;
 }
 
 .link {
@@ -112,6 +120,48 @@
   font-size: 14px;
   line-height: 20px;
   text-decoration: none;
+}
+
+.userLogin {
+  height: 32px;
+  width: 117px;
+  border-radius: 9999px;
+  .flex();
+  .items-center();
+  .justify-center();
+
+  &:hover {
+    background-color: @primary-color;
+
+    a {
+      color: @pink-60;
+
+      &:first-of-type {
+        border-right: 2px solid @pink-60;
+      }
+    }
+  }
+
+  a {
+    color: @gray-60;
+    line-height: 14px;
+    font-size: 14px;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+      font-weight: bold;
+    }
+
+    &:first-of-type {
+      padding-right: 12px;
+      border-right: 2px solid @gray-60;
+    }
+
+    &:last-of-type {
+      padding-left: 12px;
+    }
+  }
 }
 
 /* 临时的移动端适配 */
