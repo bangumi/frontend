@@ -30,6 +30,16 @@ describe('html render vnode', () => {
       '<a href="http://chii.in/" target="_blank" ref="nofollow external noopener noreferrer" class="l test"/>'
     )
   })
+  test('render boolean props node', () => {
+    const vnode = {
+      type: 'input',
+      props: {
+        type: 'text',
+        disabled: true
+      }
+    }
+    expect(renderNode(vnode)).toBe('<input type="text" disabled/>')
+  })
   test('render sticker node', () => {
     const id = '38'
     const vnode = {
@@ -136,7 +146,8 @@ describe('html render vnode', () => {
 
 describe('html render bbcode string', () => {
   test('render color size', () => {
-    const input = '[color=red][size=18]一般[b]粗[/b]\n   [s]删除[/s][/size][/color]'
+    const input =
+      '[color=red][size=18]一般[b]粗[/b]\n   [s]删除[/s][/size][/color]'
     expect(render(input)).toBe(
       '<span style="color:red"><span style="font-size:18px;line-height:18px">一般<strong>粗</strong><br/>   <span style="text-decoration:line-through">删除</span></span></span>'
     )
@@ -155,7 +166,8 @@ describe('html render bbcode string', () => {
     )
   })
   test('render size', () => {
-    const input = '[size=10]不同[/size][size=14]大小的[/size][size=18]文字[/size]效果也可实现。'
+    const input =
+      '[size=10]不同[/size][size=14]大小的[/size][size=18]文字[/size]效果也可实现。'
     expect(render(input)).toBe(
       '<span style="font-size:10px;line-height:10px">不同</span><span style="font-size:14px;line-height:14px">大小的</span><span style="font-size:18px;line-height:18px">文字</span>效果也可实现。'
     )
@@ -181,7 +193,7 @@ describe('html render bbcode string', () => {
   test('render sticker', () => {
     const input = '(bgm38)(bgm23)(=///=)'
     expect(render(input)).toBe(
-      '<img src="/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" /><img src="/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" /><img src="/img/smiles/13.gif" smileid="13" alt="(=///=)" />'
+      '<img src="https://lain.bgm.tv/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" /><img src="https://lain.bgm.tv/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" /><img src="https://lain.bgm.tv/img/smiles/13.gif" smileid="13" alt="(=///=)" />'
     )
   })
   test('render quote', () => {
@@ -191,9 +203,9 @@ describe('html render bbcode string', () => {
     )
   })
   test('render code', () => {
-    const input = '[code]ss[b]加粗[/b][/code]'
+    const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]'
     expect(render(input)).toBe(
-      '<div class="codeHighlight"><pre>ss[b]加粗[/b]</pre></div>'
+      '<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>'
     )
   })
 })

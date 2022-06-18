@@ -1,9 +1,9 @@
-import { BBCODE_REGEXP, Parser } from '../parser'
+import { BBCODE_REGEXP, mergeTags, Parser } from '../parser'
 import { CodeNodeTypes } from '../types'
 
 function getNodes (input: string): CodeNodeTypes[] {
   const p = new Parser(input)
-  return p.parseNodes()
+  return p.parse()
 }
 
 describe('bbcode parser', () => {
@@ -57,8 +57,6 @@ describe('bbcode parser', () => {
   })
   test('bold bbcode', () => {
     const input = '[b]bgm[/b]'
-    // const input2 = `[url=http://chii.in]bgm[/url]`;
-    // const input3 = ` [url]http://chii.in/[/url]`;
     const tests: CodeNodeTypes[] = [
       {
         type: 'b',
@@ -91,7 +89,7 @@ describe('bbcode parser', () => {
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
   test('invalid bbcode', () => {
-    const input = '[ba]bgm[/b](bg38)'
+    const input = '[ba测试]bgm[/b](bg38)[b]加粗[b]'
     // const input = `[b]bgm[url]sss[/ual][/b](bg38)`;
     expect(getNodes(input).join('')).toEqual(input)
   })
@@ -226,12 +224,55 @@ describe('bbcode parser', () => {
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
+  test('invalid basic bbcode', () => {
+    const input = '[b][/b][mask][/mask][s][/]'
+    expect(getNodes(input).join('')).toEqual(input)
+  })
   test('invalid url bbcode', () => {
-    const input = '[url]Bangumi 番组计划[/url][url=sfaf]番组计划[/url]'
+    const input =
+      '[url]Bangumi 番组计划[/url][url=sfaf]番组计划[/url][url][/url]'
     const tests: CodeNodeTypes[] = [
       '[url]Bangumi 番组计划[/url]',
-      '[url=sfaf]番组计划[/url]'
+      '[url=sfaf]番组计划[/url]',
+      '[url][/url]'
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
+  })
+  test('invalid sticker bbcode', () => {
+    const input = '(bgmab)(bgm38a'
+    const tests: CodeNodeTypes[] = ['(bgm', 'ab)', '(bgm38a']
+    expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
+  })
+  test('invalid [code] /code] bbcode', () => {
+    const input = '[code]测试中/code]'
+    expect(getNodes(input).join('')).toEqual(input)
+  })
+  test('custom bbcode', () => {
+    const input = '[mybbcode]测试自定义tag[/mybbcode]'
+    const nodes = new Parser(input, ['mybbcode']).parse()
+    expect(nodes).toEqual([{
+      type: 'mybbcode',
+      children: ['测试自定义tag']
+    }])
+  })
+  test('merge tags', () => {
+    const fn = (): boolean => true
+    const tags = mergeTags(['i', 'b', {
+      name: 's',
+      schema: {
+        s: fn
+      }
+    }], [{
+      name: 'i',
+      schema: {
+        i: fn
+      }
+    }, 's', 'mybbcode'])
+    expect(tags).toEqual(expect.arrayContaining(['b', 's', 'mybbcode', {
+      name: 'i',
+      schema: {
+        i: fn
+      }
+    }]))
   })
 })

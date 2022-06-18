@@ -6,36 +6,128 @@ const INVALID_STICKER_NODE = 'invalid sticker node'
 export const BBCODE_REGEXP = /^\[([a-z]+)(=.+?)?\](.+?)\[\/([a-z]+)\]/
 
 type CheckCharFn = (str: string) => boolean
+type Validator = (value: any, node: CodeVNode) => boolean
+// 也许需要引入  Object schema validation
+export interface CustomTag {
+  name: string
+  // 校验 props
+  schema: Record<string, Validator>
+}
+
+type ITag = CustomTag | string
+
+// 只有一个 string child
+function getStringChild (node: CodeVNode): string | undefined {
+  if (!!node.children && node.children.length === 1 && typeof node.children[0] === 'string') {
+    return node.children[0]
+  }
+}
+
+function getNodeProp (node: CodeVNode, prop: string): string | boolean | undefined {
+  const props = node.props ?? {}
+  return props[prop]
+}
+
+function isValidUrl (str: string): boolean {
+  try {
+    ; (() => new URL(str))()
+  } catch (error) {
+    return false
+  }
+  return true
+}
+
+const DEFAULT_TAGS: ITag[] = [
+  'b',
+  'i',
+  's',
+  'u',
+  'mask',
+  {
+    name: 'color',
+    schema: {
+      color: (value) => !!value
+    }
+  },
+  {
+    name: 'size',
+    schema: {
+      size: (value) => /\d+/.test(value)
+    }
+  },
+  {
+    name: 'url',
+    schema: {
+      url: (value, node) => {
+        let href = value
+        if (!href) {
+          href = getStringChild(node)
+        }
+        if (!href) {
+          return false
+        }
+        return isValidUrl(href)
+      }
+    }
+  },
+  {
+    name: 'img',
+    schema: {
+      children: (value, node) => {
+        const src = getStringChild(node)
+        if (!src) {
+          return false
+        }
+        return isValidUrl(src)
+      }
+    }
+  },
+  'code',
+  'quote',
+  'sticker'
+]
+
+// 合并 tag 配置。新的覆盖旧的
+export function mergeTags (tagList: ITag[], toMergeTags: ITag[]): ITag[] {
+  const results: ITag[] = [...toMergeTags]
+  tagList.forEach(tag => {
+    let name = ''
+    if (typeof tag === 'string') {
+      name = tag
+    } else {
+      name = tag.name
+    }
+    const idx = results.findIndex(t => {
+      if (typeof t === 'string') {
+        return t === name
+      } else {
+        return t.name === name
+      }
+    })
+    if (idx === -1) {
+      results.push(tag)
+    }
+  })
+  return results
+}
 
 export class Parser {
+  private readonly input: string
   private pos: number
   // 记录上下文
   private readonly ctxStack: Array<{ startIdx: number }>
   private readonly tagStack: string[]
-  private readonly validTags: string[]
-  constructor (private readonly input: string, tags: string[] = []) {
+  private readonly validTags: ITag[]
+  constructor (input: string, tags: ITag[] = []) {
+    this.input = input
     this.pos = 0
     this.ctxStack = []
     this.tagStack = []
     // 默认支持的 tag; sticker 为自定义
-    const defaultTags = [
-      'b',
-      'i',
-      's',
-      'u',
-      'mask',
-      'color',
-      'size',
-      'url',
-      'img',
-      'code',
-      'quote',
-      'sticker'
-    ]
-    this.validTags = [...defaultTags, ...tags]
+    this.validTags = mergeTags(DEFAULT_TAGS, tags)
   }
 
-  parseNodes (): CodeNodeTypes[] {
+  parse (): CodeNodeTypes[] {
     const nodes: CodeNodeTypes[] = []
     while (true) {
       if (this.eof() || (this.tagStack.length > 0 && this.startsWith('[/'))) {
@@ -46,7 +138,7 @@ export class Parser {
     return nodes
   }
 
-  parseNode (): CodeNodeTypes {
+  private parseNode (): CodeNodeTypes {
     this.enterNode()
     let node: CodeNodeTypes = ''
     try {
@@ -62,8 +154,6 @@ export class Parser {
       }
       this.exitNode()
     } catch (error: any) {
-      // console.log(this.input.slice(this.pos), this.curChar());
-      // console.log(error);
       if (
         error.message === INVALID_NODE_MSG ||
         error.message === INVALID_STICKER_NODE
@@ -76,7 +166,7 @@ export class Parser {
   }
 
   // 解析 (bgm38) (bgm1)
-  parseStickerNode (): CodeNodeTypes {
+  private parseStickerNode (): CodeNodeTypes {
     if (!this.startsWith('(bgm')) {
       // 1-16号表情最长为7
       const target = this.input.slice(this.pos, this.pos + 8)
@@ -111,7 +201,7 @@ export class Parser {
   }
 
   // @TODO 暂时只支持 Bangumi 的 bbcode; 不支持 [style size="30px"]Large Text[/style]
-  parseBBCodeNode (): CodeNodeTypes {
+  private parseBBCodeNode (): CodeNodeTypes {
     let c = this.consumeChar()
     const openTag = this.parseTagName()
     c = this.consumeChar()
@@ -136,7 +226,7 @@ export class Parser {
       }
     }
     this.tagStack.push(openTag)
-    const children = this.parseNodes()
+    const children = this.parse()
     this.tagStack.pop()
 
     this.validateStartStr('[/')
@@ -160,7 +250,7 @@ export class Parser {
     return n
   }
 
-  parseTagName (): string {
+  private parseTagName (): string {
     const tag = this.consumeWhile((c) => /[a-zA-Z]/.test(c))
     if (!tag) {
       throw new Error(INVALID_NODE_MSG)
@@ -168,11 +258,11 @@ export class Parser {
     return tag
   }
 
-  parseText (): string {
+  private parseText (): string {
     return this.consumeWhile((c) => !['(', '['].includes(c))
   }
 
-  consumeWhile (checkFn: CheckCharFn): string {
+  private consumeWhile (checkFn: CheckCharFn): string {
     let result = ''
     while (!this.eof() && checkFn(this.curChar())) {
       result += this.consumeChar()
@@ -180,47 +270,37 @@ export class Parser {
     return result
   }
 
-  consumeChar (): string {
+  private consumeChar (): string {
     const cur = this.input[this.pos]
     this.pos += 1
     return cur
   }
 
-  getChildrenStr (tag: string): string {
-    let result = ''
-    while (!this.eof()) {
-      result += this.consumeChar()
-    }
-    return result
-  }
-
-  curChar (): string {
+  private curChar (): string {
     return this.input[this.pos]
   }
 
-  startsWith (pattern: string | RegExp): boolean {
-    if (typeof pattern === 'string') {
-      return this.input.slice(this.pos).startsWith(pattern)
-    } else {
-      return pattern.test(this.input.slice(this.pos))
-    }
+  private startsWith (pattern: string): boolean {
+    return this.input.slice(this.pos).startsWith(pattern)
+    // 正则的方式暂时没用到 注释了
+    // return pattern.test(this.input.slice(this.pos))
   }
 
-  eof (): boolean {
+  private eof (): boolean {
     return this.pos >= this.input.length
   }
 
-  enterNode (): void {
+  private enterNode (): void {
     this.ctxStack.push({
       startIdx: this.pos
     })
   }
 
-  exitNode (): void {
+  private exitNode (): void {
     this.ctxStack.pop()
   }
 
-  validateStartStr (str: string): boolean {
+  private validateStartStr (str: string): boolean {
     let count = 0
     while (count < str.length) {
       if (this.consumeChar() !== str[count]) {
@@ -232,41 +312,37 @@ export class Parser {
   }
 
   isValidateBBCode (node: CodeVNode): boolean {
-    if (!this.validTags.includes(node.type)) {
+    const idx = this.findTag(node.type)
+    if (idx === -1) {
       return false
     }
-    switch (node.type) {
-      case 'img':
-        if (!node.children) {
-          return false
-        }
-        break
-      case 'url':
-        return isValidUrlNode(node)
-      default:
-        break
+    const tag = this.validTags[idx]
+    if (!tag) {
+      return false
+    }
+    // [b][/b] 内部为空的也识别成无效 tag
+    if (!node.children || node.children.length === 0) {
+      return false
+    }
+    if (typeof tag === 'string') {
+      return true
+    }
+    for (const [key, validateFn] of Object.entries(tag.schema)) {
+      const prop = getNodeProp(node, key)
+      if (!validateFn(prop, node)) {
+        return false
+      }
     }
     return true
   }
-}
 
-function isValidUrlNode (node: CodeVNode): boolean {
-  if (node.type !== 'url') {
-    return false
+  private findTag (name: string): number {
+    return this.validTags.findIndex(tag => {
+      if (typeof tag === 'string') {
+        return tag === name
+      } else {
+        return tag.name === name
+      }
+    })
   }
-  let href = node?.props?.url as string
-  if (!href) {
-    if (node.children && typeof node.children[0] === 'string') {
-      href = node.children[0]
-    }
-  }
-  if (!href) {
-    return false
-  }
-  try {
-    ;(() => new URL(href))()
-  } catch (error) {
-    return false
-  }
-  return true
 }
