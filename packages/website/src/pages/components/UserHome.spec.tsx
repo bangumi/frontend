@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { render } from '@testing-library/react'
 import React from 'react'
 import UserHome from './UserHome'
@@ -9,8 +10,6 @@ const mockedUseUser = jest.mocked(useUser)
 
 it('should show user name if user is logged', () => {
   mockedUseUser.mockReturnValue({
-    // 没必要写全
-    // @ts-expect-error
     user: {
       nickname: 'testuser',
       url: 'https://bgm.tv/user/testuser-123'
