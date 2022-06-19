@@ -15,7 +15,7 @@ export interface User {
   url: string
   username: string
   nickname: string
-  userGroup: UserGroup
+  user_group: UserGroup
   avatar: {
     large: string
     medium: string
