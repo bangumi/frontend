@@ -1,6 +1,6 @@
 import { convert } from './convert'
 import { Parser } from './parser'
-import { CodeNodeTypes, NodeTypes, VNode } from './types'
+import { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types'
 
 const escapeHTML = (str: string): string =>
   str
@@ -88,11 +88,11 @@ export function renderNodes (nodes: NodeTypes[], parentNode?: VNode): string {
   return result
 }
 
-export function render (rawStr: string): string {
+export function render (rawStr: string, converterMap: Record<string, ConverterFn> = {}): string {
   let result = ''
   const nodes: CodeNodeTypes[] = new Parser(rawStr).parse()
   nodes.forEach((node) => {
-    result += renderNode(convert(node))
+    result += renderNode(convert(node, converterMap))
   })
   return result
 }

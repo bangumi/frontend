@@ -1,7 +1,8 @@
-import { EMOJI_ARRAY } from './constants'
+import { BGM_STICKER_START_STR, EMOJI_ARRAY } from './constants'
 import {
   CodeNodeTypes,
   CodeVNode,
+  ConverterFn,
   NodeTypes,
   VNode
 } from './types'
@@ -54,6 +55,9 @@ function convertUrlNode (node: CodeVNode): VNode {
     },
     className: 'l'
   }
+  if (node.children) {
+    vnode.children = node.children.map((c) => convert(c))
+  }
   if (isExternalLink(href)) {
     vnode.props = {
       ...vnode.props,
@@ -67,7 +71,7 @@ function convertUrlNode (node: CodeVNode): VNode {
 function convertStickerNode (node: CodeVNode): string {
   const stickerId = node.props!.stickerId as string
   let id = -1
-  if (stickerId.startsWith('(bgm')) {
+  if (stickerId.startsWith(BGM_STICKER_START_STR)) {
     const m = stickerId.match(/\d+/)!
     id = +m[0] + EMOJI_ARRAY.length
   } else {
@@ -108,84 +112,68 @@ function convertQuote (node: CodeVNode): VNode {
   }
 }
 
-// function converUnknownNode(node: CodeVNode): NodeTypes {}
-
-export function convert (node: CodeNodeTypes): NodeTypes {
-  if (typeof node === 'string') {
-    return node
-  }
-  const type = node.type
-  let vnode: VNode = {
-    type: node.type
-  }
-  switch (type) {
-    case 'code':
-      return {
-        type: 'div',
-        className: 'codeHighlight',
-        children: [
-          {
-            type: 'pre',
-            children: node.children
-          }
-        ]
-      }
-    case 'b':
-      vnode.type = 'strong'
-      break
-    case 'i':
-      vnode.type = 'em'
-      break
-    case 'u':
-      vnode.type = 'span'
-      vnode.style = {
-        'text-decoration': 'underline'
-      }
-      break
-    case 's':
-      vnode.type = 'span'
-      vnode.style = {
-        'text-decoration': 'line-through'
-      }
-      break
-    case 'mask':
-      vnode.type = 'span'
-      vnode.style = {
-        'background-color': '#555',
-        color: '#555',
-        border: '1px solid #555'
-      }
-      break
-    case 'color':
-      vnode.type = 'span'
-      vnode.style = {
-        color: node.props!.color as string
-      }
-      break
-    case 'size':
-      vnode.type = 'span'
-      vnode.style = {
-        'font-size': (node.props!.size as string) + 'px',
-        'line-height': (node.props!.size as string) + 'px'
-      }
-      break
-    case 'url':
-      vnode = convertUrlNode(node)
-      break
-    case 'img':
-      return convertImgNode(node)
-    case 'sticker':
-      return convertStickerNode(node)
-    case 'quote':
-      return convertQuote(node)
-    default:
-      vnode = {
-        ...node
-      }
-      break
+function toVNode (node: CodeVNode, type: string, props: Pick<VNode, 'style' | 'className'> = {}): VNode {
+  const vnode: VNode = {
+    type,
+    ...props
   }
   if (node.children) {
     vnode.children = node.children.map((c) => convert(c))
   }
   return vnode
+}
+
+const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
+  b: (node) => toVNode(node, 'strong'),
+  i: (node) => toVNode(node, 'em'),
+  u: (node) => toVNode(node, 'span', {
+    style: {
+      'text-decoration': 'underline'
+    }
+  }),
+  s: (node) => toVNode(node, 'span', {
+    style: {
+      'text-decoration': 'line-through'
+    }
+  }),
+  mask: (node) => toVNode(node, 'span', {
+    style: {
+      'background-color': '#555',
+      color: '#555',
+      border: '1px solid #555'
+    }
+  }),
+  color: (node) => toVNode(node, 'span', {
+    style: {
+      color: node.props!.color as string
+    }
+  }),
+  size: (node) => toVNode(node, 'span', {
+    style: {
+      'font-size': (node.props!.size as string) + 'px',
+      'line-height': (node.props!.size as string) + 'px'
+    }
+  }),
+  url: convertUrlNode,
+  img: convertImgNode,
+  sticker: convertStickerNode,
+  quote: convertQuote,
+  code: (node) => ({
+    type: 'pre',
+    children: node.children
+  })
+}
+
+export function convert (node: CodeNodeTypes, converterMap: Record<string, ConverterFn> = {}): NodeTypes {
+  if (typeof node === 'string') {
+    return node
+  }
+  let converterFn = converterMap[node.type]
+  if (!converterFn) {
+    converterFn = CONVERTER_FN_MAP[node.type]
+  }
+  if (converterFn) {
+    return converterFn(node)
+  }
+  return { ...node }
 }

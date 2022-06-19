@@ -205,6 +205,23 @@ describe('html render bbcode string', () => {
   test('render code', () => {
     const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]'
     expect(render(input)).toBe(
+      '<pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre>'
+    )
+  })
+  test('render code by custom converter', () => {
+    const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]'
+    expect(render(input, {
+      code: (node) => ({
+        type: 'div',
+        className: 'codeHighlight',
+        children: [
+          {
+            type: 'pre',
+            children: node.children
+          }
+        ]
+      })
+    })).toBe(
       '<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>'
     )
   })

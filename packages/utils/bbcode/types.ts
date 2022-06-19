@@ -17,3 +17,5 @@ export interface VNode {
 }
 
 export type NodeTypes = string | VNode
+
+export type ConverterFn = (node: CodeVNode) => NodeTypes
