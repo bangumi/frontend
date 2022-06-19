@@ -30,7 +30,7 @@ describe('bbcode parser', () => {
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
   test('bangumi sticker', () => {
-    const input = '[(bgm38)[/(=A=)]'
+    const input = '[(bgm38)[/(=A=)](=///=)'
     const tests: CodeNodeTypes[] = [
       '[',
       {
@@ -47,23 +47,18 @@ describe('bbcode parser', () => {
           stickerId: '(=A=)'
         }
       },
-      ']'
+      ']',
+      {
+        type: 'sticker',
+        props: {
+          stickerId: '(=///=)'
+        }
+      }
     ]
     const nodes = getNodes(input)
     for (let i = 0; i < nodes.length; i++) {
       expect(nodes[i]).toEqual(tests[i])
     }
-    // expect(getNodes(input)).toEqual(expect.arrayContaining(tests));
-  })
-  test('bold bbcode', () => {
-    const input = '[b]bgm[/b]'
-    const tests: CodeNodeTypes[] = [
-      {
-        type: 'b',
-        children: ['bgm']
-      }
-    ]
-    expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
   test('url bbcode', () => {
     const input = '[url=http://chii.in]bgm[/url]'
@@ -223,6 +218,13 @@ describe('bbcode parser', () => {
       }
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
+  })
+  test('code bbcode nest [code]', () => {
+    const input = '[code]1[/code][/code] [code]2[/code]'
+    expect(getNodes(input)).toEqual([{
+      type: 'code',
+      children: ['1[/code][/code] [code]2']
+    }])
   })
   test('invalid basic bbcode', () => {
     const input = '[b][/b][mask][/mask][s][/]'

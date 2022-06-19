@@ -1,4 +1,5 @@
-import { CodeNodeTypes, CodeVNode, EMOJI_ARRAY } from './types'
+import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants'
+import { CodeNodeTypes, CodeVNode } from './types'
 
 const INVALID_NODE_MSG = 'invalid node'
 const INVALID_STICKER_NODE = 'invalid sticker node'
@@ -123,7 +124,7 @@ export class Parser {
     this.pos = 0
     this.ctxStack = []
     this.tagStack = []
-    // 默认支持的 tag; sticker 为自定义
+    // 解析器支持的 tag; sticker 用来表示 Bangumi 的表情，不是 bbcode
     this.validTags = mergeTags(DEFAULT_TAGS, tags)
   }
 
@@ -165,11 +166,9 @@ export class Parser {
     return node
   }
 
-  // 解析 (bgm38) (bgm1)
   private parseStickerNode (): CodeNodeTypes {
-    if (!this.startsWith('(bgm')) {
-      // 1-16号表情最长为7
-      const target = this.input.slice(this.pos, this.pos + 8)
+    if (!this.startsWith(BGM_STICKER_START_STR)) {
+      const target = this.input.slice(this.pos, this.pos + MAX_EMOJI_LENGTH)
       const emoji = EMOJI_ARRAY.find((s) => target.startsWith(s))
       if (!emoji) {
         this.consumeChar()
@@ -183,7 +182,7 @@ export class Parser {
         }
       }
     }
-    this.pos += 4
+    this.pos += BGM_STICKER_START_STR.length
     const id = this.consumeWhile((c) => !isNaN(+c))
     if (!id) {
       throw new Error(INVALID_STICKER_NODE)
@@ -213,13 +212,15 @@ export class Parser {
       prop = this.consumeWhile((c) => c !== ']')
       c = this.consumeChar()
     }
+    // code 标签需要尽可能长的匹配
     if (openTag === 'code') {
-      const idx = this.input.lastIndexOf('[/code]')
+      const codeEndTag = '[/code]'
+      const idx = this.input.lastIndexOf(codeEndTag)
       if (idx === -1) {
         throw new Error(INVALID_NODE_MSG)
       }
       const pos = this.pos
-      this.pos = idx + 7
+      this.pos = idx + codeEndTag.length
       return {
         type: 'code',
         children: [this.input.slice(pos, idx)]
@@ -282,8 +283,6 @@ export class Parser {
 
   private startsWith (pattern: string): boolean {
     return this.input.slice(this.pos).startsWith(pattern)
-    // 正则的方式暂时没用到 注释了
-    // return pattern.test(this.input.slice(this.pos))
   }
 
   private eof (): boolean {

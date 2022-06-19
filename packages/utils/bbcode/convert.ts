@@ -1,7 +1,7 @@
+import { EMOJI_ARRAY } from './constants'
 import {
   CodeNodeTypes,
   CodeVNode,
-  EMOJI_ARRAY,
   NodeTypes,
   VNode
 } from './types'
