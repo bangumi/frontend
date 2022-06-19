@@ -58,7 +58,7 @@ const Login: React.FC = () => {
   }
 
   return (
-    <div className={style.mask}>
+    <div className={style.wrapper}>
       <div className={style.container}>
         <LoginLogo />
         {errorMessage && <ErrorMessage message={errorMessage} />}
