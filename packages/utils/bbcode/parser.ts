@@ -212,10 +212,9 @@ export class Parser {
       prop = this.consumeWhile((c) => c !== ']')
       c = this.consumeChar()
     }
-    // code 标签需要尽可能长的匹配
     if (openTag === 'code') {
       const codeEndTag = '[/code]'
-      const idx = this.input.lastIndexOf(codeEndTag)
+      const idx = this.input.indexOf(codeEndTag, this.pos)
       if (idx === -1) {
         throw new Error(INVALID_NODE_MSG)
       }

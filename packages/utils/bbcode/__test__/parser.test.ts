@@ -220,11 +220,35 @@ describe('bbcode parser', () => {
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
   test('code bbcode nest [code]', () => {
-    const input = '[code]1[/code][/code] [code]2[/code]'
-    expect(getNodes(input)).toEqual([{
-      type: 'code',
-      children: ['1[/code][/code] [code]2']
-    }])
+    const tests: Array<[string, CodeNodeTypes[]]> = [
+      [
+        '[code][code]1[/code][/code] [code]2[/code]',
+        [
+          { type: 'code', children: ['[code]1'] },
+          '[',
+          '/code] ',
+          { type: 'code', children: ['2'] }
+        ]
+      ],
+      ['[code]1[/code][/code] [code]2[/code]',
+        [
+          { type: 'code', children: ['1'] },
+          '[',
+          '/code] ',
+          { type: 'code', children: ['2'] }
+        ]
+      ],
+      ['[code][code]1[/code] [code]2[/code]',
+        [
+          { type: 'code', children: ['[code]1'] },
+          ' ',
+          { type: 'code', children: ['2'] }
+        ]
+      ]
+    ]
+    for (const [input, expected] of tests) {
+      expect(getNodes(input)).toEqual(expect.arrayContaining(expected))
+    }
   })
   test('invalid basic bbcode', () => {
     const input = '[b][/b][mask][/mask][s][/]'
