@@ -43,6 +43,12 @@ function convertImgNode (node: CodeVNode): VNode {
   return vnode
 }
 
+function setVNodeChildren (vnode: VNode, node: CodeVNode): void {
+  if (node.children) {
+    vnode.children = node.children.map((c) => convert(c))
+  }
+}
+
 function convertUrlNode (node: CodeVNode): VNode {
   let href = node?.props?.url as string
   if (!href) {
@@ -102,9 +108,7 @@ function convertQuote (node: CodeVNode): VNode {
   const q: VNode = {
     type: 'q'
   }
-  if (node.children) {
-    q.children = node.children.map((c) => convert(c))
-  }
+  setVNodeChildren(q, node)
   return {
     type: 'div',
     className: 'quote',
@@ -117,9 +121,7 @@ function toVNode (node: CodeVNode, type: string, props: Pick<VNode, 'style' | 'c
     type,
     ...props
   }
-  if (node.children) {
-    vnode.children = node.children.map((c) => convert(c))
-  }
+  setVNodeChildren(vnode, node)
   return vnode
 }
 
@@ -175,5 +177,9 @@ export function convert (node: CodeNodeTypes, converterMap: Record<string, Conve
   if (converterFn) {
     return converterFn(node)
   }
-  return { ...node }
+  const vnode: VNode = {
+    type: node.type
+  }
+  setVNodeChildren(vnode, node)
+  return vnode
 }

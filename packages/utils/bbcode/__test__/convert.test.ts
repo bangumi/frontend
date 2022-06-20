@@ -311,4 +311,53 @@ describe('convert bbcode to html vnode', () => {
       expect(convert(input)).toEqual(expected)
     }
   })
+  test('unknown bbcode', () => {
+    const node: CodeNodeTypes = {
+      type: 'unknown',
+      children: [
+        {
+          type: 'i',
+          children: [
+            {
+              type: 'u',
+              children: [
+                {
+                  type: 's',
+                  children: [{
+                    type: 'output',
+                    children: ['测试文字']
+                  }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    const vnode: VNode = {
+      type: 'unknown',
+      children: [
+        {
+          type: 'em',
+          children: [
+            {
+              type: 'span',
+              style: { 'text-decoration': 'underline' },
+              children: [
+                {
+                  type: 'span',
+                  style: { 'text-decoration': 'line-through' },
+                  children: [{
+                    type: 'output',
+                    children: ['测试文字']
+                  }]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    expect(convert(node)).toEqual(vnode)
+  })
 })
