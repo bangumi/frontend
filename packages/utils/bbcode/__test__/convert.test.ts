@@ -1,3 +1,4 @@
+import { STICKER_DOMAIN_URL } from '../constants'
 import { convert } from '../convert'
 import { CodeNodeTypes, NodeTypes, VNode } from '../types'
 
@@ -249,7 +250,7 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm114)'
           }
         },
-        '<img src="https://lain.bgm.tv/img/smiles/tv/91.gif" smileid="130" alt="(bgm114)" />'
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/91.gif" smileid="130" alt="(bgm114)" />`
       ],
       [
         {
@@ -258,7 +259,7 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm38)'
           }
         },
-        '<img src="https://lain.bgm.tv/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" />'
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" />`
       ],
       [
         {
@@ -267,7 +268,7 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm23)'
           }
         },
-        '<img src="https://lain.bgm.tv/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />'
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
       ],
       [
         {
@@ -276,7 +277,7 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm01)'
           }
         },
-        '<img src="https://lain.bgm.tv/img/smiles/bgm/01.png" smileid="17" alt="(bgm01)" />'
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/01.png" smileid="17" alt="(bgm01)" />`
       ],
       [
         {
@@ -285,7 +286,7 @@ describe('convert bbcode to html vnode', () => {
             stickerId: "(='=)"
           }
         },
-        '<img src="https://lain.bgm.tv/img/smiles/10.gif" smileid="10" alt="(=\'=)" />'
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/10.gif" smileid="10" alt="(='=)" />`
       ],
       [
         {
@@ -294,7 +295,7 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(=///=)'
           }
         },
-        '<img src="https://lain.bgm.tv/img/smiles/13.gif" smileid="13" alt="(=///=)" />'
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/13.gif" smileid="13" alt="(=///=)" />`
       ],
       [
         {

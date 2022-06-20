@@ -1,3 +1,4 @@
+import { STICKER_DOMAIN_URL } from '../constants'
 import { renderNodes, renderNode, render } from '../html'
 import { VNode } from '../types'
 
@@ -193,7 +194,7 @@ describe('html render bbcode string', () => {
   test('render sticker', () => {
     const input = '(bgm38)(bgm23)(=///=)'
     expect(render(input)).toBe(
-      '<img src="https://lain.bgm.tv/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" /><img src="https://lain.bgm.tv/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" /><img src="https://lain.bgm.tv/img/smiles/13.gif" smileid="13" alt="(=///=)" />'
+      `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" /><img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" /><img src="${STICKER_DOMAIN_URL}/img/smiles/13.gif" smileid="13" alt="(=///=)" />`
     )
   })
   test('render quote', () => {

@@ -20,3 +20,5 @@ export const EMOJI_ARRAY = [
   '(:P)',
   '(LOL)'
 ]
+
+export const STICKER_DOMAIN_URL = 'https://lain.bgm.tv'

@@ -1,4 +1,4 @@
-import { BGM_STICKER_START_STR, EMOJI_ARRAY } from './constants'
+import { BGM_STICKER_START_STR, EMOJI_ARRAY, STICKER_DOMAIN_URL } from './constants'
 import {
   CodeNodeTypes,
   CodeVNode,
@@ -79,19 +79,19 @@ function convertStickerNode (node: CodeVNode): string {
   }
   let img = ''
   if (id >= 1 && id < 17) {
-    img = `<img src="https://lain.bgm.tv/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`
+    img = `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`
   } else if (id >= 17 && id < 39) {
     const m = stickerId.match(/\d+/)!
-    img = `<img src="https://lain.bgm.tv/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`
+    img = `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`
   } else if (id === 39) {
     img =
-      '<img src="https://lain.bgm.tv/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />'
+      `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
   } else if (id >= 40 && id < 140) {
     let tvId: string | number = id - 39
     if (id < 10) {
       tvId = `0${tvId}`
     }
-    img = `<img src="https://lain.bgm.tv/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`
+    img = `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`
   } else {
     img = stickerId
   }
