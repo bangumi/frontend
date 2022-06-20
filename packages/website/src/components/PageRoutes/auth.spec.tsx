@@ -31,7 +31,7 @@ describe('RequireAuth', () => {
   it('should show content if user is authorized properly', () => {
     mockedUseUser.mockReturnValue({
       user: {
-        userGroup: UserGroup.Admin
+        user_group: UserGroup.Admin
       }
     })
     const { getByText } = render(<ComponentRequireAuth />)
@@ -44,7 +44,7 @@ describe('RequireAuth', () => {
     mockedUseNavigate.mockReturnValue(mockedNavigate)
     mockedUseUser.mockReturnValue({
       user: {
-        userGroup: UserGroup.User
+        user_group: UserGroup.User
       }
     }
     )
