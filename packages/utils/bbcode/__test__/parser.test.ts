@@ -315,6 +315,12 @@ describe('bbcode parser', () => {
         props: { subject: '1' },
         children: ['sub1']
       }]],
+      ['[subject]sub2[/subject]',
+        ['[subject]sub2[/subject]']
+      ],
+      ['[subject=01]01[/subject]',
+        ['[subject=01]01[/subject]']
+      ],
       ['[subject=abc]subabc[/subject]',
         ['[subject=abc]subabc[/subject]']
       ]

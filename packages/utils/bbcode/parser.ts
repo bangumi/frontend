@@ -89,6 +89,14 @@ const DEFAULT_TAGS: ITag[] = [
   'float',
   'code',
   'quote',
+  {
+    name: 'subject',
+    schema: {
+      subject: (value) => {
+        return /^[1-9]\d*/.test(value)
+      }
+    }
+  },
   'subject',
   {
     name: 'user',
