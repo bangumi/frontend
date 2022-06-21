@@ -1,4 +1,4 @@
-import { BBCODE_REGEXP, mergeTags, Parser } from '../parser'
+import { mergeTags, Parser } from '../parser'
 import { CodeNodeTypes } from '../types'
 
 function getNodes (input: string): CodeNodeTypes[] {
@@ -7,23 +7,6 @@ function getNodes (input: string): CodeNodeTypes[] {
 }
 
 describe('bbcode parser', () => {
-  test('bbcode regexp', () => {
-    const url = '[url=http://chii.in]bgm[/url]'
-    expect(url).toMatch(BBCODE_REGEXP)
-    let m = url.match(BBCODE_REGEXP)!
-    expect(m[1]).toBe('url')
-    expect(m[2]).toBe('=http://chii.in')
-    expect(m[3]).toBe('bgm')
-    expect(m[4]).toBe('url')
-
-    const bolded = '[b]粗体字[/b]'
-    expect(bolded).toMatch(BBCODE_REGEXP)
-    m = bolded.match(BBCODE_REGEXP)!
-    expect(m[1]).toBe('b')
-    expect(m[2]).toBeUndefined()
-    expect(m[3]).toBe('粗体字')
-    expect(m[4]).toBe('b')
-  })
   test('text', () => {
     const input = '啊aあ\n)[bs][/bs]222'
     const tests: CodeNodeTypes[] = ['啊aあ\n)', '[bs][/bs]', '222']

@@ -4,8 +4,6 @@ import { CodeNodeTypes, CodeVNode } from './types'
 const INVALID_NODE_MSG = 'invalid node'
 const INVALID_STICKER_NODE = 'invalid sticker node'
 
-export const BBCODE_REGEXP = /^\[([a-z]+)(=.+?)?\](.+?)\[\/([a-z]+)\]/
-
 type CheckCharFn = (str: string) => boolean
 type Validator = (value: any, node: CodeVNode) => boolean
 // 也许需要引入  Object schema validation
