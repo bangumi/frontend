@@ -83,9 +83,35 @@ const DEFAULT_TAGS: ITag[] = [
       }
     }
   },
+  'sticker',
+  'left',
+  'right',
+  'center',
+  'indent',
+  'float',
   'code',
   'quote',
-  'sticker'
+  'subject',
+  {
+    name: 'user',
+    schema: {
+      user: (value, node) => {
+        let userId = value
+        if (!userId) {
+          userId = getStringChild(node)
+        }
+        return !!userId
+      }
+    }
+  },
+  {
+    name: 'align',
+    schema: {
+      align: (value) => {
+        return ['left', 'right', 'center'].includes(value)
+      }
+    }
+  }
 ]
 
 // 合并 tag 配置。新的覆盖旧的
@@ -244,7 +270,7 @@ export class Parser {
         [openTag]: prop
       }
     }
-    if (!this.isValidateBBCode(n)) {
+    if (!this.isValidBBCode(n)) {
       throw new Error(INVALID_NODE_MSG)
     }
     return n
@@ -309,7 +335,7 @@ export class Parser {
     return true
   }
 
-  isValidateBBCode (node: CodeVNode): boolean {
+  isValidBBCode (node: CodeVNode): boolean {
     const idx = this.findTag(node.type)
     if (idx === -1) {
       return false

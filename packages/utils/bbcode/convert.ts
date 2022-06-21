@@ -83,25 +83,22 @@ function convertStickerNode (node: CodeVNode): string {
   } else {
     id = EMOJI_ARRAY.indexOf(stickerId) + 1
   }
-  let img = ''
   if (id >= 1 && id < 17) {
-    img = `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`
   } else if (id >= 17 && id < 39) {
     const m = stickerId.match(/\d+/)!
-    img = `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`
   } else if (id === 39) {
-    img =
-      `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
   } else if (id >= 40 && id < 140) {
     let tvId: string | number = id - 39
     if (id < 10) {
       tvId = `0${tvId}`
     }
-    img = `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`
   } else {
-    img = stickerId
+    return stickerId
   }
-  return img
 }
 
 function convertQuote (node: CodeVNode): VNode {
@@ -113,6 +110,21 @@ function convertQuote (node: CodeVNode): VNode {
     type: 'div',
     className: 'quote',
     children: [q]
+  }
+}
+
+function convertUser (node: CodeVNode): VNode {
+  let userId = node?.props?.user as string
+  if (!userId) {
+    userId = node.children![0] as string
+  }
+  return {
+    type: 'a',
+    props: {
+      href: `/user/${userId}`
+    },
+    className: 'l',
+    children: [`@${node.children![0] as string}`]
   }
 }
 
@@ -163,7 +175,37 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
   code: (node) => ({
     type: 'pre',
     children: node.children
-  })
+  }),
+  left: (node) => toVNode(node, 'p', {
+    style: {
+      'text-align': 'left'
+    }
+  }),
+  right: (node) => toVNode(node, 'p', {
+    style: {
+      'text-align': 'right'
+    }
+  }),
+  center: (node) => toVNode(node, 'p', {
+    style: {
+      'text-align': 'center'
+    }
+  }),
+  indent: (node) => toVNode(node, 'blockquote', {}),
+  align: (node) => toVNode(node, 'p', {
+    style: {
+      'text-align': node.props!.align as string
+    }
+  }),
+  float: (node) => toVNode(node, 'span', {
+    style: {
+      float: node.props!.float as string
+    }
+  }),
+  subject: (node) => toVNode(node, 'a', {
+    className: 'l'
+  }),
+  user: convertUser
 }
 
 export function convert (node: CodeNodeTypes, converterMap: Record<string, ConverterFn> = {}): NodeTypes {

@@ -203,6 +203,18 @@ describe('html render bbcode string', () => {
       '<div class="quote"><q>ss<strong>加粗</strong></q></div>'
     )
   })
+  test('render align', () => {
+    const input = '[align=right]右[/align][center]中[/center][left]左[/left]'
+    expect(render(input)).toBe(
+      '<p style="text-align:right">右</p><p style="text-align:center">中</p><p style="text-align:left">左</p>'
+    )
+  })
+  test('render @user', () => {
+    const input = '[user=1]sai[/user][user]a_little[/user]'
+    expect(render(input)).toBe(
+      '<a href="/user/1" class="l">@sai</a><a href="/user/a_little" class="l">@a_little</a>'
+    )
+  })
   test('render code', () => {
     const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]'
     expect(render(input)).toBe(

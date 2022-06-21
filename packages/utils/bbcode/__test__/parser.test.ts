@@ -30,7 +30,7 @@ describe('bbcode parser', () => {
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
   test('bangumi sticker', () => {
-    const input = '[(bgm38)[/(=A=)](=///=)'
+    const input = '[(bgm38)[/(=A=)](=///=)(bgm01)'
     const tests: CodeNodeTypes[] = [
       '[',
       {
@@ -52,6 +52,12 @@ describe('bbcode parser', () => {
         type: 'sticker',
         props: {
           stickerId: '(=///=)'
+        }
+      },
+      {
+        type: 'sticker',
+        props: {
+          stickerId: '(bgm01)'
         }
       }
     ]
@@ -107,6 +113,12 @@ describe('bbcode parser', () => {
 [i]斜体字[/i]
 [b]粗体字[/b]
 [color=red]彩[/color][color=green]色[/color][color=blue]的[/color][color=orange]哟[/color]
+[quote]引用[/quote]
+[left]左[/left]
+[right]右[/right]
+[center]中[/center]
+[indent]块引用[/indent]
+[float]浮动[/float]
 `
     const tests: CodeNodeTypes[] = [
       '我是',
@@ -163,6 +175,18 @@ describe('bbcode parser', () => {
         },
         children: ['哟']
       },
+      '\n',
+      { type: 'quote', children: ['引用'] },
+      '\n',
+      { type: 'left', children: ['左'] },
+      '\n',
+      { type: 'right', children: ['右'] },
+      '\n',
+      { type: 'center', children: ['中'] },
+      '\n',
+      { type: 'indent', children: ['块引用'] },
+      '\n',
+      { type: 'float', children: ['浮动'] },
       '\n'
     ]
     const nodes = getNodes(input)
@@ -300,5 +324,52 @@ describe('bbcode parser', () => {
         i: fn
       }
     }]))
+  })
+  test('subject bbcode', () => {
+    const tests: Array<[string, CodeNodeTypes[]]> = [
+      ['[subject=1]sub1[/subject]', [{
+        type: 'subject',
+        props: { subject: '1' },
+        children: ['sub1']
+      }]],
+      ['[subject=abc]subabc[/subject]',
+        ['[subject=abc]subabc[/subject]']
+      ]
+    ]
+    for (const [input, expected] of tests) {
+      expect(getNodes(input)).toEqual(expected)
+    }
+  })
+  test('align bbcode', () => {
+    const tests: Array<[string, CodeNodeTypes[]]> = [
+      ['[align=left]对齐[/align]', [{
+        type: 'align',
+        props: { align: 'left' },
+        children: ['对齐']
+      }]],
+      ['[align=lft]对齐[/align]',
+        ['[align=lft]对齐[/align]']
+      ]
+    ]
+    for (const [input, expected] of tests) {
+      expect(getNodes(input)).toEqual(expected)
+    }
+  })
+  test('user bbcode', () => {
+    const input = '[user=a_little]me[/user][user]a_little[/user]'
+    const tests: CodeNodeTypes[] = [
+      {
+        type: 'user',
+        props: {
+          user: 'a_little'
+        },
+        children: ['me']
+      },
+      {
+        type: 'user',
+        children: ['a_little']
+      }
+    ]
+    expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
 })
