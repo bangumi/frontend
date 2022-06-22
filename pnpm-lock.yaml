@@ -99,6 +99,7 @@ importers:
       react: ^17.0.2
       react-docgen-typescript: ^2.2.2
       react-dom: ^17.0.2
+      reset-css: ^5.0.1
       storybook-builder-vite: ^0.1.13
       typescript: ^4.4.4
       vite: ^2.7.10
@@ -108,6 +109,7 @@ importers:
       normalize.css: 8.0.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
+      reset-css: r2.cnpmjs.org/reset-css/5.0.1
     devDependencies:
       '@babel/core': 7.16.7
       '@bangumi/icons': link:../icons
@@ -17666,6 +17668,12 @@ packages:
     version: 2.0.2
     engines: {node: '>=0.10.0'}
     dev: true
+
+  r2.cnpmjs.org/reset-css/5.0.1:
+    resolution: {integrity: sha512-VyuJdNFfp5x/W6e5wauJM59C02Vs0P22sxzZGhQMPaqu/NGTeFxlBFOOw3eq9vQd19gIDdZp7zi89ylyKOJ33Q==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/reset-css/-/reset-css-5.0.1.tgz}
+    name: reset-css
+    version: 5.0.1
+    dev: false
 
   r2.cnpmjs.org/resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/resolve-from/-/resolve-from-4.0.0.tgz}
