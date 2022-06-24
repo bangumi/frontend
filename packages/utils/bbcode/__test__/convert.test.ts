@@ -247,6 +247,33 @@ describe('convert bbcode to html vnode', () => {
         {
           type: 'sticker',
           props: {
+            stickerId: '(bgm33)'
+          }
+        },
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/10.gif" smileid="49" alt="(bgm33)" />`
+      ],
+      [
+        {
+          type: 'sticker',
+          props: {
+            stickerId: '(bgm32)'
+          }
+        },
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/09.gif" smileid="48" alt="(bgm32)" />`
+      ],
+      [
+        {
+          type: 'sticker',
+          props: {
+            stickerId: '(bgm24)'
+          }
+        },
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/01.gif" smileid="40" alt="(bgm24)" />`
+      ],
+      [
+        {
+          type: 'sticker',
+          props: {
             stickerId: '(bgm114)'
           }
         },

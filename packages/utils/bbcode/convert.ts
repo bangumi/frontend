@@ -92,7 +92,7 @@ function convertStickerNode (node: CodeVNode): string {
     return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
   } else if (id >= 40 && id < 140) {
     let tvId: string | number = id - 39
-    if (id < 10) {
+    if (tvId < 10) {
       tvId = `0${tvId}`
     }
     return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`

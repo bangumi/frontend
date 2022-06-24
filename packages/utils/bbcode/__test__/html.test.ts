@@ -143,6 +143,15 @@ describe('html render vnode', () => {
       '<span style="background-color:#555;color:#555;border:1px solid #555" class="l">文字<br/>换行</span>'
     )
   })
+  test('render pre children', () => {
+    const vnode: VNode = {
+      type: 'pre',
+      children: ['文字\n换行']
+    }
+    expect(renderNode('文字\n换行', vnode)).toBe(
+      '文字\n换行'
+    )
+  })
 })
 
 describe('html render bbcode string', () => {

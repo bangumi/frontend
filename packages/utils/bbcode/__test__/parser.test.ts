@@ -73,7 +73,7 @@ describe('bbcode parser', () => {
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
   test('invalid bbcode', () => {
-    const input = '[ba测试]bgm[/b](bg38)[b]加粗[b]'
+    const input = '[ba]bgm[/b](bg38)[b]加粗[b]'
     // const input = `[b]bgm[url]sss[/ual][/b](bg38)`;
     expect(getNodes(input).join('')).toEqual(input)
   })

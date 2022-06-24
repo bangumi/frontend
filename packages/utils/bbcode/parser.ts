@@ -62,9 +62,6 @@ const DEFAULT_TAGS: ITag[] = [
         if (!href) {
           href = getStringChild(node)
         }
-        if (!href) {
-          return false
-        }
         return isValidUrl(href)
       }
     }
@@ -74,10 +71,7 @@ const DEFAULT_TAGS: ITag[] = [
     schema: {
       children: (value, node) => {
         const src = getStringChild(node)
-        if (!src) {
-          return false
-        }
-        return isValidUrl(src)
+        return isValidUrl(src!)
       }
     }
   },
@@ -347,9 +341,6 @@ export class Parser {
       return false
     }
     const tag = this.validTags[idx]
-    if (!tag) {
-      return false
-    }
     // [b][/b] 内部为空的也识别成无效 tag
     if (!node.children || node.children.length === 0) {
       return false
