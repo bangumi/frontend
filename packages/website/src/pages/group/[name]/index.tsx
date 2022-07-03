@@ -14,7 +14,11 @@ const GroupHome: React.FC = () => {
       return null
     }
 
-    return <GroupHeader group={group} />
+    return (
+      <>
+        <GroupHeader group={group} />
+      </>
+    )
   }
 
   return (
