@@ -1,5 +1,5 @@
 import React from 'react'
-import Tab from '.'
+import Tab, { TabProps } from '.'
 import type { Story } from '@storybook/react'
 
 export default {
@@ -17,7 +17,7 @@ export default {
 }
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<{ activeKey: string }> = ({ activeKey }) => {
+const Template: Story<TabProps> = ({ activeKey, type }) => {
   const items = [{
     key: 'all',
     label: '全部条目'
@@ -38,8 +38,13 @@ const Template: Story<{ activeKey: string }> = ({ activeKey }) => {
     label: '三次元'
   }]
   return (
-    <Tab items={items} activeKey={activeKey} />
+    <Tab items={items} activeKey={activeKey} type={type} />
   )
 }
 
 export const Usage = Template.bind({})
+
+export const Borderless = Template.bind({})
+Borderless.args = {
+  type: 'borderless'
+}

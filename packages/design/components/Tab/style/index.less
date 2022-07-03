@@ -7,6 +7,10 @@
   list-style: none;
   background-color: @pink-60;
   border-radius: 19px;
+
+  &--borderless {
+    background-color: transparent;
+  }
 }
 
 .bgm-tab__item {
@@ -16,6 +20,16 @@
   padding: 4px 6px;
   color: #fff;
   cursor: pointer;
+
+  &--borderless {
+    font-weight: 500;
+    color: @gray-80;
+    padding: 4px 20px;
+
+    &.bgm-tab__item--active {
+      color: #fff;
+    }
+  }
 
   &--active {
     background-color: @primary-color;
