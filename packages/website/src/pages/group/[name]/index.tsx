@@ -1,4 +1,4 @@
-import { Tab } from '@bangumi/design'
+import { Tab, Image, Section, Typography } from '@bangumi/design'
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import GlobalLayout from '../../../components/GlobalLayout'
@@ -6,6 +6,12 @@ import { useGroup } from '../../../hooks/use-group'
 import { GroupHeader } from './components/GroupHeader'
 import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
+
+const { Link } = Typography
+
+function getUserProfileLink (username: string): string {
+  return 'https://bgm.tv/user/' + username
+}
 
 const GroupHome: React.FC = () => {
   const { name } = useParams()
@@ -33,7 +39,20 @@ const GroupHome: React.FC = () => {
           <div className={styles.leftCol}>
             <div className={styles.description} dangerouslySetInnerHTML={{ __html: parsedDescription }} />
           </div>
-          <div className={styles.rightCol} />
+          <div className={styles.rightCol}>
+            <Section title="最近加入">
+              <div className={styles.newMembers}>
+                {group.new_members.slice(0, 10).map((member) => {
+                  return (
+                    <Link className={styles.userCard} key={member.id} href={getUserProfileLink(member.username)}>
+                      <Image className={styles.avatar} src={member.avatar.large} alt={`${member.nickname} 头像`} />
+                      <span className={styles.nickname}>{member.nickname}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+            </Section>
+          </div>
         </div>
       </div>
     )

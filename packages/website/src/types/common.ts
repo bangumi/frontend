@@ -98,4 +98,15 @@ export interface Group {
   description: string
   total_members: number
   icon: string
+  new_members: Array<{
+    joined_at: string
+    avatar: {
+      large: string
+      medium: string
+      small: string
+    }
+    username: string
+    nickname: string
+    id: number
+  }>
 }
