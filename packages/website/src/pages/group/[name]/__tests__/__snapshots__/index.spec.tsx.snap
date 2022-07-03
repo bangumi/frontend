@@ -556,26 +556,272 @@ exports[`should match snapshot properly 1`] = `
     </div>
     <div>
       <div>
-        <img
-          alt="靠谱人生茶话会 头像"
-          class="bgm-image bgm-image--rect"
-          data-testid="img-wrapper"
-          src="https://lain.bgm.tv/pic/icon/l/000/00/03/364.jpg"
-        />
+        <div>
+          <img
+            alt="靠谱人生茶话会 头像"
+            class="bgm-image bgm-image--rect"
+            data-testid="img-wrapper"
+            src="https://lain.bgm.tv/pic/icon/l/000/00/03/364.jpg"
+          />
+          <div>
+            <div>
+              靠谱人生茶话会
+            </div>
+            <div>
+              <span
+                class="bgm-text bgm-text--secondary"
+              >
+                 创建于 
+                2009-10-9 13:25
+                 | 现有 
+                9053
+                 名成员 
+              </span>
+            </div>
+          </div>
+        </div>
+        <ul
+          class="bgm-tab bgm-tab--borderless"
+        >
+          <li
+            class="bgm-tab__item bgm-tab__item--borderless bgm-tab__item--active"
+          >
+             
+            小组概览
+          </li>
+        </ul>
         <div>
           <div>
-            靠谱人生茶话会
+            <div>
+              又名：CUP人生茶话会
+
+              <br />
+              
+
+              <br />
+              本茶话会欢迎以下各界人士：
+
+              <br />
+              1.上班的时候想要回家的。
+
+              <br />
+              2.学校课上打瞌睡的。
+
+              <br />
+              3.外表在上班或上课，脑内在high晚上看的XXX的。
+
+              <br />
+              4.上班无法开启聊天工具的。
+
+              <br />
+              5.上班精神寂寞无处排解的。
+
+              <br />
+              6.胸无大志前途漫漫的。
+
+              <br />
+              7.有大把的时间却不知道怎么用的。
+
+              <br />
+              8.所谓理想就只是想想的。
+
+              <br />
+              9.黄花大闺女还愁嫁的。
+
+              <br />
+              10.夜晚靠脑内剧场入睡的。
+
+              <br />
+              
+
+              <br />
+              茶话会内容：
+
+              <br />
+              1.可在茶话会中无意义嚎叫，引起其他成员响应嚎叫。
+
+              <br />
+              2.可在茶话会中吐各种嘈，法律禁止的就吞下去吧。
+
+              <br />
+              3.可在茶话会中转帖各种内容，以便上班学习时偷看的。
+
+              <br />
+              4.可把茶话会当做网络存储，各类需要的东西先放进来以便回家时能马上找到。
+
+              <br />
+              5.可在茶话会中擅自勾搭，但不能构成骚扰。
+
+              <br />
+              6.可在茶话会中讨论各种话题，法律禁止的请自己分裂人格讨论。
+
+              <br />
+              
+
+              <br />
+              茶话会的茶水供应方法：
+
+              <br />
+              咽口水。
+
+              <br />
+              
+
+              <br />
+              茶话会旨归：
+
+              <br />
+              通过“谈谈山海经”“伐伐珊瑚”“无聊嚎叫”“闲言碎语”等方式帮助组员实现个性解放，找到生命中的另一半。
+            </div>
           </div>
           <div>
-            <span
-              class="bgm-text bgm-text--secondary"
+            <div
+              class="bgm-section"
             >
-               创建于 
-              2009-10-9 13:25
-               | 现有 
-              9053
-               名成员 
-            </span>
+              <h3
+                class="bgm-section__title"
+              >
+                最近加入
+              </h3>
+              <hr
+                class="bgm-divider bgm-section__divider"
+                role="separator"
+              />
+              <div>
+                <div>
+                  <a
+                    href="https://bgm.tv/user/479141"
+                  >
+                    <img
+                      alt="呐，你想变成什么颜色？ 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/000/47/91/479141.jpg?r=1592902823"
+                    />
+                    <span>
+                      呐，你想变成什么颜色？
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/578405"
+                  >
+                    <img
+                      alt="かなで 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/000/57/84/578405.jpg?r=1631637205"
+                    />
+                    <span>
+                      かなで
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/index2333333"
+                  >
+                    <img
+                      alt="再也不修仙了 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/000/70/45/704586.jpg?r=1656681930"
+                    />
+                    <span>
+                      再也不修仙了
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/704505"
+                  >
+                    <img
+                      alt="mushin2k 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+                    />
+                    <span>
+                      mushin2k
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/569657"
+                  >
+                    <img
+                      alt="猪屁屁 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+                    />
+                    <span>
+                      猪屁屁
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/474548"
+                  >
+                    <img
+                      alt="Rinx 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/000/47/45/474548.jpg?r=1652495450"
+                    />
+                    <span>
+                      Rinx
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/704354"
+                  >
+                    <img
+                      alt="出警专用小号 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+                    />
+                    <span>
+                      出警专用小号
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/704146"
+                  >
+                    <img
+                      alt="屿 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+                    />
+                    <span>
+                      屿
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/704139"
+                  >
+                    <img
+                      alt="miemiemie 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+                    />
+                    <span>
+                      miemiemie
+                    </span>
+                  </a>
+                  <a
+                    href="https://bgm.tv/user/landorus"
+                  >
+                    <img
+                      alt="咸鱼文学 头像"
+                      class="bgm-image bgm-image--rect"
+                      data-testid="img-wrapper"
+                      src="https://lain.bgm.tv/pic/user/l/000/34/59/345920.jpg?r=1656304222"
+                    />
+                    <span>
+                      咸鱼文学
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

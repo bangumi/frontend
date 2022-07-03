@@ -48,5 +48,5 @@ class GroupHomeTest {
 it('should match snapshot properly', async () => {
   const test = new GroupHomeTest('test', Boring)
 
-  await test.assertHeader({ title: '靠谱人生茶话会' })
+  await test.assertHeader()
 })
