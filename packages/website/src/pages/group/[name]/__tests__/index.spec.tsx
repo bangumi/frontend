@@ -6,6 +6,7 @@ import { server as mockServer } from '../../../../mocks/server'
 import { rest } from 'msw'
 import Boring from './boring.json'
 import { useParams } from 'react-router-dom'
+import { Group } from '../../../../types/common'
 
 jest.mock('react-router-dom', () => {
   return {
