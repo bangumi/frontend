@@ -1,5 +1,29 @@
+@import '@bangumi/design/theme/base';
+
 .pageContainer {
   > * {
     margin-bottom: 10px;
   }
+}
+
+.columnContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.leftCol {
+  width: 913px;
+  flex: 1;
+  margin-right: 40px;
+}
+
+.rightCol {
+  width: 427px;
+  flex: 1;
+}
+
+.description {
+  color: @gray-100;
+  font-size: 16px;
+  line-height: 24px;
 }

@@ -5,6 +5,7 @@ import GlobalLayout from '../../../components/GlobalLayout'
 import { useGroup } from '../../../hooks/use-group'
 import { GroupHeader } from './components/GroupHeader'
 import styles from './index.module.less'
+import { render as renderBBCode } from '@bangumi/utils'
 
 const GroupHome: React.FC = () => {
   const { name } = useParams()
@@ -21,10 +22,19 @@ const GroupHome: React.FC = () => {
       label: '小组概览'
     }]
 
+    // TODO: XSS defense
+    const parsedDescription = renderBBCode(group.description)
+
     return (
       <div className={styles.pageContainer}>
         <GroupHeader group={group} />
         <Tab type="borderless" items={tabs} activeKey="index" />
+        <div className={styles.columnContainer}>
+          <div className={styles.leftCol}>
+            <div className={styles.description} dangerouslySetInnerHTML={{ __html: parsedDescription }} />
+          </div>
+          <div className={styles.rightCol} />
+        </div>
       </div>
     )
   }
