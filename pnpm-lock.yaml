@@ -164,6 +164,7 @@ importers:
       '@vitejs/plugin-react': ^1.0.7
       axios: ^0.24.0
       bgm-types: ^2.0.2
+      dayjs: ^1.11.3
       msw: ^0.36.5
       normalize.css: ^8.0.1
       react: ^17.0.2
@@ -179,6 +180,7 @@ importers:
     dependencies:
       '@hcaptcha/react-hcaptcha': 1.3.0_sfoxds7t5ydpegc3knd667wn6m
       axios: 0.24.0
+      dayjs: 1.11.3
       normalize.css: 8.0.1
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -4873,6 +4875,10 @@ packages:
       whatwg-url: 8.7.0
     dev: true
 
+  /dayjs/1.11.3:
+    resolution: {integrity: sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==}
+    dev: false
+
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
     peerDependencies:
@@ -8010,7 +8016,7 @@ packages:
       vite: ^2.6.0
     dependencies:
       '@svgr/core': 6.2.1
-      vite: 2.7.10_less@4.1.2
+      vite: 2.7.10
     transitivePeerDependencies:
       - supports-color
     dev: true
