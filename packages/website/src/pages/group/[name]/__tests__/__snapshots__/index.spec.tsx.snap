@@ -1,0 +1,764 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match snapshot properly 1`] = `
+<div>
+  <div>
+    <div>
+      <div>
+        <div
+          class="flex items-center"
+        >
+          <div />
+          <div />
+          <button
+            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+          >
+            菜单
+          </button>
+          <div>
+            <ul
+              class="bgm-menu bgm-menu--horizontal"
+            >
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                动画
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      排行榜
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      每日放送
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      动画标签
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      分类浏览
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      动画日志
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      在看
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      想看
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      看过
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      搁置
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      抛弃
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                书籍
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      排行榜
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      图书标签
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      分类浏览
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      图书日志
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      在读
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      想读
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      读过
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      搁置
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      抛弃
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                音乐
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      排行榜
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      音乐标签
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      浏览全部
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      音乐日志
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      在听
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      想听
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      听过
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      搁置
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      抛弃
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                游戏
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      排行榜
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      游戏标签
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      平台浏览
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      游戏日志
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      在玩
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      想玩
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      玩过
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      搁置
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      抛弃
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                三次元
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      排行榜
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      三次元标签
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      三次元日志
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      日剧
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      欧美剧
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      在看
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      想看
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      看过
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      搁置
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      抛弃
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+            <hr
+              class="bgm-divider bgm-divider--vertical"
+              role="separator"
+            />
+            <ul
+              class="bgm-menu bgm-menu--horizontal"
+            >
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                人物
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      虚构人物
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      现实人物
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      关注人物更新
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      收藏的角色
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      收藏的人物
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                超展开
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                小组
+                <div
+                  class="bgm-menu-item__submenu"
+                  data-testid="submenu"
+                >
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      随便看看
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      所有小组
+                    </li>
+                  </ul>
+                  <hr
+                    class="bgm-divider"
+                    role="separator"
+                  />
+                  <ul
+                    class="bgm-menu bgm-menu--vertical"
+                  >
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      发表的话题
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      回复的话题
+                    </li>
+                    <li
+                      class="bgm-menu-item bgm-menu-item--circle"
+                    >
+                      参加的小组
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                探索
+              </li>
+              <li
+                class="bgm-menu-item bgm-menu-item--underline"
+              >
+                天窗联盟
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="flex items-center"
+        >
+          <div>
+            <div
+              class="bgm-input__wrapper"
+            >
+              <select
+                name="cat"
+              >
+                <option
+                  selected=""
+                  value="value1"
+                >
+                  全部条目
+                </option>
+                <option
+                  value="value2"
+                >
+                  动画
+                </option>
+                <option
+                  value="value3"
+                >
+                  书籍
+                </option>
+                <option
+                  value="value4"
+                >
+                  游戏
+                </option>
+                <option
+                  value="value5"
+                >
+                  三次元
+                </option>
+                <option
+                  value="value6"
+                >
+                  人物
+                </option>
+              </select>
+              <hr
+                class="bgm-divider bgm-divider--vertical"
+                role="separator"
+              />
+              <input
+                class="bgm-input"
+                type="text"
+              />
+              <div
+                style="flex-shrink: 0;"
+              />
+            </div>
+          </div>
+          <span>
+            <a
+              href="/login"
+            >
+              登录
+            </a>
+            <a
+              href="/register"
+            >
+              注册
+            </a>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <img
+          alt="靠谱人生茶话会 头像"
+          class="bgm-image bgm-image--rect"
+          data-testid="img-wrapper"
+          src="https://lain.bgm.tv/pic/icon/l/000/00/03/364.jpg"
+        />
+        <div>
+          <div>
+            靠谱人生茶话会
+          </div>
+          <div>
+            <span
+              class="bgm-text bgm-text--secondary"
+            >
+               创建于 
+              2009-10-9 13:25
+               | 现有 
+              9053
+               名成员 
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div />
+            <div>
+              <p>
+                © 2008-
+                2022
+                 Bangumi (a.k.a.Chobits),
+              </p>
+              <p>
+                some rights reserved | ver. 
+              </p>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h2>
+                关于我们
+              </h2>
+              <div>
+                <a
+                  href="https://bgm.tv/about"
+                >
+                  关于我们
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/about/guideline"
+                >
+                  社区指导原则
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/about/copyright"
+                >
+                  版权声明
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/about/link2us"
+                >
+                  链接我们
+                </a>
+              </div>
+            </div>
+            <div>
+              <h2>
+                获得帮助
+              </h2>
+              <div>
+                <a
+                  href="https://bgm.tv/help/bbcode"
+                >
+                  BBCode
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/group/forum"
+                >
+                  站务论坛
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/group/wiki"
+                >
+                  番組 WIKI 計画
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/group/doujin"
+                >
+                  天窗站务
+                </a>
+              </div>
+            </div>
+            <div>
+              <h2>
+                开发相关
+              </h2>
+              <div>
+                <a
+                  href="https://bgm.tv/group/dev"
+                >
+                  番组开发
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/dev/app"
+                >
+                  开发者平台
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/group/issues"
+                >
+                  BUG 追踪
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/onair"
+                >
+                  客户端
+                </a>
+              </div>
+            </div>
+            <div>
+              <h2>
+                特别推荐
+              </h2>
+              <div>
+                <a
+                  href="https://bgm.tv/award/2021"
+                >
+                  Bangumi 年鉴
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/magi"
+                >
+                  MAGI 问答
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/tokei"
+                >
+                  etokei 绘时计
+                </a>
+              </div>
+            </div>
+            <div>
+              <h2>
+                更多
+              </h2>
+              <div>
+                <a
+                  href="https://bgm.tv/index"
+                >
+                  目录
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/wiki"
+                >
+                  维基人
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/goodies"
+                >
+                  周边
+                </a>
+              </div>
+              <div>
+                <a
+                  href="https://bgm.tv/dollars"
+                >
+                  Dollars
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

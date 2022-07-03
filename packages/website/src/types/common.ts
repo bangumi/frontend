@@ -91,3 +91,11 @@ export interface Subject {
   collection: collection
   tags: tag[]
 }
+
+export interface Group {
+  title: string
+  created_at: string
+  description: string
+  total_members: number
+  icon: string
+}
