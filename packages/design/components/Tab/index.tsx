@@ -3,12 +3,13 @@ import classnames from 'classnames'
 
 interface ItemProps {
   isActive: boolean
+  type: 'default' | 'borderless'
   onClick: () => void
 }
-const Item: React.FC<ItemProps> = ({ children, isActive, onClick }) => {
+const Item: React.FC<ItemProps> = ({ children, isActive, onClick, type }) => {
   return (
     <li
-      className={classnames('bgm-tab__item', { 'bgm-tab__item--active': isActive })}
+      className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, { 'bgm-tab__item--active': isActive })}
       onClick={onClick}
     >
       {children}
@@ -28,17 +29,20 @@ export interface TabProps {
   activeKey: string
   /* 点击切换事件回调，对每一个 Item 都生效 */
   onChange?: (key: string) => void
+  /* 样式类型 */
+  type?: 'default' | 'borderless'
 }
 
-export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange }) => {
+export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'default' }) => {
   return (
-    <ul className="bgm-tab">
+    <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>
       {
       items.map((item) => {
         return (
           <Item
             key={item.key}
             isActive={activeKey === item.key}
+            type={type}
             onClick={() => { onChange?.(item.key) }}
           > {item.label}
           </Item>

@@ -30,3 +30,15 @@ it('should trigger onChange when click tabs', () => {
 
   expect(handleChange).toBeCalledWith('2')
 })
+
+it('should render borderless tab', () => {
+  const items = [{
+    key: '1',
+    label: '1'
+  }, {
+    key: '2',
+    label: '2'
+  }]
+  const { container } = render(<Tab items={items} activeKey="1" type="borderless" />)
+  expect(container).toMatchSnapshot()
+})
