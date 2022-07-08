@@ -1,11 +1,17 @@
 import React, { FC, useState } from 'react'
 import style from './style.module.less'
-import { BangumiLogo, BangumiTextLogo } from '@bangumi/icons/musume'
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons'
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
 import { useUser } from '../../hooks/use-user'
 import { Link } from 'react-router-dom'
+
+// todo: SVG Sprites
+import { ReactComponent as Musume1 } from '../../assets/musume_1.svg'
+import { ReactComponent as Musume2 } from '../../assets/musume_2.svg'
+import { ReactComponent as Musume3 } from '../../assets/musume_3.svg'
+import { ReactComponent as Musume4 } from '../../assets/musume_4.svg'
+import { ReactComponent as Logo } from '../../assets/logo.svg'
 
 const navLeft = [
   {
@@ -60,6 +66,12 @@ const navRight = [
   }
 ]
 
+function getRandomNumber (n: number): number {
+  return Math.floor(Math.random() * n)
+}
+
+const Musume = [Musume1, Musume2, Musume3, Musume4][getRandomNumber(4)]
+
 const Header: FC = () => {
   const { user } = useUser()
 
@@ -69,9 +81,10 @@ const Header: FC = () => {
       <div className={style.main}>
         <div className="flex items-center">
           {/* Logo */}
-          <BangumiLogo className={style.logo} />
-          {/* Mobile Logo */}
-          <BangumiTextLogo className={style.logoMobile} />
+          <div className={style.logo}>
+            <Musume className={style.musume} />
+            <Logo className={style.textLogo} />
+          </div>
           {/* Mobile Menu Toggle Button */}
           <Button
             className={style.mobileMenuToggle} shape="rounded" type={showMobileMenu ? 'primary' : 'secondary'}

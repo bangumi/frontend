@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { BangumiTextLogo } from '@bangumi/icons/musume'
+import { ReactComponent as BangumiTextLogo } from '../../assets/footer-logo.svg'
 import style from './style.module.less'
 
 interface IBlockItem {
