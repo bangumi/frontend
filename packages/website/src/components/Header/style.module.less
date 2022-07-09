@@ -29,15 +29,26 @@
 }
 
 .logo {
+  position: relative;
   margin-left: 24px;
   flex-shrink: 0;
   width: 193px;
-}
+  height: @header-height;
 
-.logoMobile {
-  width: 110px;
-  margin-left: 12px;
-  display: none;
+  .musume {
+    position: absolute;
+    bottom: 0;
+    width: 58px;
+    height: 58px;
+  }
+
+  .textLogo {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    width: 126px;
+    height: 37px;
+  }
 }
 
 .mobileMenuToggle {
@@ -216,10 +227,15 @@
   }
 
   .logo {
-    display: none;
-  }
+    width: 110px;
+    margin-left: 12px;
 
-  .logoMobile {
-    display: block;
+    .musume {
+      display: none;
+    }
+
+    .textLogo {
+      width: 110px;
+    }
   }
 }
