@@ -18,7 +18,7 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
   viteFinal: async (viteConfig) => {
     // workaround for vite build
     // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
-    viteConfig.root = dirname(require.resolve('storybook-builder-vite'))
+    viteConfig.root = dirname(require.resolve('@storybook/builder-vite'))
     /*
     * About auto-generated component docs:
     * Please use FC<Props> instead of React.FC<Props> to declare component.
@@ -43,7 +43,7 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
     return viteConfig
   },
   core: {
-    builder: 'storybook-builder-vite'
+    builder: '@storybook/builder-vite'
   }
 }
 export default config
