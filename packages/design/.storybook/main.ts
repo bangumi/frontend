@@ -1,10 +1,10 @@
 import { dirname } from 'path'
 import reactDocgenTypescript from '@joshwooding/vite-plugin-react-docgen-typescript'
-import type { StorybookConfig } from '@storybook/react/types'
-import type { UserConfig, PluginOption } from 'vite'
+import type { StorybookViteConfig } from '@storybook/builder-vite'
+import type { PluginOption } from 'vite'
 import svgr from 'vite-plugin-svgr'
 
-const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise<UserConfig> } = {
+const config: StorybookViteConfig = {
   stories: [
     '../components/**/*.stories.mdx',
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
@@ -39,7 +39,7 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
       }
     } as PluginOption)
 
-    viteConfig.plugins.push(svgr() as any)
+    viteConfig.plugins.push(svgr() as PluginOption)
     return viteConfig
   },
   core: {
