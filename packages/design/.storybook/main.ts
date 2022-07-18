@@ -39,7 +39,7 @@ const config: StorybookConfig & { viteFinal: (viteConfig: UserConfig) => Promise
       }
     } as PluginOption)
 
-    viteConfig.plugins.push(svgr())
+    viteConfig.plugins.push(svgr() as any)
     return viteConfig
   },
   core: {
