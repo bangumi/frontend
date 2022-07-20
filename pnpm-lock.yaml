@@ -81,7 +81,6 @@ importers:
   packages/design:
     specifiers:
       '@bangumi/icons': workspace:*
-      '@joshwooding/vite-plugin-react-docgen-typescript': ^0.0.4
       '@storybook/addon-actions': ^6.5.9
       '@storybook/addon-essentials': ^6.5.9
       '@storybook/addon-links': ^6.5.9
@@ -93,7 +92,6 @@ importers:
       less: ^4.1.2
       normalize.css: ^8.0.1
       react: ^17.0.2
-      react-docgen-typescript: ^2.2.2
       react-dom: ^17.0.2
       typescript: ^4.7.4
       vite: ^3.0.2
@@ -104,7 +102,6 @@ importers:
       react-dom: 17.0.2_react@17.0.2
     devDependencies:
       '@bangumi/icons': link:../icons
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.0.4_v3wns4mmlyy7olg3wbdj3skgpq
       '@storybook/addon-actions': 6.5.9_sfoxds7t5ydpegc3knd667wn6m
       '@storybook/addon-essentials': 6.5.9_3tgeifm2vmwrlpqlopppsnjtcu
       '@storybook/addon-links': 6.5.9_sfoxds7t5ydpegc3knd667wn6m
@@ -114,7 +111,6 @@ importers:
       '@types/react-dom': 17.0.11
       classnames: 2.3.1
       less: r2.cnpmjs.org/less/4.1.2
-      react-docgen-typescript: 2.2.2_typescript@4.7.4
       typescript: 4.7.4
       vite: 3.0.2_less@4.1.2
       vite-plugin-svgr: 2.2.0_vite@3.0.2

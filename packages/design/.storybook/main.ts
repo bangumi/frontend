@@ -1,5 +1,4 @@
 import { dirname } from 'path'
-import reactDocgenTypescript from '@joshwooding/vite-plugin-react-docgen-typescript'
 import type { StorybookViteConfig } from '@storybook/builder-vite'
 import type { PluginOption } from 'vite'
 import svgr from 'vite-plugin-svgr'
@@ -26,7 +25,6 @@ const config: StorybookViteConfig = {
     * https://github.com/styleguidist/react-docgen-typescript/issues/393
     * */
     !viteConfig.plugins && (viteConfig.plugins = [])
-    viteConfig.plugins.push(reactDocgenTypescript())
     /* WIP: Temporary patch for style */
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
     viteConfig.plugins.push({
