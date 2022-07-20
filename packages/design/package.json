@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@bangumi/icons": "workspace:*",
-    "@joshwooding/vite-plugin-react-docgen-typescript": "^0.0.2",
+    "@joshwooding/vite-plugin-react-docgen-typescript": "^0.0.4",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-links": "^6.5.9",
@@ -22,7 +22,7 @@
     "less": "^4.1.2",
     "react-docgen-typescript": "^2.2.2",
     "typescript": "^4.7.4",
-    "vite": "^3.0.1",
+    "vite": "^3.0.2",
     "vite-plugin-svgr": "^2.2.0"
   },
   "scripts": {
