@@ -9,6 +9,9 @@
   background: @gray-10;
   object-fit: cover;
   object-position: top left;
+  // https://github.com/bangumi/frontend/pull/77
+  /* stylelint-disable-next-line value-no-vendor-prefix */
+  image-rendering: -webkit-optimize-contrast;
 
   &:hover {
     outline: 2px solid @outline-color;
