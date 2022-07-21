@@ -1,11 +1,9 @@
-import LegacyLink from './Link'
 import Text from './Text'
-import Link from './NewLink'
+import Link from './Link'
 
 export type { LinkProps } from './Link'
 
 export default {
-  LegacyLink,
   Text,
   Link
 }
