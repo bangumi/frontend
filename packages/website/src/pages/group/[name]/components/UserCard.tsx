@@ -16,9 +16,9 @@ export interface UserCardProps {
 
 export const UserCard: React.FC<UserCardProps> = ({ user }) => {
   return (
-    <Link className={styles.userCard} href={getUserProfileLink(user.username)}>
+    <Link className={styles.userCard} to={getUserProfileLink(user.username)} fontWeight="bold" isExternal>
       <Image className={styles.avatar} src={user.avatar} alt={`${user.nickname} 头像`} />
-      <span className={styles.nickname}>{user.nickname}</span>
+      {user.nickname}
     </Link>
   )
 }
