@@ -16,7 +16,7 @@ const Template: Story<LinkProps> = (props) => {
 
 export const InternalLink = Template.bind({})
 InternalLink.args = {
-  to: '/group/borin'
+  to: '/group/boring'
 }
 
 export const ExternalLink = Template.bind({})
@@ -27,6 +27,6 @@ ExternalLink.args = {
 
 export const BoldLink = Template.bind({})
 BoldLink.args = {
-  to: '/group/borin',
+  to: '/group/boring',
   fontWeight: 'bold'
 }
