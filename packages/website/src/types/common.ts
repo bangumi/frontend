@@ -1,5 +1,5 @@
 // using camelcase api
-type infoBox = Array<{
+export type InfoBox = Array<{
   key: string
   value: string | Array<{
     k?: string
@@ -60,7 +60,7 @@ export interface CharacterDetail {
   }
   summary: string
   locked: boolean
-  infobox: infoBox
+  infobox: InfoBox
   gender: string
   blooType: number
   birthYear: number
@@ -83,11 +83,19 @@ export interface Subject {
   date: string // YYYY-MM-DD format
   platform: string
   images: images
-  infobox: infoBox
+  infobox: InfoBox
   volumes: number
   eps: number
   totalEpisodes: number
   rating: rating
   collection: collection
   tags: tag[]
+}
+
+export interface RelatedSubject {
+  id: number
+  staff: string
+  name?: string
+  nameCn?: string
+  image: string
 }
