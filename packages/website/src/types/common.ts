@@ -1,3 +1,5 @@
+import { User } from './user'
+
 // using camelcase api
 type infoBox = Array<{
   key: string
@@ -90,4 +92,44 @@ export interface Subject {
   rating: rating
   collection: collection
   tags: tag[]
+}
+
+export interface AvatarSet {
+  large: string
+  medium: string
+  small: string
+}
+
+export interface Group {
+  title: string
+  created_at: string
+  description: string
+  total_members: number
+  icon: string
+  new_members: Array<{
+    joined_at: string
+    avatar: AvatarSet
+    username: string
+    nickname: string
+    id: number
+  }>
+}
+
+export interface Topic {
+  created_at: string
+  updated_at: string
+  title: string
+  creator: User
+  id: 371781
+  reply_count: 10
+}
+
+export interface Pagination {
+  total: number
+  limit: number
+  offset: number
+}
+
+export interface ResponseWithPagination<T> extends Pagination {
+  data: T
 }

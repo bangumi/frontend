@@ -6,13 +6,14 @@
   "dependencies": {
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "reset-css": "^5.0.1"
   },
   "devDependencies": {
-    "@bangumi/icons": "workspace:*",
     "@babel/core": "^7.16.7",
-    "@mdx-js/react": "^2.0.0",
+    "@bangumi/icons": "workspace:*",
     "@joshwooding/vite-plugin-react-docgen-typescript": "^0.0.2",
+    "@mdx-js/react": "^2.0.0",
     "@storybook/addon-actions": "^6.4.13",
     "@storybook/addon-essentials": "^6.4.13",
     "@storybook/addon-links": "^6.4.13",

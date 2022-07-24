@@ -10,6 +10,8 @@
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.3.0",
     "axios": "^0.24.0",
+    "classnames": "^2.3.1",
+    "dayjs": "^1.11.3",
     "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -20,12 +22,14 @@
   "devDependencies": {
     "@bangumi/design": "workspace:*",
     "@bangumi/icons": "workspace:*",
+    "@bangumi/utils": "workspace:*",
     "@types/lodash": "^4.14.182",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@vitejs/plugin-react": "^1.0.7",
     "bgm-types": "^2.0.2",
     "msw": "^0.36.5",
+    "timezone-mock": "^1.3.4",
     "typescript": "^4.4.4",
     "vite": "^2.7.10",
     "vite-plugin-pages": "^0.23.0",
