@@ -1,5 +1,13 @@
 @import '@bangumi/design/theme/base';
 
+.text-clamp-by-line(@lines) {
+  overflow: hidden;
+  /* stylelint-disable-next-line  value-no-vendor-prefix */
+  display: -webkit-box;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+}
+
 .pageContainer {
   > * {
     margin-bottom: 10px;
@@ -21,9 +29,20 @@
 }
 
 .description {
+  width: 100%;
   color: @gray-100;
   font-size: 16px;
   line-height: 24px;
+
+  &.clamped {
+    .text-clamp-by-line(8);
+  }
+}
+
+.clampControlButton {
+  color: @gray-60;
+  font-size: 14px;
+  line-height: 14px;
 }
 
 .newMembers {

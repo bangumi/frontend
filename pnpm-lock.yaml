@@ -167,6 +167,7 @@ importers:
       '@vitejs/plugin-react': ^1.0.7
       axios: ^0.24.0
       bgm-types: ^2.0.2
+      classnames: ^2.3.1
       dayjs: ^1.11.3
       msw: ^0.36.5
       normalize.css: ^8.0.1
@@ -184,6 +185,7 @@ importers:
     dependencies:
       '@hcaptcha/react-hcaptcha': 1.3.0_sfoxds7t5ydpegc3knd667wn6m
       axios: 0.24.0
+      classnames: r2.cnpmjs.org/classnames/2.3.1
       dayjs: 1.11.3
       normalize.css: 8.0.1
       react: 17.0.2
@@ -8016,7 +8018,7 @@ packages:
       vite: ^2.6.0
     dependencies:
       '@svgr/core': 6.2.1
-      vite: 2.7.10_less@4.1.2
+      vite: 2.7.10
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -11062,6 +11064,12 @@ packages:
       isobject: r2.cnpmjs.org/isobject/3.0.1
       static-extend: r2.cnpmjs.org/static-extend/0.1.2
     dev: true
+
+  r2.cnpmjs.org/classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/classnames/-/classnames-2.3.1.tgz}
+    name: classnames
+    version: 2.3.1
+    dev: false
 
   r2.cnpmjs.org/clean-css/4.2.4:
     resolution: {integrity: sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/clean-css/-/clean-css-4.2.4.tgz}

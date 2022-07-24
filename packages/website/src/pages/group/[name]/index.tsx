@@ -1,5 +1,6 @@
 import { Tab, Section, Typography } from '@bangumi/design'
-import React, { ReactElement } from 'react'
+import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import classnames from 'classnames'
 import { useParams } from 'react-router-dom'
 import GlobalLayout from '../../../components/GlobalLayout'
 import { useGroup } from '../../../hooks/use-group'
@@ -15,6 +16,22 @@ const { Link } = Typography
 const GroupHome: React.FC = () => {
   const { name } = useParams()
   const { group, recentTopics } = useGroup(name as string)
+  const descRef = useRef<HTMLDivElement>(null)
+  const [isClampEnabled, setClampEnabled] = useState(false)
+  const [isClamped] = useState<boolean>(true)
+
+  useEffect(() => {
+    if (!descRef) {
+      return undefined
+    }
+
+    if (descRef.current) {
+      descRef.current.classList.add(styles.clamped)
+      if (descRef.current.scrollHeight > descRef.current.clientHeight) {
+        setClampEnabled(true)
+      }
+    }
+  }, [group])
 
   if (!group) {
     return null
@@ -71,6 +88,14 @@ const GroupHome: React.FC = () => {
     )
   }
 
+  const renderClampToggle = (): ReactElement | null => {
+    if (!isClampEnabled) {
+      return null
+    }
+
+    return <div className={styles.clampControlButton}>{isClamped ? '展开' : '收起'}</div>
+  }
+
   return (
     <GlobalLayout>
       <div className={styles.pageContainer}>
@@ -78,7 +103,14 @@ const GroupHome: React.FC = () => {
         <Tab type="borderless" items={tabs} activeKey="index" />
         <div className={styles.columnContainer}>
           <div className={styles.leftCol}>
-            <div className={styles.description} dangerouslySetInnerHTML={{ __html: parsedDescription }} />
+            <div
+              ref={descRef}
+              className={classnames(styles.description, {
+                [styles.clamped]: isClampEnabled && isClamped
+              })}
+              dangerouslySetInnerHTML={{ __html: parsedDescription }}
+            />
+            {renderClampToggle()}
             <Section title="最近讨论">
               {renderRecentTopics()}
             </Section>
