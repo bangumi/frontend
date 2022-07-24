@@ -1,17 +1,18 @@
-@link-primary-color: #0084B4;
-@link-hover-color: #02A3FB;
+@import (reference) '../../../theme/base';
 
-.bgm-classic-link {
-  &,
+.bgm-link {
   &:link,
   &:visited,
   &:active {
-    color: @link-primary-color;
+    color: @blue-100;
     text-decoration: none;
   }
 
   &:hover {
-    color: @link-hover-color;
     text-decoration: underline;
+  }
+
+  &--bold {
+    font-weight: bold;
   }
 }

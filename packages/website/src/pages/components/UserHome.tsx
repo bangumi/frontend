@@ -16,7 +16,7 @@ const UserHome: React.FC = () => {
   return (
     <GlobalLayout>
       <main className={styles.pageContainer}>
-        <div className={styles.greets}>Hi! <Link className={styles.link} href={user.url}>{user.nickname}</Link></div>
+        <div className={styles.greets}>Hi! <Link to={user.url} isExternal>{user.nickname}</Link></div>
       </main>
     </GlobalLayout>
   )
