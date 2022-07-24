@@ -78,6 +78,6 @@ it('should list recent topics', async () => {
     title: '看了4000本漫画，大家有什么想问的',
     creator: 'brad',
     replyCount: 40,
-    updatedAt: '2022-07-24'
+    updatedAt: '2022-7-24'
   })
 })
