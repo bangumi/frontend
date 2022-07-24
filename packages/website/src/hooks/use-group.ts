@@ -1,16 +1,19 @@
 import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
-import { Group } from '../types/common'
+import { Group, ResponseWithPagination, Topic } from '../types/common'
 
 interface UseGroupRet {
   group: Group | undefined
+  recentTopics: Topic[] | undefined
 }
 
 export function useGroup (name: string): UseGroupRet {
-  const { data } = useSWR<AxiosResponse<Group>>(`/p/groups/${name}`, privateRequest.get)
+  const { data: groupResp } = useSWR<AxiosResponse<Group>>(`/p/groups/${name}`, privateRequest.get)
+  const { data: recentTopicsResp } = useSWR<AxiosResponse<ResponseWithPagination<Topic[]>>>(`/p/groups/${name}/topics?limit=10`, privateRequest.get)
 
   return {
-    group: data?.data
+    group: groupResp?.data,
+    recentTopics: recentTopicsResp?.data.data
   }
 }

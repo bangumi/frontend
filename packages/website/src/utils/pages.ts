@@ -2,3 +2,7 @@
 export function getUserProfileLink (username: string): string {
   return 'https://bgm.tv/user/' + username
 }
+
+export function getGroupTopicLink (topicId: number): string {
+  return `https://bgm.tv/group/topic/${topicId}`
+}
