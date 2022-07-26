@@ -93,6 +93,7 @@ importers:
       normalize.css: ^8.0.1
       react: ^17.0.2
       react-dom: ^17.0.2
+      react-router-dom: ^6.2.2
       typescript: ^4.7.4
       vite: ^3.0.2
       vite-plugin-svgr: ^2.2.0
@@ -111,6 +112,7 @@ importers:
       '@types/react-dom': 17.0.11
       classnames: 2.3.1
       less: r2.cnpmjs.org/less/4.1.2
+      react-router-dom: 6.2.2_sfoxds7t5ydpegc3knd667wn6m
       typescript: 4.7.4
       vite: 3.0.2_less@4.1.2
       vite-plugin-svgr: 2.2.0_vite@3.0.2
@@ -14002,7 +14004,6 @@ packages:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-router: 6.2.2_react@17.0.2
-    dev: false
 
   /react-router/6.2.2_react@17.0.2:
     resolution: {integrity: sha512-/MbxyLzd7Q7amp4gDOGaYvXwhEojkJD5BtExkuKmj39VEE0m3l/zipf6h2WIB2jyAO0lI6NGETh4RDcktRm4AQ==}
@@ -14011,7 +14012,6 @@ packages:
     dependencies:
       history: r2.cnpmjs.org/history/5.2.0
       react: 17.0.2
-    dev: false
 
   /react-syntax-highlighter/15.5.0_react@17.0.2:
     resolution: {integrity: sha512-+zq2myprEnQmH5yw6Gqc8lD55QHnpKaU8TOcFeC/Lg/MQSs8UknEA0JC4nTZGFAXC2J2Hyj/ijJ7NlabyPi2gg==}
@@ -18279,7 +18279,6 @@ packages:
     version: 5.2.0
     dependencies:
       '@babel/runtime': 7.16.7
-    dev: false
 
   r2.cnpmjs.org/iconv-lite/0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz}

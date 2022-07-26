@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render external link 1`] = `
+<DocumentFragment>
+  <a
+    class="bgm-link"
+    href="https://test.com"
+  />
+</DocumentFragment>
+`;
+
+exports[`should render internal link 1`] = `
+<DocumentFragment>
+  <a
+    class="bgm-link"
+    href="/a"
+  />
+</DocumentFragment>
+`;
