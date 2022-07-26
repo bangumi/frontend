@@ -51,7 +51,7 @@ git push -u origin <YOUR_BRANCH>
 ### 启动开发环境之前
 
 因为登录引入了 hCaptcha，需要通过 `bgm.tv` 下面的域名来访问。因此本地开发前，
-需要将 `dev.bgm.tv` 通过 hosts 文件映射到 `127.0.0.1`。然后通过 `dev.bgm.tv:3000` 访问。
+需要将 `dev.bgm.tv` 通过 hosts 文件映射到 `127.0.0.1`。然后通过 `dev.bgm.tv:5173` 访问。
 
 Linux/Mac 用户 hosts 文件位置 `/etc/hosts`。
 Windows 用户 hosts 文件位置 `%WinDir%\System32\Drivers\Etc\hosts`。
