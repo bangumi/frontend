@@ -1,0 +1,32 @@
+@import '../../../theme/base';
+
+.bgm-editor {
+  &__container {
+    display: inline-flex;
+    flex-direction: column;
+    min-height: 162px;
+    border: 2px solid @gray-10;
+    border-radius: 12px;
+    padding: 10px 0 0 12px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 26px;
+    width: 215px;
+  }
+
+  &__text {
+    flex: 1 0 auto;
+    width: 682px;
+    padding: 10px;
+    border: none;
+    outline: none;
+
+    &::placeholder {
+      color: @gray-60;
+    }
+  }
+}
