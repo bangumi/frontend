@@ -160,7 +160,7 @@ importers:
       rooks: ^5.11.0
       swr: ^1.3.0
       typescript: ^4.7.4
-      vite: 3.0.2
+      vite: ^3.0.2
       vite-plugin-pages: ^0.25.0
       vite-plugin-style-import: ^1.4.1
       vite-plugin-svgr: ^2.2.0
