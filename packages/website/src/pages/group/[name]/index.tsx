@@ -1,6 +1,5 @@
 import { Tab, Section, Typography } from '@bangumi/design'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
-import classnames from 'classnames'
 import { useParams } from 'react-router-dom'
 import GlobalLayout from '../../../components/GlobalLayout'
 import { useGroup } from '../../../hooks/use-group'
@@ -10,8 +9,11 @@ import { render as renderBBCode } from '@bangumi/utils'
 import { UserCard } from './components/UserCard'
 import { getGroupTopicLink, getUserProfileLink } from '../../../utils/pages'
 import dayjs from 'dayjs'
+import { ClampableContent } from './components/ClampableContent'
 
 const { Link } = Typography
+
+const CLAMP_HEIGHT_THRESHOLD = 193
 
 const GroupHome: React.FC = () => {
   const { name } = useParams()
@@ -103,13 +105,7 @@ const GroupHome: React.FC = () => {
         <Tab type="borderless" items={tabs} activeKey="index" />
         <div className={styles.columnContainer}>
           <div className={styles.leftCol}>
-            <div
-              ref={descRef}
-              className={classnames(styles.description, {
-                [styles.clamped]: isClampEnabled && isClamped
-              })}
-              dangerouslySetInnerHTML={{ __html: parsedDescription }}
-            />
+            <ClampableContent threshold={CLAMP_HEIGHT_THRESHOLD} content={parsedDescription} />
             {renderClampToggle()}
             <Section title="最近讨论">
               {renderRecentTopics()}
