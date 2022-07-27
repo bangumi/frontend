@@ -98,6 +98,7 @@ importers:
       react-router-dom: ^6.2.2
       typescript: ^4.7.4
       vite: ^3.0.2
+      vite-plugin-svgr: ^2.2.0
     dependencies:
       normalize.css: 8.0.1
       react: 17.0.2
@@ -116,6 +117,7 @@ importers:
       react-router-dom: 6.2.2_sfoxds7t5ydpegc3knd667wn6m
       typescript: 4.7.4
       vite: 3.0.2_less@4.1.2
+      vite-plugin-svgr: 2.2.0_vite@3.0.2
 
   packages/icons:
     specifiers:
@@ -15990,7 +15992,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 4.2.1
       '@svgr/core': 6.2.1
-      vite: 3.0.2
+      vite: 3.0.2_less@4.1.2
     transitivePeerDependencies:
       - supports-color
     dev: true
