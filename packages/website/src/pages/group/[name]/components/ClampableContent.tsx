@@ -1,6 +1,7 @@
 import React from 'react'
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg'
 import { ReactComponent as UpArrow } from '../../../../assets/up-arrow.svg'
+import { useLocalConfig } from '../../../../hooks/use-local-config'
 import styles from './ClampableContent.module.less'
 
 export interface ClampableContentProps {
@@ -9,8 +10,9 @@ export interface ClampableContentProps {
 }
 
 export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold }) => {
+  const { getConfig, setConfig } = useLocalConfig()
   const [isClampEnabled, setIsClampedEnable] = React.useState(false)
-  const [isClamped, setIsClamped] = React.useState(true)
+  const [isClamped, setIsClamped] = React.useState(getConfig('doesGroupDescriptionNeedClamp'))
   const contentRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
@@ -26,10 +28,12 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
   }
 
   const handleUnclamp = (): void => {
+    setConfig('doesGroupDescriptionNeedClamp', false)
     setIsClamped(false)
   }
 
   const handleClamp = (): void => {
+    setConfig('doesGroupDescriptionNeedClamp', true)
     setIsClamped(true)
   }
 
