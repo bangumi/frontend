@@ -3,7 +3,9 @@ import React, { forwardRef, useRef, useImperativeHandle } from 'react'
 import Toolbox from './Toolbox'
 
 export interface EditorProps {
+  /* placeholder */
   placeholder?: string
+  /* 是否显示工具栏 */
   showToolbox?: boolean
 }
 

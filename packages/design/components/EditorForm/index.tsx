@@ -5,16 +5,22 @@ import Link from '../Typography/Link'
 import classnames from 'classnames'
 
 export interface EditorFormProps extends EditorProps {
+  /* 最外层 className */
   className?: string
-  style: React.CSSProperties
+  /* 最外层 style */
+  style?: React.CSSProperties
+  /* 确认按钮的文本 */
   confirmText?: string
+  /* 确认按钮后的回调 */
   onConfirm?: (content: string) => void
+  /* 取消按钮的文本 */
   cancelText?: string
+  /* 取消按钮的回调 */
   onCancel?: () => void
 }
 
 const EditorForm: FC<EditorFormProps> = ({
-  className = '',
+  className,
   style,
   confirmText = '写好了',
   onConfirm,
