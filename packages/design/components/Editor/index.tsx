@@ -1,10 +1,5 @@
 import React, { FC } from 'react'
-import { ReactComponent as Bold } from './assets/Bold.svg'
-import { ReactComponent as Italic } from './assets/Italic.svg'
-import { ReactComponent as Underscore } from './assets/Underscore.svg'
-import { ReactComponent as Image } from './assets/Image.svg'
-import { ReactComponent as Link } from './assets/Link.svg'
-import { ReactComponent as Size } from './assets/Size.svg'
+import { Bold, Italic, Underscore, Image, Link, Size } from '@bangumi/icons'
 
 const Editor: FC = () => {
   return (
