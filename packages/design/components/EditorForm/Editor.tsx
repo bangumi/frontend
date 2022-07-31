@@ -9,10 +9,21 @@ export interface EditorProps {
   showToolbox?: boolean
 }
 
-const setInputValue = (el: HTMLTextAreaElement, content: string, shouldUpdateSelection = true): void => {
-  const pos = el.value.length + content.lastIndexOf('[')
-  el.value += content
-  shouldUpdateSelection && el.setSelectionRange(pos, pos)
+const setInputValue = (
+  el: HTMLTextAreaElement,
+  bbcode: string,
+  shouldUpdateSelection = true,
+  start?: number,
+  end?: number
+): void => {
+  if (start && end) {
+    el.value += bbcode
+    shouldUpdateSelection && el.setSelectionRange(start, end)
+  } else {
+    const pos = el.value.length + bbcode.lastIndexOf('[')
+    el.value += bbcode
+    shouldUpdateSelection && el.setSelectionRange(pos, pos)
+  }
   el.focus()
 }
 
@@ -49,7 +60,9 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
       case 'link': {
         const value = prompt('请输入链接地址')
         if (value === null) break
-        setInputValue(el, `[url=${value}]链接描述[/url]`)
+        const bbcode = `[url=${value}]链接描述[/url]`
+        const pos = el.value.length + bbcode.lastIndexOf('[')
+        setInputValue(el, bbcode, true, pos - 4, pos)
         break
       }
       case 'size': {

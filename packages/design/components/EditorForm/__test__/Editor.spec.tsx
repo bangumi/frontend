@@ -69,7 +69,7 @@ describe('EditorForm > Editor', () => {
         }
         case 'link': {
           expect(textarea.value).toBe(`[url=${mockValue}]链接描述[/url]`)
-          expect(textarea.selectionStart).toBe(64)
+          expect(textarea.selectionStart).toBe(60)
           expect(textarea.selectionEnd).toBe(64)
           break
         }
