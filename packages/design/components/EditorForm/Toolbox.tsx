@@ -8,7 +8,7 @@ interface ToolboxProps {
 
 const Toolbox: FC<ToolboxProps> = ({ handleClickEvent, style }) => {
   return (
-    <div className="bgm-editor__header" style={style}>
+    <div className="bgm-editor__toolbox" style={style}>
       <Bold onClick={() => handleClickEvent('bold')} />
       <Italic onClick={() => handleClickEvent('italic')} />
       <Underscore onClick={() => handleClickEvent('underscore')} />
