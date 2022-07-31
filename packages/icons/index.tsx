@@ -10,7 +10,7 @@ export { ReactComponent as UserLogin } from './assets/user-login.svg'
 export { ReactComponent as Password } from './assets/password.svg'
 export { ReactComponent as Captcha } from './assets/captcha.svg'
 
-// BBCode EditorForm
+// BBCode Editor
 
 export { ReactComponent as Bold } from './assets/bold.svg'
 export { ReactComponent as Italic } from './assets/italic.svg'
