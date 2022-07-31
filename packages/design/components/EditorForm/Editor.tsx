@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle } from 'react'
+import React, { forwardRef, useRef, useImperativeHandle, HTMLAttributes } from 'react'
 import Toolbox from './Toolbox'
 
-export interface EditorProps {
+export interface EditorProps extends HTMLAttributes<HTMLTextAreaElement> {
   /* placeholder */
   placeholder?: string
   /* 是否显示工具栏 */
@@ -27,7 +27,8 @@ const setInputValue = (
 
 const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
   placeholder,
-  showToolbox = true
+  showToolbox = true,
+  ...props
 }, ref) => {
   const innerRef = useRef<HTMLTextAreaElement>(null)
   useImperativeHandle(ref, () => innerRef.current!, [innerRef])
@@ -81,7 +82,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
   return (
     <div className="bgm-editor__container">
       <Toolbox handleClickEvent={handleToolboxClick} style={{ display: showToolbox ? '' : 'none' }} />
-      <textarea className="bgm-editor__text" placeholder={placeholder} ref={innerRef} />
+      <textarea className="bgm-editor__text" placeholder={placeholder} ref={innerRef} {...props} />
     </div>
   )
 })

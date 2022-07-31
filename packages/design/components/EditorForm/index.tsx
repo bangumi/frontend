@@ -26,13 +26,25 @@ const EditorForm: FC<EditorFormProps> = ({
   onConfirm,
   cancelText = '取消',
   onCancel,
-  ...args
+  ...props
 }) => {
   const classNames = classnames('bgm-editor__form', className)
   const ref = useRef<HTMLTextAreaElement>(null)
   return (
     <div className={classNames} style={style}>
-      <Editor {...args} ref={ref} />
+      <Editor
+        ref={ref}
+        onKeyDown={e => {
+          console.log(e)
+          if (
+            ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
+          (e.altKey && e.key === 's')
+          ) {
+            onConfirm?.(ref.current!.value)
+          }
+        }}
+        {...props}
+      />
       <div className="bgm-editor__button-group">
         <Button
           shape="rounded" className="bgm-editor__button bgm-editor__button--confirm"
