@@ -11,18 +11,16 @@ export interface EditorProps {
 
 const setInputValue = (
   el: HTMLTextAreaElement,
-  bbcode: string,
-  shouldUpdateSelection = true,
-  start?: number,
-  end?: number
+  prefix: string,
+  suffix: string,
+  content = ''
 ): void => {
-  if (start && end) {
-    el.value += bbcode
-    shouldUpdateSelection && el.setSelectionRange(start, end)
-  } else {
-    const pos = el.value.length + bbcode.lastIndexOf('[')
-    el.value += bbcode
-    shouldUpdateSelection && el.setSelectionRange(pos, pos)
+  const preStart = el.selectionStart
+  const preEnd = el.selectionEnd
+  const preValue = el.value
+  el.value = `${preValue.slice(0, preStart)}${prefix}${content}${suffix}${preValue.slice(preEnd)}`
+  if (preStart === preEnd) {
+    el.selectionStart = el.selectionEnd = preStart + prefix.length + content.length
   }
   el.focus()
 }
@@ -38,37 +36,44 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
     if (!el) {
       return
     }
+    const preStart = el.selectionStart
+    const preEnd = el.selectionEnd
+    const selected = el.value.slice(preStart, preEnd)
     switch (type) {
       case 'bold': {
-        setInputValue(el, '[b][/b]')
+        setInputValue(el, '[b]', '[/b]', selected)
         break
       }
       case 'italic': {
-        setInputValue(el, '[i][/i]')
+        setInputValue(el, '[i]', '[/i]', selected)
         break
       }
       case 'underscore': {
-        setInputValue(el, '[u][/u]')
+        setInputValue(el, '[u]', '[/u]', selected)
         break
       }
       case 'image': {
         const value = prompt('请输入图片链接')
         if (value === null) break
-        setInputValue(el, `[img]${value}[/img]`, false)
+        setInputValue(el, '[img]', '[/img]', value)
+        el.selectionStart = el.selectionEnd = el.value.length
         break
       }
       case 'link': {
         const value = prompt('请输入链接地址')
         if (value === null) break
-        const bbcode = `[url=${value}]链接描述[/url]`
-        const pos = el.value.length + bbcode.lastIndexOf('[')
-        setInputValue(el, bbcode, true, pos - 4, pos)
+        const prefix = `[url=${value}]`
+        const suffix = '[/url]'
+        setInputValue(el, prefix, suffix, selected || '链接描述')
+        if (!selected) {
+          el.selectionStart = el.selectionEnd - 4
+        }
         break
       }
       case 'size': {
         const value = prompt('请输入字体大小')
         if (value === null) break
-        setInputValue(el, `[size=${value}][/size]`)
+        setInputValue(el, `[size=${value}]`, '[/size]', selected)
         break
       }
     }
