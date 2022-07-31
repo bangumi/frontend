@@ -3,7 +3,8 @@ import React, { FC, ChangeEvent, useRef } from 'react'
 import Toolbox from './Toolbox'
 
 export interface EditorProps {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+  placeholder?: string
+  onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 const setInputValue = (el: HTMLTextAreaElement, content: string, shouldUpdateSelection = true): void => {
@@ -14,6 +15,7 @@ const setInputValue = (el: HTMLTextAreaElement, content: string, shouldUpdateSel
 }
 
 const Editor: FC<EditorProps> = ({
+  placeholder,
   onChange
 }) => {
   const ref = useRef<HTMLTextAreaElement>(null)
@@ -58,7 +60,7 @@ const Editor: FC<EditorProps> = ({
   return (
     <div className="bgm-editor__container">
       <Toolbox handleClickEvent={handleToolboxClick} />
-      <textarea className="bgm-editor__text" placeholder="想聊点什么的呢..." onChange={onChange} ref={ref} />
+      <textarea className="bgm-editor__text" placeholder={placeholder} onChange={onChange} ref={ref} />
     </div>
   )
 }

@@ -1,5 +1,7 @@
 @import '../../../theme/base';
 
+@toolbox-with: 215px;
+
 .bgm-editor {
   &__container {
     display: inline-flex;
@@ -15,7 +17,7 @@
     justify-content: space-between;
     align-items: center;
     height: 26px;
-    width: 215px;
+    width: @toolbox-with;
 
     > svg {
       cursor: pointer;
@@ -24,8 +26,9 @@
 
   &__text {
     flex: 1 0 auto;
+    min-width: @toolbox-with;
     width: 682px;
-    padding: 10px;
+    padding-top: 10px;
     border: none;
     outline: none;
 
