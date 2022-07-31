@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { FC, ChangeEvent, useRef } from 'react'
+import React, { forwardRef, ChangeEvent, useRef, useImperativeHandle } from 'react'
 import Toolbox from './Toolbox'
 
 export interface EditorProps {
   placeholder?: string
+  showToolbox?: boolean
   onChange?: (e: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
@@ -14,13 +15,15 @@ const setInputValue = (el: HTMLTextAreaElement, content: string, shouldUpdateSel
   el.focus()
 }
 
-const Editor: FC<EditorProps> = ({
+const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
   placeholder,
+  showToolbox = true,
   onChange
-}) => {
-  const ref = useRef<HTMLTextAreaElement>(null)
+}, ref) => {
+  const innerRef = useRef<HTMLTextAreaElement>(null)
+  useImperativeHandle(ref, () => innerRef.current!, [innerRef])
   const handleToolboxClick = (type: string, payload?: any): void => {
-    const el = ref.current
+    const el = innerRef.current
     if (!el) {
       return
     }
@@ -59,10 +62,10 @@ const Editor: FC<EditorProps> = ({
   }
   return (
     <div className="bgm-editor__container">
-      <Toolbox handleClickEvent={handleToolboxClick} />
-      <textarea className="bgm-editor__text" placeholder={placeholder} onChange={onChange} ref={ref} />
+      <Toolbox handleClickEvent={handleToolboxClick} style={{ display: showToolbox ? '' : 'none' }} />
+      <textarea className="bgm-editor__text" placeholder={placeholder} onChange={onChange} ref={innerRef} />
     </div>
   )
-}
+})
 
 export default Editor

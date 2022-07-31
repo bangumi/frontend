@@ -18,6 +18,7 @@
     align-items: center;
     height: 26px;
     width: @toolbox-with;
+    margin-bottom: 10px;
 
     > svg {
       cursor: pointer;
@@ -26,11 +27,13 @@
 
   &__text {
     flex: 1 0 auto;
+    padding: 0;
     min-width: @toolbox-with;
     width: 682px;
-    padding-top: 10px;
     border: none;
     outline: none;
+    color: @gray-100;
+    line-height: 26px;
 
     &::placeholder {
       color: @gray-60;
