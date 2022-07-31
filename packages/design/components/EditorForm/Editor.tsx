@@ -49,7 +49,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
       case 'link': {
         const value = prompt('请输入链接地址')
         if (value === null) break
-        setInputValue(el, `[url=${value}]连接描述[/url]`)
+        setInputValue(el, `[url=${value}]链接描述[/url]`)
         break
       }
       case 'size': {
