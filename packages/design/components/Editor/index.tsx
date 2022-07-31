@@ -36,17 +36,20 @@ const Editor: FC<EditorProps> = ({
         break
       }
       case 'image': {
-        const value = prompt('请输入图片链接') ?? ''
+        const value = prompt('请输入图片链接')
+        if (value === null) break
         setInputValue(el, `[img]${value}[/img]`, false)
         break
       }
       case 'link': {
-        const value = prompt('请输入链接地址') ?? ''
+        const value = prompt('请输入链接地址')
+        if (value === null) break
         setInputValue(el, `[url=${value}]连接描述[/url]`)
         break
       }
       case 'size': {
-        const value = prompt('请输入字体大小') ?? ''
+        const value = prompt('请输入字体大小')
+        if (value === null) break
         setInputValue(el, `[size=${value}][/size]`)
         break
       }
