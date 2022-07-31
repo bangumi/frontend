@@ -9,12 +9,12 @@ interface ToolboxProps {
 const Toolbox: FC<ToolboxProps> = ({ handleClickEvent, style }) => {
   return (
     <div className="bgm-editor__toolbox" style={style}>
-      <Bold onClick={() => handleClickEvent('bold')} />
-      <Italic onClick={() => handleClickEvent('italic')} />
-      <Underscore onClick={() => handleClickEvent('underscore')} />
-      <Image onClick={() => handleClickEvent('image')} />
-      <Link onClick={() => handleClickEvent('link')} />
-      <Size onClick={() => handleClickEvent('size')} />
+      <Bold data-testid="bold" onClick={() => handleClickEvent('bold')} />
+      <Italic data-testid="italic" onClick={() => handleClickEvent('italic')} />
+      <Underscore data-testid="underscore" onClick={() => handleClickEvent('underscore')} />
+      <Image data-testid="image" onClick={() => handleClickEvent('image')} />
+      <Link data-testid="link" onClick={() => handleClickEvent('link')} />
+      <Size data-testid="size" onClick={() => handleClickEvent('size')} />
     </div>
   )
 }
