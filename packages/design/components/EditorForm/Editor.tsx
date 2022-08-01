@@ -11,6 +11,15 @@ export interface EditorProps {
   onConfirm?: (content: string) => void
 }
 
+const keyToEvent = {
+  b: 'bold',
+  i: 'italic',
+  u: 'underscore',
+  l: 'link',
+  s: 'size',
+  p: 'image'
+}
+
 const setInputValue = (
   el: HTMLTextAreaElement,
   prefix: string,
@@ -100,36 +109,10 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
             }
             // https://bgm.tv/help/bbcode
             if (e.ctrlKey || e.metaKey) {
-              switch (e.key) {
-                case 'b': {
-                  handleToolboxEvent('bold')
-                  e.preventDefault()
-                  break
-                }
-                case 'i': {
-                  handleToolboxEvent('italic')
-                  e.preventDefault()
-                  break
-                }
-                case 'u': {
-                  handleToolboxEvent('underscore')
-                  e.preventDefault()
-                  break
-                }
-                case 'l': {
-                  handleToolboxEvent('link')
-                  e.preventDefault()
-                  break
-                }
-                case 'p': {
-                  handleToolboxEvent('image')
-                  e.preventDefault()
-                  break
-                }
-                case 's': {
-                  handleToolboxEvent('size')
-                  e.preventDefault()
-                }
+              const key = e.key as keyof typeof keyToEvent
+              if (key && keyToEvent[key]) {
+                handleToolboxEvent(keyToEvent[key])
+                e.preventDefault()
               }
             }
           }
