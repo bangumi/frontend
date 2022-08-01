@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle, HTMLAttributes } from 'react'
+import React, { forwardRef, useRef, useImperativeHandle, useCallback } from 'react'
 import Toolbox from './Toolbox'
 
-export interface EditorProps extends HTMLAttributes<HTMLTextAreaElement> {
+export interface EditorProps {
   /* placeholder */
   placeholder?: string
   /* 是否显示工具栏 */
   showToolbox?: boolean
+  /* textarea 通过键盘按下提交触发事件 */
+  onConfirm?: (content: string) => void
 }
 
 const setInputValue = (
@@ -28,11 +30,11 @@ const setInputValue = (
 const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
   placeholder,
   showToolbox = true,
-  ...props
+  onConfirm
 }, ref) => {
   const innerRef = useRef<HTMLTextAreaElement>(null)
   useImperativeHandle(ref, () => innerRef.current!, [innerRef])
-  const handleToolboxClick = (type: string, payload?: any): void => {
+  const handleToolboxEvent = useCallback((type: string, payload?: any): void => {
     const el = innerRef.current
     if (!el) {
       return
@@ -78,11 +80,61 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
         break
       }
     }
-  }
+  }, [innerRef])
   return (
     <div className="bgm-editor__container">
-      <Toolbox handleClickEvent={handleToolboxClick} style={{ display: showToolbox ? '' : 'none' }} />
-      <textarea className="bgm-editor__text" placeholder={placeholder} ref={innerRef} {...props} />
+      <Toolbox handleClickEvent={handleToolboxEvent} style={{ display: showToolbox ? '' : 'none' }} />
+      <textarea
+        className="bgm-editor__text"
+        placeholder={placeholder}
+        ref={innerRef}
+        onKeyDown={
+          e => {
+            // Ctrl + Enter & Alt + S 触发提交
+            if (
+              ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
+              (e.altKey && e.key === 's')
+            ) {
+              onConfirm?.(innerRef.current!.value)
+              return e.preventDefault()
+            }
+            // https://bgm.tv/help/bbcode
+            if (e.ctrlKey || e.metaKey) {
+              switch (e.key) {
+                case 'b': {
+                  handleToolboxEvent('bold')
+                  e.preventDefault()
+                  break
+                }
+                case 'i': {
+                  handleToolboxEvent('italic')
+                  e.preventDefault()
+                  break
+                }
+                case 'u': {
+                  handleToolboxEvent('underscore')
+                  e.preventDefault()
+                  break
+                }
+                case 'l': {
+                  handleToolboxEvent('link')
+                  e.preventDefault()
+                  break
+                }
+                case 'p': {
+                  handleToolboxEvent('image')
+                  e.preventDefault()
+                  break
+                }
+                case 's': {
+                  handleToolboxEvent('size')
+                  e.preventDefault()
+                }
+              }
+            }
+          }
+        }
+      />
     </div>
   )
 })

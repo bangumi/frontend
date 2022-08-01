@@ -12,7 +12,7 @@ export interface EditorFormProps extends EditorProps {
   /* 确认按钮的文本 */
   confirmText?: string
   /* 确认按钮后的回调 */
-  onConfirm?: (content: string) => void
+  onConfirm?: (bbcode: string) => void
   /* 取消按钮的文本 */
   cancelText?: string
   /* 取消按钮的回调 */
@@ -34,15 +34,7 @@ const EditorForm: FC<EditorFormProps> = ({
     <div className={classNames} style={style}>
       <Editor
         ref={ref}
-        onKeyDown={e => {
-          console.log(e)
-          if (
-            ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
-          (e.altKey && e.key === 's')
-          ) {
-            onConfirm?.(ref.current!.value)
-          }
-        }}
+        onConfirm={onConfirm}
         {...props}
       />
       <div className="bgm-editor__button-group">
