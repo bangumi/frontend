@@ -139,6 +139,8 @@ describe('EditorForm > Editor', () => {
       const el = screen.getByTestId(type)
       el.click()
       doSelectionTest(textarea, type, mockValue)
+      // Click toolbox -> textarea should be focused
+      expect(textarea).toHaveFocus()
     })
   })
 
@@ -157,6 +159,8 @@ describe('EditorForm > Editor', () => {
       const el = screen.getByTestId(type)
       el.click()
       doSelectionTest(textarea, type, mockValue, true)
+      // Click toolbox -> textarea should be focused
+      expect(textarea).toHaveFocus()
     })
   })
 
