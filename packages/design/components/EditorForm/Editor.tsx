@@ -42,7 +42,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
   onConfirm
 }, ref) => {
   const innerRef = useRef<HTMLTextAreaElement>(null)
-  useImperativeHandle(ref, () => innerRef.current!, [innerRef])
+  useImperativeHandle(ref, () => innerRef.current!)
   const handleToolboxEvent = (type: string, payload?: any): void => {
     const el = innerRef.current
     if (!el) {
