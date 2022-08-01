@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle, useCallback } from 'react'
+import React, { forwardRef, useRef, useImperativeHandle } from 'react'
 import Toolbox from './Toolbox'
 
 export interface EditorProps {
@@ -34,7 +34,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
 }, ref) => {
   const innerRef = useRef<HTMLTextAreaElement>(null)
   useImperativeHandle(ref, () => innerRef.current!, [innerRef])
-  const handleToolboxEvent = useCallback((type: string, payload?: any): void => {
+  const handleToolboxEvent = (type: string, payload?: any): void => {
     const el = innerRef.current
     if (!el) {
       return
@@ -80,7 +80,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(({
         break
       }
     }
-  }, [innerRef])
+  }
   return (
     <div className="bgm-editor__container">
       <Toolbox handleClickEvent={handleToolboxEvent} style={{ display: showToolbox ? '' : 'none' }} />
