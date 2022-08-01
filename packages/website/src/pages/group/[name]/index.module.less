@@ -1,13 +1,5 @@
 @import '@bangumi/design/theme/base';
 
-.text-clamp-by-line(@lines) {
-  overflow: hidden;
-  /* stylelint-disable-next-line  value-no-vendor-prefix */
-  display: -webkit-box;
-  -webkit-line-clamp: @lines;
-  -webkit-box-orient: vertical;
-}
-
 .pageContainer {
   > * {
     margin-bottom: 10px;
@@ -28,23 +20,6 @@
   width: 427px;
 }
 
-.description {
-  width: 100%;
-  color: @gray-100;
-  font-size: 16px;
-  line-height: 24px;
-
-  &.clamped {
-    .text-clamp-by-line(8);
-  }
-}
-
-.clampControlButton {
-  color: @gray-60;
-  font-size: 14px;
-  line-height: 14px;
-}
-
 .newMembers {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -59,7 +34,7 @@
 
   th,
   td {
-    padding: 11px 0;
+    padding: 11px 5px 11px 0;
   }
 
   tr {
@@ -75,4 +50,16 @@
       font-weight: normal;
     }
   }
+}
+
+.author {
+  width: 120px;
+}
+
+.replies {
+  width: 60px;
+}
+
+.updateTime {
+  width: 100px;
 }

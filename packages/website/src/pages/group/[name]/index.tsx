@@ -1,5 +1,5 @@
 import { Tab, Section, Typography } from '@bangumi/design'
-import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import GlobalLayout from '../../../components/GlobalLayout'
 import { useGroup } from '../../../hooks/use-group'
@@ -18,22 +18,6 @@ const CLAMP_HEIGHT_THRESHOLD = 193
 const GroupHome: React.FC = () => {
   const { name } = useParams()
   const { group, recentTopics } = useGroup(name as string)
-  const descRef = useRef<HTMLDivElement>(null)
-  const [isClampEnabled, setClampEnabled] = useState(false)
-  const [isClamped] = useState<boolean>(true)
-
-  useEffect(() => {
-    if (!descRef) {
-      return undefined
-    }
-
-    if (descRef.current) {
-      descRef.current.classList.add(styles.clamped)
-      if (descRef.current.scrollHeight > descRef.current.clientHeight) {
-        setClampEnabled(true)
-      }
-    }
-  }, [group])
 
   if (!group) {
     return null
@@ -44,9 +28,6 @@ const GroupHome: React.FC = () => {
     label: '小组概览'
   }]
 
-  // TODO: XSS defense
-  const parsedDescription = renderBBCode(group.description)
-
   const renderRecentTopics = (): ReactElement | null => {
     if (!recentTopics) {
       return null
@@ -56,30 +37,30 @@ const GroupHome: React.FC = () => {
       <table className={styles.topicTable}>
         <thead>
           <tr>
-            <th>标题</th>
-            <th>作者</th>
-            <th>回复数</th>
-            <th>最后回复于</th>
+            <th className={styles.title}>标题</th>
+            <th className={styles.author}>作者</th>
+            <th className={styles.replies}>回复数</th>
+            <th className={styles.updateTime}>最后回复于</th>
           </tr>
         </thead>
         <tbody>
           {recentTopics.map((topic) => {
             return (
               <tr key={topic.id}>
-                <td>
+                <td className={styles.title}>
                   <Link to={getGroupTopicLink(topic.id)} fontWeight="bold" isExternal>
                     {topic.title}
                   </Link>
                 </td>
-                <td>
+                <td className={styles.author}>
                   <Link to={getUserProfileLink(topic.creator.username)} fontWeight="bold" isExternal>
                     {topic.creator.nickname}
                   </Link>
                 </td>
-                <td>
+                <td className={styles.replies}>
                   {topic.reply_count}
                 </td>
-                <td>
+                <td className={styles.updateTime}>
                   {dayjs(topic.updated_at).format('YYYY-M-D')}
                 </td>
               </tr>
@@ -90,13 +71,8 @@ const GroupHome: React.FC = () => {
     )
   }
 
-  const renderClampToggle = (): ReactElement | null => {
-    if (!isClampEnabled) {
-      return null
-    }
-
-    return <div className={styles.clampControlButton}>{isClamped ? '展开' : '收起'}</div>
-  }
+  // TODO: XSS defense
+  const parsedDescription = renderBBCode(group.description)
 
   return (
     <GlobalLayout>
@@ -106,7 +82,6 @@ const GroupHome: React.FC = () => {
         <div className={styles.columnContainer}>
           <div className={styles.leftCol}>
             <ClampableContent threshold={CLAMP_HEIGHT_THRESHOLD} content={parsedDescription} />
-            {renderClampToggle()}
             <Section title="最近讨论">
               {renderRecentTopics()}
             </Section>
