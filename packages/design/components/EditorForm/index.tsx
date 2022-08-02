@@ -12,7 +12,7 @@ export interface EditorFormProps extends EditorProps {
   /* 确认按钮的文本 */
   confirmText?: string
   /* 确认按钮后的回调 */
-  onConfirm?: (bbcode: string) => void
+  onConfirm?: (content: string) => void
   /* 取消按钮的文本 */
   cancelText?: string
   /* 取消按钮的回调 */
@@ -37,17 +37,17 @@ const EditorForm: FC<EditorFormProps> = ({
         onConfirm={onConfirm}
         {...props}
       />
-      <div className="bgm-editor__button-group">
+      <div className="bgm-editor__submit">
         <Button
           shape="rounded" className="bgm-editor__button bgm-editor__button--confirm"
           onClick={() => onConfirm?.(ref.current!.value)}
         >{confirmText}
         </Button>
         <Button
-          type="secondary" className="bgm-editor__button bgm-editor__button--cancel"
+          type="text" className="bgm-editor__button"
           onClick={onCancel}
         >{cancelText}</Button>
-        <span className="bgm-editor__button-group__tip">
+        <span className="bgm-editor__bbcode-tip">
           使用 Ctrl+Enter 或 Alt+S 快速提交 |
           {' '}
           <Link
