@@ -175,6 +175,10 @@ describe('EditorForm > Editor', () => {
     textarea.value = 'test2'
     fireEvent.keyDown(textarea, { key: 's', altKey: true })
     expect(onConfirm).lastCalledWith('test2')
+
+    textarea.value = 'test3'
+    fireEvent.keyDown(textarea, { key: 'S', altKey: true })
+    expect(onConfirm).lastCalledWith('test3')
   })
 
   it('BBCode editor keyboard event', () => {
@@ -183,13 +187,18 @@ describe('EditorForm > Editor', () => {
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
     jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
-    ;['b', 'i', 'u', 'l', 'p', 's'].forEach((key) => {
+    for (const key of Object.keys(keyToEvent)) {
       // init
       textarea.value = ''
 
       fireEvent.keyDown(textarea, { key, ctrlKey: true })
       doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue)
-    })
+
+      // Uppercase
+      textarea.value = ''
+      fireEvent.keyDown(textarea, { key: key.toUpperCase(), ctrlKey: true })
+      doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue)
+    }
   })
 
   it('BBCode editor keyboard event with selection', () => {
@@ -198,7 +207,7 @@ describe('EditorForm > Editor', () => {
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
     jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
-    ;['b', 'i', 'u', 'l', 'p', 's'].forEach((key) => {
+    for (const key of Object.keys(keyToEvent)) {
       // init
       textarea.value = 'Hello World'
       textarea.selectionStart = 6
@@ -206,6 +215,14 @@ describe('EditorForm > Editor', () => {
 
       fireEvent.keyDown(textarea, { key, ctrlKey: true })
       doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue, true)
-    })
+
+      // Uppercase
+      textarea.value = 'Hello World'
+      textarea.selectionStart = 6
+      textarea.selectionEnd = 11
+
+      fireEvent.keyDown(textarea, { key: key.toUpperCase(), ctrlKey: true })
+      doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue, true)
+    }
   })
 })
