@@ -36,7 +36,7 @@ exports[`<EditorForm /> render correctly with props 1`] = `
       />
     </div>
     <div
-      class="bgm-editor__button-group"
+      class="bgm-editor__submit"
     >
       <button
         class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button__primary bgm-button__rounded bgm-button__normal"
@@ -44,12 +44,12 @@ exports[`<EditorForm /> render correctly with props 1`] = `
         Confirm
       </button>
       <button
-        class="bgm-button bgm-editor__button bgm-editor__button--cancel bgm-button__secondary bgm-button__square bgm-button__normal"
+        class="bgm-button bgm-editor__button bgm-button__text bgm-button__square bgm-button__normal"
       >
         取消
       </button>
       <span
-        class="bgm-editor__button-group__tip"
+        class="bgm-editor__bbcode-tip"
       >
         使用 Ctrl+Enter 或 Alt+S 快速提交 | 
         <a

@@ -131,7 +131,7 @@ describe('EditorForm > Editor', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
     ;['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach(type => {
       // init
@@ -139,6 +139,14 @@ describe('EditorForm > Editor', () => {
       const el = screen.getByTestId(type)
       el.click()
       doSelectionTest(textarea, type, mockValue)
+
+      if (type === 'image' || type === 'link' || type === 'size') {
+        expect(prompt).toHaveBeenCalled()
+      } else {
+        expect(prompt).not.toHaveBeenCalled()
+      }
+      prompt.mockClear()
+
       // Click toolbox -> textarea should be focused
       expect(textarea).toHaveFocus()
     })
@@ -148,7 +156,7 @@ describe('EditorForm > Editor', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
     ;['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach(type => {
       // init
@@ -159,6 +167,14 @@ describe('EditorForm > Editor', () => {
       const el = screen.getByTestId(type)
       el.click()
       doSelectionTest(textarea, type, mockValue, true)
+
+      if (type === 'image' || type === 'link' || type === 'size') {
+        expect(prompt).toHaveBeenCalled()
+      } else {
+        expect(prompt).not.toHaveBeenCalled()
+      }
+      prompt.mockClear()
+
       // Click toolbox -> textarea should be focused
       expect(textarea).toHaveFocus()
     })
@@ -185,19 +201,27 @@ describe('EditorForm > Editor', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
     for (const key of Object.keys(keyToEvent)) {
+      const type = keyToEvent[key as keyof typeof keyToEvent]
       // init
       textarea.value = ''
 
       fireEvent.keyDown(textarea, { key, ctrlKey: true })
-      doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue)
+      doSelectionTest(textarea, type, mockValue)
 
       // Uppercase
       textarea.value = ''
       fireEvent.keyDown(textarea, { key: key.toUpperCase(), ctrlKey: true })
-      doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue)
+      doSelectionTest(textarea, type, mockValue)
+
+      if (type === 'image' || type === 'link' || type === 'size') {
+        expect(prompt).toHaveBeenCalled()
+      } else {
+        expect(prompt).not.toHaveBeenCalled()
+      }
+      prompt.mockClear()
     }
   })
 
@@ -205,16 +229,17 @@ describe('EditorForm > Editor', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
     for (const key of Object.keys(keyToEvent)) {
+      const type = keyToEvent[key as keyof typeof keyToEvent]
       // init
       textarea.value = 'Hello World'
       textarea.selectionStart = 6
       textarea.selectionEnd = 11
 
       fireEvent.keyDown(textarea, { key, ctrlKey: true })
-      doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue, true)
+      doSelectionTest(textarea, type, mockValue, true)
 
       // Uppercase
       textarea.value = 'Hello World'
@@ -222,7 +247,14 @@ describe('EditorForm > Editor', () => {
       textarea.selectionEnd = 11
 
       fireEvent.keyDown(textarea, { key: key.toUpperCase(), ctrlKey: true })
-      doSelectionTest(textarea, keyToEvent[key as keyof typeof keyToEvent], mockValue, true)
+      doSelectionTest(textarea, type, mockValue, true)
+
+      if (type === 'image' || type === 'link' || type === 'size') {
+        expect(prompt).toHaveBeenCalled()
+      } else {
+        expect(prompt).not.toHaveBeenCalled()
+      }
+      prompt.mockClear()
     }
   })
 })
