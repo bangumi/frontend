@@ -6,3 +6,7 @@ export function getUserProfileLink (username: string): string {
 export function getGroupTopicLink (topicId: number): string {
   return `https://bgm.tv/group/topic/${topicId}`
 }
+
+export function getGroupForumPage (groupName: string): string {
+  return `https://bgm.tv/group/${groupName}/forum`
+}
