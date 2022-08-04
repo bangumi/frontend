@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditorForm > Toolbox render with default classNames 1`] = `
+<DocumentFragment>
+  <div
+    class="bgm-editor__toolbox"
+  >
+    <div
+      data-testid="bold"
+    />
+    <div
+      data-testid="italic"
+    />
+    <div
+      data-testid="underscore"
+    />
+    <div
+      data-testid="image"
+    />
+    <div
+      data-testid="link"
+    />
+    <div
+      data-testid="size"
+    />
+  </div>
+</DocumentFragment>
+`;

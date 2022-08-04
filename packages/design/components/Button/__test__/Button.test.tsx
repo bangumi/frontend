@@ -6,6 +6,7 @@ it.each`
   type
   ${'primary'}
   ${'secondary'}
+  ${'text'}
 `('should render button of type $type', ({ type }) => {
   const { container } = render(<Button type={type}>hello world</Button>)
   expect(container.firstChild).toMatchSnapshot()

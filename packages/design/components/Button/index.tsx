@@ -5,7 +5,7 @@ export interface ButtonProps {
   disabled?: boolean
   onClick?: () => void
   className?: string
-  type?: 'primary' | 'secondary'
+  type?: 'primary' | 'secondary' | 'text'
   shape?: 'square' | 'rounded'
   size?: 'normal'
 }
