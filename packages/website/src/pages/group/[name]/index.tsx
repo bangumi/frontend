@@ -7,7 +7,7 @@ import { GroupHeader } from './components/GroupHeader'
 import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
 import { UserCard } from './components/UserCard'
-import { getGroupForumPage, getGroupTopicLink, getUserProfileLink } from '../../../utils/pages'
+import { getGroupForumPage, getGroupMemberPage, getGroupTopicLink, getUserProfileLink } from '../../../utils/pages'
 import dayjs from 'dayjs'
 import { ClampableContent } from './components/ClampableContent'
 import { ReactComponent as RightArrow } from '../../../assets/right-arrow.svg'
@@ -70,7 +70,15 @@ const GroupHome: React.FC = () => {
             })}
           </tbody>
         </table>
-        <a className={styles.textButton} href={getGroupForumPage(name)}><span>更多组内讨论</span><RightArrow /></a>
+        {/* TODO: 给 Section 增加 footer props */}
+        <div className={styles.footer}>
+          <a
+            className={styles.textButton}
+            href={getGroupForumPage(name)}
+          >
+            <span>更多组内讨论</span><RightArrow />
+          </a>
+        </div>
       </>
     )
   }
@@ -98,6 +106,14 @@ const GroupHome: React.FC = () => {
                     <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
                   )
                 })}
+              </div>
+              <div className={styles.footer}>
+                <a
+                  className={styles.textButton}
+                  href={getGroupMemberPage(name)}
+                >
+                  <span>更多小组成员</span><RightArrow />
+                </a>
               </div>
             </Section>
           </div>

@@ -10,3 +10,7 @@ export function getGroupTopicLink (topicId: number): string {
 export function getGroupForumPage (groupName: string): string {
   return `https://bgm.tv/group/${groupName}/forum`
 }
+
+export function getGroupMemberPage (groupName: string): string {
+  return `https://bgm.tv/group/${groupName}/members`
+}

@@ -35,7 +35,7 @@
 
   th,
   td {
-    padding: 11px 5px 11px 0;
+    padding: 11px 0 11px 5px;
   }
 
   tr {
@@ -50,6 +50,10 @@
     th {
       font-weight: normal;
     }
+  }
+
+  .updateTime {
+    text-align: right;
   }
 }
 
@@ -67,6 +71,7 @@
 
 .textButton {
   display: flex;
+  justify-content: right;
   align-items: center;
   color: @gray-60;
   font-size: 14px;
@@ -85,4 +90,8 @@
       fill: @blue-100;
     }
   }
+}
+
+.footer {
+  padding-top: 10px;
 }
