@@ -1,3 +1,5 @@
+@import './style/reset.less';
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont,
     'SF Pro SC', 'SF Pro Display', 'PingFang SC', 'Microsoft YaHei',

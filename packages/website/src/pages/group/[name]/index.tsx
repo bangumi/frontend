@@ -70,15 +70,6 @@ const GroupHome: React.FC = () => {
             })}
           </tbody>
         </table>
-        {/* TODO: 给 Section 增加 footer props */}
-        <div className={styles.footer}>
-          <a
-            className={styles.textButton}
-            href={getGroupForumPage(name)}
-          >
-            <span>更多组内讨论</span><RightArrow />
-          </a>
-        </div>
       </>
     )
   }
@@ -94,26 +85,37 @@ const GroupHome: React.FC = () => {
         <div className={styles.columnContainer}>
           <div className={styles.leftCol}>
             <ClampableContent threshold={CLAMP_HEIGHT_THRESHOLD} content={parsedDescription} />
-            <Section title="最近讨论">
+            <Section
+              title="最近讨论"
+              renderFooter={() => (
+                <a
+                  className={styles.textButton}
+                  href={getGroupForumPage(name)}
+                >
+                  <span>更多组内讨论</span><RightArrow />
+                </a>
+              )}
+            >
               {renderRecentTopics()}
             </Section>
           </div>
           <div className={styles.rightCol}>
-            <Section title="最近加入">
-              <div className={styles.newMembers}>
-                {group.new_members.slice(0, 10).map((member) => {
-                  return (
-                    <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
-                  )
-                })}
-              </div>
-              <div className={styles.footer}>
+            <Section
+              title="最近加入" renderFooter={() => (
                 <a
                   className={styles.textButton}
                   href={getGroupMemberPage(name)}
                 >
                   <span>更多小组成员</span><RightArrow />
                 </a>
+              )}
+            >
+              <div className={styles.newMembers}>
+                {group.new_members.slice(0, 10).map((member) => {
+                  return (
+                    <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
+                  )
+                })}
               </div>
             </Section>
           </div>
