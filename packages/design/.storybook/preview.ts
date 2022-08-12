@@ -1,6 +1,5 @@
 import type { Parameters as StoryParameters } from '@storybook/react'
 
-import 'normalize.css'
 import 'reset-css'
 import './global.css'
 

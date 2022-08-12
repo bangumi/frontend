@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
-import 'normalize.css'
+import 'reset-css'
 import './index.css'
 
 ReactDOM.render(
