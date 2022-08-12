@@ -1,0 +1,27 @@
+@import '@bangumi/design/theme/base';
+
+.pageContainer {
+  padding: 23px 46px;
+
+  > * {
+    margin-bottom: 10px;
+  }
+}
+
+.columnContainer {
+  display: flex;
+}
+
+.leftCol {
+  width: 913px;
+  flex: 1;
+  margin-right: 40px;
+}
+
+.members {
+  display: grid;
+  grid-template-columns: repeat(3, 290px);
+  padding-top: 20px;
+  column-gap: 14px;
+  row-gap: 20px;
+}

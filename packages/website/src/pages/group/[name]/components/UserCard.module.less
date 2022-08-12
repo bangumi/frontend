@@ -1,0 +1,49 @@
+@import '@bangumi/design/theme/base';
+
+.userCard {
+  display: flex;
+  font-size: 14px;
+  word-break: break-all;
+
+  &.vertical {
+    flex-direction: column;
+    align-items: center;
+    width: 60px;
+  }
+
+  &.horizontal {
+    width: 290px;
+  }
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  display: block;
+
+  .vertical & {
+    margin-bottom: 5px;
+  }
+
+  .horizontal & {
+    margin-right: 10px;
+  }
+}
+
+.nickname {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  color: @blue-100;
+  font-weight: bold;
+  text-align: center;
+
+  .vertical & {
+    width: 60px;
+  }
+
+  .horizontal & {
+    width: 220px;
+  }
+}

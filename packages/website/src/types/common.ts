@@ -91,3 +91,27 @@ export interface Subject {
   collection: collection
   tags: tag[]
 }
+
+export interface AvatarSet {
+  large: string
+  medium: string
+  small: string
+}
+
+export interface Member {
+  joined_at: string
+  avatar: AvatarSet
+  username: string
+  nickname: string
+  id: number
+}
+
+export interface Pagination {
+  total: number
+  limit: number
+  offset: number
+}
+
+export interface ResponseWithPagination<T> extends Pagination {
+  data: T
+}
