@@ -1,18 +1,17 @@
 import React from 'react'
 import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg'
 import { ReactComponent as UpArrow } from '../../../../assets/up-arrow.svg'
-import { useLocalConfig } from '../../../../hooks/use-local-config'
 import styles from './ClampableContent.module.less'
 
 export interface ClampableContentProps {
   threshold: number
   content: string
+  isClamped: boolean
+  onChange: (isClamped: boolean) => void
 }
 
-export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold }) => {
-  const { getConfig, setConfig } = useLocalConfig()
+export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold, isClamped, onChange }) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false)
-  const [isClamped, setIsClamped] = React.useState(getConfig('doesGroupDescriptionNeedClamp'))
   const contentRef = React.useRef<HTMLDivElement>(null)
 
   React.useEffect(() => {
@@ -28,13 +27,11 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
   }
 
   const handleUnclamp = (): void => {
-    setConfig('doesGroupDescriptionNeedClamp', false)
-    setIsClamped(false)
+    onChange?.(false)
   }
 
   const handleClamp = (): void => {
-    setConfig('doesGroupDescriptionNeedClamp', true)
-    setIsClamped(true)
+    onChange?.(true)
   }
 
   const renderControl = (): React.ReactElement | null => {

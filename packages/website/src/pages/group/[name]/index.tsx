@@ -2,7 +2,7 @@ import { Tab, Section, Typography } from '@bangumi/design'
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
 import GlobalLayout from '../../../components/GlobalLayout'
-import { useGroup } from '../../../hooks/use-group'
+import { DescriptionClamp, useGroup } from '../../../hooks/use-group'
 import { GroupHeader } from './components/GroupHeader'
 import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
@@ -18,7 +18,7 @@ const CLAMP_HEIGHT_THRESHOLD = 193
 
 const GroupHome: React.FC = () => {
   const { name } = useParams()
-  const { group, recentTopics } = useGroup(name as string)
+  const { group, recentTopics, descriptionClamp, setDescriptionClamp } = useGroup(name as string)
 
   if (!name || !group) {
     return null
@@ -74,6 +74,10 @@ const GroupHome: React.FC = () => {
     )
   }
 
+  const handleChangeClamp = (isClamped: boolean): void => {
+    setDescriptionClamp(isClamped ? DescriptionClamp.clamp : DescriptionClamp.unclamp)
+  }
+
   // TODO: XSS defense
   const parsedDescription = renderBBCode(group.description)
 
@@ -84,7 +88,12 @@ const GroupHome: React.FC = () => {
         <Tab type="borderless" items={tabs} activeKey="index" />
         <div className={styles.columnContainer}>
           <div className={styles.leftCol}>
-            <ClampableContent threshold={CLAMP_HEIGHT_THRESHOLD} content={parsedDescription} />
+            <ClampableContent
+              threshold={CLAMP_HEIGHT_THRESHOLD}
+              content={parsedDescription}
+              isClamped={descriptionClamp === DescriptionClamp.clamp}
+              onChange={handleChangeClamp}
+            />
             <Section
               title="最近讨论"
               renderFooter={() => (
