@@ -4,9 +4,9 @@
   "private": true,
   "main": "index.tsx",
   "dependencies": {
-    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "reset-css": "^5.0.1"
   },
   "devDependencies": {
     "@bangumi/icons": "workspace:*",
