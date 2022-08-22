@@ -57,7 +57,7 @@ export default defineConfig({
       libs: [
         {
           libraryName: '@bangumi/design',
-          libraryNameChangeCase: 'capitalCase',
+          libraryNameChangeCase: 'pascalCase',
           ensureStyleFile: true,
           resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`
         }
