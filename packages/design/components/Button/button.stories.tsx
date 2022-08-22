@@ -23,6 +23,11 @@ SecondaryButton.args = {
   type: 'secondary'
 }
 
+export const TextButton = Template.bind({})
+TextButton.args = {
+  type: 'text'
+}
+
 export const SquareButton = Template.bind({})
 SquareButton.args = {
   shape: 'square'

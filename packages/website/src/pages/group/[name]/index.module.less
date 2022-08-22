@@ -1,0 +1,102 @@
+@import '@bangumi/design/theme/base';
+
+.pageContainer {
+  > * {
+    margin-bottom: 10px;
+  }
+}
+
+.columnContainer {
+  display: flex;
+}
+
+.leftCol,
+.rightCol {
+  > * {
+    margin-bottom: 20px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.leftCol {
+  width: 913px;
+  flex: 1;
+  margin-right: 40px;
+}
+
+.rightCol {
+  width: 427px;
+}
+
+.newMembers {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 30px;
+  row-gap: 15px;
+}
+
+.topicTable {
+  width: 100%;
+  color: @gray-60;
+
+  th,
+  td {
+    padding: 11px 0;
+  }
+
+  tr {
+    border-bottom: 1px dotted @gray-10;
+  }
+
+  thead {
+    font-size: 18px;
+    line-height: 18px;
+    text-align: left;
+
+    th {
+      font-weight: normal;
+    }
+  }
+
+  .updateTime {
+    text-align: right;
+  }
+}
+
+.author {
+  width: 120px;
+}
+
+.replies {
+  width: 60px;
+}
+
+.updateTime {
+  width: 100px;
+}
+
+.textButton {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  color: @gray-60;
+  font-size: 14px;
+  line-height: 14px;
+  text-decoration: none;
+  cursor: pointer;
+
+  span {
+    margin-right: 4px;
+  }
+
+  &:hover {
+    color: @blue-100;
+
+    path {
+      fill: @blue-100;
+    }
+  }
+}

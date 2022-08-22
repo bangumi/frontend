@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EditorForm /> render correctly with props 1`] = `
+<DocumentFragment>
+  <div
+    class="bgm-editor__form custom class"
+  >
+    <div
+      class="bgm-editor__container"
+    >
+      <div
+        class="bgm-editor__toolbox"
+      >
+        <div
+          data-testid="bold"
+        />
+        <div
+          data-testid="italic"
+        />
+        <div
+          data-testid="underscore"
+        />
+        <div
+          data-testid="image"
+        />
+        <div
+          data-testid="link"
+        />
+        <div
+          data-testid="size"
+        />
+      </div>
+      <textarea
+        class="bgm-editor__text"
+        placeholder="placeholder"
+      />
+    </div>
+    <div
+      class="bgm-editor__submit"
+    >
+      <button
+        class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button__primary bgm-button__rounded bgm-button__normal"
+      >
+        Confirm
+      </button>
+      <button
+        class="bgm-button bgm-editor__button bgm-button__text bgm-button__square bgm-button__normal"
+      >
+        取消
+      </button>
+      <span
+        class="bgm-editor__bbcode-tip"
+      >
+        使用 Ctrl+Enter 或 Alt+S 快速提交 | 
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/help/bbcode"
+        >
+          BBCode指南
+        </a>
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;

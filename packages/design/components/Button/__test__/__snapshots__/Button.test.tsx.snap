@@ -31,3 +31,11 @@ exports[`should render button of type secondary 1`] = `
   hello world
 </button>
 `;
+
+exports[`should render button of type text 1`] = `
+<button
+  class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+>
+  hello world
+</button>
+`;

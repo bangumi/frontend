@@ -9,3 +9,12 @@ export { ReactComponent as Delete } from './assets/delete.svg'
 export { ReactComponent as UserLogin } from './assets/user-login.svg'
 export { ReactComponent as Password } from './assets/password.svg'
 export { ReactComponent as Captcha } from './assets/captcha.svg'
+
+// BBCode Editor
+
+export { ReactComponent as Bold } from './assets/bold.svg'
+export { ReactComponent as Italic } from './assets/italic.svg'
+export { ReactComponent as Underscore } from './assets/underscore.svg'
+export { ReactComponent as Image } from './assets/image.svg'
+export { ReactComponent as Link } from './assets/link.svg'
+export { ReactComponent as Size } from './assets/size.svg'

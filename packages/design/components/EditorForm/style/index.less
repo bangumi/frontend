@@ -1,0 +1,77 @@
+@import '../../../theme/base';
+
+@toolbox-with: 215px;
+
+.bgm-editor {
+  &__container {
+    display: inline-flex;
+    flex-direction: column;
+    min-height: 162px;
+    border: 2px solid @gray-10;
+    border-radius: 12px;
+    padding: 8px 0 0 10px;
+  }
+
+  &__toolbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 26px;
+    width: @toolbox-with;
+    padding: 0 4px;
+    margin-bottom: 10px;
+
+    > svg {
+      cursor: pointer;
+    }
+  }
+
+  &__text {
+    flex: 1 0 auto;
+    padding: 0;
+    min-width: @toolbox-with;
+    width: 682px;
+    border: none;
+    outline: none;
+    color: @gray-100;
+    line-height: 26px;
+
+    &::placeholder {
+      color: @gray-60;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  &__submit {
+    font-size: 14px;
+    display: flex;
+    margin-top: 12px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+
+    .bgm-editor__button {
+      font-weight: 600;
+      font-size: 14px;
+      height: 24px;
+      line-height: 24px;
+      padding: 0 16px;
+      margin-right: 10px;
+
+      &--confirm {
+        background-color: @blue-100;
+      }
+    }
+
+    .bgm-editor__bbcode-tip {
+      color: @gray-60;
+      line-height: 24px;
+    }
+  }
+}

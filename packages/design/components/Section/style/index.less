@@ -5,12 +5,8 @@
 }
 
 .bgm-section {
-  > * {
-    margin-bottom: 15px;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
+  > * + * {
+    margin-top: 20px;
   }
 }
 
@@ -19,8 +15,11 @@
 
   color: @gray-60;
   font-size: 18px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid @gray-10;
 }
 
-.bgm-section__divider {
-  width: 100%;
+.bgm-section__footer {
+  display: flex;
+  justify-content: right;
 }
