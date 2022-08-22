@@ -1,12 +1,12 @@
 import React from 'react'
 import classNames from 'classnames'
 
-export interface RichTextProps {
+export interface RichContentProps {
   html: string
   classname?: string
 }
 
-const RichContent: React.FC<RichTextProps> = ({ html, classname }) => {
+const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
   return (
     <article
       className={classNames('bgm-rich-content', classname)}
