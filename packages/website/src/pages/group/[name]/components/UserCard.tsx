@@ -1,8 +1,9 @@
 import React from 'react'
 import styles from './UserCard.module.less'
 import { Image, Typography } from '@bangumi/design'
-// import { getUserProfileLink } from '../../../../utils/pages'
+import { getUserProfileLink } from '../../../../utils/pages'
 
+// TODO: 重写 Link
 const { Link } = Typography
 
 export interface UserCardProps {
@@ -15,10 +16,6 @@ export interface UserCardProps {
 }
 
 export const UserCard: React.FC<UserCardProps> = ({ user, mode = 'vertical' }) => {
-  const getUserProfileLink = (name: string): string => {
-    // TODO: 复用 /utils/pages
-    return ''
-  }
   return (
     <Link
       className={
