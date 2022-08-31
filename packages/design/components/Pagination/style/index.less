@@ -1,0 +1,62 @@
+@import '../../../theme/base';
+
+.bgm-pagination {
+  display: flex;
+
+  &-prev {
+    margin-right: 30px;
+  }
+
+  &-next {
+    margin-left: 30px;
+  }
+
+  &-prev,
+  &-next {
+    cursor: pointer;
+    height: 34px;
+    width: 80px;
+    border-radius: 17px;
+    border: solid 2px @gray-10;
+
+    &:hover {
+      background-color: @primary-color;
+      border-color: @primary-color;
+
+      .bgm-pagination-icon {
+        fill: #fff;
+      }
+    }
+  }
+
+  &-icon {
+    fill: @gray-60;
+  }
+
+  &-pager {
+    width: 34px;
+    height: 34px;
+    border-radius: 34px;
+    border: solid 2px @gray-10;
+    cursor: pointer;
+
+    &--active {
+      color: #fff;
+      background-color: @primary-color;
+      border-color: @primary-color;
+      cursor: default;
+    }
+
+    & + & {
+      margin-left: 10px;
+    }
+  }
+
+  &-prev,
+  &-next,
+  &-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

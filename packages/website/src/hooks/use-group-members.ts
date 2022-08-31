@@ -5,6 +5,7 @@ import { Member, ResponseWithPagination } from '../types/common'
 
 interface UseGroupMembersRet {
   data: Member[] | undefined
+  total: number | undefined
   isLoading: boolean
   error: any
 }
@@ -20,6 +21,7 @@ export function useGroupMembers (name: string, index: number, type: 'mod' | 'nor
 
   return {
     data: data?.data.data,
+    total: data?.data.total,
     isLoading: !data && !error,
     error
   }

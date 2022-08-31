@@ -1,23 +1,25 @@
-import { Section, Tab } from '@bangumi/design'
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Pagination, Section, Tab } from '@bangumi/design'
+import React from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import GlobalLayout from '../../../components/GlobalLayout'
-// TODO: 复用GroupHome的组件
-// import { useGroup } from '../../../hooks/use-group'
-// import { GroupHeader } from './components/GroupHeader'
+import { useGroup } from '../../../hooks/use-group'
+import { useQuery } from '../../../hooks/use-query'
+import { GroupHeader } from './components/GroupHeader'
 import { useGroupMembers } from '../../../hooks/use-group-members'
 import { UserCard } from './components/UserCard'
 import styles from './members.module.less'
 
 const GroupMembers: React.FC = () => {
+  const query = useQuery()
+  const unsafePage = Number(query.get('page'))
+  const pageIndex = (isNaN(unsafePage) || unsafePage < 1) ? 1 : unsafePage
   const { name } = useParams()
-  // const { group } = useGroup(name as string)
-  const [pageIndex, setPageIndex] = useState(() => 0)
-  const { data: groupModMembers } = useGroupMembers(name as string, pageIndex, 'mod')
-  const { data } = useGroupMembers(name as string, pageIndex, 'normal')
+  const { group } = useGroup(name as string)
+  const { data: groupModMembers } = useGroupMembers(name as string, pageIndex - 1, 'mod')
+  const { data, total } = useGroupMembers(name as string, pageIndex - 1, 'normal')
+  const navigate = useNavigate()
 
-  // if (!name || !group) {
-  if (!name) {
+  if (!name || !group) {
     return null
   }
 
@@ -32,17 +34,21 @@ const GroupMembers: React.FC = () => {
     }
   ]
 
+  const handlePageChange = (page: number): void => {
+    navigate({ search: `page=${page}` })
+  }
+
   return (
     <GlobalLayout>
       <div className={styles.pageContainer}>
-        {/* <GroupHeader group={group} /> */}
+        <GroupHeader group={group} />
         <Tab type="borderless" items={tabs} activeKey="members" />
 
         <div className={styles.columnContainer}>
           <div className={styles.leftCol}>
             {
             // TODO: 遵循旧站的交互规则，可能需要改动
-            pageIndex === 0 &&
+            pageIndex === 1 &&
               <Section title="小组管理员">
                 <div className={styles.members}>
                   {(groupModMembers ?? []).map((member) => {
@@ -73,12 +79,7 @@ const GroupMembers: React.FC = () => {
           </div>
         </div>
 
-        <div>
-          {/* 临时分页 */}
-          <button onClick={() => setPageIndex(pageIndex - 1)}>后退一下</button>
-          <span> {pageIndex} </span>
-          <button onClick={() => setPageIndex(pageIndex + 1)}>前进一下</button>
-        </div>
+        <Pagination total={total} current={pageIndex} onChange={handlePageChange} />
       </div>
     </GlobalLayout>
   )
