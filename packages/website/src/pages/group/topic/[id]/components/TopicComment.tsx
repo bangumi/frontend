@@ -56,7 +56,7 @@ const TopicComment: FC<TopicCommentProps> = ({
           <TopicComment
             key={reply.id}
             isReply
-            floor={idx}
+            floor={`${floor}-${idx + 1}`}
             originalPosterId={originalPosterId}
             {...reply}
           />
