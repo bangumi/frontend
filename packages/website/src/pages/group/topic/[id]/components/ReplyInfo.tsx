@@ -3,7 +3,7 @@ import styles from './ReplyInfo.module.less'
 import dayjs from 'dayjs'
 
 interface ReplyInfoProps {
-  floor: string
+  floor: string | number
   createdAt: Date
 }
 

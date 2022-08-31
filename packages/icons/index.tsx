@@ -18,3 +18,8 @@ export { ReactComponent as Underscore } from './assets/underscore.svg'
 export { ReactComponent as Image } from './assets/image.svg'
 export { ReactComponent as Link } from './assets/link.svg'
 export { ReactComponent as Size } from './assets/size.svg'
+
+// Topic
+
+export { ReactComponent as OriginalPoster } from './assets/original-poster.svg'
+export { ReactComponent as Friend } from './assets/friend.svg'

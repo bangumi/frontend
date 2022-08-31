@@ -1,0 +1,39 @@
+@import '@bangumi/design/theme/base';
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  height: 98px;
+  max-width: 913px;
+}
+
+.commentMain {
+  height: 60px;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navBar {
+  font-size: 16px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: @gray-60;
+  width: 100%;
+
+  .creatorInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  div > a,
+  svg {
+    padding-right: 12px;
+  }
+}
