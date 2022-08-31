@@ -16,10 +16,17 @@ const Topic: FC = () => {
   const parsedText = renderBBCode(topicDetail.text)
   return (
     <GlobalLayout>
-      <GroupTopicHeader title={topicDetail.title} creator={topicDetail.creator} createdAt={topicDetail.created_at} />
+      <GroupTopicHeader
+        title={topicDetail.title}
+        creator={topicDetail.creator}
+        createdAt={topicDetail.created_at}
+        group={topicDetail.group}
+      />
       <div className={styles.columnContainer}>
         <div className={styles.leftCol}>
+          {/* Topic content */}
           <RichContent html={parsedText} />
+          {/* Topic replies */}
         </div>
         <div className={styles.rightCol}>
           RightCol

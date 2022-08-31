@@ -1,35 +1,39 @@
 import React, { FC } from 'react'
 import styles from './GroupTopicHeader.module.less'
 import { Avatar, Typography } from '@bangumi/design'
-import { Creator } from '../../../../../types/common'
-import dayjs from 'dayjs'
+import { Creator, GroupTopicGroupInfo } from '../../../../../types/common'
+import ReplyInfo from './ReplyInfo'
 
 interface Header {
   title: string
   createdAt: Date
   creator: Creator
+  group: GroupTopicGroupInfo
 }
 
 const Link = Typography.Link
 
-const GroupTopicHeader: FC<Header> = (props) => {
+const GroupTopicHeader: FC<Header> = ({
+  title,
+  createdAt,
+  creator,
+  group
+}) => {
   return (
     <div className={styles.groupTopicHeader}>
-      <Avatar src={props.creator.avatar.large} size="medium" />
+      <Avatar src={creator.avatar.large} size="medium" />
       <div className={styles.headerMain}>
         <span className={styles.navBar}>
           <div>
-            <Link to={props.creator.url}>{props.creator.nickname}</Link>
+            <Link to={creator.url} isExternal>{creator.nickname}</Link>
             <span>发表于</span>
-            <Link to="">靠谱人生茶话会</Link>
+            <Link to={`/group/${group.name}`}>{group.title}</Link>
             <span>»</span>
-            <Link to="">组内讨论</Link>
+            <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
           </div>
-          <span
-            className={styles.info}
-          >#1&nbsp;&nbsp;|&nbsp;&nbsp;{dayjs(props.createdAt).format('YYYY-M-D HH:MM')}&nbsp;&nbsp;|&nbsp;&nbsp;!</span>
+          <ReplyInfo createdAt={createdAt} floor="1" />
         </span>
-        <h1 className={styles.title}>{props.title}</h1>
+        <h1 className={styles.title}>{title}</h1>
       </div>
     </div>
   )
