@@ -1,5 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Pagination /> should render correctly 1`] = `
+<ul
+  class="bgm-pagination"
+  data-testid="pagination-wrapper"
+>
+  <li
+    class="bgm-pagination-prev bgm-pagination-disabled"
+    title="上一页"
+  >
+    <a>
+      上一页
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--1 bgm-pagination-item--active"
+    data-testid="pagination-pager-1"
+    tabindex="0"
+    title="1"
+  >
+    <a
+      rel="nofollow"
+    >
+      1
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--2"
+    data-testid="pagination-pager-2"
+    tabindex="0"
+    title="2"
+  >
+    <a
+      rel="nofollow"
+    >
+      2
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--3"
+    data-testid="pagination-pager-3"
+    tabindex="0"
+    title="3"
+  >
+    <a
+      rel="nofollow"
+    >
+      3
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--4"
+    data-testid="pagination-pager-4"
+    tabindex="0"
+    title="4"
+  >
+    <a
+      rel="nofollow"
+    >
+      4
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--5"
+    data-testid="pagination-pager-5"
+    tabindex="0"
+    title="5"
+  >
+    <a
+      rel="nofollow"
+    >
+      5
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--6"
+    data-testid="pagination-pager-6"
+    tabindex="0"
+    title="6"
+  >
+    <a
+      rel="nofollow"
+    >
+      6
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--7"
+    data-testid="pagination-pager-7"
+    tabindex="0"
+    title="7"
+  >
+    <a
+      rel="nofollow"
+    >
+      7
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--8"
+    data-testid="pagination-pager-8"
+    tabindex="0"
+    title="8"
+  >
+    <a
+      rel="nofollow"
+    >
+      8
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--9"
+    data-testid="pagination-pager-9"
+    tabindex="0"
+    title="9"
+  >
+    <a
+      rel="nofollow"
+    >
+      9
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-item bgm-pagination-item--10"
+    data-testid="pagination-pager-10"
+    tabindex="0"
+    title="10"
+  >
+    <a
+      rel="nofollow"
+    >
+      10
+    </a>
+  </li>
+  <li
+    class="bgm-pagination-next bgm-pagination-disabled"
+    title="上一页"
+  >
+    <a>
+      下一页
+    </a>
+  </li>
+  <li>
+    1
+     / 
+    100
+  </li>
+</ul>
+`;
+
 exports[`should render correctly 1`] = `
 <ul
   class="bgm-pagination"
@@ -128,19 +277,10 @@ exports[`should render correctly 1`] = `
   <li
     class="bgm-pagination-next"
     data-testid="pagination-next"
-    title="下一页"
   >
-    <a>
-      下一页
-    </a>
-  </li>
-  <li
-    class="bgm-pagination-total"
-    data-testid="pagination-total"
-  >
-    1
-     / 
-    132
+    <div
+      class="bgm-pagination-icon"
+    />
   </li>
 </ul>
 `;
