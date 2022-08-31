@@ -33,9 +33,11 @@ const Topic: FC = () => {
             topicDetail.comments.map((comment, idx) =>
               (
                 <TopicComment
-                  key={comment.id} {...comment} isReply={false}
+                  key={comment.id}
+                  isReply={false}
                   floor={idx + 2}
-                  isOriginalPoster={comment.creator.id === originalPosterId}
+                  originalPosterId={originalPosterId}
+                  {...comment}
                 />
               )
             )
