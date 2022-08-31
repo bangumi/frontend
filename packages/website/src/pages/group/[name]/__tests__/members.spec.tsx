@@ -4,6 +4,7 @@ import { renderPage } from '../../../../utils/test-utils'
 import { server as mockServer } from '../../../../mocks/server'
 import { rest } from 'msw'
 import GroupMembers from '../members'
+import Boring from './fixtures/boring.json'
 import BoringMembers from './fixtures/boring-members.json'
 import BoringModMember from './fixtures/boring-mod-member.json'
 import { useParams } from 'react-router-dom'
@@ -28,6 +29,10 @@ class GroupMembersTest {
     mockedUseParams.mockReturnValue({
       name
     })
+
+    mockServer.use(rest.get(`http://localhost/p/groups/${name}`, (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(Boring))
+    }))
 
     mockServer.use(rest.get(`http://localhost/p/groups/${name}/members`, (req, res, ctx) => {
       const isAdmin = req.url.searchParams.get('type') === 'mod'

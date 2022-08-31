@@ -1,6 +1,6 @@
 import React from 'react'
 import Pagination from '..'
-import { fireEvent, render } from '@testing-library/react'
+import { fireEvent, render, waitFor } from '@testing-library/react'
 
 it('should render correctly', () => {
   const { getByTestId } = render(<Pagination total={3939} />)
@@ -58,7 +58,7 @@ it('prev-button should not be hide, next-button should be hide', () => {
   expect(nextButton).not.toBeInTheDocument()
 })
 
-it('should response next page', () => {
+it('should response next page', async () => {
   const onChange = jest.fn()
   const { getByTestId } = render(
     <Pagination total={300} onChange={onChange} />
@@ -66,4 +66,10 @@ it('should response next page', () => {
   const nextButton = getByTestId('pagination-next')
   fireEvent.click(nextButton)
   expect(onChange).toHaveBeenLastCalledWith(2)
+
+  await waitFor(() => {
+    const prevButton = getByTestId('pagination-prev')
+    fireEvent.click(prevButton)
+    expect(onChange).toHaveBeenLastCalledWith(1)
+  })
 })
