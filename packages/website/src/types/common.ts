@@ -169,6 +169,13 @@ export interface Comment {
 }
 
 export interface GroupTopicDetail {
+  group: {
+    id: number
+    name: string
+    created_at: string
+    title: string
+    icon: string
+  }
   created_at: Date
   updated_at: Date
   title: string

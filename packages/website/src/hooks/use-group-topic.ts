@@ -9,7 +9,7 @@ interface UseGroupTopic {
 
 function useGroupTopic (id: string): UseGroupTopic {
   // todo
-  const { data: { data: topicDetail } = {} } = useSWR<AxiosResponse<GroupTopicDetail>>(`/p/groups/boring/topics/${id}`, privateRequest.get)
+  const { data: { data: topicDetail } = {} } = useSWR<AxiosResponse<GroupTopicDetail>>(`/p/groups/-/topics/${id}`, privateRequest.get)
   return { topicDetail }
 }
 
