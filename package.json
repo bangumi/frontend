@@ -6,6 +6,7 @@
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm website build",
+    "build:test": "pnpm website build --mode test",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design storybook",
     "design:build-doc": "pnpm design build-storybook",
