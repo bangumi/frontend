@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { Reply, Comment } from '../../../../../types/common'
 import { Avatar, RichContent, Typography } from '@bangumi/design'
 import { render as renderBBCode } from '@bangumi/utils'
@@ -27,7 +27,26 @@ const TopicComment: FC<TopicCommentProps> = ({
 }) => {
   const isReply = props.isReply
   const replies = !isReply ? props.replies : null
-  const headerClassName = classNames(styles.commentHeader, { [styles.replyHeader]: isReply })
+  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && /[+-]\d+$/.test(text))
+  const headerClassName = classNames(styles.commentHeader, {
+    [styles.replyHeader]: isReply,
+    [styles.collapsed]: shouldCollapsed
+  })
+
+  if (shouldCollapsed) {
+    return (
+      <div className={headerClassName} onClick={() => setShouldCollapsed(false)}>
+        <span className={styles.navBar}>
+          <div className={styles.creatorInfo}>
+            <Link to={creator.url} isExternal>{creator.nickname}</Link>
+            <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+          </div>
+          <ReplyInfo createdAt={createAt} floor={floor} />
+        </span>
+      </div>
+    )
+  }
+
   return (
     <div>
       <div className={headerClassName}>
