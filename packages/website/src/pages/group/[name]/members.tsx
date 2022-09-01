@@ -79,7 +79,7 @@ const GroupMembers: React.FC = () => {
           </div>
         </div>
 
-        <Pagination total={total} current={pageIndex} onChange={handlePageChange} />
+        <Pagination total={total} currentOffset={pageIndex} onChange={handlePageChange} />
       </div>
     </GlobalLayout>
   )
