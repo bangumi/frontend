@@ -29,19 +29,21 @@ const Topic: FC = () => {
           {/* Topic content */}
           <RichContent html={parsedText} />
           {/* Topic Comments */}
-          {
-            topicDetail.comments.map((comment, idx) =>
-              (
-                <TopicComment
-                  key={comment.id}
-                  isReply={false}
-                  floor={idx + 2}
-                  originalPosterId={originalPosterId}
-                  {...comment}
-                />
+          <div className={styles.replies}>
+            {
+              topicDetail.comments.map((comment, idx) =>
+                (
+                  <TopicComment
+                    key={comment.id}
+                    isReply={false}
+                    floor={idx + 2}
+                    originalPosterId={originalPosterId}
+                    {...comment}
+                  />
+                )
               )
-            )
-          }
+            }
+          </div>
         </div>
         <div className={styles.rightCol}>
           RightCol

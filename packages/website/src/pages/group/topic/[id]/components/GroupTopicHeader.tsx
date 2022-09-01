@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import styles from './GroupTopicHeader.module.less'
 import { Avatar, Typography } from '@bangumi/design'
-import { Creator, GroupTopicGroupInfo } from '../../../../../types/common'
 import ReplyInfo from './ReplyInfo'
+import { Creator, GroupTopicGroupInfo } from '../../../../../types/common'
+import { getGroupForumPage } from '../../../../../utils/pages'
 
 interface Header {
   title: string
@@ -29,7 +30,7 @@ const GroupTopicHeader: FC<Header> = ({
             <span>发表于</span>
             <Link to={`/group/${group.name}`}>{group.title}</Link>
             <span>»</span>
-            <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
+            <Link to={getGroupForumPage(group.name)} isExternal>组内讨论</Link>
           </div>
           <ReplyInfo createdAt={createdAt} floor="1" />
         </span>

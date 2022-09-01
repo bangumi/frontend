@@ -23,11 +23,12 @@ const TopicComment: FC<TopicCommentProps> = ({
   floor,
   is_friend: isFriend,
   originalPosterId,
+  state,
   ...props
 }) => {
   const isReply = props.isReply
   const replies = !isReply ? props.replies : null
-  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && /[+-]\d+$/.test(text))
+  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && (/[+-]\d+$/.test(text) || state === 6))
   const headerClassName = classNames(styles.commentHeader, {
     [styles.replyHeader]: isReply,
     [styles.collapsed]: shouldCollapsed
