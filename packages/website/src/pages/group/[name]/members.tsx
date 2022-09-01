@@ -11,7 +11,7 @@ import styles from './members.module.less'
 
 const GroupMembers: React.FC = () => {
   const query = useQuery()
-  const unsafePage = parseInt(query.get('page'))
+  const unsafePage = parseInt(query.get('page') ?? '')
   const pageIndex = (Number.isNaN(unsafePage) || unsafePage < 1) ? 1 : unsafePage
   const { name } = useParams()
   const { group } = useGroup(name as string)
