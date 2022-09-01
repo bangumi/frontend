@@ -3,8 +3,8 @@ import Pager from './Pager'
 import { VerticalLeft, VerticalRight } from '@bangumi/icons'
 
 export interface PaginationProps {
-  /* 当前页码 */
-  current?: number
+  /* 当前偏移 */
+  currentOffset?: number
   /* 默认页码 */
   defaultCurrent?: number
   /* 单页的数据条数 */
@@ -14,7 +14,7 @@ export interface PaginationProps {
   /* 数据的总条数 */
   total?: number
   /* 页码改变的回调 */
-  onChange?: (page: number) => void
+  onChange?: (offset: number) => void
 }
 
 function calculatePage (pageSize: number, total: number): number {
