@@ -8,14 +8,14 @@ it('should render correctly', () => {
 })
 
 it('should hightlight current page and not highlight other page', async () => {
-  const current = 20
+  const currentOffset = 20
   const { findAllByTestId } = render(
-    <Pagination total={3000} current={current} />
+    <Pagination total={3000} currentOffset={currentOffset} />
   )
   const pagers = await findAllByTestId('pagination-pager')
   expect(pagers.length).toBe(10)
   pagers.forEach((pager) => {
-    if (pager.title === String(current)) {
+    if (pager.title === String(currentOffset)) {
       expect(pager.classList.contains('bgm-pagination-pager--active')).toBe(
         true
       )
@@ -30,7 +30,7 @@ it('should hightlight current page and not highlight other page', async () => {
 it('should response mouse click right', async () => {
   const onChange = jest.fn()
   const { findAllByTestId } = render(
-    <Pagination total={30} pageSize={10} current={1} onChange={onChange} />
+    <Pagination total={30} pageSize={10} currentOffset={1} onChange={onChange} />
   )
   const pagers = await findAllByTestId('pagination-pager')
   expect(pagers.length).toBe(3)
@@ -43,19 +43,25 @@ it('should response mouse click right', async () => {
   expect(onChange).toHaveBeenLastCalledWith(2)
 })
 
-it('prev-button should be hide, next-button should not be hide', () => {
-  const { queryByTestId } = render(<Pagination total={3000} current={1} />)
-  const prevButton = queryByTestId('pagination-prev')
-  const nextButton = queryByTestId('pagination-next')
-  expect(prevButton).not.toBeInTheDocument()
-  expect(nextButton).toBeInTheDocument()
+it('should not response the prev-button clicked', () => {
+  const onChange = jest.fn()
+  const { queryByTestId } = render(<Pagination total={3000} currentOffset={1} onChange={onChange} />)
+  const prevButton = queryByTestId('pagination-prev')!
+  fireEvent.click(prevButton)
+  expect(onChange).toHaveBeenCalledTimes(0)
+  const nextButton = queryByTestId('pagination-next')!
+  fireEvent.click(nextButton)
+  expect(onChange).toHaveBeenLastCalledWith(2)
 })
-it('prev-button should not be hide, next-button should be hide', () => {
-  const { queryByTestId } = render(<Pagination total={3000} current={100} />)
-  const prevButton = queryByTestId('pagination-prev')
-  const nextButton = queryByTestId('pagination-next')
-  expect(prevButton).toBeInTheDocument()
-  expect(nextButton).not.toBeInTheDocument()
+it('should not response the next-button clicked', () => {
+  const onChange = jest.fn()
+  const { queryByTestId } = render(<Pagination total={3000} currentOffset={100} onChange={onChange} />)
+  const nextButton = queryByTestId('pagination-next')!
+  fireEvent.click(nextButton)
+  expect(onChange).toHaveBeenCalledTimes(0)
+  const prevButton = queryByTestId('pagination-prev')!
+  fireEvent.click(prevButton)
+  expect(onChange).toHaveBeenLastCalledWith(99)
 })
 
 it('should response next page', async () => {

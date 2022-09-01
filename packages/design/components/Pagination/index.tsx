@@ -1,16 +1,13 @@
 import React, { FC, useState } from 'react'
 import Pager from './Pager'
 import { VerticalLeft, VerticalRight } from '@bangumi/icons'
+import cn from 'classnames'
 
 export interface PaginationProps {
   /* 当前偏移 */
   currentOffset?: number
-  /* 默认页码 */
-  defaultCurrent?: number
   /* 单页的数据条数 */
   pageSize?: number
-  /* 默认单页的数据条数 */
-  defaultPageSize?: number
   /* 数据的总条数 */
   total?: number
   /* 页码改变的回调 */
@@ -22,13 +19,12 @@ function calculatePage (pageSize: number, total: number): number {
 }
 
 const Pagination: FC<PaginationProps> = ({
-  defaultCurrent = 1,
-  defaultPageSize = 30,
+  currentOffset = 1,
+  pageSize = 30,
   total = 0,
   ...restProps
 }) => {
-  const [current, setCurrent] = useState(() => restProps.current ?? defaultCurrent)
-  const pageSize = restProps.pageSize ?? defaultPageSize
+  const [current, setCurrent] = useState(() => currentOffset)
 
   // 不需要分页的时候不渲染
   if (total < pageSize) {
@@ -59,7 +55,9 @@ const Pagination: FC<PaginationProps> = ({
     <li
       onClick={prev}
       data-testid="pagination-prev"
-      className="bgm-pagination-prev"
+      className={cn('bgm-pagination-prev', {
+        'bgm-pagination-prev--hide': !hasPrev
+      })}
     >
       <VerticalLeft className="bgm-pagination-icon" />
     </li>
@@ -69,7 +67,9 @@ const Pagination: FC<PaginationProps> = ({
     <li
       onClick={next}
       data-testid="pagination-next"
-      className="bgm-pagination-next"
+      className={cn('bgm-pagination-next', {
+        'bgm-pagination-next--hide': !hasNext
+      })}
     >
       <VerticalRight className="bgm-pagination-icon" />
     </li>
@@ -110,9 +110,9 @@ const Pagination: FC<PaginationProps> = ({
   }
   return (
     <ul className="bgm-pagination" data-testid="pagination-wrapper">
-      {hasPrev && prevButton}
+      {prevButton}
       {pagerList}
-      {hasNext && nextButton}
+      {nextButton}
     </ul>
   )
 }

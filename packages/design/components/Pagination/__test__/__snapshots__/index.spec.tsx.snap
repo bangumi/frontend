@@ -6,6 +6,14 @@ exports[`should render correctly 1`] = `
   data-testid="pagination-wrapper"
 >
   <li
+    class="bgm-pagination-prev bgm-pagination-prev--hide"
+    data-testid="pagination-prev"
+  >
+    <div
+      class="bgm-pagination-icon"
+    />
+  </li>
+  <li
     class="bgm-pagination-pager bgm-pagination-pager--1 bgm-pagination-pager--active"
     data-testid="pagination-pager"
     tabindex="0"
