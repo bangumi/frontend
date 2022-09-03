@@ -6,6 +6,7 @@ import styles from './TopicComment.module.less'
 import ReplyInfo from './ReplyInfo'
 import { Friend, OriginalPoster } from '@bangumi/icons'
 import classNames from 'classnames'
+import { useUser } from '../../../../../hooks/use-user'
 
 type TopicCommentProps =
   ((Reply & { isReply: true }) | (Comment & { isReply: false }))
@@ -29,6 +30,8 @@ const TopicComment: FC<TopicCommentProps> = ({
   const isReply = props.isReply
   const replies = !isReply ? props.replies : null
   const [shouldCollapsed, setShouldCollapsed] = useState(isReply && (/[+-]\d+$/.test(text) || state === 6))
+  const { user } = useUser()
+
   const headerClassName = classNames(styles.commentHeader, {
     [styles.replyHeader]: isReply,
     [styles.collapsed]: shouldCollapsed
@@ -58,14 +61,17 @@ const TopicComment: FC<TopicCommentProps> = ({
               <div className={styles.creatorInfo}>
                 <Link to={creator.url} isExternal>{creator.nickname}</Link>
                 {
-                originalPosterId === creator.id ? <OriginalPoster /> : null
-              }
+                  originalPosterId === creator.id ? <OriginalPoster /> : null
+                }
                 {
-                isFriend ? <Friend /> : null
-              }
+                  isFriend ? <Friend /> : null
+                }
                 {
-                creator.sign ? <span>{`// ${creator.sign}`}</span> : null
-              }
+                  // Todo: XSS ?
+                  creator.sign
+                    ? <span className={styles.sign} dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
+                    : null
+                }
               </div>
               <ReplyInfo createdAt={createAt} floor={floor} />
             </span>
@@ -74,22 +80,31 @@ const TopicComment: FC<TopicCommentProps> = ({
           <div className={styles.buttonGroup}>
             <Button type="secondary" shape="rounded">回复</Button>
             <Button type="secondary" shape="rounded">+1</Button>
-            <Button type="text">编辑</Button>
-            <Button type="text">删除</Button>
+            {
+                  user?.id === creator.id
+                    ? (
+                      <>
+                        <Button type="text">编辑</Button>
+                        <Button type="text">删除</Button>
+                      </>
+                      )
+                    : null
+                }
+
           </div>
         </div>
       </div>
       {
-        replies?.map((reply, idx) => (
-          <TopicComment
-            key={reply.id}
-            isReply
-            floor={`${floor}-${idx + 1}`}
-            originalPosterId={originalPosterId}
-            {...reply}
-          />
-        ))
-      }
+                  replies?.map((reply, idx) => (
+                    <TopicComment
+                      key={reply.id}
+                      isReply
+                      floor={`${floor}-${idx + 1}`}
+                      originalPosterId={originalPosterId}
+                      {...reply}
+                    />
+                  ))
+                }
     </div>
   )
 }
