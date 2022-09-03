@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Reply, Comment } from '../../../../../types/common'
-import { Avatar, RichContent, Typography } from '@bangumi/design'
+import { Avatar, RichContent, Typography, Button } from '@bangumi/design'
 import { render as renderBBCode } from '@bangumi/utils'
 import styles from './TopicComment.module.less'
 import ReplyInfo from './ReplyInfo'
@@ -52,23 +52,31 @@ const TopicComment: FC<TopicCommentProps> = ({
     <div>
       <div className={headerClassName}>
         <Avatar src={creator.avatar.large} size={isReply ? 'small' : 'medium'} />
-        <div className={styles.commentMain}>
-          <span className={styles.navBar}>
-            <div className={styles.creatorInfo}>
-              <Link to={creator.url} isExternal>{creator.nickname}</Link>
-              {
+        <div className={styles.commentBox}>
+          <div className={styles.commentMain}>
+            <span className={styles.navBar}>
+              <div className={styles.creatorInfo}>
+                <Link to={creator.url} isExternal>{creator.nickname}</Link>
+                {
                 originalPosterId === creator.id ? <OriginalPoster /> : null
               }
-              {
+                {
                 isFriend ? <Friend /> : null
               }
-              {
+                {
                 creator.sign ? <span>{`// ${creator.sign}`}</span> : null
               }
-            </div>
-            <ReplyInfo createdAt={createAt} floor={floor} />
-          </span>
-          <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+              </div>
+              <ReplyInfo createdAt={createAt} floor={floor} />
+            </span>
+            <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+          </div>
+          <div className={styles.buttonGroup}>
+            <Button type="secondary" shape="rounded">回复</Button>
+            <Button type="secondary" shape="rounded">+1</Button>
+            <Button type="text">编辑</Button>
+            <Button type="text">删除</Button>
+          </div>
         </div>
       </div>
       {
