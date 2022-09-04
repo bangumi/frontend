@@ -18,6 +18,7 @@ const Topic: FC = () => {
   }
   const originalPosterId = topicDetail.creator.id
   const parsedText = renderBBCode(topicDetail.text)
+  const isClosed = topicDetail.state === 1
   return (
     <GlobalLayout>
       <GroupTopicHeader
@@ -48,7 +49,7 @@ const Topic: FC = () => {
           </div>
           {/* Reply BBCode Editor */}
           {
-            user && (
+            !isClosed && user && (
               <div className={styles.replyFormContainer}>
                 <Avatar src={user.avatar.medium} size="medium" />
                 <EditorForm

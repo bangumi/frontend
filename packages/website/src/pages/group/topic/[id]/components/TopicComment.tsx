@@ -4,7 +4,7 @@ import { Avatar, RichContent, Typography, Button, EditorForm } from '@bangumi/de
 import { render as renderBBCode } from '@bangumi/utils'
 import styles from './TopicComment.module.less'
 import ReplyInfo from './ReplyInfo'
-import { Friend, OriginalPoster } from '@bangumi/icons'
+import { Friend, OriginalPoster, TopicClosed, TopicSilent } from '@bangumi/icons'
 import classNames from 'classnames'
 import { useUser } from '../../../../../hooks/use-user'
 
@@ -26,6 +26,12 @@ const RenderContent: FC<{ state: number, text: string }> = (
   switch (state) {
     case 0:
       return <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+    case 1:
+      return <div className={styles.topicContent}>关闭了该主题</div>
+    case 2:
+      return <div className={styles.topicContent}>重新开启了该主题</div>
+    case 5:
+      return <div className={styles.topicContent}>下沉了该主题</div>
     case 6:
       return <div className={styles.deletedContent}>内容已被用户删除</div>
     case 7:
@@ -50,14 +56,16 @@ const TopicComment: FC<TopicCommentProps> = ({
 }) => {
   const isReply = props.isReply
   const isDeleted = state === 6 || state === 7
+  // 1 关闭 2 重开 5 下沉
+  const isSpecial = state === 1 || state === 2 || state === 5
   const replies = !isReply ? props.replies : null
-  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && (/[+-]\d+$/.test(text) || isDeleted))
+  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && ((/[+-]\d+$/.test(text) || isDeleted)))
   const [showReplyEditor, setShowReplyEditor] = useState(false)
   const { user } = useUser()
 
   const headerClassName = classNames(styles.commentHeader, {
     [styles.replyHeader]: isReply,
-    [styles.collapsed]: shouldCollapsed
+    [styles.commentCollapsed]: shouldCollapsed || isSpecial
   })
 
   if (shouldCollapsed) {
@@ -69,6 +77,35 @@ const TopicComment: FC<TopicCommentProps> = ({
             <RenderContent state={state} text={text} />
           </div>
           <ReplyInfo createdAt={createAt} floor={floor} />
+        </span>
+      </div>
+    )
+  }
+
+  if (isSpecial) {
+    let icon = null
+    switch (state) {
+      case 1:
+        icon = <TopicClosed />
+        break
+      case 2:
+        icon = null
+        break
+      case 5:
+        icon = <TopicSilent />
+        break
+    }
+    return (
+      <div className={headerClassName}>
+        <span className={styles.navBar}>
+          <div className={styles.creatorInfo}>
+            {
+              icon
+            }
+            <Link to={creator.url} isExternal>{creator.nickname}</Link>
+            <RenderContent state={state} text={text} />
+          </div>
+          <ReplyInfo createdAt={createAt} floor={floor} isSpecial />
         </span>
       </div>
     )

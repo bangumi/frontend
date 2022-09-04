@@ -25,3 +25,5 @@ export { ReactComponent as Size } from './assets/size.svg'
 
 export { ReactComponent as OriginalPoster } from './assets/original-poster.svg'
 export { ReactComponent as Friend } from './assets/friend.svg'
+export { ReactComponent as TopicSilent } from './assets/topic-silent.svg'
+export { ReactComponent as TopicClosed } from './assets/topic-closed.svg'
