@@ -17,6 +17,27 @@ type TopicCommentProps =
 
 const Link = Typography.Link
 
+const RenderContent: FC<{ state: number, text: string }> = (
+  {
+    state,
+    text
+  }
+) => {
+  switch (state) {
+    case 0:
+      return <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+    case 6:
+      return <div className={styles.deletedContent}>内容已被用户删除</div>
+    case 7:
+      return (
+        <div className={styles.deletedContent}>内容因违反「<Link to="https://bgm.tv/about/guideline" isExternal>社区指导原则</Link>」已被删除
+        </div>
+      )
+    default:
+      return null
+  }
+}
+
 const TopicComment: FC<TopicCommentProps> = ({
   text,
   creator,
@@ -28,8 +49,9 @@ const TopicComment: FC<TopicCommentProps> = ({
   ...props
 }) => {
   const isReply = props.isReply
+  const isDeleted = state === 6 || state === 7
   const replies = !isReply ? props.replies : null
-  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && (/[+-]\d+$/.test(text) || state === 6))
+  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && (/[+-]\d+$/.test(text) || isDeleted))
   const [showReplyEditor, setShowReplyEditor] = useState(false)
   const { user } = useUser()
 
@@ -44,7 +66,7 @@ const TopicComment: FC<TopicCommentProps> = ({
         <span className={styles.navBar}>
           <div className={styles.creatorInfo}>
             <Link to={creator.url} isExternal>{creator.nickname}</Link>
-            <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+            <RenderContent state={state} text={text} />
           </div>
           <ReplyInfo createdAt={createAt} floor={floor} />
         </span>
@@ -76,7 +98,7 @@ const TopicComment: FC<TopicCommentProps> = ({
               </div>
               <ReplyInfo createdAt={createAt} floor={floor} />
             </span>
-            <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+            <RenderContent state={state} text={text} />
           </div>
           <div className={styles.optionBox}>
             {
