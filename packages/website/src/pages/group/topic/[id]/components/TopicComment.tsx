@@ -59,32 +59,21 @@ const TopicComment: FC<TopicCommentProps> = ({
   // 1 关闭 2 重开 5 下沉
   const isSpecial = state === 1 || state === 2 || state === 5
   const replies = !isReply ? props.replies : null
-  const [shouldCollapsed, setShouldCollapsed] = useState(isReply && ((/[+-]\d+$/.test(text) || isDeleted)))
+  const [shouldCollapsed, setShouldCollapsed] = useState(isSpecial || (isReply && ((/[+-]\d+$/.test(text) || isDeleted))))
   const [showReplyEditor, setShowReplyEditor] = useState(false)
   const { user } = useUser()
 
   const headerClassName = classNames(styles.commentHeader, {
     [styles.replyHeader]: isReply,
-    [styles.commentCollapsed]: shouldCollapsed || isSpecial
+    [styles.commentCollapsed]: shouldCollapsed
   })
 
   if (shouldCollapsed) {
-    return (
-      <div className={headerClassName} onClick={() => setShouldCollapsed(false)}>
-        <span className={styles.navBar}>
-          <div className={styles.creatorInfo}>
-            <Link to={creator.url} isExternal>{creator.nickname}</Link>
-            <RenderContent state={state} text={text} />
-          </div>
-          <ReplyInfo createdAt={createAt} floor={floor} />
-        </span>
-      </div>
-    )
-  }
-
-  if (isSpecial) {
     let icon = null
     switch (state) {
+      case 0:
+        icon = null
+        break
       case 1:
         icon = <TopicClosed />
         break
@@ -95,8 +84,9 @@ const TopicComment: FC<TopicCommentProps> = ({
         icon = <TopicSilent />
         break
     }
+
     return (
-      <div className={headerClassName}>
+      <div className={headerClassName} onClick={isSpecial ? undefined : () => setShouldCollapsed(false)}>
         <span className={styles.navBar}>
           <div className={styles.creatorInfo}>
             {
@@ -105,7 +95,7 @@ const TopicComment: FC<TopicCommentProps> = ({
             <Link to={creator.url} isExternal>{creator.nickname}</Link>
             <RenderContent state={state} text={text} />
           </div>
-          <ReplyInfo createdAt={createAt} floor={floor} isSpecial />
+          <ReplyInfo createdAt={createAt} floor={floor} isSpecial={isSpecial} />
         </span>
       </div>
     )
