@@ -1,16 +1,18 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { RichContent } from '@bangumi/design'
+import { EditorForm, RichContent, Avatar } from '@bangumi/design'
 import GlobalLayout from '../../../../components/GlobalLayout'
 import useGroupTopic from '../../../../hooks/use-group-topic'
 import GroupTopicHeader from './components/GroupTopicHeader'
 import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
 import TopicComment from './components/TopicComment'
+import { useUser } from '../../../../hooks/use-user'
 
 const Topic: FC = () => {
   const { id } = useParams()
   const { topicDetail } = useGroupTopic(id!)
+  const { user } = useUser()
   if (!topicDetail) {
     return null
   }
@@ -44,6 +46,18 @@ const Topic: FC = () => {
               )
             }
           </div>
+          {/* Reply BBCode Editor */}
+          {
+            user && (
+              <div className={styles.replyFormContainer}>
+                <Avatar src={user.avatar.medium} size="medium" />
+                <EditorForm
+                  className={styles.replyForm}
+                  placeholder="添加新回复..."
+                />
+              </div>
+            )
+          }
         </div>
         <div className={styles.rightCol}>
           RightCol

@@ -78,7 +78,7 @@ const TopicComment: FC<TopicCommentProps> = ({
             </span>
             <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
           </div>
-          <div className={styles.buttonGroup}>
+          <div className={styles.optionBox}>
             {
               showReplyEditor
                 ? (
