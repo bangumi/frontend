@@ -1,0 +1,337 @@
+{
+  "data": [
+      {
+          "joined_at": "2022-08-09T09:59:38Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "717353",
+          "nickname": "astnd",
+          "id": 717353
+      },
+      {
+          "joined_at": "2022-08-09T09:15:11Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/71/69/716976.jpg?r=1659932532",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/71/69/716976.jpg?r=1659932532",
+              "small": "https://lain.bgm.tv/pic/user/s/000/71/69/716976.jpg?r=1659932532"
+          },
+          "username": "towazzz",
+          "nickname": "towazzz",
+          "id": 716976
+      },
+      {
+          "joined_at": "2022-08-09T08:44:31Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "717335",
+          "nickname": "西西",
+          "id": 717335
+      },
+      {
+          "joined_at": "2022-08-09T07:32:46Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/46/07/460743.jpg?r=1596172965",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/46/07/460743.jpg?r=1596172965",
+              "small": "https://lain.bgm.tv/pic/user/s/000/46/07/460743.jpg?r=1596172965"
+          },
+          "username": "460743",
+          "nickname": "一个人的旅行日记",
+          "id": 460743
+      },
+      {
+          "joined_at": "2022-08-09T01:17:29Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/71/72/717232.jpg?r=1660008480",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/71/72/717232.jpg?r=1660008480",
+              "small": "https://lain.bgm.tv/pic/user/s/000/71/72/717232.jpg?r=1660008480"
+          },
+          "username": "717232",
+          "nickname": "补天大造丸",
+          "id": 717232
+      },
+      {
+          "joined_at": "2022-08-08T17:16:47Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/59/09/590904.jpg?r=1619084673",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/59/09/590904.jpg?r=1619084673",
+              "small": "https://lain.bgm.tv/pic/user/s/000/59/09/590904.jpg?r=1619084673"
+          },
+          "username": "590904",
+          "nickname": "李停",
+          "id": 590904
+      },
+      {
+          "joined_at": "2022-08-08T10:16:23Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/61/13/611322.jpg?r=1634963438",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/61/13/611322.jpg?r=1634963438",
+              "small": "https://lain.bgm.tv/pic/user/s/000/61/13/611322.jpg?r=1634963438"
+          },
+          "username": "611322",
+          "nickname": "我太弱了",
+          "id": 611322
+      },
+      {
+          "joined_at": "2022-08-08T07:49:36Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/61/41/614187.jpg?r=1653458067",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/61/41/614187.jpg?r=1653458067",
+              "small": "https://lain.bgm.tv/pic/user/s/000/61/41/614187.jpg?r=1653458067"
+          },
+          "username": "614187",
+          "nickname": "Genifednu",
+          "id": 614187
+      },
+      {
+          "joined_at": "2022-08-07T16:09:02Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/62/32/623202.jpg?r=1659882787",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/62/32/623202.jpg?r=1659882787",
+              "small": "https://lain.bgm.tv/pic/user/s/000/62/32/623202.jpg?r=1659882787"
+          },
+          "username": "623202",
+          "nickname": "Ooofah",
+          "id": 623202
+      },
+      {
+          "joined_at": "2022-08-07T09:39:50Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "715243",
+          "nickname": "爱上三次元",
+          "id": 715243
+      },
+      {
+          "joined_at": "2022-08-07T08:12:58Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/59/33/593305.jpg?r=1659190210",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/59/33/593305.jpg?r=1659190210",
+              "small": "https://lain.bgm.tv/pic/user/s/000/59/33/593305.jpg?r=1659190210"
+          },
+          "username": "yumeow",
+          "nickname": "鱼喵",
+          "id": 593305
+      },
+      {
+          "joined_at": "2022-08-07T07:55:16Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/58/62/586278.jpg?r=1657512064",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/58/62/586278.jpg?r=1657512064",
+              "small": "https://lain.bgm.tv/pic/user/s/000/58/62/586278.jpg?r=1657512064"
+          },
+          "username": "zc051215",
+          "nickname": "帆`",
+          "id": 586278
+      },
+      {
+          "joined_at": "2022-08-07T07:43:40Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/70/97/709764.jpg?r=1657948855",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/70/97/709764.jpg?r=1657948855",
+              "small": "https://lain.bgm.tv/pic/user/s/000/70/97/709764.jpg?r=1657948855"
+          },
+          "username": "709764",
+          "nickname": "末日凄惶月",
+          "id": 709764
+      },
+      {
+          "joined_at": "2022-08-07T05:56:53Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "716675",
+          "nickname": "Lemonice",
+          "id": 716675
+      },
+      {
+          "joined_at": "2022-08-07T03:58:55Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/53/84/538421.jpg?r=1588153666",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/53/84/538421.jpg?r=1588153666",
+              "small": "https://lain.bgm.tv/pic/user/s/000/53/84/538421.jpg?r=1588153666"
+          },
+          "username": "538421",
+          "nickname": "ONE",
+          "id": 538421
+      },
+      {
+          "joined_at": "2022-08-06T15:06:25Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/34/11/341121.jpg?r=1658122907",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/34/11/341121.jpg?r=1658122907",
+              "small": "https://lain.bgm.tv/pic/user/s/000/34/11/341121.jpg?r=1658122907"
+          },
+          "username": "341121",
+          "nickname": "等待并心怀希望",
+          "id": 341121
+      },
+      {
+          "joined_at": "2022-08-06T14:25:35Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/70/40/704007.jpg?r=1658917181",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/70/40/704007.jpg?r=1658917181",
+              "small": "https://lain.bgm.tv/pic/user/s/000/70/40/704007.jpg?r=1658917181"
+          },
+          "username": "704007",
+          "nickname": "尝到二次元的甜头",
+          "id": 704007
+      },
+      {
+          "joined_at": "2022-08-06T08:59:47Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "716387",
+          "nickname": "mryoungycy",
+          "id": 716387
+      },
+      {
+          "joined_at": "2022-08-06T01:51:16Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/71/62/716278.jpg?r=1659749887",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/71/62/716278.jpg?r=1659749887",
+              "small": "https://lain.bgm.tv/pic/user/s/000/71/62/716278.jpg?r=1659749887"
+          },
+          "username": "716278",
+          "nickname": "WKone",
+          "id": 716278
+      },
+      {
+          "joined_at": "2022-08-05T22:01:36Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/53/20/532070.jpg?r=1624165354",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/53/20/532070.jpg?r=1624165354",
+              "small": "https://lain.bgm.tv/pic/user/s/000/53/20/532070.jpg?r=1624165354"
+          },
+          "username": "posthumz",
+          "nickname": "posthumz",
+          "id": 532070
+      },
+      {
+          "joined_at": "2022-08-05T03:18:34Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/61/97/619749.jpg?r=1657621065",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/61/97/619749.jpg?r=1657621065",
+              "small": "https://lain.bgm.tv/pic/user/s/000/61/97/619749.jpg?r=1657621065"
+          },
+          "username": "evoler",
+          "nickname": "夜の蝉",
+          "id": 619749
+      },
+      {
+          "joined_at": "2022-08-04T15:31:43Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/61/50/615082.jpg?r=1627099531",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/61/50/615082.jpg?r=1627099531",
+              "small": "https://lain.bgm.tv/pic/user/s/000/61/50/615082.jpg?r=1627099531"
+          },
+          "username": "615082",
+          "nickname": "宫水十五叶",
+          "id": 615082
+      },
+      {
+          "joined_at": "2022-08-04T02:06:52Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "715029",
+          "nickname": "stellar",
+          "id": 715029
+      },
+      {
+          "joined_at": "2022-08-04T01:15:50Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/62/73/627306.jpg?r=1659574361",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/62/73/627306.jpg?r=1659574361",
+              "small": "https://lain.bgm.tv/pic/user/s/000/62/73/627306.jpg?r=1659574361"
+          },
+          "username": "627306",
+          "nickname": "一丘",
+          "id": 627306
+      },
+      {
+          "joined_at": "2022-08-04T00:15:02Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "597270",
+          "nickname": "晴空",
+          "id": 597270
+      },
+      {
+          "joined_at": "2022-08-03T23:18:34Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "715704",
+          "nickname": "呃呃",
+          "id": 715704
+      },
+      {
+          "joined_at": "2022-08-03T16:26:39Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/71/38/713847.jpg?r=1658989472",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/71/38/713847.jpg?r=1658989472",
+              "small": "https://lain.bgm.tv/pic/user/s/000/71/38/713847.jpg?r=1658989472"
+          },
+          "username": "713847",
+          "nickname": "sober",
+          "id": 713847
+      },
+      {
+          "joined_at": "2022-08-03T12:07:27Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/43/22/432241.jpg?r=1533981061",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/43/22/432241.jpg?r=1533981061",
+              "small": "https://lain.bgm.tv/pic/user/s/000/43/22/432241.jpg?r=1533981061"
+          },
+          "username": "432241",
+          "nickname": "hotheart1987",
+          "id": 432241
+      },
+      {
+          "joined_at": "2022-08-03T06:09:22Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/000/61/81/618189.jpg?r=1628066167",
+              "medium": "https://lain.bgm.tv/pic/user/m/000/61/81/618189.jpg?r=1628066167",
+              "small": "https://lain.bgm.tv/pic/user/s/000/61/81/618189.jpg?r=1628066167"
+          },
+          "username": "618189",
+          "nickname": "我的同桌就会浪",
+          "id": 618189
+      },
+      {
+          "joined_at": "2022-08-03T00:50:23Z",
+          "avatar": {
+              "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+              "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+              "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
+          },
+          "username": "715472",
+          "nickname": "柏木英理",
+          "id": 715472
+      }
+  ],
+  "total": 8792,
+  "limit": 30,
+  "offset": 0
+}
