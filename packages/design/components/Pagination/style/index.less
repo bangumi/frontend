@@ -47,10 +47,14 @@
     color: @gray-60;
     cursor: pointer;
 
-    &--active {
+    &--active,
+    &:hover {
       color: #fff;
       background-color: @primary-color;
       border-color: @primary-color;
+    }
+
+    &--active {
       cursor: default;
     }
 
