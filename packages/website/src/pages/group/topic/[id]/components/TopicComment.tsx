@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Reply, Comment } from '../../../../../types/common'
-import { Avatar, RichContent, Typography, Button } from '@bangumi/design'
+import { Avatar, RichContent, Typography, Button, EditorForm } from '@bangumi/design'
 import { render as renderBBCode } from '@bangumi/utils'
 import styles from './TopicComment.module.less'
 import ReplyInfo from './ReplyInfo'
@@ -30,6 +30,7 @@ const TopicComment: FC<TopicCommentProps> = ({
   const isReply = props.isReply
   const replies = !isReply ? props.replies : null
   const [shouldCollapsed, setShouldCollapsed] = useState(isReply && (/[+-]\d+$/.test(text) || state === 6))
+  const [showReplyEditor, setShowReplyEditor] = useState(false)
   const { user } = useUser()
 
   const headerClassName = classNames(styles.commentHeader, {
@@ -78,33 +79,45 @@ const TopicComment: FC<TopicCommentProps> = ({
             <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
           </div>
           <div className={styles.buttonGroup}>
-            <Button type="secondary" shape="rounded">回复</Button>
-            <Button type="secondary" shape="rounded">+1</Button>
             {
-                  user?.id === creator.id
-                    ? (
-                      <>
-                        <Button type="text">编辑</Button>
-                        <Button type="text">删除</Button>
-                      </>
-                      )
-                    : null
-                }
-
+              showReplyEditor
+                ? (
+                  <EditorForm
+                    onCancel={() => setShowReplyEditor(false)}
+                    placeholder={`回复给 @${creator.nickname}：`}
+                  />
+                  )
+                : (
+                  <>
+                    <Button type="secondary" shape="rounded" onClick={() => setShowReplyEditor(true)}>回复</Button>
+                    <Button type="secondary" shape="rounded">+1</Button>
+                    {
+                      user?.id === creator.id
+                        ? (
+                          <>
+                            <Button type="text">编辑</Button>
+                            <Button type="text">删除</Button>
+                          </>
+                          )
+                        : null
+                    }
+                  </>
+                  )
+            }
           </div>
         </div>
       </div>
       {
-                  replies?.map((reply, idx) => (
-                    <TopicComment
-                      key={reply.id}
-                      isReply
-                      floor={`${floor}-${idx + 1}`}
-                      originalPosterId={originalPosterId}
-                      {...reply}
-                    />
-                  ))
-                }
+        replies?.map((reply, idx) => (
+          <TopicComment
+            key={reply.id}
+            isReply
+            floor={`${floor}-${idx + 1}`}
+            originalPosterId={originalPosterId}
+            {...reply}
+          />
+        ))
+      }
     </div>
   )
 }
