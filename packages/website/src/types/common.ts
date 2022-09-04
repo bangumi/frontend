@@ -106,13 +106,7 @@ export interface Group {
   description: string
   total_members: number
   icon: string
-  new_members: Array<{
-    joined_at: string
-    avatar: AvatarSet
-    username: string
-    nickname: string
-    id: number
-  }>
+  new_members: Member[]
 }
 
 export interface Topic {
@@ -122,6 +116,14 @@ export interface Topic {
   creator: User
   id: 371781
   reply_count: 10
+}
+
+export interface Member {
+  joined_at: string
+  avatar: AvatarSet
+  username: string
+  nickname: string
+  id: number
 }
 
 export interface Pagination {
