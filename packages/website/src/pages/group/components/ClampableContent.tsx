@@ -1,16 +1,18 @@
 import React from 'react'
-import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg'
-import { ReactComponent as UpArrow } from '../../../../assets/up-arrow.svg'
+import { ReactComponent as DownArrow } from '../../../assets/down-arrow.svg'
+import { ReactComponent as UpArrow } from '../../../assets/up-arrow.svg'
 import styles from './ClampableContent.module.less'
+import classNames from 'classnames'
 
 export interface ClampableContentProps {
   threshold: number
   content: string
   isClamped: boolean
-  onChange: (isClamped: boolean) => void
+  className?: string
+  onChange?: (isClamped: boolean) => void
 }
 
-export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold, isClamped, onChange }) => {
+export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold, isClamped, onChange, className }) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false)
   const contentRef = React.useRef<HTMLDivElement>(null)
 
@@ -43,7 +45,11 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
       return (
         <>
           <div>...</div>
-          <div className={styles.textButton} onClick={handleUnclamp}><span>展开</span><DownArrow /></div>
+          {
+            onChange
+              ? <div className={styles.textButton} onClick={handleUnclamp}><span>展开</span><DownArrow /></div>
+              : null
+          }
         </>
       )
     } else {
@@ -52,7 +58,7 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
   }
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, className)}>
       <div ref={contentRef} className={styles.content} style={isClampEnabled && isClamped ? clampedStyle : undefined} dangerouslySetInnerHTML={{ __html: content }} />
       {renderControl()}
     </div>

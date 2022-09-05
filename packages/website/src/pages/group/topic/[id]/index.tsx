@@ -81,12 +81,8 @@ const Topic: FC = () => {
             <ClampableContent
               threshold={CLAMP_HEIGHT_THRESHOLD}
               content={renderBBCode(group.description)}
-              isClamped
-              onChange={() => { }}
-            />
-            <div
               className={styles.groupDescription}
-              dangerouslySetInnerHTML={{ __html: renderBBCode(group.description) }}
+              isClamped
             />
             <div className={styles.groupOpinions}>
               <Button type="text"><Link to={`/group/${group.name}`}>小组概览</Link></Button>
