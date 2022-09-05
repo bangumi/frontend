@@ -176,6 +176,8 @@ export interface GroupTopicGroupInfo {
   created_at: string
   title: string
   icon: string
+  description: string
+  total_members: number
 }
 
 export interface GroupTopicDetail {

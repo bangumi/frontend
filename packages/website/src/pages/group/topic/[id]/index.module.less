@@ -1,3 +1,5 @@
+/* stylelint-disable value-no-vendor-prefix */
+
 @import '@bangumi/design/theme/base';
 
 /* Todo: col & raw component */
@@ -33,4 +35,44 @@
   .replyForm {
     margin-left: 12px;
   }
+}
+
+// Right Col
+.groupInfo {
+  display: flex;
+}
+
+.groupDetails {
+  margin-left: 10px;
+
+  > a {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  > div {
+    font-size: 12px;
+    line-height: 17px;
+    color: @gray-60;
+  }
+}
+
+.groupDescription {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 20px;
+  color: @gray-80;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 8;
+}
+
+.groupOpinions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
 }
