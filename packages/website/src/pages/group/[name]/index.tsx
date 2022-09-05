@@ -9,7 +9,7 @@ import { render as renderBBCode } from '@bangumi/utils'
 import { UserCard } from './components/UserCard'
 import { getGroupForumPage, getGroupMemberPage, getGroupTopicLink, getUserProfileLink } from '../../../utils/pages'
 import dayjs from 'dayjs'
-import { ClampableContent } from './components/ClampableContent'
+import { ClampableContent } from '../components/ClampableContent'
 import { ReactComponent as RightArrow } from '../../../assets/right-arrow.svg'
 
 const { Link } = Typography

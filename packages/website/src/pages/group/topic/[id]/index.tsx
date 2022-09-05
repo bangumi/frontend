@@ -7,10 +7,13 @@ import GroupTopicHeader from './components/GroupTopicHeader'
 import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
 import TopicComment from './components/TopicComment'
+import { ClampableContent } from '../../components/ClampableContent'
 import { useUser } from '../../../../hooks/use-user'
 import { getGroupForumPage } from '../../../../utils/pages'
 
 const { Link } = Typography
+
+const CLAMP_HEIGHT_THRESHOLD = 193
 
 const Topic: FC = () => {
   const { id } = useParams()
@@ -75,6 +78,12 @@ const Topic: FC = () => {
                 <div>{`${group.total_members} 名成员`}</div>
               </div>
             </div>
+            <ClampableContent
+              threshold={CLAMP_HEIGHT_THRESHOLD}
+              content={renderBBCode(group.description)}
+              isClamped
+              onChange={() => { }}
+            />
             <div
               className={styles.groupDescription}
               dangerouslySetInnerHTML={{ __html: renderBBCode(group.description) }}
