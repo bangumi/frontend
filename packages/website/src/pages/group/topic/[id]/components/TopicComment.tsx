@@ -4,7 +4,7 @@ import { Avatar, RichContent, Typography, Button, EditorForm } from '@bangumi/de
 import { render as renderBBCode } from '@bangumi/utils'
 import styles from './TopicComment.module.less'
 import ReplyInfo from './ReplyInfo'
-import { Friend, OriginalPoster, TopicClosed, TopicSilent } from '@bangumi/icons'
+import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons'
 import classNames from 'classnames'
 import { useUser } from '../../../../../hooks/use-user'
 
@@ -78,7 +78,7 @@ const TopicComment: FC<TopicCommentProps> = ({
         icon = <TopicClosed />
         break
       case 2:
-        icon = null
+        icon = <TopicReopen />
         break
       case 5:
         icon = <TopicSilent />
