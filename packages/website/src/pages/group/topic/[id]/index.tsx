@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { EditorForm, RichContent, Avatar, Section, Typography } from '@bangumi/design'
+import { EditorForm, RichContent, Avatar, Section, Typography, Button } from '@bangumi/design'
 import GlobalLayout from '../../../../components/GlobalLayout'
 import useGroupTopic from '../../../../hooks/use-group-topic'
 import GroupTopicHeader from './components/GroupTopicHeader'
@@ -8,6 +8,7 @@ import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
 import TopicComment from './components/TopicComment'
 import { useUser } from '../../../../hooks/use-user'
+import { getGroupForumPage } from '../../../../utils/pages'
 
 const { Link } = Typography
 
@@ -79,9 +80,9 @@ const Topic: FC = () => {
               dangerouslySetInnerHTML={{ __html: renderBBCode(group.description) }}
             />
             <div className={styles.groupOpinions}>
-              <Link to="">小组概览</Link>
-              <Link to="">组内讨论</Link>
-              <Link to="">小组成员</Link>
+              <Button type="text"><Link to={`/group/${group.name}`}>小组概览</Link></Button>
+              <Button type="text"><Link to={getGroupForumPage(group.name)} isExternal>组内讨论</Link></Button>
+              <Button type="text"><Link to={`/group/${group.name}/members`}>小组成员</Link></Button>
             </div>
           </Section>
         </div>
