@@ -2,7 +2,7 @@ import React from 'react'
 import { User } from '../types/user'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 interface UserContextType {
@@ -60,7 +60,7 @@ export const UserProvider: React.FC = ({ children }) => {
     hCaptchaResp: string
   ) => Promise<void> =
     (email, password, hCaptchaResp) => {
-      return axios.post(
+      return privateRequest.post(
         '/p/login', {
           email,
           password,
