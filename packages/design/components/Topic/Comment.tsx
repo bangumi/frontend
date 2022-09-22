@@ -131,9 +131,11 @@ const Comment: FC<CommentProps> = ({
                   isFriend ? <Friend /> : null
                 }
                 {
-                  // Todo: XSS ?
-                  creator.sign
-                    ? <span dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
+                  !isReply
+                    // Todo: XSS ?
+                    ? creator.sign
+                      ? <span dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
+                      : null
                     : null
                 }
               </div>
