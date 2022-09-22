@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Reply, Comment as IComment, Creator } from '@bangumi/types'
+import { Reply, Comment as IComment, User } from '@bangumi/types'
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons'
 import classNames from 'classnames'
 import { render as renderBBCode } from '@bangumi/utils'
@@ -15,7 +15,7 @@ export type CommentProps =
   & {
     floor: string | number
     originalPosterId: number
-    user: Creator
+    user?: User
   }
 
 const Link = Typography.Link

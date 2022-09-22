@@ -49,7 +49,7 @@ const TopicPage: FC = () => {
                     isReply={false}
                     floor={idx + 2}
                     originalPosterId={originalPosterId}
-                    user={topicDetail?.creator}
+                    user={user}
                     {...comment}
                   />
                 )
