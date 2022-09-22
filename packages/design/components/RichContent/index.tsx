@@ -8,7 +8,7 @@ export interface RichContentProps {
 
 const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
   return (
-    <article
+    <div
       className={classNames('bgm-rich-content', classname)}
       dangerouslySetInnerHTML={{ __html: html }}
     />

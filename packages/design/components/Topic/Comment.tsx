@@ -1,17 +1,21 @@
 import React, { FC, useState } from 'react'
-import { Avatar, RichContent, Typography, Button, EditorForm } from '../../'
-import { render as renderBBCode } from '@bangumi/utils'
 import { Reply, Comment as IComment, Creator } from '@bangumi/types'
-import CommentInfo from './CommentInfo'
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons'
 import classNames from 'classnames'
+import { render as renderBBCode } from '@bangumi/utils'
+import Avatar from '../../components/Avatar'
+import RichContent from '../../components/RichContent'
+import Typography from '../../components/Typography'
+import Button from '../../components/Button'
+import EditorForm from '../../components/EditorForm'
+import CommentInfo from './CommentInfo'
 
 export type CommentProps =
   ((Reply & { isReply: true }) | (IComment & { isReply: false }))
   & {
     floor: string | number
     originalPosterId: number
-    author: Creator
+    user: Creator
   }
 
 const Link = Typography.Link
@@ -59,7 +63,7 @@ const Comment: FC<CommentProps> = ({
   is_friend: isFriend,
   originalPosterId,
   state,
-  author,
+  user,
   ...props
 }) => {
   const isReply = props.isReply
@@ -93,7 +97,10 @@ const Comment: FC<CommentProps> = ({
     }
 
     return (
-      <div className={headerClassName} onClick={isSpecial ? undefined : () => setShouldCollapsed(false)}>
+      <div
+        className={headerClassName} onClick={isSpecial ? undefined : () => setShouldCollapsed(false)}
+        id={`post_${props.id}`}
+      >
         <span className="bgm-comment__tip">
           <div className="creator-info">
             {
@@ -110,7 +117,7 @@ const Comment: FC<CommentProps> = ({
 
   return (
     <div>
-      <div className={headerClassName}>
+      <div className={headerClassName} id={`post_${props.id}`}>
         <Avatar src={creator.avatar.large} size={isReply ? 'small' : 'medium'} />
         <div className="bgm-comment__box">
           <div className="bgm-comment__main">
@@ -126,7 +133,7 @@ const Comment: FC<CommentProps> = ({
                 {
                   // Todo: XSS ?
                   creator.sign
-                    ? <span className="todo" dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
+                    ? <span dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
                     : null
                 }
               </div>
@@ -148,7 +155,7 @@ const Comment: FC<CommentProps> = ({
                     <Button type="secondary" shape="rounded" onClick={() => setShowReplyEditor(true)}>回复</Button>
                     <Button type="secondary" shape="rounded">+1</Button>
                     {
-                      author?.id === creator.id
+                      user?.id === creator.id
                         ? (
                           <>
                             <Button type="text">编辑</Button>
@@ -170,7 +177,7 @@ const Comment: FC<CommentProps> = ({
             isReply
             floor={`${floor}-${idx + 1}`}
             originalPosterId={originalPosterId}
-            author={author}
+            user={user}
             {...reply}
           />
         ))
