@@ -11,6 +11,7 @@ export { default as Section } from './components/Section'
 export { default as EditorForm } from './components/EditorForm'
 export { default as RichContent } from './components/RichContent'
 export { default as Pagination } from './components/Pagination'
+export { default as Topic } from './components/Topic'
 
 export type { ButtonProps } from './components/Button'
 export type { LinkProps } from './components/Typography'

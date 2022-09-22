@@ -1,0 +1,83 @@
+@import '../../../theme/base';
+
+.bgm-comment {
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    min-height: 98px;
+    max-width: 913px;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed @gray-10;
+
+    &--reply {
+      margin-left: 72px;
+    }
+
+    &--collapsed {
+      padding-top: 12px;
+      min-height: 22px;
+    }
+  }
+
+  &__box {
+    margin-left: 12px;
+    width: 100%;
+  }
+
+  &__main {
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__tip {
+    font-size: 16px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: @gray-60;
+    width: 100%;
+
+    .creator-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    div > a,
+    svg {
+      padding-right: 12px;
+    }
+  }
+
+  &__opinions {
+    margin-top: 12px;
+
+    > .bgm-button {
+      height: 24px;
+      line-height: 22px;
+      margin-right: 10px;
+    }
+
+    > .bgm-button__secondary {
+      background-color: #fff;
+      border: 2px solid @gray-10;
+      border-radius: 12px;
+      padding: 0 15px;
+    }
+  }
+
+  &__content {
+    color: @gray-100;
+    line-height: 26px;
+
+    &--deleted {
+      color: @gray-80;
+    }
+  }
+}

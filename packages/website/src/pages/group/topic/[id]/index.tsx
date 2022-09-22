@@ -1,12 +1,11 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
-import { EditorForm, RichContent, Avatar, Section, Typography, Button } from '@bangumi/design'
+import { EditorForm, RichContent, Avatar, Section, Typography, Button, Topic } from '@bangumi/design'
 import GlobalLayout from '../../../../components/GlobalLayout'
 import useGroupTopic from '../../../../hooks/use-group-topic'
 import GroupTopicHeader from './components/GroupTopicHeader'
 import styles from './index.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
-import TopicComment from './components/TopicComment'
 import { ClampableContent } from '../../components/ClampableContent'
 import { useUser } from '../../../../hooks/use-user'
 import { getGroupForumPage } from '../../../../utils/pages'
@@ -15,7 +14,9 @@ const { Link } = Typography
 
 const CLAMP_HEIGHT_THRESHOLD = 193
 
-const Topic: FC = () => {
+const { Comment } = Topic
+
+const TopicPage: FC = () => {
   const { id } = useParams()
   const { topicDetail } = useGroupTopic(id!)
   const { user } = useUser()
@@ -43,11 +44,12 @@ const Topic: FC = () => {
             {
               topicDetail.comments.map((comment, idx) =>
                 (
-                  <TopicComment
+                  <Comment
                     key={comment.id}
                     isReply={false}
                     floor={idx + 2}
                     originalPosterId={originalPosterId}
+                    author={topicDetail?.creator}
                     {...comment}
                   />
                 )
@@ -95,4 +97,4 @@ const Topic: FC = () => {
     </GlobalLayout>
   )
 }
-export default Topic
+export default TopicPage

@@ -1,18 +1,17 @@
 import React, { FC, useState } from 'react'
-import { Reply, Comment } from '../../../../../types/common'
-import { Avatar, RichContent, Typography, Button, EditorForm } from '@bangumi/design'
+import { Avatar, RichContent, Typography, Button, EditorForm } from '../../'
 import { render as renderBBCode } from '@bangumi/utils'
-import styles from './TopicComment.module.less'
-import ReplyInfo from './ReplyInfo'
+import { Reply, Comment as IComment, Creator } from '@bangumi/types'
+import CommentInfo from './CommentInfo'
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons'
 import classNames from 'classnames'
-import { useUser } from '../../../../../hooks/use-user'
 
-type TopicCommentProps =
-  ((Reply & { isReply: true }) | (Comment & { isReply: false }))
+export type CommentProps =
+  ((Reply & { isReply: true }) | (IComment & { isReply: false }))
   & {
     floor: string | number
     originalPosterId: number
+    author: Creator
   }
 
 const Link = Typography.Link
@@ -25,18 +24,26 @@ const RenderContent: FC<{ state: number, text: string }> = (
 ) => {
   switch (state) {
     case 0:
-      return <RichContent html={renderBBCode(text)} classname={styles.topicContent} />
+      return <RichContent html={renderBBCode(text)} classname="bgm-comment__content" />
     case 1:
-      return <div className={styles.topicContent}>关闭了该主题</div>
+      return <div className="bgm-comment__content">关闭了该主题</div>
     case 2:
-      return <div className={styles.topicContent}>重新开启了该主题</div>
+      return <div className="bgm-comment__content">重新开启了该主题</div>
     case 5:
-      return <div className={styles.topicContent}>下沉了该主题</div>
+      return <div className="bgm-comment__content">下沉了该主题</div>
     case 6:
-      return <div className={styles.deletedContent}>内容已被用户删除</div>
+      return <div className="bgm-comment__content--deleted">内容已被用户删除</div>
     case 7:
       return (
-        <div className={styles.deletedContent}>内容因违反「<Link to="https://bgm.tv/about/guideline" isExternal>社区指导原则</Link>」已被删除
+        <div className="bgm-comment__content--deleted">
+          内容因违反「
+          <Link
+            to="https://bgm.tv/about/guideline"
+            isExternal
+          >
+            社区指导原则
+          </Link>
+          」已被删除
         </div>
       )
     default:
@@ -44,7 +51,7 @@ const RenderContent: FC<{ state: number, text: string }> = (
   }
 }
 
-const TopicComment: FC<TopicCommentProps> = ({
+const Comment: FC<CommentProps> = ({
   text,
   creator,
   created_at: createAt,
@@ -52,6 +59,7 @@ const TopicComment: FC<TopicCommentProps> = ({
   is_friend: isFriend,
   originalPosterId,
   state,
+  author,
   ...props
 }) => {
   const isReply = props.isReply
@@ -61,11 +69,10 @@ const TopicComment: FC<TopicCommentProps> = ({
   const replies = !isReply ? props.replies : null
   const [shouldCollapsed, setShouldCollapsed] = useState(isSpecial || (isReply && ((/[+-]\d+$/.test(text) || isDeleted))))
   const [showReplyEditor, setShowReplyEditor] = useState(false)
-  const { user } = useUser()
 
-  const headerClassName = classNames(styles.commentHeader, {
-    [styles.replyHeader]: isReply,
-    [styles.commentCollapsed]: shouldCollapsed
+  const headerClassName = classNames('bgm-comment__header', {
+    'bgm-comment__header--reply': isReply,
+    'bgm-comment__header--collapsed': shouldCollapsed
   })
 
   if (shouldCollapsed) {
@@ -87,15 +94,15 @@ const TopicComment: FC<TopicCommentProps> = ({
 
     return (
       <div className={headerClassName} onClick={isSpecial ? undefined : () => setShouldCollapsed(false)}>
-        <span className={styles.navBar}>
-          <div className={styles.creatorInfo}>
+        <span className="bgm-comment__tip">
+          <div className="creator-info">
             {
               icon
             }
             <Link to={creator.url} isExternal>{creator.nickname}</Link>
             <RenderContent state={state} text={text} />
           </div>
-          <ReplyInfo createdAt={createAt} floor={floor} isSpecial={isSpecial} />
+          <CommentInfo createdAt={createAt} floor={floor} isSpecial={isSpecial} />
         </span>
       </div>
     )
@@ -105,10 +112,10 @@ const TopicComment: FC<TopicCommentProps> = ({
     <div>
       <div className={headerClassName}>
         <Avatar src={creator.avatar.large} size={isReply ? 'small' : 'medium'} />
-        <div className={styles.commentBox}>
-          <div className={styles.commentMain}>
-            <span className={styles.navBar}>
-              <div className={styles.creatorInfo}>
+        <div className="bgm-comment__box">
+          <div className="bgm-comment__main">
+            <span className="bgm-comment__tip">
+              <div className="creator-info">
                 <Link to={creator.url} isExternal>{creator.nickname}</Link>
                 {
                   originalPosterId === creator.id ? <OriginalPoster /> : null
@@ -119,15 +126,15 @@ const TopicComment: FC<TopicCommentProps> = ({
                 {
                   // Todo: XSS ?
                   creator.sign
-                    ? <span className={styles.sign} dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
+                    ? <span className="todo" dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
                     : null
                 }
               </div>
-              <ReplyInfo createdAt={createAt} floor={floor} />
+              <CommentInfo createdAt={createAt} floor={floor} />
             </span>
             <RenderContent state={state} text={text} />
           </div>
-          <div className={styles.optionBox}>
+          <div className="bgm-comment__opinions">
             {
               showReplyEditor
                 ? (
@@ -141,7 +148,7 @@ const TopicComment: FC<TopicCommentProps> = ({
                     <Button type="secondary" shape="rounded" onClick={() => setShowReplyEditor(true)}>回复</Button>
                     <Button type="secondary" shape="rounded">+1</Button>
                     {
-                      user?.id === creator.id
+                      author?.id === creator.id
                         ? (
                           <>
                             <Button type="text">编辑</Button>
@@ -158,11 +165,12 @@ const TopicComment: FC<TopicCommentProps> = ({
       </div>
       {
         replies?.map((reply, idx) => (
-          <TopicComment
+          <Comment
             key={reply.id}
             isReply
             floor={`${floor}-${idx + 1}`}
             originalPosterId={originalPosterId}
+            author={author}
             {...reply}
           />
         ))
@@ -171,4 +179,4 @@ const TopicComment: FC<TopicCommentProps> = ({
   )
 }
 
-export default TopicComment
+export default Comment

@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import styles from './GroupTopicHeader.module.less'
-import { Avatar, Typography } from '@bangumi/design'
-import ReplyInfo from './ReplyInfo'
+import { Avatar, Typography, Topic } from '@bangumi/design'
 import { Creator, GroupTopicGroupInfo } from '../../../../../types/common'
 import { getGroupForumPage } from '../../../../../utils/pages'
 
@@ -13,6 +12,7 @@ interface Header {
 }
 
 const Link = Typography.Link
+const CommentInfo = Topic.CommentInfo
 
 const GroupTopicHeader: FC<Header> = ({
   title,
@@ -32,7 +32,7 @@ const GroupTopicHeader: FC<Header> = ({
             <span>»</span>
             <Link to={getGroupForumPage(group.name)} isExternal>组内讨论</Link>
           </div>
-          <ReplyInfo createdAt={createdAt} floor="1" />
+          <CommentInfo createdAt={createdAt} floor="1" />
         </span>
         <h1 className={styles.title}>{title}</h1>
       </div>
