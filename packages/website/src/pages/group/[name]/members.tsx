@@ -1,7 +1,6 @@
 import { Pagination, Section, Tab } from '@bangumi/design'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import GlobalLayout from '../../../components/GlobalLayout'
 import { useGroup } from '../../../hooks/use-group'
 import { useQuery } from '../../../hooks/use-query'
 import { GroupHeader } from './components/GroupHeader'
@@ -39,14 +38,13 @@ const GroupMembers: React.FC = () => {
   }
 
   return (
-    <GlobalLayout>
-      <div className={styles.pageContainer}>
-        <GroupHeader group={group} />
-        <Tab type="borderless" items={tabs} activeKey="members" />
+    <div className={styles.pageContainer}>
+      <GroupHeader group={group} />
+      <Tab type="borderless" items={tabs} activeKey="members" />
 
-        <div className={styles.columnContainer}>
-          <div className={styles.leftCol}>
-            {
+      <div className={styles.columnContainer}>
+        <div className={styles.leftCol}>
+          {
             // TODO: 遵循旧站的交互规则，可能需要改动
             pageIndex === 1 &&
               <Section title="小组管理员">
@@ -63,25 +61,24 @@ const GroupMembers: React.FC = () => {
                 </div>
               </Section>
           }
-            <Section title="小组成员">
-              <div className={styles.members}>
-                {(data ?? []).map((member) => {
-                  return (
-                    <UserCard
-                      mode="horizontal"
-                      user={{ ...member, avatar: member.avatar.large }}
-                      key={member.id}
-                    />
-                  )
-                })}
-              </div>
-            </Section>
-          </div>
+          <Section title="小组成员">
+            <div className={styles.members}>
+              {(data ?? []).map((member) => {
+                return (
+                  <UserCard
+                    mode="horizontal"
+                    user={{ ...member, avatar: member.avatar.large }}
+                    key={member.id}
+                  />
+                )
+              })}
+            </div>
+          </Section>
         </div>
-
-        <Pagination total={total} currentOffset={pageIndex} onChange={handlePageChange} />
       </div>
-    </GlobalLayout>
+
+      <Pagination total={total} currentOffset={pageIndex} onChange={handlePageChange} />
+    </div>
   )
 }
 
