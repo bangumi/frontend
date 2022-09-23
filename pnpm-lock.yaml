@@ -135,6 +135,16 @@ importers:
   packages/server:
     specifiers: {}
 
+  packages/types:
+    specifiers:
+      js-yaml: ^4.1.0
+      node-fetch: ^3.2.10
+      openapi-typescript: ^5.4.1
+    devDependencies:
+      js-yaml: 4.1.0
+      node-fetch: 3.2.10
+      openapi-typescript: 5.4.1
+
   packages/utils:
     specifiers:
       '@types/js-yaml': ^4.0.5
@@ -149,6 +159,7 @@ importers:
     specifiers:
       '@bangumi/design': workspace:*
       '@bangumi/icons': workspace:*
+      '@bangumi/types': workspace:^0.0.0
       '@bangumi/utils': workspace:*
       '@hcaptcha/react-hcaptcha': ^1.3.0
       '@types/lodash': ^4.14.182
@@ -186,6 +197,7 @@ importers:
     devDependencies:
       '@bangumi/design': link:../design
       '@bangumi/icons': link:../icons
+      '@bangumi/types': link:../types
       '@bangumi/utils': link:../utils
       '@types/lodash': 4.14.182
       '@types/react': 17.0.38
@@ -8470,6 +8482,28 @@ packages:
     resolution: {integrity: sha512-mKKUkUbhPpQlCOfIuZkvSEgktjPFIsZKRRbC6KWVEMvlzblj3i3asQv5ODsrwt0N3pHAEvjP8KTQPHkp0+6jOg==}
     dev: true
 
+  /chokidar/2.1.8:
+    resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==}
+    deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
+    dependencies:
+      anymatch: r2.cnpmjs.org/anymatch/2.0.0
+      async-each: r2.cnpmjs.org/async-each/1.0.3
+      braces: r2.cnpmjs.org/braces/2.3.2
+      glob-parent: r2.cnpmjs.org/glob-parent/3.1.0
+      inherits: r2.cnpmjs.org/inherits/2.0.4
+      is-binary-path: r2.cnpmjs.org/is-binary-path/1.0.1
+      is-glob: r2.cnpmjs.org/is-glob/4.0.3
+      normalize-path: r2.cnpmjs.org/normalize-path/3.0.0
+      path-is-absolute: r2.cnpmjs.org/path-is-absolute/1.0.1
+      readdirp: r2.cnpmjs.org/readdirp/2.2.1
+      upath: r2.cnpmjs.org/upath/1.2.0
+    optionalDependencies:
+      fsevents: 1.2.13
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+    optional: true
+
   /chokidar/3.5.2:
     resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==}
     engines: {node: '>= 8.10.0'}
@@ -8482,7 +8516,7 @@ packages:
       normalize-path: r2.cnpmjs.org/normalize-path/3.0.0
       readdirp: r2.cnpmjs.org/readdirp/3.6.0
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   /chownr/1.1.4:
@@ -8981,6 +9015,11 @@ packages:
     resolution: {integrity: sha512-NJGVKPS81XejHcLhaLJS7plab0fK3slPh11mESeeDq2W4ZI5kUKK/LRRdVDvjJseojbPB7ZwjnyOybg3Igea/A==}
     dev: true
 
+  /data-uri-to-buffer/4.0.0:
+    resolution: {integrity: sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==}
+    engines: {node: '>= 12'}
+    dev: true
+
   /data-urls/2.0.0:
     resolution: {integrity: sha512-X5eWTSXO/BJmpdIKCRuKUgSCgAN0OwliVK3yPKbwIWU1Tdw5BRajxlzMidvh+gwko9AfQ9zIj52pzF91Q3YAvQ==}
     engines: {node: '>=10'}
@@ -9389,6 +9428,7 @@ packages:
   /errno/0.1.8:
     resolution: {integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==}
     hasBin: true
+    requiresBuild: true
     dependencies:
       prr: r2.cnpmjs.org/prr/1.0.1
     dev: true
@@ -10215,6 +10255,14 @@ packages:
       bser: 2.1.1
     dev: true
 
+  /fetch-blob/3.2.0:
+    resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
+    engines: {node: ^12.20 || >= 14.13}
+    dependencies:
+      node-domexception: 1.0.0
+      web-streams-polyfill: 3.2.1
+    dev: true
+
   /fetch-retry/5.0.3:
     resolution: {integrity: sha512-uJQyMrX5IJZkhoEUBQ3EjxkeiZkppBd5jS/fMTJmfZxLSiaQjv2zD0kTvuvkSH89uFvgSlB6ueGpjD3HWN7Bxw==}
     dev: true
@@ -10439,6 +10487,13 @@ packages:
     engines: {node: '>=0.4.x'}
     dev: true
 
+  /formdata-polyfill/4.0.10:
+    resolution: {integrity: sha512-buewHzMvYL29jdeQTVILecSaZKnt/RJWjoZCF5OW60Z67/GmSLBkOFM7qh1PI3zFNtJbaZL5eQu1vLfazOwj4g==}
+    engines: {node: '>=12.20.0'}
+    dependencies:
+      fetch-blob: 3.2.0
+    dev: true
+
   /forwarded/0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
@@ -10504,6 +10559,26 @@ packages:
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
     dev: true
+
+  /fsevents/1.2.13:
+    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
+    engines: {node: '>= 4.0'}
+    os: [darwin]
+    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    requiresBuild: true
+    dependencies:
+      bindings: 1.5.0
+      nan: 2.15.0
+    dev: true
+    optional: true
+
+  /fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -10702,6 +10777,10 @@ packages:
       define-properties: 1.1.3
     dev: true
 
+  /globalyzer/0.1.0:
+    resolution: {integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==}
+    dev: true
+
   /globby/11.0.4:
     resolution: {integrity: sha512-9O4MVG9ioZJ08ffbcyVYyLOJLk5JQ688pJ4eMGLpdWLHq/Wr1D9BlriLQyL0E+jbkuePVZXYFj47QM/v093wHg==}
     engines: {node: '>=10'}
@@ -10746,6 +10825,10 @@ packages:
     resolution: {integrity: sha1-L0SUrIkZ43Z8XLtpHp9GMyQoXUM=}
     dev: true
 
+  /globrex/0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
+    dev: true
+
   /graceful-fs/4.2.9:
     resolution: {integrity: sha512-NtNxqUcXgpW2iMrfqSfR73Glt39K+BLwWsPs94yR63v45T0Wbej7eRmL5cWfwEgqXnmjQp3zaJTshdRW/qC2ZQ==}
     dev: true
@@ -10760,7 +10843,7 @@ packages:
       source-map: 0.6.1
       wordwrap: 1.0.0
     optionalDependencies:
-      uglify-js: r2.cnpmjs.org/uglify-js/3.14.5
+      uglify-js: 3.14.5
     dev: true
 
   /hard-rejection/2.1.0:
@@ -11080,6 +11163,14 @@ packages:
     resolution: {integrity: sha512-CmxgYGiEPCLhfLnpPp1MoRmifwEIOgjcHXxOBjv7mY96c+eWScsOP9c112ZyLdWHi0FxHjI+4uVhKYp/gcdRmQ==}
     engines: {node: '>= 4'}
     dev: true
+
+  /image-size/0.5.5:
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
+    engines: {node: '>=0.10.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -11737,7 +11828,7 @@ packages:
       sane: 4.1.0
       walker: 1.0.8
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -11759,7 +11850,7 @@ packages:
       micromatch: 4.0.4
       walker: 1.0.8
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   /jest-jasmine2/27.4.6:
@@ -12458,6 +12549,7 @@ packages:
   /make-dir/2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dependencies:
       pify: r2.cnpmjs.org/pify/4.0.1
       semver: r2.cnpmjs.org/semver/5.7.1
@@ -12690,11 +12782,18 @@ packages:
     resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
     engines: {node: '>=4'}
     hasBin: true
+    requiresBuild: true
     dev: true
 
   /mime/2.6.0:
     resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
     engines: {node: '>=4.0.0'}
+    hasBin: true
+    dev: true
+
+  /mime/3.0.0:
+    resolution: {integrity: sha512-jSCU7/VB1loIWBZe14aEYHU/+1UMEHoaO7qxCOVJOw9GgH72VAWppxNcjU+x9a2k3GSIBXNKxXQFqRvvZ7vr3A==}
+    engines: {node: '>=10.0.0'}
     hasBin: true
     dev: true
 
@@ -12886,6 +12985,20 @@ packages:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
 
+  /needle/2.9.1:
+    resolution: {integrity: sha512-6R9fqJ5Zcmf+uYaFgdIHmLwNldn5HbK8L5ybn7Uz+ylX/rnOsSp1AHcvQSrCaFN+qNM1wpymHqD7mVasEOlHGQ==}
+    engines: {node: '>= 4.4.x'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      debug: 3.2.7
+      iconv-lite: r2.cnpmjs.org/iconv-lite/0.4.24
+      sax: r2.cnpmjs.org/sax/1.2.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+    optional: true
+
   /negotiator/0.6.2:
     resolution: {integrity: sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==}
     engines: {node: '>= 0.6'}
@@ -12917,6 +13030,11 @@ packages:
       minimatch: 3.0.4
     dev: true
 
+  /node-domexception/1.0.0:
+    resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
+    engines: {node: '>=10.5.0'}
+    dev: true
+
   /node-fetch/2.6.7:
     resolution: {integrity: sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==}
     engines: {node: 4.x || >=6.0.0}
@@ -12927,6 +13045,15 @@ packages:
         optional: true
     dependencies:
       whatwg-url: 5.0.0
+    dev: true
+
+  /node-fetch/3.2.10:
+    resolution: {integrity: sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      data-uri-to-buffer: 4.0.0
+      fetch-blob: 3.2.0
+      formdata-polyfill: 4.0.10
     dev: true
 
   /node-int64/0.4.0:
@@ -13157,6 +13284,19 @@ packages:
       define-lazy-prop: 2.0.0
       is-docker: 2.2.1
       is-wsl: 2.2.0
+    dev: true
+
+  /openapi-typescript/5.4.1:
+    resolution: {integrity: sha512-AGB2QiZPz4rE7zIwV3dRHtoUC/CWHhUjuzGXvtmMQN2AFV8xCTLKcZUHLcdPQmt/83i22nRE7+TxXOXkK+gf4Q==}
+    engines: {node: '>= 14.0.0'}
+    hasBin: true
+    dependencies:
+      js-yaml: 4.1.0
+      mime: 3.0.0
+      prettier: 2.6.2
+      tiny-glob: 0.2.9
+      undici: 5.10.0
+      yargs-parser: 21.1.1
     dev: true
 
   /optionator/0.8.3:
@@ -14386,7 +14526,7 @@ packages:
     engines: {node: '>=10.0.0'}
     hasBin: true
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   /rooks/5.11.0_sfoxds7t5ydpegc3knd667wn6m:
@@ -14726,7 +14866,7 @@ packages:
     dev: true
 
   /source-map/0.5.7:
-    resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=}
+    resolution: {integrity: sha512-LbrmJOMUSdEVxIKvdcJzQC+nQhe8FUZQTXQy6+I75skNgn3OoQ0DZA8YnFa7gp8tqtL3KPf1kmo0R5DoApeSGQ==}
     engines: {node: '>=0.10.0'}
     dev: true
 
@@ -15390,6 +15530,13 @@ packages:
     resolution: {integrity: sha512-B0CGmOgMPVUZqp63eU/FGcDaL68JjHeiVnCF24K99Kj6AwCV15BHWMLCv8ZKSUq5oyVHTtg7p1ajOWfXB+0wnQ==}
     dev: true
 
+  /tiny-glob/0.2.9:
+    resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
+    dependencies:
+      globalyzer: 0.1.0
+      globrex: 0.1.2
+    dev: true
+
   /tmpl/1.0.5:
     resolution: {integrity: sha512-3f0uOEAQwIqGuWW2MVzYg8fV/QNnc/IpuJNG837rLuczAaLVHslWHZQj4IGiEl5Hs3kkbhwL9Ab7Hrsmuj+Smw==}
     dev: true
@@ -15565,6 +15712,14 @@ packages:
     hasBin: true
     dev: true
 
+  /uglify-js/3.14.5:
+    resolution: {integrity: sha512-qZukoSxOG0urUTvjc2ERMTcAy+BiFh3weWAkeurLwjrCba73poHmG3E36XEjd/JGukMzwTL7uCxZiAexj8ppvQ==}
+    engines: {node: '>=0.8.0'}
+    hasBin: true
+    requiresBuild: true
+    dev: true
+    optional: true
+
   /unbox-primitive/1.0.1:
     resolution: {integrity: sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw==}
     dependencies:
@@ -15572,6 +15727,11 @@ packages:
       has-bigints: 1.0.1
       has-symbols: 1.0.2
       which-boxed-primitive: 1.0.2
+    dev: true
+
+  /undici/5.10.0:
+    resolution: {integrity: sha512-c8HsD3IbwmjjbLvoZuRI26TZic+TSEe8FPMLLOkN1AfYRhdjnKBU6yL+IwcSCbdZiX4e5t0lfMDLDCqj4Sq70g==}
+    engines: {node: '>=12.18'}
     dev: true
 
   /unfetch/4.2.0:
@@ -15942,7 +16102,7 @@ packages:
       resolve: 1.22.1
       rollup: 2.77.0
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   /vite/3.0.2_less@4.1.2:
@@ -15970,7 +16130,7 @@ packages:
       resolve: 1.22.1
       rollup: 2.77.0
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   /vm-browserify/1.1.2:
@@ -15996,14 +16156,24 @@ packages:
       makeerror: 1.0.12
     dev: true
 
+  /watchpack-chokidar2/2.0.1:
+    resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==}
+    requiresBuild: true
+    dependencies:
+      chokidar: 2.1.8
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+    optional: true
+
   /watchpack/1.7.5:
     resolution: {integrity: sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==}
     dependencies:
       graceful-fs: 4.2.9
       neo-async: 2.6.2
     optionalDependencies:
-      chokidar: r2.cnpmjs.org/chokidar/3.5.2
-      watchpack-chokidar2: r2.cnpmjs.org/watchpack-chokidar2/2.0.1
+      chokidar: 3.5.2
+      watchpack-chokidar2: 2.0.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -16018,6 +16188,11 @@ packages:
 
   /web-namespaces/1.1.4:
     resolution: {integrity: sha512-wYxSGajtmoP4WxfejAPIr4l0fVh+jeMXZb08wNc0tMg6xsfZXj3cECqIK0G7ZAqUq0PP8WlMDtaOGVBTAWztNw==}
+    dev: true
+
+  /web-streams-polyfill/3.2.1:
+    resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
+    engines: {node: '>= 8'}
     dev: true
 
   /webidl-conversions/3.0.1:
@@ -16401,6 +16576,11 @@ packages:
   /yargs-parser/20.2.9:
     resolution: {integrity: sha512-y11nGElTIV+CT3Zv9t7VKl+Q3hTQoT9a1Qzezhhl6Rp21gJ/IVTW7Z3y9EWXhuUBC2Shnf+DX0antecpAwSP8w==}
     engines: {node: '>=10'}
+    dev: true
+
+  /yargs-parser/21.1.1:
+    resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
+    engines: {node: '>=12'}
     dev: true
 
   /yargs/16.2.0:
@@ -17124,30 +17304,6 @@ packages:
     version: 0.7.0
     dev: true
 
-  r2.cnpmjs.org/chokidar/2.1.8:
-    resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/chokidar/-/chokidar-2.1.8.tgz}
-    name: chokidar
-    version: 2.1.8
-    deprecated: Chokidar 2 does not receive security updates since 2019. Upgrade to chokidar 3 with 15x fewer dependencies
-    dependencies:
-      anymatch: r2.cnpmjs.org/anymatch/2.0.0
-      async-each: r2.cnpmjs.org/async-each/1.0.3
-      braces: r2.cnpmjs.org/braces/2.3.2
-      glob-parent: r2.cnpmjs.org/glob-parent/3.1.0
-      inherits: r2.cnpmjs.org/inherits/2.0.4
-      is-binary-path: r2.cnpmjs.org/is-binary-path/1.0.1
-      is-glob: r2.cnpmjs.org/is-glob/4.0.3
-      normalize-path: r2.cnpmjs.org/normalize-path/3.0.0
-      path-is-absolute: r2.cnpmjs.org/path-is-absolute/1.0.1
-      readdirp: r2.cnpmjs.org/readdirp/2.2.1
-      upath: r2.cnpmjs.org/upath/1.2.0
-    optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/1.2.13
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-    optional: true
-
   r2.cnpmjs.org/chokidar/3.5.2:
     resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/chokidar/-/chokidar-3.5.2.tgz}
     name: chokidar
@@ -17162,7 +17318,7 @@ packages:
       normalize-path: r2.cnpmjs.org/normalize-path/3.0.0
       readdirp: r2.cnpmjs.org/readdirp/3.6.0
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   r2.cnpmjs.org/class-utils/0.3.6:
@@ -17503,17 +17659,6 @@ packages:
     dependencies:
       ansi-colors: r2.cnpmjs.org/ansi-colors/4.1.1
     dev: true
-
-  r2.cnpmjs.org/errno/0.1.8:
-    resolution: {integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/errno/-/errno-0.1.8.tgz}
-    name: errno
-    version: 0.1.8
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      prr: r2.cnpmjs.org/prr/1.0.1
-    dev: true
-    optional: true
 
   r2.cnpmjs.org/es-abstract/1.19.1:
     resolution: {integrity: sha512-2vJ6tjA/UfqLm2MPs7jxVybLoB8i1t1Jd9R3kISld20sIxPcTbLuggQOUxeWeAvIUkduv/CfMjuh4WmiXr2v9w==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/es-abstract/-/es-abstract-1.19.1.tgz}
@@ -18042,30 +18187,6 @@ packages:
     version: 1.0.3
     dev: true
 
-  r2.cnpmjs.org/fsevents/1.2.13:
-    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/fsevents/-/fsevents-1.2.13.tgz}
-    name: fsevents
-    version: 1.2.13
-    engines: {node: '>= 4.0'}
-    os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.15.0
-    dev: true
-    optional: true
-
-  r2.cnpmjs.org/fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/fsevents/-/fsevents-2.3.2.tgz}
-    name: fsevents
-    version: 2.3.2
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    dev: true
-    optional: true
-
   r2.cnpmjs.org/function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/function-bind/-/function-bind-1.1.1.tgz}
     name: function-bind
@@ -18293,16 +18414,6 @@ packages:
     version: 5.2.0
     engines: {node: '>= 4'}
     dev: true
-
-  r2.cnpmjs.org/image-size/0.5.5:
-    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/image-size/-/image-size-0.5.5.tgz}
-    name: image-size
-    version: 0.5.5
-    engines: {node: '>=0.10.0'}
-    hasBin: true
-    requiresBuild: true
-    dev: true
-    optional: true
 
   r2.cnpmjs.org/import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/import-fresh/-/import-fresh-3.3.0.tgz}
@@ -18824,13 +18935,13 @@ packages:
       parse-node-version: r2.cnpmjs.org/parse-node-version/1.0.1
       tslib: r2.cnpmjs.org/tslib/2.3.1
     optionalDependencies:
-      errno: r2.cnpmjs.org/errno/0.1.8
+      errno: 0.1.8
       graceful-fs: 4.2.9
-      image-size: r2.cnpmjs.org/image-size/0.5.5
-      make-dir: r2.cnpmjs.org/make-dir/2.1.0
-      mime: r2.cnpmjs.org/mime/1.6.0
-      needle: r2.cnpmjs.org/needle/2.9.1
-      source-map: r2.cnpmjs.org/source-map/0.6.1
+      image-size: 0.5.5
+      make-dir: 2.1.0
+      mime: 1.6.0
+      needle: 2.9.1
+      source-map: 0.6.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -18926,18 +19037,6 @@ packages:
       yallist: r2.cnpmjs.org/yallist/4.0.0
     dev: true
 
-  r2.cnpmjs.org/make-dir/2.1.0:
-    resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/make-dir/-/make-dir-2.1.0.tgz}
-    name: make-dir
-    version: 2.1.0
-    engines: {node: '>=6'}
-    requiresBuild: true
-    dependencies:
-      pify: r2.cnpmjs.org/pify/4.0.1
-      semver: r2.cnpmjs.org/semver/5.7.1
-    dev: true
-    optional: true
-
   r2.cnpmjs.org/map-cache/0.2.2:
     resolution: {integrity: sha512-8y/eV9QQZCiyn1SprXSrCmqJN0yNRATe+PO8ztwqrvrbdRLA3eYJF0yaR0YayLWkMbsQSKWS9N2gPcGEc4UsZg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/map-cache/-/map-cache-0.2.2.tgz}
     name: map-cache
@@ -18960,16 +19059,6 @@ packages:
     version: 1.4.1
     engines: {node: '>= 8'}
     dev: true
-
-  r2.cnpmjs.org/mime/1.6.0:
-    resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/mime/-/mime-1.6.0.tgz}
-    name: mime
-    version: 1.6.0
-    engines: {node: '>=4'}
-    hasBin: true
-    requiresBuild: true
-    dev: true
-    optional: true
 
   r2.cnpmjs.org/mimic-fn/2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/mimic-fn/-/mimic-fn-2.1.0.tgz}
@@ -19053,22 +19142,6 @@ packages:
     name: natural-compare
     version: 1.4.0
     dev: true
-
-  r2.cnpmjs.org/needle/2.9.1:
-    resolution: {integrity: sha512-6R9fqJ5Zcmf+uYaFgdIHmLwNldn5HbK8L5ybn7Uz+ylX/rnOsSp1AHcvQSrCaFN+qNM1wpymHqD7mVasEOlHGQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/needle/-/needle-2.9.1.tgz}
-    name: needle
-    version: 2.9.1
-    engines: {node: '>= 4.4.x'}
-    hasBin: true
-    requiresBuild: true
-    dependencies:
-      debug: 3.2.7
-      iconv-lite: r2.cnpmjs.org/iconv-lite/0.4.24
-      sax: r2.cnpmjs.org/sax/1.2.4
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-    optional: true
 
   r2.cnpmjs.org/node-fetch/2.6.6:
     resolution: {integrity: sha512-Z8/6vRlTUChSdIgMa51jxQ4lrw/Jy5SOW10ObaA47/RElsAN2c5Pn8bTgFGWn/ibwzXTE8qwr1Yzx28vsecXEA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/node-fetch/-/node-fetch-2.6.6.tgz}
@@ -19925,13 +19998,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  r2.cnpmjs.org/source-map/0.7.3:
-    resolution: {integrity: sha512-CkCj6giN3S+n9qrYiBTX5gystlENnRW5jZeNLHpe6aue+SrHcG5VYwujhW9s4dY31mEGsxBDrHR6oI69fTXsaQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/source-map/-/source-map-0.7.3.tgz}
-    name: source-map
-    version: 0.7.3
-    engines: {node: '>= 8'}
-    dev: true
-
   r2.cnpmjs.org/split-string/3.1.0:
     resolution: {integrity: sha512-NzNVhJDYpwceVVii8/Hu6DKfD2G+NrQHlS/V/qgv763EYudVwEcMQNxd2lh+0VrUByXN/oJkl5grOhYWvQUYiw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/split-string/-/split-string-3.1.0.tgz}
     name: split-string
@@ -20238,16 +20304,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  r2.cnpmjs.org/uglify-js/3.14.5:
-    resolution: {integrity: sha512-qZukoSxOG0urUTvjc2ERMTcAy+BiFh3weWAkeurLwjrCba73poHmG3E36XEjd/JGukMzwTL7uCxZiAexj8ppvQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/uglify-js/-/uglify-js-3.14.5.tgz}
-    name: uglify-js
-    version: 3.14.5
-    engines: {node: '>=0.8.0'}
-    hasBin: true
-    requiresBuild: true
-    dev: true
-    optional: true
-
   r2.cnpmjs.org/unbox-primitive/1.0.1:
     resolution: {integrity: sha512-tZU/3NqK3dA5gpE1KtyiJUrEB0lxnGkMFHptJ7q6ewdZ8s12QrODwNbhIJStmJkd1QDXa1NRA8aF2A1zk/Ypyw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/unbox-primitive/-/unbox-primitive-1.0.1.tgz}
     name: unbox-primitive
@@ -20331,20 +20387,8 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': r2.cnpmjs.org/@types/istanbul-lib-coverage/2.0.4
       convert-source-map: r2.cnpmjs.org/convert-source-map/1.8.0
-      source-map: r2.cnpmjs.org/source-map/0.7.3
+      source-map: 0.7.3
     dev: true
-
-  r2.cnpmjs.org/watchpack-chokidar2/2.0.1:
-    resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz}
-    name: watchpack-chokidar2
-    version: 2.0.1
-    requiresBuild: true
-    dependencies:
-      chokidar: r2.cnpmjs.org/chokidar/2.1.8
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-    optional: true
 
   r2.cnpmjs.org/wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/wcwidth/-/wcwidth-1.0.1.tgz}

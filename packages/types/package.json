@@ -1,0 +1,14 @@
+{
+  "name": "@bangumi/types",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "devDependencies": {
+    "js-yaml": "^4.1.0",
+    "node-fetch": "^3.2.10",
+    "openapi-typescript": "^5.4.1"
+  }
+}
