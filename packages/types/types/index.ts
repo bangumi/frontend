@@ -130,7 +130,7 @@ export interface components {
        */
       name: string;
       /** @description 新加入的用户，最多 10 个。 */
-      new_members: components["schemas"]["GroupMember"]["items"][];
+      new_members: components["schemas"]["GroupMember"][];
       /** @example ～技术宅真可怕～ */
       title: string;
       /**
@@ -337,7 +337,7 @@ export interface components {
        * @example 2022-06-25T21:07:38.466+08:00
        */
       joined_at: string;
-    }[];
+    };
     Paged: {
       /** Total */
       total: number;
@@ -347,11 +347,6 @@ export interface components {
       offset: number;
       /** Data */
       data: { [key: string]: unknown }[];
-    };
-    /** Paged[GroupMember] */
-    Paged_GroupMember: components["schemas"]["Paged"] & {
-      /** Data */
-      data?: components["schemas"]["GroupMember"][];
     };
     /** Paged[Topic] */
     Paged_Topic: components["schemas"]["Paged"] & {

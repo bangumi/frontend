@@ -2,8 +2,8 @@ import { Typography } from '@bangumi/design'
 import React from 'react'
 import GlobalLayout from '../../components/GlobalLayout'
 import { useUser } from '../../hooks/use-user'
-import styles from './UserHome.module.less'
 import { getUserProfileLink } from '../../utils/pages'
+import styles from './UserHome.module.less'
 
 const { Link } = Typography
 
