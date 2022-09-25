@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
-import { Group, ResponseWithPagination, Topic } from '../types/common'
+import { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group'
 
 export enum DescriptionClamp {
   clamp = 'clamp',
@@ -10,14 +10,14 @@ export enum DescriptionClamp {
 }
 
 interface UseGroupRet {
-  group: Group | undefined
+  group: GroupProfile | undefined
   recentTopics: Topic[] | undefined
   descriptionClamp: DescriptionClamp
   setDescriptionClamp: (val: DescriptionClamp) => void
 }
 
 export function useGroup (name: string): UseGroupRet {
-  const { data: groupResp } = useSWR<AxiosResponse<Group>>(`/p/groups/${name}`, privateRequest.get)
+  const { data: groupResp } = useSWR<AxiosResponse<GroupProfile>>(`/p/groups/${name}`, privateRequest.get)
   const { data: recentTopicsResp } = useSWR<AxiosResponse<ResponseWithPagination<Topic[]>>>(`/p/groups/${name}/topics?limit=10`, privateRequest.get)
 
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`
