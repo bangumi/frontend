@@ -3,6 +3,7 @@ import React from 'react'
 import GlobalLayout from '../../components/GlobalLayout'
 import { useUser } from '../../hooks/use-user'
 import styles from './UserHome.module.less'
+import { getUserProfileLink } from '../../utils/pages'
 
 const { Link } = Typography
 
@@ -16,7 +17,7 @@ const UserHome: React.FC = () => {
   return (
     <GlobalLayout>
       <main className={styles.pageContainer}>
-        <div className={styles.greets}>Hi! <Link to={user.url} isExternal>{user.nickname}</Link></div>
+        <div className={styles.greets}>Hi! <Link to={getUserProfileLink(user.username)} isExternal>{user.nickname}</Link></div>
       </main>
     </GlobalLayout>
   )
