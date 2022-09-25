@@ -1,11 +1,11 @@
 import React from 'react'
 import { Image, Typography } from '@bangumi/design'
 import dayjs from 'dayjs'
-import { Group } from '../../../../types/common'
+import { GroupProfile } from '@bangumi/types/group'
 import styles from './GroupHeader.module.less'
 
 const { Text } = Typography
-export const GroupHeader: React.FC<{group: Group}> = ({ group }) => {
+export const GroupHeader: React.FC<{group: GroupProfile}> = ({ group }) => {
   return (
     <div className={styles.groupHeader}>
       <Image className={styles.thumbnail} src={group.icon} alt={`${group.title} 头像`} />
