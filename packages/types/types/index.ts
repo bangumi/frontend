@@ -92,31 +92,7 @@ export interface components {
        * @enum {integer}
        */
       user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-      /**
-       * Avatar
-       * @example {
-       *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-       *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-       *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-       * }
-       */
-      avatar: {
-        /**
-         * Large
-         * Format: url
-         */
-        large: string;
-        /**
-         * Medium
-         * Format: url
-         */
-        medium: string;
-        /**
-         * Small
-         * Format: url
-         */
-        small: string;
-      };
+      avatar: components["schemas"]["Avatar"];
       /**
        * Sign
        * @description 个人签名
@@ -154,44 +130,7 @@ export interface components {
        */
       name: string;
       /** @description 新加入的用户，最多 10 个。 */
-      new_members: {
-        /**
-         * Avatar
-         * @example {
-         *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-         *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-         *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-         * }
-         */
-        avatar: {
-          /**
-           * Large
-           * Format: url
-           */
-          large: string;
-          /**
-           * Medium
-           * Format: url
-           */
-          medium: string;
-          /**
-           * Small
-           * Format: url
-           */
-          small: string;
-        };
-        /** @example 1 */
-        id: number;
-        /** @example Sai🖖 */
-        nickname: string;
-        /** @example sai */
-        username: string;
-        /**
-         * Format: date-time
-         * @example 2022-06-25T21:07:38.466+08:00
-         */
-        joined_at: string;
-      }[];
+      new_members: components["schemas"]["GroupMember"]["items"][];
       /** @example ～技术宅真可怕～ */
       title: string;
       /**
@@ -256,176 +195,9 @@ export interface components {
       description: string;
     };
     PrivateTopicDetail: {
-      comments: {
-        /** @description 发帖人是否好友 */
-        is_friend: boolean;
-        /**
-         * Format: date-time
-         * @example 2008-07-14T07:38:35.000Z
-         */
-        created_at: string;
-        /**
-         * User
-         * @description 实际的返回值可能包括文档未声明的 `url` 字段，此字段主要用于开发者从 api 响应直接转跳到网页。
-         * 客户端开发者请不用依赖于此特性，此字段的值随时可能会改变。
-         *
-         * @example {
-         *   "avatar": {
-         *     "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-         *     "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-         *     "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-         *   },
-         *   "sign": "Awesome!",
-         *   "username": "sai",
-         *   "nickname": "Sai🖖",
-         *   "id": 1,
-         *   "user_group": 1
-         * }
-         */
-        creator: {
-          /** ID */
-          id: number;
-          /**
-           * Username
-           * @description 唯一用户名，初始与 UID 相同，可修改一次
-           */
-          username: string;
-          /** Nickname */
-          nickname: string;
-          /**
-           * UserGroup
-           * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
-           * @enum {integer}
-           */
-          user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-          /**
-           * Avatar
-           * @example {
-           *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-           *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-           *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-           * }
-           */
-          avatar: {
-            /**
-             * Large
-             * Format: url
-             */
-            large: string;
-            /**
-             * Medium
-             * Format: url
-             */
-            medium: string;
-            /**
-             * Small
-             * Format: url
-             */
-            small: string;
-          };
-          /**
-           * Sign
-           * @description 个人签名
-           */
-          sign: string;
-        };
-        /**
-         * Format: int32
-         * @example 2
-         */
-        id: number;
-        replies: ({
-          /**
-           * Format: date-time
-           * @example 2012-12-23T12:46:29.000Z
-           */
-          created_at: string;
-          /**
-           * Creator
-           * @description 意义同<a href="#model-Me">Me</a>
-           */
-          creator: {
-            /** Username */
-            username: string;
-            /** Nickname */
-            nickname: string;
-          };
-          /**
-           * Format: int32
-           * @example 24360
-           */
-          id: number;
-          /**
-           * @description 如果 `state` 不为 `0`，内容为空
-           * @example [quote][b]15www[/b] 说: 檞寄生+1 我的明菁 T-T[/quote]\n挖墳黨喪心病狂！
-           */
-          text?: string;
-          /**
-           * CommentState
-           * @description 回复和帖子共用的状态
-           *
-           * 表示帖子正常/下沉/关闭
-           *
-           * 如果是回复，表示管理员的下沉/关闭主题操作
-           *
-           *
-           * - `0` 正常
-           * - `1` 管理员关闭帖子
-           * - `5` 管理员下沉帖子
-           * - `6` 被用户删除
-           * - `7` 违反社区指导原则，已被删除
-           * @example 0
-           * @enum {integer}
-           */
-          state: 0 | 1 | 5 | 6 | 7;
-          /** @description 发帖人是否好友 */
-          is_friend: boolean;
-        } & {
-          test: unknown;
-        })[];
-        /**
-         * @description 如果 `state` 不为 `0`，内容为空
-         * @example 你是猪 ... 鉴定完毕 ...
-         */
-        text: string;
-        /**
-         * CommentState
-         * @description 回复和帖子共用的状态
-         *
-         * 表示帖子正常/下沉/关闭
-         *
-         * 如果是回复，表示管理员的下沉/关闭主题操作
-         *
-         *
-         * - `0` 正常
-         * - `1` 管理员关闭帖子
-         * - `5` 管理员下沉帖子
-         * - `6` 被用户删除
-         * - `7` 违反社区指导原则，已被删除
-         * @example 0
-         * @enum {integer}
-         */
-        state: 0 | 1 | 5 | 6 | 7;
-      }[];
+      comments: components["schemas"]["Comment"][];
     } & {
-      /**
-       * CommentState
-       * @description 回复和帖子共用的状态
-       *
-       * 表示帖子正常/下沉/关闭
-       *
-       * 如果是回复，表示管理员的下沉/关闭主题操作
-       *
-       *
-       * - `0` 正常
-       * - `1` 管理员关闭帖子
-       * - `5` 管理员下沉帖子
-       * - `6` 被用户删除
-       * - `7` 违反社区指导原则，已被删除
-       * @example 0
-       * @enum {integer}
-       */
-      state: 0 | 1 | 5 | 6 | 7;
+      state: components["schemas"]["Comment"]["state"];
       /** @description 发帖人是否好友 */
       is_friend: boolean;
       /**
@@ -433,71 +205,7 @@ export interface components {
        * @example 2008-07-14T07:34:07.000Z
        */
       created_at?: string;
-      /**
-       * User
-       * @description 实际的返回值可能包括文档未声明的 `url` 字段，此字段主要用于开发者从 api 响应直接转跳到网页。
-       * 客户端开发者请不用依赖于此特性，此字段的值随时可能会改变。
-       *
-       * @example {
-       *   "avatar": {
-       *     "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-       *     "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-       *     "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-       *   },
-       *   "sign": "Awesome!",
-       *   "username": "sai",
-       *   "nickname": "Sai🖖",
-       *   "id": 1,
-       *   "user_group": 1
-       * }
-       */
-      creator: {
-        /** ID */
-        id: number;
-        /**
-         * Username
-         * @description 唯一用户名，初始与 UID 相同，可修改一次
-         */
-        username: string;
-        /** Nickname */
-        nickname: string;
-        /**
-         * UserGroup
-         * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
-         * @enum {integer}
-         */
-        user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-        /**
-         * Avatar
-         * @example {
-         *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-         *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-         *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-         * }
-         */
-        avatar: {
-          /**
-           * Large
-           * Format: url
-           */
-          large: string;
-          /**
-           * Medium
-           * Format: url
-           */
-          medium: string;
-          /**
-           * Small
-           * Format: url
-           */
-          small: string;
-        };
-        /**
-         * Sign
-         * @description 个人签名
-         */
-        sign: string;
-      };
+      creator: components["schemas"]["User"];
       /**
        * Format: int32
        * @example 1
@@ -525,71 +233,7 @@ export interface components {
        * @example 2008-07-14T07:34:07.000Z
        */
       created_at: string;
-      /**
-       * User
-       * @description 实际的返回值可能包括文档未声明的 `url` 字段，此字段主要用于开发者从 api 响应直接转跳到网页。
-       * 客户端开发者请不用依赖于此特性，此字段的值随时可能会改变。
-       *
-       * @example {
-       *   "avatar": {
-       *     "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-       *     "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-       *     "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-       *   },
-       *   "sign": "Awesome!",
-       *   "username": "sai",
-       *   "nickname": "Sai🖖",
-       *   "id": 1,
-       *   "user_group": 1
-       * }
-       */
-      creator: {
-        /** ID */
-        id: number;
-        /**
-         * Username
-         * @description 唯一用户名，初始与 UID 相同，可修改一次
-         */
-        username: string;
-        /** Nickname */
-        nickname: string;
-        /**
-         * UserGroup
-         * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
-         * @enum {integer}
-         */
-        user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-        /**
-         * Avatar
-         * @example {
-         *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-         *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-         *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-         * }
-         */
-        avatar: {
-          /**
-           * Large
-           * Format: url
-           */
-          large: string;
-          /**
-           * Medium
-           * Format: url
-           */
-          medium: string;
-          /**
-           * Small
-           * Format: url
-           */
-          small: string;
-        };
-        /**
-         * Sign
-         * @description 个人签名
-         */
-        sign: string;
-      };
+      creator: components["schemas"]["User"];
       /**
        * Format: int32
        * @example 1
@@ -618,71 +262,7 @@ export interface components {
        * @example 2008-07-14T07:38:35.000Z
        */
       created_at: string;
-      /**
-       * User
-       * @description 实际的返回值可能包括文档未声明的 `url` 字段，此字段主要用于开发者从 api 响应直接转跳到网页。
-       * 客户端开发者请不用依赖于此特性，此字段的值随时可能会改变。
-       *
-       * @example {
-       *   "avatar": {
-       *     "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-       *     "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-       *     "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-       *   },
-       *   "sign": "Awesome!",
-       *   "username": "sai",
-       *   "nickname": "Sai🖖",
-       *   "id": 1,
-       *   "user_group": 1
-       * }
-       */
-      creator: {
-        /** ID */
-        id: number;
-        /**
-         * Username
-         * @description 唯一用户名，初始与 UID 相同，可修改一次
-         */
-        username: string;
-        /** Nickname */
-        nickname: string;
-        /**
-         * UserGroup
-         * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
-         * @enum {integer}
-         */
-        user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-        /**
-         * Avatar
-         * @example {
-         *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-         *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-         *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-         * }
-         */
-        avatar: {
-          /**
-           * Large
-           * Format: url
-           */
-          large: string;
-          /**
-           * Medium
-           * Format: url
-           */
-          medium: string;
-          /**
-           * Small
-           * Format: url
-           */
-          small: string;
-        };
-        /**
-         * Sign
-         * @description 个人签名
-         */
-        sign: string;
-      };
+      creator: components["schemas"]["User"];
       /**
        * Format: int32
        * @example 2
@@ -714,24 +294,7 @@ export interface components {
          * @example [quote][b]15www[/b] 说: 檞寄生+1 我的明菁 T-T[/quote]\n挖墳黨喪心病狂！
          */
         text?: string;
-        /**
-         * CommentState
-         * @description 回复和帖子共用的状态
-         *
-         * 表示帖子正常/下沉/关闭
-         *
-         * 如果是回复，表示管理员的下沉/关闭主题操作
-         *
-         *
-         * - `0` 正常
-         * - `1` 管理员关闭帖子
-         * - `5` 管理员下沉帖子
-         * - `6` 被用户删除
-         * - `7` 违反社区指导原则，已被删除
-         * @example 0
-         * @enum {integer}
-         */
-        state: 0 | 1 | 5 | 6 | 7;
+        state: components["schemas"]["Comment"]["state"];
         /** @description 发帖人是否好友 */
         is_friend: boolean;
       } & {
@@ -762,31 +325,7 @@ export interface components {
       state: 0 | 1 | 5 | 6 | 7;
     };
     GroupMember: {
-      /**
-       * Avatar
-       * @example {
-       *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-       *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-       *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-       * }
-       */
-      avatar: {
-        /**
-         * Large
-         * Format: url
-         */
-        large: string;
-        /**
-         * Medium
-         * Format: url
-         */
-        medium: string;
-        /**
-         * Small
-         * Format: url
-         */
-        small: string;
-      };
+      avatar: components["schemas"]["Avatar"];
       /** @example 1 */
       id: number;
       /** @example Sai🖖 */
