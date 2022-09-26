@@ -1,5 +1,4 @@
 import React from 'react'
-import GlobalLayout from '../components/GlobalLayout'
 import { useUser } from '../hooks/use-user'
 import UserHome from './components/UserHome'
 
@@ -11,7 +10,7 @@ const Home: React.FC = () => {
   }
 
   // TODO: 未登录态主页
-  return <GlobalLayout />
+  return <div />
 }
 
 export default Home
