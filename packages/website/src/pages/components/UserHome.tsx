@@ -1,6 +1,5 @@
 import { Typography } from '@bangumi/design'
 import React from 'react'
-import GlobalLayout from '../../components/GlobalLayout'
 import { useUser } from '../../hooks/use-user'
 import styles from './UserHome.module.less'
 
@@ -14,11 +13,9 @@ const UserHome: React.FC = () => {
   }
 
   return (
-    <GlobalLayout>
-      <main className={styles.pageContainer}>
-        <div className={styles.greets}>Hi! <Link to={user.url} isExternal>{user.nickname}</Link></div>
-      </main>
-    </GlobalLayout>
+    <main className={styles.pageContainer}>
+      <div className={styles.greets}>Hi! <Link to={user.url} isExternal>{user.nickname}</Link></div>
+    </main>
   )
 }
 
