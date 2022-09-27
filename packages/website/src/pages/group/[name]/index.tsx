@@ -1,7 +1,6 @@
 import { Tab, Section, Typography } from '@bangumi/design'
 import React, { ReactElement } from 'react'
 import { useParams } from 'react-router-dom'
-import GlobalLayout from '../../../components/GlobalLayout'
 import { DescriptionClamp, useGroup } from '../../../hooks/use-group'
 import { GroupHeader } from './components/GroupHeader'
 import styles from './index.module.less'
@@ -82,55 +81,53 @@ const GroupHome: React.FC = () => {
   const parsedDescription = renderBBCode(group.description)
 
   return (
-    <GlobalLayout>
-      <div className={styles.pageContainer}>
-        <GroupHeader group={group} />
-        <Tab type="borderless" items={tabs} activeKey="index" />
-        <div className={styles.columnContainer}>
-          <div className={styles.leftCol}>
-            <ClampableContent
-              threshold={CLAMP_HEIGHT_THRESHOLD}
-              content={parsedDescription}
-              isClamped={descriptionClamp === DescriptionClamp.clamp}
-              onChange={handleChangeClamp}
-            />
-            <Section
-              title="最近讨论"
-              renderFooter={() => (
-                <a
-                  className={styles.textButton}
-                  href={getGroupForumPage(name)}
-                >
-                  <span>更多组内讨论</span><RightArrow />
-                </a>
-              )}
-            >
-              {renderRecentTopics()}
-            </Section>
-          </div>
-          <div className={styles.rightCol}>
-            <Section
-              title="最近加入" renderFooter={() => (
-                <a
-                  className={styles.textButton}
-                  href={getGroupMemberPage(name)}
-                >
-                  <span>更多小组成员</span><RightArrow />
-                </a>
-              )}
-            >
-              <div className={styles.newMembers}>
-                {group.new_members.slice(0, 10).map((member) => {
-                  return (
-                    <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
-                  )
-                })}
-              </div>
-            </Section>
-          </div>
+    <div className={styles.pageContainer}>
+      <GroupHeader group={group} />
+      <Tab type="borderless" items={tabs} activeKey="index" />
+      <div className={styles.columnContainer}>
+        <div className={styles.leftCol}>
+          <ClampableContent
+            threshold={CLAMP_HEIGHT_THRESHOLD}
+            content={parsedDescription}
+            isClamped={descriptionClamp === DescriptionClamp.clamp}
+            onChange={handleChangeClamp}
+          />
+          <Section
+            title="最近讨论"
+            renderFooter={() => (
+              <a
+                className={styles.textButton}
+                href={getGroupForumPage(name)}
+              >
+                <span>更多组内讨论</span><RightArrow />
+              </a>
+            )}
+          >
+            {renderRecentTopics()}
+          </Section>
+        </div>
+        <div className={styles.rightCol}>
+          <Section
+            title="最近加入" renderFooter={() => (
+              <a
+                className={styles.textButton}
+                href={getGroupMemberPage(name)}
+              >
+                <span>更多小组成员</span><RightArrow />
+              </a>
+            )}
+          >
+            <div className={styles.newMembers}>
+              {group.new_members.slice(0, 10).map((member) => {
+                return (
+                  <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
+                )
+              })}
+            </div>
+          </Section>
         </div>
       </div>
-    </GlobalLayout>
+    </div>
   )
 }
 
