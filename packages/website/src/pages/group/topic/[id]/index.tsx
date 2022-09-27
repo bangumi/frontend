@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
 import { EditorForm, RichContent, Avatar, Section, Typography, Button, Topic } from '@bangumi/design'
-import GlobalLayout from '../../../../components/GlobalLayout'
 import useGroupTopic from '../../../../hooks/use-group-topic'
 import GroupTopicHeader from './components/GroupTopicHeader'
 import styles from './index.module.less'
@@ -28,7 +27,7 @@ const TopicPage: FC = () => {
   const isClosed = topicDetail.state === 1
   const { group } = topicDetail
   return (
-    <GlobalLayout>
+    <>
       <GroupTopicHeader
         title={topicDetail.title}
         creator={topicDetail.creator}
@@ -94,7 +93,7 @@ const TopicPage: FC = () => {
           </Section>
         </div>
       </div>
-    </GlobalLayout>
+    </>
   )
 }
 export default TopicPage
