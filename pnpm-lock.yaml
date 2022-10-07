@@ -13,6 +13,7 @@ importers:
       '@testing-library/react-hooks': ^8.0.0
       '@types/jest': ^27.4.0
       '@types/node': ^17.0.10
+      '@types/testing-library__jest-dom': ^5.14.5
       '@typescript-eslint/eslint-plugin': ^5.8.1
       '@typescript-eslint/parser': ^5.8.1
       babel-jest: ^27.4.6
@@ -51,6 +52,7 @@ importers:
       '@testing-library/react-hooks': 8.0.0_sfoxds7t5ydpegc3knd667wn6m
       '@types/jest': 27.4.0
       '@types/node': 17.0.10
+      '@types/testing-library__jest-dom': 5.14.5
       '@typescript-eslint/eslint-plugin': r2.cnpmjs.org/@typescript-eslint/eslint-plugin/5.8.1_bil4e7t2k67zxz56stzwz7stsq
       '@typescript-eslint/parser': 5.9.0_hxadhbs2xogijvk7vq4t2azzbu
       babel-jest: 27.4.6_@babel+core@7.16.7
@@ -6772,6 +6774,12 @@ packages:
     resolution: {integrity: sha512-ipixuVrh2OdNmauvtT51o3d8z12p6LtFW9in7U79der/kwejjdNchQC5UMn5u/KxNoM7VHHOs/l8KS8uHxhODQ==}
     dev: true
 
+  /@types/testing-library__jest-dom/5.14.5:
+    resolution: {integrity: sha512-SBwbxYoyPIvxHbeHxTZX2Pe/74F/tX2/D3mMvzabdeJ25bBojfW0TyB8BHrbq/9zaaKICJZjLP+8r6AeZMFCuQ==}
+    dependencies:
+      '@types/jest': 27.4.0
+    dev: true
+
   /@types/uglify-js/3.13.1:
     resolution: {integrity: sha512-O3MmRAk6ZuAKa9CHgg0Pr0+lUOqoMLpc9AS4R8ano2auvsg7IE8syF3Xh/NPr26TWklxYcqoEEFdzLLs1fV9PQ==}
     dependencies:
@@ -9712,7 +9720,7 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
-      source-map: r2.cnpmjs.org/source-map/0.6.1
+      source-map: 0.6.1
     dev: true
 
   /eslint-config-standard-jsx/10.0.0_kqu4i3lv3dayvcexvayuoxbqny:
@@ -10504,6 +10512,14 @@ packages:
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
     dev: true
+
+  /fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -11759,7 +11775,7 @@ packages:
       micromatch: 4.0.4
       walker: 1.0.8
     optionalDependencies:
-      fsevents: r2.cnpmjs.org/fsevents/2.3.2
+      fsevents: 2.3.2
     dev: true
 
   /jest-jasmine2/27.4.6:
@@ -16546,7 +16562,7 @@ packages:
     engines: {node: '>=8', npm: '>=6', yarn: '>=1'}
     dependencies:
       '@babel/runtime': 7.16.7
-      '@types/testing-library__jest-dom': r2.cnpmjs.org/@types/testing-library__jest-dom/5.14.2
+      '@types/testing-library__jest-dom': 5.14.5
       aria-query: r2.cnpmjs.org/aria-query/5.0.0
       chalk: r2.cnpmjs.org/chalk/3.0.0
       css: r2.cnpmjs.org/css/3.0.0
@@ -16601,14 +16617,6 @@ packages:
     version: 2.4.2
     dependencies:
       '@types/node': 17.0.10
-    dev: true
-
-  r2.cnpmjs.org/@types/testing-library__jest-dom/5.14.2:
-    resolution: {integrity: sha512-vehbtyHUShPxIa9SioxDwCvgxukDMH//icJG90sXQBUm5lJOHLT5kNeU9tnivhnA/TkOFMzGIXN2cTc4hY8/kg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/@types/testing-library__jest-dom/-/testing-library__jest-dom-5.14.2.tgz}
-    name: '@types/testing-library__jest-dom'
-    version: 5.14.2
-    dependencies:
-      '@types/jest': 27.4.0
     dev: true
 
   r2.cnpmjs.org/@types/through/0.0.30:
