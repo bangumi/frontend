@@ -1,10 +1,10 @@
 import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
-import { Member, ResponseWithPagination } from '../types/common'
+import { GroupMember, ResponseWithPagination } from '@bangumi/types/group'
 
 interface UseGroupMembersRet {
-  data: Member[] | undefined
+  data: GroupMember[] | undefined
   total: number | undefined
   isLoading: boolean
   error: any
@@ -12,7 +12,7 @@ interface UseGroupMembersRet {
 
 export function useGroupMembers (name: string, index: number, type: 'mod' | 'normal' | 'all'): UseGroupMembersRet {
   const ignoreIndex = type === 'mod' && index > 0
-  const { data, error } = useSWR<AxiosResponse<ResponseWithPagination<Member[]>>>(
+  const { data, error } = useSWR<AxiosResponse<ResponseWithPagination<GroupMember[]>>>(
     ignoreIndex
       ? null
       : `/p/groups/${name}/members?type=${type}&limit=30&offset=${index * 30}`,

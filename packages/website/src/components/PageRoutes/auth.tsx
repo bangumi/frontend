@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../../hooks/use-user'
-import { UserGroup } from '../../types/user'
+import { UserGroup } from '@bangumi/types/user'
 
 interface RequireAuthProps {
   groupRequired: UserGroup[]

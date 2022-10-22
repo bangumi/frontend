@@ -1,5 +1,5 @@
 import React from 'react'
-import { User } from '../types/user'
+import { User } from '@bangumi/types/user'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
 import { AxiosResponse } from 'axios'

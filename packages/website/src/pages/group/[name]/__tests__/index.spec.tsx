@@ -7,7 +7,7 @@ import { rest } from 'msw'
 import Boring from './fixtures/boring.json'
 import RecentTopics from './fixtures/recent-topics.json'
 import { useParams } from 'react-router-dom'
-import { Group, ResponseWithPagination, Topic } from '../../../../types/common'
+import { Group, ResponseWithPagination, Topic } from '@bangumi/types/group'
 
 jest.mock('react-router-dom', () => {
   return {
