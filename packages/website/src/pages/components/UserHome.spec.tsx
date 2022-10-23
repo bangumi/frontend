@@ -12,7 +12,7 @@ it('should show user name if user is logged', () => {
   mockedUseUser.mockReturnValue({
     user: {
       nickname: 'testuser',
-      url: 'https://bgm.tv/user/testuser-123'
+      username: 'testuser-123'
     }
   })
 
