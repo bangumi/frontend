@@ -12,6 +12,7 @@ interface UseGroupMembersRet {
 
 export function useGroupMembers (name: string, index: number, type: 'mod' | 'normal' | 'all'): UseGroupMembersRet {
   const ignoreIndex = type === 'mod' && index > 0
+  // TODO：支持分页
   const { data, error } = useSWR<AxiosResponse<ResponseWithPagination<Member[]>>>(
     ignoreIndex
       ? null

@@ -102,6 +102,7 @@ export interface AvatarSet {
 
 export interface Group {
   title: string
+  name: string
   created_at: string
   description: string
   total_members: number

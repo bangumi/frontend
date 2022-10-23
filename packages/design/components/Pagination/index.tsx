@@ -5,6 +5,7 @@ import cn from 'classnames'
 
 export interface PaginationProps {
   /* 当前偏移 */
+  // ? 有歧义，经测试应该是当前页，而不是当前偏移
   currentOffset?: number
   /* 单页的数据条数 */
   pageSize?: number
