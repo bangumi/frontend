@@ -11,7 +11,7 @@ const productionRootURL = 'https://next.bgm.tv/'
 export default defineConfig({
   resolve: {
     alias: {
-      website: path.resolve(__dirname, './src')
+      '@bangumi/website': path.resolve(__dirname, './src')
     }
   },
   server: {

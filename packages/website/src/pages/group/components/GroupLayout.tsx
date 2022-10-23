@@ -15,7 +15,7 @@ export enum GroupTabs{
   Members = 'members'
 }
 
-const GroupTabsItemsItems = [{
+const GroupTabsItems = [{
   key: GroupTabs.Index,
   label: '小组概览',
   to: (groupName: string) => `/group/${groupName}`
@@ -31,12 +31,12 @@ const GroupTabsItemsItems = [{
 
 const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
   const navigate = useNavigate()
-  const groupTabsByKey = keyBy(GroupTabsItemsItems, 'key')
+  const groupTabsByKey = keyBy(GroupTabsItems, 'key')
   const handleTabChange = (key: string): void => navigate(groupTabsByKey[key as GroupTabs].to(group.name))
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group} />
-      <Tab type="borderless" items={GroupTabsItemsItems} activeKey={curTab} onChange={handleTabChange} />
+      <Tab type="borderless" items={GroupTabsItems} activeKey={curTab} onChange={handleTabChange} />
       <div className={styles.columnContainer}>
         <div className={styles.leftCol}>
           {children}
