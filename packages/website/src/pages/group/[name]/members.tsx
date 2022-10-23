@@ -1,10 +1,10 @@
 import { Pagination, Section } from '@bangumi/design'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useGroupMembers } from '@/hooks/use-group-members'
+import { useGroupMembers } from 'website/hooks/use-group-members'
 import { UserCard } from '../components/UserCard'
 import styles from './members.module.less'
-import { usePaginationParams } from '@/hooks/use-pagination'
+import { usePaginationParams } from 'website/hooks/use-pagination'
 
 const GroupMembers: React.FC = () => {
   // TODO: useGroupMembers 中使用 limit=30

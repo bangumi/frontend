@@ -1,8 +1,8 @@
 import { Pagination } from '@bangumi/design'
 import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useGroupTopic } from '@/hooks/use-group'
-import { usePaginationParams } from '@/hooks/use-pagination'
+import { useGroupTopic } from 'website/hooks/use-group'
+import { usePaginationParams } from 'website/hooks/use-pagination'
 import TopicsTable from './components/TopicsTable'
 
 const GroupForum: React.FC = () => {

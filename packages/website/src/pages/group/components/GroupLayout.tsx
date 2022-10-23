@@ -1,14 +1,14 @@
 import { Section, Tab } from '@bangumi/design'
 import React, { PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
-import type { Group } from '@/types/common'
+import type { GroupProfile } from '@bangumi/types/group'
 import { GroupHeader } from './GroupHeader'
 import styles from './GroupLayout.module.less'
 import CommonStyles from '../common.module.less'
-import { getGroupMemberPage } from '@/utils/pages'
-import { ReactComponent as RightArrow } from '@/assets/right-arrow.svg'
+import { getGroupMemberPage } from 'website/utils/pages'
+import { ReactComponent as RightArrow } from 'website/assets/right-arrow.svg'
 import { UserCard } from './UserCard'
-import { keyBy } from '@/utils'
+import { keyBy } from 'website/utils'
 
 export enum GroupTabs{
   Index = 'index',
@@ -30,7 +30,7 @@ const GroupTabsItemsItems = [{
   to: (groupName: string) => `/group/${groupName}/members`
 }]
 
-const GroupLayout: React.FC<PropsWithChildren<{group: Group, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
+const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
   const navigate = useNavigate()
   const groupTabsByKey = keyBy(GroupTabsItemsItems, 'key')
   const handleTabChange = (key: string): void => navigate(groupTabsByKey[key].to(group.name))

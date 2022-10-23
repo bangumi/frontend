@@ -1,6 +1,6 @@
 import { Typography } from '@bangumi/design'
-import { Topic } from '@/types/common'
-import { getGroupTopicLink, getUserProfileLink } from '@/utils/pages'
+import { Topic } from '@bangumi/types/common'
+import { getGroupTopicLink, getUserProfileLink } from 'website/utils/pages'
 import React from 'react'
 import dayjs from 'dayjs'
 import styles from './TopicsTable.module.less'
