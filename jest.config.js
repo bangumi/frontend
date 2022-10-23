@@ -85,7 +85,7 @@ module.exports = {
   moduleNameMapper: {
     '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '.+\\.svg$': '<rootDir>/__mocks__/svg.js',
-    'website/(.*)': '<rootDir>/packages/website/src/$1'
+    '@bangumi/website/(.*)': '<rootDir>/packages/website/src/$1'
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

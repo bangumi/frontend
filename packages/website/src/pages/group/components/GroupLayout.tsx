@@ -1,14 +1,13 @@
 import { Section, Tab } from '@bangumi/design'
 import React, { PropsWithChildren } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import type { GroupProfile } from '@bangumi/types/group'
 import { GroupHeader } from './GroupHeader'
 import styles from './GroupLayout.module.less'
 import CommonStyles from '../common.module.less'
-import { getGroupMemberPage } from 'website/utils/pages'
-import { ReactComponent as RightArrow } from 'website/assets/right-arrow.svg'
+import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg'
 import { UserCard } from './UserCard'
-import { keyBy } from 'website/utils'
+import { keyBy } from '@bangumi/utils'
 
 export enum GroupTabs{
   Index = 'index',
@@ -33,7 +32,7 @@ const GroupTabsItemsItems = [{
 const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
   const navigate = useNavigate()
   const groupTabsByKey = keyBy(GroupTabsItemsItems, 'key')
-  const handleTabChange = (key: string): void => navigate(groupTabsByKey[key].to(group.name))
+  const handleTabChange = (key: string): void => navigate(groupTabsByKey[key as GroupTabs].to(group.name))
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group} />
@@ -45,12 +44,9 @@ const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile, curTab: Grou
         <div className={styles.rightCol}>
           <Section
             title="最近加入" renderFooter={() => (
-              <a
-                className={CommonStyles.textButton}
-                href={getGroupMemberPage(group.name)}
-              >
+              <Link to={groupTabsByKey.members.to(group.name)} className={CommonStyles.textButton}>
                 <span>更多小组成员</span><RightArrow />
-              </a>
+              </Link>
             )}
           >
             <div className={styles.newMembers}>

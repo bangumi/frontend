@@ -1,13 +1,13 @@
 import { Section } from '@bangumi/design'
 import React from 'react'
 import { useParams, Link as RouterLink } from 'react-router-dom'
-import { DescriptionClamp, useGroupTopic } from 'website/hooks/use-group'
+import { DescriptionClamp, useGroupTopic } from '@bangumi/website/hooks/use-group'
 import CommonStyles from '../common.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
 import { ClampableContent } from './components/ClampableContent'
-import { ReactComponent as RightArrow } from 'website/assets/right-arrow.svg'
+import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg'
 import TopicsTable from './components/TopicsTable'
-import { useGroupContext } from 'website/pages/group'
+import { useGroupContext } from '@bangumi/website/pages/group'
 
 const CLAMP_HEIGHT_THRESHOLD = 193
 

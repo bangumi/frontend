@@ -1,4 +1,4 @@
-import { useGroup, UseGroupRet } from 'website/hooks/use-group'
+import { useGroup, UseGroupRet } from '@bangumi/website/hooks/use-group'
 import React from 'react'
 import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom'
 import GroupLayout, { GroupTabs } from './group/components/GroupLayout'

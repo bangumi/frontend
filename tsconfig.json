@@ -17,7 +17,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["jest", "vite-plugin-svgr/client", "@testing-library/jest-dom"],
-    "paths": { "website/*": ["packages/website/src/*"] }
+    "paths": { "@bangumi/website/*": ["packages/website/src/*"] }
   },
   "include": [
     "./packages",
