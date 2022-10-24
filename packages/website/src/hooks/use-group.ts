@@ -19,9 +19,9 @@ export interface UseGroupRet {
 export function useGroupTopic (name: string, pagination?: Partial<Pagination>): TopicApiRes {
   const params = new URLSearchParams()
   if (pagination) {
-    const { limit = 20, offset } = pagination
-    params.append('offset', String(offset))
-    params.append('limit', String(limit))
+    const { limit = 20, offset = 0 } = pagination
+    params.append('offset', offset.toString())
+    params.append('limit', limit.toString())
   }
   const { data: recentTopicsResp } = useSWR<AxiosResponse<TopicApiRes>>(`/p/groups/${name}/topics?${params.toString()}`, privateRequest.get)
   return recentTopicsResp?.data
