@@ -29,10 +29,10 @@ const GroupTabsItems = [{
   to: (groupName: string) => `/group/${groupName}/members`
 }]
 
-const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
+const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile|undefined, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
   const navigate = useNavigate()
   const groupTabsByKey = keyBy(GroupTabsItems, 'key')
-  const handleTabChange = (key: string): void => navigate(groupTabsByKey[key as GroupTabs].to(group.name))
+  const handleTabChange = (key: string): void => group && navigate(groupTabsByKey[key as GroupTabs].to(group.name))
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group} />
@@ -44,13 +44,14 @@ const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile, curTab: Grou
         <div className={styles.rightCol}>
           <Section
             title="最近加入" renderFooter={() => (
-              <Link to={groupTabsByKey.members.to(group.name)} className={CommonStyles.textButton}>
-                <span>更多小组成员</span><RightArrow />
-              </Link>
+              group &&
+                <Link to={groupTabsByKey.members.to(group.name)} className={CommonStyles.textButton}>
+                  <span>更多小组成员</span><RightArrow />
+                </Link>
             )}
           >
             <div className={styles.newMembers}>
-              {group.new_members.slice(0, 10).map((member) => {
+              {group?.new_members.slice(0, 10).map((member) => {
                 return (
                   <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
                 )

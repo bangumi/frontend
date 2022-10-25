@@ -7,7 +7,7 @@ import { render as renderBBCode } from '@bangumi/utils'
 import { ClampableContent } from './components/ClampableContent'
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg'
 import TopicsTable from './components/TopicsTable'
-import { useGroupContext } from '@bangumi/website/pages/group'
+import { useGroupContext } from '../[name]'
 
 const CLAMP_HEIGHT_THRESHOLD = 193
 

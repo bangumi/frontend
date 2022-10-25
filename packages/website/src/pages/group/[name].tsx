@@ -1,7 +1,7 @@
 import { useGroup, UseGroupRet } from '@bangumi/website/hooks/use-group'
 import React from 'react'
 import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom'
-import GroupLayout, { GroupTabs } from './group/components/GroupLayout'
+import GroupLayout, { GroupTabs } from './components/GroupLayout'
 
 interface ContextType {
   groupRet: UseGroupRet
@@ -21,11 +21,11 @@ const GroupPage: React.FC = () => {
   if (!groupRet.group) {
     return null
   }
-  return name
-    ? <GroupLayout group={groupRet.group} curTab={matchTab}>
+  return (
+    <GroupLayout group={groupRet.group} curTab={matchTab}>
       <Outlet context={{ groupRet }} />
     </GroupLayout>
-    : <Outlet />
+  )
 }
 
 export const useGroupContext = (): ContextType => useOutletContext<ContextType>()
