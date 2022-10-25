@@ -7,7 +7,7 @@ import Boring from './fixtures/boring.json'
 import RecentTopics from './fixtures/recent-topics.json'
 import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom'
 import { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group'
-import GroupPage from '@bangumi/website/pages/group'
+import GroupPage from '@bangumi/website/pages/group/[name]'
 
 jest.mock('react-router-dom', () => {
   return {
