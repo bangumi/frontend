@@ -26,7 +26,7 @@ const GroupForum: React.FC = () => {
   return (
     <>
       <TopicsTable topics={topics.data} />
-      <Pagination total={topics?.total} pageSize={pageSize} currentOffset={curPage} onChange={handlePageChange} />
+      <Pagination total={topics?.total} pageSize={pageSize} currentPage={curPage} onChange={handlePageChange} />
     </>
   )
 }

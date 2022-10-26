@@ -5,8 +5,7 @@ import cn from 'classnames'
 
 export interface PaginationProps {
   /* 当前偏移 */
-  // ? 有歧义，经测试应该是当前页，而不是当前偏移
-  currentOffset?: number
+  currentPage?: number
   /* 单页的数据条数 */
   pageSize?: number
   /* 数据的总条数 */
@@ -20,12 +19,12 @@ function calculatePage (pageSize: number, total: number): number {
 }
 
 const Pagination: FC<PaginationProps> = ({
-  currentOffset = 1,
+  currentPage = 1,
   pageSize = 30,
   total = 0,
   ...restProps
 }) => {
-  const [current, setCurrent] = useState(() => currentOffset)
+  const [current, setCurrent] = useState(() => currentPage)
 
   // 不需要分页的时候不渲染
   if (total < pageSize) {
