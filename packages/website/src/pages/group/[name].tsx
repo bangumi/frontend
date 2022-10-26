@@ -3,11 +3,11 @@ import React from 'react'
 import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom'
 import GroupLayout, { GroupTabs } from './components/GroupLayout'
 
-interface ContextType {
+interface GroupContext {
   groupRet: UseGroupRet
 }
 
-const GroupPage: React.FC = () => {
+const GroupPage = () => {
   const { name } = useParams()
   const { pathname } = useLocation()
   const groupRet = useGroup(name as string)
@@ -18,9 +18,6 @@ const GroupPage: React.FC = () => {
       ? GroupTabs.Members
       : GroupTabs.Index
 
-  if (!groupRet.group) {
-    return null
-  }
   return (
     <GroupLayout group={groupRet.group} curTab={matchTab}>
       <Outlet context={{ groupRet }} />
@@ -28,6 +25,6 @@ const GroupPage: React.FC = () => {
   )
 }
 
-export const useGroupContext = (): ContextType => useOutletContext<ContextType>()
+export const useGroupContext = () => useOutletContext<GroupContext>()
 
 export default GroupPage

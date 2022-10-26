@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
-import { GroupMember, ResponseWithPagination } from '@bangumi/types/group'
+import { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group'
 
 interface UseGroupMembersRet {
   data: GroupMember[] | undefined
@@ -10,12 +10,24 @@ interface UseGroupMembersRet {
   error: any
 }
 
-export function useGroupMembers (name: string, index: number, type: 'mod' | 'normal' | 'all'): UseGroupMembersRet {
-  const ignoreIndex = type === 'mod' && index > 0
+type GroupMembersReq ={
+  type: 'mod'|'normal'|'all'
+  disable?: boolean
+} & Partial<Pagination>
+
+export function useGroupMembers (name: string, options: GroupMembersReq): UseGroupMembersRet {
+  const { type, offset = 0, limit = 30, disable = false } = options
+  // const ignoreIndex = type === 'mod' && offset > 0
+  const query = new URLSearchParams({
+    type,
+    limit: limit.toString(),
+    offset: offset.toString()
+  })
+
   const { data, error } = useSWR<AxiosResponse<ResponseWithPagination<GroupMember[]>>>(
-    ignoreIndex
+    disable
       ? null
-      : `/p/groups/${name}/members?type=${type}&limit=30&offset=${index * 30}`,
+      : `/p/groups/${name}/members?${query.toString()}`,
     privateRequest.get
   )
 

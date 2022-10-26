@@ -20,7 +20,7 @@ export const usePaginationParams = (defaultPageSize: number = 20): IPaginationPa
   const unsafePage = parseInt(params.get('page') ?? '')
   const page = (Number.isNaN(unsafePage) || unsafePage < 1) ? 1 : unsafePage
 
-  const unsafePageSize = parseInt(params.get('page') ?? '')
+  const unsafePageSize = parseInt(params.get('limit') ?? '')
   const pageSize = (Number.isNaN(unsafePageSize) || unsafePageSize < 1) ? defaultPageSize : unsafePageSize
 
   return {

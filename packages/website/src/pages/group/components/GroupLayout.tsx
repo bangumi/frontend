@@ -28,10 +28,10 @@ const GroupTabsItems = [{
   label: '小组成员',
   to: (groupName: string) => `/group/${groupName}/members`
 }]
+const groupTabsByKey = keyBy(GroupTabsItems, 'key')
 
 const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile|undefined, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
   const navigate = useNavigate()
-  const groupTabsByKey = keyBy(GroupTabsItems, 'key')
   const handleTabChange = (key: string): void => group && navigate(groupTabsByKey[key as GroupTabs].to(group.name))
   return (
     <div className={styles.pageContainer}>

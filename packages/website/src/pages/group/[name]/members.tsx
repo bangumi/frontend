@@ -7,11 +7,21 @@ import styles from './members.module.less'
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination'
 
 const GroupMembers: React.FC = () => {
-  // TODO: useGroupMembers 中使用 limit=30
-  const { curPage } = usePaginationParams(30)
+  const { curPage, offset, pageSize } = usePaginationParams(30)
   const { name } = useParams()
-  const { data: groupModMembers } = useGroupMembers(name as string, curPage - 1, 'mod')
-  const { data, total } = useGroupMembers(name as string, curPage - 1, 'normal')
+
+  // 仅第一页获取管理员
+  const { data: groupModMembers } = useGroupMembers(name as string, {
+    offset,
+    type: 'mod',
+    disable: curPage > 1
+  })
+
+  const { data, total } = useGroupMembers(name as string, {
+    offset,
+    limit: pageSize,
+    type: 'normal'
+  })
   const navigate = useNavigate()
 
   if (!name) {
