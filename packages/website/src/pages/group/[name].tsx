@@ -10,7 +10,7 @@ interface GroupContext {
 const GroupPage = () => {
   const { name } = useParams()
   const { pathname } = useLocation()
-  const groupRet = useGroup(name as string)
+  const groupRet = useGroup(name!)
 
   const matchTab = pathname.endsWith(GroupTabs.Forum)
     ? GroupTabs.Forum
@@ -19,7 +19,7 @@ const GroupPage = () => {
       : GroupTabs.Index
 
   return (
-    <GroupLayout group={groupRet.group} curTab={matchTab}>
+    <GroupLayout group={groupRet.group} groupName={name!} curTab={matchTab}>
       <Outlet context={{ groupRet }} />
     </GroupLayout>
   )

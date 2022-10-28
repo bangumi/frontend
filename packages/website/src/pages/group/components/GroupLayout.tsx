@@ -30,9 +30,11 @@ const GroupTabsItems = [{
 }]
 const groupTabsByKey = keyBy(GroupTabsItems, 'key')
 
-const GroupLayout: React.FC<PropsWithChildren<{group: GroupProfile|undefined, curTab: GroupTabs}>> = ({ group, children, curTab }) => {
+type IGroupLayoutProps = PropsWithChildren<{group: GroupProfile|undefined, curTab: GroupTabs, groupName: string}>
+
+const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, groupName }) => {
   const navigate = useNavigate()
-  const handleTabChange = (key: string): void => group && navigate(groupTabsByKey[key as GroupTabs].to(group.name))
+  const handleTabChange = (key: string) => navigate(groupTabsByKey[key as GroupTabs].to(groupName))
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group} />
