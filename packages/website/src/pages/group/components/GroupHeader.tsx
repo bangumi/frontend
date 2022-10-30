@@ -5,7 +5,8 @@ import { GroupProfile } from '@bangumi/types/group'
 import styles from './GroupHeader.module.less'
 
 const { Text } = Typography
-export const GroupHeader: React.FC<{group: GroupProfile}> = ({ group }) => {
+export const GroupHeader: React.FC<{group: GroupProfile|undefined}> = ({ group }) => {
+  if (!group) return null
   return (
     <div className={styles.groupHeader}>
       <div className={styles.thumbnail}>
