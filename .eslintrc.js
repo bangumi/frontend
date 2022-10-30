@@ -24,6 +24,7 @@ module.exports = {
     'jest'
   ],
   rules: {
+    'no-new-wrappers': 'error',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/strict-boolean-expressions': 'off',
