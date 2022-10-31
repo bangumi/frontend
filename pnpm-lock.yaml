@@ -8246,7 +8246,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001296
+      caniuse-lite: 1.0.30001423
       electron-to-chromium: 1.4.35
       escalade: 3.1.1
       node-releases: 2.0.1
@@ -8258,7 +8258,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001367
+      caniuse-lite: 1.0.30001423
       electron-to-chromium: 1.4.192
       node-releases: 2.0.6
       update-browserslist-db: 1.0.4_browserslist@4.21.2
@@ -8427,12 +8427,12 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite/1.0.30001296:
-    resolution: {integrity: sha512-WfrtPEoNSoeATDlf4y3QvkwiELl9GyPLISV5GejTbbQRtQx4LhsXmc9IQ6XCL2d7UxCyEzToEZNMeqR79OUw8Q==}
-    dev: true
-
   /caniuse-lite/1.0.30001367:
     resolution: {integrity: sha512-XDgbeOHfifWV3GEES2B8rtsrADx4Jf+juKX2SICJcaUhjYBO3bR96kvEIHa15VU6ohtOhBZuPGGYGbXMRn0NCw==}
+    dev: true
+
+  /caniuse-lite/1.0.30001423:
+    resolution: {integrity: sha512-09iwWGOlifvE1XuHokFMP7eR38a0JnajoyL3/i87c8ZjRWRrdKo1fqjNfugfBD0UDBIOz0U+jtNhJ0EPm1VleQ==}
     dev: true
 
   /capital-case/1.0.4:
@@ -9784,7 +9784,7 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
-      source-map: r2.cnpmjs.org/source-map/0.6.1
+      source-map: 0.6.1
     dev: true
 
   /eslint-config-standard-jsx/10.0.0_kqu4i3lv3dayvcexvayuoxbqny:
@@ -15251,7 +15251,7 @@ packages:
     dependencies:
       stylelint: 14.8.0
     optionalDependencies:
-      stylelint-scss: 4.2.0_stylelint@14.8.0
+      stylelint-scss: 4.3.0_stylelint@14.8.0
     dev: true
 
   /stylelint-config-recommended/7.0.0_stylelint@14.8.0:
@@ -15271,8 +15271,8 @@ packages:
       stylelint-config-recommended: 7.0.0_stylelint@14.8.0
     dev: true
 
-  /stylelint-scss/4.2.0_stylelint@14.8.0:
-    resolution: {integrity: sha512-HHHMVKJJ5RM9pPIbgJ/XA67h9H0407G68Rm69H4fzFbFkyDMcTV1Byep3qdze5+fJ3c0U7mJrbj6S0Fg072uZA==}
+  /stylelint-scss/4.3.0_stylelint@14.8.0:
+    resolution: {integrity: sha512-GvSaKCA3tipzZHoz+nNO7S02ZqOsdBzMiCx9poSmLlb3tdJlGddEX/8QzCOD8O7GQan9bjsvLMsO5xiw6IhhIQ==}
     requiresBuild: true
     peerDependencies:
       stylelint: ^14.5.1
@@ -17283,7 +17283,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001296
+      caniuse-lite: 1.0.30001423
       electron-to-chromium: 1.4.35
       escalade: r2.cnpmjs.org/escalade/3.1.1
       node-releases: r2.cnpmjs.org/node-releases/2.0.1

@@ -1,13 +1,13 @@
 import React from 'react'
 import GroupHome from '..'
-import { RenderResult, waitFor } from '@testing-library/react'
-import { renderPage } from '../../../../utils/test-utils'
-import { server as mockServer } from '../../../../mocks/server'
+import { render, RenderResult, waitFor } from '@testing-library/react'
+import { server as mockServer } from '@bangumi/website/mocks/server'
 import { rest } from 'msw'
 import Boring from './fixtures/boring.json'
 import RecentTopics from './fixtures/recent-topics.json'
-import { useParams } from 'react-router-dom'
-import { Group, ResponseWithPagination, Topic } from '@bangumi/types/group'
+import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom'
+import { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group'
+import GroupPage from '@bangumi/website/pages/group/[name]'
 
 jest.mock('react-router-dom', () => {
   return {
@@ -23,7 +23,7 @@ class GroupHomeTest {
   page: RenderResult
   constructor (
     name: string,
-    mock: {group?: Group, topics?: ResponseWithPagination<Topic[]>}
+    mock: {group?: GroupProfile, topics?: ResponseWithPagination<Topic[]>}
   ) {
     mockedUseParams.mockReturnValue({
       name
@@ -37,7 +37,15 @@ class GroupHomeTest {
       return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics))
     }))
 
-    this.page = renderPage(<GroupHome />)
+    this.page = render(<MemoryRouter>
+      <Routes>
+        <Route element={<GroupPage />}>
+          <Route index element={<GroupHome />} />
+        </Route>
+      </Routes>
+      <GroupHome />
+    </MemoryRouter>
+    )
   }
 
   async assertHeader (expectedHeader: string): Promise<void> {
@@ -66,13 +74,13 @@ class GroupHomeTest {
 }
 
 it('should match snapshot properly', async () => {
-  const test = new GroupHomeTest('test', { group: Boring })
+  const test = new GroupHomeTest('test', { group: Boring as GroupProfile })
 
   await test.assertHeader('靠谱人生茶话会')
 })
 
 it('should list recent topics', async () => {
-  const test = new GroupHomeTest('test', { topics: RecentTopics as ResponseWithPagination<Topic[]> })
+  const test = new GroupHomeTest('test', { group: Boring as GroupProfile, topics: RecentTopics as ResponseWithPagination<Topic[]> })
 
   await test.assertTopicExist({
     title: '看了4000本漫画，大家有什么想问的',
