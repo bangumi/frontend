@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import GlobalLayout from '../../../components/GlobalLayout'
+import GlobalLayout from '../../../../components/GlobalLayout'
 import DetailEditor from './components/WikiEditor/DetailEditor'
 
 const WikiEditPage: React.FC = () => {

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useUser } from '../hooks/use-user'
 import UserHome from './components/UserHome'
+import { Outlet } from 'react-router-dom'
+import GlobalLayout from '../components/GlobalLayout'
 
 const Home: React.FC = () => {
   const { user } = useUser()
@@ -10,7 +12,11 @@ const Home: React.FC = () => {
   }
 
   // TODO: 未登录态主页
-  return <div />
+  return (
+    <GlobalLayout>
+      <Outlet />
+    </GlobalLayout>
+  )
 }
 
 export default Home
