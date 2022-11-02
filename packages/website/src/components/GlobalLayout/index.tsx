@@ -3,7 +3,7 @@ import Footer from '../Footer'
 import Header from '../Header'
 import styles from './style.module.less'
 
-const GlobalLayout: React.FC<PropsWithChildren> = (props) => {
+const GlobalLayout = (props: PropsWithChildren<{}>) => {
   return (
     <div className={styles.container}>
       <Header />
