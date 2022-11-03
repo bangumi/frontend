@@ -60,7 +60,7 @@ const Login: React.FC = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.container}>
-        <LoginLogo />
+        <LoginLogo className={style.logo} />
         {errorMessage && <ErrorMessage message={errorMessage} />}
         <Input
           type="email"

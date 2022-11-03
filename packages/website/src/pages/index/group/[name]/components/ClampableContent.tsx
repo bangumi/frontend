@@ -1,6 +1,6 @@
 import React from 'react'
-import { ReactComponent as DownArrow } from '../../../../assets/down-arrow.svg'
-import { ReactComponent as UpArrow } from '../../../../assets/up-arrow.svg'
+import { ReactComponent as DownArrow } from '@bangumi/website/assets/down-arrow.svg'
+import { ReactComponent as UpArrow } from '@bangumi/website/assets/up-arrow.svg'
 import styles from './ClampableContent.module.less'
 
 export interface ClampableContentProps {
