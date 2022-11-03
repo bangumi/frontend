@@ -23,7 +23,8 @@
     "server": "pnpm --filter=@bangumi/server",
     "test": "jest",
     "website": "pnpm --filter=@bangumi/website",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "type-check": "tsc --noEmit"
   },
   "lint-staged": {
     "*.{yaml,yml}": "prettier --write",
