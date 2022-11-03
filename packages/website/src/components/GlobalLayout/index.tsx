@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import Footer from '../Footer'
 import Header from '../Header'
 import styles from './style.module.less'
 
-const GlobalLayout: React.FC = (props) => {
+const GlobalLayout = (props: PropsWithChildren<{}>) => {
   return (
     <div className={styles.container}>
       <Header />
