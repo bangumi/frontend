@@ -6,8 +6,9 @@ import { usePaginationParams } from '@bangumi/website/hooks/use-pagination'
 import TopicsTable from './components/TopicsTable'
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate'
 
-const GroupForum: React.FC = () => {
+const GroupForum = () => {
   const { name } = useParams()
+  // const navigate = useNavigate()
   const [, navigate] = useTransitionNavigate()
   const { curPage, offset, pageSize } = usePaginationParams()
 
@@ -20,14 +21,11 @@ const GroupForum: React.FC = () => {
     navigate({ search: `page=${page}` })
   }
 
-  if (!topics) {
-    return null
-  }
-
+  // TODO @waua ErrorBoundary
   return (
     <>
       <TopicsTable topics={topics.data} />
-      <Pagination total={topics?.total} pageSize={pageSize} currentPage={curPage} onChange={handlePageChange} />
+      <Pagination total={topics.total} pageSize={pageSize} currentPage={curPage} onChange={handlePageChange} />
     </>
   )
 }

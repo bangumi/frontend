@@ -38,7 +38,8 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
   const handleTabChange = (key: string) => navigate(groupTabsByKey[key as GroupTabs].to(groupName))
   return (
     <div className={styles.pageContainer}>
-      <GroupHeader group={group} />
+      {/* TODO:@waua error boundary */}
+      <GroupHeader group={group!} />
       <Tab type="borderless" items={GroupTabsItems} activeKey={curTab} onChange={handleTabChange} />
       <div className={styles.columnContainer}>
         <div className={styles.leftCol}>
