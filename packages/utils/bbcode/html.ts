@@ -27,15 +27,8 @@ function renderProps (
   }, '')
 }
 
-function renderStyle (style: Record<string, string>): string {
-  return Object.keys(style).reduce((pre, key) => {
-    let val = style[key]
-    val = `${key}:${escapeHTML(val)}`
-    if (!pre) {
-      return val
-    }
-    return pre + ';' + val
-  }, '')
+function renderStyle (style: Record<string, string>) {
+  return Object.entries(style).map(([key, value]) => `${key}:${value}`).join(';')
 }
 
 export function renderNode (node: NodeTypes, parentNode?: VNode): string {
