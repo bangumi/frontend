@@ -26,8 +26,7 @@ const Login: React.FC = () => {
     [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试'
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
-  const handleLogin: () => void = async () => {
+  const handleLogin = async () => {
     if (!hCaptchaToken) {
       setErrorMessage('请完成验证')
       return
