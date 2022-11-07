@@ -25,6 +25,14 @@ module.exports = {
   ],
   rules: {
     'no-use-before-define': 'off',
+    '@typescript-eslint/no-misused-promises': [
+      'error',
+      {
+        checksVoidReturn: {
+          attributes: false
+        }
+      }
+    ],
     '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/strict-boolean-expressions': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
