@@ -28,7 +28,7 @@ function renderProps (
 }
 
 function renderStyle (style: Record<string, string>): string {
-  return Object.entries(style).map(([key, value]) => `${key}:${value}`).join(';')
+  return Object.entries(style).map(([key, value]) => `${key}:${escapeHTML(value)}`).join(';')
 }
 
 export function renderNode (node: NodeTypes, parentNode?: VNode): string {
