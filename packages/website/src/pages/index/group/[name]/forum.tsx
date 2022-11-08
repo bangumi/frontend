@@ -8,7 +8,6 @@ import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate'
 
 const GroupForum = () => {
   const { name } = useParams()
-  // const navigate = useNavigate()
   const [, navigate] = useTransitionNavigate()
   const { curPage, offset, pageSize } = usePaginationParams()
 
