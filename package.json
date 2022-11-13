@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
-    "build": "pnpm website build",
+    "build": "pnpm icons build && pnpm website build",
     "build:types": "pnpm --filter @bangumi/types build",
     "build:test": "pnpm website build:test",
     "design": "pnpm --filter=@bangumi/design",
@@ -23,6 +23,7 @@
     "server": "pnpm --filter=@bangumi/server",
     "test": "jest",
     "website": "pnpm --filter=@bangumi/website",
+    "icons": "pnpm --filter=@bangumi/icons",
     "lint-staged": "lint-staged"
   },
   "lint-staged": {

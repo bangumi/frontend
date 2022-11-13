@@ -1,6 +1,6 @@
 import React from 'react'
 import type { Story, ComponentMeta } from '@storybook/react'
-import * as Icons from '.'
+import * as Icons from './dist'
 
 type IComponent = React.FC<React.SVGProps<SVGSVGElement> & {
   title?: string
@@ -13,11 +13,11 @@ const componentMeta: ComponentMeta<IComponent> = {
     story => (
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          flex: 'auto',
-          flexWrap: 'wrap',
-          margin: '0 10rem'
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill,minmax(8rem,1fr))',
+          gap: '2rem',
+          maxWidth: '80rem',
+          margin: 'auto'
         }}
       >{story()}
       </div>
@@ -45,8 +45,17 @@ const Template: Story<{ height: number, width: number, style: React.CSSPropertie
     Object.keys(Icons).map(iconName => {
       const Icon = (Icons as any)[iconName] as IComponent
       return (
-        <div key={iconName} style={{ textAlign: 'center', width: 120 }}>
-          <p>{iconName}</p>
+        <div
+          key={iconName}
+          style={{
+            textAlign: 'center',
+            height: 100,
+            border: 'solid 2px #dedede',
+            borderRadius: '5px',
+            padding: '1rem'
+          }}
+        >
+          <p style={{ paddingBottom: '1.5rem', fontWeight: '600' }}>{iconName}</p>
           <Icon height={height} width={width} style={style} />
         </div>
       )
