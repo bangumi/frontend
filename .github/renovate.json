@@ -33,6 +33,15 @@
       "semanticCommitType": "ci"
     },
     {
+      "matchManagers": [
+        "npm"
+      ],
+      "semanticCommitType": "build",
+      "matchUpdateTypes": [
+        "major"
+      ]
+    },
+    {
       "groupName": "deps",
       "matchManagers": [
         "npm"
