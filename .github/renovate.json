@@ -3,19 +3,21 @@
   "extends": ["config:base"],
   "timezone": "Asia/Shanghai",
   "schedule": ["monthly"],
+  "baseBranches": ["master"],
   "separateMajorMinor": true,
   "separateMinorPatch": false,
-  "semanticCommitType": "build",
   "rangeStrategy": "bump",
   "packageRules": [
     {
       "matchManagers": ["npm"],
       "matchDepTypes": "dependencies",
+      "semanticCommitType": "build",
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "matchManagers": ["npm"],
       "matchDepTypes": "devDependencies",
+      "semanticCommitType": "build",
       "matchUpdateTypes": ["minor", "patch"]
     }
   ]
