@@ -168,7 +168,7 @@ importers:
       axios: ^0.24.0
       bgm-types: ^2.0.2
       classnames: ^2.3.1
-      dayjs: ^1.11.3
+      dayjs: ^1.11.6
       msw: ^0.36.5
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -187,7 +187,7 @@ importers:
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       axios: 0.24.0
       classnames: r2.cnpmjs.org/classnames/2.3.1
-      dayjs: 1.11.3
+      dayjs: 1.11.6
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router-dom: 6.2.2_biqbaboplfbrettd7655fr4n2y
@@ -9510,8 +9510,8 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
-  /dayjs/1.11.3:
-    resolution: {integrity: sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==}
+  /dayjs/1.11.6:
+    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
     dev: false
 
   /debug/2.6.9:
