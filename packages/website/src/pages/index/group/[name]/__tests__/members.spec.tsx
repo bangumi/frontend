@@ -24,7 +24,7 @@ class GroupMembersTest {
   page: RenderResult
   constructor (
     name: string,
-    mock: {members: ResponseWithPagination<GroupMember[]>, modMembers: ResponseWithPagination<GroupMember[]>}
+    mock: { members: ResponseWithPagination<GroupMember[]>, modMembers: ResponseWithPagination<GroupMember[]> }
   ) {
     mockedUseParams.mockReturnValue({
       name

@@ -5,7 +5,7 @@ import React from 'react'
 import dayjs from 'dayjs'
 import styles from './TopicsTable.module.less'
 
-const TopicsTable: React.FC<{topics: Topic[]}> = ({ topics }) => {
+const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
   return (
     <table className={styles.topicTable}>
       <thead>
