@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { MemoryRouter } from 'react-router-dom'
 import { usePaginationParams } from './use-pagination'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 const wrapper = (entry: string) => ({ children }: PropsWithChildren<{}>) => {
   return <MemoryRouter initialEntries={[entry]}>{children}</MemoryRouter>

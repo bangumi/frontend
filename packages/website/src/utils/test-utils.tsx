@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { render, RenderOptions, RenderResult } from '@testing-library/react'
 import { UserProvider } from '../hooks/use-user'
 import { MemoryRouter } from 'react-router-dom'
 
-const PageWrapper: React.FC = ({ children }) => (
+const PageWrapper = ({ children }: PropsWithChildren<{}>) => (
   <MemoryRouter>
     <UserProvider>
       {children}

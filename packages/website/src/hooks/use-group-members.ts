@@ -28,7 +28,8 @@ export function useGroupMembers (name: string, options: GroupMembersReq): UseGro
     disable
       ? null
       : `/p/groups/${name}/members?${query.toString()}`,
-    privateRequest.get
+    privateRequest.get,
+    { suspense: true }
   )
 
   return {
