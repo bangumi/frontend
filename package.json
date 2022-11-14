@@ -63,7 +63,7 @@
     "jest-environment-jsdom": "^29.3.1",
     "jest-transform-stub": "^2.0.0",
     "lint-staged": "^13.0.3",
-    "postcss": "^8.4.18",
+    "postcss": "^8.4.19",
     "postcss-less": "^6.0.0",
     "prettier": "^2.7.1",
     "stylelint": "^14.15.0",

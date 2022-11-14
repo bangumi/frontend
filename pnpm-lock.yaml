@@ -31,7 +31,7 @@ importers:
       jest-environment-jsdom: ^29.3.1
       jest-transform-stub: ^2.0.0
       lint-staged: ^13.0.3
-      postcss: ^8.4.18
+      postcss: ^8.4.19
       postcss-less: ^6.0.0
       prettier: ^2.7.1
       stylelint: ^14.15.0
@@ -67,8 +67,8 @@ importers:
       jest-environment-jsdom: 29.3.1
       jest-transform-stub: 2.0.0
       lint-staged: 13.0.3
-      postcss: 8.4.18
-      postcss-less: 6.0.0_postcss@8.4.18
+      postcss: 8.4.19
+      postcss-less: 6.0.0_postcss@8.4.19
       prettier: 2.7.1
       stylelint: 14.15.0
       stylelint-config-css-modules: 4.1.0_stylelint@14.15.0
@@ -14792,13 +14792,13 @@ packages:
       postcss: 7.0.39
     dev: true
 
-  /postcss-less/6.0.0_postcss@8.4.18:
+  /postcss-less/6.0.0_postcss@8.4.19:
     resolution: {integrity: sha512-FPX16mQLyEjLzEuuJtxA8X3ejDLNGGEG503d2YGZR5Ask1SpDN8KmZUMpzCvyalWRywAn1n1VOA5dcqfCLo5rg==}
     engines: {node: '>=12'}
     peerDependencies:
       postcss: ^8.3.5
     dependencies:
-      postcss: 8.4.18
+      postcss: 8.4.19
     dev: true
 
   /postcss-loader/4.3.0_gzaxsinx64nntyd3vmdqwl7coe:
