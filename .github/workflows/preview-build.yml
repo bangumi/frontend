@@ -21,7 +21,7 @@ jobs:
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16.x"
 
@@ -73,7 +73,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16.x"
 
