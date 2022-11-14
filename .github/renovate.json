@@ -18,6 +18,11 @@
       "semanticCommitType": "build"
     },
     {
+      "groupName": "eslint",
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "semanticCommitType": "style"
+    },
+    {
       "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
