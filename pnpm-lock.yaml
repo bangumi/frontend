@@ -136,11 +136,11 @@ importers:
   packages/types:
     specifiers:
       js-yaml: ^4.1.0
-      node-fetch: ^3.2.10
+      node-fetch: ^3.3.0
       openapi-typescript: ^5.4.1
     devDependencies:
       js-yaml: 4.1.0
-      node-fetch: 3.2.10
+      node-fetch: 3.3.0
       openapi-typescript: 5.4.1
 
   packages/utils:
@@ -13933,13 +13933,14 @@ packages:
       inquirer: r2.cnpmjs.org/inquirer/8.2.0
       is-node-process: r2.cnpmjs.org/is-node-process/1.0.1
       js-levenshtein: r2.cnpmjs.org/js-levenshtein/1.1.6
-      node-fetch: r2.cnpmjs.org/node-fetch/2.6.6
+      node-fetch: 2.6.7
       path-to-regexp: r2.cnpmjs.org/path-to-regexp/6.2.0
       statuses: r2.cnpmjs.org/statuses/2.0.1
       strict-event-emitter: r2.cnpmjs.org/strict-event-emitter/0.2.0
       type-fest: r2.cnpmjs.org/type-fest/1.4.0
       yargs: r2.cnpmjs.org/yargs/17.3.1
     transitivePeerDependencies:
+      - encoding
       - supports-color
     dev: true
 
@@ -14044,8 +14045,8 @@ packages:
       whatwg-url: 5.0.0
     dev: true
 
-  /node-fetch/3.2.10:
-    resolution: {integrity: sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==}
+  /node-fetch/3.3.0:
+    resolution: {integrity: sha512-BKwRP/O0UvoMKp7GNdwPlObhYGB5DQqwhEDQlNKuoqwVYSxkSZCSbHjnFFmUEtwSKRPU4kNK8PbDYYitwaE3QA==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dependencies:
       data-uri-to-buffer: 4.0.0
@@ -18288,15 +18289,6 @@ packages:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/mute-stream/-/mute-stream-0.0.8.tgz}
     name: mute-stream
     version: 0.0.8
-    dev: true
-
-  r2.cnpmjs.org/node-fetch/2.6.6:
-    resolution: {integrity: sha512-Z8/6vRlTUChSdIgMa51jxQ4lrw/Jy5SOW10ObaA47/RElsAN2c5Pn8bTgFGWn/ibwzXTE8qwr1Yzx28vsecXEA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/node-fetch/-/node-fetch-2.6.6.tgz}
-    name: node-fetch
-    version: 2.6.6
-    engines: {node: 4.x || >=6.0.0}
-    dependencies:
-      whatwg-url: 5.0.0
     dev: true
 
   r2.cnpmjs.org/ora/5.4.1:
