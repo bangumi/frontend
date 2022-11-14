@@ -180,7 +180,7 @@ importers:
       typescript: ^4.8.4
       vite: ^3.2.3
       vite-plugin-pages: ^0.27.1
-      vite-plugin-style-import: ^1.4.1
+      vite-plugin-style-import: ^2.0.0
       vite-plugin-svgr: ^2.2.2
     dependencies:
       '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
@@ -209,7 +209,7 @@ importers:
       typescript: 4.8.4
       vite: 3.2.3
       vite-plugin-pages: 0.27.1_vite@3.2.3
-      vite-plugin-style-import: 1.4.1_vite@3.2.3
+      vite-plugin-style-import: 2.0.0_vite@3.2.3
       vite-plugin-svgr: 2.2.2_vite@3.2.3
 
 packages:
@@ -7552,6 +7552,10 @@ packages:
     resolution: {integrity: sha512-ty/fTekppD2fIwRvnZAVdeOiGd1c7YXEixbgJTNzqcxJWKQnjJ/V1bNEEE6hygpM3WjwHFUVK6HTjWSzV4a8sQ==}
     dev: true
 
+  /console/0.7.2:
+    resolution: {integrity: sha512-+JSDwGunA4MTEgAV/4VBKwUHonP8CzJ/6GIuwPi6acKFqFfHUdSGCm89ZxZ5FfGWdZfkdgAroy5bJ5FSeN/t4g==}
+    dev: true
+
   /constant-case/3.0.4:
     resolution: {integrity: sha512-I2hSBi7Vvs7BEuJDr5dDHfzb/Ruj3FyvFyh7KLilAjNQw3Be+xgqUBA2W6scVEcL0hL1dwPRtIqEPVUCKkSsyQ==}
     dependencies:
@@ -12988,6 +12992,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /pathe/0.2.0:
+    resolution: {integrity: sha512-sTitTPYnn23esFR3RlqYBWn4c45WGeLcsKzQiUpXJAyfcWkolvlYpV8FLo7JishK946oQwMFUCHXQ9AjGPKExw==}
+    dev: true
+
   /pbkdf2/3.1.2:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
@@ -15674,8 +15682,8 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-style-import/1.4.1_vite@3.2.3:
-    resolution: {integrity: sha512-lJCRvm7+So0hHdnSJiJPg9gD5mxtL6YY0jmhEph+k7ArpsyvqOh6han2kG5htbWWDZxHkUN9d1BuTFL//yCLLQ==}
+  /vite-plugin-style-import/2.0.0_vite@3.2.3:
+    resolution: {integrity: sha512-qtoHQae5dSUQPo/rYz/8p190VU5y19rtBaeV7ryLa/AYAU/e9CG89NrN/3+k7MR8mJy/GPIu91iJ3zk9foUOSA==}
     peerDependencies:
       vite: '>=2.0.0'
     peerDependenciesMeta:
@@ -15684,13 +15692,12 @@ packages:
     dependencies:
       '@rollup/pluginutils': 4.2.1
       change-case: 4.1.2
-      debug: 4.3.4
+      console: 0.7.2
       es-module-lexer: 0.9.3
       fs-extra: 10.1.0
       magic-string: 0.25.9
+      pathe: 0.2.0
       vite: 3.2.3
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /vite-plugin-svgr/2.2.2:
