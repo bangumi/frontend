@@ -4,6 +4,7 @@
   "separateMajorMinor": true,
   "separateMinorPatch": false,
   "semanticCommitType": "build",
+  "rangeStrategy": "bump",
   "packageRules": [
     {
       "matchManagers": ["npm"],
