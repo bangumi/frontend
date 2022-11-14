@@ -9,193 +9,193 @@
   "date": "2012-04-26",
   "platform": "",
   "images": {
-      "large": "https://lain.bgm.tv/pic/cover/l/41/29/39115_3r6JY.jpg",
-      "common": "https://lain.bgm.tv/pic/cover/c/41/29/39115_3r6JY.jpg",
-      "medium": "https://lain.bgm.tv/pic/cover/m/41/29/39115_3r6JY.jpg",
-      "small": "https://lain.bgm.tv/pic/cover/s/41/29/39115_3r6JY.jpg",
-      "grid": "https://lain.bgm.tv/pic/cover/g/41/29/39115_3r6JY.jpg"
+    "large": "https://lain.bgm.tv/pic/cover/l/41/29/39115_3r6JY.jpg",
+    "common": "https://lain.bgm.tv/pic/cover/c/41/29/39115_3r6JY.jpg",
+    "medium": "https://lain.bgm.tv/pic/cover/m/41/29/39115_3r6JY.jpg",
+    "small": "https://lain.bgm.tv/pic/cover/s/41/29/39115_3r6JY.jpg",
+    "grid": "https://lain.bgm.tv/pic/cover/g/41/29/39115_3r6JY.jpg"
   },
   "infobox": [
-      {
-          "key": "平台",
-          "value": [
-              {
-                  "v": "PC"
-              }
-          ]
-      },
-      {
-          "key": "游戏类型",
-          "value": "乙女向けダークゴシックADV"
-      },
-      {
-          "key": "游玩人数",
-          "value": "1"
-      },
-      {
-          "key": "发行日期",
-          "value": "2012-04-26"
-      },
-      {
-          "key": "售价",
-          "value": "8190円"
-      },
-      {
-          "key": "website",
-          "value": "http://rejetweb.jp/bws/top/"
-      },
-      {
-          "key": "剧本",
-          "value": "山田かのこ"
-      }
+    {
+      "key": "平台",
+      "value": [
+        {
+          "v": "PC"
+        }
+      ]
+    },
+    {
+      "key": "游戏类型",
+      "value": "乙女向けダークゴシックADV"
+    },
+    {
+      "key": "游玩人数",
+      "value": "1"
+    },
+    {
+      "key": "发行日期",
+      "value": "2012-04-26"
+    },
+    {
+      "key": "售价",
+      "value": "8190円"
+    },
+    {
+      "key": "website",
+      "value": "http://rejetweb.jp/bws/top/"
+    },
+    {
+      "key": "剧本",
+      "value": "山田かのこ"
+    }
   ],
   "volumes": 0,
   "eps": 0,
   "total_episodes": 0,
   "rating": {
-      "rank": 1756,
-      "total": 605,
-      "count": {
-          "1": 0,
-          "2": 0,
-          "3": 0,
-          "4": 4,
-          "5": 1,
-          "6": 11,
-          "7": 30,
-          "8": 15,
-          "9": 12,
-          "10": 8
-      },
-      "score": 7.5
+    "rank": 1756,
+    "total": 605,
+    "count": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "4": 4,
+      "5": 1,
+      "6": 11,
+      "7": 30,
+      "8": 15,
+      "9": 12,
+      "10": 8
+    },
+    "score": 7.5
   },
   "collection": {
-      "wish": 128,
-      "collect": 98,
-      "doing": 15,
-      "on_hold": 21,
-      "dropped": 6
+    "wish": 128,
+    "collect": 98,
+    "doing": 15,
+    "on_hold": 21,
+    "dropped": 6
   },
   "tags": [
-      {
-          "name": "乙女向",
-          "count": 85
-      },
-      {
-          "name": "Rejet",
-          "count": 59
-      },
-      {
-          "name": "PC",
-          "count": 48
-      },
-      {
-          "name": "梶裕贵",
-          "count": 18
-      },
-      {
-          "name": "至郁",
-          "count": 14
-      },
-      {
-          "name": "乙女ゲーム",
-          "count": 13
-      },
-      {
-          "name": "AVG",
-          "count": 12
-      },
-      {
-          "name": "抖M向",
-          "count": 10
-      },
-      {
-          "name": "岩崎大介",
-          "count": 10
-      },
-      {
-          "name": "光田康典",
-          "count": 9
-      },
-      {
-          "name": "双子",
-          "count": 8
-      },
-      {
-          "name": "樱井孝宏",
-          "count": 7
-      },
-      {
-          "name": "石头",
-          "count": 6
-      },
-      {
-          "name": "吉野裕行",
-          "count": 4
-      },
-      {
-          "name": "石田彰",
-          "count": 4
-      },
-      {
-          "name": "乙女",
-          "count": 4
-      },
-      {
-          "name": "Wolves",
-          "count": 3
-      },
-      {
-          "name": "小黑屋",
-          "count": 3
-      },
-      {
-          "name": "细谷佳正",
-          "count": 2
-      },
-      {
-          "name": "櫻井孝宏",
-          "count": 2
-      },
-      {
-          "name": "Black",
-          "count": 2
-      },
-      {
-          "name": "女性向",
-          "count": 2
-      },
-      {
-          "name": "全年龄",
-          "count": 2
-      },
-      {
-          "name": "【乙女向】",
-          "count": 2
-      },
-      {
-          "name": "抖m的颤抖",
-          "count": 2
-      },
-      {
-          "name": "PSV",
-          "count": 2
-      },
-      {
-          "name": "STEAM",
-          "count": 2
-      },
-      {
-          "name": "谷山纪章",
-          "count": 1
-      },
-      {
-          "name": "2017年",
-          "count": 1
-      },
-      {
-          "name": "考哥",
-          "count": 1
-      }
+    {
+      "name": "乙女向",
+      "count": 85
+    },
+    {
+      "name": "Rejet",
+      "count": 59
+    },
+    {
+      "name": "PC",
+      "count": 48
+    },
+    {
+      "name": "梶裕贵",
+      "count": 18
+    },
+    {
+      "name": "至郁",
+      "count": 14
+    },
+    {
+      "name": "乙女ゲーム",
+      "count": 13
+    },
+    {
+      "name": "AVG",
+      "count": 12
+    },
+    {
+      "name": "抖M向",
+      "count": 10
+    },
+    {
+      "name": "岩崎大介",
+      "count": 10
+    },
+    {
+      "name": "光田康典",
+      "count": 9
+    },
+    {
+      "name": "双子",
+      "count": 8
+    },
+    {
+      "name": "樱井孝宏",
+      "count": 7
+    },
+    {
+      "name": "石头",
+      "count": 6
+    },
+    {
+      "name": "吉野裕行",
+      "count": 4
+    },
+    {
+      "name": "石田彰",
+      "count": 4
+    },
+    {
+      "name": "乙女",
+      "count": 4
+    },
+    {
+      "name": "Wolves",
+      "count": 3
+    },
+    {
+      "name": "小黑屋",
+      "count": 3
+    },
+    {
+      "name": "细谷佳正",
+      "count": 2
+    },
+    {
+      "name": "櫻井孝宏",
+      "count": 2
+    },
+    {
+      "name": "Black",
+      "count": 2
+    },
+    {
+      "name": "女性向",
+      "count": 2
+    },
+    {
+      "name": "全年龄",
+      "count": 2
+    },
+    {
+      "name": "【乙女向】",
+      "count": 2
+    },
+    {
+      "name": "抖m的颤抖",
+      "count": 2
+    },
+    {
+      "name": "PSV",
+      "count": 2
+    },
+    {
+      "name": "STEAM",
+      "count": 2
+    },
+    {
+      "name": "谷山纪章",
+      "count": 1
+    },
+    {
+      "name": "2017年",
+      "count": 1
+    },
+    {
+      "name": "考哥",
+      "count": 1
+    }
   ]
 }

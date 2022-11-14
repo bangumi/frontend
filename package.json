@@ -27,7 +27,7 @@
     "type-check": "tsc --noEmit"
   },
   "lint-staged": {
-    "*.{yaml,yml}": "prettier --write",
+    "*.{yaml,yml,json}": "prettier --write",
     "*.{js,ts,tsx}": [
       "eslint --fix"
     ],
