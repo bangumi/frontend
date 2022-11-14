@@ -87,7 +87,7 @@ importers:
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.8
       classnames: ^2.3.1
-      less: ^4.1.2
+      less: ^4.1.3
       react: ^18.2.0
       react-dom: ^18.2.0
       react-router-dom: ^6.2.2
@@ -109,10 +109,10 @@ importers:
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.8
       classnames: 2.3.1
-      less: r2.cnpmjs.org/less/4.1.2
+      less: 4.1.3
       react-router-dom: 6.2.2_biqbaboplfbrettd7655fr4n2y
       typescript: 4.8.4
-      vite: 3.0.2_less@4.1.2
+      vite: 3.0.2_less@4.1.3
       vite-plugin-svgr: 2.2.0_vite@3.0.2
 
   packages/icons:
@@ -325,7 +325,7 @@ packages:
     dependencies:
       '@babel/types': 7.16.7
       jsesc: r2.cnpmjs.org/jsesc/2.5.2
-      source-map: r2.cnpmjs.org/source-map/0.5.7
+      source-map: 0.5.7
     dev: true
 
   /@babel/generator/7.18.9:
@@ -4932,7 +4932,7 @@ packages:
       magic-string: 0.26.2
       react-docgen-typescript: 2.2.2_typescript@4.8.4
       typescript: 4.8.4
-      vite: 3.0.2_less@4.1.2
+      vite: 3.0.2_less@4.1.3
     dev: true
 
   /@jridgewell/gen-mapping/0.1.1:
@@ -5634,7 +5634,7 @@ packages:
       react-docgen: 6.0.0-alpha.3
       slash: 3.0.0
       sveltedoc-parser: 4.2.1
-      vite: 3.0.2_less@4.1.2
+      vite: 3.0.2_less@4.1.3
     transitivePeerDependencies:
       - '@babel/core'
       - eslint
@@ -9263,6 +9263,12 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
+  /copy-anything/2.0.3:
+    resolution: {integrity: sha512-GK6QUtisv4fNS+XcI7shX0Gx9ORg7QqIznyfho79JTnX1XhLiyZHfftvGiziqzRiEi/Bjhgpi+D2o7HxJFPnDQ==}
+    dependencies:
+      is-what: 3.14.1
+    dev: true
+
   /copy-concurrently/1.0.5:
     resolution: {integrity: sha512-f2domd9fsVDFtaFcbaRZuYXwtdmnzqbADSwhSWYxYB/Q8zsdUUFMXVRwXGDMWmbEzAn1kdRrtI1T/KTFOL4X2A==}
     dependencies:
@@ -9967,7 +9973,7 @@ packages:
     hasBin: true
     requiresBuild: true
     dependencies:
-      prr: r2.cnpmjs.org/prr/1.0.1
+      prr: 1.0.1
     dev: true
 
   /error-ex/1.3.2:
@@ -12472,6 +12478,10 @@ packages:
       get-intrinsic: 1.1.3
     dev: true
 
+  /is-what/3.14.1:
+    resolution: {integrity: sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==}
+    dev: true
+
   /is-whitespace-character/1.0.4:
     resolution: {integrity: sha512-SDweEzfIZM0SJV0EUga669UTKlmL0Pq8Lno0QDQsPnvECB3IM2aP0gdx5TrU0A01MAPfViaZiI2V1QMZLaKK5w==}
     dev: true
@@ -13292,6 +13302,26 @@ packages:
       dotenv-expand: 5.1.0
     dev: true
 
+  /less/4.1.3:
+    resolution: {integrity: sha512-w16Xk/Ta9Hhyei0Gpz9m7VS8F28nieJaL/VyShID7cYvP6IL5oHeL6p4TXSDJqZE/lNv0oJ2pGVjJsRkfwm5FA==}
+    engines: {node: '>=6'}
+    hasBin: true
+    dependencies:
+      copy-anything: 2.0.3
+      parse-node-version: 1.0.1
+      tslib: 2.4.1
+    optionalDependencies:
+      errno: 0.1.8
+      graceful-fs: 4.2.9
+      image-size: 0.5.5
+      make-dir: 2.1.0
+      mime: 1.6.0
+      needle: 3.1.0
+      source-map: 0.6.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /leven/3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
     engines: {node: '>=6'}
@@ -13983,15 +14013,15 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /needle/2.9.1:
-    resolution: {integrity: sha512-6R9fqJ5Zcmf+uYaFgdIHmLwNldn5HbK8L5ybn7Uz+ylX/rnOsSp1AHcvQSrCaFN+qNM1wpymHqD7mVasEOlHGQ==}
+  /needle/3.1.0:
+    resolution: {integrity: sha512-gCE9weDhjVGCRqS8dwDR/D3GTAeyXLXuqp7I8EzH6DllZGXSUyxuqqLh+YX9rMAWaaTFyVAg6rHGL25dqvczKw==}
     engines: {node: '>= 4.4.x'}
     hasBin: true
     requiresBuild: true
     dependencies:
       debug: 3.2.7
-      iconv-lite: 0.4.24
-      sax: r2.cnpmjs.org/sax/1.2.4
+      iconv-lite: 0.6.3
+      sax: 1.2.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -14530,6 +14560,11 @@ packages:
       lines-and-columns: 1.2.4
     dev: true
 
+  /parse-node-version/1.0.1:
+    resolution: {integrity: sha512-3YHlOa/JgH6Mnpr05jP9eDG254US9ek25LyIxZlDItp2iJtwyaXQb57lBYLdT3MowkUFYEV2XXNAYIPlESvJlA==}
+    engines: {node: '>= 0.10'}
+    dev: true
+
   /parse5/6.0.1:
     resolution: {integrity: sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==}
     dev: true
@@ -15012,6 +15047,10 @@ packages:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+    dev: true
+
+  /prr/1.0.1:
+    resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
     dev: true
 
   /psl/1.9.0:
@@ -15736,6 +15775,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /sax/1.2.4:
+    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
+    dev: true
+    optional: true
 
   /saxes/6.0.0:
     resolution: {integrity: sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==}
@@ -17384,7 +17428,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 4.2.1
       '@svgr/core': 6.2.1
-      vite: 3.0.2_less@4.1.2
+      vite: 3.0.2_less@4.1.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -17416,7 +17460,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vite/3.0.2_less@4.1.2:
+  /vite/3.0.2_less@4.1.3:
     resolution: {integrity: sha512-TAqydxW/w0U5AoL5AsD9DApTvGb2iNbGs3sN4u2VdT1GFkQVUfgUldt+t08TZgi23uIauh1TUOQJALduo9GXqw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -17436,7 +17480,7 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.14.49
-      less: r2.cnpmjs.org/less/4.1.2
+      less: 4.1.3
       postcss: 8.4.18
       resolve: 1.22.1
       rollup: 2.77.0
@@ -18096,14 +18140,6 @@ packages:
     engines: {node: '>= 0.6'}
     dev: true
 
-  r2.cnpmjs.org/copy-anything/2.0.3:
-    resolution: {integrity: sha512-GK6QUtisv4fNS+XcI7shX0Gx9ORg7QqIznyfho79JTnX1XhLiyZHfftvGiziqzRiEi/Bjhgpi+D2o7HxJFPnDQ==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/copy-anything/-/copy-anything-2.0.3.tgz}
-    name: copy-anything
-    version: 2.0.3
-    dependencies:
-      is-what: r2.cnpmjs.org/is-what/3.14.1
-    dev: true
-
   r2.cnpmjs.org/debug/4.3.3:
     resolution: {integrity: sha512-/zxw5+vh1Tfv+4Qn7a5nsbcJKPaSvCDhojn6FEl9vupwK2VCSDtEiEtqr8DFtzYFOdz63LBkxec7DYuc2jon6Q==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/debug/-/debug-4.3.3.tgz}
     name: debug
@@ -18222,12 +18258,6 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  r2.cnpmjs.org/is-what/3.14.1:
-    resolution: {integrity: sha512-sNxgpk9793nzSs7bA6JQJGeIuRBQhAaNGG77kzYQgMkrID+lS6SlK07K5LaptscDlSaIgH+GPFzf+d75FVxozA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/is-what/-/is-what-3.14.1.tgz}
-    name: is-what
-    version: 3.14.1
-    dev: true
-
   r2.cnpmjs.org/js-levenshtein/1.1.6:
     resolution: {integrity: sha512-X2BB11YZtrRqY4EnQcLX5Rh373zbK4alC1FW7D7MBhL2gtcC17cTnr6DmfHZeS0s2rTHjUTMMHfG7gO8SSdw+g==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/js-levenshtein/-/js-levenshtein-1.1.6.tgz}
     name: js-levenshtein
@@ -18251,28 +18281,6 @@ packages:
     hasBin: true
     dependencies:
       minimist: r2.cnpmjs.org/minimist/1.2.5
-    dev: true
-
-  r2.cnpmjs.org/less/4.1.2:
-    resolution: {integrity: sha512-EoQp/Et7OSOVu0aJknJOtlXZsnr8XE8KwuzTHOLeVSEx8pVWUICc8Q0VYRHgzyjX78nMEyC/oztWFbgyhtNfDA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/less/-/less-4.1.2.tgz}
-    name: less
-    version: 4.1.2
-    engines: {node: '>=6'}
-    hasBin: true
-    dependencies:
-      copy-anything: r2.cnpmjs.org/copy-anything/2.0.3
-      parse-node-version: r2.cnpmjs.org/parse-node-version/1.0.1
-      tslib: r2.cnpmjs.org/tslib/2.3.1
-    optionalDependencies:
-      errno: 0.1.8
-      graceful-fs: 4.2.9
-      image-size: 0.5.5
-      make-dir: 2.1.0
-      mime: 1.6.0
-      needle: 2.9.1
-      source-map: 0.6.1
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   r2.cnpmjs.org/log-symbols/4.1.0:
@@ -18327,23 +18335,10 @@ packages:
     version: 1.2.1
     dev: true
 
-  r2.cnpmjs.org/parse-node-version/1.0.1:
-    resolution: {integrity: sha512-3YHlOa/JgH6Mnpr05jP9eDG254US9ek25LyIxZlDItp2iJtwyaXQb57lBYLdT3MowkUFYEV2XXNAYIPlESvJlA==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/parse-node-version/-/parse-node-version-1.0.1.tgz}
-    name: parse-node-version
-    version: 1.0.1
-    engines: {node: '>= 0.10'}
-    dev: true
-
   r2.cnpmjs.org/path-to-regexp/6.2.0:
     resolution: {integrity: sha512-f66KywYG6+43afgE/8j/GoiNyygk/bnoCbps++3ErRKsIYkGGupyv07R2Ok5m9i67Iqc+T2g1eAUGUPzWhYTyg==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/path-to-regexp/-/path-to-regexp-6.2.0.tgz}
     name: path-to-regexp
     version: 6.2.0
-    dev: true
-
-  r2.cnpmjs.org/prr/1.0.1:
-    resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/prr/-/prr-1.0.1.tgz}
-    name: prr
-    version: 1.0.1
     dev: true
 
   r2.cnpmjs.org/reset-css/5.0.1:
@@ -18364,13 +18359,6 @@ packages:
     name: safe-buffer
     version: 5.1.2
     dev: true
-
-  r2.cnpmjs.org/sax/1.2.4:
-    resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/sax/-/sax-1.2.4.tgz}
-    name: sax
-    version: 1.2.4
-    dev: true
-    optional: true
 
   r2.cnpmjs.org/semver/6.3.0:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/semver/-/semver-6.3.0.tgz}
@@ -18421,12 +18409,6 @@ packages:
     name: to-fast-properties
     version: 2.0.0
     engines: {node: '>=4'}
-    dev: true
-
-  r2.cnpmjs.org/tslib/2.3.1:
-    resolution: {integrity: sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==, registry: https://r.cnpmjs.org/, tarball: https://r2.cnpmjs.org/tslib/-/tslib-2.3.1.tgz}
-    name: tslib
-    version: 2.3.1
     dev: true
 
   r2.cnpmjs.org/type-fest/1.4.0:
