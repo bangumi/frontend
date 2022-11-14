@@ -2,7 +2,6 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", "schedule:monthly"],
   "timezone": "Asia/Shanghai",
-  "schedule": ["monthly"],
   "baseBranches": ["master"],
   "separateMajorMinor": true,
   "separateMinorPatch": false,
