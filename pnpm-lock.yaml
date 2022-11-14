@@ -83,7 +83,7 @@ importers:
       '@storybook/react': ^6.5.13
       '@testing-library/react': ^13.4.0
       '@types/react': ^18.0.24
-      '@types/react-dom': ^18.0.7
+      '@types/react-dom': ^18.0.8
       classnames: ^2.3.1
       less: ^4.1.2
       react: ^18.2.0
@@ -161,7 +161,7 @@ importers:
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.188
       '@types/react': ^18.0.24
-      '@types/react-dom': ^18.0.7
+      '@types/react-dom': ^18.0.8
       '@vitejs/plugin-react': ^2.0.0
       axios: ^0.24.0
       bgm-types: ^2.0.2
