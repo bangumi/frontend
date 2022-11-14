@@ -408,7 +408,7 @@ export interface operations {
             /** Detail */
             detail: {
               /** @description 剩余可用登录次数。 */
-              remain?: number;
+              remain: number;
             };
           };
         };
