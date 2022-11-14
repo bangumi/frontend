@@ -167,6 +167,7 @@ importers:
       bgm-types: ^2.0.2
       classnames: ^2.3.1
       dayjs: ^1.11.3
+      ky: ^0.32.2
       msw: ^0.36.5
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -186,6 +187,7 @@ importers:
       axios: 0.24.0
       classnames: r2.cnpmjs.org/classnames/2.3.1
       dayjs: 1.11.3
+      ky: 0.32.2
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router-dom: 6.2.2_biqbaboplfbrettd7655fr4n2y
@@ -13065,6 +13067,11 @@ packages:
     resolution: {integrity: sha512-RTSoaUAfLvpR357vWzAz/50Q/BmHfmE6ETSWfutT0AJiw10e6CmcdYRQJlLRd95B53D0Y2aD1jSxD3V3ySF+PA==}
     dev: true
 
+  /ky/0.32.2:
+    resolution: {integrity: sha512-eBJeF6IXNwX5rksdwBrE2rIJrU2d84GoTvdM7OmmTIwUVXEMd72wIwvT+nyhrqtv7AzbSNsWz7yRsHgVhj1uog==}
+    engines: {node: '>=14.16'}
+    dev: false
+
   /lazy-universal-dotenv/3.0.1:
     resolution: {integrity: sha512-prXSYk799h3GY3iOWnC6ZigYzMPjxN2svgjJ9shk7oMadSNX3wXy0B6F32PMJv7qtMnrIbUxoEHzbutvxR2LBQ==}
     engines: {node: '>=6.0.0', npm: '>=6.0.0', yarn: '>=1.0.0'}
@@ -17090,7 +17097,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 4.2.1
       '@svgr/core': 6.2.1
-      vite: 3.0.2_less@4.1.2
+      vite: 3.0.2
     transitivePeerDependencies:
       - supports-color
     dev: true

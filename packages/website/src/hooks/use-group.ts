@@ -31,7 +31,7 @@ export function useGroupTopic (name: string, pagination?: Partial<Pagination>) {
     params.append('limit', limit.toString())
   }
 
-  const { data: recentTopicsResp } = useSWR<AxiosResponse<TopicApiRes>>(`/p/groups/${name}/topics?${params.toString()}`, privateGet, { suspense: true })
+  const { data: recentTopicsResp } = useSWR<TopicApiRes>(`/p/groups/${name}/topics?${params.toString()}`, privateGet, { suspense: true })
   return recentTopicsResp
 }
 
