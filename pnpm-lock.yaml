@@ -85,7 +85,7 @@ importers:
       '@storybook/react': ^6.5.13
       '@testing-library/react': ^13.4.0
       '@types/react': ^18.0.25
-      '@types/react-dom': ^18.0.8
+      '@types/react-dom': ^18.0.9
       classnames: ^2.3.1
       less: ^4.1.2
       react: ^18.2.0
@@ -107,7 +107,7 @@ importers:
       '@storybook/react': 6.5.13_yalvw3r2waubxycyb7k7qsruca
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       '@types/react': 18.0.25
-      '@types/react-dom': 18.0.8
+      '@types/react-dom': 18.0.9
       classnames: 2.3.1
       less: r2.cnpmjs.org/less/4.1.2
       react-router-dom: 6.2.2_biqbaboplfbrettd7655fr4n2y
@@ -163,7 +163,7 @@ importers:
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.188
       '@types/react': ^18.0.25
-      '@types/react-dom': ^18.0.8
+      '@types/react-dom': ^18.0.9
       '@vitejs/plugin-react': ^2.0.0
       axios: ^0.24.0
       bgm-types: ^2.0.2
@@ -201,7 +201,7 @@ importers:
       '@bangumi/utils': link:../utils
       '@types/lodash': 4.14.188
       '@types/react': 18.0.25
-      '@types/react-dom': 18.0.8
+      '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 2.0.0_vite@3.0.2
       bgm-types: 2.0.2
       msw: 0.36.5
@@ -6866,7 +6866,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.17.9
       '@testing-library/dom': 8.11.1
-      '@types/react-dom': 18.0.8
+      '@types/react-dom': 18.0.9
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
 
@@ -7073,8 +7073,8 @@ packages:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
-  /@types/react-dom/18.0.8:
-    resolution: {integrity: sha512-C3GYO0HLaOkk9dDAz3Dl4sbe4AKUGTCfFIZsz3n/82dPNN8Du533HzKatDxeUYWu24wJgMP1xICqkWk1YOLOIw==}
+  /@types/react-dom/18.0.9:
+    resolution: {integrity: sha512-qnVvHxASt/H7i+XG1U1xMiY5t+IHcPGUK7TDMDzom08xa7e86eCeKOiLZezwCKVxJn6NEiiy2ekgX8aQssjIKg==}
     dependencies:
       '@types/react': 18.0.25
 
