@@ -10,8 +10,8 @@ interface UseGroupMembersRet {
   error: any
 }
 
-type GroupMembersReq ={
-  type: 'mod'|'normal'|'all'
+type GroupMembersReq = {
+  type: 'mod' | 'normal' | 'all'
   disable?: boolean
 } & Partial<Pagination>
 
