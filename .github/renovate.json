@@ -1,68 +1,39 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base",
-    "schedule:monthly"
-  ],
+  "extends": ["config:base", "schedule:monthly"],
   "timezone": "Asia/Shanghai",
-  "schedule": [
-    "monthly"
-  ],
-  "baseBranches": [
-    "master"
-  ],
+  "schedule": ["monthly"],
+  "baseBranches": ["master"],
   "separateMajorMinor": true,
   "separateMinorPatch": false,
   "rangeStrategy": "bump",
   "semanticCommits": "enabled",
-  "labels": [
-    "dependencies"
-  ],
+  "labels": ["dependencies"],
   "lockFileMaintenance": {
-    "extends": [
-      "github>Trim21/renovate-config:monthly"
-    ],
+    "extends": ["github>Trim21/renovate-config:monthly"],
     "enabled": true
   },
   "packageRules": [
     {
-      "matchManagers": [
-        "npm"
-      ],
+      "matchManagers": ["npm"],
       "semanticCommitType": "build"
     },
     {
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
     },
     {
       "groupName": "deps",
-      "matchManagers": [
-        "npm"
-      ],
-      "matchDepTypes": [
-        "dependencies"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "groupName": "dev-deps",
-      "matchManagers": [
-        "npm"
-      ],
-      "matchDepTypes": [
-        "devDependencies"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"]
     }
   ]
 }
