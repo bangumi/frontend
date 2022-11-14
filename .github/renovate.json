@@ -9,14 +9,16 @@
   "rangeStrategy": "bump",
   "packageRules": [
     {
+      "groupName": "deps",
       "matchManagers": ["npm"],
-      "matchDepTypes": "dependencies",
+      "matchDepTypes": ["dependencies"],
       "semanticCommitType": "build",
       "matchUpdateTypes": ["minor", "patch"]
     },
     {
+      "groupName": "dev-deps",
       "matchManagers": ["npm"],
-      "matchDepTypes": "devDependencies",
+      "matchDepTypes": ["devDependencies"],
       "semanticCommitType": "build",
       "matchUpdateTypes": ["minor", "patch"]
     }
