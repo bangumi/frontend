@@ -27,20 +27,16 @@
   "packageRules": [
     {
       "matchManagers": [
+        "npm"
+      ],
+      "semanticCommitType": "build"
+    },
+    {
+      "matchManagers": [
         "github-actions"
       ],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
-    },
-    {
-      "matchManagers": [
-        "npm"
-      ],
-      "semanticCommitType": "build",
-      "matchUpdateTypes": [
-        "lockFileMaintenance",
-        "major"
-      ]
     },
     {
       "groupName": "deps",
@@ -50,7 +46,6 @@
       "matchDepTypes": [
         "dependencies"
       ],
-      "semanticCommitType": "build",
       "matchUpdateTypes": [
         "minor",
         "patch"
@@ -64,7 +59,6 @@
       "matchDepTypes": [
         "devDependencies"
       ],
-      "semanticCommitType": "build",
       "matchUpdateTypes": [
         "minor",
         "patch"
