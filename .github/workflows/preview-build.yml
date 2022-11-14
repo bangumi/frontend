@@ -28,7 +28,7 @@ jobs:
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-${{ env.CLI_VER }}
@@ -80,7 +80,7 @@ jobs:
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-${{ env.CLI_VER }}
