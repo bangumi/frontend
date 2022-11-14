@@ -5,5 +5,17 @@
   ],
   "separateMajorMinor": true,
   "separateMinorPatch": false,
-  "semanticCommitType": "build"
+  "semanticCommitType": "build",
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": "dependencies",
+      "semanticCommitScope": "deps"
+    },
+    {
+      "matchManagers": ["npm"],
+      "matchDepTypes": "devDependencies",
+      "semanticCommitScope": "deps"
+    }
+  ]
 }
