@@ -1,4 +1,5 @@
-import ky, { Input, Options } from 'ky'
+import ky, { Options } from 'ky'
+import { Input } from 'ky/distribution/types/options'
 
 export const client = ky.create({
   prefixUrl: import.meta.env.VITE_PRIVATE_API_ROOT,
