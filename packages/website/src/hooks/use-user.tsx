@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { User } from '@bangumi/types/user'
 import useSWR from 'swr'
 import { client, privateGet } from '../api/request'
@@ -38,11 +38,8 @@ export class PasswordUnMatchError extends Error {
   }
 }
 
-export const UserProvider: React.FC = ({ children }) => {
-  const {
-    data: user,
-    mutate
-  } = useSWR<User>(
+export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  const { data: user, mutate } = useSWR<User>(
     '/p/me',
     privateGet,
     {

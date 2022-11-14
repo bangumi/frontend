@@ -3,10 +3,11 @@
 .topicTable {
   width: 100%;
   color: @gray-60;
+  table-layout: fixed;
 
   th,
   td {
-    padding: 11px 0;
+    padding: 11px 4px;
   }
 
   tr {
@@ -28,7 +29,13 @@
   }
 }
 
+.title {
+  .truncate();
+}
+
 .author {
+  .truncate();
+
   width: 120px;
 }
 

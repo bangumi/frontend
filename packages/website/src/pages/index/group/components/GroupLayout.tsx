@@ -1,6 +1,6 @@
 import { Section, Tab } from '@bangumi/design'
 import React, { PropsWithChildren } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import type { GroupProfile } from '@bangumi/types/group'
 import { GroupHeader } from './GroupHeader'
 import styles from './GroupLayout.module.less'
@@ -8,8 +8,9 @@ import CommonStyles from '../common.module.less'
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg'
 import { UserCard } from './UserCard'
 import { keyBy } from '@bangumi/utils'
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate'
 
-export enum GroupTabs{
+export enum GroupTabs {
   Index = 'index',
   Forum = 'forum',
   Members = 'members'
@@ -30,14 +31,14 @@ const GroupTabsItems = [{
 }]
 const groupTabsByKey = keyBy(GroupTabsItems, 'key')
 
-type IGroupLayoutProps = PropsWithChildren<{group: GroupProfile|undefined, curTab: GroupTabs, groupName: string}>
+type IGroupLayoutProps = PropsWithChildren<{ group: GroupProfile | undefined, curTab: GroupTabs, groupName: string }>
 
 const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, groupName }) => {
-  const navigate = useNavigate()
+  const [, navigate] = useTransitionNavigate()
   const handleTabChange = (key: string) => navigate(groupTabsByKey[key as GroupTabs].to(groupName))
   return (
     <div className={styles.pageContainer}>
-      <GroupHeader group={group} />
+      <GroupHeader group={group!} />
       <Tab type="borderless" items={GroupTabsItems} activeKey={curTab} onChange={handleTabChange} />
       <div className={styles.columnContainer}>
         <div className={styles.leftCol}>

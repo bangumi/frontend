@@ -1,13 +1,14 @@
 import App from './App'
 import React from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { SWRConfig } from 'swr'
 
 import 'reset-css'
 import './index.css'
 
-ReactDOM.render(
+const root = createRoot(document.getElementById('root')!)
+root.render(
   <React.StrictMode>
     <SWRConfig value={{
       refreshWhenHidden: false,
@@ -20,6 +21,5 @@ ReactDOM.render(
         <App />
       </BrowserRouter>
     </SWRConfig>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 )

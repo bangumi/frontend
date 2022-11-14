@@ -13,15 +13,14 @@ export enum DescriptionClamp {
   unclamp = 'unclamp'
 }
 
-export type TopicApiRes = ResponseWithPagination<Topic[]> | undefined
-
+export type TopicApiRes = ResponseWithPagination<Topic[]>
 export interface UseGroupRet {
   group: GroupProfile | undefined
   descriptionClamp: DescriptionClamp
   setDescriptionClamp: (val: DescriptionClamp) => void
 }
 
-export function useGroupTopic (name: string, pagination?: Partial<Pagination>): TopicApiRes {
+export function useGroupTopic (name: string, pagination?: Partial<Pagination>) {
   const params = new URLSearchParams()
   if (pagination) {
     const {
@@ -31,12 +30,13 @@ export function useGroupTopic (name: string, pagination?: Partial<Pagination>): 
     params.append('offset', offset.toString())
     params.append('limit', limit.toString())
   }
-  const { data: recentTopicsResp } = useSWR<TopicApiRes>(`/p/groups/${name}/topics?${params.toString()}`, privateGet)
+
+  const { data: recentTopicsResp } = useSWR<AxiosResponse<TopicApiRes>>(`/p/groups/${name}/topics?${params.toString()}`, privateGet, { suspense: true })
   return recentTopicsResp
 }
 
 export function useGroup (name: string): UseGroupRet {
-  const { data: groupResp } = useSWR<GroupProfile>(`/p/groups/${name}`, privateGet)
+  const { data: groupResp } = useSWR<GroupProfile>(`/p/groups/${name}`, privateGet, { suspense: true })
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`
   const descriptionClamp = localStorage.getItem(clampKey) as DescriptionClamp ?? DescriptionClamp.unclamp
   const [descriptionClampState, setDescriptionClampState] = useState<DescriptionClamp>(descriptionClamp)
