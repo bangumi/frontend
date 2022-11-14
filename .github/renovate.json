@@ -30,14 +30,12 @@
     {
       "groupName": "deps",
       "matchManagers": ["npm"],
-      "matchDepTypes": ["dependencies"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchDepTypes": ["dependencies"]
     },
     {
       "groupName": "dev-deps",
       "matchManagers": ["npm"],
-      "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["minor", "patch"]
+      "matchDepTypes": ["devDependencies"]
     }
   ]
 }
