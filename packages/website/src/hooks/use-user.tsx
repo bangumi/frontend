@@ -1,15 +1,16 @@
 import React from 'react'
 import { User } from '@bangumi/types/user'
 import useSWR from 'swr'
-import { privateRequest } from '../api/request'
-import { AxiosResponse } from 'axios'
+import { client, privateGet } from '../api/request'
 import { useNavigate } from 'react-router-dom'
+import { operations } from '@bangumi/types/types'
 
 interface UserContextType {
   user?: User
   redirectToLogin: () => void
   login: (username: string, password: string, hCaptchaResp: string) => Promise<void>
 }
+
 const UserContext = React.createContext<UserContextType>(null!)
 
 export enum LoginErrorCode {
@@ -30,6 +31,7 @@ const ERROR_CODE_MAP: Record<number, LoginErrorCode> = {
 
 export class PasswordUnMatchError extends Error {
   remain: number
+
   constructor (remain: number) {
     super(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)
     this.remain = remain
@@ -37,9 +39,12 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC = ({ children }) => {
-  const { data: user, mutate } = useSWR<AxiosResponse<User>>(
+  const {
+    data: user,
+    mutate
+  } = useSWR<User>(
     '/p/me',
-    privateRequest.get,
+    privateGet,
     {
       refreshWhenHidden: false,
       revalidateOnFocus: false,
@@ -59,32 +64,39 @@ export const UserProvider: React.FC = ({ children }) => {
     password: string,
     hCaptchaResp: string
   ) => Promise<void> =
-    (email, password, hCaptchaResp) => {
-      return privateRequest.post(
+    async (email, password, hCaptchaResp) => {
+      const res = await client.post(
         '/p/login', {
-          email,
-          password,
-          'h-captcha-response': hCaptchaResp
+          json: {
+            email,
+            password,
+            'h-captcha-response': hCaptchaResp
+          },
+          throwHttpErrors: false
         }
-      ).then(() => {
-        mutate()
-      }).catch((error) => {
-        if (error.response) {
-          const errorCode = ERROR_CODE_MAP[error.response.status]
-          if (errorCode) {
-            if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
-              throw new PasswordUnMatchError(error.response.data.detail.remain)
-            }
-            throw new Error(errorCode)
-          }
-          throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
-        } else {
-          throw new Error(LoginErrorCode.E_NETWORK_ERROR)
+      )
+
+      if (res.status === 200) {
+        await mutate()
+        return
+      }
+
+      const data = await res.json()
+      const errorCode = ERROR_CODE_MAP[res.status]
+      if (errorCode) {
+        if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
+          throw new PasswordUnMatchError((data as operations['login']['responses']['401']['content']['application/json']).detail.remain)
         }
-      })
+        throw new Error(errorCode)
+      }
+      throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
     }
 
-  const value: UserContextType = { redirectToLogin, login, user: user?.data }
+  const value: UserContextType = {
+    redirectToLogin,
+    login,
+    user
+  }
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

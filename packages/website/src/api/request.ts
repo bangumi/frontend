@@ -1,32 +1,11 @@
-import axios from 'axios'
+import ky from 'ky'
+import { Input, Options } from 'ky/distribution/types/options'
 
-const baseURL = (import.meta.env.VITE_APP_ROOT as string) ?? 'https://api.bgm.tv'
-
-export const request = axios.create({
-  baseURL,
-  timeout: 6000 // 请求超时时间
+export const client = ky.create({
+  prefixUrl: import.meta.env.VITE_PRIVATE_API_ROOT,
+  credentials: 'include'
 })
 
-// 异常拦截处理器
-const errorHandler = async (error: any): Promise<never> => {
-  console.log(error)
-
-  return await Promise.reject(error)
+export async function privateGet (url: Input, options?: Options): Promise<any> {
+  return await client.get(url, options).json()
 }
-
-request.interceptors.request.use(config => {
-  return config
-}, errorHandler)
-
-request.interceptors.response.use((response) => {
-  return response
-}, errorHandler)
-
-export const privateRequest = axios.create({
-  baseURL: import.meta.env.VITE_PRIVATE_API_ROOT,
-  withCredentials: true
-})
-
-privateRequest.interceptors.response.use((response) => {
-  return response
-})

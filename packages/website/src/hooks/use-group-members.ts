@@ -1,6 +1,5 @@
-import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
-import { privateRequest } from '../api/request'
+import { privateGet } from '../api/request'
 import { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group'
 
 interface UseGroupMembersRet {
@@ -24,16 +23,16 @@ export function useGroupMembers (name: string, options: GroupMembersReq): UseGro
     offset: offset.toString()
   })
 
-  const { data, error } = useSWR<AxiosResponse<ResponseWithPagination<GroupMember[]>>>(
+  const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>>(
     disable
       ? null
       : `/p/groups/${name}/members?${query.toString()}`,
-    privateRequest.get
+    privateGet
   )
 
   return {
-    data: data?.data.data,
-    total: data?.data.total,
+    data: data?.data,
+    total: data?.total,
     isLoading: !data && !error,
     error
   }
