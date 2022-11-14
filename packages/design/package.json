@@ -22,7 +22,7 @@
     "react-router-dom": "^6.2.2",
     "typescript": "^4.8.4",
     "vite": "^3.0.2",
-    "vite-plugin-svgr": "^2.2.0"
+    "vite-plugin-svgr": "^2.2.2"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
