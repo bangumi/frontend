@@ -27,7 +27,7 @@ jobs:
         with:
           version: "6"
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16.x"
           cache: "pnpm"
