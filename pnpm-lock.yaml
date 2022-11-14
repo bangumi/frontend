@@ -26,7 +26,7 @@ importers:
       eslint-plugin-node: ^11.1.0
       eslint-plugin-promise: ^5.2.0
       eslint-plugin-react: ^7.31.10
-      husky: ^7.0.4
+      husky: ^8.0.2
       jest: ^27.4.6
       jest-transform-stub: ^2.0.0
       lint-staged: ^12.2.0
@@ -61,7 +61,7 @@ importers:
       eslint-plugin-node: r2.cnpmjs.org/eslint-plugin-node/11.1.0_eslint@7.32.0
       eslint-plugin-promise: r2.cnpmjs.org/eslint-plugin-promise/5.2.0_eslint@7.32.0
       eslint-plugin-react: 7.31.10_eslint@7.32.0
-      husky: 7.0.4
+      husky: 8.0.2
       jest: 27.4.6_@babel+core@7.16.7
       jest-transform-stub: 2.0.0
       lint-staged: 12.2.0
@@ -11849,9 +11849,9 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
-  /husky/7.0.4:
-    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
-    engines: {node: '>=12'}
+  /husky/8.0.2:
+    resolution: {integrity: sha512-Tkv80jtvbnkK3mYWxPZePGFpQ/tT3HNSs/sasF9P2YfkMezDl3ON37YN6jUUI4eTg5LcyVynlb6r4eyvOmspvg==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
