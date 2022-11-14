@@ -38,6 +38,7 @@
       ],
       "semanticCommitType": "build",
       "matchUpdateTypes": [
+        "lockFileMaintenance",
         "major"
       ]
     },
