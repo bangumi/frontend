@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "js-yaml": "^4.1.0",
-    "node-fetch": "^3.2.10",
+    "node-fetch": "^3.3.0",
     "openapi-typescript": "^5.4.1"
   }
 }
