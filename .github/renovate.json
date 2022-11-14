@@ -1,8 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
-  ],
+  "extends": ["config:base"],
   "separateMajorMinor": true,
   "separateMinorPatch": false,
   "semanticCommitType": "build",
@@ -10,11 +8,13 @@
     {
       "matchManagers": ["npm"],
       "matchDepTypes": "dependencies",
+      "matchUpdateTypes": ["minor", "patch"],
       "semanticCommitScope": "deps"
     },
     {
       "matchManagers": ["npm"],
       "matchDepTypes": "devDependencies",
+      "matchUpdateTypes": ["minor", "patch"],
       "semanticCommitScope": "deps"
     }
   ]
