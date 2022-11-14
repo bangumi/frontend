@@ -1,0 +1,38 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", "schedule:yearly"],
+  "timezone": "Asia/Shanghai",
+  "baseBranches": ["master"],
+  "separateMajorMinor": true,
+  "separateMinorPatch": false,
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "extends": ["github>Trim21/renovate-config:monthly"],
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "semanticCommitType": "build"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "semanticCommitScope": "",
+      "semanticCommitType": "ci"
+    },
+    {
+      "groupName": "deps",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["dependencies"],
+      "matchUpdateTypes": ["minor", "patch"]
+    },
+    {
+      "groupName": "dev-deps",
+      "matchManagers": ["npm"],
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["minor", "patch"]
+    }
+  ]
+}
