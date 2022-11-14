@@ -26,16 +26,6 @@
       "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
-    },
-    {
-      "groupName": "deps",
-      "matchManagers": ["npm"],
-      "matchDepTypes": ["dependencies"]
-    },
-    {
-      "groupName": "dev-deps",
-      "matchManagers": ["npm"],
-      "matchDepTypes": ["devDependencies"]
     }
   ]
 }
