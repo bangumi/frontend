@@ -4,31 +4,31 @@
   "private": true,
   "main": "index.tsx",
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "reset-css": "^5.0.1"
   },
   "devDependencies": {
     "@bangumi/icons": "workspace:*",
-    "@storybook/addon-actions": "^6.5.9",
-    "@storybook/addon-essentials": "^6.5.9",
-    "@storybook/addon-links": "^6.5.9",
-    "@storybook/builder-vite": "^0.2.1",
-    "@storybook/react": "^6.5.9",
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
-    "classnames": "^2.3.1",
-    "less": "^4.1.2",
-    "react-router-dom": "^6.2.2",
-    "typescript": "^4.7.4",
-    "vite": "^3.0.2",
-    "vite-plugin-svgr": "^2.2.0"
+    "@storybook/addon-essentials": "^6.5.13",
+    "@storybook/addon-links": "^6.5.13",
+    "@storybook/builder-vite": "^0.2.5",
+    "@storybook/react": "^6.5.13",
+    "@testing-library/react": "^13.4.0",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "classnames": "^2.3.2",
+    "less": "^4.1.3",
+    "react-router-dom": "^6.4.3",
+    "typescript": "^4.8.4",
+    "vite": "^3.2.3",
+    "vite-plugin-svgr": "^2.2.2"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "react-router-dom": "^6.2.2"
+    "react-router-dom": "^6.4.3"
   }
 }

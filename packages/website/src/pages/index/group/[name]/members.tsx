@@ -1,12 +1,14 @@
 import { Pagination, Section } from '@bangumi/design'
 import React from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { useGroupMembers } from '@bangumi/website/hooks/use-group-members'
 import { UserCard } from '../components/UserCard'
 import styles from './members.module.less'
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination'
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate'
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary'
 
-const GroupMembers: React.FC = () => {
+const GroupMembersPage = () => {
   const { curPage, offset, pageSize } = usePaginationParams(30)
   const { name } = useParams()
 
@@ -22,11 +24,7 @@ const GroupMembers: React.FC = () => {
     limit: pageSize,
     type: 'normal'
   })
-  const navigate = useNavigate()
-
-  if (!name) {
-    return null
-  }
+  const [, navigate] = useTransitionNavigate()
 
   const handlePageChange = (page: number): void => {
     navigate({ search: `page=${page}` })
@@ -65,4 +63,4 @@ const GroupMembers: React.FC = () => {
   )
 }
 
-export default GroupMembers
+export default withErrorBoundary(GroupMembersPage)

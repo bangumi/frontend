@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import classnames from 'classnames'
 
 interface ItemProps {
@@ -6,7 +6,7 @@ interface ItemProps {
   type: 'default' | 'borderless'
   onClick: () => void
 }
-const Item: React.FC<ItemProps> = ({ children, isActive, onClick, type }) => {
+const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onClick, type }) => {
   return (
     <li
       className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, { 'bgm-tab__item--active': isActive })}

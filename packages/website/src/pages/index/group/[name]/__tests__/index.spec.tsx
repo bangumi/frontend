@@ -23,7 +23,7 @@ class GroupHomeTest {
   page: RenderResult
   constructor (
     name: string,
-    mock: {group?: GroupProfile, topics?: ResponseWithPagination<Topic[]>}
+    mock: { group?: GroupProfile, topics?: ResponseWithPagination<Topic[]> }
   ) {
     mockedUseParams.mockReturnValue({
       name

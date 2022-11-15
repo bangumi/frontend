@@ -1,9 +1,8 @@
-import React from 'react'
-import { renderHook } from '@testing-library/react-hooks'
+import React, { PropsWithChildren } from 'react'
 import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './use-user'
 import { server as mockServer } from '../mocks/server'
 import { rest } from 'msw'
-import { waitFor } from '@testing-library/react'
+import { waitFor, renderHook } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
 function mockLogin (statusCode: number, response: Object = {}): void {
@@ -14,7 +13,7 @@ function mockLogin (statusCode: number, response: Object = {}): void {
   )
 }
 
-const wrapper: React.FC = ({ children }) => (
+const wrapper = ({ children }: PropsWithChildren) => (
   <MemoryRouter>
     <UserProvider>
       {children}

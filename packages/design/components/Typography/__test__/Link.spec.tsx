@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import { render } from '@testing-library/react'
 import Link from '../Link'
 import { MemoryRouter } from 'react-router-dom'
 
-const LinkTestWrapper: React.FC = ({ children }) => {
+const LinkTestWrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return (
     <MemoryRouter>
       {children}

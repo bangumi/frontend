@@ -1,0 +1,31 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", "schedule:yearly"],
+  "timezone": "Asia/Shanghai",
+  "baseBranches": ["master"],
+  "separateMajorMinor": true,
+  "separateMinorPatch": false,
+  "rangeStrategy": "bump",
+  "semanticCommits": "enabled",
+  "labels": ["dependencies"],
+  "lockFileMaintenance": {
+    "extends": ["github>Trim21/renovate-config:monthly"],
+    "enabled": true
+  },
+  "packageRules": [
+    {
+      "matchManagers": ["npm"],
+      "semanticCommitType": "build"
+    },
+    {
+      "groupName": "eslint",
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "semanticCommitType": "style"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "semanticCommitScope": "",
+      "semanticCommitType": "ci"
+    }
+  ]
+}

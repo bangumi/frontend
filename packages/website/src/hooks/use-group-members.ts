@@ -10,8 +10,8 @@ interface UseGroupMembersRet {
   error: any
 }
 
-type GroupMembersReq ={
-  type: 'mod'|'normal'|'all'
+type GroupMembersReq = {
+  type: 'mod' | 'normal' | 'all'
   disable?: boolean
 } & Partial<Pagination>
 
@@ -28,7 +28,8 @@ export function useGroupMembers (name: string, options: GroupMembersReq): UseGro
     disable
       ? null
       : `/p/groups/${name}/members?${query.toString()}`,
-    privateRequest.get
+    privateRequest.get,
+    { suspense: true }
   )
 
   return {
