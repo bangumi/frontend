@@ -4,7 +4,7 @@ const { transform } = require('@svgr/core')
 const { rmSync } = require('fs')
 
 const OUT_DIR = resolve('./dist')
-const upperCaseFirst = (str) => str[0].toUpperCase() + str.slice(1)
+const capitalize = (str) => str[0].toUpperCase() + str.slice(1)
 
 async function main () {
   try {
@@ -17,9 +17,11 @@ async function main () {
 
   try {
     const icons = await readdir('./assets/')
+    let indexContent = ''
+
     for (const icon of icons) {
       const [filename] = icon.split('.')
-      const defaultName = filename.split('-').map(upperCaseFirst).join('')
+      const defaultName = filename.split('-').map(capitalize).join('')
       const svg = (await readFile(resolve('./assets', icon))).toString()
 
       const svgComponents = await transform(svg)
@@ -27,16 +29,14 @@ async function main () {
 declare function ${defaultName}(props: React.ComponentProps<'svg'>): JSX.Element;
 export default ${defaultName};
 `
+      indexContent += `export { default as ${defaultName} } from "./${filename}.jsx"\n`
+
+      // create jsx
       await writeFile(join(OUT_DIR, `${filename}.jsx`), svgComponents)
       await writeFile(join(OUT_DIR, `${filename}.d.ts`), svgComponentsDts)
     }
 
-    const indexContent = icons.map((icon) => {
-      const [filename] = icon.split('.')
-      const defaultName = filename.split('-').map(upperCaseFirst).join('')
-      return `export { default as ${defaultName} } from "./${filename}.jsx"`
-    }).join('\n')
-
+    // export all svg
     await writeFile(join(OUT_DIR, 'index.js'), indexContent, { encoding: 'utf-8' })
     await writeFile(join(OUT_DIR, 'index.d.ts'), indexContent, { encoding: 'utf-8' })
   } catch (error) {
