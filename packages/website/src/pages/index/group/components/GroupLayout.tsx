@@ -35,11 +35,10 @@ type IGroupLayoutProps = PropsWithChildren<{ group: GroupProfile | undefined, cu
 
 const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, groupName }) => {
   const [, navigate] = useTransitionNavigate()
-  const handleTabChange = (key: string) => navigate(groupTabsByKey[key as GroupTabs].to(groupName))
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group!} />
-      <Tab type="borderless" items={GroupTabsItems} activeKey={curTab} onChange={handleTabChange} />
+      <Tab type="borderless" items={GroupTabsItems} activeKey={curTab} onChange={(_, value) => navigate(value.to(groupName))} />
       <div className={styles.columnContainer}>
         <div className={styles.leftCol}>
           {children}
