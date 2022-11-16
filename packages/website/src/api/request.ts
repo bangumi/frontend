@@ -8,5 +8,6 @@ export const client = ky.create({
 })
 
 export async function privateGet (url: Input, options?: Options): Promise<any> {
-  return await client.get(url, options).json()
+  const res = await client.get(url, options)
+  return await res.json()
 }

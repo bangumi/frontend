@@ -29,6 +29,15 @@ const ERROR_CODE_MAP: Record<number, LoginErrorCode> = {
   502: LoginErrorCode.E_SERVER_ERROR
 }
 
+export class UnknownError extends Error {
+  messages: string[]
+
+  constructor (messages: string[]) {
+    super(messages[0])
+    this.messages = messages
+  }
+}
+
 export class PasswordUnMatchError extends Error {
   remain: number
 
@@ -39,7 +48,10 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR<User>(
+  const {
+    data: user,
+    mutate
+  } = useSWR<User>(
     '/p/me',
     privateGet,
     {
@@ -82,9 +94,9 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       const errorCode = ERROR_CODE_MAP[res.status]
       if (errorCode) {
         if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
-          throw new PasswordUnMatchError((data as operations['login']['responses']['401']['content']['application/json']).detail.remain)
+          throw new PasswordUnMatchError((data as operations['login']['responses']['401']['content']['application/json']).details.remain)
         }
-        throw new Error(errorCode)
+        throw new UnknownError((data as operations['login']['responses']['400']['content']['application/json']).details)
       }
       throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
     }

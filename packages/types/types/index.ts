@@ -393,7 +393,7 @@ export interface operations {
             /** Description */
             description: string;
             /** Detail */
-            detail: string[];
+            details: string[];
           };
         };
       };
@@ -406,7 +406,7 @@ export interface operations {
             /** Description */
             description: string;
             /** Detail */
-            detail: {
+            details: {
               /** @description 剩余可用登录次数。 */
               remain: number;
             };

@@ -21,6 +21,7 @@
     "prettier": "prettier --write --list-different ./**/*.{yaml,yml}",
     "prettier:check": "prettier --list-different ./**/*.{yaml,yml}",
     "server": "pnpm --filter=@bangumi/server",
+    "types": "pnpm --filter=@bangumi/types",
     "test": "jest",
     "website": "pnpm --filter=@bangumi/website",
     "lint-staged": "lint-staged",
