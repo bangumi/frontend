@@ -68,45 +68,12 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
     navigate('/login')
   }
 
-  const login: (
-    email: string,
-    password: string,
-    hCaptchaResp: string
-  ) => Promise<void> =
-    async (email, password, hCaptchaResp) => {
-      const res = await privatePost(
-        '/p/login', {
-          json: {
-            email,
-            password,
-            'h-captcha-response': hCaptchaResp
-          }
-        }
-      )
-
-      if (res.status === 200) {
-        await mutate()
-        return
-      }
-
-      const data = await res.json()
-      const errorCode = ERROR_CODE_MAP[res.status]
-      if (errorCode) {
-        if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
-          throw new PasswordUnMatchError((data as operations['login']['responses']['401']['content']['application/json']).details.remain)
-        }
-        if (errorCode === LoginErrorCode.E_REQUEST_ERROR) {
-          throw new UnknownError((data as operations['login']['responses']['400']['content']['application/json']).details)
-        }
-
-        throw new Error(errorCode)
-      }
-      throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
-    }
-
   const value: UserContextType = {
     redirectToLogin,
-    login,
+    login: async (email, password, hCaptchaResp) => {
+      await login(email, password, hCaptchaResp)
+      await mutate()
+    },
     user
   }
 
@@ -115,4 +82,38 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
 export const useUser: () => UserContextType = () => {
   return React.useContext(UserContext)
+}
+
+async function login (
+  email: string,
+  password: string,
+  hCaptchaResp: string
+): Promise<void> {
+  const res = await privatePost(
+    '/p/login', {
+      json: {
+        email,
+        password,
+        'h-captcha-response': hCaptchaResp
+      }
+    }
+  )
+
+  if (res.status === 200) {
+    return
+  }
+
+  const data = await res.json()
+  const errorCode = ERROR_CODE_MAP[res.status]
+  if (errorCode) {
+    if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
+      throw new PasswordUnMatchError((data as operations['login']['responses']['401']['content']['application/json']).details.remain)
+    }
+    if (errorCode === LoginErrorCode.E_REQUEST_ERROR) {
+      throw new UnknownError((data as operations['login']['responses']['400']['content']['application/json']).details)
+    }
+
+    throw new Error(errorCode)
+  }
+  throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
 }
