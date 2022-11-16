@@ -2,7 +2,7 @@ export async function privateGet (url: string): Promise<any> {
   const res = await fetch(
     url,
     {
-      credentials: 'include',
+      credentials: 'same-origin',
       method: 'get'
     }
   )
@@ -10,13 +10,20 @@ export async function privateGet (url: string): Promise<any> {
 }
 
 export function privatePost (url: string, options: { json: Record<string, any> }): Promise<Response> {
+  let body
+  const header = new Headers()
+  if (options.json) {
+    body = JSON.stringify(options.json)
+    header.set('content-type', 'application/json')
+  }
+
   return fetch(
     url,
     {
-      credentials: 'include',
+      credentials: 'same-origin',
       method: 'post',
-      body: JSON.stringify(options.json),
-      headers: { 'content-type': 'application/json' }
+      body,
+      headers: header
     }
   )
 }
