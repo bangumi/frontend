@@ -8,7 +8,7 @@ export const parameters: StoryParameters = {
   controls: {
     matchers: {
       color: /(background|color)$/i,
-      date: /Date$/
-    }
-  }
+      date: /Date$/,
+    },
+  },
 }

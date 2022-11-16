@@ -17,19 +17,31 @@ it.each`
   ${'square'}
   ${'rounded'}
 `('should render button of shape $shape', ({ shape }) => {
-  const { container } = render(<Button type="primary" shape={shape}>hello world</Button>)
+  const { container } = render(
+    <Button type="primary" shape={shape}>
+      hello world
+    </Button>,
+  )
   expect(container.firstChild).toMatchSnapshot()
 })
 
 it('should trigger onClick callback', () => {
   const onClick = jest.fn()
-  const { getByText } = render(<Button type="primary" onClick={onClick}>hello world</Button>)
+  const { getByText } = render(
+    <Button type="primary" onClick={onClick}>
+      hello world
+    </Button>,
+  )
   fireEvent.click(getByText('hello world'))
 
   expect(onClick).toBeCalledTimes(1)
 })
 
 it('should disable the button if disabled is true', () => {
-  const { getByText } = render(<Button type="primary" disabled>hello world</Button>)
+  const { getByText } = render(
+    <Button type="primary" disabled>
+      hello world
+    </Button>,
+  )
   expect(getByText('hello world')).toBeDisabled()
 })

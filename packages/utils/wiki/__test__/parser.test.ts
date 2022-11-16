@@ -11,7 +11,7 @@ const validTestFiles = fs.readdirSync(validTestDir)
 const inValidTestFiles = fs.readdirSync(invalidTestDir)
 
 describe('Wiki syntax parser expected to be valid', () => {
-  validTestFiles.forEach(file => {
+  validTestFiles.forEach((file) => {
     const prefix = file.split('.')[0]
     const suffix = file.split('.')[1]
     if (suffix !== 'wiki') {
@@ -33,7 +33,7 @@ describe('Wiki syntax parser expected to be valid', () => {
 })
 
 describe('Wiki syntax parser expected to be inValid', () => {
-  inValidTestFiles.forEach(file => {
+  inValidTestFiles.forEach((file) => {
     const prefix = file.split('.')[0]
     it(`${prefix} should be invalid`, () => {
       const testFilePath = path.resolve(invalidTestDir, file)

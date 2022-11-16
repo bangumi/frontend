@@ -4,56 +4,56 @@
  */
 
 export interface paths {
-  "/p/login": {
+  '/p/login': {
     /**
      * `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
      *
      * site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
      */
-    post: operations["login"];
-  };
-  "/p/logout": {
-    post: operations["logout"];
-  };
-  "/p/me": {
-    get: operations["getCurrentUser"];
-  };
-  "/p/groups/{group_id}/topics": {
-    get: operations["getGroupTopicsById"];
-  };
-  "/p/subjects/{subject_id}/topics": {
-    get: operations["getSubjectTopicsById"];
-  };
-  "/p/subjects/-/topics/{topic_id}": {
+    post: operations['login']
+  }
+  '/p/logout': {
+    post: operations['logout']
+  }
+  '/p/me': {
+    get: operations['getCurrentUser']
+  }
+  '/p/groups/{group_id}/topics': {
+    get: operations['getGroupTopicsById']
+  }
+  '/p/subjects/{subject_id}/topics': {
+    get: operations['getSubjectTopicsById']
+  }
+  '/p/subjects/-/topics/{topic_id}': {
     /** 没有分页 */
-    get: operations["getSubjectTopicById"];
-  };
-  "/p/groups/-/topics/{topic_id}": {
+    get: operations['getSubjectTopicById']
+  }
+  '/p/groups/-/topics/{topic_id}': {
     /** 没有分页 */
-    get: operations["getGroupTopicById"];
-  };
-  "/p/indices/{index_id}/comments": {
+    get: operations['getGroupTopicById']
+  }
+  '/p/indices/{index_id}/comments': {
     /** 没有分页 */
-    get: operations["getIndexCommentsById"];
-  };
-  "/p/episodes/{episode_id}/comments": {
+    get: operations['getIndexCommentsById']
+  }
+  '/p/episodes/{episode_id}/comments': {
     /** 没有分页 */
-    get: operations["getEpisodeCommentsById"];
-  };
-  "/p/characters/{character_id}/comments": {
+    get: operations['getEpisodeCommentsById']
+  }
+  '/p/characters/{character_id}/comments': {
     /** 没有分页 */
-    get: operations["getCharacterCommentsById"];
-  };
-  "/p/persons/{person_id}/comments": {
+    get: operations['getCharacterCommentsById']
+  }
+  '/p/persons/{person_id}/comments': {
     /** 没有分页 */
-    get: operations["getPersonCommentsById"];
-  };
-  "/p/groups/{name}": {
-    get: operations["getGroupProfileByName"];
-  };
-  "/p/groups/{name}/members": {
-    get: operations["listGroupMembersByName"];
-  };
+    get: operations['getPersonCommentsById']
+  }
+  '/p/groups/{name}': {
+    get: operations['getGroupProfileByName']
+  }
+  '/p/groups/{name}/members': {
+    get: operations['listGroupMembersByName']
+  }
 }
 
 export interface components {
@@ -78,38 +78,38 @@ export interface components {
      */
     User: {
       /** ID */
-      id: number;
+      id: number
       /**
        * Username
        * @description 唯一用户名，初始与 UID 相同，可修改一次
        */
-      username: string;
+      username: string
       /** Nickname */
-      nickname: string;
+      nickname: string
       /**
        * UserGroup
        * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
        * @enum {integer}
        */
-      user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-      avatar: components["schemas"]["Avatar"];
+      user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11
+      avatar: components['schemas']['Avatar']
       /**
        * Sign
        * @description 个人签名
        */
-      sign: string;
-    };
+      sign: string
+    }
     GroupProfile: {
       /**
        * @description 小组的数字 ID
        * @example 11
        */
-      id: number;
+      id: number
       /**
        * Format: date-time
        * @example 2008-08-01T06:11:29+08:00
        */
-      created_at: string;
+      created_at: string
       /**
        * Format: bbcode
        * @example 本小组欢迎对各种技术有一定了解的人，
@@ -118,30 +118,30 @@ export interface components {
        * 不过、本组主要谈论ＰＣ软硬件方面，
        * 想了解相关知识，结识可怕的技术宅，请进。
        */
-      description: string;
+      description: string
       /**
        * Format: url
        * @example https://lain.bgm.tv/pic/icon/l/000/00/00/11.jpg
        */
-      icon: string;
+      icon: string
       /**
        * @description 小组的 string ID，原本出现在小组URL中
        * @example a
        */
-      name: string;
+      name: string
       /** @description 新加入的用户，最多 10 个。 */
-      new_members: components["schemas"]["GroupMember"][];
+      new_members: components['schemas']['GroupMember'][]
       /** @example ～技术宅真可怕～ */
-      title: string;
+      title: string
       /**
        * @description 用户数
        * @example 9450
        */
-      total_members: number;
+      total_members: number
     } & {
-      related_groups: unknown;
-      new_topics: unknown;
-    };
+      related_groups: unknown
+      new_topics: unknown
+    }
     /**
      * Avatar
      * @example {
@@ -155,156 +155,156 @@ export interface components {
        * Large
        * Format: url
        */
-      large: string;
+      large: string
       /**
        * Medium
        * Format: url
        */
-      medium: string;
+      medium: string
       /**
        * Small
        * Format: url
        */
-      small: string;
-    };
+      small: string
+    }
     /** ErrorDetail */
     ErrorDetail: {
       /** Title */
-      title: string;
+      title: string
       /** Description */
-      description: string;
+      description: string
       /** Detail */
       detail?:
         | string
         | {
             /** @description error message */
-            error?: string;
+            error?: string
             /** @description request path */
-            path?: string;
-          };
-    };
+            path?: string
+          }
+    }
     Group: {
-      id: number;
-      name: string;
+      id: number
+      name: string
       /** Format: date-time */
-      created_at: string;
-      title: string;
+      created_at: string
+      title: string
       /** Format: url */
-      icon: string;
-      total_members: number;
-      description: string;
-    };
+      icon: string
+      total_members: number
+      description: string
+    }
     PrivateTopicDetail: {
-      comments: components["schemas"]["Comment"][];
+      comments: components['schemas']['Comment'][]
     } & {
-      state: components["schemas"]["Comment"]["state"];
+      state: components['schemas']['Comment']['state']
       /** @description 发帖人是否好友 */
-      is_friend: boolean;
+      is_friend: boolean
       /**
        * Format: date-time
        * @example 2008-07-14T07:34:07.000Z
        */
-      created_at?: string;
-      creator: components["schemas"]["User"];
+      created_at?: string
+      creator: components['schemas']['User']
       /**
        * Format: int32
        * @example 1
        */
-      id: number;
+      id: number
       /**
        * Format: int32
        * @example 76
        */
-      reply_count: number;
+      reply_count: number
       /** @example SAi看的也是红皮书吧 */
-      text: string;
+      text: string
       /** @example 拿这个来测试 */
-      title: string;
+      title: string
       /**
        * Format: date-time
        * @example 2021-12-20T11:18:49.000Z
        */
-      updated_at: string;
-    };
+      updated_at: string
+    }
     /** Topic */
     Topic: {
       /**
        * Format: date-time
        * @example 2008-07-14T07:34:07.000Z
        */
-      created_at: string;
-      creator: components["schemas"]["User"];
+      created_at: string
+      creator: components['schemas']['User']
       /**
        * Format: int32
        * @example 1
        */
-      id: number;
+      id: number
       /**
        * Format: int32
        * @description 全部回复，包括二级回复
        * @example 76
        */
-      reply_count: number;
+      reply_count: number
       /** @example 拿这个来测试 */
-      title: string;
+      title: string
       /**
        * Format: date-time
        * @example 2021-12-20T11:18:49.000Z
        */
-      updated_at: string;
-    };
+      updated_at: string
+    }
     /** Comment */
     Comment: {
       /** @description 发帖人是否好友 */
-      is_friend: boolean;
+      is_friend: boolean
       /**
        * Format: date-time
        * @example 2008-07-14T07:38:35.000Z
        */
-      created_at: string;
-      creator: components["schemas"]["User"];
+      created_at: string
+      creator: components['schemas']['User']
       /**
        * Format: int32
        * @example 2
        */
-      id: number;
+      id: number
       replies: ({
         /**
          * Format: date-time
          * @example 2012-12-23T12:46:29.000Z
          */
-        created_at: string;
+        created_at: string
         /**
          * Creator
          * @description 意义同<a href="#model-Me">Me</a>
          */
         creator: {
           /** Username */
-          username: string;
+          username: string
           /** Nickname */
-          nickname: string;
-        };
+          nickname: string
+        }
         /**
          * Format: int32
          * @example 24360
          */
-        id: number;
+        id: number
         /**
          * @description 如果 `state` 不为 `0`，内容为空
          * @example [quote][b]15www[/b] 说: 檞寄生+1 我的明菁 T-T[/quote]\n挖墳黨喪心病狂！
          */
-        text?: string;
-        state: components["schemas"]["Comment"]["state"];
+        text?: string
+        state: components['schemas']['Comment']['state']
         /** @description 发帖人是否好友 */
-        is_friend: boolean;
+        is_friend: boolean
       } & {
-        test: unknown;
-      })[];
+        test: unknown
+      })[]
       /**
        * @description 如果 `state` 不为 `0`，内容为空
        * @example 你是猪 ... 鉴定完毕 ...
        */
-      text: string;
+      text: string
       /**
        * CommentState
        * @description 回复和帖子共用的状态
@@ -322,48 +322,48 @@ export interface components {
        * @example 0
        * @enum {integer}
        */
-      state: 0 | 1 | 5 | 6 | 7;
-    };
+      state: 0 | 1 | 5 | 6 | 7
+    }
     GroupMember: {
-      avatar: components["schemas"]["Avatar"];
+      avatar: components['schemas']['Avatar']
       /** @example 1 */
-      id: number;
+      id: number
       /** @example Sai🖖 */
-      nickname: string;
+      nickname: string
       /** @example sai */
-      username: string;
+      username: string
       /**
        * Format: date-time
        * @example 2022-06-25T21:07:38.466+08:00
        */
-      joined_at: string;
-    };
+      joined_at: string
+    }
     Paged: {
       /** Total */
-      total: number;
+      total: number
       /** Limit */
-      limit: number;
+      limit: number
       /** Offset */
-      offset: number;
+      offset: number
       /** Data */
-      data: { [key: string]: unknown }[];
-    };
+      data: { [key: string]: unknown }[]
+    }
     /** Paged[Topic] */
-    Paged_Topic: components["schemas"]["Paged"] & {
+    Paged_Topic: components['schemas']['Paged'] & {
       /** Data */
-      data?: components["schemas"]["Topic"][];
-    };
+      data?: components['schemas']['Topic'][]
+    }
     /** Comments */
     Comments: {
-      comments: components["schemas"]["Comment"][];
-    };
-  };
+      comments: components['schemas']['Comment'][]
+    }
+  }
   parameters: {
     /** @description 分页参数 */
-    default_query_limit: number;
+    default_query_limit: number
     /** @description 分页参数 */
-    default_query_offset: number;
-  };
+    default_query_offset: number
+  }
 }
 
 export interface operations {
@@ -378,369 +378,369 @@ export interface operations {
       200: {
         headers: {
           /** 设置 cookies session */
-          "Set-Cookie"?: string;
-        };
+          'Set-Cookie'?: string
+        }
         content: {
-          "application/json": components["schemas"]["User"];
-        };
-      };
+          'application/json': components['schemas']['User']
+        }
+      }
       /** 请求错误或者验证码错误 */
       400: {
         content: {
-          "application/json": {
+          'application/json': {
             /** Title */
-            title: string;
+            title: string
             /** Description */
-            description: string;
+            description: string
             /** Detail */
-            detail: string[];
-          };
-        };
-      };
+            detail: string[]
+          }
+        }
+      }
       /** 账号或密码错误 */
       401: {
         content: {
-          "application/json": {
+          'application/json': {
             /** Title */
-            title: string;
+            title: string
             /** Description */
-            description: string;
+            description: string
             /** Detail */
             detail: {
               /** @description 剩余可用登录次数。 */
-              remain?: number;
-            };
-          };
-        };
-      };
+              remain?: number
+            }
+          }
+        }
+      }
       /** content-type 不是 `application/json` */
-      415: unknown;
+      415: unknown
       /** JSON 语法错误 */
-      422: unknown;
+      422: unknown
       /** hCaptcha HTTP 请求失败 */
-      502: unknown;
-    };
+      502: unknown
+    }
     requestBody: {
       content: {
-        "application/json": {
-          email: string;
-          password: string;
-          "h-captcha-response": string;
-        };
-      };
-    };
-  };
+        'application/json': {
+          email: string
+          password: string
+          'h-captcha-response': string
+        }
+      }
+    }
+  }
   logout: {
     responses: {
       /** 正常登出 */
-      204: never;
+      204: never
       /** 用户未登录或者 session 已失效 */
-      401: unknown;
-    };
-  };
+      401: unknown
+    }
+  }
   getCurrentUser: {
     responses: {
       /** 返回当前用户 */
       200: {
         content: {
-          "application/json": components["schemas"]["User"];
-        };
-      };
+          'application/json': components['schemas']['User']
+        }
+      }
       /** 用户未登录或者 session 已失效 */
-      401: unknown;
-    };
-  };
+      401: unknown
+    }
+  }
   getGroupTopicsById: {
     parameters: {
       path: {
         /** 小组ID */
-        group_id: number;
-      };
+        group_id: number
+      }
       query: {
         /** 小组 Limit */
-        limit: number;
+        limit: number
         /** 小组 Offset */
-        offset: number;
-      };
-    };
+        offset: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["Paged_Topic"];
-        };
-      };
+          'application/json': components['schemas']['Paged_Topic']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   getSubjectTopicsById: {
     parameters: {
       path: {
         /** 条目ID */
-        subject_id: number;
-      };
+        subject_id: number
+      }
       query: {
         /** 条目 Limit */
-        limit: number;
+        limit: number
         /** 条目 Offset */
-        offset: number;
-      };
-    };
+        offset: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["Paged_Topic"];
-        };
-      };
+          'application/json': components['schemas']['Paged_Topic']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   /** 没有分页 */
   getSubjectTopicById: {
     parameters: {
       path: {
         /** 条目讨论ID */
-        topic_id: number;
-      };
-    };
+        topic_id: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["PrivateTopicDetail"];
-        };
-      };
+          'application/json': components['schemas']['PrivateTopicDetail']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   /** 没有分页 */
   getGroupTopicById: {
     parameters: {
       path: {
         /** 小组讨论ID */
-        topic_id: number;
-      };
-    };
+        topic_id: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": {
-            group?: components["schemas"]["Group"];
-          } & components["schemas"]["PrivateTopicDetail"];
-        };
-      };
+          'application/json': {
+            group?: components['schemas']['Group']
+          } & components['schemas']['PrivateTopicDetail']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   /** 没有分页 */
   getIndexCommentsById: {
     parameters: {
       path: {
         /** 目录ID */
-        index_id: number;
-      };
-    };
+        index_id: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["Comments"];
-        };
-      };
+          'application/json': components['schemas']['Comments']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   /** 没有分页 */
   getEpisodeCommentsById: {
     parameters: {
       path: {
         /** 章节ID */
-        episode_id: number;
-      };
-    };
+        episode_id: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["Comments"];
-        };
-      };
+          'application/json': components['schemas']['Comments']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   /** 没有分页 */
   getCharacterCommentsById: {
     parameters: {
       path: {
         /** 角色ID */
-        character_id: number;
-      };
-    };
+        character_id: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["Comments"];
-        };
-      };
+          'application/json': components['schemas']['Comments']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   /** 没有分页 */
   getPersonCommentsById: {
     parameters: {
       path: {
         /** 人物ID */
-        person_id: number;
-      };
-    };
+        person_id: number
+      }
+    }
     responses: {
       /** Successful Response */
       200: {
         content: {
-          "application/json": components["schemas"]["Comments"];
-        };
-      };
+          'application/json': components['schemas']['Comments']
+        }
+      }
       /** Validation Error */
       400: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
       /** Not Found */
       404: {
         content: {
-          "application/json": components["schemas"]["ErrorDetail"];
-        };
-      };
-    };
-  };
+          'application/json': components['schemas']['ErrorDetail']
+        }
+      }
+    }
+  }
   getGroupProfileByName: {
     parameters: {
       path: {
         /** 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
-        name: string;
-      };
-    };
+        name: string
+      }
+    }
     responses: {
       /** 返回当前用户 */
       200: {
         content: {
-          "application/json": components["schemas"]["GroupProfile"];
-        };
-      };
+          'application/json': components['schemas']['GroupProfile']
+        }
+      }
       /** 小组不存在 */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
   listGroupMembersByName: {
     parameters: {
       path: {
         /** 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
-        name: string;
-      };
+        name: string
+      }
       query: {
         /** 成员类型，默认为 `all` */
-        type: "mod" | "normal" | "all";
+        type: 'mod' | 'normal' | 'all'
         /** 分页参数 */
-        limit?: components["parameters"]["default_query_limit"];
+        limit?: components['parameters']['default_query_limit']
         /** 分页参数 */
-        offset?: components["parameters"]["default_query_offset"];
-      };
-    };
+        offset?: components['parameters']['default_query_offset']
+      }
+    }
     responses: {
       /** 列出用户 */
       200: {
         content: {
-          "application/json": components["schemas"]["Paged"] & {
+          'application/json': components['schemas']['Paged'] & {
             /** Data */
-            data?: components["schemas"]["GroupMember"][];
-          };
-        };
-      };
+            data?: components['schemas']['GroupMember'][]
+          }
+        }
+      }
       /** 小组不存在 */
-      404: unknown;
-    };
-  };
+      404: unknown
+    }
+  }
 }
 
 export interface external {}

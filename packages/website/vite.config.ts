@@ -11,15 +11,15 @@ const productionRootURL = 'https://next.bgm.tv/'
 export default defineConfig({
   resolve: {
     alias: {
-      '@bangumi/website': path.resolve(__dirname, './src')
-    }
+      '@bangumi/website': path.resolve(__dirname, './src'),
+    },
   },
   server: {
     proxy: {
       '/p': {
         target: privateAPIDomain,
         changeOrigin: true,
-        configure (proxy) {
+        configure(proxy) {
           proxy.on('proxyReq', (proxyReq) => {
             if (proxyReq.hasHeader('Origin')) {
               proxyReq.setHeader('Origin', privateAPIDomain)
@@ -31,19 +31,20 @@ export default defineConfig({
             // 所以在本地开发时移除 secure attribute
             const setCookies = proxyRes.headers['set-cookie']
             if (Array.isArray(setCookies)) {
-              proxyRes.headers['set-cookie'] = setCookies.map(sc => {
-                return sc.split(';')
-                  .filter(v => v.trim().toLowerCase() !== 'secure')
+              proxyRes.headers['set-cookie'] = setCookies.map((sc) => {
+                return sc
+                  .split(';')
+                  .filter((v) => v.trim().toLowerCase() !== 'secure')
                   .join('; ')
               })
             }
           })
         },
         cookieDomainRewrite: {
-          'next.bgm.tv': 'dev.bgm.tv'
-        }
-      }
-    }
+          'next.bgm.tv': 'dev.bgm.tv',
+        },
+      },
+    },
   },
   plugins: [
     react(),
@@ -56,8 +57,8 @@ export default defineConfig({
         '**/*.spec.ts',
         '**/*.spec.tsx',
         '**/*.test.ts',
-        '**/*.test.tsx'
-      ]
+        '**/*.test.tsx',
+      ],
     }),
     styleImport({
       libs: [
@@ -65,20 +66,23 @@ export default defineConfig({
           libraryName: '@bangumi/design',
           libraryNameChangeCase: 'capitalCase',
           ensureStyleFile: true,
-          resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`
-        }
-      ]
-    })
+          resolveStyle: (name: string) =>
+            `@bangumi/design/components/${name}/style/index.tsx`,
+        },
+      ],
+    }),
   ],
   css: {
     preprocessorOptions: {
       less: {
         charset: false,
-        additionalData: '@import "./src/style/utils.less";'
-      }
-    }
+        additionalData: '@import "./src/style/utils.less";',
+      },
+    },
   },
   define: {
-    'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version)
-  }
+    'import.meta.env.__APP_VERSION__': JSON.stringify(
+      process.env.npm_package_version,
+    ),
+  },
 })

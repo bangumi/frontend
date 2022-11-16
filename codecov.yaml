@@ -4,7 +4,7 @@ codecov:
 coverage:
   precision: 2
   round: down
-  range: "80...100"
+  range: '80...100'
   status:
     default_rules:
       flag_coverage_not_uploaded_behavior: exclude
@@ -13,9 +13,9 @@ coverage:
         target: auto
         threshold: 0
         paths:
-          - "packages/design"
+          - 'packages/design'
       website:
         target: auto
         threshold: 5
         paths:
-          - "packages/website"
+          - 'packages/website'

@@ -15,17 +15,22 @@ export interface UserCardProps {
   mode?: 'vertical' | 'horizontal'
 }
 
-export const UserCard: React.FC<UserCardProps> = ({ user, mode = 'vertical' }) => {
+export const UserCard: React.FC<UserCardProps> = ({
+  user,
+  mode = 'vertical',
+}) => {
   return (
     <Link
-      className={
-        [
-          styles.userCard,
-          styles[mode]
-        ].join(' ')
-      } to={getUserProfileLink(user.username)} fontWeight="bold" isExternal
+      className={[styles.userCard, styles[mode]].join(' ')}
+      to={getUserProfileLink(user.username)}
+      fontWeight="bold"
+      isExternal
     >
-      <Image className={styles.avatar} src={user.avatar} alt={`${user.nickname} 头像`} />
+      <Image
+        className={styles.avatar}
+        src={user.avatar}
+        alt={`${user.nickname} 头像`}
+      />
       {user.nickname}
     </Link>
   )

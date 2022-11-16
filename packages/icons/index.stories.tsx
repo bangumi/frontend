@@ -2,47 +2,54 @@ import React from 'react'
 import type { Story, ComponentMeta } from '@storybook/react'
 import * as Icons from '.'
 
-type IComponent = React.FC<React.SVGProps<SVGSVGElement> & {
-  title?: string
-}>
+type IComponent = React.FC<
+  React.SVGProps<SVGSVGElement> & {
+    title?: string
+  }
+>
 
 const componentMeta: ComponentMeta<IComponent> = {
   title: 'Icons',
   subcomponents: Icons,
   decorators: [
-    story => (
+    (story) => (
       <div
         style={{
           display: 'flex',
           alignItems: 'center',
           flex: 'auto',
           flexWrap: 'wrap',
-          margin: '0 10rem'
+          margin: '0 10rem',
         }}
-      >{story()}
+      >
+        {story()}
       </div>
-    )
+    ),
   ],
   args: {
     height: 40,
-    width: 40
+    width: 40,
   },
   argTypes: {
     style: {
       control: {
         type: 'object',
-        defaultValue: {}
-      }
-    }
-  }
+        defaultValue: {},
+      },
+    },
+  },
 }
 
 export default componentMeta
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<{ height: number, width: number, style: React.CSSProperties }> = ({ height, width, style }) => <>
-  {
-    Object.keys(Icons).map(iconName => {
+const Template: Story<{
+  height: number
+  width: number
+  style: React.CSSProperties
+}> = ({ height, width, style }) => (
+  <>
+    {Object.keys(Icons).map((iconName) => {
       const Icon = (Icons as any)[iconName] as IComponent
       return (
         <div key={iconName} style={{ textAlign: 'center', width: 120 }}>
@@ -50,9 +57,8 @@ const Template: Story<{ height: number, width: number, style: React.CSSPropertie
           <Icon height={height} width={width} style={style} />
         </div>
       )
-    }
-    )
-  }
-</>
+    })}
+  </>
+)
 
 export const Usage = Template.bind({})

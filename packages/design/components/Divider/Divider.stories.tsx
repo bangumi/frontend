@@ -6,8 +6,8 @@ const componentMeta: ComponentMeta<typeof Divider> = {
   title: 'Grid/Divider',
   component: Divider,
   decorators: [
-    story => <div style={{ width: '15vw', height: '15vh' }}>{story()}</div>
-  ]
+    (story) => <div style={{ width: '15vw', height: '15vh' }}>{story()}</div>,
+  ],
 }
 
 export default componentMeta
@@ -18,11 +18,12 @@ const Template: ComponentStory<typeof Divider> = (args) => {
 
   if (isListItem) {
     return (
-      <ul style={{
-        listStyle: 'none',
-        display: 'flex',
-        flexDirection: orientation === 'vertical' ? 'row' : 'column'
-      }}
+      <ul
+        style={{
+          listStyle: 'none',
+          display: 'flex',
+          flexDirection: orientation === 'vertical' ? 'row' : 'column',
+        }}
       >
         <li>想看</li>
         <Divider {...args} />
@@ -43,11 +44,11 @@ const Template: ComponentStory<typeof Divider> = (args) => {
 export const Horizontal = Template.bind({})
 Horizontal.args = {
   orientation: 'horizontal',
-  isListItem: false
+  isListItem: false,
 }
 
 export const Vertical = Template.bind({})
 Vertical.args = {
   orientation: 'vertical',
-  isListItem: false
+  isListItem: false,
 }

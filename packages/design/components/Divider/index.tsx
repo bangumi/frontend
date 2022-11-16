@@ -11,25 +11,23 @@ export interface DividerProps {
 }
 
 const Divider: FC<DividerProps> = (props) => {
-  const {
-    orientation = 'horizontal',
-    isListItem = false,
-    className
-  } = props
+  const { orientation = 'horizontal', isListItem = false, className } = props
 
   const classes = classnames(
     'bgm-divider',
     {
-      'bgm-divider--vertical': orientation === 'vertical'
+      'bgm-divider--vertical': orientation === 'vertical',
     },
-    className
+    className,
   )
 
   return (
     <>
-      {isListItem
-        ? <li className={classes} role="separator" />
-        : <hr className={classes} role="separator" />}
+      {isListItem ? (
+        <li className={classes} role="separator" />
+      ) : (
+        <hr className={classes} role="separator" />
+      )}
     </>
   )
 }

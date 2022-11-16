@@ -4,7 +4,7 @@ import RichContent from '.'
 
 export default {
   title: 'modern/RichContent',
-  component: RichContent
+  component: RichContent,
 }
 
 const demoText = `
@@ -17,9 +17,5 @@ const demoText = `
 `
 
 export const Demo: ComponentStory<typeof RichContent> = () => {
-  return (
-    <RichContent
-      html={demoText}
-    />
-  )
+  return <RichContent html={demoText} />
 }

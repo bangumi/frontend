@@ -13,7 +13,7 @@ const GroupForum = () => {
 
   const topics = useGroupTopic(name!, {
     offset,
-    limit: pageSize
+    limit: pageSize,
   })
 
   const handlePageChange = (page: number): void => {
@@ -24,7 +24,12 @@ const GroupForum = () => {
   return (
     <>
       <TopicsTable topics={topics.data} />
-      <Pagination total={topics.total} pageSize={pageSize} currentPage={curPage} onChange={handlePageChange} />
+      <Pagination
+        total={topics.total}
+        pageSize={pageSize}
+        currentPage={curPage}
+        onChange={handlePageChange}
+      />
     </>
   )
 }

@@ -32,28 +32,21 @@ const EditorForm: FC<EditorFormProps> = ({
   const ref = useRef<HTMLTextAreaElement>(null)
   return (
     <div className={classNames} style={style}>
-      <Editor
-        ref={ref}
-        onConfirm={onConfirm}
-        {...props}
-      />
+      <Editor ref={ref} onConfirm={onConfirm} {...props} />
       <div className="bgm-editor__submit">
         <Button
-          shape="rounded" className="bgm-editor__button bgm-editor__button--confirm"
+          shape="rounded"
+          className="bgm-editor__button bgm-editor__button--confirm"
           onClick={() => onConfirm?.(ref.current!.value)}
-        >{confirmText}
+        >
+          {confirmText}
         </Button>
-        <Button
-          type="text" className="bgm-editor__button"
-          onClick={onCancel}
-        >{cancelText}</Button>
+        <Button type="text" className="bgm-editor__button" onClick={onCancel}>
+          {cancelText}
+        </Button>
         <span className="bgm-editor__bbcode-tip">
-          使用 Ctrl+Enter 或 Alt+S 快速提交 |
-          {' '}
-          <Link
-            isExternal
-            to="https://bgm.tv/help/bbcode"
-          >
+          使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
+          <Link isExternal to="https://bgm.tv/help/bbcode">
             BBCode指南
           </Link>
         </span>

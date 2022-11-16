@@ -32,25 +32,19 @@ const Menu: FC<MenuProps> = ({
   mode = 'horizontal',
   style,
   activeKey,
-  items
+  items,
 }) => {
-  const className = classnames(
-    'bgm-menu',
-    `bgm-menu--${mode}`,
-    wrapperClass
-  )
+  const className = classnames('bgm-menu', `bgm-menu--${mode}`, wrapperClass)
   return (
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, mode }}>
-        {
-          items.map(item => {
-            return children
-              ? children(item)
-              : (
-                <MenuItem {...item} id={item.key} />
-                )
-          })
-        }
+        {items.map((item) => {
+          return children ? (
+            children(item)
+          ) : (
+            <MenuItem {...item} id={item.key} />
+          )
+        })}
       </MenuContext.Provider>
     </ul>
   )
@@ -58,4 +52,5 @@ const Menu: FC<MenuProps> = ({
 
 export default Menu
 
-export const useMenuContext = (): MenuContextType => useContext<MenuContextType>(MenuContext)
+export const useMenuContext = (): MenuContextType =>
+  useContext<MenuContextType>(MenuContext)

@@ -4,10 +4,14 @@ import Section from '.'
 
 export default {
   title: 'modern/Section',
-  component: Section
+  component: Section,
 }
 
-export const Demo: ComponentStory<typeof Section> = () => <Section title="小节标题"><div>内容</div></Section>
+export const Demo: ComponentStory<typeof Section> = () => (
+  <Section title="小节标题">
+    <div>内容</div>
+  </Section>
+)
 
 export const WithFooter: ComponentStory<typeof Section> = () => (
   <Section

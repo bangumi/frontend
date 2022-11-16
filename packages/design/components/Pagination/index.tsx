@@ -14,7 +14,7 @@ export interface PaginationProps {
   onChange?: (offset: number) => void
 }
 
-function calculatePage (pageSize: number, total: number): number {
+function calculatePage(pageSize: number, total: number): number {
   return Math.floor((total - 1) / pageSize) + 1
 }
 
@@ -56,7 +56,7 @@ const Pagination: FC<PaginationProps> = ({
       onClick={prev}
       data-testid="pagination-prev"
       className={cn('bgm-pagination-prev', {
-        'bgm-pagination-prev--hide': !hasPrev
+        'bgm-pagination-prev--hide': !hasPrev,
       })}
     >
       <VerticalLeft className="bgm-pagination-icon" />
@@ -68,7 +68,7 @@ const Pagination: FC<PaginationProps> = ({
       onClick={next}
       data-testid="pagination-next"
       className={cn('bgm-pagination-next', {
-        'bgm-pagination-next--hide': !hasNext
+        'bgm-pagination-next--hide': !hasNext,
       })}
     >
       <VerticalRight className="bgm-pagination-icon" />
@@ -78,7 +78,7 @@ const Pagination: FC<PaginationProps> = ({
   // pagers
   const pagerList = []
   const pagerProps = {
-    onClick: handleChange
+    onClick: handleChange,
   }
   const L_PAGE_BUFFER_SIZE = 3
   const R_PAGE_BUFFER_SIZE = 6
@@ -86,9 +86,7 @@ const Pagination: FC<PaginationProps> = ({
   if (allPages <= PAGE_BUFFER_SIZE) {
     for (let i = 1; i <= allPages; i += 1) {
       const active = current === i
-      pagerList.push(
-        <Pager {...pagerProps} key={i} page={i} active={active} />
-      )
+      pagerList.push(<Pager {...pagerProps} key={i} page={i} active={active} />)
     }
   } else {
     let left = Math.max(1, current - L_PAGE_BUFFER_SIZE)
@@ -103,9 +101,7 @@ const Pagination: FC<PaginationProps> = ({
 
     for (let i = left; i <= right; i += 1) {
       const active = current === i
-      pagerList.push(
-        <Pager {...pagerProps} key={i} page={i} active={active} />
-      )
+      pagerList.push(<Pager {...pagerProps} key={i} page={i} active={active} />)
     }
   }
   return (

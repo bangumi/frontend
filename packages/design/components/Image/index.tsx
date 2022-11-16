@@ -22,15 +22,18 @@ const Image: FC<ImageProps> = ({
   shape = 'rect',
   ...rest
 }) => {
-  const actualClassnames = classnames('bgm-image',
-    className, {
-      'bgm-image--withBoxShadow': withBoxShadow,
-      'bgm-image--rect': shape === 'rect',
-      'bgm-image--circle': shape === 'circle'
-    }
-  )
+  const actualClassnames = classnames('bgm-image', className, {
+    'bgm-image--withBoxShadow': withBoxShadow,
+    'bgm-image--rect': shape === 'rect',
+    'bgm-image--circle': shape === 'circle',
+  })
   return (
-    <img className={actualClassnames} src={src} data-testid="img-wrapper" {...rest} />
+    <img
+      className={actualClassnames}
+      src={src}
+      data-testid="img-wrapper"
+      {...rest}
+    />
   )
 }
 

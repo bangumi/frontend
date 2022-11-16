@@ -9,7 +9,7 @@ export class WikiArrayItem {
   k?: string
   v?: string
 
-  constructor (k: string, v: string) {
+  constructor(k: string, v: string) {
     k && (this.k = k)
     this.v = v
   }
@@ -21,7 +21,7 @@ export class WikiItem {
   array?: boolean
   values?: WikiArrayItem[]
 
-  constructor (key: string, value: string, type: WikiItemType) {
+  constructor(key: string, value: string, type: WikiItemType) {
     this.key = key
     switch (type) {
       case 'array':

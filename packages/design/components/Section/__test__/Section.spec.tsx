@@ -10,7 +10,11 @@ it('should render title and content', () => {
 })
 
 it('should render footer', () => {
-  const { getByText } = render(<Section title="标题" renderFooter={() => <div>footer</div>}>内容</Section>)
+  const { getByText } = render(
+    <Section title="标题" renderFooter={() => <div>footer</div>}>
+      内容
+    </Section>,
+  )
 
   expect(getByText('footer')).toBeInTheDocument()
 })

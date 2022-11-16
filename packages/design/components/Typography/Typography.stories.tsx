@@ -4,7 +4,7 @@ import { Story } from '@storybook/react'
 
 export default {
   title: 'modern/Topology/Text',
-  component: Text
+  component: Text,
 }
 
 export const Demo: Story<TextProps> = () => {

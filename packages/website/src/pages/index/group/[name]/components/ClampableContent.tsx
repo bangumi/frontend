@@ -10,7 +10,12 @@ export interface ClampableContentProps {
   onChange: (isClamped: boolean) => void
 }
 
-export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold, isClamped, onChange }) => {
+export const ClampableContent: React.FC<ClampableContentProps> = ({
+  content,
+  threshold,
+  isClamped,
+  onChange,
+}) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false)
   const contentRef = React.useRef<HTMLDivElement>(null)
 
@@ -23,7 +28,7 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
 
   const clampedStyle: React.CSSProperties = {
     maxHeight: threshold,
-    overflow: 'hidden'
+    overflow: 'hidden',
   }
 
   const handleUnclamp = (): void => {
@@ -43,17 +48,30 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
       return (
         <>
           <div>...</div>
-          <div className={styles.textButton} onClick={handleUnclamp}><span>展开</span><DownArrow /></div>
+          <div className={styles.textButton} onClick={handleUnclamp}>
+            <span>展开</span>
+            <DownArrow />
+          </div>
         </>
       )
     } else {
-      return <div className={styles.textButton} onClick={handleClamp}><span>收起</span><UpArrow /></div>
+      return (
+        <div className={styles.textButton} onClick={handleClamp}>
+          <span>收起</span>
+          <UpArrow />
+        </div>
+      )
     }
   }
 
   return (
     <div className={styles.container}>
-      <div ref={contentRef} className={styles.content} style={isClampEnabled && isClamped ? clampedStyle : undefined} dangerouslySetInnerHTML={{ __html: content }} />
+      <div
+        ref={contentRef}
+        className={styles.content}
+        style={isClampEnabled && isClamped ? clampedStyle : undefined}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
       {renderControl()}
     </div>
   )

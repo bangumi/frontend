@@ -24,5 +24,5 @@
     "./jest-setup.ts",
     ".eslintrc.js",
     "./packages/design/.storybook/*"
-  ],
+  ]
 }

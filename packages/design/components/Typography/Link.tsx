@@ -1,6 +1,9 @@
 import classNames from 'classnames'
 import React from 'react'
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from 'react-router-dom'
 
 export interface LinkProps extends RouterLinkProps {
   isExternal?: boolean
@@ -18,9 +21,9 @@ const Link: React.FC<LinkProps> = ({
   const resolvedClassnames = classNames(
     'bgm-link',
     {
-      'bgm-link--bold': fontWeight === 'bold'
+      'bgm-link--bold': fontWeight === 'bold',
     },
-    className
+    className,
   )
 
   if (isExternal && typeof to === 'string') {

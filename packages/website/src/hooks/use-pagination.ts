@@ -14,18 +14,23 @@ interface IPaginationParams {
  * @param defaultPageSize - 修改默认的页面的大小，注意，当页面拥有 limit 参数时会失效
  * @returns 分页所需数据对象
  */
-export const usePaginationParams = (defaultPageSize: number = 20): IPaginationParams => {
+export const usePaginationParams = (
+  defaultPageSize: number = 20,
+): IPaginationParams => {
   const [params] = useSearchParams()
 
   const unsafePage = parseInt(params.get('page') ?? '')
-  const page = (Number.isNaN(unsafePage) || unsafePage < 1) ? 1 : unsafePage
+  const page = Number.isNaN(unsafePage) || unsafePage < 1 ? 1 : unsafePage
 
   const unsafePageSize = parseInt(params.get('limit') ?? '')
-  const pageSize = (Number.isNaN(unsafePageSize) || unsafePageSize < 1) ? defaultPageSize : unsafePageSize
+  const pageSize =
+    Number.isNaN(unsafePageSize) || unsafePageSize < 1
+      ? defaultPageSize
+      : unsafePageSize
 
   return {
     curPage: page,
     pageSize,
-    offset: (page - 1) * pageSize
+    offset: (page - 1) * pageSize,
   }
 }

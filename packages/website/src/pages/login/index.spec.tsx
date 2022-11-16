@@ -7,7 +7,9 @@ import { server as mockServer } from '../../mocks/server'
 import { rest } from 'msw'
 import { useNavigate } from 'react-router-dom'
 
-const FakeHCaptcha: React.FC<{ onVerify: (token: string) => void }> = ({ onVerify }) => {
+const FakeHCaptcha: React.FC<{ onVerify: (token: string) => void }> = ({
+  onVerify,
+}) => {
   React.useEffect(() => {
     onVerify('fake-token')
   })
@@ -21,11 +23,11 @@ jest.mock('@hcaptcha/react-hcaptcha', () => {
 jest.mock('react-router-dom')
 const mockedUseNavigate = jest.mocked(useNavigate)
 
-function mockLogin (statusCode: number, response: Object = {}): void {
+function mockLogin(statusCode: number, response: Object = {}): void {
   mockServer.use(
     rest.post('http://localhost/p/login', (req, res, ctx) => {
       return res(ctx.status(statusCode), ctx.json(response))
-    })
+    }),
   )
 }
 
@@ -37,13 +39,17 @@ it('should redirect user to homepage after success login', async () => {
   const { getByPlaceholderText, getByText } = render(
     <UserProvider>
       <LoginPage />
-    </UserProvider>
+    </UserProvider>,
   )
   const fakeEmail = 'fake-email'
   const fakePassword = 'fakepassword'
 
-  fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } })
-  fireEvent.input(getByPlaceholderText('你的登录密码'), { target: { value: fakePassword } })
+  fireEvent.input(getByPlaceholderText('你的 Email 地址'), {
+    target: { value: fakeEmail },
+  })
+  fireEvent.input(getByPlaceholderText('你的登录密码'), {
+    target: { value: fakePassword },
+  })
 
   fireEvent.click(getByText('登录'))
 
@@ -53,36 +59,43 @@ it('should redirect user to homepage after success login', async () => {
 })
 
 it.each`
-  statusCode | resp | expectedError
-  ${400} | ${{}} | ${'验证码错误，请再试一遍'}
-  ${401} | ${{ detail: { remain: 5 } }} | ${'用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试'}
-  ${422} | ${{}} | ${'请求错误'}
-  ${502} | ${{}} | ${'服务器错误，请稍后重试'}
-`('should show error message when response is %statusCode}', async ({ statusCode, resp, expectedError }) => {
-  mockLogin(statusCode, resp)
-  const { getByPlaceholderText, getByText } = render(
-    <UserProvider>
-      <LoginPage />
-    </UserProvider>
-  )
-  const fakeEmail = 'fake-email'
-  const fakePassword = 'fakepassword'
+  statusCode | resp                         | expectedError
+  ${400}     | ${{}}                        | ${'验证码错误，请再试一遍'}
+  ${401}     | ${{ detail: { remain: 5 } }} | ${'用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试'}
+  ${422}     | ${{}}                        | ${'请求错误'}
+  ${502}     | ${{}}                        | ${'服务器错误，请稍后重试'}
+`(
+  'should show error message when response is %statusCode}',
+  async ({ statusCode, resp, expectedError }) => {
+    mockLogin(statusCode, resp)
+    const { getByPlaceholderText, getByText } = render(
+      <UserProvider>
+        <LoginPage />
+      </UserProvider>,
+    )
+    const fakeEmail = 'fake-email'
+    const fakePassword = 'fakepassword'
 
-  fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } })
-  fireEvent.input(getByPlaceholderText('你的登录密码'), { target: { value: fakePassword } })
+    fireEvent.input(getByPlaceholderText('你的 Email 地址'), {
+      target: { value: fakeEmail },
+    })
+    fireEvent.input(getByPlaceholderText('你的登录密码'), {
+      target: { value: fakePassword },
+    })
 
-  fireEvent.click(getByText('登录'))
+    fireEvent.click(getByText('登录'))
 
-  await waitFor(() => {
-    expect(getByText(expectedError)).toBeInTheDocument()
-  })
-})
+    await waitFor(() => {
+      expect(getByText(expectedError)).toBeInTheDocument()
+    })
+  },
+)
 
 it('should validate user input', async () => {
   const { getByPlaceholderText, getByText } = render(
     <UserProvider>
       <LoginPage />
-    </UserProvider>
+    </UserProvider>,
   )
 
   fireEvent.click(getByText('登录'))
@@ -92,7 +105,9 @@ it('should validate user input', async () => {
   })
 
   const fakeEmail = 'fake-email'
-  fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } })
+  fireEvent.input(getByPlaceholderText('你的 Email 地址'), {
+    target: { value: fakeEmail },
+  })
 
   fireEvent.click(getByText('登录'))
 

@@ -16,9 +16,15 @@ export * from './bbcode'
  * @param key （T）中的某个key
  * @returns 以（T）中键为 key 的值为新对象的键，值为（T）本身
  */
-export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(collection: T[], key: R): Record<T[R], T> => {
-  return collection.reduce((pre, cur) => ({
-    ...pre,
-    [cur[key]]: cur
-  }), Object.assign({}))
+export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
+  collection: T[],
+  key: R,
+): Record<T[R], T> => {
+  return collection.reduce(
+    (pre, cur) => ({
+      ...pre,
+      [cur[key]]: cur,
+    }),
+    Object.assign({}),
+  )
 }

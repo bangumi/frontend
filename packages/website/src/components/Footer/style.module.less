@@ -53,7 +53,11 @@
     height: 100%;
     left: 0;
     top: 0;
-    background: linear-gradient(270deg, @bg-left-color 41.38%, rgba(242, 155, 163, 0) 85.34%);
+    background: linear-gradient(
+      270deg,
+      @bg-left-color 41.38%,
+      rgba(242, 155, 163, 0) 85.34%
+    );
     transform: rotate(-180deg);
   }
 
@@ -64,7 +68,11 @@
     height: 100%;
     right: 0;
     top: 0;
-    background: linear-gradient(270deg, @bg-right-color 0%, rgba(246, 75, 81, 0) 100%);
+    background: linear-gradient(
+      270deg,
+      @bg-right-color 0%,
+      rgba(246, 75, 81, 0) 100%
+    );
   }
 }
 
@@ -144,13 +152,13 @@
 
 /* 临时的移动端适配 */
 
-@media screen and  (max-width: 1200px) {
+@media screen and (max-width: 1200px) {
   .footerRight .block {
     width: 130px;
   }
 }
 
-@media screen and  (max-width: 992px) {
+@media screen and (max-width: 992px) {
   .footerLeft {
     .copyright {
       display: none;
@@ -169,7 +177,7 @@
   }
 }
 
-@media screen and  (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .footerContainer {
     height: 160px;
   }

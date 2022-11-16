@@ -17,20 +17,21 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   type = 'primary',
   shape = 'square',
   size = 'normal',
-  children
+  children,
 }) => {
   return (
     <button
       disabled={disabled}
-      className={
-        classNames('bgm-button', className, {
-          'bgm-button__disabled': disabled
+      className={classNames(
+        'bgm-button',
+        className,
+        {
+          'bgm-button__disabled': disabled,
         },
-          `bgm-button__${type}`,
-          `bgm-button__${shape}`,
-          `bgm-button__${size}`
-        )
-      }
+        `bgm-button__${type}`,
+        `bgm-button__${shape}`,
+        `bgm-button__${size}`,
+      )}
       onClick={onClick}
     >
       {children}

@@ -5,7 +5,7 @@ export type { LinkProps } from './Link'
 
 export default {
   Text,
-  Link
+  Link,
 }
 
 export type { TextProps } from './Text'

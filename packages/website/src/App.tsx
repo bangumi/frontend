@@ -6,9 +6,7 @@ import { UserProvider } from './hooks/use-user'
 const App = () => {
   return (
     <UserProvider>
-      <Suspense fallback={null}>
-        {useRoutes(pageRoutes)}
-      </Suspense>
+      <Suspense fallback={null}>{useRoutes(pageRoutes)}</Suspense>
     </UserProvider>
   )
 }

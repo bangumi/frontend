@@ -31,8 +31,8 @@ describe('RequireAuth', () => {
   it('should show content if user is authorized properly', () => {
     mockedUseUser.mockReturnValue({
       user: {
-        user_group: UserGroup.Admin
-      }
+        user_group: UserGroup.Admin,
+      },
     })
     const { getByText } = render(<ComponentRequireAuth />)
 
@@ -44,10 +44,9 @@ describe('RequireAuth', () => {
     mockedUseNavigate.mockReturnValue(mockedNavigate)
     mockedUseUser.mockReturnValue({
       user: {
-        user_group: UserGroup.User
-      }
-    }
-    )
+        user_group: UserGroup.User,
+      },
+    })
 
     render(<ComponentRequireAuth />)
     expect(mockedNavigate).toBeCalledWith('/', { replace: true })
@@ -57,7 +56,7 @@ describe('RequireAuth', () => {
     const mockedRedirectToLogin = jest.fn()
     mockedUseUser.mockReturnValue({
       user: null,
-      redirectToLogin: mockedRedirectToLogin
+      redirectToLogin: mockedRedirectToLogin,
     })
 
     render(<ComponentRequireAuth />)

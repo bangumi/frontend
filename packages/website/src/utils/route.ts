@@ -1,7 +1,5 @@
-const noLayoutRoutes = new Set([
-  '/login'
-])
+const noLayoutRoutes = new Set(['/login'])
 
-export function isNoLayoutRoute (pathname: string): boolean {
+export function isNoLayoutRoute(pathname: string): boolean {
   return noLayoutRoutes.has(pathname)
 }

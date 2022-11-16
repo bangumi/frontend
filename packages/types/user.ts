@@ -13,5 +13,5 @@ export enum UserGroup {
   CharacterAdmin = 8,
   WikiAdmin = 9,
   User = 10,
-  WikiContributor = 11
+  WikiContributor = 11,
 }

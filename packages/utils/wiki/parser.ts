@@ -6,14 +6,14 @@ import {
   ExpectingSignEqualError,
   GlobalPrefixError,
   GlobalSuffixError,
-  WikiSyntaxError
+  WikiSyntaxError,
 } from './error'
 
 /* should start with `{{Infobox` and end with `}}` */
 const prefix = '{{Infobox'
 const suffix = '}}'
 
-export default function parse (s: string): Wiki {
+export default function parse(s: string): Wiki {
   const wiki: Wiki = { type: '', data: [] }
 
   const strTrim = s.trim().replace(/\r\n/g, '\n')
@@ -62,9 +62,7 @@ export default function parse (s: string): Wiki {
         throw new WikiSyntaxError(lino, line, ArrayNoCloseError)
       }
       wiki.data[wiki.data.length - 1]!.values!.push(
-        new WikiArrayItem(
-          ...parseArrayItem(lino, line)
-        )
+        new WikiArrayItem(...parseArrayItem(lino, line)),
       )
     } else {
       throw new WikiSyntaxError(lino, line, ExpectingNewFieldError)
@@ -74,10 +72,15 @@ export default function parse (s: string): Wiki {
 }
 
 const parseType = (line: string): string => {
-  return line.slice(prefix.length, !line.includes('}}') ? undefined : line.indexOf('}}')).trim()
+  return line
+    .slice(prefix.length, !line.includes('}}') ? undefined : line.indexOf('}}'))
+    .trim()
 }
 
-const parseNewField = (lino: number, line: string): [string, string, WikiItemType] => {
+const parseNewField = (
+  lino: number,
+  line: string,
+): [string, string, WikiItemType] => {
   const str = line.slice(1)
   const index = str.indexOf('=')
 
@@ -90,7 +93,7 @@ const parseNewField = (lino: number, line: string): [string, string, WikiItemTyp
   switch (value) {
     case '{':
       return [key, '', 'array']
-    default :
+    default:
       return [key, value, 'object']
   }
 }

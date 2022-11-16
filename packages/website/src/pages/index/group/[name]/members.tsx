@@ -16,13 +16,13 @@ const GroupMembersPage = () => {
   const { data: groupModMembers } = useGroupMembers(name as string, {
     offset,
     type: 'mod',
-    disable: curPage > 1
+    disable: curPage > 1,
   })
 
   const { data, total } = useGroupMembers(name as string, {
     offset,
     limit: pageSize,
-    type: 'normal'
+    type: 'normal',
   })
   const [, navigate] = useTransitionNavigate()
 
@@ -33,18 +33,19 @@ const GroupMembersPage = () => {
   // TODO: 遵循旧站的交互规则，可能需要改动
   return (
     <>
-      {curPage === 1 &&
+      {curPage === 1 && (
         <Section title="小组管理员">
           <div className={styles.members}>
-            {(groupModMembers ?? []).map((member) =>
+            {(groupModMembers ?? []).map((member) => (
               <UserCard
                 mode="horizontal"
                 user={{ ...member, avatar: member.avatar.large }}
                 key={member.id}
               />
-            )}
+            ))}
           </div>
-        </Section>}
+        </Section>
+      )}
       <Section title="小组成员">
         <div className={styles.members}>
           {(data ?? []).map((member) => {
@@ -57,7 +58,11 @@ const GroupMembersPage = () => {
             )
           })}
         </div>
-        <Pagination total={total} currentPage={curPage} onChange={handlePageChange} />
+        <Pagination
+          total={total}
+          currentPage={curPage}
+          onChange={handlePageChange}
+        />
       </Section>
     </>
   )

@@ -1,7 +1,7 @@
 import { mergeTags, Parser } from '../parser'
 import { CodeNodeTypes } from '../types'
 
-function getNodes (input: string): CodeNodeTypes[] {
+function getNodes(input: string): CodeNodeTypes[] {
   const p = new Parser(input)
   return p.parse()
 }
@@ -19,30 +19,30 @@ describe('bbcode parser', () => {
       {
         type: 'sticker',
         props: {
-          stickerId: '(bgm38)'
-        }
+          stickerId: '(bgm38)',
+        },
       },
       '[',
       '/',
       {
         type: 'sticker',
         props: {
-          stickerId: '(=A=)'
-        }
+          stickerId: '(=A=)',
+        },
       },
       ']',
       {
         type: 'sticker',
         props: {
-          stickerId: '(=///=)'
-        }
+          stickerId: '(=///=)',
+        },
       },
       {
         type: 'sticker',
         props: {
-          stickerId: '(bgm01)'
-        }
-      }
+          stickerId: '(bgm01)',
+        },
+      },
     ]
     const nodes = getNodes(input)
     for (let i = 0; i < nodes.length; i++) {
@@ -55,10 +55,10 @@ describe('bbcode parser', () => {
       {
         type: 'url',
         props: {
-          url: 'http://chii.in'
+          url: 'http://chii.in',
         },
-        children: ['bgm']
-      }
+        children: ['bgm'],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -67,8 +67,8 @@ describe('bbcode parser', () => {
     const tests: CodeNodeTypes[] = [
       {
         type: 'url',
-        children: ['http://chii.in/']
-      }
+        children: ['http://chii.in/'],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -84,8 +84,8 @@ describe('bbcode parser', () => {
       '存放于其他网络服务器的图片：\n',
       {
         type: 'img',
-        children: ['http://chii.in/img/ico/bgm88-31.gif']
-      }
+        children: ['http://chii.in/img/ico/bgm88-31.gif'],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -107,56 +107,56 @@ describe('bbcode parser', () => {
       '我是',
       {
         type: 'mask',
-        children: ['马赛克文字']
+        children: ['马赛克文字'],
       },
       '\n',
       {
         type: 's',
-        children: ['删除线文字']
+        children: ['删除线文字'],
       },
       '\n',
       {
         type: 'u',
-        children: ['下划线文字']
+        children: ['下划线文字'],
       },
       '\n',
       {
         type: 'i',
-        children: ['斜体字']
+        children: ['斜体字'],
       },
       '\n',
       {
         type: 'b',
-        children: ['粗体字']
+        children: ['粗体字'],
       },
       '\n',
       {
         type: 'color',
         props: {
-          color: 'red'
+          color: 'red',
         },
-        children: ['彩']
+        children: ['彩'],
       },
       {
         type: 'color',
         props: {
-          color: 'green'
+          color: 'green',
         },
-        children: ['色']
+        children: ['色'],
       },
       {
         type: 'color',
         props: {
-          color: 'blue'
+          color: 'blue',
         },
-        children: ['的']
+        children: ['的'],
       },
       {
         type: 'color',
         props: {
-          color: 'orange'
+          color: 'orange',
         },
-        children: ['哟']
+        children: ['哟'],
       },
       '\n',
       { type: 'quote', children: ['引用'] },
@@ -170,7 +170,7 @@ describe('bbcode parser', () => {
       { type: 'indent', children: ['块引用'] },
       '\n',
       { type: 'float', children: ['浮动'] },
-      '\n'
+      '\n',
     ]
     const nodes = getNodes(input)
     for (let i = 0; i < nodes.length; i++) {
@@ -188,12 +188,12 @@ describe('bbcode parser', () => {
           {
             type: 'size',
             props: {
-              size: '16'
+              size: '16',
             },
-            children: ['更新：']
-          }
-        ]
-      }
+            children: ['更新：'],
+          },
+        ],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -207,12 +207,12 @@ describe('bbcode parser', () => {
           {
             type: 'color',
             props: {
-              color: 'blue'
+              color: 'blue',
             },
-            children: ['更新：']
-          }
-        ]
-      }
+            children: ['更新：'],
+          },
+        ],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -221,8 +221,8 @@ describe('bbcode parser', () => {
     const tests: CodeNodeTypes[] = [
       {
         type: 'code',
-        children: ['afafaf[b]bbbbb[/b]']
-      }
+        children: ['afafaf[b]bbbbb[/b]'],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -234,24 +234,26 @@ describe('bbcode parser', () => {
           { type: 'code', children: ['[code]1'] },
           '[',
           '/code] ',
-          { type: 'code', children: ['2'] }
-        ]
+          { type: 'code', children: ['2'] },
+        ],
       ],
-      ['[code]1[/code][/code] [code]2[/code]',
+      [
+        '[code]1[/code][/code] [code]2[/code]',
         [
           { type: 'code', children: ['1'] },
           '[',
           '/code] ',
-          { type: 'code', children: ['2'] }
-        ]
+          { type: 'code', children: ['2'] },
+        ],
       ],
-      ['[code][code]1[/code] [code]2[/code]',
+      [
+        '[code][code]1[/code] [code]2[/code]',
         [
           { type: 'code', children: ['[code]1'] },
           ' ',
-          { type: 'code', children: ['2'] }
-        ]
-      ]
+          { type: 'code', children: ['2'] },
+        ],
+      ],
     ]
     for (const [input, expected] of tests) {
       expect(getNodes(input)).toEqual(expect.arrayContaining(expected))
@@ -267,7 +269,7 @@ describe('bbcode parser', () => {
     const tests: CodeNodeTypes[] = [
       '[url]Bangumi 番组计划[/url]',
       '[url=sfaf]番组计划[/url]',
-      '[url][/url]'
+      '[url][/url]',
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })
@@ -283,47 +285,66 @@ describe('bbcode parser', () => {
   test('custom bbcode', () => {
     const input = '[mybbcode]测试自定义tag[/mybbcode]'
     const nodes = new Parser(input, ['mybbcode']).parse()
-    expect(nodes).toEqual([{
-      type: 'mybbcode',
-      children: ['测试自定义tag']
-    }])
+    expect(nodes).toEqual([
+      {
+        type: 'mybbcode',
+        children: ['测试自定义tag'],
+      },
+    ])
   })
   test('merge tags', () => {
     const fn = (): boolean => true
-    const tags = mergeTags(['i', 'b', {
-      name: 's',
-      schema: {
-        s: fn
-      }
-    }], [{
-      name: 'i',
-      schema: {
-        i: fn
-      }
-    }, 's', 'mybbcode'])
-    expect(tags).toEqual(expect.arrayContaining(['b', 's', 'mybbcode', {
-      name: 'i',
-      schema: {
-        i: fn
-      }
-    }]))
+    const tags = mergeTags(
+      [
+        'i',
+        'b',
+        {
+          name: 's',
+          schema: {
+            s: fn,
+          },
+        },
+      ],
+      [
+        {
+          name: 'i',
+          schema: {
+            i: fn,
+          },
+        },
+        's',
+        'mybbcode',
+      ],
+    )
+    expect(tags).toEqual(
+      expect.arrayContaining([
+        'b',
+        's',
+        'mybbcode',
+        {
+          name: 'i',
+          schema: {
+            i: fn,
+          },
+        },
+      ]),
+    )
   })
   test('subject bbcode', () => {
     const tests: Array<[string, CodeNodeTypes[]]> = [
-      ['[subject=1]sub1[/subject]', [{
-        type: 'subject',
-        props: { subject: '1' },
-        children: ['sub1']
-      }]],
-      ['[subject]sub2[/subject]',
-        ['[subject]sub2[/subject]']
+      [
+        '[subject=1]sub1[/subject]',
+        [
+          {
+            type: 'subject',
+            props: { subject: '1' },
+            children: ['sub1'],
+          },
+        ],
       ],
-      ['[subject=01]01[/subject]',
-        ['[subject=01]01[/subject]']
-      ],
-      ['[subject=abc]subabc[/subject]',
-        ['[subject=abc]subabc[/subject]']
-      ]
+      ['[subject]sub2[/subject]', ['[subject]sub2[/subject]']],
+      ['[subject=01]01[/subject]', ['[subject=01]01[/subject]']],
+      ['[subject=abc]subabc[/subject]', ['[subject=abc]subabc[/subject]']],
     ]
     for (const [input, expected] of tests) {
       expect(getNodes(input)).toEqual(expected)
@@ -331,14 +352,17 @@ describe('bbcode parser', () => {
   })
   test('align bbcode', () => {
     const tests: Array<[string, CodeNodeTypes[]]> = [
-      ['[align=left]对齐[/align]', [{
-        type: 'align',
-        props: { align: 'left' },
-        children: ['对齐']
-      }]],
-      ['[align=lft]对齐[/align]',
-        ['[align=lft]对齐[/align]']
-      ]
+      [
+        '[align=left]对齐[/align]',
+        [
+          {
+            type: 'align',
+            props: { align: 'left' },
+            children: ['对齐'],
+          },
+        ],
+      ],
+      ['[align=lft]对齐[/align]', ['[align=lft]对齐[/align]']],
     ]
     for (const [input, expected] of tests) {
       expect(getNodes(input)).toEqual(expected)
@@ -350,14 +374,14 @@ describe('bbcode parser', () => {
       {
         type: 'user',
         props: {
-          user: 'a_little'
+          user: 'a_little',
         },
-        children: ['me']
+        children: ['me'],
       },
       {
         type: 'user',
-        children: ['a_little']
-      }
+        children: ['a_little'],
+      },
     ]
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests))
   })

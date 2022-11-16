@@ -19,10 +19,13 @@ const Avatar: FC<AvatarProps> = ({
   src,
   alt,
   wrapperClass,
-  wrapperStyle
+  wrapperStyle,
 }) => {
   return (
-    <div className={classNames('bgm-avatar', `bgm-avatar--${size}`, wrapperClass)} style={wrapperStyle}>
+    <div
+      className={classNames('bgm-avatar', `bgm-avatar--${size}`, wrapperClass)}
+      style={wrapperStyle}
+    >
       <img src={src} alt={alt} />
     </div>
   )

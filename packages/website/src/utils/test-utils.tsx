@@ -5,15 +5,16 @@ import { MemoryRouter } from 'react-router-dom'
 
 const PageWrapper = ({ children }: PropsWithChildren<{}>) => (
   <MemoryRouter>
-    <UserProvider>
-      {children}
-    </UserProvider>
+    <UserProvider>{children}</UserProvider>
   </MemoryRouter>
 )
 
-export const renderPage = (page: React.ReactElement, options?: RenderOptions): RenderResult => {
+export const renderPage = (
+  page: React.ReactElement,
+  options?: RenderOptions,
+): RenderResult => {
   return render(page, {
     wrapper: PageWrapper,
-    ...options
+    ...options,
   })
 }

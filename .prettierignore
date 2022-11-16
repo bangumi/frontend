@@ -1,11 +1,4 @@
-*.md
-*.js
-*.jsx
-*.ts
-*.tsx
-*.css
-*.less
-*.html
+dist
 pnpm-lock.yaml
 # submodules
 /packages/utils/wiki/__test__/wiki-syntax-spec/

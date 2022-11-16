@@ -10,8 +10,8 @@ const escapeHTML = (str: string): string =>
     .replace(/&/g, '&amp;')
     .replace(/'/g, '&#039;')
 
-function renderProps (
-  props: Record<string, string | boolean> | undefined
+function renderProps(
+  props: Record<string, string | boolean> | undefined,
 ): string {
   if (!props) {
     return ''
@@ -27,11 +27,13 @@ function renderProps (
   }, '')
 }
 
-function renderStyle (style: Record<string, string>): string {
-  return Object.entries(style).map(([key, value]) => `${key}:${escapeHTML(value)}`).join(';')
+function renderStyle(style: Record<string, string>): string {
+  return Object.entries(style)
+    .map(([key, value]) => `${key}:${escapeHTML(value)}`)
+    .join(';')
 }
 
-export function renderNode (node: NodeTypes, parentNode?: VNode): string {
+export function renderNode(node: NodeTypes, parentNode?: VNode): string {
   let result = ''
   if (typeof node === 'string') {
     if (parentNode && parentNode.type === 'pre') {
@@ -69,11 +71,11 @@ export function renderNode (node: NodeTypes, parentNode?: VNode): string {
   return result
 }
 
-function renderText (str: string): string {
+function renderText(str: string): string {
   return str.replace(/\n/g, '<br/>')
 }
 
-export function renderNodes (nodes: NodeTypes[], parentNode?: VNode): string {
+export function renderNodes(nodes: NodeTypes[], parentNode?: VNode): string {
   let result = ''
   nodes.forEach((node) => {
     result += renderNode(node, parentNode)
@@ -81,7 +83,10 @@ export function renderNodes (nodes: NodeTypes[], parentNode?: VNode): string {
   return result
 }
 
-export function render (rawStr: string, converterMap: Record<string, ConverterFn> = {}): string {
+export function render(
+  rawStr: string,
+  converterMap: Record<string, ConverterFn> = {},
+): string {
   let result = ''
   const nodes: CodeNodeTypes[] = new Parser(rawStr).parse()
   nodes.forEach((node) => {

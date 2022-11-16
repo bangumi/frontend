@@ -4,7 +4,7 @@ name: Upload Preview (build)
 
 on:
   workflow_run:
-    workflows: ["Build"]
+    workflows: ['Build']
     types:
       - completed
 
@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: '16.x'
 
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 
@@ -47,8 +47,8 @@ jobs:
         id: fc
         with:
           issue-number: ${{ env.PR_NUMBER }}
-          comment-author: "github-actions[bot]"
-          body-includes: "<!-- build preview comment -->"
+          comment-author: 'github-actions[bot]'
+          body-includes: '<!-- build preview comment -->'
 
       - name: Create or update comment
         uses: peter-evans/create-or-update-comment@v2
@@ -75,7 +75,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: "16.x"
+          node-version: '16.x'
 
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 

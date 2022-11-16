@@ -9,8 +9,8 @@ const componentMeta: ComponentMeta<typeof EditorForm> = {
   component: EditorForm,
   subcomponents: {
     Toolbox,
-    Editor
-  }
+    Editor,
+  },
 }
 
 export default componentMeta
@@ -22,5 +22,5 @@ const Template: ComponentStory<typeof EditorForm> = (args) => {
 export const Usage = Template.bind({})
 
 Usage.args = {
-  placeholder: '请输入内容'
+  placeholder: '请输入内容',
 }

@@ -7,9 +7,7 @@ const GlobalLayout = (props: PropsWithChildren<{}>) => {
   return (
     <div className={styles.container}>
       <Header />
-      <div className={styles.contentWrapper}>
-        {props.children}
-      </div>
+      <div className={styles.contentWrapper}>{props.children}</div>
       <Footer />
     </div>
   )

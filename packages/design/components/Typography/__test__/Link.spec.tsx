@@ -4,11 +4,7 @@ import Link from '../Link'
 import { MemoryRouter } from 'react-router-dom'
 
 const LinkTestWrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => {
-  return (
-    <MemoryRouter>
-      {children}
-    </MemoryRouter>
-  )
+  return <MemoryRouter>{children}</MemoryRouter>
 }
 
 it('should render internal link', () => {
@@ -18,7 +14,9 @@ it('should render internal link', () => {
 })
 
 it('should render external link', () => {
-  const { asFragment } = render(<Link to="https://test.com" isExternal />, { wrapper: LinkTestWrapper })
+  const { asFragment } = render(<Link to="https://test.com" isExternal />, {
+    wrapper: LinkTestWrapper,
+  })
 
   expect(asFragment()).toMatchSnapshot()
 })

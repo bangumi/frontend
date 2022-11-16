@@ -15,7 +15,11 @@ const UserHome: React.FC = () => {
 
   return (
     <main className={styles.pageContainer}>
-      <div className={styles.greets}>Hi! <Link to={getUserProfileLink(user.username)} isExternal>{user.nickname}</Link>
+      <div className={styles.greets}>
+        Hi!{' '}
+        <Link to={getUserProfileLink(user.username)} isExternal>
+          {user.nickname}
+        </Link>
       </div>
     </main>
   )

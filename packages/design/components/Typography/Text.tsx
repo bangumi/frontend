@@ -11,18 +11,17 @@ const Text = ({
   children,
   className,
   style,
-  type = 'default'
+  type = 'default',
 }: PropsWithChildren<TextProps>) => {
   return (
     <span
-      className={
-        classNames(
-          'bgm-text', {
-            'bgm-text--secondary': type === 'secondary'
-          },
-          className
-        )
-      }
+      className={classNames(
+        'bgm-text',
+        {
+          'bgm-text--secondary': type === 'secondary',
+        },
+        className,
+      )}
       style={style}
     >
       {children}

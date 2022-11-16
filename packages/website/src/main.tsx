@@ -10,16 +10,17 @@ import './index.css'
 const root = createRoot(document.getElementById('root')!)
 root.render(
   <React.StrictMode>
-    <SWRConfig value={{
-      refreshWhenHidden: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      shouldRetryOnError: false
-    }}
+    <SWRConfig
+      value={{
+        refreshWhenHidden: false,
+        revalidateOnFocus: false,
+        revalidateOnReconnect: false,
+        shouldRetryOnError: false,
+      }}
     >
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </SWRConfig>
-  </React.StrictMode>
+  </React.StrictMode>,
 )

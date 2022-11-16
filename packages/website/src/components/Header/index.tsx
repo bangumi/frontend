@@ -2,7 +2,15 @@ import React, { FC, useState } from 'react'
 import style from './style.module.less'
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons'
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design'
-import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
+import {
+  animeSubMenu,
+  bookSubMenu,
+  musicSubMenu,
+  gameSubMenu,
+  realSubMenu,
+  monoSubMenu,
+  groupSubMenu,
+} from './SubMenu'
 import { useUser } from '../../hooks/use-user'
 import { Link } from 'react-router-dom'
 
@@ -17,56 +25,56 @@ const navLeft = [
   {
     key: 'animation',
     label: '动画',
-    subMenu: animeSubMenu
+    subMenu: animeSubMenu,
   },
   {
     key: 'book',
     label: '书籍',
-    subMenu: bookSubMenu
+    subMenu: bookSubMenu,
   },
   {
     key: 'music',
     label: '音乐',
-    subMenu: musicSubMenu
+    subMenu: musicSubMenu,
   },
   {
     key: 'game',
     label: '游戏',
-    subMenu: gameSubMenu
+    subMenu: gameSubMenu,
   },
   {
     key: 'drama',
     label: '三次元',
-    subMenu: realSubMenu
-  }
+    subMenu: realSubMenu,
+  },
 ]
 
 const navRight = [
   {
     key: 'mono',
     label: '人物',
-    subMenu: monoSubMenu
+    subMenu: monoSubMenu,
   },
   {
     key: 'rakuen',
-    label: '超展开'
+    label: '超展开',
   },
   {
     key: 'group',
     label: '小组',
-    subMenu: groupSubMenu
+    subMenu: groupSubMenu,
   },
   {
     key: 'explore',
-    label: '探索'
+    label: '探索',
   },
   {
     key: 'doujin',
-    label: '天窗联盟'
-  }
+    label: '天窗联盟',
+  },
 ]
 
-function getRandomNumber (n: number): number {
+function getRandomNumber(n: number): number {
   return Math.floor(Math.random() * n)
 }
 
@@ -87,27 +95,25 @@ const Header: FC = () => {
           </div>
           {/* Mobile Menu Toggle Button */}
           <Button
-            className={style.mobileMenuToggle} shape="rounded" type={showMobileMenu ? 'primary' : 'secondary'}
-            onClick={() => setShowMobileMenu(show => !show)}
+            className={style.mobileMenuToggle}
+            shape="rounded"
+            type={showMobileMenu ? 'primary' : 'secondary'}
+            onClick={() => setShowMobileMenu((show) => !show)}
           >
             {showMobileMenu ? '关闭' : '菜单'}
           </Button>
           {/* Menu */}
           <div className={style.nav}>
-            <Menu
-              items={navLeft} wrapperClass={style.navLeft}
-            />
+            <Menu items={navLeft} wrapperClass={style.navLeft} />
             <Divider orientation="vertical" className={style.divider} />
-            <Menu
-              items={navRight} wrapperClass={style.navRight}
-            />
+            <Menu items={navRight} wrapperClass={style.navRight} />
           </div>
         </div>
         <div className="flex items-center">
           <div className={style.infoBox}>
             {/* Search Todo */}
             <Input
-              prefix={(
+              prefix={
                 <>
                   <select
                     name="cat"
@@ -121,24 +127,33 @@ const Header: FC = () => {
                     <option value="value5">三次元</option>
                     <option value="value6">人物</option>
                   </select>
-                  <Divider orientation="vertical" className={style.searchDivider} />
+                  <Divider
+                    orientation="vertical"
+                    className={style.searchDivider}
+                  />
                 </>
-              )}
+              }
               suffix={<SearchIcon style={{ flexShrink: 0 }} />}
               wrapperClass={style.search}
             />
           </div>
           {/* Avatar */}
-          {user
-            ? <>
+          {user ? (
+            <>
               <Notification className={style.iconNotification} />
               <Setting className={style.iconSetting} />
               <Avatar src={user?.avatar?.large} wrapperClass={style.avatar} />
             </>
-            : <span className={style.userLogin}>
-              <Link className={style.link} to="/login">登录</Link>
-              <Link className={style.link} to="/register">注册</Link>
-            </span>}
+          ) : (
+            <span className={style.userLogin}>
+              <Link className={style.link} to="/login">
+                登录
+              </Link>
+              <Link className={style.link} to="/register">
+                注册
+              </Link>
+            </span>
+          )}
         </div>
       </div>
     </div>

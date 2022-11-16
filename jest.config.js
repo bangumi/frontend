@@ -26,10 +26,7 @@ module.exports = {
   // coverageDirectory: undefined,
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: [
-    '/node_modules/',
-    'packages/website/src/mocks/'
-  ],
+  coveragePathIgnorePatterns: ['/node_modules/', 'packages/website/src/mocks/'],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
@@ -83,9 +80,10 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
+      'jest-transform-stub',
     '.+\\.svg$': '<rootDir>/__mocks__/svg.js',
-    '@bangumi/website/(.*)': '<rootDir>/packages/website/src/$1'
+    '@bangumi/website/(.*)': '<rootDir>/packages/website/src/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
@@ -135,7 +133,7 @@ module.exports = {
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: [
     '<rootDir>/jest-setup.ts',
-    '<rootDir>/packages/website/jest-setup.ts'
+    '<rootDir>/packages/website/jest-setup.ts',
   ],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
@@ -145,7 +143,7 @@ module.exports = {
   // snapshotSerializers: [],
 
   // The test environment that will be used for testing
-  testEnvironment: 'jsdom'
+  testEnvironment: 'jsdom',
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},

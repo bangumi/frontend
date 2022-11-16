@@ -6,14 +6,18 @@ import { rest } from 'msw'
 import Boring from './fixtures/boring.json'
 import RecentTopics from './fixtures/recent-topics.json'
 import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom'
-import { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group'
+import {
+  GroupProfile,
+  ResponseWithPagination,
+  Topic,
+} from '@bangumi/types/group'
 import GroupPage from '@bangumi/website/pages/index/group/[name]'
 
 jest.mock('react-router-dom', () => {
   return {
     __esModule: true,
     ...jest.requireActual('react-router-dom'),
-    useParams: jest.fn()
+    useParams: jest.fn(),
   }
 })
 
@@ -21,34 +25,39 @@ const mockedUseParams = jest.mocked(useParams)
 
 class GroupHomeTest {
   page: RenderResult
-  constructor (
+  constructor(
     name: string,
-    mock: { group?: GroupProfile, topics?: ResponseWithPagination<Topic[]> }
+    mock: { group?: GroupProfile; topics?: ResponseWithPagination<Topic[]> },
   ) {
     mockedUseParams.mockReturnValue({
-      name
+      name,
     })
 
-    mockServer.use(rest.get(`http://localhost/p/groups/${name}`, (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(mock.group ?? Boring))
-    }))
+    mockServer.use(
+      rest.get(`http://localhost/p/groups/${name}`, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(mock.group ?? Boring))
+      }),
+    )
 
-    mockServer.use(rest.get(`http://localhost/p/groups/${name}/topics`, (req, res, ctx) => {
-      return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics))
-    }))
+    mockServer.use(
+      rest.get(`http://localhost/p/groups/${name}/topics`, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics))
+      }),
+    )
 
-    this.page = render(<MemoryRouter>
-      <Routes>
-        <Route element={<GroupPage />}>
-          <Route index element={<GroupHome />} />
-        </Route>
-      </Routes>
-      <GroupHome />
-    </MemoryRouter>
+    this.page = render(
+      <MemoryRouter>
+        <Routes>
+          <Route element={<GroupPage />}>
+            <Route index element={<GroupHome />} />
+          </Route>
+        </Routes>
+        <GroupHome />
+      </MemoryRouter>,
     )
   }
 
-  async assertHeader (expectedHeader: string): Promise<void> {
+  async assertHeader(expectedHeader: string): Promise<void> {
     const { getByText } = this.page
 
     await waitFor(() => {
@@ -56,7 +65,7 @@ class GroupHomeTest {
     })
   }
 
-  async assertTopicExist (expectTopic: {
+  async assertTopicExist(expectTopic: {
     title: string
     creator: string
     replyCount: number
@@ -80,12 +89,15 @@ it('should match snapshot properly', async () => {
 })
 
 it('should list recent topics', async () => {
-  const test = new GroupHomeTest('test', { group: Boring as GroupProfile, topics: RecentTopics as ResponseWithPagination<Topic[]> })
+  const test = new GroupHomeTest('test', {
+    group: Boring as GroupProfile,
+    topics: RecentTopics as ResponseWithPagination<Topic[]>,
+  })
 
   await test.assertTopicExist({
     title: '看了4000本漫画，大家有什么想问的',
     creator: 'brad',
     replyCount: 40,
-    updatedAt: '2022-7-24'
+    updatedAt: '2022-7-24',
   })
 })

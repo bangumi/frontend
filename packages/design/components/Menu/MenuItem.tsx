@@ -13,36 +13,36 @@ export interface MenuItemProps {
   subMenu?: JSX.Element
 }
 
-const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, subMenu }) => {
-  const {
-    onClick: onClickEmit,
-    activeKey,
-    mode
-  } = useMenuContext()
+const MenuItem: FC<MenuItemProps> = ({
+  id,
+  label,
+  className: customClassName,
+  subMenu,
+}) => {
+  const { onClick: onClickEmit, activeKey, mode } = useMenuContext()
 
   const isActive = id === activeKey
 
   const className = classnames(
     'bgm-menu-item',
     {
-      'bgm-menu-item--active': isActive
+      'bgm-menu-item--active': isActive,
     },
     `bgm-menu-item--${mode === 'horizontal' ? 'underline' : 'circle'}`,
-    customClassName
+    customClassName,
   )
 
   return (
     <li
       className={className}
-      onClick={onClickEmit && (e => onClickEmit(id, e))}
+      onClick={onClickEmit && ((e) => onClickEmit(id, e))}
     >
       {label}
-      {
-        subMenu &&
-          <div className="bgm-menu-item__submenu" data-testid="submenu">
-            {subMenu}
-          </div>
-      }
+      {subMenu && (
+        <div className="bgm-menu-item__submenu" data-testid="submenu">
+          {subMenu}
+        </div>
+      )}
     </li>
   )
 }

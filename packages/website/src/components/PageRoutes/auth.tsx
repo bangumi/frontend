@@ -8,7 +8,11 @@ interface RequireAuthProps {
   redirectUrlWhenUnauthorized: string
 }
 
-export const RequireAuth: React.FC<PropsWithChildren<RequireAuthProps>> = ({ groupRequired, redirectUrlWhenUnauthorized, children }) => {
+export const RequireAuth: React.FC<PropsWithChildren<RequireAuthProps>> = ({
+  groupRequired,
+  redirectUrlWhenUnauthorized,
+  children,
+}) => {
   const { user, redirectToLogin } = useUser()
   const navigate = useNavigate()
 

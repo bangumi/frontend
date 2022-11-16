@@ -1,4 +1,8 @@
-import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants'
+import {
+  BGM_STICKER_START_STR,
+  EMOJI_ARRAY,
+  MAX_EMOJI_LENGTH,
+} from './constants'
 import { CodeNodeTypes, CodeVNode } from './types'
 
 const INVALID_NODE_MSG = 'invalid node'
@@ -16,20 +20,27 @@ export interface CustomTag {
 type ITag = CustomTag | string
 
 // 只有一个 string child
-function getStringChild (node: CodeVNode): string | undefined {
-  if (!!node.children && node.children.length === 1 && typeof node.children[0] === 'string') {
+function getStringChild(node: CodeVNode): string | undefined {
+  if (
+    !!node.children &&
+    node.children.length === 1 &&
+    typeof node.children[0] === 'string'
+  ) {
     return node.children[0]
   }
 }
 
-function getNodeProp (node: CodeVNode, prop: string): string | boolean | undefined {
+function getNodeProp(
+  node: CodeVNode,
+  prop: string,
+): string | boolean | undefined {
   const props = node.props ?? {}
   return props[prop]
 }
 
-function isValidUrl (str: string): boolean {
+function isValidUrl(str: string): boolean {
   try {
-    ; (() => new URL(str))()
+    ;(() => new URL(str))()
   } catch (error) {
     return false
   }
@@ -45,14 +56,14 @@ const DEFAULT_TAGS: ITag[] = [
   {
     name: 'color',
     schema: {
-      color: (value) => !!value
-    }
+      color: (value) => !!value,
+    },
   },
   {
     name: 'size',
     schema: {
-      size: (value) => /\d+/.test(value)
-    }
+      size: (value) => /\d+/.test(value),
+    },
   },
   {
     name: 'url',
@@ -63,8 +74,8 @@ const DEFAULT_TAGS: ITag[] = [
           href = getStringChild(node)
         }
         return isValidUrl(href)
-      }
-    }
+      },
+    },
   },
   {
     name: 'img',
@@ -72,8 +83,8 @@ const DEFAULT_TAGS: ITag[] = [
       children: (value, node) => {
         const src = getStringChild(node)
         return isValidUrl(src!)
-      }
-    }
+      },
+    },
   },
   'sticker',
   'left',
@@ -88,8 +99,8 @@ const DEFAULT_TAGS: ITag[] = [
     schema: {
       subject: (value) => {
         return /^[1-9]\d*/.test(value)
-      }
-    }
+      },
+    },
   },
   'subject',
   {
@@ -101,30 +112,30 @@ const DEFAULT_TAGS: ITag[] = [
           userId = getStringChild(node)
         }
         return !!userId
-      }
-    }
+      },
+    },
   },
   {
     name: 'align',
     schema: {
       align: (value) => {
         return ['left', 'right', 'center'].includes(value)
-      }
-    }
-  }
+      },
+    },
+  },
 ]
 
 // 合并 tag 配置。新的覆盖旧的
-export function mergeTags (tagList: ITag[], toMergeTags: ITag[]): ITag[] {
+export function mergeTags(tagList: ITag[], toMergeTags: ITag[]): ITag[] {
   const results: ITag[] = [...toMergeTags]
-  tagList.forEach(tag => {
+  tagList.forEach((tag) => {
     let name = ''
     if (typeof tag === 'string') {
       name = tag
     } else {
       name = tag.name
     }
-    const idx = results.findIndex(t => {
+    const idx = results.findIndex((t) => {
       if (typeof t === 'string') {
         return t === name
       } else {
@@ -145,7 +156,7 @@ export class Parser {
   private readonly ctxStack: Array<{ startIdx: number }>
   private readonly tagStack: string[]
   private readonly validTags: ITag[]
-  constructor (input: string, tags: ITag[] = []) {
+  constructor(input: string, tags: ITag[] = []) {
     this.input = input
     this.pos = 0
     this.ctxStack = []
@@ -154,7 +165,7 @@ export class Parser {
     this.validTags = mergeTags(DEFAULT_TAGS, tags)
   }
 
-  parse (): CodeNodeTypes[] {
+  parse(): CodeNodeTypes[] {
     const nodes: CodeNodeTypes[] = []
     while (true) {
       if (this.eof() || (this.tagStack.length > 0 && this.startsWith('[/'))) {
@@ -165,7 +176,7 @@ export class Parser {
     return nodes
   }
 
-  private parseNode (): CodeNodeTypes {
+  private parseNode(): CodeNodeTypes {
     this.enterNode()
     let node: CodeNodeTypes = ''
     try {
@@ -192,7 +203,7 @@ export class Parser {
     return node
   }
 
-  private parseStickerNode (): CodeNodeTypes {
+  private parseStickerNode(): CodeNodeTypes {
     if (!this.startsWith(BGM_STICKER_START_STR)) {
       const target = this.input.slice(this.pos, this.pos + MAX_EMOJI_LENGTH)
       const emoji = EMOJI_ARRAY.find((s) => target.startsWith(s))
@@ -204,8 +215,8 @@ export class Parser {
       return {
         type: 'sticker',
         props: {
-          stickerId: emoji
-        }
+          stickerId: emoji,
+        },
       }
     }
     this.pos += BGM_STICKER_START_STR.length
@@ -220,13 +231,13 @@ export class Parser {
     return {
       type: 'sticker',
       props: {
-        stickerId: `(bgm${id})`
-      }
+        stickerId: `(bgm${id})`,
+      },
     }
   }
 
   // @TODO 暂时只支持 Bangumi 的 bbcode; 不支持 [style size="30px"]Large Text[/style]
-  private parseBBCodeNode (): CodeNodeTypes {
+  private parseBBCodeNode(): CodeNodeTypes {
     let c = this.consumeChar()
     const openTag = this.parseTagName()
     c = this.consumeChar()
@@ -248,7 +259,7 @@ export class Parser {
       this.pos = idx + codeEndTag.length
       return {
         type: 'code',
-        children: [this.input.slice(pos, idx)]
+        children: [this.input.slice(pos, idx)],
       }
     }
     this.tagStack.push(openTag)
@@ -263,11 +274,11 @@ export class Parser {
     this.validateStartStr(']')
     const n: CodeNodeTypes = {
       type: openTag,
-      children
+      children,
     }
     if (prop) {
       n.props = {
-        [openTag]: prop
+        [openTag]: prop,
       }
     }
     if (!this.isValidBBCode(n)) {
@@ -276,7 +287,7 @@ export class Parser {
     return n
   }
 
-  private parseTagName (): string {
+  private parseTagName(): string {
     const tag = this.consumeWhile((c) => /[a-zA-Z]/.test(c))
     if (!tag) {
       throw new Error(INVALID_NODE_MSG)
@@ -284,11 +295,11 @@ export class Parser {
     return tag
   }
 
-  private parseText (): string {
+  private parseText(): string {
     return this.consumeWhile((c) => !['(', '['].includes(c))
   }
 
-  private consumeWhile (checkFn: CheckCharFn): string {
+  private consumeWhile(checkFn: CheckCharFn): string {
     let result = ''
     while (!this.eof() && checkFn(this.curChar())) {
       result += this.consumeChar()
@@ -296,35 +307,35 @@ export class Parser {
     return result
   }
 
-  private consumeChar (): string {
+  private consumeChar(): string {
     const cur = this.input[this.pos]
     this.pos += 1
     return cur
   }
 
-  private curChar (): string {
+  private curChar(): string {
     return this.input[this.pos]
   }
 
-  private startsWith (pattern: string): boolean {
+  private startsWith(pattern: string): boolean {
     return this.input.slice(this.pos).startsWith(pattern)
   }
 
-  private eof (): boolean {
+  private eof(): boolean {
     return this.pos >= this.input.length
   }
 
-  private enterNode (): void {
+  private enterNode(): void {
     this.ctxStack.push({
-      startIdx: this.pos
+      startIdx: this.pos,
     })
   }
 
-  private exitNode (): void {
+  private exitNode(): void {
     this.ctxStack.pop()
   }
 
-  private validateStartStr (str: string): boolean {
+  private validateStartStr(str: string): boolean {
     let count = 0
     while (count < str.length) {
       if (this.consumeChar() !== str[count]) {
@@ -335,7 +346,7 @@ export class Parser {
     return true
   }
 
-  isValidBBCode (node: CodeVNode): boolean {
+  isValidBBCode(node: CodeVNode): boolean {
     const idx = this.findTag(node.type)
     if (idx === -1) {
       return false
@@ -357,8 +368,8 @@ export class Parser {
     return true
   }
 
-  private findTag (name: string): number {
-    return this.validTags.findIndex(tag => {
+  private findTag(name: string): number {
+    return this.validTags.findIndex((tag) => {
       if (typeof tag === 'string') {
         return tag === name
       } else {
