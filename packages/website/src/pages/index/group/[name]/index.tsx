@@ -1,6 +1,7 @@
 import { Section } from '@bangumi/design'
 import React from 'react'
-import { useParams, Link as RouterLink } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
+import { Link as RouterLink } from '@bangumi/website/components/Link'
 import { DescriptionClamp, useGroupTopic } from '@bangumi/website/hooks/use-group'
 import CommonStyles from '../common.module.less'
 import { render as renderBBCode } from '@bangumi/utils'

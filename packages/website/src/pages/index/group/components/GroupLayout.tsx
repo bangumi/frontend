@@ -1,6 +1,6 @@
 import { Section, Tab } from '@bangumi/design'
 import React, { PropsWithChildren } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from '@bangumi/website/components/Link'
 import type { GroupProfile } from '@bangumi/types/group'
 import { GroupHeader } from './GroupHeader'
 import styles from './GroupLayout.module.less'

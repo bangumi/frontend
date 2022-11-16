@@ -4,7 +4,7 @@ import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons'
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design'
 import { animeSubMenu, bookSubMenu, musicSubMenu, gameSubMenu, realSubMenu, monoSubMenu, groupSubMenu } from './SubMenu'
 import { useUser } from '../../hooks/use-user'
-import { Link } from 'react-router-dom'
+import { Link } from '@bangumi/website/components/Link'
 
 // todo: SVG Sprites
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg'
