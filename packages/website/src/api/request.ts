@@ -10,7 +10,7 @@ export async function privateGet (url: string): Promise<any> {
 }
 
 export function privatePost (url: string, options: { json: Record<string, any> }): Promise<Response> {
-  let body
+  let body: BodyInit | null = null
   const header = new Headers()
   if (options.json) {
     body = JSON.stringify(options.json)
