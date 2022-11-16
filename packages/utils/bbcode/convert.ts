@@ -1,5 +1,5 @@
-import { BGM_STICKER_START_STR, EMOJI_ARRAY, STICKER_DOMAIN_URL } from './constants'
-import { CodeNodeTypes, CodeVNode, ConverterFn, NodeTypes, VNode } from './types'
+import { BGM_STICKER_START_STR, EMOJI_ARRAY, STICKER_DOMAIN_URL } from './constants';
+import { CodeNodeTypes, CodeVNode, ConverterFn, NodeTypes, VNode } from './types';
 
 const BGM_HOST_ARR = [
   'chii.in',
@@ -8,45 +8,45 @@ const BGM_HOST_ARR = [
   'www.bangumi.tv',
   'bgm.tv',
   'www.bgm.tv',
-]
+];
 function isExternalLink(url: string): boolean {
   try {
-    const urlObj = new URL(url)
-    return !BGM_HOST_ARR.includes(urlObj.host)
+    const urlObj = new URL(url);
+    return !BGM_HOST_ARR.includes(urlObj.host);
   } catch (error) {
-    return true
+    return true;
   }
 }
 
 function convertImgNode(node: CodeVNode): VNode {
-  const src = node.children![0] as string
+  const src = node.children![0] as string;
   const vnode: VNode = {
     type: 'img',
     props: {
       src,
     },
     className: 'code',
-  }
+  };
   if (isExternalLink(src)) {
     vnode.props = {
       ...vnode.props,
       referrerpolicy: 'no-referrer',
       ref: 'noreferrer',
-    }
+    };
   }
-  return vnode
+  return vnode;
 }
 
 function setVNodeChildren(vnode: VNode, node: CodeVNode): void {
   if (node.children) {
-    vnode.children = node.children.map((c) => convert(c))
+    vnode.children = node.children.map((c) => convert(c));
   }
 }
 
 function convertUrlNode(node: CodeVNode): VNode {
-  let href = node?.props?.url as string
+  let href = node?.props?.url as string;
   if (!href) {
-    href = node.children![0] as string
+    href = node.children![0] as string;
   }
   const vnode: VNode = {
     type: 'a',
@@ -54,63 +54,63 @@ function convertUrlNode(node: CodeVNode): VNode {
       href,
     },
     className: 'l',
-  }
+  };
   if (node.children) {
-    vnode.children = node.children.map((c) => convert(c))
+    vnode.children = node.children.map((c) => convert(c));
   }
   if (isExternalLink(href)) {
     vnode.props = {
       ...vnode.props,
       target: '_blank',
       ref: 'nofollow external noopener noreferrer',
-    }
+    };
   }
-  return vnode
+  return vnode;
 }
 
 function convertStickerNode(node: CodeVNode): string {
-  const stickerId = node.props!.stickerId as string
-  let id = -1
+  const stickerId = node.props!.stickerId as string;
+  let id = -1;
   if (stickerId.startsWith(BGM_STICKER_START_STR)) {
-    const m = stickerId.match(/\d+/)!
-    id = +m[0] + EMOJI_ARRAY.length
+    const m = stickerId.match(/\d+/)!;
+    id = +m[0] + EMOJI_ARRAY.length;
   } else {
-    id = EMOJI_ARRAY.indexOf(stickerId) + 1
+    id = EMOJI_ARRAY.indexOf(stickerId) + 1;
   }
   if (id >= 1 && id < 17) {
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`;
   } else if (id >= 17 && id < 39) {
-    const m = stickerId.match(/\d+/)!
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`
+    const m = stickerId.match(/\d+/)!;
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`;
   } else if (id === 39) {
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`;
   } else if (id >= 40 && id < 140) {
-    let tvId: string | number = id - 39
+    let tvId: string | number = id - 39;
     if (tvId < 10) {
-      tvId = `0${tvId}`
+      tvId = `0${tvId}`;
     }
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`;
   } else {
-    return stickerId
+    return stickerId;
   }
 }
 
 function convertQuote(node: CodeVNode): VNode {
   const q: VNode = {
     type: 'q',
-  }
-  setVNodeChildren(q, node)
+  };
+  setVNodeChildren(q, node);
   return {
     type: 'div',
     className: 'quote',
     children: [q],
-  }
+  };
 }
 
 function convertUser(node: CodeVNode): VNode {
-  let userId = node?.props?.user as string
+  let userId = node?.props?.user as string;
   if (!userId) {
-    userId = node.children![0] as string
+    userId = node.children![0] as string;
   }
   return {
     type: 'a',
@@ -119,7 +119,7 @@ function convertUser(node: CodeVNode): VNode {
     },
     className: 'l',
     children: [`@${node.children![0] as string}`],
-  }
+  };
 }
 
 function toVNode(
@@ -130,9 +130,9 @@ function toVNode(
   const vnode: VNode = {
     type,
     ...props,
-  }
-  setVNodeChildren(vnode, node)
-  return vnode
+  };
+  setVNodeChildren(vnode, node);
+  return vnode;
 }
 
 const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
@@ -215,25 +215,25 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
       className: 'l',
     }),
   user: convertUser,
-}
+};
 
 export function convert(
   node: CodeNodeTypes,
   converterMap: Record<string, ConverterFn> = {},
 ): NodeTypes {
   if (typeof node === 'string') {
-    return node
+    return node;
   }
-  let converterFn = converterMap[node.type]
+  let converterFn = converterMap[node.type];
   if (!converterFn) {
-    converterFn = CONVERTER_FN_MAP[node.type]
+    converterFn = CONVERTER_FN_MAP[node.type];
   }
   if (converterFn) {
-    return converterFn(node)
+    return converterFn(node);
   }
   const vnode: VNode = {
     type: node.type,
-  }
-  setVNodeChildren(vnode, node)
-  return vnode
+  };
+  setVNodeChildren(vnode, node);
+  return vnode;
 }

@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
-import { ReactComponent as BangumiTextLogo } from '../../assets/logo.svg'
-import style from './style.module.less'
+import React, { FC } from 'react';
+import { ReactComponent as BangumiTextLogo } from '../../assets/logo.svg';
+import style from './style.module.less';
 
 interface IBlockItem {
-  title: string
-  items: Array<{ key: string; label: string }>
+  title: string;
+  items: Array<{ key: string; label: string }>;
 }
 
 const FooterBlockItem: FC<{ block: IBlockItem }> = ({ block }) => {
@@ -17,8 +17,8 @@ const FooterBlockItem: FC<{ block: IBlockItem }> = ({ block }) => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 
 const aboutBlock: IBlockItem = {
   title: '关于我们',
@@ -40,7 +40,7 @@ const aboutBlock: IBlockItem = {
       label: '链接我们',
     },
   ],
-}
+};
 
 const helpBlock: IBlockItem = {
   title: '获得帮助',
@@ -62,7 +62,7 @@ const helpBlock: IBlockItem = {
       label: '天窗站务',
     },
   ],
-}
+};
 
 const devBlock: IBlockItem = {
   title: '开发相关',
@@ -84,7 +84,7 @@ const devBlock: IBlockItem = {
       label: '客户端',
     },
   ],
-}
+};
 
 const specialBlock: IBlockItem = {
   title: '特别推荐',
@@ -102,7 +102,7 @@ const specialBlock: IBlockItem = {
       label: 'etokei 绘时计',
     },
   ],
-}
+};
 
 const moreBlock: IBlockItem = {
   title: '更多',
@@ -124,9 +124,9 @@ const moreBlock: IBlockItem = {
       label: 'Dollars',
     },
   ],
-}
+};
 
-const getThisYear = (): string => new Date().getFullYear().toString()
+const getThisYear = (): string => new Date().getFullYear().toString();
 
 const Footer: FC = () => {
   return (
@@ -151,7 +151,7 @@ const Footer: FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

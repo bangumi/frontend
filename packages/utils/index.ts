@@ -1,6 +1,6 @@
-export { default as parseWiki } from './wiki/parser'
-export { render, convert } from './bbcode'
-export * from './bbcode'
+export { default as parseWiki } from './wiki/parser';
+export { render, convert } from './bbcode';
+export * from './bbcode';
 
 /**
  * 输入一个对象数组，提取对象中的某个值作为新对象中的键，值为对象本身
@@ -26,5 +26,5 @@ export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
       [cur[key]]: cur,
     }),
     Object.assign({}),
-  )
-}
+  );
+};

@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react'
-import classnames from 'classnames'
+import React, { PropsWithChildren } from 'react';
+import classnames from 'classnames';
 
 interface ItemProps {
-  isActive: boolean
-  type: 'default' | 'borderless'
-  onClick: () => void
+  isActive: boolean;
+  type: 'default' | 'borderless';
+  onClick: () => void;
 }
 const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onClick, type }) => {
   return (
@@ -16,23 +16,23 @@ const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onCl
     >
       {children}
     </li>
-  )
-}
+  );
+};
 
 interface ItemType {
-  key: string
-  label: string
+  key: string;
+  label: string;
 }
 
 export interface TabProps {
   /* 节点数组 */
-  items: ItemType[]
+  items: ItemType[];
   /* 选中节点的 Key */
-  activeKey: string
+  activeKey: string;
   /* 点击切换事件回调，对每一个 Item 都生效 */
-  onChange?: (key: string) => void
+  onChange?: (key: string) => void;
   /* 样式类型 */
-  type?: 'default' | 'borderless'
+  type?: 'default' | 'borderless';
 }
 
 export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'default' }) => {
@@ -45,16 +45,16 @@ export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'de
             isActive={activeKey === item.key}
             type={type}
             onClick={() => {
-              onChange?.(item.key)
+              onChange?.(item.key);
             }}
           >
             {' '}
             {item.label}
           </Item>
-        )
+        );
       })}
     </ul>
-  )
-}
+  );
+};
 
-export default Tab
+export default Tab;

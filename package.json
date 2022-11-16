@@ -29,7 +29,7 @@
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
-    "semi": false,
+    "semi": true,
     "trailingComma": "all"
   },
   "lint-staged": {

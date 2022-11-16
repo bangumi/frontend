@@ -1,6 +1,6 @@
-import React from 'react'
-import Button from '../index'
-import { fireEvent, render } from '@testing-library/react'
+import React from 'react';
+import Button from '../index';
+import { fireEvent, render } from '@testing-library/react';
 
 it.each`
   type
@@ -8,9 +8,9 @@ it.each`
   ${'secondary'}
   ${'text'}
 `('should render button of type $type', ({ type }) => {
-  const { container } = render(<Button type={type}>hello world</Button>)
-  expect(container.firstChild).toMatchSnapshot()
-})
+  const { container } = render(<Button type={type}>hello world</Button>);
+  expect(container.firstChild).toMatchSnapshot();
+});
 
 it.each`
   shape
@@ -21,27 +21,27 @@ it.each`
     <Button type="primary" shape={shape}>
       hello world
     </Button>,
-  )
-  expect(container.firstChild).toMatchSnapshot()
-})
+  );
+  expect(container.firstChild).toMatchSnapshot();
+});
 
 it('should trigger onClick callback', () => {
-  const onClick = jest.fn()
+  const onClick = jest.fn();
   const { getByText } = render(
     <Button type="primary" onClick={onClick}>
       hello world
     </Button>,
-  )
-  fireEvent.click(getByText('hello world'))
+  );
+  fireEvent.click(getByText('hello world'));
 
-  expect(onClick).toBeCalledTimes(1)
-})
+  expect(onClick).toBeCalledTimes(1);
+});
 
 it('should disable the button if disabled is true', () => {
   const { getByText } = render(
     <Button type="primary" disabled>
       hello world
     </Button>,
-  )
-  expect(getByText('hello world')).toBeDisabled()
-})
+  );
+  expect(getByText('hello world')).toBeDisabled();
+});

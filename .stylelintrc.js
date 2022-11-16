@@ -10,4 +10,4 @@ module.exports = {
     'alpha-value-notation': 'number',
     'string-quotes': 'single',
   },
-}
+};

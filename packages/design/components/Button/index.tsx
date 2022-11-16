@@ -1,13 +1,13 @@
-import React, { FC, PropsWithChildren } from 'react'
-import classNames from 'classnames'
+import React, { FC, PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
 export interface ButtonProps {
-  disabled?: boolean
-  onClick?: () => void
-  className?: string
-  type?: 'primary' | 'secondary' | 'text'
-  shape?: 'square' | 'rounded'
-  size?: 'normal'
+  disabled?: boolean;
+  onClick?: () => void;
+  className?: string;
+  type?: 'primary' | 'secondary' | 'text';
+  shape?: 'square' | 'rounded';
+  size?: 'normal';
 }
 
 const Button: FC<PropsWithChildren<ButtonProps>> = ({
@@ -36,7 +36,7 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
     >
       {children}
     </button>
-  )
-}
+  );
+};
 
-export default Button
+export default Button;

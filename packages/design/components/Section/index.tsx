@@ -1,8 +1,8 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren } from 'react';
 
 export interface SectionProps {
-  title: string
-  renderFooter?: () => React.ReactNode
+  title: string;
+  renderFooter?: () => React.ReactNode;
 }
 const Section = ({ title, children, renderFooter }: PropsWithChildren<SectionProps>) => {
   return (
@@ -11,7 +11,7 @@ const Section = ({ title, children, renderFooter }: PropsWithChildren<SectionPro
       {children}
       {renderFooter && <div className="bgm-section__footer">{renderFooter()}</div>}
     </div>
-  )
-}
+  );
+};
 
-export default Section
+export default Section;

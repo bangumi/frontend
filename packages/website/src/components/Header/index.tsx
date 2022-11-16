@@ -1,7 +1,7 @@
-import React, { FC, useState } from 'react'
-import style from './style.module.less'
-import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons'
-import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design'
+import React, { FC, useState } from 'react';
+import style from './style.module.less';
+import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
+import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import {
   animeSubMenu,
   bookSubMenu,
@@ -10,16 +10,16 @@ import {
   realSubMenu,
   monoSubMenu,
   groupSubMenu,
-} from './SubMenu'
-import { useUser } from '../../hooks/use-user'
-import { Link } from 'react-router-dom'
+} from './SubMenu';
+import { useUser } from '../../hooks/use-user';
+import { Link } from 'react-router-dom';
 
 // todo: SVG Sprites
-import { ReactComponent as Musume1 } from '../../assets/musume_1.svg'
-import { ReactComponent as Musume2 } from '../../assets/musume_2.svg'
-import { ReactComponent as Musume3 } from '../../assets/musume_3.svg'
-import { ReactComponent as Musume4 } from '../../assets/musume_4.svg'
-import { ReactComponent as Logo } from '../../assets/logo.svg'
+import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
+import { ReactComponent as Musume2 } from '../../assets/musume_2.svg';
+import { ReactComponent as Musume3 } from '../../assets/musume_3.svg';
+import { ReactComponent as Musume4 } from '../../assets/musume_4.svg';
+import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 const navLeft = [
   {
@@ -47,7 +47,7 @@ const navLeft = [
     label: '三次元',
     subMenu: realSubMenu,
   },
-]
+];
 
 const navRight = [
   {
@@ -72,18 +72,18 @@ const navRight = [
     key: 'doujin',
     label: '天窗联盟',
   },
-]
+];
 
 function getRandomNumber(n: number): number {
-  return Math.floor(Math.random() * n)
+  return Math.floor(Math.random() * n);
 }
 
-const Musume = [Musume1, Musume2, Musume3, Musume4][getRandomNumber(4)]
+const Musume = [Musume1, Musume2, Musume3, Musume4][getRandomNumber(4)];
 
 const Header: FC = () => {
-  const { user } = useUser()
+  const { user } = useUser();
 
-  const [showMobileMenu, setShowMobileMenu] = useState(false)
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
     <div className={style.container}>
       <div className={style.main}>
@@ -150,7 +150,7 @@ const Header: FC = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

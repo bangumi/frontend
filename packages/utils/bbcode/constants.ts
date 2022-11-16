@@ -1,6 +1,6 @@
-export const BGM_STICKER_START_STR = '(bgm'
+export const BGM_STICKER_START_STR = '(bgm';
 // 最长的emoji: (=///=)
-export const MAX_EMOJI_LENGTH = 7
+export const MAX_EMOJI_LENGTH = 7;
 
 export const EMOJI_ARRAY = [
   '(=A=)',
@@ -19,6 +19,6 @@ export const EMOJI_ARRAY = [
   '(=.,=)',
   '(:P)',
   '(LOL)',
-]
+];
 
-export const STICKER_DOMAIN_URL = 'https://lain.bgm.tv'
+export const STICKER_DOMAIN_URL = 'https://lain.bgm.tv';

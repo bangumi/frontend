@@ -1,8 +1,8 @@
-import type { components } from './types'
+import type { components } from './types';
 
-export * from './common'
+export * from './common';
 
-export type User = components['schemas']['User']
+export type User = components['schemas']['User'];
 
 export enum UserGroup {
   Admin = 1,

@@ -1,10 +1,10 @@
-import classNames from 'classnames'
-import React from 'react'
-import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom'
+import classNames from 'classnames';
+import React from 'react';
+import { Link as RouterLink, LinkProps as RouterLinkProps } from 'react-router-dom';
 
 export interface LinkProps extends RouterLinkProps {
-  isExternal?: boolean
-  fontWeight?: 'bold'
+  isExternal?: boolean;
+  fontWeight?: 'bold';
 }
 
 const Link: React.FC<LinkProps> = ({
@@ -21,21 +21,21 @@ const Link: React.FC<LinkProps> = ({
       'bgm-link--bold': fontWeight === 'bold',
     },
     className,
-  )
+  );
 
   if (isExternal && typeof to === 'string') {
     return (
       <a className={resolvedClassnames} href={to} {...rest}>
         {children}
       </a>
-    )
+    );
   }
 
   return (
     <RouterLink className={resolvedClassnames} to={to} {...rest}>
       {children}
     </RouterLink>
-  )
-}
+  );
+};
 
-export default Link
+export default Link;

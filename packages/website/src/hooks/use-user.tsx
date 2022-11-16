@@ -1,16 +1,16 @@
-import React, { PropsWithChildren } from 'react'
-import { User } from '@bangumi/types/user'
-import useSWR from 'swr'
-import { privateRequest } from '../api/request'
-import { AxiosResponse } from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { PropsWithChildren } from 'react';
+import { User } from '@bangumi/types/user';
+import useSWR from 'swr';
+import { privateRequest } from '../api/request';
+import { AxiosResponse } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface UserContextType {
-  user?: User
-  redirectToLogin: () => void
-  login: (username: string, password: string, hCaptchaResp: string) => Promise<void>
+  user?: User;
+  redirectToLogin: () => void;
+  login: (username: string, password: string, hCaptchaResp: string) => Promise<void>;
 }
-const UserContext = React.createContext<UserContextType>(null!)
+const UserContext = React.createContext<UserContextType>(null!);
 
 export enum LoginErrorCode {
   E_USERNAME_OR_PASSWORD_INCORRECT = 'E_USERNAME_OR_PASSWORD_INCORRECT',
@@ -26,13 +26,13 @@ const ERROR_CODE_MAP: Record<number, LoginErrorCode> = {
   401: LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT,
   422: LoginErrorCode.E_CLIENT_ERROR,
   502: LoginErrorCode.E_SERVER_ERROR,
-}
+};
 
 export class PasswordUnMatchError extends Error {
-  remain: number
+  remain: number;
   constructor(remain: number) {
-    super(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT)
-    this.remain = remain
+    super(LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT);
+    this.remain = remain;
   }
 }
 
@@ -42,12 +42,12 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
     shouldRetryOnError: false,
-  })
+  });
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function redirectToLogin(): void {
-    navigate('/login')
+    navigate('/login');
   }
 
   const login: (email: string, password: string, hCaptchaResp: string) => Promise<void> = (
@@ -62,29 +62,29 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
         'h-captcha-response': hCaptchaResp,
       })
       .then(() => {
-        mutate()
+        mutate();
       })
       .catch((error) => {
         if (error.response) {
-          const errorCode = ERROR_CODE_MAP[error.response.status]
+          const errorCode = ERROR_CODE_MAP[error.response.status];
           if (errorCode) {
             if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
-              throw new PasswordUnMatchError(error.response.data.detail.remain)
+              throw new PasswordUnMatchError(error.response.data.detail.remain);
             }
-            throw new Error(errorCode)
+            throw new Error(errorCode);
           }
-          throw new Error(LoginErrorCode.E_UNKNOWN_ERROR)
+          throw new Error(LoginErrorCode.E_UNKNOWN_ERROR);
         } else {
-          throw new Error(LoginErrorCode.E_NETWORK_ERROR)
+          throw new Error(LoginErrorCode.E_NETWORK_ERROR);
         }
-      })
-  }
+      });
+  };
 
-  const value: UserContextType = { redirectToLogin, login, user: user?.data }
+  const value: UserContextType = { redirectToLogin, login, user: user?.data };
 
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
-}
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+};
 
 export const useUser: () => UserContextType = () => {
-  return React.useContext(UserContext)
-}
+  return React.useContext(UserContext);
+};

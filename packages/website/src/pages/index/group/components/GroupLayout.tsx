@@ -1,14 +1,14 @@
-import { Section, Tab } from '@bangumi/design'
-import React, { PropsWithChildren } from 'react'
-import { Link } from 'react-router-dom'
-import type { GroupProfile } from '@bangumi/types/group'
-import { GroupHeader } from './GroupHeader'
-import styles from './GroupLayout.module.less'
-import CommonStyles from '../common.module.less'
-import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg'
-import { UserCard } from './UserCard'
-import { keyBy } from '@bangumi/utils'
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate'
+import { Section, Tab } from '@bangumi/design';
+import React, { PropsWithChildren } from 'react';
+import { Link } from 'react-router-dom';
+import type { GroupProfile } from '@bangumi/types/group';
+import { GroupHeader } from './GroupHeader';
+import styles from './GroupLayout.module.less';
+import CommonStyles from '../common.module.less';
+import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
+import { UserCard } from './UserCard';
+import { keyBy } from '@bangumi/utils';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 
 export enum GroupTabs {
   Index = 'index',
@@ -32,18 +32,18 @@ const GroupTabsItems = [
     label: '小组成员',
     to: (groupName: string) => `/group/${groupName}/members`,
   },
-]
-const groupTabsByKey = keyBy(GroupTabsItems, 'key')
+];
+const groupTabsByKey = keyBy(GroupTabsItems, 'key');
 
 type IGroupLayoutProps = PropsWithChildren<{
-  group: GroupProfile | undefined
-  curTab: GroupTabs
-  groupName: string
-}>
+  group: GroupProfile | undefined;
+  curTab: GroupTabs;
+  groupName: string;
+}>;
 
 const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, groupName }) => {
-  const [, navigate] = useTransitionNavigate()
-  const handleTabChange = (key: string) => navigate(groupTabsByKey[key as GroupTabs].to(groupName))
+  const [, navigate] = useTransitionNavigate();
+  const handleTabChange = (key: string) => navigate(groupTabsByKey[key as GroupTabs].to(groupName));
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group!} />
@@ -69,14 +69,14 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
               {group?.new_members.slice(0, 10).map((member) => {
                 return (
                   <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
-                )
+                );
               })}
             </div>
           </Section>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GroupLayout
+export default GroupLayout;

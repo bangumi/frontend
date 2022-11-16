@@ -1,12 +1,12 @@
-import React from 'react'
-import type { Story, ComponentMeta } from '@storybook/react'
-import * as Icons from '.'
+import React from 'react';
+import type { Story, ComponentMeta } from '@storybook/react';
+import * as Icons from '.';
 
 type IComponent = React.FC<
   React.SVGProps<SVGSVGElement> & {
-    title?: string
+    title?: string;
   }
->
+>;
 
 const componentMeta: ComponentMeta<IComponent> = {
   title: 'Icons',
@@ -38,28 +38,28 @@ const componentMeta: ComponentMeta<IComponent> = {
       },
     },
   },
-}
+};
 
-export default componentMeta
+export default componentMeta;
 
 /* eslint-disable react/prop-types */
 const Template: Story<{
-  height: number
-  width: number
-  style: React.CSSProperties
+  height: number;
+  width: number;
+  style: React.CSSProperties;
 }> = ({ height, width, style }) => (
   <>
     {Object.keys(Icons).map((iconName) => {
-      const Icon = (Icons as any)[iconName] as IComponent
+      const Icon = (Icons as any)[iconName] as IComponent;
       return (
         <div key={iconName} style={{ textAlign: 'center', width: 120 }}>
           <p>{iconName}</p>
           <Icon height={height} width={width} style={style} />
         </div>
-      )
+      );
     })}
   </>
-)
+);
 /* eslint-enable react/prop-types */
 
-export const Usage = Template.bind({})
+export const Usage = Template.bind({});

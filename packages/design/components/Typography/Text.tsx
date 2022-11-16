@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react'
-import classNames from 'classnames'
+import React, { PropsWithChildren } from 'react';
+import classNames from 'classnames';
 
 export interface TextProps {
-  className?: string
-  style?: React.CSSProperties
-  type?: 'default' | 'secondary'
+  className?: string;
+  style?: React.CSSProperties;
+  type?: 'default' | 'secondary';
 }
 
 const Text = ({ children, className, style, type = 'default' }: PropsWithChildren<TextProps>) => {
@@ -21,7 +21,7 @@ const Text = ({ children, className, style, type = 'default' }: PropsWithChildre
     >
       {children}
     </span>
-  )
-}
+  );
+};
 
-export default Text
+export default Text;

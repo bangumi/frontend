@@ -1,6 +1,6 @@
-import React from 'react'
-import Rate from '..'
-import { render } from '@testing-library/react'
+import React from 'react';
+import Rate from '..';
+import { render } from '@testing-library/react';
 
 it.each([
   [0.1, 0, 0, 5],
@@ -15,10 +15,10 @@ it.each([
 ])(
   'should render correct stars for rate %d',
   (rate, expectedNumFilledStars, expectedNumHalfStars, expectedNumEmptyStars) => {
-    const { queryAllByTestId } = render(<Rate value={rate} />)
+    const { queryAllByTestId } = render(<Rate value={rate} />);
 
-    expect(queryAllByTestId('filled')).toHaveLength(expectedNumFilledStars)
-    expect(queryAllByTestId('half')).toHaveLength(expectedNumHalfStars)
-    expect(queryAllByTestId('empty')).toHaveLength(expectedNumEmptyStars)
+    expect(queryAllByTestId('filled')).toHaveLength(expectedNumFilledStars);
+    expect(queryAllByTestId('half')).toHaveLength(expectedNumHalfStars);
+    expect(queryAllByTestId('empty')).toHaveLength(expectedNumEmptyStars);
   },
-)
+);

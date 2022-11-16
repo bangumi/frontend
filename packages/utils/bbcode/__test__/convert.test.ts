@@ -1,6 +1,6 @@
-import { STICKER_DOMAIN_URL } from '../constants'
-import { convert } from '../convert'
-import { CodeNodeTypes, NodeTypes, VNode } from '../types'
+import { STICKER_DOMAIN_URL } from '../constants';
+import { convert } from '../convert';
+import { CodeNodeTypes, NodeTypes, VNode } from '../types';
 
 describe('convert bbcode to html vnode', () => {
   test('basic bbcode', () => {
@@ -100,11 +100,11 @@ describe('convert bbcode to html vnode', () => {
           children: ['大小'],
         },
       ],
-    ]
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('url bbcode', () => {
     const tests: Array<[CodeNodeTypes, NodeTypes]> = [
       [
@@ -143,11 +143,11 @@ describe('convert bbcode to html vnode', () => {
           children: ['测试'],
         },
       ],
-    ]
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('img bbcode', () => {
     const tests: Array<[CodeNodeTypes, NodeTypes]> = [
       [
@@ -193,11 +193,11 @@ describe('convert bbcode to html vnode', () => {
           className: 'code',
         },
       ],
-    ]
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('nest bbcode', () => {
     const node: CodeNodeTypes = {
       type: 'b',
@@ -217,7 +217,7 @@ describe('convert bbcode to html vnode', () => {
           ],
         },
       ],
-    }
+    };
     const vnode: VNode = {
       type: 'strong',
       children: [
@@ -238,9 +238,9 @@ describe('convert bbcode to html vnode', () => {
           ],
         },
       ],
-    }
-    expect(convert(node)).toEqual(vnode)
-  })
+    };
+    expect(convert(node)).toEqual(vnode);
+  });
   test('sticker', () => {
     const tests: Array<[CodeNodeTypes, NodeTypes]> = [
       [
@@ -333,11 +333,11 @@ describe('convert bbcode to html vnode', () => {
         },
         '(bgm233)',
       ],
-    ]
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('unknown bbcode', () => {
     const node: CodeNodeTypes = {
       type: 'unknown',
@@ -362,7 +362,7 @@ describe('convert bbcode to html vnode', () => {
           ],
         },
       ],
-    }
+    };
     const vnode: VNode = {
       type: 'unknown',
       children: [
@@ -388,7 +388,7 @@ describe('convert bbcode to html vnode', () => {
           ],
         },
       ],
-    }
-    expect(convert(node)).toEqual(vnode)
-  })
-})
+    };
+    expect(convert(node)).toEqual(vnode);
+  });
+});

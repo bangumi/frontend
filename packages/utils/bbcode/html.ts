@@ -1,6 +1,6 @@
-import { convert } from './convert'
-import { Parser } from './parser'
-import { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types'
+import { convert } from './convert';
+import { Parser } from './parser';
+import { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
 
 const escapeHTML = (str: string): string =>
   str
@@ -8,84 +8,84 @@ const escapeHTML = (str: string): string =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/&/g, '&amp;')
-    .replace(/'/g, '&#039;')
+    .replace(/'/g, '&#039;');
 
 function renderProps(props: Record<string, string | boolean> | undefined): string {
   if (!props) {
-    return ''
+    return '';
   }
   return Object.keys(props).reduce((pre, key) => {
-    let val: boolean | string = props[key]
+    let val: boolean | string = props[key];
     if (typeof val === 'boolean') {
-      val = val ? key : ''
+      val = val ? key : '';
     } else {
-      val = `${key}="${escapeHTML(val)}"`
+      val = `${key}="${escapeHTML(val)}"`;
     }
-    return pre + ' ' + val
-  }, '')
+    return pre + ' ' + val;
+  }, '');
 }
 
 function renderStyle(style: Record<string, string>): string {
   return Object.entries(style)
     .map(([key, value]) => `${key}:${escapeHTML(value)}`)
-    .join(';')
+    .join(';');
 }
 
 export function renderNode(node: NodeTypes, parentNode?: VNode): string {
-  let result = ''
+  let result = '';
   if (typeof node === 'string') {
     if (parentNode && parentNode.type === 'pre') {
-      return node
+      return node;
     } else {
-      return renderText(node)
+      return renderText(node);
     }
   }
-  const { type, props, children, style, className } = node
-  let propsStr = renderProps(props)
+  const { type, props, children, style, className } = node;
+  let propsStr = renderProps(props);
   if (style) {
-    propsStr += ` style="${renderStyle(style)}"`
+    propsStr += ` style="${renderStyle(style)}"`;
   }
   if (className) {
-    let clsStr = ''
+    let clsStr = '';
     if (typeof className === 'string') {
-      clsStr = escapeHTML(className)
+      clsStr = escapeHTML(className);
     } else {
-      clsStr = escapeHTML(className.join(' '))
+      clsStr = escapeHTML(className.join(' '));
     }
-    propsStr += ` class="${clsStr}"`
+    propsStr += ` class="${clsStr}"`;
   }
   if (!children) {
-    result = `<${type}${propsStr}/>`
+    result = `<${type}${propsStr}/>`;
   } else {
-    let childrenStr = ''
+    let childrenStr = '';
     if (type === 'pre') {
-      childrenStr = children.join('')
+      childrenStr = children.join('');
     } else {
-      childrenStr = renderNodes(children, parentNode)
+      childrenStr = renderNodes(children, parentNode);
     }
-    result = `<${type}${propsStr}>${childrenStr}</${type}>`
+    result = `<${type}${propsStr}>${childrenStr}</${type}>`;
   }
 
-  return result
+  return result;
 }
 
 function renderText(str: string): string {
-  return str.replace(/\n/g, '<br/>')
+  return str.replace(/\n/g, '<br/>');
 }
 
 export function renderNodes(nodes: NodeTypes[], parentNode?: VNode): string {
-  let result = ''
+  let result = '';
   nodes.forEach((node) => {
-    result += renderNode(node, parentNode)
-  })
-  return result
+    result += renderNode(node, parentNode);
+  });
+  return result;
 }
 
 export function render(rawStr: string, converterMap: Record<string, ConverterFn> = {}): string {
-  let result = ''
-  const nodes: CodeNodeTypes[] = new Parser(rawStr).parse()
+  let result = '';
+  const nodes: CodeNodeTypes[] = new Parser(rawStr).parse();
   nodes.forEach((node) => {
-    result += renderNode(convert(node, converterMap))
-  })
-  return result
+    result += renderNode(convert(node, converterMap));
+  });
+  return result;
 }

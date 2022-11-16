@@ -1,6 +1,6 @@
-import React from 'react'
-import Tab, { TabProps } from '.'
-import type { Story } from '@storybook/react'
+import React from 'react';
+import Tab, { TabProps } from '.';
+import type { Story } from '@storybook/react';
 
 export default {
   title: 'modern/Tab',
@@ -14,7 +14,7 @@ export default {
       control: { type: 'object' },
     },
   },
-}
+};
 
 // eslint-disable-next-line react/prop-types
 const Template: Story<TabProps> = ({ activeKey, type }) => {
@@ -43,13 +43,13 @@ const Template: Story<TabProps> = ({ activeKey, type }) => {
       key: 'drama',
       label: '三次元',
     },
-  ]
-  return <Tab items={items} activeKey={activeKey} type={type} />
-}
+  ];
+  return <Tab items={items} activeKey={activeKey} type={type} />;
+};
 
-export const Usage = Template.bind({})
+export const Usage = Template.bind({});
 
-export const Borderless = Template.bind({})
+export const Borderless = Template.bind({});
 Borderless.args = {
   type: 'borderless',
-}
+};

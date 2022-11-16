@@ -1,11 +1,11 @@
-import React from 'react'
-import Text, { TextProps } from './Text'
-import { Story } from '@storybook/react'
+import React from 'react';
+import Text, { TextProps } from './Text';
+import { Story } from '@storybook/react';
 
 export default {
   title: 'modern/Topology/Text',
   component: Text,
-}
+};
 
 export const Demo: Story<TextProps> = () => {
   return (
@@ -14,5 +14,5 @@ export const Demo: Story<TextProps> = () => {
       <br />
       <Text type="secondary">text(secondary)</Text>
     </div>
-  )
-}
+  );
+};

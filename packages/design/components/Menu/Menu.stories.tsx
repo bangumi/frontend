@@ -1,6 +1,6 @@
-import React from 'react'
-import type { Story } from '@storybook/react'
-import Menu, { MenuProps, MenuItemType } from '.'
+import React from 'react';
+import type { Story } from '@storybook/react';
+import Menu, { MenuProps, MenuItemType } from '.';
 
 const items: MenuItemType[] = [
   {
@@ -23,7 +23,7 @@ const items: MenuItemType[] = [
     key: 'drama',
     label: '三次元',
   },
-]
+];
 
 const itemsVertical: MenuItemType[] = [
   {
@@ -46,7 +46,7 @@ const itemsVertical: MenuItemType[] = [
     key: 'blog',
     label: '动画日志',
   },
-]
+];
 
 export default {
   title: 'modern/Menu',
@@ -67,7 +67,7 @@ export default {
       ],
     },
   },
-}
+};
 
 /* eslint-disable react/prop-types */
 const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
@@ -88,22 +88,22 @@ const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wr
         wrapperClass={wrapperClass}
       />
     </div>
-  )
-}
+  );
+};
 /* eslint-enable react/prop-types */
 
-export const Horizontal = Template.bind({})
+export const Horizontal = Template.bind({});
 
-export const Vertical = Template.bind({})
+export const Vertical = Template.bind({});
 
-Horizontal.args = { items, mode: 'horizontal' }
+Horizontal.args = { items, mode: 'horizontal' };
 Horizontal.argTypes = {
   activeKey: {
     options: items.map((item) => item.key),
   },
-}
+};
 
-Vertical.args = { items: itemsVertical, mode: 'vertical' }
+Vertical.args = { items: itemsVertical, mode: 'vertical' };
 Vertical.argTypes = {
   activeKey: {
     options: itemsVertical.map((item) => item.key),
@@ -114,4 +114,4 @@ Vertical.argTypes = {
       fontWeight: 400,
     },
   },
-}
+};

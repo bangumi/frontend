@@ -1,19 +1,19 @@
-import React, { forwardRef } from 'react'
-import classnames from 'classnames'
+import React, { forwardRef } from 'react';
+import classnames from 'classnames';
 
 export interface InputProps {
   /* 同原生 input 标签 `type` */
-  type?: string
+  type?: string;
   /* 同原生 `placeholder` */
-  placeholder?: string
+  placeholder?: string;
   /* 外层 wrapper 的样式 */
-  wrapperStyle?: React.CSSProperties
+  wrapperStyle?: React.CSSProperties;
   /* 外层 wrapper 的自定义类名 */
-  wrapperClass?: string
+  wrapperClass?: string;
   /* 前缀 */
-  prefix?: React.ReactNode
+  prefix?: React.ReactNode;
   /* 后缀 */
-  suffix?: React.ReactNode
+  suffix?: React.ReactNode;
 }
 
 /* eslint-disable react/prop-types */
@@ -26,8 +26,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input type={type} className="bgm-input" placeholder={placeholder} ref={ref} {...rest} />
         {suffix && suffix}
       </div>
-    )
+    );
   },
-)
+);
 
-export default Input
+export default Input;

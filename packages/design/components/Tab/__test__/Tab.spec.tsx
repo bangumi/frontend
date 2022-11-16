@@ -1,6 +1,6 @@
-import { render } from '@testing-library/react'
-import React from 'react'
-import Tab from '..'
+import { render } from '@testing-library/react';
+import React from 'react';
+import Tab from '..';
 
 it('should render all tab', () => {
   const items = [
@@ -12,12 +12,12 @@ it('should render all tab', () => {
       key: '2',
       label: '2',
     },
-  ]
-  const { getByText } = render(<Tab items={items} activeKey="1" />)
-  expect(getByText('1')).toBeInTheDocument()
-  expect(getByText('2')).toBeInTheDocument()
-  expect(getByText('1')).toHaveClass('bgm-tab__item--active')
-})
+  ];
+  const { getByText } = render(<Tab items={items} activeKey="1" />);
+  expect(getByText('1')).toBeInTheDocument();
+  expect(getByText('2')).toBeInTheDocument();
+  expect(getByText('1')).toHaveClass('bgm-tab__item--active');
+});
 
 it('should trigger onChange when click tabs', () => {
   const items = [
@@ -29,13 +29,13 @@ it('should trigger onChange when click tabs', () => {
       key: '2',
       label: '2',
     },
-  ]
-  const handleChange = jest.fn()
-  const { getByText } = render(<Tab items={items} activeKey="1" onChange={handleChange} />)
-  getByText('2').click()
+  ];
+  const handleChange = jest.fn();
+  const { getByText } = render(<Tab items={items} activeKey="1" onChange={handleChange} />);
+  getByText('2').click();
 
-  expect(handleChange).toBeCalledWith('2')
-})
+  expect(handleChange).toBeCalledWith('2');
+});
 
 it('should render borderless tab', () => {
   const items = [
@@ -47,7 +47,7 @@ it('should render borderless tab', () => {
       key: '2',
       label: '2',
     },
-  ]
-  const { container } = render(<Tab items={items} activeKey="1" type="borderless" />)
-  expect(container).toMatchSnapshot()
-})
+  ];
+  const { container } = render(<Tab items={items} activeKey="1" type="borderless" />);
+  expect(container).toMatchSnapshot();
+});

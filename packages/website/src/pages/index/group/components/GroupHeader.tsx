@@ -1,10 +1,10 @@
-import React from 'react'
-import { Image, Typography } from '@bangumi/design'
-import dayjs from 'dayjs'
-import { GroupProfile } from '@bangumi/types/group'
-import styles from './GroupHeader.module.less'
+import React from 'react';
+import { Image, Typography } from '@bangumi/design';
+import dayjs from 'dayjs';
+import { GroupProfile } from '@bangumi/types/group';
+import styles from './GroupHeader.module.less';
 
-const { Text } = Typography
+const { Text } = Typography;
 export const GroupHeader: React.FC<{ group: GroupProfile }> = ({ group }) => {
   return (
     <div className={styles.groupHeader}>
@@ -24,5 +24,5 @@ export const GroupHeader: React.FC<{ group: GroupProfile }> = ({ group }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};

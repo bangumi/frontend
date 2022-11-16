@@ -1,16 +1,16 @@
-import { Typography } from '@bangumi/design'
-import React from 'react'
-import { useUser } from '../../hooks/use-user'
-import { getUserProfileLink } from '../../utils/pages'
-import styles from './UserHome.module.less'
+import { Typography } from '@bangumi/design';
+import React from 'react';
+import { useUser } from '../../hooks/use-user';
+import { getUserProfileLink } from '../../utils/pages';
+import styles from './UserHome.module.less';
 
-const { Link } = Typography
+const { Link } = Typography;
 
 const UserHome: React.FC = () => {
-  const { user } = useUser()
+  const { user } = useUser();
 
   if (!user) {
-    return null
+    return null;
   }
 
   return (
@@ -22,7 +22,7 @@ const UserHome: React.FC = () => {
         </Link>
       </div>
     </main>
-  )
-}
+  );
+};
 
-export default UserHome
+export default UserHome;

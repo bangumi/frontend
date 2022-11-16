@@ -1,9 +1,9 @@
-import type { components } from './types'
+import type { components } from './types';
 
-export type Avatar = components['schemas']['Avatar']
-export type Topic = components['schemas']['Topic']
-export type Pagination = Omit<components['schemas']['Paged'], 'data'>
+export type Avatar = components['schemas']['Avatar'];
+export type Topic = components['schemas']['Topic'];
+export type Pagination = Omit<components['schemas']['Paged'], 'data'>;
 
 export interface ResponseWithPagination<T = unknown> extends Pagination {
-  data: T
+  data: T;
 }

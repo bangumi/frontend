@@ -1,23 +1,23 @@
-import React, { PropsWithChildren } from 'react'
-import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './use-user'
-import { server as mockServer } from '../mocks/server'
-import { rest } from 'msw'
-import { waitFor, renderHook } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import React, { PropsWithChildren } from 'react';
+import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './use-user';
+import { server as mockServer } from '../mocks/server';
+import { rest } from 'msw';
+import { waitFor, renderHook } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 
 function mockLogin(statusCode: number, response: Object = {}): void {
   mockServer.use(
     rest.post('http://localhost/p/login', (req, res, ctx) => {
-      return res(ctx.status(statusCode), ctx.json(response))
+      return res(ctx.status(statusCode), ctx.json(response));
     }),
-  )
+  );
 }
 
 const wrapper = ({ children }: PropsWithChildren) => (
   <MemoryRouter>
     <UserProvider>{children}</UserProvider>
   </MemoryRouter>
-)
+);
 
 it.each`
   statusCode | resp                         | expectedError
@@ -29,25 +29,25 @@ it.each`
 `(
   'should return error if request is failed with failed status $statusCode',
   async ({ statusCode, resp, expectedError }) => {
-    const { result } = renderHook(() => useUser(), { wrapper })
+    const { result } = renderHook(() => useUser(), { wrapper });
 
-    mockLogin(statusCode, resp)
+    mockLogin(statusCode, resp);
 
-    expect.assertions(1)
+    expect.assertions(1);
     await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
       expectedError,
-    )
+    );
 
-    await waitFor(() => {})
+    await waitFor(() => {});
   },
-)
+);
 
 it('should refresh me if login succeeded', async () => {
-  const { result } = renderHook(() => useUser(), { wrapper })
+  const { result } = renderHook(() => useUser(), { wrapper });
 
-  mockLogin(200)
-  await result.current.login('fakeuser', 'fakepassword', 'fake-token')
+  mockLogin(200);
+  await result.current.login('fakeuser', 'fakepassword', 'fake-token');
   await waitFor(() => {
-    expect(result.current.user).toMatchSnapshot()
-  })
-})
+    expect(result.current.user).toMatchSnapshot();
+  });
+});
