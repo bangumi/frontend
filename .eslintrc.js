@@ -39,14 +39,6 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type':
       'off' /** 限制了一些不需要显示指明类型的场景，比如自动推导，导致了一些多余代码 */,
     'react/jsx-closing-tag-location': 'off',
-    /* https://github.com/yannickcr/eslint-plugin-react/issues/3097 */
-    'react/jsx-curly-newline': [
-      'error',
-      {
-        multiline: 'consistent',
-        singleline: 'consistent',
-      },
-    ],
     'jsx-quotes': ['error', 'prefer-double'],
   },
   settings: {
