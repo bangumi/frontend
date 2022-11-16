@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 
-interface IPaginationParams{
+interface IPaginationParams {
   /** 当前页 */
   curPage: number
   /** 每页大小 */

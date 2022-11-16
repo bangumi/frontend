@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof Image> = (args) => {
 
 export const Loaded = Template.bind({})
 Loaded.args = {
-  src: src,
+  src,
   alt: 'vanilla',
   width: 136,
   height: 200

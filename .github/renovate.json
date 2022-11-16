@@ -18,21 +18,14 @@
       "semanticCommitType": "build"
     },
     {
+      "groupName": "eslint",
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "semanticCommitType": "style"
+    },
+    {
       "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
-    },
-    {
-      "groupName": "deps",
-      "matchManagers": ["npm"],
-      "matchDepTypes": ["dependencies"],
-      "matchUpdateTypes": ["minor", "patch"]
-    },
-    {
-      "groupName": "dev-deps",
-      "matchManagers": ["npm"],
-      "matchDepTypes": ["devDependencies"],
-      "matchUpdateTypes": ["minor", "patch"]
     }
   ]
 }

@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should refresh me if login succeeded 1`] = `
-Object {
-  "avatar": Object {
+{
+  "avatar": {
     "large": "https://lain.bgm.tv/pic/user/l/000/18/66/186665.jpg?r=1502208749",
     "medium": "https://lain.bgm.tv/pic/user/m/000/18/66/186665.jpg?r=1502208749",
     "small": "https://lain.bgm.tv/pic/user/s/000/18/66/186665.jpg?r=1502208749",
