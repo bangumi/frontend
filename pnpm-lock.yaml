@@ -17,6 +17,7 @@ importers:
       babel-jest: ^29.3.1
       babel-preset-vite: ^1.0.4
       eslint: ^8.27.0
+      eslint-config-prettier: ^8.5.0
       eslint-config-standard: ^17.0.0
       eslint-config-standard-jsx: ^11.0.0
       eslint-config-standard-react: ^12.0.0
@@ -53,6 +54,7 @@ importers:
       babel-jest: 29.3.1_@babel+core@7.20.2
       babel-preset-vite: 1.0.4
       eslint: 8.27.0
+      eslint-config-prettier: 8.5.0_eslint@8.27.0
       eslint-config-standard: 17.0.0_qmmcbu32ybj7ict4ieqqyvwr3m
       eslint-config-standard-jsx: 11.0.0_crua5zzh5wtgko3a7bkv6w5n7m
       eslint-config-standard-react: 12.0.0_crua5zzh5wtgko3a7bkv6w5n7m
@@ -8951,6 +8953,15 @@ packages:
       optionator: 0.8.3
     optionalDependencies:
       source-map: 0.6.1
+    dev: true
+
+  /eslint-config-prettier/8.5.0_eslint@8.27.0:
+    resolution: {integrity: sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==}
+    hasBin: true
+    peerDependencies:
+      eslint: '>=7.0.0'
+    dependencies:
+      eslint: 8.27.0
     dev: true
 
   /eslint-config-standard-jsx/11.0.0_crua5zzh5wtgko3a7bkv6w5n7m:
