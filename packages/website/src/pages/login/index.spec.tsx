@@ -54,8 +54,8 @@ it('should redirect user to homepage after success login', async () => {
 
 it.each`
   statusCode | resp | expectedError
-  ${400} | ${{}} | ${'验证码错误，请再试一遍'}
-  ${401} | ${{ detail: { remain: 5 } }} | ${'用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试'}
+  ${400} | ${{ details: ['验证码错误，请再试一遍'] }} | ${'验证码错误，请再试一遍'}
+  ${401} | ${{ details: { remain: 5 } }} | ${'用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试'}
   ${422} | ${{}} | ${'请求错误'}
   ${502} | ${{}} | ${'服务器错误，请稍后重试'}
 `('should show error message when response is %statusCode}', async ({ statusCode, resp, expectedError }) => {

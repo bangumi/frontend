@@ -1,13 +1,22 @@
-import ky, { Options } from 'ky'
-import { Input } from 'ky/distribution/types/options'
-
-export const client = ky.create({
-  prefixUrl: import.meta.env.VITE_PRIVATE_API_ROOT,
-  credentials: 'include',
-  timeout: 6000
-})
-
-export async function privateGet (url: Input, options?: Options): Promise<any> {
-  const res = await client.get(url, options)
+export async function privateGet (url: string): Promise<any> {
+  const res = await fetch(
+    url,
+    {
+      credentials: 'include',
+      method: 'get'
+    }
+  )
   return await res.json()
+}
+
+export function privatePost (url: string, options: { json: Record<string, any> }): Promise<Response> {
+  return fetch(
+    url,
+    {
+      credentials: 'include',
+      method: 'post',
+      body: JSON.stringify(options.json),
+      headers: { 'content-type': 'application/json' }
+    }
+  )
 }

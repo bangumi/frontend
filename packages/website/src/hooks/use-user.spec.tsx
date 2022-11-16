@@ -1,5 +1,10 @@
 import React, { PropsWithChildren } from 'react'
-import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './use-user'
+import {
+  useUser,
+  UserProvider,
+  LoginErrorCode,
+  PasswordUnMatchError, UnknownError
+} from './use-user'
 import { server as mockServer } from '../mocks/server'
 import { rest } from 'msw'
 import { waitFor, renderHook } from '@testing-library/react'
@@ -23,8 +28,8 @@ const wrapper = ({ children }: PropsWithChildren) => (
 
 it.each`
   statusCode | resp | expectedError
-  ${401} | ${{ detail: { remain: 4 } }} | ${new PasswordUnMatchError(4)}
-  ${400} | ${{}} | ${new Error(LoginErrorCode.E_REQUEST_ERROR)}
+  ${401} | ${{ details: { remain: 4 } }} | ${new PasswordUnMatchError(4)}
+  ${400} | ${{ details: ['a', 'b'] }} | ${new UnknownError(['a', 'b'])}
   ${422} | ${{}} | ${new Error(LoginErrorCode.E_CLIENT_ERROR)}
   ${418} | ${{}} | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
   ${502} | ${{}} | ${new Error(LoginErrorCode.E_SERVER_ERROR)}
