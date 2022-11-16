@@ -7,9 +7,7 @@ import { server as mockServer } from '../../mocks/server'
 import { rest } from 'msw'
 import { useNavigate } from 'react-router-dom'
 
-const FakeHCaptcha: React.FC<{ onVerify: (token: string) => void }> = ({
-  onVerify,
-}) => {
+const FakeHCaptcha: React.FC<{ onVerify: (token: string) => void }> = ({ onVerify }) => {
   React.useEffect(() => {
     onVerify('fake-token')
   })

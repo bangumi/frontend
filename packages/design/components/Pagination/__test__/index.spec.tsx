@@ -9,20 +9,14 @@ it('should render correctly', () => {
 
 it('should hightlight current page and not highlight other page', async () => {
   const currentPage = 20
-  const { findAllByTestId } = render(
-    <Pagination total={3000} currentPage={currentPage} />,
-  )
+  const { findAllByTestId } = render(<Pagination total={3000} currentPage={currentPage} />)
   const pagers = await findAllByTestId('pagination-pager')
   expect(pagers.length).toBe(10)
   pagers.forEach((pager) => {
     if (pager.title === String(currentPage)) {
-      expect(pager.classList.contains('bgm-pagination-pager--active')).toBe(
-        true,
-      )
+      expect(pager.classList.contains('bgm-pagination-pager--active')).toBe(true)
     } else {
-      expect(pager.classList.contains('bgm-pagination-pager--active')).toBe(
-        false,
-      )
+      expect(pager.classList.contains('bgm-pagination-pager--active')).toBe(false)
     }
   })
 })
@@ -45,9 +39,7 @@ it('should response mouse click right', async () => {
 
 it('should not response the prev-button clicked', () => {
   const onChange = jest.fn()
-  const { queryByTestId } = render(
-    <Pagination total={3000} currentPage={1} onChange={onChange} />,
-  )
+  const { queryByTestId } = render(<Pagination total={3000} currentPage={1} onChange={onChange} />)
   const prevButton = queryByTestId('pagination-prev')!
   fireEvent.click(prevButton)
   expect(onChange).toHaveBeenCalledTimes(0)

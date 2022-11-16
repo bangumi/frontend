@@ -6,12 +6,7 @@ interface ItemProps {
   type: 'default' | 'borderless'
   onClick: () => void
 }
-const Item: React.FC<PropsWithChildren<ItemProps>> = ({
-  children,
-  isActive,
-  onClick,
-  type,
-}) => {
+const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onClick, type }) => {
   return (
     <li
       className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, {
@@ -40,12 +35,7 @@ export interface TabProps {
   type?: 'default' | 'borderless'
 }
 
-export const Tab: React.FC<TabProps> = ({
-  activeKey,
-  items,
-  onChange,
-  type = 'default',
-}) => {
+export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'default' }) => {
   return (
     <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>
       {items.map((item) => {

@@ -1,10 +1,5 @@
 import React, { PropsWithChildren } from 'react'
-import {
-  useUser,
-  UserProvider,
-  LoginErrorCode,
-  PasswordUnMatchError,
-} from './use-user'
+import { useUser, UserProvider, LoginErrorCode, PasswordUnMatchError } from './use-user'
 import { server as mockServer } from '../mocks/server'
 import { rest } from 'msw'
 import { waitFor, renderHook } from '@testing-library/react'
@@ -39,9 +34,9 @@ it.each`
     mockLogin(statusCode, resp)
 
     expect.assertions(1)
-    await expect(
-      result.current.login('fakeuser', 'fakepassword', 'fake-token'),
-    ).rejects.toEqual(expectedError)
+    await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
+      expectedError,
+    )
 
     await waitFor(() => {})
   },

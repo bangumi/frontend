@@ -80,8 +80,7 @@ module.exports = {
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
   moduleNameMapper: {
-    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$':
-      'jest-transform-stub',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '.+\\.svg$': '<rootDir>/__mocks__/svg.js',
     '@bangumi/website/(.*)': '<rootDir>/packages/website/src/$1',
   },
@@ -131,10 +130,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
-  setupFilesAfterEnv: [
-    '<rootDir>/jest-setup.ts',
-    '<rootDir>/packages/website/jest-setup.ts',
-  ],
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.ts', '<rootDir>/packages/website/jest-setup.ts'],
 
   // The number of seconds after which a test is considered as slow and reported as such in the results.
   // slowTestThreshold: 5,

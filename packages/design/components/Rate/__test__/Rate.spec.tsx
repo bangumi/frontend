@@ -14,12 +14,7 @@ it.each([
   [10, 5, 0, 0],
 ])(
   'should render correct stars for rate %d',
-  (
-    rate,
-    expectedNumFilledStars,
-    expectedNumHalfStars,
-    expectedNumEmptyStars,
-  ) => {
+  (rate, expectedNumFilledStars, expectedNumHalfStars, expectedNumEmptyStars) => {
     const { queryAllByTestId } = render(<Rate value={rate} />)
 
     expect(queryAllByTestId('filled')).toHaveLength(expectedNumFilledStars)

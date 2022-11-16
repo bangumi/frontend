@@ -29,13 +29,9 @@ const setInputValue = (
   const preStart = el.selectionStart
   const preEnd = el.selectionEnd
   const preValue = el.value
-  el.value = `${preValue.slice(
-    0,
-    preStart,
-  )}${prefix}${content}${suffix}${preValue.slice(preEnd)}`
+  el.value = `${preValue.slice(0, preStart)}${prefix}${content}${suffix}${preValue.slice(preEnd)}`
   if (preStart === preEnd) {
-    el.selectionStart = el.selectionEnd =
-      preStart + prefix.length + content.length
+    el.selectionStart = el.selectionEnd = preStart + prefix.length + content.length
   }
   el.focus()
 }

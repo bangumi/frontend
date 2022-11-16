@@ -18,8 +18,5 @@ it('should show user name if user is logged', () => {
 
   const { getByText } = render(<UserHome />)
 
-  expect(getByText('testuser')).toHaveAttribute(
-    'href',
-    'https://bgm.tv/user/testuser-123',
-  )
+  expect(getByText('testuser')).toHaveAttribute('href', 'https://bgm.tv/user/testuser-123')
 })

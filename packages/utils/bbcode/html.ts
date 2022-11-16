@@ -10,9 +10,7 @@ const escapeHTML = (str: string): string =>
     .replace(/&/g, '&amp;')
     .replace(/'/g, '&#039;')
 
-function renderProps(
-  props: Record<string, string | boolean> | undefined,
-): string {
+function renderProps(props: Record<string, string | boolean> | undefined): string {
   if (!props) {
     return ''
   }
@@ -83,10 +81,7 @@ export function renderNodes(nodes: NodeTypes[], parentNode?: VNode): string {
   return result
 }
 
-export function render(
-  rawStr: string,
-  converterMap: Record<string, ConverterFn> = {},
-): string {
+export function render(rawStr: string, converterMap: Record<string, ConverterFn> = {}): string {
   let result = ''
   const nodes: CodeNodeTypes[] = new Parser(rawStr).parse()
   nodes.forEach((node) => {

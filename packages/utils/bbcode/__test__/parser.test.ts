@@ -239,20 +239,11 @@ describe('bbcode parser', () => {
       ],
       [
         '[code]1[/code][/code] [code]2[/code]',
-        [
-          { type: 'code', children: ['1'] },
-          '[',
-          '/code] ',
-          { type: 'code', children: ['2'] },
-        ],
+        [{ type: 'code', children: ['1'] }, '[', '/code] ', { type: 'code', children: ['2'] }],
       ],
       [
         '[code][code]1[/code] [code]2[/code]',
-        [
-          { type: 'code', children: ['[code]1'] },
-          ' ',
-          { type: 'code', children: ['2'] },
-        ],
+        [{ type: 'code', children: ['[code]1'] }, ' ', { type: 'code', children: ['2'] }],
       ],
     ]
     for (const [input, expected] of tests) {
@@ -264,8 +255,7 @@ describe('bbcode parser', () => {
     expect(getNodes(input).join('')).toEqual(input)
   })
   test('invalid url bbcode', () => {
-    const input =
-      '[url]Bangumi 番组计划[/url][url=sfaf]番组计划[/url][url][/url]'
+    const input = '[url]Bangumi 番组计划[/url][url=sfaf]番组计划[/url][url][/url]'
     const tests: CodeNodeTypes[] = [
       '[url]Bangumi 番组计划[/url]',
       '[url=sfaf]番组计划[/url]',

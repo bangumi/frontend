@@ -10,11 +10,7 @@ export const GroupHeader: React.FC<{ group: GroupProfile }> = ({ group }) => {
     <div className={styles.groupHeader}>
       <div className={styles.thumbnail}>
         {group.icon && (
-          <Image
-            className={styles.thumbnail}
-            src={group.icon}
-            alt={`${group.title} 头像`}
-          />
+          <Image className={styles.thumbnail} src={group.icon} alt={`${group.title} 头像`} />
         )}
       </div>
       <div className={styles.infoCol}>
@@ -22,8 +18,8 @@ export const GroupHeader: React.FC<{ group: GroupProfile }> = ({ group }) => {
         <div>
           <Text type="secondary">
             {' '}
-            创建于 {dayjs(group.created_at).format('YYYY-M-D HH:mm')} | 现有{' '}
-            {group.total_members} 名成员{' '}
+            创建于 {dayjs(group.created_at).format('YYYY-M-D HH:mm')} | 现有 {group.total_members}{' '}
+            名成员{' '}
           </Text>
         </div>
       </div>

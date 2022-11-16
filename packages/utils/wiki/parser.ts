@@ -72,15 +72,10 @@ export default function parse(s: string): Wiki {
 }
 
 const parseType = (line: string): string => {
-  return line
-    .slice(prefix.length, !line.includes('}}') ? undefined : line.indexOf('}}'))
-    .trim()
+  return line.slice(prefix.length, !line.includes('}}') ? undefined : line.indexOf('}}')).trim()
 }
 
-const parseNewField = (
-  lino: number,
-  line: string,
-): [string, string, WikiItemType] => {
+const parseNewField = (lino: number, line: string): [string, string, WikiItemType] => {
   const str = line.slice(1)
   const index = str.indexOf('=')
 

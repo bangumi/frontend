@@ -2,14 +2,10 @@ import React from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import Editor, { EditorProps } from '../Editor'
 
-const initTextareaTest = (
-  props: EditorProps,
-): { textarea: HTMLTextAreaElement } => {
+const initTextareaTest = (props: EditorProps): { textarea: HTMLTextAreaElement } => {
   props.placeholder = props.placeholder ?? 'placeholder'
   const { getByPlaceholderText } = render(<Editor {...props} />)
-  const textarea = getByPlaceholderText(
-    props.placeholder,
-  ) as HTMLTextAreaElement
+  const textarea = getByPlaceholderText(props.placeholder) as HTMLTextAreaElement
   return { textarea }
 }
 
@@ -126,70 +122,60 @@ describe('EditorForm > Editor', () => {
 
   it('showToolbox props', () => {
     const { container } = render(<Editor showToolbox={false} />)
-    expect(container.querySelector('.bgm-editor__toolbox')).toHaveStyle(
-      'display: none',
-    )
+    expect(container.querySelector('.bgm-editor__toolbox')).toHaveStyle('display: none')
   })
 
   it('click toolbox should have correct behavior', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    const prompt = jest
-      .spyOn(window, 'prompt')
-      .mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
-    ;['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach(
-      (type) => {
-        // init
-        textarea.value = ''
-        const el = screen.getByTestId(type)
-        el.click()
-        doSelectionTest(textarea, type, mockValue)
+    ;['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
+      // init
+      textarea.value = ''
+      const el = screen.getByTestId(type)
+      el.click()
+      doSelectionTest(textarea, type, mockValue)
 
-        if (type === 'image' || type === 'link' || type === 'size') {
-          expect(prompt).toHaveBeenCalled()
-        } else {
-          expect(prompt).not.toHaveBeenCalled()
-        }
-        prompt.mockClear()
+      if (type === 'image' || type === 'link' || type === 'size') {
+        expect(prompt).toHaveBeenCalled()
+      } else {
+        expect(prompt).not.toHaveBeenCalled()
+      }
+      prompt.mockClear()
 
-        // Click toolbox -> textarea should be focused
-        expect(textarea).toHaveFocus()
-      },
-    )
+      // Click toolbox -> textarea should be focused
+      expect(textarea).toHaveFocus()
+    })
   })
 
   it('click toolbox with selection', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    const prompt = jest
-      .spyOn(window, 'prompt')
-      .mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
-    ;['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach(
-      (type) => {
-        // init
-        textarea.value = 'Hello World'
-        textarea.selectionStart = 6
-        textarea.selectionEnd = 11
+    ;['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
+      // init
+      textarea.value = 'Hello World'
+      textarea.selectionStart = 6
+      textarea.selectionEnd = 11
 
-        const el = screen.getByTestId(type)
-        el.click()
-        doSelectionTest(textarea, type, mockValue, true)
+      const el = screen.getByTestId(type)
+      el.click()
+      doSelectionTest(textarea, type, mockValue, true)
 
-        if (type === 'image' || type === 'link' || type === 'size') {
-          expect(prompt).toHaveBeenCalled()
-        } else {
-          expect(prompt).not.toHaveBeenCalled()
-        }
-        prompt.mockClear()
+      if (type === 'image' || type === 'link' || type === 'size') {
+        expect(prompt).toHaveBeenCalled()
+      } else {
+        expect(prompt).not.toHaveBeenCalled()
+      }
+      prompt.mockClear()
 
-        // Click toolbox -> textarea should be focused
-        expect(textarea).toHaveFocus()
-      },
-    )
+      // Click toolbox -> textarea should be focused
+      expect(textarea).toHaveFocus()
+    })
   })
 
   it('onConfirm keyboard event', () => {
@@ -213,9 +199,7 @@ describe('EditorForm > Editor', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    const prompt = jest
-      .spyOn(window, 'prompt')
-      .mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
     for (const key of Object.keys(keyToEvent)) {
       const type = keyToEvent[key as keyof typeof keyToEvent]
@@ -243,9 +227,7 @@ describe('EditorForm > Editor', () => {
     const { textarea } = initTextareaTest({ placeholder: 'Hello' })
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg'
-    const prompt = jest
-      .spyOn(window, 'prompt')
-      .mockImplementation(() => mockValue)
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue)
 
     for (const key of Object.keys(keyToEvent)) {
       const type = keyToEvent[key as keyof typeof keyToEvent]

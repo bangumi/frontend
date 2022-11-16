@@ -13,12 +13,7 @@ export interface MenuItemProps {
   subMenu?: JSX.Element
 }
 
-const MenuItem: FC<MenuItemProps> = ({
-  id,
-  label,
-  className: customClassName,
-  subMenu,
-}) => {
+const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, subMenu }) => {
   const { onClick: onClickEmit, activeKey, mode } = useMenuContext()
 
   const isActive = id === activeKey
@@ -33,10 +28,7 @@ const MenuItem: FC<MenuItemProps> = ({
   )
 
   return (
-    <li
-      className={className}
-      onClick={onClickEmit && ((e) => onClickEmit(id, e))}
-    >
+    <li className={className} onClick={onClickEmit && ((e) => onClickEmit(id, e))}>
       {label}
       {subMenu && (
         <div className="bgm-menu-item__submenu" data-testid="submenu">

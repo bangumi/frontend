@@ -5,9 +5,7 @@ import Divider from '.'
 const componentMeta: ComponentMeta<typeof Divider> = {
   title: 'Grid/Divider',
   component: Divider,
-  decorators: [
-    (story) => <div style={{ width: '15vw', height: '15vh' }}>{story()}</div>,
-  ],
+  decorators: [(story) => <div style={{ width: '15vw', height: '15vh' }}>{story()}</div>],
 }
 
 export default componentMeta

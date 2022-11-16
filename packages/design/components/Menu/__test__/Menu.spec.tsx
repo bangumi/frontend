@@ -33,13 +33,9 @@ it('should trigger onChange when click menus', () => {
 })
 
 it('render props', () => {
-  const Comp: React.FC<{ label: string }> = ({ label }) => (
-    <div>{`Custom:${label}`}</div>
-  )
+  const Comp: React.FC<{ label: string }> = ({ label }) => <div>{`Custom:${label}`}</div>
   const { getByText } = render(
-    <Menu items={items}>
-      {(item) => <Comp label={item.label} key={item.key} />}
-    </Menu>,
+    <Menu items={items}>{(item) => <Comp label={item.label} key={item.key} />}</Menu>,
   )
   expect(getByText('Custom:1')).toBeInTheDocument()
 })

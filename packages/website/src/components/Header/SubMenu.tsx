@@ -217,50 +217,29 @@ const SubMenu: VFC<{
 )
 
 export const animeSubMenu = (
-  <SubMenu
-    itemsTop={animeSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('anime')}
-  />
+  <SubMenu itemsTop={animeSubMenuItems} itemsBottom={subMenuBottomWrapper('anime')} />
 )
 
 export const bookSubMenu = (
-  <SubMenu
-    itemsTop={bookSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('book')}
-  />
+  <SubMenu itemsTop={bookSubMenuItems} itemsBottom={subMenuBottomWrapper('book')} />
 )
 
 export const musicSubMenu = (
-  <SubMenu
-    itemsTop={musicSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('music')}
-  />
+  <SubMenu itemsTop={musicSubMenuItems} itemsBottom={subMenuBottomWrapper('music')} />
 )
 
 export const gameSubMenu = (
-  <SubMenu
-    itemsTop={gameSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('game')}
-  />
+  <SubMenu itemsTop={gameSubMenuItems} itemsBottom={subMenuBottomWrapper('game')} />
 )
 
 export const realSubMenu = (
-  <SubMenu
-    itemsTop={realSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('real')}
-  />
+  <SubMenu itemsTop={realSubMenuItems} itemsBottom={subMenuBottomWrapper('real')} />
 )
 
 export const monoSubMenu = (
-  <SubMenu
-    itemsTop={monoSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('mono')}
-  />
+  <SubMenu itemsTop={monoSubMenuItems} itemsBottom={subMenuBottomWrapper('mono')} />
 )
 
 export const groupSubMenu = (
-  <SubMenu
-    itemsTop={groupSubMenuItems}
-    itemsBottom={subMenuBottomWrapper('group')}
-  />
+  <SubMenu itemsTop={groupSubMenuItems} itemsBottom={subMenuBottomWrapper('group')} />
 )

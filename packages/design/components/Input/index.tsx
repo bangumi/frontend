@@ -19,31 +19,11 @@ export interface InputProps {
 /* eslint-disable react/prop-types */
 // https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      type = 'text',
-      wrapperStyle,
-      wrapperClass,
-      prefix,
-      suffix,
-      placeholder,
-      ...rest
-    },
-    ref,
-  ) => {
+  ({ type = 'text', wrapperStyle, wrapperClass, prefix, suffix, placeholder, ...rest }, ref) => {
     return (
-      <div
-        className={classnames('bgm-input__wrapper', wrapperClass)}
-        style={wrapperStyle}
-      >
+      <div className={classnames('bgm-input__wrapper', wrapperClass)} style={wrapperStyle}>
         {prefix && prefix}
-        <input
-          type={type}
-          className="bgm-input"
-          placeholder={placeholder}
-          ref={ref}
-          {...rest}
-        />
+        <input type={type} className="bgm-input" placeholder={placeholder} ref={ref} {...rest} />
         {suffix && suffix}
       </div>
     )

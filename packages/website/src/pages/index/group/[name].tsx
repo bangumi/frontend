@@ -1,12 +1,7 @@
 import ErrorBoundary from '@bangumi/website/components/ErrorBoundary'
 import { useGroup, UseGroupRet } from '@bangumi/website/hooks/use-group'
 import React from 'react'
-import {
-  Outlet,
-  useLocation,
-  useOutletContext,
-  useParams,
-} from 'react-router-dom'
+import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom'
 import GroupLayout, { GroupTabs } from './components/GroupLayout'
 
 interface GroupContext {

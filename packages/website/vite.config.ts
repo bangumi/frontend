@@ -66,8 +66,7 @@ export default defineConfig({
           libraryName: '@bangumi/design',
           libraryNameChangeCase: 'capitalCase',
           ensureStyleFile: true,
-          resolveStyle: (name: string) =>
-            `@bangumi/design/components/${name}/style/index.tsx`,
+          resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`,
         },
       ],
     }),
@@ -81,8 +80,6 @@ export default defineConfig({
     },
   },
   define: {
-    'import.meta.env.__APP_VERSION__': JSON.stringify(
-      process.env.npm_package_version,
-    ),
+    'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
   },
 })

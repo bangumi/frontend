@@ -1,9 +1,6 @@
 import { Typography } from '@bangumi/design'
 import { Topic } from '@bangumi/types/common'
-import {
-  getGroupTopicLink,
-  getUserProfileLink,
-} from '@bangumi/website/utils/pages'
+import { getGroupTopicLink, getUserProfileLink } from '@bangumi/website/utils/pages'
 import React from 'react'
 import dayjs from 'dayjs'
 import styles from './TopicsTable.module.less'
@@ -25,11 +22,7 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
             <tr key={topic.id}>
               <td className={styles.title}>
                 {/* TODO: replace to Link */}
-                <Typography.Link
-                  to={getGroupTopicLink(topic.id)}
-                  fontWeight="bold"
-                  isExternal
-                >
+                <Typography.Link to={getGroupTopicLink(topic.id)} fontWeight="bold" isExternal>
                   {topic.title}
                 </Typography.Link>
               </td>
@@ -43,9 +36,7 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
                 </Typography.Link>
               </td>
               <td className={styles.replies}>{topic.reply_count}</td>
-              <td className={styles.updateTime}>
-                {dayjs(topic.updated_at).format('YYYY-M-D')}
-              </td>
+              <td className={styles.updateTime}>{dayjs(topic.updated_at).format('YYYY-M-D')}</td>
             </tr>
           )
         })}

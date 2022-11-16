@@ -115,11 +115,7 @@ const Header: FC = () => {
             <Input
               prefix={
                 <>
-                  <select
-                    name="cat"
-                    className={style.searchSelect}
-                    defaultValue="value1"
-                  >
+                  <select name="cat" className={style.searchSelect} defaultValue="value1">
                     <option value="value1">全部条目</option>
                     <option value="value2">动画</option>
                     <option value="value3">书籍</option>
@@ -127,10 +123,7 @@ const Header: FC = () => {
                     <option value="value5">三次元</option>
                     <option value="value6">人物</option>
                   </select>
-                  <Divider
-                    orientation="vertical"
-                    className={style.searchDivider}
-                  />
+                  <Divider orientation="vertical" className={style.searchDivider} />
                 </>
               }
               suffix={<SearchIcon style={{ flexShrink: 0 }} />}

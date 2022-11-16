@@ -9,14 +9,10 @@ export interface PagerProps {
 
 const Pager: FC<PagerProps> = (props) => {
   const prefixCls = 'bgm-pagination-pager'
-  const actualClassnames = classNames(
-    prefixCls,
-    `${prefixCls}--${props.page}`,
-    {
-      [`${prefixCls}--active`]: props.active,
-      [`${prefixCls}--disabled`]: !props.page,
-    },
-  )
+  const actualClassnames = classNames(prefixCls, `${prefixCls}--${props.page}`, {
+    [`${prefixCls}--active`]: props.active,
+    [`${prefixCls}--disabled`]: !props.page,
+  })
 
   const handleClick = (): void => {
     props.onClick(props.page)

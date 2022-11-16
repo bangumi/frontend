@@ -39,11 +39,7 @@ const Menu: FC<MenuProps> = ({
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, mode }}>
         {items.map((item) => {
-          return children ? (
-            children(item)
-          ) : (
-            <MenuItem {...item} id={item.key} />
-          )
+          return children ? children(item) : <MenuItem {...item} id={item.key} />
         })}
       </MenuContext.Provider>
     </ul>
@@ -52,5 +48,4 @@ const Menu: FC<MenuProps> = ({
 
 export default Menu
 
-export const useMenuContext = (): MenuContextType =>
-  useContext<MenuContextType>(MenuContext)
+export const useMenuContext = (): MenuContextType => useContext<MenuContextType>(MenuContext)

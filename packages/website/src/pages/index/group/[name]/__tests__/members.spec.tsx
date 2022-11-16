@@ -42,10 +42,7 @@ class GroupMembersTest {
     mockServer.use(
       rest.get(`http://localhost/p/groups/${name}/members`, (req, res, ctx) => {
         const isAdmin = req.url.searchParams.get('type') === 'mod'
-        return res(
-          ctx.status(200),
-          ctx.json(isAdmin ? mock.modMembers : mock.members),
-        )
+        return res(ctx.status(200), ctx.json(isAdmin ? mock.modMembers : mock.members))
       }),
     )
 

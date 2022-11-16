@@ -3,8 +3,7 @@ export const GlobalSuffixError = "missing suffix '}}' at the end"
 export const ArrayNoCloseError = "array should be closed by '}'"
 export const ArrayItemWrappedError = "array item should be wrapped by '[]'"
 export const ExpectingNewFieldError = "missing '|' to start a new field"
-export const ExpectingSignEqualError =
-  "missing '=' to separate field name and value"
+export const ExpectingSignEqualError = "missing '=' to separate field name and value"
 
 export class WikiSyntaxError extends Error {
   line: string | null

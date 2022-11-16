@@ -31,9 +31,7 @@ it('should trigger onChange when click tabs', () => {
     },
   ]
   const handleChange = jest.fn()
-  const { getByText } = render(
-    <Tab items={items} activeKey="1" onChange={handleChange} />,
-  )
+  const { getByText } = render(<Tab items={items} activeKey="1" onChange={handleChange} />)
   getByText('2').click()
 
   expect(handleChange).toBeCalledWith('2')
@@ -50,8 +48,6 @@ it('should render borderless tab', () => {
       label: '2',
     },
   ]
-  const { container } = render(
-    <Tab items={items} activeKey="1" type="borderless" />,
-  )
+  const { container } = render(<Tab items={items} activeKey="1" type="borderless" />)
   expect(container).toMatchSnapshot()
 })

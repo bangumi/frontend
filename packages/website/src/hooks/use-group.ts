@@ -2,12 +2,7 @@ import { useState, useEffect } from 'react'
 import { AxiosResponse } from 'axios'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
-import {
-  GroupProfile,
-  ResponseWithPagination,
-  Topic,
-  Pagination,
-} from '@bangumi/types/group'
+import { GroupProfile, ResponseWithPagination, Topic, Pagination } from '@bangumi/types/group'
 
 export enum DescriptionClamp {
   clamp = 'clamp',
@@ -44,8 +39,7 @@ export function useGroup(name: string): UseGroupRet {
   )
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`
   const descriptionClamp =
-    (localStorage.getItem(clampKey) as DescriptionClamp) ??
-    DescriptionClamp.unclamp
+    (localStorage.getItem(clampKey) as DescriptionClamp) ?? DescriptionClamp.unclamp
   const [descriptionClampState, setDescriptionClampState] =
     useState<DescriptionClamp>(descriptionClamp)
 

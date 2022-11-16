@@ -1,7 +1,6 @@
 import axios from 'axios'
 
-const baseURL =
-  (import.meta.env.VITE_APP_ROOT as string) ?? 'https://api.bgm.tv'
+const baseURL = (import.meta.env.VITE_APP_ROOT as string) ?? 'https://api.bgm.tv'
 
 export const request = axios.create({
   baseURL,

@@ -1,10 +1,7 @@
 import { Section } from '@bangumi/design'
 import React from 'react'
 import { useParams, Link as RouterLink } from 'react-router-dom'
-import {
-  DescriptionClamp,
-  useGroupTopic,
-} from '@bangumi/website/hooks/use-group'
+import { DescriptionClamp, useGroupTopic } from '@bangumi/website/hooks/use-group'
 import CommonStyles from '../common.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
 import { ClampableContent } from './components/ClampableContent'
@@ -28,9 +25,7 @@ const GroupHome: React.FC = () => {
   } = groupContext
 
   const handleChangeClamp = (isClamped: boolean): void => {
-    setDescriptionClamp(
-      isClamped ? DescriptionClamp.clamp : DescriptionClamp.unclamp,
-    )
+    setDescriptionClamp(isClamped ? DescriptionClamp.clamp : DescriptionClamp.unclamp)
   }
 
   // TODO: XSS defense
@@ -47,10 +42,7 @@ const GroupHome: React.FC = () => {
       <Section
         title="最近讨论"
         renderFooter={() => (
-          <RouterLink
-            to={`/group/${name}/forum`}
-            className={CommonStyles.textButton}
-          >
+          <RouterLink to={`/group/${name}/forum`} className={CommonStyles.textButton}>
             <span>更多组内讨论</span>
             <RightArrow />
           </RouterLink>

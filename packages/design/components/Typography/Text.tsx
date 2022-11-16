@@ -7,12 +7,7 @@ export interface TextProps {
   type?: 'default' | 'secondary'
 }
 
-const Text = ({
-  children,
-  className,
-  style,
-  type = 'default',
-}: PropsWithChildren<TextProps>) => {
+const Text = ({ children, className, style, type = 'default' }: PropsWithChildren<TextProps>) => {
   return (
     <span
       className={classNames(

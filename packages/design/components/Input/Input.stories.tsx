@@ -19,7 +19,6 @@ const Template: Story<InputProps> = ({
   wrapperClass,
   wrapperStyle,
 }) => {
-  /* eslint-enable react/prop-types */
   return (
     <Input
       placeholder={placeholder}
@@ -31,6 +30,7 @@ const Template: Story<InputProps> = ({
     />
   )
 }
+/* eslint-enable react/prop-types */
 
 export const Default = Template.bind({})
 

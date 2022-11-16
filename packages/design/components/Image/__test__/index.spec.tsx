@@ -13,17 +13,13 @@ describe('<Image />', () => {
   })
 
   it('should render box-shadow properly', () => {
-    const { getByTestId } = render(
-      <Image src={src} alt="vanilla" withBoxShadow />,
-    )
+    const { getByTestId } = render(<Image src={src} alt="vanilla" withBoxShadow />)
 
     expect(getByTestId('img-wrapper')).toMatchSnapshot()
   })
 
   it('should render hovering styles properly', () => {
-    const { getByTestId } = render(
-      <Image src={src} alt="vanilla" withBoxShadow />,
-    )
+    const { getByTestId } = render(<Image src={src} alt="vanilla" withBoxShadow />)
 
     const Img = getByTestId('img-wrapper')
 
@@ -33,9 +29,7 @@ describe('<Image />', () => {
   })
 
   it('should render circle shape properly', () => {
-    const { getByTestId } = render(
-      <Image src={src} alt="vanilla" withBoxShadow shape="circle" />,
-    )
+    const { getByTestId } = render(<Image src={src} alt="vanilla" withBoxShadow shape="circle" />)
 
     expect(getByTestId('img-wrapper')).toMatchSnapshot()
   })

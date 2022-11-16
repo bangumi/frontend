@@ -35,8 +35,6 @@ type HTTPMethods = 'get' | 'post' | 'put' | 'delete' | 'options'
 
 export function mockAPI(url: string, method: HTTPMethods): RequestHandler {
   return rest[method](url, (req, res, ctx) =>
-    loadFixture(req.url.pathname, req.method).then((data) =>
-      res(ctx.status(200), ctx.json(data)),
-    ),
+    loadFixture(req.url.pathname, req.method).then((data) => res(ctx.status(200), ctx.json(data))),
   )
 }

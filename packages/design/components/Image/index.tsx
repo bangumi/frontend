@@ -1,8 +1,7 @@
 import React, { FC, ImgHTMLAttributes } from 'react'
 import classnames from 'classnames'
 
-export interface ImageProps
-  extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'> {
+export interface ImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'> {
   /* 图像的 URL */
   src: string
   /* 图像的备用文本描述 */
@@ -27,14 +26,7 @@ const Image: FC<ImageProps> = ({
     'bgm-image--rect': shape === 'rect',
     'bgm-image--circle': shape === 'circle',
   })
-  return (
-    <img
-      className={actualClassnames}
-      src={src}
-      data-testid="img-wrapper"
-      {...rest}
-    />
-  )
+  return <img className={actualClassnames} src={src} data-testid="img-wrapper" {...rest} />
 }
 
 export default Image

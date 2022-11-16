@@ -4,11 +4,7 @@ import { UserLogin, Password } from '@bangumi/icons'
 import { useInput } from 'rooks'
 import HCaptcha from '@hcaptcha/react-hcaptcha'
 import style from './index.module.less'
-import {
-  LoginErrorCode,
-  PasswordUnMatchError,
-  useUser,
-} from '../../hooks/use-user'
+import { LoginErrorCode, PasswordUnMatchError, useUser } from '../../hooks/use-user'
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg'
 import { useNavigate } from 'react-router-dom'
 import ErrorMessage from './components/ErrorMessage'
@@ -51,9 +47,7 @@ const Login: React.FC = () => {
       navigate('/', { replace: true })
     } catch (error: any) {
       if (error instanceof PasswordUnMatchError) {
-        setErrorMessage(
-          `用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`,
-        )
+        setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`)
         return
       }
       const errorMsg = errorMessageMap[error.message]
@@ -87,20 +81,10 @@ const Login: React.FC = () => {
           />
         </div>
         <div className={style.buttonGroup}>
-          <Button
-            className={style.button}
-            type="secondary"
-            shape="rounded"
-            disabled
-          >
+          <Button className={style.button} type="secondary" shape="rounded" disabled>
             注册新用户
           </Button>
-          <Button
-            className={style.button}
-            type="primary"
-            shape="rounded"
-            onClick={handleLogin}
-          >
+          <Button className={style.button} type="primary" shape="rounded" onClick={handleLogin}>
             登录
           </Button>
         </div>

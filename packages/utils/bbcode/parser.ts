@@ -1,8 +1,4 @@
-import {
-  BGM_STICKER_START_STR,
-  EMOJI_ARRAY,
-  MAX_EMOJI_LENGTH,
-} from './constants'
+import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants'
 import { CodeNodeTypes, CodeVNode } from './types'
 
 const INVALID_NODE_MSG = 'invalid node'
@@ -21,19 +17,12 @@ type ITag = CustomTag | string
 
 // 只有一个 string child
 function getStringChild(node: CodeVNode): string | undefined {
-  if (
-    !!node.children &&
-    node.children.length === 1 &&
-    typeof node.children[0] === 'string'
-  ) {
+  if (!!node.children && node.children.length === 1 && typeof node.children[0] === 'string') {
     return node.children[0]
   }
 }
 
-function getNodeProp(
-  node: CodeVNode,
-  prop: string,
-): string | boolean | undefined {
+function getNodeProp(node: CodeVNode, prop: string): string | boolean | undefined {
   const props = node.props ?? {}
   return props[prop]
 }
@@ -192,10 +181,7 @@ export class Parser {
       }
       this.exitNode()
     } catch (error: any) {
-      if (
-        error.message === INVALID_NODE_MSG ||
-        error.message === INVALID_STICKER_NODE
-      ) {
+      if (error.message === INVALID_NODE_MSG || error.message === INVALID_STICKER_NODE) {
         const ctx = this.ctxStack.pop()!
         node = this.input.slice(ctx.startIdx, this.pos)
       }

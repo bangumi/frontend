@@ -4,12 +4,7 @@ module.exports = {
     es2021: true,
     'jest/globals': true,
   },
-  extends: [
-    'standard-with-typescript',
-    'standard-jsx',
-    'standard-react',
-    'prettier',
-  ],
+  extends: ['standard-with-typescript', 'standard-jsx', 'standard-react', 'prettier'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {

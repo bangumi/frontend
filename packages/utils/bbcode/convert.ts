@@ -1,15 +1,5 @@
-import {
-  BGM_STICKER_START_STR,
-  EMOJI_ARRAY,
-  STICKER_DOMAIN_URL,
-} from './constants'
-import {
-  CodeNodeTypes,
-  CodeVNode,
-  ConverterFn,
-  NodeTypes,
-  VNode,
-} from './types'
+import { BGM_STICKER_START_STR, EMOJI_ARRAY, STICKER_DOMAIN_URL } from './constants'
+import { CodeNodeTypes, CodeVNode, ConverterFn, NodeTypes, VNode } from './types'
 
 const BGM_HOST_ARR = [
   'chii.in',

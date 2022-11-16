@@ -70,14 +70,7 @@ export default {
 }
 
 /* eslint-disable react/prop-types */
-const Template: Story<MenuProps> = ({
-  items,
-  activeKey,
-  mode,
-  onClick,
-  style,
-  wrapperClass,
-}) => {
+const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
     <div
       style={{

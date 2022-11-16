@@ -9,10 +9,7 @@ const PageWrapper = ({ children }: PropsWithChildren<{}>) => (
   </MemoryRouter>
 )
 
-export const renderPage = (
-  page: React.ReactElement,
-  options?: RenderOptions,
-): RenderResult => {
+export const renderPage = (page: React.ReactElement, options?: RenderOptions): RenderResult => {
   return render(page, {
     wrapper: PageWrapper,
     ...options,

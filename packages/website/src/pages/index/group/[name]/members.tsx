@@ -58,11 +58,7 @@ const GroupMembersPage = () => {
             )
           })}
         </div>
-        <Pagination
-          total={total}
-          currentPage={curPage}
-          onChange={handlePageChange}
-        />
+        <Pagination total={total} currentPage={curPage} onChange={handlePageChange} />
       </Section>
     </>
   )

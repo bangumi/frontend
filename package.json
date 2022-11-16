@@ -27,6 +27,7 @@
     "type-check": "tsc --noEmit"
   },
   "prettier": {
+    "printWidth": 100,
     "singleQuote": true,
     "semi": false,
     "trailingComma": "all"

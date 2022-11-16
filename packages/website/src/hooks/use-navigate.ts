@@ -1,10 +1,5 @@
 import { useTransition } from 'react'
-import {
-  useNavigate,
-  To,
-  NavigateOptions,
-  NavigateFunction,
-} from 'react-router-dom'
+import { useNavigate, To, NavigateOptions, NavigateFunction } from 'react-router-dom'
 
 // https://github.com/bangumi/frontend/issues/125
 export const useTransitionNavigate = (): [boolean, NavigateFunction] => {

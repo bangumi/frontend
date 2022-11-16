@@ -51,9 +51,7 @@ describe('html render vnode', () => {
         alt: `(bgm${id})`,
       },
     }
-    expect(renderNode(vnode)).toBe(
-      '<img sticker-id="38" smileid="38" alt="(bgm38)"/>',
-    )
+    expect(renderNode(vnode)).toBe('<img sticker-id="38" smileid="38" alt="(bgm38)"/>')
   })
   test('render nodes', () => {
     const vnodes: VNode[] = [
@@ -154,8 +152,7 @@ describe('html render vnode', () => {
 
 describe('html render bbcode string', () => {
   test('render color size', () => {
-    const input =
-      '[color=red][size=18]一般[b]粗[/b]\n   [s]删除[/s][/size][/color]'
+    const input = '[color=red][size=18]一般[b]粗[/b]\n   [s]删除[/s][/size][/color]'
     expect(render(input)).toBe(
       '<span style="color:red"><span style="font-size:18px;line-height:18px">一般<strong>粗</strong><br/>   <span style="text-decoration:line-through">删除</span></span></span>',
     )
@@ -174,8 +171,7 @@ describe('html render bbcode string', () => {
     )
   })
   test('render size', () => {
-    const input =
-      '[size=10]不同[/size][size=14]大小的[/size][size=18]文字[/size]效果也可实现。'
+    const input = '[size=10]不同[/size][size=14]大小的[/size][size=18]文字[/size]效果也可实现。'
     expect(render(input)).toBe(
       '<span style="font-size:10px;line-height:10px">不同</span><span style="font-size:14px;line-height:14px">大小的</span><span style="font-size:18px;line-height:18px">文字</span>效果也可实现。',
     )
@@ -206,9 +202,7 @@ describe('html render bbcode string', () => {
   })
   test('render quote', () => {
     const input = '[quote]ss[b]加粗[/b][/quote]'
-    expect(render(input)).toBe(
-      '<div class="quote"><q>ss<strong>加粗</strong></q></div>',
-    )
+    expect(render(input)).toBe('<div class="quote"><q>ss<strong>加粗</strong></q></div>')
   })
   test('render align', () => {
     const input = '[align=right]右[/align][center]中[/center][left]左[/left]'
@@ -224,9 +218,7 @@ describe('html render bbcode string', () => {
   })
   test('render code', () => {
     const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]'
-    expect(render(input)).toBe(
-      '<pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre>',
-    )
+    expect(render(input)).toBe('<pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre>')
   })
   test('render code by custom converter', () => {
     const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]'
@@ -243,8 +235,6 @@ describe('html render bbcode string', () => {
           ],
         }),
       }),
-    ).toBe(
-      '<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>',
-    )
+    ).toBe('<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>')
   })
 })

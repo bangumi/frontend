@@ -8,11 +8,7 @@ import { useNavigate } from 'react-router-dom'
 interface UserContextType {
   user?: User
   redirectToLogin: () => void
-  login: (
-    username: string,
-    password: string,
-    hCaptchaResp: string,
-  ) => Promise<void>
+  login: (username: string, password: string, hCaptchaResp: string) => Promise<void>
 }
 const UserContext = React.createContext<UserContextType>(null!)
 
@@ -41,16 +37,12 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR<AxiosResponse<User>>(
-    '/p/me',
-    privateRequest.get,
-    {
-      refreshWhenHidden: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      shouldRetryOnError: false,
-    },
-  )
+  const { data: user, mutate } = useSWR<AxiosResponse<User>>('/p/me', privateRequest.get, {
+    refreshWhenHidden: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    shouldRetryOnError: false,
+  })
 
   const navigate = useNavigate()
 
@@ -58,11 +50,11 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
     navigate('/login')
   }
 
-  const login: (
-    email: string,
-    password: string,
-    hCaptchaResp: string,
-  ) => Promise<void> = (email, password, hCaptchaResp) => {
+  const login: (email: string, password: string, hCaptchaResp: string) => Promise<void> = (
+    email,
+    password,
+    hCaptchaResp,
+  ) => {
     return privateRequest
       .post('/p/login', {
         email,

@@ -14,13 +14,7 @@ export interface AvatarProps {
   wrapperStyle?: React.CSSProperties
 }
 
-const Avatar: FC<AvatarProps> = ({
-  size = 'small',
-  src,
-  alt,
-  wrapperClass,
-  wrapperStyle,
-}) => {
+const Avatar: FC<AvatarProps> = ({ size = 'small', src, alt, wrapperClass, wrapperStyle }) => {
   return (
     <div
       className={classNames('bgm-avatar', `bgm-avatar--${size}`, wrapperClass)}
