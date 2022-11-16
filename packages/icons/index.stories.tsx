@@ -42,7 +42,7 @@ const componentMeta: ComponentMeta<IComponent> = {
 
 export default componentMeta
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const Template: Story<{
   height: number
   width: number
@@ -60,5 +60,6 @@ const Template: Story<{
     })}
   </>
 )
+/* eslint-enable react/prop-types */
 
 export const Usage = Template.bind({})

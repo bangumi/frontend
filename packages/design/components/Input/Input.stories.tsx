@@ -10,7 +10,7 @@ const componentMeta: ComponentMeta<typeof Input> = {
 
 export default componentMeta
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const Template: Story<InputProps> = ({
   placeholder,
   type,
@@ -19,6 +19,7 @@ const Template: Story<InputProps> = ({
   wrapperClass,
   wrapperStyle,
 }) => {
+  /* eslint-enable react/prop-types */
   return (
     <Input
       placeholder={placeholder}
@@ -62,7 +63,11 @@ NavSearch.args = {
   prefix: (
     <select
       name="select"
-      style={{ outline: 'none', border: 'none', color: '#AAA6A6' }}
+      style={{
+        outline: 'none',
+        border: 'none',
+        color: '#AAA6A6',
+      }}
     >
       <option value="value1" selected>
         全部条目

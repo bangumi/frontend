@@ -69,7 +69,7 @@ export default {
   },
 }
 
-// eslint-disable-next-line react/prop-types
+/* eslint-disable react/prop-types */
 const Template: Story<MenuProps> = ({
   items,
   activeKey,
@@ -97,6 +97,7 @@ const Template: Story<MenuProps> = ({
     </div>
   )
 }
+/* eslint-enable react/prop-types */
 
 export const Horizontal = Template.bind({})
 
