@@ -1,13 +1,14 @@
 import React from 'react'
 import GroupHome from '..'
-import { render, RenderResult, waitFor } from '@testing-library/react'
+import { RenderResult, waitFor } from '@testing-library/react'
 import { server as mockServer } from '@bangumi/website/mocks/server'
 import { rest } from 'msw'
 import Boring from './fixtures/boring.json'
 import RecentTopics from './fixtures/recent-topics.json'
-import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom'
+import { Route, Routes, useParams } from 'react-router-dom'
 import { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group'
 import GroupPage from '@bangumi/website/pages/index/group/[name]'
+import { renderPage } from '@bangumi/website/utils/test-utils'
 
 jest.mock('react-router-dom', () => {
   return {
@@ -37,14 +38,15 @@ class GroupHomeTest {
       return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics))
     }))
 
-    this.page = render(<MemoryRouter>
-      <Routes>
-        <Route element={<GroupPage />}>
-          <Route index element={<GroupHome />} />
-        </Route>
-      </Routes>
-      <GroupHome />
-    </MemoryRouter>
+    this.page = renderPage(
+      <>
+        <Routes>
+          <Route element={<GroupPage />}>
+            <Route index element={<GroupHome />} />
+          </Route>
+        </Routes>
+        <GroupHome />
+      </>
     )
   }
 
