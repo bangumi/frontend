@@ -94,7 +94,7 @@ async function updateComment (octokit, comment, artifact, alias) {
   const links = [];
   const s = comment.body.split('\n').filter(Boolean);
 
-  for (const value of s.slice(1)) {
+  for (const value of s.slice(2)) {
     if (value.includes(`<!-- ${artifact} -->`)) {
       return;
     }
