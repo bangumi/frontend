@@ -1,0 +1,46 @@
+# 把 PR 构建的页面推送到 Netlify
+# 由于涉及 secrets，所以不能直接在 build.yml 中配置
+name: Upload Preview
+
+on:
+  workflow_run:
+    workflows: ["Build", "Storybook Build"]
+    types:
+      - completed
+
+jobs:
+  upload-pr:
+    strategy:
+      max-parallel: 1
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2.2.4
+        with:
+          version: "6"
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          cache: "pnpm"
+
+      - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: npm-${{ env.CLI_VER }}
+
+      - name: Install netlify-cli
+        run: npm install -g 'netlify-cli@${{ env.CLI_VER }}'
+
+      - name: Install Dependencies
+        run: pnpm install
+      - run: node ./.github/scripts/upload-preview.cjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}

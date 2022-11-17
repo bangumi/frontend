@@ -20,10 +20,17 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Download Atifact
-        run: gh --repo $GITHUB_REPOSITORY run download ${{github.event.workflow_run.id }} --name sites --dir sites
+      - if: ${{ github.event.workflow.name == "Build" }}
+        run: echo "ARTIFACT_NAME=sites" >> $GITHUB_ENV
+
+      - if: ${{ github.event.workflow.name == "Storybook Build" }}
+        run: echo "ARTIFACT_NAME=storybook" >> $GITHUB_ENV
+
+      - name: Download Artifact
+        run: gh --repo $GITHUB_REPOSITORY run download ${{github.event.workflow_run.id }} --name ${ARTIFACT_NAME} --dir ${ARTIFACT_NAME}
         env:
           GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
 
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
@@ -44,7 +51,7 @@ jobs:
         run: npm install -g 'netlify-cli@${{ env.CLI_VER }}'
 
       - name: Upload Deploy
-        run: netlify deploy --dir=sites --alias="pr-$PR_NUMBER"
+        run: netlify deploy --dir=${ARTIFACT_NAME} --alias="pr-$PR_NUMBER-${ARTIFACT_NAME}"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
