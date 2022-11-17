@@ -11,6 +11,8 @@ const artifacts = {
   'Storybook Build': 'storybook',
 };
 
+const commentComment = '<!-- preview comment -->';
+
 async function main () {
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
@@ -73,13 +75,78 @@ async function main () {
   )) {
     console.log(comments);
     for (const comment of comments) {
-      if (comment.user.login === 'github-actions[bot]' && comment.body.includes('<!-- preview comment -->')) {
-        console.log(comment);
+      if (comment.user.login === 'github-actions[bot]' && comment.body.includes(commentComment)) {
+        return await updateComment(octokit, comment, artifact, alias);
       }
     }
   }
 
-  console.log(comments);
+  await createComment(octokit, prNumber, artifact, alias);
+}
+
+/**
+ * @param {InstanceType<typeof GitHub>} octokit
+ * @param {string} artifact
+ * @param {string} alias
+ * @param {{id:number;body:string;}} comment
+ */
+async function updateComment (octokit, comment, artifact, alias) {
+  let s = comment.body.split('\n');
+
+  let has = false;
+
+  s.slice(1).forEach((value, index) => {
+    if (value.includes(`<!-- ${artifact} -->`)) {
+      has = true;
+    }
+  });
+
+  if (has) {
+    return;
+  }
+
+  s.push(
+    `<!-- ${artifact} -->` + toTitle(artifact) + ' ' + `<https://${alias}--bangumi-next.netlify.app>`,
+  );
+
+  s = s.slice(0, 2).concat(s.slice(1).sort());
+
+  await octokit.rest.issues.updateComment({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    comment_id: comment.id,
+    body: s.join('\n'),
+  });
+}
+
+/**
+ * @param {InstanceType<typeof GitHub>} octokit
+ * @param {number} issue_number
+ * @param {string} artifact
+ * @param {string} alias
+ */
+async function createComment (octokit, issue_number, artifact, alias) {
+  await octokit.rest.issues.createComment({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    issue_number,
+    body: [
+      commentComment,
+      '# Preview Deployment',
+      `<!-- ${artifact} -->` + toTitle(artifact) + ' ' + `<https://${alias}--bangumi-next.netlify.app>`,
+    ].join('\n'),
+  });
+}
+
+/**
+ * @param {string} s
+ */
+function toTitle (s) {
+  if (!s) {
+    return '';
+  }
+
+  return s[0].toUpperCase() + s.slice(1).toLowerCase();
 }
 
 main().catch((e) => {
