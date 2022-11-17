@@ -62,11 +62,21 @@ async function main () {
     },
   });
 
-  const comments = await octokit.rest.issues.getComment({
-    owner: context.repo.owner,
-    repo: context.repo.repo,
-    issue_number: prNumber,
-  });
+  for await(const { data: comments } of octokit.paginate.iterator(
+    octokit.rest.issues.listComments,
+    {
+      owner: context.repo.owner,
+      repo: context.repo.repo,
+      issue_number: prNumber,
+    },
+  )) {
+    console.log(comments);
+    for (const comment of comments) {
+      if (comment.user.login === 'github-actions[bot]' && comment.body.includes('<!-- preview comment -->')) {
+        console.log(comment);
+      }
+    }
+  }
 
   console.log(comments);
 }
