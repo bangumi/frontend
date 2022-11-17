@@ -1,4 +1,3 @@
-const fsp = require('node:fs/promises');
 const fs = require('node:fs');
 const path = require('node:path');
 
