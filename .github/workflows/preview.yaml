@@ -17,7 +17,7 @@ jobs:
 
   upload:
     concurrency:
-      group: upload-preview
+      group: upload-preview-${{ github.event.workflow_run.head_branch }}
       cancel-in-progress: false
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
