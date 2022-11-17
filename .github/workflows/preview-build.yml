@@ -4,12 +4,19 @@ name: Upload Preview (build)
 
 on:
   workflow_run:
-    workflows: ["Build"]
+    workflows: ["Build", "Storybook Build"]
     types:
       - completed
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - echo '${{ toJSON(github) }}'
+
   upload-pr:
+    strategy:
+      max-parallel: 1
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
     steps:
