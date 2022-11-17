@@ -5,6 +5,7 @@ name: Upload Preview
 on:
   workflow_run:
     workflows: ["Build", "Storybook Build"]
+    branches-ignore: [master]
     types:
       - completed
 
@@ -13,7 +14,7 @@ jobs:
     strategy:
       max-parallel: 1
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.4
