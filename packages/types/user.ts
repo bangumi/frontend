@@ -1,3 +1,9 @@
+import type { components } from './types'
+
+export * from './common'
+
+export type User = components['schemas']['User']
+
 export enum UserGroup {
   Admin = 1,
   BangumiAdmin = 2,
@@ -8,18 +14,4 @@ export enum UserGroup {
   WikiAdmin = 9,
   User = 10,
   WikiContributor = 11
-}
-
-export interface User {
-  id: number
-  url: string
-  username: string
-  nickname: string
-  user_group: UserGroup
-  avatar: {
-    large: string
-    medium: string
-    small: string
-  }
-  sign: string
 }

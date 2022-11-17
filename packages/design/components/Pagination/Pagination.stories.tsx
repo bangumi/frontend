@@ -16,5 +16,5 @@ const Template: ComponentStory<typeof Pagination> = (args) => {
 export const Usage = Template.bind({})
 Usage.args = {
   total: 3000,
-  currentOffset: 20
+  currentPage: 20
 }

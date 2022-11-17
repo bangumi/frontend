@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, PropsWithChildren } from 'react'
 import classNames from 'classnames'
 
 export interface ButtonProps {
@@ -10,7 +10,7 @@ export interface ButtonProps {
   size?: 'normal'
 }
 
-const Button: FC<ButtonProps> = ({
+const Button: FC<PropsWithChildren<ButtonProps>> = ({
   disabled = false,
   onClick,
   className,

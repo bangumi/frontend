@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "created_at": "2022-07-24T03:20:52Z",
+      "updated_at": "2022-07-24T08:21:30Z",
+      "title": "看了4000本漫画，大家有什么想问的",
+      "creator": {
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/34/73/347384.jpg?r=1626854999",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/34/73/347384.jpg?r=1626854999",
+          "small": "https://lain.bgm.tv/pic/user/s/000/34/73/347384.jpg?r=1626854999"
+        },
+        "sign": "今天又是替博士背锅的一天……",
+        "url": "https://bgm.tv/user/347384",
+        "username": "347384",
+        "nickname": "brad",
+        "id": 347384,
+        "user_group": 10
+      },
+      "id": 371794,
+      "reply_count": 40
+    }
+  ],
+  "total": 19682,
+  "limit": 10,
+  "offset": 0
+}

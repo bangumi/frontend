@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropsWithChildren } from 'react'
 import classNames from 'classnames'
 
 export interface TextProps {
@@ -7,12 +7,12 @@ export interface TextProps {
   type?: 'default' | 'secondary'
 }
 
-const Text: React.FC<TextProps> = ({
+const Text = ({
   children,
   className,
   style,
   type = 'default'
-}) => {
+}: PropsWithChildren<TextProps>) => {
   return (
     <span
       className={

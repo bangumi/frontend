@@ -2,7 +2,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { RequireAuth } from './auth'
-import { UserGroup } from '../../types/user'
+import { UserGroup } from '@bangumi/types/user'
 import { useUser } from '../../hooks/use-user'
 import { useNavigate } from 'react-router-dom'
 

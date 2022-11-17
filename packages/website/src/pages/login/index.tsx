@@ -26,7 +26,7 @@ const Login: React.FC = () => {
     [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试'
   }
 
-  const handleLogin: () => void = async () => {
+  const handleLogin = async () => {
     if (!hCaptchaToken) {
       setErrorMessage('请完成验证')
       return
@@ -60,7 +60,7 @@ const Login: React.FC = () => {
   return (
     <div className={style.wrapper}>
       <div className={style.container}>
-        <LoginLogo />
+        <LoginLogo className={style.logo} />
         {errorMessage && <ErrorMessage message={errorMessage} />}
         <Input
           type="email"

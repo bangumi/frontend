@@ -21,14 +21,14 @@ jobs:
       - run: echo "PR_NUMBER=$(cat sites/pr_number)" >> $GITHUB_ENV
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16.x"
 
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-${{ env.CLI_VER }}
@@ -43,7 +43,7 @@ jobs:
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
 
       - name: Find Comment
-        uses: peter-evans/find-comment@v1
+        uses: peter-evans/find-comment@v2
         id: fc
         with:
           issue-number: ${{ env.PR_NUMBER }}
@@ -51,7 +51,7 @@ jobs:
           body-includes: "<!-- build preview comment -->"
 
       - name: Create or update comment
-        uses: peter-evans/create-or-update-comment@v1
+        uses: peter-evans/create-or-update-comment@v2
         with:
           comment-id: ${{ steps.fc.outputs.comment-id }}
           issue-number: ${{ env.PR_NUMBER }}
@@ -73,14 +73,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: "16.x"
 
       - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: npm-${{ env.CLI_VER }}

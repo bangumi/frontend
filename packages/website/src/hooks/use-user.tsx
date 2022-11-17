@@ -1,5 +1,5 @@
-import React from 'react'
-import { User } from '../types/user'
+import React, { PropsWithChildren } from 'react'
+import { User } from '@bangumi/types/user'
 import useSWR from 'swr'
 import { privateRequest } from '../api/request'
 import { AxiosResponse } from 'axios'
@@ -36,7 +36,7 @@ export class PasswordUnMatchError extends Error {
   }
 }
 
-export const UserProvider: React.FC = ({ children }) => {
+export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const { data: user, mutate } = useSWR<AxiosResponse<User>>(
     '/p/me',
     privateRequest.get,

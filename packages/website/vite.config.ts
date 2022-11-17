@@ -3,11 +3,17 @@ import react from '@vitejs/plugin-react'
 import styleImport from 'vite-plugin-style-import'
 import svgr from 'vite-plugin-svgr'
 import pages from 'vite-plugin-pages'
+import path from 'path'
 
 const privateAPIDomain = 'https://next.bgm.tv'
 const productionRootURL = 'https://next.bgm.tv/'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@bangumi/website': path.resolve(__dirname, './src')
+    }
+  },
   server: {
     proxy: {
       '/p': {
