@@ -27,7 +27,7 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build:test
+        run: pnpm build
 
       - run: echo ${{ github.event.number }} > packages/website/dist/pr_number
 
