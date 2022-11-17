@@ -19,7 +19,7 @@ jobs:
           submodules: recursive
       - uses: pnpm/action-setup@v2.2.4
         with:
-          version: "6"
+          version: "7"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
