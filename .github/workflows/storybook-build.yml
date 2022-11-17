@@ -47,7 +47,7 @@ jobs:
           path: storybook-static
 
       - name: Upload Deploy
-        run: netlify deploy --dir=storybook-static --alias="storybook" --prod
+        run: netlify deploy --dir=storybook-static --alias="storybook"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}

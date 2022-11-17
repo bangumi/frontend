@@ -37,17 +37,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - run: echo "CLI_VER=$(npm show netlify-cli version)" >> $GITHUB_ENV
-
-      - name: Cache node modules
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: npm-${{ env.CLI_VER }}
-
-      - name: Install netlify-cli
-        run: npm install -g 'netlify-cli@${{ env.CLI_VER }}'
-
       - run: node ./.github/scripts/upload-preview.cjs
         env:
           workflow_name: "${{ github.event.workflow.name }}"
