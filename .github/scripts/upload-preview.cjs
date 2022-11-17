@@ -59,6 +59,7 @@ async function main () {
     env: {
       NETLIFY_AUTH_TOKEN: process.env.NETLIFY_AUTH_TOKEN,
       NETLIFY_SITE_ID: process.env.NETLIFY_SITE_ID,
+      PATH: process.env.PATH,
     },
   });
 
