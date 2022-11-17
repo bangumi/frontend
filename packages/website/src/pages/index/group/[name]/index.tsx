@@ -4,12 +4,10 @@ import { useParams, Link as RouterLink } from 'react-router-dom'
 import { DescriptionClamp, useGroupTopic } from '@bangumi/website/hooks/use-group'
 import CommonStyles from '../common.module.less'
 import { render as renderBBCode } from '@bangumi/utils'
-import { ClampableContent } from './components/ClampableContent'
+import { ClampableContent } from '../components/ClampableContent'
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg'
 import TopicsTable from './components/TopicsTable'
 import { useGroupContext } from '../[name]'
-
-const CLAMP_HEIGHT_THRESHOLD = 193
 
 const GroupHome: React.FC = () => {
   const { name } = useParams()
@@ -38,7 +36,6 @@ const GroupHome: React.FC = () => {
   return (
     <>
       <ClampableContent
-        threshold={CLAMP_HEIGHT_THRESHOLD}
         content={parsedDescription}
         isClamped={descriptionClamp === DescriptionClamp.clamp}
         onChange={handleChangeClamp}

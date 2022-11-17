@@ -11,8 +11,6 @@ import { getGroupForumPage } from '@bangumi/website/utils/pages'
 
 const { Link } = Typography
 
-const CLAMP_HEIGHT_THRESHOLD = 193
-
 const { Comment } = Topic
 
 const TopicPage: FC = () => {
@@ -31,7 +29,7 @@ const TopicPage: FC = () => {
       <GroupTopicHeader
         title={topicDetail.title}
         creator={topicDetail.creator}
-        createdAt={topicDetail.created_at}
+        createdAt={topicDetail.created_at as string}
         group={topicDetail.group}
       />
       <div className={styles.columnContainer}>
@@ -80,7 +78,6 @@ const TopicPage: FC = () => {
               </div>
             </div>
             <ClampableContent
-              threshold={CLAMP_HEIGHT_THRESHOLD}
               content={renderBBCode(group.description)}
               className={styles.groupDescription}
               isClamped

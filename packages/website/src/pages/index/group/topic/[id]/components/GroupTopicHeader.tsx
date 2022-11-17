@@ -6,7 +6,7 @@ import { getGroupForumPage, getUserProfileLink } from '@bangumi/website/utils/pa
 
 interface Header {
   title: string
-  createdAt: Date
+  createdAt: string | Date
   creator: User
   group: Group
 }

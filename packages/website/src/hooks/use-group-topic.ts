@@ -4,7 +4,7 @@ import { AxiosResponse } from 'axios'
 import { privateRequest } from '../api/request'
 
 type TopicsResp = {
-  group?: Group
+  group: Group
 } & GroupTopics
 
 interface UseGroupTopic {

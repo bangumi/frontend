@@ -5,14 +5,22 @@ import styles from './ClampableContent.module.less'
 import classNames from 'classnames'
 
 export interface ClampableContentProps {
-  threshold: number
+  threshold?: number
   content: string
   isClamped: boolean
   className?: string
   onChange?: (isClamped: boolean) => void
 }
 
-export const ClampableContent: React.FC<ClampableContentProps> = ({ content, threshold, isClamped, onChange, className }) => {
+const CLAMP_HEIGHT_THRESHOLD = 193
+
+export const ClampableContent: React.FC<ClampableContentProps> = ({
+  content,
+  threshold = CLAMP_HEIGHT_THRESHOLD,
+  isClamped,
+  onChange,
+  className
+}) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false)
   const contentRef = React.useRef<HTMLDivElement>(null)
 
@@ -59,7 +67,10 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({ content, thr
 
   return (
     <div className={classNames(styles.container, className)}>
-      <div ref={contentRef} className={styles.content} style={isClampEnabled && isClamped ? clampedStyle : undefined} dangerouslySetInnerHTML={{ __html: content }} />
+      <div
+        ref={contentRef} className={styles.content} style={isClampEnabled && isClamped ? clampedStyle : undefined}
+        dangerouslySetInnerHTML={{ __html: content }}
+      />
       {renderControl()}
     </div>
   )

@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 export interface CommentInfoProps {
   floor: string | number
   isSpecial?: boolean
-  createdAt: Date
+  createdAt: string | Date
 }
 
 const CommentInfo: React.FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false }) => {
