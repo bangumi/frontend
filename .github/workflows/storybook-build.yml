@@ -30,7 +30,7 @@ jobs:
 
       - run: echo ${{ github.event.number }} > packages/design/storybook-static/pr_number
 
-      - name: Archive code coverage results
+      - name: upload storybook build artifact
         uses: actions/upload-artifact@v3
         with:
           name: storybook
