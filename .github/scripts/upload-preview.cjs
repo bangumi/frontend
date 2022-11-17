@@ -99,11 +99,11 @@ async function updateComment (octokit, comment, artifact, alias) {
       return;
     }
 
-    links.push(value);
+    links.push(value + '\n');
   }
 
   links.push(
-    `<!-- ${artifact} -->` + toTitle(artifact) + ' ' + `<https://${alias}--bangumi-next.netlify.app>`,
+    `<!-- ${artifact} -->` + toTitle(artifact) + ' ' + `<https://${alias}--bangumi-next.netlify.app>\n`,
   );
 
   links.unshift(
