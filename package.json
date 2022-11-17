@@ -42,6 +42,8 @@
     ]
   },
   "devDependencies": {
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",

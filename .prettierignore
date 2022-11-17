@@ -1,4 +1,5 @@
 dist
+packages/design/storybook-static
 pnpm-lock.yaml
 # submodules
 /packages/utils/wiki/__test__/wiki-syntax-spec/
