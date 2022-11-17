@@ -101,7 +101,7 @@ async function updateComment (octokit, comment, artifact, alias) {
   }
 
   links.push(
-    `<!-- ${artifact} --> ${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app>\n`,
+    `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->\n`,
   );
 
   links.unshift(
@@ -131,7 +131,7 @@ async function createComment (octokit, issue_number, artifact, alias) {
     body: [
       commentComment,
       '# Preview Deployment',
-      `<!-- ${artifact} --> ${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app>`,
+      `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->`,
     ].join('\n'),
   });
 }
