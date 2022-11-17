@@ -23,7 +23,7 @@ async function main () {
     throw new Error('process.env.workflow_name is empty');
   }
 
-  if (Object.keys(artifacts).includes(workflow_name)) {
+  if (!Object.keys(artifacts).includes(workflow_name)) {
     throw new Error(`not valid workflow name ${workflow_name}`);
   }
 
