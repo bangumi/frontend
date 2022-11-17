@@ -35,3 +35,19 @@ jobs:
         with:
           name: storybook
           path: packages/design/storybook-static
+
+  upload-preview:
+    needs: [storybook-build]
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: storybook
+          path: storybook-static
+
+      - name: Upload Deploy
+        run: netlify deploy --dir=storybook-static --alias="storybook"
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}

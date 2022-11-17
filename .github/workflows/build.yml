@@ -45,10 +45,10 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: sites
-          path: packages/website/dist
+          path: sites
 
       - name: Upload Deploy
-        run: netlify deploy --dir=packages/website/dist --alias="master" --prod
+        run: netlify deploy --dir=sites --alias="sites"
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}
