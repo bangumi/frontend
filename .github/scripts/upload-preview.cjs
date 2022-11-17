@@ -73,7 +73,6 @@ async function main () {
       issue_number: prNumber,
     },
   )) {
-    console.log(comments);
     for (const comment of comments) {
       if (comment.user.login === 'github-actions[bot]' && comment.body.includes(commentComment)) {
         return await updateComment(octokit, comment, artifact, alias);
