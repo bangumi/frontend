@@ -91,31 +91,31 @@ async function main () {
  * @param {{id:number;body:string;}} comment
  */
 async function updateComment (octokit, comment, artifact, alias) {
-  let s = comment.body.split('\n');
+  const links = [];
+  const s = comment.body.split('\n');
 
-  let has = false;
-
-  s.slice(1).forEach((value, index) => {
+  for (const value of s.slice(1)) {
     if (value.includes(`<!-- ${artifact} -->`)) {
-      has = true;
+      return;
     }
-  });
 
-  if (has) {
-    return;
+    links.push(value);
   }
 
-  s.push(
+  links.push(
     `<!-- ${artifact} -->` + toTitle(artifact) + ' ' + `<https://${alias}--bangumi-next.netlify.app>`,
   );
 
-  s = s.slice(0, 2).concat(s.slice(1).sort());
+  links.unshift(
+    commentComment,
+    '# Preview Deployment',
+  );
 
   await octokit.rest.issues.updateComment({
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
-    body: s.join('\n'),
+    body: links.join('\n'),
   });
 }
 
