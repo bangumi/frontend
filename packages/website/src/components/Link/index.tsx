@@ -38,7 +38,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(({
     relative
   })
   const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (onClick) onClick(event)
+    onClick?.(event)
     startTransition(() => {
       internalOnClick(event)
     })
