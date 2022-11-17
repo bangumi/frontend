@@ -17,7 +17,7 @@ const TopicPage: FC = () => {
   const { id } = useParams()
   if (!id) {
     // Todo: ErrorBoundary
-    throw new Error('topic id is required')
+    throw new Error('BUG: topic id is required')
   }
   const { topicDetail } = useGroupTopic(id)
   const { user } = useUser()
