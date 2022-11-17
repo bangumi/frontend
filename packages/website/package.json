@@ -11,7 +11,6 @@
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.4.4",
     "@testing-library/react": "^13.4.0",
-    "axios": "^0.24.0",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.6",
     "react": "^18.2.0",
