@@ -315,6 +315,7 @@ export interface components {
        *
        *
        * - `0` 正常
+       * - `2` 重开
        * - `1` 管理员关闭帖子
        * - `5` 管理员下沉帖子
        * - `6` 被用户删除
@@ -322,7 +323,7 @@ export interface components {
        * @example 0
        * @enum {integer}
        */
-      state: 0 | 1 | 5 | 6 | 7;
+      state: 0 | 1 | 2 | 5 | 6 | 7;
     };
     GroupMember: {
       avatar: components["schemas"]["Avatar"];
@@ -393,7 +394,7 @@ export interface operations {
             /** Description */
             description: string;
             /** Detail */
-            detail: string[];
+            details: string[];
           };
         };
       };
@@ -406,9 +407,9 @@ export interface operations {
             /** Description */
             description: string;
             /** Detail */
-            detail: {
+            details: {
               /** @description 剩余可用登录次数。 */
-              remain?: number;
+              remain: number;
             };
           };
         };
