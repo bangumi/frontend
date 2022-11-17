@@ -15,7 +15,11 @@ const { Comment } = Topic
 
 const TopicPage: FC = () => {
   const { id } = useParams()
-  const { topicDetail } = useGroupTopic(id!)
+  if (!id) {
+    // Todo: ErrorBoundary
+    throw new Error('topic id is required')
+  }
+  const { topicDetail } = useGroupTopic(id)
   const { user } = useUser()
   if (!topicDetail) {
     return null
