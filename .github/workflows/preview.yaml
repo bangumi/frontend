@@ -10,6 +10,11 @@ on:
       - completed
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo '${{ toJSON(github) }}'
+
   upload:
     concurrency:
       group: upload-preview
