@@ -19,16 +19,16 @@ async function main() {
   }
   const octokit = github.getOctokit(githubToken);
 
-  const workflow_name = process.env.workflow_name;
-  if (!workflow_name) {
+  const workflowName = process.env.workflow_name;
+  if (!workflowName) {
     throw new Error('process.env.workflow_name is empty');
   }
 
-  if (!Object.keys(artifacts).includes(workflow_name)) {
-    throw new Error(`not valid workflow name ${workflow_name}`);
+  if (!Object.keys(artifacts).includes(workflowName)) {
+    throw new Error(`not valid workflow name ${workflowName}`);
   }
 
-  const artifact = artifacts[workflow_name];
+  const artifact = artifacts[workflowName];
 
   await exec(
     'gh',
@@ -114,15 +114,15 @@ async function updateComment(octokit, comment, artifact, alias) {
 
 /**
  * @param {InstanceType<typeof GitHub>} octokit
- * @param {number} issue_number
+ * @param {number} prNumber
  * @param {string} artifact
  * @param {string} alias
  */
-async function createComment(octokit, issue_number, artifact, alias) {
+async function createComment(octokit, prNumber, artifact, alias) {
   await octokit.rest.issues.createComment({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    issue_number,
+    issue_number: prNumber,
     body: [
       commentComment,
       '# Preview Deployment',
