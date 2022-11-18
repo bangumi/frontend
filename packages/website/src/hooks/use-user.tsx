@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
-import type { operations } from '@bangumi/types/types';
+import type { Response } from '@bangumi/types/index';
 import type { User } from '@bangumi/types/user';
 
 import { privateGet, privatePost } from '../api/request';
@@ -13,6 +13,7 @@ interface UserContextType {
   redirectToLogin: () => void;
   login: (username: string, password: string, hCaptchaResp: string) => Promise<void>;
 }
+
 const UserContext = React.createContext<UserContextType>(null!);
 
 export enum LoginErrorCode {
@@ -92,20 +93,14 @@ async function login(email: string, password: string, hCaptchaResp: string): Pro
     return;
   }
 
-  const data = await res.json();
+  const data = (await res.json()) as Response<'login', '401' | '400'>;
   const errorCode = ERROR_CODE_MAP[res.status];
   if (errorCode) {
     if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
-      throw new PasswordUnMatchError(
-        (
-          data as operations['login']['responses']['401']['content']['application/json']
-        ).details.remain,
-      );
+      throw new PasswordUnMatchError((data as Response<'login', '401'>).details.remain);
     }
     if (errorCode === LoginErrorCode.E_REQUEST_ERROR) {
-      throw new UnknownError(
-        (data as operations['login']['responses']['400']['content']['application/json']).details,
-      );
+      throw new UnknownError((data as Response<'login', '400'>).details);
     }
 
     throw new Error(errorCode);

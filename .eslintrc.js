@@ -47,9 +47,9 @@ module.exports = {
         'standard-with-typescript',
         'standard-jsx',
         'standard-react',
-        // 'plugin:@typescript-eslint/recommended',
-        // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
-        // 'plugin:@typescript-eslint/strict',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/strict',
         'prettier',
       ],
       parser: '@typescript-eslint/parser',
@@ -75,6 +75,19 @@ module.exports = {
         },
       },
       rules: {
+        '@typescript-eslint/no-unnecessary-condition': 'off',
+        '@typescript-eslint/ban-types': [
+          'error',
+          {
+            types: {
+              // un-ban a type that's banned by default
+              Object: false,
+              '{}': false,
+            },
+            extendDefaults: true,
+          },
+        ],
+        '@typescript-eslint/ban-ts-comment': 'off',
         curly: 'error',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-misused-promises': [
@@ -113,6 +126,14 @@ module.exports = {
         ecmaFeatures: {
           jsx: true,
         },
+      },
+    },
+    {
+      files: ['*.spec.tsx'],
+      rules: {
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
       },
     },
   ],

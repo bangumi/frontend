@@ -12,14 +12,14 @@ export interface EditorProps {
   onConfirm?: (content: string) => void;
 }
 
-const keyToEvent = {
+const keyToEvent: Record<string, string> = {
   b: 'bold',
   i: 'italic',
   u: 'underscore',
   l: 'link',
   s: 'size',
   p: 'image',
-};
+} as const;
 
 const setInputValue = (
   el: HTMLTextAreaElement,
@@ -41,7 +41,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
   ({ placeholder, showToolbox = true, onConfirm }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
     useImperativeHandle(ref, () => innerRef.current!);
-    const handleToolboxEvent = (type: string, payload?: any): void => {
+    const handleToolboxEvent = (type: string, payload?: unknown): void => {
       const el = innerRef.current;
       if (!el) {
         return;
@@ -109,9 +109,10 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
             }
             // https://bgm.tv/help/bbcode
             if (e.ctrlKey || e.metaKey) {
-              const key = e.key.toLowerCase() as keyof typeof keyToEvent;
-              if (key && keyToEvent[key]) {
-                handleToolboxEvent(keyToEvent[key]);
+              const key = e.key.toLowerCase();
+              const event = keyToEvent[key];
+              if (event) {
+                handleToolboxEvent(event);
                 e.preventDefault();
               }
             }

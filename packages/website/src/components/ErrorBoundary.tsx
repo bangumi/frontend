@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
-type ErrorBoundaryFallbackFunc = (err: any) => JSX.Element;
+type ErrorBoundaryFallbackFunc = (err: unknown) => JSX.Element;
 type FallbackArg = JSX.Element | ErrorBoundaryFallbackFunc;
 // Error boundaries currently have to be classes.
 // ref: https://reactjs.org/docs/error-boundaries.html#gatsby-focus-wrapper
@@ -9,7 +9,7 @@ export default class ErrorBoundary extends React.Component<
   PropsWithChildren<{ fallback: FallbackArg }>
 > {
   state = { hasError: false, error: null };
-  static getDerivedStateFromError(error: any) {
+  static getDerivedStateFromError(error: unknown) {
     return {
       hasError: true,
       error,

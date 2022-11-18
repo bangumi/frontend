@@ -17,13 +17,14 @@ jest.mock('react-router-dom', () => {
     __esModule: true,
     ...jest.requireActual('react-router-dom'),
     useParams: jest.fn(),
-  };
+  } as unknown;
 });
 
 const mockedUseParams = jest.mocked(useParams);
 
 class GroupHomeTest {
   page: RenderResult;
+
   constructor(
     name: string,
     mock: { group?: GroupProfile; topics?: ResponseWithPagination<Topic[]> },

@@ -21,7 +21,7 @@ const GroupHome: React.FC = () => {
   const groupContext = useGroupContext();
   const recentTopics = useGroupTopic(name);
 
-  if (!groupContext?.groupRet?.group || !recentTopics.data.length) {
+  if (!groupContext?.groupRet.group || !recentTopics.data.length) {
     return null;
   }
 

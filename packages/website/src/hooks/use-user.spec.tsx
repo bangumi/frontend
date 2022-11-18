@@ -45,8 +45,6 @@ it.each`
     await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
       expectedError,
     );
-
-    await waitFor(() => {});
   },
 );
 
