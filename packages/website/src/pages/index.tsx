@@ -1,6 +1,6 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import GlobalLayout from '../components/GlobalLayout'
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import GlobalLayout from '../components/GlobalLayout';
 
 // https://github.com/bangumi/frontend/discussions/126
 const RootIndex = () => {
@@ -8,7 +8,7 @@ const RootIndex = () => {
     <GlobalLayout>
       <Outlet />
     </GlobalLayout>
-  )
-}
+  );
+};
 
-export default RootIndex
+export default RootIndex;

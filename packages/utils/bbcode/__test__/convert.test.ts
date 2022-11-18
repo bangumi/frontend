@@ -1,6 +1,6 @@
-import { STICKER_DOMAIN_URL } from '../constants'
-import { convert } from '../convert'
-import { CodeNodeTypes, NodeTypes, VNode } from '../types'
+import { STICKER_DOMAIN_URL } from '../constants';
+import { convert } from '../convert';
+import { CodeNodeTypes, NodeTypes, VNode } from '../types';
 
 describe('convert bbcode to html vnode', () => {
   test('basic bbcode', () => {
@@ -9,195 +9,195 @@ describe('convert bbcode to html vnode', () => {
       [
         {
           type: 'b',
-          children: ['加粗']
+          children: ['加粗'],
         },
         {
           type: 'strong',
-          children: ['加粗']
-        }
+          children: ['加粗'],
+        },
       ],
       [
         {
           type: 'i',
-          children: ['斜体']
+          children: ['斜体'],
         },
         {
           type: 'em',
-          children: ['斜体']
-        }
+          children: ['斜体'],
+        },
       ],
       [
         {
           type: 'u',
-          children: ['下划线']
+          children: ['下划线'],
         },
         {
           type: 'span',
           style: {
-            'text-decoration': 'underline'
+            'text-decoration': 'underline',
           },
-          children: ['下划线']
-        }
+          children: ['下划线'],
+        },
       ],
       [
         {
           type: 's',
-          children: ['删除线']
+          children: ['删除线'],
         },
         {
           type: 'span',
           style: {
-            'text-decoration': 'line-through'
+            'text-decoration': 'line-through',
           },
-          children: ['删除线']
-        }
+          children: ['删除线'],
+        },
       ],
       [
         {
           type: 'mask',
-          children: ['mask']
+          children: ['mask'],
         },
         {
           type: 'span',
           style: {
             'background-color': '#555',
             color: '#555',
-            border: '1px solid #555'
+            border: '1px solid #555',
           },
-          children: ['mask']
-        }
+          children: ['mask'],
+        },
       ],
       [
         {
           type: 'color',
           props: {
-            color: 'red'
+            color: 'red',
           },
-          children: ['红']
+          children: ['红'],
         },
         {
           type: 'span',
           style: {
-            color: 'red'
+            color: 'red',
           },
-          children: ['红']
-        }
+          children: ['红'],
+        },
       ],
       [
         {
           type: 'size',
           props: {
-            size: '18'
+            size: '18',
           },
-          children: ['大小']
+          children: ['大小'],
         },
         {
           type: 'span',
           style: {
             'font-size': '18px',
-            'line-height': '18px'
+            'line-height': '18px',
           },
-          children: ['大小']
-        }
-      ]
-    ]
+          children: ['大小'],
+        },
+      ],
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('url bbcode', () => {
     const tests: Array<[CodeNodeTypes, NodeTypes]> = [
       [
         {
           type: 'url',
           props: {
-            url: 'http://chii.in/'
+            url: 'http://chii.in/',
           },
-          children: ['http://chii.in/']
+          children: ['http://chii.in/'],
         },
         {
           type: 'a',
           props: {
-            href: 'http://chii.in/'
+            href: 'http://chii.in/',
           },
           className: 'l',
-          children: ['http://chii.in/']
-        }
+          children: ['http://chii.in/'],
+        },
       ],
       [
         {
           type: 'url',
           props: {
-            url: 'http://test.com/'
+            url: 'http://test.com/',
           },
-          children: ['测试']
+          children: ['测试'],
         },
         {
           type: 'a',
           props: {
             href: 'http://test.com/',
             target: '_blank',
-            ref: 'nofollow external noopener noreferrer'
+            ref: 'nofollow external noopener noreferrer',
           },
           className: 'l',
-          children: ['测试']
-        }
-      ]
-    ]
+          children: ['测试'],
+        },
+      ],
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('img bbcode', () => {
     const tests: Array<[CodeNodeTypes, NodeTypes]> = [
       [
         {
           type: 'img',
-          children: ['http://chii.in/img/ico/bgm88-31.gif']
+          children: ['http://chii.in/img/ico/bgm88-31.gif'],
         },
         {
           type: 'img',
           props: {
-            src: 'http://chii.in/img/ico/bgm88-31.gif'
+            src: 'http://chii.in/img/ico/bgm88-31.gif',
           },
-          className: 'code'
-        }
+          className: 'code',
+        },
       ],
       [
         {
           type: 'img',
-          children: ['http://test.com/xx.png']
+          children: ['http://test.com/xx.png'],
         },
         {
           type: 'img',
           props: {
             src: 'http://test.com/xx.png',
             referrerpolicy: 'no-referrer',
-            ref: 'noreferrer'
+            ref: 'noreferrer',
           },
-          className: 'code'
-        }
+          className: 'code',
+        },
       ],
       [
         {
           type: 'img',
-          children: ['not-a-website']
+          children: ['not-a-website'],
         },
         {
           type: 'img',
           props: {
             src: 'not-a-website',
             referrerpolicy: 'no-referrer',
-            ref: 'noreferrer'
+            ref: 'noreferrer',
           },
-          className: 'code'
-        }
-      ]
-    ]
+          className: 'code',
+        },
+      ],
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('nest bbcode', () => {
     const node: CodeNodeTypes = {
       type: 'b',
@@ -210,14 +210,14 @@ describe('convert bbcode to html vnode', () => {
               children: [
                 {
                   type: 's',
-                  children: ['测试文字']
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                  children: ['测试文字'],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
     const vnode: VNode = {
       type: 'strong',
       children: [
@@ -231,113 +231,113 @@ describe('convert bbcode to html vnode', () => {
                 {
                   type: 'span',
                   style: { 'text-decoration': 'line-through' },
-                  children: ['测试文字']
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-    expect(convert(node)).toEqual(vnode)
-  })
+                  children: ['测试文字'],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    expect(convert(node)).toEqual(vnode);
+  });
   test('sticker', () => {
     const tests: Array<[CodeNodeTypes, NodeTypes]> = [
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm33)'
-          }
+            stickerId: '(bgm33)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/10.gif" smileid="49" alt="(bgm33)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/10.gif" smileid="49" alt="(bgm33)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm32)'
-          }
+            stickerId: '(bgm32)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/09.gif" smileid="48" alt="(bgm32)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/09.gif" smileid="48" alt="(bgm32)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm24)'
-          }
+            stickerId: '(bgm24)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/01.gif" smileid="40" alt="(bgm24)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/01.gif" smileid="40" alt="(bgm24)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm114)'
-          }
+            stickerId: '(bgm114)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/91.gif" smileid="130" alt="(bgm114)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/91.gif" smileid="130" alt="(bgm114)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm38)'
-          }
+            stickerId: '(bgm38)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm23)'
-          }
+            stickerId: '(bgm23)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm01)'
-          }
+            stickerId: '(bgm01)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/01.png" smileid="17" alt="(bgm01)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/01.png" smileid="17" alt="(bgm01)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: "(='=)"
-          }
+            stickerId: "(='=)",
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/10.gif" smileid="10" alt="(='=)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/10.gif" smileid="10" alt="(='=)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(=///=)'
-          }
+            stickerId: '(=///=)',
+          },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/13.gif" smileid="13" alt="(=///=)" />`
+        `<img src="${STICKER_DOMAIN_URL}/img/smiles/13.gif" smileid="13" alt="(=///=)" />`,
       ],
       [
         {
           type: 'sticker',
           props: {
-            stickerId: '(bgm233)'
-          }
+            stickerId: '(bgm233)',
+          },
         },
-        '(bgm233)'
-      ]
-    ]
+        '(bgm233)',
+      ],
+    ];
     for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected)
+      expect(convert(input)).toEqual(expected);
     }
-  })
+  });
   test('unknown bbcode', () => {
     const node: CodeNodeTypes = {
       type: 'unknown',
@@ -350,17 +350,19 @@ describe('convert bbcode to html vnode', () => {
               children: [
                 {
                   type: 's',
-                  children: [{
-                    type: 'output',
-                    children: ['测试文字']
-                  }]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                  children: [
+                    {
+                      type: 'output',
+                      children: ['测试文字'],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
     const vnode: VNode = {
       type: 'unknown',
       children: [
@@ -374,17 +376,19 @@ describe('convert bbcode to html vnode', () => {
                 {
                   type: 'span',
                   style: { 'text-decoration': 'line-through' },
-                  children: [{
-                    type: 'output',
-                    children: ['测试文字']
-                  }]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-    expect(convert(node)).toEqual(vnode)
-  })
-})
+                  children: [
+                    {
+                      type: 'output',
+                      children: ['测试文字'],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+    expect(convert(node)).toEqual(vnode);
+  });
+});
