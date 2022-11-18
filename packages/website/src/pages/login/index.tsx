@@ -4,7 +4,7 @@ import { UserLogin, Password } from '@bangumi/icons';
 import { useInput } from 'rooks';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import style from './index.module.less';
-import { LoginErrorCode, PasswordUnMatchError, useUser } from '../../hooks/use-user';
+import { LoginErrorCode, PasswordUnMatchError, UnknownError, useUser } from '../../hooks/use-user';
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg';
 import { useNavigate } from 'react-router-dom';
 import ErrorMessage from './components/ErrorMessage';
@@ -50,10 +50,19 @@ const Login: React.FC = () => {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`);
         return;
       }
+
+      if (error instanceof UnknownError) {
+        console.error(error);
+        setErrorMessage(error.message);
+        return;
+      }
+
       const errorMsg = errorMessageMap[error.message];
       if (errorMsg) {
         setErrorMessage(errorMsg);
       }
+
+      console.error(error);
     }
   };
 

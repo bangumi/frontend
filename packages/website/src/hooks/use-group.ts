@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
-import { AxiosResponse } from 'axios';
 import useSWR from 'swr';
-import { privateRequest } from '../api/request';
+import { privateGet, RequestError } from '../api/request';
 import { GroupProfile, ResponseWithPagination, Topic, Pagination } from '@bangumi/types/group';
 
 export enum DescriptionClamp {
@@ -10,6 +9,7 @@ export enum DescriptionClamp {
 }
 
 export type TopicApiRes = ResponseWithPagination<Topic[]>;
+
 export interface UseGroupRet {
   group: GroupProfile | undefined;
   descriptionClamp: DescriptionClamp;
@@ -23,20 +23,19 @@ export function useGroupTopic(name: string, pagination?: Partial<Pagination>) {
     params.append('offset', offset.toString());
     params.append('limit', limit.toString());
   }
-  const { data: recentTopicsResp } = useSWR<AxiosResponse<TopicApiRes>>(
+
+  const { data: recentTopicsResp } = useSWR<TopicApiRes, RequestError>(
     `/p/groups/${name}/topics?${params.toString()}`,
-    privateRequest.get,
+    privateGet,
     { suspense: true },
   );
-  return recentTopicsResp!.data;
+  return recentTopicsResp!;
 }
 
 export function useGroup(name: string): UseGroupRet {
-  const { data: groupResp } = useSWR<AxiosResponse<GroupProfile>>(
-    `/p/groups/${name}`,
-    privateRequest.get,
-    { suspense: true },
-  );
+  const { data: groupResp } = useSWR<GroupProfile>(`/p/groups/${name}`, privateGet, {
+    suspense: true,
+  });
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`;
   const descriptionClamp =
     (localStorage.getItem(clampKey) as DescriptionClamp) ?? DescriptionClamp.unclamp;
@@ -48,7 +47,7 @@ export function useGroup(name: string): UseGroupRet {
   }, [descriptionClampState]);
 
   return {
-    group: groupResp!.data,
+    group: groupResp,
     descriptionClamp: descriptionClampState,
     setDescriptionClamp(val) {
       setDescriptionClampState(val);

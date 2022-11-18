@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 import { server } from './src/mocks/server';
 import timezoneMock from 'timezone-mock';
 
