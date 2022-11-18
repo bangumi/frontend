@@ -38,7 +38,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/promise-function-async': 'off',
         '@typescript-eslint/no-implicit-any-catch': 'error',
-        '@typescript-eslint/no-floating-promises': 'off',
+        '@typescript-eslint/no-floating-promises': 'error',
         // 限制了一些不需要显示指明类型的场景，比如自动推导，导致了一些多余代码
         '@typescript-eslint/explicit-function-return-type': 'off',
         'react/jsx-closing-tag-location': 'off',
