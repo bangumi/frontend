@@ -20,7 +20,6 @@ import { ClampableContent } from '../../components/ClampableContent';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
-
 const { Link } = Typography;
 
 const { Comment } = Topic;

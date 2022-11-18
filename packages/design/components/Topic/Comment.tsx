@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { FC} from 'react';
+import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
