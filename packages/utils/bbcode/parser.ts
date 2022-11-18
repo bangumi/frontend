@@ -1,3 +1,4 @@
+import { UnreadableCode } from '../index';
 import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants';
 import type { CodeNodeTypes, CodeVNode } from './types';
 
@@ -301,12 +302,19 @@ export class Parser {
 
   private consumeChar(): string {
     const cur = this.input[this.pos];
+    if (cur === undefined) {
+      throw new UnreadableCode('BUG: pos overflow');
+    }
     this.pos += 1;
     return cur;
   }
 
   private curChar(): string {
-    return this.input[this.pos];
+    const cur = this.input[this.pos];
+    if (cur === undefined) {
+      throw new UnreadableCode('BUG: pos overflow');
+    }
+    return cur;
   }
 
   private startsWith(pattern: string): boolean {
