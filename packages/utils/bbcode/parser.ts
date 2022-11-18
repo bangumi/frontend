@@ -61,7 +61,7 @@ const DEFAULT_TAGS: ITag[] = [
     schema: {
       url: (value, node) => {
         let href = value;
-        if (href !== undefined) {
+        if (!href) {
           href = getStringChild(node);
         }
         return isValidUrl(href);
@@ -99,7 +99,7 @@ const DEFAULT_TAGS: ITag[] = [
     schema: {
       user: (value, node) => {
         let userId = value;
-        if (userId !== undefined) {
+        if (!userId) {
           userId = getStringChild(node);
         }
         return Boolean(userId);
@@ -212,7 +212,7 @@ export class Parser {
       };
     }
     this.pos += BGM_STICKER_START_STR.length;
-    const id = this.consumeWhile((c) => !isNaN(+c));
+    const id = this.consumeWhile((c) => !isNaN(parseInt(c)));
     if (!id) {
       throw new Error(INVALID_STICKER_NODE);
     }
@@ -351,7 +351,7 @@ export class Parser {
     if (typeof tag === 'string') {
       return true;
     }
-    for (const [key, validateFn] of Object.entries(tag.schema)) {
+    for (const [key, validateFn] of Object.entries(tag?.schema ?? {})) {
       const prop = getNodeProp(node, key);
       if (!validateFn(prop, node)) {
         return false;

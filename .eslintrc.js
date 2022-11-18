@@ -14,6 +14,7 @@ module.exports = {
     'import/internal-regex': '^@bangumi/',
   },
   rules: {
+    curly: 'error',
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
     'import/order': [
@@ -42,7 +43,15 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
-      extends: ['standard-with-typescript', 'standard-jsx', 'standard-react', 'prettier'],
+      extends: [
+        'standard-with-typescript',
+        'standard-jsx',
+        'standard-react',
+        // 'plugin:@typescript-eslint/recommended',
+        // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        // 'plugin:@typescript-eslint/strict',
+        'prettier',
+      ],
       parser: '@typescript-eslint/parser',
       plugins: ['react', '@typescript-eslint', 'jest'],
       parserOptions: {
@@ -66,6 +75,7 @@ module.exports = {
         },
       },
       rules: {
+        curly: 'error',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-misused-promises': [
           'error',

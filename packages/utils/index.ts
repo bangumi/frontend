@@ -29,7 +29,10 @@ export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
 };
 
 export class UnreadableCode extends Error {
-  constructor(readonly message: string) {
+  readonly args: unknown[];
+
+  constructor(readonly message: string, ...args: unknown[]) {
     super();
+    this.args = args;
   }
 }

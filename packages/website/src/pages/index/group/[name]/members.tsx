@@ -15,13 +15,13 @@ const GroupMembersPage = () => {
   const { name } = useParams();
 
   // 仅第一页获取管理员
-  const { data: groupModMembers } = useGroupMembers(name as string, {
+  const { data: groupModMembers } = useGroupMembers(name!, {
     offset,
     type: 'mod',
     disable: curPage > 1,
   });
 
-  const { data, total } = useGroupMembers(name as string, {
+  const { data, total } = useGroupMembers(name!, {
     offset,
     limit: pageSize,
     type: 'normal',

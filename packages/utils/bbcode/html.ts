@@ -48,7 +48,7 @@ export function renderNode(node: NodeTypes, parentNode?: VNode): string {
   if (style) {
     propsStr += ` style="${renderStyle(style)}"`;
   }
-  if (className !== undefined) {
+  if (className !== undefined && className !== '') {
     let clsStr = '';
     if (typeof className === 'string') {
       clsStr = escapeHTML(className);
