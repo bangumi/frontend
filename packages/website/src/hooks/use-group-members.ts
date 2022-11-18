@@ -23,7 +23,7 @@ export function useGroupMembers(name: string, options: GroupMembersReq): UseGrou
     offset: offset.toString(),
   });
 
-  const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>, RequestError>(
+  const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>, RequestError | TypeError>(
     disable ? null : `/p/groups/${name}/members?${query.toString()}`,
     privateGet,
     { suspense: true },
