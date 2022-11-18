@@ -10,7 +10,6 @@ interface UserContextType {
   redirectToLogin: () => void;
   login: (username: string, password: string, hCaptchaResp: string) => Promise<void>;
 }
-
 const UserContext = React.createContext<UserContextType>(null!);
 
 export enum LoginErrorCode {
