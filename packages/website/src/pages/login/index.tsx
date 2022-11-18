@@ -52,7 +52,7 @@ const Login: React.FC = () => {
       }
 
       if (error instanceof UnknownError) {
-        console.log('UnknownError');
+        console.error(error);
         setErrorMessage(error.message);
         return;
       }
