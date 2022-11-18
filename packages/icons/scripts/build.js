@@ -43,4 +43,6 @@ export default ${defaultName};
   }
 }
 
-main();
+main().catch(e => {
+  throw e;
+});
