@@ -45,7 +45,7 @@ const Login: React.FC = () => {
     try {
       await login(email.value, password.value, hCaptchaToken);
       navigate('/', { replace: true });
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof PasswordUnMatchError) {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`);
         return;
@@ -57,12 +57,15 @@ const Login: React.FC = () => {
         return;
       }
 
-      const errorMsg = errorMessageMap[error.message];
-      if (errorMsg) {
-        setErrorMessage(errorMsg);
+      if (error instanceof Error) {
+        const errorMsg = errorMessageMap[error.message];
+        if (errorMsg) {
+          setErrorMessage(errorMsg);
+          return;
+        }
       }
 
-      console.error(error);
+      setErrorMessage(`意料之外的错误：${error?.toString() ?? typeof error}`);
     }
   };
 

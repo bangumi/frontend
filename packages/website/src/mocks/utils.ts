@@ -5,7 +5,7 @@ import path from 'path';
 async function isFileExist(filePath: string): Promise<boolean> {
   try {
     await fsp.stat(filePath);
-  } catch (e) {
+  } catch {
     return false;
   }
 
