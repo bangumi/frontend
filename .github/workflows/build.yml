@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2.2.4
         with:
-          version: "6"
+          version: "7"
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
@@ -27,12 +27,19 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build:test
+        run: pnpm build
 
       - run: echo ${{ github.event.number }} > packages/website/dist/pr_number
 
-      - name: Archive code coverage results
+      - name: upload website build artifact
         uses: actions/upload-artifact@v3
         with:
           name: sites
           path: packages/website/dist
+
+      - name: Deploy to Netlify
+        if: ${{ github.event_name == 'push' }}
+        run: netlify deploy --dir=packages/website/dist --alias="sites" --prod
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}

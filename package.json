@@ -7,7 +7,6 @@
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm website build",
     "build:types": "pnpm --filter @bangumi/types build",
-    "build:test": "pnpm website build:test",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design storybook",
     "design:build-doc": "pnpm design build-storybook",
@@ -36,6 +35,8 @@
     ]
   },
   "devDependencies": {
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
