@@ -34,11 +34,11 @@ const GroupMembersPage = () => {
   return (
     <>
       {curPage === 1 && (
-        <Section title="小组管理员">
+        <Section title='小组管理员'>
           <div className={styles.members}>
             {(groupModMembers ?? []).map((member) => (
               <UserCard
-                mode="horizontal"
+                mode='horizontal'
                 user={{ ...member, avatar: member.avatar.large }}
                 key={member.id}
               />
@@ -46,12 +46,12 @@ const GroupMembersPage = () => {
           </div>
         </Section>
       )}
-      <Section title="小组成员">
+      <Section title='小组成员'>
         <div className={styles.members}>
           {(data ?? []).map((member) => {
             return (
               <UserCard
-                mode="horizontal"
+                mode='horizontal'
                 user={{ ...member, avatar: member.avatar.large }}
                 key={member.id}
               />

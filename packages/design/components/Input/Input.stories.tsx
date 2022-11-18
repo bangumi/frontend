@@ -61,8 +61,8 @@ export const NavSearch = Template.bind({});
 NavSearch.args = {
   // 正式需要详细样式
   prefix: (
-    <select name="select" style={{ outline: 'none', border: 'none', color: '#AAA6A6' }}>
-      <option value="value1" selected>
+    <select name='select' style={{ outline: 'none', border: 'none', color: '#AAA6A6' }}>
+      <option value='value1' selected>
         全部条目
       </option>
     </select>

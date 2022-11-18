@@ -41,7 +41,7 @@ it('render props', () => {
 });
 
 it('should render subMenu', () => {
-  const subMenu = <Menu items={items} mode="vertical" />;
+  const subMenu = <Menu items={items} mode='vertical' />;
   const menuItems = [
     {
       key: 'outer1',

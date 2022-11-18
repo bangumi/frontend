@@ -6,10 +6,10 @@ export interface SectionProps {
 }
 const Section = ({ title, children, renderFooter }: PropsWithChildren<SectionProps>) => {
   return (
-    <div className="bgm-section">
-      <h3 className="bgm-section__title">{title}</h3>
+    <div className='bgm-section'>
+      <h3 className='bgm-section__title'>{title}</h3>
       {children}
-      {renderFooter && <div className="bgm-section__footer">{renderFooter()}</div>}
+      {renderFooter && <div className='bgm-section__footer'>{renderFooter()}</div>}
     </div>
   );
 };

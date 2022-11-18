@@ -175,7 +175,6 @@ importers:
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
       '@vitejs/plugin-react': ^2.2.0
-      axios: ^0.24.0
       bgm-types: ^2.0.2
       classnames: ^2.3.2
       dayjs: ^1.11.6
@@ -192,10 +191,10 @@ importers:
       vite-plugin-pages: ^0.27.1
       vite-plugin-style-import: ^1.4.1
       vite-plugin-svgr: ^2.2.2
+      whatwg-fetch: ^3.6.2
     dependencies:
       '@hcaptcha/react-hcaptcha': 1.4.4_biqbaboplfbrettd7655fr4n2y
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
-      axios: 0.24.0
       classnames: 2.3.2
       dayjs: 1.11.6
       react: 18.2.0
@@ -221,6 +220,7 @@ importers:
       vite-plugin-pages: 0.27.1_vite@3.2.3
       vite-plugin-style-import: 1.4.1_vite@3.2.3
       vite-plugin-svgr: 2.2.2_vite@3.2.3
+      whatwg-fetch: 3.6.2
 
 packages:
 
@@ -6680,14 +6680,6 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /axios/0.24.0:
-    resolution: {integrity: sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==}
-    dependencies:
-      follow-redirects: 1.14.7
-    transitivePeerDependencies:
-      - debug
-    dev: false
-
   /babel-jest/29.3.1_@babel+core@7.20.2:
     resolution: {integrity: sha512-aard+xnMoxgjwV70t0L6wkW/3HQQtV+O0PEimxKgzNqCJnbYmroPojdP2tqKSOAt8QAKV/uSZU8851M7B5+fcA==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -9713,16 +9705,6 @@ packages:
       inherits: 2.0.4
       readable-stream: 2.3.7
     dev: true
-
-  /follow-redirects/1.14.7:
-    resolution: {integrity: sha512-+hbxoLbFMbRKDwohX8GkTataGqO6Jb7jGwpAlwgy2bIz25XtRm7KEzJM76R1WiNT5SwZkX4Y75SwBolkpmE7iQ==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dev: false
 
   /for-in/1.0.2:
     resolution: {integrity: sha512-7EwmXrOjyL+ChxMhmG5lnW9MPt1aIeZEwKhQzoBUdTV0N3zuwWDZYVJatDvZ2OyzPUvdIAZDsCetk3coyMfcnQ==}
@@ -16281,6 +16263,10 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       iconv-lite: 0.6.3
+    dev: true
+
+  /whatwg-fetch/3.6.2:
+    resolution: {integrity: sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==}
     dev: true
 
   /whatwg-mimetype/3.0.0:

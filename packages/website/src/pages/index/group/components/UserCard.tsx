@@ -20,7 +20,7 @@ export const UserCard: React.FC<UserCardProps> = ({ user, mode = 'vertical' }) =
     <Link
       className={[styles.userCard, styles[mode]].join(' ')}
       to={getUserProfileLink(user.username)}
-      fontWeight="bold"
+      fontWeight='bold'
       isExternal
     >
       <Image className={styles.avatar} src={user.avatar} alt={`${user.nickname} 头像`} />

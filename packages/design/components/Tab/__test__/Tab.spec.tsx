@@ -13,7 +13,7 @@ it('should render all tab', () => {
       label: '2',
     },
   ];
-  const { getByText } = render(<Tab items={items} activeKey="1" />);
+  const { getByText } = render(<Tab items={items} activeKey='1' />);
   expect(getByText('1')).toBeInTheDocument();
   expect(getByText('2')).toBeInTheDocument();
   expect(getByText('1')).toHaveClass('bgm-tab__item--active');
@@ -31,7 +31,7 @@ it('should trigger onChange when click tabs', () => {
     },
   ];
   const handleChange = jest.fn();
-  const { getByText } = render(<Tab items={items} activeKey="1" onChange={handleChange} />);
+  const { getByText } = render(<Tab items={items} activeKey='1' onChange={handleChange} />);
   getByText('2').click();
 
   expect(handleChange).toBeCalledWith('2', items[1]);
@@ -48,6 +48,6 @@ it('should render borderless tab', () => {
       label: '2',
     },
   ];
-  const { container } = render(<Tab items={items} activeKey="1" type="borderless" />);
+  const { container } = render(<Tab items={items} activeKey='1' type='borderless' />);
   expect(container).toMatchSnapshot();
 });
