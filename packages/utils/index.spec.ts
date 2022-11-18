@@ -1,5 +1,3 @@
-import { describe, test, expect } from '@jest/globals';
-
 import { keyBy } from './index';
 
 describe('keyBy', () => {
