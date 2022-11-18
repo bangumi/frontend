@@ -12,7 +12,7 @@ export const Demo: Story<TextProps> = () => {
     <div>
       <Text>text(default)</Text>
       <br />
-      <Text type="secondary">text(secondary)</Text>
+      <Text type='secondary'>text(secondary)</Text>
     </div>
   );
 };

@@ -18,7 +18,7 @@ afterEach(() => {
 
 const ComponentRequireAuth: React.FC = () => {
   return (
-    <RequireAuth groupRequired={[UserGroup.Admin]} redirectUrlWhenUnauthorized="/">
+    <RequireAuth groupRequired={[UserGroup.Admin]} redirectUrlWhenUnauthorized='/'>
       只有管理员知道的世界
     </RequireAuth>
   );

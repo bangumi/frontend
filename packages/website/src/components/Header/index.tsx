@@ -87,7 +87,7 @@ const Header: FC = () => {
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <div className="flex items-center">
+        <div className='flex items-center'>
           {/* Logo */}
           <div className={style.logo}>
             <Musume className={style.musume} />
@@ -96,7 +96,7 @@ const Header: FC = () => {
           {/* Mobile Menu Toggle Button */}
           <Button
             className={style.mobileMenuToggle}
-            shape="rounded"
+            shape='rounded'
             type={showMobileMenu ? 'primary' : 'secondary'}
             onClick={() => setShowMobileMenu((show) => !show)}
           >
@@ -105,25 +105,25 @@ const Header: FC = () => {
           {/* Menu */}
           <div className={style.nav}>
             <Menu items={navLeft} wrapperClass={style.navLeft} />
-            <Divider orientation="vertical" className={style.divider} />
+            <Divider orientation='vertical' className={style.divider} />
             <Menu items={navRight} wrapperClass={style.navRight} />
           </div>
         </div>
-        <div className="flex items-center">
+        <div className='flex items-center'>
           <div className={style.infoBox}>
             {/* Search Todo */}
             <Input
               prefix={
                 <>
-                  <select name="cat" className={style.searchSelect} defaultValue="value1">
-                    <option value="value1">全部条目</option>
-                    <option value="value2">动画</option>
-                    <option value="value3">书籍</option>
-                    <option value="value4">游戏</option>
-                    <option value="value5">三次元</option>
-                    <option value="value6">人物</option>
+                  <select name='cat' className={style.searchSelect} defaultValue='value1'>
+                    <option value='value1'>全部条目</option>
+                    <option value='value2'>动画</option>
+                    <option value='value3'>书籍</option>
+                    <option value='value4'>游戏</option>
+                    <option value='value5'>三次元</option>
+                    <option value='value6'>人物</option>
                   </select>
-                  <Divider orientation="vertical" className={style.searchDivider} />
+                  <Divider orientation='vertical' className={style.searchDivider} />
                 </>
               }
               suffix={<SearchIcon style={{ flexShrink: 0 }} />}
@@ -139,10 +139,10 @@ const Header: FC = () => {
             </>
           ) : (
             <span className={style.userLogin}>
-              <Link className={style.link} to="/login">
+              <Link className={style.link} to='/login'>
                 登录
               </Link>
-              <Link className={style.link} to="/register">
+              <Link className={style.link} to='/register'>
                 注册
               </Link>
             </span>
