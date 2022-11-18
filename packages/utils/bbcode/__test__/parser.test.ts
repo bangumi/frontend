@@ -159,17 +159,35 @@ describe('bbcode parser', () => {
         children: ['哟'],
       },
       '\n',
-      { type: 'quote', children: ['引用'] },
+      {
+        type: 'quote',
+        children: ['引用'],
+      },
       '\n',
-      { type: 'left', children: ['左'] },
+      {
+        type: 'left',
+        children: ['左'],
+      },
       '\n',
-      { type: 'right', children: ['右'] },
+      {
+        type: 'right',
+        children: ['右'],
+      },
       '\n',
-      { type: 'center', children: ['中'] },
+      {
+        type: 'center',
+        children: ['中'],
+      },
       '\n',
-      { type: 'indent', children: ['块引用'] },
+      {
+        type: 'indent',
+        children: ['块引用'],
+      },
       '\n',
-      { type: 'float', children: ['浮动'] },
+      {
+        type: 'float',
+        children: ['浮动'],
+      },
       '\n',
     ];
     const nodes = getNodes(input);
@@ -231,19 +249,46 @@ describe('bbcode parser', () => {
       [
         '[code][code]1[/code][/code] [code]2[/code]',
         [
-          { type: 'code', children: ['[code]1'] },
+          {
+            type: 'code',
+            children: ['[code]1'],
+          },
           '[',
           '/code] ',
-          { type: 'code', children: ['2'] },
+          {
+            type: 'code',
+            children: ['2'],
+          },
         ],
       ],
       [
         '[code]1[/code][/code] [code]2[/code]',
-        [{ type: 'code', children: ['1'] }, '[', '/code] ', { type: 'code', children: ['2'] }],
+        [
+          {
+            type: 'code',
+            children: ['1'],
+          },
+          '[',
+          '/code] ',
+          {
+            type: 'code',
+            children: ['2'],
+          },
+        ],
       ],
       [
         '[code][code]1[/code] [code]2[/code]',
-        [{ type: 'code', children: ['[code]1'] }, ' ', { type: 'code', children: ['2'] }],
+        [
+          {
+            type: 'code',
+            children: ['[code]1'],
+          },
+          ' ',
+          {
+            type: 'code',
+            children: ['2'],
+          },
+        ],
       ],
     ];
     for (const [input, expected] of tests) {

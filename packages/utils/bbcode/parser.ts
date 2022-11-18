@@ -1,4 +1,4 @@
-import { UnreadableCode } from '../index';
+import { UnreadableCodeError } from '../index';
 import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants';
 import type { CodeNodeTypes, CodeVNode } from './types';
 
@@ -189,9 +189,13 @@ export class Parser {
         if (error.message === INVALID_NODE_MSG || error.message === INVALID_STICKER_NODE) {
           const ctx = this.ctxStack.pop()!;
           node = this.input.slice(ctx.startIdx, this.pos);
+        } else {
+          // unexpected error
+          throw error;
         }
+      } else {
+        console.error('unexpected throw', error);
       }
-      console.error('unexpected throw', error);
     }
     return node;
   }
@@ -234,7 +238,7 @@ export class Parser {
     let c = this.consumeChar();
     const openTag = this.parseTagName();
     c = this.consumeChar();
-    if (![']', '='].includes(c)) {
+    if (c === undefined || ![']', '='].includes(c)) {
       throw new Error(INVALID_NODE_MSG);
     }
     let prop: string = '';
@@ -295,16 +299,13 @@ export class Parser {
   private consumeWhile(checkFn: CheckCharFn): string {
     let result = '';
     while (!this.eof() && checkFn(this.curChar())) {
-      result += this.consumeChar();
+      result += this.consumeChar() as string;
     }
     return result;
   }
 
-  private consumeChar(): string {
+  private consumeChar(): string | undefined {
     const cur = this.input[this.pos];
-    if (cur === undefined) {
-      throw new UnreadableCode('BUG: pos overflow');
-    }
     this.pos += 1;
     return cur;
   }
@@ -312,7 +313,7 @@ export class Parser {
   private curChar(): string {
     const cur = this.input[this.pos];
     if (cur === undefined) {
-      throw new UnreadableCode('BUG: pos overflow');
+      throw new UnreadableCodeError('BUG: pos overflow');
     }
     return cur;
   }
@@ -351,7 +352,12 @@ export class Parser {
     if (idx === -1) {
       return false;
     }
+
     const tag = this.validTags[idx];
+    if (tag === undefined) {
+      throw new UnreadableCodeError('BUG: unexpected tag idx');
+    }
+
     // [b][/b] 内部为空的也识别成无效 tag
     if (!node.children || node.children.length === 0) {
       return false;
@@ -359,7 +365,7 @@ export class Parser {
     if (typeof tag === 'string') {
       return true;
     }
-    for (const [key, validateFn] of Object.entries(tag?.schema ?? {})) {
+    for (const [key, validateFn] of Object.entries(tag.schema)) {
       const prop = getNodeProp(node, key);
       if (!validateFn(prop, node)) {
         return false;

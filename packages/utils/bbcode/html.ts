@@ -1,4 +1,4 @@
-import { UnreadableCode } from '../index';
+import { UnreadableCodeError } from '../index';
 import { convert } from './convert';
 import { Parser } from './parser';
 import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
@@ -18,7 +18,7 @@ function renderProps(props: Record<string, string | boolean> | undefined): strin
   return Object.keys(props).reduce((pre, key) => {
     let val = props[key];
     if (val === undefined) {
-      throw new UnreadableCode('BUG: unexpected undefined');
+      throw new UnreadableCodeError('BUG: unexpected undefined');
     } else if (typeof val === 'boolean') {
       val = val ? key : '';
     } else {

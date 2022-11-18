@@ -3,7 +3,7 @@ import path from 'path';
 
 import yaml from 'js-yaml';
 
-import { UnreadableCode } from '../../index';
+import { UnreadableCodeError } from '../../index';
 import parse from '../parser';
 
 const testsDir = path.resolve(__dirname, './wiki-syntax-spec/tests/');
@@ -21,7 +21,7 @@ describe('Wiki syntax parser expected to be valid', () => {
     }
 
     if (!prefix) {
-      throw new UnreadableCode('BUG: undefined file path prefix');
+      throw new UnreadableCodeError('BUG: undefined file path prefix');
     }
 
     it(`${prefix} should be valid`, () => {
@@ -43,7 +43,7 @@ describe('Wiki syntax parser expected to be inValid', () => {
   inValidTestFiles.forEach((file) => {
     const prefix = file.split('.')[0];
     if (!prefix) {
-      throw new UnreadableCode('BUG: undefined file path prefix');
+      throw new UnreadableCodeError('BUG: undefined file path prefix');
     }
 
     it(`${prefix} should be invalid`, () => {
