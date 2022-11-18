@@ -176,8 +176,8 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
   size: (node) =>
     toVNode(node, 'span', {
       style: {
-        'font-size': (node.props!.size!) + 'px',
-        'line-height': (node.props!.size!) + 'px',
+        'font-size': node.props!.size! + 'px',
+        'line-height': node.props!.size! + 'px',
       },
     }),
   url: convertUrlNode,
