@@ -75,7 +75,11 @@ function convertStickerNode(node: CodeVNode): string {
   let id = -1;
   if (stickerId.startsWith(BGM_STICKER_START_STR)) {
     const m = stickerId.match(/\d+/)!;
-    id = parseInt(m[0]) + EMOJI_ARRAY.length;
+    if (m[0]) {
+      id = parseInt(m[0]) + EMOJI_ARRAY.length;
+    } else {
+      throw new UnreadableCode('BUG: unexpected match result', m[0]);
+    }
   } else {
     id = EMOJI_ARRAY.indexOf(stickerId) + 1;
   }
@@ -83,7 +87,9 @@ function convertStickerNode(node: CodeVNode): string {
     return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`;
   } else if (id >= 17 && id < 39) {
     const m = stickerId.match(/\d+/)!;
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`;
+    if (m[0]) {
+      return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`;
+    }
     throw new UnreadableCode('BUG: unexpected match result', m[0]);
   } else if (id === 39) {
     return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`;
