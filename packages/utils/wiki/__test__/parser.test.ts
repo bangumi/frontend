@@ -42,6 +42,10 @@ describe('Wiki syntax parser expected to be valid', () => {
 describe('Wiki syntax parser expected to be inValid', () => {
   inValidTestFiles.forEach((file) => {
     const prefix = file.split('.')[0];
+    if (!prefix) {
+      throw new UnreadableCode('BUG: undefined file path prefix');
+    }
+
     it(`${prefix} should be invalid`, () => {
       const testFilePath = path.resolve(invalidTestDir, file);
       const testContent = fs.readFileSync(testFilePath, 'utf8');
