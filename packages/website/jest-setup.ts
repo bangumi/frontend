@@ -1,7 +1,7 @@
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 
-import { server } from './src/mocks/server'
-import timezoneMock from 'timezone-mock'
+import { server } from './src/mocks/server';
+import timezoneMock from 'timezone-mock';
 
 beforeAll(() => {
   server.listen();

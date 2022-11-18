@@ -1,6 +1,6 @@
-import useSWR from 'swr'
-import { privateGet } from '../api/request'
-import { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group'
+import useSWR from 'swr';
+import { privateGet } from '../api/request';
+import { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group';
 
 interface UseGroupMembersRet {
   data: GroupMember[] | undefined;
@@ -24,12 +24,10 @@ export function useGroupMembers(name: string, options: GroupMembersReq): UseGrou
   });
 
   const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>>(
-    disable
-      ? null
-      : `/p/groups/${name}/members?${query.toString()}`,
+    disable ? null : `/p/groups/${name}/members?${query.toString()}`,
     privateGet,
-    { suspense: true }
-  )
+    { suspense: true },
+  );
 
   return {
     data: data?.data,
