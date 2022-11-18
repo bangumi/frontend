@@ -1,13 +1,15 @@
+import HCaptcha from '@hcaptcha/react-hcaptcha';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useInput } from 'rooks';
+
 import { Input, Button } from '@bangumi/design';
 import { UserLogin, Password } from '@bangumi/icons';
-import { useInput } from 'rooks';
-import HCaptcha from '@hcaptcha/react-hcaptcha';
-import style from './index.module.less';
+
 import { LoginErrorCode, PasswordUnMatchError, UnknownError, useUser } from '../../hooks/use-user';
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg';
-import { useNavigate } from 'react-router-dom';
 import ErrorMessage from './components/ErrorMessage';
+import style from './index.module.less';
 
 const Login: React.FC = () => {
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);

@@ -1,5 +1,5 @@
 import { mergeTags, Parser } from '../parser';
-import { CodeNodeTypes } from '../types';
+import type { CodeNodeTypes } from '../types';
 
 function getNodes(input: string): CodeNodeTypes[] {
   const p = new Parser(input);

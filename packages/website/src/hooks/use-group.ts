@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
-import { privateGet, RequestError } from '../api/request';
-import { GroupProfile, ResponseWithPagination, Topic, Pagination } from '@bangumi/types/group';
+
+import type { GroupProfile, ResponseWithPagination, Topic, Pagination } from '@bangumi/types/group';
+
+import type { RequestError } from '../api/request';
+import { privateGet } from '../api/request';
 
 export enum DescriptionClamp {
   clamp = 'clamp',

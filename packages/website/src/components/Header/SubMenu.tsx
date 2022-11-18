@@ -1,5 +1,9 @@
-import React, { VFC } from 'react';
-import { Menu, Divider, MenuItemType } from '@bangumi/design';
+import type { VFC } from 'react';
+import React from 'react';
+
+import { Menu, Divider } from '@bangumi/design';
+import type { MenuItemType } from '@bangumi/design';
+
 import style from './SubMenu.module.less';
 
 const buildMenuBottom = (verb: '看' | '读' | '听' | '玩'): MenuItemType[] => [

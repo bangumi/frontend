@@ -1,8 +1,9 @@
 // @ts-nocheck
 import { render } from '@testing-library/react';
 import React from 'react';
-import UserHome from './UserHome';
+
 import { useUser } from '../../hooks/use-user';
+import UserHome from './UserHome';
 
 jest.mock('../../hooks/use-user');
 

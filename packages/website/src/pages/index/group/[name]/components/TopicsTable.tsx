@@ -1,8 +1,10 @@
-import { Typography } from '@bangumi/design';
-import { Topic } from '@bangumi/types/common';
-import { getGroupTopicLink, getUserProfileLink } from '@bangumi/website/utils/pages';
-import React from 'react';
 import dayjs from 'dayjs';
+import React from 'react';
+
+import { Typography } from '@bangumi/design';
+import type { Topic } from '@bangumi/types/common';
+import { getGroupTopicLink, getUserProfileLink } from '@bangumi/website/utils/pages';
+
 import styles from './TopicsTable.module.less';
 
 const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {

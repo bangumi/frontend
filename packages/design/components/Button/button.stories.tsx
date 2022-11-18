@@ -1,6 +1,8 @@
-import { ComponentMeta, Story } from '@storybook/react';
+import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import Button, { ButtonProps } from '.';
+
+import type { ButtonProps } from '.';
+import Button from '.';
 
 const storyMeta: ComponentMeta<typeof Button> = {
   title: 'modern/Button',

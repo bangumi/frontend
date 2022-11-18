@@ -1,9 +1,10 @@
+import { promises as fs } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { promises as fs } from 'fs';
-import openapiTS from 'openapi-typescript';
-import fetch from 'node-fetch';
+
 import yaml from 'js-yaml';
+import fetch from 'node-fetch';
+import openapiTS from 'openapi-typescript';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

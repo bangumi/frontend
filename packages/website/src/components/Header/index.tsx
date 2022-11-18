@@ -1,7 +1,17 @@
-import React, { FC, useState } from 'react';
-import style from './style.module.less';
-import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
+import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
+import { Link } from '@bangumi/website/components/Link';
+
+import { ReactComponent as Logo } from '../../assets/logo.svg';
+import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
+import { ReactComponent as Musume2 } from '../../assets/musume_2.svg';
+import { ReactComponent as Musume3 } from '../../assets/musume_3.svg';
+import { ReactComponent as Musume4 } from '../../assets/musume_4.svg';
+import { useUser } from '../../hooks/use-user';
+import style from './style.module.less';
 import {
   animeSubMenu,
   bookSubMenu,
@@ -11,15 +21,8 @@ import {
   monoSubMenu,
   groupSubMenu,
 } from './SubMenu';
-import { useUser } from '../../hooks/use-user';
-import { Link } from '@bangumi/website/components/Link';
 
 // todo: SVG Sprites
-import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
-import { ReactComponent as Musume2 } from '../../assets/musume_2.svg';
-import { ReactComponent as Musume3 } from '../../assets/musume_3.svg';
-import { ReactComponent as Musume4 } from '../../assets/musume_4.svg';
-import { ReactComponent as Logo } from '../../assets/logo.svg';
 
 const navLeft = [
   {

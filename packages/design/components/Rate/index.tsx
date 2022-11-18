@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { FilledStar, HalfStar, EmptyStar } from '@bangumi/icons';
 
 export interface RateProps {

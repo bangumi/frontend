@@ -1,6 +1,6 @@
 import { STICKER_DOMAIN_URL } from '../constants';
 import { convert } from '../convert';
-import { CodeNodeTypes, NodeTypes, VNode } from '../types';
+import type { CodeNodeTypes, NodeTypes, VNode } from '../types';
 
 describe('convert bbcode to html vnode', () => {
   test('basic bbcode', () => {

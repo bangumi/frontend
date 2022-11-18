@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+
 import Toolbox from './Toolbox';
 
 export interface EditorProps {

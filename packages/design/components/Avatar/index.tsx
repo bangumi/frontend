@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
 import classNames from 'classnames';
+import type { FC } from 'react';
+import React from 'react';
 
 export interface AvatarProps {
   /* 头像大小 */

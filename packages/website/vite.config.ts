@@ -1,9 +1,10 @@
-import { defineConfig } from 'vite';
+import path from 'path';
+
 import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
+import pages from 'vite-plugin-pages';
 import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
-import pages from 'vite-plugin-pages';
-import path from 'path';
 
 const privateAPIDomain = 'https://next.bgm.tv';
 const productionRootURL = 'https://next.bgm.tv/';

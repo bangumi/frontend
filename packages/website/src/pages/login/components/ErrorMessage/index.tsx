@@ -1,6 +1,7 @@
 import React from 'react';
-import style from './index.module.less';
+
 import { ReactComponent as Error } from '../../assets/error.svg';
+import style from './index.module.less';
 
 interface ErrorMessageProps {
   message: string;

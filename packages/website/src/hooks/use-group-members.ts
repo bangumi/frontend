@@ -1,6 +1,9 @@
 import useSWR from 'swr';
-import { privateGet, RequestError } from '../api/request';
-import { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group';
+
+import type { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group';
+
+import type { RequestError } from '../api/request';
+import { privateGet } from '../api/request';
 
 interface UseGroupMembersRet {
   data: GroupMember[] | undefined;

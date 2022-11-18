@@ -1,7 +1,10 @@
-import React, { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import type { UserGroup } from '@bangumi/types/user';
+
 import { useUser } from '../../hooks/use-user';
-import { UserGroup } from '@bangumi/types/user';
 
 interface RequireAuthProps {
   groupRequired: UserGroup[];

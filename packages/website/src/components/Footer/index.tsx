@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
+
 import { ReactComponent as BangumiTextLogo } from '../../assets/logo.svg';
 import style from './style.module.less';
 

@@ -1,5 +1,6 @@
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import Divider from '.';
 
 const componentMeta: ComponentMeta<typeof Divider> = {

@@ -1,11 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  PropsWithChildren,
-  useTransition,
-  forwardRef,
-} from 'react';
-import { LinkProps, useHref, useLinkClickHandler } from 'react-router-dom';
+import type { PropsWithChildren } from 'react';
+import React, { createContext, useContext, useTransition, forwardRef } from 'react';
+import type { LinkProps } from 'react-router-dom';
+import { useHref, useLinkClickHandler } from 'react-router-dom';
 
 interface ILinkContext {
   pending: boolean;

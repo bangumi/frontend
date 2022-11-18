@@ -1,6 +1,7 @@
-import React from 'react';
-import Pagination from '..';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import React from 'react';
+
+import Pagination from '..';
 
 it('should render correctly', () => {
   const { getByTestId } = render(<Pagination total={3939} />);

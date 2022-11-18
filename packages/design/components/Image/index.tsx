@@ -1,5 +1,6 @@
-import React, { FC, ImgHTMLAttributes } from 'react';
 import classnames from 'classnames';
+import type { FC, ImgHTMLAttributes } from 'react';
+import React from 'react';
 
 export interface ImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'> {
   /* 图像的 URL */
