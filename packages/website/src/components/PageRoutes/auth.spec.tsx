@@ -1,10 +1,12 @@
 // @ts-nocheck
-import React from 'react';
 import { render } from '@testing-library/react';
-import { RequireAuth } from './auth';
-import { UserGroup } from '@bangumi/types/user';
-import { useUser } from '../../hooks/use-user';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { UserGroup } from '@bangumi/types/user';
+
+import { useUser } from '../../hooks/use-user';
+import { RequireAuth } from './auth';
 
 jest.mock('../../hooks/use-user');
 const mockedUseUser = jest.mocked(useUser);

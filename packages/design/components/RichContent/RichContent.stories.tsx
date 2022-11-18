@@ -1,5 +1,6 @@
+import type { ComponentStory } from '@storybook/react';
 import React from 'react';
-import { ComponentStory } from '@storybook/react';
+
 import RichContent from '.';
 
 export default {

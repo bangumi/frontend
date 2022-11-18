@@ -1,6 +1,8 @@
-import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import Editor, { EditorProps } from '../Editor';
+import React from 'react';
+
+import type { EditorProps } from '../Editor';
+import Editor from '../Editor';
 
 const initTextareaTest = (props: EditorProps): { textarea: HTMLTextAreaElement } => {
   props.placeholder = props.placeholder ?? 'placeholder';

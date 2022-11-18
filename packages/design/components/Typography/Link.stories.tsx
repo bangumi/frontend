@@ -1,7 +1,9 @@
-import { ComponentMeta, Story } from '@storybook/react';
+import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import Link, { LinkProps } from './Link';
+
+import type { LinkProps } from './Link';
+import Link from './Link';
 
 const componentMeta: ComponentMeta<typeof Link> = {
   title: 'modern/Topology/Link',

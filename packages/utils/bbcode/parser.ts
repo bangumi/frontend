@@ -1,5 +1,5 @@
 import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants';
-import { CodeNodeTypes, CodeVNode } from './types';
+import type { CodeNodeTypes, CodeVNode } from './types';
 
 const INVALID_NODE_MSG = 'invalid node';
 const INVALID_STICKER_NODE = 'invalid sticker node';

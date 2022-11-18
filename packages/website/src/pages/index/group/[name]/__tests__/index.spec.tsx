@@ -1,13 +1,16 @@
-import React from 'react';
-import GroupHome from '..';
-import { render, RenderResult, waitFor } from '@testing-library/react';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import type { RenderResult } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
+import React from 'react';
+import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
+
+import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group';
+import { server as mockServer } from '@bangumi/website/mocks/server';
+import GroupPage from '@bangumi/website/pages/index/group/[name]';
+
+import GroupHome from '..';
 import Boring from './fixtures/boring.json';
 import RecentTopics from './fixtures/recent-topics.json';
-import { MemoryRouter, Route, Routes, useParams } from 'react-router-dom';
-import { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group';
-import GroupPage from '@bangumi/website/pages/index/group/[name]';
 
 jest.mock('react-router-dom', () => {
   return {

@@ -1,5 +1,6 @@
-import React, { FC, PropsWithChildren } from 'react';
 import classNames from 'classnames';
+import type { FC, PropsWithChildren } from 'react';
+import React from 'react';
 
 export interface ButtonProps {
   disabled?: boolean;

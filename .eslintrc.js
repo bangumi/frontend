@@ -5,11 +5,40 @@ module.exports = {
     'jest/globals': true,
   },
   extends: ['standard-with-typescript', 'prettier'],
+  plugins: ['unused-imports'],
   parserOptions: {
     ecmaVersion: 13,
     sourceType: 'module',
   },
-  rules: {},
+  settings: {
+    'import/internal-regex': '^@bangumi/',
+  },
+  rules: {
+    'no-unused-vars': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'import/order': [
+      'error',
+      {
+        alphabetize: {
+          order: 'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
+          caseInsensitive: true /* ignore case. Options: [true, false] */,
+        },
+        pathGroups: [
+          {
+            pattern: '@bangumi/**',
+            group: 'internal',
+          },
+        ],
+        'newlines-between': 'always',
+        groups: [
+          'builtin', // Built-in types are first
+          'external',
+          'internal',
+          ['parent', 'sibling', 'index', 'object'],
+        ],
+      },
+    ],
+  },
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
@@ -23,8 +52,21 @@ module.exports = {
         react: {
           version: 'detect',
         },
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts'],
+        },
+        'import/extensions': ['.js', '.ts', '.mjs'],
+        'import/resolver': {
+          typescript: {
+            project: ['tsconfig.json'],
+          },
+          node: {
+            project: ['tsconfig.json'],
+          },
+        },
       },
       rules: {
+        '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-misused-promises': [
           'error',
           {
@@ -39,6 +81,7 @@ module.exports = {
         '@typescript-eslint/promise-function-async': 'error',
         '@typescript-eslint/no-implicit-any-catch': 'error',
         '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
         // 限制了一些不需要显示指明类型的场景，比如自动推导，导致了一些多余代码
         '@typescript-eslint/explicit-function-return-type': 'off',
         'react/jsx-closing-tag-location': 'off',

@@ -1,5 +1,5 @@
-import Text from './Text';
 import Link from './Link';
+import Text from './Text';
 
 export type { LinkProps } from './Link';
 

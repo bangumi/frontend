@@ -1,8 +1,11 @@
-import React, { FC, useRef } from 'react';
-import Editor, { EditorProps } from './Editor';
+import classnames from 'classnames';
+import type { FC } from 'react';
+import React, { useRef } from 'react';
+
 import Button from '../Button';
 import Link from '../Typography/Link';
-import classnames from 'classnames';
+import type { EditorProps } from './Editor';
+import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
   /* 最外层 className */

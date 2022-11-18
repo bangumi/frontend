@@ -1,6 +1,7 @@
-import React from 'react';
-import Rate from '..';
 import { render } from '@testing-library/react';
+import React from 'react';
+
+import Rate from '..';
 
 it.each([
   [0.1, 0, 0, 5],

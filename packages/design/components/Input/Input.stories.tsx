@@ -1,7 +1,10 @@
+import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
-import { ComponentMeta, Story } from '@storybook/react';
-import Input, { InputProps } from '.';
+
 import { UserLogin, Search as SearchIcon } from '@bangumi/icons';
+
+import type { InputProps } from '.';
+import Input from '.';
 
 const componentMeta: ComponentMeta<typeof Input> = {
   title: 'modern/Input',

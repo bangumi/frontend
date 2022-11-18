@@ -1,7 +1,9 @@
-import path from 'path';
 import fs from 'fs';
-import parse from '../parser';
+import path from 'path';
+
 import yaml from 'js-yaml';
+
+import parse from '../parser';
 
 const testsDir = path.resolve(__dirname, './wiki-syntax-spec/tests/');
 const validTestDir = path.resolve(testsDir, 'valid');

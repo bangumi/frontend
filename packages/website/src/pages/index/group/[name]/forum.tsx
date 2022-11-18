@@ -1,10 +1,12 @@
-import { Pagination } from '@bangumi/design';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+
+import { Pagination } from '@bangumi/design';
 import { useGroupTopic } from '@bangumi/website/hooks/use-group';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import TopicsTable from './components/TopicsTable';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+
+import TopicsTable from './components/TopicsTable';
 
 const GroupForum = () => {
   const { name } = useParams();
