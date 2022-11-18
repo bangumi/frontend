@@ -65,6 +65,11 @@ const DEFAULT_TAGS: ITag[] = [
         if (href === undefined || href === '') {
           href = getStringChild(node);
         }
+
+        if (href === undefined) {
+          return false;
+        }
+
         return isValidUrl(href);
       },
     },
@@ -90,7 +95,7 @@ const DEFAULT_TAGS: ITag[] = [
     name: 'subject',
     schema: {
       subject: (value) => {
-        return /^[1-9]\d*/.test(value);
+        return typeof value === 'string' && /^[1-9]\d*/.test(value);
       },
     },
   },
