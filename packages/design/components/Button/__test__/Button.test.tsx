@@ -18,7 +18,7 @@ it.each`
   ${'rounded'}
 `('should render button of shape $shape', ({ shape }) => {
   const { container } = render(
-    <Button type="primary" shape={shape}>
+    <Button type='primary' shape={shape}>
       hello world
     </Button>,
   );
@@ -28,7 +28,7 @@ it.each`
 it('should trigger onClick callback', () => {
   const onClick = jest.fn();
   const { getByText } = render(
-    <Button type="primary" onClick={onClick}>
+    <Button type='primary' onClick={onClick}>
       hello world
     </Button>,
   );
@@ -39,7 +39,7 @@ it('should trigger onClick callback', () => {
 
 it('should disable the button if disabled is true', () => {
   const { getByText } = render(
-    <Button type="primary" disabled>
+    <Button type='primary' disabled>
       hello world
     </Button>,
   );

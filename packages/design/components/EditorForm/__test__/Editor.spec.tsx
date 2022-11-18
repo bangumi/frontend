@@ -116,7 +116,7 @@ describe('EditorForm > Editor', () => {
   });
 
   it('placeholder props', () => {
-    const { getByPlaceholderText } = render(<Editor placeholder="Hello" />);
+    const { getByPlaceholderText } = render(<Editor placeholder='Hello' />);
     expect(getByPlaceholderText('Hello')).toBeInTheDocument();
   });
 

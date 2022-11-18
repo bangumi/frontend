@@ -45,7 +45,7 @@ const Login: React.FC = () => {
     try {
       await login(email.value, password.value, hCaptchaToken);
       navigate('/', { replace: true });
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof PasswordUnMatchError) {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`);
         return;
@@ -57,12 +57,15 @@ const Login: React.FC = () => {
         return;
       }
 
-      const errorMsg = errorMessageMap[error.message];
-      if (errorMsg) {
-        setErrorMessage(errorMsg);
+      if (error instanceof Error) {
+        const errorMsg = errorMessageMap[error.message];
+        if (errorMsg) {
+          setErrorMessage(errorMsg);
+          return;
+        }
       }
 
-      console.error(error);
+      setErrorMessage(`意料之外的错误：${error?.toString() ?? typeof error}`);
     }
   };
 
@@ -72,15 +75,15 @@ const Login: React.FC = () => {
         <LoginLogo className={style.logo} />
         {errorMessage && <ErrorMessage message={errorMessage} />}
         <Input
-          type="email"
+          type='email'
           prefix={<UserLogin className={style.icon} />}
-          placeholder="你的 Email 地址"
+          placeholder='你的 Email 地址'
           {...email}
         />
         <Input
-          type="password"
+          type='password'
           prefix={<Password className={style.icon} />}
-          placeholder="你的登录密码"
+          placeholder='你的登录密码'
           {...password}
         />
         <div className={style.hcaptcha}>
@@ -90,10 +93,10 @@ const Login: React.FC = () => {
           />
         </div>
         <div className={style.buttonGroup}>
-          <Button className={style.button} type="secondary" shape="rounded" disabled>
+          <Button className={style.button} type='secondary' shape='rounded' disabled>
             注册新用户
           </Button>
-          <Button className={style.button} type="primary" shape="rounded" onClick={handleLogin}>
+          <Button className={style.button} type='primary' shape='rounded' onClick={handleLogin}>
             登录
           </Button>
         </div>

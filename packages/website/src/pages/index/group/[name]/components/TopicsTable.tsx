@@ -22,14 +22,14 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
             <tr key={topic.id}>
               <td className={styles.title}>
                 {/* TODO: replace to Link */}
-                <Typography.Link to={getGroupTopicLink(topic.id)} fontWeight="bold" isExternal>
+                <Typography.Link to={getGroupTopicLink(topic.id)} fontWeight='bold' isExternal>
                   {topic.title}
                 </Typography.Link>
               </td>
               <td className={styles.author}>
                 <Typography.Link
                   to={getUserProfileLink(topic.creator.username)}
-                  fontWeight="bold"
+                  fontWeight='bold'
                   isExternal
                 >
                   {topic.creator.nickname}

@@ -8,13 +8,13 @@ const LinkTestWrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => {
 };
 
 it('should render internal link', () => {
-  const { asFragment } = render(<Link to="/a" />, { wrapper: LinkTestWrapper });
+  const { asFragment } = render(<Link to='/a' />, { wrapper: LinkTestWrapper });
 
   expect(asFragment()).toMatchSnapshot();
 });
 
 it('should render external link', () => {
-  const { asFragment } = render(<Link to="https://test.com" isExternal />, {
+  const { asFragment } = render(<Link to='https://test.com' isExternal />, {
     wrapper: LinkTestWrapper,
   });
 

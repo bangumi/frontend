@@ -26,7 +26,7 @@ const Image: FC<ImageProps> = ({
     'bgm-image--rect': shape === 'rect',
     'bgm-image--circle': shape === 'circle',
   });
-  return <img className={actualClassnames} src={src} data-testid="img-wrapper" {...rest} />;
+  return <img className={actualClassnames} src={src} data-testid='img-wrapper' {...rest} />;
 };
 
 export default Image;

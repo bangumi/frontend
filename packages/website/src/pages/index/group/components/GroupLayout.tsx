@@ -47,7 +47,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
     <div className={styles.pageContainer}>
       <GroupHeader group={group!} />
       <Tab
-        type="borderless"
+        type='borderless'
         items={GroupTabsItems}
         activeKey={curTab}
         onChange={(_, value) => navigate(value.to(groupName))}
@@ -56,7 +56,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
         <div className={styles.leftCol}>{children}</div>
         <div className={styles.rightCol}>
           <Section
-            title="最近加入"
+            title='最近加入'
             renderFooter={() =>
               group && (
                 <Link

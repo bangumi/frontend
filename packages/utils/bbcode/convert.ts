@@ -9,11 +9,12 @@ const BGM_HOST_ARR = [
   'bgm.tv',
   'www.bgm.tv',
 ];
+
 function isExternalLink(url: string): boolean {
   try {
     const urlObj = new URL(url);
     return !BGM_HOST_ARR.includes(urlObj.host);
-  } catch (error) {
+  } catch {
     return true;
   }
 }

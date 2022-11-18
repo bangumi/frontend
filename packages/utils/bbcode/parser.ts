@@ -6,6 +6,7 @@ const INVALID_STICKER_NODE = 'invalid sticker node';
 
 type CheckCharFn = (str: string) => boolean;
 type Validator = (value: any, node: CodeVNode) => boolean;
+
 // 也许需要引入  Object schema validation
 export interface CustomTag {
   name: string;
@@ -29,8 +30,9 @@ function getNodeProp(node: CodeVNode, prop: string): string | boolean | undefine
 
 function isValidUrl(str: string): boolean {
   try {
-    (() => new URL(str))();
-  } catch (error) {
+    // eslint-disable-next-line no-new
+    new URL(str);
+  } catch (e: unknown) {
     return false;
   }
   return true;
@@ -145,6 +147,7 @@ export class Parser {
   private readonly ctxStack: Array<{ startIdx: number }>;
   private readonly tagStack: string[];
   private readonly validTags: ITag[];
+
   constructor(input: string, tags: ITag[] = []) {
     this.input = input;
     this.pos = 0;
@@ -180,11 +183,14 @@ export class Parser {
           node = this.parseText();
       }
       this.exitNode();
-    } catch (error: any) {
-      if (error.message === INVALID_NODE_MSG || error.message === INVALID_STICKER_NODE) {
-        const ctx = this.ctxStack.pop()!;
-        node = this.input.slice(ctx.startIdx, this.pos);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        if (error.message === INVALID_NODE_MSG || error.message === INVALID_STICKER_NODE) {
+          const ctx = this.ctxStack.pop()!;
+          node = this.input.slice(ctx.startIdx, this.pos);
+        }
       }
+      console.error('unexpected throw', error);
     }
     return node;
   }

@@ -41,7 +41,7 @@ const GroupHome: React.FC = () => {
         onChange={handleChangeClamp}
       />
       <Section
-        title="最近讨论"
+        title='最近讨论'
         renderFooter={() => (
           <RouterLink to={`/group/${name}/forum`} className={CommonStyles.textButton}>
             <span>更多组内讨论</span>

@@ -210,9 +210,9 @@ const SubMenu: VFC<{ itemsTop: MenuItemType[]; itemsBottom: MenuItemType[] }> = 
   itemsBottom,
 }) => (
   <>
-    <Menu items={itemsTop} mode="vertical" wrapperClass={style.subMenu} />
+    <Menu items={itemsTop} mode='vertical' wrapperClass={style.subMenu} />
     <Divider className={style.subMenuDivider} />
-    <Menu items={itemsBottom} mode="vertical" wrapperClass={style.subMenu} />
+    <Menu items={itemsBottom} mode='vertical' wrapperClass={style.subMenu} />
   </>
 );
 

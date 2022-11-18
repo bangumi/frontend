@@ -5,7 +5,7 @@ import EditorForm from '..';
 describe('<EditorForm />', () => {
   it('render correctly with props', () => {
     const { asFragment } = render(
-      <EditorForm className="custom class" placeholder="placeholder" confirmText="Confirm" />,
+      <EditorForm className='custom class' placeholder='placeholder' confirmText='Confirm' />,
     );
     expect(asFragment()).toMatchSnapshot();
   });
@@ -13,7 +13,7 @@ describe('<EditorForm />', () => {
   it('onConfirm event', () => {
     const onConfirm = jest.fn();
     const { getByText, getByPlaceholderText } = render(
-      <EditorForm onConfirm={onConfirm} confirmText="Confirm" placeholder="placeholder" />,
+      <EditorForm onConfirm={onConfirm} confirmText='Confirm' placeholder='placeholder' />,
     );
     const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
     textarea.value = 'test';
@@ -31,7 +31,7 @@ describe('<EditorForm />', () => {
   it('Ctrl + Enter & Alt + S should trigger onConfirm event', async () => {
     const onConfirm = jest.fn();
     const { getByPlaceholderText } = render(
-      <EditorForm onConfirm={onConfirm} placeholder="placeholder" />,
+      <EditorForm onConfirm={onConfirm} placeholder='placeholder' />,
     );
     const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
 
