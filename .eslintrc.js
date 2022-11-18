@@ -9,9 +9,7 @@ module.exports = {
     ecmaVersion: 13,
     sourceType: 'module',
   },
-  rules: {
-    'no-use-before-define': 'off',
-  },
+  rules: {},
   overrides: [
     {
       files: ['*.ts', '*.tsx'],

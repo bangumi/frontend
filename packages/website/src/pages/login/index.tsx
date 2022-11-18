@@ -61,10 +61,11 @@ const Login: React.FC = () => {
         const errorMsg = errorMessageMap[error.message];
         if (errorMsg) {
           setErrorMessage(errorMsg);
+          return;
         }
       }
 
-      console.error(error);
+      setErrorMessage(`意料之外的错误：${error?.toString() ?? typeof error}`);
     }
   };
 
