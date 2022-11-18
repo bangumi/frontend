@@ -1,49 +1,56 @@
-import React from 'react'
-import type { Story, ComponentMeta } from '@storybook/react'
-import * as Icons from './dist'
+import React from 'react';
+import type { Story, ComponentMeta } from '@storybook/react';
+import * as Icons from './dist';
 
-type IComponent = React.FC<React.SVGProps<SVGSVGElement> & {
-  title?: string
-}>
+type IComponent = React.FC<
+  React.SVGProps<SVGSVGElement> & {
+    title?: string;
+  }
+>;
 
 const componentMeta: ComponentMeta<IComponent> = {
   title: 'Icons',
   subcomponents: Icons,
   decorators: [
-    story => (
+    (story) => (
       <div
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fill,minmax(8rem,1fr))',
           gap: '2rem',
           maxWidth: '80rem',
-          margin: 'auto'
+          margin: 'auto',
         }}
-      >{story()}
+      >
+        {story()}
       </div>
-    )
+    ),
   ],
   args: {
     height: 40,
-    width: 40
+    width: 40,
   },
   argTypes: {
     style: {
       control: {
         type: 'object',
-        defaultValue: {}
-      }
-    }
-  }
-}
+        defaultValue: {},
+      },
+    },
+  },
+};
 
-export default componentMeta
+export default componentMeta;
 
-// eslint-disable-next-line react/prop-types
-const Template: Story<{ height: number, width: number, style: React.CSSProperties }> = ({ height, width, style }) => <>
-  {
-    Object.keys(Icons).map(iconName => {
-      const Icon = (Icons as any)[iconName] as IComponent
+/* eslint-disable react/prop-types */
+const Template: Story<{ height: number; width: number; style: React.CSSProperties }> = ({
+  height,
+  width,
+  style,
+}) => (
+  <>
+    {Object.keys(Icons).map((iconName) => {
+      const Icon = (Icons as any)[iconName] as IComponent;
       return (
         <div
           key={iconName}
@@ -52,16 +59,16 @@ const Template: Story<{ height: number, width: number, style: React.CSSPropertie
             height: 100,
             border: 'solid 2px #dedede',
             borderRadius: '5px',
-            padding: '1rem'
+            padding: '1rem',
           }}
         >
           <p style={{ paddingBottom: '1.5rem', fontWeight: '600' }}>{iconName}</p>
           <Icon height={height} width={width} style={style} />
         </div>
-      )
-    }
-    )
-  }
-</>
+      );
+    })}
+  </>
+);
+/* eslint-enable react/prop-types */
 
-export const Usage = Template.bind({})
+export const Usage = Template.bind({});

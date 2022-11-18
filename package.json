@@ -7,19 +7,18 @@
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm icons build && pnpm website build",
     "build:types": "pnpm --filter @bangumi/types build",
-    "build:test": "pnpm icons build && pnpm website build:test",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design storybook",
     "design:build-doc": "pnpm icons build && pnpm design build-storybook",
     "dev": "pnpm dev:csr",
     "dev:csr": "pnpm website dev",
     "dev:ssr": "pnpm server dev",
-    "lint": "eslint ./packages --ext .js,jsx,ts,tsx",
+    "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,tsx",
     "lint:fix": "pnpm lint -- --fix",
     "lint:style": "stylelint \"./packages/**/*.{css,less}\" \"!**/dist/**\"",
     "lint:style-fix": "pnpm lint:style -- --fix",
-    "prettier": "prettier --write --list-different ./**/*.{yaml,yml}",
-    "prettier:check": "prettier --list-different ./**/*.{yaml,yml}",
+    "prettier": "prettier --write --list-different ./",
+    "prettier:check": "prettier --list-different ./",
     "server": "pnpm --filter=@bangumi/server",
     "test": "pnpm icons build && jest",
     "website": "pnpm --filter=@bangumi/website",
@@ -27,9 +26,15 @@
     "lint-staged": "lint-staged",
     "type-check": "tsc --noEmit"
   },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "all"
+  },
   "lint-staged": {
-    "*.{yaml,yml,json}": "prettier --write",
-    "*.{js,ts,tsx}": [
+    "*.{js,ts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write",
+    "*.{js,ts,tsx,cjs,mjs}": [
       "eslint --fix"
     ],
     "*.{css,less}": [
@@ -37,6 +42,8 @@
     ]
   },
   "devDependencies": {
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^5.1.1",
     "@babel/core": "^7.20.2",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
@@ -50,6 +57,7 @@
     "babel-jest": "^29.3.1",
     "babel-preset-vite": "^1.0.4",
     "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-config-standard-jsx": "^11.0.0",
     "eslint-config-standard-react": "^12.0.0",
@@ -67,6 +75,7 @@
     "postcss": "^8.4.19",
     "postcss-less": "^6.0.0",
     "prettier": "^2.7.1",
+    "react": "^18.2.0",
     "stylelint": "^14.15.0",
     "stylelint-config-css-modules": "^4.1.0",
     "stylelint-config-standard": "^25.0.0",

@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "tsc && vite build",
-    "build:test": "tsc && vite build --mode test",
+    "build": "tsc --noEmit && vite build",
     "dev": "vite",
     "preview": "vite preview"
   },

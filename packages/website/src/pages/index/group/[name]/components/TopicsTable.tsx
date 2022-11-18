@@ -1,9 +1,9 @@
-import { Typography } from '@bangumi/design'
-import { Topic } from '@bangumi/types/common'
-import { getGroupTopicLink, getUserProfileLink } from '@bangumi/website/utils/pages'
-import React from 'react'
-import dayjs from 'dayjs'
-import styles from './TopicsTable.module.less'
+import { Typography } from '@bangumi/design';
+import { Topic } from '@bangumi/types/common';
+import { getGroupTopicLink, getUserProfileLink } from '@bangumi/website/utils/pages';
+import React from 'react';
+import dayjs from 'dayjs';
+import styles from './TopicsTable.module.less';
 
 const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
   return (
@@ -27,22 +27,22 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
                 </Typography.Link>
               </td>
               <td className={styles.author}>
-                <Typography.Link to={getUserProfileLink(topic.creator.username)} fontWeight="bold" isExternal>
+                <Typography.Link
+                  to={getUserProfileLink(topic.creator.username)}
+                  fontWeight="bold"
+                  isExternal
+                >
                   {topic.creator.nickname}
                 </Typography.Link>
               </td>
-              <td className={styles.replies}>
-                {topic.reply_count}
-              </td>
-              <td className={styles.updateTime}>
-                {dayjs(topic.updated_at).format('YYYY-M-D')}
-              </td>
+              <td className={styles.replies}>{topic.reply_count}</td>
+              <td className={styles.updateTime}>{dayjs(topic.updated_at).format('YYYY-M-D')}</td>
             </tr>
-          )
+          );
         })}
       </tbody>
     </table>
-  )
-}
+  );
+};
 
-export default TopicsTable
+export default TopicsTable;
