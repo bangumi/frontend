@@ -20,13 +20,13 @@ const Pager: FC<PagerProps> = (props) => {
 
   return (
     <li
-      data-testid="pagination-pager"
+      data-testid='pagination-pager'
       title={`${props.page}`}
       className={actualClassnames}
       onClick={handleClick}
       tabIndex={0}
     >
-      <a rel="nofollow">{props.page}</a>
+      <a rel='nofollow'>{props.page}</a>
     </li>
   );
 };

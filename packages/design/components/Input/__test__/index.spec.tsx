@@ -4,7 +4,7 @@ import Input from '../index';
 
 describe('Input', () => {
   it('placeholder', () => {
-    const { getByPlaceholderText } = render(<Input placeholder="Hello" />);
+    const { getByPlaceholderText } = render(<Input placeholder='Hello' />);
     expect(getByPlaceholderText('Hello')).toBeInTheDocument();
   });
 
@@ -15,12 +15,12 @@ describe('Input', () => {
   });
 
   it('prefix should be rendered', () => {
-    const { getByText } = render(<Input prefix="$" />);
+    const { getByText } = render(<Input prefix='$' />);
     expect(getByText('$')).toBeInTheDocument();
   });
 
   it('suffix should be rendered', () => {
-    const { getByText } = render(<Input suffix="$" />);
+    const { getByText } = render(<Input suffix='$' />);
     expect(getByText('$')).toBeInTheDocument();
   });
 });

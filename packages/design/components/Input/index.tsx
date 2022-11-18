@@ -23,7 +23,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={classnames('bgm-input__wrapper', wrapperClass)} style={wrapperStyle}>
         {prefix && prefix}
-        <input type={type} className="bgm-input" placeholder={placeholder} ref={ref} {...rest} />
+        <input type={type} className='bgm-input' placeholder={placeholder} ref={ref} {...rest} />
         {suffix && suffix}
       </div>
     );

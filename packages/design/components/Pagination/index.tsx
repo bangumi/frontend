@@ -54,24 +54,24 @@ const Pagination: FC<PaginationProps> = ({
   const prevButton = (
     <li
       onClick={prev}
-      data-testid="pagination-prev"
+      data-testid='pagination-prev'
       className={cn('bgm-pagination-prev', {
         'bgm-pagination-prev--hide': !hasPrev,
       })}
     >
-      <VerticalLeft className="bgm-pagination-icon" />
+      <VerticalLeft className='bgm-pagination-icon' />
     </li>
   );
 
   const nextButton = (
     <li
       onClick={next}
-      data-testid="pagination-next"
+      data-testid='pagination-next'
       className={cn('bgm-pagination-next', {
         'bgm-pagination-next--hide': !hasNext,
       })}
     >
-      <VerticalRight className="bgm-pagination-icon" />
+      <VerticalRight className='bgm-pagination-icon' />
     </li>
   );
 
@@ -105,7 +105,7 @@ const Pagination: FC<PaginationProps> = ({
     }
   }
   return (
-    <ul className="bgm-pagination" data-testid="pagination-wrapper">
+    <ul className='bgm-pagination' data-testid='pagination-wrapper'>
       {prevButton}
       {pagerList}
       {nextButton}

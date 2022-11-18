@@ -88,13 +88,13 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
       }
     };
     return (
-      <div className="bgm-editor__container">
+      <div className='bgm-editor__container'>
         <Toolbox
           handleClickEvent={handleToolboxEvent}
           style={{ display: showToolbox ? '' : 'none' }}
         />
         <textarea
-          className="bgm-editor__text"
+          className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
           onKeyDown={(e) => {

@@ -16,7 +16,7 @@ export const GroupHeader: React.FC<{ group: GroupProfile }> = ({ group }) => {
       <div className={styles.infoCol}>
         <div className={styles.title}>{group.title}</div>
         <div>
-          <Text type="secondary">
+          <Text type='secondary'>
             {' '}
             创建于 {dayjs(group.created_at).format('YYYY-M-D HH:mm')} | 现有 {group.total_members}{' '}
             名成员{' '}
