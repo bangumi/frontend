@@ -24,18 +24,23 @@ interface ItemType {
   label: string;
 }
 
-export interface TabProps {
+export interface TabProps<T extends ItemType = ItemType> {
   /* 节点数组 */
-  items: ItemType[];
+  items: T[];
   /* 选中节点的 Key */
   activeKey: string;
   /* 点击切换事件回调，对每一个 Item 都生效 */
-  onChange?: (key: string) => void;
+  onChange?: (key: string, value: T) => void;
   /* 样式类型 */
   type?: 'default' | 'borderless';
 }
 
-export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'default' }) => {
+export const Tab = <T extends ItemType>({
+  activeKey,
+  items,
+  onChange,
+  type = 'default',
+}: TabProps<T>) => {
   return (
     <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>
       {items.map((item) => {
@@ -45,7 +50,7 @@ export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'de
             isActive={activeKey === item.key}
             type={type}
             onClick={() => {
-              onChange?.(item.key);
+              onChange?.(item.key, item);
             }}
           >
             {' '}
