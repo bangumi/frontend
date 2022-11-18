@@ -304,7 +304,7 @@ export class Parser {
   private consumeWhile(checkFn: CheckCharFn): string {
     let result = '';
     while (!this.eof() && checkFn(this.curChar())) {
-      result += this.consumeChar() as string;
+      result += this.consumeChar()!;
     }
     return result;
   }
