@@ -1,31 +1,40 @@
-import axios from 'axios'
+export class RequestError extends Error {
+  readonly response: Response;
 
-const baseURL = (import.meta.env.VITE_APP_ROOT as string) ?? 'https://api.bgm.tv'
-
-export const request = axios.create({
-  baseURL,
-  timeout: 6000 // 请求超时时间
-})
-
-// 异常拦截处理器
-const errorHandler = async (error: any): Promise<never> => {
-  console.log(error)
-
-  return await Promise.reject(error)
+  constructor(response: Response) {
+    super();
+    this.response = response;
+  }
 }
 
-request.interceptors.request.use(config => {
-  return config
-}, errorHandler)
+export async function privateGet<T = unknown>(url: string): Promise<T> {
+  const res: Response = await fetch(url, {
+    credentials: 'same-origin',
+    method: 'get',
+  });
 
-request.interceptors.response.use((response) => {
-  return response
-}, errorHandler)
+  if (res.status >= 400) {
+    throw new RequestError(res);
+  }
 
-export const privateRequest = axios.create({
-  withCredentials: true
-})
+  return await res.json();
+}
 
-privateRequest.interceptors.response.use((response) => {
-  return response
-})
+export async function privatePost(
+  url: string,
+  options: { json: Record<string, any> },
+): Promise<Response> {
+  let body: BodyInit | null = null;
+  const header = new Headers();
+  if (options.json) {
+    body = JSON.stringify(options.json);
+    header.set('content-type', 'application/json');
+  }
+
+  return await fetch(url, {
+    credentials: 'same-origin',
+    method: 'post',
+    body,
+    headers: header,
+  });
+}

@@ -1,20 +1,21 @@
-import React from 'react'
-import Pagination from '.'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react';
+
+import Pagination from '.';
 
 const componentMeta: ComponentMeta<typeof Pagination> = {
   title: 'modern/Pagination',
-  component: Pagination
-}
+  component: Pagination,
+};
 
-export default componentMeta
+export default componentMeta;
 
 const Template: ComponentStory<typeof Pagination> = (args) => {
-  return <Pagination {...args} />
-}
+  return <Pagination {...args} />;
+};
 
-export const Usage = Template.bind({})
+export const Usage = Template.bind({});
 Usage.args = {
   total: 3000,
-  currentPage: 20
-}
+  currentPage: 20,
+};

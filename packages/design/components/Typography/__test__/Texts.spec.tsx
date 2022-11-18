@@ -1,6 +1,7 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import Text from '../Text'
+import { render } from '@testing-library/react';
+import React from 'react';
+
+import Text from '../Text';
 
 it.each`
   type
@@ -8,6 +9,6 @@ it.each`
   ${'default'}
   ${'secondary'}
 `('should render $type text', ({ type }) => {
-  const { container } = render(<Text type={type}>hello world</Text>)
-  expect(container.firstChild).toMatchSnapshot()
-})
+  const { container } = render(<Text type={type}>hello world</Text>);
+  expect(container.firstChild).toMatchSnapshot();
+});

@@ -1,22 +1,23 @@
 // @ts-nocheck
-import { render } from '@testing-library/react'
-import React from 'react'
-import UserHome from './UserHome'
-import { useUser } from '../../hooks/use-user'
+import { render } from '@testing-library/react';
+import React from 'react';
 
-jest.mock('../../hooks/use-user')
+import { useUser } from '../../hooks/use-user';
+import UserHome from './UserHome';
 
-const mockedUseUser = jest.mocked(useUser)
+jest.mock('../../hooks/use-user');
+
+const mockedUseUser = jest.mocked(useUser);
 
 it('should show user name if user is logged', () => {
   mockedUseUser.mockReturnValue({
     user: {
       nickname: 'testuser',
-      username: 'testuser-123'
-    }
-  })
+      username: 'testuser-123',
+    },
+  });
 
-  const { getByText } = render(<UserHome />)
+  const { getByText } = render(<UserHome />);
 
-  expect(getByText('testuser')).toHaveAttribute('href', 'https://bgm.tv/user/testuser-123')
-})
+  expect(getByText('testuser')).toHaveAttribute('href', 'https://bgm.tv/user/testuser-123');
+});

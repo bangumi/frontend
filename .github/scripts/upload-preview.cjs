@@ -12,23 +12,23 @@ const artifacts = {
 
 const commentComment = '<!-- preview comment -->';
 
-async function main () {
+async function main() {
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
     throw new Error('process.env.GH_TOKEN is empty');
   }
   const octokit = github.getOctokit(githubToken);
 
-  const workflow_name = process.env.workflow_name;
-  if (!workflow_name) {
+  const workflowName = process.env.workflow_name;
+  if (!workflowName) {
     throw new Error('process.env.workflow_name is empty');
   }
 
-  if (!Object.keys(artifacts).includes(workflow_name)) {
-    throw new Error(`not valid workflow name ${workflow_name}`);
+  if (!Object.keys(artifacts).includes(workflowName)) {
+    throw new Error(`not valid workflow name ${workflowName}`);
   }
 
-  const artifact = artifacts[workflow_name];
+  const artifact = artifacts[workflowName];
 
   await exec(
     'gh',
@@ -50,9 +50,7 @@ async function main () {
     },
   );
 
-  const prNumber = parseInt(
-    fs.readFileSync(path.resolve(artifact, 'pr_number')).toString().trim(),
-  );
+  const prNumber = parseInt(fs.readFileSync(path.resolve(artifact, 'pr_number')).toString().trim());
 
   const alias = `pr-${prNumber}-${artifact}`;
 
@@ -64,7 +62,7 @@ async function main () {
     },
   });
 
-  for await(const { data: comments } of octokit.paginate.iterator(
+  for await (const { data: comments } of octokit.paginate.iterator(
     octokit.rest.issues.listComments,
     {
       owner: context.repo.owner,
@@ -88,7 +86,7 @@ async function main () {
  * @param {string} alias
  * @param {{id:number;body:string;}} comment
  */
-async function updateComment (octokit, comment, artifact, alias) {
+async function updateComment(octokit, comment, artifact, alias) {
   const links = [];
   const s = comment.body.split('\n').filter(Boolean);
 
@@ -104,10 +102,7 @@ async function updateComment (octokit, comment, artifact, alias) {
     `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->\n`,
   );
 
-  links.unshift(
-    commentComment,
-    '# Preview Deployment',
-  );
+  links.unshift(commentComment, '# Preview Deployment');
 
   await octokit.rest.issues.updateComment({
     owner: context.repo.owner,
@@ -119,15 +114,15 @@ async function updateComment (octokit, comment, artifact, alias) {
 
 /**
  * @param {InstanceType<typeof GitHub>} octokit
- * @param {number} issue_number
+ * @param {number} prNumber
  * @param {string} artifact
  * @param {string} alias
  */
-async function createComment (octokit, issue_number, artifact, alias) {
+async function createComment(octokit, prNumber, artifact, alias) {
   await octokit.rest.issues.createComment({
     owner: context.repo.owner,
     repo: context.repo.repo,
-    issue_number,
+    issue_number: prNumber,
     body: [
       commentComment,
       '# Preview Deployment',
@@ -139,7 +134,7 @@ async function createComment (octokit, issue_number, artifact, alias) {
 /**
  * @param {string} s
  */
-function toTitle (s) {
+function toTitle(s) {
   if (!s) {
     return '';
   }

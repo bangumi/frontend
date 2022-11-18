@@ -1,30 +1,28 @@
-import React, { FC } from 'react'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import type { FC } from 'react';
+import React from 'react';
 
 export interface AvatarProps {
   /* 头像大小 */
-  size?: 'small' | 'medium' | 'large'
+  size?: 'small' | 'medium' | 'large';
   /* 头像的 URL */
-  src: string
+  src: string;
   /* 替代文本 */
-  alt?: string
+  alt?: string;
   /* 自定义最外层类名 */
-  wrapperClass?: string
+  wrapperClass?: string;
   /* 自定义最外层样式 */
-  wrapperStyle?: React.CSSProperties
+  wrapperStyle?: React.CSSProperties;
 }
 
-const Avatar: FC<AvatarProps> = ({
-  size = 'small',
-  src,
-  alt,
-  wrapperClass,
-  wrapperStyle
-}) => {
+const Avatar: FC<AvatarProps> = ({ size = 'small', src, alt, wrapperClass, wrapperStyle }) => {
   return (
-    <div className={classNames('bgm-avatar', `bgm-avatar--${size}`, wrapperClass)} style={wrapperStyle}>
+    <div
+      className={classNames('bgm-avatar', `bgm-avatar--${size}`, wrapperClass)}
+      style={wrapperStyle}
+    >
       <img src={src} alt={alt} />
     </div>
-  )
-}
-export default Avatar
+  );
+};
+export default Avatar;

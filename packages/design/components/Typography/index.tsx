@@ -1,11 +1,11 @@
-import Text from './Text'
-import Link from './Link'
+import Link from './Link';
+import Text from './Text';
 
-export type { LinkProps } from './Link'
+export type { LinkProps } from './Link';
 
 export default {
   Text,
-  Link
-}
+  Link,
+};
 
-export type { TextProps } from './Text'
+export type { TextProps } from './Text';

@@ -1,34 +1,35 @@
-import React, { FC } from 'react'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import type { FC } from 'react';
+import React from 'react';
 
 export interface PagerProps {
-  page: number
-  active: boolean
-  onClick: (p: number) => void
+  page: number;
+  active: boolean;
+  onClick: (p: number) => void;
 }
 
 const Pager: FC<PagerProps> = (props) => {
-  const prefixCls = 'bgm-pagination-pager'
+  const prefixCls = 'bgm-pagination-pager';
   const actualClassnames = classNames(prefixCls, `${prefixCls}--${props.page}`, {
     [`${prefixCls}--active`]: props.active,
-    [`${prefixCls}--disabled`]: !props.page
-  })
+    [`${prefixCls}--disabled`]: !props.page,
+  });
 
   const handleClick = (): void => {
-    props.onClick(props.page)
-  }
+    props.onClick(props.page);
+  };
 
   return (
     <li
-      data-testid="pagination-pager"
+      data-testid='pagination-pager'
       title={`${props.page}`}
       className={actualClassnames}
       onClick={handleClick}
       tabIndex={0}
     >
-      <a rel="nofollow">{props.page}</a>
+      <a rel='nofollow'>{props.page}</a>
     </li>
-  )
-}
+  );
+};
 
-export default Pager
+export default Pager;

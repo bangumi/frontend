@@ -1,20 +1,24 @@
-import { GroupTopics, Group } from '@bangumi/types/group'
-import useSWR from 'swr'
-import { AxiosResponse } from 'axios'
-import { privateRequest } from '../api/request'
+import useSWR from 'swr';
+
+import type { GroupTopics, Group } from '@bangumi/types/group';
+
+import { privateGet } from '../api/request';
 
 type TopicsResp = {
-  group: Group
-} & GroupTopics
+  group: Group;
+} & GroupTopics;
 
 interface UseGroupTopic {
-  topicDetail: TopicsResp
+  topicDetail: TopicsResp;
 }
 
-function useGroupTopic (id: string): UseGroupTopic {
+function useGroupTopic(id: string): UseGroupTopic {
   // todo
-  const { data: { data: topicDetail } = {} } = useSWR<AxiosResponse>(`/p/groups/-/topics/${id}`, privateRequest.get)
-  return { topicDetail }
+  const { data: { data: topicDetail } = {} } = useSWR<unknown>(
+    `/p/groups/-/topics/${id}`,
+    privateGet,
+  );
+  return { topicDetail };
 }
 
-export default useGroupTopic
+export default useGroupTopic;

@@ -1,2 +1,2 @@
-import './Comment.less'
-import './CommentInfo.less'
+import './Comment.less';
+import './CommentInfo.less';

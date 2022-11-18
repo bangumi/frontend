@@ -1,9 +1,9 @@
-import React from 'react'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import React from 'react';
 
 export interface RichContentProps {
-  html: string
-  classname?: string
+  html: string;
+  classname?: string;
 }
 
 const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
@@ -12,7 +12,7 @@ const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
       className={classNames('bgm-rich-content', classname)}
       dangerouslySetInnerHTML={{ __html: html }}
     />
-  )
-}
+  );
+};
 
-export default RichContent
+export default RichContent;

@@ -1,77 +1,87 @@
-import React from 'react'
-import { ReactComponent as DownArrow } from '@bangumi/website/assets/down-arrow.svg'
-import { ReactComponent as UpArrow } from '@bangumi/website/assets/up-arrow.svg'
-import styles from './ClampableContent.module.less'
-import classNames from 'classnames'
+import classNames from 'classnames';
+import React from 'react';
+
+import { ReactComponent as DownArrow } from '@bangumi/website/assets/down-arrow.svg';
+import { ReactComponent as UpArrow } from '@bangumi/website/assets/up-arrow.svg';
+
+import styles from './ClampableContent.module.less';
 
 export interface ClampableContentProps {
-  threshold?: number
-  content: string
-  isClamped: boolean
-  className?: string
-  onChange?: (isClamped: boolean) => void
+  threshold?: number;
+  content: string;
+  isClamped: boolean;
+  className?: string;
+  onChange?: (isClamped: boolean) => void;
 }
 
-const CLAMP_HEIGHT_THRESHOLD = 193
+const CLAMP_HEIGHT_THRESHOLD = 193;
 
 export const ClampableContent: React.FC<ClampableContentProps> = ({
   content,
   threshold = CLAMP_HEIGHT_THRESHOLD,
   isClamped,
   onChange,
-  className
+  className,
 }) => {
-  const [isClampEnabled, setIsClampedEnable] = React.useState(false)
-  const contentRef = React.useRef<HTMLDivElement>(null)
+  const [isClampEnabled, setIsClampedEnable] = React.useState(false);
+  const contentRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (!contentRef.current) {
-      return
+      return;
     }
-    setIsClampedEnable(contentRef.current.scrollHeight > threshold)
-  }, [threshold])
+    setIsClampedEnable(contentRef.current.scrollHeight > threshold);
+  }, [threshold]);
 
   const clampedStyle: React.CSSProperties = {
     maxHeight: threshold,
-    overflow: 'hidden'
-  }
+    overflow: 'hidden',
+  };
 
   const handleUnclamp = (): void => {
-    onChange?.(false)
-  }
+    onChange?.(false);
+  };
 
   const handleClamp = (): void => {
-    onChange?.(true)
-  }
+    onChange?.(true);
+  };
 
   const renderControl = (): React.ReactElement | null => {
     if (!isClampEnabled) {
-      return null
+      return null;
     }
 
     if (isClamped) {
       return (
         <>
           <div>...</div>
-          {
-            onChange
-              ? <div className={styles.textButton} onClick={handleUnclamp}><span>展开</span><DownArrow /></div>
-              : null
-          }
+          {onChange ? (
+            <div className={styles.textButton} onClick={handleUnclamp}>
+              <span>展开</span>
+              <DownArrow />
+            </div>
+          ) : null}
         </>
-      )
+      );
     } else {
-      return <div className={styles.textButton} onClick={handleClamp}><span>收起</span><UpArrow /></div>
+      return (
+        <div className={styles.textButton} onClick={handleClamp}>
+          <span>收起</span>
+          <UpArrow />
+        </div>
+      );
     }
-  }
+  };
 
   return (
     <div className={classNames(styles.container, className)}>
       <div
-        ref={contentRef} className={styles.content} style={isClampEnabled && isClamped ? clampedStyle : undefined}
+        ref={contentRef}
+        className={styles.content}
+        style={isClampEnabled && isClamped ? clampedStyle : undefined}
         dangerouslySetInnerHTML={{ __html: content }}
       />
       {renderControl()}
     </div>
-  )
-}
+  );
+};

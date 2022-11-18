@@ -1,56 +1,66 @@
-import React, { PropsWithChildren } from 'react'
-import classnames from 'classnames'
+import classnames from 'classnames';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 
 interface ItemProps {
-  isActive: boolean
-  type: 'default' | 'borderless'
-  onClick: () => void
+  isActive: boolean;
+  type: 'default' | 'borderless';
+  onClick: () => void;
 }
 const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onClick, type }) => {
   return (
     <li
-      className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, { 'bgm-tab__item--active': isActive })}
+      className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, {
+        'bgm-tab__item--active': isActive,
+      })}
       onClick={onClick}
     >
       {children}
     </li>
-  )
-}
+  );
+};
 
 interface ItemType {
-  key: string
-  label: string
+  key: string;
+  label: string;
 }
 
-export interface TabProps {
+export interface TabProps<T extends ItemType = ItemType> {
   /* 节点数组 */
-  items: ItemType[]
+  items: T[];
   /* 选中节点的 Key */
-  activeKey: string
+  activeKey: string;
   /* 点击切换事件回调，对每一个 Item 都生效 */
-  onChange?: (key: string) => void
+  onChange?: (key: string, value: T) => void;
   /* 样式类型 */
-  type?: 'default' | 'borderless'
+  type?: 'default' | 'borderless';
 }
 
-export const Tab: React.FC<TabProps> = ({ activeKey, items, onChange, type = 'default' }) => {
+export const Tab = <T extends ItemType>({
+  activeKey,
+  items,
+  onChange,
+  type = 'default',
+}: TabProps<T>) => {
   return (
     <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>
-      {
-      items.map((item) => {
+      {items.map((item) => {
         return (
           <Item
             key={item.key}
             isActive={activeKey === item.key}
             type={type}
-            onClick={() => { onChange?.(item.key) }}
-          > {item.label}
+            onClick={() => {
+              onChange?.(item.key, item);
+            }}
+          >
+            {' '}
+            {item.label}
           </Item>
-        )
-      })
-    }
+        );
+      })}
     </ul>
-  )
-}
+  );
+};
 
-export default Tab
+export default Tab;

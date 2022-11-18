@@ -1,10 +1,10 @@
-import Comment from './Comment'
-import CommentInfo from './CommentInfo'
+import Comment from './Comment';
+import CommentInfo from './CommentInfo';
 
 export default {
   Comment,
-  CommentInfo
-}
+  CommentInfo,
+};
 
-export type { CommentProps } from './Comment'
-export type { CommentInfoProps } from './CommentInfo'
+export type { CommentProps } from './Comment';
+export type { CommentInfoProps } from './CommentInfo';
