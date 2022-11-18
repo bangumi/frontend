@@ -43,11 +43,11 @@ const componentMeta: ComponentMeta<IComponent> = {
 export default componentMeta;
 
 /* eslint-disable react/prop-types */
-const Template: Story<{
-  height: number;
-  width: number;
-  style: React.CSSProperties;
-}> = ({ height, width, style }) => (
+const Template: Story<{ height: number; width: number; style: React.CSSProperties }> = ({
+  height,
+  width,
+  style,
+}) => (
   <>
     {Object.keys(Icons).map((iconName) => {
       const Icon = (Icons as any)[iconName] as IComponent;

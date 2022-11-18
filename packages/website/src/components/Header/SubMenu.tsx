@@ -205,10 +205,10 @@ const subMenuBottomWrapper = (type: string): MenuItemType[] => {
 };
 
 // eslint-disable-next-line react/prop-types
-const SubMenu: VFC<{
-  itemsTop: MenuItemType[];
-  itemsBottom: MenuItemType[];
-}> = ({ itemsTop, itemsBottom }) => (
+const SubMenu: VFC<{ itemsTop: MenuItemType[]; itemsBottom: MenuItemType[] }> = ({
+  itemsTop,
+  itemsBottom,
+}) => (
   <>
     <Menu items={itemsTop} mode="vertical" wrapperClass={style.subMenu} />
     <Divider className={style.subMenuDivider} />

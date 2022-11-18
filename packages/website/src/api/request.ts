@@ -23,7 +23,6 @@ request.interceptors.response.use((response) => {
 }, errorHandler);
 
 export const privateRequest = axios.create({
-  baseURL: import.meta.env.VITE_PRIVATE_API_ROOT,
   withCredentials: true,
 });
 

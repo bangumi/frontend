@@ -69,7 +69,7 @@ export default {
   },
 };
 
-/* eslint-disable react/prop-types */
+// eslint-disable-next-line react/prop-types
 const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
     <div
@@ -90,7 +90,6 @@ const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wr
     </div>
   );
 };
-/* eslint-enable react/prop-types */
 
 export const Horizontal = Template.bind({});
 

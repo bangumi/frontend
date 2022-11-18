@@ -7,7 +7,6 @@
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm website build",
     "build:types": "pnpm --filter @bangumi/types build",
-    "build:test": "pnpm website build:test",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design storybook",
     "design:build-doc": "pnpm design build-storybook",

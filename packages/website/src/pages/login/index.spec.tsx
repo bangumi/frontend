@@ -42,12 +42,8 @@ it('should redirect user to homepage after success login', async () => {
   const fakeEmail = 'fake-email';
   const fakePassword = 'fakepassword';
 
-  fireEvent.input(getByPlaceholderText('你的 Email 地址'), {
-    target: { value: fakeEmail },
-  });
-  fireEvent.input(getByPlaceholderText('你的登录密码'), {
-    target: { value: fakePassword },
-  });
+  fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } });
+  fireEvent.input(getByPlaceholderText('你的登录密码'), { target: { value: fakePassword } });
 
   fireEvent.click(getByText('登录'));
 
@@ -74,12 +70,8 @@ it.each`
     const fakeEmail = 'fake-email';
     const fakePassword = 'fakepassword';
 
-    fireEvent.input(getByPlaceholderText('你的 Email 地址'), {
-      target: { value: fakeEmail },
-    });
-    fireEvent.input(getByPlaceholderText('你的登录密码'), {
-      target: { value: fakePassword },
-    });
+    fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } });
+    fireEvent.input(getByPlaceholderText('你的登录密码'), { target: { value: fakePassword } });
 
     fireEvent.click(getByText('登录'));
 
@@ -103,9 +95,7 @@ it('should validate user input', async () => {
   });
 
   const fakeEmail = 'fake-email';
-  fireEvent.input(getByPlaceholderText('你的 Email 地址'), {
-    target: { value: fakeEmail },
-  });
+  fireEvent.input(getByPlaceholderText('你的 Email 地址'), { target: { value: fakeEmail } });
 
   fireEvent.click(getByText('登录'));
 

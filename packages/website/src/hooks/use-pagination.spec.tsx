@@ -11,9 +11,7 @@ const wrapper =
 
 describe('use-pagination hook', () => {
   test('plainly path', async () => {
-    const { result } = renderHook(() => usePaginationParams(), {
-      wrapper: wrapper(''),
-    });
+    const { result } = renderHook(() => usePaginationParams(), { wrapper: wrapper('') });
     expect(result.current.curPage).toBe(1);
     expect(result.current.offset).toBe(0);
     expect(result.current.pageSize).toBe(20);
