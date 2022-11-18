@@ -3,6 +3,7 @@ import path from 'path';
 
 import yaml from 'js-yaml';
 
+import { UnreadableCode } from '../../index';
 import parse from '../parser';
 
 const testsDir = path.resolve(__dirname, './wiki-syntax-spec/tests/');
@@ -14,11 +15,15 @@ const inValidTestFiles = fs.readdirSync(invalidTestDir);
 
 describe('Wiki syntax parser expected to be valid', () => {
   validTestFiles.forEach((file) => {
-    const prefix = file.split('.')[0];
-    const suffix = file.split('.')[1];
+    const [prefix, suffix, ..._] = file.split('.');
     if (suffix !== 'wiki') {
       return;
     }
+
+    if (!prefix) {
+      throw new UnreadableCode('BUG: undefined file path prefix');
+    }
+
     it(`${prefix} should be valid`, () => {
       const testFilePath = path.resolve(validTestDir, file);
       const expectedFilePath = path.resolve(validTestDir, `${prefix}.yaml`);

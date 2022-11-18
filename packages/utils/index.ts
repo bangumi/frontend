@@ -27,3 +27,9 @@ export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
     Object.assign({}),
   );
 };
+
+export class UnreadableCode extends Error {
+  constructor(readonly message: string) {
+    super();
+  }
+}

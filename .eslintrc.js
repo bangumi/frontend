@@ -76,13 +76,16 @@ module.exports = {
           },
         ],
         '@typescript-eslint/no-use-before-define': ['error'],
-        '@typescript-eslint/strict-boolean-expressions': ['error', {
-          allowString: true,
-          allowNumber: true,
-          allowNullableNumber: true,
-          allowNullableString: true,
-          allowNullableBoolean: true,
-        }],
+        '@typescript-eslint/strict-boolean-expressions': [
+          'error',
+          {
+            allowString: true,
+            allowNumber: true,
+            allowNullableNumber: true,
+            allowNullableString: true,
+            allowNullableBoolean: true,
+          },
+        ],
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/promise-function-async': 'error',
         '@typescript-eslint/no-implicit-any-catch': 'error',

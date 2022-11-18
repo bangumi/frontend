@@ -1,3 +1,4 @@
+import { UnreadableCode } from '../index';
 import { convert } from './convert';
 import { Parser } from './parser';
 import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
@@ -15,8 +16,10 @@ function renderProps(props: Record<string, string | boolean> | undefined): strin
     return '';
   }
   return Object.keys(props).reduce((pre, key) => {
-    let val: boolean | string = props[key];
-    if (typeof val === 'boolean') {
+    let val = props[key];
+    if (val === undefined) {
+      throw new UnreadableCode('BUG: unexpected undefined');
+    } else if (typeof val === 'boolean') {
       val = val ? key : '';
     } else {
       val = `${key}="${escapeHTML(val)}"`;
@@ -45,7 +48,7 @@ export function renderNode(node: NodeTypes, parentNode?: VNode): string {
   if (style) {
     propsStr += ` style="${renderStyle(style)}"`;
   }
-  if (className) {
+  if (className !== undefined) {
     let clsStr = '';
     if (typeof className === 'string') {
       clsStr = escapeHTML(className);
