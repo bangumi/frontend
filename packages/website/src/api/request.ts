@@ -20,7 +20,7 @@ export async function privateGet<T = unknown>(url: string): Promise<T> {
   return await res.json();
 }
 
-export function privatePost(
+export async function privatePost(
   url: string,
   options: { json: Record<string, any> },
 ): Promise<Response> {
@@ -31,7 +31,7 @@ export function privatePost(
     header.set('content-type', 'application/json');
   }
 
-  return fetch(url, {
+  return await fetch(url, {
     credentials: 'same-origin',
     method: 'post',
     body,
