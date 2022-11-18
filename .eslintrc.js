@@ -84,6 +84,7 @@ module.exports = {
             allowNullableNumber: true,
             allowNullableString: true,
             allowNullableBoolean: true,
+            allowNullableObject: true,
           },
         ],
         '@typescript-eslint/no-non-null-assertion': 'off',

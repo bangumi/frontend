@@ -47,7 +47,7 @@ const DEFAULT_TAGS: ITag[] = [
   {
     name: 'color',
     schema: {
-      color: (value) => !!value,
+      color: (value) => Boolean(value),
     },
   },
   {
@@ -61,7 +61,7 @@ const DEFAULT_TAGS: ITag[] = [
     schema: {
       url: (value, node) => {
         let href = value;
-        if (!href) {
+        if (href !== undefined) {
           href = getStringChild(node);
         }
         return isValidUrl(href);
@@ -99,10 +99,10 @@ const DEFAULT_TAGS: ITag[] = [
     schema: {
       user: (value, node) => {
         let userId = value;
-        if (!userId) {
+        if (userId !== undefined) {
           userId = getStringChild(node);
         }
-        return !!userId;
+        return Boolean(userId);
       },
     },
   },
