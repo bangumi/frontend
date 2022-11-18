@@ -77,8 +77,8 @@ module.exports = {
         ],
         '@typescript-eslint/no-use-before-define': ['error'],
         '@typescript-eslint/strict-boolean-expressions': ['error', {
-          allowString: false,
-          allowNumber: false,
+          allowString: true,
+          allowNumber: true,
           allowNullableNumber: true,
           allowNullableString: true,
           allowNullableBoolean: true,

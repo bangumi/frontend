@@ -34,12 +34,12 @@ const Login: React.FC = () => {
       return;
     }
 
-    if (email.value === '') {
+    if (!email.value) {
       setErrorMessage('请输入 Email 地址');
       return;
     }
 
-    if (password.value === '') {
+    if (!password.value) {
       setErrorMessage('请输入密码');
       return;
     }
