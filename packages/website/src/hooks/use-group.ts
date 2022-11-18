@@ -28,7 +28,7 @@ export function useGroupTopic(name: string, pagination?: Partial<Pagination>) {
     privateRequest.get,
     { suspense: true },
   );
-  return recentTopicsResp.data;
+  return recentTopicsResp!.data;
 }
 
 export function useGroup(name: string): UseGroupRet {
@@ -48,7 +48,7 @@ export function useGroup(name: string): UseGroupRet {
   }, [descriptionClampState]);
 
   return {
-    group: groupResp.data,
+    group: groupResp!.data,
     descriptionClamp: descriptionClampState,
     setDescriptionClamp(val) {
       setDescriptionClampState(val);
