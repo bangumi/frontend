@@ -1,8 +1,5 @@
 module.exports = {
-  extends: [
-    'stylelint-config-standard',
-    'stylelint-config-css-modules'
-  ],
+  extends: ['stylelint-config-standard', 'stylelint-config-css-modules'],
   customSyntax: 'postcss-less',
   rules: {
     'declaration-colon-newline-after': null,
@@ -11,6 +8,6 @@ module.exports = {
     'no-descending-specificity': null,
     'color-function-notation': 'legacy',
     'alpha-value-notation': 'number',
-    'string-quotes': 'single'
-  }
-}
+    'string-quotes': 'single',
+  },
+};
