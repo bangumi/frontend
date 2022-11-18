@@ -102,14 +102,14 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
             // Ctrl + Enter & Alt + S 触发提交
             if (
               ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
-              (e.altKey && e.key?.toLowerCase() === 's')
+              (e.altKey && e.key.toLowerCase() === 's')
             ) {
               onConfirm?.(innerRef.current!.value);
               return e.preventDefault();
             }
             // https://bgm.tv/help/bbcode
             if (e.ctrlKey || e.metaKey) {
-              const key = e.key?.toLowerCase() as keyof typeof keyToEvent;
+              const key = e.key.toLowerCase() as keyof typeof keyToEvent;
               if (key && keyToEvent[key]) {
                 handleToolboxEvent(keyToEvent[key]);
                 e.preventDefault();

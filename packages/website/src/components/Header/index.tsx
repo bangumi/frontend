@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
+import { UnreadableCodeError } from '@bangumi/utils';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
@@ -83,6 +84,10 @@ function getRandomNumber(n: number): number {
 
 const Musume = [Musume1, Musume2, Musume3, Musume4][getRandomNumber(4)];
 
+if (Musume === undefined) {
+  throw new UnreadableCodeError('BUG: unexpected choice result');
+}
+
 const Header: FC = () => {
   const { user } = useUser();
 
@@ -138,7 +143,7 @@ const Header: FC = () => {
             <>
               <Notification className={style.iconNotification} />
               <Setting className={style.iconSetting} />
-              <Avatar src={user?.avatar?.large} wrapperClass={style.avatar} />
+              <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
             </>
           ) : (
             <span className={style.userLogin}>

@@ -15,7 +15,10 @@ const prefix = '{{Infobox';
 const suffix = '}}';
 
 export default function parse(s: string): Wiki {
-  const wiki: Wiki = { type: '', data: [] };
+  const wiki: Wiki = {
+    type: '',
+    data: [],
+  };
 
   const strTrim = s.trim().replace(/\r\n/g, '\n');
 
@@ -31,21 +34,23 @@ export default function parse(s: string): Wiki {
   }
 
   const arr = strTrim.split('\n');
-  wiki.type = parseType(arr[0]);
+  if (arr[0]) {
+    wiki.type = parseType(arr[0]);
+  }
 
   /* split content between {{Infobox xxx and }} */
   const fields = arr.slice(1, -1);
 
   let inArray = false;
   for (let i = 0; i < fields.length; ++i) {
-    const line = fields[i].trim();
+    const line = fields[i]?.trim();
     const lino = i + 2;
 
-    if (line === '') {
+    if (!line) {
       continue;
     }
     /* new field */
-    if (line[0] === '|') {
+    if (line.startsWith('|')) {
       if (inArray) {
         throw new WikiSyntaxError(lino, line, ArrayNoCloseError);
       }
@@ -55,7 +60,7 @@ export default function parse(s: string): Wiki {
       wiki.data.push(field);
       /* is Array item */
     } else if (inArray) {
-      if (line[0] === '}') {
+      if (line.startsWith('}')) {
         inArray = false;
         continue;
       }
@@ -73,7 +78,11 @@ export default function parse(s: string): Wiki {
 }
 
 const parseType = (line: string): string => {
-  return line.slice(prefix.length, !line.includes('}}') ? undefined : line.indexOf('}}')).trim();
+  if (!line.includes('}}')) {
+    return line.slice(prefix.length).trim();
+  } else {
+    return line.slice(prefix.length, line.indexOf('}}')).trim();
+  }
 };
 
 const parseNewField = (lino: number, line: string): [string, string, WikiItemType] => {
@@ -95,7 +104,7 @@ const parseNewField = (lino: number, line: string): [string, string, WikiItemTyp
 };
 
 const parseArrayItem = (lino: number, line: string): [string, string] => {
-  if (line[0] !== '[' || line[line.length - 1] !== ']') {
+  if (!line.startsWith('[') || !line.endsWith(']')) {
     throw new WikiSyntaxError(lino, line, ArrayItemWrappedError);
   }
   const content = line.slice(1, line.length - 1);

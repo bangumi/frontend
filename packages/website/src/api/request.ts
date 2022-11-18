@@ -22,7 +22,7 @@ export async function privateGet<T = unknown>(url: string): Promise<T> {
 
 export async function privatePost(
   url: string,
-  options: { json: Record<string, any> },
+  options: { json?: Record<string, any> },
 ): Promise<Response> {
   let body: BodyInit | null = null;
   const header = new Headers();

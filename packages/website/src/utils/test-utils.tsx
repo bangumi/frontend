@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { UserProvider } from '../hooks/use-user';
 
-const PageWrapper = ({ children }: PropsWithChildren<{}>) => (
+const PageWrapper = ({ children }: PropsWithChildren) => (
   <MemoryRouter>
     <UserProvider>{children}</UserProvider>
   </MemoryRouter>

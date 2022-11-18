@@ -27,3 +27,18 @@ export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
     Object.assign({}),
   );
 };
+
+export class UnreadableCodeError extends Error {
+  readonly args: unknown[];
+
+  constructor(readonly message: string, ...args: unknown[]) {
+    super();
+    this.args = args;
+  }
+
+  toString(): string {
+    return `UnreadableCodeError(${this.message}, ${this.args
+      .map((x) => x?.toString())
+      .join(', ')})`;
+  }
+}
