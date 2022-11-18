@@ -1,14 +1,17 @@
-import { Section, Tab } from '@bangumi/design';
-import React, { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+
+import { Section, Tab } from '@bangumi/design';
 import type { GroupProfile } from '@bangumi/types/group';
+import { keyBy } from '@bangumi/utils';
+import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
+
+import CommonStyles from '../common.module.less';
 import { GroupHeader } from './GroupHeader';
 import styles from './GroupLayout.module.less';
-import CommonStyles from '../common.module.less';
-import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { UserCard } from './UserCard';
-import { keyBy } from '@bangumi/utils';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 
 export enum GroupTabs {
   Index = 'index',
@@ -72,7 +75,13 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
             <div className={styles.newMembers}>
               {group?.new_members.slice(0, 10).map((member) => {
                 return (
-                  <UserCard user={{ ...member, avatar: member.avatar.large }} key={member.id} />
+                  <UserCard
+                    user={{
+                      ...member,
+                      avatar: member.avatar.large,
+                    }}
+                    key={member.id}
+                  />
                 );
               })}
             </div>

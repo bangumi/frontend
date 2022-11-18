@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from 'react';
 import classnames from 'classnames';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 
 interface ItemProps {
   isActive: boolean;

@@ -1,7 +1,9 @@
 import React from 'react';
-import styles from './UserCard.module.less';
+
 import { Image, Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/website/utils/pages';
+
+import styles from './UserCard.module.less';
 
 // TODO: 重写 Link
 const { Link } = Typography;

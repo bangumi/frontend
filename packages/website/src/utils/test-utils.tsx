@@ -1,7 +1,10 @@
-import React, { PropsWithChildren } from 'react';
-import { render, RenderOptions, RenderResult } from '@testing-library/react';
-import { UserProvider } from '../hooks/use-user';
+import type { RenderOptions, RenderResult } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+
+import { UserProvider } from '../hooks/use-user';
 
 const PageWrapper = ({ children }: PropsWithChildren<{}>) => (
   <MemoryRouter>

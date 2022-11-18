@@ -1,9 +1,12 @@
-import React, { PropsWithChildren } from 'react';
-import { User } from '@bangumi/types/user';
-import useSWR from 'swr';
-import { privateGet, privatePost } from '../api/request';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { operations } from '@bangumi/types/types';
+import useSWR from 'swr';
+
+import type { operations } from '@bangumi/types/types';
+import type { User } from '@bangumi/types/user';
+
+import { privateGet, privatePost } from '../api/request';
 
 interface UserContextType {
   user?: User;

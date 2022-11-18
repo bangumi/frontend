@@ -1,6 +1,6 @@
 import { convert } from './convert';
 import { Parser } from './parser';
-import { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
+import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
 
 const escapeHTML = (str: string): string =>
   str

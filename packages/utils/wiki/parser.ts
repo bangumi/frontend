@@ -1,4 +1,3 @@
-import { Wiki, WikiArrayItem, WikiItem, WikiItemType } from './types';
 import {
   ArrayItemWrappedError,
   ArrayNoCloseError,
@@ -8,6 +7,8 @@ import {
   GlobalSuffixError,
   WikiSyntaxError,
 } from './error';
+import type { Wiki, WikiItemType } from './types';
+import { WikiArrayItem, WikiItem } from './types';
 
 /* should start with `{{Infobox` and end with `}}` */
 const prefix = '{{Infobox';

@@ -1,5 +1,6 @@
-import React, { FC } from 'react';
 import classnames from 'classnames';
+import type { FC } from 'react';
+import React from 'react';
 
 export interface DividerProps {
   /* 朝向：水平或竖直 */

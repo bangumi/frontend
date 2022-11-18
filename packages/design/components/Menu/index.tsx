@@ -1,6 +1,9 @@
-import React, { FC, createContext, useContext } from 'react';
-import MenuItem, { MenuItemProps } from './MenuItem';
 import classnames from 'classnames';
+import type { FC } from 'react';
+import React, { createContext, useContext } from 'react';
+
+import type { MenuItemProps } from './MenuItem';
+import MenuItem from './MenuItem';
 
 export type MenuItemType = Omit<MenuItemProps, 'id'> & { key: string };
 

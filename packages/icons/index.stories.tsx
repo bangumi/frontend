@@ -1,5 +1,6 @@
-import React from 'react';
 import type { Story, ComponentMeta } from '@storybook/react';
+import React from 'react';
+
 import * as Icons from '.';
 
 type IComponent = React.FC<

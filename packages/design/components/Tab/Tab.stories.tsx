@@ -1,6 +1,8 @@
-import React from 'react';
-import Tab, { TabProps } from '.';
 import type { Story } from '@storybook/react';
+import React from 'react';
+
+import type { TabProps } from '.';
+import Tab from '.';
 
 export default {
   title: 'modern/Tab',

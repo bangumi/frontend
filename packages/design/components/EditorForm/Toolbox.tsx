@@ -1,4 +1,6 @@
-import React, { FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
+
 import { Bold, Image, Italic, Link, Size, Underscore } from '@bangumi/icons';
 
 interface ToolboxProps {

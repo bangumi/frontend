@@ -1,6 +1,7 @@
-import React from 'react';
-import Avatar from '..';
 import { render } from '@testing-library/react';
+import React from 'react';
+
+import Avatar from '..';
 
 it('Render a Avatar', () => {
   const { container } = render(<Avatar src='urlLink' />);

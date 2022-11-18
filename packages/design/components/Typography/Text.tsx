@@ -1,5 +1,6 @@
-import React, { PropsWithChildren } from 'react';
 import classNames from 'classnames';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
 
 export interface TextProps {
   className?: string;

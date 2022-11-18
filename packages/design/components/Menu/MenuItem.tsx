@@ -1,5 +1,7 @@
-import React, { FC } from 'react';
 import classnames from 'classnames';
+import type { FC } from 'react';
+import React from 'react';
+
 import { useMenuContext } from '.';
 
 export interface MenuItemProps {

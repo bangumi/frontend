@@ -1,8 +1,9 @@
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import EditorForm from '.';
-import Toolbox from './Toolbox';
 import Editor from './Editor';
+import Toolbox from './Toolbox';
 
 const componentMeta: ComponentMeta<typeof EditorForm> = {
   title: 'Modern/EditorForm',

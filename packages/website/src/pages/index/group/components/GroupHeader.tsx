@@ -1,7 +1,9 @@
-import React from 'react';
-import { Image, Typography } from '@bangumi/design';
 import dayjs from 'dayjs';
-import { GroupProfile } from '@bangumi/types/group';
+import React from 'react';
+
+import { Image, Typography } from '@bangumi/design';
+import type { GroupProfile } from '@bangumi/types/group';
+
 import styles from './GroupHeader.module.less';
 
 const { Text } = Typography;

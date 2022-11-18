@@ -1,6 +1,8 @@
-import { rest, RequestHandler } from 'msw';
 import fsp from 'fs/promises';
 import path from 'path';
+
+import type { RequestHandler } from 'msw';
+import { rest } from 'msw';
 
 async function isFileExist(filePath: string): Promise<boolean> {
   try {

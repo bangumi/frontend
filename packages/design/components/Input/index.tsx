@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react';
 import classnames from 'classnames';
+import React, { forwardRef } from 'react';
 
 export interface InputProps {
   /* 同原生 input 标签 `type` */

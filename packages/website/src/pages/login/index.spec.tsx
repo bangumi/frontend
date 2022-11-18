@@ -1,11 +1,12 @@
-import React from 'react';
-import LoginPage from '.';
 import { fireEvent, render, waitFor } from '@testing-library/react';
+import { rest } from 'msw';
+import React from 'react';
 import '@hcaptcha/react-hcaptcha';
+import { useNavigate } from 'react-router-dom';
+
+import LoginPage from '.';
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
-import { rest } from 'msw';
-import { useNavigate } from 'react-router-dom';
 
 const FakeHCaptcha: React.FC<{ onVerify: (token: string) => void }> = ({ onVerify }) => {
   React.useEffect(() => {

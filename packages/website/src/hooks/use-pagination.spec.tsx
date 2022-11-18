@@ -1,7 +1,9 @@
-import React, { PropsWithChildren } from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { usePaginationParams } from './use-pagination';
 import { renderHook } from '@testing-library/react';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+
+import { usePaginationParams } from './use-pagination';
 
 const wrapper =
   (entry: string) =>

@@ -1,5 +1,6 @@
+import type { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+
 import Image from '.';
 
 const src =

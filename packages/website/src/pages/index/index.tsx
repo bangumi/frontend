@@ -1,5 +1,7 @@
-import { useUser } from '@bangumi/website/hooks/use-user';
 import React from 'react';
+
+import { useUser } from '@bangumi/website/hooks/use-user';
+
 import UserHome from '../components/UserHome';
 
 const HomePage = () => {

@@ -1,12 +1,14 @@
-import { Pagination, Section } from '@bangumi/design';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+
+import { Pagination, Section } from '@bangumi/design';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+
 import { UserCard } from '../components/UserCard';
 import styles from './members.module.less';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 
 const GroupMembersPage = () => {
   const { curPage, offset, pageSize } = usePaginationParams(30);

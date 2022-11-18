@@ -1,5 +1,7 @@
-import { Typography } from '@bangumi/design';
 import React from 'react';
+
+import { Typography } from '@bangumi/design';
+
 import { useUser } from '../../hooks/use-user';
 import { getUserProfileLink } from '../../utils/pages';
 import styles from './UserHome.module.less';

@@ -1,7 +1,10 @@
-import React, { FC, useState } from 'react';
-import Pager from './Pager';
-import { VerticalLeft, VerticalRight } from '@bangumi/icons';
 import cn from 'classnames';
+import type { FC } from 'react';
+import React, { useState } from 'react';
+
+import { VerticalLeft, VerticalRight } from '@bangumi/icons';
+
+import Pager from './Pager';
 
 export interface PaginationProps {
   /* 当前偏移 */

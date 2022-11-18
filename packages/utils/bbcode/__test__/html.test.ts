@@ -1,6 +1,6 @@
 import { STICKER_DOMAIN_URL } from '../constants';
 import { renderNodes, renderNode, render } from '../html';
-import { VNode } from '../types';
+import type { VNode } from '../types';
 
 describe('html render vnode', () => {
   test('render multi style', () => {

@@ -1,4 +1,10 @@
-import React, { PropsWithChildren } from 'react';
+import { waitFor, renderHook } from '@testing-library/react';
+import { rest } from 'msw';
+import type { PropsWithChildren } from 'react';
+import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
+
+import { server as mockServer } from '../mocks/server';
 import {
   useUser,
   UserProvider,
@@ -6,10 +12,6 @@ import {
   PasswordUnMatchError,
   UnknownError,
 } from './use-user';
-import { server as mockServer } from '../mocks/server';
-import { rest } from 'msw';
-import { waitFor, renderHook } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 
 function mockLogin(statusCode: number, response: Object = {}): void {
   mockServer.use(

@@ -1,14 +1,17 @@
-import React from 'react';
-import { RenderResult, waitFor } from '@testing-library/react';
-import { renderPage } from '../../../../../utils/test-utils';
-import { server as mockServer } from '../../../../../mocks/server';
+import type { RenderResult } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { rest } from 'msw';
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+import type { GroupMember, ResponseWithPagination } from '@bangumi/types/group';
+
+import { server as mockServer } from '../../../../../mocks/server';
+import { renderPage } from '../../../../../utils/test-utils';
 import GroupMembers from '../members';
-import Boring from './fixtures/boring.json';
 import BoringMembers from './fixtures/boring-members.json';
 import BoringModMember from './fixtures/boring-mod-member.json';
-import { useParams } from 'react-router-dom';
-import { GroupMember, ResponseWithPagination } from '@bangumi/types/group';
+import Boring from './fixtures/boring.json';
 
 jest.mock('react-router-dom', () => {
   return {
