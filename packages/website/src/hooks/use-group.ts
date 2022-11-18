@@ -10,18 +10,18 @@ import {
 
 export enum DescriptionClamp {
   clamp = 'clamp',
-  unclamp = 'unclamp'
+  unclamp = 'unclamp',
 }
 
-export type TopicApiRes = ResponseWithPagination<Topic[]>
+export type TopicApiRes = ResponseWithPagination<Topic[]>;
 export interface UseGroupRet {
-  group: GroupProfile | undefined
-  descriptionClamp: DescriptionClamp
-  setDescriptionClamp: (val: DescriptionClamp) => void
+  group: GroupProfile | undefined;
+  descriptionClamp: DescriptionClamp;
+  setDescriptionClamp: (val: DescriptionClamp) => void;
 }
 
-export function useGroupTopic (name: string, pagination?: Partial<Pagination>) {
-  const params = new URLSearchParams()
+export function useGroupTopic(name: string, pagination?: Partial<Pagination>) {
+  const params = new URLSearchParams();
   if (pagination) {
     const {
       limit = 20,
@@ -35,21 +35,21 @@ export function useGroupTopic (name: string, pagination?: Partial<Pagination>) {
   return recentTopicsResp!
 }
 
-export function useGroup (name: string): UseGroupRet {
+export function useGroup(name: string): UseGroupRet {
   const { data: groupResp } = useSWR<GroupProfile>(`/p/groups/${name}`, privateGet, { suspense: true })
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`
   const descriptionClamp = localStorage.getItem(clampKey) as DescriptionClamp ?? DescriptionClamp.unclamp
   const [descriptionClampState, setDescriptionClampState] = useState<DescriptionClamp>(descriptionClamp)
 
   useEffect(() => {
-    localStorage.setItem(clampKey, descriptionClampState)
-  }, [descriptionClampState])
+    localStorage.setItem(clampKey, descriptionClampState);
+  }, [descriptionClampState]);
 
   return {
     group: groupResp,
     descriptionClamp: descriptionClampState,
-    setDescriptionClamp (val) {
-      setDescriptionClampState(val)
-    }
-  }
+    setDescriptionClamp(val) {
+      setDescriptionClampState(val);
+    },
+  };
 }

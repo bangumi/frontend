@@ -1,4 +1,4 @@
-export async function privateGet (url: string): Promise<any> {
+export async function privateGet(url: string): Promise<any> {
   const res = await fetch(
     url,
     {
@@ -9,7 +9,7 @@ export async function privateGet (url: string): Promise<any> {
   return await res.json()
 }
 
-export function privatePost (url: string, options: { json: Record<string, any> }): Promise<Response> {
+export function privatePost(url: string, options: { json: Record<string, any> }): Promise<Response> {
   let body: BodyInit | null = null
   const header = new Headers()
   if (options.json) {

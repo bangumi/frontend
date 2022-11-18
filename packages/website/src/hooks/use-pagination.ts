@@ -1,12 +1,12 @@
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom';
 
 interface IPaginationParams {
   /** 当前页 */
-  curPage: number
+  curPage: number;
   /** 每页大小 */
-  pageSize: number
+  pageSize: number;
   /** 偏移数值 (curPage-1) * pageSize */
-  offset: number
+  offset: number;
 }
 
 /**
@@ -15,17 +15,18 @@ interface IPaginationParams {
  * @returns 分页所需数据对象
  */
 export const usePaginationParams = (defaultPageSize: number = 20): IPaginationParams => {
-  const [params] = useSearchParams()
+  const [params] = useSearchParams();
 
-  const unsafePage = parseInt(params.get('page') ?? '')
-  const page = (Number.isNaN(unsafePage) || unsafePage < 1) ? 1 : unsafePage
+  const unsafePage = parseInt(params.get('page') ?? '');
+  const page = Number.isNaN(unsafePage) || unsafePage < 1 ? 1 : unsafePage;
 
-  const unsafePageSize = parseInt(params.get('limit') ?? '')
-  const pageSize = (Number.isNaN(unsafePageSize) || unsafePageSize < 1) ? defaultPageSize : unsafePageSize
+  const unsafePageSize = parseInt(params.get('limit') ?? '');
+  const pageSize =
+    Number.isNaN(unsafePageSize) || unsafePageSize < 1 ? defaultPageSize : unsafePageSize;
 
   return {
     curPage: page,
     pageSize,
-    offset: (page - 1) * pageSize
-  }
-}
+    offset: (page - 1) * pageSize,
+  };
+};

@@ -9,7 +9,7 @@ Bangumi 新前端项目，基于 React/TypeScript/Vite。
 
 安装依赖
 
-``` bash
+```bash
 pnpm install
 ```
 

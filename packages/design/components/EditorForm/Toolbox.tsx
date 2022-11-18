@@ -1,9 +1,9 @@
-import React, { FC } from 'react'
-import { Bold, Image, Italic, Link, Size, Underscore } from '@bangumi/icons'
+import React, { FC } from 'react';
+import { Bold, Image, Italic, Link, Size, Underscore } from '@bangumi/icons';
 
 interface ToolboxProps {
-  handleClickEvent: (type: string, payload?: any) => void
-  style?: React.CSSProperties
+  handleClickEvent: (type: string, payload?: any) => void;
+  style?: React.CSSProperties;
 }
 
 const Toolbox: FC<ToolboxProps> = ({ handleClickEvent, style }) => {
@@ -16,7 +16,7 @@ const Toolbox: FC<ToolboxProps> = ({ handleClickEvent, style }) => {
       <Link data-testid="link" onClick={() => handleClickEvent('link')} />
       <Size data-testid="size" onClick={() => handleClickEvent('size')} />
     </div>
-  )
-}
+  );
+};
 
-export default Toolbox
+export default Toolbox;
