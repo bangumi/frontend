@@ -23,5 +23,5 @@ website 项目使用约定式路由。由 [vite-plugin-pages](https://github.com
 详细请见 [next.js 式的路由约定](https://nextjs.org/docs/routing/introduction)。
 
 ### Layout
-请看 [关于 Layout 的讨论](https://github.com/bangumi/frontend/discussions/126)
 
+请看 [关于 Layout 的讨论](https://github.com/bangumi/frontend/discussions/126)

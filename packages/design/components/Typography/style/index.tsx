@@ -1,2 +1,2 @@
-import './Link.less'
-import './Text.less'
+import './Link.less';
+import './Text.less';
