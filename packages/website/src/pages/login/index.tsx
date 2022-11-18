@@ -61,6 +61,8 @@ const Login: React.FC = () => {
       if (errorMsg) {
         setErrorMessage(errorMsg);
       }
+
+      console.error(error);
     }
   };
 

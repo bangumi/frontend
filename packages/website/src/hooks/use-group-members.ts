@@ -1,12 +1,12 @@
 import useSWR from 'swr';
-import { privateGet } from '../api/request';
+import { privateGet, RequestError } from '../api/request';
 import { GroupMember, Pagination, ResponseWithPagination } from '@bangumi/types/group';
 
 interface UseGroupMembersRet {
   data: GroupMember[] | undefined;
   total: number | undefined;
   isLoading: boolean;
-  error: any;
+  error: Error | undefined;
 }
 
 type GroupMembersReq = {
@@ -23,7 +23,7 @@ export function useGroupMembers(name: string, options: GroupMembersReq): UseGrou
     offset: offset.toString(),
   });
 
-  const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>>(
+  const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>, RequestError>(
     disable ? null : `/p/groups/${name}/members?${query.toString()}`,
     privateGet,
     { suspense: true },
@@ -32,7 +32,7 @@ export function useGroupMembers(name: string, options: GroupMembersReq): UseGrou
   return {
     data: data?.data,
     total: data?.total,
-    isLoading: !data && !error,
+    isLoading: !data && error !== undefined,
     error,
   };
 }

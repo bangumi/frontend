@@ -1,8 +1,22 @@
-export async function privateGet(url: string): Promise<any> {
-  const res = await fetch(url, {
+export class RequestError extends Error {
+  readonly response: Response;
+
+  constructor(response: Response) {
+    super();
+    this.response = response;
+  }
+}
+
+export async function privateGet<T = unknown>(url: string): Promise<T> {
+  const res: Response = await fetch(url, {
     credentials: 'same-origin',
     method: 'get',
   });
+
+  if (res.status >= 400) {
+    throw new RequestError(res);
+  }
+
   return await res.json();
 }
 
