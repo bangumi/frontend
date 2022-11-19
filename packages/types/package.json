@@ -2,7 +2,7 @@
   "name": "@bangumi/types",
   "version": "0.0.0",
   "type": "module",
-  "types": "./index.d.ts",
+  "main": "./index.ts",
   "private": true,
   "scripts": {
     "build": "node scripts/build.js"
