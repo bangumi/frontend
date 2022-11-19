@@ -58,13 +58,7 @@ const Template: Story<{ height: number; width: number; style: React.CSSPropertie
         throw new UnreadableCodeError(`BUG: unknown icon name ${JSON.stringify(iconName)}`);
       }
       return (
-        <div
-          key={iconName}
-          style={{
-            textAlign: 'center',
-            width: 120,
-          }}
-        >
+        <div key={iconName} style={{ textAlign: 'center', width: 120 }}>
           <p>{iconName}</p>
           <Icon height={height} width={width} style={style} />
         </div>
