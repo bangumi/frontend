@@ -6,7 +6,7 @@ const INVALID_NODE_MSG = 'invalid node';
 const INVALID_STICKER_NODE = 'invalid sticker node';
 
 type CheckCharFn = (str: string) => boolean;
-type Validator = (value: any, node: CodeVNode) => boolean;
+type Validator = (value: string | undefined, node: CodeVNode) => boolean;
 
 // 也许需要引入  Object schema validation
 export interface CustomTag {
@@ -24,7 +24,7 @@ function getStringChild(node: CodeVNode): string | undefined {
   }
 }
 
-function getNodeProp(node: CodeVNode, prop: string): string | boolean | undefined {
+function getNodeProp(node: CodeVNode, prop: string): string | undefined {
   const props = node.props ?? {};
   return props[prop];
 }
@@ -48,13 +48,13 @@ const DEFAULT_TAGS: ITag[] = [
   {
     name: 'color',
     schema: {
-      color: (value) => Boolean(value),
+      color: (value) => value !== undefined && value !== '',
     },
   },
   {
     name: 'size',
     schema: {
-      size: (value) => /\d+/.test(value),
+      size: (value) => typeof value === 'string' && /\d+/.test(value),
     },
   },
   {
@@ -65,6 +65,11 @@ const DEFAULT_TAGS: ITag[] = [
         if (href === undefined || href === '') {
           href = getStringChild(node);
         }
+
+        if (href === undefined) {
+          return false;
+        }
+
         return isValidUrl(href);
       },
     },
@@ -90,7 +95,7 @@ const DEFAULT_TAGS: ITag[] = [
     name: 'subject',
     schema: {
       subject: (value) => {
-        return /^[1-9]\d*/.test(value);
+        return typeof value === 'string' && /^[1-9]\d*/.test(value);
       },
     },
   },
@@ -111,7 +116,7 @@ const DEFAULT_TAGS: ITag[] = [
     name: 'align',
     schema: {
       align: (value) => {
-        return ['left', 'right', 'center'].includes(value);
+        return (['left', 'right', 'center'] as unknown[]).includes(value);
       },
     },
   },
@@ -241,7 +246,7 @@ export class Parser {
     if (c === undefined || ![']', '='].includes(c)) {
       throw new Error(INVALID_NODE_MSG);
     }
-    let prop: string = '';
+    let prop = '';
     if (c === '=') {
       prop = this.consumeWhile((c) => c !== ']');
       c = this.consumeChar();
@@ -299,7 +304,7 @@ export class Parser {
   private consumeWhile(checkFn: CheckCharFn): string {
     let result = '';
     while (!this.eof() && checkFn(this.curChar())) {
-      result += this.consumeChar() as string;
+      result += this.consumeChar()!;
     }
     return result;
   }

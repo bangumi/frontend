@@ -1,7 +1,7 @@
 import fsp from 'fs/promises';
 import path from 'path';
 
-import type { RequestHandler } from 'msw';
+import type { DefaultRequestBody, RequestHandler } from 'msw';
 import { rest } from 'msw';
 
 async function isFileExist(filePath: string): Promise<boolean> {
@@ -14,10 +14,7 @@ async function isFileExist(filePath: string): Promise<boolean> {
   return true;
 }
 
-async function loadFixture(
-  pathname: string,
-  requestMethod: string,
-): Promise<Record<string, any> | any[]> {
+async function loadFixture(pathname: string, requestMethod: string): Promise<DefaultRequestBody> {
   const fixturePath = path.join(
     __dirname,
     './fixtures',
@@ -30,7 +27,7 @@ async function loadFixture(
     throw new Error(errMessage);
   }
 
-  return JSON.parse((await fsp.readFile(fixturePath)).toString());
+  return JSON.parse((await fsp.readFile(fixturePath)).toString()) as DefaultRequestBody;
 }
 
 type HTTPMethods = 'get' | 'post' | 'put' | 'delete' | 'options';

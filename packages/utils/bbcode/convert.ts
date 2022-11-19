@@ -46,7 +46,7 @@ function setVNodeChildren(vnode: VNode, node: CodeVNode): void {
 }
 
 function convertUrlNode(node: CodeVNode): VNode {
-  let href = node.props?.url as string;
+  let href = node.props?.url;
   if (!href) {
     href = node.children![0] as string;
   }
@@ -71,7 +71,7 @@ function convertUrlNode(node: CodeVNode): VNode {
 }
 
 function convertStickerNode(node: CodeVNode): string {
-  const stickerId = node.props!.stickerId as string;
+  const stickerId = node.props!.stickerId!;
   let id = -1;
   if (stickerId.startsWith(BGM_STICKER_START_STR)) {
     const m = stickerId.match(/\d+/)!;
@@ -117,7 +117,7 @@ function convertQuote(node: CodeVNode): VNode {
 }
 
 function convertUser(node: CodeVNode): VNode {
-  let userId = node.props?.user as string;
+  let userId = node.props?.user;
   if (!userId) {
     userId = node.children![0] as string;
   }
@@ -170,14 +170,14 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
   color: (node) =>
     toVNode(node, 'span', {
       style: {
-        color: node.props!.color as string,
+        color: node.props!.color!,
       },
     }),
   size: (node) =>
     toVNode(node, 'span', {
       style: {
-        'font-size': (node.props!.size as string) + 'px',
-        'line-height': (node.props!.size as string) + 'px',
+        'font-size': node.props!.size! + 'px',
+        'line-height': node.props!.size! + 'px',
       },
     }),
   url: convertUrlNode,
@@ -210,13 +210,13 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
   align: (node) =>
     toVNode(node, 'p', {
       style: {
-        'text-align': node.props!.align as string,
+        'text-align': node.props!.align!,
       },
     }),
   float: (node) =>
     toVNode(node, 'span', {
       style: {
-        float: node.props!.float as string,
+        float: node.props!.float!,
       },
     }),
   subject: (node) =>

@@ -29,7 +29,7 @@ describe('<EditorForm />', () => {
     expect(onCancel).toHaveBeenCalled();
   });
 
-  it('Ctrl + Enter & Alt + S should trigger onConfirm event', async () => {
+  it('Ctrl + Enter & Alt + S should trigger onConfirm event', () => {
     const onConfirm = jest.fn();
     const { getByPlaceholderText } = render(
       <EditorForm onConfirm={onConfirm} placeholder='placeholder' />,

@@ -41,7 +41,7 @@ export function useGroup(name: string): UseGroupRet {
   });
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`;
   const descriptionClamp =
-    (localStorage.getItem(clampKey) as DescriptionClamp) ?? DescriptionClamp.unclamp;
+    (localStorage.getItem(clampKey) as DescriptionClamp | undefined) ?? DescriptionClamp.unclamp;
   const [descriptionClampState, setDescriptionClampState] =
     useState<DescriptionClamp>(descriptionClamp);
 
