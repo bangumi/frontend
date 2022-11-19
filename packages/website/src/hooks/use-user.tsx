@@ -93,14 +93,14 @@ async function login(email: string, password: string, hCaptchaResp: string): Pro
     return;
   }
 
-  const data = (await res.json()) as Response<'login', '401' | '400'>;
+  const data = (await res.json()) as Response<'login', 400 | 401>;
   const errorCode = ERROR_CODE_MAP[res.status];
   if (errorCode) {
     if (errorCode === LoginErrorCode.E_USERNAME_OR_PASSWORD_INCORRECT) {
-      throw new PasswordUnMatchError((data as Response<'login', '401'>).details.remain);
+      throw new PasswordUnMatchError((data as Response<'login', 401>).details.remain);
     }
     if (errorCode === LoginErrorCode.E_REQUEST_ERROR) {
-      throw new UnknownError((data as Response<'login', '400'>).details);
+      throw new UnknownError((data as Response<'login', 400>).details);
     }
 
     throw new Error(errorCode);
