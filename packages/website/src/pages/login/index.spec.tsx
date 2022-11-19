@@ -64,11 +64,11 @@ it.each([
     resp: { details: { remain: 5 } },
     expectedError: '用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试',
   },
-  { statusCode: 422, resp: {}, expectedError: '请求错误' },
-  { statusCode: 502, resp: {}, expectedError: '服务器错误，请稍后重试' },
+  { statusCode: 422, expectedError: '请求错误' },
+  { statusCode: 502, expectedError: '服务器错误，请稍后重试' },
 ])(
   'should show error message when response is $statusCode',
-  async ({ statusCode, resp, expectedError }) => {
+  async ({ statusCode, resp = {}, expectedError }) => {
     mockLogin(statusCode, resp);
     const { getByPlaceholderText, getByText } = render(
       <UserProvider>
