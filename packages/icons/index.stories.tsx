@@ -55,7 +55,7 @@ const Template: Story<{ height: number; width: number; style: React.CSSPropertie
     {Object.keys(Icons).map((iconName) => {
       const Icon = (Icons as Record<string, IComponent>)[iconName];
       if (Icon === undefined) {
-        throw new UnreadableCodeError('BUG: ');
+        throw new UnreadableCodeError(`BUG: unknown icon name ${JSON.stringify(iconName)}`);
       }
       return (
         <div
