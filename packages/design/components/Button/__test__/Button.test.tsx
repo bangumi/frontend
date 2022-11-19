@@ -3,21 +3,12 @@ import React from 'react';
 
 import Button from '../index';
 
-it.each`
-  type
-  ${'primary'}
-  ${'secondary'}
-  ${'text'}
-`('should render button of type $type', ({ type }: { type: string }) => {
+it.each(['primary', 'secondary', 'text'])('should render button of type %s', (type) => {
   const { container } = render(<Button type={type}>hello world</Button>);
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it.each`
-  shape
-  ${'square'}
-  ${'rounded'}
-`('should render button of shape $shape', ({ shape }: { shape: string }) => {
+it.each(['square', 'rounded'])('should render button of shape %s', (shape) => {
   const { container } = render(
     <Button type='primary' shape={shape}>
       hello world
