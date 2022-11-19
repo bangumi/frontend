@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "tsc --noEmit && vite build",
-    "dev": "vite",
+    "dev": "vite --host 127.0.0.1",
     "preview": "vite preview"
   },
   "dependencies": {
