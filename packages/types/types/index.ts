@@ -174,7 +174,7 @@ export interface components {
       /** Description */
       description: string;
       /** Detail */
-      detail?:
+      details?:
         | string
         | {
             /** @description error message */
@@ -418,6 +418,12 @@ export interface operations {
       415: unknown;
       /** JSON 语法错误 */
       422: unknown;
+      /** 登录失败次数太多 */
+      429: {
+        content: {
+          'application/json': components['schemas']['ErrorDetail'];
+        };
+      };
       /** hCaptcha HTTP 请求失败 */
       502: unknown;
     };
