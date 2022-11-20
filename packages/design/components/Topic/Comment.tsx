@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
-import type { Reply, Comment as IComment, User } from '@bangumi/types';
+import type { Reply, Comment as IComment, User } from '@bangumi/types/topic';
 import { render as renderBBCode } from '@bangumi/utils';
 
 import Avatar from '../../components/Avatar';
@@ -65,7 +65,7 @@ const Comment: FC<CommentProps> = ({
   const isSpecial = state === 1 || state === 2 || state === 5;
   const replies = !isReply ? props.replies : null;
   const [shouldCollapsed, setShouldCollapsed] = useState(
-    isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted)),
+    isSpecial || (isReply && (/[+-]\d+$/.test(text!) || isDeleted)),
   );
   const [showReplyEditor, setShowReplyEditor] = useState(false);
 
@@ -73,6 +73,9 @@ const Comment: FC<CommentProps> = ({
     'bgm-comment__header--reply': isReply,
     'bgm-comment__header--collapsed': shouldCollapsed,
   });
+
+  // todo
+  const url = `https://bgm.tv/${creator.username}`;
 
   if (shouldCollapsed) {
     let icon = null;
@@ -100,10 +103,10 @@ const Comment: FC<CommentProps> = ({
         <span className='bgm-comment__tip'>
           <div className='creator-info'>
             {icon}
-            <Link to={creator.url} isExternal>
+            <Link to={url} isExternal>
               {creator.nickname}
             </Link>
-            <RenderContent state={state} text={text} />
+            <RenderContent state={state} text={text!} />
           </div>
           <CommentInfo createdAt={createAt} floor={floor} isSpecial={isSpecial} />
         </span>
@@ -119,7 +122,7 @@ const Comment: FC<CommentProps> = ({
           <div className='bgm-comment__main'>
             <span className='bgm-comment__tip'>
               <div className='creator-info'>
-                <Link to={creator.url} isExternal>
+                <Link to={url} isExternal>
                   {creator.nickname}
                 </Link>
                 {originalPosterId === creator.id ? <OriginalPoster /> : null}
@@ -133,7 +136,7 @@ const Comment: FC<CommentProps> = ({
               </div>
               <CommentInfo createdAt={createAt} floor={floor} />
             </span>
-            <RenderContent state={state} text={text} />
+            <RenderContent state={state} text={text!} />
           </div>
           <div className='bgm-comment__opinions'>
             {showReplyEditor ? (

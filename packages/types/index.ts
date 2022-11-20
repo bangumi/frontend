@@ -1,6 +1,4 @@
 import type { operations } from './types';
-export * from './group';
-export * from './user';
 
 /**
  * usage:

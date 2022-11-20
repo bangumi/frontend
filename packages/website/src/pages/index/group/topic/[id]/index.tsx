@@ -30,7 +30,7 @@ const TopicPage: FC = () => {
     // Todo: ErrorBoundary
     throw new Error('BUG: topic id is required');
   }
-  const { topicDetail } = useGroupTopic(id);
+  const topicDetail = useGroupTopic(id);
   const { user } = useUser();
   if (!topicDetail) {
     return null;
@@ -44,7 +44,7 @@ const TopicPage: FC = () => {
       <GroupTopicHeader
         title={topicDetail.title}
         creator={topicDetail.creator}
-        createdAt={topicDetail.created_at as string}
+        createdAt={topicDetail.created_at!}
         group={topicDetail.group}
       />
       <div className={styles.columnContainer}>

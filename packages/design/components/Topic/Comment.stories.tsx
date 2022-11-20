@@ -24,7 +24,7 @@ SingleComment.args = {
   ...singleComment,
   isReply: false,
   user: null as any,
-  created_at: new Date(),
+  created_at: String(new Date()),
   floor: 1,
 };
 
@@ -35,7 +35,7 @@ CommentWithIcons.args = {
   isReply: false,
   is_friend: true,
   originalPosterId: 1,
-  created_at: new Date(),
+  created_at: String(new Date()),
   floor: 2,
 };
 
@@ -44,7 +44,7 @@ CommentWithReplies.args = {
   ...commentWithReplies,
   isReply: false,
   is_friend: false,
-  created_at: new Date(),
+  created_at: String(new Date()),
   floor: 2,
 } as any;
 
@@ -54,7 +54,7 @@ SelfComment.args = {
   ...singleComment,
   isReply: false,
   is_friend: false,
-  created_at: new Date(),
+  created_at: String(new Date()),
   user: singleComment.creator,
   floor: 2,
 };

@@ -129,7 +129,7 @@ module.exports = {
       },
     },
     {
-      files: ['*.spec.tsx'],
+      files: ['*.spec.tsx', '*.stories.tsx'],
       rules: {
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-argument': 'off',
