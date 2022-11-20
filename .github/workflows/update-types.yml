@@ -2,6 +2,8 @@ name: Update Type Definition
 on:
   repository_dispatch:
     types: [update-types]
+  workflow_dispatch:
+
 jobs:
   update-types:
     runs-on: ubuntu-latest
