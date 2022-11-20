@@ -451,14 +451,14 @@ export interface operations {
   getGroupTopicsByGroupName: {
     parameters: {
       path: {
-        /** 小组ID */
-        name: number;
+        /** 小组名称 */
+        name: string;
       };
       query: {
-        /** 小组 Limit */
-        limit: number;
-        /** 小组 Offset */
-        offset: number;
+        /** 分页参数 */
+        limit?: components['parameters']['default_query_limit'];
+        /** 分页参数 */
+        offset?: components['parameters']['default_query_offset'];
       };
     };
     responses: {
