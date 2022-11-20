@@ -23,6 +23,8 @@ jobs:
 
       - name: Build Type Definition
         run: pnpm build:types
+        env:
+          OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
