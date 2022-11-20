@@ -274,16 +274,7 @@ export interface components {
          * @example 2012-12-23T12:46:29.000Z
          */
         created_at: string;
-        /**
-         * Creator
-         * @description 意义同<a href="#model-Me">Me</a>
-         */
-        creator: {
-          /** Username */
-          username: string;
-          /** Nickname */
-          nickname: string;
-        };
+        creator: components['schemas']['User'];
         /**
          * Format: int32
          * @example 24360
