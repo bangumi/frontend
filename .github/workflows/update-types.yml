@@ -23,8 +23,10 @@ jobs:
 
       - name: Build Type Definition
         run: pnpm build:types
+        env:
+          OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          title: Update Type Definition from bangumi/dev-docs
+          title: 'chore(types): update private API type definition'
