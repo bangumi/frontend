@@ -32,7 +32,7 @@ export function useGroupTopic(name: string, pagination?: Partial<Pagination>) {
     privateGet,
     { suspense: true },
   );
-  return recentTopicsResp;
+  return recentTopicsResp!;
 }
 
 export function useGroup(name: string): UseGroupRet {

@@ -39,11 +39,11 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   };
 
   const handleUnclamp = (): void => {
-    onChange(false);
+    onChange?.(false);
   };
 
   const handleClamp = (): void => {
-    onChange(true);
+    onChange?.(true);
   };
 
   const renderControl = (): React.ReactElement | null => {
