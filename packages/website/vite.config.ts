@@ -41,9 +41,6 @@ export default defineConfig({
             }
           });
         },
-        cookieDomainRewrite: {
-          'next.bgm.tv': 'dev.bgm.tv',
-        },
       },
     },
   },
