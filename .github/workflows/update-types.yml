@@ -27,7 +27,7 @@ jobs:
         run: pnpm install
 
       - name: Build Type Definition
-        run: pnpm build:types
+        run: pnpm types build
         env:
           OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
 
