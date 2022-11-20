@@ -39,7 +39,7 @@
     "*.{css,less}": [
       "stylelint --fix"
     ],
-    "*.{js,ts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
+    "*.{md,html,js,ts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
   },
   "devDependencies": {
     "@actions/exec": "^1.1.1",
