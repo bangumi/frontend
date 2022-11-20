@@ -18,8 +18,8 @@ export interface paths {
   '/p/me': {
     get: operations['getCurrentUser'];
   };
-  '/p/groups/{group_id}/topics': {
-    get: operations['getGroupTopicsById'];
+  '/p/groups/{name}/topics': {
+    get: operations['getGroupTopicsByGroupName'];
   };
   '/p/subjects/{subject_id}/topics': {
     get: operations['getSubjectTopicsById'];
@@ -448,11 +448,11 @@ export interface operations {
       401: unknown;
     };
   };
-  getGroupTopicsById: {
+  getGroupTopicsByGroupName: {
     parameters: {
       path: {
         /** 小组ID */
-        group_id: number;
+        name: number;
       };
       query: {
         /** 小组 Limit */
