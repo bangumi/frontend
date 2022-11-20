@@ -24,7 +24,7 @@ export const RequireAuth: React.FC<PropsWithChildren<RequireAuthProps>> = ({
     return null;
   }
 
-  if (!groupRequired.includes(user?.user_group)) {
+  if (!groupRequired.includes(user.user_group)) {
     navigate(redirectUrlWhenUnauthorized, { replace: true });
     return null;
   }

@@ -8,7 +8,7 @@ it.each`
   ${'primary'}
   ${'secondary'}
   ${'text'}
-`('should render button of type $type', ({ type }) => {
+`('should render button of type $type', ({ type }: { type: string }) => {
   const { container } = render(<Button type={type}>hello world</Button>);
   expect(container.firstChild).toMatchSnapshot();
 });
@@ -17,7 +17,7 @@ it.each`
   shape
   ${'square'}
   ${'rounded'}
-`('should render button of shape $shape', ({ shape }) => {
+`('should render button of shape $shape', ({ shape }: { shape: string }) => {
   const { container } = render(
     <Button type='primary' shape={shape}>
       hello world

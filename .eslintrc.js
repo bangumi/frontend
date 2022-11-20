@@ -14,6 +14,7 @@ module.exports = {
     'import/internal-regex': '^@bangumi/',
   },
   rules: {
+    curly: 'error',
     'no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error',
     'import/order': [
@@ -42,7 +43,15 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*.tsx'],
-      extends: ['standard-with-typescript', 'standard-jsx', 'standard-react', 'prettier'],
+      extends: [
+        'standard-with-typescript',
+        'standard-jsx',
+        'standard-react',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/strict',
+        'prettier',
+      ],
       parser: '@typescript-eslint/parser',
       plugins: ['react', '@typescript-eslint', 'jest'],
       parserOptions: {
@@ -66,6 +75,20 @@ module.exports = {
         },
       },
       rules: {
+        '@typescript-eslint/no-unnecessary-condition': 'off',
+        '@typescript-eslint/ban-types': [
+          'error',
+          {
+            types: {
+              // un-ban a type that's banned by default
+              Object: false,
+              '{}': false,
+            },
+            extendDefaults: true,
+          },
+        ],
+        '@typescript-eslint/ban-ts-comment': 'off',
+        curly: 'error',
         '@typescript-eslint/no-unused-vars': 'off',
         '@typescript-eslint/no-misused-promises': [
           'error',
@@ -76,7 +99,17 @@ module.exports = {
           },
         ],
         '@typescript-eslint/no-use-before-define': ['error'],
-        '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/strict-boolean-expressions': [
+          'error',
+          {
+            allowString: true,
+            allowNumber: true,
+            allowNullableNumber: true,
+            allowNullableString: true,
+            allowNullableBoolean: true,
+            allowNullableObject: true,
+          },
+        ],
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/promise-function-async': 'error',
         '@typescript-eslint/no-implicit-any-catch': 'error',
@@ -93,6 +126,14 @@ module.exports = {
         ecmaFeatures: {
           jsx: true,
         },
+      },
+    },
+    {
+      files: ['*.spec.tsx'],
+      rules: {
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
       },
     },
   ],

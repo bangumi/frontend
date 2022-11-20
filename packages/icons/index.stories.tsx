@@ -1,6 +1,8 @@
 import type { Story, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
+import { UnreadableCodeError } from '@bangumi/utils';
+
 import * as Icons from '.';
 
 type IComponent = React.FC<
@@ -51,7 +53,10 @@ const Template: Story<{ height: number; width: number; style: React.CSSPropertie
 }) => (
   <>
     {Object.keys(Icons).map((iconName) => {
-      const Icon = (Icons as any)[iconName] as IComponent;
+      const Icon = (Icons as Record<string, IComponent>)[iconName];
+      if (Icon === undefined) {
+        throw new UnreadableCodeError(`BUG: unknown icon name ${JSON.stringify(iconName)}`);
+      }
       return (
         <div key={iconName} style={{ textAlign: 'center', width: 120 }}>
           <p>{iconName}</p>

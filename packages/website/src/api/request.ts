@@ -17,16 +17,13 @@ export async function privateGet<T = unknown>(url: string): Promise<T> {
     throw new RequestError(res);
   }
 
-  return await res.json();
+  return (await res.json()) as T;
 }
 
-export async function privatePost(
-  url: string,
-  options: { json: Record<string, any> },
-): Promise<Response> {
+export async function privatePost(url: string, options: { json?: unknown }): Promise<Response> {
   let body: BodyInit | null = null;
   const header = new Headers();
-  if (options.json) {
+  if (options.json !== undefined) {
     body = JSON.stringify(options.json);
     header.set('content-type', 'application/json');
   }
