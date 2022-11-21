@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Avatar, Typography, Topic } from '@bangumi/design';
 import type { User, Group } from '@bangumi/types/group';
-import { getGroupForumPage, getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './GroupTopicHeader.module.less';
 
@@ -30,9 +30,7 @@ const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group }) => {
             <span>发表于</span>
             <Link to={`/group/${group.name}`}>{group.title}</Link>
             <span>»</span>
-            <Link to={getGroupForumPage(group.name)} isExternal>
-              组内讨论
-            </Link>
+            <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
           </div>
           <CommentInfo createdAt={createdAt} floor='1' />
         </span>

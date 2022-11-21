@@ -320,7 +320,7 @@ exports[`Normal Comment should render with reply 1`] = `
           class="bgm-avatar bgm-avatar--small"
         >
           <img
-            src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+            src="https://lain.bgm.tv/pic/user/m/icon.jpg"
           />
         </div>
         <div
