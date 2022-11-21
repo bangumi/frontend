@@ -5,27 +5,28 @@ import type { CommentProps } from '../Comment';
 import Comment from '../Comment';
 import repliesComment from './fixtures/repliesComment.json';
 import singleComment from './fixtures/singleComment.json';
+import specialComment from './fixtures/specialComment.json';
 import mockedCurrentUser from './fixtures/user.json';
 
-function buildProps(
-  isReply = false,
-  comment?: any,
-  floor = '233',
-  originalPosterId = 233,
-  user = mockedCurrentUser,
-) {
-  const reply = repliesComment.replies[0];
-  const mockedComment = comment ?? (isReply ? reply : singleComment);
-  return {
-    ...mockedComment,
-    floor,
-    originalPosterId,
-    user,
-    isReply,
-  } as unknown as CommentProps;
-}
-
 describe('Normal Comment', () => {
+  function buildProps(
+    isReply = false,
+    comment?: any,
+    floor = '233',
+    originalPosterId = 233,
+    user = mockedCurrentUser,
+  ) {
+    const reply = repliesComment.replies[0];
+    const mockedComment = comment ?? (isReply ? reply : singleComment);
+    return {
+      ...mockedComment,
+      floor,
+      originalPosterId,
+      user,
+      isReply,
+    } as unknown as CommentProps;
+  }
+
   it('should render', () => {
     const props = buildProps();
     const { container } = render(<Comment {...props} />);
@@ -95,5 +96,21 @@ describe('Normal Comment', () => {
 
     fireEvent.click(getByText('取消'));
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
+  });
+});
+
+// 1 关闭 2 重开 5 下沉 6 被用户删除 7 违反社区指导原则，已被删除
+describe('Special Comment', () => {
+  function buildProps(state: number) {
+    return {
+      ...specialComment,
+      state,
+    } as unknown as CommentProps;
+  }
+
+  it.each([1, 2, 5, 6, 7])('should render state is %d', (state) => {
+    const props = buildProps(state);
+    const { container } = render(<Comment {...props} />);
+    expect(container).toMatchSnapshot();
   });
 });
