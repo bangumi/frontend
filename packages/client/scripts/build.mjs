@@ -62,41 +62,47 @@ async function generateClient(openapi) {
   function renderEntryPoint(path, method, operator) {
     const { responses, parameters, operationId } = operator;
     const beforeFunction = [`type M = '${operationId}'`];
+
+    const ParamType = [];
+
     const pathParameters = [];
+
     const returnString = [];
-    const query = [];
+
+    const QueryType = [];
     let queryTypeString = '';
+
     const fetchOptions = [];
     const swrKey = [];
 
     if (parameters) {
       for (const parameter of parameters) {
         if (parameter.in === 'path') {
-          pathParameters.push([parameter.name, renderType(parameter.schema.type)]);
+          ParamType.push([parameter.name, renderType(parameter.schema.type)]);
         }
 
         if (parameter.in === 'query') {
           if (requiredType(parameter.required)) {
-            query.push([parameter.name, renderType(parameter.schema.type)]);
+            QueryType.push([parameter.name, renderType(parameter.schema.type)]);
           } else {
-            query.push([parameter.name + '?', renderType(parameter.schema.type)]);
+            QueryType.push([parameter.name + '?', renderType(parameter.schema.type)]);
           }
         }
       }
     }
 
     let queryName = 'query';
-    if (query.length) {
-      if (query.filter((x) => x[0].endsWith('?')).length) {
+    if (QueryType.length) {
+      if (QueryType.filter((x) => x[0].endsWith('?')).length) {
         queryName = queryName + '?';
       }
-      queryTypeString = `{${query.map((x) => x.join(':')).join(';')}}`;
+      queryTypeString = `{${QueryType.map((x) => x.join(':')).join(';')}}`;
       pathParameters.push([queryName, queryTypeString]);
     }
 
     let requestPath = '`' + path.replace('{', '${') + '`';
     const handleQuery = [];
-    if (query.length) {
+    if (QueryType.length) {
       handleQuery.push(`let _requestPath = ${requestPath}`);
       requestPath = '_requestPath';
       if (queryName.endsWith('?')) {
@@ -155,6 +161,36 @@ async function generateClient(openapi) {
       }
     }
 
+    if (ParamType.length) {
+      pathParameters.unshift([
+        '{' + ParamType.map((x) => removeSuffix(x[0], '?')).join(',') + '}',
+        'Param',
+      ]);
+      beforeFunction.push('');
+      beforeFunction.push('interface Param {');
+      beforeFunction.push(...ParamType.map((x) => x.join(':') + ';'));
+      beforeFunction.push('}');
+    }
+
+    if (QueryType.length) {
+      beforeFunction.push('');
+      beforeFunction.push('interface Query {');
+      beforeFunction.push(...QueryType.map((x) => x.join(':') + ';'));
+      beforeFunction.push('}');
+    }
+
+    beforeFunction.push('');
+    beforeFunction.push('interface SWRKey {');
+    beforeFunction.push('op: M;');
+    if (ParamType.length) {
+      beforeFunction.push('param: Param;');
+    }
+
+    if (QueryType.length) {
+      beforeFunction.push('query: Query;');
+    }
+    beforeFunction.push('}');
+
     /**
      * render a response union string
      */
@@ -199,37 +235,44 @@ async function generateClient(openapi) {
 
     if (method === 'get') {
       if (pathParameters.length) {
-        let key =
-          `${operationId}-` +
-          pathParameters
-            .map(([key, type]) => {
-              if (!key.startsWith('query')) {
-                return '$' + `{${key}}`;
-              }
-              // if (key.endsWith('?')) {
-              return query.map(([x, _]) => '$' + `{${removeSuffix(x, '?')}}`).join('-');
-              // }
-            })
-            .join('-');
-
-        key = '`' + key + '`';
-
-        const pp = pathParameters.slice().filter((x) => !x[0].startsWith('query'));
-        if (query.length) {
-          pp.push([
-            '{' + query.map(([key, _]) => removeSuffix(key, '?')).join(',') + '}',
-            queryTypeString + (queryName.endsWith('?') ? '={}' : ''),
-          ]);
-        }
-
         swrKey.push(
-          `export function swrKey(${pp.map((x) => x.join(':')).join(',')}): string {`,
-          `  return ${key}`,
-          `}`,
+          'export function swrKey(',
+          ParamType.length ? 'param:Param,' : '',
+          QueryType.length ? 'query:Query,' : '',
+          '): SWRKey {',
+          '  return {',
+          `    op: '${operationId}',`,
+          ParamType.length ? 'param,' : '',
+          QueryType.length ? 'query,' : '',
+          '  }',
+          '}',
         );
       } else {
-        swrKey.push(`export function swrKey(): string {`, `  return '${operationId}'`, `}`);
+        swrKey.push(`export function swrKey(): SWRKey {  return { op: '${operationId}' } }`);
       }
+
+      const param = [];
+
+      if (ParamType.length + QueryType.length) {
+        param.push(
+          '{',
+          ParamType.length ? 'param,' : '',
+          QueryType.length ? 'query,' : '',
+          '}: SWRKey',
+        );
+      }
+
+      swrKey.push(
+        '',
+        'export async function X(',
+        ...param,
+        '):Promise<ResX["data"]>{',
+        '  return executeX(',
+        ParamType.length ? 'param,' : '',
+        QueryType.length ? 'query,' : '',
+        '  )',
+        '}',
+      );
     }
 
     return [
@@ -256,10 +299,6 @@ async function generateClient(openapi) {
       ``,
       ...returnString,
       ``,
-      // `    throw new ApiError({`,
-      // `    });`,
-      // `  }`,
-
       `}`,
       ``,
       ``,

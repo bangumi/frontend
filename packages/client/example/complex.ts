@@ -8,35 +8,26 @@ import type { operations } from '../types';
 import type { ApiResponse } from '../types/utils';
 import { response } from '../utils';
 
-type M = 'listGroupMembersByName';
+type M = 'getGroupTopicsByGroupName';
 
 interface Param {
   name: string;
 }
 
 interface Query {
-  type?: string;
   limit?: number;
   offset?: number;
 }
 
-interface SWRKey {
-  op: M;
-  param: Param;
-  query: Query;
-}
-
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
-  | ApiResponse<404>;
+  | ApiResponse<400, operations[M]['responses'][400]['content']['application/json']>
+  | ApiResponse<404, operations[M]['responses'][404]['content']['application/json']>;
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute(
-  { name }: Param,
-  query?: { type?: string; limit?: number; offset?: number },
-): Promise<Res> {
-  let _requestPath = `/p/groups/${name}/members`;
+export async function execute({ name }: Param, query?: Query): Promise<Res> {
+  let _requestPath = `/p/groups/${name}/topics`;
   if (query !== undefined) {
     // @ts-expect-error
     _requestPath += '?' + new URLSearchParams(query).toString();
@@ -54,10 +45,10 @@ export async function execute(
  * method throw error when 'res.ok' is false
  */
 export async function executeX(
-  { name }: Param,
-  query?: { type?: string; limit?: number; offset?: number },
+  param: { name: string },
+  query?: { limit?: number; offset?: number },
 ): Promise<ResX['data']> {
-  const res = await execute({ name }, query);
+  const res = await execute(param, query);
   if (res.ok) {
     return res.data;
   }
@@ -65,14 +56,26 @@ export async function executeX(
   throw new ApiError(res);
 }
 
-export function swrKey(param: Param, query: Query): SWRKey {
-  return {
-    op: 'listGroupMembersByName',
-    param,
-    query,
+interface SWRKey {
+  op: M;
+  param: {
+    name: string;
   };
+  query: { limit?: number; offset?: number };
 }
 
-export async function X({ param, query }: SWRKey): Promise<ResX['data']> {
-  return executeX(param, query);
+export function swrKey(param: Param, query: { limit?: number; offset?: number } = {}): SWRKey {
+  return { op: 'getGroupTopicsByGroupName', param, query };
+}
+
+export async function X({
+  param,
+  query,
+}: SWRKey): Promise<operations[M]['responses'][200]['content']['application/json']> {
+  const res = await execute(param, query);
+  if (res.ok) {
+    return res.data;
+  }
+
+  throw new ApiError(res);
 }

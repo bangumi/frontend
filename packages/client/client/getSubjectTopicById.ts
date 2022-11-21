@@ -10,6 +10,15 @@ import { response } from '../utils';
 
 type M = 'getSubjectTopicById';
 
+interface Param {
+  topic_id: number;
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
+}
+
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<400, operations[M]['responses'][400]['content']['application/json']>
@@ -17,7 +26,7 @@ type Res =
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute(topic_id: number): Promise<Res> {
+export async function execute({ topic_id }: Param): Promise<Res> {
   const res = await fetch(`/p/subjects/-/topics/${topic_id}`, {
     method: 'get',
     credentials: 'same-origin',
@@ -29,8 +38,8 @@ export async function execute(topic_id: number): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX(topic_id: number): Promise<ResX['data']> {
-  const res = await execute(topic_id);
+export async function executeX({ topic_id }: Param): Promise<ResX['data']> {
+  const res = await execute({ topic_id });
   if (res.ok) {
     return res.data;
   }
@@ -38,6 +47,13 @@ export async function executeX(topic_id: number): Promise<ResX['data']> {
   throw new ApiError(res);
 }
 
-export function swrKey(topic_id: number): string {
-  return `getSubjectTopicById-${topic_id}`;
+export function swrKey(param: Param): SWRKey {
+  return {
+    op: 'getSubjectTopicById',
+    param,
+  };
+}
+
+export async function X({ param }: SWRKey): Promise<ResX['data']> {
+  return executeX(param);
 }

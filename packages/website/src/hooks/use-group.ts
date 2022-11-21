@@ -24,8 +24,8 @@ export interface UseGroupRet {
 
 export function useGroupTopic(name: string, { limit = 20, offset = 0 }: Partial<Pagination> = {}) {
   const { data: recentTopicsResp } = useSWR<TopicApiRes>(
-    api.getGroupTopicsByGroupName.swrKey(name, { limit, offset }),
-    async () => api.getGroupTopicsByGroupName.executeX(name, { limit, offset }),
+    api.getGroupTopicsByGroupName.swrKey({ name }, { limit, offset }),
+    api.getGroupTopicsByGroupName.X,
     { suspense: true },
   );
 
@@ -34,8 +34,8 @@ export function useGroupTopic(name: string, { limit = 20, offset = 0 }: Partial<
 
 export function useGroup(name: string): UseGroupRet {
   const { data: groupResp } = useSWR(
-    api.getGroupProfileByName.swrKey(name),
-    async () => api.getGroupProfileByName.executeX(name),
+    api.getGroupProfileByName.swrKey({ name }),
+    api.getGroupProfileByName.X,
     { suspense: true },
   );
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`;

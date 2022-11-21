@@ -43,16 +43,12 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR(
-    api.getCurrentUser.swrKey(),
-    async () => api.getCurrentUser.executeX(),
-    {
-      refreshWhenHidden: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      shouldRetryOnError: false,
-    },
-  );
+  const { data: user, mutate } = useSWR(api.getCurrentUser.swrKey(), api.getCurrentUser.X, {
+    refreshWhenHidden: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+    shouldRetryOnError: false,
+  });
   const navigate = useNavigate();
 
   function redirectToLogin(): void {

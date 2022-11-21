@@ -10,6 +10,21 @@ import { response } from '../utils';
 
 type M = 'getSubjectTopicsById';
 
+interface Param {
+  subject_id: number;
+}
+
+interface Query {
+  limit?: number;
+  offset?: number;
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
+  query: Query;
+}
+
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<400, operations[M]['responses'][400]['content']['application/json']>
@@ -18,7 +33,7 @@ type Res =
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
 export async function execute(
-  subject_id: number,
+  { subject_id }: Param,
   query?: { limit?: number; offset?: number },
 ): Promise<Res> {
   let _requestPath = `/p/subjects/${subject_id}/topics`;
@@ -39,10 +54,10 @@ export async function execute(
  * method throw error when 'res.ok' is false
  */
 export async function executeX(
-  subject_id: number,
+  { subject_id }: Param,
   query?: { limit?: number; offset?: number },
 ): Promise<ResX['data']> {
-  const res = await execute(subject_id, query);
+  const res = await execute({ subject_id }, query);
   if (res.ok) {
     return res.data;
   }
@@ -50,9 +65,14 @@ export async function executeX(
   throw new ApiError(res);
 }
 
-export function swrKey(
-  subject_id: number,
-  { limit, offset }: { limit?: number; offset?: number } = {},
-): string {
-  return `getSubjectTopicsById-${subject_id}-${limit}-${offset}`;
+export function swrKey(param: Param, query: Query): SWRKey {
+  return {
+    op: 'getSubjectTopicsById',
+    param,
+    query,
+  };
+}
+
+export async function X({ param, query }: SWRKey): Promise<ResX['data']> {
+  return executeX(param, query);
 }

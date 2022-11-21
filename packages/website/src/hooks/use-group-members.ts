@@ -21,8 +21,8 @@ export function useGroupMembers(
   { type, offset = 0, limit = 30, disable = false }: GroupMembersReq,
 ): UseGroupMembersRet {
   const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>, ApiError>(
-    disable ? null : api.listGroupMembersByName.swrKey(name, { type, limit, offset }),
-    async () => api.listGroupMembersByName.executeX(name, { type, limit, offset }),
+    disable ? null : api.listGroupMembersByName.swrKey({ name }, { type, limit, offset }),
+    api.listGroupMembersByName.X,
     { suspense: true },
   );
 
