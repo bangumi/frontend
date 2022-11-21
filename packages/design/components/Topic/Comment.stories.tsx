@@ -1,9 +1,10 @@
 import type { ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import commentWithReplies from './__test__/fixtures/commentWithReplies.json';
+import repliesComment from './__test__/fixtures/repliesComment.json';
 import singleComment from './__test__/fixtures/singleComment.json';
 import specialComment from './__test__/fixtures/specialComment.json';
+import mockedCurrentUser from './__test__/fixtures/user.json';
 import Comment from './Comment';
 
 export default {
@@ -48,7 +49,7 @@ SingleComment.args = {
 
 export const CommentWithReplies = Template.bind({});
 CommentWithReplies.args = {
-  ...commentWithReplies,
+  ...repliesComment,
   isReply: false,
   is_friend: false,
   created_at: String(new Date()),
@@ -62,7 +63,7 @@ SelfComment.args = {
   isReply: false,
   is_friend: false,
   created_at: String(new Date()),
-  user: singleComment.creator,
+  user: mockedCurrentUser,
   floor: 2,
 } as any;
 

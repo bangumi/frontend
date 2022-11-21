@@ -1,0 +1,254 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Normal Comment should render 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                // 我是签名
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              #
+              233
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+          >
+            +1
+          </button>
+          <button
+            class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+          >
+            编辑
+          </button>
+          <button
+            class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+          >
+            删除
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Normal Comment should render with reply 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                // 我是签名
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              #
+              233
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+          >
+            +1
+          </button>
+          <button
+            class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+          >
+            编辑
+          </button>
+          <button
+            class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+          >
+            删除
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="bgm-comment__header bgm-comment__header--reply"
+        id="post_2104702"
+      >
+        <div
+          class="bgm-avatar bgm-avatar--small"
+        >
+          <img
+            src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+          />
+        </div>
+        <div
+          class="bgm-comment__box"
+        >
+          <div
+            class="bgm-comment__main"
+          >
+            <span
+              class="bgm-comment__tip"
+            >
+              <div
+                class="creator-info"
+              >
+                <a
+                  class="bgm-link"
+                  href="https://bgm.tv/user/123456789"
+                >
+                  用户
+                </a>
+              </div>
+              <span
+                class="bgm-topic__commentInfo"
+              >
+                #
+                233-1
+                  
+                |
+                  
+                2022-9-22 06:03
+                  
+                |
+                  
+                !
+              </span>
+            </span>
+            <div
+              class="bgm-rich-content bgm-comment__content"
+            >
+              123456789~~~
+            </div>
+          </div>
+          <div
+            class="bgm-comment__opinions"
+          >
+            <button
+              class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            >
+              回复
+            </button>
+            <button
+              class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            >
+              +1
+            </button>
+            <button
+              class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+            >
+              编辑
+            </button>
+            <button
+              class="bgm-button bgm-button__text bgm-button__square bgm-button__normal"
+            >
+              删除
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
