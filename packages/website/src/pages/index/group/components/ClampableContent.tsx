@@ -10,7 +10,8 @@ export interface ClampableContentProps {
   threshold?: number;
   content: string;
   isClamped: boolean;
-  className?: string;
+  containerClassName?: string;
+  contentClassName?: string;
   onChange?: (isClamped: boolean) => void;
 }
 
@@ -21,7 +22,8 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   threshold = CLAMP_HEIGHT_THRESHOLD,
   isClamped,
   onChange,
-  className,
+  containerClassName,
+  contentClassName,
 }) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -74,10 +76,10 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   };
 
   return (
-    <div className={classNames(styles.container, className)}>
+    <div className={classNames(styles.container, containerClassName)}>
       <div
         ref={contentRef}
-        className={styles.content}
+        className={classNames(styles.content, contentClassName)}
         style={isClampEnabled && isClamped ? clampedStyle : undefined}
         dangerouslySetInnerHTML={{ __html: content }}
       />

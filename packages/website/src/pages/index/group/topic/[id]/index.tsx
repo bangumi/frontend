@@ -83,7 +83,9 @@ const TopicPage: FC = () => {
             </div>
             <ClampableContent
               content={renderBBCode(group.description)}
-              className={styles.groupDescription}
+              containerClassName={styles.groupDescription}
+              contentClassName={styles.groupDescriptionContent}
+              threshold={158}
               isClamped
             />
             <div className={styles.groupOpinions}>
