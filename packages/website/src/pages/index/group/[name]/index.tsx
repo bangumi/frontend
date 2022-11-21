@@ -37,6 +37,7 @@ const GroupHome: React.FC = () => {
   return (
     <>
       <ClampableContent
+        threshold={193}
         content={parsedDescription}
         isClamped={descriptionClamp === DescriptionClamp.clamp}
         onChange={handleChangeClamp}

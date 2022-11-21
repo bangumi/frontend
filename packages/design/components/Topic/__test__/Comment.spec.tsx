@@ -8,6 +8,7 @@ import singleComment from './fixtures/singleComment.json';
 import specialComment from './fixtures/specialComment.json';
 import mockedCurrentUser from './fixtures/user.json';
 
+// 0 正常评论 6 被用户删除 7 违反社区指导原则，已被删除
 describe('Normal Comment', () => {
   function buildProps(
     isReply = false,
@@ -27,9 +28,9 @@ describe('Normal Comment', () => {
     } as unknown as CommentProps;
   }
 
-  it('should render', () => {
+  it.each([0, 6, 7])('should render %d', (state) => {
     const props = buildProps();
-    const { container } = render(<Comment {...props} />);
+    const { container } = render(<Comment {...props} state={state as any} />);
     expect(container).toMatchSnapshot();
   });
 
@@ -99,7 +100,7 @@ describe('Normal Comment', () => {
   });
 });
 
-// 1 关闭 2 重开 5 下沉 6 被用户删除 7 违反社区指导原则，已被删除
+// 1 关闭 2 重开 5 下沉
 describe('Special Comment', () => {
   function buildProps(state: number) {
     return {
@@ -108,7 +109,7 @@ describe('Special Comment', () => {
     } as unknown as CommentProps;
   }
 
-  it.each([1, 2, 5, 6, 7])('should render state is %d', (state) => {
+  it.each([1, 2, 5])('should render state is %d', (state) => {
     const props = buildProps(state);
     const { container } = render(<Comment {...props} />);
     expect(container).toMatchSnapshot();

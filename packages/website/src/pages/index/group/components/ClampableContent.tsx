@@ -7,7 +7,7 @@ import { ReactComponent as UpArrow } from '@bangumi/website/assets/up-arrow.svg'
 import styles from './ClampableContent.module.less';
 
 export interface ClampableContentProps {
-  threshold?: number;
+  threshold: number;
   content: string;
   isClamped: boolean;
   containerClassName?: string;
@@ -15,11 +15,9 @@ export interface ClampableContentProps {
   onChange?: (isClamped: boolean) => void;
 }
 
-const CLAMP_HEIGHT_THRESHOLD = 193;
-
 export const ClampableContent: React.FC<ClampableContentProps> = ({
   content,
-  threshold = CLAMP_HEIGHT_THRESHOLD,
+  threshold,
   isClamped,
   onChange,
   containerClassName,
