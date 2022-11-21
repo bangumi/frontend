@@ -110,13 +110,10 @@ async function generateClient(openapi) {
       pathParameters.push([queryName, 'Query']);
     }
 
-    let requestPath =
-      '`' +
-      path.replaceAll(/\{(.*)}/g, (x) => {
-        console.log(x);
-        return '${' + camelCase(x) + '}';
-      }) +
-      '`';
+    let requestPath = path.replaceAll(/\{(.*)}/g, (x) => '${' + camelCase(x) + '}');
+
+    requestPath = '`' + requestPath + '`';
+
     const beforeFetch = [];
     if (QueryType.length) {
       requestPath = `buildURL(${requestPath}, query)`;
@@ -219,8 +216,17 @@ async function generateClient(openapi) {
 
     if (OkResponseTypeString.length) {
       beforeFunction.push('');
-      beforeFunction.push('type ResX =' + OkResponseTypeString.join('|\n'));
-      methXResponseType = 'ResX["data"]';
+      beforeFunction.push(
+        'type ResX =' +
+          OkResponseTypeString.map((x) => {
+            const s = x.split(', ')[1]?.split('>')?.[0];
+            if (s) {
+              return s;
+            }
+            return 'undefined';
+          }).join('|\n'),
+      );
+      methXResponseType = 'ResX';
     }
 
     returnString.push(`    return await response(res) as ${methResponseType}`);
@@ -269,7 +275,7 @@ async function generateClient(openapi) {
         '',
         'export async function fetcher(',
         ...param,
-        '):Promise<ResX["data"]>{',
+        '):Promise<ResX>{',
         '  return executeX(',
         ParamType.length ? 'param,' : '',
         QueryType.length ? 'query,' : '',

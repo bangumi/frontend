@@ -19,7 +19,7 @@ type Res =
   | ApiResponse<400, operations[M]['responses'][400]['content']['application/json']>
   | ApiResponse<404, operations[M]['responses'][404]['content']['application/json']>;
 
-type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
+type ResX = operations[M]['responses'][200]['content']['application/json'];
 
 export async function execute({ characterID }: Param): Promise<Res> {
   const res = await fetch(`/p/characters/${characterID}/comments`);
@@ -30,7 +30,7 @@ export async function execute({ characterID }: Param): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({ characterID }: Param): Promise<ResX['data']> {
+export async function executeX({ characterID }: Param): Promise<ResX> {
   const res = await execute({ characterID });
   if (res.ok) {
     return res.data;
@@ -51,6 +51,6 @@ export function swrKey(param: Param): SWRKey {
   };
 }
 
-export async function fetcher({ param }: SWRKey): Promise<ResX['data']> {
+export async function fetcher({ param }: SWRKey): Promise<ResX> {
   return executeX(param);
 }

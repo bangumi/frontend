@@ -14,7 +14,7 @@ type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<401>;
 
-type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
+type ResX = operations[M]['responses'][200]['content']['application/json'];
 
 export async function execute(): Promise<Res> {
   const res = await fetch(`/p/me`);
@@ -25,7 +25,7 @@ export async function execute(): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX(): Promise<ResX['data']> {
+export async function executeX(): Promise<ResX> {
   const res = await execute();
   if (res.ok) {
     return res.data;
@@ -42,6 +42,6 @@ export function swrKey(): SWRKey {
   return { op: 'getCurrentUser' };
 }
 
-export async function fetcher(): Promise<ResX['data']> {
+export async function fetcher(): Promise<ResX> {
   return executeX();
 }

@@ -24,7 +24,7 @@ type Res =
   | ApiResponse<429, operations[M]['responses'][429]['content']['application/json']>
   | ApiResponse<502>;
 
-type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
+type ResX = operations[M]['responses'][200]['content']['application/json'];
 
 export async function execute({ email, password, hCaptchaResponse }: RequestBody): Promise<Res> {
   const res = await fetch(`/p/login`, {
@@ -41,11 +41,7 @@ export async function execute({ email, password, hCaptchaResponse }: RequestBody
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({
-  email,
-  password,
-  hCaptchaResponse,
-}: RequestBody): Promise<ResX['data']> {
+export async function executeX({ email, password, hCaptchaResponse }: RequestBody): Promise<ResX> {
   const res = await execute({ email, password, hCaptchaResponse });
   if (res.ok) {
     return res.data;

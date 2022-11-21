@@ -24,7 +24,7 @@ type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<404>;
 
-type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
+type ResX = operations[M]['responses'][200]['content']['application/json'];
 
 export async function execute({ name }: Param, query?: Query): Promise<Res> {
   const res = await fetch(buildURL(`/p/groups/${name}/members`, query));
@@ -35,7 +35,7 @@ export async function execute({ name }: Param, query?: Query): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({ name }: Param, query?: Query): Promise<ResX['data']> {
+export async function executeX({ name }: Param, query?: Query): Promise<ResX> {
   const res = await execute({ name }, query);
   if (res.ok) {
     return res.data;
@@ -58,6 +58,6 @@ export function swrKey(param: Param, query: Query): SWRKey {
   };
 }
 
-export async function fetcher({ param, query }: SWRKey): Promise<ResX['data']> {
+export async function fetcher({ param, query }: SWRKey): Promise<ResX> {
   return executeX(param, query);
 }

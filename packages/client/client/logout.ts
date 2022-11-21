@@ -11,7 +11,7 @@ type M = 'logout';
 
 type Res = ApiResponse<204, undefined> | ApiResponse<401>;
 
-type ResX = ApiResponse<204, undefined>;
+type ResX = undefined;
 
 export async function execute(): Promise<Res> {
   const res = await fetch(`/p/logout`, {
@@ -24,7 +24,7 @@ export async function execute(): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX(): Promise<ResX['data']> {
+export async function executeX(): Promise<ResX> {
   const res = await execute();
   if (res.ok) {
     return res.data;
