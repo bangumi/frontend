@@ -1,5 +1,4 @@
 import cn from 'classnames';
-import classnames from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
@@ -113,7 +112,7 @@ const Pagination: FC<PaginationProps> = ({
     }
   }
   return (
-    <ul className={classnames('bgm-pagination', wrapperClass)} data-testid='pagination-wrapper'>
+    <ul className={cn('bgm-pagination', wrapperClass)} data-testid='pagination-wrapper'>
       {prevButton}
       {pagerList}
       {nextButton}
