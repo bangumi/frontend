@@ -7,6 +7,7 @@ import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 
 import TopicsTable from './components/TopicsTable';
+import styles from './style.module.less';
 
 const GroupForum = () => {
   const { name } = useParams();
@@ -30,6 +31,7 @@ const GroupForum = () => {
         total={topics.total}
         pageSize={pageSize}
         currentPage={curPage}
+        wrapperClass={styles.pagination}
         onChange={handlePageChange}
       />
     </>

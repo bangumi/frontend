@@ -10,6 +10,7 @@ import { useGroupContext } from '../[name]';
 import CommonStyles from '../common.module.less';
 import { ClampableContent } from '../components/ClampableContent';
 import TopicsTable from './components/TopicsTable';
+import styles from './style.module.less';
 
 const GroupHome: React.FC = () => {
   const { name } = useParams();
@@ -44,6 +45,7 @@ const GroupHome: React.FC = () => {
       />
       <Section
         title='最近讨论'
+        wrapperClass={styles.recentTopics}
         renderFooter={() => (
           <RouterLink to={`/group/${name}/forum`} className={CommonStyles.textButton}>
             <span>更多组内讨论</span>

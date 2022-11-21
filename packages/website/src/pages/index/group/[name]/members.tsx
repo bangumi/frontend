@@ -9,7 +9,7 @@ import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 
 import { UserCard } from '../components/UserCard';
-import styles from './members.module.less';
+import styles from './style.module.less';
 
 const GroupMembersPage = () => {
   const { curPage, offset, pageSize } = usePaginationParams(30);
@@ -65,7 +65,12 @@ const GroupMembersPage = () => {
             );
           })}
         </div>
-        <Pagination total={total} currentPage={curPage} onChange={handlePageChange} />
+        <Pagination
+          wrapperClass={styles.pagination}
+          total={total}
+          currentPage={curPage}
+          onChange={handlePageChange}
+        />
       </Section>
     </>
   );
