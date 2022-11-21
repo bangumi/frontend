@@ -11,7 +11,6 @@ export interface ClampableContentProps {
   content: string;
   isClamped: boolean;
   containerClassName?: string;
-  contentClassName?: string;
   onChange?: (isClamped: boolean) => void;
 }
 
@@ -21,7 +20,6 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   isClamped,
   onChange,
   containerClassName,
-  contentClassName,
 }) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -77,7 +75,6 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
     <div className={classNames(styles.container, containerClassName)}>
       <div
         ref={contentRef}
-        className={classNames(styles.content, contentClassName)}
         style={isClampEnabled && isClamped ? clampedStyle : undefined}
         dangerouslySetInnerHTML={{ __html: content }}
       />
