@@ -11,12 +11,7 @@ import { response } from '../utils';
 type M = 'getCharacterCommentsById';
 
 interface Param {
-  character_id: number;
-}
-
-interface SWRKey {
-  op: M;
-  param: Param;
+  characterID: number;
 }
 
 type Res =
@@ -26,8 +21,8 @@ type Res =
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute({ character_id }: Param): Promise<Res> {
-  const res = await fetch(`/p/characters/${character_id}/comments`);
+export async function execute({ characterID }: Param): Promise<Res> {
+  const res = await fetch(`/p/characters/${characterID}/comments`);
 
   return (await response(res)) as Res;
 }
@@ -35,13 +30,18 @@ export async function execute({ character_id }: Param): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({ character_id }: Param): Promise<ResX['data']> {
-  const res = await execute({ character_id });
+export async function executeX({ characterID }: Param): Promise<ResX['data']> {
+  const res = await execute({ characterID });
   if (res.ok) {
     return res.data;
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
 }
 
 export function swrKey(param: Param): SWRKey {

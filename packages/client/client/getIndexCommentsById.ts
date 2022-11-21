@@ -11,12 +11,7 @@ import { response } from '../utils';
 type M = 'getIndexCommentsById';
 
 interface Param {
-  index_id: number;
-}
-
-interface SWRKey {
-  op: M;
-  param: Param;
+  indexID: number;
 }
 
 type Res =
@@ -26,8 +21,8 @@ type Res =
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute({ index_id }: Param): Promise<Res> {
-  const res = await fetch(`/p/indices/${index_id}/comments`);
+export async function execute({ indexID }: Param): Promise<Res> {
+  const res = await fetch(`/p/indices/${indexID}/comments`);
 
   return (await response(res)) as Res;
 }
@@ -35,13 +30,18 @@ export async function execute({ index_id }: Param): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({ index_id }: Param): Promise<ResX['data']> {
-  const res = await execute({ index_id });
+export async function executeX({ indexID }: Param): Promise<ResX['data']> {
+  const res = await execute({ indexID });
   if (res.ok) {
     return res.data;
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
 }
 
 export function swrKey(param: Param): SWRKey {

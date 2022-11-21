@@ -10,10 +10,6 @@ import { response } from '../utils';
 
 type M = 'getCurrentUser';
 
-interface SWRKey {
-  op: M;
-}
-
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<401>;
@@ -36,6 +32,10 @@ export async function executeX(): Promise<ResX['data']> {
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
 }
 
 export function swrKey(): SWRKey {

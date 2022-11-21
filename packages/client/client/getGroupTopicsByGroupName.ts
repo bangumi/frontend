@@ -19,12 +19,6 @@ interface Query {
   offset?: number;
 }
 
-interface SWRKey {
-  op: M;
-  param: Param;
-  query: Query;
-}
-
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<400, operations[M]['responses'][400]['content']['application/json']>
@@ -48,6 +42,12 @@ export async function executeX({ name }: Param, query?: Query): Promise<ResX['da
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
+  query: Query;
 }
 
 export function swrKey(param: Param, query: Query): SWRKey {

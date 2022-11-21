@@ -9,10 +9,6 @@ import { response } from '../utils';
 
 type M = 'logout';
 
-interface SWRKey {
-  op: M;
-}
-
 type Res = ApiResponse<204, undefined> | ApiResponse<401>;
 
 type ResX = ApiResponse<204, undefined>;

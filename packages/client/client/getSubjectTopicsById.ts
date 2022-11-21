@@ -11,18 +11,12 @@ import { buildURL, response } from '../utils';
 type M = 'getSubjectTopicsById';
 
 interface Param {
-  subject_id: number;
+  subjectID: number;
 }
 
 interface Query {
   limit?: number;
   offset?: number;
-}
-
-interface SWRKey {
-  op: M;
-  param: Param;
-  query: Query;
 }
 
 type Res =
@@ -32,8 +26,8 @@ type Res =
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute({ subject_id }: Param, query?: Query): Promise<Res> {
-  const res = await fetch(buildURL(`/p/subjects/${subject_id}/topics`, query));
+export async function execute({ subjectID }: Param, query?: Query): Promise<Res> {
+  const res = await fetch(buildURL(`/p/subjects/${subjectID}/topics`, query));
 
   return (await response(res)) as Res;
 }
@@ -41,13 +35,19 @@ export async function execute({ subject_id }: Param, query?: Query): Promise<Res
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({ subject_id }: Param, query?: Query): Promise<ResX['data']> {
-  const res = await execute({ subject_id }, query);
+export async function executeX({ subjectID }: Param, query?: Query): Promise<ResX['data']> {
+  const res = await execute({ subjectID }, query);
   if (res.ok) {
     return res.data;
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
+  query: Query;
 }
 
 export function swrKey(param: Param, query: Query): SWRKey {

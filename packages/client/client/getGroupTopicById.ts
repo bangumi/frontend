@@ -11,12 +11,7 @@ import { response } from '../utils';
 type M = 'getGroupTopicById';
 
 interface Param {
-  topic_id: number;
-}
-
-interface SWRKey {
-  op: M;
-  param: Param;
+  topicID: number;
 }
 
 type Res =
@@ -26,8 +21,8 @@ type Res =
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute({ topic_id }: Param): Promise<Res> {
-  const res = await fetch(`/p/groups/-/topics/${topic_id}`);
+export async function execute({ topicID }: Param): Promise<Res> {
+  const res = await fetch(`/p/groups/-/topics/${topicID}`);
 
   return (await response(res)) as Res;
 }
@@ -35,13 +30,18 @@ export async function execute({ topic_id }: Param): Promise<Res> {
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX({ topic_id }: Param): Promise<ResX['data']> {
-  const res = await execute({ topic_id });
+export async function executeX({ topicID }: Param): Promise<ResX['data']> {
+  const res = await execute({ topicID });
   if (res.ok) {
     return res.data;
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
 }
 
 export function swrKey(param: Param): SWRKey {

@@ -14,11 +14,6 @@ interface Param {
   name: string;
 }
 
-interface SWRKey {
-  op: M;
-  param: Param;
-}
-
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<404>;
@@ -41,6 +36,11 @@ export async function executeX({ name }: Param): Promise<ResX['data']> {
   }
 
   throw new ApiError(res);
+}
+
+interface SWRKey {
+  op: M;
+  param: Param;
 }
 
 export function swrKey(param: Param): SWRKey {

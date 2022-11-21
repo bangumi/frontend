@@ -15,10 +15,6 @@ interface RequestBody {
   readonly hCaptchaResponse: string;
 }
 
-interface SWRKey {
-  op: M;
-}
-
 type Res =
   | ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>
   | ApiResponse<400, operations[M]['responses'][400]['content']['application/json']>
