@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Typography } from '@bangumi/design';
 import type { Topic } from '@bangumi/types/common';
-import { getGroupTopicLink, getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './TopicsTable.module.less';
 
@@ -24,7 +24,7 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
             <tr key={topic.id}>
               <td className={styles.title}>
                 {/* TODO: replace to Link */}
-                <Typography.Link to={getGroupTopicLink(topic.id)} fontWeight='bold' isExternal>
+                <Typography.Link to={`/group/topic/${topic.id}`} fontWeight='bold'>
                   {topic.title}
                 </Typography.Link>
               </td>

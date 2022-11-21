@@ -12,7 +12,6 @@ import {
   Topic,
 } from '@bangumi/design';
 import { render as renderBBCode } from '@bangumi/utils';
-import { getGroupForumPage } from '@bangumi/utils/pages';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -92,9 +91,7 @@ const TopicPage: FC = () => {
                 <Link to={`/group/${group.name}`}>小组概览</Link>
               </Button>
               <Button type='text'>
-                <Link to={getGroupForumPage(group.name)} isExternal>
-                  组内讨论
-                </Link>
+                <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
               </Button>
               <Button type='text'>
                 <Link to={`/group/${group.name}/members`}>小组成员</Link>
