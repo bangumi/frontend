@@ -182,6 +182,8 @@ module.exports = {
   //   "\\.pnp\\.[^\\/]+$"
   // ],
 
+  transformIgnorePatterns: ['<rootDir>/node_modules/.pnpm/(?!(openapi-typescript-fetch)@)'],
+
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,
 

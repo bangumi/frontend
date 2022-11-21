@@ -33,6 +33,7 @@ it.each`
   ${400}     | ${{ details: ['a', 'b'] }}    | ${new UnknownError(['a', 'b'])}
   ${422}     | ${{}}                         | ${new Error(LoginErrorCode.E_CLIENT_ERROR)}
   ${418}     | ${{}}                         | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
+  ${429}     | ${{}}                         | ${new Error(LoginErrorCode.E_TOO_MANY_ERROR)}
   ${502}     | ${{}}                         | ${new Error(LoginErrorCode.E_SERVER_ERROR)}
 `(
   'should return error if request is failed with failed status $statusCode',
@@ -42,9 +43,11 @@ it.each`
     mockLogin(statusCode, resp);
 
     expect.assertions(1);
-    await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
-      expectedError,
-    );
+    await waitFor(async () => {
+      await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
+        expectedError,
+      );
+    });
   },
 );
 

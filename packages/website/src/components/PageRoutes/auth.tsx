@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { UserGroup } from '@bangumi/types/user';
+import type { UserGroup } from '@bangumi/client/user';
 
 import { useUser } from '../../hooks/use-user';
 

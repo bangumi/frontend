@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
+import type { GroupProfile } from '@bangumi/client/group';
 import { Image, Typography } from '@bangumi/design';
-import type { GroupProfile } from '@bangumi/types/group';
 
 import styles from './GroupHeader.module.less';
 
