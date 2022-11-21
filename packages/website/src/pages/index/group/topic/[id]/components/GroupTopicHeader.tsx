@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Avatar, Typography, Topic } from '@bangumi/design';
 import type { User, Group } from '@bangumi/types/group';
-import { getGroupForumPage, getUserProfileLink } from '@bangumi/website/utils/pages';
+import { getGroupForumPage, getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './GroupTopicHeader.module.less';
 

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
 import type { Reply, Comment as IComment, User } from '@bangumi/types/topic';
 import { render as renderBBCode } from '@bangumi/utils';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
@@ -74,8 +75,7 @@ const Comment: FC<CommentProps> = ({
     'bgm-comment__header--collapsed': shouldCollapsed,
   });
 
-  // todo
-  const url = `https://bgm.tv/${creator.username}`;
+  const url = getUserProfileLink(creator.username);
 
   if (shouldCollapsed) {
     let icon = null;

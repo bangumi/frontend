@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Typography } from '@bangumi/design';
 import type { Topic } from '@bangumi/types/common';
-import { getGroupTopicLink, getUserProfileLink } from '@bangumi/website/utils/pages';
+import { getGroupTopicLink, getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './TopicsTable.module.less';
 

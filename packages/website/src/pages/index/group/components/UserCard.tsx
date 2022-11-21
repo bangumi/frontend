@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Image, Typography } from '@bangumi/design';
-import { getUserProfileLink } from '@bangumi/website/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './UserCard.module.less';
 

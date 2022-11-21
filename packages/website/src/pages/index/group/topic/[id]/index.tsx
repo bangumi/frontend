@@ -12,9 +12,9 @@ import {
   Topic,
 } from '@bangumi/design';
 import { render as renderBBCode } from '@bangumi/utils';
+import { getGroupForumPage } from '@bangumi/utils/pages';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
-import { getGroupForumPage } from '@bangumi/website/utils/pages';
 
 import { ClampableContent } from '../../components/ClampableContent';
 import GroupTopicHeader from './components/GroupTopicHeader';
