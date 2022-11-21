@@ -67,6 +67,6 @@ export function swrKey(param: Param, query: Query): SWRKey {
   };
 }
 
-export async function X({ param, query }: SWRKey): Promise<ResX['data']> {
+export async function fetcher({ param, query }: SWRKey): Promise<ResX['data']> {
   return executeX(param, query);
 }

@@ -43,7 +43,7 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR(api.getCurrentUser.swrKey(), api.getCurrentUser.X, {
+  const { data: user, mutate } = useSWR(api.getCurrentUser.swrKey(), api.getCurrentUser.fetcher, {
     refreshWhenHidden: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

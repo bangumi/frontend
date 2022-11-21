@@ -45,6 +45,6 @@ export function swrKey(): SWRKey {
   return { op: 'getCurrentUser' };
 }
 
-export async function X(): Promise<ResX['data']> {
+export async function fetcher(): Promise<ResX['data']> {
   return executeX();
 }

@@ -263,7 +263,7 @@ async function generateClient(openapi) {
 
       swrKey.push(
         '',
-        'export async function X(',
+        'export async function fetcher(',
         ...param,
         '):Promise<ResX["data"]>{',
         '  return executeX(',

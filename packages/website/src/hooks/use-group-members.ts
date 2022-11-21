@@ -22,7 +22,7 @@ export function useGroupMembers(
 ): UseGroupMembersRet {
   const { data, error } = useSWR<ResponseWithPagination<GroupMember[]>, ApiError>(
     disable ? null : api.listGroupMembersByName.swrKey({ name }, { type, limit, offset }),
-    api.listGroupMembersByName.X,
+    api.listGroupMembersByName.fetcher,
     { suspense: true },
   );
 

@@ -53,6 +53,6 @@ export function swrKey(param: Param): SWRKey {
   };
 }
 
-export async function X({ param }: SWRKey): Promise<ResX['data']> {
+export async function fetcher({ param }: SWRKey): Promise<ResX['data']> {
   return executeX(param);
 }
