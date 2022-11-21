@@ -2,11 +2,16 @@ name: Update Type Definition
 on:
   repository_dispatch:
     types: [update-types]
+  workflow_dispatch:
+
 jobs:
   update-types:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: master
+          fetch-depth: 1
 
       - uses: pnpm/action-setup@v2.2.4
         with:
@@ -22,7 +27,7 @@ jobs:
         run: pnpm install
 
       - name: Build Type Definition
-        run: pnpm build:types
+        run: pnpm types build
         env:
           OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
 

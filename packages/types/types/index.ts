@@ -18,8 +18,8 @@ export interface paths {
   '/p/me': {
     get: operations['getCurrentUser'];
   };
-  '/p/groups/{group_id}/topics': {
-    get: operations['getGroupTopicsById'];
+  '/p/groups/{name}/topics': {
+    get: operations['getGroupTopicsByGroupName'];
   };
   '/p/subjects/{subject_id}/topics': {
     get: operations['getSubjectTopicsById'];
@@ -448,17 +448,17 @@ export interface operations {
       401: unknown;
     };
   };
-  getGroupTopicsById: {
+  getGroupTopicsByGroupName: {
     parameters: {
       path: {
-        /** 小组ID */
-        group_id: number;
+        /** 小组名称 */
+        name: string;
       };
       query: {
-        /** 小组 Limit */
-        limit: number;
-        /** 小组 Offset */
-        offset: number;
+        /** 分页参数 */
+        limit?: components['parameters']['default_query_limit'];
+        /** 分页参数 */
+        offset?: components['parameters']['default_query_offset'];
       };
     };
     responses: {
