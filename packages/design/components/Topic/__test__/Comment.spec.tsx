@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
 import type { CommentProps } from '../Comment';
@@ -77,12 +77,23 @@ describe('Normal Comment', () => {
     expect(container3.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(4);
   });
 
-  it('show edit button if current user is comment creator', () => {
-    const user = mockedCurrentUser;
-    user.id = 1;
+  it('show edit and delete button if current user is comment creator', () => {
+    const user = { ...mockedCurrentUser, id: 1 };
     const props = buildProps(false, singleComment, '233', 233, user);
     const { getByText } = render(<Comment {...props} />);
     expect(getByText('编辑')).toBeInTheDocument();
     expect(getByText('删除')).toBeInTheDocument();
+  });
+
+  it('click reply button should show editor form', () => {
+    const props = buildProps(false);
+    const { getByText, container } = render(<Comment {...props} />);
+    expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
+
+    fireEvent.click(getByText('回复'));
+    expect(container.getElementsByClassName('bgm-editor__form').length).toBe(1);
+
+    fireEvent.click(getByText('取消'));
+    expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
   });
 });

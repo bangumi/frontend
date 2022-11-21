@@ -58,12 +58,14 @@ CommentWithReplies.args = {
 
 export const SelfComment = Template.bind({});
 
+const selfUser = { ...mockedCurrentUser, id: 1 };
+
 SelfComment.args = {
   ...singleComment,
   isReply: false,
   is_friend: false,
   created_at: String(new Date()),
-  user: mockedCurrentUser,
+  user: selfUser,
   floor: 2,
 } as any;
 
