@@ -3,6 +3,7 @@ import React from 'react';
 
 import commentWithReplies from './__test__/fixtures/commentWithReplies.json';
 import singleComment from './__test__/fixtures/singleComment.json';
+import specialComment from './__test__/fixtures/specialComment.json';
 import Comment from './Comment';
 
 export default {
@@ -18,26 +19,31 @@ const Template: ComponentStory<typeof Comment> = (args) => {
   );
 };
 
+const SpecialCommentTemplate: ComponentStory<typeof Comment> = (args) => {
+  // 1 关闭 2 重开 5 下沉
+  const states = [1, 2, 5];
+  return (
+    <div style={{ width: 913 }}>
+      {states.map((state, idx) => (
+        <div key={idx} style={{ marginBottom: 10 }}>
+          <h1>State: {state}</h1>
+          <Comment {...args} state={state as any} />
+        </div>
+      ))}
+    </div>
+  );
+};
+
 export const SingleComment = Template.bind({});
 
 SingleComment.args = {
-  ...singleComment,
-  isReply: false,
-  user: null as any,
-  created_at: String(new Date()),
-  floor: 1,
-};
-
-export const CommentWithIcons = Template.bind({});
-
-CommentWithIcons.args = {
   ...singleComment,
   isReply: false,
   is_friend: true,
   originalPosterId: 1,
   created_at: String(new Date()),
   floor: 2,
-};
+} as any;
 
 export const CommentWithReplies = Template.bind({});
 CommentWithReplies.args = {
@@ -57,4 +63,8 @@ SelfComment.args = {
   created_at: String(new Date()),
   user: singleComment.creator,
   floor: 2,
-};
+} as any;
+
+export const SpecialComment = SpecialCommentTemplate.bind({});
+
+SpecialComment.args = specialComment as any;

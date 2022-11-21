@@ -3,9 +3,9 @@
   "text": "123456789~~~",
   "creator": {
     "avatar": {
-      "large": "https://lain.bgm.tv/pic/user/l/000/42/29/422922.jpg?r=1602346224",
-      "medium": "https://lain.bgm.tv/pic/user/m/000/42/29/422922.jpg?r=1602346224",
-      "small": "https://lain.bgm.tv/pic/user/s/000/42/29/422922.jpg?r=1602346224"
+      "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+      "medium": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+      "small": "https://lain.bgm.tv/pic/user/l/icon.jpg"
     },
     "sign": "我是签名",
     "url": "https://bgm.tv/user/123456789",
@@ -20,9 +20,9 @@
       "text": "123456789~~~",
       "creator": {
         "avatar": {
-          "large": "https://lain.bgm.tv/pic/user/l/000/42/29/422922.jpg?r=1602346224",
-          "medium": "https://lain.bgm.tv/pic/user/m/000/42/29/422922.jpg?r=1602346224",
-          "small": "https://lain.bgm.tv/pic/user/s/000/42/29/422922.jpg?r=1602346224"
+          "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/l/icon.jpg",
+          "small": "https://lain.bgm.tv/pic/user/l/icon.jpg"
         },
         "sign": "我是签名",
         "url": "https://bgm.tv/user/123456789",

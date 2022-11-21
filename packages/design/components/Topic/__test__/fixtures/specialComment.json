@@ -1,21 +1,21 @@
 {
-  "created_at": "2022-09-22T06:03:21Z",
-  "text": "123456789~~~",
+  "created_at": "2022-07-17T04:08:38Z",
+  "text": "",
   "creator": {
     "avatar": {
       "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
-      "medium": "https://lain.bgm.tv/pic/user/l/icon.jpg",
-      "small": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+      "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+      "small": "https://lain.bgm.tv/pic/user/s/icon.jpg"
     },
     "sign": "我是签名",
     "url": "https://bgm.tv/user/123456789",
     "username": "123456789",
     "nickname": "用户",
-    "id": 1,
-    "user_group": 11
+    "id": 123456789,
+    "user_group": 0
   },
   "replies": [],
-  "id": 2104702,
+  "id": 2056216,
   "is_friend": false,
   "state": 0
 }
