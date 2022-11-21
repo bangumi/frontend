@@ -12,6 +12,7 @@ export { default as EditorForm } from './components/EditorForm';
 export { default as RichContent } from './components/RichContent';
 export { default as Pagination } from './components/Pagination';
 export { default as Topic } from './components/Topic';
+export { default as Layout } from './components/Layout';
 
 export type { ButtonProps } from './components/Button';
 export type { LinkProps } from './components/Typography';
@@ -26,3 +27,4 @@ export type { SectionProps } from './components/Section';
 export type { EditorFormProps } from './components/EditorForm';
 export type { RichContentProps } from './components/RichContent';
 export type { PaginationProps } from './components/Pagination';
+export type { LayoutProps } from './components/Layout';

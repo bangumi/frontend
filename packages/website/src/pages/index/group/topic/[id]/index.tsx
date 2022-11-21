@@ -10,6 +10,7 @@ import {
   Typography,
   Button,
   Topic,
+  Layout,
 } from '@bangumi/design';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
@@ -46,32 +47,35 @@ const TopicPage: FC = () => {
         createdAt={topicDetail.created_at!}
         group={topicDetail.group}
       />
-      <div className={styles.columnContainer}>
-        <div className={styles.leftCol}>
-          {/* Topic content */}
-          <RichContent html={parsedText} />
-          {/* Topic Comments */}
-          <div className={styles.replies}>
-            {topicDetail.comments.map((comment, idx) => (
-              <Comment
-                key={comment.id}
-                isReply={false}
-                floor={idx + 2}
-                originalPosterId={originalPosterId}
-                user={user}
-                {...comment}
-              />
-            ))}
-          </div>
-          {/* Reply BBCode Editor */}
-          {!isClosed && user && (
-            <div className={styles.replyFormContainer}>
-              <Avatar src={user.avatar.large} size='medium' />
-              <EditorForm className={styles.replyForm} placeholder='添加新回复...' />
+      <Layout
+        type='alpha'
+        leftChildren={
+          <>
+            {/* Topic content */}
+            <RichContent html={parsedText} />
+            {/* Topic Comments */}
+            <div className={styles.replies}>
+              {topicDetail.comments.map((comment, idx) => (
+                <Comment
+                  key={comment.id}
+                  isReply={false}
+                  floor={idx + 2}
+                  originalPosterId={originalPosterId}
+                  user={user}
+                  {...comment}
+                />
+              ))}
+              {/* Reply BBCode Editor */}
+              {!isClosed && user && (
+                <div className={styles.replyFormContainer}>
+                  <Avatar src={user.avatar.large} size='medium' />
+                  <EditorForm className={styles.replyForm} placeholder='添加新回复...' />
+                </div>
+              )}
             </div>
-          )}
-        </div>
-        <div className={styles.rightCol}>
+          </>
+        }
+        rightChildren={
           <Section title='小组信息'>
             <div className={styles.groupInfo}>
               <Avatar src={group.icon} size='medium' />
@@ -98,8 +102,8 @@ const TopicPage: FC = () => {
               </Button>
             </div>
           </Section>
-        </div>
-      </div>
+        }
+      />
     </>
   );
 };
