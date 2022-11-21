@@ -514,6 +514,8 @@ paths:
                 allOf:
                   - $ref: '#/components/schemas/Paged'
                   - type: object
+                    required:
+                      - data
                     properties:
                       data:
                         title: Data
@@ -947,7 +949,6 @@ components:
         - total
         - limit
         - offset
-        - data
       properties:
         total:
           title: Total
@@ -958,16 +959,13 @@ components:
         offset:
           title: Offset
           type: integer
-        data:
-          title: Data
-          type: array
-          items:
-            type: object
     Paged_Topic:
       title: Paged[Topic]
       allOf:
         - $ref: '#/components/schemas/Paged'
         - type: object
+          required:
+            - data
           properties:
             data:
               title: Data
