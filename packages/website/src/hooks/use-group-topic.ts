@@ -8,9 +8,11 @@ type TopicsResp = {
   group: Group;
 } & GroupTopics;
 
-function useGroupTopic(id: string): TopicsResp | undefined {
-  const { data: topicDetail } = useSWR<TopicsResp>(`/p/groups/-/topics/${id}`, privateGet);
-  return topicDetail;
+function useGroupTopic(id: string): TopicsResp {
+  const { data: topicDetail } = useSWR<TopicsResp>(`/p/groups/-/topics/${id}`, privateGet, {
+    suspense: true,
+  });
+  return topicDetail!;
 }
 
 export default useGroupTopic;

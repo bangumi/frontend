@@ -27,14 +27,10 @@ const { Comment } = Topic;
 const TopicPage: FC = () => {
   const { id } = useParams();
   if (!id) {
-    // Todo: ErrorBoundary
     throw new Error('BUG: topic id is required');
   }
   const topicDetail = useGroupTopic(id);
   const { user } = useUser();
-  if (!topicDetail) {
-    return null;
-  }
   const originalPosterId = topicDetail.creator.id;
   const parsedText = renderBBCode(topicDetail.text);
   const isClosed = topicDetail.state === 1;
