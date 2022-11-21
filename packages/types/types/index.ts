@@ -337,13 +337,11 @@ export interface components {
       limit: number;
       /** Offset */
       offset: number;
-      /** Data */
-      data: { [key: string]: unknown }[];
     };
     /** Paged[Topic] */
     Paged_Topic: components['schemas']['Paged'] & {
       /** Data */
-      data?: components['schemas']['Topic'][];
+      data: components['schemas']['Topic'][];
     };
     /** Comments */
     Comments: {
@@ -731,7 +729,7 @@ export interface operations {
         content: {
           'application/json': components['schemas']['Paged'] & {
             /** Data */
-            data?: components['schemas']['GroupMember'][];
+            data: components['schemas']['GroupMember'][];
           };
         };
       };
