@@ -12,6 +12,7 @@ export default {
 };
 
 const Template: ComponentStory<typeof Comment> = (args) => {
+  const states = [1, 2, 5];
   return (
     <div style={{ width: 913 }}>
       <Comment {...args} />
@@ -20,8 +21,8 @@ const Template: ComponentStory<typeof Comment> = (args) => {
 };
 
 const SpecialCommentTemplate: ComponentStory<typeof Comment> = (args) => {
-  // 1 关闭 2 重开 5 下沉
-  const states = [1, 2, 5];
+  // 1 关闭 2 重开 5 下沉 6 被用户删除 7 违反社区指导原则，已被删除
+  const states = [1, 2, 5, 6, 7];
   return (
     <div style={{ width: 913 }}>
       {states.map((state, idx) => (
@@ -67,4 +68,10 @@ SelfComment.args = {
 
 export const SpecialComment = SpecialCommentTemplate.bind({});
 
-SpecialComment.args = specialComment as any;
+SpecialComment.args = {
+  ...specialComment,
+  isReply: false,
+  is_friend: false,
+  created_at: String(new Date()),
+  floor: 2,
+} as any;
