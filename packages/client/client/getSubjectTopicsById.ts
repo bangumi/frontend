@@ -32,10 +32,7 @@ type Res =
 
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
-export async function execute(
-  { subject_id }: Param,
-  query?: { limit?: number; offset?: number },
-): Promise<Res> {
+export async function execute({ subject_id }: Param, query?: Query): Promise<Res> {
   let _requestPath = `/p/subjects/${subject_id}/topics`;
   if (query !== undefined) {
     // @ts-expect-error
@@ -53,10 +50,7 @@ export async function execute(
 /**
  * method throw error when 'res.ok' is false
  */
-export async function executeX(
-  { subject_id }: Param,
-  query?: { limit?: number; offset?: number },
-): Promise<ResX['data']> {
+export async function executeX({ subject_id }: Param, query?: Query): Promise<ResX['data']> {
   const res = await execute({ subject_id }, query);
   if (res.ok) {
     return res.data;

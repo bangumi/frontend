@@ -70,7 +70,7 @@ async function generateClient(openapi) {
     const returnString = [];
 
     const QueryType = [];
-    let queryTypeString = '';
+    const queryTypeString = '';
 
     const fetchOptions = [];
     const swrKey = [];
@@ -96,8 +96,7 @@ async function generateClient(openapi) {
       if (QueryType.filter((x) => x[0].endsWith('?')).length) {
         queryName = queryName + '?';
       }
-      queryTypeString = `{${QueryType.map((x) => x.join(':')).join(';')}}`;
-      pathParameters.push([queryName, queryTypeString]);
+      pathParameters.push([queryName, 'Query']);
     }
 
     let requestPath = '`' + path.replace('{', '${') + '`';
