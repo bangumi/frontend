@@ -67,7 +67,7 @@ const TopicPage: FC = () => {
           {/* Reply BBCode Editor */}
           {!isClosed && user && (
             <div className={styles.replyFormContainer}>
-              <Avatar src={user.avatar.medium} size='medium' />
+              <Avatar src={user.avatar.large} size='medium' />
               <EditorForm className={styles.replyForm} placeholder='添加新回复...' />
             </div>
           )}
@@ -78,7 +78,7 @@ const TopicPage: FC = () => {
               <Avatar src={group.icon} size='medium' />
               <div className={styles.groupDetails}>
                 <Link to={`/group/${group.name}`}>{group.title}</Link>
-                <div>{`${group.total_members} 名成员`}</div>
+                <span>{`${group.total_members} 名成员`}</span>
               </div>
             </div>
             <ClampableContent
