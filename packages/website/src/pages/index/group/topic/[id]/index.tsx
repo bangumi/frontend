@@ -38,6 +38,7 @@ const TopicPage: FC = () => {
   return (
     <>
       <GroupTopicHeader
+        id={topicDetail.id}
         title={topicDetail.title}
         creator={topicDetail.creator}
         createdAt={topicDetail.created_at!}
@@ -48,7 +49,9 @@ const TopicPage: FC = () => {
         leftChildren={
           <>
             {/* Topic content */}
-            <RichContent html={parsedText} id={`post_${topicDetail.id}`} />
+            <div id={`post_${topicDetail.id}`}>
+              <RichContent html={parsedText} />
+            </div>
             {/* Topic Comments */}
             <div className={styles.replies}>
               {topicDetail.comments.map((comment, idx) => (

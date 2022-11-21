@@ -133,7 +133,7 @@ const Comment: FC<CommentProps> = ({
                 {isFriend ? <Friend /> : null}
                 {!isReply && creator.sign ? <span>{`// ${unescape(creator.sign)}`}</span> : null}
               </div>
-              <CommentInfo createdAt={createAt} floor={floor} />
+              <CommentInfo createdAt={createAt} floor={floor} id={`post_${props.id}`} />
             </span>
             <RenderContent state={state} text={text!} />
           </div>

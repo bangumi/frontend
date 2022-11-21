@@ -12,12 +12,13 @@ interface Header {
   createdAt: string | Date;
   creator: User;
   group: Group;
+  id: number;
 }
 
 const Link = Typography.Link;
 const CommentInfo = Topic.CommentInfo;
 
-const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group }) => {
+const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group, id }) => {
   return (
     <div className={styles.groupTopicHeader}>
       <Avatar src={creator.avatar.large} size='medium' />
@@ -32,7 +33,7 @@ const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group }) => {
             <span>»</span>
             <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
           </div>
-          <CommentInfo createdAt={createdAt} floor='1' />
+          <CommentInfo createdAt={createdAt} floor='1' id={`post_${id}`} />
         </span>
         <h1 className={styles.title}>{title}</h1>
       </div>
