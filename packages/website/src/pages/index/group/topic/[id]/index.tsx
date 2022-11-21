@@ -48,7 +48,7 @@ const TopicPage: FC = () => {
         leftChildren={
           <>
             {/* Topic content */}
-            <RichContent html={parsedText} />
+            <RichContent html={parsedText} id={`post_${topicDetail.id}`} />
             {/* Topic Comments */}
             <div className={styles.replies}>
               {topicDetail.comments.map((comment, idx) => (
