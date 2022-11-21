@@ -383,3 +383,108 @@ exports[`Normal Comment should render with reply 1`] = `
   </div>
 </div>
 `;
+
+exports[`Special Comment should render state is 1 1`] = `
+<div>
+  <div
+    class="bgm-comment__header bgm-comment__header--collapsed"
+    id="post_2056216"
+  >
+    <span
+      class="bgm-comment__tip"
+    >
+      <div
+        class="creator-info"
+      >
+        <div />
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/user/123456789"
+        >
+          用户
+        </a>
+        <div
+          class="bgm-comment__content"
+        >
+          关闭了该主题
+        </div>
+      </div>
+      <span
+        class="bgm-topic__commentInfo"
+      >
+        2022-7-17 04:08
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Special Comment should render state is 2 1`] = `
+<div>
+  <div
+    class="bgm-comment__header bgm-comment__header--collapsed"
+    id="post_2056216"
+  >
+    <span
+      class="bgm-comment__tip"
+    >
+      <div
+        class="creator-info"
+      >
+        <div />
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/user/123456789"
+        >
+          用户
+        </a>
+        <div
+          class="bgm-comment__content"
+        >
+          重新开启了该主题
+        </div>
+      </div>
+      <span
+        class="bgm-topic__commentInfo"
+      >
+        2022-7-17 04:08
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Special Comment should render state is 5 1`] = `
+<div>
+  <div
+    class="bgm-comment__header bgm-comment__header--collapsed"
+    id="post_2056216"
+  >
+    <span
+      class="bgm-comment__tip"
+    >
+      <div
+        class="creator-info"
+      >
+        <div />
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/user/123456789"
+        >
+          用户
+        </a>
+        <div
+          class="bgm-comment__content"
+        >
+          下沉了该主题
+        </div>
+      </div>
+      <span
+        class="bgm-topic__commentInfo"
+      >
+        2022-7-17 04:08
+      </span>
+    </span>
+  </div>
+</div>
+`;
