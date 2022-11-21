@@ -33,10 +33,7 @@ type Res =
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
 export async function execute({ subject_id }: Param, query?: Query): Promise<Res> {
-  const res = await fetch(buildURL(`/p/subjects/${subject_id}/topics`, query), {
-    method: 'get',
-    credentials: 'same-origin',
-  });
+  const res = await fetch(buildURL(`/p/subjects/${subject_id}/topics`, query));
 
   return (await response(res)) as Res;
 }

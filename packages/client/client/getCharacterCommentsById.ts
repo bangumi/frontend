@@ -27,10 +27,7 @@ type Res =
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
 export async function execute({ character_id }: Param): Promise<Res> {
-  const res = await fetch(`/p/characters/${character_id}/comments`, {
-    method: 'get',
-    credentials: 'same-origin',
-  });
+  const res = await fetch(`/p/characters/${character_id}/comments`);
 
   return (await response(res)) as Res;
 }

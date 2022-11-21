@@ -20,7 +20,6 @@ type ResX = ApiResponse<204, undefined>;
 export async function execute(): Promise<Res> {
   const res = await fetch(`/p/logout`, {
     method: 'post',
-    credentials: 'same-origin',
   });
 
   return (await response(res)) as Res;

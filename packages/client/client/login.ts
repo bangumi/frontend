@@ -37,7 +37,6 @@ export async function execute({ email, password, hCaptchaResponse }: RequestBody
     headers: {
       'content-type': 'application/json',
     },
-    credentials: 'same-origin',
   });
 
   return (await response(res)) as Res;

@@ -64,15 +64,15 @@ async function generateClient(openapi) {
     const beforeFunction = [`type M = '${operationId}'`];
 
     const ParamType = [];
+    const QueryType = [];
 
     const pathParameters = [];
-
     const returnString = [];
 
-    const QueryType = [];
-    const queryTypeString = '';
-
     const fetchOptions = [];
+    if (method !== 'get') {
+      fetchOptions.push(`method: '${method}',`);
+    }
     const swrKey = [];
 
     if (parameters) {
@@ -291,11 +291,11 @@ async function generateClient(openapi) {
         .map((x) => x.join(':'))
         .join(',')}):Promise<${methResponseType}>{`,
       ...beforeFetch,
-      `  const res= await fetch(${requestPath},{`,
-      `    method: ${JSON.stringify(method)},`,
+      `  const res= await fetch(${requestPath},`,
+      fetchOptions.length ? '{' : '',
       ...fetchOptions,
-      `    credentials: 'same-origin',`,
-      `  })`,
+      fetchOptions.length ? '}' : '',
+      `  )`,
       ``,
       ...returnString,
       ``,
