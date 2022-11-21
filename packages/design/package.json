@@ -5,19 +5,21 @@
   "main": "index.tsx",
   "dependencies": {
     "dayjs": "^1.11.3",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "reset-css": "^5.0.1"
   },
   "devDependencies": {
     "@bangumi/icons": "workspace:*",
-    "@bangumi/utils": "workspace:*",
     "@bangumi/types": "workspace:*",
+    "@bangumi/utils": "workspace:*",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",
     "@storybook/builder-vite": "^0.2.5",
     "@storybook/react": "^6.5.13",
     "@testing-library/react": "^13.4.0",
+    "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
     "classnames": "^2.3.2",

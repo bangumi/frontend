@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { unescape } from 'lodash-es';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
@@ -127,12 +128,7 @@ const Comment: FC<CommentProps> = ({
                 </Link>
                 {originalPosterId === creator.id ? <OriginalPoster /> : null}
                 {isFriend ? <Friend /> : null}
-                {!isReply ? (
-                  // Todo: XSS ?
-                  creator.sign ? (
-                    <span dangerouslySetInnerHTML={{ __html: `// ${creator.sign}` }} />
-                  ) : null
-                ) : null}
+                {!isReply && creator.sign ? <span>{`// ${unescape(creator.sign)}`}</span> : null}
               </div>
               <CommentInfo createdAt={createAt} floor={floor} />
             </span>
