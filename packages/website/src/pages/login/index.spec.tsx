@@ -53,15 +53,22 @@ it('should redirect user to homepage after success login', async () => {
   });
 });
 
-it.each`
-  statusCode | resp                                       | expectedError
-  ${400}     | ${{ details: ['验证码错误，请再试一遍'] }} | ${'验证码错误，请再试一遍'}
-  ${401}     | ${{ details: { remain: 5 } }}              | ${'用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试'}
-  ${422}     | ${{}}                                      | ${'请求错误'}
-  ${502}     | ${{}}                                      | ${'服务器错误，请稍后重试'}
-`(
-  'should show error message when response is %statusCode}',
-  async ({ statusCode, resp, expectedError }) => {
+it.each([
+  {
+    statusCode: 400,
+    resp: { details: ['验证码错误，请再试一遍'] },
+    expectedError: '验证码错误，请再试一遍',
+  },
+  {
+    statusCode: 401,
+    resp: { details: { remain: 5 } },
+    expectedError: '用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试',
+  },
+  { statusCode: 422, expectedError: '请求错误' },
+  { statusCode: 502, expectedError: '服务器错误，请稍后重试' },
+])(
+  'should show error message when response is $statusCode',
+  async ({ statusCode, resp = {}, expectedError }) => {
     mockLogin(statusCode, resp);
     const { getByPlaceholderText, getByText } = render(
       <UserProvider>
