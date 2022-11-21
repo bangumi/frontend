@@ -10,7 +10,7 @@ export interface CommentInfoProps {
 const spaces = '\u00A0'.repeat(2);
 
 const CommentInfo: React.FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false }) => {
-  const date = dayjs(createdAt).format('YYYY-M-D HH:MM');
+  const date = dayjs(createdAt).format('YYYY-M-D HH:mm');
   return !isSpecial ? (
     <span className='bgm-topic__commentInfo'>
       #{floor}
