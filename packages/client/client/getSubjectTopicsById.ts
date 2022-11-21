@@ -6,7 +6,7 @@
 import { ApiError } from '../error';
 import type { operations } from '../types';
 import type { ApiResponse } from '../types/utils';
-import { response } from '../utils';
+import { buildURL, response } from '../utils';
 
 type M = 'getSubjectTopicsById';
 
@@ -33,13 +33,7 @@ type Res =
 type ResX = ApiResponse<200, operations[M]['responses'][200]['content']['application/json']>;
 
 export async function execute({ subject_id }: Param, query?: Query): Promise<Res> {
-  let _requestPath = `/p/subjects/${subject_id}/topics`;
-  if (query !== undefined) {
-    // @ts-expect-error
-    _requestPath += '?' + new URLSearchParams(query).toString();
-  }
-
-  const res = await fetch(_requestPath, {
+  const res = await fetch(buildURL(`/p/subjects/${subject_id}/topics`, query), {
     method: 'get',
     credentials: 'same-origin',
   });

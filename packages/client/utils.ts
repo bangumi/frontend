@@ -17,3 +17,12 @@ export async function response(res: Response) {
     ok: res.ok,
   };
 }
+
+export function buildURL(u: string, query?: unknown): string {
+  if (query !== undefined) {
+    // @ts-expect-error
+    return u + '?' + new URLSearchParams(query).toString();
+  }
+
+  return u;
+}

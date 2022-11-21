@@ -100,21 +100,22 @@ async function generateClient(openapi) {
     }
 
     let requestPath = '`' + path.replace('{', '${') + '`';
-    const handleQuery = [];
+    const beforeFetch = [];
     if (QueryType.length) {
-      handleQuery.push(`let _requestPath = ${requestPath}`);
-      requestPath = '_requestPath';
-      if (queryName.endsWith('?')) {
-        handleQuery.push(`if(query !== undefined){`);
-
-        handleQuery.push('// @ts-expect-error');
-        handleQuery.push(`_requestPath += '?' + new URLSearchParams(query).toString()`);
-        handleQuery.push(`}`);
-      } else {
-        handleQuery.push('// @ts-expect-error');
-        handleQuery.push(`_requestPath += '?' + new URLSearchParams(query).toString()`);
-      }
-      handleQuery.push('');
+      requestPath = `buildURL(${requestPath}, query)`;
+      // handleQuery.push(`let _requestPath = ${requestPath}`);
+      // requestPath = '_requestPath';
+      // if (queryName.endsWith('?')) {
+      //   handleQuery.push(`if(query !== undefined){`);
+      //
+      //   handleQuery.push('// @ts-expect-error');
+      //   handleQuery.push(`_requestPath += '?' + new URLSearchParams(query).toString()`);
+      //   handleQuery.push(`}`);
+      // } else {
+      //   handleQuery.push('// @ts-expect-error');
+      //   handleQuery.push(`_requestPath += '?' + new URLSearchParams(query).toString()`);
+      // }
+      // handleQuery.push('');
     }
 
     if (method !== 'get') {
@@ -282,14 +283,14 @@ async function generateClient(openapi) {
       `import { ApiError } from '../error';`,
       `import type { operations } from '../types';`,
       `import type { ApiResponse } from '../types/utils';`,
-      `import {response} from '../utils';`,
+      `import { buildURL, response } from '../utils';`,
       '',
       ...beforeFunction,
       '',
       `export async function execute(${pathParameters
         .map((x) => x.join(':'))
         .join(',')}):Promise<${methResponseType}>{`,
-      ...handleQuery,
+      ...beforeFetch,
       `  const res= await fetch(${requestPath},{`,
       `    method: ${JSON.stringify(method)},`,
       ...fetchOptions,
