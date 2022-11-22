@@ -26,6 +26,9 @@
     "lint-staged": "lint-staged",
     "type-check": "tsc --noEmit"
   },
+  "engines": {
+    "node": ">=18.12.1"
+  },
   "prettier": {
     "printWidth": 100,
     "singleQuote": true,
