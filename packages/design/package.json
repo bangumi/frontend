@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@bangumi/icons": "workspace:*",
-    "@bangumi/types": "workspace:*",
+    "@bangumi/client": "workspace:*",
     "@bangumi/utils": "workspace:*",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",

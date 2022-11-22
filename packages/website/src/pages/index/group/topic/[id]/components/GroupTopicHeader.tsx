@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React from 'react';
 
+import type { User, Group } from '@bangumi/client/group';
 import { Avatar, Typography, Topic } from '@bangumi/design';
-import type { User, Group } from '@bangumi/types/group';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './GroupTopicHeader.module.less';

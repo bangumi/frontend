@@ -4,7 +4,7 @@ import { useParams, Link as RouterLink } from 'react-router-dom';
 import { Section } from '@bangumi/design';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
-import { DescriptionClamp, useGroupTopic } from '@bangumi/website/hooks/use-group';
+import { DescriptionClamp, useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 
 import { useGroupContext } from '../[name]';
 import CommonStyles from '../common.module.less';
@@ -18,7 +18,7 @@ const GroupHome: React.FC = () => {
     throw new UnreadableCodeError('BUG: name is undefined');
   }
   const groupContext = useGroupContext();
-  const recentTopics = useGroupTopic(name);
+  const recentTopics = useGroupRecentTopics(name);
 
   if (!groupContext?.groupRet?.group || !recentTopics.data.length) {
     return null;

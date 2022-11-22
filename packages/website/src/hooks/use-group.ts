@@ -15,7 +15,10 @@ export interface UseGroupRet {
   setDescriptionClamp: (val: DescriptionClamp) => void;
 }
 
-export function useGroupTopic(name: string, { limit = 20, offset = 0 }: Partial<Pagination> = {}) {
+export function useGroupRecentTopics(
+  name: string,
+  { limit = 20, offset = 0 }: Partial<Pagination> = {},
+) {
   const { data: recentTopicsResp } = useSWR(
     api.getGroupTopicsByGroupName.swrKey({ name }, { limit, offset }),
     api.getGroupTopicsByGroupName.fetcher,

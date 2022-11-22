@@ -26,10 +26,10 @@ const { Comment } = Topic;
 
 const TopicPage: FC = () => {
   const { id } = useParams();
-  if (!id) {
+  if (!id || Number.isNaN(Number(id))) {
     throw new Error('BUG: topic id is required');
   }
-  const topicDetail = useGroupTopic(id);
+  const topicDetail = useGroupTopic(Number(id));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
   const parsedText = renderBBCode(topicDetail.text);

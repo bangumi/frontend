@@ -177,9 +177,10 @@ module.exports = {
   // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  transformIgnorePatterns: ['<rootDir>/node_modules/.pnpm/(?!(lodash-es)@)'],
-
-  transformIgnorePatterns: ['<rootDir>/node_modules/.pnpm/(?!(openapi-typescript-fetch)@)'],
+  transformIgnorePatterns: [
+    '<rootDir>/node_modules/.pnpm/(?!(lodash-es)@)',
+    '<rootDir>/node_modules/.pnpm/(?!(openapi-typescript-fetch)@)',
+  ],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

@@ -3,8 +3,8 @@ import { unescape } from 'lodash-es';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
+import type { Reply, Comment as IComment, User } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
-import type { Reply, Comment as IComment, User } from '@bangumi/types/topic';
 import { render as renderBBCode } from '@bangumi/utils';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
