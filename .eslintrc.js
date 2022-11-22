@@ -75,6 +75,7 @@ module.exports = {
         },
       },
       rules: {
+        '@typescript-eslint/return-await': ['error', 'in-try-catch'],
         '@typescript-eslint/no-unnecessary-condition': 'off',
         '@typescript-eslint/ban-types': [
           'error',

@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
+import type { Topic } from '@bangumi/client/common';
 import { Typography } from '@bangumi/design';
-import type { Topic } from '@bangumi/types/common';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './TopicsTable.module.less';

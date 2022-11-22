@@ -4,7 +4,7 @@ import { rest } from 'msw';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import type { GroupMember, ResponseWithPagination } from '@bangumi/types/group';
+import type { GroupMember, ResponseWithPagination } from '@bangumi/client/group';
 
 import { server as mockServer } from '../../../../../mocks/server';
 import { renderPage } from '../../../../../utils/test-utils';

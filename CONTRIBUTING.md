@@ -32,6 +32,20 @@ git remote add upstream https://github.com/bangumi/frontend.git
 git checkout -b <BRANCH_NAME>
 ```
 
+- 启动开发服务器
+
+使用生产后端（next.bgm.tv）
+
+```bash
+pnpm dev
+```
+
+使用测试后端（dev.bgm38.com）
+
+```bash
+pnpm dev --mode stage
+```
+
 - 提交前确认所有的测试、lint 通过；
 
 ```bash

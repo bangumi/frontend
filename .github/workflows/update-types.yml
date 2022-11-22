@@ -26,10 +26,16 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Build Type Definition
-        run: pnpm types build
+      - name: Update OpenAPI Definition
+        run: pnpm client update-openapi
         env:
           OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
+
+      - name: Build Type Definition
+        run: pnpm client build
+
+      - name: Format
+        run: pnpm lint --fix && pnpm prettier
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4

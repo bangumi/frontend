@@ -2,8 +2,8 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import type { GroupProfile } from '@bangumi/client/group';
 import { Section, Tab, Layout } from '@bangumi/design';
-import type { GroupProfile } from '@bangumi/types/group';
 import { keyBy } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';

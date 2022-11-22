@@ -25,6 +25,7 @@ const Login: React.FC = () => {
     [LoginErrorCode.E_NETWORK_ERROR]: '网络错误，请稍后重试',
     [LoginErrorCode.E_UNKNOWN_ERROR]: '未知错误',
     [LoginErrorCode.E_CLIENT_ERROR]: '请求错误',
+    [LoginErrorCode.E_TOO_MANY_ERROR]: '登录失败次数太多，请过段时间再重试',
     [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试',
   };
 
@@ -54,7 +55,6 @@ const Login: React.FC = () => {
       }
 
       if (error instanceof UnknownError) {
-        console.error(error);
         setErrorMessage(error.message);
         return;
       }
