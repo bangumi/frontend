@@ -65,6 +65,7 @@ it.each([
     expectedError: '用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试',
   },
   { statusCode: 422, expectedError: '请求错误' },
+  { statusCode: 429, expectedError: '登录失败次数太多，请过段时间再重试' },
   { statusCode: 502, expectedError: '服务器错误，请稍后重试' },
 ])(
   'should show error message when response is $statusCode',
