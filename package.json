@@ -27,7 +27,8 @@
     "type-check": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=18.12.1"
+    "node": ">=18.12.1",
+    "pnpm": "^7.10.0"
   },
   "prettier": {
     "printWidth": 100,
