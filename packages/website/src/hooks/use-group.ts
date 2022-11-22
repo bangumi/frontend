@@ -2,19 +2,12 @@ import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 
 import { api } from '@bangumi/client';
-import type {
-  GroupProfile,
-  Pagination,
-  ResponseWithPagination,
-  Topic,
-} from '@bangumi/client/group';
+import type { GroupProfile, Pagination } from '@bangumi/client/group';
 
 export enum DescriptionClamp {
   clamp = 'clamp',
   unclamp = 'unclamp',
 }
-
-export type TopicApiRes = ResponseWithPagination<Topic[]>;
 
 export interface UseGroupRet {
   group: GroupProfile | undefined;
@@ -23,7 +16,7 @@ export interface UseGroupRet {
 }
 
 export function useGroupTopic(name: string, { limit = 20, offset = 0 }: Partial<Pagination> = {}) {
-  const { data: recentTopicsResp } = useSWR<TopicApiRes>(
+  const { data: recentTopicsResp } = useSWR(
     api.getGroupTopicsByGroupName.swrKey({ name }, { limit, offset }),
     api.getGroupTopicsByGroupName.fetcher,
     { suspense: true },
