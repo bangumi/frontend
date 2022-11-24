@@ -1,0 +1,6 @@
+!packages/design/.storybook
+packages/design/storybook-static
+packages/client/types
+jest.config.js
+node_modules
+dist
