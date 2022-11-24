@@ -14,7 +14,7 @@ runs:
     - name: Get npm cache directory
       id: npm-cache-dir
       shell: bash
-      run: echo "::set-output name=dir::$(pnpm store path --silent)"
+      run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
 
     - uses: actions/cache@v3
       id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
