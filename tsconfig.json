@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["jest", "vite-plugin-svgr/client", "@testing-library/jest-dom"],
+    "types": ["node", "jest", "vite-plugin-svgr/client", "@testing-library/jest-dom"],
     "paths": { "@bangumi/website/*": ["packages/website/src/*"] }
   },
   "include": ["./packages", "./jest-setup.ts", ".eslintrc.js", "./packages/design/.storybook/*"]
