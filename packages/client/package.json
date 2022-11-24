@@ -17,7 +17,7 @@
     "msw": "^0.36.5",
     "node-fetch": "^3.3.0",
     "openapi-types": "^12",
-    "openapi-typescript": "^6.0.3",
+    "openapi-typescript": "^6.1.0",
     "orval": "^6.10.3"
   }
 }
