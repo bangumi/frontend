@@ -2,6 +2,7 @@ module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-css-modules'],
   customSyntax: 'postcss-less',
   rules: {
+    'import-notation': null,
     'declaration-colon-newline-after': null,
     'value-list-comma-newline-after': null,
     'selector-class-pattern': null,
