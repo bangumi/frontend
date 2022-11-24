@@ -97,7 +97,7 @@ importers:
       msw: ^0.36.5
       node-fetch: ^3.3.0
       openapi-types: ^12
-      openapi-typescript: ^6.0.3
+      openapi-typescript: ^6.1.0
       orval: ^6.10.3
     devDependencies:
       '@apidevtools/json-schema-ref-parser': 9.0.9
@@ -107,7 +107,7 @@ importers:
       msw: 0.36.8
       node-fetch: 3.3.0
       openapi-types: 12.0.2
-      openapi-typescript: 6.0.3
+      openapi-typescript: 6.1.0
       orval: 6.10.3_openapi-types@12.0.2
 
   packages/design:
@@ -13790,8 +13790,8 @@ packages:
     engines: {node: '>= 12.0.0', npm: '>= 7.0.0'}
     dev: false
 
-  /openapi-typescript/6.0.3:
-    resolution: {integrity: sha512-zEIqeBdpLRNmfPJX6GG4ntnOesDPvzZ7VM+1P6/PzBUP6KVSgAaz32Ly1baMydVzyvBLVcJBHYDY8WRwasiIyg==}
+  /openapi-typescript/6.1.0:
+    resolution: {integrity: sha512-4G0hQu9zXHESZe4fZouucmA+6J5oKSBNYzG0gPbV9V4aKBNIwfUY86ur/cxyTMzuN9vQuAiMe//q4ZMXgMvGtQ==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
