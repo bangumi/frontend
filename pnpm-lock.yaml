@@ -96,7 +96,7 @@ importers:
       js-yaml: ^4.1.0
       msw: ^0.36.5
       node-fetch: ^3.3.0
-      openapi-types: ^7
+      openapi-types: ^12
       openapi-typescript: ^6.0.3
       orval: ^6.10.3
     devDependencies:
@@ -106,9 +106,9 @@ importers:
       js-yaml: 4.1.0
       msw: 0.36.8
       node-fetch: 3.3.0
-      openapi-types: 7.2.3
+      openapi-types: 12.0.2
       openapi-typescript: 6.0.3
-      orval: 6.10.3_openapi-types@7.2.3
+      orval: 6.10.3_openapi-types@12.0.2
 
   packages/design:
     specifiers:
@@ -307,7 +307,7 @@ packages:
     resolution: {integrity: sha512-QAkD5kK2b1WfjDS/UQn/qQkbwF31uqRjPTrsCs5ZG9BQGAkjwvqGFjjPqAuzac/IYzpPtRzjCP1WrTuAIjMrXg==}
     dev: true
 
-  /@apidevtools/swagger-parser/10.1.0_openapi-types@7.2.3:
+  /@apidevtools/swagger-parser/10.1.0_openapi-types@12.0.2:
     resolution: {integrity: sha512-9Kt7EuS/7WbMAUv2gSziqjvxwDbFSg3Xeyfuj5laUODX8o/k/CpsAKiQ8W7/R88eXFTMbJYg6+7uAmOWNKmwnw==}
     peerDependencies:
       openapi-types: '>=7'
@@ -319,7 +319,7 @@ packages:
       ajv: 8.11.2
       ajv-draft-04: 1.0.0_ajv@8.11.2
       call-me-maybe: 1.0.2
-      openapi-types: 7.2.3
+      openapi-types: 12.0.2
     dev: true
 
   /@asyncapi/specs/3.2.1:
@@ -13708,8 +13708,8 @@ packages:
       is-wsl: 2.2.0
     dev: true
 
-  /openapi-types/7.2.3:
-    resolution: {integrity: sha512-olbaNxz12R27+mTyJ/ZAFEfUruauHH27AkeQHDHRq5AF0LdNkK1SSV7EourXQDK+4aX7dv2HtyirAGK06WMAsA==}
+  /openapi-types/12.0.2:
+    resolution: {integrity: sha512-GuTo7FyZjOIWVhIhQSWJVaws6A82sWIGyQogxxYBYKZ0NBdyP2CYSIgOwFfSB+UVoPExk/YzFpyYitHS8KVZtA==}
     dev: true
 
   /openapi-typescript-fetch/1.1.3:
@@ -13774,11 +13774,11 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /orval/6.10.3_openapi-types@7.2.3:
+  /orval/6.10.3_openapi-types@12.0.2:
     resolution: {integrity: sha512-gct7wGGacGIj3cRKqfioRK2/TRDAK11LbpghRgTMeNWWF+JBCyZGA8H9ehhfdCOuhXIb4me61aNphiusrlz7jQ==}
     hasBin: true
     dependencies:
-      '@apidevtools/swagger-parser': 10.1.0_openapi-types@7.2.3
+      '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.0.2
       acorn: 8.8.1
       cac: 6.7.14
       chalk: 4.1.2

@@ -16,7 +16,7 @@
     "js-yaml": "^4.1.0",
     "msw": "^0.36.5",
     "node-fetch": "^3.3.0",
-    "openapi-types": "^7",
+    "openapi-types": "^12",
     "openapi-typescript": "^6.0.3",
     "orval": "^6.10.3"
   }
