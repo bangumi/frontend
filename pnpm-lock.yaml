@@ -38,7 +38,7 @@ importers:
       lint-staged: ^13.0.3
       postcss: ^8.4.19
       postcss-less: ^6.0.0
-      prettier: ^2.7.1
+      prettier: ^2.8.0
       react: ^18.2.0
       stylelint: ^14.15.0
       stylelint-config-css-modules: ^4.1.0
@@ -80,7 +80,7 @@ importers:
       lint-staged: 13.0.3
       postcss: 8.4.19
       postcss-less: 6.0.0_postcss@8.4.19
-      prettier: 2.7.1
+      prettier: 2.8.0
       react: 18.2.0
       stylelint: 14.15.0
       stylelint-config-css-modules: 4.1.0_stylelint@14.15.0
@@ -14392,8 +14392,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier/2.7.1:
-    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
+  /prettier/2.8.0:
+    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
