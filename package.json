@@ -81,7 +81,7 @@
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.19",
     "postcss-less": "^6.0.0",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.0",
     "react": "^18.2.0",
     "stylelint": "^14.15.0",
     "stylelint-config-css-modules": "^4.1.0",
