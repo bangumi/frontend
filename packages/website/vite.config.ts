@@ -36,11 +36,7 @@ export default defineConfig(({ mode }) => {
                 proxyRes.headers['set-cookie'] = setCookies.map((sc) => {
                   return sc
                     .split(';')
-                    .filter(
-                      (v) =>
-                        v.trim().toLowerCase() !== 'secure' &&
-                        v.trim().toLowerCase() !== 'samesite=none',
-                    )
+                    .filter((v) => v.trim().toLowerCase() !== 'secure')
                     .join('; ');
                 });
               }
