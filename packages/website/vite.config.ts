@@ -29,14 +29,18 @@ export default defineConfig(({ mode }) => {
               proxyReq.setHeader('Referer', apiDomain);
             });
             proxy.on('proxyRes', (proxyRes) => {
-              // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
-              // 所以在本地开发时移除 secure attribute
+              // 本地开发环境没有 https 带有 secure 和 samesite attribute 的 set-cookies 无效，
+              // 所以在本地开发时移除 secure 和 samesite attribute
               const setCookies = proxyRes.headers['set-cookie'];
               if (Array.isArray(setCookies)) {
                 proxyRes.headers['set-cookie'] = setCookies.map((sc) => {
                   return sc
                     .split(';')
-                    .filter((v) => v.trim().toLowerCase() !== 'secure')
+                    .filter(
+                      (v) =>
+                        v.trim().toLowerCase() !== 'secure' &&
+                        v.trim().toLowerCase() !== 'samesite=none',
+                    )
                     .join('; ');
                 });
               }
