@@ -27,8 +27,8 @@
     "type-check": "tsc --noEmit"
   },
   "engines": {
-    "node": ">=v18.12.1",
-    "pnpm": "^7.10.0"
+    "node": ">=v16",
+    "pnpm": ">=7"
   },
   "prettier": {
     "printWidth": 100,
