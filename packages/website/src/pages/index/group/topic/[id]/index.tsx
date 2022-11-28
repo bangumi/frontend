@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -35,6 +35,14 @@ const TopicPage: FC = () => {
   const parsedText = renderBBCode(topicDetail.text);
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
+
+  // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
+  // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601
+  useEffect(() => {
+    const anchor = window.location.hash.slice(1);
+    document.getElementById(anchor)?.scrollIntoView(true);
+  }, [topicDetail]);
+
   return (
     <>
       <GroupTopicHeader
