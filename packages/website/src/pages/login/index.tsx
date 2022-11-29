@@ -11,8 +11,8 @@ import { ReactComponent as LoginLogo } from './assets/login-logo.svg';
 import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
 
-const Login: React.FC = () => {
-  const hCaptcha = useRef<HCaptcha | null>(null);
+const Login: React.FC = React.forwardRef((_: {}, refs) => {
+  const hCaptcha = useRef<HCaptcha>(null);
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
@@ -109,6 +109,6 @@ const Login: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Login;

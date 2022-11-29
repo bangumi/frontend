@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import React from 'react';
+import React, { Component as MockComponent } from 'react';
 import '@hcaptcha/react-hcaptcha';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,17 +8,28 @@ import LoginPage from '.';
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
 
-const FakeHCaptcha: React.FC<{ onVerify: (token: string) => void }> = ({ onVerify }) => {
-  React.useEffect(() => {
-    onVerify('fake-token');
-  });
-
-  return <div />;
-};
+interface P {
+  onVerify?: (token: string) => void;
+}
 
 jest.mock('@hcaptcha/react-hcaptcha', () => {
-  return FakeHCaptcha;
+  class HCaptcha extends MockComponent<P> {
+    componentDidMount() {
+      this.props?.onVerify?.('fake-token');
+    }
+
+    resetCaptcha() {
+      void 0;
+    }
+
+    render() {
+      return <div />;
+    }
+  }
+
+  return HCaptcha;
 });
+
 jest.mock('react-router-dom');
 const mockedUseNavigate = jest.mocked(useNavigate);
 
