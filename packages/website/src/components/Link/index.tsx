@@ -29,12 +29,13 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
     const href = useHref(to, { relative });
     const internalOnClick = useLinkClickHandler(to, {
       replace,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       state,
       target,
       preventScrollReset,
       relative,
     });
-    const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
       onClick?.(event);
       startTransition(() => {
         internalOnClick(event);
