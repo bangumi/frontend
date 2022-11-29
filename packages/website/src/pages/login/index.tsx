@@ -1,5 +1,5 @@
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInput } from 'rooks';
 
@@ -12,6 +12,7 @@ import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
 
 const Login: React.FC = () => {
+  const hCaptcha = useRef<HCaptcha | null>(null);
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
@@ -49,6 +50,8 @@ const Login: React.FC = () => {
       await login(email.value, password.value, hCaptchaToken);
       navigate('/', { replace: true });
     } catch (error: unknown) {
+      hCaptcha.current?.resetCaptcha();
+      setHCaptchaToken(null);
       if (error instanceof PasswordUnMatchError) {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`);
         return;
@@ -92,6 +95,7 @@ const Login: React.FC = () => {
           <HCaptcha
             sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
             onVerify={(token: string) => setHCaptchaToken(token)}
+            ref={hCaptcha}
           />
         </div>
         <div className={style.buttonGroup}>
