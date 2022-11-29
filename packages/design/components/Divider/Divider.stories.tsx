@@ -29,15 +29,14 @@ const Template: ComponentStory<typeof Divider> = (args) => {
         <li>看过</li>
       </ul>
     );
-  } else {
-    return (
-      <div style={{ display: orientation === 'vertical' ? 'flex' : undefined }}>
-        <span>标题</span>
-        <Divider {...args} />
-        <span>文本</span>
-      </div>
-    );
   }
+  return (
+    <div style={{ display: orientation === 'vertical' ? 'flex' : undefined }}>
+      <span>标题</span>
+      <Divider {...args} />
+      <span>文本</span>
+    </div>
+  );
 };
 
 export const Horizontal = Template.bind({});
