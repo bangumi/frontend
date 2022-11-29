@@ -35,7 +35,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       preventScrollReset,
       relative,
     });
-    const handleOnClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    const handleOnClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
       onClick?.(event);
       startTransition(() => {
         internalOnClick(event);
