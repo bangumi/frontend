@@ -135,9 +135,8 @@ export function mergeTags(tagList: ITag[], toMergeTags: ITag[]): ITag[] {
     const idx = results.findIndex((t) => {
       if (typeof t === 'string') {
         return t === name;
-      } else {
-        return t.name === name;
       }
+      return t.name === name;
     });
     if (idx === -1) {
       results.push(tag);
@@ -383,9 +382,8 @@ export class Parser {
     return this.validTags.findIndex((tag) => {
       if (typeof tag === 'string') {
         return tag === name;
-      } else {
-        return tag.name === name;
       }
+      return tag.name === name;
     });
   }
 }
