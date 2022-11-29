@@ -10,6 +10,7 @@
   },
   "devDependencies": {
     "@bangumi/icons": "workspace:*",
+    "@bangumi/utils": "workspace:*",
     "@storybook/addon-essentials": "^6.5.13",
     "@storybook/addon-links": "^6.5.13",
     "@storybook/builder-vite": "^0.2.5",

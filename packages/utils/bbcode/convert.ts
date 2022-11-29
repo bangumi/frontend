@@ -83,25 +83,37 @@ function convertStickerNode(node: CodeVNode): string {
   } else {
     id = EMOJI_ARRAY.indexOf(stickerId) + 1;
   }
+
   if (id >= 1 && id < 17) {
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`;
-  } else if (id >= 17 && id < 39) {
+    return `<img src='${STICKER_DOMAIN_URL}/img/smiles/${id}.gif' smileid='${id}' alt='${stickerId}' />`;
+  }
+
+  if (id >= 17 && id < 39) {
     const m = stickerId.match(/\d+/)!;
+
     if (m[0]) {
-      return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`;
+      if (m[0] === '11') {
+        return `<img src='${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif' smileid='${id}' alt='${stickerId}' />`;
+      }
+
+      return `<img src='${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png' smileid='${id}' alt='${stickerId}' />`;
     }
     throw new UnreadableCodeError('BUG: unexpected match result', m[0]);
-  } else if (id === 39) {
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`;
-  } else if (id >= 40 && id < 140) {
+  }
+
+  if (id === 39) {
+    return `<img src='${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif' smileid='39' alt='(bgm23)' />`;
+  }
+
+  if (id >= 40 && id < 140) {
     let tvId: string | number = id - 39;
     if (tvId < 10) {
       tvId = `0${tvId}`;
     }
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`;
-  } else {
-    return stickerId;
+    return `<img src='${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif' smileid='${id}' alt='${stickerId}' />`;
   }
+
+  return stickerId;
 }
 
 function convertQuote(node: CodeVNode): VNode {

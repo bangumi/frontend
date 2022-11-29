@@ -1,6 +1,8 @@
 import type { ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { render } from '@bangumi/utils';
+
 import RichContent from '.';
 
 export default {
@@ -8,14 +10,16 @@ export default {
   component: RichContent,
 };
 
-const demoText = `
-<p>又名：CUP人生茶话会</p>
-<br/>
-<p>1.上班的时候想要回家的。 </p>
-<p>2.学校课上打瞌睡的。<img src="https://lain.bgm.tv/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)"></p>
+const demoText = render(`
+又名：CUP人生茶话会
 
-<p><a href="https://www.youtube.com/watch?v=hw-ukQ1MuT0" target="_blank" rel="nofollow external noopener noreferrer" class="l">LUVORATORRRRRY! 歌ってみた</a></p>
-`;
+1.上班的时候想要回家的。
+2.学校课上打瞌睡的。(bgm38)
+2.学校课上打瞌睡的。(bgm11)
+2.学校课上打瞌睡的。(bgm12)
+
+
+`);
 
 export const Demo: ComponentStory<typeof RichContent> = () => {
   return <RichContent html={demoText} />;
