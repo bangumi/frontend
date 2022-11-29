@@ -85,7 +85,7 @@ function convertStickerNode(node: CodeVNode): string {
   }
 
   if (id >= 1 && id < 17) {
-    return `<img src='${STICKER_DOMAIN_URL}/img/smiles/${id}.gif' smileid='${id}' alt='${stickerId}' />`;
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`;
   }
 
   if (id >= 17 && id < 39) {
@@ -93,16 +93,17 @@ function convertStickerNode(node: CodeVNode): string {
 
     if (m[0]) {
       if (m[0] === '11') {
-        return `<img src='${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif' smileid='${id}' alt='${stickerId}' />`;
+        return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif" smileid="${id}" alt="${stickerId}" />`;
       }
 
-      return `<img src='${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png' smileid='${id}' alt='${stickerId}' />`;
+      return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`;
     }
-    throw new UnreadableCodeError('BUG: unexpected match result', m[0]);
+
+    throw new UnreadableCodeError('BUG: unexpected match result', stickerId);
   }
 
   if (id === 39) {
-    return `<img src='${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif' smileid='39' alt='(bgm23)' />`;
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`;
   }
 
   if (id >= 40 && id < 140) {
@@ -110,7 +111,7 @@ function convertStickerNode(node: CodeVNode): string {
     if (tvId < 10) {
       tvId = `0${tvId}`;
     }
-    return `<img src='${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif' smileid='${id}' alt='${stickerId}' />`;
+    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`;
   }
 
   return stickerId;

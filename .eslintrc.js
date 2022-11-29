@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     curly: 'error',
     'no-unused-vars': 'off',
+    'no-else-return': ['error', { allowElseIf: false }],
     'unused-imports/no-unused-imports': 'error',
     'import/order': [
       'error',

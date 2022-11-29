@@ -56,14 +56,13 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
           </div>
         </>
       );
-    } else {
-      return (
-        <div className={styles.textButton} onClick={handleClamp}>
-          <span>收起</span>
-          <UpArrow />
-        </div>
-      );
     }
+    return (
+      <div className={styles.textButton} onClick={handleClamp}>
+        <span>收起</span>
+        <UpArrow />
+      </div>
+    );
   };
 
   return (
