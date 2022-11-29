@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom';
 
 import { Section } from '@bangumi/design';
-import { render as renderBBCode } from '@bangumi/utils';
+import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { DescriptionClamp, useGroupTopic } from '@bangumi/website/hooks/use-group';
 
@@ -15,10 +15,13 @@ const CLAMP_HEIGHT_THRESHOLD = 193;
 
 const GroupHome: React.FC = () => {
   const { name } = useParams();
+  if (!name) {
+    throw new UnreadableCodeError('BUG: name is undefined');
+  }
   const groupContext = useGroupContext();
-  const recentTopics = useGroupTopic(name as string);
+  const recentTopics = useGroupTopic(name);
 
-  if (!name || !groupContext?.groupRet?.group || !recentTopics?.data) {
+  if (!groupContext?.groupRet?.group || !recentTopics.data.length) {
     return null;
   }
 

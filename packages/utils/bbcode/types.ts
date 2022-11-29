@@ -2,7 +2,7 @@ export type TextNode = string;
 
 export interface CodeVNode {
   type: string;
-  props?: Record<string, string | boolean>;
+  props?: Record<string, string>;
   children?: CodeNodeTypes[];
 }
 

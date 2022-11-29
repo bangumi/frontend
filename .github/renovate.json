@@ -18,6 +18,10 @@
       "semanticCommitType": "build"
     },
     {
+      "matchDepTypes": ["engines"],
+      "enabled": false
+    },
+    {
       "groupName": "eslint",
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "semanticCommitType": "style"

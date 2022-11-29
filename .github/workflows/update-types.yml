@@ -2,29 +2,30 @@ name: Update Type Definition
 on:
   repository_dispatch:
     types: [update-types]
+  workflow_dispatch:
+
 jobs:
   update-types:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - uses: pnpm/action-setup@v2.2.4
         with:
-          version: '7'
+          ref: master
+          fetch-depth: 1
+      - uses: ./.github/actions/setup-js-env
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: pnpm install
+      - name: Update OpenAPI Definition
+        run: pnpm client update-openapi
+        env:
+          OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
 
       - name: Build Type Definition
-        run: pnpm build:types
+        run: pnpm client build
+
+      - name: Format
+        run: pnpm lint --fix && pnpm prettier
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          title: Update Type Definition from bangumi/dev-docs
+          title: 'chore(types): update private API type definition'

@@ -32,6 +32,20 @@ git remote add upstream https://github.com/bangumi/frontend.git
 git checkout -b <BRANCH_NAME>
 ```
 
+- 启动开发服务器
+
+使用生产后端（next.bgm.tv）
+
+```bash
+pnpm dev
+```
+
+使用测试后端（dev.bgm38.com）
+
+```bash
+pnpm dev --mode stage
+```
+
 - 提交前确认所有的测试、lint 通过；
 
 ```bash
@@ -47,14 +61,6 @@ git push -u origin <YOUR_BRANCH>
 ```
 
 - 开一个新的 Pull Request，详细参见 [PR 规则](#pr-规则)。
-
-### 启动开发环境之前
-
-因为登录引入了 hCaptcha，需要通过 `bgm.tv` 下面的域名来访问。因此本地开发前，
-需要将 `dev.bgm.tv` 通过 hosts 文件映射到 `127.0.0.1`。然后通过 `dev.bgm.tv:5173` 访问。
-
-Linux/Mac 用户 hosts 文件位置 `/etc/hosts`。
-Windows 用户 hosts 文件位置 `%WinDir%\System32\Drivers\Etc\hosts`。
 
 ## PR 规则
 

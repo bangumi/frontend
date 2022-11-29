@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { UserGroup } from '@bangumi/types/user';
+import { UserGroup } from '@bangumi/client/user';
 
 import { useUser } from '../../hooks/use-user';
 import { RequireAuth } from './auth';

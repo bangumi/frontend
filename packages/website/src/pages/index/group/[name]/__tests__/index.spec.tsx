@@ -4,7 +4,7 @@ import { rest } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/types/group';
+import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/client/group';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import GroupPage from '@bangumi/website/pages/index/group/[name]';
 
@@ -17,13 +17,14 @@ jest.mock('react-router-dom', () => {
     __esModule: true,
     ...jest.requireActual('react-router-dom'),
     useParams: jest.fn(),
-  };
+  } as unknown;
 });
 
 const mockedUseParams = jest.mocked(useParams);
 
 class GroupHomeTest {
   page: RenderResult;
+
   constructor(
     name: string,
     mock: { group?: GroupProfile; topics?: ResponseWithPagination<Topic[]> },

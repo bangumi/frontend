@@ -4,7 +4,7 @@ import React from 'react';
 import { Bold, Image, Italic, Link, Size, Underscore } from '@bangumi/icons';
 
 interface ToolboxProps {
-  handleClickEvent: (type: string, payload?: any) => void;
+  handleClickEvent: (type: string, payload?: unknown) => void;
   style?: React.CSSProperties;
 }
 

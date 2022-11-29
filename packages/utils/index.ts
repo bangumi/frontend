@@ -19,11 +19,23 @@ export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
   collection: T[],
   key: R,
 ): Record<T[R], T> => {
-  return collection.reduce(
-    (pre, cur) => ({
-      ...pre,
-      [cur[key]]: cur,
-    }),
-    Object.assign({}),
-  );
+  return collection.reduce<Record<T[R], T>>((pre, cur) => {
+    pre[cur[key]] = cur;
+    return pre;
+  }, {});
 };
+
+export class UnreadableCodeError extends Error {
+  readonly args: unknown[];
+
+  constructor(readonly message: string, ...args: unknown[]) {
+    super();
+    this.args = args;
+  }
+
+  toString(): string {
+    return `UnreadableCodeError(${this.message}, ${this.args
+      .map((x) => x?.toString())
+      .join(', ')})`;
+  }
+}

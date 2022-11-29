@@ -27,14 +27,14 @@ const wrapper = ({ children }: PropsWithChildren) => (
   </MemoryRouter>
 );
 
-it.each`
-  statusCode | resp                          | expectedError
-  ${401}     | ${{ details: { remain: 4 } }} | ${new PasswordUnMatchError(4)}
-  ${400}     | ${{ details: ['a', 'b'] }}    | ${new UnknownError(['a', 'b'])}
-  ${422}     | ${{}}                         | ${new Error(LoginErrorCode.E_CLIENT_ERROR)}
-  ${418}     | ${{}}                         | ${new Error(LoginErrorCode.E_UNKNOWN_ERROR)}
-  ${502}     | ${{}}                         | ${new Error(LoginErrorCode.E_SERVER_ERROR)}
-`(
+it.each([
+  { statusCode: 401, resp: { details: { remain: 4 } }, expectedError: new PasswordUnMatchError(4) },
+  { statusCode: 400, resp: { details: ['a', 'b'] }, expectedError: new UnknownError(['a', 'b']) },
+  { statusCode: 422, resp: {}, expectedError: new Error(LoginErrorCode.E_CLIENT_ERROR) },
+  { statusCode: 418, resp: {}, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
+  { statusCode: 429, resp: {}, expectedError: new Error(LoginErrorCode.E_TOO_MANY_ERROR) },
+  { statusCode: 502, resp: {}, expectedError: new Error(LoginErrorCode.E_SERVER_ERROR) },
+])(
   'should return error if request is failed with failed status $statusCode',
   async ({ statusCode, resp, expectedError }) => {
     const { result } = renderHook(() => useUser(), { wrapper });
@@ -42,11 +42,11 @@ it.each`
     mockLogin(statusCode, resp);
 
     expect.assertions(1);
-    await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
-      expectedError,
-    );
-
-    await waitFor(() => {});
+    await waitFor(async () => {
+      await expect(result.current.login('fakeuser', 'fakepassword', 'fake-token')).rejects.toEqual(
+        expectedError,
+      );
+    });
   },
 );
 

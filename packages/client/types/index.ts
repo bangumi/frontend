@@ -3,55 +3,89 @@
  * Do not make direct changes to the file.
  */
 
+/** Type helpers */
+type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+type OneOf<T extends any[]> = T extends [infer Only]
+  ? Only
+  : T extends [infer A, infer B, ...infer Rest]
+  ? OneOf<[XOR<A, B>, ...Rest]>
+  : never;
+
 export interface paths {
   '/p/login': {
     /**
-     * `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
+     * 登录
+     * @description `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
      *
      * site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
      */
     post: operations['login'];
   };
   '/p/logout': {
+    /** 登出 */
     post: operations['logout'];
   };
   '/p/me': {
+    /** 获取当前用户 */
     get: operations['getCurrentUser'];
   };
-  '/p/groups/{group_id}/topics': {
-    get: operations['getGroupTopicsById'];
+  '/p/groups/{name}/topics': {
+    /** 分页获取小组讨论列表，按照回复时间倒序分页 */
+    get: operations['getGroupTopicsByGroupName'];
   };
   '/p/subjects/{subject_id}/topics': {
+    /** 分页获取条目讨论列表，使用最新回复时间倒序分页 */
     get: operations['getSubjectTopicsById'];
   };
   '/p/subjects/-/topics/{topic_id}': {
-    /** 没有分页 */
+    /**
+     * 条目讨论回复列表
+     * @description 没有分页
+     */
     get: operations['getSubjectTopicById'];
   };
   '/p/groups/-/topics/{topic_id}': {
-    /** 没有分页 */
+    /**
+     * 获取小组讨论回复列表
+     * @description 没有分页
+     */
     get: operations['getGroupTopicById'];
   };
   '/p/indices/{index_id}/comments': {
-    /** 没有分页 */
+    /**
+     * 获取目录讨论列表
+     * @description 没有分页
+     */
     get: operations['getIndexCommentsById'];
   };
   '/p/episodes/{episode_id}/comments': {
-    /** 没有分页 */
+    /**
+     * 获取章节讨论列表
+     * @description 没有分页
+     */
     get: operations['getEpisodeCommentsById'];
   };
   '/p/characters/{character_id}/comments': {
-    /** 没有分页 */
+    /**
+     * 获取角色讨论列表
+     * @description 没有分页
+     */
     get: operations['getCharacterCommentsById'];
   };
   '/p/persons/{person_id}/comments': {
-    /** 没有分页 */
+    /**
+     * 获取人物讨论列表
+     * @description 没有分页
+     */
     get: operations['getPersonCommentsById'];
   };
   '/p/groups/{name}': {
+    /** 获取小组首页信息 */
     get: operations['getGroupProfileByName'];
   };
   '/p/groups/{name}/members': {
+    /** 获取小组成员信息 */
     get: operations['listGroupMembersByName'];
   };
 }
@@ -138,9 +172,6 @@ export interface components {
        * @example 9450
        */
       total_members: number;
-    } & {
-      related_groups: unknown;
-      new_topics: unknown;
     };
     /**
      * Avatar
@@ -174,14 +205,17 @@ export interface components {
       /** Description */
       description: string;
       /** Detail */
-      detail?:
-        | string
-        | {
+      details?: OneOf<
+        [
+          string,
+          {
             /** @description error message */
             error?: string;
             /** @description request path */
             path?: string;
-          };
+          },
+        ]
+      >;
     };
     Group: {
       id: number;
@@ -202,7 +236,7 @@ export interface components {
       is_friend: boolean;
       /**
        * Format: date-time
-       * @example 2008-07-14T07:34:07.000Z
+       * @example "2008-07-14T07:34:07.000Z"
        */
       created_at?: string;
       creator: components['schemas']['User'];
@@ -222,7 +256,7 @@ export interface components {
       title: string;
       /**
        * Format: date-time
-       * @example 2021-12-20T11:18:49.000Z
+       * @example "2021-12-20T11:18:49.000Z"
        */
       updated_at: string;
     };
@@ -230,7 +264,7 @@ export interface components {
     Topic: {
       /**
        * Format: date-time
-       * @example 2008-07-14T07:34:07.000Z
+       * @example "2008-07-14T07:34:07.000Z"
        */
       created_at: string;
       creator: components['schemas']['User'];
@@ -249,7 +283,7 @@ export interface components {
       title: string;
       /**
        * Format: date-time
-       * @example 2021-12-20T11:18:49.000Z
+       * @example "2021-12-20T11:18:49.000Z"
        */
       updated_at: string;
     };
@@ -259,7 +293,7 @@ export interface components {
       is_friend: boolean;
       /**
        * Format: date-time
-       * @example 2008-07-14T07:38:35.000Z
+       * @example "2008-07-14T07:38:35.000Z"
        */
       created_at: string;
       creator: components['schemas']['User'];
@@ -268,22 +302,13 @@ export interface components {
        * @example 2
        */
       id: number;
-      replies: ({
+      replies: {
         /**
          * Format: date-time
-         * @example 2012-12-23T12:46:29.000Z
+         * @example "2012-12-23T12:46:29.000Z"
          */
         created_at: string;
-        /**
-         * Creator
-         * @description 意义同<a href="#model-Me">Me</a>
-         */
-        creator: {
-          /** Username */
-          username: string;
-          /** Nickname */
-          nickname: string;
-        };
+        creator: components['schemas']['User'];
         /**
          * Format: int32
          * @example 24360
@@ -297,9 +322,7 @@ export interface components {
         state: components['schemas']['Comment']['state'];
         /** @description 发帖人是否好友 */
         is_friend: boolean;
-      } & {
-        test: unknown;
-      })[];
+      }[];
       /**
        * @description 如果 `state` 不为 `0`，内容为空
        * @example 你是猪 ... 鉴定完毕 ...
@@ -346,46 +369,60 @@ export interface components {
       limit: number;
       /** Offset */
       offset: number;
-      /** Data */
-      data: { [key: string]: unknown }[];
     };
     /** Paged[Topic] */
     Paged_Topic: components['schemas']['Paged'] & {
       /** Data */
-      data?: components['schemas']['Topic'][];
+      data: components['schemas']['Topic'][];
     };
     /** Comments */
     Comments: {
       comments: components['schemas']['Comment'][];
     };
   };
+  responses: never;
   parameters: {
     /** @description 分页参数 */
     default_query_limit: number;
     /** @description 分页参数 */
     default_query_offset: number;
   };
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 
+export type external = Record<string, never>;
+
 export interface operations {
-  /**
-   * `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
-   *
-   * site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
-   */
   login: {
+    /**
+     * 登录
+     * @description `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
+     *
+     * site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
+     */
+    requestBody?: {
+      content: {
+        'application/json': {
+          email: string;
+          password: string;
+          'h-captcha-response': string;
+        };
+      };
+    };
     responses: {
-      /** 账号密码正确，设置 Cookies */
+      /** @description 账号密码正确，设置 Cookies */
       200: {
         headers: {
-          /** 设置 cookies session */
+          /** @description 设置 cookies session */
           'Set-Cookie'?: string;
         };
         content: {
           'application/json': components['schemas']['User'];
         };
       };
-      /** 请求错误或者验证码错误 */
+      /** @description 请求错误或者验证码错误 */
       400: {
         content: {
           'application/json': {
@@ -398,7 +435,7 @@ export interface operations {
           };
         };
       };
-      /** 账号或密码错误 */
+      /** @description 账号或密码错误 */
       401: {
         content: {
           'application/json': {
@@ -414,70 +451,64 @@ export interface operations {
           };
         };
       };
-      /** content-type 不是 `application/json` */
-      415: unknown;
-      /** JSON 语法错误 */
-      422: unknown;
-      /** hCaptcha HTTP 请求失败 */
-      502: unknown;
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          email: string;
-          password: string;
-          'h-captcha-response': string;
+      /** @description content-type 不是 `application/json` */
+      415: never;
+      /** @description JSON 语法错误 */
+      422: never;
+      /** @description 登录失败次数太多 */
+      429: {
+        content: {
+          'application/json': components['schemas']['ErrorDetail'];
         };
       };
+      /** @description hCaptcha HTTP 请求失败 */
+      502: never;
     };
   };
   logout: {
+    /** 登出 */
     responses: {
-      /** 正常登出 */
+      /** @description 正常登出 */
       204: never;
-      /** 用户未登录或者 session 已失效 */
-      401: unknown;
+      /** @description 用户未登录或者 session 已失效 */
+      401: never;
     };
   };
   getCurrentUser: {
+    /** 获取当前用户 */
     responses: {
-      /** 返回当前用户 */
+      /** @description 返回当前用户 */
       200: {
         content: {
           'application/json': components['schemas']['User'];
         };
       };
-      /** 用户未登录或者 session 已失效 */
-      401: unknown;
+      /** @description 用户未登录或者 session 已失效 */
+      401: never;
     };
   };
-  getGroupTopicsById: {
+  getGroupTopicsByGroupName: {
+    /** 分页获取小组讨论列表，按照回复时间倒序分页 */
     parameters: {
+      /** @description 小组名称 */
       path: {
-        /** 小组ID */
-        group_id: number;
-      };
-      query: {
-        /** 小组 Limit */
-        limit: number;
-        /** 小组 Offset */
-        offset: number;
+        name: string;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['Paged_Topic'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -486,32 +517,33 @@ export interface operations {
     };
   };
   getSubjectTopicsById: {
+    /** 分页获取条目讨论列表，使用最新回复时间倒序分页 */
     parameters: {
-      path: {
-        /** 条目ID */
-        subject_id: number;
-      };
+      /** @description 条目 Limit */
+      /** @description 条目 Offset */
       query: {
-        /** 条目 Limit */
         limit: number;
-        /** 条目 Offset */
         offset: number;
+      };
+      /** @description 条目ID */
+      path: {
+        subject_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['Paged_Topic'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -519,28 +551,31 @@ export interface operations {
       };
     };
   };
-  /** 没有分页 */
   getSubjectTopicById: {
+    /**
+     * 条目讨论回复列表
+     * @description 没有分页
+     */
     parameters: {
+      /** @description 条目讨论ID */
       path: {
-        /** 条目讨论ID */
         topic_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['PrivateTopicDetail'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -548,16 +583,19 @@ export interface operations {
       };
     };
   };
-  /** 没有分页 */
   getGroupTopicById: {
+    /**
+     * 获取小组讨论回复列表
+     * @description 没有分页
+     */
     parameters: {
+      /** @description 小组讨论ID */
       path: {
-        /** 小组讨论ID */
         topic_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': {
@@ -565,13 +603,13 @@ export interface operations {
           } & components['schemas']['PrivateTopicDetail'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -579,28 +617,31 @@ export interface operations {
       };
     };
   };
-  /** 没有分页 */
   getIndexCommentsById: {
+    /**
+     * 获取目录讨论列表
+     * @description 没有分页
+     */
     parameters: {
+      /** @description 目录ID */
       path: {
-        /** 目录ID */
         index_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['Comments'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -608,28 +649,31 @@ export interface operations {
       };
     };
   };
-  /** 没有分页 */
   getEpisodeCommentsById: {
+    /**
+     * 获取章节讨论列表
+     * @description 没有分页
+     */
     parameters: {
+      /** @description 章节ID */
       path: {
-        /** 章节ID */
         episode_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['Comments'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -637,28 +681,31 @@ export interface operations {
       };
     };
   };
-  /** 没有分页 */
   getCharacterCommentsById: {
+    /**
+     * 获取角色讨论列表
+     * @description 没有分页
+     */
     parameters: {
+      /** @description 角色ID */
       path: {
-        /** 角色ID */
         character_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['Comments'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -666,28 +713,31 @@ export interface operations {
       };
     };
   };
-  /** 没有分页 */
   getPersonCommentsById: {
+    /**
+     * 获取人物讨论列表
+     * @description 没有分页
+     */
     parameters: {
+      /** @description 人物ID */
       path: {
-        /** 人物ID */
         person_id: number;
       };
     };
     responses: {
-      /** Successful Response */
+      /** @description Successful Response */
       200: {
         content: {
           'application/json': components['schemas']['Comments'];
         };
       };
-      /** Validation Error */
+      /** @description Validation Error */
       400: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
         };
       };
-      /** Not Found */
+      /** @description Not Found */
       404: {
         content: {
           'application/json': components['schemas']['ErrorDetail'];
@@ -696,52 +746,48 @@ export interface operations {
     };
   };
   getGroupProfileByName: {
+    /** 获取小组首页信息 */
     parameters: {
+      /** @description 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
       path: {
-        /** 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
         name: string;
       };
     };
     responses: {
-      /** 返回当前用户 */
+      /** @description 返回当前用户 */
       200: {
         content: {
           'application/json': components['schemas']['GroupProfile'];
         };
       };
-      /** 小组不存在 */
-      404: unknown;
+      /** @description 小组不存在 */
+      404: never;
     };
   };
   listGroupMembersByName: {
+    /** 获取小组成员信息 */
     parameters: {
-      path: {
-        /** 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
-        name: string;
-      };
+      /** @description 成员类型，默认为 `all` */
       query: {
-        /** 成员类型，默认为 `all` */
         type: 'mod' | 'normal' | 'all';
-        /** 分页参数 */
-        limit?: components['parameters']['default_query_limit'];
-        /** 分页参数 */
-        offset?: components['parameters']['default_query_offset'];
+      };
+      /** @description 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
+      path: {
+        name: string;
       };
     };
     responses: {
-      /** 列出用户 */
+      /** @description 列出用户 */
       200: {
         content: {
           'application/json': components['schemas']['Paged'] & {
             /** Data */
-            data?: components['schemas']['GroupMember'][];
+            data: components['schemas']['GroupMember'][];
           };
         };
       };
-      /** 小组不存在 */
-      404: unknown;
+      /** @description 小组不存在 */
+      404: never;
     };
   };
 }
-
-export interface external {}

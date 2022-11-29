@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { UserGroup } from '@bangumi/types/user';
+import type { UserGroup } from '@bangumi/client/user';
 
 import { useUser } from '../../hooks/use-user';
 
@@ -24,7 +24,7 @@ export const RequireAuth: React.FC<PropsWithChildren<RequireAuthProps>> = ({
     return null;
   }
 
-  if (!groupRequired.includes(user?.user_group)) {
+  if (!groupRequired.includes(user.user_group)) {
     navigate(redirectUrlWhenUnauthorized, { replace: true });
     return null;
   }
