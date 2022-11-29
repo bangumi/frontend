@@ -31,7 +31,6 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async () => {
-    console.log(hCaptchaToken);
     if (!hCaptchaToken) {
       setErrorMessage('请完成验证');
       return;
