@@ -7,6 +7,7 @@ import { Route, Routes, useParams } from 'react-router-dom';
 import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/client/group';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import GroupPage from '@bangumi/website/pages/index/group/[name]';
+import { renderPage } from '@bangumi/website/utils/test-utils';
 
 import GroupHome from '..';
 import Boring from './fixtures/boring.json';
