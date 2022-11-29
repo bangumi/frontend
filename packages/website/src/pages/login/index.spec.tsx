@@ -8,12 +8,8 @@ import LoginPage from '.';
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
 
-interface P {
-  onVerify?: (token: string) => void;
-}
-
 jest.mock('@hcaptcha/react-hcaptcha', () => {
-  class HCaptcha extends MockComponent<P> {
+  class HCaptcha extends MockComponent<{ onVerify?: (token: string) => void }> {
     componentDidMount() {
       this.props?.onVerify?.('fake-token');
     }
