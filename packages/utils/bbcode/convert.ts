@@ -74,11 +74,11 @@ function convertStickerNode(node: CodeVNode): string {
   const stickerId = node.props!.stickerId!;
   let id = -1;
   if (stickerId.startsWith(BGM_STICKER_START_STR)) {
-    const m = stickerId.match(/\d+/)!;
-    if (m[0]) {
-      id = parseInt(m[0]) + EMOJI_ARRAY.length;
+    const m = stickerId.match(/\d+/)?.[0];
+    if (m) {
+      id = parseInt(m) + EMOJI_ARRAY.length;
     } else {
-      throw new UnreadableCodeError('BUG: unexpected match result', m[0]);
+      throw new UnreadableCodeError('BUG: unexpected match result', stickerId);
     }
   } else {
     id = EMOJI_ARRAY.indexOf(stickerId) + 1;
@@ -89,14 +89,14 @@ function convertStickerNode(node: CodeVNode): string {
   }
 
   if (id >= 17 && id < 39) {
-    const m = stickerId.match(/\d+/)!;
+    const m = stickerId.match(/\d+/)?.[0];
 
-    if (m[0]) {
-      if (m[0] === '11') {
+    if (m) {
+      if (m === '11') {
         return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif" smileid="${id}" alt="${stickerId}" />`;
       }
 
-      return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m[0]}.png" smileid="${id}" alt="${stickerId}" />`;
+      return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m}.png" smileid="${id}" alt="${stickerId}" />`;
     }
 
     throw new UnreadableCodeError('BUG: unexpected match result', stickerId);
