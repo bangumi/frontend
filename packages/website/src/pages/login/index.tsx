@@ -12,7 +12,7 @@ import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
 
 const Login: React.FC = () => {
-  const captcha = useRef<HCaptcha | null>(null);
+  const hCaptcha = useRef<HCaptcha | null>(null);
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
@@ -31,6 +31,7 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async () => {
+    console.log(hCaptchaToken);
     if (!hCaptchaToken) {
       setErrorMessage('请完成验证');
       return;
@@ -50,7 +51,8 @@ const Login: React.FC = () => {
       await login(email.value, password.value, hCaptchaToken);
       navigate('/', { replace: true });
     } catch (error: unknown) {
-      captcha.current?.resetCaptcha();
+      hCaptcha.current?.resetCaptcha();
+      setHCaptchaToken(null);
       if (error instanceof PasswordUnMatchError) {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`);
         return;
@@ -94,7 +96,7 @@ const Login: React.FC = () => {
           <HCaptcha
             sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
             onVerify={(token: string) => setHCaptchaToken(token)}
-            ref={captcha}
+            ref={hCaptcha}
           />
         </div>
         <div className={style.buttonGroup}>
