@@ -42,10 +42,7 @@ export class PasswordUnMatchError extends Error {
   }
 }
 
-export const UserProvider: React.FC<PropsWithChildren> = React.forwardRef<
-  unknown,
-  PropsWithChildren
->(({ children }, refs) => {
+export const UserProvider: React.FC<PropsWithChildren> = ({ children }, refs) => {
   const { data: user, mutate } = useSWR(api.getCurrentUser.swrKey(), api.getCurrentUser.fetcher, {
     refreshWhenHidden: false,
     revalidateOnFocus: false,
@@ -68,7 +65,7 @@ export const UserProvider: React.FC<PropsWithChildren> = React.forwardRef<
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
-});
+};
 
 export const useUser: () => UserContextType = () => {
   return React.useContext(UserContext);
