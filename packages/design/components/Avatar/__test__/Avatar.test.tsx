@@ -7,7 +7,7 @@ it('Render a Avatar', () => {
   const { container } = render(<Avatar src='urlLink' />);
   const img = container.children[0];
   expect(img).toBeInTheDocument();
-  expect(img.children[0]).toHaveAttribute('src', 'urlLink');
+  expect(img?.children[0]).toHaveAttribute('src', 'urlLink');
 });
 
 it('Avatar Size', () => {
