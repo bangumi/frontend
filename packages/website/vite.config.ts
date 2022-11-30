@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
               if (proxyReq.hasHeader('Origin')) {
                 proxyReq.setHeader('Origin', apiDomain);
               }
-              proxyReq.setHeader('Referer', apiDomain);
+              proxyReq.setHeader('Referer', apiDomain + '/');
             });
             proxy.on('proxyRes', (proxyRes) => {
               // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，

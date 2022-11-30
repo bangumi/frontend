@@ -39,9 +39,8 @@ export function renderNode(node: NodeTypes, parentNode?: VNode): string {
   if (typeof node === 'string') {
     if (parentNode && parentNode.type === 'pre') {
       return node;
-    } else {
-      return renderText(node);
     }
+    return renderText(node);
   }
   const { type, props, children, style, className } = node;
   let propsStr = renderProps(props);

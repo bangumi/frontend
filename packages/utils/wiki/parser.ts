@@ -80,9 +80,8 @@ export default function parse(s: string): Wiki {
 const parseType = (line: string): string => {
   if (!line.includes('}}')) {
     return line.slice(prefix.length).trim();
-  } else {
-    return line.slice(prefix.length, line.indexOf('}}')).trim();
   }
+  return line.slice(prefix.length, line.indexOf('}}')).trim();
 };
 
 const parseNewField = (lino: number, line: string): [string, string, WikiItemType] => {
