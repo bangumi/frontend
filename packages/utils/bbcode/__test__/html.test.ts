@@ -239,4 +239,9 @@ describe('html render bbcode string', () => {
       '<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>',
     );
   });
+  test('should render sticker', () => {
+    expect(render('(bgm01)')).toContain('/img/smiles/bgm/01.png');
+    expect(render('(bgm38)')).toContain('/img/smiles/tv/15.gif');
+    expect(render('(bgm11)')).toContain('/img/smiles/bgm/11.gif');
+  });
 });
