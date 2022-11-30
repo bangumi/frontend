@@ -239,4 +239,15 @@ describe('html render bbcode string', () => {
       '<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>',
     );
   });
+
+  test('render code by custom converter, nested', () => {
+    const input = '[b][url]qq[/url][/b]';
+    expect(
+      render(input, {
+        url: (node) => {
+          return '[url]convert map[/url]';
+        },
+      }),
+    ).toBe('<strong>[url]convert map[/url]</strong>');
+  });
 });
