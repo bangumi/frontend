@@ -1,5 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Normal Comment do not show opinions if not login 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                // 我是签名
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Normal Comment should render 0 1`] = `
 <div>
   <div>

@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import type { FC } from 'react';
 import React from 'react';
 
 export interface CommentInfoProps {
@@ -10,12 +11,8 @@ export interface CommentInfoProps {
 
 const spaces = '\u00A0'.repeat(2);
 
-const CommentInfo: React.FC<CommentInfoProps> = ({
-  floor,
-  createdAt,
-  isSpecial = false,
-  id = '',
-}) => {
+// Todo: report
+const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false, id = '' }) => {
   const date = dayjs(createdAt).format('YYYY-M-D HH:mm');
   return !isSpecial ? (
     <span className='bgm-topic__commentInfo'>

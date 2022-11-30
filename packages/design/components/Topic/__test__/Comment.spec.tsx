@@ -87,6 +87,12 @@ describe('Normal Comment', () => {
     expect(getByText('删除')).toBeInTheDocument();
   });
 
+  it('do not show opinions if not login', () => {
+    const props = buildProps(false, singleComment, '233', 233, null as any);
+    const { container } = render(<Comment {...props} />);
+    expect(container).toMatchSnapshot();
+  });
+
   it('click reply button should show editor form', () => {
     const props = buildProps(false);
     const { getByText, container } = render(<Comment {...props} />);

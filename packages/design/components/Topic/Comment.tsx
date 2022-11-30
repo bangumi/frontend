@@ -137,29 +137,31 @@ const Comment: FC<CommentProps> = ({
             </span>
             <RenderContent state={state} text={text!} />
           </div>
-          <div className='bgm-comment__opinions'>
-            {showReplyEditor ? (
-              <EditorForm
-                onCancel={() => setShowReplyEditor(false)}
-                placeholder={`回复给 @${creator.nickname}：`}
-              />
-            ) : (
-              <>
-                <Button type='secondary' shape='rounded' onClick={() => setShowReplyEditor(true)}>
-                  回复
-                </Button>
-                <Button type='secondary' shape='rounded'>
-                  +1
-                </Button>
-                {user?.id === creator.id ? (
-                  <>
-                    <Button type='text'>编辑</Button>
-                    <Button type='text'>删除</Button>
-                  </>
-                ) : null}
-              </>
-            )}
-          </div>
+          {user ? (
+            <div className='bgm-comment__opinions'>
+              {showReplyEditor ? (
+                <EditorForm
+                  onCancel={() => setShowReplyEditor(false)}
+                  placeholder={`回复给 @${creator.nickname}：`}
+                />
+              ) : (
+                <>
+                  <Button type='secondary' shape='rounded' onClick={() => setShowReplyEditor(true)}>
+                    回复
+                  </Button>
+                  <Button type='secondary' shape='rounded'>
+                    +1
+                  </Button>
+                  {user.id === creator.id ? (
+                    <>
+                      <Button type='text'>编辑</Button>
+                      <Button type='text'>删除</Button>
+                    </>
+                  ) : null}
+                </>
+              )}
+            </div>
+          ) : null}
         </div>
       </div>
       {replies?.map((reply, idx) => (
