@@ -89,6 +89,15 @@ describe('bbcode parser', () => {
     ];
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests));
   });
+  test('ignore img bbcode', () => {
+    const input = `存放于其他网络服务器的图片：
+[img]http://chii.in/img/ico/bgm88-31.gif[/img]`;
+    const tests: CodeNodeTypes[] = [
+      '存放于其他网络服务器的图片：\n',
+      '[img]http://chii.in/img/ico/bgm88-31.gif[/img]',
+    ];
+    expect(new Parser(input, [], ['img']).parse()).toEqual(expect.arrayContaining(tests));
+  });
   test('simple bbcode', () => {
     const input = `我是[mask]马赛克文字[/mask]
 [s]删除线文字[/s]
@@ -319,6 +328,33 @@ describe('bbcode parser', () => {
         },
       ]),
     );
+  });
+  test('merge tags with ignore case', () => {
+    const fn = (): boolean => true;
+    const tags = mergeTags(
+      [
+        'i',
+        'b',
+        {
+          name: 's',
+          schema: {
+            s: fn,
+          },
+        },
+      ],
+      [
+        {
+          name: 'i',
+          schema: {
+            i: fn,
+          },
+        },
+        's',
+        'mybbcode',
+      ],
+      ['i', 's'],
+    );
+    expect(tags).toEqual(expect.arrayContaining(['b', 'mybbcode']));
   });
   test('subject bbcode', () => {
     const tests: Array<[string, CodeNodeTypes[]]> = [

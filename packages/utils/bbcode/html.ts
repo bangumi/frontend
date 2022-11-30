@@ -1,5 +1,5 @@
 import { UnreadableCodeError } from '../index';
-import { convert } from './convert';
+import { convert, setUserConverter } from './convert';
 import { Parser } from './parser';
 import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
 
@@ -84,10 +84,20 @@ export function renderNodes(nodes: NodeTypes[], parentNode?: VNode): string {
 }
 
 export function render(rawStr: string, converterMap: Record<string, ConverterFn> = {}): string {
+  return renderWithParser(new Parser(rawStr), converterMap);
+}
+
+export function renderWithParser(
+  parser: Parser,
+  converterMap: Record<string, ConverterFn> = {},
+): string {
   let result = '';
-  const nodes: CodeNodeTypes[] = new Parser(rawStr).parse();
+  const nodes: CodeNodeTypes[] = parser.parse();
+  setUserConverter(converterMap);
   nodes.forEach((node) => {
-    result += renderNode(convert(node, converterMap));
+    result += renderNode(convert(node));
   });
+  // 重置为默认值 @TODO 改成类避免使用全局变量
+  setUserConverter({});
   return result;
 }

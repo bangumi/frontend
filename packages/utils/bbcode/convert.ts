@@ -151,6 +151,12 @@ function toVNode(
   return vnode;
 }
 
+let UserConverterFnMap: Record<string, ConverterFn> = {};
+
+export function setUserConverter(map: Record<string, ConverterFn>): void {
+  UserConverterFnMap = map;
+}
+
 const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
   b: (node) => toVNode(node, 'strong'),
   i: (node) => toVNode(node, 'em'),
@@ -233,14 +239,11 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
   user: convertUser,
 };
 
-export function convert(
-  node: CodeNodeTypes,
-  converterMap: Record<string, ConverterFn> = {},
-): NodeTypes {
+export function convert(node: CodeNodeTypes): NodeTypes {
   if (typeof node === 'string') {
     return node;
   }
-  let converterFn = converterMap[node.type];
+  let converterFn = UserConverterFnMap[node.type];
   if (!converterFn) {
     converterFn = CONVERTER_FN_MAP[node.type];
   }

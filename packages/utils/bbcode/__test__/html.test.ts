@@ -1,5 +1,6 @@
 import { STICKER_DOMAIN_URL } from '../constants';
-import { renderNodes, renderNode, render } from '../html';
+import { renderNodes, renderNode, render, renderWithParser } from '../html';
+import { Parser } from '../parser';
 import type { VNode } from '../types';
 
 describe('html render vnode', () => {
@@ -241,7 +242,7 @@ describe('html render bbcode string', () => {
   });
 
   test('render code by custom converter, nested', () => {
-    const input = '[b][url]qq[/url][/b]';
+    const input = '[b][url]http://qq.com[/url][/b]';
     expect(
       render(input, {
         url: (node) => {
@@ -249,5 +250,17 @@ describe('html render bbcode string', () => {
         },
       }),
     ).toBe('<strong>[url]convert map[/url]</strong>');
+  });
+  test('render code with Parser, nested', () => {
+    const input = '[b]加粗[size=16]16px[img]http://chii.in/img/ico/bgm88-31.gif[/img][/size][/b]';
+    expect(
+      renderWithParser(new Parser(input, [], ['img']), {
+        url: (node) => {
+          return '[url]convert map[/url]';
+        },
+      }),
+    ).toBe(
+      '<strong>加粗<span style="font-size:16px;line-height:16px">16px[img]http://chii.in/img/ico/bgm88-31.gif[/img]</span></strong>',
+    );
   });
 });

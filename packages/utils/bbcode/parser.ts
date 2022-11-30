@@ -123,15 +123,23 @@ const DEFAULT_TAGS: ITag[] = [
 ];
 
 // 合并 tag 配置。新的覆盖旧的
-export function mergeTags(tagList: ITag[], toMergeTags: ITag[]): ITag[] {
-  const results: ITag[] = [...toMergeTags];
-  tagList.forEach((tag) => {
+export function mergeTags(
+  tagList: ITag[],
+  toMergeTags: ITag[],
+  ignoreTagNames: string[] = [],
+): ITag[] {
+  let results: ITag[] = [...toMergeTags];
+  const getTagName = (tag: ITag) => {
     let name = '';
     if (typeof tag === 'string') {
       name = tag;
     } else {
       name = tag.name;
     }
+    return name;
+  };
+  tagList.forEach((tag) => {
+    const name = getTagName(tag);
     const idx = results.findIndex((t) => {
       if (typeof t === 'string') {
         return t === name;
@@ -141,6 +149,9 @@ export function mergeTags(tagList: ITag[], toMergeTags: ITag[]): ITag[] {
     if (idx === -1) {
       results.push(tag);
     }
+  });
+  results = results.filter((tag) => {
+    return !ignoreTagNames.includes(getTagName(tag));
   });
   return results;
 }
@@ -153,13 +164,13 @@ export class Parser {
   private readonly tagStack: string[];
   private readonly validTags: ITag[];
 
-  constructor(input: string, tags: ITag[] = []) {
+  constructor(input: string, tags: ITag[] = [], ignoreTagNames: string[] = []) {
     this.input = input;
     this.pos = 0;
     this.ctxStack = [];
     this.tagStack = [];
     // 解析器支持的 tag; sticker 用来表示 Bangumi 的表情，不是 bbcode
-    this.validTags = mergeTags(DEFAULT_TAGS, tags);
+    this.validTags = mergeTags(DEFAULT_TAGS, tags, ignoreTagNames);
   }
 
   parse(): CodeNodeTypes[] {
