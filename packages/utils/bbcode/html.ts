@@ -1,5 +1,5 @@
 import { UnreadableCodeError } from '../index';
-import { convert } from './convert';
+import { Converter } from './convert';
 import { Parser } from './parser';
 import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
 
@@ -93,8 +93,9 @@ export function renderWithParser(
 ): string {
   let result = '';
   const nodes: CodeNodeTypes[] = parser.parse();
+  const converter = new Converter(converterMap);
   nodes.forEach((node) => {
-    result += renderNode(convert(node, converterMap));
+    result += renderNode(converter.convert(node));
   });
   return result;
 }
