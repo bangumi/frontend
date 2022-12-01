@@ -263,4 +263,9 @@ describe('html render bbcode string', () => {
       '<strong>加粗<span style="font-size:16px;line-height:16px">16px[img]http://chii.in/img/ico/bgm88-31.gif[/img]</span></strong>',
     );
   });
+  test('should render sticker', () => {
+    expect(render('(bgm01)')).toContain('/img/smiles/bgm/01.png');
+    expect(render('(bgm38)')).toContain('/img/smiles/tv/15.gif');
+    expect(render('(bgm11)')).toContain('/img/smiles/bgm/11.gif');
+  });
 });

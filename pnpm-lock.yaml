@@ -113,6 +113,7 @@ importers:
   packages/design:
     specifiers:
       '@bangumi/icons': workspace:*
+      '@bangumi/utils': workspace:*
       '@storybook/addon-essentials': ^6.5.13
       '@storybook/addon-links': ^6.5.13
       '@storybook/builder-vite': ^0.2.5
@@ -135,6 +136,7 @@ importers:
       reset-css: 5.0.1
     devDependencies:
       '@bangumi/icons': link:../icons
+      '@bangumi/utils': link:../utils
       '@storybook/addon-essentials': 6.5.13_lb6du3saekb5anf2gjv3wxj3oq
       '@storybook/addon-links': 6.5.13_biqbaboplfbrettd7655fr4n2y
       '@storybook/builder-vite': 0.2.5_sugbzh45vkst6yuqsfexy2pu44
