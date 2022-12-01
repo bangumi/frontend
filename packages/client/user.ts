@@ -1,5 +1,6 @@
 export * from './common';
 
+// https://github.com/drwpow/openapi-typescript/issues/941
 export enum UserGroup {
   Admin = 1,
   BangumiAdmin = 2,

@@ -3,6 +3,7 @@ import { unescape } from 'lodash-es';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
+import { State } from '@bangumi/client/topic';
 import type { Reply, Comment as IComment, User } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
 import { render as renderBBCode } from '@bangumi/utils';
@@ -23,19 +24,19 @@ export type CommentProps = ((Reply & { isReply: true }) | (IComment & { isReply:
 
 const Link = Typography.Link;
 
-const RenderContent: FC<{ state: number; text: string }> = ({ state, text }) => {
+const RenderContent: FC<{ state: State; text: string }> = ({ state, text }) => {
   switch (state) {
-    case 0:
+    case State.Normal:
       return <RichContent html={renderBBCode(text)} classname='bgm-comment__content' />;
-    case 1:
+    case State.Closed:
       return <div className='bgm-comment__content'>关闭了该主题</div>;
-    case 2:
+    case State.Reopen:
       return <div className='bgm-comment__content'>重新开启了该主题</div>;
-    case 5:
+    case State.Silent:
       return <div className='bgm-comment__content'>下沉了该主题</div>;
-    case 6:
+    case State.DeletedByUser:
       return <div className='bgm-comment__content--deleted'>内容已被用户删除</div>;
-    case 7:
+    case State.DeletedByAdmin:
       return (
         <div className='bgm-comment__content--deleted'>
           内容因违反「
@@ -62,9 +63,9 @@ const Comment: FC<CommentProps> = ({
   ...props
 }) => {
   const isReply = props.isReply;
-  const isDeleted = state === 6 || state === 7;
+  const isDeleted = state === State.DeletedByUser || state === State.DeletedByAdmin;
   // 1 关闭 2 重开 5 下沉
-  const isSpecial = state === 1 || state === 2 || state === 5;
+  const isSpecial = state === State.Closed || state === State.Reopen || state === State.Silent;
   const replies = !isReply ? props.replies : null;
   const [shouldCollapsed, setShouldCollapsed] = useState(
     isSpecial || (isReply && (/[+-]\d+$/.test(text!) || isDeleted)),
@@ -81,16 +82,16 @@ const Comment: FC<CommentProps> = ({
   if (shouldCollapsed) {
     let icon = null;
     switch (state) {
-      case 0:
+      case State.Normal:
         icon = null;
         break;
-      case 1:
+      case State.Closed:
         icon = <TopicClosed />;
         break;
-      case 2:
+      case State.Reopen:
         icon = <TopicReopen />;
         break;
-      case 5:
+      case State.Silent:
         icon = <TopicSilent />;
         break;
     }
