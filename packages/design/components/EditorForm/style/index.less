@@ -1,6 +1,7 @@
 @import '../../../theme/base';
 
-@toolbox-with: 215px;
+@toolbox-width: 215px;
+@text-width: 682px;
 
 .bgm-editor {
   &__container {
@@ -10,6 +11,7 @@
     border: 2px solid @gray-10;
     border-radius: 12px;
     padding: 8px 0 0 10px;
+    z-index: 9999;
   }
 
   &__toolbox {
@@ -17,7 +19,7 @@
     justify-content: space-between;
     align-items: center;
     height: 26px;
-    width: @toolbox-with;
+    width: @toolbox-width;
     padding: 0 4px;
     margin-bottom: 10px;
 
@@ -29,13 +31,12 @@
   &__text {
     flex: 1 0 auto;
     padding: 0;
-    min-width: @toolbox-with;
-    width: 682px;
+    min-width: @toolbox-width;
+    width: @text-width;
     border: none;
     outline: none;
     color: @gray-100;
     line-height: 26px;
-    resize: vertical;
 
     &::placeholder {
       color: @gray-60;
@@ -47,6 +48,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    width: @text-width;
   }
 
   &__submit {

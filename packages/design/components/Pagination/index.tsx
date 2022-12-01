@@ -15,6 +15,9 @@ export interface PaginationProps {
   total?: number;
   /* 页码改变的回调 */
   onChange?: (offset: number) => void;
+
+  /* 自定义 classname */
+  wrapperClass?: string;
 }
 
 function calculatePage(pageSize: number, total: number): number {
@@ -25,6 +28,7 @@ const Pagination: FC<PaginationProps> = ({
   currentPage = 1,
   pageSize = 30,
   total = 0,
+  wrapperClass,
   ...restProps
 }) => {
   const [current, setCurrent] = useState(() => currentPage);
@@ -108,7 +112,7 @@ const Pagination: FC<PaginationProps> = ({
     }
   }
   return (
-    <ul className='bgm-pagination' data-testid='pagination-wrapper'>
+    <ul className={cn('bgm-pagination', wrapperClass)} data-testid='pagination-wrapper'>
       {prevButton}
       {pagerList}
       {nextButton}

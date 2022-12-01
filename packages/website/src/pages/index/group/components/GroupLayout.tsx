@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import type { GroupProfile } from '@bangumi/client/group';
-import { Section, Tab } from '@bangumi/design';
+import { Section, Tab, Layout } from '@bangumi/design';
 import { keyBy } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
@@ -55,9 +55,10 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
         activeKey={curTab}
         onChange={(_, value) => navigate(value.to(groupName))}
       />
-      <div className={styles.columnContainer}>
-        <div className={styles.leftCol}>{children}</div>
-        <div className={styles.rightCol}>
+      <Layout
+        type='alpha'
+        leftChildren={children}
+        rightChildren={
           <Section
             title='最近加入'
             renderFooter={() =>
@@ -86,8 +87,8 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
               })}
             </div>
           </Section>
-        </div>
-      </div>
+        }
+      />
     </div>
   );
 };

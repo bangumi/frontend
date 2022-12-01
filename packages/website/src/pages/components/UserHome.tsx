@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Typography } from '@bangumi/design';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import { useUser } from '../../hooks/use-user';
-import { getUserProfileLink } from '../../utils/pages';
 import styles from './UserHome.module.less';
 
 const { Link } = Typography;

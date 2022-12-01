@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 
 import { ReactComponent as DownArrow } from '@bangumi/website/assets/down-arrow.svg';
@@ -9,7 +10,8 @@ export interface ClampableContentProps {
   threshold: number;
   content: string;
   isClamped: boolean;
-  onChange: (isClamped: boolean) => void;
+  containerClassName?: string;
+  onChange?: (isClamped: boolean) => void;
 }
 
 export const ClampableContent: React.FC<ClampableContentProps> = ({
@@ -17,6 +19,7 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   threshold,
   isClamped,
   onChange,
+  containerClassName,
 }) => {
   const [isClampEnabled, setIsClampedEnable] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
@@ -34,11 +37,11 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   };
 
   const handleUnclamp = (): void => {
-    onChange(false);
+    onChange?.(false);
   };
 
   const handleClamp = (): void => {
-    onChange(true);
+    onChange?.(true);
   };
 
   const renderControl = (): React.ReactElement | null => {
@@ -50,10 +53,12 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
       return (
         <>
           <div>...</div>
-          <div className={styles.textButton} onClick={handleUnclamp}>
-            <span>展开</span>
-            <DownArrow />
-          </div>
+          {onChange ? (
+            <div className={styles.textButton} onClick={handleUnclamp}>
+              <span>展开</span>
+              <DownArrow />
+            </div>
+          ) : null}
         </>
       );
     }
@@ -66,10 +71,9 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, containerClassName)}>
       <div
         ref={contentRef}
-        className={styles.content}
         style={isClampEnabled && isClamped ? clampedStyle : undefined}
         dangerouslySetInnerHTML={{ __html: content }}
       />

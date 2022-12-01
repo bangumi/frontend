@@ -7,7 +7,7 @@ const componentMeta: ComponentMeta<typeof Avatar> = {
   title: 'modern/Avatar',
   component: Avatar,
   args: {
-    src: 'https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg',
+    src: 'https://lain.bgm.tv/pic/user/l/icon.jpg',
     size: 'small',
   },
 };

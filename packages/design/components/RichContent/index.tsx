@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import React from 'react';
 
-export interface RichTextProps {
+export interface RichContentProps {
   html: string;
   classname?: string;
 }
 
-const RichContent: React.FC<RichTextProps> = ({ html, classname }) => {
+const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
   return (
-    <article
+    <div
       className={classNames('bgm-rich-content', classname)}
       dangerouslySetInnerHTML={{ __html: html }}
     />

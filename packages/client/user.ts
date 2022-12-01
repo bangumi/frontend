@@ -1,9 +1,6 @@
-import type { components } from './types';
-
 export * from './common';
 
-export type User = components['schemas']['User'];
-
+// https://github.com/drwpow/openapi-typescript/issues/941
 export enum UserGroup {
   Admin = 1,
   BangumiAdmin = 2,

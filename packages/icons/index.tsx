@@ -20,3 +20,11 @@ export { ReactComponent as Underscore } from './assets/underscore.svg';
 export { ReactComponent as Image } from './assets/image.svg';
 export { ReactComponent as Link } from './assets/link.svg';
 export { ReactComponent as Size } from './assets/size.svg';
+
+// Topic
+
+export { ReactComponent as OriginalPoster } from './assets/original-poster.svg';
+export { ReactComponent as Friend } from './assets/friend.svg';
+export { ReactComponent as TopicSilent } from './assets/topic-silent.svg';
+export { ReactComponent as TopicClosed } from './assets/topic-closed.svg';
+export { ReactComponent as TopicReopen } from './assets/topic-reopen.svg';
