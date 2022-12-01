@@ -1,5 +1,5 @@
 import { UnreadableCodeError } from '../index';
-import { convert, setUserConverter } from './convert';
+import { convert } from './convert';
 import { Parser } from './parser';
 import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
 
@@ -93,11 +93,8 @@ export function renderWithParser(
 ): string {
   let result = '';
   const nodes: CodeNodeTypes[] = parser.parse();
-  setUserConverter(converterMap);
   nodes.forEach((node) => {
-    result += renderNode(convert(node));
+    result += renderNode(convert(node, converterMap));
   });
-  // 重置为默认值 @TODO 改成类避免使用全局变量
-  setUserConverter({});
   return result;
 }

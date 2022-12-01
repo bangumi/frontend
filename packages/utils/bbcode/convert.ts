@@ -39,37 +39,6 @@ function convertImgNode(node: CodeVNode): VNode {
   return vnode;
 }
 
-function setVNodeChildren(vnode: VNode, node: CodeVNode): void {
-  if (node.children) {
-    vnode.children = node.children.map((c) => convert(c));
-  }
-}
-
-function convertUrlNode(node: CodeVNode): VNode {
-  let href = node.props?.url;
-  if (!href) {
-    href = node.children![0] as string;
-  }
-  const vnode: VNode = {
-    type: 'a',
-    props: {
-      href,
-    },
-    className: 'l',
-  };
-  if (node.children) {
-    vnode.children = node.children.map((c) => convert(c));
-  }
-  if (isExternalLink(href)) {
-    vnode.props = {
-      ...vnode.props,
-      target: '_blank',
-      ref: 'nofollow external noopener noreferrer',
-    };
-  }
-  return vnode;
-}
-
 function convertStickerNode(node: CodeVNode): string {
   const stickerId = node.props!.stickerId!;
   let id = -1;
@@ -117,18 +86,6 @@ function convertStickerNode(node: CodeVNode): string {
   return stickerId;
 }
 
-function convertQuote(node: CodeVNode): VNode {
-  const q: VNode = {
-    type: 'q',
-  };
-  setVNodeChildren(q, node);
-  return {
-    type: 'div',
-    className: 'quote',
-    children: [q],
-  };
-}
-
 function convertUser(node: CodeVNode): VNode {
   let userId = node.props?.user;
   if (!userId) {
@@ -144,121 +101,174 @@ function convertUser(node: CodeVNode): VNode {
   };
 }
 
-function toVNode(
-  node: CodeVNode,
-  type: string,
-  props: Pick<VNode, 'style' | 'className'> = {},
-): VNode {
-  const vnode: VNode = {
-    type,
-    ...props,
+export function convert(
+  node: CodeNodeTypes,
+  converterMap: Record<string, ConverterFn> = {},
+): NodeTypes {
+  const converter = new Converter(converterMap);
+  return converter.convert(node);
+}
+
+export class Converter {
+  readonly fnMap: Record<string, ConverterFn> = {};
+  readonly defaultFnMap: Record<string, ConverterFn> = {
+    b: (node) => this.toVNode(node, 'strong'),
+    i: (node) => this.toVNode(node, 'em'),
+    u: (node) =>
+      this.toVNode(node, 'span', {
+        style: {
+          'text-decoration': 'underline',
+        },
+      }),
+    s: (node) =>
+      this.toVNode(node, 'span', {
+        style: {
+          'text-decoration': 'line-through',
+        },
+      }),
+    mask: (node) =>
+      this.toVNode(node, 'span', {
+        style: {
+          'background-color': '#555',
+          color: '#555',
+          border: '1px solid #555',
+        },
+      }),
+    color: (node) =>
+      this.toVNode(node, 'span', {
+        style: {
+          color: node.props!.color!,
+        },
+      }),
+    size: (node) =>
+      this.toVNode(node, 'span', {
+        style: {
+          'font-size': node.props!.size! + 'px',
+          'line-height': node.props!.size! + 'px',
+        },
+      }),
+    url: (node) => this.convertUrlNode(node),
+    img: convertImgNode,
+    sticker: convertStickerNode,
+    quote: (node) => this.convertQuote(node),
+    code: (node) => ({
+      type: 'pre',
+      children: node.children,
+    }),
+    left: (node) =>
+      this.toVNode(node, 'p', {
+        style: {
+          'text-align': 'left',
+        },
+      }),
+    right: (node) =>
+      this.toVNode(node, 'p', {
+        style: {
+          'text-align': 'right',
+        },
+      }),
+    center: (node) =>
+      this.toVNode(node, 'p', {
+        style: {
+          'text-align': 'center',
+        },
+      }),
+    indent: (node) => this.toVNode(node, 'blockquote', {}),
+    align: (node) =>
+      this.toVNode(node, 'p', {
+        style: {
+          'text-align': node.props!.align!,
+        },
+      }),
+    float: (node) =>
+      this.toVNode(node, 'span', {
+        style: {
+          float: node.props!.float!,
+        },
+      }),
+    subject: (node) =>
+      this.toVNode(node, 'a', {
+        className: 'l',
+      }),
+    user: convertUser,
   };
-  setVNodeChildren(vnode, node);
-  return vnode;
-}
 
-let UserConverterFnMap: Record<string, ConverterFn> = {};
+  constructor(converterMap: Record<string, ConverterFn>) {
+    this.fnMap = converterMap;
+  }
 
-export function setUserConverter(map: Record<string, ConverterFn>): void {
-  UserConverterFnMap = map;
-}
+  convert(node: CodeNodeTypes): NodeTypes {
+    if (typeof node === 'string') {
+      return node;
+    }
+    const converterFn = this.getConvertFn(node.type);
+    if (converterFn) {
+      return converterFn(node);
+    }
+    const vnode: VNode = {
+      type: node.type,
+    };
+    this.setVNodeChildren(vnode, node);
+    return vnode;
+  }
 
-const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
-  b: (node) => toVNode(node, 'strong'),
-  i: (node) => toVNode(node, 'em'),
-  u: (node) =>
-    toVNode(node, 'span', {
-      style: {
-        'text-decoration': 'underline',
+  getConvertFn(type: string): ConverterFn | undefined {
+    let converterFn = this.fnMap[type];
+    if (!converterFn) {
+      converterFn = this.defaultFnMap[type];
+    }
+    return converterFn;
+  }
+
+  toVNode(node: CodeVNode, type: string, props: Pick<VNode, 'style' | 'className'> = {}): VNode {
+    const vnode: VNode = {
+      type,
+      ...props,
+    };
+    this.setVNodeChildren(vnode, node);
+    return vnode;
+  }
+
+  setVNodeChildren(vnode: VNode, node: CodeVNode): void {
+    if (node.children) {
+      vnode.children = node.children.map((c) => this.convert(c));
+    }
+  }
+
+  convertQuote(node: CodeVNode): VNode {
+    const q: VNode = {
+      type: 'q',
+    };
+    this.setVNodeChildren(q, node);
+    return {
+      type: 'div',
+      className: 'quote',
+      children: [q],
+    };
+  }
+
+  convertUrlNode(node: CodeVNode): VNode {
+    let href = node.props?.url;
+    if (!href) {
+      href = node.children![0] as string;
+    }
+    const vnode: VNode = {
+      type: 'a',
+      props: {
+        href,
       },
-    }),
-  s: (node) =>
-    toVNode(node, 'span', {
-      style: {
-        'text-decoration': 'line-through',
-      },
-    }),
-  mask: (node) =>
-    toVNode(node, 'span', {
-      style: {
-        'background-color': '#555',
-        color: '#555',
-        border: '1px solid #555',
-      },
-    }),
-  color: (node) =>
-    toVNode(node, 'span', {
-      style: {
-        color: node.props!.color!,
-      },
-    }),
-  size: (node) =>
-    toVNode(node, 'span', {
-      style: {
-        'font-size': node.props!.size! + 'px',
-        'line-height': node.props!.size! + 'px',
-      },
-    }),
-  url: convertUrlNode,
-  img: convertImgNode,
-  sticker: convertStickerNode,
-  quote: convertQuote,
-  code: (node) => ({
-    type: 'pre',
-    children: node.children,
-  }),
-  left: (node) =>
-    toVNode(node, 'p', {
-      style: {
-        'text-align': 'left',
-      },
-    }),
-  right: (node) =>
-    toVNode(node, 'p', {
-      style: {
-        'text-align': 'right',
-      },
-    }),
-  center: (node) =>
-    toVNode(node, 'p', {
-      style: {
-        'text-align': 'center',
-      },
-    }),
-  indent: (node) => toVNode(node, 'blockquote', {}),
-  align: (node) =>
-    toVNode(node, 'p', {
-      style: {
-        'text-align': node.props!.align!,
-      },
-    }),
-  float: (node) =>
-    toVNode(node, 'span', {
-      style: {
-        float: node.props!.float!,
-      },
-    }),
-  subject: (node) =>
-    toVNode(node, 'a', {
       className: 'l',
-    }),
-  user: convertUser,
-};
-
-export function convert(node: CodeNodeTypes): NodeTypes {
-  if (typeof node === 'string') {
-    return node;
+    };
+    if (node.children) {
+      vnode.children = node.children.map((c) => this.convert(c));
+    }
+    if (isExternalLink(href)) {
+      vnode.props = {
+        ...vnode.props,
+        target: '_blank',
+        ref: 'nofollow external noopener noreferrer',
+      };
+    }
+    return vnode;
   }
-  let converterFn = UserConverterFnMap[node.type];
-  if (!converterFn) {
-    converterFn = CONVERTER_FN_MAP[node.type];
-  }
-  if (converterFn) {
-    return converterFn(node);
-  }
-  const vnode: VNode = {
-    type: node.type,
-  };
-  setVNodeChildren(vnode, node);
-  return vnode;
 }
