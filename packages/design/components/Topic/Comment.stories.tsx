@@ -1,6 +1,8 @@
 import type { ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { State } from '@bangumi/client/topic';
+
 import repliesComment from './__test__/fixtures/repliesComment.json';
 import singleComment from './__test__/fixtures/singleComment.json';
 import specialComment from './__test__/fixtures/specialComment.json';
@@ -13,7 +15,7 @@ export default {
   component: Comment,
 };
 
-const Template: ComponentStory<typeof Comment> = (args: CommentProps & { states?: number[] }) => {
+const Template: ComponentStory<typeof Comment> = (args: CommentProps & { states?: State[] }) => {
   // 0 正常评论 6 被用户删除 7 违反社区指导原则，已被删除
   // 1 关闭 2 重开 5 下沉
   return (
@@ -21,7 +23,7 @@ const Template: ComponentStory<typeof Comment> = (args: CommentProps & { states?
       {(args.states ?? [0]).map((state, idx) => (
         <div key={idx} style={{ marginBottom: 20 }}>
           <h1>State: {state}</h1>
-          <Comment {...args} state={state as any} />
+          <Comment {...args} state={state} />
         </div>
       ))}
     </div>
@@ -37,7 +39,7 @@ SingleComment.args = {
   originalPosterId: 1,
   created_at: String(new Date()),
   floor: 2,
-  states: [0, 6, 7],
+  states: [State.Normal, State.DeletedByUser, State.DeletedByAdmin],
 } as any;
 
 export const CommentWithReplies = Template.bind({});
@@ -70,5 +72,5 @@ SpecialComment.args = {
   is_friend: false,
   created_at: String(new Date()),
   floor: 2,
-  states: [1, 2, 5],
+  states: [State.Closed, State.Reopen, State.Silent],
 } as any;
