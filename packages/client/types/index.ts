@@ -90,6 +90,8 @@ export interface paths {
   };
 }
 
+export type webhooks = Record<string, never>;
+
 export interface components {
   schemas: {
     /**
@@ -236,7 +238,7 @@ export interface components {
       is_friend: boolean;
       /**
        * Format: date-time
-       * @example "2008-07-14T07:34:07.000Z"
+       * @example 2008-07-14T15:34:07+08:00
        */
       created_at?: string;
       creator: components['schemas']['User'];
@@ -256,7 +258,7 @@ export interface components {
       title: string;
       /**
        * Format: date-time
-       * @example "2021-12-20T11:18:49.000Z"
+       * @example 2021-12-20T19:18:49+08:00
        */
       updated_at: string;
     };
@@ -264,7 +266,7 @@ export interface components {
     Topic: {
       /**
        * Format: date-time
-       * @example "2008-07-14T07:34:07.000Z"
+       * @example 2008-07-14T15:34:07+08:00
        */
       created_at: string;
       creator: components['schemas']['User'];
@@ -283,7 +285,7 @@ export interface components {
       title: string;
       /**
        * Format: date-time
-       * @example "2021-12-20T11:18:49.000Z"
+       * @example 2021-12-20T19:18:49+08:00
        */
       updated_at: string;
     };
@@ -293,7 +295,7 @@ export interface components {
       is_friend: boolean;
       /**
        * Format: date-time
-       * @example "2008-07-14T07:38:35.000Z"
+       * @example 2008-07-14T15:38:35+08:00
        */
       created_at: string;
       creator: components['schemas']['User'];
@@ -305,7 +307,7 @@ export interface components {
       replies: {
         /**
          * Format: date-time
-         * @example "2012-12-23T12:46:29.000Z"
+         * @example 2012-12-23T20:46:29+08:00
          */
         created_at: string;
         creator: components['schemas']['User'];

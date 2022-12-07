@@ -779,7 +779,7 @@ components:
             created_at:
               type: string
               format: date-time
-              example: 2008-07-14T07:34:07.000Z
+              example: '2008-07-14T15:34:07+08:00'
             creator:
               $ref: '#/components/schemas/User'
             id:
@@ -799,7 +799,7 @@ components:
             updated_at:
               type: string
               format: date-time
-              example: 2021-12-20T11:18:49.000Z
+              example: '2021-12-20T19:18:49+08:00'
     Topic:
       title: Topic
       type: object
@@ -814,7 +814,7 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2008-07-14T07:34:07.000Z
+          example: '2008-07-14T15:34:07+08:00'
         creator:
           $ref: '#/components/schemas/User'
         id:
@@ -832,7 +832,7 @@ components:
         updated_at:
           type: string
           format: date-time
-          example: 2021-12-20T11:18:49.000Z
+          example: '2021-12-20T19:18:49+08:00'
     Comment:
       title: Comment
       type: object
@@ -851,7 +851,7 @@ components:
         created_at:
           type: string
           format: date-time
-          example: 2008-07-14T07:38:35.000Z
+          example: '2008-07-14T15:38:35+08:00'
         creator:
           $ref: '#/components/schemas/User'
         id:
@@ -873,7 +873,7 @@ components:
               created_at:
                 type: string
                 format: date-time
-                example: 2012-12-23T12:46:29.000Z
+                example: '2012-12-23T20:46:29+08:00'
               creator:
                 $ref: '#/components/schemas/User'
               id:
