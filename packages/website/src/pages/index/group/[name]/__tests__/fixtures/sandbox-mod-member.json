@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+      },
+      "id": 287622,
+      "nickname": "nickname 287622",
+      "username": "287622",
+      "joinedAt": 1531631310
+    }
+  ],
+  "total": 1
+}

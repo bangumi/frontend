@@ -13,5 +13,11 @@ export interface Group {
   description: string;
 }
 export type GroupProfile = components['schemas']['GroupProfile'];
-export type GroupMember = components['schemas']['GroupMember'];
+export interface GroupMember {
+  avatar: components['schemas']['Avatar'];
+  id: number;
+  nickname: string;
+  username: string;
+  joinedAt: number;
+}
 export type GroupTopics = components['schemas']['PrivateTopicDetail'];

@@ -1,6 +1,7 @@
+import { ok } from 'oazapfts';
 import useSWR from 'swr';
 
-import { api } from '@bangumi/client';
+import { ozaClient } from '@bangumi/client';
 import type { GroupMember, Pagination } from '@bangumi/client/group';
 
 interface UseGroupMembersRet {
@@ -18,8 +19,8 @@ export function useGroupMembers(
   { type, offset = 0, limit = 30, disable = false }: GroupMembersReq,
 ): UseGroupMembersRet {
   const { data } = useSWR(
-    disable ? null : api.listGroupMembersByName.swrKey({ name }, { type, limit, offset }),
-    api.listGroupMembersByName.fetcher,
+    disable ? null : `listGroupMembersByName ${name} ${type} ${limit} ${offset}`,
+    async () => ok(ozaClient.listGroupMembersByName(name, { limit, offset, $type: type })),
     { suspense: true },
   );
 

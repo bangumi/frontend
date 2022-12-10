@@ -48,6 +48,17 @@ export interface Topic {
   updatedAt: number;
   repliesCount: number;
 }
+export interface GroupMember {
+  avatar: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+  id: number;
+  nickname: string;
+  username: string;
+  joinedAt: number;
+}
 /**
  * 登出
  */
@@ -150,16 +161,15 @@ export async function getGroupProfile(
         status: 200;
         data: {
           recentAddedMembers: Array<{
-            id: number;
-            username: string;
             avatar: {
               small: string;
               medium: string;
               large: string;
             };
+            id: number;
             nickname: string;
-            sign: string;
-            user_group: number;
+            username: string;
+            joinedAt: number;
           }>;
           topics: Topic[];
           inGroup: boolean;
@@ -282,6 +292,51 @@ export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
   >(`/p1/groups/-/topics/${encodeURIComponent(id)}`, {
     ...opts,
   });
+}
+/**
+ * 获取帖子列表
+ */
+export async function listGroupMembersByName(
+  groupName: string,
+  {
+    $type,
+    limit,
+    offset,
+  }: {
+    $type?: 'mod' | 'normal' | 'all';
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: GroupMember[];
+          total: number;
+        };
+      }
+    | {
+        status: 404;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/groups/${encodeURIComponent(groupName)}/members${QS.query(
+      QS.explode({
+        type: $type,
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
 }
 /**
  * 获取帖子列表
