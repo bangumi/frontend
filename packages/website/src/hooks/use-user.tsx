@@ -1,9 +1,10 @@
+import { ok } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { api, ozaClient } from '@bangumi/client';
+import { ozaClient } from '@bangumi/client';
 import type { User } from '@bangumi/client/user';
 
 interface UserContextType {
@@ -49,7 +50,7 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR(api.getCurrentUser.swrKey(), api.getCurrentUser.fetcher, {
+  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()), {
     refreshWhenHidden: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,

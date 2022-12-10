@@ -3,15 +3,12 @@
 exports[`should refresh me if login succeeded 1`] = `
 {
   "avatar": {
-    "large": "https://lain.bgm.tv/pic/user/l/000/18/66/186665.jpg?r=1502208749",
-    "medium": "https://lain.bgm.tv/pic/user/m/000/18/66/186665.jpg?r=1502208749",
-    "small": "https://lain.bgm.tv/pic/user/s/000/18/66/186665.jpg?r=1502208749",
+    "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg?r=1571167246",
+    "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg?r=1571167246",
+    "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg?r=1571167246",
   },
-  "id": 123456,
-  "nickname": "user",
-  "sign": "sign",
-  "url": "https://bgm.tv/user/user",
-  "user_group": 11,
-  "username": "user",
+  "id": 382951,
+  "nickname": "树洞酱",
+  "username": "382951",
 }
 `;
