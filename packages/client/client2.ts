@@ -33,6 +33,8 @@ export interface Topic {
       large: string;
     };
     nickname: string;
+    sign: string;
+    user_group: number;
   };
   parentID: number;
   lastRepliedAt: string;
@@ -48,6 +50,10 @@ export async function logout(opts?: Oazapfts.RequestOpts) {
       }
     | {
         status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
         data: Error;
       }
   >('/p1/logout', {
@@ -85,6 +91,10 @@ export async function login(
         status: 429;
         data: Error;
       }
+    | {
+        status: 500;
+        data: Error;
+      }
   >(
     '/p1/login',
     oazapfts.json({
@@ -94,7 +104,7 @@ export async function login(
     }),
   );
 }
-export async function getP1Me(opts?: Oazapfts.RequestOpts) {
+export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -104,6 +114,10 @@ export async function getP1Me(opts?: Oazapfts.RequestOpts) {
         status: 401;
         data: Error;
       }
+    | {
+        status: 500;
+        data: Error;
+      }
   >('/p1/me', {
     ...opts,
   });
@@ -111,10 +125,7 @@ export async function getP1Me(opts?: Oazapfts.RequestOpts) {
 /**
  * 获取小组首页
  */
-export async function getP1GroupsByGroupNameProfile(
-  groupName: string,
-  opts?: Oazapfts.RequestOpts,
-) {
+export async function getGroupProfile(groupName: string, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -128,19 +139,29 @@ export async function getP1GroupsByGroupNameProfile(
               large: string;
             };
             nickname: string;
+            sign: string;
+            user_group: number;
           }>;
           topics: Topic[];
+          inGroup: boolean;
           group: {
             id: number;
             name: string;
             nsfw: boolean;
-            summary: string;
+            title: string;
+            icon: string;
+            description: string;
+            totalMembers: number;
             createdAt: number;
           };
         };
       }
     | {
         status: 404;
+        data: Error;
+      }
+    | {
+        status: 500;
         data: Error;
       }
   >(`/p1/groups/${encodeURIComponent(groupName)}/profile`, {
@@ -150,7 +171,94 @@ export async function getP1GroupsByGroupNameProfile(
 /**
  * 获取帖子列表
  */
-export async function getP1GroupsByGroupNameTopics(
+export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          id: number;
+          group: {
+            id: number;
+            name: string;
+            nsfw: boolean;
+            title: string;
+            icon: string;
+            description: string;
+            totalMembers: number;
+            createdAt: number;
+          };
+          creator: {
+            id: number;
+            username: string;
+            avatar: {
+              small: string;
+              medium: string;
+              large: string;
+            };
+            nickname: string;
+            sign: string;
+            user_group: number;
+          };
+          title: string;
+          text: string;
+          state: number;
+          createdAt: number;
+          replies: Array<{
+            id: number;
+            isFriend: boolean;
+            replies: Array<{
+              id: number;
+              creator: {
+                id: number;
+                username: string;
+                avatar: {
+                  small: string;
+                  medium: string;
+                  large: string;
+                };
+                nickname: string;
+                sign: string;
+                user_group: number;
+              };
+              createdAt: number;
+              isFriend: boolean;
+              text: string;
+              state: number;
+            }>;
+            creator: {
+              id: number;
+              username: string;
+              avatar: {
+                small: string;
+                medium: string;
+                large: string;
+              };
+              nickname: string;
+              sign: string;
+              user_group: number;
+            };
+            createdAt: number;
+            text: string;
+            state: number;
+          }>;
+        };
+      }
+    | {
+        status: 404;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/groups/-/topics/${encodeURIComponent(id)}`, {
+    ...opts,
+  });
+}
+/**
+ * 获取帖子列表
+ */
+export async function getGroupTopicsByGroupName(
   groupName: string,
   {
     limit,
@@ -173,6 +281,10 @@ export async function getP1GroupsByGroupNameTopics(
         status: 404;
         data: Error;
       }
+    | {
+        status: 500;
+        data: Error;
+      }
   >(
     `/p1/groups/${encodeURIComponent(groupName)}/topics${QS.query(
       QS.explode({
@@ -188,7 +300,7 @@ export async function getP1GroupsByGroupNameTopics(
 /**
  * 获取帖子列表
  */
-export async function getP1SubjectsBySubjectIdTopics(
+export async function getSubjectTopicsBySubjectId(
   subjectId: number,
   {
     limit,
@@ -209,6 +321,10 @@ export async function getP1SubjectsBySubjectIdTopics(
       }
     | {
         status: 404;
+        data: Error;
+      }
+    | {
+        status: 500;
         data: Error;
       }
   >(

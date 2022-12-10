@@ -127,7 +127,7 @@ export interface components {
        * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
        * @enum {integer}
        */
-      user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
+      user_group: number;
       avatar: components['schemas']['Avatar'];
       /**
        * Sign
@@ -297,7 +297,7 @@ export interface components {
        * Format: date-time
        * @example 2008-07-14T15:38:35+08:00
        */
-      created_at: string;
+      createdAt: number;
       creator: components['schemas']['User'];
       /**
        * Format: int32
@@ -348,7 +348,7 @@ export interface components {
        * @example 0
        * @enum {integer}
        */
-      state: 0 | 1 | 2 | 5 | 6 | 7;
+      state: number;
     };
     GroupMember: {
       avatar: components['schemas']['Avatar'];

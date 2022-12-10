@@ -54,9 +54,9 @@ const RenderContent: FC<{ state: State; text: string }> = ({ state, text }) => {
 const Comment: FC<CommentProps> = ({
   text,
   creator,
-  created_at: createAt,
+  createdAt,
   floor,
-  is_friend: isFriend,
+  isFriend,
   originalPosterId,
   state,
   user,
@@ -110,7 +110,7 @@ const Comment: FC<CommentProps> = ({
             </Link>
             <RenderContent state={state} text={text!} />
           </div>
-          <CommentInfo createdAt={createAt} floor={floor} isSpecial={isSpecial} />
+          <CommentInfo createdAt={createdAt} floor={floor} isSpecial={isSpecial} />
         </span>
       </div>
     );
@@ -134,7 +134,7 @@ const Comment: FC<CommentProps> = ({
                 {isFriend ? <Friend /> : null}
                 {!isReply && creator.sign ? <span>{`// ${unescape(creator.sign)}`}</span> : null}
               </div>
-              <CommentInfo createdAt={createAt} floor={floor} id={`post_${props.id}`} />
+              <CommentInfo createdAt={createdAt} floor={floor} id={`post_${props.id}`} />
             </span>
             <RenderContent state={state} text={text!} />
           </div>

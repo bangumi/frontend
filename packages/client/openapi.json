@@ -85,9 +85,15 @@
               "nickname": {
                 "examples": ["Sai🖖"],
                 "type": "string"
+              },
+              "sign": {
+                "type": "string"
+              },
+              "user_group": {
+                "type": "integer"
               }
             },
-            "required": ["id", "username", "avatar", "nickname"]
+            "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
           },
           "parentID": {
             "description": "小组/条目ID",
@@ -134,9 +140,15 @@
           "nickname": {
             "examples": ["Sai🖖"],
             "type": "string"
+          },
+          "sign": {
+            "type": "string"
+          },
+          "user_group": {
+            "type": "integer"
           }
         },
-        "required": ["id", "username", "avatar", "nickname"]
+        "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
       },
       "Avatar": {
         "title": "Avatar",
@@ -192,6 +204,17 @@
                       "statusCode": 401
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
@@ -344,13 +367,24 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
     },
     "/p1/me": {
       "get": {
-        "operationId": "get-current-user",
+        "operationId": "getCurrentUser",
         "tags": ["auth"],
         "responses": {
           "200": {
@@ -378,13 +412,24 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
     },
     "/p1/groups/{groupName}/profile": {
       "get": {
-        "operationId": "get-group-topics-by-group-name",
+        "operationId": "getGroupProfile",
         "tags": ["topic"],
         "description": "获取小组首页",
         "parameters": [
@@ -441,9 +486,15 @@
                           "nickname": {
                             "examples": ["Sai🖖"],
                             "type": "string"
+                          },
+                          "sign": {
+                            "type": "string"
+                          },
+                          "user_group": {
+                            "type": "integer"
                           }
                         },
-                        "required": ["id", "username", "avatar", "nickname"]
+                        "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
                       }
                     },
                     "topics": {
@@ -451,6 +502,10 @@
                       "items": {
                         "$ref": "#/components/schemas/Topic"
                       }
+                    },
+                    "inGroup": {
+                      "description": "是否已经加入小组",
+                      "type": "boolean"
                     },
                     "group": {
                       "type": "object",
@@ -464,17 +519,35 @@
                         "nsfw": {
                           "type": "boolean"
                         },
-                        "summary": {
+                        "title": {
                           "type": "string"
+                        },
+                        "icon": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "totalMembers": {
+                          "type": "integer"
                         },
                         "createdAt": {
                           "type": "integer"
                         }
                       },
-                      "required": ["id", "name", "nsfw", "summary", "createdAt"]
+                      "required": [
+                        "id",
+                        "name",
+                        "nsfw",
+                        "title",
+                        "icon",
+                        "description",
+                        "totalMembers",
+                        "createdAt"
+                      ]
                     }
                   },
-                  "required": ["recentAddedMembers", "topics", "group"]
+                  "required": ["recentAddedMembers", "topics", "inGroup", "group"]
                 }
               }
             }
@@ -499,13 +572,349 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/groups/-/topics/{id}": {
+      "get": {
+        "operationId": "getGroupTopic",
+        "tags": ["topic"],
+        "description": "获取帖子列表",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "group": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "nsfw": {
+                          "type": "boolean"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "icon": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "totalMembers": {
+                          "type": "integer"
+                        },
+                        "createdAt": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "name",
+                        "nsfw",
+                        "title",
+                        "icon",
+                        "description",
+                        "totalMembers",
+                        "createdAt"
+                      ]
+                    },
+                    "creator": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "examples": [1],
+                          "type": "integer"
+                        },
+                        "username": {
+                          "examples": ["sai"],
+                          "type": "string"
+                        },
+                        "avatar": {
+                          "title": "Avatar",
+                          "type": "object",
+                          "properties": {
+                            "small": {
+                              "type": "string"
+                            },
+                            "medium": {
+                              "examples": ["sai"],
+                              "type": "string"
+                            },
+                            "large": {
+                              "type": "string"
+                            }
+                          },
+                          "required": ["small", "medium", "large"]
+                        },
+                        "nickname": {
+                          "examples": ["Sai🖖"],
+                          "type": "string"
+                        },
+                        "sign": {
+                          "type": "string"
+                        },
+                        "user_group": {
+                          "type": "integer"
+                        },
+                        "isFriend": {
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "id",
+                        "username",
+                        "avatar",
+                        "nickname",
+                        "sign",
+                        "user_group",
+                        "isFriend"
+                      ]
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "text": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "type": "integer"
+                    },
+                    "createdAt": {
+                      "type": "integer"
+                    },
+                    "replies": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer"
+                          },
+                          "replies": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer"
+                                },
+                                "creator": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "examples": [1],
+                                      "type": "integer"
+                                    },
+                                    "username": {
+                                      "examples": ["sai"],
+                                      "type": "string"
+                                    },
+                                    "avatar": {
+                                      "title": "Avatar",
+                                      "type": "object",
+                                      "properties": {
+                                        "small": {
+                                          "type": "string"
+                                        },
+                                        "medium": {
+                                          "examples": ["sai"],
+                                          "type": "string"
+                                        },
+                                        "large": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "required": ["small", "medium", "large"]
+                                    },
+                                    "nickname": {
+                                      "examples": ["Sai🖖"],
+                                      "type": "string"
+                                    },
+                                    "sign": {
+                                      "type": "string"
+                                    },
+                                    "user_group": {
+                                      "type": "integer"
+                                    },
+                                    "isFriend": {
+                                      "type": "boolean"
+                                    }
+                                  },
+                                  "required": [
+                                    "id",
+                                    "username",
+                                    "avatar",
+                                    "nickname",
+                                    "sign",
+                                    "user_group",
+                                    "isFriend"
+                                  ]
+                                },
+                                "createdAt": {
+                                  "type": "integer"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "state": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": ["id", "creator", "createdAt", "text", "state"]
+                            }
+                          },
+                          "creator": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "examples": [1],
+                                "type": "integer"
+                              },
+                              "username": {
+                                "examples": ["sai"],
+                                "type": "string"
+                              },
+                              "avatar": {
+                                "title": "Avatar",
+                                "type": "object",
+                                "properties": {
+                                  "small": {
+                                    "type": "string"
+                                  },
+                                  "medium": {
+                                    "examples": ["sai"],
+                                    "type": "string"
+                                  },
+                                  "large": {
+                                    "type": "string"
+                                  }
+                                },
+                                "required": ["small", "medium", "large"]
+                              },
+                              "nickname": {
+                                "examples": ["Sai🖖"],
+                                "type": "string"
+                              },
+                              "sign": {
+                                "type": "string"
+                              },
+                              "user_group": {
+                                "type": "integer"
+                              },
+                              "isFriend": {
+                                "type": "boolean"
+                              }
+                            },
+                            "required": [
+                              "id",
+                              "username",
+                              "avatar",
+                              "nickname",
+                              "sign",
+                              "user_group",
+                              "isFriend"
+                            ]
+                          },
+                          "createdAt": {
+                            "type": "integer"
+                          },
+                          "text": {
+                            "type": "string"
+                          },
+                          "state": {
+                            "type": "integer"
+                          }
+                        },
+                        "required": ["id", "replies", "creator", "createdAt", "text", "state"]
+                      }
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "group",
+                    "creator",
+                    "title",
+                    "text",
+                    "state",
+                    "createdAt",
+                    "replies"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "小组不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "小组不存在",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotFoundError": {
+                    "value": {
+                      "code": "NOT_FOUND",
+                      "error": "Not Found",
+                      "message": "topic not found",
+                      "statusCode": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
     },
     "/p1/groups/{groupName}/topics": {
       "get": {
-        "operationId": "get-group-topics-by-group-name",
+        "operationId": "getGroupTopicsByGroupName",
         "tags": ["topic"],
         "description": "获取帖子列表",
         "parameters": [
@@ -580,13 +989,24 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
           }
         }
       }
     },
     "/p1/subjects/{subjectID}/topics": {
       "get": {
-        "operationId": "get-subject-topics-by-subject-id",
+        "operationId": "getSubjectTopicsBySubjectId",
         "tags": ["topic"],
         "description": "获取帖子列表",
         "parameters": [
@@ -658,6 +1078,17 @@
                       "statusCode": 404
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
                 }
               }
             }
