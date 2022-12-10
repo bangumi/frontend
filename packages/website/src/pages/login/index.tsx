@@ -12,7 +12,7 @@ import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
 
 const Login: React.FC = () => {
-  const hCaptcha = useRef<HCaptcha | null>(null);
+  const hCaptcha = useRef<HCaptcha>(null);
   const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
