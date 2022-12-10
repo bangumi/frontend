@@ -64,7 +64,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
             renderFooter={() =>
               group && (
                 <Link
-                  to={groupTabsByKey.members.to(group.name)}
+                  to={groupTabsByKey.members.to(group.group.name)}
                   className={CommonStyles.textButton}
                 >
                   <span>更多小组成员</span>
@@ -74,7 +74,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, gro
             }
           >
             <div className={styles.newMembers}>
-              {group?.new_members.slice(0, 10).map((member) => {
+              {group?.recentAddedMembers.slice(0, 10).map((member) => {
                 return (
                   <UserCard
                     user={{

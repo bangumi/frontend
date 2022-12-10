@@ -10,8 +10,8 @@ import GroupPage from '@bangumi/website/pages/index/group/[name]';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
 import GroupHome from '..';
-import Boring from './fixtures/boring.json';
 import RecentTopics from './fixtures/recent-topics.json';
+import Sandbox from './fixtures/sandbox.json';
 
 jest.mock('react-router-dom', () => {
   return {
@@ -35,8 +35,8 @@ class GroupHomeTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost/p/groups/${name}`, (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(mock.group ?? Boring));
+      rest.get(`http://localhost/p1/groups/${name}/profile`, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(mock.group ?? Sandbox));
       }),
     );
 
@@ -84,21 +84,21 @@ class GroupHomeTest {
 }
 
 it('should match snapshot properly', async () => {
-  const test = new GroupHomeTest('test', { group: Boring as GroupProfile });
+  const test = new GroupHomeTest('test', { group: Sandbox });
 
-  await test.assertHeader('靠谱人生茶话会');
+  await test.assertHeader('沙盒');
 });
 
 it('should list recent topics', async () => {
   const test = new GroupHomeTest('test', {
-    group: Boring as GroupProfile,
+    group: Sandbox,
     topics: RecentTopics as ResponseWithPagination<Topic[]>,
   });
 
   await test.assertTopicExist({
-    title: '看了4000本漫画，大家有什么想问的',
-    creator: 'brad',
-    replyCount: 40,
+    title: 'tes',
+    creator: '树洞酱',
+    replyCount: 2,
     updatedAt: '2022-9-4',
   });
 });

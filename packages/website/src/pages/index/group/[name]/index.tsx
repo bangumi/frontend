@@ -33,7 +33,7 @@ const GroupHome: React.FC = () => {
   };
 
   // TODO: XSS defense
-  const parsedDescription = renderBBCode(group.description);
+  const parsedDescription = renderBBCode(group?.group.description);
 
   return (
     <>

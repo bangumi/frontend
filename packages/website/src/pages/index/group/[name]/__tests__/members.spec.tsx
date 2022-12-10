@@ -9,9 +9,9 @@ import type { GroupMember, ResponseWithPagination } from '@bangumi/client/group'
 import { server as mockServer } from '../../../../../mocks/server';
 import { renderPage } from '../../../../../utils/test-utils';
 import GroupMembers from '../members';
-import Boring from './fixtures/boring.json';
 import sandboxMembers from './fixtures/sandbox-members.json';
 import sandboxModMember from './fixtures/sandbox-mod-member.json';
+import Sandbox from './fixtures/sandbox.json';
 
 jest.mock('react-router-dom', () => {
   return {
@@ -38,8 +38,8 @@ class GroupMembersTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost/p/groups/${name}`, (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(Boring));
+      rest.get(`http://localhost/p1/groups/${name}/profile`, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(Sandbox));
       }),
     );
 

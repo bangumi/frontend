@@ -2,7 +2,7 @@ import { ok } from 'oazapfts';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 
-import { ozaClient, api } from '@bangumi/client';
+import { ozaClient } from '@bangumi/client';
 import type { GroupProfile, Pagination } from '@bangumi/client/group';
 
 export enum DescriptionClamp {
@@ -31,8 +31,8 @@ export function useGroupRecentTopics(
 
 export function useGroup(name: string): UseGroupRet {
   const { data: groupResp } = useSWR(
-    api.getGroupProfileByName.swrKey({ name }),
-    api.getGroupProfileByName.fetcher,
+    `/group/${name}/profile`,
+    async () => ok(ozaClient.getGroupProfile(name)),
     { suspense: true },
   );
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`;
