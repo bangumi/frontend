@@ -268,7 +268,7 @@ export interface components {
        * Format: date-time
        * @example 2008-07-14T15:34:07+08:00
        */
-      created_at: string;
+      createdAt: number;
       creator: components['schemas']['User'];
       /**
        * Format: int32

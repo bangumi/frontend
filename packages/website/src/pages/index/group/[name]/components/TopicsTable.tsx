@@ -37,8 +37,10 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
                   {topic.creator.nickname}
                 </Typography.Link>
               </td>
-              <td className={styles.replies}>{topic.reply_count}</td>
-              <td className={styles.updateTime}>{dayjs(topic.updated_at).format('YYYY-M-D')}</td>
+              <td className={styles.replies}>{topic.repliesCount}</td>
+              <td className={styles.updateTime}>
+                {dayjs(topic.updatedAt * 1000).format('YYYY-M-D')}
+              </td>
             </tr>
           );
         })}

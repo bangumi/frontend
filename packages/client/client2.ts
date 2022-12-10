@@ -42,8 +42,11 @@ export interface Topic {
     sign: string;
     user_group: number;
   };
+  title: string;
   parentID: number;
-  lastRepliedAt: string;
+  createdAt: number;
+  updatedAt: number;
+  repliesCount: number;
 }
 /**
  * 登出
@@ -131,7 +134,17 @@ export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
 /**
  * 获取小组首页
  */
-export async function getGroupProfile(groupName: string, opts?: Oazapfts.RequestOpts) {
+export async function getGroupProfile(
+  groupName: string,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -160,6 +173,7 @@ export async function getGroupProfile(groupName: string, opts?: Oazapfts.Request
             totalMembers: number;
             createdAt: number;
           };
+          totalTopics: number;
         };
       }
     | {
@@ -170,9 +184,17 @@ export async function getGroupProfile(groupName: string, opts?: Oazapfts.Request
         status: 500;
         data: Error;
       }
-  >(`/p1/groups/${encodeURIComponent(groupName)}/profile`, {
-    ...opts,
-  });
+  >(
+    `/p1/groups/${encodeURIComponent(groupName)}/profile${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
 }
 /**
  * 获取帖子列表

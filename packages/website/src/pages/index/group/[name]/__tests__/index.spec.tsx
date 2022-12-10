@@ -41,7 +41,7 @@ class GroupHomeTest {
     );
 
     mockServer.use(
-      rest.get(`http://localhost/p/groups/${name}/topics`, (req, res, ctx) => {
+      rest.get(`http://localhost/p1/groups/${name}/topics`, (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics));
       }),
     );
@@ -99,6 +99,6 @@ it('should list recent topics', async () => {
     title: '看了4000本漫画，大家有什么想问的',
     creator: 'brad',
     replyCount: 40,
-    updatedAt: '2022-7-24',
+    updatedAt: '2022-9-4',
   });
 });
