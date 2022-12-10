@@ -1,0 +1,669 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "version": "0.0.24",
+    "title": "hello"
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "title": "User",
+        "type": "object",
+        "properties": {
+          "id": {
+            "examples": [1],
+            "type": "integer"
+          },
+          "username": {
+            "examples": ["sai"],
+            "type": "string"
+          },
+          "nickname": {
+            "examples": ["Sai🖖"],
+            "type": "string"
+          }
+        },
+        "required": ["id", "username", "nickname"]
+      },
+      "Error": {
+        "description": "fastify default error response",
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "error": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "integer"
+          }
+        },
+        "required": ["code", "error", "message", "statusCode"]
+      },
+      "Topic": {
+        "title": "Topic",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "topic id",
+            "type": "integer"
+          },
+          "creator": {
+            "title": "Creator",
+            "description": "a slim user object to contain basic info",
+            "type": "object",
+            "properties": {
+              "id": {
+                "examples": [1],
+                "type": "integer"
+              },
+              "username": {
+                "examples": ["sai"],
+                "type": "string"
+              },
+              "avatar": {
+                "title": "Avatar",
+                "type": "object",
+                "properties": {
+                  "small": {
+                    "type": "string"
+                  },
+                  "medium": {
+                    "examples": ["sai"],
+                    "type": "string"
+                  },
+                  "large": {
+                    "type": "string"
+                  }
+                },
+                "required": ["small", "medium", "large"]
+              },
+              "nickname": {
+                "examples": ["Sai🖖"],
+                "type": "string"
+              }
+            },
+            "required": ["id", "username", "avatar", "nickname"]
+          },
+          "parentID": {
+            "description": "小组/条目ID",
+            "type": "integer"
+          },
+          "lastRepliedAt": {
+            "description": "最后回复时间，unix time stamp",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": ["id", "creator", "parentID", "lastRepliedAt"]
+      },
+      "Creator": {
+        "title": "Creator",
+        "description": "a slim user object to contain basic info",
+        "type": "object",
+        "properties": {
+          "id": {
+            "examples": [1],
+            "type": "integer"
+          },
+          "username": {
+            "examples": ["sai"],
+            "type": "string"
+          },
+          "avatar": {
+            "title": "Avatar",
+            "type": "object",
+            "properties": {
+              "small": {
+                "type": "string"
+              },
+              "medium": {
+                "examples": ["sai"],
+                "type": "string"
+              },
+              "large": {
+                "type": "string"
+              }
+            },
+            "required": ["small", "medium", "large"]
+          },
+          "nickname": {
+            "examples": ["Sai🖖"],
+            "type": "string"
+          }
+        },
+        "required": ["id", "username", "avatar", "nickname"]
+      },
+      "Avatar": {
+        "title": "Avatar",
+        "type": "object",
+        "properties": {
+          "small": {
+            "type": "string"
+          },
+          "medium": {
+            "examples": ["sai"],
+            "type": "string"
+          },
+          "large": {
+            "type": "string"
+          }
+        },
+        "required": ["small", "medium", "large"]
+      }
+    }
+  },
+  "paths": {
+    "/p1/logout": {
+      "post": {
+        "operationId": "logout",
+        "tags": ["auth"],
+        "description": "登出",
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "未登录",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "未登录",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NeedLoginError": {
+                    "value": {
+                      "code": "NEED_LOGIN",
+                      "error": "Unauthorized",
+                      "message": "you need to login before logout",
+                      "statusCode": 401
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/login": {
+      "post": {
+        "operationId": "login",
+        "tags": ["auth"],
+        "description": "需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)\n\nsite-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "password": {
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "h-captcha-response": {
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": ["email", "password", "h-captcha-response"]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "headers": {
+              "Set-Cookie": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "example: \"sessionID=12345abc\""
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "缺少字段等",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "缺少字段等",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "验证码错误/账号密码不匹配",
+            "headers": {
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "remaining rate limit"
+              },
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "total limit per 10 minutes"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "seconds to reset rate limit"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "验证码错误/账号密码不匹配",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "CaptchaError": {
+                    "value": {
+                      "code": "CAPTCHA_ERROR",
+                      "error": "Unauthorized",
+                      "message": "wrong captcha",
+                      "statusCode": 401
+                    }
+                  },
+                  "UsernameOrPasswordError": {
+                    "value": {
+                      "code": "USERNAME_PASSWORD_ERROR",
+                      "error": "Unauthorized",
+                      "message": "email does not exists or email and password not match",
+                      "statusCode": 401
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "失败次数太多，需要过一段时间再重试",
+            "headers": {
+              "X-RateLimit-Remaining": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "remaining rate limit"
+              },
+              "X-RateLimit-Limit": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "limit per 10 minutes"
+              },
+              "X-RateLimit-Reset": {
+                "schema": {
+                  "type": "integer"
+                },
+                "description": "seconds to reset rate limit"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "失败次数太多，需要过一段时间再重试",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "TOO_MANY_REQUESTS",
+                  "error": "Too Many Requests",
+                  "message": "too many failed login attempts",
+                  "statusCode": 429
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/me": {
+      "get": {
+        "operationId": "get-current-user",
+        "tags": ["auth"],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "code": "NEED_LOGIN",
+                  "error": "Unauthorized",
+                  "message": "you need to login before %s",
+                  "statusCode": 401
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/groups/{groupName}/profile": {
+      "get": {
+        "operationId": "get-group-topics-by-group-name",
+        "tags": ["topic"],
+        "description": "获取小组首页",
+        "parameters": [
+          {
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "in": "path",
+            "name": "groupName",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "recentAddedMembers": {
+                      "type": "array",
+                      "items": {
+                        "title": "Creator",
+                        "description": "a slim user object to contain basic info",
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "examples": [1],
+                            "type": "integer"
+                          },
+                          "username": {
+                            "examples": ["sai"],
+                            "type": "string"
+                          },
+                          "avatar": {
+                            "title": "Avatar",
+                            "type": "object",
+                            "properties": {
+                              "small": {
+                                "type": "string"
+                              },
+                              "medium": {
+                                "examples": ["sai"],
+                                "type": "string"
+                              },
+                              "large": {
+                                "type": "string"
+                              }
+                            },
+                            "required": ["small", "medium", "large"]
+                          },
+                          "nickname": {
+                            "examples": ["Sai🖖"],
+                            "type": "string"
+                          }
+                        },
+                        "required": ["id", "username", "avatar", "nickname"]
+                      }
+                    },
+                    "topics": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Topic"
+                      }
+                    },
+                    "group": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "nsfw": {
+                          "type": "boolean"
+                        },
+                        "summary": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": ["id", "name", "nsfw", "summary", "createdAt"]
+                    }
+                  },
+                  "required": ["recentAddedMembers", "topics", "group"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "小组不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "小组不存在",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotFoundError": {
+                    "value": {
+                      "code": "NOT_FOUND",
+                      "error": "Not Found",
+                      "message": "topic not found",
+                      "statusCode": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/groups/{groupName}/topics": {
+      "get": {
+        "operationId": "get-group-topics-by-group-name",
+        "tags": ["topic"],
+        "description": "获取帖子列表",
+        "parameters": [
+          {
+            "schema": {
+              "default": 30,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false
+          },
+          {
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false
+          },
+          {
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "in": "path",
+            "name": "groupName",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Topic"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": ["data", "total"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "小组不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "小组不存在",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotFoundError": {
+                    "value": {
+                      "code": "NOT_FOUND",
+                      "error": "Not Found",
+                      "message": "topic not found",
+                      "statusCode": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/subjects/{subjectID}/topics": {
+      "get": {
+        "operationId": "get-subject-topics-by-subject-id",
+        "tags": ["topic"],
+        "description": "获取帖子列表",
+        "parameters": [
+          {
+            "schema": {
+              "default": 30,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false
+          },
+          {
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false
+          },
+          {
+            "schema": {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "subjectID",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Topic"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": ["data", "total"]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "条目不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "条目不存在",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotFoundError": {
+                    "value": {
+                      "code": "NOT_FOUND",
+                      "error": "Not Found",
+                      "message": "topic not found",
+                      "statusCode": 404
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

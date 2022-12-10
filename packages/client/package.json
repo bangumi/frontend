@@ -7,7 +7,10 @@
   "private": true,
   "scripts": {
     "update-openapi": "node scripts/update-openapi.mjs",
-    "build": "node scripts/build.mjs && prettier -w ./"
+    "build": "node scripts/build.mjs && (oazapfts openapi.json > client2.ts) && prettier -w ./"
+  },
+  "dependencies": {
+    "oazapfts": "^4.5.0"
   },
   "devDependencies": {
     "@apidevtools/json-schema-ref-parser": "^9.0.9",

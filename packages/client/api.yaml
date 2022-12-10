@@ -987,8 +987,3 @@ components:
       name: sessionID
       type: apiKey
       in: cookie
-servers:
-  - url: https://next.bgm.tv
-    description: Production server
-  - url: https://dev.bgm38.com/
-    description: 开发用服务器

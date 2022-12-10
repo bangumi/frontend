@@ -1,4 +1,4 @@
-import { waitFor, renderHook } from '@testing-library/react';
+import { renderHook, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
@@ -6,17 +6,22 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { server as mockServer } from '../mocks/server';
 import {
-  useUser,
-  UserProvider,
+  CaptureError,
   LoginErrorCode,
   PasswordUnMatchError,
   UnknownError,
+  UserProvider,
+  useUser,
 } from './use-user';
 
-function mockLogin(statusCode: number, response: Object = {}): void {
+function mockLogin(
+  statusCode: number,
+  response: Object = {},
+  headers: Record<string, string | string[]> = {},
+): void {
   mockServer.use(
-    rest.post('http://localhost/p/login', (req, res, ctx) => {
-      return res(ctx.status(statusCode), ctx.json(response));
+    rest.post('http://localhost/p1/login', (req, res, ctx) => {
+      return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
     }),
   );
 }
@@ -28,18 +33,29 @@ const wrapper = ({ children }: PropsWithChildren) => (
 );
 
 it.each([
-  { statusCode: 401, resp: { details: { remain: 4 } }, expectedError: new PasswordUnMatchError(4) },
-  { statusCode: 400, resp: { details: ['a', 'b'] }, expectedError: new UnknownError(['a', 'b']) },
-  { statusCode: 422, resp: {}, expectedError: new Error(LoginErrorCode.E_CLIENT_ERROR) },
-  { statusCode: 418, resp: {}, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
-  { statusCode: 429, resp: {}, expectedError: new Error(LoginErrorCode.E_TOO_MANY_ERROR) },
-  { statusCode: 502, resp: {}, expectedError: new Error(LoginErrorCode.E_SERVER_ERROR) },
+  {
+    statusCode: 401,
+    body: { code: 'CAPTCHA_ERROR' },
+    headers: { 'X-RateLimit-Remaining': '4' },
+    expectedError: new CaptureError(4),
+  },
+  {
+    statusCode: 401,
+    body: { code: 'USERNAME_PASSWORD_ERROR' },
+    headers: { 'X-RateLimit-Remaining': '4' },
+    expectedError: new PasswordUnMatchError(4),
+  },
+  { statusCode: 400, body: { message: 'a' }, expectedError: new UnknownError('a') },
+  { statusCode: 422, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
+  { statusCode: 418, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
+  { statusCode: 429, expectedError: new Error(LoginErrorCode.E_TOO_MANY_ERROR) },
+  { statusCode: 502, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
 ])(
   'should return error if request is failed with failed status $statusCode',
-  async ({ statusCode, resp, expectedError }) => {
+  async ({ statusCode, body = {}, headers = {}, expectedError }) => {
     const { result } = renderHook(() => useUser(), { wrapper });
 
-    mockLogin(statusCode, resp);
+    mockLogin(statusCode, body, headers);
 
     expect.assertions(1);
     await waitFor(async () => {
@@ -54,8 +70,8 @@ it('should refresh me if login succeeded', async () => {
   const { result } = renderHook(() => useUser(), { wrapper });
 
   mockLogin(200);
-  await result.current.login('fakeuser', 'fakepassword', 'fake-token');
-  await waitFor(() => {
+  await waitFor(async () => {
+    await result.current.login('fakeuser', 'fakepassword', 'fake-token');
     expect(result.current.user).toMatchSnapshot();
   });
 });
