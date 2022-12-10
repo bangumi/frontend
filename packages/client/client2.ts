@@ -21,6 +21,12 @@ export interface User {
   id: number;
   username: string;
   nickname: string;
+  avatar: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+  user_group: number;
 }
 export interface Topic {
   id: number;

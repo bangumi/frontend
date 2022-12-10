@@ -21,9 +21,46 @@
           "nickname": {
             "examples": ["Sai🖖"],
             "type": "string"
+          },
+          "avatar": {
+            "title": "Avatar",
+            "type": "object",
+            "properties": {
+              "small": {
+                "type": "string"
+              },
+              "medium": {
+                "examples": ["sai"],
+                "type": "string"
+              },
+              "large": {
+                "type": "string"
+              }
+            },
+            "required": ["small", "medium", "large"]
+          },
+          "user_group": {
+            "type": "integer"
           }
         },
-        "required": ["id", "username", "nickname"]
+        "required": ["id", "username", "nickname", "avatar", "user_group"]
+      },
+      "Avatar": {
+        "title": "Avatar",
+        "type": "object",
+        "properties": {
+          "small": {
+            "type": "string"
+          },
+          "medium": {
+            "examples": ["sai"],
+            "type": "string"
+          },
+          "large": {
+            "type": "string"
+          }
+        },
+        "required": ["small", "medium", "large"]
       },
       "Error": {
         "description": "fastify default error response",
@@ -149,23 +186,6 @@
           }
         },
         "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
-      },
-      "Avatar": {
-        "title": "Avatar",
-        "type": "object",
-        "properties": {
-          "small": {
-            "type": "string"
-          },
-          "medium": {
-            "examples": ["sai"],
-            "type": "string"
-          },
-          "large": {
-            "type": "string"
-          }
-        },
-        "required": ["small", "medium", "large"]
       }
     }
   },
@@ -653,6 +673,8 @@
                       ]
                     },
                     "creator": {
+                      "title": "Creator",
+                      "description": "a slim user object to contain basic info",
                       "type": "object",
                       "properties": {
                         "id": {
@@ -689,20 +711,9 @@
                         },
                         "user_group": {
                           "type": "integer"
-                        },
-                        "isFriend": {
-                          "type": "boolean"
                         }
                       },
-                      "required": [
-                        "id",
-                        "username",
-                        "avatar",
-                        "nickname",
-                        "sign",
-                        "user_group",
-                        "isFriend"
-                      ]
+                      "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
                     },
                     "title": {
                       "type": "string"
@@ -724,6 +735,9 @@
                           "id": {
                             "type": "integer"
                           },
+                          "isFriend": {
+                            "type": "boolean"
+                          },
                           "replies": {
                             "type": "array",
                             "items": {
@@ -733,6 +747,8 @@
                                   "type": "integer"
                                 },
                                 "creator": {
+                                  "title": "Creator",
+                                  "description": "a slim user object to contain basic info",
                                   "type": "object",
                                   "properties": {
                                     "id": {
@@ -769,9 +785,6 @@
                                     },
                                     "user_group": {
                                       "type": "integer"
-                                    },
-                                    "isFriend": {
-                                      "type": "boolean"
                                     }
                                   },
                                   "required": [
@@ -780,12 +793,14 @@
                                     "avatar",
                                     "nickname",
                                     "sign",
-                                    "user_group",
-                                    "isFriend"
+                                    "user_group"
                                   ]
                                 },
                                 "createdAt": {
                                   "type": "integer"
+                                },
+                                "isFriend": {
+                                  "type": "boolean"
                                 },
                                 "text": {
                                   "type": "string"
@@ -794,10 +809,19 @@
                                   "type": "integer"
                                 }
                               },
-                              "required": ["id", "creator", "createdAt", "text", "state"]
+                              "required": [
+                                "id",
+                                "creator",
+                                "createdAt",
+                                "isFriend",
+                                "text",
+                                "state"
+                              ]
                             }
                           },
                           "creator": {
+                            "title": "Creator",
+                            "description": "a slim user object to contain basic info",
                             "type": "object",
                             "properties": {
                               "id": {
@@ -834,9 +858,6 @@
                               },
                               "user_group": {
                                 "type": "integer"
-                              },
-                              "isFriend": {
-                                "type": "boolean"
                               }
                             },
                             "required": [
@@ -845,8 +866,7 @@
                               "avatar",
                               "nickname",
                               "sign",
-                              "user_group",
-                              "isFriend"
+                              "user_group"
                             ]
                           },
                           "createdAt": {
@@ -859,7 +879,15 @@
                             "type": "integer"
                           }
                         },
-                        "required": ["id", "replies", "creator", "createdAt", "text", "state"]
+                        "required": [
+                          "id",
+                          "isFriend",
+                          "replies",
+                          "creator",
+                          "createdAt",
+                          "text",
+                          "state"
+                        ]
                       }
                     }
                   },

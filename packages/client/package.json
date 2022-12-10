@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "update-openapi": "node scripts/update-openapi.mjs",
-    "build": "node scripts/build.mjs && (oazapfts openapi.json > client2.ts) && prettier -w ./"
+    "build": "(oazapfts openapi.json > client2.ts) && prettier -w ./"
   },
   "dependencies": {
     "oazapfts": "^4.5.0"
