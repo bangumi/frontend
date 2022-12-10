@@ -35,7 +35,14 @@ export interface Topic {
   repliesCount: number;
 }
 
-export type Pagination = Omit<components['schemas']['Paged'], 'data'>;
+export interface Pagination {
+  /** Total */
+  total: number;
+  /** Limit */
+  limit: number;
+  /** Offset */
+  offset: number;
+}
 
 export interface ResponseWithPagination<T = unknown> extends Pagination {
   data: T;

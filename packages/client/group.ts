@@ -47,4 +47,3 @@ export interface GroupMember {
   username: string;
   joinedAt: number;
 }
-export type GroupTopics = components['schemas']['PrivateTopicDetail'];

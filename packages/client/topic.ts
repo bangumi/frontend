@@ -60,7 +60,7 @@ export interface Reply {
    * @example [quote][b]15www[/b] 说: 檞寄生+1 我的明菁 T-T[/quote]\n挖墳黨喪心病狂！
    */
   text?: string;
-  state: components['schemas']['Comment']['state'];
+  state: number;
   /** @description 发帖人是否好友 */
   isFriend: boolean;
 }

@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "version": "0.0.24",
+    "version": "0.0.25",
     "title": "hello"
   },
   "components": {
@@ -39,11 +39,14 @@
             },
             "required": ["small", "medium", "large"]
           },
+          "sign": {
+            "type": "string"
+          },
           "user_group": {
             "type": "integer"
           }
         },
-        "required": ["id", "username", "nickname", "avatar", "user_group"]
+        "required": ["id", "username", "nickname", "avatar", "sign", "user_group"]
       },
       "Avatar": {
         "title": "Avatar",
@@ -90,8 +93,7 @@
             "type": "integer"
           },
           "creator": {
-            "title": "Creator",
-            "description": "a slim user object to contain basic info",
+            "title": "User",
             "type": "object",
             "properties": {
               "id": {
@@ -100,6 +102,10 @@
               },
               "username": {
                 "examples": ["sai"],
+                "type": "string"
+              },
+              "nickname": {
+                "examples": ["Sai🖖"],
                 "type": "string"
               },
               "avatar": {
@@ -119,10 +125,6 @@
                 },
                 "required": ["small", "medium", "large"]
               },
-              "nickname": {
-                "examples": ["Sai🖖"],
-                "type": "string"
-              },
               "sign": {
                 "type": "string"
               },
@@ -130,33 +132,32 @@
                 "type": "integer"
               }
             },
-            "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
+            "required": ["id", "username", "nickname", "avatar", "sign", "user_group"]
+          },
+          "title": {
+            "type": "string"
           },
           "parentID": {
             "description": "小组/条目ID",
             "type": "integer"
           },
-          "lastRepliedAt": {
-            "description": "最后回复时间，unix time stamp",
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "required": ["id", "creator", "parentID", "lastRepliedAt"]
-      },
-      "Creator": {
-        "title": "Creator",
-        "description": "a slim user object to contain basic info",
-        "type": "object",
-        "properties": {
-          "id": {
-            "examples": [1],
+          "createdAt": {
+            "description": "发帖时间，unix time stamp in seconds",
             "type": "integer"
           },
-          "username": {
-            "examples": ["sai"],
-            "type": "string"
+          "updatedAt": {
+            "description": "最后回复时间，unix time stamp in seconds",
+            "type": "integer"
           },
+          "repliesCount": {
+            "type": "integer"
+          }
+        },
+        "required": ["id", "creator", "title", "parentID", "createdAt", "updatedAt", "repliesCount"]
+      },
+      "GroupMember": {
+        "type": "object",
+        "properties": {
           "avatar": {
             "title": "Avatar",
             "type": "object",
@@ -174,18 +175,20 @@
             },
             "required": ["small", "medium", "large"]
           },
+          "id": {
+            "type": "integer"
+          },
           "nickname": {
-            "examples": ["Sai🖖"],
             "type": "string"
           },
-          "sign": {
+          "username": {
             "type": "string"
           },
-          "user_group": {
+          "joinedAt": {
             "type": "integer"
           }
         },
-        "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
+        "required": ["avatar", "id", "nickname", "username", "joinedAt"]
       }
     }
   },
@@ -455,6 +458,24 @@
         "parameters": [
           {
             "schema": {
+              "default": 20,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false
+          },
+          {
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false
+          },
+          {
+            "schema": {
               "minLength": 1,
               "type": "string"
             },
@@ -474,18 +495,8 @@
                     "recentAddedMembers": {
                       "type": "array",
                       "items": {
-                        "title": "Creator",
-                        "description": "a slim user object to contain basic info",
                         "type": "object",
                         "properties": {
-                          "id": {
-                            "examples": [1],
-                            "type": "integer"
-                          },
-                          "username": {
-                            "examples": ["sai"],
-                            "type": "string"
-                          },
                           "avatar": {
                             "title": "Avatar",
                             "type": "object",
@@ -503,18 +514,20 @@
                             },
                             "required": ["small", "medium", "large"]
                           },
+                          "id": {
+                            "type": "integer"
+                          },
                           "nickname": {
-                            "examples": ["Sai🖖"],
                             "type": "string"
                           },
-                          "sign": {
+                          "username": {
                             "type": "string"
                           },
-                          "user_group": {
+                          "joinedAt": {
                             "type": "integer"
                           }
                         },
-                        "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
+                        "required": ["avatar", "id", "nickname", "username", "joinedAt"]
                       }
                     },
                     "topics": {
@@ -565,9 +578,12 @@
                         "totalMembers",
                         "createdAt"
                       ]
+                    },
+                    "totalTopics": {
+                      "type": "integer"
                     }
                   },
-                  "required": ["recentAddedMembers", "topics", "inGroup", "group"]
+                  "required": ["recentAddedMembers", "topics", "inGroup", "group", "totalTopics"]
                 }
               }
             }
@@ -673,8 +689,7 @@
                       ]
                     },
                     "creator": {
-                      "title": "Creator",
-                      "description": "a slim user object to contain basic info",
+                      "title": "User",
                       "type": "object",
                       "properties": {
                         "id": {
@@ -683,6 +698,10 @@
                         },
                         "username": {
                           "examples": ["sai"],
+                          "type": "string"
+                        },
+                        "nickname": {
+                          "examples": ["Sai🖖"],
                           "type": "string"
                         },
                         "avatar": {
@@ -702,10 +721,6 @@
                           },
                           "required": ["small", "medium", "large"]
                         },
-                        "nickname": {
-                          "examples": ["Sai🖖"],
-                          "type": "string"
-                        },
                         "sign": {
                           "type": "string"
                         },
@@ -713,7 +728,7 @@
                           "type": "integer"
                         }
                       },
-                      "required": ["id", "username", "avatar", "nickname", "sign", "user_group"]
+                      "required": ["id", "username", "nickname", "avatar", "sign", "user_group"]
                     },
                     "title": {
                       "type": "string"
@@ -747,8 +762,7 @@
                                   "type": "integer"
                                 },
                                 "creator": {
-                                  "title": "Creator",
-                                  "description": "a slim user object to contain basic info",
+                                  "title": "User",
                                   "type": "object",
                                   "properties": {
                                     "id": {
@@ -757,6 +771,10 @@
                                     },
                                     "username": {
                                       "examples": ["sai"],
+                                      "type": "string"
+                                    },
+                                    "nickname": {
+                                      "examples": ["Sai🖖"],
                                       "type": "string"
                                     },
                                     "avatar": {
@@ -776,10 +794,6 @@
                                       },
                                       "required": ["small", "medium", "large"]
                                     },
-                                    "nickname": {
-                                      "examples": ["Sai🖖"],
-                                      "type": "string"
-                                    },
                                     "sign": {
                                       "type": "string"
                                     },
@@ -790,8 +804,8 @@
                                   "required": [
                                     "id",
                                     "username",
-                                    "avatar",
                                     "nickname",
+                                    "avatar",
                                     "sign",
                                     "user_group"
                                   ]
@@ -820,8 +834,7 @@
                             }
                           },
                           "creator": {
-                            "title": "Creator",
-                            "description": "a slim user object to contain basic info",
+                            "title": "User",
                             "type": "object",
                             "properties": {
                               "id": {
@@ -830,6 +843,10 @@
                               },
                               "username": {
                                 "examples": ["sai"],
+                                "type": "string"
+                              },
+                              "nickname": {
+                                "examples": ["Sai🖖"],
                                 "type": "string"
                               },
                               "avatar": {
@@ -849,10 +866,6 @@
                                 },
                                 "required": ["small", "medium", "large"]
                               },
-                              "nickname": {
-                                "examples": ["Sai🖖"],
-                                "type": "string"
-                              },
                               "sign": {
                                 "type": "string"
                               },
@@ -863,8 +876,8 @@
                             "required": [
                               "id",
                               "username",
-                              "avatar",
                               "nickname",
+                              "avatar",
                               "sign",
                               "user_group"
                             ]
@@ -901,6 +914,120 @@
                     "createdAt",
                     "replies"
                   ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "小组不存在",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "小组不存在",
+                  "$ref": "#/components/schemas/Error"
+                },
+                "examples": {
+                  "NotFoundError": {
+                    "value": {
+                      "code": "NOT_FOUND",
+                      "error": "Not Found",
+                      "message": "topic not found",
+                      "statusCode": 404
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "意料之外的服务器错误",
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/groups/{groupName}/members": {
+      "get": {
+        "operationId": "listGroupMembersByName",
+        "tags": ["topic"],
+        "description": "获取帖子列表",
+        "parameters": [
+          {
+            "schema": {
+              "default": "all",
+              "anyOf": [
+                {
+                  "type": "string",
+                  "enum": ["mod"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["normal"]
+                },
+                {
+                  "type": "string",
+                  "enum": ["all"]
+                }
+              ]
+            },
+            "in": "query",
+            "name": "type",
+            "required": false
+          },
+          {
+            "schema": {
+              "default": 30,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false
+          },
+          {
+            "schema": {
+              "default": 0,
+              "type": "integer"
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false
+          },
+          {
+            "schema": {
+              "minLength": 1,
+              "type": "string"
+            },
+            "in": "path",
+            "name": "groupName",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GroupMember"
+                      }
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": ["data", "total"]
                 }
               }
             }

@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.24
+ * 0.0.25
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -26,6 +26,7 @@ export interface User {
     medium: string;
     large: string;
   };
+  sign: string;
   user_group: number;
 }
 export interface Topic {
@@ -33,12 +34,12 @@ export interface Topic {
   creator: {
     id: number;
     username: string;
+    nickname: string;
     avatar: {
       small: string;
       medium: string;
       large: string;
     };
-    nickname: string;
     sign: string;
     user_group: number;
   };
@@ -228,12 +229,12 @@ export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
           creator: {
             id: number;
             username: string;
+            nickname: string;
             avatar: {
               small: string;
               medium: string;
               large: string;
             };
-            nickname: string;
             sign: string;
             user_group: number;
           };
@@ -249,12 +250,12 @@ export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
               creator: {
                 id: number;
                 username: string;
+                nickname: string;
                 avatar: {
                   small: string;
                   medium: string;
                   large: string;
                 };
-                nickname: string;
                 sign: string;
                 user_group: number;
               };
@@ -266,12 +267,12 @@ export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
             creator: {
               id: number;
               username: string;
+              nickname: string;
               avatar: {
                 small: string;
                 medium: string;
                 large: string;
               };
-              nickname: string;
               sign: string;
               user_group: number;
             };
