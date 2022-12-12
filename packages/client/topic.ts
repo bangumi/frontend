@@ -1,6 +1,6 @@
 export * from './common';
 
-export type { Reply, SubReply } from './client';
+export type { Reply, SubReply, TopicDetail } from './client';
 
 // https://github.com/drwpow/openapi-typescript/issues/941
 // https://github.com/oazapfts/oazapfts/pull/349

@@ -2,10 +2,9 @@ import { ok } from 'oazapfts';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
+import type { TopicDetail } from '@bangumi/client/topic';
 
-// type res = Awaited<ReturnType<typeof ok<ReturnType<typeof ozaClient.getGroupTopic>>>>
-
-function useGroupTopic(id: number) {
+function useGroupTopic(id: number): TopicDetail {
   const { data: topicDetail } = useSWR(
     `/group/topic/${id}`,
     async () => ok(ozaClient.getGroupTopicDetail(id)),

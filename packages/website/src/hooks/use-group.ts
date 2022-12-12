@@ -26,7 +26,7 @@ export function useGroupRecentTopics(
     { suspense: true },
   );
 
-  return recentTopicsResp!;
+  return recentTopicsResp;
 }
 
 export function useGroup(name: string): UseGroupRet {
