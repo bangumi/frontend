@@ -204,7 +204,6 @@ importers:
       '@types/react': ^18.0.25
       '@types/react-dom': ^18.0.9
       '@vitejs/plugin-react': ^2.2.0
-      bgm-types: ^2.0.2
       classnames: ^2.3.2
       dayjs: ^1.11.6
       msw: ^0.49.0
@@ -245,7 +244,6 @@ importers:
       '@types/react': 18.0.25
       '@types/react-dom': 18.0.9
       '@vitejs/plugin-react': 2.2.0_vite@3.2.4
-      bgm-types: 2.0.2
       msw: 0.49.0_typescript@4.9.3
       timezone-mock: 1.3.4
       typescript: 4.9.3
@@ -7479,10 +7477,6 @@ packages:
     engines: {node: '>8.0.0'}
     dependencies:
       open: 7.4.2
-    dev: true
-
-  /bgm-types/2.0.2:
-    resolution: {integrity: sha512-+RzUrQ0ZIfN5hgqQ/9JGg6rs2/fy4de5b83ZZr4mqBlUaBsL93IOnbq97MmBg6VnCD3sp97Wuvm9ayBVYVl6qQ==}
     dev: true
 
   /big-integer/1.6.51:
@@ -17247,7 +17241,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2
       '@svgr/core': 6.5.1
-      vite: 3.2.4
+      vite: 3.2.4_less@4.1.3
     transitivePeerDependencies:
       - rollup
       - supports-color

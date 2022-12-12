@@ -3,7 +3,12 @@ import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type { GroupProfile, PaginationQuery } from '@bangumi/client/group';
+import type {
+  GroupProfile,
+  PaginationQuery,
+  ResponseWithPagination,
+  Topic,
+} from '@bangumi/client/group';
 
 export enum DescriptionClamp {
   clamp = 'clamp',
@@ -19,14 +24,14 @@ export interface UseGroupRet {
 export function useGroupRecentTopics(
   name: string,
   { limit = 20, offset = 0 }: Partial<PaginationQuery> = {},
-) {
+): ResponseWithPagination<Topic[]> {
   const { data: recentTopicsResp } = useSWR(
     `/group/${name}/topics?${limit}-${offset}`,
     async () => ok(ozaClient.getGroupTopicsByGroupName(name, { limit, offset })),
     { suspense: true },
   );
 
-  return recentTopicsResp;
+  return recentTopicsResp!;
 }
 
 export function useGroup(name: string): UseGroupRet {
