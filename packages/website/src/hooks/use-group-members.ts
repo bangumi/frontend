@@ -2,7 +2,7 @@ import { ok } from 'oazapfts';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type { GroupMember, Pagination } from '@bangumi/client/group';
+import type { GroupMember, PaginationQuery } from '@bangumi/client/group';
 
 interface UseGroupMembersRet {
   data: GroupMember[] | undefined;
@@ -12,7 +12,7 @@ interface UseGroupMembersRet {
 type GroupMembersReq = {
   type: 'mod' | 'normal' | 'all';
   disable?: boolean;
-} & Partial<Pagination>;
+} & Partial<PaginationQuery>;
 
 export function useGroupMembers(
   name: string,
