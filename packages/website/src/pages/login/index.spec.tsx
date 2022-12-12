@@ -73,7 +73,7 @@ it.each([
   },
   {
     statusCode: 401,
-    resp: { code: 'USERNAME_PASSWORD_ERROR' },
+    resp: { code: 'EMAIL_PASSWORD_ERROR' },
     headers: { 'X-RateLimit-Remaining': '4' },
     expectedError: '用户名与密码不正确，请检查后重试，您还有 4 次尝试机会',
   },

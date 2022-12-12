@@ -41,7 +41,7 @@ it.each([
   },
   {
     statusCode: 401,
-    body: { code: 'USERNAME_PASSWORD_ERROR' },
+    body: { code: 'EMAIL_PASSWORD_ERROR' },
     headers: { 'X-RateLimit-Remaining': '4' },
     expectedError: new PasswordUnMatchError(4),
   },
