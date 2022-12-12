@@ -95,7 +95,7 @@ async function login(email: string, password: string, hCaptchaResponse: string):
     throw new CaptureError(parseInt(remain));
   }
 
-  if (res.data.code === 'USERNAME_PASSWORD_ERROR') {
+  if (res.data.code === 'EMAIL_PASSWORD_ERROR') {
     throw new PasswordUnMatchError(parseInt(remain));
   }
 

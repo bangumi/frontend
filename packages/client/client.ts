@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.25
+ * 0.0.36
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -29,6 +29,17 @@ export interface User {
   sign: string;
   user_group: number;
 }
+export interface GroupMember {
+  avatar: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+  id: number;
+  nickname: string;
+  username: string;
+  joinedAt: number;
+}
 export interface Topic {
   id: number;
   creator: {
@@ -49,16 +60,47 @@ export interface Topic {
   updatedAt: number;
   repliesCount: number;
 }
-export interface GroupMember {
-  avatar: {
-    small: string;
-    medium: string;
-    large: string;
-  };
+export interface Group {
   id: number;
-  nickname: string;
-  username: string;
-  joinedAt: number;
+  name: string;
+  nsfw: boolean;
+  title: string;
+  icon: string;
+  description: string;
+  totalMembers: number;
+  createdAt: number;
+}
+export interface GroupProfile {
+  recentAddedMembers: GroupMember[];
+  topics: Topic[];
+  inGroup: boolean;
+  group: Group;
+  totalTopics: number;
+}
+export interface TopicDetail {
+  id: number;
+  group: Group;
+  creator: User;
+  title: string;
+  text: string;
+  state: number;
+  createdAt: number;
+  replies: Array<{
+    id: number;
+    isFriend: boolean;
+    replies: Array<{
+      id: number;
+      creator: User;
+      createdAt: number;
+      isFriend: boolean;
+      text: string;
+      state: number;
+    }>;
+    creator: User;
+    createdAt: number;
+    text: string;
+    state: number;
+  }>;
 }
 /**
  * 登出
@@ -160,32 +202,7 @@ export async function getGroupProfile(
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: {
-          recentAddedMembers: Array<{
-            avatar: {
-              small: string;
-              medium: string;
-              large: string;
-            };
-            id: number;
-            nickname: string;
-            username: string;
-            joinedAt: number;
-          }>;
-          topics: Topic[];
-          inGroup: boolean;
-          group: {
-            id: number;
-            name: string;
-            nsfw: boolean;
-            title: string;
-            icon: string;
-            description: string;
-            totalMembers: number;
-            createdAt: number;
-          };
-          totalTopics: number;
-        };
+        data: GroupProfile;
       }
     | {
         status: 404;
@@ -214,73 +231,7 @@ export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: {
-          id: number;
-          group: {
-            id: number;
-            name: string;
-            nsfw: boolean;
-            title: string;
-            icon: string;
-            description: string;
-            totalMembers: number;
-            createdAt: number;
-          };
-          creator: {
-            id: number;
-            username: string;
-            nickname: string;
-            avatar: {
-              small: string;
-              medium: string;
-              large: string;
-            };
-            sign: string;
-            user_group: number;
-          };
-          title: string;
-          text: string;
-          state: number;
-          createdAt: number;
-          replies: Array<{
-            id: number;
-            isFriend: boolean;
-            replies: Array<{
-              id: number;
-              creator: {
-                id: number;
-                username: string;
-                nickname: string;
-                avatar: {
-                  small: string;
-                  medium: string;
-                  large: string;
-                };
-                sign: string;
-                user_group: number;
-              };
-              createdAt: number;
-              isFriend: boolean;
-              text: string;
-              state: number;
-            }>;
-            creator: {
-              id: number;
-              username: string;
-              nickname: string;
-              avatar: {
-                small: string;
-                medium: string;
-                large: string;
-              };
-              sign: string;
-              user_group: number;
-            };
-            createdAt: number;
-            text: string;
-            state: number;
-          }>;
-        };
+        data: TopicDetail;
       }
     | {
         status: 404;
@@ -379,6 +330,34 @@ export async function getGroupTopicsByGroupName(
     {
       ...opts,
     },
+  );
+}
+export async function createNewGroupTopic(
+  groupName: string,
+  body: {
+    title: string;
+    content: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/groups/${encodeURIComponent(groupName)}/topics`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
   );
 }
 /**
