@@ -8,7 +8,7 @@ import { ozaClient } from '@bangumi/client';
 function useGroupTopic(id: number) {
   const { data: topicDetail } = useSWR(
     `/group/topic/${id}`,
-    async () => ok(ozaClient.getGroupTopic(id)),
+    async () => ok(ozaClient.getGroupTopicDetail(id)),
     {
       suspense: true,
     },

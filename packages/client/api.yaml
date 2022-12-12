@@ -1,852 +1,1056 @@
-openapi: 3.0.3
-info:
-  version: 0.0.36
-  title: hello
-components:
-  securitySchemes:
-    CookiesSession:
-      type: apiKey
-      in: cookie
-      name: sessionID
-      description: 使用 [login](#/auth/login) 登录
-  schemas:
-    User:
-      title: User
-      type: object
-      properties:
-        id:
-          examples:
-            - 1
-          type: integer
-        username:
-          examples:
-            - sai
-          type: string
-        nickname:
-          examples:
-            - Sai🖖
-          type: string
-        avatar:
-          title: Avatar
-          type: object
-          properties:
-            small:
-              type: string
-            medium:
-              examples:
-                - sai
-              type: string
-            large:
-              type: string
-          required:
-            - small
-            - medium
-            - large
-        sign:
-          type: string
-        user_group:
-          type: integer
-      required:
-        - id
-        - username
-        - nickname
-        - avatar
-        - sign
-        - user_group
-    Avatar:
-      title: Avatar
-      type: object
-      properties:
-        small:
-          type: string
-        medium:
-          examples:
-            - sai
-          type: string
-        large:
-          type: string
-      required:
-        - small
-        - medium
-        - large
-    Error:
-      description: fastify default error response
-      type: object
-      properties:
-        code:
-          type: string
-        error:
-          type: string
-        message:
-          type: string
-        statusCode:
-          type: integer
-      required:
-        - code
-        - error
-        - message
-        - statusCode
-    Topic:
-      title: Topic
-      type: object
-      properties:
-        id:
-          description: topic id
-          type: integer
-        creator:
-          title: User
-          type: object
-          properties:
-            id:
-              examples:
-                - 1
-              type: integer
-            username:
-              examples:
-                - sai
-              type: string
-            nickname:
-              examples:
-                - Sai🖖
-              type: string
-            avatar:
-              title: Avatar
-              type: object
-              properties:
-                small:
-                  type: string
-                medium:
-                  examples:
-                    - sai
-                  type: string
-                large:
-                  type: string
-              required:
-                - small
-                - medium
-                - large
-            sign:
-              type: string
-            user_group:
-              type: integer
-          required:
-            - id
-            - username
-            - nickname
-            - avatar
-            - sign
-            - user_group
-        title:
-          type: string
-        parentID:
-          description: 小组/条目ID
-          type: integer
-        createdAt:
-          description: 发帖时间，unix time stamp in seconds
-          type: integer
-        updatedAt:
-          description: 最后回复时间，unix time stamp in seconds
-          type: integer
-        repliesCount:
-          type: integer
-      required:
-        - id
-        - creator
-        - title
-        - parentID
-        - createdAt
-        - updatedAt
-        - repliesCount
-    Group:
-      type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        nsfw:
-          type: boolean
-        title:
-          type: string
-        icon:
-          type: string
-        description:
-          type: string
-        totalMembers:
-          type: integer
-        createdAt:
-          type: integer
-      required:
-        - id
-        - name
-        - nsfw
-        - title
-        - icon
-        - description
-        - totalMembers
-        - createdAt
-    GroupProfile:
-      type: object
-      properties:
-        recentAddedMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupMember'
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/Topic'
-        inGroup:
-          description: 是否已经加入小组
-          type: boolean
-        group:
-          $ref: '#/components/schemas/Group'
-        totalTopics:
-          type: integer
-      required:
-        - recentAddedMembers
-        - topics
-        - inGroup
-        - group
-        - totalTopics
-    TopicDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-        group:
-          $ref: '#/components/schemas/Group'
-        creator:
-          $ref: '#/components/schemas/User'
-        title:
-          type: string
-        text:
-          type: string
-        state:
-          type: integer
-        createdAt:
-          type: integer
-        replies:
-          type: array
-          items:
-            type: object
-            properties:
-              id:
-                type: integer
-              isFriend:
-                type: boolean
-              replies:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    creator:
-                      $ref: '#/components/schemas/User'
-                    createdAt:
-                      type: integer
-                    isFriend:
-                      type: boolean
-                    text:
-                      type: string
-                    state:
-                      type: integer
-                  required:
-                    - id
-                    - creator
-                    - createdAt
-                    - isFriend
-                    - text
-                    - state
-              creator:
-                $ref: '#/components/schemas/User'
-              createdAt:
-                type: integer
-              text:
-                type: string
-              state:
-                type: integer
-            required:
-              - id
-              - isFriend
-              - replies
-              - creator
-              - createdAt
-              - text
-              - state
-      required:
-        - id
-        - group
-        - creator
-        - title
-        - text
-        - state
-        - createdAt
-        - replies
-    GroupMember:
-      type: object
-      properties:
-        avatar:
-          title: Avatar
-          type: object
-          properties:
-            small:
-              type: string
-            medium:
-              examples:
-                - sai
-              type: string
-            large:
-              type: string
-          required:
-            - small
-            - medium
-            - large
-        id:
-          type: integer
-        nickname:
-          type: string
-        username:
-          type: string
-        joinedAt:
-          type: integer
-      required:
-        - avatar
-        - id
-        - nickname
-        - username
-        - joinedAt
-paths:
-  /p1/logout:
-    post:
-      operationId: logout
-      tags:
-        - auth
-      description: 登出
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-        '401':
-          description: 未登录
-          content:
-            application/json:
-              schema:
-                description: 未登录
-                $ref: '#/components/schemas/Error'
-              examples:
-                NeedLoginError:
-                  value:
-                    code: NEED_LOGIN
-                    error: Unauthorized
-                    message: you need to login before logout
-                    statusCode: 401
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/login:
-    post:
-      operationId: login
-      tags:
-        - auth
-      description: >-
-        需要
-        [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
-
-
-        site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  minLength: 1
-                  type: string
-                password:
-                  minLength: 1
-                  type: string
-                h-captcha-response:
-                  minLength: 1
-                  type: string
-              required:
-                - email
-                - password
-                - h-captcha-response
-            example:
-              email: treeholechan@gmail.com
-              password: lovemeplease
-              h-captcha-response: 10000000-aaaa-bbbb-cccc-000000000001
-        required: true
-      responses:
-        '200':
-          description: Default Response
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-              description: 'example: "sessionID=12345abc"'
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '400':
-          description: 缺少字段等
-          content:
-            application/json:
-              schema:
-                description: 缺少字段等
-                $ref: '#/components/schemas/Error'
-        '401':
-          description: 验证码错误/账号密码不匹配
-          headers:
-            X-RateLimit-Remaining:
-              schema:
-                type: integer
-              description: remaining rate limit
-            X-RateLimit-Limit:
-              schema:
-                type: integer
-              description: total limit per 10 minutes
-            X-RateLimit-Reset:
-              schema:
-                type: integer
-              description: seconds to reset rate limit
-          content:
-            application/json:
-              schema:
-                description: 验证码错误/账号密码不匹配
-                $ref: '#/components/schemas/Error'
-              examples:
-                CAPTCHA_ERROR:
-                  value:
-                    code: CAPTCHA_ERROR
-                    error: Unauthorized
-                    message: wrong captcha
-                    statusCode: 401
-                EMAIL_PASSWORD_ERROR:
-                  value:
-                    code: EMAIL_PASSWORD_ERROR
-                    error: Unauthorized
-                    message: email does not exists or email and password not match
-                    statusCode: 401
-        '429':
-          description: 失败次数太多，需要过一段时间再重试
-          headers:
-            X-RateLimit-Remaining:
-              schema:
-                type: integer
-              description: remaining rate limit
-            X-RateLimit-Limit:
-              schema:
-                type: integer
-              description: limit per 10 minutes
-            X-RateLimit-Reset:
-              schema:
-                type: integer
-              description: seconds to reset rate limit
-          content:
-            application/json:
-              schema:
-                description: 失败次数太多，需要过一段时间再重试
-                $ref: '#/components/schemas/Error'
-              example:
-                code: TOO_MANY_REQUESTS
-                error: Too Many Requests
-                message: too many failed login attempts
-                statusCode: 429
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/me:
-    get:
-      operationId: getCurrentUser
-      tags:
-        - auth
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '401':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: NEED_LOGIN
-                error: Unauthorized
-                message: you need to login before %s
-                statusCode: 401
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/{groupName}/profile:
-    get:
-      operationId: getGroupProfile
-      tags:
-        - topic
-      description: 获取小组首页
-      parameters:
-        - schema:
-            default: 20
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            minLength: 1
-            type: string
-          in: path
-          name: groupName
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GroupProfile'
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/-/topics/{id}:
-    get:
-      operationId: getGroupTopic
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            type: integer
-          in: path
-          name: id
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TopicDetail'
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/{groupName}/members:
-    get:
-      operationId: listGroupMembersByName
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            default: all
-            anyOf:
-              - type: string
-                enum:
-                  - mod
-              - type: string
-                enum:
-                  - normal
-              - type: string
-                enum:
-                  - all
-          in: query
-          name: type
-          required: false
-        - schema:
-            default: 30
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            minLength: 1
-            type: string
-          in: path
-          name: groupName
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/GroupMember'
-                  total:
-                    type: integer
-                required:
-                  - data
-                  - total
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/{groupName}/topics:
-    get:
-      operationId: getGroupTopicsByGroupName
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            default: 30
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            minLength: 1
-            type: string
-          in: path
-          name: groupName
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Topic'
-                  total:
-                    type: integer
-                required:
-                  - data
-                  - total
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-    post:
-      operationId: createNewGroupTopic
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                title:
-                  minLength: 1
-                  type: string
-                content:
-                  minLength: 1
-                  type: string
-              required:
-                - title
-                - content
-            example:
-              title: post title
-              content: post contents
-        required: true
-      parameters:
-        - schema:
-            minLength: 1
-            type: string
-          example: sandbox
-          in: path
-          name: groupName
-          required: true
-      security:
-        - CookiesSession: []
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  id:
-                    description: new post topic id
-                    type: integer
-                required:
-                  - id
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/subjects/{subjectID}/topics:
-    get:
-      operationId: getSubjectTopicsBySubjectId
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            default: 30
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            exclusiveMinimum: 0
-            type: integer
-          in: path
-          name: subjectID
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Topic'
-                  total:
-                    type: integer
-                required:
-                  - data
-                  - total
-        '404':
-          description: 条目不存在
-          content:
-            application/json:
-              schema:
-                description: 条目不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
+{
+  'openapi': '3.0.3',
+  'info': { 'version': '0.0.36', 'title': 'hello' },
+  'components':
+    {
+      'securitySchemes':
+        {
+          'CookiesSession':
+            {
+              'type': 'apiKey',
+              'in': 'cookie',
+              'name': 'sessionID',
+              'description': '使用 [login](#/auth/login) 登录',
+            },
+        },
+      'schemas':
+        {
+          'User':
+            {
+              'title': 'User',
+              'type': 'object',
+              'properties':
+                {
+                  'id': { 'examples': [1], 'type': 'integer' },
+                  'username': { 'examples': ['sai'], 'type': 'string' },
+                  'nickname': { 'examples': ['Sai🖖'], 'type': 'string' },
+                  'avatar':
+                    {
+                      'title': 'Avatar',
+                      'type': 'object',
+                      'properties':
+                        {
+                          'small': { 'type': 'string' },
+                          'medium': { 'examples': ['sai'], 'type': 'string' },
+                          'large': { 'type': 'string' },
+                        },
+                      'required': ['small', 'medium', 'large'],
+                    },
+                  'sign': { 'type': 'string' },
+                  'user_group': { 'type': 'integer' },
+                },
+              'required': ['id', 'username', 'nickname', 'avatar', 'sign', 'user_group'],
+            },
+          'Avatar':
+            {
+              'title': 'Avatar',
+              'type': 'object',
+              'properties':
+                {
+                  'small': { 'type': 'string' },
+                  'medium': { 'examples': ['sai'], 'type': 'string' },
+                  'large': { 'type': 'string' },
+                },
+              'required': ['small', 'medium', 'large'],
+            },
+          'Error':
+            {
+              'description': 'fastify default error response',
+              'type': 'object',
+              'properties':
+                {
+                  'code': { 'type': 'string' },
+                  'error': { 'type': 'string' },
+                  'message': { 'type': 'string' },
+                  'statusCode': { 'type': 'integer' },
+                },
+              'required': ['code', 'error', 'message', 'statusCode'],
+            },
+          'Topic':
+            {
+              'title': 'Topic',
+              'type': 'object',
+              'properties':
+                {
+                  'id': { 'description': 'topic id', 'type': 'integer' },
+                  'creator':
+                    {
+                      'title': 'User',
+                      'type': 'object',
+                      'properties':
+                        {
+                          'id': { 'examples': [1], 'type': 'integer' },
+                          'username': { 'examples': ['sai'], 'type': 'string' },
+                          'nickname': { 'examples': ['Sai🖖'], 'type': 'string' },
+                          'avatar':
+                            {
+                              'title': 'Avatar',
+                              'type': 'object',
+                              'properties':
+                                {
+                                  'small': { 'type': 'string' },
+                                  'medium': { 'examples': ['sai'], 'type': 'string' },
+                                  'large': { 'type': 'string' },
+                                },
+                              'required': ['small', 'medium', 'large'],
+                            },
+                          'sign': { 'type': 'string' },
+                          'user_group': { 'type': 'integer' },
+                        },
+                      'required': ['id', 'username', 'nickname', 'avatar', 'sign', 'user_group'],
+                    },
+                  'title': { 'type': 'string' },
+                  'parentID': { 'description': '小组/条目ID', 'type': 'integer' },
+                  'createdAt':
+                    { 'description': '发帖时间，unix time stamp in seconds', 'type': 'integer' },
+                  'updatedAt':
+                    {
+                      'description': '最后回复时间，unix time stamp in seconds',
+                      'type': 'integer',
+                    },
+                  'repliesCount': { 'type': 'integer' },
+                },
+              'required':
+                ['id', 'creator', 'title', 'parentID', 'createdAt', 'updatedAt', 'repliesCount'],
+            },
+          'Group':
+            {
+              'type': 'object',
+              'properties':
+                {
+                  'id': { 'type': 'integer' },
+                  'name': { 'type': 'string' },
+                  'nsfw': { 'type': 'boolean' },
+                  'title': { 'type': 'string' },
+                  'icon': { 'type': 'string' },
+                  'description': { 'type': 'string' },
+                  'totalMembers': { 'type': 'integer' },
+                  'createdAt': { 'type': 'integer' },
+                },
+              'required':
+                ['id', 'name', 'nsfw', 'title', 'icon', 'description', 'totalMembers', 'createdAt'],
+            },
+          'GroupProfile':
+            {
+              'type': 'object',
+              'properties':
+                {
+                  'recentAddedMembers':
+                    { 'type': 'array', 'items': { '$ref': '#/components/schemas/GroupMember' } },
+                  'topics': { 'type': 'array', 'items': { '$ref': '#/components/schemas/Topic' } },
+                  'inGroup': { 'description': '是否已经加入小组', 'type': 'boolean' },
+                  'group': { '$ref': '#/components/schemas/Group' },
+                  'totalTopics': { 'type': 'integer' },
+                },
+              'required': ['recentAddedMembers', 'topics', 'inGroup', 'group', 'totalTopics'],
+            },
+          'SubReply':
+            {
+              'type': 'object',
+              'properties':
+                {
+                  'id': { 'type': 'integer' },
+                  'creator': { '$ref': '#/components/schemas/User' },
+                  'createdAt': { 'type': 'integer' },
+                  'isFriend': { 'type': 'boolean' },
+                  'text': { 'type': 'string' },
+                  'state': { 'type': 'integer' },
+                },
+              'required': ['id', 'creator', 'createdAt', 'isFriend', 'text', 'state'],
+            },
+          'Reply':
+            {
+              'type': 'object',
+              'properties':
+                {
+                  'id': { 'type': 'integer' },
+                  'isFriend': { 'type': 'boolean' },
+                  'replies':
+                    { 'type': 'array', 'items': { '$ref': '#/components/schemas/SubReply' } },
+                  'creator': { '$ref': '#/components/schemas/User' },
+                  'createdAt': { 'type': 'integer' },
+                  'text': { 'type': 'string' },
+                  'state': { 'type': 'integer' },
+                },
+              'required': ['id', 'isFriend', 'replies', 'creator', 'createdAt', 'text', 'state'],
+            },
+          'TopicDetail':
+            {
+              'type': 'object',
+              'properties':
+                {
+                  'id': { 'type': 'integer' },
+                  'group': { '$ref': '#/components/schemas/Group' },
+                  'creator': { '$ref': '#/components/schemas/User' },
+                  'title': { 'type': 'string' },
+                  'text': { 'type': 'string' },
+                  'state': { 'type': 'integer' },
+                  'createdAt': { 'type': 'integer' },
+                  'replies': { 'type': 'array', 'items': { '$ref': '#/components/schemas/Reply' } },
+                },
+              'required':
+                ['id', 'group', 'creator', 'title', 'text', 'state', 'createdAt', 'replies'],
+            },
+          'GroupMember':
+            {
+              'type': 'object',
+              'properties':
+                {
+                  'avatar':
+                    {
+                      'title': 'Avatar',
+                      'type': 'object',
+                      'properties':
+                        {
+                          'small': { 'type': 'string' },
+                          'medium': { 'examples': ['sai'], 'type': 'string' },
+                          'large': { 'type': 'string' },
+                        },
+                      'required': ['small', 'medium', 'large'],
+                    },
+                  'id': { 'type': 'integer' },
+                  'nickname': { 'type': 'string' },
+                  'username': { 'type': 'string' },
+                  'joinedAt': { 'type': 'integer' },
+                },
+              'required': ['avatar', 'id', 'nickname', 'username', 'joinedAt'],
+            },
+        },
+    },
+  'paths':
+    {
+      '/p1/logout':
+        {
+          'post':
+            {
+              'operationId': 'logout',
+              'tags': ['auth'],
+              'description': '登出',
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json': { 'schema': { 'type': 'object', 'properties': {} } },
+                        },
+                    },
+                  '401':
+                    {
+                      'description': '未登录',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                { 'description': '未登录', '$ref': '#/components/schemas/Error' },
+                              'examples':
+                                {
+                                  'NeedLoginError':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'NEED_LOGIN',
+                                          'error': 'Unauthorized',
+                                          'message': 'you need to login before logout',
+                                          'statusCode': 401,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/login':
+        {
+          'post':
+            {
+              'operationId': 'login',
+              'tags': ['auth'],
+              'description': "需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)\n\nsite-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`",
+              'requestBody':
+                {
+                  'content':
+                    {
+                      'application/json':
+                        {
+                          'schema':
+                            {
+                              'type': 'object',
+                              'properties':
+                                {
+                                  'email': { 'minLength': 1, 'type': 'string' },
+                                  'password': { 'minLength': 1, 'type': 'string' },
+                                  'h-captcha-response': { 'minLength': 1, 'type': 'string' },
+                                },
+                              'required': ['email', 'password', 'h-captcha-response'],
+                            },
+                          'example':
+                            {
+                              'email': 'treeholechan@gmail.com',
+                              'password': 'lovemeplease',
+                              'h-captcha-response': '10000000-aaaa-bbbb-cccc-000000000001',
+                            },
+                        },
+                    },
+                  'required': true,
+                },
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'headers':
+                        {
+                          'Set-Cookie':
+                            {
+                              'schema': { 'type': 'string' },
+                              'description': 'example: "sessionID=12345abc"',
+                            },
+                        },
+                      'content':
+                        {
+                          'application/json': { 'schema': { '$ref': '#/components/schemas/User' } },
+                        },
+                    },
+                  '400':
+                    {
+                      'description': '缺少字段等',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '缺少字段等',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                  '401':
+                    {
+                      'description': '验证码错误/账号密码不匹配',
+                      'headers':
+                        {
+                          'X-RateLimit-Remaining':
+                            {
+                              'schema': { 'type': 'integer' },
+                              'description': 'remaining rate limit',
+                            },
+                          'X-RateLimit-Limit':
+                            {
+                              'schema': { 'type': 'integer' },
+                              'description': 'total limit per 10 minutes',
+                            },
+                          'X-RateLimit-Reset':
+                            {
+                              'schema': { 'type': 'integer' },
+                              'description': 'seconds to reset rate limit',
+                            },
+                        },
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '验证码错误/账号密码不匹配',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'examples':
+                                {
+                                  'CAPTCHA_ERROR':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'CAPTCHA_ERROR',
+                                          'error': 'Unauthorized',
+                                          'message': 'wrong captcha',
+                                          'statusCode': 401,
+                                        },
+                                    },
+                                  'EMAIL_PASSWORD_ERROR':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'EMAIL_PASSWORD_ERROR',
+                                          'error': 'Unauthorized',
+                                          'message': 'email does not exists or email and password not match',
+                                          'statusCode': 401,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '429':
+                    {
+                      'description': '失败次数太多，需要过一段时间再重试',
+                      'headers':
+                        {
+                          'X-RateLimit-Remaining':
+                            {
+                              'schema': { 'type': 'integer' },
+                              'description': 'remaining rate limit',
+                            },
+                          'X-RateLimit-Limit':
+                            {
+                              'schema': { 'type': 'integer' },
+                              'description': 'limit per 10 minutes',
+                            },
+                          'X-RateLimit-Reset':
+                            {
+                              'schema': { 'type': 'integer' },
+                              'description': 'seconds to reset rate limit',
+                            },
+                        },
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '失败次数太多，需要过一段时间再重试',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'example':
+                                {
+                                  'code': 'TOO_MANY_REQUESTS',
+                                  'error': 'Too Many Requests',
+                                  'message': 'too many failed login attempts',
+                                  'statusCode': 429,
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/me':
+        {
+          'get':
+            {
+              'operationId': 'getCurrentUser',
+              'tags': ['auth'],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json': { 'schema': { '$ref': '#/components/schemas/User' } },
+                        },
+                    },
+                  '401':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema': { '$ref': '#/components/schemas/Error' },
+                              'example':
+                                {
+                                  'code': 'NEED_LOGIN',
+                                  'error': 'Unauthorized',
+                                  'message': 'you need to login before %s',
+                                  'statusCode': 401,
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/groups/{groupName}/profile':
+        {
+          'get':
+            {
+              'operationId': 'getGroupProfile',
+              'tags': ['topic'],
+              'description': '获取小组首页',
+              'parameters':
+                [
+                  {
+                    'schema': { 'default': 20, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'limit',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'default': 0, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'offset',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'minLength': 1, 'type': 'string' },
+                    'in': 'path',
+                    'name': 'groupName',
+                    'required': true,
+                  },
+                ],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            { 'schema': { '$ref': '#/components/schemas/GroupProfile' } },
+                        },
+                    },
+                  '404':
+                    {
+                      'description': '小组不存在',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '小组不存在',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'examples':
+                                {
+                                  'NotFoundError':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'NOT_FOUND',
+                                          'error': 'Not Found',
+                                          'message': 'topic not found',
+                                          'statusCode': 404,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/groups/-/topics/{id}':
+        {
+          'get':
+            {
+              'operationId': 'getGroupTopicDetail',
+              'tags': ['topic'],
+              'description': '获取帖子列表',
+              'parameters':
+                [{ 'schema': { 'type': 'integer' }, 'in': 'path', 'name': 'id', 'required': true }],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            { 'schema': { '$ref': '#/components/schemas/TopicDetail' } },
+                        },
+                    },
+                  '404':
+                    {
+                      'description': '小组不存在',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '小组不存在',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'examples':
+                                {
+                                  'NotFoundError':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'NOT_FOUND',
+                                          'error': 'Not Found',
+                                          'message': 'topic not found',
+                                          'statusCode': 404,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/groups/{groupName}/members':
+        {
+          'get':
+            {
+              'operationId': 'listGroupMembersByName',
+              'tags': ['topic'],
+              'description': '获取帖子列表',
+              'parameters':
+                [
+                  {
+                    'schema':
+                      {
+                        'default': 'all',
+                        'anyOf':
+                          [
+                            { 'type': 'string', 'enum': ['mod'] },
+                            { 'type': 'string', 'enum': ['normal'] },
+                            { 'type': 'string', 'enum': ['all'] },
+                          ],
+                      },
+                    'in': 'query',
+                    'name': 'type',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'default': 30, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'limit',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'default': 0, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'offset',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'minLength': 1, 'type': 'string' },
+                    'in': 'path',
+                    'name': 'groupName',
+                    'required': true,
+                  },
+                ],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'type': 'object',
+                                  'properties':
+                                    {
+                                      'data':
+                                        {
+                                          'type': 'array',
+                                          'items': { '$ref': '#/components/schemas/GroupMember' },
+                                        },
+                                      'total': { 'type': 'integer' },
+                                    },
+                                  'required': ['data', 'total'],
+                                },
+                            },
+                        },
+                    },
+                  '404':
+                    {
+                      'description': '小组不存在',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '小组不存在',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'examples':
+                                {
+                                  'NotFoundError':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'NOT_FOUND',
+                                          'error': 'Not Found',
+                                          'message': 'topic not found',
+                                          'statusCode': 404,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/groups/{groupName}/topics':
+        {
+          'get':
+            {
+              'operationId': 'getGroupTopicsByGroupName',
+              'tags': ['topic'],
+              'description': '获取帖子列表',
+              'parameters':
+                [
+                  {
+                    'schema': { 'default': 30, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'limit',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'default': 0, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'offset',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'minLength': 1, 'type': 'string' },
+                    'in': 'path',
+                    'name': 'groupName',
+                    'required': true,
+                  },
+                ],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'type': 'object',
+                                  'properties':
+                                    {
+                                      'data':
+                                        {
+                                          'type': 'array',
+                                          'items': { '$ref': '#/components/schemas/Topic' },
+                                        },
+                                      'total': { 'type': 'integer' },
+                                    },
+                                  'required': ['data', 'total'],
+                                },
+                            },
+                        },
+                    },
+                  '404':
+                    {
+                      'description': '小组不存在',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '小组不存在',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'examples':
+                                {
+                                  'NotFoundError':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'NOT_FOUND',
+                                          'error': 'Not Found',
+                                          'message': 'topic not found',
+                                          'statusCode': 404,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+          'post':
+            {
+              'operationId': 'createNewGroupTopic',
+              'requestBody':
+                {
+                  'content':
+                    {
+                      'application/json':
+                        {
+                          'schema':
+                            {
+                              'type': 'object',
+                              'properties':
+                                {
+                                  'title': { 'minLength': 1, 'type': 'string' },
+                                  'content': { 'minLength': 1, 'type': 'string' },
+                                },
+                              'required': ['title', 'content'],
+                            },
+                          'example': { 'title': 'post title', 'content': 'post contents' },
+                        },
+                    },
+                  'required': true,
+                },
+              'parameters':
+                [
+                  {
+                    'schema': { 'minLength': 1, 'type': 'string' },
+                    'example': 'sandbox',
+                    'in': 'path',
+                    'name': 'groupName',
+                    'required': true,
+                  },
+                ],
+              'security': [{ 'CookiesSession': [] }],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'type': 'object',
+                                  'properties':
+                                    {
+                                      'id':
+                                        { 'description': 'new post topic id', 'type': 'integer' },
+                                    },
+                                  'required': ['id'],
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+      '/p1/subjects/{subjectID}/topics':
+        {
+          'get':
+            {
+              'operationId': 'getSubjectTopicsBySubjectId',
+              'tags': ['topic'],
+              'description': '获取帖子列表',
+              'parameters':
+                [
+                  {
+                    'schema': { 'default': 30, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'limit',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'default': 0, 'type': 'integer' },
+                    'in': 'query',
+                    'name': 'offset',
+                    'required': false,
+                  },
+                  {
+                    'schema': { 'exclusiveMinimum': 0, 'type': 'integer' },
+                    'in': 'path',
+                    'name': 'subjectID',
+                    'required': true,
+                  },
+                ],
+              'responses':
+                {
+                  '200':
+                    {
+                      'description': 'Default Response',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'type': 'object',
+                                  'properties':
+                                    {
+                                      'data':
+                                        {
+                                          'type': 'array',
+                                          'items': { '$ref': '#/components/schemas/Topic' },
+                                        },
+                                      'total': { 'type': 'integer' },
+                                    },
+                                  'required': ['data', 'total'],
+                                },
+                            },
+                        },
+                    },
+                  '404':
+                    {
+                      'description': '条目不存在',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '条目不存在',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                              'examples':
+                                {
+                                  'NotFoundError':
+                                    {
+                                      'value':
+                                        {
+                                          'code': 'NOT_FOUND',
+                                          'error': 'Not Found',
+                                          'message': 'topic not found',
+                                          'statusCode': 404,
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                  '500':
+                    {
+                      'description': '意料之外的服务器错误',
+                      'content':
+                        {
+                          'application/json':
+                            {
+                              'schema':
+                                {
+                                  'description': '意料之外的服务器错误',
+                                  '$ref': '#/components/schemas/Error',
+                                },
+                            },
+                        },
+                    },
+                },
+            },
+        },
+    },
+}

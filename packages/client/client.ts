@@ -77,6 +77,23 @@ export interface GroupProfile {
   group: Group;
   totalTopics: number;
 }
+export interface SubReply {
+  id: number;
+  creator: User;
+  createdAt: number;
+  isFriend: boolean;
+  text: string;
+  state: number;
+}
+export interface Reply {
+  id: number;
+  isFriend: boolean;
+  replies: SubReply[];
+  creator: User;
+  createdAt: number;
+  text: string;
+  state: number;
+}
 export interface TopicDetail {
   id: number;
   group: Group;
@@ -85,22 +102,7 @@ export interface TopicDetail {
   text: string;
   state: number;
   createdAt: number;
-  replies: Array<{
-    id: number;
-    isFriend: boolean;
-    replies: Array<{
-      id: number;
-      creator: User;
-      createdAt: number;
-      isFriend: boolean;
-      text: string;
-      state: number;
-    }>;
-    creator: User;
-    createdAt: number;
-    text: string;
-    state: number;
-  }>;
+  replies: Reply[];
 }
 /**
  * 登出
@@ -227,7 +229,7 @@ export async function getGroupProfile(
 /**
  * 获取帖子列表
  */
-export async function getGroupTopic(id: number, opts?: Oazapfts.RequestOpts) {
+export async function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
