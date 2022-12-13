@@ -16,8 +16,6 @@ const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false
   let date: string;
   if (typeof createdAt === 'number') {
     date = dayjs(createdAt * 1000).format('YYYY-M-D HH:mm');
-  } else if (typeof createdAt === 'string') {
-    date = dayjs(createdAt).format('YYYY-M-D HH:mm');
   } else {
     date = dayjs(createdAt).format('YYYY-M-D HH:mm');
   }
