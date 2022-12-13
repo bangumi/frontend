@@ -66,7 +66,7 @@ it('should redirect user to homepage after success login', async () => {
 
 it.each([
   {
-    statusCode: 400,
+    statusCode: 401,
     resp: { code: 'CAPTCHA_ERROR' },
     headers: { 'X-RateLimit-Remaining': '4' },
     expectedError: '验证码错误，您还有 4 次尝试机会',

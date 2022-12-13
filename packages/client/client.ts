@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.36
+ * 0.0.42
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -28,6 +28,11 @@ export interface User {
   };
   sign: string;
   user_group: number;
+}
+export interface ValidationError {
+  error: string;
+  message: string;
+  statusCode: number;
 }
 export interface GroupMember {
   avatar: {
@@ -146,7 +151,7 @@ export async function login(
       }
     | {
         status: 400;
-        data: Error;
+        data: ValidationError;
       }
     | {
         status: 401;
@@ -162,6 +167,51 @@ export async function login(
       }
   >(
     '/p1/login',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
+/**
+ * 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+ *
+ * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+ *
+ * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+ */
+export async function login2(
+  body: {
+    email: string;
+    password: string;
+    'cf-turnstile-response': string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: User;
+      }
+    | {
+        status: 400;
+        data: ValidationError;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 429;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    '/p1/login2',
     oazapfts.json({
       ...opts,
       method: 'POST',
@@ -402,5 +452,30 @@ export async function getSubjectTopicsBySubjectId(
     {
       ...opts,
     },
+  );
+}
+export async function createGroupReply(
+  topicId: number,
+  body: {
+    relatedID: number;
+    content: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/groups/-/topics/${encodeURIComponent(topicId)}/replies`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
   );
 }

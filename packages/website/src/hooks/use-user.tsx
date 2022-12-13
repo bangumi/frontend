@@ -89,6 +89,12 @@ async function login(email: string, password: string, hCaptchaResponse: string):
     return;
   }
 
+  if (res.status === 400) {
+    throw new UnknownError(res.data.message);
+  } else if (res.status === 429) {
+    throw new Error(LoginErrorCode.E_TOO_MANY_ERROR);
+  }
+
   const remain = res.headers.get('X-RateLimit-Remaining') ?? '0';
 
   if (res.data.code === 'CAPTCHA_ERROR') {
@@ -99,12 +105,5 @@ async function login(email: string, password: string, hCaptchaResponse: string):
     throw new PasswordUnMatchError(parseInt(remain));
   }
 
-  switch (res.status) {
-    case 400:
-      throw new UnknownError(res.data.message);
-    case 429:
-      throw new Error(LoginErrorCode.E_TOO_MANY_ERROR);
-    default:
-      throw new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR);
-  }
+  throw new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR);
 }
