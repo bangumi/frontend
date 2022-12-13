@@ -9,7 +9,7 @@ import styles from './GroupTopicHeader.module.less';
 
 interface Header {
   title: string;
-  createdAt: string | Date;
+  createdAt: number;
   creator: User;
   group: Group;
   id: number;

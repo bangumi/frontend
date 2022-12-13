@@ -1,9 +1,19 @@
 import type { components } from './types';
 
-export type User = components['schemas']['User'];
+export type { User, Topic } from './client';
 export type Avatar = components['schemas']['Avatar'];
-export type Topic = components['schemas']['Topic'];
-export type Pagination = Omit<components['schemas']['Paged'], 'data'>;
+
+export interface PaginationQuery {
+  /** Limit */
+  limit: number;
+  /** Offset */
+  offset: number;
+}
+
+export interface Pagination {
+  /** Total */
+  total: number;
+}
 
 export interface ResponseWithPagination<T = unknown> extends Pagination {
   data: T;

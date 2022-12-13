@@ -9,9 +9,9 @@ import type { GroupMember, ResponseWithPagination } from '@bangumi/client/group'
 import { server as mockServer } from '../../../../../mocks/server';
 import { renderPage } from '../../../../../utils/test-utils';
 import GroupMembers from '../members';
-import BoringMembers from './fixtures/boring-members.json';
-import BoringModMember from './fixtures/boring-mod-member.json';
-import Boring from './fixtures/boring.json';
+import sandboxMembers from './fixtures/sandbox-members.json';
+import sandboxModMember from './fixtures/sandbox-mod-member.json';
+import Sandbox from './fixtures/sandbox.json';
 
 jest.mock('react-router-dom', () => {
   return {
@@ -25,6 +25,7 @@ const mockedUseParams = jest.mocked(useParams);
 
 class GroupMembersTest {
   page: RenderResult;
+
   constructor(
     name: string,
     mock: {
@@ -37,13 +38,13 @@ class GroupMembersTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost/p/groups/${name}`, (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(Boring));
+      rest.get(`http://localhost/p1/groups/${name}/profile`, (req, res, ctx) => {
+        return res(ctx.status(200), ctx.json(Sandbox));
       }),
     );
 
     mockServer.use(
-      rest.get(`http://localhost/p/groups/${name}/members`, (req, res, ctx) => {
+      rest.get(`http://localhost/p1/groups/${name}/members`, (req, res, ctx) => {
         const isAdmin = req.url.searchParams.get('type') === 'mod';
         return res(ctx.status(200), ctx.json(isAdmin ? mock.modMembers : mock.members));
       }),
@@ -65,15 +66,9 @@ class GroupMembersTest {
 
 it('should list group members', async () => {
   const test = new GroupMembersTest('test', {
-    members: BoringMembers as ResponseWithPagination<GroupMember[]>,
-    modMembers: BoringModMember as ResponseWithPagination<GroupMember[]>,
+    members: sandboxMembers as ResponseWithPagination<GroupMember[]>,
+    modMembers: sandboxModMember as ResponseWithPagination<GroupMember[]>,
   });
 
-  await test.assertMembersExist([
-    '列那淡定地',
-    'towazzz',
-    '末日凄惶月',
-    '尝到二次元的甜头',
-    '夜の蝉',
-  ]);
+  await test.assertMembersExist(['树洞酱', 'nickname 427613', 'nickname 287622']);
 });

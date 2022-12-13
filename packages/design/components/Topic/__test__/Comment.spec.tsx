@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import dayjs from 'dayjs';
 import React from 'react';
 
 import type { CommentProps } from '../Comment';
@@ -21,11 +22,12 @@ describe('Normal Comment', () => {
     const mockedComment = comment ?? (isReply ? reply : singleComment);
     return {
       ...mockedComment,
+      createdAt: dayjs(mockedComment.created_at).unix(),
       floor,
       originalPosterId,
       user,
       isReply,
-    } as unknown as CommentProps;
+    } as CommentProps;
   }
 
   it.each([0, 6, 7])('should render %d', (state) => {
@@ -66,16 +68,16 @@ describe('Normal Comment', () => {
   it('show icons', () => {
     const props = buildProps(false);
     const { container: container1 } = render(
-      <Comment {...props} is_friend originalPosterId={233} />,
+      <Comment {...props} isFriend originalPosterId={233} />,
     );
     expect(container1.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(3);
 
     const { container: container2 } = render(
-      <Comment {...props} is_friend={false} originalPosterId={1} />,
+      <Comment {...props} isFriend={false} originalPosterId={1} />,
     );
     expect(container2.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(3);
 
-    const { container: container3 } = render(<Comment {...props} is_friend originalPosterId={1} />);
+    const { container: container3 } = render(<Comment {...props} isFriend originalPosterId={1} />);
     expect(container3.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(4);
   });
 
@@ -111,6 +113,7 @@ describe('Special Comment', () => {
   function buildProps(state: number) {
     return {
       ...specialComment,
+      createdAt: dayjs(specialComment.created_at).unix(),
       state,
     } as unknown as CommentProps;
   }

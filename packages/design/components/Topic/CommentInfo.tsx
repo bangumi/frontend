@@ -5,7 +5,7 @@ import React from 'react';
 export interface CommentInfoProps {
   floor: string | number;
   isSpecial?: boolean;
-  createdAt: string | Date;
+  createdAt: number | string | Date;
   id?: string;
 }
 
@@ -13,7 +13,13 @@ const spaces = '\u00A0'.repeat(2);
 
 // Todo: report
 const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false, id = '' }) => {
-  const date = dayjs(createdAt).format('YYYY-M-D HH:mm');
+  let date: string;
+  if (typeof createdAt === 'number') {
+    date = dayjs(createdAt * 1000).format('YYYY-M-D HH:mm');
+  } else {
+    date = dayjs(createdAt).format('YYYY-M-D HH:mm');
+  }
+
   return !isSpecial ? (
     <span className='bgm-topic__commentInfo'>
       <a href={`#${id}`}>#{floor}</a>

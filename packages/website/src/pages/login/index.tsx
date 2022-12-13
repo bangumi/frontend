@@ -6,7 +6,13 @@ import { useInput } from 'rooks';
 import { Input, Button } from '@bangumi/design';
 import { UserLogin, Password } from '@bangumi/icons';
 
-import { LoginErrorCode, PasswordUnMatchError, UnknownError, useUser } from '../../hooks/use-user';
+import {
+  CaptureError,
+  LoginErrorCode,
+  PasswordUnMatchError,
+  UnknownError,
+  useUser,
+} from '../../hooks/use-user';
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg';
 import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
@@ -22,7 +28,6 @@ const Login: React.FC = () => {
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
   const errorMessageMap: Record<string, string> = {
-    [LoginErrorCode.E_REQUEST_ERROR]: '验证码错误，请再试一遍',
     [LoginErrorCode.E_NETWORK_ERROR]: '网络错误，请稍后重试',
     [LoginErrorCode.E_UNKNOWN_ERROR]: '未知错误',
     [LoginErrorCode.E_CLIENT_ERROR]: '请求错误',
@@ -53,12 +58,17 @@ const Login: React.FC = () => {
       hCaptcha.current?.resetCaptcha();
       setHCaptchaToken(null);
       if (error instanceof PasswordUnMatchError) {
-        setErrorMessage(`用户名与密码不正确，请检查后重试，您可以有至多 ${error.remain} 次尝试`);
+        setErrorMessage(`用户名与密码不正确，请检查后重试，您还有 ${error.remain} 次尝试机会`);
+        return;
+      }
+
+      if (error instanceof CaptureError) {
+        setErrorMessage(`验证码错误，您还有 ${error.remain} 次尝试机会`);
         return;
       }
 
       if (error instanceof UnknownError) {
-        setErrorMessage(error.message);
+        setErrorMessage('未知错误');
         return;
       }
 

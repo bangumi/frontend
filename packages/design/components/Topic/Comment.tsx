@@ -4,7 +4,7 @@ import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { State } from '@bangumi/client/topic';
-import type { Reply, Comment as IComment, User } from '@bangumi/client/topic';
+import type { SubReply, Reply, User } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
 import { render as renderBBCode } from '@bangumi/utils';
 import { getUserProfileLink } from '@bangumi/utils/pages';
@@ -16,7 +16,7 @@ import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
 import CommentInfo from './CommentInfo';
 
-export type CommentProps = ((Reply & { isReply: true }) | (IComment & { isReply: false })) & {
+export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply: false })) & {
   floor: string | number;
   originalPosterId: number;
   user?: User;
@@ -54,9 +54,9 @@ const RenderContent: FC<{ state: State; text: string }> = ({ state, text }) => {
 const Comment: FC<CommentProps> = ({
   text,
   creator,
-  created_at: createAt,
+  createdAt,
   floor,
-  is_friend: isFriend,
+  isFriend,
   originalPosterId,
   state,
   user,
@@ -68,7 +68,7 @@ const Comment: FC<CommentProps> = ({
   const isSpecial = state === State.Closed || state === State.Reopen || state === State.Silent;
   const replies = !isReply ? props.replies : null;
   const [shouldCollapsed, setShouldCollapsed] = useState(
-    isSpecial || (isReply && (/[+-]\d+$/.test(text!) || isDeleted)),
+    isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted)),
   );
   const [showReplyEditor, setShowReplyEditor] = useState(false);
 
@@ -108,9 +108,9 @@ const Comment: FC<CommentProps> = ({
             <Link to={url} isExternal>
               {creator.nickname}
             </Link>
-            <RenderContent state={state} text={text!} />
+            <RenderContent state={state} text={text} />
           </div>
-          <CommentInfo createdAt={createAt} floor={floor} isSpecial={isSpecial} />
+          <CommentInfo createdAt={createdAt} floor={floor} isSpecial={isSpecial} />
         </span>
       </div>
     );
@@ -134,9 +134,9 @@ const Comment: FC<CommentProps> = ({
                 {isFriend ? <Friend /> : null}
                 {!isReply && creator.sign ? <span>{`// ${unescape(creator.sign)}`}</span> : null}
               </div>
-              <CommentInfo createdAt={createAt} floor={floor} id={`post_${props.id}`} />
+              <CommentInfo createdAt={createdAt} floor={floor} id={`post_${props.id}`} />
             </span>
-            <RenderContent state={state} text={text!} />
+            <RenderContent state={state} text={text} />
           </div>
           {user ? (
             <div className='bgm-comment__opinions'>

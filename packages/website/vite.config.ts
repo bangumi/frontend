@@ -7,7 +7,12 @@ import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
-  const apiDomain = mode === 'stage' ? 'https://dev.bgm38.com' : 'https://next.bgm.tv';
+  const apiDomain =
+    mode === 'loc'
+      ? 'http://127.0.0.1:4000'
+      : mode === 'stage'
+      ? 'https://dev.bgm38.com'
+      : 'https://next.bgm.tv';
   console.log('using backend', apiDomain);
 
   return {

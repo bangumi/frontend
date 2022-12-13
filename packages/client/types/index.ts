@@ -3,90 +3,55 @@
  * Do not make direct changes to the file.
  */
 
-/** Type helpers */
-type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-type XOR<T, U> = T | U extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
-type OneOf<T extends any[]> = T extends [infer Only]
-  ? Only
-  : T extends [infer A, infer B, ...infer Rest]
-  ? OneOf<[XOR<A, B>, ...Rest]>
-  : never;
-
 export interface paths {
-  '/p/login': {
+  '/p1/logout': {
+    /** @description 登出 */
+    post: operations['logout'];
+  };
+  '/p1/login': {
     /**
-     * 登录
-     * @description `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
+     * @description 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
      *
-     * site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
+     * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
      */
     post: operations['login'];
   };
-  '/p/logout': {
-    /** 登出 */
-    post: operations['logout'];
+  '/p1/login2': {
+    /**
+     * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+     *
+     * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+     *
+     * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+     */
+    post: operations['login2'];
   };
-  '/p/me': {
-    /** 获取当前用户 */
+  '/p1/me': {
     get: operations['getCurrentUser'];
   };
-  '/p/groups/{name}/topics': {
-    /** 分页获取小组讨论列表，按照回复时间倒序分页 */
-    get: operations['getGroupTopicsByGroupName'];
+  '/p1/groups/{groupName}/profile': {
+    /** @description 获取小组首页 */
+    get: operations['getGroupProfile'];
   };
-  '/p/subjects/{subject_id}/topics': {
-    /** 分页获取条目讨论列表，使用最新回复时间倒序分页 */
-    get: operations['getSubjectTopicsById'];
+  '/p1/groups/-/topics/{id}': {
+    /** @description 获取帖子列表 */
+    get: operations['getGroupTopicDetail'];
   };
-  '/p/subjects/-/topics/{topic_id}': {
-    /**
-     * 条目讨论回复列表
-     * @description 没有分页
-     */
-    get: operations['getSubjectTopicById'];
-  };
-  '/p/groups/-/topics/{topic_id}': {
-    /**
-     * 获取小组讨论回复列表
-     * @description 没有分页
-     */
-    get: operations['getGroupTopicById'];
-  };
-  '/p/indices/{index_id}/comments': {
-    /**
-     * 获取目录讨论列表
-     * @description 没有分页
-     */
-    get: operations['getIndexCommentsById'];
-  };
-  '/p/episodes/{episode_id}/comments': {
-    /**
-     * 获取章节讨论列表
-     * @description 没有分页
-     */
-    get: operations['getEpisodeCommentsById'];
-  };
-  '/p/characters/{character_id}/comments': {
-    /**
-     * 获取角色讨论列表
-     * @description 没有分页
-     */
-    get: operations['getCharacterCommentsById'];
-  };
-  '/p/persons/{person_id}/comments': {
-    /**
-     * 获取人物讨论列表
-     * @description 没有分页
-     */
-    get: operations['getPersonCommentsById'];
-  };
-  '/p/groups/{name}': {
-    /** 获取小组首页信息 */
-    get: operations['getGroupProfileByName'];
-  };
-  '/p/groups/{name}/members': {
-    /** 获取小组成员信息 */
+  '/p1/groups/{groupName}/members': {
+    /** @description 获取帖子列表 */
     get: operations['listGroupMembersByName'];
+  };
+  '/p1/groups/{groupName}/topics': {
+    /** @description 获取帖子列表 */
+    get: operations['getGroupTopicsByGroupName'];
+    post: operations['createNewGroupTopic'];
+  };
+  '/p1/subjects/{subjectID}/topics': {
+    /** @description 获取帖子列表 */
+    get: operations['getSubjectTopicsBySubjectId'];
+  };
+  '/p1/groups/-/topics/{topicID}/replies': {
+    post: operations['createGroupReply'];
   };
 }
 
@@ -94,301 +59,126 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
-    /**
-     * User
-     * @description 实际的返回值可能包括文档未声明的 `url` 字段，此字段主要用于开发者从 api 响应直接转跳到网页。
-     * 客户端开发者请不用依赖于此特性，此字段的值随时可能会改变。
-     *
-     * @example {
-     *   "avatar": {
-     *     "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-     *     "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-     *     "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-     *   },
-     *   "sign": "Awesome!",
-     *   "username": "sai",
-     *   "nickname": "Sai🖖",
-     *   "id": 1,
-     *   "user_group": 1
-     * }
-     */
+    /** User */
     User: {
-      /** ID */
       id: number;
-      /**
-       * Username
-       * @description 唯一用户名，初始与 UID 相同，可修改一次
-       */
       username: string;
-      /** Nickname */
       nickname: string;
-      /**
-       * UserGroup
-       * @description 用户组 - 1 = 管理员 - 2 = Bangumi 管理猿 - 3 = 天窗管理猿 - 4 = 禁言用户 - 5 = 禁止访问用户 - 8 = 人物管理猿 - 9 = 维基条目管理猿 - 10 = 用户 - 11 = 维基人
-       * @enum {integer}
-       */
-      user_group: 1 | 2 | 3 | 4 | 5 | 8 | 9 | 10 | 11;
-      avatar: components['schemas']['Avatar'];
-      /**
-       * Sign
-       * @description 个人签名
-       */
+      /** Avatar */
+      avatar: {
+        small: string;
+        medium: string;
+        large: string;
+      };
       sign: string;
+      user_group: number;
     };
-    GroupProfile: {
-      /**
-       * @description 小组的数字 ID
-       * @example 11
-       */
-      id: number;
-      /**
-       * Format: date-time
-       * @example 2008-08-01T06:11:29+08:00
-       */
-      created_at: string;
-      /**
-       * Format: bbcode
-       * @example 本小组欢迎对各种技术有一定了解的人，
-       * 比如像橘花热衷杀人技术……
-       *
-       * 不过、本组主要谈论ＰＣ软硬件方面，
-       * 想了解相关知识，结识可怕的技术宅，请进。
-       */
-      description: string;
-      /**
-       * Format: url
-       * @example https://lain.bgm.tv/pic/icon/l/000/00/00/11.jpg
-       */
-      icon: string;
-      /**
-       * @description 小组的 string ID，原本出现在小组URL中
-       * @example a
-       */
-      name: string;
-      /** @description 新加入的用户，最多 10 个。 */
-      new_members: components['schemas']['GroupMember'][];
-      /** @example ～技术宅真可怕～ */
-      title: string;
-      /**
-       * @description 用户数
-       * @example 9450
-       */
-      total_members: number;
-    };
-    /**
-     * Avatar
-     * @example {
-     *   "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg?r=1391790456",
-     *   "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg?r=1391790456",
-     *   "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg?r=1391790456"
-     * }
-     */
+    /** Avatar */
     Avatar: {
-      /**
-       * Large
-       * Format: url
-       */
-      large: string;
-      /**
-       * Medium
-       * Format: url
-       */
-      medium: string;
-      /**
-       * Small
-       * Format: url
-       */
       small: string;
+      medium: string;
+      large: string;
     };
-    /** ErrorDetail */
-    ErrorDetail: {
-      /** Title */
+    /** @description fastify default error response */
+    Error: {
+      code: string;
+      error: string;
+      message: string;
+      statusCode: number;
+    };
+    /** @description request data validation error */
+    ValidationError: {
+      error: string;
+      message: string;
+      statusCode: number;
+    };
+    /** Topic */
+    Topic: {
+      /** @description topic id */
+      id: number;
+      /** User */
+      creator: {
+        id: number;
+        username: string;
+        nickname: string;
+        /** Avatar */
+        avatar: {
+          small: string;
+          medium: string;
+          large: string;
+        };
+        sign: string;
+        user_group: number;
+      };
       title: string;
-      /** Description */
-      description: string;
-      /** Detail */
-      details?: OneOf<
-        [
-          string,
-          {
-            /** @description error message */
-            error?: string;
-            /** @description request path */
-            path?: string;
-          },
-        ]
-      >;
+      /** @description 小组/条目ID */
+      parentID: number;
+      /** @description 发帖时间，unix time stamp in seconds */
+      createdAt: number;
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+      repliesCount: number;
     };
     Group: {
       id: number;
       name: string;
-      /** Format: date-time */
-      created_at: string;
+      nsfw: boolean;
       title: string;
-      /** Format: url */
       icon: string;
-      total_members: number;
       description: string;
+      totalMembers: number;
+      createdAt: number;
     };
-    PrivateTopicDetail: {
-      comments: components['schemas']['Comment'][];
-    } & {
-      state: components['schemas']['Comment']['state'];
-      /** @description 发帖人是否好友 */
-      is_friend: boolean;
-      /**
-       * Format: date-time
-       * @example 2008-07-14T15:34:07+08:00
-       */
-      created_at?: string;
-      creator: components['schemas']['User'];
-      /**
-       * Format: int32
-       * @example 1
-       */
+    GroupProfile: {
+      recentAddedMembers: components['schemas']['GroupMember'][];
+      topics: components['schemas']['Topic'][];
+      /** @description 是否已经加入小组 */
+      inGroup: boolean;
+      group: components['schemas']['Group'];
+      totalTopics: number;
+    };
+    SubReply: {
       id: number;
-      /**
-       * Format: int32
-       * @example 76
-       */
-      reply_count: number;
-      /** @example SAi看的也是红皮书吧 */
+      creator: components['schemas']['User'];
+      createdAt: number;
+      isFriend: boolean;
       text: string;
-      /** @example 拿这个来测试 */
-      title: string;
-      /**
-       * Format: date-time
-       * @example 2021-12-20T19:18:49+08:00
-       */
-      updated_at: string;
+      state: number;
     };
-    /** Topic */
-    Topic: {
-      /**
-       * Format: date-time
-       * @example 2008-07-14T15:34:07+08:00
-       */
-      created_at: string;
-      creator: components['schemas']['User'];
-      /**
-       * Format: int32
-       * @example 1
-       */
+    Reply: {
       id: number;
-      /**
-       * Format: int32
-       * @description 全部回复，包括二级回复
-       * @example 76
-       */
-      reply_count: number;
-      /** @example 拿这个来测试 */
-      title: string;
-      /**
-       * Format: date-time
-       * @example 2021-12-20T19:18:49+08:00
-       */
-      updated_at: string;
-    };
-    /** Comment */
-    Comment: {
-      /** @description 发帖人是否好友 */
-      is_friend: boolean;
-      /**
-       * Format: date-time
-       * @example 2008-07-14T15:38:35+08:00
-       */
-      created_at: string;
+      isFriend: boolean;
+      replies: components['schemas']['SubReply'][];
       creator: components['schemas']['User'];
-      /**
-       * Format: int32
-       * @example 2
-       */
-      id: number;
-      replies: {
-        /**
-         * Format: date-time
-         * @example 2012-12-23T20:46:29+08:00
-         */
-        created_at: string;
-        creator: components['schemas']['User'];
-        /**
-         * Format: int32
-         * @example 24360
-         */
-        id: number;
-        /**
-         * @description 如果 `state` 不为 `0`，内容为空
-         * @example [quote][b]15www[/b] 说: 檞寄生+1 我的明菁 T-T[/quote]\n挖墳黨喪心病狂！
-         */
-        text?: string;
-        state: components['schemas']['Comment']['state'];
-        /** @description 发帖人是否好友 */
-        is_friend: boolean;
-      }[];
-      /**
-       * @description 如果 `state` 不为 `0`，内容为空
-       * @example 你是猪 ... 鉴定完毕 ...
-       */
+      createdAt: number;
       text: string;
-      /**
-       * CommentState
-       * @description 回复和帖子共用的状态
-       *
-       * 表示帖子正常/下沉/关闭
-       *
-       * 如果是回复，表示管理员的下沉/关闭主题操作
-       *
-       *
-       * - `0` 正常
-       * - `2` 重开
-       * - `1` 管理员关闭帖子
-       * - `5` 管理员下沉帖子
-       * - `6` 被用户删除
-       * - `7` 违反社区指导原则，已被删除
-       * @example 0
-       * @enum {integer}
-       */
-      state: 0 | 1 | 2 | 5 | 6 | 7;
+      state: number;
+    };
+    TopicDetail: {
+      id: number;
+      group: components['schemas']['Group'];
+      creator: components['schemas']['User'];
+      title: string;
+      text: string;
+      state: number;
+      createdAt: number;
+      replies: components['schemas']['Reply'][];
     };
     GroupMember: {
-      avatar: components['schemas']['Avatar'];
-      /** @example 1 */
+      /** Avatar */
+      avatar: {
+        small: string;
+        medium: string;
+        large: string;
+      };
       id: number;
-      /** @example Sai🖖 */
       nickname: string;
-      /** @example sai */
       username: string;
-      /**
-       * Format: date-time
-       * @example 2022-06-25T21:07:38.466+08:00
-       */
-      joined_at: string;
-    };
-    Paged: {
-      /** Total */
-      total: number;
-      /** Limit */
-      limit: number;
-      /** Offset */
-      offset: number;
-    };
-    /** Paged[Topic] */
-    Paged_Topic: components['schemas']['Paged'] & {
-      /** Data */
-      data: components['schemas']['Topic'][];
-    };
-    /** Comments */
-    Comments: {
-      comments: components['schemas']['Comment'][];
+      joinedAt: number;
     };
   };
   responses: never;
-  parameters: {
-    /** @description 分页参数 */
-    default_query_limit: number;
-    /** @description 分页参数 */
-    default_query_offset: number;
-  };
+  parameters: never;
   requestBodies: never;
   headers: never;
   pathItems: never;
@@ -397,15 +187,44 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
+  logout: {
+    /** @description 登出 */
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 未登录 */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
   login: {
     /**
-     * 登录
-     * @description `h-captcha-response` 是 [hCaptcha 的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
+     * @description 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
      *
-     * site key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
+     * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
      */
-    requestBody?: {
+    requestBody: {
       content: {
+        /**
+         * @example {
+         *   "email": "treeholechan@gmail.com",
+         *   "password": "lovemeplease",
+         *   "h-captcha-response": "10000000-aaaa-bbbb-cccc-000000000001"
+         * }
+         */
         'application/json': {
           email: string;
           password: string;
@@ -414,382 +233,393 @@ export interface operations {
       };
     };
     responses: {
-      /** @description 账号密码正确，设置 Cookies */
+      /** @description Default Response */
       200: {
         headers: {
-          /** @description 设置 cookies session */
+          /** @description example: "sessionID=12345abc" */
           'Set-Cookie'?: string;
         };
         content: {
           'application/json': components['schemas']['User'];
         };
       };
-      /** @description 请求错误或者验证码错误 */
+      /** @description Default Response */
       400: {
         content: {
-          'application/json': {
-            /** Title */
-            title: string;
-            /** Description */
-            description: string;
-            /** Detail */
-            details: string[];
-          };
+          'application/json': components['schemas']['ValidationError'];
         };
       };
-      /** @description 账号或密码错误 */
+      /** @description 验证码错误/账号密码不匹配 */
       401: {
+        headers: {
+          /** @description remaining rate limit */
+          'X-RateLimit-Remaining'?: number;
+          /** @description total limit per 10 minutes */
+          'X-RateLimit-Limit'?: number;
+          /** @description seconds to reset rate limit */
+          'X-RateLimit-Reset'?: number;
+        };
         content: {
-          'application/json': {
-            /** Title */
-            title: string;
-            /** Description */
-            description: string;
-            /** Detail */
-            details: {
-              /** @description 剩余可用登录次数。 */
-              remain: number;
-            };
-          };
+          'application/json': components['schemas']['Error'];
         };
       };
-      /** @description content-type 不是 `application/json` */
-      415: never;
-      /** @description JSON 语法错误 */
-      422: never;
-      /** @description 登录失败次数太多 */
+      /** @description 失败次数太多，需要过一段时间再重试 */
       429: {
+        headers: {
+          /** @description remaining rate limit */
+          'X-RateLimit-Remaining'?: number;
+          /** @description limit per 10 minutes */
+          'X-RateLimit-Limit'?: number;
+          /** @description seconds to reset rate limit */
+          'X-RateLimit-Reset'?: number;
+        };
         content: {
-          'application/json': components['schemas']['ErrorDetail'];
+          'application/json': components['schemas']['Error'];
         };
       };
-      /** @description hCaptcha HTTP 请求失败 */
-      502: never;
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
     };
   };
-  logout: {
-    /** 登出 */
+  login2: {
+    /**
+     * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+     *
+     * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+     *
+     * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+     */
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "email": "treeholechan@gmail.com",
+         *   "password": "lovemeplease",
+         *   "cf-turnstile-response": "10000000-aaaa-bbbb-cccc-000000000001"
+         * }
+         */
+        'application/json': {
+          email: string;
+          password: string;
+          'cf-turnstile-response': string;
+        };
+      };
+    };
     responses: {
-      /** @description 正常登出 */
-      204: never;
-      /** @description 用户未登录或者 session 已失效 */
-      401: never;
+      /** @description Default Response */
+      200: {
+        headers: {
+          /** @description example: "sessionID=12345abc" */
+          'Set-Cookie'?: string;
+        };
+        content: {
+          'application/json': components['schemas']['User'];
+        };
+      };
+      /** @description Default Response */
+      400: {
+        content: {
+          'application/json': components['schemas']['ValidationError'];
+        };
+      };
+      /** @description 验证码错误/账号密码不匹配 */
+      401: {
+        headers: {
+          /** @description remaining rate limit */
+          'X-RateLimit-Remaining'?: number;
+          /** @description total limit per 10 minutes */
+          'X-RateLimit-Limit'?: number;
+          /** @description seconds to reset rate limit */
+          'X-RateLimit-Reset'?: number;
+        };
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 失败次数太多，需要过一段时间再重试 */
+      429: {
+        headers: {
+          /** @description remaining rate limit */
+          'X-RateLimit-Remaining'?: number;
+          /** @description limit per 10 minutes */
+          'X-RateLimit-Limit'?: number;
+          /** @description seconds to reset rate limit */
+          'X-RateLimit-Reset'?: number;
+        };
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
     };
   };
   getCurrentUser: {
-    /** 获取当前用户 */
     responses: {
-      /** @description 返回当前用户 */
+      /** @description Default Response */
       200: {
         content: {
           'application/json': components['schemas']['User'];
         };
       };
-      /** @description 用户未登录或者 session 已失效 */
-      401: never;
-    };
-  };
-  getGroupTopicsByGroupName: {
-    /** 分页获取小组讨论列表，按照回复时间倒序分页 */
-    parameters: {
-      /** @description 小组名称 */
-      path: {
-        name: string;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
+      /** @description Default Response */
+      401: {
         content: {
-          'application/json': components['schemas']['Paged_Topic'];
+          'application/json': components['schemas']['Error'];
         };
       };
-      /** @description Validation Error */
-      400: {
+      /** @description 意料之外的服务器错误 */
+      500: {
         content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
+          'application/json': components['schemas']['Error'];
         };
       };
     };
   };
-  getSubjectTopicsById: {
-    /** 分页获取条目讨论列表，使用最新回复时间倒序分页 */
+  getGroupProfile: {
+    /** @description 获取小组首页 */
     parameters: {
-      /** @description 条目 Limit */
-      /** @description 条目 Offset */
-      query: {
-        limit: number;
-        offset: number;
+      query?: {
+        limit?: number;
+        offset?: number;
       };
-      /** @description 条目ID */
       path: {
-        subject_id: number;
+        groupName: string;
       };
     };
     responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['Paged_Topic'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getSubjectTopicById: {
-    /**
-     * 条目讨论回复列表
-     * @description 没有分页
-     */
-    parameters: {
-      /** @description 条目讨论ID */
-      path: {
-        topic_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['PrivateTopicDetail'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getGroupTopicById: {
-    /**
-     * 获取小组讨论回复列表
-     * @description 没有分页
-     */
-    parameters: {
-      /** @description 小组讨论ID */
-      path: {
-        topic_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': {
-            group?: components['schemas']['Group'];
-          } & components['schemas']['PrivateTopicDetail'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getIndexCommentsById: {
-    /**
-     * 获取目录讨论列表
-     * @description 没有分页
-     */
-    parameters: {
-      /** @description 目录ID */
-      path: {
-        index_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['Comments'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getEpisodeCommentsById: {
-    /**
-     * 获取章节讨论列表
-     * @description 没有分页
-     */
-    parameters: {
-      /** @description 章节ID */
-      path: {
-        episode_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['Comments'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getCharacterCommentsById: {
-    /**
-     * 获取角色讨论列表
-     * @description 没有分页
-     */
-    parameters: {
-      /** @description 角色ID */
-      path: {
-        character_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['Comments'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getPersonCommentsById: {
-    /**
-     * 获取人物讨论列表
-     * @description 没有分页
-     */
-    parameters: {
-      /** @description 人物ID */
-      path: {
-        person_id: number;
-      };
-    };
-    responses: {
-      /** @description Successful Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['Comments'];
-        };
-      };
-      /** @description Validation Error */
-      400: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-      /** @description Not Found */
-      404: {
-        content: {
-          'application/json': components['schemas']['ErrorDetail'];
-        };
-      };
-    };
-  };
-  getGroupProfileByName: {
-    /** 获取小组首页信息 */
-    parameters: {
-      /** @description 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
-      path: {
-        name: string;
-      };
-    };
-    responses: {
-      /** @description 返回当前用户 */
+      /** @description Default Response */
       200: {
         content: {
           'application/json': components['schemas']['GroupProfile'];
         };
       };
       /** @description 小组不存在 */
-      404: never;
+      404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
     };
   };
-  listGroupMembersByName: {
-    /** 获取小组成员信息 */
+  getGroupTopicDetail: {
+    /** @description 获取帖子列表 */
     parameters: {
-      /** @description 成员类型，默认为 `all` */
-      query: {
-        type: 'mod' | 'normal' | 'all';
-      };
-      /** @description 小组名，类似于 `https://bgm.tv/groups/boring` 的 `boring` */
+      /** @example 371602 */
       path: {
-        name: string;
+        id: number;
       };
     };
     responses: {
-      /** @description 列出用户 */
+      /** @description Default Response */
       200: {
         content: {
-          'application/json': components['schemas']['Paged'] & {
-            /** Data */
+          'application/json': components['schemas']['TopicDetail'];
+        };
+      };
+      /** @description 小组不存在 */
+      404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  listGroupMembersByName: {
+    /** @description 获取帖子列表 */
+    parameters: {
+      query?: {
+        type?: 'mod' | 'normal' | 'all';
+        limit?: number;
+        offset?: number;
+      };
+      path: {
+        groupName: string;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
             data: components['schemas']['GroupMember'][];
+            total: number;
           };
         };
       };
       /** @description 小组不存在 */
-      404: never;
+      404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  getGroupTopicsByGroupName: {
+    /** @description 获取帖子列表 */
+    parameters: {
+      query?: {
+        limit?: number;
+        offset?: number;
+      };
+      path: {
+        groupName: string;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Topic'][];
+            total: number;
+          };
+        };
+      };
+      /** @description 小组不存在 */
+      404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  createNewGroupTopic: {
+    parameters: {
+      /** @example sandbox */
+      path: {
+        groupName: string;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "title": "post title",
+         *   "content": "post contents"
+         * }
+         */
+        'application/json': {
+          title: string;
+          content: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            /** @description new post topic id */
+            id: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  getSubjectTopicsBySubjectId: {
+    /** @description 获取帖子列表 */
+    parameters: {
+      query?: {
+        limit?: number;
+        offset?: number;
+      };
+      path: {
+        subjectID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Topic'][];
+            total: number;
+          };
+        };
+      };
+      /** @description 条目不存在 */
+      404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  createGroupReply: {
+    parameters: {
+      /** @example 371602 */
+      path: {
+        topicID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "content": "post contents"
+         * }
+         */
+        'application/json': {
+          /** @default 0 */
+          relatedID: number;
+          content: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: never;
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
     };
   };
 }

@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg?r=1571167246",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg?r=1571167246",
+        "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg?r=1571167246"
+      },
+      "id": 382951,
+      "nickname": "树洞酱",
+      "username": "382951",
+      "joinedAt": 1640499538
+    },
+    {
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+      },
+      "id": 427613,
+      "nickname": "nickname 427613",
+      "username": "427613",
+      "joinedAt": 1531631570
+    }
+  ],
+  "total": 3
+}

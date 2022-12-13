@@ -1,8 +1,14 @@
+import { ok } from 'oazapfts';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 
-import { api } from '@bangumi/client';
-import type { GroupProfile, Pagination } from '@bangumi/client/group';
+import { ozaClient } from '@bangumi/client';
+import type {
+  GroupProfile,
+  PaginationQuery,
+  ResponseWithPagination,
+  Topic,
+} from '@bangumi/client/group';
 
 export enum DescriptionClamp {
   clamp = 'clamp',
@@ -17,11 +23,11 @@ export interface UseGroupRet {
 
 export function useGroupRecentTopics(
   name: string,
-  { limit = 20, offset = 0 }: Partial<Pagination> = {},
-) {
+  { limit = 20, offset = 0 }: Partial<PaginationQuery> = {},
+): ResponseWithPagination<Topic[]> {
   const { data: recentTopicsResp } = useSWR(
-    api.getGroupTopicsByGroupName.swrKey({ name }, { limit, offset }),
-    api.getGroupTopicsByGroupName.fetcher,
+    `/group/${name}/topics?${limit}-${offset}`,
+    async () => ok(ozaClient.getGroupTopicsByGroupName(name, { limit, offset })),
     { suspense: true },
   );
 
@@ -30,8 +36,8 @@ export function useGroupRecentTopics(
 
 export function useGroup(name: string): UseGroupRet {
   const { data: groupResp } = useSWR(
-    api.getGroupProfileByName.swrKey({ name }),
-    api.getGroupProfileByName.fetcher,
+    `/group/${name}/profile`,
+    async () => ok(ozaClient.getGroupProfile(name)),
     { suspense: true },
   );
   const clampKey = `doesGroupDescriptionNeedClamp.${name}`;

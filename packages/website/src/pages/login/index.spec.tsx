@@ -29,10 +29,14 @@ jest.mock('@hcaptcha/react-hcaptcha', () => {
 jest.mock('react-router-dom');
 const mockedUseNavigate = jest.mocked(useNavigate);
 
-function mockLogin(statusCode: number, response: Object = {}): void {
+function mockLogin(
+  statusCode: number,
+  response: Object = {},
+  headers: Record<string, string | string[]> = {},
+): void {
   mockServer.use(
-    rest.post('http://localhost/p/login', (req, res, ctx) => {
-      return res(ctx.status(statusCode), ctx.json(response));
+    rest.post('http://localhost/p1/login', (req, res, ctx) => {
+      return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
     }),
   );
 }
@@ -62,22 +66,24 @@ it('should redirect user to homepage after success login', async () => {
 
 it.each([
   {
-    statusCode: 400,
-    resp: { details: ['验证码错误，请再试一遍'] },
-    expectedError: '验证码错误，请再试一遍',
+    statusCode: 401,
+    resp: { code: 'CAPTCHA_ERROR' },
+    headers: { 'X-RateLimit-Remaining': '4' },
+    expectedError: '验证码错误，您还有 4 次尝试机会',
   },
   {
     statusCode: 401,
-    resp: { details: { remain: 5 } },
-    expectedError: '用户名与密码不正确，请检查后重试，您可以有至多 5 次尝试',
+    resp: { code: 'EMAIL_PASSWORD_ERROR' },
+    headers: { 'X-RateLimit-Remaining': '4' },
+    expectedError: '用户名与密码不正确，请检查后重试，您还有 4 次尝试机会',
   },
-  { statusCode: 422, expectedError: '请求错误' },
+  { statusCode: 422, expectedError: '未知错误' },
   { statusCode: 429, expectedError: '登录失败次数太多，请过段时间再重试' },
-  { statusCode: 502, expectedError: '服务器错误，请稍后重试' },
+  { statusCode: 502, expectedError: '未知错误' },
 ])(
   'should show error message when response is $statusCode',
-  async ({ statusCode, resp = {}, expectedError }) => {
-    mockLogin(statusCode, resp);
+  async ({ statusCode, resp = {}, headers = {}, expectedError }) => {
+    mockLogin(statusCode, resp, headers);
     const { getByPlaceholderText, getByText } = render(
       <UserProvider>
         <LoginPage />

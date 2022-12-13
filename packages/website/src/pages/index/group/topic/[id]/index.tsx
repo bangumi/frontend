@@ -49,7 +49,7 @@ const TopicPage: FC = () => {
         id={topicDetail.id}
         title={topicDetail.title}
         creator={topicDetail.creator}
-        createdAt={topicDetail.created_at!}
+        createdAt={topicDetail.createdAt}
         group={topicDetail.group}
       />
       <Layout
@@ -62,7 +62,7 @@ const TopicPage: FC = () => {
             </div>
             {/* Topic Comments */}
             <div className={styles.replies}>
-              {topicDetail.comments.map((comment, idx) => (
+              {topicDetail.replies.map((comment, idx) => (
                 <Comment
                   key={comment.id}
                   isReply={false}
@@ -88,7 +88,7 @@ const TopicPage: FC = () => {
               <Avatar src={group.icon} size='medium' />
               <div className={styles.groupDetails}>
                 <Link to={`/group/${group.name}`}>{group.title}</Link>
-                <span>{`${group.total_members} 名成员`}</span>
+                <span>{`${group.totalMembers} 名成员`}</span>
               </div>
             </div>
             <ClampableContent

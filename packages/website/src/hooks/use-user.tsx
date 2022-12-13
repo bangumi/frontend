@@ -1,9 +1,10 @@
+import { ok } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { api } from '@bangumi/client';
+import { ozaClient } from '@bangumi/client';
 import type { User } from '@bangumi/client/user';
 
 interface UserContextType {
@@ -17,7 +18,7 @@ const UserContext = React.createContext<UserContextType>(null!);
 export enum LoginErrorCode {
   E_USERNAME_OR_PASSWORD_INCORRECT = 'E_USERNAME_OR_PASSWORD_INCORRECT',
   E_TOO_MANY_ERROR = 'E_TOO_MANY_ERROR',
-  E_REQUEST_ERROR = 'E_REQUEST_ERROR',
+  E_CAPTCHA_ERROR = 'E_CAPTCHA_ERROR',
   E_NETWORK_ERROR = 'E_NETWORK_ERROR',
   E_UNKNOWN_ERROR = 'E_UNKNOWN_ERROR',
   E_CLIENT_ERROR = 'E_CLIENT_ERROR',
@@ -25,11 +26,17 @@ export enum LoginErrorCode {
 }
 
 export class UnknownError extends Error {
-  messages: string[];
+  constructor(readonly detail: string) {
+    super(LoginErrorCode.E_UNKNOWN_ERROR);
+  }
+}
 
-  constructor(messages: string[]) {
-    super(messages[0]);
-    this.messages = messages;
+export class CaptureError extends Error {
+  remain: number;
+
+  constructor(remain: number) {
+    super(LoginErrorCode.E_CAPTCHA_ERROR);
+    this.remain = remain;
   }
 }
 
@@ -43,7 +50,7 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR(api.getCurrentUser.swrKey(), api.getCurrentUser.fetcher, {
+  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()), {
     refreshWhenHidden: false,
     revalidateOnFocus: false,
     revalidateOnReconnect: false,
@@ -72,28 +79,31 @@ export const useUser: () => UserContextType = () => {
 };
 
 async function login(email: string, password: string, hCaptchaResponse: string): Promise<void> {
-  const res = await api.login.execute({
+  const res = await ozaClient.login({
     email,
     password,
-    hCaptchaResponse,
+    'h-captcha-response': hCaptchaResponse,
   });
 
-  if (res.ok) {
+  if (res.status === 200) {
     return;
   }
 
-  switch (res.status) {
-    case 400:
-      throw new UnknownError(res.data.details);
-    case 401:
-      throw new PasswordUnMatchError(res.data.details.remain);
-    case 422:
-      throw new Error(LoginErrorCode.E_CLIENT_ERROR);
-    case 429:
-      throw new Error(LoginErrorCode.E_TOO_MANY_ERROR);
-    case 502:
-      throw new Error(LoginErrorCode.E_SERVER_ERROR);
-    default:
-      throw new Error(LoginErrorCode.E_UNKNOWN_ERROR);
+  if (res.status === 400) {
+    throw new UnknownError(res.data.message);
+  } else if (res.status === 429) {
+    throw new Error(LoginErrorCode.E_TOO_MANY_ERROR);
   }
+
+  const remain = res.headers.get('X-RateLimit-Remaining') ?? '0';
+
+  if (res.data.code === 'CAPTCHA_ERROR') {
+    throw new CaptureError(parseInt(remain));
+  }
+
+  if (res.data.code === 'EMAIL_PASSWORD_ERROR') {
+    throw new PasswordUnMatchError(parseInt(remain));
+  }
+
+  throw new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR);
 }
