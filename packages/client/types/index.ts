@@ -53,6 +53,14 @@ export interface paths {
   '/p1/groups/-/topics/{topicID}/replies': {
     post: operations['createGroupReply'];
   };
+  '/p1/sub/notify': {
+    /**
+     * @description 使用 websocket 订阅通知
+     *
+     * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+     */
+    get: operations['subscribeNotify'];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -142,6 +150,13 @@ export interface components {
       creator: components['schemas']['User'];
       createdAt: number;
       isFriend: boolean;
+      text: string;
+      state: number;
+    };
+    BasicReply: {
+      id: number;
+      creator: components['schemas']['User'];
+      createdAt: number;
       text: string;
       state: number;
     };
@@ -599,11 +614,6 @@ export interface operations {
     };
     requestBody: {
       content: {
-        /**
-         * @example {
-         *   "content": "post contents"
-         * }
-         */
         'application/json': {
           /** @default 0 */
           relatedID: number;
@@ -613,7 +623,40 @@ export interface operations {
     };
     responses: {
       /** @description Default Response */
-      200: never;
+      200: {
+        content: {
+          'application/json': components['schemas']['BasicReply'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  subscribeNotify: {
+    /**
+     * @description 使用 websocket 订阅通知
+     *
+     * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+     */
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            count: number;
+          };
+        };
+      };
+      /** @description 未登录 */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {

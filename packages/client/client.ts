@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.42
+ * 0.0.48
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -108,6 +108,13 @@ export interface TopicDetail {
   state: number;
   createdAt: number;
   replies: Reply[];
+}
+export interface BasicReply {
+  id: number;
+  creator: User;
+  createdAt: number;
+  text: string;
+  state: number;
 }
 /**
  * 登出
@@ -465,6 +472,7 @@ export async function createGroupReply(
   return oazapfts.fetchJson<
     | {
         status: 200;
+        data: BasicReply;
       }
     | {
         status: 500;
@@ -478,4 +486,29 @@ export async function createGroupReply(
       body,
     }),
   );
+}
+/**
+ * 使用 websocket 订阅通知
+ *
+ * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+ */
+export async function subscribeNotify(opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          count: number;
+        };
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >('/p1/sub/notify', {
+    ...opts,
+  });
 }
