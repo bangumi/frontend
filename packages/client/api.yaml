@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.48
+  version: 0.0.50
   title: hello
 components:
   securitySchemes:
@@ -354,6 +354,74 @@ components:
         - nickname
         - username
         - joinedAt
+    Notice:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        type:
+          description: 查看 `./lib/notify.ts` _settings
+          type: integer
+        sender:
+          title: User
+          type: object
+          properties:
+            id:
+              examples:
+                - 1
+              type: integer
+            username:
+              examples:
+                - sai
+              type: string
+            nickname:
+              examples:
+                - Sai🖖
+              type: string
+            avatar:
+              title: Avatar
+              type: object
+              properties:
+                small:
+                  type: string
+                medium:
+                  examples:
+                    - sai
+                  type: string
+                large:
+                  type: string
+              required:
+                - small
+                - medium
+                - large
+            sign:
+              type: string
+            user_group:
+              type: integer
+          required:
+            - id
+            - username
+            - nickname
+            - avatar
+            - sign
+            - user_group
+        topicID:
+          type: integer
+        postID:
+          type: integer
+        createdAt:
+          description: unix timestamp in seconds
+          type: integer
+      required:
+        - id
+        - title
+        - type
+        - sender
+        - topicID
+        - postID
+        - createdAt
 paths:
   /p1/logout:
     post:
@@ -1060,6 +1128,112 @@ paths:
               schema:
                 description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
+  /p1/notify:
+    get:
+      operationId: listNotice
+      tags:
+        - user
+      description: 获取未读通知
+      parameters:
+        - schema:
+            default: 20
+            type: integer
+          in: query
+          name: limit
+          required: false
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Notice'
+                  total:
+                    type: integer
+                required:
+                  - data
+                  - total
+        '401':
+          description: 未登录
+          content:
+            application/json:
+              schema:
+                description: 未登录
+                $ref: '#/components/schemas/Error'
+              examples:
+                NeedLoginError:
+                  value:
+                    code: NEED_LOGIN
+                    error: Unauthorized
+                    message: you need to login before getting notifications
+                    statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/clear-notify:
+    post:
+      operationId: clearNotice
+      tags:
+        - user
+      description: |-
+        标记通知为已读
+
+        不传id时会清空所有未读通知
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: array
+                  items:
+                    type: integer
+            examples:
+              ClearAll:
+                value: {}
+              ClearSome:
+                value:
+                  id:
+                    - 1
+                    - 2
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: 没有返回值
+        '401':
+          description: 未登录
+          content:
+            application/json:
+              schema:
+                description: 未登录
+                $ref: '#/components/schemas/Error'
+              examples:
+                NeedLoginError:
+                  value:
+                    code: NEED_LOGIN
+                    error: Unauthorized
+                    message: you need to login before marking notifications as read
+                    statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
   /p1/sub/notify:
     get:
       operationId: subscribeNotify
@@ -1069,6 +1243,10 @@ paths:
         使用 websocket 订阅通知
 
         openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+
+        swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
+      security:
+        - CookiesSession: []
       responses:
         '200':
           description: Default Response
@@ -1093,7 +1271,7 @@ paths:
                   value:
                     code: NEED_LOGIN
                     error: Unauthorized
-                    message: you need to login before logout
+                    message: you need to login before subscribing notify
                     statusCode: 401
         '500':
           description: 意料之外的服务器错误

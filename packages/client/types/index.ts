@@ -53,11 +53,25 @@ export interface paths {
   '/p1/groups/-/topics/{topicID}/replies': {
     post: operations['createGroupReply'];
   };
+  '/p1/notify': {
+    /** @description 获取未读通知 */
+    get: operations['listNotice'];
+  };
+  '/p1/clear-notify': {
+    /**
+     * @description 标记通知为已读
+     *
+     * 不传id时会清空所有未读通知
+     */
+    post: operations['clearNotice'];
+  };
   '/p1/sub/notify': {
     /**
      * @description 使用 websocket 订阅通知
      *
      * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+     *
+     * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
      */
     get: operations['subscribeNotify'];
   };
@@ -190,6 +204,30 @@ export interface components {
       nickname: string;
       username: string;
       joinedAt: number;
+    };
+    Notice: {
+      id: number;
+      title: string;
+      /** @description 查看 `./lib/notify.ts` _settings */
+      type: number;
+      /** User */
+      sender: {
+        id: number;
+        username: string;
+        nickname: string;
+        /** Avatar */
+        avatar: {
+          small: string;
+          medium: string;
+          large: string;
+        };
+        sign: string;
+        user_group: number;
+      };
+      topicID: number;
+      postID: number;
+      /** @description unix timestamp in seconds */
+      createdAt: number;
     };
   };
   responses: never;
@@ -636,11 +674,74 @@ export interface operations {
       };
     };
   };
+  listNotice: {
+    /** @description 获取未读通知 */
+    parameters?: {
+      query?: {
+        limit?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Notice'][];
+            total: number;
+          };
+        };
+      };
+      /** @description 未登录 */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  clearNotice: {
+    /**
+     * @description 标记通知为已读
+     *
+     * 不传id时会清空所有未读通知
+     */
+    requestBody?: {
+      content: {
+        'application/json': {
+          id?: number[];
+        };
+      };
+    };
+    responses: {
+      /** @description 没有返回值 */
+      200: never;
+      /** @description 未登录 */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
   subscribeNotify: {
     /**
      * @description 使用 websocket 订阅通知
      *
      * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+     *
+     * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
      */
     responses: {
       /** @description Default Response */
