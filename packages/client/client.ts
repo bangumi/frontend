@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.48
+ * 0.0.50
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -115,6 +115,26 @@ export interface BasicReply {
   createdAt: number;
   text: string;
   state: number;
+}
+export interface Notice {
+  id: number;
+  title: string;
+  type: number;
+  sender: {
+    id: number;
+    username: string;
+    nickname: string;
+    avatar: {
+      small: string;
+      medium: string;
+      large: string;
+    };
+    sign: string;
+    user_group: number;
+  };
+  topicID: number;
+  postID: number;
+  createdAt: number;
 }
 /**
  * 登出
@@ -488,9 +508,81 @@ export async function createGroupReply(
   );
 }
 /**
+ * 获取未读通知
+ */
+export async function listNotice(
+  {
+    limit,
+  }: {
+    limit?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: Notice[];
+          total: number;
+        };
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/notify${QS.query(
+      QS.explode({
+        limit,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 标记通知为已读
+ *
+ * 不传id时会清空所有未读通知
+ */
+export async function clearNotice(
+  body?: {
+    id?: number[];
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    '/p1/clear-notify',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
+/**
  * 使用 websocket 订阅通知
  *
  * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+ *
+ * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
  */
 export async function subscribeNotify(opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
