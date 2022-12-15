@@ -17,7 +17,7 @@ jobs:
       - name: Update OpenAPI Definition
         run: pnpm client update-openapi
         env:
-          OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api1.yaml'
+          OPENAPI_URL: 'https://github.com/bangumi/dev-docs/raw/master/api.yaml'
 
       - name: Build Type Definition
         run: pnpm client build
