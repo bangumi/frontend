@@ -12,6 +12,12 @@ const config: StorybookViteConfig = {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/react',
   viteFinal: (viteConfig) => {
+    if (!viteConfig.build) {
+      viteConfig.build = { sourcemap: true };
+    } else {
+      viteConfig.build.sourcemap = true;
+    }
+
     // workaround for vite build
     // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
     viteConfig.root = dirname(require.resolve('@storybook/builder-vite'));
