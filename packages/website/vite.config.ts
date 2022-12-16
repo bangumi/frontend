@@ -26,6 +26,7 @@ export default defineConfig(({ mode }) => {
         '/p': {
           target: apiDomain,
           changeOrigin: true,
+          ws: true,
           configure(proxy) {
             proxy.on('proxyReq', (proxyReq) => {
               if (proxyReq.hasHeader('Origin')) {

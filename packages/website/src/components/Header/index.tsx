@@ -1,9 +1,9 @@
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
-import { UnreadableCodeError } from '@bangumi/utils';
+import { UnreadableCodeError, wsURL } from '@bangumi/utils';
 import { Link } from '@bangumi/website/components/Link';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
@@ -88,8 +88,36 @@ if (Musume === undefined) {
   throw new UnreadableCodeError('BUG: unexpected choice result');
 }
 
+const notifySubscribeURL = wsURL('/p1/sub/notify');
+
 const Header: FC = () => {
   const { user } = useUser();
+
+  const [serverMessage, setServerMessage] = useState<{ count: number }>({ count: 0 });
+  const [webSocketReady, setWebSocketReady] = useState(false);
+
+  const [webSocket, setWebSocket] = useState(new WebSocket(notifySubscribeURL));
+
+  useEffect(() => {
+    webSocket.onopen = (event) => {
+      setWebSocketReady(true);
+    };
+
+    webSocket.onmessage = function (event) {
+      setServerMessage(JSON.parse(event.data as string) as { count: number });
+    };
+
+    webSocket.onclose = function (event) {
+      setWebSocketReady(false);
+      setTimeout(() => {
+        setWebSocket(new WebSocket(notifySubscribeURL));
+      }, 5000);
+    };
+
+    return () => {
+      webSocket.close();
+    };
+  }, [webSocket]);
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
@@ -141,7 +169,12 @@ const Header: FC = () => {
           {/* Avatar */}
           {user ? (
             <>
-              <Notification className={style.iconNotification} />
+              {serverMessage.count ? (
+                // TODO: 等设计稿
+                <div className={style.iconNotification}> {serverMessage.count} now notify </div>
+              ) : (
+                <Notification className={style.iconNotification} />
+              )}
               <Setting className={style.iconSetting} />
               <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
             </>
