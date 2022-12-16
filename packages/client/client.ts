@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.51
+ * 0.0.52
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -493,6 +493,10 @@ export async function createGroupReply(
     | {
         status: 200;
         data: BasicReply;
+      }
+    | {
+        status: 401;
+        data: Error;
       }
     | {
         status: 500;
