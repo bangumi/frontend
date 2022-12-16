@@ -93,22 +93,17 @@ const notifySubscribeURL = wsURL('/p1/sub/notify');
 const Header: FC = () => {
   const { user } = useUser();
 
-  const [serverMessage, setServerMessage] = useState<{ count: number }>({ count: 0 });
-  const [webSocketReady, setWebSocketReady] = useState(false);
+  const [noticeCount, setNoticeCount] = useState(0);
 
   const [webSocket, setWebSocket] = useState(new WebSocket(notifySubscribeURL));
 
   useEffect(() => {
-    webSocket.onopen = (event) => {
-      setWebSocketReady(true);
-    };
-
     webSocket.onmessage = function (event) {
-      setServerMessage(JSON.parse(event.data as string) as { count: number });
+      const { count } = JSON.parse(event.data as string) as { count: number };
+      setNoticeCount(count);
     };
 
     webSocket.onclose = function (event) {
-      setWebSocketReady(false);
       setTimeout(() => {
         setWebSocket(new WebSocket(notifySubscribeURL));
       }, 5000);
@@ -169,9 +164,9 @@ const Header: FC = () => {
           {/* Avatar */}
           {user ? (
             <>
-              {serverMessage.count ? (
+              {noticeCount ? (
                 // TODO: 等设计稿
-                <div className={style.iconNotification}> {serverMessage.count} now notify </div>
+                <div className={style.iconNotification}> {noticeCount} now notify </div>
               ) : (
                 <Notification className={style.iconNotification} />
               )}
