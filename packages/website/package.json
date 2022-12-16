@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "dev": "vite --host 127.0.0.1",
-    "preview": "vite preview"
+    "preview": "pnpm run build && vite preview"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.4.4",

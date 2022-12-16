@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
   console.log('using backend', apiDomain);
 
   return {
+    build: {
+      sourcemap: true,
+    },
     resolve: {
       alias: {
         '@bangumi/website': path.resolve(__dirname, './src'),
