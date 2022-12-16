@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
+import './style';
 
 export interface RichContentProps {
   html: string;

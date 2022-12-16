@@ -1,3 +1,5 @@
+import './style';
+
 import cn from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';

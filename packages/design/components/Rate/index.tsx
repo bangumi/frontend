@@ -1,3 +1,5 @@
+import './style';
+
 import React from 'react';
 
 import { FilledStar, HalfStar, EmptyStar } from '@bangumi/icons';

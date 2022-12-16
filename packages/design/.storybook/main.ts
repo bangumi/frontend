@@ -1,7 +1,6 @@
 import { dirname } from 'path';
 
 import type { StorybookViteConfig } from '@storybook/builder-vite';
-import type { PluginOption } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 const config: StorybookViteConfig = {
@@ -22,18 +21,7 @@ const config: StorybookViteConfig = {
      * https://github.com/styleguidist/react-docgen-typescript/issues/323
      * https://github.com/styleguidist/react-docgen-typescript/issues/393
      * */
-    !viteConfig.plugins && (viteConfig.plugins = []);
-    /* WIP: Temporary patch for style */
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    viteConfig.plugins.push({
-      transform(source, id) {
-        if (id.endsWith('.stories.tsx') && id.includes('components')) {
-          return `${source}
-          import './style'`;
-        }
-        return source;
-      },
-    } as PluginOption);
+    viteConfig.plugins ??= [];
 
     viteConfig.plugins.push(svgr());
     return viteConfig;
