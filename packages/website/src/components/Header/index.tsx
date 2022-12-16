@@ -95,24 +95,29 @@ const Header: FC = () => {
 
   const [noticeCount, setNoticeCount] = useState(0);
 
-  const [webSocket, setWebSocket] = useState(new WebSocket(notifySubscribeURL));
+  const [webSocket, setWebSocket] = useState<WebSocket | null>(null);
 
   useEffect(() => {
-    webSocket.onmessage = function (event) {
+    if (!user) {
+      return;
+    }
+
+    console.log('new websocket');
+    const ws = new WebSocket(notifySubscribeURL);
+    ws.onmessage = function (event) {
       const { count } = JSON.parse(event.data as string) as { count: number };
       setNoticeCount(count);
     };
 
-    webSocket.onclose = function (event) {
+    ws.onclose = function (event) {
       setTimeout(() => {
         setWebSocket(new WebSocket(notifySubscribeURL));
       }, 5000);
     };
-
     return () => {
-      webSocket.close();
+      webSocket?.close();
     };
-  }, [webSocket]);
+  }, [user]);
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
