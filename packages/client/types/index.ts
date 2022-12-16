@@ -54,11 +54,12 @@ export interface paths {
     post: operations['createGroupReply'];
   };
   '/p1/notify': {
-    /** @description 获取未读通知 */
+    /** 获取未读通知 */
     get: operations['listNotice'];
   };
   '/p1/clear-notify': {
     /**
+     * 标记通知为已读
      * @description 标记通知为已读
      *
      * 不传id时会清空所有未读通知
@@ -67,9 +68,8 @@ export interface paths {
   };
   '/p1/sub/notify': {
     /**
-     * @description 使用 websocket 订阅通知
-     *
-     * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+     * 使用 websocket 订阅通知
+     * @description openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
      *
      * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
      */
@@ -675,7 +675,7 @@ export interface operations {
     };
   };
   listNotice: {
-    /** @description 获取未读通知 */
+    /** 获取未读通知 */
     parameters?: {
       query?: {
         limit?: number;
@@ -707,6 +707,7 @@ export interface operations {
   };
   clearNotice: {
     /**
+     * 标记通知为已读
      * @description 标记通知为已读
      *
      * 不传id时会清空所有未读通知
@@ -737,9 +738,8 @@ export interface operations {
   };
   subscribeNotify: {
     /**
-     * @description 使用 websocket 订阅通知
-     *
-     * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+     * 使用 websocket 订阅通知
+     * @description openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
      *
      * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
      */

@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.50
+  version: 0.0.51
   title: hello
 components:
   securitySchemes:
@@ -1131,9 +1131,9 @@ paths:
   /p1/notify:
     get:
       operationId: listNotice
+      summary: 获取未读通知
       tags:
         - user
-      description: 获取未读通知
       parameters:
         - schema:
             default: 20
@@ -1184,6 +1184,7 @@ paths:
   /p1/clear-notify:
     post:
       operationId: clearNotice
+      summary: 标记通知为已读
       tags:
         - user
       description: |-
@@ -1237,12 +1238,11 @@ paths:
   /p1/sub/notify:
     get:
       operationId: subscribeNotify
+      summary: 使用 websocket 订阅通知
       tags:
         - user
       description: |-
-        使用 websocket 订阅通知
-
-        openapi不能很好的描述websocket api，但是这个api只会返回一种数据
+        openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
 
         swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
       security:
