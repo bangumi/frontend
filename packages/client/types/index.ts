@@ -666,6 +666,12 @@ export interface operations {
           'application/json': components['schemas']['BasicReply'];
         };
       };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {

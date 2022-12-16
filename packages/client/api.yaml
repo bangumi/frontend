@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.51
+  version: 0.0.52
   title: hello
 components:
   securitySchemes:
@@ -1121,6 +1121,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BasicReply'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                NOT_JOIN_PRIVATE_GROUP_ERROR:
+                  value:
+                    code: NOT_JOIN_PRIVATE_GROUP_ERROR
+                    error: Unauthorized
+                    message: >-
+                      you need to join private group '沙盒' before you create a
+                      post or reply
+                    statusCode: 401
         '500':
           description: 意料之外的服务器错误
           content:
