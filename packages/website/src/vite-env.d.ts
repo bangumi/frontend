@@ -3,5 +3,5 @@
 /// <reference types="vite-plugin-pages/client-react" />
 
 interface ImportMetaEnv {
-  readonly TURNSTILE_SITE_KEY: string;
+  readonly VITE_TURNSTILE_SITE_KEY: string;
 }

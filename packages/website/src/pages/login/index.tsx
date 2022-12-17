@@ -108,7 +108,7 @@ const Login: React.FC = () => {
               theme: 'light',
               action: 'login',
             }}
-            siteKey={import.meta.env.TURNSTILE_SITE_KEY}
+            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
             onSuccess={(token: string) => setCaptchaToken(token)}
             ref={captcha}
           />
