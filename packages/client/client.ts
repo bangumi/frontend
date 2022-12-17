@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.55
+ * 0.0.56
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
