@@ -1,7 +1,8 @@
 import type { FC } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { ozaClient } from '@bangumi/client';
 import {
   EditorForm,
   RichContent,
@@ -12,6 +13,7 @@ import {
   Topic,
   Layout,
 } from '@bangumi/design';
+import type { IReset } from '@bangumi/design/components/EditorForm/Editor';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -29,12 +31,17 @@ const TopicPage: FC = () => {
   if (!id || Number.isNaN(Number(id))) {
     throw new Error('BUG: topic id is required');
   }
-  const topicDetail = useGroupTopic(Number(id));
+
+  const [sending, setSending] = useState(false);
+
+  const [topicDetail, setTopicDetail] = useState(useGroupTopic(Number(id)));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
   const parsedText = renderBBCode(topicDetail.text);
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
+
+  const editorRef = useRef<IReset>(null);
 
   // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
   // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601
@@ -42,6 +49,39 @@ const TopicPage: FC = () => {
     const anchor = window.location.hash.slice(1);
     document.getElementById(anchor)?.scrollIntoView(true);
   }, [topicDetail]);
+
+  const postReply = async (content: string) => {
+    if (sending) {
+      return;
+    }
+
+    if (!content) {
+      return;
+    }
+
+    try {
+      setSending(true);
+      const res = await ozaClient.createGroupReply(topicDetail.id, { content, relatedID: 0 });
+      setSending(false);
+      if (res.status === 200) {
+        editorRef.current?.reset();
+        setTopicDetail({
+          ...topicDetail,
+          replies: [
+            ...topicDetail.replies,
+            {
+              ...res.data,
+              isFriend: false,
+              replies: [],
+            },
+          ],
+        });
+      }
+    } catch (e: unknown) {
+      setSending(false);
+      throw e;
+    }
+  };
 
   return (
     <>
@@ -76,7 +116,13 @@ const TopicPage: FC = () => {
               {!isClosed && user && (
                 <div className={styles.replyFormContainer}>
                   <Avatar src={user.avatar.large} size='medium' />
-                  <EditorForm className={styles.replyForm} placeholder='添加新回复...' />
+                  <EditorForm
+                    className={styles.replyForm}
+                    ref={editorRef}
+                    placeholder='添加新回复...'
+                    confirmText={sending ? '...' : '写好了'}
+                    onConfirm={postReply}
+                  />
                 </div>
               )}
             </div>
