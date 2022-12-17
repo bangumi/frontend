@@ -158,6 +158,7 @@ const Comment: FC<CommentProps> = ({
             <div className='bgm-comment__opinions'>
               {showReplyEditor ? (
                 <EditorForm
+                  focus
                   onCancel={() => setShowReplyEditor(false)}
                   placeholder={`回复给 @${creator.nickname}：`}
                   initContent={isReply ? `[quote]${text.slice(0, 30)}[/quote]\n\n` : ''}
