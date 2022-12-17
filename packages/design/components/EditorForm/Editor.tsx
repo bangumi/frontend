@@ -67,7 +67,7 @@ const Editor = forwardRef<EditorRef, EditorProps>(
 
       // 用来确保输入光标在自动插入的quote内容之后。
       setContent(initContent);
-    });
+    }, []);
 
     const handleToolboxEvent = (type: string, payload?: unknown): void => {
       const el = innerRef.current;
