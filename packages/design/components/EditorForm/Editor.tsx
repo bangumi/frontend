@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useState } from 'react';
 
 import Toolbox from './Toolbox';
 
@@ -37,10 +37,21 @@ const setInputValue = (
   el.focus();
 };
 
-const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
+export interface IReset {
+  reset: () => void;
+}
+
+const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
   ({ placeholder, showToolbox = true, onConfirm }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    useImperativeHandle(ref, () => innerRef.current!);
+    const [content, setContent] = useState('');
+
+    useImperativeHandle(ref, () => ({
+      ...innerRef.current!,
+      reset: () => {
+        setContent('');
+      },
+    }));
     const handleToolboxEvent = (type: string, payload?: unknown): void => {
       const el = innerRef.current;
       if (!el) {
@@ -98,6 +109,8 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => {
             // Ctrl + Enter & Alt + S 触发提交
             if (
