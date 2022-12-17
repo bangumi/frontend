@@ -1,3 +1,5 @@
+import './style';
+
 import classnames from 'classnames';
 import type { FC } from 'react';
 import React, { createContext, useContext } from 'react';

@@ -8,3 +8,4 @@ dist-ssr
 .pnpm-debug.log
 
 coverage
+.eslintcache

@@ -3,7 +3,6 @@ import path from 'path';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
-import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
@@ -17,6 +16,9 @@ export default defineConfig(({ mode }) => {
   console.log('using backend', apiDomain);
 
   return {
+    build: {
+      sourcemap: true,
+    },
     resolve: {
       alias: {
         '@bangumi/website': path.resolve(__dirname, './src'),
@@ -63,16 +65,6 @@ export default defineConfig(({ mode }) => {
           '**/*.spec.tsx',
           '**/*.test.ts',
           '**/*.test.tsx',
-        ],
-      }),
-      styleImport({
-        libs: [
-          {
-            libraryName: '@bangumi/design',
-            libraryNameChangeCase: 'pascalCase',
-            ensureStyleFile: true,
-            resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`,
-          },
         ],
       }),
     ],

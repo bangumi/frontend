@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "dev": "vite --host 127.0.0.1",
-    "preview": "vite preview"
+    "preview": "pnpm run build && vite preview"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^0.0.5",
@@ -36,7 +36,6 @@
     "typescript": "^4.9.4",
     "vite": "^3.2.5",
     "vite-plugin-pages": "^0.27.1",
-    "vite-plugin-style-import": "^1.4.1",
     "vite-plugin-svgr": "^2.4.0",
     "whatwg-fetch": "^3.6.2"
   }

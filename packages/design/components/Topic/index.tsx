@@ -1,3 +1,5 @@
+import './style';
+
 import Comment from './Comment';
 import CommentInfo from './CommentInfo';
 
