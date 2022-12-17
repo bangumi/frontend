@@ -60,6 +60,8 @@ const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
       if (focus) {
         innerRef.current?.focus();
       }
+
+      // 用来确保输入光标在自动插入的quote内容之后。
       setContent(initContent);
     });
 
