@@ -158,6 +158,7 @@ const Comment: FC<CommentProps> = ({
                 <EditorForm
                   onCancel={() => setShowReplyEditor(false)}
                   placeholder={`回复给 @${creator.nickname}：`}
+                  initContent={isReply ? `[quote]${text.slice(0, 30)}[/quote]\n\n` : ''}
                   onConfirm={(content) => submit(content, props.id)}
                 />
               ) : (
