@@ -34,7 +34,7 @@ const TopicPage: FC = () => {
 
   const [sending, setSending] = useState(false);
 
-  const [topicDetail, setTopicDetail] = useState(useGroupTopic(Number(id)));
+  const { data: topicDetail, mutate } = useGroupTopic(Number(id));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
   const parsedText = renderBBCode(topicDetail.text);
@@ -61,21 +61,10 @@ const TopicPage: FC = () => {
 
     try {
       setSending(true);
-      const res = await ozaClient.createGroupReply(topicDetail.id, { content, relatedID: 0 });
+      const res = await ozaClient.createGroupReply(topicDetail.id, { content, replyTo: 0 });
       setSending(false);
       if (res.status === 200) {
-        editorRef.current?.reset();
-        setTopicDetail({
-          ...topicDetail,
-          replies: [
-            ...topicDetail.replies,
-            {
-              ...res.data,
-              isFriend: false,
-              replies: [],
-            },
-          ],
-        });
+        await mutate();
       }
     } catch (e: unknown) {
       setSending(false);
@@ -110,6 +99,7 @@ const TopicPage: FC = () => {
                   floor={idx + 2}
                   originalPosterId={originalPosterId}
                   user={user}
+                  onReply={mutate}
                   {...comment}
                 />
               ))}

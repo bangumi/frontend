@@ -21,6 +21,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicID: number;
   floor: string | number;
   originalPosterId: number;
+  onReply: () => void;
   user?: User;
 };
 
@@ -63,6 +64,7 @@ const Comment: FC<CommentProps> = ({
   state,
   user,
   topicID,
+  onReply,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -122,7 +124,8 @@ const Comment: FC<CommentProps> = ({
   const submit = (content: string, replyTo = 0) => {
     void ozaClient.createGroupReply(topicID, { content, replyTo }).then((res) => {
       if (res.status === 200) {
-        location.reload();
+        onReply();
+        setShowReplyEditor(false);
       }
     });
   };
@@ -183,6 +186,7 @@ const Comment: FC<CommentProps> = ({
           topicID={topicID}
           key={reply.id}
           isReply
+          onReply={onReply}
           floor={`${floor}-${idx + 1}`}
           originalPosterId={originalPosterId}
           user={user}
