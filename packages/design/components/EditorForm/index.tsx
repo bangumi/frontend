@@ -21,10 +21,6 @@ export interface EditorFormProps extends EditorProps {
   cancelText?: string;
   /* 取消按钮的回调 */
   onCancel?: () => void;
-  /**
-   * 初始内容
-   */
-  initContent?: string;
 }
 
 const EditorForm = forwardRef<IReset, EditorFormProps>(

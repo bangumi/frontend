@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useState, useEffect } from 'react';
 
 import Toolbox from './Toolbox';
 
@@ -11,6 +11,8 @@ export interface EditorProps {
   /* textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
   initContent: string;
+  /** 在被渲染时是否自动获取焦点 */
+  autoFocus?: boolean;
 }
 
 const keyToEvent: Record<string, string> = {
@@ -43,9 +45,9 @@ export interface IReset {
 }
 
 const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, initContent }, ref) => {
+  ({ placeholder, showToolbox = true, onConfirm, initContent, autoFocus }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    const [content, setContent] = useState(initContent);
+    const [content, setContent] = useState('');
 
     useImperativeHandle(ref, () => ({
       ...innerRef.current!,
@@ -53,6 +55,16 @@ const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
         setContent('');
       },
     }));
+
+    useEffect(() => {
+      if (autoFocus) {
+        innerRef.current?.focus();
+      }
+
+      // 用来确保输入光标在自动插入的quote内容之后。
+      setContent(initContent);
+    }, []);
+
     const handleToolboxEvent = (type: string, payload?: unknown): void => {
       const el = innerRef.current;
       if (!el) {
