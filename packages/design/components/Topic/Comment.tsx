@@ -21,7 +21,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicID: number;
   floor: string | number;
   originalPosterId: number;
-  onReply: () => void;
+  onReply: () => Promise<void>;
   user?: User;
 };
 
@@ -121,13 +121,15 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
-  const submit = (content: string, replyTo = 0) => {
-    void ozaClient.createGroupReply(topicID, { content, replyTo }).then((res) => {
-      if (res.status === 200) {
-        onReply();
-        setShowReplyEditor(false);
-      }
-    });
+  const submit = async (content: string, replyTo = 0) => {
+    const res = await ozaClient.createGroupReply(topicID, { content, replyTo });
+    if (res.status === 200) {
+      await onReply();
+      document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });
+      setShowReplyEditor(false);
+    }
+
+    // TODO: handle error
   };
 
   return (
@@ -159,7 +161,7 @@ const Comment: FC<CommentProps> = ({
                   onCancel={() => setShowReplyEditor(false)}
                   placeholder={`回复给 @${creator.nickname}：`}
                   initContent={isReply ? `[quote]${text.slice(0, 30)}[/quote]\n\n` : ''}
-                  onConfirm={(content) => submit(content, props.id)}
+                  onConfirm={async (content) => submit(content, props.id)}
                 />
               ) : (
                 <>
