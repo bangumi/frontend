@@ -1,6 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import React, { Component as MockComponent } from 'react';
+import React from 'react';
+import * as MockReact from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import LoginPage from '.';
@@ -8,19 +9,18 @@ import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
 
 jest.mock('@marsidev/react-turnstile', () => {
-  class Turnstile extends MockComponent<{ onSuccess?: (token: string) => void }> {
-    componentDidMount() {
-      this.props?.onSuccess?.('fake-token');
-    }
+  const Turnstile = MockReact.forwardRef<
+    { reset?: () => void },
+    { onSuccess?: (token: string) => void }
+  >(({ onSuccess }, ref) => {
+    MockReact.useImperativeHandle(ref, () => ({ reset: () => undefined }));
 
-    reset() {
-      void 0;
-    }
+    MockReact.useEffect(() => {
+      onSuccess?.('fake-token');
+    });
 
-    render() {
-      return <div />;
-    }
-  }
+    return <div />;
+  });
 
   return { Turnstile };
 });
