@@ -104,6 +104,7 @@ const TopicPage: FC = () => {
             <div className={styles.replies}>
               {topicDetail.replies.map((comment, idx) => (
                 <Comment
+                  topicID={topicDetail.id}
                   key={comment.id}
                   isReply={false}
                   floor={idx + 2}
