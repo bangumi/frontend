@@ -10,9 +10,10 @@ export default defineConfig(({ mode }) => {
   const apiDomain =
     mode === 'loc'
       ? 'http://127.0.0.1:4000'
-      : mode === 'stage'
+      : ['stage', 'development'].includes(mode)
       ? 'https://dev.bgm38.com'
       : 'https://next.bgm.tv';
+
   console.log('using backend', apiDomain);
 
   return {
