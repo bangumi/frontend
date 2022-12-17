@@ -21,7 +21,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicID: number;
   floor: string | number;
   originalPosterId: number;
-  onReply: () => Promise<void>;
+  onReply: () => Promise<unknown>;
   user?: User;
 };
 

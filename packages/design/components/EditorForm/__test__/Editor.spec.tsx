@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import type { EditorProps } from '../Editor';
+import type { EditorProps, IReset } from '../Editor';
 import Editor from '../Editor';
 
 const initTextareaTest = (props: EditorProps): { textarea: HTMLTextAreaElement } => {
@@ -112,7 +112,7 @@ describe('EditorForm > Editor', () => {
   });
 
   it('ref should forward to textarea tag', () => {
-    const ref = React.createRef<HTMLTextAreaElement>();
+    const ref = React.createRef<HTMLTextAreaElement & IReset>();
     render(<Editor ref={ref} />);
     expect(ref.current?.tagName).toBe('TEXTAREA');
   });
