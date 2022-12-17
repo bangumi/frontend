@@ -1,4 +1,5 @@
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import type { TurnstileInstance } from '@marsidev/react-turnstile';
+import { Turnstile } from '@marsidev/react-turnstile';
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInput } from 'rooks';
@@ -18,8 +19,8 @@ import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
 
 const Login: React.FC = () => {
-  const hCaptcha = useRef<HCaptcha>(null);
-  const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);
+  const captcha = useRef<TurnstileInstance>(null);
+  const [captchaToken, setCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
   const { login } = useUser();
@@ -36,7 +37,7 @@ const Login: React.FC = () => {
   };
 
   const handleLogin = async () => {
-    if (!hCaptchaToken) {
+    if (!captchaToken) {
       setErrorMessage('请完成验证');
       return;
     }
@@ -52,11 +53,11 @@ const Login: React.FC = () => {
     }
 
     try {
-      await login(email.value, password.value, hCaptchaToken);
+      await login(email.value, password.value, captchaToken);
       navigate('/', { replace: true });
     } catch (error: unknown) {
-      hCaptcha.current?.resetCaptcha();
-      setHCaptchaToken(null);
+      captcha.current?.reset();
+      setCaptchaToken(null);
       if (error instanceof PasswordUnMatchError) {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您还有 ${error.remain} 次尝试机会`);
         return;
@@ -102,10 +103,10 @@ const Login: React.FC = () => {
           {...password}
         />
         <div className={style.hcaptcha}>
-          <HCaptcha
-            sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
-            onVerify={(token: string) => setHCaptchaToken(token)}
-            ref={hCaptcha}
+          <Turnstile
+            siteKey={import.meta.env.TURNSTILE_SITE_KEY}
+            onSuccess={(token: string) => setCaptchaToken(token)}
+            ref={captcha}
           />
         </div>
         <div className={style.buttonGroup}>

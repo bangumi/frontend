@@ -7,12 +7,14 @@ import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
+  console.log(mode);
   const apiDomain =
     mode === 'loc'
       ? 'http://127.0.0.1:4000'
-      : mode === 'stage'
+      : ['stage', 'development'].includes(mode)
       ? 'https://dev.bgm38.com'
       : 'https://next.bgm.tv';
+
   console.log('using backend', apiDomain);
 
   return {
@@ -85,6 +87,10 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+      // production site key,
+      'import.meta.env.TURNSTILE_SITE_KEY': JSON.stringify(
+        mode === 'production' ? '0x4AAAAAAABkMYinukE8nzYS' : '1x00000000000000000000AA',
+      ),
     },
   };
 });

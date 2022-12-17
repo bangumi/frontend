@@ -4,4 +4,5 @@
 
 interface ImportMetaEnv {
   readonly VITE_HCAPTCHA_SITE_KEY: string;
+  readonly TURNSTILE_SITE_KEY: string;
 }
