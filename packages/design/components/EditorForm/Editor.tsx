@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useState, useEffect } from 'react';
 
 import Toolbox from './Toolbox';
 
@@ -45,7 +45,7 @@ export interface IReset {
 const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
   ({ placeholder, showToolbox = true, onConfirm, initContent }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    const [content, setContent] = useState(initContent);
+    const [content, setContent] = useState('');
 
     useImperativeHandle(ref, () => ({
       ...innerRef.current!,
@@ -53,6 +53,12 @@ const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
         setContent('');
       },
     }));
+
+    useEffect(() => {
+      innerRef.current?.focus();
+      setContent(initContent);
+    });
+
     const handleToolboxEvent = (type: string, payload?: unknown): void => {
       const el = innerRef.current;
       if (!el) {
