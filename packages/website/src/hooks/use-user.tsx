@@ -50,12 +50,7 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()), {
-    refreshWhenHidden: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    shouldRetryOnError: false,
-  });
+  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()));
   const navigate = useNavigate();
 
   function redirectToLogin(): void {
