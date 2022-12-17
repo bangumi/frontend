@@ -20,14 +20,16 @@ describe('Normal Comment', () => {
   ) {
     const reply = repliesComment.replies[0];
     const mockedComment = comment ?? (isReply ? reply : singleComment);
-    return {
+
+    const commentProps: CommentProps = {
       ...mockedComment,
       createdAt: dayjs(mockedComment.created_at).unix(),
       floor,
       originalPosterId,
       user,
       isReply,
-    } as CommentProps;
+    };
+    return commentProps;
   }
 
   it.each([0, 6, 7])('should render %d', (state) => {
