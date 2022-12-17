@@ -1,11 +1,11 @@
 import './style';
 
 import classnames from 'classnames';
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import Button from '../Button';
 import Link from '../Typography/Link';
-import type { EditorProps, IReset } from './Editor';
+import type { EditorProps, EditorRef } from './Editor';
 import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
@@ -23,12 +23,11 @@ export interface EditorFormProps extends EditorProps {
   onCancel?: () => void;
 }
 
-const EditorForm = forwardRef<IReset, EditorFormProps>(
+const EditorForm = forwardRef<EditorRef, EditorFormProps>(
   (
     {
       className,
       style,
-      initContent = '',
       confirmText = '写好了',
       onConfirm,
       cancelText = '取消',
@@ -38,20 +37,15 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
     ref,
   ) => {
     const classNames = classnames('bgm-editor__form', className);
-    const editorRef = useRef<HTMLTextAreaElement & { reset: () => void }>(null);
-
-    useImperativeHandle(ref, () => ({
-      reset: () => editorRef.current?.reset(),
-    }));
 
     return (
       <div className={classNames} style={style}>
-        <Editor ref={editorRef} initContent={initContent} onConfirm={onConfirm} {...props} />
+        <Editor ref={ref} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button
             shape='rounded'
             className='bgm-editor__button bgm-editor__button--confirm'
-            onClick={() => onConfirm?.(editorRef.current!.value)}
+            onClick={() => onConfirm?.(props.content ?? '')}
           >
             {confirmText}
           </Button>

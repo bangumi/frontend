@@ -13,7 +13,7 @@ import {
   Topic,
   Layout,
 } from '@bangumi/design';
-import type { IReset } from '@bangumi/design/components/EditorForm/Editor';
+import type { EditorRef } from '@bangumi/design/components/EditorForm/Editor';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -41,7 +41,7 @@ const TopicPage: FC = () => {
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
 
-  const editorRef = useRef<IReset>(null);
+  const editorRef = useRef<EditorRef>(null);
 
   // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
   // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601

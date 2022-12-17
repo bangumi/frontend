@@ -10,7 +10,10 @@ export interface EditorProps {
   showToolbox?: boolean;
   /* textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
-  initContent: string;
+  /**
+   * @default empty string
+   */
+  initContent?: string;
   /** 在被渲染时是否自动获取焦点 */
   autoFocus?: boolean;
 }
@@ -40,17 +43,18 @@ const setInputValue = (
   el.focus();
 };
 
-export interface IReset {
+export interface EditorRef {
+  textArea: HTMLTextAreaElement;
   reset: () => void;
 }
 
-const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, initContent, autoFocus }, ref) => {
+const Editor = forwardRef<EditorRef, EditorProps>(
+  ({ placeholder, showToolbox = true, onConfirm, initContent = '', autoFocus }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
     const [content, setContent] = useState('');
 
     useImperativeHandle(ref, () => ({
-      ...innerRef.current!,
+      textArea: innerRef.current!,
       reset: () => {
         setContent('');
       },
