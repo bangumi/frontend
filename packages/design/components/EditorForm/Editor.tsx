@@ -43,17 +43,18 @@ const setInputValue = (
   el.focus();
 };
 
-export interface IReset {
+export interface EditorRef {
+  textArea: HTMLTextAreaElement;
   reset: () => void;
 }
 
-const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
+const Editor = forwardRef<EditorRef, EditorProps>(
   ({ placeholder, showToolbox = true, onConfirm, initContent = '', focus }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
     const [content, setContent] = useState('');
 
     useImperativeHandle(ref, () => ({
-      ...innerRef.current!,
+      textArea: innerRef.current!,
       reset: () => {
         setContent('');
       },

@@ -1,11 +1,11 @@
 import './style';
 
 import classnames from 'classnames';
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 
 import Button from '../Button';
 import Link from '../Typography/Link';
-import type { EditorProps, IReset } from './Editor';
+import type { EditorProps, EditorRef } from './Editor';
 import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
@@ -23,7 +23,7 @@ export interface EditorFormProps extends EditorProps {
   onCancel?: () => void;
 }
 
-const EditorForm = forwardRef<IReset, EditorFormProps>(
+const EditorForm = forwardRef<EditorRef, EditorFormProps>(
   (
     {
       className,
@@ -37,11 +37,7 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
     ref,
   ) => {
     const classNames = classnames('bgm-editor__form', className);
-    const editorRef = useRef<HTMLTextAreaElement & { reset: () => void }>(null);
-
-    useImperativeHandle(ref, () => ({
-      reset: () => editorRef.current?.reset(),
-    }));
+    const editorRef = useRef<EditorRef>(null);
 
     return (
       <div className={classNames} style={style}>
@@ -50,7 +46,7 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
           <Button
             shape='rounded'
             className='bgm-editor__button bgm-editor__button--confirm'
-            onClick={() => onConfirm?.(editorRef.current!.value)}
+            onClick={() => onConfirm?.(editorRef.current!.textArea.value)}
           >
             {confirmText}
           </Button>
