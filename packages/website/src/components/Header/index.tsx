@@ -1,10 +1,11 @@
 import type { FC } from 'react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
-import { UnreadableCodeError, wsURL } from '@bangumi/utils';
+import { UnreadableCodeError } from '@bangumi/utils';
 import { Link } from '@bangumi/website/components/Link';
+import { useNotify } from '@bangumi/website/hooks/use-notify';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
@@ -88,36 +89,9 @@ if (Musume === undefined) {
   throw new UnreadableCodeError('BUG: unexpected choice result');
 }
 
-const notifySubscribeURL = wsURL('/p1/sub/notify');
-
 const Header: FC = () => {
   const { user } = useUser();
-
-  const [noticeCount, setNoticeCount] = useState(0);
-
-  const [webSocket, setWebSocket] = useState<WebSocket | null>(null);
-
-  useEffect(() => {
-    if (!user) {
-      return;
-    }
-
-    console.log('new websocket');
-    const ws = new WebSocket(notifySubscribeURL);
-    ws.onmessage = function (event) {
-      const { count } = JSON.parse(event.data as string) as { count: number };
-      setNoticeCount(count);
-    };
-
-    ws.onclose = function (event) {
-      setTimeout(() => {
-        setWebSocket(new WebSocket(notifySubscribeURL));
-      }, 5000);
-    };
-    return () => {
-      webSocket?.close();
-    };
-  }, [user]);
+  const { noticeCount } = useNotify(user);
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
