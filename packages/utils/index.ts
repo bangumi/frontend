@@ -25,20 +25,6 @@ export const keyBy = <T extends Record<R, T[R]>, R extends keyof T>(
   }, {});
 };
 
-/**
- * transform path to a full ws url
- * @example wsURL("/p1/sub/notify")
- */
-export function wsURL(path: string): string {
-  const loc = new URL(path, window.location.toString());
-
-  if (loc.protocol === 'https') {
-    return 'wss' + loc.toString().slice('https'.length);
-  }
-
-  return 'ws' + loc.toString().slice('http'.length);
-}
-
 export class UnreadableCodeError extends Error {
   readonly args: unknown[];
 
