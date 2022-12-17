@@ -3,6 +3,7 @@ import { unescape } from 'lodash-es';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
+import { ozaClient } from '@bangumi/client';
 import { State } from '@bangumi/client/topic';
 import type { SubReply, Reply, User } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
@@ -17,6 +18,7 @@ import Typography from '../../components/Typography';
 import CommentInfo from './CommentInfo';
 
 export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply: false })) & {
+  topicID: number;
   floor: string | number;
   originalPosterId: number;
   user?: User;
@@ -60,6 +62,7 @@ const Comment: FC<CommentProps> = ({
   originalPosterId,
   state,
   user,
+  topicID,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -116,6 +119,14 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
+  const submit = (content: string, replyTo = 0) => {
+    void ozaClient.createGroupReply(topicID, { content, replyTo }).then((res) => {
+      if (res.status === 200) {
+        location.reload();
+      }
+    });
+  };
+
   return (
     <div>
       <div className={headerClassName} id={`post_${props.id}`}>
@@ -144,6 +155,7 @@ const Comment: FC<CommentProps> = ({
                 <EditorForm
                   onCancel={() => setShowReplyEditor(false)}
                   placeholder={`回复给 @${creator.nickname}：`}
+                  onConfirm={(content) => submit(content, props.id)}
                 />
               ) : (
                 <>
@@ -155,8 +167,9 @@ const Comment: FC<CommentProps> = ({
                   </Button>
                   {user.id === creator.id ? (
                     <>
-                      <Button type='text'>编辑</Button>
-                      <Button type='text'>删除</Button>
+                      {/* TODO */}
+                      {/* <Button type='text'>编辑</Button> */}
+                      {/* <Button type='text'>删除</Button> */}
                     </>
                   ) : null}
                 </>
@@ -167,6 +180,7 @@ const Comment: FC<CommentProps> = ({
       </div>
       {replies?.map((reply, idx) => (
         <Comment
+          topicID={topicID}
           key={reply.id}
           isReply
           floor={`${floor}-${idx + 1}`}
