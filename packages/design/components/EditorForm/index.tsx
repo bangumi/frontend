@@ -28,7 +28,6 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
     {
       className,
       style,
-      initContent = '',
       confirmText = '写好了',
       onConfirm,
       cancelText = '取消',
@@ -46,7 +45,7 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
 
     return (
       <div className={classNames} style={style}>
-        <Editor ref={editorRef} initContent={initContent} onConfirm={onConfirm} {...props} />
+        <Editor ref={editorRef} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button
             shape='rounded'

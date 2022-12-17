@@ -10,7 +10,10 @@ export interface EditorProps {
   showToolbox?: boolean;
   /* textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
-  initContent: string;
+  /**
+   * @default empty string
+   */
+  initContent?: string;
   /** 在被渲染时是否自动焦点 */
   focus?: boolean;
 }
@@ -45,7 +48,7 @@ export interface IReset {
 }
 
 const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, initContent, focus }, ref) => {
+  ({ placeholder, showToolbox = true, onConfirm, initContent = '', focus }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
     const [content, setContent] = useState('');
 
