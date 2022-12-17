@@ -7,7 +7,6 @@ import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
-  console.log(mode);
   const apiDomain =
     mode === 'loc'
       ? 'http://127.0.0.1:4000'

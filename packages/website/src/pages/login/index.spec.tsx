@@ -1,20 +1,19 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React, { Component as MockComponent } from 'react';
-import '@hcaptcha/react-hcaptcha';
 import { useNavigate } from 'react-router-dom';
 
 import LoginPage from '.';
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
 
-jest.mock('@hcaptcha/react-hcaptcha', () => {
-  class HCaptcha extends MockComponent<{ onVerify?: (token: string) => void }> {
+jest.mock('@marsidev/react-turnstile', () => {
+  class Turnstile extends MockComponent<{ onSuccess?: (token: string) => void }> {
     componentDidMount() {
-      this.props?.onVerify?.('fake-token');
+      this.props?.onSuccess?.('fake-token');
     }
 
-    resetCaptcha() {
+    reset() {
       void 0;
     }
 
@@ -23,7 +22,7 @@ jest.mock('@hcaptcha/react-hcaptcha', () => {
     }
   }
 
-  return HCaptcha;
+  return { Turnstile };
 });
 
 jest.mock('react-router-dom');
@@ -35,7 +34,7 @@ function mockLogin(
   headers: Record<string, string | string[]> = {},
 ): void {
   mockServer.use(
-    rest.post('http://localhost/p1/login', (req, res, ctx) => {
+    rest.post('http://localhost/p1/login2', (req, res, ctx) => {
       return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
     }),
   );
