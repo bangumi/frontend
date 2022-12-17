@@ -125,7 +125,7 @@ const Comment: FC<CommentProps> = ({
     const res = await ozaClient.createGroupReply(topicID, { content, replyTo });
     if (res.status === 200) {
       await onReply();
-      document.getElementById(`post_${res.data.id}`)?.scrollIntoView(true);
+      document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });
       setShowReplyEditor(false);
     }
 
