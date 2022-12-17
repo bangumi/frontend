@@ -653,8 +653,11 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': {
-          /** @default 0 */
-          relatedID: number;
+          /**
+           * @description 被回复的 topic ID, `0` 代表回复楼主
+           * @default 0
+           */
+          replyTo?: number;
           content: string;
         };
       };

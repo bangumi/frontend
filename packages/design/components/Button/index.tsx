@@ -1,3 +1,5 @@
+import './style';
+
 import classNames from 'classnames';
 import type { FC, PropsWithChildren } from 'react';
 import React from 'react';

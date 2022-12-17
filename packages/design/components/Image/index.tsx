@@ -1,3 +1,5 @@
+import './style';
+
 import classnames from 'classnames';
 import type { FC, ImgHTMLAttributes } from 'react';
 import React from 'react';

@@ -1,3 +1,5 @@
+import './style';
+
 import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 

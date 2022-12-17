@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  version: 0.0.54
+  version: 0.0.55
   title: hello
 components:
   securitySchemes:
@@ -1085,16 +1085,16 @@ paths:
             schema:
               type: object
               properties:
-                relatedID:
+                replyTo:
                   examples:
                     - 0
                   default: 0
+                  description: 被回复的 topic ID, `0` 代表回复楼主
                   type: integer
                 content:
                   minLength: 1
                   type: string
               required:
-                - relatedID
                 - content
             examples:
               example1:
@@ -1103,7 +1103,7 @@ paths:
               example2:
                 value:
                   content: post contents
-                  relatedID: 0
+                  replyTo: 2
         required: true
       parameters:
         - schema:

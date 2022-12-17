@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.54
+ * 0.0.55
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -484,7 +484,7 @@ export async function getSubjectTopicsBySubjectId(
 export async function createGroupReply(
   topicId: number,
   body: {
-    relatedID: number;
+    replyTo?: number;
     content: string;
   },
   opts?: Oazapfts.RequestOpts,
