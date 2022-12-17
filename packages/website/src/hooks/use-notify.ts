@@ -13,6 +13,7 @@ export function useNotify(user: User | undefined) {
     if (!user) {
       return;
     }
+
     console.log('new websocket');
     const ws = new WebSocket(notifySubscribeURL);
     ws.onmessage = function (event) {

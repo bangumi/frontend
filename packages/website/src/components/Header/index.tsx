@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
@@ -93,6 +94,8 @@ const Header: FC = () => {
   const { user } = useUser();
   const { noticeCount } = useNotify(user);
 
+  const navigate = useNavigate();
+
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
     <div className={style.container}>
@@ -144,8 +147,14 @@ const Header: FC = () => {
           {user ? (
             <>
               {noticeCount ? (
-                // TODO: 等设计稿
-                <div className={style.iconNotification}> {noticeCount} now notify </div>
+                // TODO: 没有设计稿
+                <div className={style.span}>
+                  <Notification
+                    className={style.iconNotification}
+                    onClick={(e) => navigate('/notifications')}
+                  />
+                  <i className={style.tip} />
+                </div>
               ) : (
                 <Notification className={style.iconNotification} />
               )}
