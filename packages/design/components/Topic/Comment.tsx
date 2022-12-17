@@ -171,8 +171,8 @@ const Comment: FC<CommentProps> = ({
                   {user.id === creator.id ? (
                     <>
                       {/* TODO */}
-                      {/* <Button type='text'>编辑</Button> */}
-                      {/* <Button type='text'>删除</Button> */}
+                      <Button type='text'>编辑</Button>
+                      <Button type='text'>删除</Button>
                     </>
                   ) : null}
                 </>
