@@ -29,3 +29,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           title: 'chore(types): update private API type definition'
+          # 使用 token 创建 PR 才能触发默认的 ci
+          push-to-fork: Trim21-bot/bangumi-frontend
+          branch: 'update-types'
+          token: ${{ secrets.PAT }}

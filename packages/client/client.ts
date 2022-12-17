@@ -1,6 +1,6 @@
 /**
  * hello
- * 0.0.50
+ * 0.0.54
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -495,6 +495,10 @@ export async function createGroupReply(
         data: BasicReply;
       }
     | {
+        status: 401;
+        data: Error;
+      }
+    | {
         status: 500;
         data: Error;
       }
@@ -547,8 +551,6 @@ export async function listNotice(
 }
 /**
  * 标记通知为已读
- *
- * 不传id时会清空所有未读通知
  */
 export async function clearNotice(
   body?: {
@@ -579,10 +581,6 @@ export async function clearNotice(
 }
 /**
  * 使用 websocket 订阅通知
- *
- * openapi不能很好的描述websocket api，但是这个api只会返回一种数据
- *
- * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
  */
 export async function subscribeNotify(opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
