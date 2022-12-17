@@ -33,3 +33,4 @@ jobs:
           push-to-fork: Trim21-bot/bangumi-frontend
           branch: 'update-types'
           token: ${{ secrets.PAT }}
+          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
