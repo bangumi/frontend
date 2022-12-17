@@ -10,6 +10,7 @@ export interface EditorProps {
   showToolbox?: boolean;
   /* textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
+  initContent: string;
 }
 
 const keyToEvent: Record<string, string> = {
@@ -42,9 +43,9 @@ export interface IReset {
 }
 
 const Editor = forwardRef<HTMLTextAreaElement & IReset, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm }, ref) => {
+  ({ placeholder, showToolbox = true, onConfirm, initContent }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(initContent);
 
     useImperativeHandle(ref, () => ({
       ...innerRef.current!,

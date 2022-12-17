@@ -21,6 +21,10 @@ export interface EditorFormProps extends EditorProps {
   cancelText?: string;
   /* 取消按钮的回调 */
   onCancel?: () => void;
+  /**
+   * 初始内容
+   */
+  initContent?: string;
 }
 
 const EditorForm = forwardRef<IReset, EditorFormProps>(
@@ -28,6 +32,7 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
     {
       className,
       style,
+      initContent = '',
       confirmText = '写好了',
       onConfirm,
       cancelText = '取消',
@@ -45,7 +50,7 @@ const EditorForm = forwardRef<IReset, EditorFormProps>(
 
     return (
       <div className={classNames} style={style}>
-        <Editor ref={editorRef} onConfirm={onConfirm} {...props} />
+        <Editor ref={editorRef} initContent={initContent} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button
             shape='rounded'
