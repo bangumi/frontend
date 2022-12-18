@@ -2,6 +2,7 @@
  * TODO: 没有设计稿，只是实现了功能
  */
 
+import './style';
 import React from 'react';
 import type { FC } from 'react';
 
@@ -22,25 +23,34 @@ const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) =
 
   return (
     <>
-      <div id={`notice_${id}`}>
-        <a
-          href={`https://bgm.tv/user/${sender.username}`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          {sender.nickname}
-        </a>{' '}
-        {setting.prefix}{' '}
-        <a
-          href={`${setting.url}/${topicID}${setting.append ?? ''}${setting.anchor}${postID}`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          {setting.inner ?? title}
-        </a>{' '}
-        {setting.suffix}
+      <div id={`notice_${id}`} className='bgm-notify'>
+        <div className='avatar'>
+          <img src={sender.avatar.small} alt='' />
+        </div>
+
+        <div className='inner'>
+          <a
+            href={`https://bgm.tv/user/${sender.username}`}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='user'
+          >
+            {sender.nickname}
+          </a>
+          <div>
+            {setting.prefix}{' '}
+            <a
+              href={`${setting.url}/${topicID}${setting.append ?? ''}${setting.anchor}${postID}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              {setting.inner ?? title}
+            </a>{' '}
+            {setting.suffix}
+          </div>
+        </div>
       </div>
-      <br />
+      <hr />
     </>
   );
 };
