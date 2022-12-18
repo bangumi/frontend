@@ -16,6 +16,9 @@ export function useNotify(user: User | undefined) {
     console.log('new websocket');
     const ws = io(location.host, {
       path: '/p1/socket-io/',
+      reconnection: true,
+      reconnectionDelay: 5000,
+      reconnectionDelayMax: 10000,
     });
 
     ws.on('notify', (event: string) => {
@@ -23,18 +26,9 @@ export function useNotify(user: User | undefined) {
       setNoticeCount(count);
     });
 
-    const reconnect = () => {
-      setTimeout(() => {
-        ws.connect();
-      }, 5000);
-    };
-
-    ws.on('disconnect', reconnect);
-
     setSocket(ws);
     return () => {
       console.log('close connection');
-      ws.removeListener('disconnect', reconnect);
       ws.disconnect();
     };
   }, [user]);
