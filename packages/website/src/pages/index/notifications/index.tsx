@@ -29,10 +29,14 @@ const SubjectPage: React.FC = () => {
 
   console.log(notice);
 
+  const onClose = (id: number) => {
+    console.log('clear notify', id);
+  };
+
   return (
     <div>
       {notice.map((x) => (
-        <Notice key={x.id} {...x} />
+        <Notice key={x.id} {...x} onClose={onClose} />
       ))}
     </div>
   );
