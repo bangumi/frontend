@@ -36,7 +36,7 @@ const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) =
           target='_blank'
           rel='noopener noreferrer'
         >
-          {title}
+          {setting.inner ?? title}
         </a>{' '}
         {setting.suffix}
       </div>
@@ -48,14 +48,18 @@ const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) =
 export default Notice;
 
 interface setting {
-  url: string;
-  prefix: string;
-  suffix: string;
-  append?: string;
-  url_mobile?: string;
-  anchor: string;
   id: number;
   hash: number;
+
+  url: string;
+  anchor: string;
+  append?: string;
+  url_mobile?: string;
+
+  prefix: string;
+  inner?: string;
+  suffix: string;
+
   merge?: number;
 }
 
@@ -252,7 +256,8 @@ const _settings: Record<number, setting> = {
   '22': {
     url: 'SITE_URL/user/chobits_user/timeline/status/',
     anchor: '#post_',
-    prefix: '回复了你的 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">吐槽</a>',
+    prefix: '回复了你的',
+    inner: '吐槽',
     suffix: '',
     id: 22,
     hash: 22,
