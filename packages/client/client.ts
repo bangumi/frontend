@@ -1,6 +1,5 @@
 /**
  * hello
- * 0.0.55
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -578,27 +577,4 @@ export async function clearNotice(
       body,
     }),
   );
-}
-/**
- * 使用 websocket 订阅通知
- */
-export async function subscribeNotify(opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: {
-          count: number;
-        };
-      }
-    | {
-        status: 401;
-        data: Error;
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >('/p1/sub/notify', {
-    ...opts,
-  });
 }

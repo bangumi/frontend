@@ -1,6 +1,5 @@
 openapi: 3.0.3
 info:
-  version: 0.0.55
   title: hello
 components:
   securitySchemes:
@@ -1242,51 +1241,6 @@ paths:
                     code: NEED_LOGIN
                     error: Unauthorized
                     message: you need to login before marking notifications as read
-                    statusCode: 401
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/sub/notify:
-    get:
-      operationId: subscribeNotify
-      summary: 使用 websocket 订阅通知
-      tags:
-        - user
-      description: |-
-        openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
-
-        swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
-      security:
-        - CookiesSession: []
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  count:
-                    type: integer
-                required:
-                  - count
-        '401':
-          description: 未登录
-          content:
-            application/json:
-              schema:
-                description: 未登录
-                $ref: '#/components/schemas/Error'
-              examples:
-                NeedLoginError:
-                  value:
-                    code: NEED_LOGIN
-                    error: Unauthorized
-                    message: you need to login before subscribing notify
                     statusCode: 401
         '500':
           description: 意料之外的服务器错误

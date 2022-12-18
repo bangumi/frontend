@@ -66,15 +66,6 @@ export interface paths {
      */
     post: operations['clearNotice'];
   };
-  '/p1/sub/notify': {
-    /**
-     * 使用 websocket 订阅通知
-     * @description openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
-     *
-     * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
-     */
-    get: operations['subscribeNotify'];
-  };
 }
 
 export type webhooks = Record<string, never>;
@@ -731,36 +722,6 @@ export interface operations {
     responses: {
       /** @description 没有返回值 */
       200: never;
-      /** @description 未登录 */
-      401: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
-  subscribeNotify: {
-    /**
-     * 使用 websocket 订阅通知
-     * @description openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
-     *
-     * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
-     */
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': {
-            count: number;
-          };
-        };
-      };
       /** @description 未登录 */
       401: {
         content: {
