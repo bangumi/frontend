@@ -1,6 +1,9 @@
 openapi: 3.0.3
 info:
   title: hello
+  description: >-
+    关于订阅通知的 socket.io 相关的文档在
+    <https://github.com/bangumi/GraphQL/blob/master/docs/socket.io.md>
 components:
   securitySchemes:
     CookiesSession:
