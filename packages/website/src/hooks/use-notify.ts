@@ -23,17 +23,19 @@ export function useNotify(user: User | undefined) {
       setNoticeCount(count);
     });
 
-    ws.on('disconnect', function (event) {
+    const reconnect = () => {
       setTimeout(() => {
-        setSocket(
-          io(location.host, {
-            path: '/p1/socket-io/',
-          }),
-        );
+        ws.connect();
       }, 5000);
-    });
+    };
+
+    ws.on('disconnect', reconnect);
+
+    setSocket(ws);
     return () => {
-      socket?.close();
+      console.log('close connection');
+      ws.removeListener('disconnect', reconnect);
+      ws.disconnect();
     };
   }, [user]);
 
