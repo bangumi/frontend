@@ -13,10 +13,10 @@ import Notice from '@bangumi/design/components/Notice';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 const useNotifications = () => {
-  const { data: notice } = useSWR(`listNotice`, async () => ok(ozaClient.listNotice()), {
+  const { data: notice, mutate } = useSWR(`listNotice`, async () => ok(ozaClient.listNotice()), {
     suspense: true,
   });
-  return notice?.data ?? [];
+  return { notice: notice?.data ?? [], mutate };
 };
 
 const SubjectPage: React.FC = () => {
@@ -25,12 +25,16 @@ const SubjectPage: React.FC = () => {
     return <div>PLEASE LOGIN FIRST</div>;
   }
 
-  const notice = useNotifications();
+  const { notice, mutate } = useNotifications();
 
   console.log(notice);
 
-  const onClose = (id: number) => {
+  const onClose = async (id: number) => {
     console.log('clear notify', id);
+    await ozaClient.clearNotice({
+      id: [id],
+    });
+    await mutate();
   };
 
   return (
