@@ -20,8 +20,6 @@ const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) =
     );
   }
 
-  const msg = setting.desc + title;
-
   return (
     <>
       <div id={`notice_${id}`}>
@@ -34,7 +32,7 @@ const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) =
         </a>{' '}
         {setting.prefix}{' '}
         <a
-          href={`${setting.url}/${topicID}${setting.anchor}${postID}`}
+          href={`${setting.url}/${topicID}${setting.append ?? ''}${setting.anchor}${postID}`}
           target='_blank'
           rel='noopener noreferrer'
         >
@@ -53,10 +51,9 @@ interface setting {
   url: string;
   prefix: string;
   suffix: string;
-
+  append?: string;
   url_mobile?: string;
   anchor: string;
-  desc: string;
   id: number;
   hash: number;
   merge?: number;
@@ -69,7 +66,6 @@ const _settings: Record<number, setting> = {
     anchor: '#post_',
     prefix: '在你的小组话题',
     suffix: '中发表了新回复',
-    desc: '在你的小组话题 <a href="$url$main_id" class="nt_link link_$anchors" target="_blank">$titles</a> 中发表了新回复',
     id: 1,
     hash: 1,
     merge: 1,
@@ -80,46 +76,46 @@ const _settings: Record<number, setting> = {
     anchor: '#post_',
     prefix: '在小组话题',
     suffix: '中回复了你',
-    desc: '在小组话题 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中回复了你',
     id: 2,
     hash: 1,
     merge: 1,
   },
-};
-
-const _ = {
-  '3': {
-    url: 'SITE_URL/subject/topic/',
-    url_mobile: 'MOBILE_URL/topic/subject/',
+  3: {
+    url: '/subject/topic',
+    url_mobile: '/topic/subject',
     anchor: '#post_',
-    desc: '在你的条目讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中发表了新回复',
+    prefix: '在你的条目讨论',
+    suffix: '中发表了新回复',
     id: 3,
     hash: 3,
     merge: 1,
   },
-  '4': {
+  4: {
     url: 'SITE_URL/subject/topic/',
     url_mobile: 'MOBILE_URL/topic/subject/',
     anchor: '#post_',
-    desc: '在条目讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在条目讨论',
+    suffix: '中回复了你',
     id: 4,
     hash: 3,
     merge: 1,
   },
-  '5': {
+  5: {
     url: 'SITE_URL/character/',
     url_mobile: 'MOBILE_URL/topic/crt/',
     anchor: '#post_',
-    desc: '在角色讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中发表了新回复',
+    prefix: '在角色讨论',
+    suffix: '中发表了新回复',
     id: 5,
     hash: 5,
     merge: 1,
   },
-  '6': {
+  6: {
     url: 'SITE_URL/character/',
     url_mobile: 'MOBILE_URL/topic/crt/',
     anchor: '#post_',
-    desc: '在角色 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在角色',
+    suffix: '中回复了你',
     id: 6,
     hash: 5,
     merge: 1,
@@ -127,7 +123,8 @@ const _ = {
   '7': {
     url: 'SITE_URL/blog/',
     anchor: '#post_',
-    desc: '在你的日志 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中发表了新回复',
+    prefix: '在你的日志',
+    suffix: '中发表了新回复',
     id: 7,
     hash: 7,
     merge: 1,
@@ -135,7 +132,8 @@ const _ = {
   '8': {
     url: 'SITE_URL/blog/',
     anchor: '#post_',
-    desc: '在日志 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在日志',
+    suffix: '中回复了你',
     id: 8,
     hash: 7,
     merge: 1,
@@ -144,7 +142,8 @@ const _ = {
     url: 'SITE_URL/subject/ep/',
     url_mobile: 'MOBILE_URL/topic/ep/',
     anchor: '#post_',
-    desc: '在章节讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中发表了新回复',
+    prefix: '在章节讨论',
+    suffix: '中发表了新回复',
     id: 9,
     hash: 9,
     merge: 1,
@@ -153,7 +152,8 @@ const _ = {
     url: 'SITE_URL/subject/ep/',
     url_mobile: 'MOBILE_URL/topic/ep/',
     anchor: '#post_',
-    desc: '在章节讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在章节讨论',
+    suffix: '中回复了你',
     id: 10,
     hash: 9,
     merge: 1,
@@ -162,7 +162,8 @@ const _ = {
     url: 'SITE_URL/index/',
     anchor: '#post_',
     append: '/comments',
-    desc: '在目录 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中给你留言了',
+    prefix: '在目录',
+    suffix: '中给你留言了',
     id: 11,
     hash: 11,
     merge: 1,
@@ -171,7 +172,8 @@ const _ = {
     url: 'SITE_URL/index/',
     anchor: '#post_',
     append: '/comments',
-    desc: '在目录 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在目录',
+    suffix: '中回复了你',
     id: 12,
     hash: 11,
     merge: 1,
@@ -180,7 +182,8 @@ const _ = {
     url: 'SITE_URL/person/',
     url_mobile: 'MOBILE_URL/topic/prsn/',
     anchor: '#post_',
-    desc: '在人物 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在人物',
+    suffix: '中回复了你',
     id: 13,
     hash: 13,
     merge: 1,
@@ -188,21 +191,24 @@ const _ = {
   '14': {
     url: 'SITE_URL/user/',
     anchor: '#',
-    desc: '请求与你成为好友',
+    prefix: '请求与你成为好友',
+    suffix: '',
     id: 14,
     hash: 14,
   },
   '15': {
     url: 'SITE_URL/user/',
     anchor: '#',
-    desc: '通过了你的好友请求',
+    prefix: '通过了你的好友请求',
+    suffix: '',
     id: 15,
     hash: 14,
   },
   '17': {
     url: 'DOUJIN_URL/club/topic/',
     anchor: '#post_',
-    desc: '在你的社团讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中发表了新回复',
+    prefix: '在你的社团讨论',
+    suffix: '中发表了新回复',
     id: 17,
     hash: 17,
     merge: 1,
@@ -210,7 +216,8 @@ const _ = {
   '18': {
     url: 'DOUJIN_URL/club/topic/',
     anchor: '#post_',
-    desc: '在社团讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中回复了你',
+    prefix: '在社团讨论',
+    suffix: '中回复了你',
     id: 18,
     hash: 17,
     merge: 1,
@@ -218,7 +225,8 @@ const _ = {
   '19': {
     url: 'DOUJIN_URL/subject/',
     anchor: '#post_',
-    desc: '在同人作品 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中回复了你',
+    prefix: '在同人作品',
+    suffix: '中回复了你',
     id: 19,
     hash: 19,
     merge: 1,
@@ -226,7 +234,8 @@ const _ = {
   '20': {
     url: 'DOUJIN_URL/event/topic/',
     anchor: '#post_',
-    desc: '在你的展会讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中发表了新回复',
+    prefix: '在你的展会讨论',
+    suffix: '中发表了新回复',
     id: 20,
     hash: 20,
     merge: 1,
@@ -234,7 +243,8 @@ const _ = {
   '21': {
     url: 'DOUJIN_URL/event/topic/',
     anchor: '#post_',
-    desc: '在展会讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中回复了你',
+    prefix: '在展会讨论',
+    suffix: '中回复了你',
     id: 21,
     hash: 20,
     merge: 1,
@@ -242,7 +252,8 @@ const _ = {
   '22': {
     url: 'SITE_URL/user/chobits_user/timeline/status/',
     anchor: '#post_',
-    desc: '回复了你的 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">吐槽</a>',
+    prefix: '回复了你的 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">吐槽</a>',
+    suffix: '',
     id: 22,
     hash: 22,
     merge: 1,
@@ -251,7 +262,8 @@ const _ = {
     url: 'SITE_URL/group/topic/',
     url_mobile: 'MOBILE_URL/topic/group/',
     anchor: '#post_',
-    desc: '在小组话题 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中提到了你',
+    prefix: '在小组话题',
+    suffix: '中提到了你',
     id: 23,
     hash: 1,
     merge: 1,
@@ -260,7 +272,8 @@ const _ = {
     url: 'SITE_URL/subject/topic/',
     url_mobile: 'MOBILE_URL/topic/subject/',
     anchor: '#post_',
-    desc: '在条目讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中提到了你',
+    prefix: '在条目讨论',
+    suffix: '中提到了你',
     id: 24,
     hash: 3,
     merge: 1,
@@ -269,7 +282,8 @@ const _ = {
     url: 'SITE_URL/character/',
     url_mobile: 'MOBILE_URL/topic/crt/',
     anchor: '#post_',
-    desc: '在角色 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a>中提到了你',
+    prefix: '在角色',
+    suffix: '中提到了你',
     id: 25,
     hash: 5,
     merge: 1,
@@ -278,7 +292,8 @@ const _ = {
     url: 'SITE_URL/person/',
     url_mobile: 'MOBILE_URL/topic/prsn/',
     anchor: '#post_',
-    desc: '在人物讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中提到了你',
+    prefix: '在人物讨论',
+    suffix: '中提到了你',
     id: 26,
     hash: 5,
     merge: 1,
@@ -287,7 +302,8 @@ const _ = {
     url: 'SITE_URL/index/',
     anchor: '#post_',
     append: '/comments',
-    desc: '在目录 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中提到了你',
+    prefix: '在目录',
+    suffix: '中提到了你',
     id: 28,
     hash: 11,
     merge: 1,
@@ -295,7 +311,8 @@ const _ = {
   '28': {
     url: 'SITE_URL/user/chobits_user/timeline/status/',
     anchor: '#post_',
-    desc: '在 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">吐槽</a> 中提到了你',
+    prefix: '在',
+    suffix: '中提到了你',
     id: 28,
     hash: 22,
     merge: 1,
@@ -303,7 +320,8 @@ const _ = {
   '29': {
     url: 'SITE_URL/blog/',
     anchor: '#post_',
-    desc: '在日志 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中提到了你',
+    prefix: '在日志',
+    suffix: '中提到了你',
     id: 29,
     hash: 7,
     merge: 1,
@@ -312,7 +330,8 @@ const _ = {
     url: 'SITE_URL/subject/ep/',
     url_mobile: 'MOBILE_URL/topic/ep/',
     anchor: '#post_',
-    desc: '在章节讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中提到了你',
+    prefix: '在章节讨论',
+    suffix: '中提到了你',
     id: 30,
     hash: 9,
     merge: 1,
@@ -320,7 +339,8 @@ const _ = {
   '31': {
     url: 'DOUJIN_URL/club/',
     anchor: '/shoutbox#post_',
-    desc: '在社团 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 的留言板中提到了你',
+    prefix: '在社团',
+    suffix: '的留言板中提到了你',
     id: 31,
     hash: 31,
     merge: 1,
@@ -328,7 +348,8 @@ const _ = {
   '32': {
     url: 'DOUJIN_URL/club/topic/',
     anchor: '#post_',
-    desc: '在社团讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中提到了你',
+    prefix: '在社团讨论',
+    suffix: '中提到了你',
     id: 32,
     hash: 17,
     merge: 1,
@@ -336,7 +357,8 @@ const _ = {
   '33': {
     url: 'DOUJIN_URL/subject/',
     anchor: '#post_',
-    desc: '在同人作品 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank"> %1$s </a> 中提到了你',
+    prefix: '在同人作品',
+    suffix: '中提到了你',
     id: 33,
     hash: 19,
     merge: 1,
@@ -344,7 +366,8 @@ const _ = {
   '34': {
     url: 'DOUJIN_URL/event/topic/',
     anchor: '#post_',
-    desc: '在展会讨论 <a href="%2$s%3$s" class="nt_link link_%4$s" target="_blank">%1$s</a> 中提到了你',
+    prefix: '在展会讨论',
+    suffix: '中提到了你',
     id: 34,
     hash: 20,
     merge: 1,
