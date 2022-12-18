@@ -1,3 +1,7 @@
+/**
+TODO 非设计稿，只是从原站copy了一下
+ */
+
 .bgm-notify {
   padding: 5px 0 5px 5px;
   display: flex;
@@ -8,6 +12,7 @@
   }
 
   & .inner {
+    flex-grow: 1;
     flex-direction: column;
     display: flex;
     line-height: 150%;
@@ -15,5 +20,20 @@
     font-size: 12px;
     color: #666;
     margin-left: 40px;
+  }
+
+  & .close {
+    align-self: flex-end;
+    background: transparent url('https://bgm.tv/img/ico/icons.gif') no-repeat scroll -2px -33px;
+    display: block;
+    height: 13px;
+    right: 0;
+    text-indent: -999em;
+    width: 13px;
+    opacity: 0.8;
+  }
+
+  & .close:hover {
+    background-position: -2px -46px;
   }
 }

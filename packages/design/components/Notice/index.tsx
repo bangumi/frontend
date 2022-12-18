@@ -8,9 +8,11 @@ import type { FC } from 'react';
 
 import type { INotice } from '@bangumi/client/user';
 
-export interface NoticeProps extends INotice {}
+export interface NoticeProps extends INotice {
+  onClose?: (id: number) => Promise<void>;
+}
 
-const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) => {
+const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender, onClose }) => {
   const setting = _settings[type];
 
   if (!setting) {
@@ -49,6 +51,8 @@ const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender }) =
             {setting.suffix}
           </div>
         </div>
+
+        <div className='close' onClick={async () => onClose?.(id)} />
       </div>
       <hr />
     </>

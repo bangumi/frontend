@@ -1,5 +1,7 @@
 /**
  * 没有具体的设计稿，所以只是提供基础功能
+ *
+ * TODO: clear notify
  */
 
 import { ok } from 'oazapfts';
