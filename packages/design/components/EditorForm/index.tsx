@@ -9,17 +9,17 @@ import type { EditorProps, EditorRef } from './Editor';
 import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
-  /* 最外层 className */
+  /** 最外层 className */
   className?: string;
-  /* 最外层 style */
+  /** 最外层 style */
   style?: React.CSSProperties;
-  /* 确认按钮的文本 */
+  /** 确认按钮的文本 */
   confirmText?: string;
-  /* 确认按钮后的回调 */
+  /** 确认按钮后的回调 */
   onConfirm?: (content: string) => void;
-  /* 取消按钮的文本 */
+  /** 取消按钮的文本 */
   cancelText?: string;
-  /* 取消按钮的回调 */
+  /** 取消按钮的回调 */
   onCancel?: () => void;
 }
 
