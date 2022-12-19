@@ -158,49 +158,6 @@ export async function logout(opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
- * 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
- *
- * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
- */
-export async function login(
-  body: {
-    email: string;
-    password: string;
-    'h-captcha-response': string;
-  },
-  opts?: Oazapfts.RequestOpts,
-) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: User;
-      }
-    | {
-        status: 400;
-        data: ValidationError;
-      }
-    | {
-        status: 401;
-        data: Error;
-      }
-    | {
-        status: 429;
-        data: Error;
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >(
-    '/p1/login',
-    oazapfts.json({
-      ...opts,
-      method: 'POST',
-      body,
-    }),
-  );
-}
-/**
  * 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
  *
  * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
