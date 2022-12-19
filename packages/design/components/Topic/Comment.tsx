@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { unescape } from 'lodash-es';
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 
 import { ozaClient } from '@bangumi/client';
 import { State } from '@bangumi/client/topic';
@@ -27,7 +27,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
 
 const Link = Typography.Link;
 
-const RenderContent: FC<{ state: State; text: string }> = ({ state, text }) => {
+const RenderContent = memo(({ state, text }: { state: State; text: string }) => {
   switch (state) {
     case State.Normal:
       return <RichContent html={renderBBCode(text)} classname='bgm-comment__content' />;
@@ -52,7 +52,7 @@ const RenderContent: FC<{ state: State; text: string }> = ({ state, text }) => {
     default:
       return null;
   }
-};
+});
 
 const Comment: FC<CommentProps> = ({
   text,
@@ -76,6 +76,7 @@ const Comment: FC<CommentProps> = ({
     isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted)),
   );
   const [showReplyEditor, setShowReplyEditor] = useState(false);
+  const [replyContent, setReplyContent] = useState('');
 
   const headerClassName = classNames('bgm-comment__header', {
     'bgm-comment__header--reply': isReply,
@@ -83,6 +84,11 @@ const Comment: FC<CommentProps> = ({
   });
 
   const url = getUserProfileLink(creator.username);
+
+  const startReply = useCallback(() => {
+    setShowReplyEditor(true);
+    setReplyContent(isReply ? `[quote]${text.slice(0, 30)}[/quote]\n` : '');
+  }, [isReply, text]);
 
   if (shouldCollapsed) {
     let icon = null;
@@ -161,12 +167,13 @@ const Comment: FC<CommentProps> = ({
                   autoFocus
                   onCancel={() => setShowReplyEditor(false)}
                   placeholder={`回复给 @${creator.nickname}：`}
-                  initContent={isReply ? `[quote]${text.slice(0, 30)}[/quote]\n\n` : ''}
+                  content={replyContent}
+                  onChange={setReplyContent}
                   onConfirm={async (content) => submit(content, props.id)}
                 />
               ) : (
                 <>
-                  <Button type='secondary' shape='rounded' onClick={() => setShowReplyEditor(true)}>
+                  <Button type='secondary' shape='rounded' onClick={startReply}>
                     回复
                   </Button>
                   <Button type='secondary' shape='rounded'>

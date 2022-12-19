@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
@@ -13,7 +13,6 @@ import {
   Topic,
   Layout,
 } from '@bangumi/design';
-import type { EditorRef } from '@bangumi/design/components/EditorForm/Editor';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -41,7 +40,7 @@ const TopicPage: FC = () => {
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
 
-  const editorRef = useRef<EditorRef>(null);
+  const [replyContent, setReplyContent] = useState('');
 
   // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
   // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601
@@ -65,6 +64,7 @@ const TopicPage: FC = () => {
       setSending(false);
       if (res.status === 200) {
         await mutate();
+        setReplyContent('');
       }
     } catch (e: unknown) {
       setSending(false);
@@ -109,9 +109,10 @@ const TopicPage: FC = () => {
                   <Avatar src={user.avatar.large} size='medium' />
                   <EditorForm
                     className={styles.replyForm}
-                    ref={editorRef}
                     placeholder='添加新回复...'
                     confirmText={sending ? '...' : '写好了'}
+                    content={replyContent}
+                    onChange={setReplyContent}
                     onConfirm={postReply}
                   />
                 </div>

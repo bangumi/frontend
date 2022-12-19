@@ -1,11 +1,4 @@
-import React, {
-  forwardRef,
-  useRef,
-  useImperativeHandle,
-  useState,
-  useEffect,
-  useCallback,
-} from 'react';
+import React, { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react';
 
 import Toolbox from './Toolbox';
 
@@ -16,10 +9,11 @@ export interface EditorProps {
   /** textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
   /**
-   * 初始内容
    * @default empty string
    */
-  initContent?: string;
+  content?: string;
+  /** 内容改变时的回调函数 */
+  onChange?: (content: string) => void;
   /** 在被渲染时是否自动获取焦点 */
   autoFocus?: boolean;
 }
@@ -51,24 +45,20 @@ const setInputValue = (
 
 export interface EditorRef {
   textArea: HTMLTextAreaElement;
-  reset: () => void;
 }
 
 const Editor = forwardRef<EditorRef, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, initContent = '', autoFocus }, ref) => {
+  ({ placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    const [content, setContent] = useState(initContent);
 
     useImperativeHandle(ref, () => ({
       textArea: innerRef.current!,
-      reset: () => {
-        setContent('');
-      },
     }));
 
     useEffect(() => {
       // 用来确保输入光标在自动插入的quote内容之后。
-      innerRef.current?.setSelectionRange(initContent.length, initContent.length);
+      const el = innerRef.current;
+      el?.setSelectionRange(el.value.length, el.value.length);
     }, []);
 
     // 使用useCallback避免在内容改变时触发Toolbox的渲染
@@ -129,7 +119,7 @@ const Editor = forwardRef<EditorRef, EditorProps>(
           ref={innerRef}
           value={content}
           autoFocus={autoFocus}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e) => onChange?.(e.target.value)}
           onKeyDown={(e) => {
             // Ctrl + Enter & Alt + S 触发提交
             if (
