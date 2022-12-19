@@ -124,7 +124,7 @@ describe('EditorForm > Editor', () => {
 
   it('showToolbox props', () => {
     const { container } = render(<Editor showToolbox={false} />);
-    expect(container.querySelector('.bgm-editor__toolbox')).toHaveStyle('display: none');
+    expect(container.querySelector('.bgm-editor__toolbox')).not.toBeInTheDocument();
   });
 
   it('click toolbox should have correct behavior', () => {

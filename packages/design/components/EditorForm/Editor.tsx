@@ -1,16 +1,22 @@
-/* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle, useState, useEffect } from 'react';
+import React, {
+  forwardRef,
+  useRef,
+  useImperativeHandle,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 
 import Toolbox from './Toolbox';
 
 export interface EditorProps {
-  /* placeholder */
   placeholder?: string;
-  /* 是否显示工具栏 */
+  /** 是否显示工具栏 */
   showToolbox?: boolean;
-  /* textarea 通过键盘按下提交触发事件 */
+  /** textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
   /**
+   * 初始内容
    * @default empty string
    */
   initContent?: string;
@@ -51,7 +57,7 @@ export interface EditorRef {
 const Editor = forwardRef<EditorRef, EditorProps>(
   ({ placeholder, showToolbox = true, onConfirm, initContent = '', autoFocus }, ref) => {
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    const [content, setContent] = useState('');
+    const [content, setContent] = useState(initContent);
 
     useImperativeHandle(ref, () => ({
       textArea: innerRef.current!,
@@ -61,15 +67,12 @@ const Editor = forwardRef<EditorRef, EditorProps>(
     }));
 
     useEffect(() => {
-      if (autoFocus) {
-        innerRef.current?.focus();
-      }
-
       // 用来确保输入光标在自动插入的quote内容之后。
-      setContent(initContent);
+      innerRef.current?.setSelectionRange(initContent.length, initContent.length);
     }, []);
 
-    const handleToolboxEvent = (type: string, payload?: unknown): void => {
+    // 使用useCallback避免在内容改变时触发Toolbox的渲染
+    const handleToolboxEvent = useCallback((type: string, payload?: unknown): void => {
       const el = innerRef.current;
       if (!el) {
         return;
@@ -115,18 +118,17 @@ const Editor = forwardRef<EditorRef, EditorProps>(
           break;
         }
       }
-    };
+    }, []);
+
     return (
       <div className='bgm-editor__container'>
-        <Toolbox
-          handleClickEvent={handleToolboxEvent}
-          style={{ display: showToolbox ? '' : 'none' }}
-        />
+        {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
         <textarea
           className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
           value={content}
+          autoFocus={autoFocus}
           onChange={(e) => setContent(e.target.value)}
           onKeyDown={(e) => {
             // Ctrl + Enter & Alt + S 触发提交
