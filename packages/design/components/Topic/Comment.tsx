@@ -18,7 +18,7 @@ import Typography from '../../components/Typography';
 import CommentInfo from './CommentInfo';
 
 export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply: false })) & {
-  topicID: number;
+  topicId: number;
   floor: string | number;
   originalPosterId: number;
   onReply: () => Promise<unknown>;
@@ -63,7 +63,7 @@ const Comment: FC<CommentProps> = ({
   originalPosterId,
   state,
   user,
-  topicID,
+  topicId,
   onReply,
   ...props
 }) => {
@@ -122,7 +122,7 @@ const Comment: FC<CommentProps> = ({
   }
 
   const submit = async (content: string, replyTo = 0) => {
-    const res = await ozaClient.createGroupReply(topicID, { content, replyTo });
+    const res = await ozaClient.createGroupReply(topicId, { content, replyTo });
     if (res.status === 200) {
       await onReply();
       document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });
@@ -187,7 +187,7 @@ const Comment: FC<CommentProps> = ({
       </div>
       {replies?.map((reply, idx) => (
         <Comment
-          topicID={topicID}
+          topicId={topicId}
           key={reply.id}
           isReply
           onReply={onReply}
