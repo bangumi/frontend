@@ -1,3 +1,5 @@
+import './style';
+
 import dayjs from 'dayjs';
 import type { FC } from 'react';
 import React from 'react';
