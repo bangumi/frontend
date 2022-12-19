@@ -8,14 +8,6 @@ export interface paths {
     /** @description 登出 */
     post: operations['logout'];
   };
-  '/p1/login': {
-    /**
-     * @description 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
-     *
-     * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
-     */
-    post: operations['login'];
-  };
   '/p1/login2': {
     /**
      * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
@@ -242,81 +234,6 @@ export interface operations {
       };
       /** @description 未登录 */
       401: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
-  login: {
-    /**
-     * @description 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
-     *
-     * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
-     */
-    requestBody: {
-      content: {
-        /**
-         * @example {
-         *   "email": "treeholechan@gmail.com",
-         *   "password": "lovemeplease",
-         *   "h-captcha-response": "10000000-aaaa-bbbb-cccc-000000000001"
-         * }
-         */
-        'application/json': {
-          email: string;
-          password: string;
-          'h-captcha-response': string;
-        };
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        headers: {
-          /** @description example: "sessionID=12345abc" */
-          'Set-Cookie'?: string;
-        };
-        content: {
-          'application/json': components['schemas']['User'];
-        };
-      };
-      /** @description Default Response */
-      400: {
-        content: {
-          'application/json': components['schemas']['ValidationError'];
-        };
-      };
-      /** @description 验证码错误/账号密码不匹配 */
-      401: {
-        headers: {
-          /** @description remaining rate limit */
-          'X-RateLimit-Remaining'?: number;
-          /** @description total limit per 10 minutes */
-          'X-RateLimit-Limit'?: number;
-          /** @description seconds to reset rate limit */
-          'X-RateLimit-Reset'?: number;
-        };
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 失败次数太多，需要过一段时间再重试 */
-      429: {
-        headers: {
-          /** @description remaining rate limit */
-          'X-RateLimit-Remaining'?: number;
-          /** @description limit per 10 minutes */
-          'X-RateLimit-Limit'?: number;
-          /** @description seconds to reset rate limit */
-          'X-RateLimit-Reset'?: number;
-        };
         content: {
           'application/json': components['schemas']['Error'];
         };
