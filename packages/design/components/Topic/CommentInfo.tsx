@@ -2,7 +2,7 @@ import './style';
 
 import dayjs from 'dayjs';
 import type { FC } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
 export interface CommentInfoProps {
   floor: string | number;
@@ -34,4 +34,4 @@ const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false
   );
 };
 
-export default CommentInfo;
+export default memo(CommentInfo);

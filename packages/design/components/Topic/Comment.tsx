@@ -208,4 +208,4 @@ const Comment: FC<CommentProps> = ({
   );
 };
 
-export default Comment;
+export default memo(Comment);
