@@ -22,8 +22,8 @@ importers:
       eslint-config-prettier: ^8.5.0
       eslint-config-standard: ^17.0.0
       eslint-config-standard-jsx: ^11.0.0
-      eslint-config-standard-react: ^12.0.0
-      eslint-config-standard-with-typescript: ^23.0.0
+      eslint-config-standard-react: ^13.0.0
+      eslint-config-standard-with-typescript: ^24.0.0
       eslint-import-resolver-typescript: ^3.5.2
       eslint-plugin-import: ^2.26.0
       eslint-plugin-jest: ^27.1.7
@@ -64,8 +64,8 @@ importers:
       eslint-config-prettier: 8.5.0_eslint@8.30.0
       eslint-config-standard: 17.0.0_snpl5wgzq3nl6iwyoqvj6sxsdi
       eslint-config-standard-jsx: 11.0.0_abfhjhn5fpot3b6pmu4yritdam
-      eslint-config-standard-react: 12.0.0_abfhjhn5fpot3b6pmu4yritdam
-      eslint-config-standard-with-typescript: 23.0.0_y3po2t3plcnlrpwr7abxczdcoa
+      eslint-config-standard-react: 13.0.0_abfhjhn5fpot3b6pmu4yritdam
+      eslint-config-standard-with-typescript: 24.0.0_y3po2t3plcnlrpwr7abxczdcoa
       eslint-import-resolver-typescript: 3.5.2_2lbwmhbr7bncddqbzzpg77o75m
       eslint-plugin-import: 2.26.0_p6eswnf3xl3aaa2djfyukgz5eq
       eslint-plugin-jest: 27.1.7_ynswt5pvagzyqki5w7w75b3qvm
@@ -9618,18 +9618,19 @@ packages:
       eslint-plugin-react: 7.31.11_eslint@8.30.0
     dev: true
 
-  /eslint-config-standard-react/12.0.0_abfhjhn5fpot3b6pmu4yritdam:
-    resolution: {integrity: sha512-Bw0hN/9YtmrJrBB0l5DIX2YhDR2IkWHOCCZGB87AawgmBsQbcX2y9uec7R178BCPnuqhm6jiwBySPw3zvmKRTg==}
+  /eslint-config-standard-react/13.0.0_abfhjhn5fpot3b6pmu4yritdam:
+    resolution: {integrity: sha512-HrVPGj8UncHfV+BsdJTuJpVsomn6AIrke3Af2Fh4XFvQQDU+iO6N2ZL+UsC+scExft4fU3uf7fJwj7PKWnXJDA==}
     peerDependencies:
       eslint: ^8.8.0
       eslint-plugin-react: ^7.28.0
+      eslint-plugin-react-hooks: ^4.6.0
     dependencies:
       eslint: 8.30.0
       eslint-plugin-react: 7.31.11_eslint@8.30.0
     dev: true
 
-  /eslint-config-standard-with-typescript/23.0.0_y3po2t3plcnlrpwr7abxczdcoa:
-    resolution: {integrity: sha512-iaaWifImn37Z1OXbNW1es7KI+S7D408F9ys0bpaQf2temeBWlvb0Nc5qHkOgYaRb5QxTZT32GGeN1gtswASOXA==}
+  /eslint-config-standard-with-typescript/24.0.0_y3po2t3plcnlrpwr7abxczdcoa:
+    resolution: {integrity: sha512-vEnGXZ5aiR1enl9652iIP4nTpY3GPcNEwuhrsPbKO3Ce3D6T3yCqZdkUPk8nJetfdL/yO0DLsHg2d/l9iECIdg==}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^5.0.0
       eslint: ^8.0.1
