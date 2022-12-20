@@ -1,14 +1,22 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import type { EditorProps, EditorRef } from '../Editor';
 import Editor from '../Editor';
 
-const initTextareaTest = (props: EditorProps): { textarea: HTMLTextAreaElement } => {
+const TestEditor = (props: EditorProps) => {
+  const [content, setContent] = useState('');
+  return <Editor content={content} onChange={setContent} {...props} />;
+};
+
+const initTextareaTest = (
+  props: EditorProps,
+): { textarea: HTMLTextAreaElement; setValue: (value: string) => void } => {
   props.placeholder = props.placeholder ?? 'placeholder';
-  const { getByPlaceholderText } = render(<Editor {...props} />);
+  const { getByPlaceholderText } = render(<TestEditor {...props} />);
   const textarea = getByPlaceholderText(props.placeholder) as HTMLTextAreaElement;
-  return { textarea };
+  const setValue = (value: string) => fireEvent.change(textarea, { target: { value } });
+  return { textarea, setValue };
 };
 
 const keyToEvent = {
@@ -29,6 +37,7 @@ function doSelectionTest(
   if (selected) {
     switch (type) {
       case 'bold': {
+        expect(textarea).toHaveTextContent('Hello [b]World[/b]');
         expect(textarea.value).toBe('Hello [b]World[/b]');
         expect(textarea.selectionStart).toBe(18);
         expect(textarea.selectionEnd).toBe(18);
@@ -128,16 +137,16 @@ describe('EditorForm > Editor', () => {
   });
 
   it('click toolbox should have correct behavior', () => {
-    const { textarea } = initTextareaTest({ placeholder: 'Hello' });
+    const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
     const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
 
     ['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
       // init
-      textarea.value = '';
+      setValue('');
       const el = screen.getByTestId(type);
-      el.click();
+      fireEvent.click(el);
       doSelectionTest(textarea, type, mockValue);
 
       if (type === 'image' || type === 'link' || type === 'size') {
@@ -153,19 +162,19 @@ describe('EditorForm > Editor', () => {
   });
 
   it('click toolbox with selection', () => {
-    const { textarea } = initTextareaTest({ placeholder: 'Hello' });
+    const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
     const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
 
     ['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
       // init
-      textarea.value = 'Hello World';
+      setValue('Hello World');
       textarea.selectionStart = 6;
       textarea.selectionEnd = 11;
 
       const el = screen.getByTestId(type);
-      el.click();
+      fireEvent.click(el);
       doSelectionTest(textarea, type, mockValue, true);
 
       if (type === 'image' || type === 'link' || type === 'size') {
@@ -198,7 +207,7 @@ describe('EditorForm > Editor', () => {
   });
 
   it('BBCode editor keyboard event', () => {
-    const { textarea } = initTextareaTest({ placeholder: 'Hello' });
+    const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
     const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
@@ -206,13 +215,13 @@ describe('EditorForm > Editor', () => {
     for (const key of Object.keys(keyToEvent)) {
       const type = keyToEvent[key as keyof typeof keyToEvent];
       // init
-      textarea.value = '';
+      setValue('');
 
       fireEvent.keyDown(textarea, { key, ctrlKey: true });
       doSelectionTest(textarea, type, mockValue);
 
       // Uppercase
-      textarea.value = '';
+      setValue('');
       fireEvent.keyDown(textarea, { key: key.toUpperCase(), ctrlKey: true });
       doSelectionTest(textarea, type, mockValue);
 
@@ -226,7 +235,7 @@ describe('EditorForm > Editor', () => {
   });
 
   it('BBCode editor keyboard event with selection', () => {
-    const { textarea } = initTextareaTest({ placeholder: 'Hello' });
+    const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
     const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
@@ -234,7 +243,7 @@ describe('EditorForm > Editor', () => {
     for (const key of Object.keys(keyToEvent)) {
       const type = keyToEvent[key as keyof typeof keyToEvent];
       // init
-      textarea.value = 'Hello World';
+      setValue('Hello World');
       textarea.selectionStart = 6;
       textarea.selectionEnd = 11;
 
@@ -242,7 +251,7 @@ describe('EditorForm > Editor', () => {
       doSelectionTest(textarea, type, mockValue, true);
 
       // Uppercase
-      textarea.value = 'Hello World';
+      setValue('Hello World');
       textarea.selectionStart = 6;
       textarea.selectionEnd = 11;
 
