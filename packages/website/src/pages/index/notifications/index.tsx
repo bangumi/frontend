@@ -19,15 +19,8 @@ const useNotifications = () => {
   return { notice: notice?.data ?? [], mutate };
 };
 
-const SubjectPage: React.FC = () => {
-  const { user } = useUser();
-  if (!user) {
-    return <div>PLEASE LOGIN FIRST</div>;
-  }
-
+const Page: React.FC = () => {
   const { notice, mutate } = useNotifications();
-
-  console.log(notice);
 
   const onClose = async (id: number) => {
     console.log('clear notify', id);
@@ -46,4 +39,13 @@ const SubjectPage: React.FC = () => {
   );
 };
 
-export default SubjectPage;
+const NotificationPage: React.FC = () => {
+  const { user } = useUser();
+  if (!user) {
+    return <div>PLEASE LOGIN FIRST</div>;
+  }
+
+  return <Page />;
+};
+
+export default NotificationPage;
