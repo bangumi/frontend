@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { unescape } from 'lodash-es';
+import type { BasicReply } from 'packages/client/client';
 import type { FC } from 'react';
 import React, { useState, memo, useCallback } from 'react';
 
-import { ozaClient } from '@bangumi/client';
 import { State } from '@bangumi/client/topic';
 import type { SubReply, Reply, User } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
@@ -12,10 +12,10 @@ import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
-import EditorForm from '../../components/EditorForm';
 import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
 import CommentInfo from './CommentInfo';
+import ReplyForm from './ReplyForm';
 
 export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply: false })) & {
   topicId: number;
@@ -127,15 +127,11 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
-  const submit = async (content: string, replyTo = 0) => {
-    const res = await ozaClient.createGroupReply(topicId, { content, replyTo });
-    if (res.status === 200) {
-      await onReply();
-      document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });
-      setShowReplyEditor(false);
-    }
-
-    // TODO: handle error
+  const onReplySuccess = async (reply: BasicReply) => {
+    // 刷新回复列表
+    await onReply();
+    document.getElementById(`post_${reply.id}`)?.scrollIntoView({ block: 'center' });
+    setShowReplyEditor(false);
   };
 
   return (
@@ -163,13 +159,15 @@ const Comment: FC<CommentProps> = ({
           {user ? (
             <div className='bgm-comment__opinions'>
               {showReplyEditor ? (
-                <EditorForm
+                <ReplyForm
                   autoFocus
-                  onCancel={() => setShowReplyEditor(false)}
-                  placeholder={`回复给 @${creator.nickname}：`}
+                  topicId={topicId}
+                  replyTo={props.id}
+                  placeholder={`回复 @${creator.nickname}：`}
                   content={replyContent}
                   onChange={setReplyContent}
-                  onConfirm={async (content) => submit(content, props.id)}
+                  onCancel={() => setShowReplyEditor(false)}
+                  onSuccess={onReplySuccess}
                 />
               ) : (
                 <>

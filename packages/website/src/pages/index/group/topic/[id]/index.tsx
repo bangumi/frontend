@@ -1,19 +1,11 @@
+import type { BasicReply } from 'packages/client/client';
 import type { Group } from 'packages/client/group';
 import type { FC } from 'react';
 import React, { useEffect, useState, memo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { ozaClient } from '@bangumi/client';
-import {
-  EditorForm,
-  RichContent,
-  Avatar,
-  Section,
-  Typography,
-  Button,
-  Topic,
-  Layout,
-} from '@bangumi/design';
+import { RichContent, Avatar, Section, Typography, Button, Topic, Layout } from '@bangumi/design';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -61,8 +53,6 @@ const TopicPage: FC = () => {
     throw new Error('BUG: topic id is required');
   }
 
-  const [sending, setSending] = useState(false);
-
   const { data: topicDetail, mutate } = useGroupTopic(Number(id));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
@@ -79,27 +69,10 @@ const TopicPage: FC = () => {
     document.getElementById(anchor)?.scrollIntoView(true);
   }, [topicDetail]);
 
-  const postReply = async (content: string) => {
-    if (sending) {
-      return;
-    }
-
-    if (!content) {
-      return;
-    }
-
-    try {
-      setSending(true);
-      const res = await ozaClient.createGroupReply(topicDetail.id, { content, replyTo: 0 });
-      setSending(false);
-      if (res.status === 200) {
-        await mutate();
-        setReplyContent('');
-      }
-    } catch (e: unknown) {
-      setSending(false);
-      throw e;
-    }
+  const onReplySuccess = async (_: BasicReply) => {
+    // 刷新评论列表
+    await mutate();
+    setReplyContent('');
   };
 
   return (
@@ -137,13 +110,12 @@ const TopicPage: FC = () => {
               {!isClosed && user && (
                 <div className={styles.replyFormContainer}>
                   <Avatar src={user.avatar.large} size='medium' />
-                  <EditorForm
+                  <ReplyForm
+                    topicId={topicDetail.id}
                     className={styles.replyForm}
-                    placeholder='添加新回复...'
-                    confirmText={sending ? '...' : '写好了'}
                     content={replyContent}
                     onChange={setReplyContent}
-                    onConfirm={postReply}
+                    onSuccess={onReplySuccess}
                   />
                 </div>
               )}
