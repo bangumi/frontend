@@ -24,6 +24,13 @@
     {
       "groupName": "eslint",
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "separateMajorMinor": true,
+      "semanticCommitType": "style"
+    },
+    {
+      "groupName": "vite",
+      "matchPackagePrefixes": ["@vitejs/", "vite"],
+      "separateMajorMinor": true,
       "semanticCommitType": "style"
     },
     {
