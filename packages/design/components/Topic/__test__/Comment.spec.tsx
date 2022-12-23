@@ -1,6 +1,9 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
+import { rest } from 'msw';
 import React from 'react';
+
+import { server as mockServer } from '@bangumi/website/mocks/server';
 
 import type { CommentProps } from '../Comment';
 import Comment from '../Comment';
@@ -107,6 +110,40 @@ describe('Normal Comment', () => {
 
     fireEvent.click(getByText('取消'));
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
+  });
+
+  it('successful reply should refresh and hide form otherwise not', async () => {
+    const mockApi = (status: number) =>
+      mockServer.use(
+        rest.post('/p1/groups/-/topics/1/replies', (_, res, ctx) =>
+          res(ctx.status(status), ctx.json({})),
+        ),
+      );
+    const onSuccess = jest.fn();
+    const props = buildProps(false);
+    const { getByText, container } = render(
+      <Comment {...props} onReplySuccess={onSuccess} topicId={1} />,
+    );
+    const fillAndSubmit = () => {
+      fireEvent.click(getByText('回复'));
+      fireEvent.change(container.querySelector('textarea')!, { target: { value: '233' } });
+      fireEvent.click(getByText('写好了'));
+    };
+
+    mockApi(200);
+    fillAndSubmit();
+    await waitFor(() => {
+      expect(onSuccess).toBeCalled();
+      expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
+    });
+
+    onSuccess.mockClear();
+    mockApi(400);
+    fillAndSubmit();
+    await waitFor(() => {
+      expect(onSuccess).not.toBeCalled();
+      expect(container.getElementsByClassName('bgm-editor__form').length).toBe(1);
+    });
   });
 });
 

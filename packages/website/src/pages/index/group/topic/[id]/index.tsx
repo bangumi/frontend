@@ -69,7 +69,7 @@ const TopicPage: FC = () => {
     document.getElementById(anchor)?.scrollIntoView(true);
   }, [topicDetail]);
 
-  const onReplySuccess = async (_: BasicReply) => {
+  const handleReplySuccess = async (_: BasicReply) => {
     // 刷新评论列表
     await mutate();
     setReplyContent('');
@@ -102,7 +102,7 @@ const TopicPage: FC = () => {
                   floor={idx + 2}
                   originalPosterId={originalPosterId}
                   user={user}
-                  onReply={mutate}
+                  onReplySuccess={mutate}
                   {...comment}
                 />
               ))}
@@ -115,7 +115,7 @@ const TopicPage: FC = () => {
                     className={styles.replyForm}
                     content={replyContent}
                     onChange={setReplyContent}
-                    onSuccess={onReplySuccess}
+                    onSuccess={handleReplySuccess}
                   />
                 </div>
               )}

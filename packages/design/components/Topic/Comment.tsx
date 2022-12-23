@@ -21,7 +21,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicId: number;
   floor: string | number;
   originalPosterId: number;
-  onReply: () => Promise<unknown>;
+  onReplySuccess: () => Promise<unknown>;
   user?: User;
 };
 
@@ -64,7 +64,7 @@ const Comment: FC<CommentProps> = ({
   state,
   user,
   topicId,
-  onReply,
+  onReplySuccess,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -127,9 +127,9 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
-  const onReplySuccess = async (reply: BasicReply) => {
+  const handleReplySuccess = async (reply: BasicReply) => {
     // 刷新回复列表
-    await onReply();
+    await onReplySuccess();
     document.getElementById(`post_${reply.id}`)?.scrollIntoView({ block: 'center' });
     setShowReplyEditor(false);
   };
@@ -167,7 +167,7 @@ const Comment: FC<CommentProps> = ({
                   content={replyContent}
                   onChange={setReplyContent}
                   onCancel={() => setShowReplyEditor(false)}
-                  onSuccess={onReplySuccess}
+                  onSuccess={handleReplySuccess}
                 />
               ) : (
                 <>
@@ -195,7 +195,7 @@ const Comment: FC<CommentProps> = ({
           topicId={topicId}
           key={reply.id}
           isReply
-          onReply={onReply}
+          onReplySuccess={onReplySuccess}
           floor={`${floor}-${idx + 1}`}
           originalPosterId={originalPosterId}
           user={user}
