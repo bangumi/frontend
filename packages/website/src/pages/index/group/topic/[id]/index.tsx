@@ -116,6 +116,7 @@ const TopicPage: FC = () => {
                     content={replyContent}
                     onChange={setReplyContent}
                     onSuccess={handleReplySuccess}
+                    hideCancel
                   />
                 </div>
               )}

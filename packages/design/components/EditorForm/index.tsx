@@ -21,6 +21,11 @@ export interface EditorFormProps extends EditorProps {
   cancelText?: string;
   /** 取消按钮的回调 */
   onCancel?: () => void;
+  /**
+   * 是否隐藏取消按钮
+   * @default false
+   */
+  hideCancel?: boolean;
 }
 
 const EditorForm = forwardRef<EditorRef, EditorFormProps>(
@@ -32,6 +37,7 @@ const EditorForm = forwardRef<EditorRef, EditorFormProps>(
       onConfirm,
       cancelText = '取消',
       onCancel,
+      hideCancel = false,
       ...props
     },
     ref,
@@ -49,9 +55,11 @@ const EditorForm = forwardRef<EditorRef, EditorFormProps>(
           >
             {confirmText}
           </Button>
-          <Button type='text' className='bgm-editor__button' onClick={onCancel}>
-            {cancelText}
-          </Button>
+          {!hideCancel && (
+            <Button type='text' className='bgm-editor__button' onClick={onCancel}>
+              {cancelText}
+            </Button>
+          )}
           <span className='bgm-editor__bbcode-tip'>
             使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
             <Link isExternal to='https://bgm.tv/help/bbcode'>
