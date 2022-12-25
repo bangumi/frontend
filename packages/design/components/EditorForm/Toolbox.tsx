@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
 import { Bold, Image, Italic, Link, Size, Underscore } from '@bangumi/icons';
 
@@ -21,4 +21,4 @@ const Toolbox: FC<ToolboxProps> = ({ handleClickEvent, style }) => {
   );
 };
 
-export default Toolbox;
+export default memo(Toolbox);

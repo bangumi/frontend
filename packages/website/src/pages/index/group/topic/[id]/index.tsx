@@ -1,17 +1,11 @@
+import type { BasicReply } from 'packages/client/client';
+import type { Group } from 'packages/client/group';
 import type { FC } from 'react';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-  EditorForm,
-  RichContent,
-  Avatar,
-  Section,
-  Typography,
-  Button,
-  Topic,
-  Layout,
-} from '@bangumi/design';
+import { RichContent, Avatar, Section, Typography, Button, Topic, Layout } from '@bangumi/design';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -24,17 +18,49 @@ const { Link } = Typography;
 
 const { Comment } = Topic;
 
+const GroupInfo = memo(({ group }: { group: Group }) => (
+  <Section title='小组信息'>
+    <div className={styles.groupInfo}>
+      <Avatar src={group.icon} size='medium' />
+      <div className={styles.groupDetails}>
+        <Link to={`/group/${group.name}`}>{group.title}</Link>
+        <span>{`${group.totalMembers} 名成员`}</span>
+      </div>
+    </div>
+    <ClampableContent
+      content={renderBBCode(group.description)}
+      containerClassName={styles.groupDescription}
+      threshold={158}
+      isClamped
+    />
+    <div className={styles.groupOpinions}>
+      <Button type='text'>
+        <Link to={`/group/${group.name}`}>小组概览</Link>
+      </Button>
+      <Button type='text'>
+        <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
+      </Button>
+      <Button type='text'>
+        <Link to={`/group/${group.name}/members`}>小组成员</Link>
+      </Button>
+    </div>
+  </Section>
+));
+
 const TopicPage: FC = () => {
   const { id } = useParams();
   if (!id || Number.isNaN(Number(id))) {
     throw new Error('BUG: topic id is required');
   }
-  const topicDetail = useGroupTopic(Number(id));
+
+  const { data: topicDetail, mutate } = useGroupTopic(Number(id));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
   const parsedText = renderBBCode(topicDetail.text);
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
+
+  const [replyContent, setReplyContent] = useState('');
 
   // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
   // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601
@@ -42,6 +68,12 @@ const TopicPage: FC = () => {
     const anchor = window.location.hash.slice(1);
     document.getElementById(anchor)?.scrollIntoView(true);
   }, [topicDetail]);
+
+  const handleReplySuccess = async (_: BasicReply) => {
+    // 刷新评论列表
+    await mutate();
+    setReplyContent('');
+  };
 
   return (
     <>
@@ -64,11 +96,13 @@ const TopicPage: FC = () => {
             <div className={styles.replies}>
               {topicDetail.replies.map((comment, idx) => (
                 <Comment
+                  topicId={topicDetail.id}
                   key={comment.id}
                   isReply={false}
                   floor={idx + 2}
                   originalPosterId={originalPosterId}
                   user={user}
+                  onReplySuccess={mutate}
                   {...comment}
                 />
               ))}
@@ -76,40 +110,20 @@ const TopicPage: FC = () => {
               {!isClosed && user && (
                 <div className={styles.replyFormContainer}>
                   <Avatar src={user.avatar.large} size='medium' />
-                  <EditorForm className={styles.replyForm} placeholder='添加新回复...' />
+                  <ReplyForm
+                    topicId={topicDetail.id}
+                    className={styles.replyForm}
+                    content={replyContent}
+                    onChange={setReplyContent}
+                    onSuccess={handleReplySuccess}
+                    hideCancel
+                  />
                 </div>
               )}
             </div>
           </>
         }
-        rightChildren={
-          <Section title='小组信息'>
-            <div className={styles.groupInfo}>
-              <Avatar src={group.icon} size='medium' />
-              <div className={styles.groupDetails}>
-                <Link to={`/group/${group.name}`}>{group.title}</Link>
-                <span>{`${group.totalMembers} 名成员`}</span>
-              </div>
-            </div>
-            <ClampableContent
-              content={renderBBCode(group.description)}
-              containerClassName={styles.groupDescription}
-              threshold={158}
-              isClamped
-            />
-            <div className={styles.groupOpinions}>
-              <Button type='text'>
-                <Link to={`/group/${group.name}`}>小组概览</Link>
-              </Button>
-              <Button type='text'>
-                <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
-              </Button>
-              <Button type='text'>
-                <Link to={`/group/${group.name}/members`}>小组成员</Link>
-              </Button>
-            </div>
-          </Section>
-        }
+        rightChildren={<GroupInfo group={group} />}
       />
     </>
   );
