@@ -10,12 +10,12 @@ coverage:
       flag_coverage_not_uploaded_behavior: exclude
     project:
       design:
-        target: '80%'
-        threshold: 0
+        target: auto
+        threshold: 2
         paths:
           - 'packages/design'
       website:
-        target: '80%'
+        target: auto
         threshold: 5
         paths:
           - 'packages/website'
