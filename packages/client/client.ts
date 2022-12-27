@@ -135,6 +135,13 @@ export interface Notice {
   postID: number;
   createdAt: number;
 }
+export interface SubjectEdit {
+  name: string;
+  infobox: string;
+  platform: number;
+  summary: string;
+  commitMessage: string;
+}
 /**
  * 登出
  */
@@ -531,6 +538,73 @@ export async function clearNotice(
     oazapfts.json({
       ...opts,
       method: 'POST',
+      body,
+    }),
+  );
+}
+/**
+ * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+ */
+export async function putSubjectInfo(
+  subjectId: number,
+  subjectEdit?: SubjectEdit,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: subjectEdit,
+    }),
+  );
+}
+/**
+ * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+ */
+export async function patchSubjectInfo(
+  subjectId: number,
+  body: {
+    commitMessage: string;
+    subject: {
+      name?: string;
+      infobox?: string;
+      platform?: number;
+      summary?: string;
+      commitMessage?: string;
+    };
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
       body,
     }),
   );
