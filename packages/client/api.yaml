@@ -457,7 +457,6 @@ components:
             普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
 
             https://bgm.tv/group/topic/366812#post_1923517
-          commitMessage: 测试编辑
       type: object
       properties:
         name:
@@ -470,15 +469,11 @@ components:
           type: integer
         summary:
           type: string
-        commitMessage:
-          minLength: 1
-          type: string
       required:
         - name
         - infobox
         - platform
         - summary
-        - commitMessage
 paths:
   /p1/logout:
     post:
@@ -1199,40 +1194,51 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SubjectEdit'
+              type: object
+              properties:
+                commitMessage:
+                  minLength: 1
+                  type: string
+                subject:
+                  $ref: '#/components/schemas/SubjectEdit'
+              required:
+                - commitMessage
+                - subject
             example:
-              name: 沙盒
-              infobox: |-
-                {{Infobox animanga/TVAnime
-                |中文名= 沙盒
-                |别名={
-                }
-                |话数= 7
-                |放送开始= 0000-10-06
-                |放送星期= 
-                |官方网站= 
-                |播放电视台= 
-                |其他电视台= 
-                |播放结束= 
-                |其他= 
-                |Copyright= 
-                |平台={
-                [龟壳]
-                [Xbox Series S]
-                [Xbox Series X]
-                [Xbox Series X/S]
-                [PC]
-                [Xbox Series X|S]
-                }
-                }}
-              platform: 0
-              summary: |-
-                本条目是一个沙盒，可以用于尝试bgm功能。
+              commitMessage: 修正笔误
+              subject:
+                name: 沙盒
+                infobox: |-
+                  {{Infobox animanga/TVAnime
+                  |中文名= 沙盒
+                  |别名={
+                  }
+                  |话数= 7
+                  |放送开始= 0000-10-06
+                  |放送星期= 
+                  |官方网站= 
+                  |播放电视台= 
+                  |其他电视台= 
+                  |播放结束= 
+                  |其他= 
+                  |Copyright= 
+                  |平台={
+                  [龟壳]
+                  [Xbox Series S]
+                  [Xbox Series X]
+                  [Xbox Series X/S]
+                  [PC]
+                  [Xbox Series X|S]
+                  }
+                  }}
+                platform: 0
+                summary: |-
+                  本条目是一个沙盒，可以用于尝试bgm功能。
 
-                普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
+                  普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
 
-                https://bgm.tv/group/topic/366812#post_1923517
-              commitMessage: 测试编辑
+                  https://bgm.tv/group/topic/366812#post_1923517
+        required: true
       parameters:
         - schema:
             minimum: 0
@@ -1315,7 +1321,6 @@ paths:
 
 
                         https://bgm.tv/group/topic/366812#post_1923517
-                      commitMessage: 测试编辑
                   type: object
                   properties:
                     name:
@@ -1327,9 +1332,6 @@ paths:
                     platform:
                       type: integer
                     summary:
-                      type: string
-                    commitMessage:
-                      minLength: 1
                       type: string
               required:
                 - commitMessage

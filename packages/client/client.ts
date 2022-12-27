@@ -140,7 +140,6 @@ export interface SubjectEdit {
   infobox: string;
   platform: number;
   summary: string;
-  commitMessage: string;
 }
 /**
  * 登出
@@ -547,7 +546,10 @@ export async function clearNotice(
  */
 export async function putSubjectInfo(
   subjectId: number,
-  subjectEdit?: SubjectEdit,
+  body: {
+    commitMessage: string;
+    subject: SubjectEdit;
+  },
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -567,7 +569,7 @@ export async function putSubjectInfo(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: subjectEdit,
+      body,
     }),
   );
 }
@@ -583,7 +585,6 @@ export async function patchSubjectInfo(
       infobox?: string;
       platform?: number;
       summary?: string;
-      commitMessage?: string;
     };
   },
   opts?: Oazapfts.RequestOpts,
