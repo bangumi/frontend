@@ -6,7 +6,7 @@ import type { LinkProps } from './Link';
 import Link from './Link';
 
 const componentMeta: ComponentMeta<typeof Link> = {
-  title: 'modern/Topology/Link',
+  title: 'modern/Typography/Link',
   component: Link,
 };
 
