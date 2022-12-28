@@ -5,11 +5,11 @@ import type { FC } from 'react';
 import React from 'react';
 
 export interface DividerProps {
-  /* 朝向：水平或竖直 */
+  /** 朝向：水平或竖直 */
   orientation?: 'horizontal' | 'vertical';
-  /* 是否属于列表子项 , 在 `ul` 中使用 */
+  /** 是否属于列表子项 , 在 `ul` 中使用 */
   isListItem?: boolean;
-  /* 自定义类名 */
+  /** 自定义类名 */
   className?: string;
 }
 
