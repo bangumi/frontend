@@ -10,7 +10,7 @@ components:
       type: apiKey
       in: cookie
       name: sessionID
-      description: 使用 [login](#/auth/login) 登录
+      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/p1/demo/login) 登录
   schemas:
     User:
       title: User
@@ -467,6 +467,12 @@ components:
           type: string
         platform:
           type: integer
+        date:
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          examples:
+            - '0000-00-00'
+            - '2007-01-30'
+          type: string
         summary:
           type: string
       required:
@@ -474,6 +480,69 @@ components:
         - infobox
         - platform
         - summary
+    WikiPlatform:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+        - text
+    SubjectWikiInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        typeID:
+          type: integer
+        infobox:
+          type: string
+        platform:
+          type: integer
+        availablePlatform:
+          type: array
+          items:
+            $ref: '#/components/schemas/WikiPlatform'
+        summary:
+          type: string
+        nsfw:
+          type: boolean
+      required:
+        - id
+        - name
+        - typeID
+        - infobox
+        - platform
+        - availablePlatform
+        - summary
+        - nsfw
+    HistorySummary:
+      type: object
+      properties:
+        creator:
+          type: object
+          properties:
+            username:
+              type: string
+          required:
+            - username
+        type:
+          description: 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知
+          type: integer
+        commitMessage:
+          type: string
+        createdAt:
+          description: unix timestamp seconds
+          type: integer
+      required:
+        - creator
+        - type
+        - commitMessage
+        - createdAt
 paths:
   /p1/logout:
     post:
@@ -652,7 +721,7 @@ paths:
               example:
                 code: NEED_LOGIN
                 error: Unauthorized
-                message: you need to login before %s
+                message: you need to login before get current user
                 statusCode: 401
         '500':
           description: 意料之外的服务器错误
@@ -1185,6 +1254,51 @@ paths:
                 description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
   /p1/wiki/subjects/{subjectID}:
+    get:
+      operationId: subjectInfo
+      tags:
+        - wiki
+      description: |-
+        获取当前的 wiki 信息
+
+        暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 363612
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectWikiInfo'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
     put:
       operationId: putSubjectInfo
       tags:
@@ -1259,9 +1373,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                INVALID_ERROR_SYNTAX:
+                INVALID_SYNTAX_ERROR:
                   value:
-                    code: INVALID_ERROR_SYNTAX
+                    code: INVALID_SYNTAX_ERROR
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
@@ -1331,6 +1445,12 @@ paths:
                       type: string
                     platform:
                       type: integer
+                    date:
+                      pattern: ^\d{4}-\d{2}-\d{2}$
+                      examples:
+                        - '0000-00-00'
+                        - '2007-01-30'
+                      type: string
                     summary:
                       type: string
               required:
@@ -1383,9 +1503,57 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
               examples:
-                INVALID_ERROR_SYNTAX:
+                INVALID_SYNTAX_ERROR:
                   value:
-                    code: INVALID_ERROR_SYNTAX
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/wiki/subjects/{subjectID}/history-summary:
+    get:
+      operationId: subjectEditHistorySummary
+      tags:
+        - wiki
+      description: |-
+        获取当前的 wiki 信息
+
+        暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 8
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HistorySummary'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
                     error: Bad Request
                     message: '%s'
                     statusCode: 400

@@ -135,11 +135,34 @@ export interface Notice {
   postID: number;
   createdAt: number;
 }
+export interface WikiPlatform {
+  id: number;
+  text: string;
+}
+export interface SubjectWikiInfo {
+  id: number;
+  name: string;
+  typeID: number;
+  infobox: string;
+  platform: number;
+  availablePlatform: WikiPlatform[];
+  summary: string;
+  nsfw: boolean;
+}
 export interface SubjectEdit {
   name: string;
   infobox: string;
   platform: number;
+  date?: string;
   summary: string;
+}
+export interface HistorySummary {
+  creator: {
+    username: string;
+  };
+  type: number;
+  commitMessage: string;
+  createdAt: number;
 }
 /**
  * 登出
@@ -542,6 +565,29 @@ export async function clearNotice(
   );
 }
 /**
+ * 获取当前的 wiki 信息
+ *
+ * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+ */
+export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: SubjectWikiInfo;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}`, {
+    ...opts,
+  });
+}
+/**
  * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
  */
 export async function putSubjectInfo(
@@ -584,6 +630,7 @@ export async function patchSubjectInfo(
       name?: string;
       infobox?: string;
       platform?: number;
+      date?: string;
       summary?: string;
     };
   },
@@ -609,4 +656,27 @@ export async function patchSubjectInfo(
       body,
     }),
   );
+}
+/**
+ * 获取当前的 wiki 信息
+ *
+ * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+ */
+export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: HistorySummary[];
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/history-summary`, {
+    ...opts,
+  });
 }
