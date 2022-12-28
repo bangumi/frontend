@@ -59,10 +59,24 @@ export interface paths {
     post: operations['clearNotice'];
   };
   '/p1/wiki/subjects/{subjectID}': {
+    /**
+     * @description 获取当前的 wiki 信息
+     *
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+     */
+    get: operations['subjectInfo'];
     /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
     put: operations['putSubjectInfo'];
     /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
     patch: operations['patchSubjectInfo'];
+  };
+  '/p1/wiki/subjects/{subjectID}/history-summary': {
+    /**
+     * @description 获取当前的 wiki 信息
+     *
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+     */
+    get: operations['subjectEditHistorySummary'];
   };
 }
 
@@ -222,7 +236,32 @@ export interface components {
       name: string;
       infobox: string;
       platform: number;
+      date?: string;
       summary: string;
+    };
+    WikiPlatform: {
+      id: number;
+      text: string;
+    };
+    SubjectWikiInfo: {
+      id: number;
+      name: string;
+      typeID: number;
+      infobox: string;
+      platform: number;
+      availablePlatform: components['schemas']['WikiPlatform'][];
+      summary: string;
+      nsfw: boolean;
+    };
+    HistorySummary: {
+      creator: {
+        username: string;
+      };
+      /** @description 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知 */
+      type: number;
+      commitMessage: string;
+      /** @description unix timestamp seconds */
+      createdAt: number;
     };
   };
   responses: never;
@@ -665,6 +704,39 @@ export interface operations {
       };
     };
   };
+  subjectInfo: {
+    /**
+     * @description 获取当前的 wiki 信息
+     *
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+     */
+    parameters: {
+      /** @example 363612 */
+      path: {
+        subjectID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['SubjectWikiInfo'];
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
   putSubjectInfo: {
     /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
     parameters: {
@@ -733,6 +805,7 @@ export interface operations {
             name?: string;
             infobox?: string;
             platform?: number;
+            date?: string;
             summary?: string;
           };
         };
@@ -741,6 +814,39 @@ export interface operations {
     responses: {
       /** @description Default Response */
       200: never;
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  subjectEditHistorySummary: {
+    /**
+     * @description 获取当前的 wiki 信息
+     *
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+     */
+    parameters: {
+      /** @example 8 */
+      path: {
+        subjectID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['HistorySummary'][];
+        };
+      };
       /** @description Default Response */
       401: {
         content: {
