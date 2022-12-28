@@ -198,6 +198,7 @@ importers:
       '@bangumi/design': workspace:0.0.0
       '@bangumi/icons': workspace:0.0.0
       '@bangumi/utils': workspace:0.0.0
+      '@bgm38/wiki': ^0.0.6
       '@marsidev/react-turnstile': ^0.0.5
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.191
@@ -223,6 +224,7 @@ importers:
       vite-plugin-svgr: ^2.4.0
       whatwg-fetch: ^3.6.2
     dependencies:
+      '@bgm38/wiki': 0.0.6
       '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       classnames: 2.3.2
@@ -3189,6 +3191,11 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
+
+  /@bgm38/wiki/0.0.6:
+    resolution: {integrity: sha512-G1f4pPGaJui10iDz/EfFvCFIuUpR+qHTYWuNFTJkq7gNqIziGOndSrNGxgCEeuCuoCoGLwPMMMAtWT2jNVp6Vg==}
+    engines: {node: '>=16'}
+    dev: false
 
   /@cnakazawa/watch/1.0.4:
     resolution: {integrity: sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ==}
@@ -17164,7 +17171,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2
       '@svgr/core': 6.5.1
-      vite: 3.2.5_less@4.1.3
+      vite: 3.2.5
     transitivePeerDependencies:
       - rollup
       - supports-color
