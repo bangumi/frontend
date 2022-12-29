@@ -90,7 +90,7 @@ const TopicPage: FC = () => {
           <>
             {/* Topic content */}
             <div id={`post_${topicDetail.id}`}>
-              <RichContent html={parsedText} />
+              <RichContent element={parsedText} />
             </div>
             {/* Topic Comments */}
             <div className={styles.replies}>

@@ -3,17 +3,12 @@ import React from 'react';
 import './style';
 
 export interface RichContentProps {
-  html: string;
+  element: React.ReactNode;
   classname?: string;
 }
 
-const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
-  return (
-    <div
-      className={classNames('bgm-rich-content', classname)}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+const RichContent: React.FC<RichContentProps> = ({ element, classname }) => {
+  return <div className={classNames('bgm-rich-content', classname)}>{element}</div>;
 };
 
 export default RichContent;

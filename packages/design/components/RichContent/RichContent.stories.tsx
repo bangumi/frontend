@@ -22,5 +22,5 @@ const demoText = render(`
 `);
 
 export const Demo: ComponentStory<typeof RichContent> = () => {
-  return <RichContent html={demoText} />;
+  return <RichContent element={demoText} />;
 };
