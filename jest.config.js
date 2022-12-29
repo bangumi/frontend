@@ -177,6 +177,7 @@ module.exports = {
   // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
+  // 使用 pnpm 作为包管理器的的路径跟传统的 npm 路径不同，
   transformIgnorePatterns: [String.raw`<rootDir>/node_modules/.pnpm/(?!(lodash-es|@bgm38\+wiki)@)`],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
