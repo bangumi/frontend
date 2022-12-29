@@ -188,9 +188,12 @@ importers:
 
   packages/utils:
     specifiers:
+      '@bgm38/wiki': ^0.0.8
       '@types/js-yaml': ^4.0.5
       js-yaml: ^4.1.0
       typescript: ^4.9.4
+    dependencies:
+      '@bgm38/wiki': 0.0.8
     devDependencies:
       '@types/js-yaml': 4.0.5
       js-yaml: 4.1.0
@@ -202,7 +205,6 @@ importers:
       '@bangumi/design': workspace:0.0.0
       '@bangumi/icons': workspace:0.0.0
       '@bangumi/utils': workspace:0.0.0
-      '@bgm38/wiki': ^0.0.6
       '@marsidev/react-turnstile': ^0.0.5
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.191
@@ -228,7 +230,6 @@ importers:
       vite-plugin-svgr: ^2.4.0
       whatwg-fetch: ^3.6.2
     dependencies:
-      '@bgm38/wiki': 0.0.6
       '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
       classnames: 2.3.2
@@ -3196,8 +3197,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@bgm38/wiki/0.0.6:
-    resolution: {integrity: sha512-G1f4pPGaJui10iDz/EfFvCFIuUpR+qHTYWuNFTJkq7gNqIziGOndSrNGxgCEeuCuoCoGLwPMMMAtWT2jNVp6Vg==}
+  /@bgm38/wiki/0.0.8:
+    resolution: {integrity: sha512-kHhJ3Kv6mpcwV+IzWnXMPcWbGTBDpQV2DidsjedKYcqNaETcfnCXcTpu1k7DzTb/37SVr5SyET1ljED4GRyyRQ==}
     engines: {node: '>=16'}
     dev: false
 

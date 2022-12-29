@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "main": "index.ts",
+  "dependencies": {
+    "@bgm38/wiki": "^0.0.8"
+  },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
     "js-yaml": "^4.1.0",
