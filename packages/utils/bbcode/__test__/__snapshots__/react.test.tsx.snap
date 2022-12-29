@@ -430,6 +430,7 @@ exports[`html render vnode render link 1`] = `
 <a
   className="l test"
   href="http://chii.in/"
+  rel="nofollow external noopener noreferrer"
   style={{}}
   target="_blank"
 />

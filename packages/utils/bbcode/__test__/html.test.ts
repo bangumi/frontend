@@ -22,12 +22,12 @@ describe('html render vnode', () => {
       props: {
         href: 'http://chii.in/',
         target: '_blank',
-        ref: 'nofollow external noopener noreferrer',
+        rel: 'nofollow external noopener noreferrer',
       },
       className: ['l', 'test'],
     };
     expect(renderNode(vnode)).toBe(
-      '<a href="http://chii.in/" target="_blank" ref="nofollow external noopener noreferrer" class="l test"/>',
+      '<a href="http://chii.in/" target="_blank" rel="nofollow external noopener noreferrer" class="l test"/>',
     );
   });
   test('render boolean props node', () => {

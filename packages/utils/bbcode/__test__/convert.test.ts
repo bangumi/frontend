@@ -137,7 +137,7 @@ describe('convert bbcode to html vnode', () => {
           props: {
             href: 'http://test.com/',
             target: '_blank',
-            ref: 'nofollow external noopener noreferrer',
+            rel: 'nofollow external noopener noreferrer',
           },
           className: 'l',
           children: ['测试'],
@@ -172,8 +172,8 @@ describe('convert bbcode to html vnode', () => {
           type: 'img',
           props: {
             src: 'http://test.com/xx.png',
-            referrerpolicy: 'no-referrer',
-            ref: 'noreferrer',
+            referrerPolicy: 'no-referrer',
+            rel: 'noreferrer',
           },
           className: 'code',
         },
@@ -187,8 +187,8 @@ describe('convert bbcode to html vnode', () => {
           type: 'img',
           props: {
             src: 'not-a-website',
-            referrerpolicy: 'no-referrer',
-            ref: 'noreferrer',
+            referrerPolicy: 'no-referrer',
+            rel: 'noreferrer',
           },
           className: 'code',
         },

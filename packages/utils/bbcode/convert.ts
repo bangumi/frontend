@@ -32,8 +32,8 @@ function convertImgNode(node: CodeVNode): VNode {
   if (isExternalLink(src)) {
     vnode.props = {
       ...vnode.props,
-      referrerpolicy: 'no-referrer',
-      ref: 'noreferrer',
+      referrerPolicy: 'no-referrer',
+      rel: 'noreferrer',
     };
   }
   return vnode;
@@ -64,7 +64,7 @@ function convertUrlNode(node: CodeVNode): VNode {
     vnode.props = {
       ...vnode.props,
       target: '_blank',
-      ref: 'nofollow external noopener noreferrer',
+      rel: 'nofollow external noopener noreferrer',
     };
   }
   return vnode;
