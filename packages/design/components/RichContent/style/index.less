@@ -13,4 +13,32 @@
   img {
     max-width: 99%;
   }
+
+  .quote {
+    color: @gray-60;
+
+    // 当没有内容时，回复按钮已有上边距，无需额外添加
+    &:not(:last-child) {
+      margin-bottom: 12px;
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      line-height: 0;
+      display: inline;
+      padding: 0 7px;
+      background-repeat: no-repeat;
+    }
+
+    &::before {
+      background-image: data-uri('../../../../icons/assets/open-quote.svg');
+      margin-right: 10px;
+    }
+
+    &::after {
+      background-image: data-uri('../../../../icons/assets/close-quote.svg');
+      margin-left: 10px;
+    }
+  }
 }

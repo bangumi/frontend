@@ -10,5 +10,6 @@ module.exports = {
     'color-function-notation': 'legacy',
     'alpha-value-notation': 'number',
     'string-quotes': 'single',
+    'function-no-unknown': [true, { ignoreFunctions: ['data-uri'] }],
   },
 };
