@@ -55,7 +55,11 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [
       react(),
-      svgr(),
+      svgr({
+        svgrOptions: {
+          titleProp: true,
+        },
+      }),
       pages({
         extensions: ['tsx'],
         importMode: 'async',

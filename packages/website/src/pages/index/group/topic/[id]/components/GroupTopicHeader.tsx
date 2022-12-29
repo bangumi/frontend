@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
 import type { User, Group } from '@bangumi/client/group';
 import { Avatar, Typography, Topic } from '@bangumi/design';
@@ -41,4 +41,4 @@ const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group, id }) 
   );
 };
 
-export default GroupTopicHeader;
+export default memo(GroupTopicHeader);

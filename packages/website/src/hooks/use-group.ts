@@ -48,7 +48,7 @@ export function useGroup(name: string): UseGroupRet {
 
   useEffect(() => {
     localStorage.setItem(clampKey, descriptionClampState);
-  }, [descriptionClampState]);
+  }, [clampKey, descriptionClampState]);
 
   return {
     group: groupResp,

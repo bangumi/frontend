@@ -5,13 +5,13 @@ import type { FC, ImgHTMLAttributes } from 'react';
 import React from 'react';
 
 export interface ImageProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'> {
-  /* 图像的 URL */
+  /** 图像的 URL */
   src: string;
-  /* 图像的备用文本描述 */
+  /** 图像的备用文本描述 */
   alt?: string;
-  /* 是否增加 box-shadow */
+  /** 是否增加 box-shadow */
   withBoxShadow?: boolean;
-  /* 形状, 矩形或圆形, 默认为矩形 */
+  /** 形状, 矩形或圆形, 默认为矩形 */
   shape?: 'rect' | 'circle';
 }
 

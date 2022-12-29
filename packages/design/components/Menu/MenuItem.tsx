@@ -5,13 +5,13 @@ import React from 'react';
 import { useMenuContext } from '.';
 
 export interface MenuItemProps {
-  /* 唯一标识，不应该直接设置它 */
+  /** 唯一标识，不应该直接设置它 */
   id: string;
-  /* 菜单标题 */
+  /** 菜单标题 */
   label: string;
-  /* 自定义类名 */
+  /** 自定义类名 */
   className?: string;
-  /* 子菜单，鼠标悬浮时显示 */
+  /** 子菜单，鼠标悬浮时显示 */
   subMenu?: JSX.Element;
 }
 
