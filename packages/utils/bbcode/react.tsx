@@ -71,7 +71,7 @@ export const renderNode = (node: NodeTypes, key?: string): React.ReactElement | 
   return React.createElement(type, convertToReactProps(node));
 };
 
-export const render = (rawStr: string) => {
+export const render = (rawStr: string): Array<React.ReactElement | string> => {
   const nodes: CodeNodeTypes[] = new Parser(rawStr).parse();
 
   return nodes.map((node) => renderNode(convert(node, {})));

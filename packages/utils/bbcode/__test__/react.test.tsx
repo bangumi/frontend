@@ -4,7 +4,7 @@ import React from 'react';
 import { render, renderNode } from '../react';
 import type { VNode } from '../types';
 
-describe('html render vnode', () => {
+describe('react render vnode', () => {
   test('render multi style', () => {
     const vnode: VNode = {
       type: 'span',
