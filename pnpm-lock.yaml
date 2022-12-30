@@ -188,9 +188,12 @@ importers:
 
   packages/utils:
     specifiers:
+      '@bgm38/wiki': ^0.0.8
       '@types/js-yaml': ^4.0.5
       js-yaml: ^4.1.0
       typescript: ^4.9.4
+    dependencies:
+      '@bgm38/wiki': 0.0.8
     devDependencies:
       '@types/js-yaml': 4.0.5
       js-yaml: 4.1.0
@@ -213,7 +216,6 @@ importers:
       msw: ^0.49.2
       oazapfts: ^4.5.0
       openapi-types: ^12.1.0
-      openapi-typescript-fetch: ^1.1.3
       react: ^18.2.0
       react-dom: ^18.2.0
       react-router-dom: ^6.5.0
@@ -232,7 +234,6 @@ importers:
       classnames: 2.3.2
       dayjs: 1.11.7
       oazapfts: 4.5.0_openapi-types@12.1.0
-      openapi-typescript-fetch: 1.1.3
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-router-dom: 6.5.0_biqbaboplfbrettd7655fr4n2y
@@ -3193,6 +3194,11 @@ packages:
   /@bcoe/v8-coverage/0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
+
+  /@bgm38/wiki/0.0.8:
+    resolution: {integrity: sha512-kHhJ3Kv6mpcwV+IzWnXMPcWbGTBDpQV2DidsjedKYcqNaETcfnCXcTpu1k7DzTb/37SVr5SyET1ljED4GRyyRQ==}
+    engines: {node: '>=16'}
+    dev: false
 
   /@cnakazawa/watch/1.0.4:
     resolution: {integrity: sha512-v9kIhKwjeZThiWrLmj0y17CWoyddASLj9O2yvbZkbvw/N3rWOYy9zkV66ursAoVr0mV15bL8g0c4QZUE6cdDoQ==}
@@ -14058,11 +14064,6 @@ packages:
 
   /openapi-types/12.1.0:
     resolution: {integrity: sha512-XpeCy01X6L5EpP+6Hc3jWN7rMZJ+/k1lwki/kTmWzbVhdPie3jd5O2ZtedEx8Yp58icJ0osVldLMrTB/zslQXA==}
-
-  /openapi-typescript-fetch/1.1.3:
-    resolution: {integrity: sha512-smLZPck4OkKMNExcw8jMgrMOGgVGx2N/s6DbKL2ftNl77g5HfoGpZGFy79RBzU/EkaO0OZpwBnslfdBfh7ZcWg==}
-    engines: {node: '>= 12.0.0', npm: '>= 7.0.0'}
-    dev: false
 
   /openapi-typescript/6.1.0:
     resolution: {integrity: sha512-4G0hQu9zXHESZe4fZouucmA+6J5oKSBNYzG0gPbV9V4aKBNIwfUY86ur/cxyTMzuN9vQuAiMe//q4ZMXgMvGtQ==}
