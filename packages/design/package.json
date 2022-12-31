@@ -27,7 +27,7 @@
     "msw": "^0.49.2",
     "react-router-dom": "^6.6.1",
     "typescript": "^4.9.4",
-    "vite": "^4.0.2",
+    "vite": "^4.0.3",
     "vite-plugin-svgr": "^2.4.0"
   },
   "scripts": {
