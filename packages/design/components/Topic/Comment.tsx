@@ -8,7 +8,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { State } from '@bangumi/client/topic';
 import type { SubReply, Reply, User } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
-import { render as renderBBCode } from '@bangumi/utils';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
@@ -31,7 +30,7 @@ const Link = Typography.Link;
 const RenderContent = memo(({ state, text }: { state: State; text: string }) => {
   switch (state) {
     case State.Normal:
-      return <RichContent html={renderBBCode(text)} classname='bgm-comment__content' />;
+      return <RichContent bbcode={text} classname='bgm-comment__content' />;
     case State.Closed:
       return <div className='bgm-comment__content'>关闭了该主题</div>;
     case State.Reopen:
