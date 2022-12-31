@@ -8,7 +8,7 @@ import styles from './ClampableContent.module.less';
 
 export interface ClampableContentProps {
   threshold: number;
-  content: string;
+  content: React.ReactNode;
   isClamped: boolean;
   containerClassName?: string;
   onChange?: (isClamped: boolean) => void;
@@ -72,12 +72,10 @@ export const ClampableContent: React.FC<ClampableContentProps> = ({
 
   return (
     <div className={classNames(styles.container, containerClassName)}>
-      <div
-        ref={contentRef}
-        style={isClampEnabled && isClamped ? clampedStyle : undefined}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-      {renderControl()}
+      <div ref={contentRef} style={isClampEnabled && isClamped ? clampedStyle : undefined}>
+        {content}
+        {renderControl()}
+      </div>
     </div>
   );
 };

@@ -1,19 +1,16 @@
 import classNames from 'classnames';
 import React from 'react';
+
+import { render } from '@bangumi/utils';
 import './style';
 
 export interface RichContentProps {
-  html: string;
+  bbcode: string;
   classname?: string;
 }
 
-const RichContent: React.FC<RichContentProps> = ({ html, classname }) => {
-  return (
-    <div
-      className={classNames('bgm-rich-content', classname)}
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
+const RichContent: React.FC<RichContentProps> = ({ bbcode, classname }) => {
+  return <div className={classNames('bgm-rich-content', classname)}>{render(bbcode)}</div>;
 };
 
 export default RichContent;

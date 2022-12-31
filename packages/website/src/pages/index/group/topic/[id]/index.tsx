@@ -56,7 +56,6 @@ const TopicPage: FC = () => {
   const { data: topicDetail, mutate } = useGroupTopic(Number(id));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
-  const parsedText = renderBBCode(topicDetail.text);
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
 
@@ -90,7 +89,7 @@ const TopicPage: FC = () => {
           <>
             {/* Topic content */}
             <div id={`post_${topicDetail.id}`}>
-              <RichContent html={parsedText} />
+              <RichContent bbcode={topicDetail.text} />
             </div>
             {/* Topic Comments */}
             <div className={styles.replies}>

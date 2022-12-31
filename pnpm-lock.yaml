@@ -190,12 +190,14 @@ importers:
     specifiers:
       '@bgm38/wiki': ^0.0.8
       '@types/js-yaml': ^4.0.5
+      '@types/react': ^18.0.26
       js-yaml: ^4.1.0
       typescript: ^4.9.4
     dependencies:
       '@bgm38/wiki': 0.0.8
     devDependencies:
       '@types/js-yaml': 4.0.5
+      '@types/react': 18.0.26
       js-yaml: 4.1.0
       typescript: 4.9.4
 
