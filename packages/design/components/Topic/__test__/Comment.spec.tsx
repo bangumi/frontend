@@ -117,13 +117,15 @@ describe('Normal Comment', () => {
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
   });
 
-  it('successful reply should refresh and hide form otherwise not', async () => {
+  it('successful reply should refresh, highlight and hide form otherwise not', async () => {
+    const basicReply = { id: 2104702 };
     const mockApi = (status: number) =>
       mockServer.use(
         rest.post('/p1/groups/-/topics/1/replies', (_, res, ctx) =>
-          res(ctx.status(status), ctx.json({})),
+          res(ctx.status(status), ctx.json(basicReply)),
         ),
       );
+
     const onSuccess = jest.fn();
     const props = buildProps(false);
     const { getByText, container } = render(
@@ -139,6 +141,9 @@ describe('Normal Comment', () => {
     fillAndSubmit();
     await waitFor(() => {
       expect(onSuccess).toBeCalled();
+      expect(document.getElementById(`post_${basicReply.id}`)).toHaveClass(
+        'bgm-comment__header--highlighted',
+      );
       expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
     });
 
