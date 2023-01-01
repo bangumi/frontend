@@ -1,7 +1,8 @@
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render as _render, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
 import { rest } from 'msw';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import { server as mockServer } from '@bangumi/website/mocks/server';
 
@@ -11,6 +12,10 @@ import repliesComment from './fixtures/repliesComment.json';
 import singleComment from './fixtures/singleComment.json';
 import specialComment from './fixtures/specialComment.json';
 import mockedCurrentUser from './fixtures/user.json';
+
+function render(component: React.ReactElement, routerEntries?: string[]) {
+  return _render(<MemoryRouter initialEntries={routerEntries}>{component}</MemoryRouter>);
+}
 
 // 0 正常评论 6 被用户删除 7 违反社区指导原则，已被删除
 describe('Normal Comment', () => {
@@ -112,13 +117,15 @@ describe('Normal Comment', () => {
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
   });
 
-  it('successful reply should refresh and hide form otherwise not', async () => {
+  it('successful reply should refresh, highlight and hide form otherwise not', async () => {
+    const basicReply = { id: 2104702 };
     const mockApi = (status: number) =>
       mockServer.use(
         rest.post('/p1/groups/-/topics/1/replies', (_, res, ctx) =>
-          res(ctx.status(status), ctx.json({})),
+          res(ctx.status(status), ctx.json(basicReply)),
         ),
       );
+
     const onSuccess = jest.fn();
     const props = buildProps(false);
     const { getByText, container } = render(
@@ -134,6 +141,9 @@ describe('Normal Comment', () => {
     fillAndSubmit();
     await waitFor(() => {
       expect(onSuccess).toBeCalled();
+      expect(document.getElementById(`post_${basicReply.id}`)).toHaveClass(
+        'bgm-comment__header--highlighted',
+      );
       expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
     });
 
@@ -144,6 +154,12 @@ describe('Normal Comment', () => {
       expect(onSuccess).not.toBeCalled();
       expect(container.getElementsByClassName('bgm-editor__form').length).toBe(1);
     });
+  });
+
+  it('should highlight comment corresponding to hash', () => {
+    const props = buildProps(false, repliesComment);
+    const { container } = render(<Comment {...props} />, ['/groups/topics/1#post_2104702']);
+    expect(container).toMatchSnapshot();
   });
 });
 

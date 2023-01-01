@@ -2,7 +2,7 @@ import type { BasicReply } from 'packages/client/client';
 import type { Group } from 'packages/client/group';
 import type { FC } from 'react';
 import React, { useEffect, useState, memo } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { RichContent, Avatar, Section, Typography, Button, Topic, Layout } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
@@ -61,14 +61,16 @@ const TopicPage: FC = () => {
 
   const [replyContent, setReplyContent] = useState('');
 
-  // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
-  // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601
+  const navigate = useNavigate();
+
+  // 首次渲染时评论列表可能还没加载完，浏览器无法定位，所以需要在评论加载完后再滚动到指定位置
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
     document.getElementById(anchor)?.scrollIntoView(true);
   }, [topicDetail]);
 
-  const handleReplySuccess = async (_: BasicReply) => {
+  const handleReplySuccess = async (reply: BasicReply) => {
+    navigate(`#post_${reply.id}`);
     // 刷新评论列表
     await mutate();
     setReplyContent('');

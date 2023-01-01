@@ -3,6 +3,7 @@ import { unescape } from 'lodash-es';
 import type { BasicReply } from 'packages/client/client';
 import type { FC } from 'react';
 import React, { useState, memo, useCallback } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { State } from '@bangumi/client/topic';
 import type { SubReply, Reply, User } from '@bangumi/client/topic';
@@ -77,12 +78,20 @@ const Comment: FC<CommentProps> = ({
   const [showReplyEditor, setShowReplyEditor] = useState(false);
   const [replyContent, setReplyContent] = useState('');
 
+  const elementId = `post_${props.id}`;
+  const location = useLocation();
+  const highlightId = location.hash.slice(1);
+  const isHighlighted = highlightId === elementId;
+
   const headerClassName = classNames('bgm-comment__header', {
     'bgm-comment__header--reply': isReply,
     'bgm-comment__header--collapsed': shouldCollapsed,
+    'bgm-comment__header--highlighted': isHighlighted,
   });
 
   const url = getUserProfileLink(creator.username);
+
+  const navigate = useNavigate();
 
   const startReply = useCallback(() => {
     setShowReplyEditor(true);
@@ -110,7 +119,7 @@ const Comment: FC<CommentProps> = ({
       <div
         className={headerClassName}
         onClick={isSpecial ? undefined : () => setShouldCollapsed(false)}
-        id={`post_${props.id}`}
+        id={elementId}
       >
         <span className='bgm-comment__tip'>
           <div className='creator-info'>
@@ -127,10 +136,11 @@ const Comment: FC<CommentProps> = ({
   }
 
   const handleReplySuccess = async (reply: BasicReply) => {
+    // 先隐藏回复框避免scrollIntoView后布局变化
+    setShowReplyEditor(false);
+    navigate(`#post_${reply.id}`);
     // 刷新回复列表
     await onReplySuccess();
-    document.getElementById(`post_${reply.id}`)?.scrollIntoView({ block: 'center' });
-    setShowReplyEditor(false);
   };
 
   return (
