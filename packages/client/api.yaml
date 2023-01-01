@@ -967,6 +967,8 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createNewGroupTopic
+      tags:
+        - group
       requestBody:
         content:
           application/json:
@@ -1082,6 +1084,8 @@ paths:
   /p1/groups/-/topics/{topicID}/replies:
     post:
       operationId: createGroupReply
+      tags:
+        - group
       requestBody:
         content:
           application/json:
