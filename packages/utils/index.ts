@@ -1,4 +1,4 @@
-export { default as parseWiki } from './wiki/parser';
+export { default as parseWiki, WikiSyntaxError } from '@bgm38/wiki';
 export * from './bbcode';
 
 /**
