@@ -45,6 +45,9 @@ export interface paths {
   '/p1/groups/-/topics/{topicID}/replies': {
     post: operations['createGroupReply'];
   };
+  '/p1/groups/-/posts/{postID}': {
+    put: operations['editReply'];
+  };
   '/p1/notify': {
     /** 获取未读通知 */
     get: operations['listNotice'];
@@ -626,6 +629,46 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['BasicReply'];
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  editReply: {
+    parameters: {
+      /** @example 2092074 */
+      path: {
+        postID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "text": "new post contents"
+         * }
+         */
+        'application/json': {
+          text: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
         };
       };
       /** @description Default Response */
