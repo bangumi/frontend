@@ -2,6 +2,14 @@
 
 首先欢迎为新 Bangumi 的前端项目添砖加瓦。
 
+## 项目状态
+
+可以在 tracking dashboard https://github.com/orgs/bangumi/projects/6 查看目前各个 issue 的进展。
+
+- Blocked: 缺少 API 或者缺少设计。
+- Todo: 有响应的 API 和设计，但是缺少响应的前端实现。
+- In Progress：已经有相关的 pull request
+
 ## 开始
 
 - 通过右上角的 Fork 按钮或者点击[这个链接](https://github.com/bangumi/frontend/fork)
