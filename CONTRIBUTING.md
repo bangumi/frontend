@@ -34,16 +34,16 @@ git checkout -b <BRANCH_NAME>
 
 - 启动开发服务器
 
-使用生产后端（next.bgm.tv）
+使用测试后端（dev.bgm38.com）
 
 ```bash
 pnpm dev
 ```
 
-使用测试后端（dev.bgm38.com）
+使用生产后端（next.bgm.tv），**请谨慎使用**
 
 ```bash
-pnpm dev --mode stage
+pnpm dev --mode production
 ```
 
 - 提交前确认所有的测试、lint 通过；
