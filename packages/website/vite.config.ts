@@ -55,7 +55,15 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      react(),
+      react(
+        mode === 'production'
+          ? {
+              babel: {
+                plugins: ['babel-plugin-jsx-remove-data-test-id'],
+              },
+            }
+          : undefined,
+      ),
       svgr({
         svgrOptions: {
           titleProp: true,
