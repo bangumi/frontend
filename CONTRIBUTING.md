@@ -40,6 +40,8 @@ git checkout -b <BRANCH_NAME>
 pnpm dev
 ```
 
+测试用的账号在 https://github.com/bangumi/dev-docs#api
+
 使用生产后端（next.bgm.tv），**请谨慎使用**
 
 ```bash
