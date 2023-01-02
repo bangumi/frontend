@@ -496,6 +496,35 @@ export async function createGroupReply(
     }),
   );
 }
+export async function editReply(
+  postId: number,
+  body: {
+    text: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/groups/-/posts/${encodeURIComponent(postId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
 /**
  * 获取未读通知
  */
