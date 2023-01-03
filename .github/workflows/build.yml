@@ -18,7 +18,7 @@ jobs:
       - uses: ./.github/actions/setup-js-env
 
       - name: Build
-        run: pnpm build
+        run: pnpm build --mode stage
 
       - run: echo ${{ github.event.number }} > packages/website/dist/pr_number
 

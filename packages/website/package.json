@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "dev": "vite --host 127.0.0.1",
-    "preview": "pnpm run build && vite preview"
+    "preview": "pnpm run build --mode stage && vite preview"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^0.0.5",
