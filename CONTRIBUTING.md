@@ -2,6 +2,14 @@
 
 首先欢迎为新 Bangumi 的前端项目添砖加瓦。
 
+## 项目状态
+
+可以在 tracking dashboard https://github.com/orgs/bangumi/projects/6 查看目前各个 issue 的进展。
+
+- Blocked: 缺少 API 或者缺少设计。
+- Todo: 有响应的 API 和设计，但是缺少响应的前端实现。
+- In Progress：已经有相关的 pull request
+
 ## 开始
 
 - 通过右上角的 Fork 按钮或者点击[这个链接](https://github.com/bangumi/frontend/fork)
@@ -34,16 +42,18 @@ git checkout -b <BRANCH_NAME>
 
 - 启动开发服务器
 
-使用生产后端（next.bgm.tv）
+使用测试后端（dev.bgm38.com）
 
 ```bash
 pnpm dev
 ```
 
-使用测试后端（dev.bgm38.com）
+测试用的账号在 https://github.com/bangumi/dev-docs#api
+
+使用生产后端（next.bgm.tv），**请谨慎使用**
 
 ```bash
-pnpm dev --mode stage
+pnpm dev --mode production
 ```
 
 - 提交前确认所有的测试、lint 通过；

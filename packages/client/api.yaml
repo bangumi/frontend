@@ -1150,6 +1150,62 @@ paths:
               schema:
                 description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
+  /p1/groups/-/posts/{postID}:
+    put:
+      operationId: editReply
+      tags:
+        - group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  minLength: 1
+                  type: string
+              required:
+                - text
+            example:
+              text: new post contents
+        required: true
+      parameters:
+        - schema:
+            type: integer
+          example: 2092074
+          in: path
+          name: postID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to edit reply
+                    statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
   /p1/notify:
     get:
       operationId: listNotice
