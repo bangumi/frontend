@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import { unescape } from 'lodash-es';
 import type { BasicReply } from 'packages/client/client';
 import type { FC } from 'react';
 import React, { useState, memo, useCallback } from 'react';
@@ -159,7 +158,7 @@ const Comment: FC<CommentProps> = ({
                 </Link>
                 {originalPosterId === creator.id ? <OriginalPoster /> : null}
                 {isFriend ? <Friend /> : null}
-                {!isReply && creator.sign ? <span>{`// ${unescape(creator.sign)}`}</span> : null}
+                {!isReply && creator.sign ? <span>{`( ${creator.sign} )`}</span> : null}
               </div>
               <CommentInfo createdAt={createdAt} floor={floor} id={`post_${props.id}`} />
             </span>
