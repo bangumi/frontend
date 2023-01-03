@@ -158,7 +158,7 @@ const Comment: FC<CommentProps> = ({
                 </Link>
                 {originalPosterId === creator.id ? <OriginalPoster /> : null}
                 {isFriend ? <Friend /> : null}
-                {!isReply && creator.sign ? <span>{`( ${creator.sign} )`}</span> : null}
+                {!isReply && creator.sign ? <span>{`(${creator.sign})`}</span> : null}
               </div>
               <CommentInfo createdAt={createdAt} floor={floor} id={`post_${props.id}`} />
             </span>
