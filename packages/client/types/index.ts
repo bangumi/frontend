@@ -328,7 +328,7 @@ export interface operations {
       /** @description Default Response */
       200: {
         headers: {
-          /** @description example: "sessionID=12345abc" */
+          /** @description example: "chiiNextSessionID=12345abc" */
           'Set-Cookie'?: string;
         };
         content: {
