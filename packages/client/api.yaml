@@ -10,7 +10,7 @@ components:
       type: apiKey
       in: cookie
       name: sessionID
-      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/p1/demo/login) 登录
+      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
   schemas:
     User:
       title: User
