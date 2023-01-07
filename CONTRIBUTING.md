@@ -7,7 +7,7 @@
 可以在 tracking dashboard https://github.com/orgs/bangumi/projects/6 查看目前各个 issue 的进展。
 
 - Blocked: 缺少 API 或者缺少设计。
-- Todo: 有响应的 API 和设计，但是缺少响应的前端实现。
+- Todo: 有相关的 API 和设计，但是缺少前端实现。
 - In Progress：已经有相关的 pull request
 
 ## 开始
