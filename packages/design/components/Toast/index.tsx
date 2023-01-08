@@ -7,7 +7,7 @@ import './style';
 import { insertToastEvent } from './utils/event-bus';
 export { Toast } from './Toast';
 
-const TOAST_CONTAINER_CLS_NAME = 'bgm-toast--container';
+const TOAST_CONTAINER_CLS_NAME = 'bgm-toast__container';
 
 interface ToastOptions {
   timeout?: number;
