@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
+import { SupportedErrorCode, withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 import type { UseGroupRet } from '@bangumi/website/hooks/use-group';
 
@@ -32,5 +32,5 @@ const InternalGroupPage = () => {
 export const useGroupContext = () => useOutletContext<GroupContext>();
 
 export default withErrorBoundary({
-  404: <>数据库中没有查询到该小组的信息</>,
+  [SupportedErrorCode.NotFound]: <>数据库中没有查询到该小组的信息</>,
 })(InternalGroupPage);
