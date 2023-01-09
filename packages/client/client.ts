@@ -153,6 +153,7 @@ export interface SubjectEdit {
   name: string;
   infobox: string;
   platform: number;
+  nsfw: boolean;
   date?: string;
   summary: string;
 }
@@ -659,6 +660,7 @@ export async function patchSubjectInfo(
       name?: string;
       infobox?: string;
       platform?: number;
+      nsfw?: boolean;
       date?: string;
       summary?: string;
     };
