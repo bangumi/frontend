@@ -15,11 +15,13 @@ const HomePage = () => {
     const theme = document.documentElement.dataset.theme;
 
     const setLight = () => {
-      delete document.documentElement.dataset.theme;
+      document.documentElement.dataset.theme = 'light';
+      localStorage.setItem('chii_theme', 'light');
     };
 
     const setDark = () => {
       document.documentElement.dataset.theme = 'dark';
+      localStorage.setItem('chii_theme', 'dark');
     };
 
     theme === 'dark' ? setLight() : setDark();

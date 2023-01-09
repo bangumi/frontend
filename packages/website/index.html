@@ -13,6 +13,11 @@
     <link rel="icon" type="image/x-icon" href="https://bgm.tv/img/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bangumi 番组计划</title>
+    <script>
+      const theme = localStorage.getItem('chii_theme');
+      theme === 'light' && (document.documentElement.dataset.theme = 'light');
+      theme === 'dark' && (document.documentElement.dataset.theme = 'dark');
+    </script>
   </head>
   <body>
     <div id="root"></div>

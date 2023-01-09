@@ -18,7 +18,7 @@
 
 ## 夜间模式
 
-在 `document.documentElement.dataset.theme` 设置 `dark` 为激活夜间模式，移除该 `dataset` 为激活日间模式。
+在 `document.documentElement.dataset.theme` 设置 `dark` 为激活夜间模式，设置为 `light` 为激活日间模式。
 
 ### 组件库
 
