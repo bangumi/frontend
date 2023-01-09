@@ -280,6 +280,11 @@ export type external = Record<string, never>;
 export interface operations {
   logout: {
     /** @description 登出 */
+    requestBody?: {
+      content: {
+        'application/json': Record<string, never>;
+      };
+    };
     responses: {
       /** @description Default Response */
       200: {
