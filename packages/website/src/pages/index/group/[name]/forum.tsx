@@ -23,7 +23,6 @@ const GroupForum = () => {
     navigate({ search: `page=${page}` });
   };
 
-  // TODO @waua ErrorBoundary
   return (
     <>
       <TopicsTable topics={topics.data} />

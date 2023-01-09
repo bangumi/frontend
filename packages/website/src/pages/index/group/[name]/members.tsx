@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 
 import { Pagination, Section } from '@bangumi/design';
 import { UnreadableCodeError } from '@bangumi/utils';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
@@ -76,4 +75,4 @@ const GroupMembersPage = () => {
   );
 };
 
-export default withErrorBoundary(GroupMembersPage);
+export default GroupMembersPage;
