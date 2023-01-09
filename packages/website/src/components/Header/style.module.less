@@ -8,17 +8,19 @@
   left: 0;
   top: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95); /* 0-1-0 */
   //backdrop-filter: blur(20px);
   border-bottom: rgba(249, 188, 193, 0.95) solid 1px;
+}
+// <element data-theme="dark">
+//   …
+//     <element class="container">
+[data-theme='dark'] .container {
+  background: linear-gradient(top, #37393b, #333); /* 0-2-0 */
 }
 
 .main {
   // 在style/utils.less 查看mixins，命名参考的tailwind-css
-  // display: flex;
-  // align-items: center;
-  // justify-content: space-between;
-  // height: 100%;
   .flex();
   .items-center();
   .justify-between();
@@ -61,7 +63,6 @@
 .nav {
   display: flex;
   align-items: center;
-  margin: 0 0 0 63px;
 
   .divider {
     display: inline-block;
@@ -89,8 +90,7 @@
 .infoBox {
   display: flex;
   align-items: center;
-  padding: 0 7px 0 9px;
-  margin-right: 16px;
+  border-radius: 19px;
 
   .search {
     height: 32px;
@@ -109,6 +109,16 @@
       height: 14px;
       margin: 0 9px 0 5px;
       flex-shrink: 0;
+    }
+  }
+}
+
+[data-theme='dark'] .infoBox {
+  background: #6e6e6e;
+
+  .search {
+    .searchSelect {
+      color: #e0e0e1;
     }
   }
 }

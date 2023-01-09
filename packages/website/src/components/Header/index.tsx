@@ -95,7 +95,7 @@ const Header: FC = () => {
   return (
     <div className={style.container}>
       <div className={style.main}>
-        <div className='flex items-center'>
+        <div className='flex items-center gap-16 shrink-0'>
           {/* Logo */}
           <div className={style.logo}>
             <Musume className={style.musume} />
@@ -117,7 +117,8 @@ const Header: FC = () => {
             <Menu items={navRight} wrapperClass={style.navRight} />
           </div>
         </div>
-        <div className='flex items-center'>
+
+        <div className='flex items-center gap-4'>
           <div className={style.infoBox}>
             {/* Search Todo */}
             <Input
