@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
+type Key = string | number;
 interface ItemProps {
   isActive: boolean;
   type: 'default' | 'borderless';
@@ -23,18 +24,18 @@ const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onCl
 };
 
 interface ItemType {
-  key: string;
+  key: Key;
   label: string;
 }
 
 export interface TabProps<T extends ItemType = ItemType> {
   /** 节点数组 */
   items: T[];
-  /** 选中节点的 Key */
-  activeKey: string;
-  /** 点击切换事件回调，对每一个 Item 都生效 */
-  onChange?: (key: string, value: T) => void;
-  /** 样式类型 */
+  /* 选中节点的 Key */
+  activeKey: Key;
+  /* 点击切换事件回调，对每一个 Item 都生效 */
+  onChange?: (key: Key, value: T) => void;
+  /* 样式类型 */
   type?: 'default' | 'borderless';
 }
 

@@ -1,6 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
+import type { PropsWithChildren } from 'react';
 import React, { forwardRef } from 'react';
 
 export interface InputProps {
@@ -18,6 +19,10 @@ export interface InputProps {
   suffix?: React.ReactNode;
 }
 
+type IInput = React.ForwardRefExoticComponent<InputProps> & {
+  Group: React.FC<PropsWithChildren<{ className?: string }>>;
+};
+
 /* eslint-disable react/prop-types */
 // https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -30,6 +35,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       </div>
     );
   },
-);
+) as IInput;
+
+Input.Group = ({ children, className }) => {
+  return <div className={classnames('bgm-input-group', className)}>{children}</div>;
+};
 
 export default Input;

@@ -1,0 +1,51 @@
+@import '../../../theme/base';
+
+.bgm-select {
+  display: inline-flex;
+  box-sizing: border-box;
+  position: relative;
+  padding: 9px 17px;
+  border: 2px solid @gray-10;
+  border-radius: 19px;
+  user-select: none;
+  font-size: 14px;
+  vertical-align: bottom;
+
+  &__dropdown {
+    position: absolute;
+    margin-top: 0.5rem;
+    top: 100%;
+    border: 2px solid @gray-10;
+    box-sizing: border-box;
+    padding: 9px 17px;
+    width: 100%;
+    left: 0;
+    border-radius: 19px;
+    background: white;
+    z-index: 10;
+
+    > div {
+      padding: 9px 0;
+    }
+  }
+
+  &__box {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+  }
+
+  &-arrow {
+    display: inline-block;
+  }
+
+  .bgm-input-group & {
+    &:not(:last-of-type) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
+  }
+}

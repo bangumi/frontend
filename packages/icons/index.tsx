@@ -11,6 +11,7 @@ export { ReactComponent as Password } from './assets/password.svg';
 export { ReactComponent as Captcha } from './assets/captcha.svg';
 export { ReactComponent as VerticalLeft } from './assets/vertical-left.svg';
 export { ReactComponent as VerticalRight } from './assets/vertical-right.svg';
+export { ReactComponent as ArrowDown } from './assets/arrow-down.svg';
 
 // BBCode Editor
 

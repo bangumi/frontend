@@ -140,6 +140,7 @@ importers:
       msw: ^0.49.2
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-hook-form: ^7.41.5
       react-router-dom: ^6.6.1
       reset-css: ^5.0.1
       typescript: ^4.9.4
@@ -167,6 +168,7 @@ importers:
       classnames: 2.3.2
       less: 4.1.3
       msw: 0.49.2_typescript@4.9.4
+      react-hook-form: 7.41.5_react@18.2.0
       react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
       typescript: 4.9.4
       vite: 4.0.3_less@4.1.3
@@ -227,6 +229,7 @@ importers:
       openapi-types: ^12.1.0
       react: ^18.2.0
       react-dom: ^18.2.0
+      react-hook-form: ^7.41.5
       react-router-dom: ^6.6.1
       reset-css: ^5.0.1
       rooks: ^7.4.2
@@ -245,6 +248,7 @@ importers:
       oazapfts: 4.5.1_openapi-types@12.1.0
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-hook-form: 7.41.5_react@18.2.0
       react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
       reset-css: 5.0.1
       rooks: 7.4.2_biqbaboplfbrettd7655fr4n2y
@@ -15189,6 +15193,14 @@ packages:
       react-is: 17.0.2
     dev: true
 
+  /react-hook-form/7.41.5_react@18.2.0:
+    resolution: {integrity: sha512-DAKjSJ7X9f16oQrP3TW2/eD9N6HOgrmIahP4LOdFphEWVfGZ2LulFd6f6AQ/YS/0cx/5oc4j8a1PXxuaurWp/Q==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
+
   /react-inspector/5.1.1_react@18.2.0:
     resolution: {integrity: sha512-GURDaYzoLbW8pMGXwYPDBIv6nqei4kK7LPRZ9q9HCZF54wqXz/dnylBp/kfE9XmekBhHvLDdcYeyIwSrvtOiWg==}
     peerDependencies:
@@ -17554,7 +17566,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2
       '@svgr/core': 6.5.1
-      vite: 4.0.3
+      vite: 4.0.3_less@4.1.3
     transitivePeerDependencies:
       - rollup
       - supports-color

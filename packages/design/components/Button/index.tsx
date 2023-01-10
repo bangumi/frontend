@@ -1,16 +1,17 @@
 import './style';
 
 import classNames from 'classnames';
-import type { FC, PropsWithChildren } from 'react';
+import type { FC, MouseEventHandler, PropsWithChildren } from 'react';
 import React from 'react';
 
 export interface ButtonProps {
   disabled?: boolean;
-  onClick?: () => void;
+  onClick?: MouseEventHandler;
   className?: string;
   type?: 'primary' | 'secondary' | 'text';
   shape?: 'square' | 'rounded';
   size?: 'normal';
+  htmlType?: JSX.IntrinsicElements['button']['type'];
 }
 
 const Button: FC<PropsWithChildren<ButtonProps>> = ({
@@ -21,6 +22,8 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   shape = 'square',
   size = 'normal',
   children,
+  htmlType,
+  ...props
 }) => {
   return (
     <button
@@ -36,6 +39,8 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
         `bgm-button__${size}`,
       )}
       onClick={onClick}
+      type={htmlType}
+      {...props}
     >
       {children}
     </button>

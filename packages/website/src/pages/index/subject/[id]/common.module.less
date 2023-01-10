@@ -1,0 +1,50 @@
+@import '@bangumi/design/theme/base';
+
+.title {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 18px;
+  color: #9f9b9b;
+}
+
+.divider {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  width: 100%;
+
+  &Vertical {
+    height: 100%;
+    margin: 0 14px;
+  }
+}
+
+.form {
+  &Input {
+    border-radius: 12px;
+    flex: 1;
+
+    &Group {
+      display: flex;
+      flex: 1;
+    }
+  }
+
+  &TextArea {
+    flex: 1;
+    border-radius: 12px;
+    resize: vertical;
+    border: 2px solid @gray-10;
+    min-height: 300px;
+    padding: 9px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &Button {
+    width: 120px;
+    background: #54b5df;
+    font-weight: 600;
+  }
+}
