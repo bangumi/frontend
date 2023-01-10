@@ -1,10 +1,10 @@
 import type { BasicReply } from 'packages/client/client';
 import type { Group } from 'packages/client/group';
 import type { FC } from 'react';
-import React, { useEffect, useState, memo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { memo, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import { RichContent, Avatar, Section, Typography, Button, Topic, Layout } from '@bangumi/design';
+import { Avatar, Button, Layout, RichContent, Section, Topic, Typography } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';

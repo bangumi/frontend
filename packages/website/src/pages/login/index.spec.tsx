@@ -4,9 +4,9 @@ import React from 'react';
 import * as MockReact from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import LoginPage from '.';
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
+import LoginPage from '.';
 
 jest.mock('@marsidev/react-turnstile', () => {
   const Turnstile = MockReact.forwardRef<

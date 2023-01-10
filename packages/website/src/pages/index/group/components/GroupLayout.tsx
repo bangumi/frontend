@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import type { GroupProfile } from '@bangumi/client/group';
-import { Section, Tab, Layout } from '@bangumi/design';
+import { Layout, Section, Tab } from '@bangumi/design';
 import { keyBy } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';

@@ -1,8 +1,9 @@
+import './style';
+
 import classNames from 'classnames';
 import React from 'react';
 
 import { render } from '@bangumi/utils';
-import './style';
 
 export interface RichContentProps {
   bbcode: string;

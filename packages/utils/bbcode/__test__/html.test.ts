@@ -1,4 +1,4 @@
-import { renderNodes, renderNode, render } from '../html';
+import { render, renderNode, renderNodes } from '../html';
 import type { VNode } from '../types';
 
 describe('html render vnode', () => {

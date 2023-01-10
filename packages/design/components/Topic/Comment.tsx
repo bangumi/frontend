@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import type { BasicReply } from 'packages/client/client';
 import type { FC } from 'react';
-import React, { useState, memo, useCallback } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import type { Reply, SubReply, User } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
-import type { SubReply, Reply, User } from '@bangumi/client/topic';
-import { Friend, OriginalPoster, TopicClosed, TopicSilent, TopicReopen } from '@bangumi/icons';
+import { Friend, OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';

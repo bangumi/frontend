@@ -1,7 +1,8 @@
+import './style';
+
 import classnames from 'classnames';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
-import './style';
 
 export interface SectionProps {
   title: string;
