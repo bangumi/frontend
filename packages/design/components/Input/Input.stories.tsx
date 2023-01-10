@@ -1,7 +1,7 @@
 import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 
-import { UserLogin, Search as SearchIcon } from '@bangumi/icons';
+import { Search as SearchIcon, UserLogin } from '@bangumi/icons';
 
 import type { InputProps } from '.';
 import Input from '.';

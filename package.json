@@ -99,5 +99,9 @@
         "vite"
       ]
     }
+  },
+  "dependencies": {
+    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-unicorn": "^45.0.2"
   }
 }

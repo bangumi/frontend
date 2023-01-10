@@ -9,9 +9,9 @@ import type { GroupMember, ResponseWithPagination } from '@bangumi/client/group'
 import { server as mockServer } from '../../../../../mocks/server';
 import { renderPage } from '../../../../../utils/test-utils';
 import GroupMembers from '../members';
+import Sandbox from './fixtures/sandbox.json';
 import sandboxMembers from './fixtures/sandbox-members.json';
 import sandboxModMember from './fixtures/sandbox-mod-member.json';
-import Sandbox from './fixtures/sandbox.json';
 
 jest.mock('react-router-dom', () => {
   return {

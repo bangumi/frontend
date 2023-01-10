@@ -1,9 +1,10 @@
+import './style';
+
 import classnames from 'classnames';
 import { delay } from 'lodash-es';
 import React from 'react';
 
 import type { Toast as TToast } from './types';
-import './style';
 import { removeToastEvent } from './utils/event-bus';
 
 interface ToastProps {

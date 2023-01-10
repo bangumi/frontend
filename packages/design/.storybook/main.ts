@@ -1,4 +1,4 @@
-import { dirname } from 'path';
+import { dirname } from 'node:path';
 
 import type { StorybookViteConfig } from '@storybook/builder-vite';
 import svgr from 'vite-plugin-svgr';
