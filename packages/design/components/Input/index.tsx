@@ -16,6 +16,7 @@ export interface InputProps {
   prefix?: React.ReactNode;
   /** 后缀 */
   suffix?: React.ReactNode;
+  defaultValue?: string;
 }
 
 type IInput = React.ForwardRefExoticComponent<InputProps> & {
