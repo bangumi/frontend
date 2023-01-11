@@ -1,0 +1,21 @@
+.bgm-radio {
+  > input {
+    appearance: none;
+    height: 0.75rem;
+    width: 0.75rem;
+    // border: 2px solid #595555;
+    border-radius: 9999px;
+    box-shadow: inset 0 0 0 1px #595555, inset 0 0 0 3px white; /* ring style!! */
+    margin: 0;
+    margin-right: 8px;
+
+    &:checked {
+      background: #595555;
+    }
+  }
+
+  > label {
+    user-select: none;
+    font-size: 1rem;
+  }
+}

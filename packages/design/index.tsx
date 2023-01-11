@@ -15,6 +15,7 @@ export { default as Topic } from './components/Topic';
 export { default as Layout } from './components/Layout';
 export { default as Form } from './components/Form';
 export { default as Select } from './components/Select';
+export { default as Radio } from './components/Radio';
 
 export type { ButtonProps } from './components/Button';
 export type { LinkProps } from './components/Typography';

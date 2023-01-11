@@ -4,12 +4,13 @@
   display: inline-flex;
   box-sizing: border-box;
   position: relative;
-  padding: 9px 17px;
+  padding: 8px 12px;
   border: 2px solid @gray-10;
   border-radius: 19px;
   user-select: none;
-  font-size: 14px;
+  font-size: 1rem;
   vertical-align: bottom;
+  cursor: pointer;
 
   &__dropdown {
     position: absolute;
@@ -17,12 +18,11 @@
     top: 100%;
     border: 2px solid @gray-10;
     box-sizing: border-box;
-    padding: 9px 17px;
+    padding: 8px 12px;
     width: 100%;
     left: 0;
     border-radius: 19px;
     background: white;
-    z-index: 10;
 
     > div {
       padding: 9px 0;
@@ -34,7 +34,11 @@
     flex: 1;
     align-items: center;
     justify-content: space-between;
-    font-size: 1rem;
+
+    & > span {
+      font-size: 1rem;
+      color: @gray-100;
+    }
   }
 
   &-arrow {
