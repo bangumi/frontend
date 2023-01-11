@@ -1,10 +1,12 @@
-import { uniqueId, defer } from 'lodash-es';
+import './style';
+
+import { defer, uniqueId } from 'lodash-es';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { ToastContainer } from './ToastContainer';
-import './style';
 import { insertToastEvent } from './utils/event-bus';
+
 export { Toast } from './Toast';
 
 const TOAST_CONTAINER_CLS_NAME = 'bgm-toast__container';

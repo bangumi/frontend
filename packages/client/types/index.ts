@@ -239,6 +239,7 @@ export interface components {
       name: string;
       infobox: string;
       platform: number;
+      nsfw: boolean;
       date?: string;
       summary: string;
     };
@@ -279,6 +280,11 @@ export type external = Record<string, never>;
 export interface operations {
   logout: {
     /** @description 登出 */
+    requestBody?: {
+      content: {
+        'application/json': Record<string, never>;
+      };
+    };
     responses: {
       /** @description Default Response */
       200: {
@@ -328,7 +334,7 @@ export interface operations {
       /** @description Default Response */
       200: {
         headers: {
-          /** @description example: "sessionID=12345abc" */
+          /** @description example: "chiiNextSessionID=12345abc" */
           'Set-Cookie'?: string;
         };
         content: {
@@ -797,6 +803,7 @@ export interface operations {
          *     "name": "沙盒",
          *     "infobox": "{{Infobox animanga/TVAnime\n|中文名= 沙盒\n|别名={\n}\n|话数= 7\n|放送开始= 0000-10-06\n|放送星期= \n|官方网站= \n|播放电视台= \n|其他电视台= \n|播放结束= \n|其他= \n|Copyright= \n|平台={\n[龟壳]\n[Xbox Series S]\n[Xbox Series X]\n[Xbox Series X/S]\n[PC]\n[Xbox Series X|S]\n}\n}}",
          *     "platform": 0,
+         *     "nsfw": false,
          *     "summary": "本条目是一个沙盒，可以用于尝试bgm功能。\n\n普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。\n\nhttps://bgm.tv/group/topic/366812#post_1923517"
          *   }
          * }
@@ -848,6 +855,7 @@ export interface operations {
             name?: string;
             infobox?: string;
             platform?: number;
+            nsfw?: boolean;
             date?: string;
             summary?: string;
           };

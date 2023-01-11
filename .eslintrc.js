@@ -5,7 +5,7 @@ module.exports = {
     'jest/globals': true,
   },
   extends: ['standard-with-typescript', 'prettier'],
-  plugins: ['unused-imports'],
+  plugins: ['unused-imports', 'unicorn', 'simple-import-sort'],
   parserOptions: {
     ecmaVersion: 13,
     sourceType: 'module',
@@ -18,28 +18,31 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-else-return': ['error', { allowElseIf: false }],
     'unused-imports/no-unused-imports': 'error',
-    'import/order': [
+    'unicorn/prefer-node-protocol': 'error',
+    'import/first': 'error',
+    'import/no-duplicates': 'error',
+    'import/newline-after-import': 'error',
+    'simple-import-sort/imports': [
       'error',
       {
-        alphabetize: {
-          order: 'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
-          caseInsensitive: true /* ignore case. Options: [true, false] */,
-        },
-        pathGroups: [
-          {
-            pattern: '@bangumi/**',
-            group: 'internal',
-          },
-        ],
-        'newlines-between': 'always',
         groups: [
-          'builtin', // Built-in types are first
-          'external',
-          'internal',
-          ['parent', 'sibling', 'index', 'object'],
+          // Side effect imports.
+          ['^\\u0000'],
+          // Node.js builtins prefixed with `node:`.
+          ['^node:'],
+          // Absolute imports and other imports such as Vue-style `@/foo`.
+          // Anything not matched in another group.
+          ['^'],
+          // Packages.
+          // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+          ['^@bangumi/.*'],
+          // Relative imports.
+          // Anything that starts with a dot.
+          ['^\\.\\.', '^\\.'],
         ],
       },
     ],
+    'import/order': 'off',
   },
   overrides: [
     {

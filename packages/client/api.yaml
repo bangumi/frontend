@@ -9,8 +9,8 @@ components:
     CookiesSession:
       type: apiKey
       in: cookie
-      name: sessionID
-      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/p1/demo/login) 登录
+      name: chiiNextSessionID
+      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
   schemas:
     User:
       title: User
@@ -451,6 +451,7 @@ components:
             }
             }}
           platform: 0
+          nsfw: false
           summary: |-
             本条目是一个沙盒，可以用于尝试bgm功能。
 
@@ -467,6 +468,8 @@ components:
           type: string
         platform:
           type: integer
+        nsfw:
+          type: boolean
         date:
           pattern: ^\d{4}-\d{2}-\d{2}$
           examples:
@@ -479,6 +482,7 @@ components:
         - name
         - infobox
         - platform
+        - nsfw
         - summary
     WikiPlatform:
       type: object
@@ -550,6 +554,12 @@ paths:
       tags:
         - auth
       description: 登出
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
       responses:
         '200':
           description: Default Response
@@ -624,7 +634,7 @@ paths:
             Set-Cookie:
               schema:
                 type: string
-              description: 'example: "sessionID=12345abc"'
+              description: 'example: "chiiNextSessionID=12345abc"'
           content:
             application/json:
               schema:
@@ -1406,6 +1416,7 @@ paths:
                   }
                   }}
                 platform: 0
+                nsfw: false
                 summary: |-
                   本条目是一个沙盒，可以用于尝试bgm功能。
 
@@ -1487,6 +1498,7 @@ paths:
                         }
                         }}
                       platform: 0
+                      nsfw: false
                       summary: >-
                         本条目是一个沙盒，可以用于尝试bgm功能。
 
@@ -1505,6 +1517,8 @@ paths:
                       type: string
                     platform:
                       type: integer
+                    nsfw:
+                      type: boolean
                     date:
                       pattern: ^\d{4}-\d{2}-\d{2}$
                       examples:

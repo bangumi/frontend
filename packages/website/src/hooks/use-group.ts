@@ -1,5 +1,5 @@
 import { ok } from 'oazapfts';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';

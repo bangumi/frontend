@@ -1,4 +1,4 @@
-import type { Story, ComponentMeta } from '@storybook/react';
+import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 
 import { UnreadableCodeError } from '@bangumi/utils';

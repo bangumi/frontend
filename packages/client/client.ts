@@ -5,6 +5,7 @@
  */
 import * as Oazapfts from 'oazapfts/lib/runtime';
 import * as QS from 'oazapfts/lib/runtime/query';
+
 export const defaults: Oazapfts.RequestOpts = {
   baseUrl: '/',
 };
@@ -153,6 +154,7 @@ export interface SubjectEdit {
   name: string;
   infobox: string;
   platform: number;
+  nsfw: boolean;
   date?: string;
   summary: string;
 }
@@ -167,7 +169,7 @@ export interface HistorySummary {
 /**
  * 登出
  */
-export async function logout(opts?: Oazapfts.RequestOpts) {
+export async function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -181,10 +183,14 @@ export async function logout(opts?: Oazapfts.RequestOpts) {
         status: 500;
         data: Error;
       }
-  >('/p1/logout', {
-    ...opts,
-    method: 'POST',
-  });
+  >(
+    '/p1/logout',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
 }
 /**
  * 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
@@ -659,6 +665,7 @@ export async function patchSubjectInfo(
       name?: string;
       infobox?: string;
       platform?: number;
+      nsfw?: boolean;
       date?: string;
       summary?: string;
     };

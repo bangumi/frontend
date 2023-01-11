@@ -1,4 +1,4 @@
-import { render, act } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 
 import { ToastContainer } from '../ToastContainer';
