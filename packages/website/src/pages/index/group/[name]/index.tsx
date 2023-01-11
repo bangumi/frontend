@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useParams } from 'react-router-dom';
 
 import { Section } from '@bangumi/design';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';

@@ -1,15 +1,28 @@
-/* eslint-disable react/prop-types */
-import React, { forwardRef, useRef, useImperativeHandle } from 'react';
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
 
 import Toolbox from './Toolbox';
 
 export interface EditorProps {
-  /* placeholder */
   placeholder?: string;
-  /* 是否显示工具栏 */
+  /** 是否显示工具栏 */
   showToolbox?: boolean;
-  /* textarea 通过键盘按下提交触发事件 */
+  /** textarea 通过键盘按下提交触发事件 */
   onConfirm?: (content: string) => void;
+  /**
+   * @default empty string
+   */
+  content?: string;
+  /** 内容改变时的回调函数 */
+  onChange?: (content: string) => void;
+  /** 在被渲染时是否自动获取焦点 */
+  autoFocus?: boolean;
 }
 
 const keyToEvent: Record<string, string> = {
@@ -21,102 +34,148 @@ const keyToEvent: Record<string, string> = {
   p: 'image',
 } as const;
 
-const setInputValue = (
-  el: HTMLTextAreaElement,
-  prefix: string,
-  suffix: string,
-  content = '',
-): void => {
-  const preStart = el.selectionStart;
-  const preEnd = el.selectionEnd;
-  const preValue = el.value;
-  el.value = `${preValue.slice(0, preStart)}${prefix}${content}${suffix}${preValue.slice(preEnd)}`;
-  if (preStart === preEnd) {
-    el.selectionStart = el.selectionEnd = preStart + prefix.length + content.length;
-  }
-  el.focus();
-};
+export interface EditorRef {
+  textArea: HTMLTextAreaElement;
+}
 
-const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm }, ref) => {
+const Editor = forwardRef<EditorRef, EditorProps>(
+  ({ placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus }, ref) => {
+    const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
-    useImperativeHandle(ref, () => innerRef.current!);
-    const handleToolboxEvent = (type: string, payload?: unknown): void => {
+
+    useImperativeHandle(ref, () => ({
+      textArea: innerRef.current!,
+    }));
+
+    useEffect(() => {
+      // 用来确保输入光标在自动插入的quote内容之后。
       const el = innerRef.current;
-      if (!el) {
-        return;
-      }
-      const preStart = el.selectionStart;
-      const preEnd = el.selectionEnd;
-      const selected = el.value.slice(preStart, preEnd);
-      switch (type) {
-        case 'bold': {
-          setInputValue(el, '[b]', '[/b]', selected);
-          break;
+      el?.setSelectionRange(el.value.length, el.value.length);
+    }, []);
+
+    // content改变时应重新设置选择范围
+    useEffect(() => {
+      if (!selection) return;
+      const [start, end] = selection;
+      const el = innerRef.current;
+      el?.setSelectionRange(start, end);
+      el?.focus();
+    }, [selection]);
+
+    const updateContent = useCallback(
+      (newContent: string): void => {
+        setSelection(undefined);
+        onChange?.(newContent);
+      },
+      [setSelection, onChange],
+    );
+
+    const insertTag = useCallback(
+      (el: HTMLTextAreaElement, prefix: string, suffix: string, selected = ''): void => {
+        const preStart = el.selectionStart;
+        const preEnd = el.selectionEnd;
+        const preValue = el.value;
+        updateContent(
+          `${preValue.slice(0, preStart)}${prefix}${selected}${suffix}${preValue.slice(preEnd)}`,
+        );
+        // 未选择内容，插入BBCode标签后应将光标置于标签中间
+        if (selected.length === 0) {
+          const cursorPos = preStart + prefix.length + selected.length;
+          setSelection([cursorPos, cursorPos]);
         }
-        case 'italic': {
-          setInputValue(el, '[i]', '[/i]', selected);
-          break;
+        el.focus();
+      },
+      [updateContent, setSelection],
+    );
+
+    // 使用useCallback避免在内容改变时触发Toolbox的渲染
+    const handleToolboxEvent = useCallback(
+      (type: string, payload?: unknown): void => {
+        const el = innerRef.current;
+        if (!el) {
+          return;
         }
-        case 'underscore': {
-          setInputValue(el, '[u]', '[/u]', selected);
-          break;
-        }
-        case 'image': {
-          const value = prompt('请输入图片链接');
-          if (value === null) break;
-          setInputValue(el, '[img]', '[/img]', value);
-          el.selectionStart = el.selectionEnd = el.value.length;
-          break;
-        }
-        case 'link': {
-          const value = prompt('请输入链接地址');
-          if (value === null) break;
-          const prefix = `[url=${value}]`;
-          const suffix = '[/url]';
-          setInputValue(el, prefix, suffix, selected || '链接描述');
-          if (!selected) {
-            el.selectionStart = el.selectionEnd - 4;
+        const preStart = el.selectionStart;
+        const preEnd = el.selectionEnd;
+        const selected = el.value.slice(preStart, preEnd);
+        switch (type) {
+          case 'bold': {
+            insertTag(el, '[b]', '[/b]', selected);
+            break;
           }
-          break;
+          case 'italic': {
+            insertTag(el, '[i]', '[/i]', selected);
+            break;
+          }
+          case 'underscore': {
+            insertTag(el, '[u]', '[/u]', selected);
+            break;
+          }
+          case 'image': {
+            const value = prompt('请输入图片链接');
+            if (value === null) break;
+            insertTag(el, '[img]', '[/img]', value);
+            break;
+          }
+          case 'link': {
+            const value = prompt('请输入链接地址');
+            if (value === null) break;
+            const prefix = `[url=${value}]`;
+            const suffix = '[/url]';
+            insertTag(el, prefix, suffix, selected || '链接描述');
+            if (!selected) {
+              // 选中“链接描述”
+              const start = preEnd + prefix.length;
+              const end = start + 4;
+              setSelection([start, end]);
+            }
+            break;
+          }
+          case 'size': {
+            const value = prompt('请输入字体大小');
+            if (value === null) break;
+            insertTag(el, `[size=${value}]`, '[/size]', selected);
+            break;
+          }
         }
-        case 'size': {
-          const value = prompt('请输入字体大小');
-          if (value === null) break;
-          setInputValue(el, `[size=${value}]`, '[/size]', selected);
-          break;
+      },
+      [innerRef, insertTag, setSelection],
+    );
+
+    const handleKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        // Ctrl + Enter & Alt + S 触发提交
+        if (
+          ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
+          (e.altKey && e.key.toLowerCase() === 's')
+        ) {
+          onConfirm?.(innerRef.current!.value);
+          return e.preventDefault();
         }
-      }
-    };
+        // https://bgm.tv/help/bbcode
+        if (e.ctrlKey || e.metaKey) {
+          const key = e.key.toLowerCase();
+          const event = keyToEvent[key];
+          if (event) {
+            handleToolboxEvent(event);
+            e.preventDefault();
+          }
+        }
+      },
+      [onConfirm, handleToolboxEvent],
+    );
+
     return (
       <div className='bgm-editor__container'>
-        <Toolbox
-          handleClickEvent={handleToolboxEvent}
-          style={{ display: showToolbox ? '' : 'none' }}
-        />
+        {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
         <textarea
           className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
-          onKeyDown={(e) => {
-            // Ctrl + Enter & Alt + S 触发提交
-            if (
-              ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
-              (e.altKey && e.key.toLowerCase() === 's')
-            ) {
-              onConfirm?.(innerRef.current!.value);
-              return e.preventDefault();
-            }
-            // https://bgm.tv/help/bbcode
-            if (e.ctrlKey || e.metaKey) {
-              const key = e.key.toLowerCase();
-              const event = keyToEvent[key];
-              if (event) {
-                handleToolboxEvent(event);
-                e.preventDefault();
-              }
-            }
-          }}
+          value={content}
+          autoFocus={autoFocus}
+          onChange={(e) => updateContent(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
       </div>
     );

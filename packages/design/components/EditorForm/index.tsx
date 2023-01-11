@@ -1,63 +1,75 @@
 import './style';
 
 import classnames from 'classnames';
-import type { FC } from 'react';
-import React, { useRef } from 'react';
+import React, { forwardRef } from 'react';
 
 import Button from '../Button';
 import Link from '../Typography/Link';
-import type { EditorProps } from './Editor';
+import type { EditorProps, EditorRef } from './Editor';
 import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
-  /* 最外层 className */
+  /** 最外层 className */
   className?: string;
-  /* 最外层 style */
+  /** 最外层 style */
   style?: React.CSSProperties;
-  /* 确认按钮的文本 */
+  /** 确认按钮的文本 */
   confirmText?: string;
-  /* 确认按钮后的回调 */
+  /** 确认按钮后的回调 */
   onConfirm?: (content: string) => void;
-  /* 取消按钮的文本 */
+  /** 取消按钮的文本 */
   cancelText?: string;
-  /* 取消按钮的回调 */
+  /** 取消按钮的回调 */
   onCancel?: () => void;
+  /**
+   * 是否隐藏取消按钮
+   * @default false
+   */
+  hideCancel?: boolean;
 }
 
-const EditorForm: FC<EditorFormProps> = ({
-  className,
-  style,
-  confirmText = '写好了',
-  onConfirm,
-  cancelText = '取消',
-  onCancel,
-  ...props
-}) => {
-  const classNames = classnames('bgm-editor__form', className);
-  const ref = useRef<HTMLTextAreaElement>(null);
-  return (
-    <div className={classNames} style={style}>
-      <Editor ref={ref} onConfirm={onConfirm} {...props} />
-      <div className='bgm-editor__submit'>
-        <Button
-          shape='rounded'
-          className='bgm-editor__button bgm-editor__button--confirm'
-          onClick={() => onConfirm?.(ref.current!.value)}
-        >
-          {confirmText}
-        </Button>
-        <Button type='text' className='bgm-editor__button' onClick={onCancel}>
-          {cancelText}
-        </Button>
-        <span className='bgm-editor__bbcode-tip'>
-          使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
-          <Link isExternal to='https://bgm.tv/help/bbcode'>
-            BBCode指南
-          </Link>
-        </span>
+const EditorForm = forwardRef<EditorRef, EditorFormProps>(
+  (
+    {
+      className,
+      style,
+      confirmText = '写好了',
+      onConfirm,
+      cancelText = '取消',
+      onCancel,
+      hideCancel = false,
+      ...props
+    },
+    ref,
+  ) => {
+    const classNames = classnames('bgm-editor__form', className);
+
+    return (
+      <div className={classNames} style={style}>
+        <Editor ref={ref} onConfirm={onConfirm} {...props} />
+        <div className='bgm-editor__submit'>
+          <Button
+            shape='rounded'
+            className='bgm-editor__button bgm-editor__button--confirm'
+            onClick={() => onConfirm?.(props.content ?? '')}
+          >
+            {confirmText}
+          </Button>
+          {!hideCancel && (
+            <Button type='text' className='bgm-editor__button' onClick={onCancel}>
+              {cancelText}
+            </Button>
+          )}
+          <span className='bgm-editor__bbcode-tip'>
+            使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
+            <Link isExternal to='https://bgm.tv/help/bbcode'>
+              BBCode指南
+            </Link>
+          </span>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  },
+);
 
 export default EditorForm;

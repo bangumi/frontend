@@ -32,8 +32,8 @@ function convertImgNode(node: CodeVNode): VNode {
   if (isExternalLink(src)) {
     vnode.props = {
       ...vnode.props,
-      referrerpolicy: 'no-referrer',
-      ref: 'noreferrer',
+      referrerPolicy: 'no-referrer',
+      rel: 'noreferrer',
     };
   }
   return vnode;
@@ -64,13 +64,13 @@ function convertUrlNode(node: CodeVNode): VNode {
     vnode.props = {
       ...vnode.props,
       target: '_blank',
-      ref: 'nofollow external noopener noreferrer',
+      rel: 'nofollow external noopener noreferrer',
     };
   }
   return vnode;
 }
 
-function convertStickerNode(node: CodeVNode): string {
+function convertStickerNode(node: CodeVNode): VNode | string {
   const stickerId = node.props!.stickerId!;
   let id = -1;
   if (stickerId.startsWith(BGM_STICKER_START_STR)) {
@@ -85,7 +85,14 @@ function convertStickerNode(node: CodeVNode): string {
   }
 
   if (id >= 1 && id < 17) {
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/${id}.gif" smileid="${id}" alt="${stickerId}" />`;
+    return {
+      type: 'img',
+      props: {
+        src: `${STICKER_DOMAIN_URL}/img/smiles/${id}.gif`,
+        smileid: `${id}`,
+        alt: stickerId,
+      },
+    };
   }
 
   if (id >= 17 && id < 39) {
@@ -93,17 +100,38 @@ function convertStickerNode(node: CodeVNode): string {
 
     if (m) {
       if (m === '11') {
-        return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif" smileid="${id}" alt="${stickerId}" />`;
+        return {
+          type: 'img',
+          props: {
+            src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif`,
+            smileid: `${id}`,
+            alt: stickerId,
+          },
+        };
       }
 
-      return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/${m}.png" smileid="${id}" alt="${stickerId}" />`;
+      return {
+        type: 'img',
+        props: {
+          src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/${m}.png`,
+          smileid: `${id}`,
+          alt: stickerId,
+        },
+      };
     }
 
     throw new UnreadableCodeError('BUG: unexpected match result', stickerId);
   }
 
   if (id === 39) {
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`;
+    return {
+      type: 'img',
+      props: {
+        src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif`,
+        smileid: '39',
+        alt: '(bgm23)',
+      },
+    };
   }
 
   if (id >= 40 && id < 140) {
@@ -111,7 +139,14 @@ function convertStickerNode(node: CodeVNode): string {
     if (tvId < 10) {
       tvId = `0${tvId}`;
     }
-    return `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif" smileid="${id}" alt="${stickerId}" />`;
+    return {
+      type: 'img',
+      props: {
+        src: `${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif`,
+        smileid: `${id}`,
+        alt: stickerId,
+      },
+    };
   }
 
   return stickerId;

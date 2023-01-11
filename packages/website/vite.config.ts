@@ -1,4 +1,4 @@
-import path from 'path';
+import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
@@ -6,12 +6,13 @@ import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
-  const apiDomain =
-    mode === 'loc'
-      ? 'http://127.0.0.1:4000'
-      : ['stage', 'development'].includes(mode)
-      ? 'https://dev.bgm38.com'
-      : 'https://next.bgm.tv';
+  let apiDomain = 'https://dev.bgm38.com';
+
+  if (mode === 'loc') {
+    apiDomain = 'http://127.0.0.1:4000';
+  } else if (mode === 'production') {
+    apiDomain = 'https://next.bgm.tv';
+  }
 
   console.log('using backend', apiDomain);
 
@@ -55,8 +56,20 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      react(),
-      svgr(),
+      react(
+        mode === 'production'
+          ? {
+              babel: {
+                plugins: ['babel-plugin-jsx-remove-data-test-id'],
+              },
+            }
+          : undefined,
+      ),
+      svgr({
+        svgrOptions: {
+          titleProp: true,
+        },
+      }),
       pages({
         extensions: ['tsx'],
         importMode: 'async',

@@ -1,7 +1,7 @@
 import type { Story } from '@storybook/react';
 import React from 'react';
 
-import type { MenuProps, MenuItemType } from '.';
+import type { MenuItemType, MenuProps } from '.';
 import Menu from '.';
 
 const items: MenuItemType[] = [

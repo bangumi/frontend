@@ -18,11 +18,11 @@ import style from './style.module.less';
 import {
   animeSubMenu,
   bookSubMenu,
-  musicSubMenu,
   gameSubMenu,
-  realSubMenu,
-  monoSubMenu,
   groupSubMenu,
+  monoSubMenu,
+  musicSubMenu,
+  realSubMenu,
 } from './SubMenu';
 
 // todo: SVG Sprites

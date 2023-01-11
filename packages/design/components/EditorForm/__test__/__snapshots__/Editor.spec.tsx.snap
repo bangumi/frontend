@@ -10,21 +10,27 @@ exports[`EditorForm > Editor render correctly 1`] = `
     >
       <div
         data-testid="bold"
+        title="粗体 [Ctrl+B]"
       />
       <div
         data-testid="italic"
+        title="斜体 [Ctrl+I]"
       />
       <div
         data-testid="underscore"
+        title="下划线 [Ctrl+U]"
       />
       <div
         data-testid="image"
+        title="图片 [Ctrl+P]"
       />
       <div
         data-testid="link"
+        title="链接 [Ctrl+L]"
       />
       <div
         data-testid="size"
+        title="文字尺寸 [Ctrl+S]"
       />
     </div>
     <textarea

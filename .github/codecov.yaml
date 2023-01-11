@@ -11,7 +11,7 @@ coverage:
     project:
       design:
         target: auto
-        threshold: 0
+        threshold: '1%'
         paths:
           - 'packages/design'
       website:

@@ -1,5 +1,5 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import React, { useState } from 'react';
 
 import EditorForm from '.';
 import Editor from './Editor';
@@ -17,7 +17,8 @@ const componentMeta: ComponentMeta<typeof EditorForm> = {
 export default componentMeta;
 
 const Template: ComponentStory<typeof EditorForm> = (args) => {
-  return <EditorForm {...args} />;
+  const [content, setContent] = useState(args.content);
+  return <EditorForm {...args} content={content} onChange={setContent} />;
 };
 
 export const Usage = Template.bind({});

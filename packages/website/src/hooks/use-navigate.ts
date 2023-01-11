@@ -1,5 +1,5 @@
 import { useTransition } from 'react';
-import type { To, NavigateOptions, NavigateFunction } from 'react-router-dom';
+import type { NavigateFunction, NavigateOptions, To } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 // https://github.com/bangumi/frontend/issues/125

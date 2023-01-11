@@ -4,8 +4,8 @@ import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useInput } from 'rooks';
 
-import { Input, Button } from '@bangumi/design';
-import { UserLogin, Password } from '@bangumi/icons';
+import { Button, Input } from '@bangumi/design';
+import { Password, UserLogin } from '@bangumi/icons';
 
 import {
   CaptureError,

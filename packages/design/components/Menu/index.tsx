@@ -10,19 +10,19 @@ import MenuItem from './MenuItem';
 export type MenuItemType = Omit<MenuItemProps, 'id'> & { key: string };
 
 export interface MenuProps {
-  /* 点击事件，对每一个 MenuItem 都生效 */
+  /** 点击事件，对每一个 MenuItem 都生效 */
   onClick?: (key: string, e: React.MouseEvent<HTMLElement>) => void;
-  /* 自定义最外层类名 */
+  /** 自定义最外层类名 */
   wrapperClass?: string;
-  /* 菜单类型，支持水平、垂直。在 Bangumi 设计中，垂直菜单多用于子菜单 */
+  /** 菜单类型，支持水平、垂直。在 Bangumi 设计中，垂直菜单多用于子菜单 */
   mode?: 'vertical' | 'horizontal';
-  /* 最外层节点样式 */
+  /** 最外层节点样式 */
   style?: React.CSSProperties;
-  /* 选中节点的 Key */
+  /** 选中节点的 Key */
   activeKey?: string;
-  /* 节点数组，设置可以自动设置 MenuItem 节点 */
+  /** 节点数组，设置可以自动设置 MenuItem 节点 */
   items: MenuItemType[];
-  /* Render Props, 你可以使用自定义的 Item 组件 */
+  /** Render Props, 你可以使用自定义的 Item 组件 */
   children?: (items: MenuItemType) => React.ReactElement;
 }
 

@@ -9,8 +9,8 @@ components:
     CookiesSession:
       type: apiKey
       in: cookie
-      name: sessionID
-      description: 使用 [login](#/auth/login) 登录
+      name: chiiNextSessionID
+      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
   schemas:
     User:
       title: User
@@ -424,6 +424,129 @@ components:
         - topicID
         - postID
         - createdAt
+    SubjectEdit:
+      examples:
+        - name: 沙盒
+          infobox: |-
+            {{Infobox animanga/TVAnime
+            |中文名= 沙盒
+            |别名={
+            }
+            |话数= 7
+            |放送开始= 0000-10-06
+            |放送星期= 
+            |官方网站= 
+            |播放电视台= 
+            |其他电视台= 
+            |播放结束= 
+            |其他= 
+            |Copyright= 
+            |平台={
+            [龟壳]
+            [Xbox Series S]
+            [Xbox Series X]
+            [Xbox Series X/S]
+            [PC]
+            [Xbox Series X|S]
+            }
+            }}
+          platform: 0
+          nsfw: false
+          summary: |-
+            本条目是一个沙盒，可以用于尝试bgm功能。
+
+            普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
+
+            https://bgm.tv/group/topic/366812#post_1923517
+      type: object
+      properties:
+        name:
+          minLength: 1
+          type: string
+        infobox:
+          minLength: 1
+          type: string
+        platform:
+          type: integer
+        nsfw:
+          type: boolean
+        date:
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          examples:
+            - '0000-00-00'
+            - '2007-01-30'
+          type: string
+        summary:
+          type: string
+      required:
+        - name
+        - infobox
+        - platform
+        - nsfw
+        - summary
+    WikiPlatform:
+      type: object
+      properties:
+        id:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+        - text
+    SubjectWikiInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        typeID:
+          type: integer
+        infobox:
+          type: string
+        platform:
+          type: integer
+        availablePlatform:
+          type: array
+          items:
+            $ref: '#/components/schemas/WikiPlatform'
+        summary:
+          type: string
+        nsfw:
+          type: boolean
+      required:
+        - id
+        - name
+        - typeID
+        - infobox
+        - platform
+        - availablePlatform
+        - summary
+        - nsfw
+    HistorySummary:
+      type: object
+      properties:
+        creator:
+          type: object
+          properties:
+            username:
+              type: string
+          required:
+            - username
+        type:
+          description: 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知
+          type: integer
+        commitMessage:
+          type: string
+        createdAt:
+          description: unix timestamp seconds
+          type: integer
+      required:
+        - creator
+        - type
+        - commitMessage
+        - createdAt
 paths:
   /p1/logout:
     post:
@@ -431,6 +554,12 @@ paths:
       tags:
         - auth
       description: 登出
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
       responses:
         '200':
           description: Default Response
@@ -505,7 +634,7 @@ paths:
             Set-Cookie:
               schema:
                 type: string
-              description: 'example: "sessionID=12345abc"'
+              description: 'example: "chiiNextSessionID=12345abc"'
           content:
             application/json:
               schema:
@@ -602,7 +731,7 @@ paths:
               example:
                 code: NEED_LOGIN
                 error: Unauthorized
-                message: you need to login before %s
+                message: you need to login before get current user
                 statusCode: 401
         '500':
           description: 意料之外的服务器错误
@@ -848,6 +977,8 @@ paths:
                 $ref: '#/components/schemas/Error'
     post:
       operationId: createNewGroupTopic
+      tags:
+        - group
       requestBody:
         content:
           application/json:
@@ -963,6 +1094,8 @@ paths:
   /p1/groups/-/topics/{topicID}/replies:
     post:
       operationId: createGroupReply
+      tags:
+        - group
       requestBody:
         content:
           application/json:
@@ -1019,6 +1152,62 @@ paths:
                     message: >-
                       you need to join private group '沙盒' before you create a
                       post or reply
+                    statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/groups/-/posts/{postID}:
+    put:
+      operationId: editReply
+      tags:
+        - group
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  minLength: 1
+                  type: string
+              required:
+                - text
+            example:
+              text: new post contents
+        required: true
+      parameters:
+        - schema:
+            type: integer
+          example: 2092074
+          in: path
+          name: postID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to edit reply
                     statusCode: 401
         '500':
           description: 意料之外的服务器错误
@@ -1127,6 +1316,321 @@ paths:
                     error: Unauthorized
                     message: you need to login before marking notifications as read
                     statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/wiki/subjects/{subjectID}:
+    get:
+      operationId: subjectInfo
+      tags:
+        - wiki
+      description: |-
+        获取当前的 wiki 信息
+
+        暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 363612
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectWikiInfo'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+    put:
+      operationId: putSubjectInfo
+      tags:
+        - wiki
+      description: 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                commitMessage:
+                  minLength: 1
+                  type: string
+                subject:
+                  $ref: '#/components/schemas/SubjectEdit'
+              required:
+                - commitMessage
+                - subject
+            example:
+              commitMessage: 修正笔误
+              subject:
+                name: 沙盒
+                infobox: |-
+                  {{Infobox animanga/TVAnime
+                  |中文名= 沙盒
+                  |别名={
+                  }
+                  |话数= 7
+                  |放送开始= 0000-10-06
+                  |放送星期= 
+                  |官方网站= 
+                  |播放电视台= 
+                  |其他电视台= 
+                  |播放结束= 
+                  |其他= 
+                  |Copyright= 
+                  |平台={
+                  [龟壳]
+                  [Xbox Series S]
+                  [Xbox Series X]
+                  [Xbox Series X/S]
+                  [PC]
+                  [Xbox Series X|S]
+                  }
+                  }}
+                platform: 0
+                nsfw: false
+                summary: |-
+                  本条目是一个沙盒，可以用于尝试bgm功能。
+
+                  普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
+
+                  https://bgm.tv/group/topic/366812#post_1923517
+        required: true
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 363612
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: patchSubjectInfo
+      tags:
+        - wiki
+      description: 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                commitMessage:
+                  minLength: 1
+                  type: string
+                subject:
+                  examples:
+                    - name: 沙盒
+                      infobox: |-
+                        {{Infobox animanga/TVAnime
+                        |中文名= 沙盒
+                        |别名={
+                        }
+                        |话数= 7
+                        |放送开始= 0000-10-06
+                        |放送星期= 
+                        |官方网站= 
+                        |播放电视台= 
+                        |其他电视台= 
+                        |播放结束= 
+                        |其他= 
+                        |Copyright= 
+                        |平台={
+                        [龟壳]
+                        [Xbox Series S]
+                        [Xbox Series X]
+                        [Xbox Series X/S]
+                        [PC]
+                        [Xbox Series X|S]
+                        }
+                        }}
+                      platform: 0
+                      nsfw: false
+                      summary: >-
+                        本条目是一个沙盒，可以用于尝试bgm功能。
+
+
+                        普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
+
+
+                        https://bgm.tv/group/topic/366812#post_1923517
+                  type: object
+                  properties:
+                    name:
+                      minLength: 1
+                      type: string
+                    infobox:
+                      minLength: 1
+                      type: string
+                    platform:
+                      type: integer
+                    nsfw:
+                      type: boolean
+                    date:
+                      pattern: ^\d{4}-\d{2}-\d{2}$
+                      examples:
+                        - '0000-00-00'
+                        - '2007-01-30'
+                      type: string
+                    summary:
+                      type: string
+              required:
+                - commitMessage
+                - subject
+            example:
+              commitMessage: 修正笔误
+              subject:
+                infobox: |-
+                  {{Infobox animanga/TVAnime
+                  |中文名= 沙盒
+                  |别名={
+                  }
+                  |话数= 7
+                  |放送开始= 0000-10-06
+                  |放送星期= 
+                  |官方网站= 
+                  |播放电视台= 
+                  |其他电视台= 
+                  |播放结束= 
+                  |其他= 
+                  |Copyright= 
+                  |平台={
+                  [龟壳]
+                  [Xbox Series S]
+                  [Xbox Series X]
+                  [Xbox Series X/S]
+                  [PC]
+                  [Xbox Series X|S]
+                  }
+                  }}
+        required: true
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 363612
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/wiki/subjects/{subjectID}/history-summary:
+    get:
+      operationId: subjectEditHistorySummary
+      tags:
+        - wiki
+      description: |-
+        获取当前的 wiki 信息
+
+        暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      parameters:
+        - schema:
+            minimum: 0
+            type: integer
+          example: 8
+          in: path
+          name: subjectID
+          required: true
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HistorySummary'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
         '500':
           description: 意料之外的服务器错误
           content:
