@@ -14,7 +14,7 @@ interface SelectProps {
 }
 
 const Select = ({ options, style, defaultValue, className }: SelectProps) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   // TODO: Click outside hidden.
   const [active, setActive] = useState(defaultValue);
   const handleClick = () => {

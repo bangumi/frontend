@@ -1,7 +1,6 @@
 import './style';
 
 import classnames from 'classnames';
-import type { PropsWithChildren } from 'react';
 import React, { forwardRef } from 'react';
 
 export interface InputProps {
@@ -20,7 +19,7 @@ export interface InputProps {
 }
 
 type IInput = React.ForwardRefExoticComponent<InputProps> & {
-  Group: React.FC<PropsWithChildren<{ className?: string }>>;
+  Group: React.FC<JSX.IntrinsicElements['div']>;
 };
 
 /* eslint-disable react/prop-types */
@@ -37,8 +36,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 ) as IInput;
 
-Input.Group = ({ children, className }) => {
-  return <div className={classnames('bgm-input-group', className)}>{children}</div>;
+Input.Group = ({ children, className, ...props }) => {
+  return (
+    <div className={classnames('bgm-input-group', className)} {...props}>
+      {children}
+    </div>
+  );
 };
 
 export default Input;
