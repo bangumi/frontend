@@ -1,3 +1,5 @@
+import './style';
+
 import classnames from 'classnames';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
@@ -26,13 +28,13 @@ interface ItemType {
 }
 
 export interface TabProps<T extends ItemType = ItemType> {
-  /* 节点数组 */
+  /** 节点数组 */
   items: T[];
-  /* 选中节点的 Key */
+  /** 选中节点的 Key */
   activeKey: string;
-  /* 点击切换事件回调，对每一个 Item 都生效 */
+  /** 点击切换事件回调，对每一个 Item 都生效 */
   onChange?: (key: string, value: T) => void;
-  /* 样式类型 */
+  /** 样式类型 */
   type?: 'default' | 'borderless';
 }
 

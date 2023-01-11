@@ -10,7 +10,7 @@ import type { User } from '@bangumi/client/user';
 interface UserContextType {
   user?: User;
   redirectToLogin: () => void;
-  login: (username: string, password: string, hCaptchaResp: string) => Promise<void>;
+  login: (username: string, password: string, captchaResp: string) => Promise<void>;
 }
 
 const UserContext = React.createContext<UserContextType>(null!);
@@ -50,12 +50,7 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()), {
-    refreshWhenHidden: false,
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-    shouldRetryOnError: false,
-  });
+  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()));
   const navigate = useNavigate();
 
   function redirectToLogin(): void {
@@ -64,8 +59,8 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
   const value: UserContextType = {
     redirectToLogin,
-    login: async (email, password, hCaptchaResp) => {
-      await login(email, password, hCaptchaResp);
+    login: async (email, password, captchaResp) => {
+      await login(email, password, captchaResp);
       await mutate();
     },
     user,
@@ -78,11 +73,11 @@ export const useUser: () => UserContextType = () => {
   return React.useContext(UserContext);
 };
 
-async function login(email: string, password: string, hCaptchaResponse: string): Promise<void> {
-  const res = await ozaClient.login({
+async function login(email: string, password: string, cfCaptchaResponse: string): Promise<void> {
+  const res = await ozaClient.login2({
     email,
     password,
-    'h-captcha-response': hCaptchaResponse,
+    'cf-turnstile-response': cfCaptchaResponse,
   });
 
   if (res.status === 200) {

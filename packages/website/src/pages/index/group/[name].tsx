@@ -2,8 +2,8 @@ import React from 'react';
 import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom';
 
 import { SupportedErrorCode, withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { useGroup } from '@bangumi/website/hooks/use-group';
 import type { UseGroupRet } from '@bangumi/website/hooks/use-group';
+import { useGroup } from '@bangumi/website/hooks/use-group';
 
 import GroupLayout, { GroupTabs } from './components/GroupLayout';
 

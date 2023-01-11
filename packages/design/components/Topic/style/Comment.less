@@ -1,5 +1,7 @@
 @import '../../../theme/base';
 
+@highlight-border-color: #369cf8;
+
 .bgm-comment {
   &__header {
     display: flex;
@@ -16,6 +18,11 @@
     &--collapsed {
       padding-top: 12px;
       min-height: 22px;
+    }
+
+    &--highlighted {
+      border: 2px solid @highlight-border-color;
+      border-radius: 5px;
     }
   }
 
@@ -74,6 +81,7 @@
   &__content {
     color: @gray-100;
     line-height: 26px;
+    margin-top: 12px;
 
     &--deleted {
       color: @gray-80;

@@ -1,21 +1,25 @@
-import path from 'path';
+import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
-import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
-  const apiDomain =
-    mode === 'loc'
-      ? 'http://127.0.0.1:4000'
-      : mode === 'stage'
-      ? 'https://dev.bgm38.com'
-      : 'https://next.bgm.tv';
+  let apiDomain = 'https://dev.bgm38.com';
+
+  if (mode === 'loc') {
+    apiDomain = 'http://127.0.0.1:4000';
+  } else if (mode === 'production') {
+    apiDomain = 'https://next.bgm.tv';
+  }
+
   console.log('using backend', apiDomain);
 
   return {
+    build: {
+      sourcemap: true,
+    },
     resolve: {
       alias: {
         '@bangumi/website': path.resolve(__dirname, './src'),
@@ -51,8 +55,20 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      react(),
-      svgr(),
+      react(
+        mode === 'production'
+          ? {
+              babel: {
+                plugins: ['babel-plugin-jsx-remove-data-test-id'],
+              },
+            }
+          : undefined,
+      ),
+      svgr({
+        svgrOptions: {
+          titleProp: true,
+        },
+      }),
       pages({
         extensions: ['tsx'],
         importMode: 'async',
@@ -62,16 +78,6 @@ export default defineConfig(({ mode }) => {
           '**/*.spec.tsx',
           '**/*.test.ts',
           '**/*.test.tsx',
-        ],
-      }),
-      styleImport({
-        libs: [
-          {
-            libraryName: '@bangumi/design',
-            libraryNameChangeCase: 'pascalCase',
-            ensureStyleFile: true,
-            resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`,
-          },
         ],
       }),
     ],

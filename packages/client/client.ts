@@ -1,11 +1,11 @@
 /**
  * hello
- * 0.0.51
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
 import * as Oazapfts from 'oazapfts/lib/runtime';
 import * as QS from 'oazapfts/lib/runtime/query';
+
 export const defaults: Oazapfts.RequestOpts = {
   baseUrl: '/',
 };
@@ -136,10 +136,40 @@ export interface Notice {
   postID: number;
   createdAt: number;
 }
+export interface WikiPlatform {
+  id: number;
+  text: string;
+}
+export interface SubjectWikiInfo {
+  id: number;
+  name: string;
+  typeID: number;
+  infobox: string;
+  platform: number;
+  availablePlatform: WikiPlatform[];
+  summary: string;
+  nsfw: boolean;
+}
+export interface SubjectEdit {
+  name: string;
+  infobox: string;
+  platform: number;
+  nsfw: boolean;
+  date?: string;
+  summary: string;
+}
+export interface HistorySummary {
+  creator: {
+    username: string;
+  };
+  type: number;
+  commitMessage: string;
+  createdAt: number;
+}
 /**
  * 登出
  */
-export async function logout(opts?: Oazapfts.RequestOpts) {
+export async function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -153,47 +183,8 @@ export async function logout(opts?: Oazapfts.RequestOpts) {
         status: 500;
         data: Error;
       }
-  >('/p1/logout', {
-    ...opts,
-    method: 'POST',
-  });
-}
-/**
- * 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
- *
- * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
- */
-export async function login(
-  body: {
-    email: string;
-    password: string;
-    'h-captcha-response': string;
-  },
-  opts?: Oazapfts.RequestOpts,
-) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: User;
-      }
-    | {
-        status: 400;
-        data: ValidationError;
-      }
-    | {
-        status: 401;
-        data: Error;
-      }
-    | {
-        status: 429;
-        data: Error;
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
   >(
-    '/p1/login',
+    '/p1/logout',
     oazapfts.json({
       ...opts,
       method: 'POST',
@@ -484,7 +475,7 @@ export async function getSubjectTopicsBySubjectId(
 export async function createGroupReply(
   topicId: number,
   body: {
-    relatedID: number;
+    replyTo?: number;
     content: string;
   },
   opts?: Oazapfts.RequestOpts,
@@ -495,6 +486,10 @@ export async function createGroupReply(
         data: BasicReply;
       }
     | {
+        status: 401;
+        data: Error;
+      }
+    | {
         status: 500;
         data: Error;
       }
@@ -503,6 +498,35 @@ export async function createGroupReply(
     oazapfts.json({
       ...opts,
       method: 'POST',
+      body,
+    }),
+  );
+}
+export async function editReply(
+  postId: number,
+  body: {
+    text: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/groups/-/posts/${encodeURIComponent(postId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
       body,
     }),
   );
@@ -576,15 +600,15 @@ export async function clearNotice(
   );
 }
 /**
- * 使用 websocket 订阅通知
+ * 获取当前的 wiki 信息
+ *
+ * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
  */
-export async function subscribeNotify(opts?: Oazapfts.RequestOpts) {
+export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: {
-          count: number;
-        };
+        data: SubjectWikiInfo;
       }
     | {
         status: 401;
@@ -594,7 +618,101 @@ export async function subscribeNotify(opts?: Oazapfts.RequestOpts) {
         status: 500;
         data: Error;
       }
-  >('/p1/sub/notify', {
+  >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}`, {
+    ...opts,
+  });
+}
+/**
+ * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+ */
+export async function putSubjectInfo(
+  subjectId: number,
+  body: {
+    commitMessage: string;
+    subject: SubjectEdit;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
+/**
+ * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+ */
+export async function patchSubjectInfo(
+  subjectId: number,
+  body: {
+    commitMessage: string;
+    subject: {
+      name?: string;
+      infobox?: string;
+      platform?: number;
+      nsfw?: boolean;
+      date?: string;
+      summary?: string;
+    };
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body,
+    }),
+  );
+}
+/**
+ * 获取当前的 wiki 信息
+ *
+ * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+ */
+export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: HistorySummary[];
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/history-summary`, {
     ...opts,
   });
 }

@@ -1,7 +1,7 @@
 import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 
-import { UserLogin, Search as SearchIcon } from '@bangumi/icons';
+import { Search as SearchIcon, UserLogin } from '@bangumi/icons';
 
 import type { InputProps } from '.';
 import Input from '.';
@@ -64,7 +64,7 @@ export const NavSearch = Template.bind({});
 NavSearch.args = {
   // 正式需要详细样式
   prefix: (
-    <select name='select' style={{ outline: 'none', border: 'none', color: '#AAA6A6' }}>
+    <select name='select' style={{ outline: 'none', border: 'none', color: '#9F9B9B' }}>
       <option value='value1' selected>
         全部条目
       </option>

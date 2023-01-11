@@ -8,14 +8,6 @@ export interface paths {
     /** @description 登出 */
     post: operations['logout'];
   };
-  '/p1/login': {
-    /**
-     * @description 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
-     *
-     * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
-     */
-    post: operations['login'];
-  };
   '/p1/login2': {
     /**
      * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
@@ -53,6 +45,9 @@ export interface paths {
   '/p1/groups/-/topics/{topicID}/replies': {
     post: operations['createGroupReply'];
   };
+  '/p1/groups/-/posts/{postID}': {
+    put: operations['editReply'];
+  };
   '/p1/notify': {
     /** 获取未读通知 */
     get: operations['listNotice'];
@@ -66,14 +61,25 @@ export interface paths {
      */
     post: operations['clearNotice'];
   };
-  '/p1/sub/notify': {
+  '/p1/wiki/subjects/{subjectID}': {
     /**
-     * 使用 websocket 订阅通知
-     * @description openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
+     * @description 获取当前的 wiki 信息
      *
-     * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
      */
-    get: operations['subscribeNotify'];
+    get: operations['subjectInfo'];
+    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
+    put: operations['putSubjectInfo'];
+    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
+    patch: operations['patchSubjectInfo'];
+  };
+  '/p1/wiki/subjects/{subjectID}/history-summary': {
+    /**
+     * @description 获取当前的 wiki 信息
+     *
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+     */
+    get: operations['subjectEditHistorySummary'];
   };
 }
 
@@ -229,6 +235,38 @@ export interface components {
       /** @description unix timestamp in seconds */
       createdAt: number;
     };
+    SubjectEdit: {
+      name: string;
+      infobox: string;
+      platform: number;
+      nsfw: boolean;
+      date?: string;
+      summary: string;
+    };
+    WikiPlatform: {
+      id: number;
+      text: string;
+    };
+    SubjectWikiInfo: {
+      id: number;
+      name: string;
+      typeID: number;
+      infobox: string;
+      platform: number;
+      availablePlatform: components['schemas']['WikiPlatform'][];
+      summary: string;
+      nsfw: boolean;
+    };
+    HistorySummary: {
+      creator: {
+        username: string;
+      };
+      /** @description 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知 */
+      type: number;
+      commitMessage: string;
+      /** @description unix timestamp seconds */
+      createdAt: number;
+    };
   };
   responses: never;
   parameters: never;
@@ -242,6 +280,11 @@ export type external = Record<string, never>;
 export interface operations {
   logout: {
     /** @description 登出 */
+    requestBody?: {
+      content: {
+        'application/json': Record<string, never>;
+      };
+    };
     responses: {
       /** @description Default Response */
       200: {
@@ -251,81 +294,6 @@ export interface operations {
       };
       /** @description 未登录 */
       401: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
-  login: {
-    /**
-     * @description 需要 [hCaptcha的验证码](https://docs.hcaptcha.com/#add-the-hcaptcha-widget-to-your-webpage)
-     *
-     * site-key 是 `4874acee-9c6e-4e47-99ad-e2ea1606961f`
-     */
-    requestBody: {
-      content: {
-        /**
-         * @example {
-         *   "email": "treeholechan@gmail.com",
-         *   "password": "lovemeplease",
-         *   "h-captcha-response": "10000000-aaaa-bbbb-cccc-000000000001"
-         * }
-         */
-        'application/json': {
-          email: string;
-          password: string;
-          'h-captcha-response': string;
-        };
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        headers: {
-          /** @description example: "sessionID=12345abc" */
-          'Set-Cookie'?: string;
-        };
-        content: {
-          'application/json': components['schemas']['User'];
-        };
-      };
-      /** @description Default Response */
-      400: {
-        content: {
-          'application/json': components['schemas']['ValidationError'];
-        };
-      };
-      /** @description 验证码错误/账号密码不匹配 */
-      401: {
-        headers: {
-          /** @description remaining rate limit */
-          'X-RateLimit-Remaining'?: number;
-          /** @description total limit per 10 minutes */
-          'X-RateLimit-Limit'?: number;
-          /** @description seconds to reset rate limit */
-          'X-RateLimit-Reset'?: number;
-        };
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 失败次数太多，需要过一段时间再重试 */
-      429: {
-        headers: {
-          /** @description remaining rate limit */
-          'X-RateLimit-Remaining'?: number;
-          /** @description limit per 10 minutes */
-          'X-RateLimit-Limit'?: number;
-          /** @description seconds to reset rate limit */
-          'X-RateLimit-Reset'?: number;
-        };
         content: {
           'application/json': components['schemas']['Error'];
         };
@@ -366,7 +334,7 @@ export interface operations {
       /** @description Default Response */
       200: {
         headers: {
-          /** @description example: "sessionID=12345abc" */
+          /** @description example: "chiiNextSessionID=12345abc" */
           'Set-Cookie'?: string;
         };
         content: {
@@ -653,8 +621,11 @@ export interface operations {
     requestBody: {
       content: {
         'application/json': {
-          /** @default 0 */
-          relatedID: number;
+          /**
+           * @description 被回复的 topic ID, `0` 代表回复楼主
+           * @default 0
+           */
+          replyTo?: number;
           content: string;
         };
       };
@@ -664,6 +635,52 @@ export interface operations {
       200: {
         content: {
           'application/json': components['schemas']['BasicReply'];
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  editReply: {
+    parameters: {
+      /** @example 2092074 */
+      path: {
+        postID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "text": "new post contents"
+         * }
+         */
+        'application/json': {
+          text: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -736,23 +753,152 @@ export interface operations {
       };
     };
   };
-  subscribeNotify: {
+  subjectInfo: {
     /**
-     * 使用 websocket 订阅通知
-     * @description openapi不能很好的描述websocket api，但是这个 api 只会返回一种数据
+     * @description 获取当前的 wiki 信息
      *
-     * swagger 的 `Try it out` 不支持 websocket，所以会直接显示为 404 响应
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
      */
+    parameters: {
+      /** @example 363612 */
+      path: {
+        subjectID: number;
+      };
+    };
     responses: {
       /** @description Default Response */
       200: {
         content: {
-          'application/json': {
-            count: number;
+          'application/json': components['schemas']['SubjectWikiInfo'];
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  putSubjectInfo: {
+    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
+    parameters: {
+      /** @example 363612 */
+      path: {
+        subjectID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "commitMessage": "修正笔误",
+         *   "subject": {
+         *     "name": "沙盒",
+         *     "infobox": "{{Infobox animanga/TVAnime\n|中文名= 沙盒\n|别名={\n}\n|话数= 7\n|放送开始= 0000-10-06\n|放送星期= \n|官方网站= \n|播放电视台= \n|其他电视台= \n|播放结束= \n|其他= \n|Copyright= \n|平台={\n[龟壳]\n[Xbox Series S]\n[Xbox Series X]\n[Xbox Series X/S]\n[PC]\n[Xbox Series X|S]\n}\n}}",
+         *     "platform": 0,
+         *     "nsfw": false,
+         *     "summary": "本条目是一个沙盒，可以用于尝试bgm功能。\n\n普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。\n\nhttps://bgm.tv/group/topic/366812#post_1923517"
+         *   }
+         * }
+         */
+        'application/json': {
+          commitMessage: string;
+          subject: components['schemas']['SubjectEdit'];
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: never;
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  patchSubjectInfo: {
+    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
+    parameters: {
+      /** @example 363612 */
+      path: {
+        subjectID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "commitMessage": "修正笔误",
+         *   "subject": {
+         *     "infobox": "{{Infobox animanga/TVAnime\n|中文名= 沙盒\n|别名={\n}\n|话数= 7\n|放送开始= 0000-10-06\n|放送星期= \n|官方网站= \n|播放电视台= \n|其他电视台= \n|播放结束= \n|其他= \n|Copyright= \n|平台={\n[龟壳]\n[Xbox Series S]\n[Xbox Series X]\n[Xbox Series X/S]\n[PC]\n[Xbox Series X|S]\n}\n}}"
+         *   }
+         * }
+         */
+        'application/json': {
+          commitMessage: string;
+          subject: {
+            name?: string;
+            infobox?: string;
+            platform?: number;
+            nsfw?: boolean;
+            date?: string;
+            summary?: string;
           };
         };
       };
-      /** @description 未登录 */
+    };
+    responses: {
+      /** @description Default Response */
+      200: never;
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  subjectEditHistorySummary: {
+    /**
+     * @description 获取当前的 wiki 信息
+     *
+     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+     */
+    parameters: {
+      /** @example 8 */
+      path: {
+        subjectID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['HistorySummary'][];
+        };
+      };
+      /** @description Default Response */
       401: {
         content: {
           'application/json': components['schemas']['Error'];

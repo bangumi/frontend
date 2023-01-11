@@ -1,18 +1,20 @@
+import './style';
+
 import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 
 export interface InputProps {
-  /* 同原生 input 标签 `type` */
+  /** 同原生 input 标签 `type` */
   type?: string;
-  /* 同原生 `placeholder` */
+  /** 同原生 `placeholder` */
   placeholder?: string;
-  /* 外层 wrapper 的样式 */
+  /** 外层 wrapper 的样式 */
   wrapperStyle?: React.CSSProperties;
-  /* 外层 wrapper 的自定义类名 */
+  /** 外层 wrapper 的自定义类名 */
   wrapperClass?: string;
-  /* 前缀 */
+  /** 前缀 */
   prefix?: React.ReactNode;
-  /* 后缀 */
+  /** 后缀 */
   suffix?: React.ReactNode;
 }
 
