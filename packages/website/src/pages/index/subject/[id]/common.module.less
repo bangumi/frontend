@@ -46,6 +46,7 @@
     border: 2px solid @gray-10;
     min-height: 300px;
     padding: 9px;
+    font-size: 1rem;
 
     &:focus {
       outline: none;
@@ -61,7 +62,42 @@
   &DetailInfo {
     display: flex;
     flex: 1;
-    flex-direction: column;
     gap: 10px;
+    flex-direction: column;
+
+    &Item {
+      position: relative;
+
+      &Add {
+        visibility: hidden;
+        height: 2px;
+        background: #54b5df;
+        margin: 4px 0;
+      }
+
+      &:hover &Add {
+        visibility: visible;
+      }
+
+      &Plus {
+        position: absolute;
+        right: 0;
+        transform: translate(50%, -50%);
+        cursor: pointer;
+      }
+
+      &Minus {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        transform: translate(50%, -50%);
+      }
+
+      &:hover &Minus {
+        display: block;
+      }
+    }
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import DetailEditor from './components/WikiEditor/DetailEditor';
-import { WikiEditTabs, _TEST_SUBJECTS_ } from './_shared';
+import { _TEST_SUBJECTS_, WikiEditTabs } from './_shared';
 import WikiLayout from './components/WikiLayout';
 
 const WikiHistoryPage = () => {
