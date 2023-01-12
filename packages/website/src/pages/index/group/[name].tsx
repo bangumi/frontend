@@ -1,11 +1,11 @@
 import React from 'react';
-import { Outlet, useLocation, useOutletContext, useParams } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 
 import ErrorBoundary from '@bangumi/website/components/ErrorBoundary';
 import type { UseGroupRet } from '@bangumi/website/hooks/use-group';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
-import GroupLayout, { GroupTabs } from './components/GroupLayout';
+import GroupLayout from './components/GroupLayout';
 
 interface GroupContext {
   groupRet: UseGroupRet;
@@ -13,17 +13,10 @@ interface GroupContext {
 
 const InternalGroupPage = () => {
   const { name } = useParams();
-  const { pathname } = useLocation();
   const groupRet = useGroup(name!);
 
-  const matchTab = pathname.endsWith(GroupTabs.Forum)
-    ? GroupTabs.Forum
-    : pathname.endsWith(GroupTabs.Members)
-    ? GroupTabs.Members
-    : GroupTabs.Index;
-
   return (
-    <GroupLayout group={groupRet.group} groupName={name!} curTab={matchTab}>
+    <GroupLayout group={groupRet.group} groupName={name!}>
       <Outlet context={{ groupRet }} />
     </GroupLayout>
   );

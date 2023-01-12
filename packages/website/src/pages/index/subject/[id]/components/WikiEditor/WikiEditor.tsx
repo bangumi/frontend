@@ -1,16 +1,18 @@
 import * as monaco from 'monaco-editor';
+import type { MutableRefObject} from 'react';
 import React, { useEffect, useRef } from 'react';
 
 import style from './WikiEditor.module.less';
 
 interface WikiEditorProps {
   defaultValue?: string;
+  instanceRef: MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>;
 }
 
-const WikiEditor = ({ defaultValue }: WikiEditorProps) => {
+const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) => {
   const editor = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
-    let instance: monaco.editor.IStandaloneCodeEditor | undefined;
     if (editor.current) {
       monaco.languages.register({ id: 'wiki' });
 
@@ -70,7 +72,7 @@ const WikiEditor = ({ defaultValue }: WikiEditorProps) => {
         },
       });
 
-      instance = monaco.editor.create(editor.current, {
+      instance.current = monaco.editor.create(editor.current, {
         value: defaultValue,
         language: 'wiki',
         automaticLayout: true,
@@ -81,11 +83,17 @@ const WikiEditor = ({ defaultValue }: WikiEditorProps) => {
       });
     }
     return () => {
-      if (instance) {
-        instance.dispose();
+      if (instance.current) {
+        instance.current.dispose();
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (instance.current) {
+      instance.current.setValue(defaultValue ?? '');
+    }
+  }, [defaultValue]);
 
   return <div id='bgm-wiki-editor' ref={editor} className={style.editor} />;
 };

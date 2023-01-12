@@ -1,4 +1,11 @@
-export { default as parseWiki, WikiSyntaxError } from '@bgm38/wiki';
+export {
+  parse as parseWiki,
+  WikiSyntaxError,
+  WikiItem,
+  WikiArrayItem,
+  stringify as stringifyWiki,
+} from '@bgm38/wiki';
+export type { Wiki } from '@bgm38/wiki';
 export * from './bbcode';
 
 /**

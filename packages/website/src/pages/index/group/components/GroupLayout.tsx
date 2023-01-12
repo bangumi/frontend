@@ -6,7 +6,7 @@ import type { GroupProfile } from '@bangumi/client/group';
 import { Layout, Section, Tab } from '@bangumi/design';
 import { keyBy } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
+import { NavLink } from '@bangumi/website/components/Link';
 
 import CommonStyles from '../common.module.less';
 import { GroupHeader } from './GroupHeader';
@@ -40,21 +40,20 @@ const groupTabsByKey = keyBy(GroupTabsItems, 'key');
 
 type IGroupLayoutProps = PropsWithChildren<{
   group: GroupProfile | undefined;
-  curTab: GroupTabs;
   groupName: string;
 }>;
 
-const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, groupName }) => {
-  const [, navigate] = useTransitionNavigate();
+const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }) => {
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group!} />
-      <Tab
-        type='borderless'
-        items={GroupTabsItems}
-        activeKey={curTab}
-        onChange={(_, value) => navigate(value.to(groupName))}
-      />
+      <Tab.Group type='borderless'>
+        {GroupTabsItems.map((tab) => (
+          <NavLink to={tab.to(groupName)} key={tab.key} end>
+            {({ isActive }) => <Tab.Item isActive={isActive}>{tab.label}</Tab.Item>}
+          </NavLink>
+        ))}
+      </Tab.Group>
       <Layout
         type='alpha'
         leftChildren={children}
