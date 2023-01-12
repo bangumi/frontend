@@ -74,7 +74,6 @@ export default defineConfig(({ mode }) => {
         importMode: 'async',
         exclude: [
           '**/components/**/*.tsx',
-          '**/_shared/**/*.ts',
           '**/*.spec.ts',
           '**/*.spec.tsx',
           '**/*.test.ts',

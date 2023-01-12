@@ -2,31 +2,23 @@ import './style';
 
 import classnames from 'classnames';
 import type { PropsWithChildren } from 'react';
-import React from 'react';
+import React, { createContext, useContext } from 'react';
 
 type Key = string | number;
-interface ItemProps {
-  isActive: boolean;
-  type: 'default' | 'borderless';
-  onClick: () => void;
-}
-const Item: React.FC<PropsWithChildren<ItemProps>> = ({ children, isActive, onClick, type }) => {
-  return (
-    <li
-      className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, {
-        'bgm-tab__item--active': isActive,
-      })}
-      onClick={onClick}
-    >
-      {children}
-    </li>
-  );
-};
+type StyleType = 'default' | 'borderless';
 
 interface ItemType {
   key: Key;
   label: string;
 }
+
+type ItemProps = JSX.IntrinsicElements['li'] & {
+  isActive: boolean;
+};
+
+type GroupProps = PropsWithChildren<{
+  type?: StyleType;
+}>;
 
 export interface TabProps<T extends ItemType = ItemType> {
   /** 节点数组 */
@@ -36,34 +28,46 @@ export interface TabProps<T extends ItemType = ItemType> {
   /* 点击切换事件回调，对每一个 Item 都生效 */
   onChange?: (key: Key, value: T) => void;
   /* 样式类型 */
-  type?: 'default' | 'borderless';
+  type?: StyleType;
 }
 
-export const Tab = <T extends ItemType>({
-  activeKey,
-  items,
-  onChange,
-  type = 'default',
-}: TabProps<T>) => {
+const TabContext = createContext<{ type: StyleType }>({ type: 'default' });
+
+const TabItem: React.FC<ItemProps> = ({ isActive, ...props }) => {
+  const { type } = useContext(TabContext);
   return (
-    <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>
-      {items.map((item) => {
-        return (
-          <Item
-            key={item.key}
-            isActive={activeKey === item.key}
-            type={type}
-            onClick={() => {
-              onChange?.(item.key, item);
-            }}
-          >
-            {' '}
-            {item.label}
-          </Item>
-        );
+    <li
+      className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, {
+        'bgm-tab__item--active': isActive,
       })}
-    </ul>
+      {...props}
+    />
   );
 };
+
+const TabGroup: React.FC<GroupProps> = ({ children, type = 'default' }) => (
+  <TabContext.Provider value={{ type }}>
+    <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>{children}</ul>
+  </TabContext.Provider>
+);
+
+const Tab = <T extends ItemType>({ activeKey, items, onChange, type = 'default' }: TabProps<T>) => (
+  <TabGroup type={type}>
+    {items.map((item) => (
+      <TabItem
+        key={item.key}
+        isActive={activeKey === item.key}
+        onClick={() => {
+          onChange?.(item.key, item);
+        }}
+      >
+        {item.label}
+      </TabItem>
+    ))}
+  </TabGroup>
+);
+
+Tab.Group = TabGroup;
+Tab.Item = TabItem;
 
 export default Tab;

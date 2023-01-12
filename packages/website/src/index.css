@@ -3,3 +3,7 @@ body {
     'PingFang SC', 'Microsoft YaHei', 'Lucida Grande', 'Helvetica Neue', 'Segoe UI', Helvetica,
     Arial, Verdana, sans-serif;
 }
+
+a {
+  text-decoration: inherit;
+}

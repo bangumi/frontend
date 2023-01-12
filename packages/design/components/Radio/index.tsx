@@ -7,6 +7,10 @@ type RadioProps = JSX.IntrinsicElements['input'] & {
   label: string;
 };
 
+type IRadio = React.ForwardRefExoticComponent<RadioProps> & {
+  Group: React.FC<JSX.IntrinsicElements['div']>;
+};
+
 /**
  * 在许多时候，传入 id 是有必要的，这使得组件点击 label 时可切换组件状态
  */
@@ -20,6 +24,15 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
       <label htmlFor={id}>{label}</label>
     </div>
   );
-});
+}) as IRadio;
+
+/* eslint-disable react/prop-types */
+Radio.Group = ({ children, className, ...props }) => {
+  return (
+    <div className={cn('bgm-radio-group', className)} {...props}>
+      {children}
+    </div>
+  );
+};
 
 export default Radio;

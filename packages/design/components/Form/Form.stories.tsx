@@ -1,14 +1,14 @@
-import type { ComponentStory, ComponentMeta } from '@storybook/react';
+import './Form.stories.less';
+
+import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import Form from '.';
 import Button from '../Button';
 import Divider from '../Divider';
 import Input from '../Input';
 import Select from '../Select';
-
-import './Form.stories.less';
+import Form from '.';
 
 const componentMeta: ComponentMeta<typeof Form> = {
   title: 'Modern/Form',
@@ -64,6 +64,7 @@ const Template: ComponentStory<typeof Form> = (args) => {
                 style={{
                   width: '120px',
                 }}
+                defaultValue='1'
               />
               <Divider orientation='vertical' className='divider' />
             </>

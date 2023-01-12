@@ -17,3 +17,12 @@ const Template: ComponentStory<typeof Radio> = () => {
   );
 };
 export const Default = Template.bind({});
+
+const GroupTemplate = () => (
+  <Radio.Group>
+    <Radio id='beginner' label='入门模式' name='type' />
+    <Radio id='wiki' label='Wiki模式' name='type' />
+  </Radio.Group>
+);
+
+export const RadioGroup = GroupTemplate.bind({});
