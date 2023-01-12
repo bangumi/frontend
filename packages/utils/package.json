@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.ts",
   "dependencies": {
-    "@bgm38/wiki": "^0.1.2"
+    "@bgm38/wiki": "^0.1.3"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
