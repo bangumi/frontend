@@ -194,13 +194,13 @@ importers:
 
   packages/utils:
     specifiers:
-      '@bgm38/wiki': ^0.1.2
+      '@bgm38/wiki': ^0.1.3
       '@types/js-yaml': ^4.0.5
       '@types/react': ^18.0.26
       js-yaml: ^4.1.0
       typescript: ^4.9.4
     dependencies:
-      '@bgm38/wiki': 0.1.2
+      '@bgm38/wiki': 0.1.3
     devDependencies:
       '@types/js-yaml': 4.0.5
       '@types/react': 18.0.26
@@ -3222,8 +3222,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@bgm38/wiki/0.1.2:
-    resolution: {integrity: sha512-jSzAqUNShjo5DBN5PxL7oNkQ0cshhizsUjDA0llgvyh8QQd0554f+cbGqlZThtaXom1xJZ22xMGtCydVJTdncA==}
+  /@bgm38/wiki/0.1.3:
+    resolution: {integrity: sha512-LRZqhAda8n2Iip3sEPK/n/8sNrqELPhxFXLRdOiidM00EKAnfYp0dALozKPupBg0wArDQQfj6tdn8nt0VHH4Cg==}
     engines: {node: '>=16'}
     dev: false
 
