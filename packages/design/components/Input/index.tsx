@@ -19,7 +19,7 @@ export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
 type IInput = React.ForwardRefExoticComponent<InputProps> & {
   Group: React.FC<JSX.IntrinsicElements['div']>;
 };
-
+// TODO: disabled style
 /* eslint-disable react/prop-types */
 // https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
 const Input = forwardRef<HTMLInputElement, InputProps>(

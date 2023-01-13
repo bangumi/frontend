@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import { cloneDeep, isArray, isNumber } from 'lodash-es';
+import { cloneDeep, isArray, isNumber, set } from 'lodash-es';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,7 +9,13 @@ import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select } from '@bangumi/design';
 import { ArrowRightCircle, Minus, Plus } from '@bangumi/icons';
 import type { Wiki } from '@bangumi/utils';
-import { parseWiki, stringifyWiki, WikiArrayItem, WikiItem } from '@bangumi/utils';
+import {
+  fromWikiElement,
+  parseWiki,
+  stringifyWiki,
+  toWikiElement,
+  WikiElement,
+} from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { Link } from '@bangumi/website/components/Link';
 import { _TEST_SUBJECTS_, WikiEditTabsItemsByKey } from '@bangumi/website/shared';
@@ -38,6 +44,9 @@ const TEMPLATE = `{{Infobox animanga/TVAnime
 |中文名= Bangumi Wiki 动画测试用沙盘
 |别名={
 [Wiki Sandbox]
+[Wiki Sandbox2]
+[Wiki Sandbox3]
+[Wiki Sandbox4]
 }
 |话数= 9
 |放送开始= 1582-10-14
@@ -72,7 +81,7 @@ const BuildInCommitMessage = [
 
 const WikiInfoItem = ({
   item,
-  isArray = false,
+  level = 1,
   handlePlus,
   handleMinus,
   onKeyUp,
@@ -80,8 +89,8 @@ const WikiInfoItem = ({
   handleKeyChange,
   handleValueChange,
 }: {
-  item?: Partial<WikiArrayItem & WikiItem>;
-  isArray?: boolean;
+  item: WikiElement;
+  level?: number;
   handlePlus?: () => void;
   handleMinus?: () => void;
   onKeyUp?: React.KeyboardEventHandler;
@@ -97,13 +106,14 @@ const WikiInfoItem = ({
           borderTopLeftRadius: '12px',
           borderBottomLeftRadius: '12px',
         }}
-        alight={isArray ? 'right' : undefined}
-        defaultValue={isArray ? item?.k : item?.key}
+        alight={level === 2 ? 'right' : undefined}
+        defaultValue={item.key}
         onChange={handleKeyChange}
       />
       <Input
         wrapperClass={style.formInput}
-        defaultValue={isArray ? item?.v : item?.value}
+        defaultValue={typeof item.value === 'string' ? item.value : ''}
+        disabled={item.isArray}
         onChange={handleValueChange}
       />
     </Input.Group>
@@ -127,8 +137,8 @@ const WikiEditDetailDetailPage: React.FC = () => {
   const { register, handleSubmit, setValue, getValues } = useForm<FormData>();
   // TODO: shim this into localStorage
   const [editorType, setEditorType] = useState(EditorType.Beginner);
-  const [wiki, setWiki] = useState<Wiki>();
-  const [wikiText, setWikiText] = useState(TEMPLATE);
+  const wikiRef = useRef<Wiki>();
+  const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
   const instanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
   const id = _TEST_SUBJECTS_;
@@ -137,9 +147,13 @@ const WikiEditDetailDetailPage: React.FC = () => {
   const onSubmit = ({ commitMessage, subject }: FormData) => {
     switch (editorType) {
       case EditorType.Beginner:
-        subject.infobox = stringifyWiki(wiki);
+        subject.infobox = stringifyWiki({
+          type: wikiRef.current?.type ?? '',
+          data: fromWikiElement(wikiElement),
+        });
         break;
       case EditorType.Wiki:
+        // TODO: check valid
         subject.infobox = instanceRef.current?.getValue() ?? '';
         break;
       default:
@@ -159,17 +173,28 @@ const WikiEditDetailDetailPage: React.FC = () => {
   };
 
   const handleSetEditorType = (type: EditorType) => {
-    switch (editorType) {
+    if (editorType === type) return;
+    setEditorType(type);
+    switch (type) {
       case EditorType.Wiki:
         // 切换到 wiki 模式，序列化 wiki
-        setWikiText(stringifyWiki(wiki));
+        instanceRef.current?.setValue(
+          stringifyWiki({
+            type: wikiRef.current?.type ?? '',
+            data: fromWikiElement(wikiElement),
+          }),
+        );
         break;
       case EditorType.Beginner: {
         // 切换到 入门模式，反序列化 wiki
         const text = instanceRef.current?.getValue() ?? '';
         try {
-          setWiki(parseWiki(text));
+          const wiki = parseWiki(text);
+          setWikiElement(toWikiElement(wiki));
+          wikiRef.current && (wikiRef.current.type = wiki.type);
         } catch (error: unknown) {
+          setEditorType(EditorType.Wiki);
+          // TODO: notify
           console.log(error);
         }
         break;
@@ -177,81 +202,79 @@ const WikiEditDetailDetailPage: React.FC = () => {
       default:
         break;
     }
-    setEditorType(type);
   };
 
   // useMemo
   useEffect(() => {
-    setWiki(parseWiki(wikiText));
-  }, [wikiText]);
+    wikiRef.current = parseWiki(TEMPLATE);
+    setWikiElement(toWikiElement(wikiRef.current));
+  }, []);
 
-  const addOneWikiItem = (idx: number, subIdx?: number) => {
-    setWiki((preWiki) => {
-      if (preWiki) {
-        const wikiData = cloneDeep(preWiki.data);
-        if (wikiData[idx]?.array) {
-          isNumber(subIdx) && wikiData[idx]?.values?.splice(subIdx + 1, 0, new WikiArrayItem());
+  // const addOneWikiItem = (idx: number, subIdx?: number) => {
+  //   setWiki((preWiki) => {
+  //     if (preWiki) {
+  //       const wikiData = cloneDeep(preWiki.data);
+  //       if (wikiData[idx]?.array) {
+  //         isNumber(subIdx) && wikiData[idx]?.values?.splice(subIdx + 1, 0, new WikiArrayItem());
+  //       } else {
+  //         wikiData.splice(idx + 1, 0, new WikiItem('', '', 'object'));
+  //       }
+  //       return {
+  //         ...preWiki,
+  //         data: wikiData,
+  //       };
+  //     }
+  //   });
+  // };
+
+  const removeOneWikiElement = (idx: number, subIdx?: number) => {
+    setWikiElement((preEl) => {
+      const els = cloneDeep(preEl);
+      if (isNumber(subIdx)) {
+        const preValue = els[idx]?.value as WikiElement[];
+        const newSub = [...preValue];
+        if (newSub.length === 1) {
+          els[idx] = new WikiElement({
+            key: els[idx]?.key,
+          });
         } else {
-          wikiData.splice(idx + 1, 0, new WikiItem('', '', 'object'));
+          newSub.splice(subIdx, 1);
+          els[idx] = new WikiElement({
+            ...els[idx],
+            value: newSub,
+          });
         }
-        return {
-          ...preWiki,
-          data: wikiData,
-        };
+      } else {
+        els.splice(idx, 1);
       }
+      return els;
     });
   };
 
-  const removeOneWikiItem = (idx: number, subIdx?: number) => {
-    setWiki((preWiki) => {
-      if (preWiki) {
-        const wikiData = cloneDeep(preWiki.data);
-        const preWikiArrayData = wikiData[idx]?.values;
-        if (isArray(preWikiArrayData)) {
-          if (preWikiArrayData.length === 1) {
-            wikiData[idx] = new WikiItem(wikiData[idx]!.key, '', 'object');
-          }
-          isNumber(subIdx) && preWikiArrayData.splice(subIdx, 1);
-        } else {
-          wikiData.splice(idx, 1);
-        }
-        return {
-          ...preWiki,
-          data: wikiData,
-        };
+  const handleWikiItemEdit = (
+    idx: number,
+    value: string,
+    target: 'key' | 'value',
+    subIdx?: number,
+  ) => {
+    setWikiElement((preEls) => {
+      if (isNumber(subIdx)) {
+        return set(preEls, `${idx}.value.${subIdx}.${target}`, value);
       }
-    });
-  };
-
-  const handleWikiItemEdit = (idx: number, value: string, target: 'key' | 'value') => {
-    setWiki((preWiki) => {
-      if (preWiki) {
-        const wikiData = cloneDeep(preWiki.data);
-        if (target === 'key') {
-          wikiData[idx]!.key = value;
-        } else if (target === 'value') {
-          wikiData[idx]!.value = value;
-        }
-        return {
-          ...preWiki,
-          data: wikiData,
-        };
-      }
+      return set(preEls, `${idx}.${target}`, value);
     });
   };
 
   const switchWikiItemToArray = (idx: number) => {
-    setWiki((preWiki) => {
-      if (preWiki) {
-        const wikiData = cloneDeep(preWiki.data);
-        wikiData[idx] = new WikiItem(wikiData[idx]!.key, '', 'array');
-        wikiData[idx]!.values = [new WikiArrayItem()];
-        return {
-          ...preWiki,
-          data: wikiData,
-        };
-      }
+    setWikiElement((preEls) => {
+      const newEls = [...preEls];
+      return set(
+        newEls,
+        idx,
+        new WikiElement({ key: preEls[idx]?.key, isArray: true, value: [new WikiElement()] }),
+      );
     });
+    console.log(wikiElement);
   };
 
   return (
@@ -299,13 +322,12 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 </Radio.Group>
 
                 <div hidden={editorType !== EditorType.Beginner}>
-                  {wiki?.data.map((item, idx) => (
-                    // TODO: use nano id!
-                    <div key={idx}>
+                  {wikiElement?.map((item, idx) => (
+                    <div key={item._id}>
                       <WikiInfoItem
                         item={item}
-                        handlePlus={() => addOneWikiItem(idx)}
-                        handleMinus={() => removeOneWikiItem(idx)}
+                        // handlePlus={() => addOneWikiItem(idx)}
+                        handleMinus={() => removeOneWikiElement(idx)}
                         onKeyDown={(e) => {
                           if (e.key === 'Tab') {
                             e.preventDefault();
@@ -319,23 +341,30 @@ const WikiEditDetailDetailPage: React.FC = () => {
                           handleWikiItemEdit(idx, v.target.value, 'value');
                         }}
                       />
-                      {item.values?.map((subItem, subIdx) => {
-                        return (
-                          <WikiInfoItem
-                            key={`${idx}_${subIdx}`}
-                            item={subItem}
-                            isArray
-                            handlePlus={() => addOneWikiItem(idx, subIdx)}
-                            handleMinus={() => removeOneWikiItem(idx, subIdx)}
-                          />
-                        );
-                      })}
+                      {isArray(item.value) &&
+                        item.value.map((subItem, subIdx) => {
+                          return (
+                            <WikiInfoItem
+                              key={subItem._id}
+                              item={subItem}
+                              level={2}
+                              // handlePlus={() => addOneWikiItem(idx, subIdx)}
+                              handleMinus={() => removeOneWikiElement(idx, subIdx)}
+                              handleKeyChange={(v) => {
+                                handleWikiItemEdit(idx, v.target.value, 'key', subIdx);
+                              }}
+                              handleValueChange={(v) => {
+                                handleWikiItemEdit(idx, v.target.value, 'value', subIdx);
+                              }}
+                            />
+                          );
+                        })}
                     </div>
                   ))}
                 </div>
 
                 <div hidden={editorType !== EditorType.Wiki}>
-                  <WikiEditor defaultValue={wikiText} instanceRef={instanceRef} />
+                  <WikiEditor instanceRef={instanceRef} />
                 </div>
               </div>
             </Form.Item>

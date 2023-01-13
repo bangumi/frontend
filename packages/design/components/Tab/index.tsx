@@ -4,11 +4,10 @@ import classnames from 'classnames';
 import type { PropsWithChildren } from 'react';
 import React, { createContext, useContext } from 'react';
 
-type Key = string | number;
 type StyleType = 'default' | 'borderless';
 
 interface ItemType {
-  key: Key;
+  key: React.Key;
   label: string;
 }
 
@@ -24,9 +23,9 @@ export interface TabProps<T extends ItemType = ItemType> {
   /** 节点数组 */
   items: T[];
   /* 选中节点的 Key */
-  activeKey: Key;
+  activeKey: React.Key;
   /* 点击切换事件回调，对每一个 Item 都生效 */
-  onChange?: (key: Key, value: T) => void;
+  onChange?: (key: React.Key, value: T) => void;
   /* 样式类型 */
   type?: StyleType;
 }
