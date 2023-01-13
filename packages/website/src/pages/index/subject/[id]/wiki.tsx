@@ -34,7 +34,7 @@ const WikiPage = () => {
   );
 
   return (
-    <WikiLayout id={id} name='data!.name'>
+    <WikiLayout id={id} name={data!.name}>
       <Outlet
         context={{
           subjectWikiInfo: data,

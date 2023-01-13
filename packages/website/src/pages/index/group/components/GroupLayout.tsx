@@ -3,8 +3,8 @@ import React from 'react';
 
 import type { GroupProfile } from '@bangumi/client/group';
 import { Layout, Section, Tab } from '@bangumi/design';
+import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';
-import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { Link, NavLink } from '@bangumi/website/components/Link';
 
 import CommonStyles from '../common.module.less';
@@ -66,7 +66,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
                   className={CommonStyles.textButton}
                 >
                   <span>更多小组成员</span>
-                  <RightArrow />
+                  <ArrowRightCircle />
                 </Link>
               )
             }

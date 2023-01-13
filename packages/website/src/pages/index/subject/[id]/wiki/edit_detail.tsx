@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select } from '@bangumi/design';
-import { Minus, Plus } from '@bangumi/icons';
+import { ArrowRightCircle, Minus, Plus } from '@bangumi/icons';
 import type { Wiki } from '@bangumi/utils';
 import { parseWiki, stringifyWiki, WikiArrayItem, WikiItem } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
@@ -401,6 +401,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
             ))}
             <Link to={WikiEditTabsItemsByKey.history.to(id)} className={style.historyMore}>
               更多修改记录
+              <ArrowRightCircle />
             </Link>
           </div>
         </div>
