@@ -1,5 +1,5 @@
 import * as monaco from 'monaco-editor';
-import type { MutableRefObject} from 'react';
+import type { MutableRefObject } from 'react';
 import React, { useEffect, useRef } from 'react';
 
 import style from './WikiEditor.module.less';
@@ -93,7 +93,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
     if (instance.current) {
       instance.current.setValue(defaultValue ?? '');
     }
-  }, [defaultValue]);
+  }, [defaultValue, instance]);
 
   return <div id='bgm-wiki-editor' ref={editor} className={style.editor} />;
 };

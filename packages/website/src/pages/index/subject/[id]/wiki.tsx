@@ -11,7 +11,7 @@ import WikiLayout from './components/WikiLayout';
 
 interface WikiContext {
   subjectWikiInfo: ozaClient.SubjectWikiInfo;
-  subjectEditHistory: ozaClient.HistorySummary;
+  subjectEditHistory: ozaClient.HistorySummary[];
 }
 
 const WikiPage = () => {
@@ -34,7 +34,7 @@ const WikiPage = () => {
   );
 
   return (
-    <WikiLayout id={id} name={data!.name}>
+    <WikiLayout id={id} name='data!.name'>
       <Outlet
         context={{
           subjectWikiInfo: data,

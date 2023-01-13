@@ -1,3 +1,5 @@
+import { keyBy } from '@bangumi/utils';
+
 export enum WikiEditTabs {
   Index = 'edit',
   Detail = 'edit_detail',
@@ -41,5 +43,7 @@ export const WikiEditTabsItems = [
     to: (id: number) => `/subject/${id}/wiki/history`,
   },
 ];
+
+export const WikiEditTabsItemsByKey = keyBy(WikiEditTabsItems, 'key');
 
 export const _TEST_SUBJECTS_ = 363612;

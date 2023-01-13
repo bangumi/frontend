@@ -1,12 +1,11 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import type { GroupProfile } from '@bangumi/client/group';
 import { Layout, Section, Tab } from '@bangumi/design';
 import { keyBy } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
-import { NavLink } from '@bangumi/website/components/Link';
+import { Link, NavLink } from '@bangumi/website/components/Link';
 
 import CommonStyles from '../common.module.less';
 import { GroupHeader } from './GroupHeader';

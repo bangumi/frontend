@@ -4,7 +4,7 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 18px;
-  color: #9f9b9b;
+  color: @gray-60;
 }
 
 .divider {
@@ -54,7 +54,7 @@
 
   &Button {
     width: 120px;
-    background: #54b5df;
+    background: @blue-100;
     font-weight: 600;
   }
 
@@ -70,7 +70,7 @@
       &Add {
         visibility: hidden;
         height: 2px;
-        background: #54b5df;
+        background: @blue-100;
         margin: 4px 0;
       }
 
@@ -98,5 +98,44 @@
         display: block;
       }
     }
+  }
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+
+  &Item {
+    display: flex;
+    gap: 0.625rem;
+    height: 30px;
+
+    > span {
+      // max-width:
+      .truncate();
+    }
+  }
+
+  &UserName {
+    color: @blue-100;
+  }
+
+  &Msg {
+    max-width: 30%;
+    color: @gray-80;
+  }
+
+  &CreateAt {
+    width: 160px;
+  }
+
+  &Suffix {
+    color: @gray-60;
+  }
+
+  &More {
+    font-weight: 600;
+    align-self: end;
   }
 }

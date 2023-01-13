@@ -1,26 +1,22 @@
+import cn from 'classnames';
+import dayjs from 'dayjs';
 import { cloneDeep, isArray, isNumber } from 'lodash-es';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select } from '@bangumi/design';
 import { Minus, Plus } from '@bangumi/icons';
-import type { Wiki} from '@bangumi/utils';
-import { parseWiki, stringifyWiki, WikiArrayItem , WikiItem } from '@bangumi/utils';
+import type { Wiki } from '@bangumi/utils';
+import { parseWiki, stringifyWiki, WikiArrayItem, WikiItem } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { _TEST_SUBJECTS_ } from '@bangumi/website/shared';
+import { Link } from '@bangumi/website/components/Link';
+import { _TEST_SUBJECTS_, WikiEditTabsItemsByKey } from '@bangumi/website/shared';
 
 import WikiEditor from '../components/WikiEditor/WikiEditor';
 import { useWikiContext } from '../wiki';
 import style from './common.module.less';
-
-const types = [
-  { label: 'TV' },
-  { label: 'WEB' },
-  { label: 'OVA' },
-  { label: '剧场版' },
-  { label: '其它' },
-];
 
 enum EditorType {
   Beginner,
@@ -120,29 +116,66 @@ const WikiInfoItem = ({
   </div>
 );
 
+interface FormData {
+  commitMessage: string;
+  subject: ozaClient.SubjectEdit;
+}
+
 const WikiEditDetailDetailPage: React.FC = () => {
   // const { id } = useParams();
 
-  const { register, handleSubmit, setValue, getValues } = useForm();
-  const id = _TEST_SUBJECTS_;
-  const { subjectEditHistory } = useWikiContext();
-  // console.log(subjectEditHistory);
-
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
-
+  const { register, handleSubmit, setValue, getValues } = useForm<FormData>();
   // TODO: shim this into localStorage
   const [editorType, setEditorType] = useState(EditorType.Beginner);
   const [wiki, setWiki] = useState<Wiki>();
   const [wikiText, setWikiText] = useState(TEMPLATE);
   const instanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
 
+  const id = _TEST_SUBJECTS_;
+  const { subjectEditHistory, subjectWikiInfo } = useWikiContext();
+
+  const onSubmit = ({ commitMessage, subject }: FormData) => {
+    switch (editorType) {
+      case EditorType.Beginner:
+        subject.infobox = stringifyWiki(wiki);
+        break;
+      case EditorType.Wiki:
+        subject.infobox = instanceRef.current?.getValue() ?? '';
+        break;
+      default:
+        break;
+    }
+    ozaClient
+      .putSubjectInfo(_TEST_SUBJECTS_, {
+        commitMessage,
+        subject,
+      })
+      .then(() => {
+        console.log('success');
+      })
+      .catch(() => {
+        console.log('err');
+      });
+  };
+
   const handleSetEditorType = (type: EditorType) => {
-    if (type === EditorType.Wiki) {
-      setWikiText(stringifyWiki(wiki));
-    } else if (type === EditorType.Beginner && instanceRef.current) {
-      setWikiText(instanceRef.current.getValue());
+    switch (editorType) {
+      case EditorType.Wiki:
+        // 切换到 wiki 模式，序列化 wiki
+        setWikiText(stringifyWiki(wiki));
+        break;
+      case EditorType.Beginner: {
+        // 切换到 入门模式，反序列化 wiki
+        const text = instanceRef.current?.getValue() ?? '';
+        try {
+          setWiki(parseWiki(text));
+        } catch (error: unknown) {
+          console.log(error);
+        }
+        break;
+      }
+      default:
+        break;
     }
     setEditorType(type);
   };
@@ -150,7 +183,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
   // useMemo
   useEffect(() => {
     setWiki(parseWiki(wikiText));
-    console.log(wiki);
   }, [wikiText]);
 
   const addOneWikiItem = (idx: number, subIdx?: number) => {
@@ -231,18 +263,18 @@ const WikiEditDetailDetailPage: React.FC = () => {
           <Divider className={style.divider} />
           <Form labelCol={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
             <Form.Item label='类别名'>
-              <Input type='text' wrapperClass={style.formInput} {...register('subject.infobox')} />
+              <Input type='text' wrapperClass={style.formInput} {...register('subject.name')} />
             </Form.Item>
 
             <Form.Item label='类型'>
               <Radio.Group>
-                {types.map((type, idx) => (
+                {subjectWikiInfo.availablePlatform.map((type, idx) => (
                   <Radio
-                    id={type.label}
+                    id={type.text}
                     className={style.formRadio}
-                    key={type.label}
-                    label={type.label}
-                    value={type.label}
+                    key={type.id}
+                    label={type.text}
+                    value={type.id}
                     defaultChecked={idx === 0}
                     {...register('subject.platform')}
                   />
@@ -290,7 +322,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                       {item.values?.map((subItem, subIdx) => {
                         return (
                           <WikiInfoItem
-                            key={`${subIdx}_${idx}`}
+                            key={`${idx}_${subIdx}`}
                             item={subItem}
                             isArray
                             handlePlus={() => addOneWikiItem(idx, subIdx)}
@@ -305,9 +337,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 <div hidden={editorType !== EditorType.Wiki}>
                   <WikiEditor defaultValue={wikiText} instanceRef={instanceRef} />
                 </div>
-
-                {/* 不显示，只作为表单受控组件 */}
-                <textarea hidden value={wikiText} {...register('subject.infobox')} />
               </div>
             </Form.Item>
 
@@ -339,7 +368,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                     borderBottomLeftRadius: '12px',
                   }}
                   onChange={(value) => {
-                    setValue('commitMessage', value?.label);
+                    setValue('commitMessage', value?.label ?? '');
                   }}
                 />
                 <Input wrapperClass={style.formInput} {...register('commitMessage')} />
@@ -353,10 +382,28 @@ const WikiEditDetailDetailPage: React.FC = () => {
         </>
       }
       rightChildren={
-        <>
+        <div className='flex flex-col'>
           <div className={style.title}>条目修订历史</div>
           <Divider className={style.divider} />
-        </>
+          <div className={style.history}>
+            {subjectEditHistory.map((his, idx) => (
+              <div key={idx} className={style.historyItem}>
+                <span className={style.historyUserName}>{his.creator.username}</span>
+                <span className={style.historyMsg} title={his.commitMessage}>
+                  {his.commitMessage}
+                </span>
+                <span className={cn(style.historySuffix, style.historyCreateAt)}>
+                  @ {dayjs.unix(his.createdAt).format('YYYY-MM-DD HH:mm')}
+                </span>
+                <span className={style.historySuffix}>|</span>
+                <span className={style.historySuffix}>恢复</span>
+              </div>
+            ))}
+            <Link to={WikiEditTabsItemsByKey.history.to(id)} className={style.historyMore}>
+              更多修改记录
+            </Link>
+          </div>
+        </div>
       }
     />
   );
