@@ -1,16 +1,15 @@
 import type { Wiki } from '@bgm38/wiki';
 import { WikiArrayItem, WikiItem } from '@bgm38/wiki';
 import { nanoid } from 'nanoid';
-import type { Key } from 'react';
 
 type Value = string | WikiElement[];
 
 export class WikiElement {
-  _id: Key;
+  _id: string;
   key: string | undefined;
   value: Value | undefined;
 
-  constructor(params?: Partial<{ id: Key; key: string; value: Value }>) {
+  constructor(params?: Partial<{ id: string; key: string; value: Value }>) {
     const { id = nanoid(), key, value } = params ?? {};
     this._id = id;
     this.key = key;

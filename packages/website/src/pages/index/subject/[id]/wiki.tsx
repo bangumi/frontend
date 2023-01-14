@@ -1,44 +1,45 @@
 import { ok } from 'oazapfts';
 import React from 'react';
-import { Outlet, useOutletContext } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
+import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { _TEST_SUBJECTS_ } from '@bangumi/website/shared';
 
 import WikiLayout from './components/WikiLayout';
 
 interface WikiContext {
   subjectWikiInfo: ozaClient.SubjectWikiInfo;
   subjectEditHistory: ozaClient.HistorySummary[];
+  mutateHistory: KeyedMutator<ozaClient.HistorySummary[]>;
 }
 
 const WikiPage = () => {
-  // const { id } = useParams();
-  const id = _TEST_SUBJECTS_;
+  const { id: subjectId } = useParams();
   const { data } = useSWR(
-    `/wiki/subjects/${id}`,
-    async () => ok(ozaClient.subjectInfo(Number(id))),
+    `/wiki/subjects/${subjectId!}`,
+    async () => ok(ozaClient.subjectInfo(parseInt(subjectId!))),
     {
       suspense: true,
     },
   );
 
-  const { data: history } = useSWR(
-    `/wiki/subjects/${id}/history`,
-    async () => ok(ozaClient.subjectEditHistorySummary(Number(id))),
+  const { data: history, mutate: mutateHistory } = useSWR(
+    `/wiki/subjects/${subjectId!}/history`,
+    async () => ok(ozaClient.subjectEditHistorySummary(parseInt(subjectId!))),
     {
       suspense: true,
     },
   );
 
   return (
-    <WikiLayout id={id} name={data!.name}>
+    <WikiLayout id={subjectId} name={data!.name}>
       <Outlet
         context={{
           subjectWikiInfo: data,
           subjectEditHistory: history,
+          mutateHistory,
         }}
       />
     </WikiLayout>

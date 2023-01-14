@@ -23,27 +23,28 @@ export const LinkProvider = ({ children }: PropsWithChildren) => {
   );
 };
 
-export const Link = forwardRef<HTMLAnchorElement, LinkProps>(
-  ({ to, replace, state, target, preventScrollReset, relative, onClick, ...rest }, ref) => {
-    const { startTransition } = useContext(LinkContext);
-    const href = useHref(to, { relative });
-    const internalOnClick = useLinkClickHandler(to, {
-      replace,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      state,
-      target,
-      preventScrollReset,
-      relative,
+export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function LinkWithRef(
+  { to, replace, state, target, preventScrollReset, relative, onClick, ...rest },
+  ref,
+) {
+  const { startTransition } = useContext(LinkContext);
+  const href = useHref(to, { relative });
+  const internalOnClick = useLinkClickHandler(to, {
+    replace,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    state,
+    target,
+    preventScrollReset,
+    relative,
+  });
+  const handleOnClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
+    onClick?.(event);
+    startTransition(() => {
+      internalOnClick(event);
     });
-    const handleOnClick: React.MouseEventHandler<HTMLAnchorElement> = (event) => {
-      onClick?.(event);
-      startTransition(() => {
-        internalOnClick(event);
-      });
-    };
-    return <a {...rest} href={href} onClick={handleOnClick} ref={ref} />;
-  },
-);
+  };
+  return <a {...rest} href={href} onClick={handleOnClick} ref={ref} />;
+});
 
 export const useLinkContext = () => useContext(LinkContext);
 

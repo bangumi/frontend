@@ -22,29 +22,40 @@ type IInput = React.ForwardRefExoticComponent<InputProps> & {
 // TODO: disabled style
 /* eslint-disable react/prop-types */
 // https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'text', wrapperStyle, wrapperClass, prefix, suffix, alight, ...rest }, ref) => {
-    return (
-      <div className={classnames('bgm-input__wrapper', wrapperClass)} style={wrapperStyle}>
-        {prefix}
-        <input
-          type={type}
-          className={classnames('bgm-input', alight === 'right' && 'bgm-input--alight-right')}
-          ref={ref}
-          {...rest}
-        />
-        {suffix}
-      </div>
-    );
-  },
-) as IInput;
+const Input = forwardRef<HTMLInputElement, InputProps>(function InputWithRef(
+  { type = 'text', wrapperStyle, wrapperClass, prefix, suffix, alight, disabled, ...rest },
+  ref,
+) {
+  return (
+    <div
+      className={classnames(
+        'bgm-input__wrapper',
+        disabled && 'bgm-input__wrapper--disabled',
+        wrapperClass,
+      )}
+      style={wrapperStyle}
+    >
+      {prefix}
+      <input
+        type={type}
+        className={classnames('bgm-input', alight === 'right' && 'bgm-input--alight-right')}
+        ref={ref}
+        disabled={disabled}
+        {...rest}
+      />
+      {suffix}
+    </div>
+  );
+}) as IInput;
 
-Input.Group = ({ children, className, ...props }) => {
+function InputGroup({ children, className, ...props }: JSX.IntrinsicElements['div']) {
   return (
     <div className={classnames('bgm-input-group', className)} {...props}>
       {children}
     </div>
   );
-};
+}
+
+Input.Group = InputGroup;
 
 export default Input;

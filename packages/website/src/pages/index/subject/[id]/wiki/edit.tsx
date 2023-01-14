@@ -2,12 +2,10 @@ import React from 'react';
 
 import { Divider, Layout } from '@bangumi/design';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { _TEST_SUBJECTS_ } from '@bangumi/website/shared';
 
 import style from './common.module.less';
 
 const WikiEditPage = () => {
-  const id = _TEST_SUBJECTS_;
   return (
     <Layout
       type='alpha'

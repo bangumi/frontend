@@ -1,13 +1,18 @@
+/* eslint-disable no-useless-return */
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import { cloneDeep, isArray, isNumber, set } from 'lodash-es';
+import { cloneDeep, concat, filter, isArray, isNaN, isNumber, set } from 'lodash-es';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select } from '@bangumi/design';
-import { ArrowRightCircle, Minus, Plus } from '@bangumi/icons';
+import { ArrowRightCircle, Cursor, Minus } from '@bangumi/icons';
 import type { Wiki } from '@bangumi/utils';
 import {
   fromWikiElement,
@@ -18,7 +23,8 @@ import {
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { Link } from '@bangumi/website/components/Link';
-import { _TEST_SUBJECTS_, WikiEditTabsItemsByKey } from '@bangumi/website/shared';
+import { WikiEditTabsItemsByKey } from '@bangumi/website/shared';
+import { reorder } from '@bangumi/website/utils';
 
 import WikiEditor from '../components/WikiEditor/WikiEditor';
 import { useWikiContext } from '../wiki';
@@ -40,28 +46,7 @@ const EditorTypeRadio = [
   },
 ];
 
-const TEMPLATE = `{{Infobox animanga/TVAnime
-|中文名= Bangumi Wiki 动画测试用沙盘
-|别名={
-[Wiki Sandbox]
-[Wiki Sandbox2]
-[Wiki Sandbox3]
-[Wiki Sandbox4]
-}
-|话数= 9
-|放送开始= 1582-10-14
-|放送星期= 星期九
-|官方网站= https://bgm.tv/wiki
-|播放电视台= Bangumi
-|其他电视台= 
-|播放结束= 2077-02-29
-|其他= 
-|Copyright= Bangumi
-}}`;
-
-const EMPTY_TEMPLATE = '';
-
-const BuildInCommitMessage = [
+const BuiltInCommitMessage = [
   '新条目',
   '修饰语句',
   '修正笔误',
@@ -79,52 +64,145 @@ const BuildInCommitMessage = [
   '警告',
 ].map((msg, idx) => ({ label: msg, value: idx.toFixed() }));
 
+type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
+  index: number;
+  item: WikiElement;
+  path: string;
+  level?: number;
+  draggableProvided: DraggableProvided;
+};
+
+interface IWikiInfoContext {
+  els: WikiElement[];
+  addOneWikiElement: (path: string) => void;
+  removeOneWikiElement: (path: string) => void;
+  editOneWikiElement: (path: string, target: 'value' | 'key', value: string) => void;
+  switchWikiElementToArray: (idx: number) => void;
+}
+
+const WikiInfoContext = createContext<IWikiInfoContext | null>(null);
+
 const WikiInfoItem = ({
   item,
   level = 1,
-  handlePlus,
-  handleMinus,
-  onKeyUp,
-  onKeyDown,
-  handleKeyChange,
-  handleValueChange,
-}: {
-  item: WikiElement;
-  level?: number;
-  handlePlus?: () => void;
-  handleMinus?: () => void;
-  onKeyUp?: React.KeyboardEventHandler;
-  onKeyDown?: React.KeyboardEventHandler;
-  handleKeyChange?: React.ChangeEventHandler<HTMLInputElement>;
-  handleValueChange?: React.ChangeEventHandler<HTMLInputElement>;
-}) => (
-  <div className={style.formDetailInfoItem} onKeyUp={onKeyUp} onKeyDown={onKeyDown}>
-    <Input.Group className={style.formInputGroup}>
-      <Input
-        wrapperStyle={{
-          width: '170px',
-          borderTopLeftRadius: '12px',
-          borderBottomLeftRadius: '12px',
-        }}
-        alight={level === 2 ? 'right' : undefined}
-        defaultValue={item.key}
-        onChange={handleKeyChange}
-      />
-      <Input
-        wrapperClass={style.formInput}
-        defaultValue={typeof item.value === 'string' ? item.value : ''}
-        disabled={isArray(item.value)}
-        onChange={handleValueChange}
-      />
-    </Input.Group>
+  draggableProvided,
+  path,
+  index,
+  ...rest
+}: WikiInfoItemProps) => {
+  const { editOneWikiElement, removeOneWikiElement, switchWikiElementToArray } =
+    useContext(WikiInfoContext) ?? {};
+  return (
+    <div
+      className={style.formDetailInfoItem}
+      onKeyDown={(e) => {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
+        }
+      }}
+      {...rest}
+    >
+      <Input.Group
+        className={cn(style.formInputGroup, level === 2 && style.formInputGroupSecondary)}
+      >
+        <Input
+          wrapperStyle={{
+            width: '170px',
+            borderTopLeftRadius: '12px',
+            borderBottomLeftRadius: '12px',
+          }}
+          alight={level === 2 ? 'right' : undefined}
+          defaultValue={item.key}
+          onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
+        />
+        <Input
+          wrapperClass={style.formInput}
+          defaultValue={typeof item.value === 'string' ? item.value : ''}
+          disabled={isArray(item.value)}
+          onChange={(v) => editOneWikiElement?.(path, 'value', v.target.value)}
+        />
+      </Input.Group>
 
-    <Minus className={style.formDetailInfoItemMinus} onClick={handleMinus} />
-
-    <div className={style.formDetailInfoItemAdd}>
-      <Plus className={style.formDetailInfoItemPlus} onClick={handlePlus} />
+      <div {...draggableProvided.dragHandleProps}>
+        <Cursor className={style.formDetailInfoItemCursor} />
+      </div>
+      <Minus
+        className={style.formDetailInfoItemMinus}
+        onClick={() => removeOneWikiElement?.(path)}
+      />
     </div>
-  </div>
-);
+  );
+};
+
+const WikiInfoList = ({
+  els,
+  level = 1,
+  path = '',
+  onDragEnd,
+}: {
+  els: WikiElement[];
+  level?: number;
+  path?: string;
+  onDragEnd: (path: string, result: DropResult, provided: ResponderProvided) => void;
+}) => {
+  const { addOneWikiElement } = useContext(WikiInfoContext) ?? {};
+
+  return (
+    <DragDropContext onDragEnd={(res, provided) => onDragEnd(path, res, provided)}>
+      <Droppable droppableId={`list-${level}`}>
+        {(droppableProvided) => (
+          <div ref={droppableProvided.innerRef}>
+            {els.map((el, idx) => {
+              return (
+                <Draggable key={el._id} index={idx} draggableId={el._id}>
+                  {(draggableProvided) => (
+                    <div
+                      ref={draggableProvided.innerRef}
+                      {...draggableProvided.draggableProps}
+                      style={{
+                        ...draggableProvided.draggableProps.style,
+                        marginBottom: '0.625rem',
+                      }}
+                    >
+                      <WikiInfoItem
+                        index={idx}
+                        item={el}
+                        level={level}
+                        path={level === 1 ? idx.toFixed() : `${path}.${idx}`}
+                        draggableProvided={draggableProvided}
+                        style={{
+                          marginBottom: isArray(el.value) ? '0.625rem' : '',
+                        }}
+                      />
+
+                      {/* subList */}
+                      {isArray(el.value) && (
+                        <WikiInfoList
+                          els={el.value}
+                          level={level + 1}
+                          onDragEnd={onDragEnd}
+                          path={level === 1 ? idx.toFixed() : `${path}.${idx}`}
+                        />
+                      )}
+                    </div>
+                  )}
+                </Draggable>
+              );
+            })}
+            {droppableProvided.placeholder}
+          </div>
+        )}
+      </Droppable>
+      <Input
+        type='button'
+        value='新增行'
+        wrapperClass={cn(style.formInput, style.formInputBtn)}
+        onClick={() => addOneWikiElement?.(path)}
+      />
+    </DragDropContext>
+  );
+};
 
 interface FormData {
   commitMessage: string;
@@ -132,45 +210,64 @@ interface FormData {
 }
 
 const WikiEditDetailDetailPage: React.FC = () => {
-  // const { id } = useParams();
+  const { id: subjectId } = useParams();
 
-  const { register, handleSubmit, setValue, getValues } = useForm<FormData>();
-  // TODO: shim this into localStorage
-  const [editorType, setEditorType] = useState(EditorType.Beginner);
+  const { register, handleSubmit, setValue } = useForm<FormData>();
+  const [editorType, setEditorType] = useLocalstorageState(
+    'chii_wiki_editor_type',
+    EditorType.Beginner,
+  );
   const wikiRef = useRef<Wiki>();
   const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
   const instanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const { subjectEditHistory, subjectWikiInfo, mutateHistory } = useWikiContext();
 
-  const id = _TEST_SUBJECTS_;
-  const { subjectEditHistory, subjectWikiInfo } = useWikiContext();
+  useEffect(() => {
+    wikiRef.current = parseWiki(subjectWikiInfo.infobox);
+    instanceRef.current?.setValue(subjectWikiInfo.infobox);
+    setWikiElement(toWikiElement(wikiRef.current));
+  }, []);
 
-  const onSubmit = ({ commitMessage, subject }: FormData) => {
-    switch (editorType) {
-      case EditorType.Beginner:
-        subject.infobox = stringifyWiki({
-          type: wikiRef.current?.type ?? '',
-          data: fromWikiElement(wikiElement),
+  const onSubmit = useCallback(
+    ({ commitMessage, subject }: FormData) => {
+      try {
+        switch (editorType) {
+          case EditorType.Beginner:
+            subject.infobox = stringifyWiki({
+              type: wikiRef.current?.type ?? '',
+              data: fromWikiElement(wikiElement),
+            });
+            break;
+          case EditorType.Wiki: {
+            // TODO: check valid
+            const text = instanceRef.current?.getValue() ?? '';
+            parseWiki(text);
+            subject.infobox = text;
+            break;
+          }
+          default:
+            break;
+        }
+      } catch (error: unknown) {
+        // TODO: notify
+        console.error(error);
+        return;
+      }
+      ozaClient
+        .putSubjectInfo(parseInt(subjectId!), {
+          commitMessage,
+          subject,
+        })
+        .then(async () => mutateHistory())
+        .then(() => {
+          console.log('success');
+        })
+        .catch(() => {
+          console.log('err');
         });
-        break;
-      case EditorType.Wiki:
-        // TODO: check valid
-        subject.infobox = instanceRef.current?.getValue() ?? '';
-        break;
-      default:
-        break;
-    }
-    ozaClient
-      .putSubjectInfo(_TEST_SUBJECTS_, {
-        commitMessage,
-        subject,
-      })
-      .then(() => {
-        console.log('success');
-      })
-      .catch(() => {
-        console.log('err');
-      });
-  };
+    },
+    [wikiElement, editorType],
+  );
 
   const handleSetEditorType = (type: EditorType) => {
     if (editorType === type) return;
@@ -204,59 +301,40 @@ const WikiEditDetailDetailPage: React.FC = () => {
     }
   };
 
-  // useMemo
-  useEffect(() => {
-    wikiRef.current = parseWiki(TEMPLATE);
-    setWikiElement(toWikiElement(wikiRef.current));
-  }, []);
-
-  // const addOneWikiItem = (idx: number, subIdx?: number) => {
-  //   setWiki((preWiki) => {
-  //     if (preWiki) {
-  //       const wikiData = cloneDeep(preWiki.data);
-  //       if (wikiData[idx]?.array) {
-  //         isNumber(subIdx) && wikiData[idx]?.values?.splice(subIdx + 1, 0, new WikiArrayItem());
-  //       } else {
-  //         wikiData.splice(idx + 1, 0, new WikiItem('', '', 'object'));
-  //       }
-  //       return {
-  //         ...preWiki,
-  //         data: wikiData,
-  //       };
-  //     }
-  //   });
-  // };
-
-  const removeOneWikiElement = (idx: number, subIdx?: number) => {
-    setWikiElement((preEl) => {
-      const els = cloneDeep(preEl);
-      if (isNumber(subIdx)) {
-        const preValue = els[idx]?.value as WikiElement[];
-        const newSub = [...preValue];
-        if (newSub.length === 1) {
-          els[idx] = new WikiElement({
-            key: els[idx]?.key,
-          });
-        } else {
-          newSub.splice(subIdx, 1);
-          els[idx] = new WikiElement({
-            ...els[idx],
-            value: newSub,
-          });
-        }
-      } else {
-        els.splice(idx, 1);
+  const addOneWikiElement = (path: string) => {
+    const [idx] = path.split('.').map((v) => parseInt(v));
+    setWikiElement((preEls) => {
+      const newEls = cloneDeep(preEls);
+      if (!isNaN(idx) && isNumber(idx)) {
+        const preValue = newEls[idx]?.value as WikiElement[];
+        return set(newEls, `${idx}.value`, concat(preValue, new WikiElement()));
       }
-      return els;
+      return concat(preEls, new WikiElement());
     });
   };
 
-  const handleWikiItemEdit = (
-    idx: number,
-    value: string,
-    target: 'key' | 'value',
-    subIdx?: number,
-  ) => {
+  const removeOneWikiElement = (path: string) => {
+    const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
+    if (!isNumber(idx)) return;
+    setWikiElement((preEl) => {
+      if (isNumber(subIdx)) {
+        return preEl.map((el, i) => {
+          if (i === idx && isArray(el.value)) {
+            return {
+              ...el,
+              value: el.value.length === 1 ? undefined : filter(el.value, (_, i) => i !== subIdx),
+            };
+          }
+          return el;
+        });
+      }
+      return filter(preEl, (_, i) => i !== idx);
+    });
+  };
+
+  const editOneWikiElement = (path: string, target: 'key' | 'value', value: string) => {
+    const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
+    if (!isNumber(idx)) return;
     setWikiElement((preEls) => {
       if (isNumber(subIdx)) {
         return set(preEls, `${idx}.value.${subIdx}.${target}`, value);
@@ -265,7 +343,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
     });
   };
 
-  const switchWikiItemToArray = (idx: number) => {
+  const switchWikiElementToArray = (idx: number) => {
     setWikiElement((preEls) => {
       const newEls = [...preEls];
       return set(
@@ -274,7 +352,28 @@ const WikiEditDetailDetailPage: React.FC = () => {
         new WikiElement({ key: preEls[idx]?.key, value: [new WikiElement()] }),
       );
     });
-    console.log(wikiElement);
+  };
+
+  const onDragEnd = (path: string, result: DropResult, provided: ResponderProvided) => {
+    const { destination, source } = result;
+    const [idx] = path.split('.').map((v) => parseInt(v));
+    if (!destination) return;
+    const level = parseInt(source.droppableId.split('-')[1] ?? '-1');
+    if (level === 1) {
+      setWikiElement((preEls) => reorder(preEls, source.index, destination.index));
+    } else if (level === 2 && isNumber(idx)) {
+      setWikiElement((preEls) =>
+        preEls.map((el, i) => {
+          if (i === idx && isArray(el.value)) {
+            return {
+              ...el,
+              value: reorder(el.value, source.index, destination.index),
+            };
+          }
+          return el;
+        }),
+      );
+    }
   };
 
   return (
@@ -286,7 +385,12 @@ const WikiEditDetailDetailPage: React.FC = () => {
           <Divider className={style.divider} />
           <Form labelCol={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
             <Form.Item label='类别名'>
-              <Input type='text' wrapperClass={style.formInput} {...register('subject.name')} />
+              <Input
+                type='text'
+                wrapperClass={style.formInput}
+                defaultValue={subjectWikiInfo.name}
+                {...register('subject.name', { required: true })}
+              />
             </Form.Item>
 
             <Form.Item label='类型'>
@@ -298,8 +402,8 @@ const WikiEditDetailDetailPage: React.FC = () => {
                     key={type.id}
                     label={type.text}
                     value={type.id}
-                    defaultChecked={idx === 0}
-                    {...register('subject.platform')}
+                    defaultChecked={subjectWikiInfo.platform === type.id}
+                    {...register('subject.platform', { required: true })}
                   />
                 ))}
               </Radio.Group>
@@ -322,45 +426,17 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 </Radio.Group>
 
                 <div hidden={editorType !== EditorType.Beginner}>
-                  {wikiElement?.map((item, idx) => (
-                    <div key={item._id}>
-                      <WikiInfoItem
-                        item={item}
-                        // handlePlus={() => addOneWikiItem(idx)}
-                        handleMinus={() => removeOneWikiElement(idx)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Tab') {
-                            e.preventDefault();
-                            switchWikiItemToArray(idx);
-                          }
-                        }}
-                        handleKeyChange={(v) => {
-                          handleWikiItemEdit(idx, v.target.value, 'key');
-                        }}
-                        handleValueChange={(v) => {
-                          handleWikiItemEdit(idx, v.target.value, 'value');
-                        }}
-                      />
-                      {isArray(item.value) &&
-                        item.value.map((subItem, subIdx) => {
-                          return (
-                            <WikiInfoItem
-                              key={subItem._id}
-                              item={subItem}
-                              level={2}
-                              // handlePlus={() => addOneWikiItem(idx, subIdx)}
-                              handleMinus={() => removeOneWikiElement(idx, subIdx)}
-                              handleKeyChange={(v) => {
-                                handleWikiItemEdit(idx, v.target.value, 'key', subIdx);
-                              }}
-                              handleValueChange={(v) => {
-                                handleWikiItemEdit(idx, v.target.value, 'value', subIdx);
-                              }}
-                            />
-                          );
-                        })}
-                    </div>
-                  ))}
+                  <WikiInfoContext.Provider
+                    value={{
+                      els: wikiElement,
+                      addOneWikiElement,
+                      removeOneWikiElement,
+                      editOneWikiElement,
+                      switchWikiElementToArray,
+                    }}
+                  >
+                    <WikiInfoList els={wikiElement} onDragEnd={onDragEnd} />
+                  </WikiInfoContext.Provider>
                 </div>
 
                 <div hidden={editorType !== EditorType.Wiki}>
@@ -370,7 +446,11 @@ const WikiEditDetailDetailPage: React.FC = () => {
             </Form.Item>
 
             <Form.Item label='剧情介绍'>
-              <textarea className={style.formTextArea} {...register('subject.summary')} />
+              <textarea
+                className={style.formTextArea}
+                defaultValue={subjectWikiInfo.summary}
+                {...register('subject.summary', { required: true })}
+              />
             </Form.Item>
 
             <Form.Item label='受限内容'>
@@ -380,6 +460,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   id='nsfw'
                   type='checkbox'
                   label='标记为受限内容'
+                  defaultChecked={subjectWikiInfo.nsfw}
                   {...register('subject.nsfw')}
                 />
               </div>
@@ -390,7 +471,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 {/* TODO: overflow here */}
                 <Select
                   defaultValue='0'
-                  options={BuildInCommitMessage}
+                  options={BuiltInCommitMessage}
                   style={{
                     width: '170px',
                     borderTopLeftRadius: '12px',
@@ -400,7 +481,10 @@ const WikiEditDetailDetailPage: React.FC = () => {
                     setValue('commitMessage', value?.label ?? '');
                   }}
                 />
-                <Input wrapperClass={style.formInput} {...register('commitMessage')} />
+                <Input
+                  wrapperClass={style.formInput}
+                  {...register('commitMessage', { required: true })}
+                />
               </Input.Group>
             </Form.Item>
 
@@ -428,7 +512,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 <span className={style.historySuffix}>恢复</span>
               </div>
             ))}
-            <Link to={WikiEditTabsItemsByKey.history.to(id)} className={style.historyMore}>
+            <Link to={WikiEditTabsItemsByKey.history.to(subjectId)} className={style.historyMore}>
               更多修改记录
               <ArrowRightCircle />
             </Link>

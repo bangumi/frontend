@@ -44,11 +44,13 @@ const TabItem: React.FC<ItemProps> = ({ isActive, ...props }) => {
   );
 };
 
-const TabGroup: React.FC<GroupProps> = ({ children, type = 'default' }) => (
-  <TabContext.Provider value={{ type }}>
-    <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>{children}</ul>
-  </TabContext.Provider>
-);
+function TabGroup({ children, type = 'default' }: GroupProps) {
+  return (
+    <TabContext.Provider value={{ type }}>
+      <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>{children}</ul>
+    </TabContext.Provider>
+  );
+}
 
 const Tab = <T extends ItemType>({ activeKey, items, onChange, type = 'default' }: TabProps<T>) => (
   <TabGroup type={type}>

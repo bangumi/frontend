@@ -8,7 +8,7 @@ type ItemProps = PropsWithChildren<{
   label?: ReactNode;
 }>;
 
-const Item = ({ children, label }: ItemProps) => {
+function FormItem({ children, label }: ItemProps) {
   const { labelCol } = useContext(FormContext);
   return (
     <div className='bgm-form-item'>
@@ -23,7 +23,7 @@ const Item = ({ children, label }: ItemProps) => {
       {children}
     </div>
   );
-};
+}
 
 const FormContext = createContext<{ labelCol: number }>({ labelCol: 12 });
 
@@ -42,6 +42,6 @@ const Form = ({ children, labelCol, className, ...props }: FormProps) => {
   );
 };
 
-Form.Item = Item;
+Form.Item = FormItem;
 
 export default Form;

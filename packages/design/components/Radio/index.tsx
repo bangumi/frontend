@@ -26,13 +26,13 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   );
 }) as IRadio;
 
-/* eslint-disable react/prop-types */
-Radio.Group = ({ children, className, ...props }) => {
+function RadioGroup({ children, className, ...props }: JSX.IntrinsicElements['div']) {
   return (
     <div className={cn('bgm-radio-group', className)} {...props}>
       {children}
     </div>
   );
-};
+}
+Radio.Group = RadioGroup;
 
 export default Radio;

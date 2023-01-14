@@ -22,17 +22,17 @@ const GroupTabsItems = [
   {
     key: GroupTabs.Index,
     label: '小组概览',
-    to: (groupName: string) => `/group/${groupName}`,
+    to: (groupName = '') => `/group/${groupName}`,
   },
   {
     key: GroupTabs.Forum,
     label: '小组讨论',
-    to: (groupName: string) => `/group/${groupName}/forum`,
+    to: (groupName = '') => `/group/${groupName}/forum`,
   },
   {
     key: GroupTabs.Members,
     label: '小组成员',
-    to: (groupName: string) => `/group/${groupName}/members`,
+    to: (groupName = '') => `/group/${groupName}/members`,
   },
 ];
 const groupTabsByKey = keyBy(GroupTabsItems, 'key');

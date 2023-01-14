@@ -27,9 +27,24 @@
       height: 1.5rem;
     }
 
+    &Btn {
+      border: 2px dashed @gray-10;
+      width: 100%;
+
+      > input[type='button'] {
+        cursor: pointer;
+        color: @gray-60;
+        background-color: #fff;
+      }
+    }
+
     &Group {
       display: flex;
       flex: 1;
+
+      &Secondary * {
+        background: @bg-gray-10;
+      }
     }
   }
 
@@ -66,24 +81,7 @@
 
     &Item {
       position: relative;
-
-      &Add {
-        visibility: hidden;
-        height: 2px;
-        background: @blue-100;
-        margin: 4px 0;
-      }
-
-      &:hover &Add {
-        visibility: visible;
-      }
-
-      &Plus {
-        position: absolute;
-        right: 0;
-        transform: translate(50%, -50%);
-        cursor: pointer;
-      }
+      background-color: #fff;
 
       &Minus {
         display: none;
@@ -94,8 +92,18 @@
         transform: translate(50%, -50%);
       }
 
-      &:hover &Minus {
+      &:hover &Minus,
+      &:hover &Cursor {
         display: block;
+      }
+
+      &Cursor {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        cursor: move;
+        transform: translateY(20%);
       }
     }
   }

@@ -8,7 +8,7 @@ import { WikiEditTabsItems } from '@bangumi/website/shared';
 import style from './WikiLayout.module.less';
 
 type Props = PropsWithChildren<{
-  id: number;
+  id: string | undefined;
   name: string;
 }>;
 
