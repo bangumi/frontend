@@ -113,7 +113,7 @@ const WikiInfoItem = ({
       <Input
         wrapperClass={style.formInput}
         defaultValue={typeof item.value === 'string' ? item.value : ''}
-        disabled={item.isArray}
+        disabled={isArray(item.value)}
         onChange={handleValueChange}
       />
     </Input.Group>
@@ -271,7 +271,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
       return set(
         newEls,
         idx,
-        new WikiElement({ key: preEls[idx]?.key, isArray: true, value: [new WikiElement()] }),
+        new WikiElement({ key: preEls[idx]?.key, value: [new WikiElement()] }),
       );
     });
     console.log(wikiElement);
