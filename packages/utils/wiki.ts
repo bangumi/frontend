@@ -6,8 +6,8 @@ type Value = string | WikiElement[];
 
 export class WikiElement {
   _id: string;
-  key: string | undefined;
-  value: Value | undefined;
+  key?: string;
+  value?: Value;
 
   constructor(params?: Partial<{ id: string; key: string; value: Value }>) {
     const { id = nanoid(), key, value } = params ?? {};
@@ -39,6 +39,7 @@ export const fromWikiElement = (elements: WikiElement[]): WikiItem[] =>
     const initWikiItemValue = typeof value === 'string' ? value : '';
     const item = new WikiItem(el.key ?? '', initWikiItemValue, 'object');
     if (Array.isArray(value) && el.key) {
+      delete item.value; /** make up for unit-test */
       item.array = true;
       item.values = value.map((v) => new WikiArrayItem(v.key, v.value as string));
     }
