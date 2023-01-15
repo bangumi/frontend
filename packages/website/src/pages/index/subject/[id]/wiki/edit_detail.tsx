@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-return */
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import { cloneDeep, concat, filter, isArray, isNaN, isNumber, set } from 'lodash-es';
+import { cloneDeep, concat, filter, isArray, isNumber, set } from 'lodash-es';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
@@ -409,6 +409,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
               </Radio.Group>
             </Form.Item>
 
+            {/* TODO: 提醒 Tab 可以切换 */}
             <Form.Item label='描述信息'>
               <div className={style.formDetailInfo}>
                 <Radio.Group>
@@ -499,6 +500,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
           <div className={style.title}>条目修订历史</div>
           <Divider className={style.divider} />
           <div className={style.history}>
+            {/* TODO: dashed here! */}
             {subjectEditHistory.map((his, idx) => (
               <div key={idx} className={style.historyItem}>
                 <span className={style.historyUserName}>{his.creator.username}</span>
