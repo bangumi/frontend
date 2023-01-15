@@ -6,6 +6,7 @@ import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
+import NotFound from '@bangumi/website/components/NotFound';
 
 import WikiLayout from './components/WikiLayout';
 
@@ -15,26 +16,25 @@ interface WikiContext {
   mutateHistory: KeyedMutator<ozaClient.HistorySummary[]>;
 }
 
-const WikiPage = () => {
-  const { id: subjectId } = useParams();
+const WikiPage = ({ id: subjectId }: { id: number }) => {
   const { data } = useSWR(
-    `/wiki/subjects/${subjectId!}`,
-    async () => ok(ozaClient.subjectInfo(parseInt(subjectId!))),
+    `/wiki/subjects/${subjectId}`,
+    async () => ok(ozaClient.subjectInfo(subjectId)),
     {
       suspense: true,
     },
   );
 
   const { data: history, mutate: mutateHistory } = useSWR(
-    `/wiki/subjects/${subjectId!}/history`,
-    async () => ok(ozaClient.subjectEditHistorySummary(parseInt(subjectId!))),
+    `/wiki/subjects/${subjectId}/history`,
+    async () => ok(ozaClient.subjectEditHistorySummary(subjectId)),
     {
       suspense: true,
     },
   );
 
   return (
-    <WikiLayout id={subjectId} name={data!.name}>
+    <WikiLayout id={subjectId.toFixed()} name={data!.name}>
       <Outlet
         context={{
           subjectWikiInfo: data,
@@ -48,4 +48,11 @@ const WikiPage = () => {
 
 export const useWikiContext = () => useOutletContext<WikiContext>();
 
-export default withErrorBoundary(WikiPage);
+export default withErrorBoundary(function WikiPageRouterGuard() {
+  const { id } = useParams();
+  const subjectId = parseInt(id!);
+  if (isNaN(subjectId)) {
+    return <NotFound />;
+  }
+  return <WikiPage id={subjectId} />;
+});

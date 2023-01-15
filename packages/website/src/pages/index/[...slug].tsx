@@ -1,7 +1,9 @@
 import React from 'react';
 
-const NotFound = () => {
-  return <>404</>;
+import NotFound from '@bangumi/website/components/NotFound';
+
+const matchAll = () => {
+  return <NotFound />;
 };
 
-export default NotFound;
+export default matchAll;

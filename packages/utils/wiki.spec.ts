@@ -33,7 +33,6 @@ describe('fromWikiElement & toWikiElement', () => {
 
       const wiki = parseWiki(testContent);
       const wikiElement = toWikiElement(wiki);
-      console.log(wikiElement);
       const wikiItems = fromWikiElement(wikiElement);
       const expected = yaml.load(expectedContent);
 
