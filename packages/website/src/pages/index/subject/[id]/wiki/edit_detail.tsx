@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
-import { Button, Divider, Form, Input, Layout, Radio, Select } from '@bangumi/design';
+import { Button, Divider, Form, Input, Layout, Radio, Select, toast } from '@bangumi/design';
 import { ArrowRightCircle, Cursor, Minus } from '@bangumi/icons';
 import type { Wiki } from '@bangumi/utils';
 import {
@@ -20,6 +20,7 @@ import {
   stringifyWiki,
   toWikiElement,
   WikiElement,
+  WikiSyntaxError,
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { Link } from '@bangumi/website/components/Link';
@@ -239,7 +240,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
             });
             break;
           case EditorType.Wiki: {
-            // TODO: check valid
             const text = instanceRef.current?.getValue() ?? '';
             parseWiki(text);
             subject.infobox = text;
@@ -249,8 +249,9 @@ const WikiEditDetailDetailPage: React.FC = () => {
             break;
         }
       } catch (error: unknown) {
-        // TODO: notify
-        console.error(error);
+        if (error instanceof WikiSyntaxError) {
+          toast(error.message);
+        }
         return;
       }
       ozaClient
@@ -291,8 +292,9 @@ const WikiEditDetailDetailPage: React.FC = () => {
           wikiRef.current && (wikiRef.current.type = wiki.type);
         } catch (error: unknown) {
           setEditorType(EditorType.Wiki);
-          // TODO: notify
-          console.log(error);
+          if (error instanceof WikiSyntaxError) {
+            toast(error.message);
+          }
         }
         break;
       }
@@ -305,7 +307,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
     const [idx] = path.split('.').map((v) => parseInt(v));
     setWikiElement((preEls) => {
       const newEls = cloneDeep(preEls);
-      if (!isNaN(idx) && isNumber(idx)) {
+      if (isNumber(idx) && !isNaN(idx)) {
         const preValue = newEls[idx]?.value as WikiElement[];
         return set(newEls, `${idx}.value`, concat(preValue, new WikiElement()));
       }
@@ -409,7 +411,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
               </Radio.Group>
             </Form.Item>
 
-            {/* TODO: 提醒 Tab 可以切换 */}
             <Form.Item label='描述信息'>
               <div className={style.formDetailInfo}>
                 <Radio.Group>
@@ -426,7 +427,11 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   ))}
                 </Radio.Group>
 
+                {/* 入门编辑模式 */}
                 <div hidden={editorType !== EditorType.Beginner}>
+                  <div data-hint>
+                    按<kbd>Tab</kbd>切换为二级项目，可拖拽改变行顺序
+                  </div>
                   <WikiInfoContext.Provider
                     value={{
                       els: wikiElement,
@@ -440,6 +445,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   </WikiInfoContext.Provider>
                 </div>
 
+                {/* Wiki 编辑模式 */}
                 <div hidden={editorType !== EditorType.Wiki}>
                   <WikiEditor instanceRef={instanceRef} />
                 </div>
@@ -455,7 +461,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
             </Form.Item>
 
             <Form.Item label='受限内容'>
-              {/* TODO: CheckBox */}
               <div className={style.formRadio}>
                 <Radio
                   id='nsfw'
@@ -469,7 +474,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
 
             <Form.Item label='编辑摘要'>
               <Input.Group className={style.formInputGroup}>
-                {/* TODO: overflow here */}
                 <Select
                   defaultValue='0'
                   options={BuiltInCommitMessage}
@@ -500,7 +504,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
           <div className={style.title}>条目修订历史</div>
           <Divider className={style.divider} />
           <div className={style.history}>
-            {/* TODO: dashed here! */}
             {subjectEditHistory.map((his, idx) => (
               <div key={idx} className={style.historyItem}>
                 <span className={style.historyUserName}>{his.creator.username}</span>
