@@ -3,9 +3,9 @@ import React from 'react';
 
 import { Search as SearchIcon, UserLogin } from '@bangumi/icons';
 
+import Select from '../Select';
 import type { InputProps } from '.';
 import Input from '.';
-import Select from '../Select';
 
 const componentMeta: ComponentMeta<typeof Input> = {
   title: 'modern/Input',
