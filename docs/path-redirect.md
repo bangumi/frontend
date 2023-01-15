@@ -2,7 +2,7 @@
 
 ```conf
 ; 编辑详细
-^/subject/(\w+)/edit_tail /subject/$1/wiki/edit_tail
+^/subject/(\w+)/edit_detail /subject/$1/wiki/edit_detail
 ; 修订历史
 ^/subject/(\w+)/edit /subject/$1/wiki/history
 ; 新增封面
