@@ -246,6 +246,7 @@ export interface components {
     WikiPlatform: {
       id: number;
       text: string;
+      wiki_tpl?: string;
     };
     SubjectWikiInfo: {
       id: number;

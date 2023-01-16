@@ -139,6 +139,7 @@ export interface Notice {
 export interface WikiPlatform {
   id: number;
   text: string;
+  wiki_tpl?: string;
 }
 export interface SubjectWikiInfo {
   id: number;
