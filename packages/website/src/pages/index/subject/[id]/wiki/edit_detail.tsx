@@ -99,9 +99,13 @@ const WikiInfoItem = ({
     <div
       className={style.formDetailInfoItem}
       onKeyDown={(e) => {
-        if (e.key === 'Tab') {
+        if (e.ctrlKey && e.key === 'Enter') {
           e.preventDefault();
           level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
+        }
+        if (e.ctrlKey && e.key === 'x') {
+          e.preventDefault();
+          removeOneWikiElement?.(path);
         }
       }}
       {...rest}
@@ -493,7 +497,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                       />
                     ))}
                   </Radio.Group>
-                  <div className={style.hint}>
+                  <div className={style.Tips}>
                     注意：切换类型会导致项目顺序发生变化，请先选择好模板再进行排序
                   </div>
                 </div>
@@ -516,8 +520,15 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   ))}
                 </Radio.Group>
 
-                <div hidden={editorType !== EditorType.Beginner} className={style.hint}>
-                  按<kbd>Tab</kbd>切换为二级项目，可拖拽改变行顺序
+                <div hidden={editorType !== EditorType.Beginner} className={style.Tips}>
+                  <div>Tips:</div>
+                  <div>可拖拽改变行顺序</div>
+                  <div>
+                    按<kbd>Ctrl</kbd>+<kbd>Enter</kbd>切换为二级项目
+                  </div>
+                  <div>
+                    按<kbd>Ctrl</kbd>+<kbd>X</kbd>可删除项目
+                  </div>
                 </div>
 
                 {/* 入门编辑模式 */}

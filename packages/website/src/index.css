@@ -16,3 +16,7 @@ button {
 textarea {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+kbd {
+  margin: 0.25rem;
+}
