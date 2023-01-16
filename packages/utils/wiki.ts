@@ -34,7 +34,7 @@ export const mergeWiki =
       }),
     )(wiki.data);
     const templateMap = keyBy('key')(template.data); /** template is safe */
-    const mergedWikiItems = Object.values(merge(wikiMap, templateMap) as WikiItem[]);
+    const mergedWikiItems = Object.values(merge(templateMap, wikiMap) as WikiItem[]);
     return {
       type: template.type,
       data: mergedWikiItems,

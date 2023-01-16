@@ -7,7 +7,6 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
 import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
@@ -25,7 +24,7 @@ import {
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { Link } from '@bangumi/website/components/Link';
-import { WikiEditTabsItemsByKey, WikiTemplate } from '@bangumi/website/shared/wiki';
+import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
 import { reorder } from '@bangumi/website/utils';
 
 import WikiEditor from '../components/WikiEditor/WikiEditor';
@@ -212,9 +211,7 @@ interface FormData {
 }
 
 const WikiEditDetailDetailPage: React.FC = () => {
-  const { id: subjectId } = useParams();
-
-  const { register, handleSubmit, setValue, getValues, watch } = useForm<FormData>();
+  const { register, handleSubmit, setValue, watch } = useForm<FormData>();
   const prePlatform = watch('subject.platform');
 
   const [editorType, setEditorType] = useLocalstorageState(
@@ -224,12 +221,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
   const wikiRef = useRef<Wiki>();
   const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
   const monoEditorInstanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const { subjectEditHistory, subjectWikiInfo, mutateHistory } = useWikiContext();
-
-  const getWikiFromEditor = () => {
-    const text = monoEditorInstanceRef.current?.getValue() ?? '';
-    return parseWiki(text);
-  };
+  const { subjectEditHistory, subjectWikiInfo, mutateHistory, subjectId } = useWikiContext();
 
   useEffect(() => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
@@ -263,19 +255,20 @@ const WikiEditDetailDetailPage: React.FC = () => {
         return;
       }
       ozaClient
-        .putSubjectInfo(parseInt(subjectId!), {
+        .putSubjectInfo(subjectId, {
           commitMessage,
           subject,
         })
         .then(async () => mutateHistory())
         .then(() => {
+          // TODO: jump to other path
           console.log('success');
         })
         .catch(() => {
-          console.log('err');
+          toast('提交失败，请稍后再试');
         });
     },
-    [wikiElement, editorType],
+    [wikiElement, editorType, mutateHistory],
   );
 
   const handleSetEditorType = (type: EditorType) => {
@@ -386,34 +379,41 @@ const WikiEditDetailDetailPage: React.FC = () => {
     }
   };
 
-  const handlePlatformChange = useCallback(() => {
-    try {
-      switch (editorType) {
-        case EditorType.Beginner:
-          setWikiElement((preEls) => {
-            const preWiki = { type: wikiRef.current?.type ?? '', data: fromWikiElement(preEls) };
-            return flow(mergeWiki(parseWiki(WikiTemplate.OVA)), toWikiElement)(preWiki);
-          });
-          break;
-        case EditorType.Wiki: {
-          const text = flow(
-            parseWiki,
-            mergeWiki(parseWiki(WikiTemplate.OVA)),
-            stringifyWiki,
-          )(monoEditorInstanceRef.current?.getValue() ?? '');
-          monoEditorInstanceRef.current?.setValue(text);
-          break;
+  const handlePlatformChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
+    (e) => {
+      const tpl = e.target.dataset.tpl;
+      const template = getWikiTemplate(subjectWikiInfo.typeID, tpl);
+      try {
+        const templateWiki = parseWiki(template);
+        switch (editorType) {
+          case EditorType.Beginner:
+            setWikiElement((preEls) => {
+              const preWiki = { type: wikiRef.current?.type ?? '', data: fromWikiElement(preEls) };
+              return flow(mergeWiki(templateWiki), toWikiElement)(preWiki);
+            });
+            break;
+          case EditorType.Wiki: {
+            const text = flow(
+              parseWiki,
+              mergeWiki(templateWiki),
+              stringifyWiki,
+            )(monoEditorInstanceRef.current?.getValue() ?? '');
+            monoEditorInstanceRef.current?.setValue(text);
+            break;
+          }
+          default:
+            break;
         }
-        default:
-          break;
+      } catch (error: unknown) {
+        if (error instanceof WikiSyntaxError) {
+          toast(error.message);
+        }
+        console.error(error);
+        setValue('subject.platform', prePlatform);
       }
-    } catch (error: unknown) {
-      if (error instanceof WikiSyntaxError) {
-        toast(error.message);
-      }
-      setValue('subject.platform', prePlatform);
-    }
-  }, [editorType, prePlatform]);
+    },
+    [editorType, prePlatform],
+  );
 
   return (
     <Layout
@@ -438,6 +438,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   {subjectWikiInfo.availablePlatform.map((type) => (
                     <Radio
                       id={type.text}
+                      data-tpl={type.wiki_tpl}
                       className={style.formRadio}
                       key={type.id}
                       label={type.text}
@@ -559,7 +560,10 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 <span className={style.historySuffix}>恢复</span>
               </div>
             ))}
-            <Link to={WikiEditTabsItemsByKey.history.to(subjectId)} className={style.historyMore}>
+            <Link
+              to={WikiEditTabsItemsByKey.history.to(subjectId.toFixed())}
+              className={style.historyMore}
+            >
               更多修改记录
               <ArrowRightCircle />
             </Link>

@@ -55,7 +55,7 @@ export const WikiEditTabsItems = [
 
 export const WikiEditTabsItemsByKey = keyBy(WikiEditTabsItems, 'key');
 
-export const WikiTemplate = {
+const WikiTemplate = {
   TVAnime:
     '{{Infobox animanga/TVAnime\n|中文名= \n|别名= {\n\n}\n|话数= * \n|放送开始= * \n|放送星期=\n|官方网站=\n|播放电视台=\n|其他电视台= \n|播放结束= \n|其他= \n|Copyright=\n}}' /** TV,WEB(anime) */,
   OVA: '{{Infobox animanga/OVA\n|中文名= \n|别名= {\n\n}\n|话数= * \n|发售日= * \n|官方网站=\n|开始= \n|结束= \n|其他= \n}}',
@@ -81,4 +81,11 @@ export const WikiTemplate = {
     '{{Infobox doujin/Album\n|艺术家={\n\n}\n|原作=\n|语言=\n|版本特性=\n|碟片数量=\n|播放时长=\n|价格=\n|发售日=\n}}',
   doujinGame:
     '{{Infobox doujin/Game\n|别名= {\n\n}\n|开发者={\n\n}\n|原作=\n|平台=\n|游戏类型=\n|游戏引擎=\n|游玩人数=\n|语言=\n|价格=\n|发售日=\n}}',
+};
+
+export const getWikiTemplate = (subjectType: number, targetTemplate: string | undefined) => {
+  if (subjectType === SubjectType.Game) return WikiTemplate.Game;
+  if (subjectType === SubjectType.Music) return WikiTemplate.Album;
+  if (targetTemplate === undefined) return '';
+  return WikiTemplate[targetTemplate as keyof typeof WikiTemplate] ?? '';
 };

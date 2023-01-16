@@ -11,12 +11,13 @@ import NotFound from '@bangumi/website/components/NotFound';
 import WikiLayout from './components/WikiLayout';
 
 interface WikiContext {
+  subjectId: number;
   subjectWikiInfo: ozaClient.SubjectWikiInfo;
   subjectEditHistory: ozaClient.HistorySummary[];
   mutateHistory: KeyedMutator<ozaClient.HistorySummary[]>;
 }
 
-const WikiPage = ({ id: subjectId }: { id: number }) => {
+const WikiPage = ({ subjectId }: { subjectId: number }) => {
   const { data } = useSWR(
     `/wiki/subjects/${subjectId}`,
     async () => ok(ozaClient.subjectInfo(subjectId)),
@@ -37,6 +38,7 @@ const WikiPage = ({ id: subjectId }: { id: number }) => {
     <WikiLayout id={subjectId.toFixed()} name={data!.name}>
       <Outlet
         context={{
+          subjectId,
           subjectWikiInfo: data,
           subjectEditHistory: history,
           mutateHistory,
@@ -54,5 +56,5 @@ export default withErrorBoundary(function WikiPageRouterGuard() {
   if (isNaN(subjectId)) {
     return <NotFound />;
   }
-  return <WikiPage id={subjectId} />;
+  return <WikiPage subjectId={subjectId} />;
 });
