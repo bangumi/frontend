@@ -25,10 +25,10 @@ import {
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { Link } from '@bangumi/website/components/Link';
+import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor';
 import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
 import { reorder } from '@bangumi/website/utils';
 
-import WikiEditor from '../components/WikiEditor/WikiEditor';
 import { useWikiContext } from '../wiki';
 import style from './common.module.less';
 
