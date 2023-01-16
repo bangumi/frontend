@@ -3,6 +3,7 @@ import cn from 'classnames';
 import dayjs from 'dayjs';
 import { cloneDeep, concat, filter, flow, isArray, isNumber, set } from 'lodash';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
+import { nanoid } from 'nanoid';
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
@@ -93,6 +94,7 @@ const WikiInfoItem = ({
 }: WikiInfoItemProps) => {
   const { editOneWikiElement, removeOneWikiElement, switchWikiElementToArray } =
     useContext(WikiInfoContext) ?? {};
+
   return (
     <div
       className={style.formDetailInfoItem}
@@ -118,6 +120,7 @@ const WikiInfoItem = ({
           onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
         />
         <Input
+          id={item._id}
           wrapperClass={style.formInput}
           defaultValue={typeof item.value === 'string' ? item.value : ''}
           disabled={isArray(item.value)}
@@ -196,7 +199,11 @@ const WikiInfoList = ({
         )}
       </Droppable>
       <button
-        className={cn(style.formInput, style.formInputBtn)}
+        className={cn(
+          style.formInput,
+          style.formInputBtn,
+          level === 2 && style.formInputBtnSecondary,
+        )}
         onClick={() => addOneWikiElement?.(path)}
         type='button'
       >
@@ -222,6 +229,16 @@ const WikiEditDetailDetailPage: React.FC = () => {
   );
   const wikiRef = useRef<Wiki>();
   const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
+
+  const [inputFocusToId, setInputFocusToId] = useState('');
+  useEffect(() => {
+    const input = document.getElementById(inputFocusToId);
+    if (input) {
+      input.focus();
+    }
+    setInputFocusToId('');
+  }, [inputFocusToId]);
+
   const monoEditorInstanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const { subjectEditHistory, subjectWikiInfo, mutateHistory, subjectId } = useWikiContext();
 
@@ -326,6 +343,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
 
   const removeOneWikiElement = (path: string) => {
     const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
+    const id = nanoid();
     if (!isNumber(idx)) return;
     setWikiElement((preEl) => {
       if (isNumber(subIdx)) {
@@ -333,7 +351,11 @@ const WikiEditDetailDetailPage: React.FC = () => {
           if (i === idx && isArray(el.value)) {
             return {
               ...el,
-              value: el.value.length === 1 ? undefined : filter(el.value, (_, i) => i !== subIdx),
+              _id: id,
+              value:
+                el.value.length === 1
+                  ? el.value[0]?.value
+                  : filter(el.value, (_, i) => i !== subIdx),
             };
           }
           return el;
@@ -341,6 +363,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
       }
       return filter(preEl, (_, i) => i !== idx);
     });
+    setInputFocusToId(id);
   };
 
   const editOneWikiElement = (path: string, target: 'key' | 'value', value: string) => {
@@ -355,14 +378,24 @@ const WikiEditDetailDetailPage: React.FC = () => {
   };
 
   const switchWikiElementToArray = (idx: number) => {
+    const id = nanoid();
     setWikiElement((preEls) => {
       const newEls = [...preEls];
       return set(
         newEls,
         idx,
-        new WikiElement({ key: preEls[idx]?.key, value: [new WikiElement()] }),
+        new WikiElement({
+          key: preEls[idx]?.key,
+          value: [
+            new WikiElement({
+              id,
+              value: preEls[idx]?.value ?? '',
+            }),
+          ],
+        }),
       );
     });
+    setInputFocusToId(id);
   };
 
   const onDragEnd = (path: string, result: DropResult, provided: ResponderProvided) => {
