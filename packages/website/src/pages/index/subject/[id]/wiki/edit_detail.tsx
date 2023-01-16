@@ -1,7 +1,7 @@
 /* eslint-disable no-useless-return */
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import { cloneDeep, concat, filter, isArray, isNumber, set } from 'lodash-es';
+import { cloneDeep, concat, filter, flow, isArray, isNumber, set } from 'lodash';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
@@ -16,6 +16,7 @@ import { ArrowRightCircle, Cursor, Minus } from '@bangumi/icons';
 import type { Wiki } from '@bangumi/utils';
 import {
   fromWikiElement,
+  mergeWiki,
   parseWiki,
   stringifyWiki,
   toWikiElement,
@@ -24,7 +25,7 @@ import {
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { Link } from '@bangumi/website/components/Link';
-import { WikiEditTabsItemsByKey } from '@bangumi/website/shared';
+import { WikiEditTabsItemsByKey, WikiTemplate } from '@bangumi/website/shared/wiki';
 import { reorder } from '@bangumi/website/utils';
 
 import WikiEditor from '../components/WikiEditor/WikiEditor';
@@ -213,19 +214,26 @@ interface FormData {
 const WikiEditDetailDetailPage: React.FC = () => {
   const { id: subjectId } = useParams();
 
-  const { register, handleSubmit, setValue } = useForm<FormData>();
+  const { register, handleSubmit, setValue, getValues, watch } = useForm<FormData>();
+  const prePlatform = watch('subject.platform');
+
   const [editorType, setEditorType] = useLocalstorageState(
     'chii_wiki_editor_type',
     EditorType.Beginner,
   );
   const wikiRef = useRef<Wiki>();
   const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
-  const instanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
+  const monoEditorInstanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const { subjectEditHistory, subjectWikiInfo, mutateHistory } = useWikiContext();
+
+  const getWikiFromEditor = () => {
+    const text = monoEditorInstanceRef.current?.getValue() ?? '';
+    return parseWiki(text);
+  };
 
   useEffect(() => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
-    instanceRef.current?.setValue(subjectWikiInfo.infobox);
+    monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
   }, []);
 
@@ -240,8 +248,8 @@ const WikiEditDetailDetailPage: React.FC = () => {
             });
             break;
           case EditorType.Wiki: {
-            const text = instanceRef.current?.getValue() ?? '';
-            parseWiki(text);
+            const text = monoEditorInstanceRef.current?.getValue() ?? '';
+            parseWiki(text); /** check if text if valid */
             subject.infobox = text;
             break;
           }
@@ -276,7 +284,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
     switch (type) {
       case EditorType.Wiki:
         // 切换到 wiki 模式，序列化 wiki
-        instanceRef.current?.setValue(
+        monoEditorInstanceRef.current?.setValue(
           stringifyWiki({
             type: wikiRef.current?.type ?? '',
             data: fromWikiElement(wikiElement),
@@ -285,7 +293,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         break;
       case EditorType.Beginner: {
         // 切换到 入门模式，反序列化 wiki
-        const text = instanceRef.current?.getValue() ?? '';
+        const text = monoEditorInstanceRef.current?.getValue() ?? '';
         try {
           const wiki = parseWiki(text);
           setWikiElement(toWikiElement(wiki));
@@ -378,6 +386,35 @@ const WikiEditDetailDetailPage: React.FC = () => {
     }
   };
 
+  const handlePlatformChange = useCallback(() => {
+    try {
+      switch (editorType) {
+        case EditorType.Beginner:
+          setWikiElement((preEls) => {
+            const preWiki = { type: wikiRef.current?.type ?? '', data: fromWikiElement(preEls) };
+            return flow(mergeWiki(parseWiki(WikiTemplate.OVA)), toWikiElement)(preWiki);
+          });
+          break;
+        case EditorType.Wiki: {
+          const text = flow(
+            parseWiki,
+            mergeWiki(parseWiki(WikiTemplate.OVA)),
+            stringifyWiki,
+          )(monoEditorInstanceRef.current?.getValue() ?? '');
+          monoEditorInstanceRef.current?.setValue(text);
+          break;
+        }
+        default:
+          break;
+      }
+    } catch (error: unknown) {
+      if (error instanceof WikiSyntaxError) {
+        toast(error.message);
+      }
+      setValue('subject.platform', prePlatform);
+    }
+  }, [editorType, prePlatform]);
+
   return (
     <Layout
       type='alpha'
@@ -395,21 +432,26 @@ const WikiEditDetailDetailPage: React.FC = () => {
               />
             </Form.Item>
 
-            <Form.Item label='类型'>
-              <Radio.Group>
-                {subjectWikiInfo.availablePlatform.map((type, idx) => (
-                  <Radio
-                    id={type.text}
-                    className={style.formRadio}
-                    key={type.id}
-                    label={type.text}
-                    value={type.id}
-                    defaultChecked={subjectWikiInfo.platform === type.id}
-                    {...register('subject.platform', { required: true })}
-                  />
-                ))}
-              </Radio.Group>
-            </Form.Item>
+            {subjectWikiInfo.availablePlatform.length && (
+              <Form.Item label='类型'>
+                <Radio.Group>
+                  {subjectWikiInfo.availablePlatform.map((type) => (
+                    <Radio
+                      id={type.text}
+                      className={style.formRadio}
+                      key={type.id}
+                      label={type.text}
+                      value={type.id}
+                      defaultChecked={subjectWikiInfo.platform === type.id}
+                      {...register('subject.platform', {
+                        required: true,
+                        onChange: handlePlatformChange,
+                      })}
+                    />
+                  ))}
+                </Radio.Group>
+              </Form.Item>
+            )}
 
             <Form.Item label='描述信息'>
               <div className={style.formDetailInfo}>
@@ -447,7 +489,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
 
                 {/* Wiki 编辑模式 */}
                 <div hidden={editorType !== EditorType.Wiki}>
-                  <WikiEditor instanceRef={instanceRef} />
+                  <WikiEditor instanceRef={monoEditorInstanceRef} />
                 </div>
               </div>
             </Form.Item>

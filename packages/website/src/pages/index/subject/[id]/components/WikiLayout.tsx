@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Tab } from '@bangumi/design';
 import { NavLink } from '@bangumi/website/components/Link';
-import { WikiEditTabsItems } from '@bangumi/website/shared';
+import { WikiEditTabsItems } from '@bangumi/website/shared/wiki';
 
 import style from './WikiLayout.module.less';
 

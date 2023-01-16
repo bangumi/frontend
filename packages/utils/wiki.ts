@@ -1,6 +1,9 @@
 import type { Wiki } from '@bgm38/wiki';
 import { WikiArrayItem, WikiItem } from '@bgm38/wiki';
+import { flow, isArray, isEmpty, isEqual, keyBy, merge, omitBy } from 'lodash/fp';
 import { nanoid } from 'nanoid';
+
+// import { keyBy } from '.';
 
 type Value = string | WikiElement[];
 
@@ -17,8 +20,34 @@ export class WikiElement {
   }
 }
 
-export const toWikiElement = (wiki: Wiki) =>
-  wiki.data.map((item) => {
+/** 方便 fp */
+export const mergeWiki =
+  (template: Wiki) =>
+  (wiki: Wiki): Wiki => {
+    // wiki 去掉 value 为 * 和 空值 的项。
+    const wikiMap = flow(
+      keyBy('key'),
+      omitBy<WikiItem>((item, key) => {
+        if (isArray(item.values)) return false;
+        key = key.trim();
+        return isEmpty(key) || isEmpty(item.value) || isEqual(item.value, '*');
+      }),
+    )(wiki.data);
+    const templateMap = keyBy('key')(template.data); /** template is safe */
+    const mergedWikiItems = Object.values(merge(wikiMap, templateMap) as WikiItem[]);
+    return {
+      type: template.type,
+      data: mergedWikiItems,
+    };
+  };
+
+/**
+ * 把 wiki 类中的 data 转换为 WikiElement 数组。只支持二级嵌套
+ * @param wiki wiki 类
+ * @returns WikiElement 数组
+ */
+export const toWikiElement = (wiki: Wiki): WikiElement[] => {
+  return wiki.data.map((item) => {
     return new WikiElement({
       key: item.key,
       value: Array.isArray(item.values)
@@ -32,7 +61,13 @@ export const toWikiElement = (wiki: Wiki) =>
         : item.value,
     });
   });
+};
 
+/**
+ * 把 WikiElement 数组恢复为 WikiItem 数组。只支持二级嵌套
+ * @param wiki wiki 类
+ * @returns WikiElement 数组
+ */
 export const fromWikiElement = (elements: WikiElement[]): WikiItem[] =>
   elements.map((el) => {
     const value = el.value;
