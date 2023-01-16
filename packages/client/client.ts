@@ -136,14 +136,16 @@ export interface Notice {
   postID: number;
   createdAt: number;
 }
+export type SubjectType = 1 | 2 | 3 | 4 | 6;
 export interface WikiPlatform {
   id: number;
   text: string;
+  wiki_tpl?: string;
 }
 export interface SubjectWikiInfo {
   id: number;
   name: string;
-  typeID: number;
+  typeID: SubjectType;
   infobox: string;
   platform: number;
   availablePlatform: WikiPlatform[];

@@ -246,11 +246,14 @@ export interface components {
     WikiPlatform: {
       id: number;
       text: string;
+      wiki_tpl?: string;
     };
+    /** SubjectType */
+    SubjectType: 1 | 2 | 3 | 4 | 6;
     SubjectWikiInfo: {
       id: number;
       name: string;
-      typeID: number;
+      typeID: components['schemas']['SubjectType'];
       infobox: string;
       platform: number;
       availablePlatform: components['schemas']['WikiPlatform'][];
