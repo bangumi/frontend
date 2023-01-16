@@ -30,12 +30,13 @@
     &Btn {
       border: 2px dashed @gray-10;
       width: 100%;
-
-      > input[type='button'] {
-        cursor: pointer;
-        color: @gray-60;
-        background-color: #fff;
-      }
+      height: 44px;
+      font-size: 1rem;
+      color: @gray-60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     &Group {
@@ -73,16 +74,17 @@
     font-weight: 600;
   }
 
+  .hint {
+    color: @gray-60;
+    width: 100%;
+    font-size: 0.75rem;
+  }
+
   &DetailInfo {
     display: flex;
     flex: 1;
     gap: 10px;
     flex-direction: column;
-
-    & [data-hint] {
-      color: @gray-60;
-      margin-bottom: 10px;
-    }
 
     &Item {
       position: relative;

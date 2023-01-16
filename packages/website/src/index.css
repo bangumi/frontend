@@ -7,3 +7,12 @@ body {
 a {
   text-decoration: inherit;
 }
+
+button {
+  background: white;
+  cursor: pointer;
+}
+
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}

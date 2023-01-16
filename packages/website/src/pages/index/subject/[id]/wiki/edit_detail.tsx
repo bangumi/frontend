@@ -11,7 +11,7 @@ import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select, toast } from '@bangumi/design';
-import { ArrowRightCircle, Cursor, Minus } from '@bangumi/icons';
+import { ArrowRightCircle, Cursor, Minus, Plus } from '@bangumi/icons';
 import type { Wiki } from '@bangumi/utils';
 import {
   fromWikiElement,
@@ -195,12 +195,14 @@ const WikiInfoList = ({
           </div>
         )}
       </Droppable>
-      <Input
-        type='button'
-        value='新增行'
-        wrapperClass={cn(style.formInput, style.formInputBtn)}
+      <button
+        className={cn(style.formInput, style.formInputBtn)}
         onClick={() => addOneWikiElement?.(path)}
-      />
+        type='button'
+      >
+        <Plus />
+        <span>新增行</span>
+      </button>
     </DragDropContext>
   );
 };
@@ -259,7 +261,13 @@ const WikiEditDetailDetailPage: React.FC = () => {
           commitMessage,
           subject,
         })
-        .then(async () => mutateHistory())
+        .then(async (err) => {
+          if (err.status !== 200) {
+            toast(err.data.message);
+          } else {
+            return mutateHistory();
+          }
+        })
         .then(() => {
           // TODO: jump to other path
           console.log('success');
@@ -434,23 +442,28 @@ const WikiEditDetailDetailPage: React.FC = () => {
 
             {subjectWikiInfo.availablePlatform.length && (
               <Form.Item label='类型'>
-                <Radio.Group>
-                  {subjectWikiInfo.availablePlatform.map((type) => (
-                    <Radio
-                      id={type.text}
-                      data-tpl={type.wiki_tpl}
-                      className={style.formRadio}
-                      key={type.id}
-                      label={type.text}
-                      value={type.id}
-                      defaultChecked={subjectWikiInfo.platform === type.id}
-                      {...register('subject.platform', {
-                        required: true,
-                        onChange: handlePlatformChange,
-                      })}
-                    />
-                  ))}
-                </Radio.Group>
+                <div className='flex-1'>
+                  <Radio.Group>
+                    {subjectWikiInfo.availablePlatform.map((type) => (
+                      <Radio
+                        id={type.text}
+                        data-tpl={type.wiki_tpl}
+                        className={style.formRadio}
+                        key={type.id}
+                        label={type.text}
+                        value={type.id}
+                        defaultChecked={subjectWikiInfo.platform === type.id}
+                        {...register('subject.platform', {
+                          required: true,
+                          onChange: handlePlatformChange,
+                        })}
+                      />
+                    ))}
+                  </Radio.Group>
+                  <div className={style.hint}>
+                    注意：切换类型会导致项目顺序发生变化，请先选择好模板再进行排序
+                  </div>
+                </div>
               </Form.Item>
             )}
 
@@ -470,11 +483,12 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   ))}
                 </Radio.Group>
 
+                <div hidden={editorType !== EditorType.Beginner} className={style.hint}>
+                  按<kbd>Tab</kbd>切换为二级项目，可拖拽改变行顺序
+                </div>
+
                 {/* 入门编辑模式 */}
                 <div hidden={editorType !== EditorType.Beginner}>
-                  <div data-hint>
-                    按<kbd>Tab</kbd>切换为二级项目，可拖拽改变行顺序
-                  </div>
                   <WikiInfoContext.Provider
                     value={{
                       els: wikiElement,
