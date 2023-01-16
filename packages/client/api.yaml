@@ -491,6 +491,8 @@ components:
           type: integer
         text:
           type: string
+        wiki_tpl:
+          type: string
       required:
         - id
         - text
