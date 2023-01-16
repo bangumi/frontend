@@ -32,10 +32,19 @@ type FormProps = PropsWithChildren<{
 }> &
   JSX.IntrinsicElements['form'];
 
-const Form = ({ children, labelCol, className, ...props }: FormProps) => {
+const Form = ({ children, labelCol, className, onSubmit, onKeyDown, ...props }: FormProps) => {
   return (
     <FormContext.Provider value={{ labelCol: labelCol ?? 12 }}>
-      <form className={cn('bgm-form', className)} {...props}>
+      <form
+        className={cn('bgm-form', className)}
+        onKeyDown={(e) => {
+          onKeyDown?.(e);
+          if (e.key === 'Enter') {
+            e.preventDefault();
+          }
+        }}
+        {...props}
+      >
         {children}
       </form>
     </FormContext.Provider>

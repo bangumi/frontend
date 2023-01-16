@@ -68,15 +68,26 @@ export const toWikiElement = (wiki: Wiki): WikiElement[] => {
  * @param wiki wiki 类
  * @returns WikiElement 数组
  */
-export const fromWikiElement = (elements: WikiElement[]): WikiItem[] =>
-  elements.map((el) => {
+export const fromWikiElement = (elements: WikiElement[]): WikiItem[] => {
+  const items: WikiItem[] = [];
+  for (const el of elements) {
+    // 移除空项目
+    if (isEmpty(el.value) && isEmpty(el.key)) continue;
     const value = el.value;
     const initWikiItemValue = typeof value === 'string' ? value : '';
     const item = new WikiItem(el.key ?? '', initWikiItemValue, 'object');
     if (Array.isArray(value) && el.key) {
       delete item.value; /** make up for unit-test */
       item.array = true;
-      item.values = value.map((v) => new WikiArrayItem(v.key, v.value as string));
+      item.values = [];
+      for (const subEl of value) {
+        if (isEmpty(subEl.key) && isEmpty(subEl.value)) continue;
+        item.values.push(new WikiArrayItem(subEl.key, subEl.value as string));
+      }
+      // 移除空项目
+      if (item.values.length === 0) continue;
     }
-    return item;
-  });
+    items.push(item);
+  }
+  return items;
+};
