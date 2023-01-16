@@ -79,11 +79,7 @@ export const fromWikiElement = (elements: WikiElement[]): WikiItem[] => {
     if (Array.isArray(value) && el.key) {
       delete item.value; /** make up for unit-test */
       item.array = true;
-      item.values = [];
-      for (const subEl of value) {
-        if (isEmpty(subEl.key) && isEmpty(subEl.value)) continue;
-        item.values.push(new WikiArrayItem(subEl.key, subEl.value as string));
-      }
+      item.values = value.map((subEl) => new WikiArrayItem(subEl.key, subEl.value as string));
       // 移除空项目
       if (item.values.length === 0) continue;
     }
