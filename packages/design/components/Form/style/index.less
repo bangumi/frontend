@@ -8,6 +8,10 @@
   &-item {
     display: flex;
 
+    @media (max-width: @sm) {
+      flex-direction: column;
+    }
+
     &-label {
       display: inline-block;
       font-weight: 400;

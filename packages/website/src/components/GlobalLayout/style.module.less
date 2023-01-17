@@ -1,10 +1,11 @@
+@import '@bangumi/design/theme/base';
+
 .container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-// TODO: 桌面响应式布局，待确定 break 点
 .contentWrapper {
   flex: 1 0 auto;
   width: 100%;
@@ -13,4 +14,8 @@
   padding: 24px 30px;
   box-sizing: border-box;
   z-index: 251;
+
+  @media (max-width: @sm) {
+    padding: 1rem;
+  }
 }

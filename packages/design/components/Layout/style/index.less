@@ -1,15 +1,22 @@
+@import '../../../theme/base.less';
+
 .bgm-layout {
   display: flex;
 
   &--alpha {
+    gap: 40px;
+
     .bgm-layout__left {
       width: 913px;
       flex: 1;
-      margin-right: 40px;
     }
 
     .bgm-layout__right {
       width: 427px;
+
+      @media (max-width: @lg) {
+        display: none;
+      }
     }
   }
 }
