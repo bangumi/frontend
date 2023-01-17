@@ -21,7 +21,6 @@ interface SelectProps {
 
 const Select = ({ options, style, defaultValue, className, onChange }: SelectProps) => {
   const [open, setOpen] = useState(false);
-  // TODO: Click outside hidden.
   const [active, setActive] = useState(defaultValue);
   const handleClick = () => {
     setOpen(!open);
@@ -40,15 +39,18 @@ const Select = ({ options, style, defaultValue, className, onChange }: SelectPro
         <span>{optionsMap[active]?.label}</span>
         <ArrowDown className='bgm-select-arrow' />
       </div>
-      {open && (
-        <div className='bgm-select__dropdown'>
-          {options.map((option) => (
-            <div key={option.value} onClick={() => handleOptionClick(option.value)}>
-              {option.label}
-            </div>
-          ))}
-        </div>
-      )}
+      <select
+        defaultValue={defaultValue}
+        onChange={(e) => {
+          handleOptionClick(e.target.value);
+        }}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };

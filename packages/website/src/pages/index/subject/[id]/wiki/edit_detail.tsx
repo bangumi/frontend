@@ -49,6 +49,7 @@ const EditorTypeRadio = [
 ];
 
 const BuiltInCommitMessage = [
+  '',
   '新条目',
   '修饰语句',
   '修正笔误',
