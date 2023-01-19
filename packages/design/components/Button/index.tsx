@@ -23,7 +23,7 @@ const Button: FC<PropsWithChildren<ButtonProps>> = ({
   size = 'normal',
   children,
   htmlType,
-  ...props
+  ...rest
 }) => {
   return (
     <button
