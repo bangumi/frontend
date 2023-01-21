@@ -115,6 +115,7 @@ const WikiInfoItem = ({
         className={cn(style.formInputGroup, level === 2 && style.formInputGroupSecondary)}
       >
         <Input
+          tabIndex={1} // 帮助在按 Tab 时能保证获取下一个 Input，不然下一个会 focus 到 <Cursor/>
           wrapperStyle={{
             width: '170px',
             borderTopLeftRadius: '12px',
@@ -125,6 +126,7 @@ const WikiInfoItem = ({
           onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
         />
         <Input
+          tabIndex={1}
           id={item._id}
           wrapperClass={style.formInput}
           defaultValue={typeof item.value === 'string' ? item.value : ''}
