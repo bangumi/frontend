@@ -33,6 +33,7 @@ const Button: FC<ButtonProps> = ({
         `bgm-button__${size}`,
       )}
       type={htmlType}
+      disabled={disabled}
       {...rest}
     >
       {children}
