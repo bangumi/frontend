@@ -6,7 +6,6 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import Button from '../Button';
-import Divider from '../Divider';
 import Input from '../Input';
 import Select from '../Select';
 import Form from '.';
@@ -57,24 +56,20 @@ const Template: ComponentStory<typeof Form> = (args) => {
       </Form.Item>
 
       <Form.Item label='编辑摘要'>
-        <Input
-          prefix={
-            <>
-              <Select
-                options={[
-                  { label: '1', value: '1' },
-                  { label: '2', value: '2' },
-                  { label: '3', value: '3' },
-                ]}
-                style={{
-                  width: '120px',
-                }}
-                defaultValue='1'
-              />
-              <Divider orientation='vertical' className='divider' />
-            </>
-          }
-        />
+        <Input.Group>
+          <Select
+            options={[
+              { label: '1', value: '1' },
+              { label: '2', value: '2' },
+              { label: '3', value: '3' },
+            ]}
+            style={{
+              width: '120px',
+            }}
+            defaultValue='1'
+          />
+          <Input />
+        </Input.Group>
       </Form.Item>
 
       <Form.Item label='描述信息'>
