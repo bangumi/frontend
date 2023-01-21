@@ -2,6 +2,7 @@ import './Form.stories.less';
 
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
+import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import Button from '../Button';
@@ -15,7 +16,7 @@ const componentMeta: ComponentMeta<typeof Form> = {
   component: Form,
   argTypes: {
     onSubmit: {
-      action: 'clicked',
+      action: 'summit',
     },
   },
 };
@@ -23,16 +24,20 @@ const componentMeta: ComponentMeta<typeof Form> = {
 export default componentMeta;
 
 const Template: ComponentStory<typeof Form> = (args) => {
-  //   const handleSubmit = (value: any) => {
-  //     console.log(value);
-  //   };
-  const onSubmit = (data: any) => {
+  const innerOnSubmit: SubmitHandler<{}> = (data) => {
     console.log(data);
   };
   const { register, handleSubmit } = useForm();
 
   return (
-    <Form labelCol={120} onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      labelCol={120}
+      onSubmit={(e) => {
+        args.onSubmit?.(e);
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        handleSubmit(innerOnSubmit)(e).catch(() => {});
+      }}
+    >
       <Form.Item label='类别名'>
         <Input
           type='text'

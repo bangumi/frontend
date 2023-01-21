@@ -1,10 +1,11 @@
 import './style';
 
 import classNames from 'classnames';
-import type { FC } from 'react';
+import type { FC, MouseEventHandler } from 'react';
 import React from 'react';
 
-export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type'> & {
+export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type' | 'onClick'> & {
+  onClick?: MouseEventHandler; // desserts for story book
   type?: 'primary' | 'secondary' | 'text';
   shape?: 'square' | 'rounded';
   size?: 'normal';

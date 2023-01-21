@@ -32,7 +32,7 @@ type FormProps = PropsWithChildren<{
 }> &
   JSX.IntrinsicElements['form'];
 
-const Form = ({ children, labelCol, className, onSubmit, onKeyDown, ...props }: FormProps) => {
+const Form = ({ children, labelCol, className, onKeyDown, ...rest }: FormProps) => {
   return (
     <FormContext.Provider value={{ labelCol: labelCol ?? 12 }}>
       <form
@@ -43,7 +43,7 @@ const Form = ({ children, labelCol, className, onSubmit, onKeyDown, ...props }: 
             e.preventDefault();
           }
         }}
-        {...props}
+        {...rest}
       >
         {children}
       </form>

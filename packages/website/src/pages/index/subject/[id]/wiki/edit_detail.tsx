@@ -101,11 +101,9 @@ const WikiInfoItem = ({
       className={style.formDetailInfoItem}
       onKeyDown={(e) => {
         if (e.ctrlKey && e.key === 'Enter') {
-          e.preventDefault();
           level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
         }
         if (e.ctrlKey && e.key === 'x') {
-          e.preventDefault();
           removeOneWikiElement?.(path);
         }
       }}
