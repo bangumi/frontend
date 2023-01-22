@@ -47,7 +47,7 @@ describe('Form Components', () => {
 
   it('form item render properly', () => {
     const { container } = render(
-      <Form labelCol={120}>
+      <Form labelWidth={120}>
         <Form.Item>
           <Input />
         </Form.Item>

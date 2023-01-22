@@ -9,13 +9,13 @@ type ItemProps = PropsWithChildren<{
 }>;
 
 function FormItem({ children, label }: ItemProps) {
-  const { labelCol } = useContext(FormContext);
+  const { labelWidth } = useContext(FormContext);
   return (
     <div className='bgm-form-item'>
       <div
         className='bgm-form-item-label'
         style={{
-          width: `${labelCol}px`,
+          width: `${labelWidth}px`,
         }}
       >
         <label>{label}</label>
@@ -25,16 +25,16 @@ function FormItem({ children, label }: ItemProps) {
   );
 }
 
-const FormContext = createContext<{ labelCol: number }>({ labelCol: 12 });
+const FormContext = createContext<{ labelWidth: number }>({ labelWidth: 12 });
 
 type FormProps = PropsWithChildren<{
-  labelCol?: number;
+  labelWidth?: number;
 }> &
   JSX.IntrinsicElements['form'];
 
-const Form = ({ children, labelCol, className, onKeyDown, ...rest }: FormProps) => {
+const Form = ({ children, labelWidth, className, onKeyDown, ...rest }: FormProps) => {
   return (
-    <FormContext.Provider value={{ labelCol: labelCol ?? 12 }}>
+    <FormContext.Provider value={{ labelWidth: labelWidth ?? 12 }}>
       <form
         className={cn('bgm-form', className)}
         onKeyDown={(e) => {

@@ -468,7 +468,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         <>
           <div className={style.title}>修改详细描述</div>
           <Divider className={style.divider} />
-          <Form labelCol={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
+          <Form labelWidth={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
             <Form.Item label='类别名'>
               <Input
                 type='text'

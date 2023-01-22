@@ -30,11 +30,11 @@ const Template: ComponentStory<typeof Form> = (args) => {
 
   return (
     <Form
-      labelCol={120}
+      labelWidth={120}
       onSubmit={(e) => {
         args.onSubmit?.(e);
-        // eslint-disable-next-line @typescript-eslint/no-empty-function
-        handleSubmit(innerOnSubmit)(e).catch(() => {});
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
+        handleSubmit(innerOnSubmit)(e);
       }}
     >
       <Form.Item label='类别名'>
