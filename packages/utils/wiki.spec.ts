@@ -40,7 +40,6 @@ describe('fromWikiElement & toWikiElement', () => {
         type: wiki.type,
         data: wikiItems,
       }).toEqual(expected);
-      //   expect(0).toEqual(1);
     });
   }
 });
