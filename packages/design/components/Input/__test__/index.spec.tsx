@@ -31,7 +31,7 @@ describe('Input', () => {
   });
 
   it('alignment', () => {
-    const { container } = render(<Input alight='right' />);
+    const { container } = render(<Input align='right' />);
     expect(container).toMatchSnapshot();
   });
 });

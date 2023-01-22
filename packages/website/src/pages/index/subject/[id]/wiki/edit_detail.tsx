@@ -119,7 +119,7 @@ const WikiInfoItem = ({
             borderTopLeftRadius: '12px',
             borderBottomLeftRadius: '12px',
           }}
-          alight={level === 2 ? 'right' : undefined}
+          align={level === 2 ? 'right' : undefined}
           defaultValue={item.key}
           onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
         />

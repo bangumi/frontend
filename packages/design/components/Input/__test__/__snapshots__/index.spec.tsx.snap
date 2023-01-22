@@ -6,7 +6,7 @@ exports[`Input alignment 1`] = `
     class="bgm-input__wrapper"
   >
     <input
-      class="bgm-input bgm-input--alight-right"
+      class="bgm-input bgm-input--align-right"
       type="text"
     />
   </div>

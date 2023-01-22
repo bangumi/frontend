@@ -13,7 +13,7 @@ export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
   /** 后缀 */
   suffix?: React.ReactNode;
   /** 对齐方式 */
-  alight?: 'right' | 'left';
+  align?: 'right' | 'left';
 };
 
 type IInput = React.ForwardRefExoticComponent<InputProps> & {
@@ -22,14 +22,16 @@ type IInput = React.ForwardRefExoticComponent<InputProps> & {
 
 // https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
 const Input = forwardRef<HTMLInputElement, InputProps>(function InputWithRef(
-  { type = 'text', wrapperStyle, wrapperClass, prefix, suffix, alight, disabled, ...rest },
+  { type = 'text', wrapperStyle, wrapperClass, prefix, suffix, align, disabled, ...rest },
   ref,
 ) {
   return (
     <div
       className={classnames(
         'bgm-input__wrapper',
-        disabled && 'bgm-input__wrapper--disabled',
+        {
+          'bgm-input__wrapper--disabled': disabled,
+        },
         wrapperClass,
       )}
       style={wrapperStyle}
@@ -37,7 +39,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(function InputWithRef(
       {prefix}
       <input
         type={type}
-        className={classnames('bgm-input', alight === 'right' && 'bgm-input--alight-right')}
+        className={classnames('bgm-input', { 'bgm-input--align-right': align === 'right' })}
         ref={ref}
         disabled={disabled}
         {...rest}
