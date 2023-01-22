@@ -1,7 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
-import { delay } from 'lodash-es';
+import { delay } from 'lodash';
 import React from 'react';
 
 import type { Toast as TToast } from './types';

@@ -59,7 +59,7 @@ export default defineConfig(({ mode }) => {
         mode === 'production'
           ? {
               babel: {
-                plugins: ['babel-plugin-jsx-remove-data-test-id'],
+                plugins: ['babel-plugin-jsx-remove-data-test-id', 'lodash'],
               },
             }
           : undefined,

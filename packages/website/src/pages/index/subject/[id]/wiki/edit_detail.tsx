@@ -521,7 +521,10 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   ))}
                 </Radio.Group>
 
-                <div hidden={editorType !== EditorType.Beginner} className={style.Tips}>
+                <div
+                  className={style.Tips}
+                  style={{ display: editorType === EditorType.Beginner ? 'block' : 'none' }}
+                >
                   <div>Tips:</div>
                   <div>可拖拽改变行顺序</div>
                   <div>
