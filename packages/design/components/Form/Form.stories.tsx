@@ -33,7 +33,6 @@ const Template: ComponentStory<typeof Form> = (args) => {
       labelWidth={120}
       onSubmit={(e) => {
         args.onSubmit?.(e);
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         handleSubmit(innerOnSubmit)(e);
       }}
     >
