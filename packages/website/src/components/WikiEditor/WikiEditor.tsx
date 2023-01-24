@@ -32,7 +32,8 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
       monaco.languages.setMonarchTokensProvider('wiki', {
         default: 'invalid',
         brackets: [
-          // @ts-expect-error
+          // @ts-expect-error IMonarchLanguageBracket interface problems
+          // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.languages.IMonarchLanguageBracket.html
           ['{', '}', 'delimiter.curly'],
           // @ts-expect-error
           ['[', ']', 'delimiter.square'],
