@@ -35,7 +35,7 @@ const WikiPage = ({ subjectId }: { subjectId: number }) => {
   );
 
   return (
-    <WikiLayout id={subjectId.toFixed()} name={data.name}>
+    <WikiLayout id={subjectId.toString()} name={data.name}>
       <Outlet
         context={{
           subjectId,

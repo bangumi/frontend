@@ -65,7 +65,7 @@ const BuiltInCommitMessage = [
   '侵权',
   '欢迎',
   '警告',
-].map((msg, idx) => ({ label: msg, value: idx.toFixed() }));
+].map((msg, idx) => ({ label: msg, value: idx.toString() }));
 
 type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
   index: number;
@@ -98,12 +98,13 @@ const WikiInfoItem = ({
 
   return (
     <div
-      className={style.formDetailInfoItem}
+      className={cn(style.formDetailInfoItem, isArray(item.value) && style.draggableBox)}
       onKeyDown={(e) => {
+        console.log(e);
         if (e.ctrlKey && e.key === 'Enter') {
           level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
         }
-        if (e.ctrlKey && e.key === 'x') {
+        if (e.ctrlKey && e.code === 'KeyX') {
           removeOneWikiElement?.(path);
         }
       }}
@@ -168,21 +169,15 @@ const WikiInfoList = ({
                   {(draggableProvided) => (
                     <div
                       ref={draggableProvided.innerRef}
+                      className={style.draggableBox}
                       {...draggableProvided.draggableProps}
-                      style={{
-                        ...draggableProvided.draggableProps.style,
-                        marginBottom: '0.625rem',
-                      }}
                     >
                       <WikiInfoItem
                         index={idx}
                         item={el}
                         level={level}
-                        path={level === 1 ? idx.toFixed() : `${path}.${idx}`}
+                        path={level === 1 ? idx.toString() : `${path}.${idx}`}
                         draggableProvided={draggableProvided}
-                        style={{
-                          marginBottom: isArray(el.value) ? '0.625rem' : '',
-                        }}
                       />
 
                       {/* subList */}
@@ -191,7 +186,7 @@ const WikiInfoList = ({
                           els={el.value}
                           level={level + 1}
                           onDragEnd={onDragEnd}
-                          path={level === 1 ? idx.toFixed() : `${path}.${idx}`}
+                          path={level === 1 ? idx.toString() : `${path}.${idx}`}
                         />
                       )}
                     </div>
@@ -582,11 +577,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 <Select
                   defaultValue='0'
                   options={BuiltInCommitMessage}
-                  style={{
-                    width: '170px',
-                    borderTopLeftRadius: '12px',
-                    borderBottomLeftRadius: '12px',
-                  }}
+                  className={style.formSelect}
                   onChange={(value) => {
                     setValue('commitMessage', value?.label ?? '');
                   }}
@@ -623,7 +614,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
               </div>
             ))}
             <Link
-              to={WikiEditTabsItemsByKey.history.to(subjectId.toFixed())}
+              to={WikiEditTabsItemsByKey.history.to(subjectId.toString())}
               className={style.historyMore}
             >
               更多修改记录
