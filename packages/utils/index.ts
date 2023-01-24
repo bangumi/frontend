@@ -5,7 +5,7 @@ export {
   WikiArrayItem,
   stringify as stringifyWiki,
 } from '@bgm38/wiki';
-export { toWikiElement, fromWikiElement, WikiElement, mergeWiki } from './wiki';
+export { toWikiElement, fromWikiElement, WikiElement, mergeWiki, WikiTemplate } from './wiki';
 export type { Wiki } from '@bgm38/wiki';
 export * from './bbcode';
 

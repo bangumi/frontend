@@ -3,7 +3,14 @@ import path from 'node:path';
 
 import yaml from 'js-yaml';
 
-import { fromWikiElement, parseWiki, toWikiElement } from './index';
+import {
+  fromWikiElement,
+  mergeWiki,
+  parseWiki,
+  stringifyWiki,
+  toWikiElement,
+  WikiTemplate,
+} from './index';
 
 const testsDir = path.resolve(__dirname, 'wiki-syntax-spec/tests/');
 
@@ -42,4 +49,128 @@ describe('fromWikiElement & toWikiElement', () => {
       }).toEqual(expected);
     });
   }
+});
+
+const TVAnimeWiki = parseWiki(WikiTemplate.TVAnime);
+const TVAnimeWikiString = stringifyWiki(TVAnimeWiki);
+
+describe('mergeWiki', () => {
+  it('omit wiki item that has empty key or empty value', () => {
+    const mergedWiki = mergeWiki(TVAnimeWiki)({
+      type: 'test',
+      data: [
+        {
+          key: '',
+          value: '',
+        },
+        {
+          key: '   ',
+          value: '',
+        },
+        {
+          key: "I'm key",
+          value: '   ',
+        },
+        {
+          key: '  ',
+          value: "I'm value",
+        },
+        {
+          key: '',
+          value: "I'm value",
+        },
+      ],
+    });
+
+    expect(stringifyWiki(mergedWiki)).toBe(TVAnimeWikiString);
+  });
+
+  it('omit wiki item that value is "*"', () => {
+    const mergedWiki = mergeWiki(TVAnimeWiki)({
+      type: 'test',
+      data: [
+        {
+          key: 'single-star',
+          value: '*',
+        },
+        {
+          key: 'star-with-space-suffix',
+          value: '*    ',
+        },
+        {
+          key: 'star-with-space-prefix',
+          value: '   *',
+        },
+        {
+          key: 'star-with-space-between',
+          value: '   * ',
+        },
+      ],
+    });
+
+    expect(stringifyWiki(mergedWiki)).toBe(TVAnimeWikiString);
+  });
+
+  it('merge wiki properly', () => {
+    const mergedWiki = mergeWiki(TVAnimeWiki)({
+      type: 'test',
+      data: [
+        {
+          key: 'character',
+          array: true,
+          values: [
+            {
+              k: '',
+              v: 'boqi',
+            },
+            {
+              k: '',
+              v: 'nijika',
+            },
+            {
+              k: '先辈',
+              v: 'ryo',
+            },
+            {
+              v: 'kita',
+            },
+          ],
+        },
+        {
+          key: 'a',
+          value: 'b',
+        },
+        {
+          key: '妖幻',
+          value: '三重奏',
+        },
+        {
+          key: '艺三',
+          value: '',
+        },
+      ],
+    });
+    expect(stringifyWiki(mergedWiki)).toBe(`{{Infobox animanga/TVAnime
+|中文名 = 
+|别名 = {
+}
+|话数 = *
+|放送开始 = *
+|放送星期 = 
+|官方网站 = 
+|播放电视台 = 
+|其他电视台 = 
+|播放结束 = 
+|其他 = 
+|Copyright = 
+|character = {
+[boqi]
+[nijika]
+[先辈|ryo]
+[kita]
+}
+|a = b
+|妖幻 = 三重奏
+}}`);
+  });
 });
