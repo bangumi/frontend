@@ -32,8 +32,11 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
       monaco.languages.setMonarchTokensProvider('wiki', {
         default: 'invalid',
         brackets: [
-          ['{', '}', 'delimiter.curly'] as any,
+          // @ts-expect-error
+          ['{', '}', 'delimiter.curly'],
+          // @ts-expect-error
           ['[', ']', 'delimiter.square'],
+          // @ts-expect-error
           ['{{', '}}', 'delimiter.doubleCurly'],
         ],
 
@@ -87,7 +90,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
         instance.current.dispose();
       }
     };
-  }, []);
+  }, [defaultValue, instance]);
 
   useEffect(() => {
     if (instance.current) {
