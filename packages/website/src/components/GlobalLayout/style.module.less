@@ -4,6 +4,10 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  header {
+    z-index: 5000;
+  }
 }
 
 .contentWrapper {
@@ -13,7 +17,6 @@
   margin: 0 auto;
   padding: 24px 30px;
   box-sizing: border-box;
-  z-index: 251;
 
   @media (max-width: @sm) {
     padding: 1rem;
