@@ -13,7 +13,6 @@ const WikiEditPage = () => {
         <>
           <div className={style.title}>Bangumi 采用的版本</div>
           <Divider className={style.divider} />
-          {/* <form></form> */}
         </>
       }
       rightChildren={
