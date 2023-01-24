@@ -47,14 +47,11 @@ class GroupHomeTest {
     );
 
     this.page = renderPage(
-      <>
-        <Routes>
-          <Route element={<GroupPage />}>
-            <Route index element={<GroupHome />} />
-          </Route>
-        </Routes>
-        <GroupHome />
-      </>,
+      <Routes>
+        <Route element={<GroupPage />}>
+          <Route index element={<GroupHome />} />
+        </Route>
+      </Routes>,
     );
   }
 
