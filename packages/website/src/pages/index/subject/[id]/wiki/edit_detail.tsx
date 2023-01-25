@@ -145,7 +145,7 @@ const WikiInfoItem = ({
   );
 };
 
-const WikiInfoList = ({
+const WikiBeginnerEditor = ({
   els,
   level = 1,
   path = '',
@@ -182,7 +182,7 @@ const WikiInfoList = ({
 
                       {/* subList */}
                       {isArray(el.value) && (
-                        <WikiInfoList
+                        <WikiBeginnerEditor
                           els={el.value}
                           level={level + 1}
                           onDragEnd={onDragEnd}
@@ -541,7 +541,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                       switchWikiElementToArray,
                     }}
                   >
-                    <WikiInfoList els={wikiElement} onDragEnd={onDragEnd} />
+                    <WikiBeginnerEditor els={wikiElement} onDragEnd={onDragEnd} />
                   </WikiInfoContext.Provider>
                 </div>
 
