@@ -97,22 +97,29 @@ export const toWikiElement = (wiki: Wiki): WikiElement[] => {
  * @param wiki wiki 类
  * @returns WikiElement 数组
  */
-export const fromWikiElement = (elements: WikiElement[]): WikiItem[] => {
-  const items: WikiItem[] = [];
-  for (const el of elements) {
-    // 移除空项目
-    if (isEmpty(el.value) && isEmpty(el.key)) continue;
-    const value = el.value;
-    const initWikiItemValue = typeof value === 'string' ? value : '';
-    const item = new WikiItem(el.key ?? '', initWikiItemValue, 'object');
-    if (Array.isArray(value) && el.key) {
-      delete item.value; /** make up for unit-test */
-      item.array = true;
-      item.values = value.map((subEl) => new WikiArrayItem(subEl.key, subEl.value as string));
-      // 移除空项目
-      if (item.values.length === 0) continue;
-    }
-    items.push(item);
-  }
-  return items;
-};
+export const fromWikiElement = (elements: WikiElement[]): WikiItem[] =>
+  elements
+    .filter(
+      (el) =>
+        !isEmpty(el.value) /** 值为空 */ ||
+        !isEmpty(el.key) /** 键为空 */ ||
+        !(isArray(el.value) && el.value.length === 0) /** value 是数组，但是是空数组 */,
+    )
+    .map((el) => {
+      const value = el.value;
+      const initWikiItemValue = typeof value === 'string' ? value : '';
+      const item = new WikiItem(el.key ?? '', initWikiItemValue, 'object');
+      if (Array.isArray(value) && el.key) {
+        // 取悦单元测试
+        // @bgm38/wiki@0.1.3
+        // 如果 WikiItem 的值（values）是数组，那么，value 应该是 undefined
+        // 但 WikiItem 的构造函数签名，value 不能是 undefined（必须是字符串）
+        // 为了与单元测试的数据相 match，需要把对象中的 value 移除（设为 undefined）
+        delete item.value;
+
+        item.array = true;
+        item.values = value.map((subEl) => new WikiArrayItem(subEl.key, subEl.value as string));
+        // 移除空项目
+      }
+      return item;
+    });

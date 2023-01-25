@@ -18,7 +18,6 @@ const validTestDir = path.resolve(testsDir, 'valid');
 const invalidTestDir = path.resolve(testsDir, 'invalid');
 
 const validTestFiles = fs.readdirSync(validTestDir);
-const inValidTestFiles = fs.readdirSync(invalidTestDir);
 
 describe('fromWikiElement & toWikiElement', () => {
   for (const file of validTestFiles) {
