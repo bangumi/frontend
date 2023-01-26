@@ -1,12 +1,12 @@
 import { keyBy, WikiTemplate } from '@bangumi/utils';
 
 export const enum SubjectType {
-  Unknown = 0,
-  Book = 1, // 书籍
-  Anime = 2, // 动画
-  Music = 3, // 音乐
-  Game = 4, // 游戏
-  Real = 6, // 三次元
+  Unknown,
+  Book, // 书籍
+  Anime, // 动画
+  Music, // 音乐
+  Game, // 游戏
+  Real, // 三次元
 }
 
 export enum WikiEditTabs {
@@ -55,7 +55,24 @@ export const WikiEditTabsItems = [
 
 export const WikiEditTabsItemsByKey = keyBy(WikiEditTabsItems, 'key');
 
-export const getWikiTemplate = (subjectType: number, targetTemplate: string | undefined) => {
+/**
+ * 根据当前的 subject 类型，获取维基模板
+ *
+ * `wiki/subjectInfo` 接口会返回当前 wiki 的 platform（表单项中也称为 ‘类型’），每个 platform 都有可能有不同的模板
+ * https://bangumi.github.io/dev-docs/#/wiki/subjectInfo `availablePlatform.wiki_tpl`
+ * `wiki_tpl` 应为 WikiTemplate 的键。
+ * 但某些 Wiki（Game，Music等）现只有单一模板（它们可能是无 platform，或者 platform 无 wiki_tpl）。
+ * 所以针对这些 subject，提前返回 WikiTemplate。
+ * 而其它 subject，则根据入参 `targetTemplate`，从 `WikiTemplate` 中提取模板。
+ *
+ * @param subjectType 枚举类型 SubjectType
+ * @param targetTemplate keyof typeof WikiTemplate
+ * @returns 维基模板字符串
+ */
+export const getWikiTemplate = (
+  subjectType: number,
+  targetTemplate: keyof typeof WikiTemplate | string | undefined,
+) => {
   if (subjectType === SubjectType.Game) return WikiTemplate.Game;
   if (subjectType === SubjectType.Music) return WikiTemplate.Album;
   if (targetTemplate === undefined) return '';
