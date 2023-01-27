@@ -8,13 +8,11 @@ exports[`should render borderless tab 1`] = `
     <li
       class="bgm-tab__item bgm-tab__item--borderless bgm-tab__item--active"
     >
-       
       1
     </li>
     <li
       class="bgm-tab__item bgm-tab__item--borderless"
     >
-       
       2
     </li>
   </ul>

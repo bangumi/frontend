@@ -3,6 +3,7 @@ import React from 'react';
 
 import { Search as SearchIcon, UserLogin } from '@bangumi/icons';
 
+import Select from '../Select';
 import type { InputProps } from '.';
 import Input from '.';
 
@@ -64,10 +65,12 @@ export const NavSearch = Template.bind({});
 NavSearch.args = {
   // 正式需要详细样式
   prefix: (
-    <select name='select' style={{ outline: 'none', border: 'none', color: '#9F9B9B' }}>
-      <option value='value1' selected>
-        全部条目
-      </option>
+    <select
+      name='select'
+      style={{ outline: 'none', border: 'none', color: '#AAA6A6' }}
+      defaultValue='value1'
+    >
+      <option value='value1'>全部条目</option>
     </select>
   ),
   suffix: <SearchIcon style={{ flexShrink: 0 }} />,
@@ -77,3 +80,16 @@ NavSearch.args = {
     padding: '3px 12px 5px 13px',
   },
 };
+
+const InputGroupTemplate = () => {
+  return (
+    <Input.Group>
+      <Select options={[{ label: '你好', value: '你好' }]} defaultValue='你好' />
+      <Input />
+      <Input />
+      <Input />
+    </Input.Group>
+  );
+};
+
+export const InputGroup = InputGroupTemplate.bind({});

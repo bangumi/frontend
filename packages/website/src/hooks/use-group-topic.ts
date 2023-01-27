@@ -12,7 +12,7 @@ function useGroupTopic(id: number): { data: TopicDetail; mutate: () => Promise<u
       suspense: true,
     },
   );
-  return { data: data!, mutate };
+  return { data, mutate };
 }
 
 export default useGroupTopic;

@@ -20,7 +20,7 @@ const GroupHome: React.FC = () => {
   const groupContext = useGroupContext();
   const recentTopics = useGroupRecentTopics(name);
 
-  if (!groupContext?.groupRet?.group || !recentTopics.data.length) {
+  if (!recentTopics.data.length) {
     return null;
   }
 
@@ -33,7 +33,7 @@ const GroupHome: React.FC = () => {
   };
 
   // TODO: XSS defense
-  const parsedDescription = renderBBCode(group?.group.description);
+  const parsedDescription = renderBBCode(group.group.description);
 
   return (
     <>

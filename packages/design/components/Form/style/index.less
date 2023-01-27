@@ -1,0 +1,29 @@
+@import '../../../theme/base';
+
+.bgm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &-item {
+    display: flex;
+
+    @media (max-width: @sm) {
+      flex-direction: column;
+    }
+
+    &-label {
+      display: inline-block;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 25px;
+      color: @gray-60;
+
+      > label {
+        display: flex;
+        align-items: center;
+        height: 38px;
+      }
+    }
+  }
+}

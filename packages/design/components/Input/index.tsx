@@ -3,11 +3,7 @@ import './style';
 import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 
-export interface InputProps {
-  /** 同原生 input 标签 `type` */
-  type?: string;
-  /** 同原生 `placeholder` */
-  placeholder?: string;
+export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
   /** 外层 wrapper 的样式 */
   wrapperStyle?: React.CSSProperties;
   /** 外层 wrapper 的自定义类名 */
@@ -16,20 +12,51 @@ export interface InputProps {
   prefix?: React.ReactNode;
   /** 后缀 */
   suffix?: React.ReactNode;
+  /** 对齐方式 */
+  align?: 'right' | 'left';
+};
+
+type IInput = React.ForwardRefExoticComponent<InputProps> & {
+  Group: React.FC<JSX.IntrinsicElements['div']>;
+};
+
+// https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
+const Input = forwardRef<HTMLInputElement, InputProps>(function InputWithRef(
+  { type = 'text', wrapperStyle, wrapperClass, prefix, suffix, align, disabled, ...rest },
+  ref,
+) {
+  return (
+    <div
+      className={classnames(
+        'bgm-input__wrapper',
+        {
+          'bgm-input__wrapper--disabled': disabled,
+        },
+        wrapperClass,
+      )}
+      style={wrapperStyle}
+    >
+      {prefix}
+      <input
+        type={type}
+        className={classnames('bgm-input', { 'bgm-input--align-right': align === 'right' })}
+        ref={ref}
+        disabled={disabled}
+        {...rest}
+      />
+      {suffix}
+    </div>
+  );
+}) as IInput;
+
+function InputGroup({ children, className, ...props }: JSX.IntrinsicElements['div']) {
+  return (
+    <div className={classnames('bgm-input-group', className)} {...props}>
+      {children}
+    </div>
+  );
 }
 
-/* eslint-disable react/prop-types */
-// https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
-const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'text', wrapperStyle, wrapperClass, prefix, suffix, placeholder, ...rest }, ref) => {
-    return (
-      <div className={classnames('bgm-input__wrapper', wrapperClass)} style={wrapperStyle}>
-        {prefix}
-        <input type={type} className='bgm-input' placeholder={placeholder} ref={ref} {...rest} />
-        {suffix}
-      </div>
-    );
-  },
-);
+Input.Group = InputGroup;
 
 export default Input;

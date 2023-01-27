@@ -1,5 +1,26 @@
+html {
+  font-size: 16px;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro SC', 'SF Pro Display',
     'PingFang SC', 'Microsoft YaHei', 'Lucida Grande', 'Helvetica Neue', 'Segoe UI', Helvetica,
     Arial, Verdana, sans-serif;
+}
+
+a {
+  text-decoration: inherit;
+}
+
+button {
+  background: white;
+  cursor: pointer;
+}
+
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+kbd {
+  margin: 0.25rem;
 }

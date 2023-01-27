@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input alignment 1`] = `
+<div>
+  <div
+    class="bgm-input__wrapper"
+  >
+    <input
+      class="bgm-input bgm-input--align-right"
+      type="text"
+    />
+  </div>
+</div>
+`;
+
+exports[`Input disabled className 1`] = `
+<div>
+  <div
+    class="bgm-input__wrapper bgm-input__wrapper--disabled"
+  >
+    <input
+      class="bgm-input"
+      disabled=""
+      type="text"
+    />
+  </div>
+</div>
+`;

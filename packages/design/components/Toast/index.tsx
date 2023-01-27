@@ -1,6 +1,6 @@
 import './style';
 
-import { defer, uniqueId } from 'lodash-es';
+import { defer, uniqueId } from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 

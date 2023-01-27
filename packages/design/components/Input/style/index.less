@@ -1,25 +1,61 @@
 @import '../../../theme/base';
 
 .bgm-input {
-  &__wrapper {
-    display: flex;
-    position: relative;
-    box-sizing: border-box;
-    align-items: center;
-    justify-content: space-between;
-    padding: 9px 17px;
-    font-size: 14px;
-    border: 2px solid @gray-10;
-    border-radius: 19px;
-  }
-
-  font-size: 1em;
+  font-size: 1rem;
+  line-height: 1.5rem;
   outline-style: none;
   border: none;
   color: @gray-100;
   padding: 0;
   width: 100%;
-  height: 100%;
+
+  &__wrapper {
+    display: inline-flex;
+    position: relative;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    border: 2px solid @gray-10;
+    border-radius: 19px;
+
+    &--disabled,
+    &--disabled * {
+      cursor: not-allowed;
+      background: #f4f4f5;
+    }
+  }
+
+  &-group {
+    white-space: nowrap;
+  }
+
+  &-group &__wrapper {
+    &:not(:first-of-type) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 0;
+
+      &::before {
+        position: absolute;
+        left: 0;
+        content: '';
+        height: 70%;
+        width: 1px;
+        background: @gray-10;
+      }
+    }
+
+    &:not(:last-of-type) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
+  }
+
+  &--align-right {
+    text-align: right;
+  }
 
   &::placeholder {
     color: @gray-10;

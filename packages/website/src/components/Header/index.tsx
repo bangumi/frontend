@@ -93,7 +93,7 @@ const Header: FC = () => {
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
-    <div className={style.container}>
+    <header className={style.container}>
       <div className={style.main}>
         <div className='flex items-center'>
           {/* Logo */}
@@ -157,7 +157,7 @@ const Header: FC = () => {
           )}
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 

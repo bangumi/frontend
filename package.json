@@ -23,6 +23,7 @@
     "client": "pnpm --filter=@bangumi/client",
     "test": "jest",
     "website": "pnpm --filter=@bangumi/website",
+    "utils": "pnpm --filter=@bangumi/utils",
     "lint-staged": "lint-staged -q",
     "type-check": "tsc --noEmit"
   },

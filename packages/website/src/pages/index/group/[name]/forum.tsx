@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Pagination } from '@bangumi/design';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
@@ -23,7 +24,6 @@ const GroupForum = () => {
     navigate({ search: `page=${page}` });
   };
 
-  // TODO @waua ErrorBoundary
   return (
     <>
       <TopicsTable topics={topics.data} />
@@ -38,4 +38,4 @@ const GroupForum = () => {
   );
 };
 
-export default GroupForum;
+export default withErrorBoundary(GroupForum);

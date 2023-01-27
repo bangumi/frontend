@@ -32,10 +32,15 @@ const defaultFallback = <div>Error Occur</div>;
 /**
  * 用于包裹页面组件，页面组件无 props，如需传递数据使用 `useOutletContext`。
  */
-export const withErrorBoundary = (Children: React.FC, fallback?: FallbackArg) => {
-  return () => (
-    <ErrorBoundary fallback={fallback ?? defaultFallback}>
-      <Children />
-    </ErrorBoundary>
-  );
+export const withErrorBoundary = <T extends Object>(
+  Children: React.FC<T>,
+  fallback?: FallbackArg,
+) => {
+  return function PageWithErrorBoundary(props: T) {
+    return (
+      <ErrorBoundary fallback={fallback ?? defaultFallback}>
+        <Children {...props} />
+      </ErrorBoundary>
+    );
+  };
 };
