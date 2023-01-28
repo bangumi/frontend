@@ -9,7 +9,7 @@ import React, {
 
 import Toolbox from './Toolbox';
 
-export interface EditorProps {
+export type EditorProps = Omit<JSX.IntrinsicElements['textarea'], 'ref' | 'onChange'> & {
   placeholder?: string;
   /** 是否显示工具栏 */
   showToolbox?: boolean;
@@ -23,7 +23,7 @@ export interface EditorProps {
   onChange?: (content: string) => void;
   /** 在被渲染时是否自动获取焦点 */
   autoFocus?: boolean;
-}
+};
 
 const keyToEvent: Record<string, string> = {
   b: 'bold',
@@ -39,7 +39,10 @@ export interface EditorRef {
 }
 
 const Editor = forwardRef<EditorRef, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus }, ref) => {
+  (
+    { placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus, ...props },
+    ref,
+  ) => {
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
@@ -176,6 +179,7 @@ const Editor = forwardRef<EditorRef, EditorProps>(
           autoFocus={autoFocus}
           onChange={(e) => updateContent(e.target.value)}
           onKeyDown={handleKeyDown}
+          {...props}
         />
       </div>
     );
