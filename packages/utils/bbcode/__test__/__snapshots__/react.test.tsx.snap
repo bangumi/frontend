@@ -59,9 +59,9 @@ exports[`html render bbcode string render code 1`] = `
     <React.Fragment>
       <React.Fragment>
         <React.Fragment />
-        <br />
         ss[b]加粗
       </React.Fragment>
+      <br />
       换行了[/b](bgm38) [/fafa [code]
     </React.Fragment>
   </pre>,
@@ -73,9 +73,9 @@ exports[`html render bbcode string render color 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       我是
     </React.Fragment>
+    <br />
     
   </React.Fragment>,
   <span
@@ -144,9 +144,9 @@ exports[`html render bbcode string render color size 1`] = `
       <React.Fragment>
         <React.Fragment>
           <React.Fragment />
-          <br />
           
         </React.Fragment>
+        <br />
            
       </React.Fragment>
       <span
@@ -168,9 +168,9 @@ exports[`html render bbcode string render img 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       存放于其他网络服务器的图片：
     </React.Fragment>
+    <br />
     
   </React.Fragment>,
   <img
@@ -295,9 +295,9 @@ exports[`html render bbcode string render url 2`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       带文字说明的网站链接：
     </React.Fragment>
+    <br />
     
   </React.Fragment>,
   <a
@@ -318,7 +318,6 @@ exports[`html render bbcode string should render br 1`] = `
         <React.Fragment>
           <React.Fragment>
             <React.Fragment />
-            <br />
             
           </React.Fragment>
           <br />
@@ -330,6 +329,7 @@ exports[`html render bbcode string should render br 1`] = `
       <br />
           1.上班的时候想要回家的。
     </React.Fragment>
+    <br />
         2.学校课上打瞌睡的。
   </React.Fragment>,
   <img
@@ -341,9 +341,9 @@ exports[`html render bbcode string should render br 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       
     </React.Fragment>
+    <br />
         2.学校课上打瞌睡的。
   </React.Fragment>,
   <img
@@ -355,9 +355,9 @@ exports[`html render bbcode string should render br 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       
     </React.Fragment>
+    <br />
         2.学校课上打瞌睡的。
   </React.Fragment>,
   <img
@@ -371,7 +371,6 @@ exports[`html render bbcode string should render br 1`] = `
       <React.Fragment>
         <React.Fragment>
           <React.Fragment />
-          <br />
           
         </React.Fragment>
         <br />
@@ -380,6 +379,7 @@ exports[`html render bbcode string should render br 1`] = `
       <br />
       
     </React.Fragment>
+    <br />
         
   </React.Fragment>,
 ]
@@ -450,9 +450,9 @@ exports[`react render vnode render mask 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       文字
     </React.Fragment>
+    <br />
     换行
   </React.Fragment>
 </span>
@@ -471,9 +471,9 @@ exports[`react render vnode render multi style 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       文字
     </React.Fragment>
+    <br />
     换行了
   </React.Fragment>
 </span>
@@ -526,9 +526,9 @@ exports[`react render vnode render pre children 1`] = `
   <React.Fragment>
     <React.Fragment>
       <React.Fragment />
-      <br />
       文字
     </React.Fragment>
+    <br />
     换行
   </React.Fragment>
 </pre>
