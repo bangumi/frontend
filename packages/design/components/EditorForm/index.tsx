@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 
 import Button from '../Button';
 import Link from '../Typography/Link';
-import type { EditorProps, EditorRef } from './Editor';
+import type { EditorProps } from './Editor';
 import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
@@ -28,7 +28,7 @@ export interface EditorFormProps extends EditorProps {
   hideCancel?: boolean;
 }
 
-const EditorForm = forwardRef<EditorRef, EditorFormProps>(
+const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
   (
     {
       className,
