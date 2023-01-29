@@ -245,7 +245,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
-  }, [subjectWikiInfo]);
+  }, []);
 
   const onSubmit = useCallback(
     ({ commitMessage, subject }: FormData) => {
