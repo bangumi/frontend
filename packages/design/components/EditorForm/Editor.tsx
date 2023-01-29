@@ -36,11 +36,7 @@ const keyToEvent: Record<string, string> = {
   p: 'image',
 } as const;
 
-export interface EditorRef {
-  textArea: HTMLTextAreaElement;
-}
-
-const Editor = forwardRef<EditorRef, EditorProps>(
+const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
   (
     { placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus, rows },
     ref,
@@ -48,9 +44,10 @@ const Editor = forwardRef<EditorRef, EditorProps>(
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
-    useImperativeHandle(ref, () => ({
-      textArea: innerRef.current!,
-    }));
+    useImperativeHandle<HTMLTextAreaElement | null, HTMLTextAreaElement | null>(
+      ref,
+      () => innerRef.current,
+    );
 
     useEffect(() => {
       // 用来确保输入光标在自动插入的quote内容之后。
