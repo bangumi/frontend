@@ -218,6 +218,10 @@ interface FormData {
   subject: ozaClient.SubjectEdit;
 }
 
+const formatWikiSyntaxErrorMessage = (error: WikiSyntaxError): string => {
+  return `${typeof error.lino === 'number' ? `line ${error.lino}:` : ''} ${error.message}`;
+};
+
 const WikiEditDetailDetailPage: React.FC = () => {
   const { register, handleSubmit, setValue, watch } = useForm<FormData>();
   const prePlatform = watch('subject.platform');
@@ -268,7 +272,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         }
       } catch (error: unknown) {
         if (error instanceof WikiSyntaxError) {
-          toast(error.message);
+          toast(formatWikiSyntaxErrorMessage(error));
         }
         return;
       }
@@ -318,9 +322,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         } catch (error: unknown) {
           setEditorType(EditorType.Wiki);
           if (error instanceof WikiSyntaxError) {
-            toast(
-              `${typeof error.lino === 'number' ? `line ${error.lino}:` : ''} ${error.message}`,
-            );
+            toast(formatWikiSyntaxErrorMessage(error));
           }
         }
         break;
