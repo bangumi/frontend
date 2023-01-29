@@ -8,7 +8,7 @@ import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 
-import { UserCard } from '../components/UserCard';
+import { UserCard } from '../../components/UserCard';
 import styles from './style.module.less';
 
 const GroupMembersPage = () => {

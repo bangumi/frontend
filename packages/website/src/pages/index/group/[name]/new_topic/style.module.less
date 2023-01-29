@@ -1,0 +1,40 @@
+@import '@bangumi/design/theme/base';
+
+.grid {
+  display: grid;
+  column-gap: 40px;
+  grid-template-columns: 2fr 1fr;
+}
+
+.tipText {
+  margin-bottom: 10px;
+}
+
+.groupLink {
+  font-weight: 600;
+}
+
+.titleInput {
+  margin-bottom: 16px;
+
+  :global(.bgm-input) {
+    &::placeholder {
+      color: @gray-60; // TODO: why design package uses @gray-10?
+    }
+
+    &__wrapper {
+      // TODO: fix design package
+      width: 100%;
+      padding: 9px 12px;
+      border-radius: 12px;
+    }
+  }
+}
+
+.contentEditor {
+  grid-column: 1;
+
+  :global(.bgm-editor__form) {
+    width: 100%;
+  }
+}
