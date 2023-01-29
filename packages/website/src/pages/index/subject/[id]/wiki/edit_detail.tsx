@@ -1,4 +1,3 @@
-/* eslint-disable no-useless-return */
 import cn from 'classnames';
 import dayjs from 'dayjs';
 import { cloneDeep, concat, filter, flow, isArray, isNumber, set } from 'lodash';
@@ -246,7 +245,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
-  }, []);
+  }, [subjectWikiInfo]);
 
   const onSubmit = useCallback(
     ({ commitMessage, subject }: FormData) => {
@@ -319,7 +318,9 @@ const WikiEditDetailDetailPage: React.FC = () => {
         } catch (error: unknown) {
           setEditorType(EditorType.Wiki);
           if (error instanceof WikiSyntaxError) {
-            toast(error.message);
+            toast(
+              `${typeof error.lino === 'number' ? `line ${error.lino}:` : ''} ${error.message}`,
+            );
           }
         }
         break;
