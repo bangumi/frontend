@@ -5,8 +5,8 @@ import type { EditorFormProps } from '..';
 import EditorForm from '..';
 
 const TestEditorForm = (props: EditorFormProps) => {
-  const [content, setContent] = useState('');
-  return <EditorForm content={content} onChange={setContent} {...props} />;
+  const [value, setValue] = useState('');
+  return <EditorForm value={value} onChange={setValue} {...props} />;
 };
 
 describe('<EditorForm />', () => {

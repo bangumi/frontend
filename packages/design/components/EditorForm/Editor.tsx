@@ -14,13 +14,13 @@ export interface EditorProps {
   /** 是否显示工具栏 */
   showToolbox?: boolean;
   /** textarea 通过键盘按下提交触发事件 */
-  onConfirm?: (content: string) => void;
+  onConfirm?: (value: string) => void;
   /**
    * @default empty string
    */
-  content?: string;
+  value?: string;
   /** 内容改变时的回调函数 */
-  onChange?: (content: string) => void;
+  onChange?: (value: string) => void;
   /** 在被渲染时是否自动获取焦点 */
   autoFocus?: boolean;
   /** 文本域初始行数 */
@@ -37,10 +37,7 @@ const keyToEvent: Record<string, string> = {
 } as const;
 
 const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
-  (
-    { placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus, rows },
-    ref,
-  ) => {
+  ({ placeholder, showToolbox = true, onConfirm, value = '', onChange, autoFocus, rows }, ref) => {
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
@@ -174,7 +171,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
-          value={content}
+          value={value}
           autoFocus={autoFocus}
           onChange={(e) => updateContent(e.target.value)}
           onKeyDown={handleKeyDown}

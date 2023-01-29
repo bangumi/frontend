@@ -5,8 +5,8 @@ import type { EditorProps } from '../Editor';
 import Editor from '../Editor';
 
 const TestEditor = (props: EditorProps) => {
-  const [content, setContent] = useState('');
-  return <Editor content={content} onChange={setContent} {...props} />;
+  const [value, setValue] = useState('');
+  return <Editor value={value} onChange={setValue} {...props} />;
 };
 
 const initTextareaTest = (
