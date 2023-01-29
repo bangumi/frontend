@@ -56,7 +56,7 @@ const ReplyForm = ({
     <EditorForm
       onCancel={onCancel}
       placeholder={placeholder}
-      content={content}
+      value={content}
       // TODO: use loading state
       confirmText={sending ? '...' : undefined}
       onChange={onChange}

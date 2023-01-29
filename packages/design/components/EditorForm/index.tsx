@@ -51,7 +51,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
           <Button
             shape='rounded'
             className='bgm-editor__button bgm-editor__button--confirm'
-            onClick={() => onConfirm?.(props.content ?? '')}
+            onClick={() => onConfirm?.(props.value ?? '')}
           >
             {confirmText}
           </Button>
