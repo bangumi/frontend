@@ -132,12 +132,12 @@ exports[`Normal Comment should highlight comment corresponding to hash 1`] = `
           class="bgm-comment__opinions"
         >
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             回复
           </button>
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             +1
           </button>
@@ -204,12 +204,12 @@ exports[`Normal Comment should highlight comment corresponding to hash 1`] = `
             class="bgm-comment__opinions"
           >
             <button
-              class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
             >
               回复
             </button>
             <button
-              class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
             >
               +1
             </button>
@@ -286,12 +286,12 @@ exports[`Normal Comment should render 0 1`] = `
           class="bgm-comment__opinions"
         >
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             回复
           </button>
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             +1
           </button>
@@ -367,12 +367,12 @@ exports[`Normal Comment should render 6 1`] = `
           class="bgm-comment__opinions"
         >
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             回复
           </button>
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             +1
           </button>
@@ -455,12 +455,12 @@ exports[`Normal Comment should render 7 1`] = `
           class="bgm-comment__opinions"
         >
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             回复
           </button>
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             +1
           </button>
@@ -536,12 +536,12 @@ exports[`Normal Comment should render with reply 1`] = `
           class="bgm-comment__opinions"
         >
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             回复
           </button>
           <button
-            class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
           >
             +1
           </button>
@@ -608,12 +608,12 @@ exports[`Normal Comment should render with reply 1`] = `
             class="bgm-comment__opinions"
           >
             <button
-              class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
             >
               回复
             </button>
             <button
-              class="bgm-button bgm-button__secondary bgm-button__rounded bgm-button__normal"
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
             >
               +1
             </button>
