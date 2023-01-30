@@ -10,7 +10,7 @@
     min-height: 162px;
     border: 2px solid @gray-10;
     border-radius: 12px;
-    padding: 8px 0 0 10px;
+    padding: 8px 6px 6px;
     z-index: 9999;
   }
 
@@ -20,7 +20,7 @@
     align-items: center;
     height: 26px;
     width: @toolbox-width;
-    padding: 0 4px;
+    padding: 0 8px;
     margin-bottom: 10px;
 
     > svg {
@@ -30,13 +30,14 @@
 
   &__text {
     flex: 1 0 auto;
-    padding: 0;
+    padding: 0 6px;
     min-width: @toolbox-width;
     width: @text-width;
     border: none;
     outline: none;
     color: @gray-100;
     line-height: 26px;
+    font-size: 16px;
 
     &::placeholder {
       color: @gray-60;
