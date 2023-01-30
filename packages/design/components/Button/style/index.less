@@ -3,33 +3,92 @@
 .bgm-button {
   border: 0;
   cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  height: var(--height);
+  border-radius: calc(var(--height) / 2);
+  padding: 0 var(--padding);
 
-  &__normal {
-    height: 38px;
-    font-size: 14px;
-    line-height: 20px;
-  }
+  // 默认大小：large
+  --height: 38px;
+  --padding: 32px;
 
-  &__primary {
+  line-height: 20px;
+
+  &--primary {
     background-color: @primary-color;
     color: #fff;
+
+    &.bgm-button--color {
+      &-blue {
+        background-color: @blue-100;
+      }
+
+      &-gray {
+        background-color: @gray-10;
+        color: @gray-80;
+      }
+    }
   }
 
-  &__secondary {
-    background-color: @gray-10;
-    color: @gray-80;
+  &--secondary {
+    background-color: transparent;
+    border: 2px solid @gray-10;
+    color: @gray-60;
+    // 为了使不同类型的按钮宽度一致，将secondary类型的内边距减去2px的边框宽度
+    padding: 0 calc(var(--padding) - 2px);
+
+    &:hover {
+      background-color: @gray-10;
+      color: @gray-80;
+    }
+
+    &.bgm-button--color {
+      &-blue {
+        border-color: @blue-100;
+        color: @blue-100;
+
+        &:hover {
+          background-color: @blue-100;
+          color: #fff;
+        }
+      }
+    }
   }
 
-  &__text {
+  &--text {
     background-color: transparent;
     color: @gray-60;
   }
 
-  &__normal&__rounded {
-    border-radius: 19px;
-  }
-}
+  &--size {
+    &-medium {
+      --height: 30px;
+      --padding: 13px;
 
-.bgm-button__disabled {
-  cursor: default;
+      line-height: 24px;
+    }
+
+    &-small {
+      --height: 24px;
+      --padding: 17px;
+
+      line-height: 24px;
+    }
+  }
+
+  &--shape-square {
+    border-radius: 0;
+  }
+
+  &--disabled {
+    cursor: default;
+  }
 }
