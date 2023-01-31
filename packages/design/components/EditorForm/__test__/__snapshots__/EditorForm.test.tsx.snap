@@ -45,12 +45,12 @@ exports[`<EditorForm /> render correctly with props 1`] = `
       class="bgm-editor__submit"
     >
       <button
-        class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button__primary bgm-button__rounded bgm-button__normal"
+        class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button--primary bgm-button--size-small bgm-button--color-blue"
       >
         Confirm
       </button>
       <button
-        class="bgm-button bgm-editor__button bgm-button__text bgm-button__square bgm-button__normal"
+        class="bgm-button bgm-editor__button bgm-button--text bgm-button--size-small"
       >
         取消
       </button>

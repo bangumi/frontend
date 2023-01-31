@@ -114,10 +114,10 @@ const Login: React.FC = () => {
           />
         </div>
         <div className={style.buttonGroup}>
-          <Button className={style.button} type='secondary' shape='rounded' disabled>
+          <Button className={style.button} color='gray' disabled>
             注册新用户
           </Button>
-          <Button className={style.button} type='primary' shape='rounded' onClick={handleLogin}>
+          <Button className={style.button} onClick={handleLogin}>
             登录
           </Button>
         </div>

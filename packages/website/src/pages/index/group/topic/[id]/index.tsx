@@ -34,13 +34,13 @@ const GroupInfo = memo(({ group }: { group: Group }) => (
       isClamped
     />
     <div className={styles.groupOpinions}>
-      <Button type='text'>
+      <Button type='secondary' size='medium'>
         <Link to={`/group/${group.name}`}>小组概览</Link>
       </Button>
-      <Button type='text'>
+      <Button type='secondary' size='medium'>
         <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
       </Button>
-      <Button type='text'>
+      <Button type='secondary' size='medium'>
         <Link to={`/group/${group.name}/members`}>小组成员</Link>
       </Button>
     </div>

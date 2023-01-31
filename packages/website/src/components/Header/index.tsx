@@ -104,8 +104,7 @@ const Header: FC = () => {
           {/* Mobile Menu Toggle Button */}
           <Button
             className={style.mobileMenuToggle}
-            shape='rounded'
-            type={showMobileMenu ? 'primary' : 'secondary'}
+            color={showMobileMenu ? 'default' : 'gray'}
             onClick={() => setShowMobileMenu((show) => !show)}
           >
             {showMobileMenu ? '关闭' : '菜单'}
