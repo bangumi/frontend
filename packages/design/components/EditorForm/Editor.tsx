@@ -1,3 +1,4 @@
+import type { FocusEventHandler } from 'react';
 import React, {
   forwardRef,
   useCallback,
@@ -25,6 +26,8 @@ export interface EditorProps {
   autoFocus?: boolean;
   /** 文本域初始行数 */
   rows?: number;
+  name?: string;
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>;
 }
 
 const keyToEvent: Record<string, string> = {
@@ -37,7 +40,20 @@ const keyToEvent: Record<string, string> = {
 } as const;
 
 const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, value = '', onChange, autoFocus, rows }, ref) => {
+  (
+    {
+      placeholder,
+      showToolbox = true,
+      onConfirm,
+      value = '',
+      onChange,
+      autoFocus,
+      rows,
+      name,
+      onBlur,
+    },
+    ref,
+  ) => {
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
@@ -176,6 +192,8 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           onChange={(e) => updateContent(e.target.value)}
           onKeyDown={handleKeyDown}
           rows={rows}
+          name={name}
+          onBlur={onBlur}
         />
       </div>
     );
