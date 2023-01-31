@@ -1,7 +1,6 @@
 @import '../../../theme/base';
 
 .bgm-button {
-  border: 0;
   cursor: pointer;
   user-select: none;
   font-size: 14px;
@@ -13,14 +12,15 @@
   align-items: center;
   text-align: center;
   justify-content: center;
+  box-sizing: border-box;
+  border: 2px transparent solid;
   height: var(--height);
   border-radius: calc(var(--height) / 2);
-  padding: 0 var(--padding);
 
   // 默认大小：large
   --height: 38px;
-  --padding: 32px;
 
+  padding: 0 32px;
   line-height: 20px;
 
   &--primary {
@@ -41,10 +41,8 @@
 
   &--secondary {
     background-color: transparent;
-    border: 2px solid @gray-10;
+    border-color: @gray-10;
     color: @gray-60;
-    // 为了使不同类型的按钮宽度一致，将secondary类型的内边距减去2px的边框宽度
-    padding: 0 calc(var(--padding) - 2px);
 
     &:hover {
       background-color: @gray-10;
@@ -72,15 +70,15 @@
   &--size {
     &-medium {
       --height: 30px;
-      --padding: 13px;
 
+      padding: 0 13px;
       line-height: 24px;
     }
 
     &-small {
       --height: 24px;
-      --padding: 17px;
 
+      padding: 0 17px;
       line-height: 24px;
     }
   }
