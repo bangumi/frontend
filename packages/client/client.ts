@@ -718,3 +718,28 @@ export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapf
     ...opts,
   });
 }
+export async function uploadSubjectCover(
+  subjectId: number,
+  body: {
+    content: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/cover`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
