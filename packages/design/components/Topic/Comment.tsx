@@ -179,17 +179,21 @@ const Comment: FC<CommentProps> = ({
                 />
               ) : (
                 <>
-                  <Button type='secondary' shape='rounded' onClick={startReply}>
+                  <Button type='secondary' size='small' onClick={startReply}>
                     回复
                   </Button>
-                  <Button type='secondary' shape='rounded'>
+                  <Button type='secondary' size='small'>
                     +1
                   </Button>
                   {user.id === creator.id ? (
                     <>
                       {/* TODO */}
-                      <Button type='text'>编辑</Button>
-                      <Button type='text'>删除</Button>
+                      <Button type='text' size='small'>
+                        编辑
+                      </Button>
+                      <Button type='text' size='small'>
+                        删除
+                      </Button>
                     </>
                   ) : null}
                 </>

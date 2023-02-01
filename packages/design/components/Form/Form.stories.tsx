@@ -83,9 +83,7 @@ const Template: ComponentStory<typeof Form> = (args) => {
         </Input.Group>
       </Form.Item>
 
-      <Button htmlType='submit' shape='rounded'>
-        提交修改
-      </Button>
+      <Button htmlType='submit'>提交修改</Button>
     </Form>
   );
 };

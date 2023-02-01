@@ -1,3 +1,4 @@
+import type { FocusEventHandler } from 'react';
 import React, {
   forwardRef,
   useCallback,
@@ -9,7 +10,7 @@ import React, {
 
 import Toolbox from './Toolbox';
 
-export type EditorProps = Omit<JSX.IntrinsicElements['textarea'], 'ref' | 'onChange'> & {
+export interface EditorProps {
   placeholder?: string;
   /** 是否显示工具栏 */
   showToolbox?: boolean;
@@ -23,7 +24,11 @@ export type EditorProps = Omit<JSX.IntrinsicElements['textarea'], 'ref' | 'onCha
   onChange?: (value: string) => void;
   /** 在被渲染时是否自动获取焦点 */
   autoFocus?: boolean;
-};
+  /** 文本域初始行数 */
+  rows?: number;
+  name?: string;
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>;
+}
 
 const keyToEvent: Record<string, string> = {
   b: 'bold',
@@ -36,7 +41,17 @@ const keyToEvent: Record<string, string> = {
 
 const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
   (
-    { placeholder, showToolbox = true, onConfirm, value = '', onChange, autoFocus, ...props },
+    {
+      placeholder,
+      showToolbox = true,
+      onConfirm,
+      value = '',
+      onChange,
+      autoFocus,
+      rows,
+      name,
+      onBlur,
+    },
     ref,
   ) => {
     const [selection, setSelection] = useState<[number, number]>();
@@ -176,7 +191,9 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           autoFocus={autoFocus}
           onChange={(e) => updateContent(e.target.value)}
           onKeyDown={handleKeyDown}
-          {...props}
+          rows={rows}
+          name={name}
+          onBlur={onBlur}
         />
       </div>
     );

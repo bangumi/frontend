@@ -14,7 +14,7 @@ const joinClassName = (cls: string | string[]) => {
   return cls;
 };
 
-const convertToReactProps = (node: VNode, key?: string) => {
+const convertToReactProps = (node: VNode, key?: React.Key) => {
   const { props, style, className } = node;
 
   const transformedStyle: Record<string, string> = style
@@ -38,7 +38,7 @@ const convertToReactProps = (node: VNode, key?: string) => {
   return reactProps;
 };
 
-export const renderNode = (node: NodeTypes, key?: string): React.ReactElement | string => {
+export const renderNode = (node: NodeTypes, key?: React.Key): React.ReactElement | string => {
   if (typeof node === 'string') {
     const splittedStr: Array<string | React.ReactElement> = node.split(/\n/g);
 
@@ -46,17 +46,17 @@ export const renderNode = (node: NodeTypes, key?: string): React.ReactElement | 
       return splittedStr[0] ?? '';
     }
     return splittedStr.reduce((pre, curr, idx) => {
-      if (idx < splittedStr.length - 1) {
+      if (idx > 0) {
         return React.createElement(
           React.Fragment,
-          null,
+          { key: idx },
           pre,
           React.createElement('br', null),
           curr,
         );
       }
-      return React.createElement(React.Fragment, null, pre, curr);
-    }, React.createElement(React.Fragment, null));
+      return React.createElement(React.Fragment, { key: idx }, pre, curr);
+    }, React.createElement(React.Fragment, { key }));
   }
 
   const { type, children } = node;
@@ -65,14 +65,14 @@ export const renderNode = (node: NodeTypes, key?: string): React.ReactElement | 
     return React.createElement(
       type,
       convertToReactProps(node, key),
-      ...children.map((child, idx) => renderNode(child, `${idx}`)),
+      ...children.map((child, idx) => renderNode(child, idx)),
     );
   }
-  return React.createElement(type, convertToReactProps(node));
+  return React.createElement(type, convertToReactProps(node, key));
 };
 
 export const render = (rawStr: string): Array<React.ReactElement | string> => {
   const nodes: CodeNodeTypes[] = new Parser(rawStr).parse();
 
-  return nodes.map((node) => renderNode(convert(node, {})));
+  return nodes.map((node, idx) => renderNode(convert(node, {}), idx));
 };
