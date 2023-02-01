@@ -601,6 +601,118 @@ export async function clearNotice(
     }),
   );
 }
+export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          current?: {
+            thumbnail: string;
+            raw: string;
+          };
+          covers: Array<{
+            id: number;
+            thumbnail: string;
+            raw: string;
+            creator: {
+              id: number;
+              username: string;
+              nickname: string;
+              avatar: {
+                small: string;
+                medium: string;
+                large: string;
+              };
+              sign: string;
+              user_group: number;
+            };
+            voted: boolean;
+          }>;
+        };
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers`, {
+    ...opts,
+  });
+}
+export async function uploadSubjectCover(
+  subjectId: number,
+  body: {
+    content: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
+/**
+ * 为条目封面投票
+ */
+export async function voteSubjectCover(
+  subjectId: number,
+  imageId: number,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers/${encodeURIComponent(imageId)}/vote`,
+    {
+      ...opts,
+      method: 'POST',
+    },
+  );
+}
+/**
+ * 撤消条目封面投票
+ */
+export async function unvoteSubjectCover(
+  subjectId: number,
+  imageId: number,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers/${encodeURIComponent(imageId)}/vote`,
+    {
+      ...opts,
+      method: 'DELETE',
+    },
+  );
+}
 /**
  * 获取当前的 wiki 信息
  *
@@ -717,29 +829,4 @@ export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapf
   >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/history-summary`, {
     ...opts,
   });
-}
-export async function uploadSubjectCover(
-  subjectId: number,
-  body: {
-    content: string;
-  },
-  opts?: Oazapfts.RequestOpts,
-) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: {};
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >(
-    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/cover`,
-    oazapfts.json({
-      ...opts,
-      method: 'POST',
-      body,
-    }),
-  );
 }
