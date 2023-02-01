@@ -34,7 +34,14 @@
 .contentEditor {
   grid-column: 1;
 
-  :global(.bgm-editor__form) {
-    width: 100%;
+  :global(.bgm-editor) {
+    &__form,
+    &__text {
+      width: auto;
+    }
+
+    &__container {
+      align-self: stretch;
+    }
   }
 }
