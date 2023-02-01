@@ -1,51 +1,18 @@
 import type { BasicReply } from 'packages/client/client';
-import type { Group } from 'packages/client/group';
 import type { FC } from 'react';
-import React, { memo, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Button, Layout, RichContent, Section, Topic, Typography } from '@bangumi/design';
+import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
-import { render as renderBBCode } from '@bangumi/utils';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
-import { ClampableContent } from '../../components/ClampableContent';
+import GroupInfo from '../../components/GroupInfo';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
-const { Link } = Typography;
-
 const { Comment } = Topic;
-
-const GroupInfo = memo(({ group }: { group: Group }) => (
-  <Section title='小组信息'>
-    <div className={styles.groupInfo}>
-      <Avatar src={group.icon} size='medium' />
-      <div className={styles.groupDetails}>
-        <Link to={`/group/${group.name}`}>{group.title}</Link>
-        <span>{`${group.totalMembers} 名成员`}</span>
-      </div>
-    </div>
-    <ClampableContent
-      content={renderBBCode(group.description)}
-      containerClassName={styles.groupDescription}
-      threshold={158}
-      isClamped
-    />
-    <div className={styles.groupOpinions}>
-      <Button type='secondary' size='medium'>
-        <Link to={`/group/${group.name}`}>小组概览</Link>
-      </Button>
-      <Button type='secondary' size='medium'>
-        <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
-      </Button>
-      <Button type='secondary' size='medium'>
-        <Link to={`/group/${group.name}/members`}>小组成员</Link>
-      </Button>
-    </div>
-  </Section>
-));
 
 const TopicPage: FC = () => {
   const { id } = useParams();
