@@ -10,6 +10,7 @@ import { Link, NavLink } from '@bangumi/website/components/Link';
 import CommonStyles from '../common.module.less';
 import { GroupHeader } from './GroupHeader';
 import styles from './GroupLayout.module.less';
+import GroupNavigation from './GroupNavigation';
 import { UserCard } from './UserCard';
 
 export enum GroupTabs {
@@ -57,34 +58,37 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
         type='alpha'
         leftChildren={children}
         rightChildren={
-          <Section
-            title='最近加入'
-            renderFooter={() =>
-              group && (
-                <Link
-                  to={groupTabsByKey.members.to(group.group.name)}
-                  className={CommonStyles.textButton}
-                >
-                  <span>更多小组成员</span>
-                  <ArrowRightCircle />
-                </Link>
-              )
-            }
-          >
-            <div className={styles.newMembers}>
-              {group?.recentAddedMembers.slice(0, 10).map((member) => {
-                return (
-                  <UserCard
-                    user={{
-                      ...member,
-                      avatar: member.avatar.large,
-                    }}
-                    key={member.id}
-                  />
-                );
-              })}
-            </div>
-          </Section>
+          <>
+            {group && <GroupNavigation group={group} />}
+            <Section
+              title='最近加入'
+              renderFooter={() =>
+                group && (
+                  <Link
+                    to={groupTabsByKey.members.to(group.group.name)}
+                    className={CommonStyles.textButton}
+                  >
+                    <span>更多小组成员</span>
+                    <ArrowRightCircle />
+                  </Link>
+                )
+              }
+            >
+              <div className={styles.newMembers}>
+                {group?.recentAddedMembers.slice(0, 10).map((member) => {
+                  return (
+                    <UserCard
+                      user={{
+                        ...member,
+                        avatar: member.avatar.large,
+                      }}
+                      key={member.id}
+                    />
+                  );
+                })}
+              </div>
+            </Section>
+          </>
         }
       />
     </div>
