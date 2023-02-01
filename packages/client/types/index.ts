@@ -81,6 +81,9 @@ export interface paths {
      */
     get: operations['subjectEditHistorySummary'];
   };
+  '/p1/wiki/subjects/{subjectID}/cover': {
+    post: operations['uploadSubjectCover'];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -905,6 +908,38 @@ export interface operations {
       401: {
         content: {
           'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  uploadSubjectCover: {
+    parameters: {
+      path: {
+        subjectID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          /**
+           * Format: byte
+           * @description base64 encoded raw bytes, 4mb size limit on **decoded** size
+           */
+          content: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
         };
       };
       /** @description 意料之外的服务器错误 */

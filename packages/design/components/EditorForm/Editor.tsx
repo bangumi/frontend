@@ -1,3 +1,4 @@
+import type { FocusEventHandler } from 'react';
 import React, {
   forwardRef,
   useCallback,
@@ -14,15 +15,19 @@ export interface EditorProps {
   /** 是否显示工具栏 */
   showToolbox?: boolean;
   /** textarea 通过键盘按下提交触发事件 */
-  onConfirm?: (content: string) => void;
+  onConfirm?: (value: string) => void;
   /**
    * @default empty string
    */
-  content?: string;
+  value?: string;
   /** 内容改变时的回调函数 */
-  onChange?: (content: string) => void;
+  onChange?: (value: string) => void;
   /** 在被渲染时是否自动获取焦点 */
   autoFocus?: boolean;
+  /** 文本域初始行数 */
+  rows?: number;
+  name?: string;
+  onBlur?: FocusEventHandler<HTMLTextAreaElement>;
 }
 
 const keyToEvent: Record<string, string> = {
@@ -34,18 +39,28 @@ const keyToEvent: Record<string, string> = {
   p: 'image',
 } as const;
 
-export interface EditorRef {
-  textArea: HTMLTextAreaElement;
-}
-
-const Editor = forwardRef<EditorRef, EditorProps>(
-  ({ placeholder, showToolbox = true, onConfirm, content = '', onChange, autoFocus }, ref) => {
+const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
+  (
+    {
+      placeholder,
+      showToolbox = true,
+      onConfirm,
+      value = '',
+      onChange,
+      autoFocus,
+      rows,
+      name,
+      onBlur,
+    },
+    ref,
+  ) => {
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
-    useImperativeHandle(ref, () => ({
-      textArea: innerRef.current!,
-    }));
+    useImperativeHandle<HTMLTextAreaElement | null, HTMLTextAreaElement | null>(
+      ref,
+      () => innerRef.current,
+    );
 
     useEffect(() => {
       // 用来确保输入光标在自动插入的quote内容之后。
@@ -172,10 +187,13 @@ const Editor = forwardRef<EditorRef, EditorProps>(
           className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
-          value={content}
+          value={value}
           autoFocus={autoFocus}
           onChange={(e) => updateContent(e.target.value)}
           onKeyDown={handleKeyDown}
+          rows={rows}
+          name={name}
+          onBlur={onBlur}
         />
       </div>
     );

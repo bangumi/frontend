@@ -589,7 +589,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
               </Input.Group>
             </Form.Item>
 
-            <Button htmlType='submit' shape='rounded' className={style.formButton}>
+            <Button htmlType='submit' color='blue' className={style.formButton}>
               提交修改
             </Button>
           </Form>
