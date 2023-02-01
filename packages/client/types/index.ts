@@ -61,6 +61,16 @@ export interface paths {
      */
     post: operations['clearNotice'];
   };
+  '/p1/wiki/subjects/{subjectID}/covers': {
+    get: operations['listSubjectCovers'];
+    post: operations['uploadSubjectCover'];
+  };
+  '/p1/wiki/subjects/{subjectID}/covers/{imageID}/vote': {
+    /** 为条目封面投票 */
+    post: operations['voteSubjectCover'];
+    /** 撤消条目封面投票 */
+    delete: operations['unvoteSubjectCover'];
+  };
   '/p1/wiki/subjects/{subjectID}': {
     /**
      * @description 获取当前的 wiki 信息
@@ -80,9 +90,6 @@ export interface paths {
      * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
      */
     get: operations['subjectEditHistorySummary'];
-  };
-  '/p1/wiki/subjects/{subjectID}/cover': {
-    post: operations['uploadSubjectCover'];
   };
 }
 
@@ -759,6 +766,131 @@ export interface operations {
       };
     };
   };
+  listSubjectCovers: {
+    parameters: {
+      /** @example 184017 */
+      path: {
+        subjectID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            current?: {
+              thumbnail: string;
+              raw: string;
+            };
+            covers: {
+              id: number;
+              thumbnail: string;
+              raw: string;
+              /** User */
+              creator: {
+                id: number;
+                username: string;
+                nickname: string;
+                /** Avatar */
+                avatar: {
+                  small: string;
+                  medium: string;
+                  large: string;
+                };
+                sign: string;
+                user_group: number;
+              };
+              voted: boolean;
+            }[];
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  uploadSubjectCover: {
+    parameters: {
+      path: {
+        subjectID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          /**
+           * Format: byte
+           * @description base64 encoded raw bytes, 4mb size limit on **decoded** size
+           */
+          content: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  voteSubjectCover: {
+    /** 为条目封面投票 */
+    parameters: {
+      path: {
+        subjectID: number;
+        imageID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  unvoteSubjectCover: {
+    /** 撤消条目封面投票 */
+    parameters: {
+      path: {
+        subjectID: number;
+        imageID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
   subjectInfo: {
     /**
      * @description 获取当前的 wiki 信息
@@ -908,38 +1040,6 @@ export interface operations {
       401: {
         content: {
           'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
-  uploadSubjectCover: {
-    parameters: {
-      path: {
-        subjectID: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          /**
-           * Format: byte
-           * @description base64 encoded raw bytes, 4mb size limit on **decoded** size
-           */
-          content: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': Record<string, never>;
         };
       };
       /** @description 意料之外的服务器错误 */

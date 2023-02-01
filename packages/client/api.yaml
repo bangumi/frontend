@@ -1343,6 +1343,212 @@ paths:
               schema:
                 description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
+  /p1/wiki/subjects/{subjectID}/covers:
+    get:
+      operationId: listSubjectCovers
+      tags:
+        - wiki
+      parameters:
+        - schema:
+            type: integer
+          example: 184017
+          in: path
+          name: subjectID
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  current:
+                    type: object
+                    properties:
+                      thumbnail:
+                        type: string
+                      raw:
+                        type: string
+                    required:
+                      - thumbnail
+                      - raw
+                  covers:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        thumbnail:
+                          type: string
+                        raw:
+                          type: string
+                        creator:
+                          title: User
+                          type: object
+                          properties:
+                            id:
+                              examples:
+                                - 1
+                              type: integer
+                            username:
+                              examples:
+                                - sai
+                              type: string
+                            nickname:
+                              examples:
+                                - Sai🖖
+                              type: string
+                            avatar:
+                              title: Avatar
+                              type: object
+                              properties:
+                                small:
+                                  type: string
+                                medium:
+                                  examples:
+                                    - sai
+                                  type: string
+                                large:
+                                  type: string
+                              required:
+                                - small
+                                - medium
+                                - large
+                            sign:
+                              type: string
+                            user_group:
+                              type: integer
+                          required:
+                            - id
+                            - username
+                            - nickname
+                            - avatar
+                            - sign
+                            - user_group
+                        voted:
+                          type: boolean
+                      required:
+                        - id
+                        - thumbnail
+                        - raw
+                        - creator
+                        - voted
+                required:
+                  - covers
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: uploadSubjectCover
+      tags:
+        - wiki
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  format: byte
+                  description: base64 encoded raw bytes, 4mb size limit on **decoded** size
+                  type: string
+              required:
+                - content
+        required: true
+      parameters:
+        - schema:
+            type: integer
+          in: path
+          name: subjectID
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+  /p1/wiki/subjects/{subjectID}/covers/{imageID}/vote:
+    post:
+      operationId: voteSubjectCover
+      summary: 为条目封面投票
+      tags:
+        - wiki
+      parameters:
+        - schema:
+            exclusiveMinimum: 0
+            type: integer
+          in: path
+          name: subjectID
+          required: true
+        - schema:
+            exclusiveMinimum: 0
+            type: integer
+          in: path
+          name: imageID
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: unvoteSubjectCover
+      summary: 撤消条目封面投票
+      tags:
+        - wiki
+      parameters:
+        - schema:
+            exclusiveMinimum: 0
+            type: integer
+          in: path
+          name: subjectID
+          required: true
+        - schema:
+            exclusiveMinimum: 0
+            type: integer
+          in: path
+          name: imageID
+          required: true
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
   /p1/wiki/subjects/{subjectID}:
     get:
       operationId: subjectInfo
@@ -1651,43 +1857,6 @@ paths:
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/wiki/subjects/{subjectID}/cover:
-    post:
-      operationId: uploadSubjectCover
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                content:
-                  format: byte
-                  description: base64 encoded raw bytes, 4mb size limit on **decoded** size
-                  type: string
-              required:
-                - content
-        required: true
-      parameters:
-        - schema:
-            type: integer
-          in: path
-          name: subjectID
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
         '500':
           description: 意料之外的服务器错误
           content:
