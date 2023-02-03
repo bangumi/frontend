@@ -35,16 +35,7 @@ type FormProps = PropsWithChildren<{
 const Form = ({ children, labelWidth, className, onKeyDown, ...rest }: FormProps) => {
   return (
     <FormContext.Provider value={{ labelWidth: labelWidth ?? 12 }}>
-      <form
-        className={cn('bgm-form', className)}
-        onKeyDown={(e) => {
-          onKeyDown?.(e);
-          if (e.key === 'Enter') {
-            e.preventDefault();
-          }
-        }}
-        {...rest}
-      >
+      <form className={cn('bgm-form', className)} onKeyDown={onKeyDown} {...rest}>
         {children}
       </form>
     </FormContext.Provider>
