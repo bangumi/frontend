@@ -5,6 +5,8 @@ import React, { useLayoutEffect, useRef, useState, useTransition } from 'react';
 import type { BrowserRouterProps } from 'react-router-dom';
 import { Router } from 'react-router-dom';
 
+import { TransitionContext } from '../hooks/use-transition-context';
+
 /**
  * 一个将react-router与useTransition结合的定制Router，以避免页面跳转时的白屏闪烁
  *
@@ -15,7 +17,7 @@ import { Router } from 'react-router-dom';
  */
 const SuspenseRouter = ({ basename, children, window }: BrowserRouterProps) => {
   const historyRef = useRef<BrowserHistory>();
-  const [_, startTransition] = useTransition();
+  const [pending, startTransition] = useTransition();
 
   if (historyRef.current == null) {
     historyRef.current = createBrowserHistory({ window, v5Compat: true });
@@ -42,7 +44,14 @@ const SuspenseRouter = ({ basename, children, window }: BrowserRouterProps) => {
       navigationType={state.action}
       navigator={history}
     >
-      {children}
+      <TransitionContext.Provider
+        value={{
+          pending,
+          startTransition,
+        }}
+      >
+        {children}
+      </TransitionContext.Provider>
     </Router>
   );
 };
