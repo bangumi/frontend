@@ -100,7 +100,6 @@ const WikiInfoItem = ({
     <div
       className={cn(style.formDetailInfoItem, isArray(item.value) && style.draggableBox)}
       onKeyDown={(e) => {
-        console.log(e);
         if (e.ctrlKey && e.key === 'Enter') {
           level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
         }
@@ -246,7 +245,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
-  }, []);
+  }, [subjectWikiInfo.infobox]);
 
   const onSubmit = useCallback(
     ({ commitMessage, subject }: FormData) => {
@@ -293,7 +292,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
           toast('提交失败，请稍后再试');
         });
     },
-    [wikiElement, editorType, mutateHistory],
+    [wikiElement, editorType, mutateHistory, subjectId],
   );
 
   const handleSetEditorType = (type: EditorType) => {
@@ -453,7 +452,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         setValue('subject.platform', prePlatform);
       }
     },
-    [editorType, prePlatform],
+    [editorType, prePlatform, setValue, subjectWikiInfo.typeID],
   );
 
   return (
