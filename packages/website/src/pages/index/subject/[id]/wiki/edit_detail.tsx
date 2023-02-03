@@ -8,6 +8,7 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
@@ -24,7 +25,6 @@ import {
   WikiSyntaxError,
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { Link } from '@bangumi/website/components/Link';
 import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor';
 import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
 import { reorder } from '@bangumi/website/utils';
