@@ -111,6 +111,12 @@ const WikiInfoItem = ({
     >
       <Input.Group
         className={cn(style.formInputGroup, level === 2 && style.formInputGroupSecondary)}
+        onKeyDown={(e) => {
+          // 阻止回车提交表单
+          if (e.key === 'Enter') {
+            e.preventDefault();
+          }
+        }}
       >
         <Input
           tabIndex={1} // 帮助在按 Tab 时能保证获取下一个 Input，不然下一个会 focus 到 <Cursor/>
