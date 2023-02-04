@@ -1,4 +1,7 @@
-import * as monaco from 'monaco-editor';
+// 导入控件和功能，但不包含内置语言
+import 'monaco-editor/esm/vs/editor/edcore.main.js';
+
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import type { MutableRefObject } from 'react';
 import React, { useEffect, useRef } from 'react';
 
