@@ -5,7 +5,7 @@ import React, { forwardRef } from 'react';
 
 import Button from '../Button';
 import Link from '../Typography/Link';
-import type { EditorProps, EditorRef } from './Editor';
+import type { EditorProps } from './Editor';
 import Editor from './Editor';
 
 export interface EditorFormProps extends EditorProps {
@@ -28,7 +28,7 @@ export interface EditorFormProps extends EditorProps {
   hideCancel?: boolean;
 }
 
-const EditorForm = forwardRef<EditorRef, EditorFormProps>(
+const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
   (
     {
       className,
@@ -49,14 +49,15 @@ const EditorForm = forwardRef<EditorRef, EditorFormProps>(
         <Editor ref={ref} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button
-            shape='rounded'
+            size='small'
+            color='blue'
             className='bgm-editor__button bgm-editor__button--confirm'
-            onClick={() => onConfirm?.(props.content ?? '')}
+            onClick={() => onConfirm?.(props.value ?? '')}
           >
             {confirmText}
           </Button>
           {!hideCancel && (
-            <Button type='text' className='bgm-editor__button' onClick={onCancel}>
+            <Button type='text' size='small' className='bgm-editor__button' onClick={onCancel}>
               {cancelText}
             </Button>
           )}

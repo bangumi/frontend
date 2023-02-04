@@ -196,7 +196,7 @@ importers:
 
   packages/utils:
     specifiers:
-      '@bgm38/wiki': ^0.1.3
+      '@bgm38/wiki': ^0.2.2
       '@types/js-yaml': ^4.0.5
       '@types/lodash': ^4.14.191
       '@types/react': ^18.0.26
@@ -205,7 +205,7 @@ importers:
       nanoid: ^4.0.0
       typescript: ^4.9.4
     dependencies:
-      '@bgm38/wiki': 0.1.3
+      '@bgm38/wiki': 0.2.2
       lodash: 4.17.21
       nanoid: 4.0.0
     devDependencies:
@@ -222,6 +222,7 @@ importers:
       '@bangumi/icons': workspace:0.0.0
       '@bangumi/utils': workspace:0.0.0
       '@marsidev/react-turnstile': ^0.0.5
+      '@remix-run/router': ^1.2.1
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.191
       '@types/react': ^18.0.26
@@ -258,6 +259,7 @@ importers:
       whatwg-fetch: ^3.6.2
     dependencies:
       '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/router': 1.2.1
       classnames: 2.3.2
       dayjs: 1.11.7
       lodash: 4.17.21
@@ -3243,8 +3245,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@bgm38/wiki/0.1.3:
-    resolution: {integrity: sha512-LRZqhAda8n2Iip3sEPK/n/8sNrqELPhxFXLRdOiidM00EKAnfYp0dALozKPupBg0wArDQQfj6tdn8nt0VHH4Cg==}
+  /@bgm38/wiki/0.2.2:
+    resolution: {integrity: sha512-G1ttxnYBbYOdc8Gwvptdu7FdlWiDmP9EQRabIrDAL1WzjNp3VNLiZeczgN1X3jarN5i8D4kuBfeJ23TKy+cJ2g==}
     engines: {node: '>=16'}
     dev: false
 
