@@ -100,7 +100,6 @@ const WikiInfoItem = ({
     <div
       className={cn(style.formDetailInfoItem, isArray(item.value) && style.draggableBox)}
       onKeyDown={(e) => {
-        console.log(e);
         if (e.ctrlKey && e.key === 'Enter') {
           level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
         }
@@ -112,6 +111,12 @@ const WikiInfoItem = ({
     >
       <Input.Group
         className={cn(style.formInputGroup, level === 2 && style.formInputGroupSecondary)}
+        onKeyDown={(e) => {
+          // 阻止回车提交表单
+          if (e.key === 'Enter') {
+            e.preventDefault();
+          }
+        }}
       >
         <Input
           tabIndex={1} // 帮助在按 Tab 时能保证获取下一个 Input，不然下一个会 focus 到 <Cursor/>
@@ -246,6 +251,8 @@ const WikiEditDetailDetailPage: React.FC = () => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
+    // https://github.com/bangumi/frontend/pull/312#discussion_r1086401410
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = useCallback(
@@ -293,7 +300,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
           toast('提交失败，请稍后再试');
         });
     },
-    [wikiElement, editorType, mutateHistory],
+    [wikiElement, editorType, mutateHistory, subjectId],
   );
 
   const handleSetEditorType = (type: EditorType) => {
@@ -453,7 +460,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         setValue('subject.platform', prePlatform);
       }
     },
-    [editorType, prePlatform],
+    [editorType, prePlatform, setValue, subjectWikiInfo.typeID],
   );
 
   return (
