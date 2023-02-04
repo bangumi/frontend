@@ -222,6 +222,7 @@ importers:
       '@bangumi/icons': workspace:0.0.0
       '@bangumi/utils': workspace:0.0.0
       '@marsidev/react-turnstile': ^0.0.5
+      '@remix-run/router': ^1.2.1
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.191
       '@types/react': ^18.0.26
@@ -258,6 +259,7 @@ importers:
       whatwg-fetch: ^3.6.2
     dependencies:
       '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/router': 1.2.1
       classnames: 2.3.2
       dayjs: 1.11.7
       lodash: 4.17.21

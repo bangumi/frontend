@@ -3,10 +3,10 @@ import './index.css';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
 import App from './App';
+import SuspenseRouter from './components/SuspenseRouter';
 
 const root = createRoot(document.getElementById('root')!);
 root.render(
@@ -19,9 +19,9 @@ root.render(
       shouldRetryOnError: false,
     }}
   >
-    <BrowserRouter>
+    <SuspenseRouter>
       <App />
-    </BrowserRouter>
+    </SuspenseRouter>
   </SWRConfig>,
   // </React.StrictMode>,
 );
