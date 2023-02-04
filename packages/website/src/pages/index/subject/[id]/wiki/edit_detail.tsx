@@ -473,6 +473,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
           <Form labelWidth={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
             <Form.Item label='类别名'>
               <Input
+                tabIndex={1}
                 type='text'
                 wrapperClass={style.formInput}
                 defaultValue={subjectWikiInfo.name}
@@ -561,6 +562,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
 
             <Form.Item label='剧情介绍'>
               <textarea
+                tabIndex={1}
                 className={style.formTextArea}
                 defaultValue={subjectWikiInfo.summary}
                 {...register('subject.summary', { required: true })}
@@ -590,6 +592,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   }}
                 />
                 <Input
+                  tabIndex={1}
                   wrapperClass={style.formInput}
                   {...register('commitMessage', { required: true })}
                 />
