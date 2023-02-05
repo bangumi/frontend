@@ -137,7 +137,15 @@ const WikiInfoItem = ({
         />
       </Input.Group>
 
-      <div {...draggableProvided.dragHandleProps} tabIndex={-1}>
+      <div
+        {...draggableProvided.dragHandleProps}
+        /**
+         * dragHandleProps 中会设置 tabIndex = 0，导致当激活上面的输入框时，按下 Tab
+         * 无法 focus 下一个输入框，而是 focus 该 Icon，这里将 tabIndex 复写为 -1，
+         * 这样下一个输入框由于有更高的优先级就可以被 focus 了。
+         */
+        tabIndex={-1}
+      >
         <Cursor className={style.formDetailInfoItemCursor} />
       </div>
       <Minus
