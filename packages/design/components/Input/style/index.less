@@ -15,14 +15,30 @@
     box-sizing: border-box;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1rem;
+    padding: 9px 18px;
     border: 2px solid @gray-10;
-    border-radius: 19px;
+    border-radius: 22px;
+    height: 44px;
+
+    &--rounded {
+      padding: 9px 12px;
+      border-radius: 12px;
+    }
 
     &--disabled,
     &--disabled * {
       cursor: not-allowed;
       background: #f4f4f5;
+    }
+  }
+
+  &__prefix {
+    display: flex;
+    margin-right: 12px;
+
+    svg {
+      width: 19px;
+      height: 19px;
     }
   }
 
