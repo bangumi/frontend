@@ -102,12 +102,12 @@ importers:
       js-yaml: ^4.1.0
       msw: ^0.49.2
       node-fetch: ^3.3.0
-      oazapfts: ^4.5.1
+      oazapfts: ^4.5.2
       openapi-types: ^12.1.0
       openapi-typescript: ^6.1.0
       orval: ^6.10.3
     dependencies:
-      oazapfts: 4.5.1_openapi-types@12.1.0
+      oazapfts: 4.5.2_openapi-types@12.1.0
     devDependencies:
       '@apidevtools/json-schema-ref-parser': 9.1.0
       '@faker-js/faker': 7.6.0
@@ -239,7 +239,7 @@ importers:
       monaco-editor: ^0.34.1
       msw: ^0.49.2
       nanoid: ^4.0.0
-      oazapfts: ^4.5.1
+      oazapfts: ^4.5.2
       openapi-types: ^12.1.0
       postcss: ^8.4.20
       postcss-less: ^6.0.0
@@ -265,7 +265,7 @@ importers:
       lodash: 4.17.21
       monaco-editor: 0.34.1
       nanoid: 4.0.0
-      oazapfts: 4.5.1_openapi-types@12.1.0
+      oazapfts: 4.5.2_openapi-types@12.1.0
       react: 18.2.0
       react-beautiful-dnd: 13.1.1_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
@@ -14147,8 +14147,8 @@ packages:
       should: 13.2.3
       yaml: 1.10.2
 
-  /oazapfts/4.5.1_openapi-types@12.1.0:
-    resolution: {integrity: sha512-jpcryIybNtMw2du1PtzjY553DK6QSRmWOj0YI8qD/Sm78Ie6AnNhOtRDvI5+naG0Qsfce4kxr2u/GuWhfn/FuA==}
+  /oazapfts/4.5.2_openapi-types@12.1.0:
+    resolution: {integrity: sha512-D8uAs3V5XRuGa1qX9VGj9joQqhHQ3SiAs07T+p8JCNukj8r5RwRsgfx4V8YyHKlAA65ClNCk95p1N+cvkqqThw==}
     hasBin: true
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
