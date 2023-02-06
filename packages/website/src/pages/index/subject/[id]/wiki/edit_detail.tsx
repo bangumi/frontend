@@ -119,7 +119,6 @@ const WikiInfoItem = ({
         }}
       >
         <Input
-          tabIndex={1} // 帮助在按 Tab 时能保证获取下一个 Input，不然下一个会 focus 到 <Cursor/>
           wrapperStyle={{
             width: '170px',
           }}
@@ -128,7 +127,6 @@ const WikiInfoItem = ({
           onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
         />
         <Input
-          tabIndex={1}
           id={item._id}
           wrapperClass={style.formInput}
           defaultValue={typeof item.value === 'string' ? item.value : ''}
@@ -137,7 +135,15 @@ const WikiInfoItem = ({
         />
       </Input.Group>
 
-      <div {...draggableProvided.dragHandleProps}>
+      <div
+        {...draggableProvided.dragHandleProps}
+        /**
+         * dragHandleProps 中会设置 tabIndex = 0，导致当激活上面的输入框时，按下 Tab
+         * 无法 focus 下一个输入框，而是 focus 该 Icon，这里将 tabIndex 复写为 -1，
+         * 这样下一个输入框由于有更高的优先级就可以被 focus 了。
+         */
+        tabIndex={-1}
+      >
         <Cursor className={style.formDetailInfoItemCursor} />
       </div>
       <Minus
