@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import { expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 import { Toast } from '..';
 import type { Toast as TToast } from '../types';
@@ -14,11 +14,11 @@ function expectToastToBeClosed(toast: TToast) {
 }
 
 beforeEach(() => {
-  jest.useFakeTimers();
+  vi.useFakeTimers();
 });
 
 afterEach(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 it('should show message and disappear after given time', () => {
@@ -27,6 +27,6 @@ it('should show message and disappear after given time', () => {
 
   expect(getByText('test')).toBeInTheDocument();
   // 包含 transition 的时间
-  jest.advanceTimersByTime(1000 + 300);
+  vi.advanceTimersByTime(1000 + 300);
   expectToastToBeClosed(toast);
 });

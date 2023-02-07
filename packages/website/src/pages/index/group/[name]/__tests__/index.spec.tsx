@@ -14,10 +14,10 @@ import GroupHome from '..';
 import RecentTopics from './fixtures/recent-topics.json';
 import Sandbox from './fixtures/sandbox.json';
 
-vi.mock('react-router-dom', () => {
+vi.mock('react-router-dom', async () => {
   return {
     __esModule: true,
-    ...jest.requireActual('react-router-dom'),
+    ...(await vi.importActual<typeof import('react-router-dom')>('react-router-dom')),
     useParams: vi.fn(),
   } as unknown;
 });

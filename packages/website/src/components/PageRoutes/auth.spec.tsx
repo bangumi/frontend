@@ -2,7 +2,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { UserGroup } from '@bangumi/client/user';
 
@@ -16,7 +16,7 @@ vi.mock('react-router-dom');
 const mockedUseNavigate = vi.mocked(useNavigate);
 
 afterEach(() => {
-  jest.resetAllMocks();
+  vi.resetAllMocks();
 });
 
 const ComponentRequireAuth: React.FC = () => {

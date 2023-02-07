@@ -14,10 +14,10 @@ import Sandbox from './fixtures/sandbox.json';
 import sandboxMembers from './fixtures/sandbox-members.json';
 import sandboxModMember from './fixtures/sandbox-mod-member.json';
 
-vi.mock('react-router-dom', () => {
+vi.mock('react-router-dom', async () => {
   return {
     __esModule: true,
-    ...jest.requireActual('react-router-dom'),
+    ...(await vi.importActual<typeof import('react-router-dom')>('react-router-dom')),
     useParams: vi.fn(),
   } as unknown;
 });

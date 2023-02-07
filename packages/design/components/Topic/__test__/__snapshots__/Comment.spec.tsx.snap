@@ -1,4 +1,629 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
+
+exports[`Normal Comment > do not show opinions if not login 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                (我是签名)
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header bgm-comment__header--highlighted"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                (我是签名)
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            +1
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="bgm-comment__header bgm-comment__header--reply bgm-comment__header--highlighted"
+        id="post_2104702"
+      >
+        <div
+          class="bgm-avatar bgm-avatar--small"
+        >
+          <img
+            src="https://lain.bgm.tv/pic/user/m/icon.jpg"
+          />
+        </div>
+        <div
+          class="bgm-comment__box"
+        >
+          <div
+            class="bgm-comment__main"
+          >
+            <span
+              class="bgm-comment__tip"
+            >
+              <div
+                class="creator-info"
+              >
+                <a
+                  class="bgm-link"
+                  href="https://bgm.tv/user/123456789"
+                >
+                  用户
+                </a>
+              </div>
+              <span
+                class="bgm-topic__commentInfo"
+              >
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233-1
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+                  
+                |
+                  
+                !
+              </span>
+            </span>
+            <div
+              class="bgm-rich-content bgm-comment__content"
+            >
+              123456789~~~
+            </div>
+          </div>
+          <div
+            class="bgm-comment__opinions"
+          >
+            <button
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
+            >
+              回复
+            </button>
+            <button
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
+            >
+              +1
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Normal Comment > should render 0 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                (我是签名)
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            +1
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Normal Comment > should render 6 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                (我是签名)
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-comment__content--deleted"
+          >
+            内容已被用户删除
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            +1
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Normal Comment > should render 7 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                (我是签名)
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-comment__content--deleted"
+          >
+            内容因违反「
+            <a
+              class="bgm-link"
+              href="https://bgm.tv/about/guideline"
+            >
+              社区指导原则
+            </a>
+            」已被删除
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            +1
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Normal Comment > should render with reply 1`] = `
+<div>
+  <div>
+    <div
+      class="bgm-comment__header"
+      id="post_2104702"
+    >
+      <div
+        class="bgm-avatar bgm-avatar--medium"
+      >
+        <img
+          src="https://lain.bgm.tv/pic/user/l/icon.jpg"
+        />
+      </div>
+      <div
+        class="bgm-comment__box"
+      >
+        <div
+          class="bgm-comment__main"
+        >
+          <span
+            class="bgm-comment__tip"
+          >
+            <div
+              class="creator-info"
+            >
+              <a
+                class="bgm-link"
+                href="https://bgm.tv/user/123456789"
+              >
+                用户
+              </a>
+              <span>
+                (我是签名)
+              </span>
+            </div>
+            <span
+              class="bgm-topic__commentInfo"
+            >
+              <a
+                href="#post_2104702"
+              >
+                #
+                233
+              </a>
+                
+              |
+                
+              2022-9-22 06:03
+                
+              |
+                
+              !
+            </span>
+          </span>
+          <div
+            class="bgm-rich-content bgm-comment__content"
+          >
+            123456789~~~
+          </div>
+        </div>
+        <div
+          class="bgm-comment__opinions"
+        >
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            回复
+          </button>
+          <button
+            class="bgm-button bgm-button--secondary bgm-button--size-small"
+          >
+            +1
+          </button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div
+        class="bgm-comment__header bgm-comment__header--reply"
+        id="post_2104702"
+      >
+        <div
+          class="bgm-avatar bgm-avatar--small"
+        >
+          <img
+            src="https://lain.bgm.tv/pic/user/m/icon.jpg"
+          />
+        </div>
+        <div
+          class="bgm-comment__box"
+        >
+          <div
+            class="bgm-comment__main"
+          >
+            <span
+              class="bgm-comment__tip"
+            >
+              <div
+                class="creator-info"
+              >
+                <a
+                  class="bgm-link"
+                  href="https://bgm.tv/user/123456789"
+                >
+                  用户
+                </a>
+              </div>
+              <span
+                class="bgm-topic__commentInfo"
+              >
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233-1
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+                  
+                |
+                  
+                !
+              </span>
+            </span>
+            <div
+              class="bgm-rich-content bgm-comment__content"
+            >
+              123456789~~~
+            </div>
+          </div>
+          <div
+            class="bgm-comment__opinions"
+          >
+            <button
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
+            >
+              回复
+            </button>
+            <button
+              class="bgm-button bgm-button--secondary bgm-button--size-small"
+            >
+              +1
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
 
 exports[`Normal Comment do not show opinions if not login 1`] = `
 <div>
@@ -621,6 +1246,166 @@ exports[`Normal Comment should render with reply 1`] = `
         </div>
       </div>
     </div>
+  </div>
+</div>
+`;
+
+exports[`Special Comment > should render state is 1 1`] = `
+<div>
+  <div
+    class="bgm-comment__header bgm-comment__header--collapsed"
+    id="post_2056216"
+  >
+    <span
+      class="bgm-comment__tip"
+    >
+      <div
+        class="creator-info"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 60 24"
+          width="60"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="#F97F77"
+            height="24"
+            rx="12"
+            width="60"
+          />
+          <path
+            clip-rule="evenodd"
+            d="M35.3333 12C35.3333 14.9455 32.9455 17.3333 30 17.3333C29.1767 17.3333 28.3969 17.1468 27.7007 16.8136L34.8136 9.7007C35.1468 10.3969 35.3333 11.1767 35.3333 12ZM25.1865 14.2995L32.2995 7.18649C31.6032 6.85327 30.8234 6.66667 30 6.66667C27.0545 6.66667 24.6667 9.05448 24.6667 12C24.6667 12.8234 24.8533 13.6032 25.1865 14.2995ZM38 12C38 16.4183 34.4183 20 30 20C25.5817 20 22 16.4183 22 12C22 7.58172 25.5817 4 30 4C34.4183 4 38 7.58172 38 12Z"
+            fill="white"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/user/123456789"
+        >
+          用户
+        </a>
+        <div
+          class="bgm-comment__content"
+        >
+          关闭了该主题
+        </div>
+      </div>
+      <span
+        class="bgm-topic__commentInfo"
+      >
+        2022-7-17 04:08
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Special Comment > should render state is 2 1`] = `
+<div>
+  <div
+    class="bgm-comment__header bgm-comment__header--collapsed"
+    id="post_2056216"
+  >
+    <span
+      class="bgm-comment__tip"
+    >
+      <div
+        class="creator-info"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 60 24"
+          width="60"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="#76DB65"
+            height="24"
+            rx="12"
+            width="60"
+          />
+          <path
+            clip-rule="evenodd"
+            d="M21 12L23.25 9.66667L27.75 14.3333L36.75 5L39 7.33333L27.75 19L21 12Z"
+            fill="white"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/user/123456789"
+        >
+          用户
+        </a>
+        <div
+          class="bgm-comment__content"
+        >
+          重新开启了该主题
+        </div>
+      </div>
+      <span
+        class="bgm-topic__commentInfo"
+      >
+        2022-7-17 04:08
+      </span>
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Special Comment > should render state is 5 1`] = `
+<div>
+  <div
+    class="bgm-comment__header bgm-comment__header--collapsed"
+    id="post_2056216"
+  >
+    <span
+      class="bgm-comment__tip"
+    >
+      <div
+        class="creator-info"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 60 24"
+          width="60"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            fill="#9F9B9B"
+            height="24"
+            rx="12"
+            width="60"
+          />
+          <path
+            d="M29.3413 17.6832C29.4147 17.7809 29.5129 17.8608 29.6274 17.916C29.742 17.9712 29.8695 18 29.9989 18C30.1283 18 30.2558 17.9712 30.3704 17.916C30.485 17.8608 30.5832 17.7809 30.6566 17.6832L37.8571 8.15052C37.9405 8.04057 37.9894 7.91179 37.9984 7.77816C38.0075 7.64454 37.9765 7.51119 37.9087 7.3926C37.8409 7.274 37.739 7.1747 37.6139 7.10549C37.4889 7.03627 37.3456 6.99979 37.1995 7H22.7984C22.6526 7.00055 22.5098 7.03751 22.3853 7.10689C22.2607 7.17627 22.1592 7.27545 22.0916 7.39377C22.0239 7.51209 21.9928 7.64507 22.0014 7.7784C22.0101 7.91174 22.0582 8.04039 22.1407 8.15052L29.3413 17.6832Z"
+            fill="white"
+          />
+        </svg>
+        <a
+          class="bgm-link"
+          href="https://bgm.tv/user/123456789"
+        >
+          用户
+        </a>
+        <div
+          class="bgm-comment__content"
+        >
+          下沉了该主题
+        </div>
+      </div>
+      <span
+        class="bgm-topic__commentInfo"
+      >
+        2022-7-17 04:08
+      </span>
+    </span>
   </div>
 </div>
 `;
