@@ -5,6 +5,10 @@ pull_request_rules:
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
+      - -check-failure=storybook-build
+      - -check-failure=lint
+      - -check-failure=test
+      - -check-failure=build
     actions:
       merge:
         method: squash
