@@ -26,11 +26,15 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: Automatic merge on approval
+  - name: Automatic merge on bot PR
     conditions:
       - author=bangumi-bot
       - -conflict
       - base=master
+      - check-success=test
+      - check-success=build
+      - check-success=lint
+      - check-success=storybook-build
     actions:
       merge:
         method: squash
