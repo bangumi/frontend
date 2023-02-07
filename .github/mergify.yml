@@ -13,6 +13,24 @@ pull_request_rules:
       merge:
         method: squash
 
+  - name: request review
+    conditions:
+      - '#approved-reviews-by=0'
+      - '#review-threads-unresolved=0'
+      - '#changes-requested-reviews-by=0'
+      - -conflict
+      - base=master
+      - check-failure!=storybook-build
+      - check-failure!=lint
+      - check-failure!=test
+      - check-failure!=build
+    actions:
+      request_reviews:
+        users_from_teams: 'bangumi/frontend-collaborators'
+      label:
+        toggle:
+          - waiting-review
+
   - name: add 48h label
     conditions:
       - '#approved-reviews-by>=1'
@@ -26,7 +44,7 @@ pull_request_rules:
     actions:
       label:
         toggle:
-          - wait-48h
+          - waiting-opened-48h
 
   - name: warn on conflicts
     conditions:
