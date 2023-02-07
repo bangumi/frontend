@@ -1,4 +1,5 @@
 @import '../../../theme/base';
+@import (reference) '../../Input/style/index.less';
 
 .bgm-form {
   display: flex;
@@ -25,5 +26,9 @@
         height: 38px;
       }
     }
+  }
+
+  .bgm-input__wrapper {
+    .rounded-mixin();
   }
 }

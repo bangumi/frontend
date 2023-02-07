@@ -19,10 +19,8 @@
     border: 2px solid @gray-10;
     border-radius: 22px;
 
-    &--rounded,
-    .bgm-form & {
-      padding: 0.5rem 0.75rem;
-      border-radius: 12px;
+    &--rounded {
+      .rounded-mixin();
     }
 
     &--disabled,
@@ -76,4 +74,9 @@
   &::placeholder {
     color: @gray-10;
   }
+}
+
+.rounded-mixin() {
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
 }
