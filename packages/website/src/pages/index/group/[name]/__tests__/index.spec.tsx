@@ -3,6 +3,7 @@ import { waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
+import { expect, it, vi } from 'vitest';
 
 import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/client/group';
 import { server as mockServer } from '@bangumi/website/mocks/server';
@@ -13,15 +14,15 @@ import GroupHome from '..';
 import RecentTopics from './fixtures/recent-topics.json';
 import Sandbox from './fixtures/sandbox.json';
 
-jest.mock('react-router-dom', () => {
+vi.mock('react-router-dom', () => {
   return {
     __esModule: true,
     ...jest.requireActual('react-router-dom'),
-    useParams: jest.fn(),
+    useParams: vi.fn(),
   } as unknown;
 });
 
-const mockedUseParams = jest.mocked(useParams);
+const mockedUseParams = vi.mocked(useParams);
 
 class GroupHomeTest {
   page: RenderResult;

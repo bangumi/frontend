@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+import { expect, it, vi } from 'vitest';
 
 import Tab from '..';
 
@@ -31,7 +32,7 @@ it('should trigger onChange when click tabs', () => {
       label: '2',
     },
   ];
-  const handleChange = jest.fn();
+  const handleChange = vi.fn();
   const { getByText } = render(<Tab items={items} activeKey='1' onChange={handleChange} />);
   getByText('2').click();
 

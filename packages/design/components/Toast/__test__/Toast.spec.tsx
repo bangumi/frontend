@@ -1,11 +1,12 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+import { expect, it, vi } from 'vitest';
 
 import { Toast } from '..';
 import type { Toast as TToast } from '../types';
 import { removeToastEvent } from '../utils/event-bus';
 
-jest.mock('../utils/event-bus');
+vi.mock('../utils/event-bus');
 
 function expectToastToBeClosed(toast: TToast) {
   // eslint-disable-next-line @typescript-eslint/unbound-method

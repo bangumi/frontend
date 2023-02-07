@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
+import { expect, it, vi } from 'vitest';
 
 import Menu from '..';
 
@@ -26,7 +27,7 @@ it('should render all menu', () => {
 });
 
 it('should trigger onChange when click menus', () => {
-  const handleChange = jest.fn();
+  const handleChange = vi.fn();
   const { getByText } = render(<Menu onClick={handleChange} items={items} />);
   getByText('2').click();
   expect(handleChange.mock.calls[0].length).toBe(2);

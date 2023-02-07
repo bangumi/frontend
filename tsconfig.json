@@ -19,12 +19,18 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "jest", "vite-plugin-svgr/client", "@testing-library/jest-dom"],
+    "types": ["node", "vite-plugin-svgr/client", "@testing-library/jest-dom"],
     "paths": {
       // 顺序不能打乱，保证 website 复写 *
       "@bangumi/*": ["packages/*/index.tsx", "packages/*/index.ts"],
       "@bangumi/website/*": ["packages/website/src/*"]
     }
   },
-  "include": ["./packages", "./jest-setup.ts", ".eslintrc.js", "./packages/design/.storybook/*"]
+  "include": [
+    "./packages",
+    "./jest-setup.ts",
+    ".eslintrc.js",
+    "vitest.config.ts",
+    "./packages/design/.storybook/*"
+  ]
 }

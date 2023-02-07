@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 
 import timezoneMock from 'timezone-mock';
+import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
 
 import { server } from './src/mocks/server';
 

@@ -1,3 +1,5 @@
+import { describe, expect, test } from 'vitest';
+
 import { mergeTags, Parser } from '../parser';
 import type { CodeNodeTypes } from '../types';
 

@@ -2,17 +2,18 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { describe, expect, it, vi } from 'vitest';
 
 import { UserGroup } from '@bangumi/client/user';
 
 import { useUser } from '../../hooks/use-user';
 import { RequireAuth } from './auth';
 
-jest.mock('../../hooks/use-user');
-const mockedUseUser = jest.mocked(useUser);
+vi.mock('../../hooks/use-user');
+const mockedUseUser = vi.mocked(useUser);
 
-jest.mock('react-router-dom');
-const mockedUseNavigate = jest.mocked(useNavigate);
+vi.mock('react-router-dom');
+const mockedUseNavigate = vi.mocked(useNavigate);
 
 afterEach(() => {
   jest.resetAllMocks();
@@ -39,7 +40,7 @@ describe('RequireAuth', () => {
   });
 
   it("should redirect to designated page if user isn't authorized", () => {
-    const mockedNavigate = jest.fn();
+    const mockedNavigate = vi.fn();
     mockedUseNavigate.mockReturnValue(mockedNavigate);
     mockedUseUser.mockReturnValue({
       user: {
@@ -52,7 +53,7 @@ describe('RequireAuth', () => {
   });
 
   it('should redirect to login page if user is logged', () => {
-    const mockedRedirectToLogin = jest.fn();
+    const mockedRedirectToLogin = vi.fn();
     mockedUseUser.mockReturnValue({
       user: null,
       redirectToLogin: mockedRedirectToLogin,

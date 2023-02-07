@@ -1,5 +1,6 @@
 /* eslint-disable unused-imports/no-unused-imports */
 import React from 'react';
+import { describe, expect, test } from 'vitest';
 
 import { render, renderNode } from '../react';
 import type { VNode } from '../types';

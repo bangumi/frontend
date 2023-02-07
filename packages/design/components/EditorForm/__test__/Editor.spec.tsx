@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
+import { describe, expect, it, vi } from 'vitest';
 
 import type { EditorProps } from '../Editor';
 import Editor from '../Editor';
@@ -190,7 +191,7 @@ describe('EditorForm > Editor', () => {
   });
 
   it('onConfirm keyboard event', () => {
-    const onConfirm = jest.fn();
+    const onConfirm = vi.fn();
     const { textarea } = initTextareaTest({ placeholder: 'Hello', onConfirm });
 
     textarea.value = 'test111';
