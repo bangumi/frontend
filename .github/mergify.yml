@@ -42,7 +42,7 @@ pull_request_rules:
 
   - name: toggle labels based on build state
     conditions:
-      - check-failure=Build / build (pull_request)
+      - check-failure=build
     actions:
       label:
         toggle:
@@ -50,7 +50,7 @@ pull_request_rules:
 
   - name: toggle labels based on storybook build  state
     conditions:
-      - check-failure=build
+      - check-failure=storybook-build
     actions:
       label:
         toggle:
