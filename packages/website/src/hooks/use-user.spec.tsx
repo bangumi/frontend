@@ -67,6 +67,9 @@ it.each([
 );
 
 it('should refresh me if login succeeded', async () => {
+  Object.defineProperty(document, 'cookie', {
+    value: 'chiiNextSessionID=test',
+  });
   const { result } = renderHook(() => useUser(), { wrapper });
 
   mockLogin(200);

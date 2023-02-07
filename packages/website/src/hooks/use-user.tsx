@@ -52,7 +52,6 @@ export class PasswordUnMatchError extends Error {
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const cookies = useMemo<Record<string, string>>(
     () => {
-      console.log('re run');
       return document?.cookie.split(';').reduce((pre, cookieItem) => {
         const [key, value] = cookieItem.split('=');
         if (key && value) {
