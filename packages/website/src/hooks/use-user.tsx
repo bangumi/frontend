@@ -1,6 +1,6 @@
 import { ok } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
@@ -50,7 +50,27 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()));
+  const cookies = useMemo<Record<string, string>>(
+    () => {
+      console.log('re run');
+      return document?.cookie.split(';').reduce((pre, cookieItem) => {
+        const [key, value] = cookieItem.split('=');
+        if (key && value) {
+          return {
+            ...pre,
+            [key]: value,
+          };
+        }
+        return pre;
+      }, {});
+    },
+    // 不是 state，eslint 会判断为无需依赖，但实际上 cookie 变化后需重新计算
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [document?.cookie],
+  );
+  const { data: user, mutate } = useSWR(cookies.chiiNextSessionID ? '/me' : null, async () =>
+    ok(ozaClient.getCurrentUser()),
+  );
   const navigate = useNavigate();
 
   function redirectToLogin(): void {
