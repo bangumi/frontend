@@ -87,6 +87,8 @@ git push -u origin <YOUR_BRANCH>
 - 所有关于新特性与缺陷修复的 PR 都必须包含对应测试用例；
 - 如果在 `packages/design` 下面添加新的组件，需要包含一个 storybook 作为组件文档；
 
+在你的 PR 满足合并要求之后，你可以使用 `@Mergifyio merge` 来合并你的 PR。
+
 ## 如何成为 Collaborator
 
 - Collaborator 需要对项目作出活跃的贡献；
