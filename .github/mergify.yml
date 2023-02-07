@@ -15,6 +15,7 @@ pull_request_rules:
 
   - name: add 48h label
     conditions:
+      - '#approved-reviews-by>=1'
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
