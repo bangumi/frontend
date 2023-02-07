@@ -2,6 +2,9 @@ pull_request_rules:
   - name: Automatic merge on approval
     conditions:
       - '#approved-reviews-by>=1'
+      - 'created-at>48 hours ago'
+      - -conflict
+      - base=master
     actions:
       merge:
         method: squash
