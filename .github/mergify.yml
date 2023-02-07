@@ -13,6 +13,20 @@ pull_request_rules:
       merge:
         method: squash
 
+  - name: Automatic merge on approval
+    conditions:
+      - -conflict
+      - base=master
+      - '#review-threads-unresolved=0'
+      - check-failure!=storybook-build
+      - check-failure!=lint
+      - check-failure!=test
+      - check-failure!=build
+    actions:
+      label:
+        add:
+          - wait-48h
+
   - name: warn on conflicts
     conditions:
       - conflict
