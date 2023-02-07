@@ -26,7 +26,7 @@ pull_request_rules:
 
   - name: toggle labels based on lint state
     conditions:
-      - check-failure=Lint / lint (pull_request)
+      - check-failure=lint
     actions:
       label:
         toggle:
@@ -34,7 +34,7 @@ pull_request_rules:
 
   - name: toggle labels based on test state
     conditions:
-      - check-failure=Unit Test / test (pull_request)
+      - check-failure=test
     actions:
       label:
         toggle:
@@ -47,3 +47,11 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:build:fail'
+
+  - name: toggle labels based on storybook build  state
+    conditions:
+      - check-failure=build
+    actions:
+      label:
+        toggle:
+          - 'ci:storybook-build:fail'
