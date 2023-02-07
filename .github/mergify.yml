@@ -13,7 +13,7 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: Automatic merge on approval
+  - name: add 48h label
     conditions:
       - -conflict
       - base=master
