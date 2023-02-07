@@ -1,12 +1,14 @@
 import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
-import type { ButtonProps } from '.';
+import type { ButtonLinkProps, ButtonProps } from '.';
 import Button from '.';
 
 const storyMeta: ComponentMeta<typeof Button> = {
   title: 'modern/Button',
   component: Button,
+  subcomponents: { 'Button.Link': Button.Link },
   argTypes: {
     disabled: { control: 'boolean' },
     color: { control: 'select', options: ['default', 'blue', 'gray'] },
@@ -100,4 +102,27 @@ Disabled.args = {
   type: 'primary',
   disabled: true,
   children: 'Disabled',
+};
+
+const ButtonLinkTemplate: Story<ButtonLinkProps> = (args) => {
+  return (
+    <MemoryRouter>
+      <Button.Link {...args}>{args.children}</Button.Link>
+    </MemoryRouter>
+  );
+};
+
+export const Link = ButtonLinkTemplate.bind({});
+Link.args = {
+  to: 'https://bgm.tv',
+  isExternal: true,
+  target: '_blank',
+  children: 'Bangumi 番组计划',
+};
+Link.parameters = {
+  docs: {
+    description: {
+      story: '按钮的链接版本，使用方法与 `Typography.Link` 相同。',
+    },
+  },
 };

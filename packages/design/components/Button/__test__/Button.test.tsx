@@ -54,6 +54,15 @@ describe('Text Button', () => {
   });
 });
 
+it('should render button link', () => {
+  const { container } = render(
+    <Button.Link to='https://bgm.tv' isExternal>
+      Bangumi
+    </Button.Link>,
+  );
+  expect(container.firstChild).toMatchSnapshot();
+});
+
 it.each(['square', 'rounded'] as const)('should render button of shape %s', (shape) => {
   const { container } = render(
     <Button type='primary' shape={shape}>

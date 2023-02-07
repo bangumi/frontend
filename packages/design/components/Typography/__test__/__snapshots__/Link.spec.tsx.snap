@@ -17,3 +17,11 @@ exports[`should render internal link 1`] = `
   />
 </DocumentFragment>
 `;
+
+exports[`should render no-style link 1`] = `
+<DocumentFragment>
+  <a
+    href="/a"
+  />
+</DocumentFragment>
+`;
