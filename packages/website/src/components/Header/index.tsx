@@ -97,10 +97,10 @@ const Header: FC = () => {
       <div className={style.main}>
         <div className='flex items-center'>
           {/* Logo */}
-          <div className={style.logo}>
+          <a className={style.logo} href='/'>
             <Musume className={style.musume} />
             <Logo className={style.textLogo} />
-          </div>
+          </a>
           {/* Mobile Menu Toggle Button */}
           <Button
             className={style.mobileMenuToggle}
