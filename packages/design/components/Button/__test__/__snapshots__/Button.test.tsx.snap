@@ -98,7 +98,7 @@ exports[`Text Button should render button of size small 1`] = `
 
 exports[`should render button link 1`] = `
 <a
-  class="bgm-link bgm-button bgm-button--link bgm-button--primary"
+  class="bgm-button bgm-button--link bgm-button--primary"
   href="https://bgm.tv"
 >
   Bangumi

@@ -71,6 +71,7 @@ export const ButtonLink = ({
         [`bgm-button--size-${size}`]: size !== 'large',
         [`bgm-button--color-${color}`]: color !== 'default',
       })}
+      noStyle
       {...props}
     >
       {children}
