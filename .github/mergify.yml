@@ -24,6 +24,7 @@ pull_request_rules:
       - check-failure!=lint
       - check-failure!=test
       - check-failure!=build
+      - label!=waiting-review
     actions:
       request_reviews:
         users_from_teams: 'bangumi/frontend-collaborators'
@@ -43,6 +44,8 @@ pull_request_rules:
       - check-failure!=build
     actions:
       label:
+        remove:
+          - waiting-review
         toggle:
           - waiting-opened-48h
 
