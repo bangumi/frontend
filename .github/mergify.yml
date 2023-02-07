@@ -27,7 +27,7 @@ pull_request_rules:
       - label!=waiting-review
     actions:
       request_reviews:
-        users_from_teams:
+        teams:
           - '@bangumi/frontend-collaborators'
       label:
         add:
