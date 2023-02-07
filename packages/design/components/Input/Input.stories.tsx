@@ -79,7 +79,7 @@ const InputGroupTemplate = (args: InputGroupProps) => {
       <Select options={[{ label: '你好', value: '你好' }]} defaultValue='你好' />
       <Input />
       <Input />
-      <Input />
+      <Input rounded />
     </Input.Group>
   );
 };
