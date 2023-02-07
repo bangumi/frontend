@@ -15,7 +15,7 @@ export enum DescriptionClamp {
   unclamp = 'unclamp',
 }
 
-export interface UseGroupRet {
+export interface UseG roupRet {
   group: GroupProfile;
   descriptionClamp: DescriptionClamp;
   setDescriptionClamp: (val: DescriptionClamp) => void;
