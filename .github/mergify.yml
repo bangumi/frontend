@@ -6,22 +6,6 @@ pull_request_rules:
       - -conflict
       - author!=bangumi-bot
       - base=master
-      - or:
-          - check-success=test
-          - check-neutral=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-neutral=build
-          - check-skipped=build
-      - or:
-          - check-success=lint
-          - check-neutral=lint
-          - check-skipped=lint
-      - or:
-          - check-success=storybook-build
-          - check-neutral=storybook-build
-          - check-skipped=storybook-build
     actions:
       merge:
         method: squash
@@ -31,10 +15,6 @@ pull_request_rules:
       - author=bangumi-bot
       - -conflict
       - base=master
-      - check-success=test
-      - check-success=build
-      - check-success=lint
-      - check-success=storybook-build
     actions:
       merge:
         method: squash
