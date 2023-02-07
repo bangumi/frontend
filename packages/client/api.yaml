@@ -102,6 +102,63 @@ components:
         - error
         - message
         - statusCode
+    Permission:
+      type: object
+      properties:
+        subjectWikiEdit:
+          type: boolean
+      required:
+        - subjectWikiEdit
+    CurrentUser:
+      type: object
+      properties:
+        id:
+          examples:
+            - 1
+          type: integer
+        username:
+          examples:
+            - sai
+          type: string
+        nickname:
+          examples:
+            - Sai🖖
+          type: string
+        avatar:
+          title: Avatar
+          type: object
+          properties:
+            small:
+              type: string
+            medium:
+              examples:
+                - sai
+              type: string
+            large:
+              type: string
+          required:
+            - small
+            - medium
+            - large
+        sign:
+          type: string
+        user_group:
+          type: integer
+        permission:
+          type: object
+          properties:
+            subjectWikiEdit:
+              type: boolean
+          required:
+            - subjectWikiEdit
+      required:
+        - id
+        - username
+        - nickname
+        - avatar
+        - sign
+        - user_group
+        - permission
     Topic:
       title: Topic
       type: object
@@ -568,6 +625,38 @@ components:
         - commitMessage
         - createdAt
 paths:
+  /p1/me:
+    get:
+      operationId: getCurrentUser
+      tags:
+        - auth
+      security:
+        - CookiesSession: []
+      responses:
+        '200':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+        '401':
+          description: Default Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+              example:
+                code: NEED_LOGIN
+                error: Unauthorized
+                message: you need to login before get current user
+                statusCode: 401
+        '500':
+          description: 意料之外的服务器错误
+          content:
+            application/json:
+              schema:
+                description: 意料之外的服务器错误
+                $ref: '#/components/schemas/Error'
   /p1/logout:
     post:
       operationId: logout
@@ -723,36 +812,6 @@ paths:
                 error: Too Many Requests
                 message: too many failed login attempts
                 statusCode: 429
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/me:
-    get:
-      operationId: getCurrentUser
-      tags:
-        - auth
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '401':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: NEED_LOGIN
-                error: Unauthorized
-                message: you need to login before get current user
-                statusCode: 401
         '500':
           description: 意料之外的服务器错误
           content:
@@ -1448,6 +1507,7 @@ paths:
       operationId: uploadSubjectCover
       tags:
         - wiki
+      description: 需要 `subjectWikiEdit` 权限
       requestBody:
         content:
           application/json:
@@ -1488,6 +1548,7 @@ paths:
       summary: 为条目封面投票
       tags:
         - wiki
+      description: 需要 `subjectWikiEdit` 权限
       parameters:
         - schema:
             exclusiveMinimum: 0
@@ -1521,6 +1582,7 @@ paths:
       summary: 撤消条目封面投票
       tags:
         - wiki
+      description: 需要 `subjectWikiEdit` 权限
       parameters:
         - schema:
             exclusiveMinimum: 0
@@ -1599,7 +1661,10 @@ paths:
       operationId: putSubjectInfo
       tags:
         - wiki
-      description: 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+      description: |-
+        暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+
+        需要 `subjectWikiEdit` 权限
       requestBody:
         content:
           application/json:

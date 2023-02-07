@@ -6,6 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 export interface LinkProps extends RouterLinkProps {
   isExternal?: boolean;
   fontWeight?: 'bold';
+  noStyle?: boolean;
 }
 
 const Link: React.FC<LinkProps> = ({
@@ -14,15 +15,18 @@ const Link: React.FC<LinkProps> = ({
   children,
   fontWeight,
   isExternal = false,
+  noStyle = false,
   ...rest
 }) => {
-  const resolvedClassnames = classNames(
-    'bgm-link',
-    {
-      'bgm-link--bold': fontWeight === 'bold',
-    },
-    className,
-  );
+  const resolvedClassnames = noStyle
+    ? className
+    : classNames(
+        'bgm-link',
+        {
+          'bgm-link--bold': fontWeight === 'bold',
+        },
+        className,
+      );
 
   if (isExternal && typeof to === 'string') {
     return (

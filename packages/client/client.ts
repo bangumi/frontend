@@ -11,6 +11,21 @@ export const defaults: Oazapfts.RequestOpts = {
 };
 const oazapfts = Oazapfts.runtime(defaults);
 export const servers = {};
+export interface CurrentUser {
+  id: number;
+  username: string;
+  nickname: string;
+  avatar: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+  sign: string;
+  user_group: number;
+  permission: {
+    subjectWikiEdit: boolean;
+  };
+}
 export interface Error {
   code: string;
   error: string;
@@ -168,6 +183,24 @@ export interface HistorySummary {
   commitMessage: string;
   createdAt: number;
 }
+export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: CurrentUser;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >('/p1/me', {
+    ...opts,
+  });
+}
 /**
  * 登出
  */
@@ -238,24 +271,6 @@ export async function login2(
       body,
     }),
   );
-}
-export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: User;
-      }
-    | {
-        status: 401;
-        data: Error;
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >('/p1/me', {
-    ...opts,
-  });
 }
 /**
  * 获取小组首页
@@ -638,6 +653,9 @@ export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.Reque
     ...opts,
   });
 }
+/**
+ * 需要 `subjectWikiEdit` 权限
+ */
 export async function uploadSubjectCover(
   subjectId: number,
   body: {
@@ -738,6 +756,8 @@ export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts
 }
 /**
  * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+ *
+ * 需要 `subjectWikiEdit` 权限
  */
 export async function putSubjectInfo(
   subjectId: number,
