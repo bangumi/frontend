@@ -1,7 +1,34 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
+      - '#approved-reviews-by>=1'
       - 'created-at<=48:00 ago'
+      - -conflict
+      - author!=bangumi-bot
+      - base=master
+      - or:
+          - check-success=test
+          - check-neutral=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-neutral=build
+          - check-skipped=build
+      - or:
+          - check-success=lint
+          - check-neutral=lint
+          - check-skipped=lint
+      - or:
+          - check-success=storybook-build
+          - check-neutral=storybook-build
+          - check-skipped=storybook-build
+    actions:
+      merge:
+        method: squash
+
+  - name: Automatic merge on approval
+    conditions:
+      - author=bangumi-bot
       - -conflict
       - base=master
     actions:
