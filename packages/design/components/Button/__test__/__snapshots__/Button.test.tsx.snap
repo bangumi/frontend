@@ -40,46 +40,6 @@ exports[`Primary Button > should render button of size small 1`] = `
 </button>
 `;
 
-exports[`Primary Button should render button of color blue 1`] = `
-<button
-  class="bgm-button bgm-button--primary bgm-button--color-blue"
->
-  hello world
-</button>
-`;
-
-exports[`Primary Button should render button of color gray 1`] = `
-<button
-  class="bgm-button bgm-button--primary bgm-button--color-gray"
->
-  hello world
-</button>
-`;
-
-exports[`Primary Button should render button of size large 1`] = `
-<button
-  class="bgm-button bgm-button--primary"
->
-  hello world
-</button>
-`;
-
-exports[`Primary Button should render button of size medium 1`] = `
-<button
-  class="bgm-button bgm-button--primary bgm-button--size-medium"
->
-  hello world
-</button>
-`;
-
-exports[`Primary Button should render button of size small 1`] = `
-<button
-  class="bgm-button bgm-button--primary bgm-button--size-small"
->
-  hello world
-</button>
-`;
-
 exports[`Secondary Button > should render button of color blue 1`] = `
 <button
   class="bgm-button bgm-button--secondary bgm-button--color-blue"
@@ -112,38 +72,6 @@ exports[`Secondary Button > should render button of size small 1`] = `
 </button>
 `;
 
-exports[`Secondary Button should render button of color blue 1`] = `
-<button
-  class="bgm-button bgm-button--secondary bgm-button--color-blue"
->
-  hello world
-</button>
-`;
-
-exports[`Secondary Button should render button of size large 1`] = `
-<button
-  class="bgm-button bgm-button--secondary"
->
-  hello world
-</button>
-`;
-
-exports[`Secondary Button should render button of size medium 1`] = `
-<button
-  class="bgm-button bgm-button--secondary bgm-button--size-medium"
->
-  hello world
-</button>
-`;
-
-exports[`Secondary Button should render button of size small 1`] = `
-<button
-  class="bgm-button bgm-button--secondary bgm-button--size-small"
->
-  hello world
-</button>
-`;
-
 exports[`Text Button > should render button of size large 1`] = `
 <button
   class="bgm-button bgm-button--text"
@@ -161,30 +89,6 @@ exports[`Text Button > should render button of size medium 1`] = `
 `;
 
 exports[`Text Button > should render button of size small 1`] = `
-<button
-  class="bgm-button bgm-button--text bgm-button--size-small"
->
-  hello world
-</button>
-`;
-
-exports[`Text Button should render button of size large 1`] = `
-<button
-  class="bgm-button bgm-button--text"
->
-  hello world
-</button>
-`;
-
-exports[`Text Button should render button of size medium 1`] = `
-<button
-  class="bgm-button bgm-button--text bgm-button--size-medium"
->
-  hello world
-</button>
-`;
-
-exports[`Text Button should render button of size small 1`] = `
 <button
   class="bgm-button bgm-button--text bgm-button--size-small"
 >
