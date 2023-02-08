@@ -90,18 +90,8 @@ const Login: React.FC = () => {
       <div className={style.container}>
         <LoginLogo className={style.logo} />
         {errorMessage && <ErrorMessage message={errorMessage} />}
-        <Input
-          type='email'
-          prefix={<UserLogin className={style.icon} />}
-          placeholder='你的 Email 地址'
-          {...email}
-        />
-        <Input
-          type='password'
-          prefix={<Password className={style.icon} />}
-          placeholder='你的登录密码'
-          {...password}
-        />
+        <Input type='email' prefix={<UserLogin />} placeholder='你的 Email 地址' {...email} />
+        <Input type='password' prefix={<Password />} placeholder='你的登录密码' {...password} />
         <div className={style.hcaptcha}>
           <Turnstile
             options={{

@@ -37,13 +37,7 @@ const Template: ComponentStory<typeof Form> = (args) => {
       }}
     >
       <Form.Item label='类别名'>
-        <Input
-          type='text'
-          wrapperStyle={{
-            borderRadius: '12px',
-          }}
-          {...register('name')}
-        />
+        <Input type='text' {...register('name')} />
       </Form.Item>
 
       <Form.Item label='类型'>

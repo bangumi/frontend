@@ -1,4 +1,5 @@
 @import '../../../theme/base';
+@import (reference) '../../Input/style/index.less';
 
 .bgm-form {
   display: flex;
@@ -25,5 +26,10 @@
         height: 38px;
       }
     }
+  }
+
+  // Input 默认为胶囊形全圆角，在表单中改为普通圆角
+  .bgm-input__wrapper {
+    .rounded-mixin();
   }
 }

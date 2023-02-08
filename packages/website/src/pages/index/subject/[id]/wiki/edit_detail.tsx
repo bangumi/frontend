@@ -121,8 +121,6 @@ const WikiInfoItem = ({
         <Input
           wrapperStyle={{
             width: '170px',
-            borderTopLeftRadius: '12px',
-            borderBottomLeftRadius: '12px',
           }}
           align={level === 2 ? 'right' : undefined}
           defaultValue={item.key}
