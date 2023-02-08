@@ -1,11 +1,12 @@
 import './Form.stories.less';
 
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import Button from '../Button';
+import EditorForm from '../EditorForm';
 import Input from '../Input';
 import Select from '../Select';
 import Form from '.';
@@ -83,3 +84,21 @@ const Template: ComponentStory<typeof Form> = (args) => {
 };
 
 export const Default = Template.bind({});
+
+export const Compact: ComponentStory<typeof Form> = (args) => {
+  const [content, setContent] = useState('');
+
+  return (
+    <Form compact style={{ width: 675 }} {...args}>
+      <Form.Item>
+        <Input type='text' placeholder='填写对方的 username' prefix='收件人:' />
+      </Form.Item>
+      <Form.Item>
+        <Input type='text' placeholder='取一个标题' prefix='主题:' />
+      </Form.Item>
+      <Form.Item>
+        <EditorForm placeholder='迈出交流的一小步…' value={content} onChange={setContent} />
+      </Form.Item>
+    </Form>
+  );
+};

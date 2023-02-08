@@ -32,4 +32,58 @@
   .bgm-input__wrapper {
     .rounded-mixin();
   }
+
+  &--compact {
+    gap: 0;
+
+    .bgm-form-item {
+      &:not(:first-of-type) {
+        .bgm-input__wrapper,
+        .bgm-editor__container {
+          border-top: none;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+
+      &:not(:last-of-type) {
+        .bgm-input__wrapper,
+        .bgm-editor__container {
+          border-bottom: none;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+
+          // 点状分隔线，距离左右各 12px，故使用伪元素实现
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            width: calc(100% - 24px);
+            border-bottom: 2px dotted @gray-10;
+          }
+        }
+      }
+    }
+
+    .bgm-input__wrapper {
+      flex: 1;
+      padding: 0.75rem;
+
+      .bgm-input {
+        &::placeholder {
+          color: @gray-60;
+        }
+      }
+    }
+
+    .bgm-editor__form {
+      align-items: stretch;
+      width: auto;
+      flex: 1;
+
+      .bgm-editor__text {
+        width: auto;
+      }
+    }
+  }
 }
