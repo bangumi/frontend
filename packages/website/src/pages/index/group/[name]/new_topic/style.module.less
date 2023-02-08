@@ -2,7 +2,7 @@
 
 .grid {
   display: grid;
-  column-gap: 40px;
+  column-gap: 2.5rem;
   grid-template-columns: 2fr 1fr;
 }
 
@@ -11,22 +11,22 @@
 }
 
 .groupLink {
-  font-weight: 600;
+  padding: 0 10px;
 }
 
 .titleInput {
-  margin-bottom: 16px;
+  display: flex;
+  margin-bottom: 1rem;
 
   :global(.bgm-input) {
+    font-size: 1.125rem;
+
     &::placeholder {
-      color: @gray-60; // TODO: why design package uses @gray-10?
+      color: @gray-60;
     }
 
     &__wrapper {
-      // TODO: fix design package
-      width: 100%;
-      padding: 9px 12px;
-      border-radius: 12px;
+      flex: 1;
     }
   }
 }

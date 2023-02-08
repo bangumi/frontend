@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
+import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
-import { EditorForm, Input, Typography } from '@bangumi/design';
+import { EditorForm, Input, toast, Typography } from '@bangumi/design';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
 import GroupInfo from '../../components/GroupInfo';
@@ -29,9 +29,14 @@ const GroupNewTopicPage = () => {
     if (response.status === 200) {
       navigate(`/group/topic/${response.data.id}`);
     } else {
-      console.error(response); // TODO: display error
+      console.error(response);
+      toast(response.data.message);
     }
     setSending(false);
+  };
+
+  const showErrors: SubmitErrorHandler<FormData> = (errors) => {
+    toast(Object.values(errors).map((field) => field.message)[0]!);
   };
 
   return (
@@ -40,28 +45,35 @@ const GroupNewTopicPage = () => {
         <div className={styles.header}>
           <div className={styles.tipText}>
             <Typography.Text type='secondary'>
-              在{' '}
-              <Typography.Link to={`/group/${group.group.name}`} className={styles.groupLink}>
+              在
+              <Typography.Link
+                to={`/group/${group.group.name}`}
+                fontWeight='bold'
+                className={styles.groupLink}
+              >
                 {group.group.title}
-              </Typography.Link>{' '}
+              </Typography.Link>
               发表新话题
             </Typography.Text>
           </div>
           <div className={styles.titleInput}>
-            <Input placeholder='取个标题……' {...register('title', { required: true })} />
+            <Input
+              rounded
+              placeholder='取个标题…'
+              {...register('title', { required: '请填写标题' })}
+            />
           </div>
         </div>
         <div className={styles.contentEditor}>
           <Controller
             name='content'
             control={control}
-            rules={{ required: true }}
+            rules={{ required: '请填写正文内容' }}
             render={({ field }) => (
               <EditorForm
-                placeholder='话题正文……'
+                placeholder='话题正文…'
                 onConfirm={() => {
-                  // TODO: display validation error
-                  handleSubmit(onSubmit, (errors) => console.log(errors))();
+                  handleSubmit(onSubmit, showErrors)();
                 }}
                 hideCancel
                 // TODO: use loading state
