@@ -2,8 +2,13 @@
 
 .grid {
   display: grid;
+  row-gap: 1rem;
   column-gap: 2.5rem;
   grid-template-columns: 2fr 1fr;
+
+  @media (max-width: @sm) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .tipText {
@@ -16,7 +21,6 @@
 
 .titleInput {
   display: flex;
-  margin-bottom: 1rem;
 
   :global(.bgm-input) {
     font-size: 1.125rem;
