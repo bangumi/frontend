@@ -19,6 +19,7 @@ pull_request_rules:
       - '#review-threads-unresolved=0'
       - '#changes-requested-reviews-by=0'
       - -conflict
+      - -draft
       - base=master
       - check-failure!=storybook-build
       - check-failure!=lint
@@ -38,6 +39,7 @@ pull_request_rules:
       - '#approved-reviews-by>=1'
       - -conflict
       - base=master
+      - -draft
       - '#review-threads-unresolved=0'
       - check-failure!=storybook-build
       - check-failure!=lint
