@@ -15,7 +15,8 @@ const GroupNavigation = ({ group }: { group: GroupProfile }) => {
           发表新主题
         </Button.Link>
         <div className={styles.links}>
-          话题：<Link to='#'>我发表的</Link> | <Link to='#'>我回复的</Link>
+          话题：<Link to='/group/my_topic'>我发表的</Link> |{' '}
+          <Link to='/group/my_reply'>我回复的</Link>
         </div>
       </div>
       <div className={styles.section}>
@@ -23,7 +24,7 @@ const GroupNavigation = ({ group }: { group: GroupProfile }) => {
           {group.inGroup ? '退出' : '加入'}这个小组
         </Button>
         <div className={styles.links}>
-          小组：<Link to='#'>我管理的</Link> | <Link to='#'>我参加的</Link>
+          小组：<Link to='#'>我管理的</Link> | <Link to='/group/mine'>我参加的</Link>
         </div>
       </div>
     </div>
