@@ -11,6 +11,21 @@ export const defaults: Oazapfts.RequestOpts = {
 };
 const oazapfts = Oazapfts.runtime(defaults);
 export const servers = {};
+export interface CurrentUser {
+  id: number;
+  username: string;
+  nickname: string;
+  avatar: {
+    small: string;
+    medium: string;
+    large: string;
+  };
+  sign: string;
+  user_group: number;
+  permission: {
+    subjectWikiEdit: boolean;
+  };
+}
 export interface Error {
   code: string;
   error: string;
@@ -168,6 +183,24 @@ export interface HistorySummary {
   commitMessage: string;
   createdAt: number;
 }
+export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: CurrentUser;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >('/p1/me', {
+    ...opts,
+  });
+}
 /**
  * 登出
  */
@@ -238,24 +271,6 @@ export async function login2(
       body,
     }),
   );
-}
-export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: User;
-      }
-    | {
-        status: 401;
-        data: Error;
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >('/p1/me', {
-    ...opts,
-  });
 }
 /**
  * 获取小组首页
@@ -601,6 +616,121 @@ export async function clearNotice(
     }),
   );
 }
+export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          current?: {
+            thumbnail: string;
+            raw: string;
+          };
+          covers: Array<{
+            id: number;
+            thumbnail: string;
+            raw: string;
+            creator: {
+              id: number;
+              username: string;
+              nickname: string;
+              avatar: {
+                small: string;
+                medium: string;
+                large: string;
+              };
+              sign: string;
+              user_group: number;
+            };
+            voted: boolean;
+          }>;
+        };
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers`, {
+    ...opts,
+  });
+}
+/**
+ * 需要 `subjectWikiEdit` 权限
+ */
+export async function uploadSubjectCover(
+  subjectId: number,
+  body: {
+    content: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
+/**
+ * 为条目封面投票
+ */
+export async function voteSubjectCover(
+  subjectId: number,
+  imageId: number,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers/${encodeURIComponent(imageId)}/vote`,
+    {
+      ...opts,
+      method: 'POST',
+    },
+  );
+}
+/**
+ * 撤消条目封面投票
+ */
+export async function unvoteSubjectCover(
+  subjectId: number,
+  imageId: number,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers/${encodeURIComponent(imageId)}/vote`,
+    {
+      ...opts,
+      method: 'DELETE',
+    },
+  );
+}
 /**
  * 获取当前的 wiki 信息
  *
@@ -626,6 +756,8 @@ export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts
 }
 /**
  * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+ *
+ * 需要 `subjectWikiEdit` 权限
  */
 export async function putSubjectInfo(
   subjectId: number,
@@ -717,29 +849,4 @@ export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapf
   >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/history-summary`, {
     ...opts,
   });
-}
-export async function uploadSubjectCover(
-  subjectId: number,
-  body: {
-    content: string;
-  },
-  opts?: Oazapfts.RequestOpts,
-) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: {};
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >(
-    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/cover`,
-    oazapfts.json({
-      ...opts,
-      method: 'POST',
-      body,
-    }),
-  );
 }

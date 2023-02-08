@@ -4,6 +4,9 @@
  */
 
 export interface paths {
+  '/p1/me': {
+    get: operations['getCurrentUser'];
+  };
   '/p1/logout': {
     /** @description 登出 */
     post: operations['logout'];
@@ -17,9 +20,6 @@ export interface paths {
      * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
      */
     post: operations['login2'];
-  };
-  '/p1/me': {
-    get: operations['getCurrentUser'];
   };
   '/p1/groups/{groupName}/profile': {
     /** @description 获取小组首页 */
@@ -61,6 +61,23 @@ export interface paths {
      */
     post: operations['clearNotice'];
   };
+  '/p1/wiki/subjects/{subjectID}/covers': {
+    get: operations['listSubjectCovers'];
+    /** @description 需要 `subjectWikiEdit` 权限 */
+    post: operations['uploadSubjectCover'];
+  };
+  '/p1/wiki/subjects/{subjectID}/covers/{imageID}/vote': {
+    /**
+     * 为条目封面投票
+     * @description 需要 `subjectWikiEdit` 权限
+     */
+    post: operations['voteSubjectCover'];
+    /**
+     * 撤消条目封面投票
+     * @description 需要 `subjectWikiEdit` 权限
+     */
+    delete: operations['unvoteSubjectCover'];
+  };
   '/p1/wiki/subjects/{subjectID}': {
     /**
      * @description 获取当前的 wiki 信息
@@ -68,7 +85,11 @@ export interface paths {
      * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
      */
     get: operations['subjectInfo'];
-    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
+    /**
+     * @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+     *
+     * 需要 `subjectWikiEdit` 权限
+     */
     put: operations['putSubjectInfo'];
     /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
     patch: operations['patchSubjectInfo'];
@@ -80,9 +101,6 @@ export interface paths {
      * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
      */
     get: operations['subjectEditHistorySummary'];
-  };
-  '/p1/wiki/subjects/{subjectID}/cover': {
-    post: operations['uploadSubjectCover'];
   };
 }
 
@@ -122,6 +140,25 @@ export interface components {
       error: string;
       message: string;
       statusCode: number;
+    };
+    Permission: {
+      subjectWikiEdit: boolean;
+    };
+    CurrentUser: {
+      id: number;
+      username: string;
+      nickname: string;
+      /** Avatar */
+      avatar: {
+        small: string;
+        medium: string;
+        large: string;
+      };
+      sign: string;
+      user_group: number;
+      permission: {
+        subjectWikiEdit: boolean;
+      };
     };
     /** Topic */
     Topic: {
@@ -284,6 +321,28 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
+  getCurrentUser: {
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['CurrentUser'];
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
   logout: {
     /** @description 登出 */
     requestBody?: {
@@ -377,28 +436,6 @@ export interface operations {
           /** @description seconds to reset rate limit */
           'X-RateLimit-Reset'?: number;
         };
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
-  getCurrentUser: {
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['User'];
-        };
-      };
-      /** @description Default Response */
-      401: {
         content: {
           'application/json': components['schemas']['Error'];
         };
@@ -759,6 +796,138 @@ export interface operations {
       };
     };
   };
+  listSubjectCovers: {
+    parameters: {
+      /** @example 184017 */
+      path: {
+        subjectID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            current?: {
+              thumbnail: string;
+              raw: string;
+            };
+            covers: {
+              id: number;
+              thumbnail: string;
+              raw: string;
+              /** User */
+              creator: {
+                id: number;
+                username: string;
+                nickname: string;
+                /** Avatar */
+                avatar: {
+                  small: string;
+                  medium: string;
+                  large: string;
+                };
+                sign: string;
+                user_group: number;
+              };
+              voted: boolean;
+            }[];
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  uploadSubjectCover: {
+    /** @description 需要 `subjectWikiEdit` 权限 */
+    parameters: {
+      path: {
+        subjectID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          /**
+           * Format: byte
+           * @description base64 encoded raw bytes, 4mb size limit on **decoded** size
+           */
+          content: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  voteSubjectCover: {
+    /**
+     * 为条目封面投票
+     * @description 需要 `subjectWikiEdit` 权限
+     */
+    parameters: {
+      path: {
+        subjectID: number;
+        imageID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  unvoteSubjectCover: {
+    /**
+     * 撤消条目封面投票
+     * @description 需要 `subjectWikiEdit` 权限
+     */
+    parameters: {
+      path: {
+        subjectID: number;
+        imageID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
   subjectInfo: {
     /**
      * @description 获取当前的 wiki 信息
@@ -793,7 +962,11 @@ export interface operations {
     };
   };
   putSubjectInfo: {
-    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
+    /**
+     * @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+     *
+     * 需要 `subjectWikiEdit` 权限
+     */
     parameters: {
       /** @example 363612 */
       path: {
@@ -908,38 +1081,6 @@ export interface operations {
       401: {
         content: {
           'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
-  uploadSubjectCover: {
-    parameters: {
-      path: {
-        subjectID: number;
-      };
-    };
-    requestBody: {
-      content: {
-        'application/json': {
-          /**
-           * Format: byte
-           * @description base64 encoded raw bytes, 4mb size limit on **decoded** size
-           */
-          content: string;
-        };
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': Record<string, never>;
         };
       };
       /** @description 意料之外的服务器错误 */

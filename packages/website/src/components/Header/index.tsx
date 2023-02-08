@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
 import { UnreadableCodeError } from '@bangumi/utils';
-import { Link } from '@bangumi/website/components/Link';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
@@ -97,10 +97,10 @@ const Header: FC = () => {
       <div className={style.main}>
         <div className='flex items-center'>
           {/* Logo */}
-          <div className={style.logo}>
+          <a className={style.logo} href='/'>
             <Musume className={style.musume} />
             <Logo className={style.textLogo} />
-          </div>
+          </a>
           {/* Mobile Menu Toggle Button */}
           <Button
             className={style.mobileMenuToggle}

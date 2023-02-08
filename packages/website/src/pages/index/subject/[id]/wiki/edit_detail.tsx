@@ -8,6 +8,7 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
@@ -24,7 +25,6 @@ import {
   WikiSyntaxError,
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { Link } from '@bangumi/website/components/Link';
 import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor';
 import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
 import { reorder } from '@bangumi/website/utils';
@@ -100,7 +100,6 @@ const WikiInfoItem = ({
     <div
       className={cn(style.formDetailInfoItem, isArray(item.value) && style.draggableBox)}
       onKeyDown={(e) => {
-        console.log(e);
         if (e.ctrlKey && e.key === 'Enter') {
           level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
         }
@@ -112,20 +111,22 @@ const WikiInfoItem = ({
     >
       <Input.Group
         className={cn(style.formInputGroup, level === 2 && style.formInputGroupSecondary)}
+        onKeyDown={(e) => {
+          // 阻止回车提交表单
+          if (e.key === 'Enter') {
+            e.preventDefault();
+          }
+        }}
       >
         <Input
-          tabIndex={1} // 帮助在按 Tab 时能保证获取下一个 Input，不然下一个会 focus 到 <Cursor/>
           wrapperStyle={{
             width: '170px',
-            borderTopLeftRadius: '12px',
-            borderBottomLeftRadius: '12px',
           }}
           align={level === 2 ? 'right' : undefined}
           defaultValue={item.key}
           onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
         />
         <Input
-          tabIndex={1}
           id={item._id}
           wrapperClass={style.formInput}
           defaultValue={typeof item.value === 'string' ? item.value : ''}
@@ -134,7 +135,15 @@ const WikiInfoItem = ({
         />
       </Input.Group>
 
-      <div {...draggableProvided.dragHandleProps}>
+      <div
+        {...draggableProvided.dragHandleProps}
+        /**
+         * dragHandleProps 中会设置 tabIndex = 0，导致当激活上面的输入框时，按下 Tab
+         * 无法 focus 下一个输入框，而是 focus 该 Icon，这里将 tabIndex 复写为 -1，
+         * 这样下一个输入框由于有更高的优先级就可以被 focus 了。
+         */
+        tabIndex={-1}
+      >
         <Cursor className={style.formDetailInfoItemCursor} />
       </div>
       <Minus
@@ -246,6 +255,8 @@ const WikiEditDetailDetailPage: React.FC = () => {
     wikiRef.current = parseWiki(subjectWikiInfo.infobox);
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
+    // https://github.com/bangumi/frontend/pull/312#discussion_r1086401410
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = useCallback(
@@ -293,7 +304,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
           toast('提交失败，请稍后再试');
         });
     },
-    [wikiElement, editorType, mutateHistory],
+    [wikiElement, editorType, mutateHistory, subjectId],
   );
 
   const handleSetEditorType = (type: EditorType) => {
@@ -453,7 +464,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
         setValue('subject.platform', prePlatform);
       }
     },
-    [editorType, prePlatform],
+    [editorType, prePlatform, setValue, subjectWikiInfo.typeID],
   );
 
   return (
@@ -464,7 +475,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
           <div className={style.title}>修改详细描述</div>
           <Divider className={style.divider} />
           <Form labelWidth={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
-            <Form.Item label='类别名'>
+            <Form.Item label='条目名'>
               <Input
                 type='text'
                 wrapperClass={style.formInput}

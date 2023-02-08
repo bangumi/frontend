@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { Tab } from '@bangumi/design';
-import { NavLink } from '@bangumi/website/components/Link';
 import { WikiEditTabsItems } from '@bangumi/website/shared/wiki';
 
 import style from './WikiLayout.module.less';

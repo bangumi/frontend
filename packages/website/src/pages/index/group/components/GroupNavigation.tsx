@@ -11,9 +11,9 @@ const GroupNavigation = ({ group }: { group: GroupProfile }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.section}>
-        <Button color='blue'>
-          <Link to={`/group/${group.group.name}/new_topic`}>发表新主题</Link>
-        </Button>
+        <Button.Link color='blue' to={`/group/${group.group.name}/new_topic`}>
+          发表新主题
+        </Button.Link>
         <div className={styles.links}>
           话题：<Link to='#'>我发表的</Link> | <Link to='#'>我回复的</Link>
         </div>
