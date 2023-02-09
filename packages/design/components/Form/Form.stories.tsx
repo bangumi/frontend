@@ -97,7 +97,12 @@ export const Compact: ComponentStory<typeof Form> = (args) => {
         <Input type='text' placeholder='取一个标题' prefix='主题:' />
       </Form.Item>
       <Form.Item>
-        <EditorForm placeholder='迈出交流的一小步…' value={content} onChange={setContent} />
+        <EditorForm
+          placeholder='迈出交流的一小步…'
+          value={content}
+          onChange={setContent}
+          confirmText='发送短信'
+        />
       </Form.Item>
     </Form>
   );
