@@ -38,14 +38,6 @@ IconPrefix.args = {
   wrapperStyle: loginStyle,
 };
 
-export const TextPrefix = Template.bind({});
-
-TextPrefix.args = {
-  placeholder: '填写对方的 username',
-  prefix: '收件人:',
-  rounded: true,
-};
-
 export const Password = Template.bind({});
 
 Password.args = {
