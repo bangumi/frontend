@@ -91,17 +91,14 @@ export const Compact: ComponentStory<typeof Form> = (args) => {
   return (
     <Form compact style={{ width: 675 }} {...args}>
       <Form.Item>
-        <Input type='text' placeholder='填写对方的 username' prefix='收件人:' />
-      </Form.Item>
-      <Form.Item>
-        <Input type='text' placeholder='取一个标题' prefix='主题:' />
+        <Input type='text' placeholder='给新帖取一个标题' />
       </Form.Item>
       <Form.Item>
         <EditorForm
-          placeholder='迈出交流的一小步…'
+          placeholder='想聊点什么的呢…'
           value={content}
           onChange={setContent}
-          confirmText='发送短信'
+          confirmText='快速发帖'
         />
       </Form.Item>
     </Form>
