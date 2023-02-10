@@ -15,7 +15,7 @@ exports[`Form Components form item render properly 1`] = `
         <label />
       </div>
       <div
-        class="bgm-input__wrapper"
+        class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
       >
         <input
           class="bgm-input"
@@ -36,7 +36,7 @@ exports[`Form Components form item render properly 1`] = `
         class="bgm-input-group"
       >
         <div
-          class="bgm-input__wrapper"
+          class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
         >
           <input
             class="bgm-input"
@@ -44,7 +44,7 @@ exports[`Form Components form item render properly 1`] = `
           />
         </div>
         <div
-          class="bgm-input__wrapper"
+          class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
         >
           <input
             class="bgm-input"
@@ -66,7 +66,7 @@ exports[`Form Components render compact layout properly 1`] = `
       class="bgm-form-item"
     >
       <div
-        class="bgm-input__wrapper"
+        class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
       >
         <input
           class="bgm-input"
@@ -78,7 +78,7 @@ exports[`Form Components render compact layout properly 1`] = `
       class="bgm-form-item"
     >
       <div
-        class="bgm-input__wrapper"
+        class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
       >
         <input
           class="bgm-input"
@@ -90,10 +90,10 @@ exports[`Form Components render compact layout properly 1`] = `
       class="bgm-form-item"
     >
       <div
-        class="bgm-editor__form"
+        class="bgm-editor__form bgm-form__editor"
       >
         <div
-          class="bgm-editor__container"
+          class="bgm-editor__container bgm-form__field"
         >
           <div
             class="bgm-editor__toolbox"

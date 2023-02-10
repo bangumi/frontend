@@ -20,7 +20,8 @@
     border-radius: 22px;
 
     &--rounded {
-      .rounded-mixin();
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
     }
 
     &--disabled,
@@ -74,9 +75,4 @@
   &::placeholder {
     color: @gray-10;
   }
-}
-
-.rounded-mixin() {
-  padding: 0.5rem 0.75rem;
-  border-radius: 12px;
 }

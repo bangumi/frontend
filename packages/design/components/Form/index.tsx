@@ -9,7 +9,7 @@ type ItemProps = PropsWithChildren<{
 }>;
 
 function FormItem({ children, label }: ItemProps) {
-  const { labelWidth, compact } = useContext(FormContext);
+  const { labelWidth, compact } = useFormContext();
   return (
     <div className='bgm-form-item'>
       {!compact && (
@@ -27,10 +27,20 @@ function FormItem({ children, label }: ItemProps) {
   );
 }
 
-const FormContext = createContext<{ labelWidth: number; compact: boolean }>({
-  labelWidth: 12,
-  compact: false,
-});
+const FormContext = createContext<{ labelWidth: number; compact: boolean } | null>(null);
+
+export const useFormContext = () => {
+  const context = useContext(FormContext);
+  if (!context) {
+    throw new Error('useFormContext() may only be used in the context of a <Form> component.');
+  }
+  return context;
+};
+
+export const useInFormContext = () => {
+  const context = useContext(FormContext);
+  return context !== null;
+};
 
 type FormProps = PropsWithChildren<{
   labelWidth?: number;

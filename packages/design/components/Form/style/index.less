@@ -1,5 +1,4 @@
 @import '../../../theme/base';
-@import (reference) '../../Input/style/index.less';
 
 .bgm-form {
   display: flex;
@@ -28,18 +27,12 @@
     }
   }
 
-  // Input 默认为胶囊形全圆角，在表单中改为普通圆角
-  .bgm-input__wrapper {
-    .rounded-mixin();
-  }
-
   &--compact {
     gap: 0;
 
     .bgm-form-item {
       &:not(:first-of-type) {
-        .bgm-input__wrapper,
-        .bgm-editor__container {
+        .bgm-form__field {
           border-top: none;
           border-top-left-radius: 0;
           border-top-right-radius: 0;
@@ -47,8 +40,7 @@
       }
 
       &:not(:last-of-type) {
-        .bgm-input__wrapper,
-        .bgm-editor__container {
+        .bgm-form__field {
           border-bottom: none;
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
@@ -65,25 +57,28 @@
       }
     }
 
-    .bgm-input__wrapper {
+    .bgm-form__field {
       flex: 1;
-      padding: 0.75rem;
-
-      .bgm-input {
-        &::placeholder {
-          color: @gray-60;
-        }
-      }
-    }
-
-    .bgm-editor__form {
-      align-items: stretch;
       width: auto;
-      flex: 1;
+
+      .bgm-input::placeholder {
+        color: @gray-60;
+      }
 
       .bgm-editor__text {
         width: auto;
+        flex: 1;
       }
+    }
+
+    .bgm-form__input {
+      padding: 0.75rem;
+    }
+
+    .bgm-form__editor {
+      align-items: stretch;
+      width: auto;
+      flex: 1;
     }
   }
 }
