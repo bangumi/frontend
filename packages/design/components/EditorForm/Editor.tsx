@@ -191,7 +191,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
       >
         {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
         <textarea
-          className='bgm-editor__text'
+          className={classnames('bgm-editor__text', { 'bgm-editor__text--width-auto': inForm })}
           placeholder={placeholder}
           ref={innerRef}
           value={value}

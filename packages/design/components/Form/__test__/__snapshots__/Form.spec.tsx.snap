@@ -18,7 +18,7 @@ exports[`Form Components form item render properly 1`] = `
         class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
       >
         <input
-          class="bgm-input"
+          class="bgm-input bgm-input--placeholder-dark"
           type="text"
         />
       </div>
@@ -39,7 +39,7 @@ exports[`Form Components form item render properly 1`] = `
           class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
         >
           <input
-            class="bgm-input"
+            class="bgm-input bgm-input--placeholder-dark"
             type="text"
           />
         </div>
@@ -47,7 +47,7 @@ exports[`Form Components form item render properly 1`] = `
           class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
         >
           <input
-            class="bgm-input"
+            class="bgm-input bgm-input--placeholder-dark"
             type="text"
           />
         </div>
@@ -69,7 +69,7 @@ exports[`Form Components render compact layout properly 1`] = `
         class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
       >
         <input
-          class="bgm-input"
+          class="bgm-input bgm-input--placeholder-dark"
           type="text"
         />
       </div>
@@ -81,7 +81,7 @@ exports[`Form Components render compact layout properly 1`] = `
         class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
       >
         <input
-          class="bgm-input"
+          class="bgm-input bgm-input--placeholder-dark"
           type="text"
         />
       </div>
@@ -124,7 +124,7 @@ exports[`Form Components render compact layout properly 1`] = `
             />
           </div>
           <textarea
-            class="bgm-editor__text"
+            class="bgm-editor__text bgm-editor__text--width-auto"
           />
         </div>
         <div

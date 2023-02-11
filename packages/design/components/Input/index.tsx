@@ -55,7 +55,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {prefix !== undefined && <div className='bgm-input__prefix'>{prefix}</div>}
         <input
           type={type}
-          className={classnames('bgm-input', { 'bgm-input--align-right': align === 'right' })}
+          className={classnames('bgm-input', {
+            'bgm-input--align-right': align === 'right',
+            'bgm-input--placeholder-dark': inForm,
+          })}
           ref={ref}
           disabled={disabled}
           {...rest}
