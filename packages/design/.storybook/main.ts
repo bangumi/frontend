@@ -1,4 +1,3 @@
-import { dirname } from 'node:path';
 
 import type { StorybookViteConfig } from '@storybook/builder-vite';
 import svgr from 'vite-plugin-svgr';
@@ -18,9 +17,6 @@ const config: StorybookViteConfig = {
       viteConfig.build.sourcemap = true;
     }
 
-    // workaround for vite build
-    // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
-    viteConfig.root = dirname(require.resolve('@storybook/builder-vite'));
     /*
      * About auto-generated component docs:
      * Please use FC<Props> instead of React.FC<Props> to declare component.
