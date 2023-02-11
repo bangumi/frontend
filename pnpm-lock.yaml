@@ -102,12 +102,12 @@ importers:
       js-yaml: ^4.1.0
       msw: ^0.49.2
       node-fetch: ^3.3.0
-      oazapfts: ^4.5.1
+      oazapfts: ^4.5.2
       openapi-types: ^12.1.0
       openapi-typescript: ^6.1.0
       orval: ^6.10.3
     dependencies:
-      oazapfts: 4.5.1_openapi-types@12.1.0
+      oazapfts: 4.5.2_openapi-types@12.1.0
     devDependencies:
       '@apidevtools/json-schema-ref-parser': 9.1.0
       '@faker-js/faker': 7.6.0
@@ -196,7 +196,7 @@ importers:
 
   packages/utils:
     specifiers:
-      '@bgm38/wiki': ^0.1.3
+      '@bgm38/wiki': ^0.2.2
       '@types/js-yaml': ^4.0.5
       '@types/lodash': ^4.14.191
       '@types/react': ^18.0.26
@@ -205,7 +205,7 @@ importers:
       nanoid: ^4.0.0
       typescript: ^4.9.4
     dependencies:
-      '@bgm38/wiki': 0.1.3
+      '@bgm38/wiki': 0.2.2
       lodash: 4.17.21
       nanoid: 4.0.0
     devDependencies:
@@ -222,6 +222,7 @@ importers:
       '@bangumi/icons': workspace:0.0.0
       '@bangumi/utils': workspace:0.0.0
       '@marsidev/react-turnstile': ^0.0.5
+      '@remix-run/router': ^1.2.1
       '@testing-library/react': ^13.4.0
       '@types/lodash': ^4.14.191
       '@types/react': ^18.0.26
@@ -238,7 +239,7 @@ importers:
       monaco-editor: ^0.34.1
       msw: ^0.49.2
       nanoid: ^4.0.0
-      oazapfts: ^4.5.1
+      oazapfts: ^4.5.2
       openapi-types: ^12.1.0
       postcss: ^8.4.20
       postcss-less: ^6.0.0
@@ -258,12 +259,13 @@ importers:
       whatwg-fetch: ^3.6.2
     dependencies:
       '@marsidev/react-turnstile': 0.0.5_biqbaboplfbrettd7655fr4n2y
+      '@remix-run/router': 1.2.1
       classnames: 2.3.2
       dayjs: 1.11.7
       lodash: 4.17.21
       monaco-editor: 0.34.1
       nanoid: 4.0.0
-      oazapfts: 4.5.1_openapi-types@12.1.0
+      oazapfts: 4.5.2_openapi-types@12.1.0
       react: 18.2.0
       react-beautiful-dnd: 13.1.1_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
@@ -3243,8 +3245,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@bgm38/wiki/0.1.3:
-    resolution: {integrity: sha512-LRZqhAda8n2Iip3sEPK/n/8sNrqELPhxFXLRdOiidM00EKAnfYp0dALozKPupBg0wArDQQfj6tdn8nt0VHH4Cg==}
+  /@bgm38/wiki/0.2.2:
+    resolution: {integrity: sha512-G1ttxnYBbYOdc8Gwvptdu7FdlWiDmP9EQRabIrDAL1WzjNp3VNLiZeczgN1X3jarN5i8D4kuBfeJ23TKy+cJ2g==}
     engines: {node: '>=16'}
     dev: false
 
@@ -14145,8 +14147,8 @@ packages:
       should: 13.2.3
       yaml: 1.10.2
 
-  /oazapfts/4.5.1_openapi-types@12.1.0:
-    resolution: {integrity: sha512-jpcryIybNtMw2du1PtzjY553DK6QSRmWOj0YI8qD/Sm78Ie6AnNhOtRDvI5+naG0Qsfce4kxr2u/GuWhfn/FuA==}
+  /oazapfts/4.5.2_openapi-types@12.1.0:
+    resolution: {integrity: sha512-D8uAs3V5XRuGa1qX9VGj9joQqhHQ3SiAs07T+p8JCNukj8r5RwRsgfx4V8YyHKlAA65ClNCk95p1N+cvkqqThw==}
     hasBin: true
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0

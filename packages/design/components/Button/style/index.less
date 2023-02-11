@@ -1,35 +1,98 @@
 @import '../../../theme/base';
 
 .bgm-button {
-  border: 0;
   cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 2px transparent solid;
+  height: var(--height);
+  border-radius: calc(var(--height) / 2);
 
-  &__normal {
-    height: 38px;
-    font-size: 14px;
-    line-height: 20px;
-  }
+  // 默认大小：large
+  --height: 38px;
 
-  &__primary {
+  padding: 0 32px;
+  line-height: 20px;
+
+  &--primary {
     background-color: @primary-color;
     color: #fff;
+
+    &.bgm-button--color {
+      &-blue {
+        background-color: @blue-100;
+      }
+
+      &-gray {
+        background-color: @gray-10;
+        color: @gray-80;
+      }
+    }
   }
 
-  &__secondary {
-    background-color: @gray-10;
-    color: @gray-80;
+  &--secondary {
+    background-color: transparent;
+    border-color: @gray-10;
+    color: @gray-60;
+
+    &:hover {
+      background-color: @gray-10;
+      color: @gray-80;
+    }
+
+    &.bgm-button--color {
+      &-blue {
+        border-color: @blue-100;
+        color: @blue-100;
+
+        &:hover {
+          background-color: @blue-100;
+          color: #fff;
+        }
+      }
+    }
   }
 
-  &__text {
+  &--text {
     background-color: transparent;
     color: @gray-60;
   }
 
-  &__normal&__rounded {
-    border-radius: 19px;
-  }
-}
+  &--size {
+    &-medium {
+      --height: 30px;
 
-.bgm-button__disabled {
-  cursor: default;
+      padding: 0 13px;
+      line-height: 24px;
+    }
+
+    &-small {
+      --height: 24px;
+
+      padding: 0 17px;
+      line-height: 24px;
+    }
+  }
+
+  &--shape-square {
+    border-radius: 0;
+  }
+
+  &--disabled {
+    cursor: default;
+  }
+
+  &--link {
+    display: inline-flex;
+    text-decoration: none;
+  }
 }

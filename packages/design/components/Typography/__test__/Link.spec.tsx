@@ -22,3 +22,9 @@ it('should render external link', () => {
 
   expect(asFragment()).toMatchSnapshot();
 });
+
+it('should render no-style link', () => {
+  const { asFragment } = render(<Link to='/a' noStyle />, { wrapper: LinkTestWrapper });
+
+  expect(asFragment()).toMatchSnapshot();
+});

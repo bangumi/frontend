@@ -3,8 +3,63 @@ import React from 'react';
 
 import Button from '../index';
 
-it.each(['primary', 'secondary', 'text'] as const)('should render button of type %s', (type) => {
-  const { container } = render(<Button type={type}>hello world</Button>);
+describe('Primary Button', () => {
+  it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
+    const { container } = render(
+      <Button type='primary' size={size}>
+        hello world
+      </Button>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it.each(['blue', 'gray'] as const)('should render button of color %s', (color) => {
+    const { container } = render(
+      <Button type='primary' color={color}>
+        hello world
+      </Button>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+});
+
+describe('Secondary Button', () => {
+  it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
+    const { container } = render(
+      <Button type='secondary' size={size}>
+        hello world
+      </Button>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it.each(['blue'] as const)('should render button of color %s', (color) => {
+    const { container } = render(
+      <Button type='secondary' color={color}>
+        hello world
+      </Button>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+});
+
+describe('Text Button', () => {
+  it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
+    const { container } = render(
+      <Button type='text' size={size}>
+        hello world
+      </Button>,
+    );
+    expect(container.firstChild).toMatchSnapshot();
+  });
+});
+
+it('should render button link', () => {
+  const { container } = render(
+    <Button.Link to='https://bgm.tv' isExternal>
+      Bangumi
+    </Button.Link>,
+  );
   expect(container.firstChild).toMatchSnapshot();
 });
 

@@ -1,11 +1,12 @@
 import './Form.stories.less';
 
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import Button from '../Button';
+import EditorForm from '../EditorForm';
 import Input from '../Input';
 import Select from '../Select';
 import Form from '.';
@@ -37,13 +38,7 @@ const Template: ComponentStory<typeof Form> = (args) => {
       }}
     >
       <Form.Item label='类别名'>
-        <Input
-          type='text'
-          wrapperStyle={{
-            borderRadius: '12px',
-          }}
-          {...register('name')}
-        />
+        <Input type='text' {...register('name')} />
       </Form.Item>
 
       <Form.Item label='类型'>
@@ -83,11 +78,29 @@ const Template: ComponentStory<typeof Form> = (args) => {
         </Input.Group>
       </Form.Item>
 
-      <Button htmlType='submit' shape='rounded'>
-        提交修改
-      </Button>
+      <Button htmlType='submit'>提交修改</Button>
     </Form>
   );
 };
 
 export const Default = Template.bind({});
+
+export const Compact: ComponentStory<typeof Form> = (args) => {
+  const [content, setContent] = useState('');
+
+  return (
+    <Form compact style={{ width: 675 }} {...args}>
+      <Form.Item>
+        <Input type='text' placeholder='给新帖取一个标题' />
+      </Form.Item>
+      <Form.Item>
+        <EditorForm
+          placeholder='想聊点什么的呢…'
+          value={content}
+          onChange={setContent}
+          confirmText='快速发帖'
+        />
+      </Form.Item>
+    </Form>
+  );
+};

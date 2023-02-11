@@ -17,8 +17,8 @@ const componentMeta: ComponentMeta<typeof EditorForm> = {
 export default componentMeta;
 
 const Template: ComponentStory<typeof EditorForm> = (args) => {
-  const [content, setContent] = useState(args.content);
-  return <EditorForm {...args} content={content} onChange={setContent} />;
+  const [value, setValue] = useState(args.value);
+  return <EditorForm {...args} value={value} onChange={setValue} />;
 };
 
 export const Usage = Template.bind({});

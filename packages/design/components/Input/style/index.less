@@ -17,12 +17,33 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     border: 2px solid @gray-10;
-    border-radius: 19px;
+    border-radius: 22px;
+
+    &--rounded {
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
+    }
 
     &--disabled,
     &--disabled * {
       cursor: not-allowed;
       background: #f4f4f5;
+    }
+  }
+
+  &__prefix {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    white-space: nowrap;
+    user-select: none;
+    font-weight: 600;
+    color: @gray-80;
+    line-height: 1.625rem;
+
+    svg {
+      width: 19px;
+      height: 19px;
     }
   }
 
@@ -59,5 +80,11 @@
 
   &::placeholder {
     color: @gray-10;
+  }
+
+  &--placeholder-dark {
+    &::placeholder {
+      color: @gray-60;
+    }
   }
 }
