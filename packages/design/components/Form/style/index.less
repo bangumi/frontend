@@ -1,5 +1,4 @@
 @import '../../../theme/base';
-@import (reference) '../../Input/style/index.less';
 
 .bgm-form {
   display: flex;
@@ -28,8 +27,49 @@
     }
   }
 
-  // Input 默认为胶囊形全圆角，在表单中改为普通圆角
-  .bgm-input__wrapper {
-    .rounded-mixin();
+  &--compact {
+    gap: 0;
+
+    .bgm-form-item {
+      &:not(:first-of-type) {
+        .bgm-form__field {
+          border-top: none;
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
+      }
+
+      &:not(:last-of-type) {
+        .bgm-form__field {
+          border-bottom: none;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+
+          // 点状分隔线，距离左右各 12px，故使用伪元素实现
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            width: calc(100% - 24px);
+            border-bottom: 2px dotted @gray-10;
+          }
+        }
+      }
+    }
+
+    .bgm-form__field {
+      flex: 1;
+      width: auto;
+    }
+
+    .bgm-form__input {
+      padding: 0.75rem;
+    }
+
+    .bgm-form__editor {
+      align-items: stretch;
+      width: auto;
+      flex: 1;
+    }
   }
 }

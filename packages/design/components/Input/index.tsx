@@ -3,6 +3,8 @@ import './style';
 import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 
+import { useInFormContext } from '../Form';
+
 export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
   /** 外层 wrapper 的样式 */
   wrapperStyle?: React.CSSProperties;
@@ -33,13 +35,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
+    const inForm = useInFormContext();
+
     return (
       <div
         className={classnames(
           'bgm-input__wrapper',
           {
             'bgm-input__wrapper--disabled': disabled,
-            'bgm-input__wrapper--rounded': rounded,
+            // 默认为胶囊形全圆角，在表单中为普通圆角
+            'bgm-input__wrapper--rounded': rounded || inForm,
+            'bgm-form__field': inForm,
+            'bgm-form__input': inForm,
           },
           wrapperClass,
         )}
@@ -48,7 +55,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {prefix !== undefined && <div className='bgm-input__prefix'>{prefix}</div>}
         <input
           type={type}
-          className={classnames('bgm-input', { 'bgm-input--align-right': align === 'right' })}
+          className={classnames('bgm-input', {
+            'bgm-input--align-right': align === 'right',
+            'bgm-input--placeholder-dark': inForm,
+          })}
           ref={ref}
           disabled={disabled}
           {...rest}
