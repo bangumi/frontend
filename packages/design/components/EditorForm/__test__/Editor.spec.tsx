@@ -272,7 +272,7 @@ describe('EditorForm > Editor', () => {
     }
   });
 
-  it('word count is working', () => {
+  it('word count is working when input contains unicode', () => {
     const { container } = render(<Editor value='123👍' />);
     expect(container.querySelector('.bgm-editor__wordcount')).toHaveTextContent('已输入 4 字');
   });
