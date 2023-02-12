@@ -12,40 +12,10 @@
 }
 
 .tipText {
+  display: block;
   margin-bottom: 10px;
 }
 
 .groupLink {
   padding: 0 10px;
-}
-
-.titleInput {
-  display: flex;
-
-  :global(.bgm-input) {
-    font-size: 1.125rem;
-
-    &::placeholder {
-      color: @gray-60;
-    }
-
-    &__wrapper {
-      flex: 1;
-    }
-  }
-}
-
-.contentEditor {
-  grid-column: 1;
-
-  :global(.bgm-editor) {
-    &__form,
-    &__text {
-      width: auto;
-    }
-
-    &__container {
-      align-self: stretch;
-    }
-  }
 }

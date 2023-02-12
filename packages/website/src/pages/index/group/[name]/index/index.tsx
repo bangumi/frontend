@@ -9,6 +9,7 @@ import { DescriptionClamp, useGroupRecentTopics } from '@bangumi/website/hooks/u
 import { useGroupContext } from '../../[name]';
 import CommonStyles from '../../common.module.less';
 import { ClampableContent } from '../../components/ClampableContent';
+import NewTopicForm from '../components/NewTopicForm';
 import TopicsTable from '../components/TopicsTable';
 import styles from './style.module.less';
 
@@ -55,6 +56,7 @@ const GroupHome: React.FC = () => {
       >
         <TopicsTable topics={recentTopics.data} />
       </Section>
+      <NewTopicForm quickPost />
     </>
   );
 };

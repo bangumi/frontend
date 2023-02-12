@@ -1,0 +1,38 @@
+@import '@bangumi/design/theme/base';
+
+.titleInput {
+  display: flex;
+  grid-column: 1;
+
+  :global(.bgm-input) {
+    font-size: 1.125rem;
+
+    &::placeholder {
+      color: @gray-60;
+    }
+
+    &__wrapper {
+      flex: 1;
+    }
+  }
+}
+
+.contentEditor {
+  grid-column: 1;
+
+  :global(.bgm-editor) {
+    &__form,
+    &__text {
+      width: auto;
+    }
+
+    &__container {
+      align-self: stretch;
+    }
+  }
+}
+
+.quickPostForm {
+  margin-top: 40px;
+  max-width: 682px;
+}
