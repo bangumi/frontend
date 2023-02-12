@@ -136,6 +136,11 @@ describe('EditorForm > Editor', () => {
     expect(container.querySelector('.bgm-editor__toolbox')).not.toBeInTheDocument();
   });
 
+  it('showWordCount props', () => {
+    const { container } = render(<Editor showWordCount={false} />);
+    expect(container.querySelector('.bgm-editor__wordcount')).not.toBeInTheDocument();
+  });
+
   it('click toolbox should have correct behavior', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
@@ -265,5 +270,10 @@ describe('EditorForm > Editor', () => {
       }
       prompt.mockClear();
     }
+  });
+
+  it('word count is working', () => {
+    const { container } = render(<Editor value='123' />);
+    expect(container.querySelector('.bgm-editor__wordcount')).toHaveTextContent('已输入 3 字');
   });
 });

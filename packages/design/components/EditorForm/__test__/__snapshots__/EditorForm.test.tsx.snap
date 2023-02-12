@@ -9,32 +9,41 @@ exports[`<EditorForm /> render correctly with props 1`] = `
       class="bgm-editor__container"
     >
       <div
-        class="bgm-editor__toolbox"
+        class="bgm-editor__toolbar"
       >
         <div
-          data-testid="bold"
-          title="粗体 [Ctrl+B]"
-        />
+          class="bgm-editor__toolbox"
+        >
+          <div
+            data-testid="bold"
+            title="粗体 [Ctrl+B]"
+          />
+          <div
+            data-testid="italic"
+            title="斜体 [Ctrl+I]"
+          />
+          <div
+            data-testid="underscore"
+            title="下划线 [Ctrl+U]"
+          />
+          <div
+            data-testid="image"
+            title="图片 [Ctrl+P]"
+          />
+          <div
+            data-testid="link"
+            title="链接 [Ctrl+L]"
+          />
+          <div
+            data-testid="size"
+            title="文字尺寸 [Ctrl+S]"
+          />
+        </div>
         <div
-          data-testid="italic"
-          title="斜体 [Ctrl+I]"
-        />
-        <div
-          data-testid="underscore"
-          title="下划线 [Ctrl+U]"
-        />
-        <div
-          data-testid="image"
-          title="图片 [Ctrl+P]"
-        />
-        <div
-          data-testid="link"
-          title="链接 [Ctrl+L]"
-        />
-        <div
-          data-testid="size"
-          title="文字尺寸 [Ctrl+S]"
-        />
+          class="bgm-editor__wordcount"
+        >
+          已输入 0 字
+        </div>
       </div>
       <textarea
         class="bgm-editor__text"
