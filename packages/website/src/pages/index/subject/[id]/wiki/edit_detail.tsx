@@ -228,7 +228,7 @@ interface FormData {
 }
 
 const formatWikiSyntaxErrorMessage = (error: WikiSyntaxError): string => {
-  return `${typeof error.lino === 'number' ? `line ${error.lino}:` : ''} ${error.message}`;
+  return `${error.lino ? `line ${error.lino}:` : ''} ${error.message}`;
 };
 
 const WikiEditDetailDetailPage: React.FC = () => {
