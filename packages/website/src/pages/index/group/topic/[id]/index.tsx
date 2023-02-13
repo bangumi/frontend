@@ -5,10 +5,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
+import { useGroup } from '@bangumi/website/hooks/use-group';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import GroupInfo from '../../components/GroupInfo';
+import GroupNavigation from '../../components/GroupNavigation';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
@@ -25,6 +27,7 @@ const TopicPage: FC = () => {
   const originalPosterId = topicDetail.creator.id;
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
+  const { group: groupProfile } = useGroup(group.name);
 
   const [replyContent, setReplyContent] = useState('');
 
@@ -91,7 +94,12 @@ const TopicPage: FC = () => {
             </div>
           </>
         }
-        rightChildren={<GroupInfo group={group} />}
+        rightChildren={
+          <>
+            <GroupNavigation group={groupProfile} />
+            <GroupInfo group={group} />
+          </>
+        }
       />
     </>
   );
