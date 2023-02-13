@@ -213,7 +213,7 @@ export async function clearNotice(
     }),
   );
 }
-export async function editReply(
+export async function editGroupReply(
   postId: number,
   body: {
     text: string;
@@ -262,6 +262,40 @@ export async function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpt
   >(`/p1/groups/-/topics/${encodeURIComponent(id)}`, {
     ...opts,
   });
+}
+export async function editGroupTopic(
+  topicId: number,
+  body: {
+    text: string;
+    title: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 400;
+        data: Error;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    `/p1/groups/-/topics/${encodeURIComponent(topicId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
 }
 export async function createGroupReply(
   topicId: number,
