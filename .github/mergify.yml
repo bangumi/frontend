@@ -5,10 +5,18 @@ pull_request_rules:
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
-      - check-failure!=storybook-build
-      - check-failure!=lint
-      - check-failure!=test
-      - check-failure!=build
+      - or:
+          - check-success=storybook-build
+          - check-skipped=storybook-build
+      - or:
+          - check-success=lint
+          - check-skipped=lint
+      - or:
+          - check-success=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-skipped=build
     actions:
       merge:
         method: squash
@@ -21,11 +29,19 @@ pull_request_rules:
       - -conflict
       - -draft
       - base=master
-      - check-failure!=storybook-build
-      - check-failure!=lint
-      - check-failure!=test
-      - check-failure!=build
       - label!=waiting-review
+      - or:
+          - check-success=storybook-build
+          - check-skipped=storybook-build
+      - or:
+          - check-success=lint
+          - check-skipped=lint
+      - or:
+          - check-success=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-skipped=build
     actions:
       request_reviews:
         teams:
@@ -41,10 +57,18 @@ pull_request_rules:
       - base=master
       - -draft
       - '#review-threads-unresolved=0'
-      - check-failure!=storybook-build
-      - check-failure!=lint
-      - check-failure!=test
-      - check-failure!=build
+      - or:
+          - check-success=storybook-build
+          - check-skipped=storybook-build
+      - or:
+          - check-success=lint
+          - check-skipped=lint
+      - or:
+          - check-success=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-skipped=build
     actions:
       label:
         remove:
