@@ -195,7 +195,9 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
       >
         <div className='bgm-editor__toolbar'>
           {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
-          {showWordCount && <div className='bgm-editor__wordcount'>已输入 {size(value)} 字</div>}
+          {showWordCount && value && (
+            <div className='bgm-editor__wordcount'>已输入 {size(value)} 字</div>
+          )}
         </div>
         <textarea
           className={classnames('bgm-editor__text', { 'bgm-editor__text--width-auto': inForm })}
