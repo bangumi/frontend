@@ -126,13 +126,6 @@ exports[`Form Components render compact layout properly 1`] = `
                 title="文字尺寸 [Ctrl+S]"
               />
             </div>
-            <div
-              class="bgm-editor__wordcount"
-            >
-              已输入 
-              0
-               字
-            </div>
           </div>
           <textarea
             class="bgm-editor__text bgm-editor__text--width-auto"
