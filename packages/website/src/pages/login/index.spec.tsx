@@ -2,7 +2,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React from 'react';
 import * as MockReact from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
@@ -27,6 +27,8 @@ jest.mock('@marsidev/react-turnstile', () => {
 
 jest.mock('react-router-dom');
 const mockedUseNavigate = jest.mocked(useNavigate);
+const mockedUseLocation = jest.mocked(useLocation);
+const mockedUseSearchParams = jest.mocked(useSearchParams);
 
 function mockLogin(
   statusCode: number,
@@ -40,10 +42,8 @@ function mockLogin(
   );
 }
 
-it('should redirect user to homepage after success login', async () => {
+function mockSuccessfulLogin() {
   mockLogin(200);
-  const mockedNavigate = jest.fn();
-  mockedUseNavigate.mockReturnValue(mockedNavigate);
 
   const { getByPlaceholderText, getByText } = render(
     <UserProvider>
@@ -57,9 +57,44 @@ it('should redirect user to homepage after success login', async () => {
   fireEvent.input(getByPlaceholderText('你的登录密码'), { target: { value: fakePassword } });
 
   fireEvent.click(getByText('登录'));
+}
 
+it('should redirect user to homepage after success login', async () => {
+  const mockedNavigate = jest.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), jest.fn()] as any);
+
+  mockSuccessfulLogin();
   await waitFor(() => {
     expect(mockedNavigate).toBeCalledWith('/', { replace: true });
+  });
+});
+
+it('should bring user back to last page if exists', async () => {
+  const mockedNavigate = jest.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'not-default' } as any);
+  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), jest.fn()] as any);
+
+  mockSuccessfulLogin();
+  await waitFor(() => {
+    expect(mockedNavigate).toBeCalledWith(-1);
+  });
+});
+
+it('should redirect user to specified page', async () => {
+  const mockedNavigate = jest.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+  mockedUseSearchParams.mockReturnValue([
+    new URLSearchParams({ backTo: '/group/sandbox' }),
+    jest.fn(),
+  ] as any);
+
+  mockSuccessfulLogin();
+  await waitFor(() => {
+    expect(mockedNavigate).toBeCalledWith('/group/sandbox', { replace: true });
   });
 });
 
