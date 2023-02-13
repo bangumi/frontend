@@ -40,8 +40,9 @@ const Login: React.FC = () => {
 
   const successRedirect = () => {
     // 如果有 backTo 参数，则跳转到指定的页面
-    if (searchParams.has('backTo')) {
-      navigate(searchParams.get('backTo')!, { replace: true });
+    const backTo = searchParams.get('backTo');
+    if (backTo) {
+      navigate(backTo, { replace: true });
     }
     // 如果有 history 则返回上一页
     // https://github.com/remix-run/react-router/discussions/9788
