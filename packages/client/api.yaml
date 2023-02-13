@@ -681,7 +681,7 @@ paths:
         - user
   /p1/groups/-/posts/{postID}:
     put:
-      operationId: editReply
+      operationId: editGroupReply
       parameters:
         - example: 2092074
           in: path
@@ -776,6 +776,73 @@ paths:
           description: 意料之外的服务器错误
       tags:
         - topic
+  /p1/groups/-/topics/{topicID}:
+    put:
+      operationId: editGroupTopic
+      parameters:
+        - example: 371602
+          in: path
+          name: topicID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              text: new contents
+              title: new topic title
+            schema:
+              properties:
+                text:
+                  minLength: 1
+                  type: string
+                title:
+                  minLength: 1
+                  type: string
+              required:
+                - title
+                - text
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to edit a topic
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - group
   /p1/groups/-/topics/{topicID}/replies:
     post:
       operationId: createGroupReply

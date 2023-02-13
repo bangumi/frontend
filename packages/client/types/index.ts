@@ -14,11 +14,14 @@ export interface paths {
     post: operations['clearNotice'];
   };
   '/p1/groups/-/posts/{postID}': {
-    put: operations['editReply'];
+    put: operations['editGroupReply'];
   };
   '/p1/groups/-/topics/{id}': {
     /** @description 获取帖子列表 */
     get: operations['getGroupTopicDetail'];
+  };
+  '/p1/groups/-/topics/{topicID}': {
+    put: operations['editGroupTopic'];
   };
   '/p1/groups/-/topics/{topicID}/replies': {
     post: operations['createGroupReply'];
@@ -352,7 +355,7 @@ export interface operations {
       };
     };
   };
-  editReply: {
+  editGroupReply: {
     parameters: {
       /** @example 2092074 */
       path: {
@@ -409,6 +412,54 @@ export interface operations {
       };
       /** @description 小组不存在 */
       404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  editGroupTopic: {
+    parameters: {
+      /** @example 371602 */
+      path: {
+        topicID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "text": "new contents",
+         *   "title": "new topic title"
+         * }
+         */
+        'application/json': {
+          text: string;
+          title: string;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description Default Response */
+      400: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description Default Response */
+      401: {
         content: {
           'application/json': components['schemas']['Error'];
         };
