@@ -89,7 +89,10 @@ export const Compact: ComponentStory<typeof Form> = (args) => {
   const [content, setContent] = useState('');
 
   return (
-    <Form compact style={{ width: 675 }} {...args}>
+    <Form compact style={{ maxWidth: 675 }} {...args}>
+      <Form.Item>
+        <Input type='text' placeholder='给新帖取一个标题' />
+      </Form.Item>
       <Form.Item>
         <Input type='text' placeholder='给新帖取一个标题' />
       </Form.Item>

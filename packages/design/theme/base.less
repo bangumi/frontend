@@ -3,3 +3,9 @@
 @sm: 640px;
 @md: 768px;
 @lg: 1024px;
+
+.desktop-only {
+  @media (max-width: @sm) {
+    display: none;
+  }
+}

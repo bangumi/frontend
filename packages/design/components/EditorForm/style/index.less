@@ -1,7 +1,7 @@
 @import '../../../theme/base';
 
 @toolbox-width: 215px;
-@text-width: 682px;
+@text-width: 500px; //TODO: fix-me:breaking on mobile style
 
 .bgm-editor {
   &__container {
@@ -10,8 +10,9 @@
     min-height: 162px;
     border: 2px solid @gray-10;
     border-radius: 12px;
-    padding: 8px 6px 6px;
-    z-index: 9999;
+    padding: 10px 0 0 12px;
+    box-sizing: border-box;
+    max-width: 100%;
   }
 
   &__toolbox {
@@ -20,7 +21,6 @@
     align-items: center;
     height: 26px;
     width: @toolbox-width;
-    padding: 0 8px;
     margin-bottom: 10px;
 
     > svg {
@@ -30,9 +30,9 @@
 
   &__text {
     flex: 1 0 auto;
-    padding: 0 6px;
-    min-width: @toolbox-width;
-    width: @text-width;
+    padding: 0;
+    max-width: 100%; // max width fit __container
+    min-width: calc(@text-width + 12px);
     border: none;
     outline: none;
     color: @gray-100;
@@ -53,7 +53,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: @text-width;
+    min-width: @text-width;
   }
 
   &__submit {
