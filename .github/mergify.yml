@@ -5,6 +5,7 @@ pull_request_rules:
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
+      - -title~=(?i)wip
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -21,15 +22,14 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: request review
+  - name: label 'waiting-review'
     conditions:
-      - '#approved-reviews-by=0'
-      - '#review-threads-unresolved=0'
-      - '#changes-requested-reviews-by=0'
+      - '#approved-reviews-by<2'
       - -conflict
       - -draft
       - base=master
       - label!=waiting-review
+      - -title~=(?i)wip
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -44,12 +44,12 @@ pull_request_rules:
           - check-skipped=build
     actions:
       label:
-        add:
+        toggle:
           - waiting-review
 
-  - name: add 48h label
+  - name: label 48h
     conditions:
-      - '#approved-reviews-by>=1'
+      - '#approved-reviews-by>=2'
       - -conflict
       - base=master
       - -draft
@@ -68,10 +68,8 @@ pull_request_rules:
           - check-skipped=build
     actions:
       label:
-        remove:
-          - waiting-review
         toggle:
-          - waiting-opened-48h
+          - waiting-opened-48h-before-merge
 
   - name: warn on conflicts
     conditions:
