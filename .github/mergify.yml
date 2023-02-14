@@ -23,7 +23,7 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: label 'waiting-review'
+  - name: label 'waiting-reviewer-approval'
     conditions:
       - '#approved-reviews-by<2'
       - -conflict
@@ -46,7 +46,7 @@ pull_request_rules:
     actions:
       label:
         toggle:
-          - waiting-review
+          - waiting-reviewer-approval
 
   - name: label 48h
     conditions:
