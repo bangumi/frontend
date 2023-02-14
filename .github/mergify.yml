@@ -54,6 +54,7 @@ pull_request_rules:
       - base=master
       - -draft
       - '#review-threads-unresolved=0'
+      - -title~=(?i)wip
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
