@@ -146,7 +146,7 @@ exports[`Form Components render compact layout properly 1`] = `
             <span
               class="desktop-only"
             >
-              使用 Ctrl+Enter 或 Alt+S 快速提交 |
+              使用 Ctrl+Enter 或 Alt+S 快速提交 | 
             </span>
             <a
               class="bgm-link"
