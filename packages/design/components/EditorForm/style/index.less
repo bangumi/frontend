@@ -10,7 +10,7 @@
     min-height: 162px;
     border: 2px solid @gray-10;
     border-radius: 12px;
-    padding: 10px 0 0 12px;
+    padding: 8px 6px 6px;
     box-sizing: border-box;
     max-width: 100%;
   }
@@ -21,6 +21,7 @@
     align-items: center;
     height: 26px;
     width: @toolbox-width;
+    padding: 0 8px;
     margin-bottom: 10px;
 
     > svg {
@@ -30,9 +31,9 @@
 
   &__text {
     flex: 1 0 auto;
-    padding: 0;
-    max-width: 100%; // max width fit __container
-    min-width: calc(@text-width + 12px); // 12px is __container width
+    padding: 0 6px;
+    max-width: calc(100% - 12px); // max width fit __container
+    min-width: @text-width;
     border: none;
     outline: none;
     color: @gray-100;
