@@ -51,6 +51,7 @@ pull_request_rules:
   - name: label 48h
     conditions:
       - '#approved-reviews-by>=2'
+      - '#changes-requested-reviews-by=0'
       - -conflict
       - base=master
       - -draft
