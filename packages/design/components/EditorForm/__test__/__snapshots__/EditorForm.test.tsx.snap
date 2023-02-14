@@ -57,7 +57,11 @@ exports[`<EditorForm /> render correctly with props 1`] = `
       <span
         class="bgm-editor__bbcode-tip"
       >
-        使用 Ctrl+Enter 或 Alt+S 快速提交 | 
+        <span
+          class="desktop-only"
+        >
+          使用 Ctrl+Enter 或 Alt+S 快速提交 |
+        </span>
         <a
           class="bgm-link"
           href="https://bgm.tv/help/bbcode"
