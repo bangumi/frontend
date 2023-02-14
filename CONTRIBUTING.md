@@ -75,6 +75,7 @@ git push -u origin <YOUR_BRANCH>
 ## PR 规则
 
 - PR 的标题需要满足 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) 规范的要求
+- 尚未完成的 PR 请在标题中添加 `[WIP]`，或者以 draft 状态。
 
 ### 在合并之前
 

@@ -5,7 +5,7 @@ pull_request_rules:
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
-      - -title~=(?i)wip
+      - -title~=(?i)\[wip\]
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -29,7 +29,7 @@ pull_request_rules:
       - -draft
       - base=master
       - label!=waiting-review
-      - -title~=(?i)wip
+      - -title~=(?i)\[wip\]
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -54,7 +54,7 @@ pull_request_rules:
       - base=master
       - -draft
       - '#review-threads-unresolved=0'
-      - -title~=(?i)wip
+      - -title~=(?i)\[wip\]
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
