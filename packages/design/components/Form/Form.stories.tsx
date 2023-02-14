@@ -91,7 +91,6 @@ export const Compact: ComponentStory<typeof Form> = (args) => {
   return (
     <Form compact style={{ width: 675 }} {...args}>
       <Input type='text' placeholder='给新帖取一个标题' />
-      <Input type='text' placeholder='给新帖取一个标题' />
       <EditorForm
         placeholder='想聊点什么的呢…'
         value={content}
