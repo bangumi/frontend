@@ -3,4 +3,4 @@ packages/design/storybook-static
 pnpm-lock.yaml
 *.snap
 # submodules
-/packages/utils/wiki/__test__/wiki-syntax-spec/
+packages/utils/wiki-syntax-spec/
