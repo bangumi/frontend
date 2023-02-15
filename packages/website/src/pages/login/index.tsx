@@ -42,7 +42,7 @@ const Login: React.FC = () => {
     // 如果有 backTo 参数，则跳转到指定的页面
     const backTo = searchParams.get('backTo');
     if (backTo) {
-      navigate(backTo, { replace: true });
+      navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
     }
     // 如果有 history 则返回上一页
     // https://github.com/remix-run/react-router/discussions/9788
