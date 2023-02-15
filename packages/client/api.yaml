@@ -210,6 +210,26 @@ components:
         - commitMessage
         - createdAt
       type: object
+    LoginRequestBody:
+      examples:
+        - cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
+          email: treeholechan@gmail.com
+          password: lovemeplease
+      properties:
+        cf-turnstile-response:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        password:
+          minLength: 1
+          type: string
+      required:
+        - email
+        - password
+        - cf-turnstile-response
+      type: object
     Notice:
       properties:
         createdAt:
@@ -1159,7 +1179,7 @@ paths:
         - CookiesSession: []
       tags:
         - group
-  /p1/login2:
+  /p1/login:
     post:
       description: >-
         需要
@@ -1170,31 +1190,12 @@ paths:
 
 
         dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
-      operationId: login2
+      operationId: login
       requestBody:
         content:
           application/json:
-            example:
-              cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-              email: treeholechan@gmail.com
-              password: lovemeplease
             schema:
-              properties:
-                cf-turnstile-response:
-                  minLength: 1
-                  type: string
-                email:
-                  minLength: 1
-                  type: string
-                password:
-                  minLength: 1
-                  type: string
-              required:
-                - email
-                - password
-                - cf-turnstile-response
-              type: object
-        required: true
+              $ref: '#/components/schemas/LoginRequestBody'
       responses:
         '200':
           content:
@@ -1269,6 +1270,94 @@ paths:
                 type: integer
             X-RateLimit-Reset:
               description: seconds to reset rate limit
+              schema:
+                type: integer
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - auth
+  /p1/login2:
+    post:
+      deprecated: true
+      description: 'backward compatibility for #login operator'
+      operationId: login2
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequestBody'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: Default Response
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                CAPTCHA_ERROR:
+                  value:
+                    code: CAPTCHA_ERROR
+                    error: Unauthorized
+                    message: wrong captcha
+                    statusCode: 401
+                EMAIL_PASSWORD_ERROR:
+                  value:
+                    code: EMAIL_PASSWORD_ERROR
+                    error: Unauthorized
+                    message: email does not exists or email and password not match
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 验证码错误/账号密码不匹配
+          description: 验证码错误/账号密码不匹配
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+        '429':
+          content:
+            application/json:
+              example:
+                code: TOO_MANY_REQUESTS
+                error: Too Many Requests
+                message: too many failed login attempts
+                statusCode: 429
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 失败次数太多，需要过一段时间再重试
+          description: 失败次数太多，需要过一段时间再重试
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+            X-RateLimit-Reset:
               schema:
                 type: integer
         '500':
