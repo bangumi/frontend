@@ -123,3 +123,22 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:storybook-build:fail'
+
+  - name: Conventional Commit
+    conditions:
+      - base=master
+      - -title~=(?i)\[wip\]
+    actions:
+      post_check:
+        success_conditions:
+          - "title~=^(fix|feat|docs|style|refactor|perf|test|build|ci|chore|revert)(?:\\(.+\\))?:"
+        title: |
+          {% if check_succeed %}
+          Title follows Conventional Commit
+          {% else %}
+          Title does not follow Conventional Commit
+          {% endif %}
+        summary: |
+          {% if not check_succeed %}
+          Your pull request title must follow [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/).
+          {% endif %}
