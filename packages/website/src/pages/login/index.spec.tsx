@@ -98,6 +98,21 @@ it('should redirect user to specified page', async () => {
   });
 });
 
+it('should redirect user to home if specified path is invalid', async () => {
+  const mockedNavigate = jest.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+  mockedUseSearchParams.mockReturnValue([
+    new URLSearchParams({ backTo: 'https://bgm.tv/' }),
+    jest.fn(),
+  ] as any);
+
+  mockSuccessfulLogin();
+  await waitFor(() => {
+    expect(mockedNavigate).toBeCalledWith('/', { replace: true });
+  });
+});
+
 it.each([
   {
     statusCode: 401,
