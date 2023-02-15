@@ -48,7 +48,7 @@ pull_request_rules:
         toggle:
           - waiting-reviewer-approval
 
-  - name: label 48h
+  - name: label waiting 48h
     conditions:
       - '#approved-reviews-by>=2'
       - '#changes-requested-reviews-by=0'
