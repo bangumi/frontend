@@ -15,10 +15,10 @@ exports[`Form Components form item render properly 1`] = `
         <label />
       </div>
       <div
-        class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
+        class="bgm-input__wrapper"
       >
         <input
-          class="bgm-input bgm-input--placeholder-dark"
+          class="bgm-input"
           type="text"
         />
       </div>
@@ -36,18 +36,18 @@ exports[`Form Components form item render properly 1`] = `
         class="bgm-input-group"
       >
         <div
-          class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
+          class="bgm-input__wrapper"
         >
           <input
-            class="bgm-input bgm-input--placeholder-dark"
+            class="bgm-input"
             type="text"
           />
         </div>
         <div
-          class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
+          class="bgm-input__wrapper"
         >
           <input
-            class="bgm-input bgm-input--placeholder-dark"
+            class="bgm-input"
             type="text"
           />
         </div>
@@ -63,100 +63,88 @@ exports[`Form Components render compact layout properly 1`] = `
     class="bgm-form bgm-form--compact"
   >
     <div
-      class="bgm-form-item"
+      class="bgm-input__wrapper"
     >
-      <div
-        class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
-      >
-        <input
-          class="bgm-input bgm-input--placeholder-dark"
-          type="text"
-        />
-      </div>
+      <input
+        class="bgm-input"
+        type="text"
+      />
     </div>
     <div
-      class="bgm-form-item"
+      class="bgm-input__wrapper"
     >
-      <div
-        class="bgm-input__wrapper bgm-input__wrapper--rounded bgm-form__field bgm-form__input"
-      >
-        <input
-          class="bgm-input bgm-input--placeholder-dark"
-          type="text"
-        />
-      </div>
+      <input
+        class="bgm-input"
+        type="text"
+      />
     </div>
     <div
-      class="bgm-form-item"
+      class="bgm-editor__form"
     >
       <div
-        class="bgm-editor__form bgm-form__editor"
+        class="bgm-editor__container"
       >
         <div
-          class="bgm-editor__container bgm-form__field"
+          class="bgm-editor__toolbar"
         >
           <div
-            class="bgm-editor__toolbar"
+            class="bgm-editor__toolbox"
           >
             <div
-              class="bgm-editor__toolbox"
-            >
-              <div
-                data-testid="bold"
-                title="粗体 [Ctrl+B]"
-              />
-              <div
-                data-testid="italic"
-                title="斜体 [Ctrl+I]"
-              />
-              <div
-                data-testid="underscore"
-                title="下划线 [Ctrl+U]"
-              />
-              <div
-                data-testid="image"
-                title="图片 [Ctrl+P]"
-              />
-              <div
-                data-testid="link"
-                title="链接 [Ctrl+L]"
-              />
-              <div
-                data-testid="size"
-                title="文字尺寸 [Ctrl+S]"
-              />
-            </div>
+              data-testid="bold"
+              title="粗体 [Ctrl+B]"
+            />
+            <div
+              data-testid="italic"
+              title="斜体 [Ctrl+I]"
+            />
+            <div
+              data-testid="underscore"
+              title="下划线 [Ctrl+U]"
+            />
+            <div
+              data-testid="image"
+              title="图片 [Ctrl+P]"
+            />
+            <div
+              data-testid="link"
+              title="链接 [Ctrl+L]"
+            />
+            <div
+              data-testid="size"
+              title="文字尺寸 [Ctrl+S]"
+            />
           </div>
-          <textarea
-            class="bgm-editor__text bgm-editor__text--width-auto"
-          />
         </div>
-        <div
-          class="bgm-editor__submit"
+        <textarea
+          class="bgm-editor__text"
+        />
+      </div>
+      <div
+        class="bgm-editor__submit"
+      >
+        <button
+          class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button--primary bgm-button--size-small bgm-button--color-blue"
         >
-          <button
-            class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button--primary bgm-button--size-small bgm-button--color-blue"
+          写好了
+        </button>
+        <button
+          class="bgm-button bgm-editor__button bgm-button--text bgm-button--size-small"
+        >
+          取消
+        </button>
+        <span
+          class="bgm-editor__bbcode-tip"
+        >
+          使用 Ctrl+Enter 或 Alt+S 快速提交 |
+           
+          <a
+            class="bgm-link"
+            href="https://bgm.tv/help/bbcode"
           >
-            写好了
-          </button>
-          <button
-            class="bgm-button bgm-editor__button bgm-button--text bgm-button--size-small"
-          >
-            取消
-          </button>
-          <span
-            class="bgm-editor__bbcode-tip"
-          >
-            使用 Ctrl+Enter 或 Alt+S 快速提交 |
-             
-            <a
-              class="bgm-link"
-              href="https://bgm.tv/help/bbcode"
-            >
-              BBCode指南
-            </a>
-          </span>
-        </div>
+            BBCode指南
+          </a>
+        </span>
       </div>
     </div>
   </form>
