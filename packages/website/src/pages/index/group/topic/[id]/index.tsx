@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
+import { Avatar, Button, Layout, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
@@ -46,6 +46,12 @@ const TopicPage: FC = () => {
     setReplyContent('');
   };
 
+  const startReply = () => {
+    const replyForm = document.getElementById('replyForm');
+    replyForm?.scrollIntoView(true);
+    replyForm?.querySelector('textarea')?.focus();
+  };
+
   return (
     <>
       <GroupTopicHeader
@@ -62,6 +68,23 @@ const TopicPage: FC = () => {
             {/* Topic content */}
             <div id={`post_${topicDetail.id}`}>
               <RichContent bbcode={topicDetail.text} />
+              {user && (
+                <div className={styles.topicActions}>
+                  <Button type='secondary' size='small' onClick={startReply}>
+                    评论
+                  </Button>
+                  {user.id === topicDetail.creator.id && (
+                    <>
+                      <Button.Link type='text' size='small' to={`/group/topic/${id}/edit`}>
+                        编辑
+                      </Button.Link>
+                      <Button type='text' size='small'>
+                        删除
+                      </Button>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
             {/* Topic Comments */}
             <div className={styles.replies}>
@@ -79,7 +102,7 @@ const TopicPage: FC = () => {
               ))}
               {/* Reply BBCode Editor */}
               {!isClosed && user && (
-                <div className={styles.replyFormContainer}>
+                <div className={styles.replyFormContainer} id='replyForm'>
                   <Avatar src={user.avatar.large} size='medium' />
                   <ReplyForm
                     topicId={topicDetail.id}

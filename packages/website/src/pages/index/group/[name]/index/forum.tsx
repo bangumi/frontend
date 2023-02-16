@@ -7,7 +7,7 @@ import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 
-import NewTopicForm from '../components/NewTopicForm';
+import TopicForm from '../../components/TopicForm';
 import TopicsTable from '../components/TopicsTable';
 import styles from './style.module.less';
 
@@ -35,7 +35,7 @@ const GroupForum = () => {
         wrapperClass={styles.pagination}
         onChange={handlePageChange}
       />
-      <NewTopicForm quickPost />
+      <TopicForm quickPost groupName={name} />
     </>
   );
 };
