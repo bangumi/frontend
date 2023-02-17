@@ -1,7 +1,7 @@
 import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { Turnstile } from '@marsidev/react-turnstile';
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useInput } from 'rooks';
 
 import { Button, Input } from '@bangumi/design';
@@ -25,6 +25,8 @@ const Login: React.FC = () => {
   const password = useInput('' as string);
   const { login } = useUser();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, _] = useSearchParams();
 
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
@@ -34,6 +36,23 @@ const Login: React.FC = () => {
     [LoginErrorCode.E_CLIENT_ERROR]: '请求错误',
     [LoginErrorCode.E_TOO_MANY_ERROR]: '登录失败次数太多，请过段时间再重试',
     [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试',
+  };
+
+  const successRedirect = () => {
+    // 如果有 backTo 参数，则跳转到指定的页面
+    const backTo = searchParams.get('backTo');
+    if (backTo) {
+      navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
+    }
+    // 如果有 history 则返回上一页
+    // https://github.com/remix-run/react-router/discussions/9788
+    else if (location.key !== 'default') {
+      navigate(-1);
+    }
+    // 否则跳转到首页
+    else {
+      navigate('/', { replace: true });
+    }
   };
 
   const handleLogin = async () => {
@@ -54,7 +73,7 @@ const Login: React.FC = () => {
 
     try {
       await login(email.value, password.value, captchaToken);
-      navigate('/', { replace: true });
+      successRedirect();
     } catch (error: unknown) {
       captcha.current?.reset();
       setCaptchaToken(null);

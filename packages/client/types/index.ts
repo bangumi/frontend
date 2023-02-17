@@ -39,13 +39,20 @@ export interface paths {
     get: operations['getGroupTopicsByGroupName'];
     post: operations['createNewGroupTopic'];
   };
-  '/p1/login2': {
+  '/p1/login': {
     /**
      * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
      *
      * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
      *
      * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+     */
+    post: operations['login'];
+  };
+  '/p1/login2': {
+    /**
+     * @deprecated
+     * @description backward compatibility for #login operator
      */
     post: operations['login2'];
   };
@@ -186,6 +193,11 @@ export interface components {
       };
       /** @description 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知 */
       type: number;
+    };
+    LoginRequestBody: {
+      'cf-turnstile-response': string;
+      email: string;
+      password: string;
     };
     Notice: {
       /** @description unix timestamp in seconds */
@@ -654,7 +666,7 @@ export interface operations {
       };
     };
   };
-  login2: {
+  login: {
     /**
      * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
      *
@@ -662,20 +674,9 @@ export interface operations {
      *
      * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
      */
-    requestBody: {
+    requestBody?: {
       content: {
-        /**
-         * @example {
-         *   "cf-turnstile-response": "10000000-aaaa-bbbb-cccc-000000000001",
-         *   "email": "treeholechan@gmail.com",
-         *   "password": "lovemeplease"
-         * }
-         */
-        'application/json': {
-          'cf-turnstile-response': string;
-          email: string;
-          password: string;
-        };
+        'application/json': components['schemas']['LoginRequestBody'];
       };
     };
     responses: {
@@ -717,6 +718,62 @@ export interface operations {
           /** @description remaining rate limit */
           'X-RateLimit-Remaining'?: number;
           /** @description seconds to reset rate limit */
+          'X-RateLimit-Reset'?: number;
+        };
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  login2: {
+    /**
+     * @deprecated
+     * @description backward compatibility for #login operator
+     */
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['LoginRequestBody'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          'Set-Cookie'?: string;
+        };
+        content: {
+          'application/json': components['schemas']['User'];
+        };
+      };
+      /** @description Default Response */
+      400: {
+        content: {
+          'application/json': components['schemas']['ValidationError'];
+        };
+      };
+      /** @description 验证码错误/账号密码不匹配 */
+      401: {
+        headers: {
+          'X-RateLimit-Limit'?: number;
+          'X-RateLimit-Remaining'?: number;
+          'X-RateLimit-Reset'?: number;
+        };
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 失败次数太多，需要过一段时间再重试 */
+      429: {
+        headers: {
+          'X-RateLimit-Limit'?: number;
+          'X-RateLimit-Remaining'?: number;
           'X-RateLimit-Reset'?: number;
         };
         content: {

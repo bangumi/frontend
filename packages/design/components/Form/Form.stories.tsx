@@ -89,21 +89,14 @@ export const Compact: ComponentStory<typeof Form> = (args) => {
   const [content, setContent] = useState('');
 
   return (
-    <Form compact style={{ maxWidth: 675 }} {...args}>
-      <Form.Item>
-        <Input type='text' placeholder='给新帖取一个标题' />
-      </Form.Item>
-      <Form.Item>
-        <Input type='text' placeholder='给新帖取一个标题' />
-      </Form.Item>
-      <Form.Item>
-        <EditorForm
-          placeholder='想聊点什么的呢…'
-          value={content}
-          onChange={setContent}
-          confirmText='快速发帖'
-        />
-      </Form.Item>
+    <Form compact style={{ width: 675 }} {...args}>
+      <Input type='text' placeholder='给新帖取一个标题' />
+      <EditorForm
+        placeholder='想聊点什么的呢…'
+        value={content}
+        onChange={setContent}
+        confirmText='快速发帖'
+      />
     </Form>
   );
 };

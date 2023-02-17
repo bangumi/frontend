@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 
 import Button from '../Button';
-import { useInFormContext } from '../Form';
 import Link from '../Typography/Link';
 import type { EditorProps } from './Editor';
 import Editor from './Editor';
@@ -43,8 +42,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
     },
     ref,
   ) => {
-    const inForm = useInFormContext();
-    const classNames = classnames('bgm-editor__form', { 'bgm-form__editor': inForm }, className);
+    const classNames = classnames('bgm-editor__form', className);
 
     return (
       <div className={classNames} style={style}>

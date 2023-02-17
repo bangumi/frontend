@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import { size } from 'lodash';
 import type { FocusEventHandler } from 'react';
 import React, {
   forwardRef,
@@ -9,13 +9,14 @@ import React, {
   useState,
 } from 'react';
 
-import { useInFormContext } from '../Form';
 import Toolbox from './Toolbox';
 
 export interface EditorProps {
   placeholder?: string;
   /** 是否显示工具栏 */
   showToolbox?: boolean;
+  /** 是否显示字数统计 */
+  showWordCount?: boolean;
   /** textarea 通过键盘按下提交触发事件 */
   onConfirm?: (value: string) => void;
   /**
@@ -46,6 +47,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
     {
       placeholder,
       showToolbox = true,
+      showWordCount = true,
       onConfirm,
       value = '',
       onChange,
@@ -56,7 +58,6 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
     },
     ref,
   ) => {
-    const inForm = useInFormContext();
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
@@ -184,14 +185,15 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
     );
 
     return (
-      <div
-        className={classnames('bgm-editor__container', {
-          'bgm-form__field': inForm,
-        })}
-      >
-        {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
+      <div className='bgm-editor__container'>
+        <div className='bgm-editor__toolbar'>
+          {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
+          {showWordCount && value && (
+            <div className='bgm-editor__wordcount'>已输入 {size(value)} 字</div>
+          )}
+        </div>
         <textarea
-          className={classnames('bgm-editor__text', { 'bgm-editor__text--width-auto': inForm })}
+          className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
           value={value}

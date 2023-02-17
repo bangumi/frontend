@@ -1,10 +1,12 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
+      - '#approved-reviews-by>=2'
       - 'created-at<=48:00 ago'
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
+      - -title~=(?i)\[wip\]
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -21,15 +23,14 @@ pull_request_rules:
       merge:
         method: squash
 
-  - name: request review
+  - name: label 'waiting-reviewer-approval'
     conditions:
-      - '#approved-reviews-by=0'
-      - '#review-threads-unresolved=0'
-      - '#changes-requested-reviews-by=0'
+      - '#approved-reviews-by<2'
       - -conflict
       - -draft
       - base=master
       - label!=waiting-review
+      - -title~=(?i)\[wip\]
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -44,16 +45,18 @@ pull_request_rules:
           - check-skipped=build
     actions:
       label:
-        add:
-          - waiting-review
+        toggle:
+          - waiting-reviewer-approval
 
-  - name: add 48h label
+  - name: label waiting 48h
     conditions:
-      - '#approved-reviews-by>=1'
+      - '#approved-reviews-by>=2'
+      - '#changes-requested-reviews-by=0'
       - -conflict
       - base=master
       - -draft
       - '#review-threads-unresolved=0'
+      - -title~=(?i)\[wip\]
       - or:
           - check-success=storybook-build
           - check-skipped=storybook-build
@@ -68,8 +71,6 @@ pull_request_rules:
           - check-skipped=build
     actions:
       label:
-        remove:
-          - waiting-review
         toggle:
           - waiting-opened-48h
 

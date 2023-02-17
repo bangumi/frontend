@@ -111,6 +111,11 @@ export interface GroupProfile {
   topics: Topic[];
   totalTopics: number;
 }
+export interface LoginRequestBody {
+  'cf-turnstile-response': string;
+  email: string;
+  password: string;
+}
 export interface ValidationError {
   error: string;
   message: string;
@@ -488,14 +493,41 @@ export async function createNewGroupTopic(
  *
  * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
  */
-export async function login2(
-  body: {
-    'cf-turnstile-response': string;
-    email: string;
-    password: string;
-  },
-  opts?: Oazapfts.RequestOpts,
-) {
+export async function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: User;
+      }
+    | {
+        status: 400;
+        data: ValidationError;
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 429;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(
+    '/p1/login',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: loginRequestBody,
+    }),
+  );
+}
+/**
+ * backward compatibility for #login operator
+ */
+export async function login2(loginRequestBody?: LoginRequestBody, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -522,7 +554,7 @@ export async function login2(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body,
+      body: loginRequestBody,
     }),
   );
 }
