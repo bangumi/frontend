@@ -26,9 +26,12 @@ const NewTopicForm = ({ quickPost = false }: { quickPost?: boolean }) => {
   const { register, handleSubmit, control } = useForm<FormData>();
   const [sending, setSending] = useState(false);
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<FormData> = async ({ content, title }) => {
     setSending(true);
-    const response = await ozaClient.createNewGroupTopic(group.group.name, data);
+    const response = await ozaClient.createNewGroupTopic(group.group.name, {
+      title,
+      text: content,
+    });
     if (response.status === 200) {
       navigate(`/group/topic/${response.data.id}`);
     } else {
