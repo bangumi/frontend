@@ -65,15 +65,9 @@ describe('Form Components', () => {
   it('render compact layout properly', () => {
     const { container } = render(
       <Form compact>
-        <Form.Item>
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <EditorForm />
-        </Form.Item>
+        <Input />
+        <Input />
+        <EditorForm />
       </Form>,
     );
     expect(container).toMatchSnapshot();
