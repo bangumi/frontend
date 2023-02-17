@@ -77,12 +77,8 @@ const NewTopicForm = ({ quickPost = false }: { quickPost?: boolean }) => {
         // 统一由 EditorForm 的 onConfirm 处理
         onSubmit={(e) => e.preventDefault()}
       >
-        <Form.Item>
-          <FormInput quickPost />
-        </Form.Item>
-        <Form.Item>
-          <FormEditor quickPost />
-        </Form.Item>
+        <FormInput quickPost />
+        <FormEditor quickPost />
       </Form>
     );
   }

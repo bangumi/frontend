@@ -42,10 +42,8 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
     },
     ref,
   ) => {
-    const classNames = classnames('bgm-editor__form', className);
-
     return (
-      <div className={classNames} style={style}>
+      <div className={classnames('bgm-editor__form', className)} style={style}>
         <Editor ref={ref} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button

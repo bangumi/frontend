@@ -2,7 +2,6 @@
 @import (reference) '../../../components/Form/style/index';
 
 @toolbox-width: 215px;
-@text-width: 500px; //TODO: fix-me:breaking on mobile style
 
 .bgm-editor {
   &__container {
@@ -13,7 +12,7 @@
     border-radius: 12px;
     padding: 8px 6px 6px;
     box-sizing: border-box;
-    max-width: 100%;
+    width: 100%;
   }
 
   &__toolbar {
@@ -47,8 +46,7 @@
   &__text {
     flex: 1 0 auto;
     padding: 0 6px;
-    max-width: calc(100% - 12px); // max width fit __container
-    min-width: @text-width;
+    resize: vertical;
     border: none;
     outline: none;
     color: @gray-100;
@@ -65,13 +63,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    // https://stackoverflow.com/questions/43809612/prevent-a-child-element-from-overflowing-its-parent-in-flexbox
-    // bgm-editor__form 将有可能作为 flex item 使用！
-    // flex item 会初始 min-width: auto。
-    // min-width: auto 时，flex item 可以自由 expand 和 shrink。
-    // 我们不想该 item(bgm-editor__form) 被自由伸缩，顾有此选项
-    // * 注意：为了避免混淆，真实的 min width 我们在 __text 中控制
-    min-width: 0;
   }
 
   &__submit {
