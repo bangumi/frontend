@@ -1,4 +1,5 @@
 @import '../../../theme/base';
+@import (reference) '../../../components/Form/style/index';
 
 @toolbox-width: 215px;
 @text-width: 682px;
@@ -56,10 +57,6 @@
     &::placeholder {
       color: @gray-60;
     }
-
-    &--width-auto {
-      width: auto;
-    }
   }
 
   &__form {
@@ -82,6 +79,24 @@
     .bgm-editor__bbcode-tip {
       color: @gray-60;
       line-height: 24px;
+    }
+  }
+
+  .bgm-form &__text {
+    width: auto;
+  }
+
+  // 在 Form 中使用 Editor 而非 EditorForm 的场景
+  .bgm-form--compact > &__container {
+    .compact-form-item();
+  }
+
+  .bgm-form--compact > &__form {
+    align-items: stretch;
+    width: auto;
+
+    .bgm-editor__container {
+      .no-top-border();
     }
   }
 }

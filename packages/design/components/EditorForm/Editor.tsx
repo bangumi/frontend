@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import { size } from 'lodash';
 import type { FocusEventHandler } from 'react';
 import React, {
@@ -10,7 +9,6 @@ import React, {
   useState,
 } from 'react';
 
-import { useInFormContext } from '../Form';
 import Toolbox from './Toolbox';
 
 export interface EditorProps {
@@ -60,7 +58,6 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
     },
     ref,
   ) => {
-    const inForm = useInFormContext();
     const [selection, setSelection] = useState<[number, number]>();
     const innerRef = useRef<HTMLTextAreaElement>(null);
 
@@ -188,11 +185,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
     );
 
     return (
-      <div
-        className={classnames('bgm-editor__container', {
-          'bgm-form__field': inForm,
-        })}
-      >
+      <div className='bgm-editor__container'>
         <div className='bgm-editor__toolbar'>
           {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
           {showWordCount && value && (
@@ -200,7 +193,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           )}
         </div>
         <textarea
-          className={classnames('bgm-editor__text', { 'bgm-editor__text--width-auto': inForm })}
+          className='bgm-editor__text'
           placeholder={placeholder}
           ref={innerRef}
           value={value}

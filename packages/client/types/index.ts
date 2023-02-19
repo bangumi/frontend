@@ -290,6 +290,11 @@ export interface components {
       /** @description 最后回复时间，unix time stamp in seconds */
       updatedAt: number;
     };
+    TopicCreation: {
+      /** @description bbcode */
+      text: string;
+      title: string;
+    };
     TopicDetail: {
       createdAt: number;
       creator: components['schemas']['User'];
@@ -443,18 +448,9 @@ export interface operations {
         topicID: number;
       };
     };
-    requestBody: {
+    requestBody?: {
       content: {
-        /**
-         * @example {
-         *   "text": "new contents",
-         *   "title": "new topic title"
-         * }
-         */
-        'application/json': {
-          text: string;
-          title: string;
-        };
+        'application/json': components['schemas']['TopicCreation'];
       };
     };
     responses: {
@@ -634,18 +630,9 @@ export interface operations {
         groupName: string;
       };
     };
-    requestBody: {
+    requestBody?: {
       content: {
-        /**
-         * @example {
-         *   "content": "post contents",
-         *   "title": "post title"
-         * }
-         */
-        'application/json': {
-          content: string;
-          title: string;
-        };
+        'application/json': components['schemas']['TopicCreation'];
       };
     };
     responses: {
@@ -653,7 +640,7 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            /** @description new post topic id */
+            /** @description new topic id */
             id: number;
           };
         };

@@ -533,6 +533,22 @@ components:
         - repliesCount
       title: Topic
       type: object
+    TopicCreation:
+      examples:
+        - content: topic content
+          title: topic title
+      properties:
+        text:
+          description: bbcode
+          minLength: 1
+          type: string
+        title:
+          minLength: 1
+          type: string
+      required:
+        - title
+        - text
+      type: object
     TopicDetail:
       properties:
         createdAt:
@@ -809,22 +825,8 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              text: new contents
-              title: new topic title
             schema:
-              properties:
-                text:
-                  minLength: 1
-                  type: string
-                title:
-                  minLength: 1
-                  type: string
-              required:
-                - title
-                - text
-              type: object
-        required: true
+              $ref: '#/components/schemas/TopicCreation'
       responses:
         '200':
           content:
@@ -1139,22 +1141,8 @@ paths:
       requestBody:
         content:
           application/json:
-            example:
-              content: post contents
-              title: post title
             schema:
-              properties:
-                content:
-                  minLength: 1
-                  type: string
-                title:
-                  minLength: 1
-                  type: string
-              required:
-                - title
-                - content
-              type: object
-        required: true
+              $ref: '#/components/schemas/TopicCreation'
       responses:
         '200':
           content:
@@ -1162,7 +1150,7 @@ paths:
               schema:
                 properties:
                   id:
-                    description: new post topic id
+                    description: new topic id
                     type: integer
                 required:
                   - id

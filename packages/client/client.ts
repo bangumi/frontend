@@ -66,6 +66,10 @@ export interface TopicDetail {
   text: string;
   title: string;
 }
+export interface TopicCreation {
+  text: string;
+  title: string;
+}
 export interface BasicReply {
   createdAt: number;
   creator: User;
@@ -270,10 +274,7 @@ export async function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpt
 }
 export async function editGroupTopic(
   topicId: number,
-  body: {
-    text: string;
-    title: string;
-  },
+  topicCreation?: TopicCreation,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -298,7 +299,7 @@ export async function editGroupTopic(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body,
+      body: topicCreation,
     }),
   );
 }
@@ -460,10 +461,7 @@ export async function getGroupTopicsByGroupName(
 }
 export async function createNewGroupTopic(
   groupName: string,
-  body: {
-    content: string;
-    title: string;
-  },
+  topicCreation?: TopicCreation,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -482,7 +480,7 @@ export async function createNewGroupTopic(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body,
+      body: topicCreation,
     }),
   );
 }
