@@ -105,7 +105,7 @@ importers:
       oazapfts: ^4.5.2
       openapi-types: ^12.1.0
       openapi-typescript: ^6.1.0
-      orval: ^6.10.3
+      orval: ^6.11.1
     dependencies:
       oazapfts: 4.5.2_openapi-types@12.1.0
     devDependencies:
@@ -117,7 +117,7 @@ importers:
       node-fetch: 3.3.0
       openapi-types: 12.1.0
       openapi-typescript: 6.1.0
-      orval: 6.10.3_openapi-types@12.1.0
+      orval: 6.11.1_openapi-types@12.1.0
 
   packages/design:
     specifiers:
@@ -4190,6 +4190,91 @@ packages:
     resolution: {integrity: sha512-Aq58f5HiWdyDlFffbbSjAlv596h/cOnt2DO1w3DOC7OJ5EHs0hd/nycJfiu9RJbT6Yk6F1knnRRXNSpxoIVZ9Q==}
     dev: true
 
+  /@orval/angular/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-L1sdQ7b7cq5jtL2OBacpyQ2MwGRUcWm1U5BEJg0R+K3eWN7LfFAQk99karMEbre1C5U/s2BXh/hxmWHK24i1+A==}
+    dependencies:
+      '@orval/core': 6.11.1_openapi-types@12.1.0
+    transitivePeerDependencies:
+      - encoding
+      - openapi-types
+      - supports-color
+    dev: true
+
+  /@orval/axios/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-iemXAYoTuguCIgzK4yHRuUWNxIYk8umpI7FYNYCk+YZ1MJfWa+GAKeem9Fzb3EbmWWvlH4bNfFkXsygvorS1nw==}
+    dependencies:
+      '@orval/core': 6.11.1_openapi-types@12.1.0
+    transitivePeerDependencies:
+      - encoding
+      - openapi-types
+      - supports-color
+    dev: true
+
+  /@orval/core/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-0d8K4gmeMovYYdagRQ5pj0KsgtB8JKDYP/RjzQfr40ootAjbP6egaAjhSzogv0vfSr5GDwNPPzD+S0cK6pQsAw==}
+    dependencies:
+      '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
+      acorn: 8.8.1
+      ajv: 8.11.2
+      chalk: 4.1.2
+      compare-versions: 4.1.4
+      debug: 4.3.4
+      esbuild: 0.15.18
+      esutils: 2.0.3
+      fs-extra: 10.1.0
+      globby: 11.1.0
+      ibm-openapi-validator: 0.88.3
+      lodash.get: 4.4.2
+      lodash.isempty: 4.4.0
+      lodash.omit: 4.5.0
+      lodash.uniq: 4.5.0
+      lodash.uniqby: 4.7.0
+      lodash.uniqwith: 4.5.0
+      micromatch: 4.0.5
+      openapi3-ts: 3.1.2
+      swagger2openapi: 7.0.8
+      validator: 13.7.0
+    transitivePeerDependencies:
+      - encoding
+      - openapi-types
+      - supports-color
+    dev: true
+
+  /@orval/msw/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-1WA9nLBhvBTu0MZ0V+UAlipNMkOmhy0vv2RfcAGrqiq8TCHkdVvVOZvrIuQkJxYkELEBAXTPfGnIzqCVwRkwiA==}
+    dependencies:
+      '@orval/core': 6.11.1_openapi-types@12.1.0
+      cuid: 2.1.8
+      lodash.get: 4.4.2
+      lodash.omit: 4.5.0
+      openapi3-ts: 3.1.2
+    transitivePeerDependencies:
+      - encoding
+      - openapi-types
+      - supports-color
+    dev: true
+
+  /@orval/query/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-FV5mGQ9fpyqPJl82AkGvft2WQGr0GLyrVp7k7Nrlr0I2j+F0PByvlvtvTbS0CCXY9m9ot6tE3NDXkISZEczG4w==}
+    dependencies:
+      '@orval/core': 6.11.1_openapi-types@12.1.0
+      lodash.omitby: 4.6.0
+    transitivePeerDependencies:
+      - encoding
+      - openapi-types
+      - supports-color
+    dev: true
+
+  /@orval/swr/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-Oi/cgNzFWU0ukXoq5RselfJLcoy9l+MmLpmgnqTghXewRq67q1iIc5ee5/8Kf9m36dLCfb7uk8m1i3e6F5LhwA==}
+    dependencies:
+      '@orval/core': 6.11.1_openapi-types@12.1.0
+    transitivePeerDependencies:
+      - encoding
+      - openapi-types
+      - supports-color
+    dev: true
+
   /@pkgr/utils/2.3.1:
     resolution: {integrity: sha512-wfzX8kc1PMyUILA+1Z/EqoE4UCXGy0iRGMhPwdfae1+f0OXlLqCk+By+aMzgJBzR9AzS4CDizioG6Ss1gvAFJw==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
@@ -4411,7 +4496,7 @@ packages:
       '@types/json-schema': 7.0.11
       ajv: 8.11.2
       ajv-errors: 3.0.0_ajv@8.11.2
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1_ajv@8.11.2
       es-aggregate-error: 1.0.9
       jsonpath-plus: 7.1.0
       lodash: 4.17.21
@@ -4449,7 +4534,7 @@ packages:
       ajv: 8.11.2
       ajv-draft-04: 1.0.0_ajv@8.11.2
       ajv-errors: 3.0.0_ajv@8.11.2
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1_ajv@8.11.2
       lodash: 4.17.21
       tslib: 2.4.1
     transitivePeerDependencies:
@@ -4502,7 +4587,7 @@ packages:
       '@stoplight/spectral-formats': 1.4.0
       '@stoplight/spectral-functions': 1.7.2
       '@stoplight/spectral-parsers': 1.0.2
-      '@stoplight/spectral-ref-resolver': 1.0.2
+      '@stoplight/spectral-ref-resolver': 1.0.3
       '@stoplight/spectral-ruleset-migrator': 1.9.1
       '@stoplight/spectral-rulesets': 1.14.1
       '@stoplight/spectral-runtime': 1.1.2
@@ -4552,7 +4637,7 @@ packages:
       '@stoplight/types': 13.8.0
       '@types/json-schema': 7.0.11
       ajv: 8.11.2
-      ajv-formats: 2.1.1
+      ajv-formats: 2.1.1_ajv@8.11.2
       json-schema-traverse: 1.0.0
       lodash: 4.17.21
       tslib: 2.4.1
@@ -6197,13 +6282,13 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.10
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/eslint/8.4.10:
     resolution: {integrity: sha512-Sl/HOqN8NKPmhWo2VBEPm0nvHnu2LL3v9vKo8MEq0EtbJ4eVzGPl41VNPvn5E1i5poMk4/XD8UriLHpJvEP/Nw==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
     dev: true
 
@@ -7039,8 +7124,10 @@ packages:
       ajv: 8.11.2
     dev: true
 
-  /ajv-formats/2.1.1:
+  /ajv-formats/2.1.1_ajv@8.11.2:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
+    peerDependencies:
+      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -8889,6 +8976,7 @@ packages:
 
   /cuid/2.1.8:
     resolution: {integrity: sha512-xiEMER6E7TlTPnDxrM4eRiC6TRgjNX9xzEZ5U/Se2YJKr7Mq4pJn/2XEHjl3STcSh96GmkHPcBXLES8M29wyyg==}
+    deprecated: Cuid and other k-sortable and non-cryptographic ids (Ulid, ObjectId, KSUID, all UUIDs) are all insecure. Use @paralleldrive/cuid2 instead.
     dev: true
 
   /currently-unhandled/0.4.1:
@@ -13258,6 +13346,10 @@ packages:
     resolution: {integrity: sha512-z+Uw/vLuy6gQe8cfaFWD7p0wVv8fJl3mbzXh33RS+0oW2wvUqiRXiQ69gLWSLpgB5/6sU+r6BlQR0MBILadqTQ==}
     dev: true
 
+  /lodash.isempty/4.4.0:
+    resolution: {integrity: sha512-oKMuF3xEeqDltrGMfDxAPGIVMSSRv8tbRSODbrs4KGsRRLEhrW8N8Rd4DRgB2+621hY8A8XwwrTVhXWpxFvMzg==}
+    dev: true
+
   /lodash.merge/4.6.2:
     resolution: {integrity: sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==}
     dev: true
@@ -14391,40 +14483,29 @@ packages:
       wcwidth: 1.0.1
     dev: true
 
-  /orval/6.10.3_openapi-types@12.1.0:
-    resolution: {integrity: sha512-gct7wGGacGIj3cRKqfioRK2/TRDAK11LbpghRgTMeNWWF+JBCyZGA8H9ehhfdCOuhXIb4me61aNphiusrlz7jQ==}
+  /orval/6.11.1_openapi-types@12.1.0:
+    resolution: {integrity: sha512-3QjI9i8mp/lT+ufJQWghQyCf6vNXqKVHva2IgLL/OWEuBA8AsGPXvJvCeqzFmi+fBSC7LzpR2Mkyle7dxfycLQ==}
     hasBin: true
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
-      acorn: 8.8.1
+      '@orval/angular': 6.11.1_openapi-types@12.1.0
+      '@orval/axios': 6.11.1_openapi-types@12.1.0
+      '@orval/core': 6.11.1_openapi-types@12.1.0
+      '@orval/msw': 6.11.1_openapi-types@12.1.0
+      '@orval/query': 6.11.1_openapi-types@12.1.0
+      '@orval/swr': 6.11.1_openapi-types@12.1.0
+      ajv: 8.11.2
       cac: 6.7.14
       chalk: 4.1.2
       chokidar: 3.5.3
-      compare-versions: 4.1.4
-      cuid: 2.1.8
-      debug: 4.3.4
-      esbuild: 0.15.18
-      esutils: 2.0.3
+      enquirer: 2.3.6
       execa: 5.1.1
       find-up: 5.0.0
       fs-extra: 10.1.0
-      globby: 11.1.0
-      ibm-openapi-validator: 0.88.3
-      inquirer: 8.2.5
-      lodash.get: 4.4.2
-      lodash.omit: 4.5.0
-      lodash.omitby: 4.6.0
       lodash.uniq: 4.5.0
-      lodash.uniqby: 4.7.0
-      lodash.uniqwith: 4.5.0
-      micromatch: 4.0.5
       openapi3-ts: 3.1.2
       string-argv: 0.3.1
-      swagger2openapi: 7.0.8
       tsconfck: 2.0.2
-      upath: 2.0.1
-      url: 0.11.0
-      validator: 13.7.0
     transitivePeerDependencies:
       - encoding
       - openapi-types
@@ -17550,11 +17631,6 @@ packages:
     engines: {node: '>=4'}
     dev: true
     optional: true
-
-  /upath/2.0.1:
-    resolution: {integrity: sha512-1uEe95xksV1O0CYKXo8vQvN1JEbtJp7lb7C5U9HMsIp6IVwntkH/oNUzyVNQSd4S1sYk2FpSSW44FqMc8qee5w==}
-    engines: {node: '>=4'}
-    dev: true
 
   /update-browserslist-db/1.0.10_browserslist@4.21.4:
     resolution: {integrity: sha512-OztqDenkfFkbSG+tRxBeAnCVPckDBcvibKd35yDONx6OU8N7sqgwc7rCbkJ/WcYtVRZ4ba68d6byhC21GFh7sQ==}
