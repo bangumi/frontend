@@ -1,53 +1,81 @@
-openapi: 3.0.3
-info:
-  title: hello
-  description: >-
-    关于订阅通知的 socket.io 相关的文档在
-    <https://github.com/bangumi/GraphQL/blob/master/docs/socket.io.md>
 components:
-  securitySchemes:
-    CookiesSession:
-      type: apiKey
-      in: cookie
-      name: chiiNextSessionID
-      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
   schemas:
-    User:
-      title: User
-      type: object
+    Avatar:
       properties:
-        id:
-          examples:
-            - 1
-          type: integer
-        username:
+        large:
+          type: string
+        medium:
           examples:
             - sai
           type: string
-        nickname:
-          examples:
-            - Sai🖖
+        small:
           type: string
+      required:
+        - small
+        - medium
+        - large
+      title: Avatar
+      type: object
+    BasicReply:
+      properties:
+        createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        id:
+          type: integer
+        state:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+        - creator
+        - createdAt
+        - text
+        - state
+      type: object
+    CurrentUser:
+      properties:
         avatar:
-          title: Avatar
-          type: object
           properties:
-            small:
+            large:
               type: string
             medium:
               examples:
                 - sai
               type: string
-            large:
+            small:
               type: string
           required:
             - small
             - medium
             - large
+          title: Avatar
+          type: object
+        id:
+          examples:
+            - 1
+          type: integer
+        nickname:
+          examples:
+            - Sai🖖
+          type: string
+        permission:
+          properties:
+            subjectWikiEdit:
+              type: boolean
+          required:
+            - subjectWikiEdit
+          type: object
         sign:
           type: string
         user_group:
           type: integer
+        username:
+          examples:
+            - sai
+          type: string
       required:
         - id
         - username
@@ -55,25 +83,10 @@ components:
         - avatar
         - sign
         - user_group
-    Avatar:
-      title: Avatar
+        - permission
       type: object
-      properties:
-        small:
-          type: string
-        medium:
-          examples:
-            - sai
-          type: string
-        large:
-          type: string
-      required:
-        - small
-        - medium
-        - large
     Error:
       description: fastify default error response
-      type: object
       properties:
         code:
           type: string
@@ -88,151 +101,15 @@ components:
         - error
         - message
         - statusCode
-    ValidationError:
-      description: request data validation error
       type: object
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-        statusCode:
-          type: integer
-      required:
-        - error
-        - message
-        - statusCode
-    Permission:
-      type: object
-      properties:
-        subjectWikiEdit:
-          type: boolean
-      required:
-        - subjectWikiEdit
-    CurrentUser:
-      type: object
-      properties:
-        id:
-          examples:
-            - 1
-          type: integer
-        username:
-          examples:
-            - sai
-          type: string
-        nickname:
-          examples:
-            - Sai🖖
-          type: string
-        avatar:
-          title: Avatar
-          type: object
-          properties:
-            small:
-              type: string
-            medium:
-              examples:
-                - sai
-              type: string
-            large:
-              type: string
-          required:
-            - small
-            - medium
-            - large
-        sign:
-          type: string
-        user_group:
-          type: integer
-        permission:
-          type: object
-          properties:
-            subjectWikiEdit:
-              type: boolean
-          required:
-            - subjectWikiEdit
-      required:
-        - id
-        - username
-        - nickname
-        - avatar
-        - sign
-        - user_group
-        - permission
-    Topic:
-      title: Topic
-      type: object
-      properties:
-        id:
-          description: topic id
-          type: integer
-        creator:
-          title: User
-          type: object
-          properties:
-            id:
-              examples:
-                - 1
-              type: integer
-            username:
-              examples:
-                - sai
-              type: string
-            nickname:
-              examples:
-                - Sai🖖
-              type: string
-            avatar:
-              title: Avatar
-              type: object
-              properties:
-                small:
-                  type: string
-                medium:
-                  examples:
-                    - sai
-                  type: string
-                large:
-                  type: string
-              required:
-                - small
-                - medium
-                - large
-            sign:
-              type: string
-            user_group:
-              type: integer
-          required:
-            - id
-            - username
-            - nickname
-            - avatar
-            - sign
-            - user_group
-        title:
-          type: string
-        parentID:
-          description: 小组/条目ID
-          type: integer
-        createdAt:
-          description: 发帖时间，unix time stamp in seconds
-          type: integer
-        updatedAt:
-          description: 最后回复时间，unix time stamp in seconds
-          type: integer
-        repliesCount:
-          type: integer
-      required:
-        - id
-        - creator
-        - title
-        - parentID
-        - createdAt
-        - updatedAt
-        - repliesCount
     Group:
-      type: object
       properties:
+        createdAt:
+          type: integer
+        description:
+          type: string
+        icon:
+          type: string
         id:
           type: integer
         name:
@@ -241,13 +118,7 @@ components:
           type: boolean
         title:
           type: string
-        icon:
-          type: string
-        description:
-          type: string
         totalMembers:
-          type: integer
-        createdAt:
           type: integer
       required:
         - id
@@ -258,22 +129,55 @@ components:
         - description
         - totalMembers
         - createdAt
-    GroupProfile:
       type: object
+    GroupMember:
       properties:
-        recentAddedMembers:
-          type: array
-          items:
-            $ref: '#/components/schemas/GroupMember'
-        topics:
-          type: array
-          items:
-            $ref: '#/components/schemas/Topic'
+        avatar:
+          properties:
+            large:
+              type: string
+            medium:
+              examples:
+                - sai
+              type: string
+            small:
+              type: string
+          required:
+            - small
+            - medium
+            - large
+          title: Avatar
+          type: object
+        id:
+          type: integer
+        joinedAt:
+          type: integer
+        nickname:
+          type: string
+        username:
+          type: string
+      required:
+        - avatar
+        - id
+        - nickname
+        - username
+        - joinedAt
+      type: object
+    GroupProfile:
+      properties:
+        group:
+          $ref: '#/components/schemas/Group'
         inGroup:
           description: 是否已经加入小组
           type: boolean
-        group:
-          $ref: '#/components/schemas/Group'
+        recentAddedMembers:
+          items:
+            $ref: '#/components/schemas/GroupMember'
+          type: array
+        topics:
+          items:
+            $ref: '#/components/schemas/Topic'
+          type: array
         totalTopics:
           type: integer
       required:
@@ -282,183 +186,93 @@ components:
         - inGroup
         - group
         - totalTopics
-    SubReply:
       type: object
+    HistorySummary:
       properties:
-        id:
+        commitMessage:
+          type: string
+        createdAt:
+          description: unix timestamp seconds
           type: integer
         creator:
-          $ref: '#/components/schemas/User'
-        createdAt:
-          type: integer
-        isFriend:
-          type: boolean
-        text:
-          type: string
-        state:
-          type: integer
-      required:
-        - id
-        - creator
-        - createdAt
-        - isFriend
-        - text
-        - state
-    BasicReply:
-      type: object
-      properties:
-        id:
-          type: integer
-        creator:
-          $ref: '#/components/schemas/User'
-        createdAt:
-          type: integer
-        text:
-          type: string
-        state:
-          type: integer
-      required:
-        - id
-        - creator
-        - createdAt
-        - text
-        - state
-    Reply:
-      type: object
-      properties:
-        id:
-          type: integer
-        isFriend:
-          type: boolean
-        replies:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubReply'
-        creator:
-          $ref: '#/components/schemas/User'
-        createdAt:
-          type: integer
-        text:
-          type: string
-        state:
-          type: integer
-      required:
-        - id
-        - isFriend
-        - replies
-        - creator
-        - createdAt
-        - text
-        - state
-    TopicDetail:
-      type: object
-      properties:
-        id:
-          type: integer
-        group:
-          $ref: '#/components/schemas/Group'
-        creator:
-          $ref: '#/components/schemas/User'
-        title:
-          type: string
-        text:
-          type: string
-        state:
-          type: integer
-        createdAt:
-          type: integer
-        replies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reply'
-      required:
-        - id
-        - group
-        - creator
-        - title
-        - text
-        - state
-        - createdAt
-        - replies
-    GroupMember:
-      type: object
-      properties:
-        avatar:
-          title: Avatar
-          type: object
           properties:
-            small:
-              type: string
-            medium:
-              examples:
-                - sai
-              type: string
-            large:
+            username:
               type: string
           required:
-            - small
-            - medium
-            - large
-        id:
-          type: integer
-        nickname:
-          type: string
-        username:
-          type: string
-        joinedAt:
+            - username
+          type: object
+        type:
+          description: 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知
           type: integer
       required:
-        - avatar
-        - id
-        - nickname
-        - username
-        - joinedAt
-    Notice:
+        - creator
+        - type
+        - commitMessage
+        - createdAt
       type: object
+    LoginRequestBody:
+      examples:
+        - cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
+          email: treeholechan@gmail.com
+          password: lovemeplease
       properties:
+        cf-turnstile-response:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        password:
+          minLength: 1
+          type: string
+      required:
+        - email
+        - password
+        - cf-turnstile-response
+      type: object
+    Notice:
+      properties:
+        createdAt:
+          description: unix timestamp in seconds
+          type: integer
         id:
           type: integer
-        title:
-          type: string
-        type:
-          description: 查看 `./lib/notify.ts` _settings
+        postID:
           type: integer
         sender:
-          title: User
-          type: object
           properties:
-            id:
-              examples:
-                - 1
-              type: integer
-            username:
-              examples:
-                - sai
-              type: string
-            nickname:
-              examples:
-                - Sai🖖
-              type: string
             avatar:
-              title: Avatar
-              type: object
               properties:
-                small:
+                large:
                   type: string
                 medium:
                   examples:
                     - sai
                   type: string
-                large:
+                small:
                   type: string
               required:
                 - small
                 - medium
                 - large
+              title: Avatar
+              type: object
+            id:
+              examples:
+                - 1
+              type: integer
+            nickname:
+              examples:
+                - Sai🖖
+              type: string
             sign:
               type: string
             user_group:
               type: integer
+            username:
+              examples:
+                - sai
+              type: string
           required:
             - id
             - username
@@ -466,12 +280,14 @@ components:
             - avatar
             - sign
             - user_group
+          title: User
+          type: object
+        title:
+          type: string
         topicID:
           type: integer
-        postID:
-          type: integer
-        createdAt:
-          description: unix timestamp in seconds
+        type:
+          description: 查看 `./lib/notify.ts` _settings
           type: integer
       required:
         - id
@@ -481,10 +297,66 @@ components:
         - topicID
         - postID
         - createdAt
+      type: object
+    Permission:
+      properties:
+        subjectWikiEdit:
+          type: boolean
+      required:
+        - subjectWikiEdit
+      type: object
+    Reply:
+      properties:
+        createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        id:
+          type: integer
+        isFriend:
+          type: boolean
+        replies:
+          items:
+            $ref: '#/components/schemas/SubReply'
+          type: array
+        state:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+        - isFriend
+        - replies
+        - creator
+        - createdAt
+        - text
+        - state
+      type: object
+    SubReply:
+      properties:
+        createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        id:
+          type: integer
+        isFriend:
+          type: boolean
+        state:
+          type: integer
+        text:
+          type: string
+      required:
+        - id
+        - creator
+        - createdAt
+        - isFriend
+        - text
+        - state
+      type: object
     SubjectEdit:
       examples:
-        - name: 沙盒
-          infobox: |-
+        - infobox: |-
             {{Infobox animanga/TVAnime
             |中文名= 沙盒
             |别名={
@@ -507,32 +379,32 @@ components:
             [Xbox Series X|S]
             }
             }}
-          platform: 0
+          name: 沙盒
           nsfw: false
+          platform: 0
           summary: |-
             本条目是一个沙盒，可以用于尝试bgm功能。
 
             普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
 
             https://bgm.tv/group/topic/366812#post_1923517
-      type: object
       properties:
-        name:
-          minLength: 1
+        date:
+          examples:
+            - '0000-00-00'
+            - '2007-01-30'
+          pattern: ^\d{4}-\d{2}-\d{2}$
           type: string
         infobox:
           minLength: 1
           type: string
-        platform:
-          type: integer
+        name:
+          minLength: 1
+          type: string
         nsfw:
           type: boolean
-        date:
-          pattern: ^\d{4}-\d{2}-\d{2}$
-          examples:
-            - '0000-00-00'
-            - '2007-01-30'
-          type: string
+        platform:
+          type: integer
         summary:
           type: string
       required:
@@ -541,8 +413,230 @@ components:
         - platform
         - nsfw
         - summary
-    WikiPlatform:
       type: object
+    SubjectType:
+      anyOf:
+        - enum:
+            - 1
+          type: number
+        - enum:
+            - 2
+          type: number
+        - enum:
+            - 3
+          type: number
+        - enum:
+            - 4
+          type: number
+        - enum:
+            - 6
+          type: number
+      title: SubjectType
+    SubjectWikiInfo:
+      properties:
+        availablePlatform:
+          items:
+            $ref: '#/components/schemas/WikiPlatform'
+          type: array
+        id:
+          type: integer
+        infobox:
+          type: string
+        name:
+          type: string
+        nsfw:
+          type: boolean
+        platform:
+          type: integer
+        summary:
+          type: string
+        typeID:
+          $ref: '#/components/schemas/SubjectType'
+      required:
+        - id
+        - name
+        - typeID
+        - infobox
+        - platform
+        - availablePlatform
+        - summary
+        - nsfw
+      type: object
+    Topic:
+      properties:
+        createdAt:
+          description: 发帖时间，unix time stamp in seconds
+          type: integer
+        creator:
+          properties:
+            avatar:
+              properties:
+                large:
+                  type: string
+                medium:
+                  examples:
+                    - sai
+                  type: string
+                small:
+                  type: string
+              required:
+                - small
+                - medium
+                - large
+              title: Avatar
+              type: object
+            id:
+              examples:
+                - 1
+              type: integer
+            nickname:
+              examples:
+                - Sai🖖
+              type: string
+            sign:
+              type: string
+            user_group:
+              type: integer
+            username:
+              examples:
+                - sai
+              type: string
+          required:
+            - id
+            - username
+            - nickname
+            - avatar
+            - sign
+            - user_group
+          title: User
+          type: object
+        id:
+          description: topic id
+          type: integer
+        parentID:
+          description: 小组/条目ID
+          type: integer
+        repliesCount:
+          type: integer
+        title:
+          type: string
+        updatedAt:
+          description: 最后回复时间，unix time stamp in seconds
+          type: integer
+      required:
+        - id
+        - creator
+        - title
+        - parentID
+        - createdAt
+        - updatedAt
+        - repliesCount
+      title: Topic
+      type: object
+    TopicCreation:
+      examples:
+        - content: topic content
+          title: topic title
+      properties:
+        text:
+          description: bbcode
+          minLength: 1
+          type: string
+        title:
+          minLength: 1
+          type: string
+      required:
+        - title
+        - text
+      type: object
+    TopicDetail:
+      properties:
+        createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        group:
+          $ref: '#/components/schemas/Group'
+        id:
+          type: integer
+        replies:
+          items:
+            $ref: '#/components/schemas/Reply'
+          type: array
+        state:
+          type: integer
+        text:
+          type: string
+        title:
+          type: string
+      required:
+        - id
+        - group
+        - creator
+        - title
+        - text
+        - state
+        - createdAt
+        - replies
+      type: object
+    User:
+      properties:
+        avatar:
+          properties:
+            large:
+              type: string
+            medium:
+              examples:
+                - sai
+              type: string
+            small:
+              type: string
+          required:
+            - small
+            - medium
+            - large
+          title: Avatar
+          type: object
+        id:
+          examples:
+            - 1
+          type: integer
+        nickname:
+          examples:
+            - Sai🖖
+          type: string
+        sign:
+          type: string
+        user_group:
+          type: integer
+        username:
+          examples:
+            - sai
+          type: string
+      required:
+        - id
+        - username
+        - nickname
+        - avatar
+        - sign
+        - user_group
+      title: User
+      type: object
+    ValidationError:
+      description: request data validation error
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        statusCode:
+          type: integer
+      required:
+        - error
+        - message
+        - statusCode
+      type: object
+    WikiPlatform:
       properties:
         id:
           type: integer
@@ -553,156 +647,528 @@ components:
       required:
         - id
         - text
-    SubjectType:
-      title: SubjectType
-      anyOf:
-        - type: number
-          enum:
-            - 1
-        - type: number
-          enum:
-            - 2
-        - type: number
-          enum:
-            - 3
-        - type: number
-          enum:
-            - 4
-        - type: number
-          enum:
-            - 6
-    SubjectWikiInfo:
       type: object
-      properties:
-        id:
-          type: integer
-        name:
-          type: string
-        typeID:
-          $ref: '#/components/schemas/SubjectType'
-        infobox:
-          type: string
-        platform:
-          type: integer
-        availablePlatform:
-          type: array
-          items:
-            $ref: '#/components/schemas/WikiPlatform'
-        summary:
-          type: string
-        nsfw:
-          type: boolean
-      required:
-        - id
-        - name
-        - typeID
-        - infobox
-        - platform
-        - availablePlatform
-        - summary
-        - nsfw
-    HistorySummary:
-      type: object
-      properties:
-        creator:
-          type: object
-          properties:
-            username:
-              type: string
-          required:
-            - username
-        type:
-          description: 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知
-          type: integer
-        commitMessage:
-          type: string
-        createdAt:
-          description: unix timestamp seconds
-          type: integer
-      required:
-        - creator
-        - type
-        - commitMessage
-        - createdAt
+  securitySchemes:
+    CookiesSession:
+      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
+      in: cookie
+      name: chiiNextSessionID
+      type: apiKey
+info:
+  description: >-
+    关于订阅通知的 socket.io 相关的文档在
+    <https://github.com/bangumi/GraphQL/blob/master/docs/socket.io.md>
+  title: hello
+openapi: 3.0.3
 paths:
-  /p1/me:
-    get:
-      operationId: getCurrentUser
-      tags:
-        - auth
-      security:
-        - CookiesSession: []
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CurrentUser'
-        '401':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              example:
-                code: NEED_LOGIN
-                error: Unauthorized
-                message: you need to login before get current user
-                statusCode: 401
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/logout:
+  /p1/clear-notify:
     post:
-      operationId: logout
-      tags:
-        - auth
-      description: 登出
+      description: |-
+        标记通知为已读
+
+        不传id时会清空所有未读通知
+      operationId: clearNotice
       requestBody:
         content:
           application/json:
+            examples:
+              ClearAll:
+                value: {}
+              ClearSome:
+                value:
+                  id:
+                    - 1
+                    - 2
             schema:
+              properties:
+                id:
+                  items:
+                    type: integer
+                  type: array
               type: object
-              properties: {}
       responses:
         '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
+          description: 没有返回值
         '401':
-          description: 未登录
           content:
             application/json:
-              schema:
-                description: 未登录
-                $ref: '#/components/schemas/Error'
               examples:
                 NeedLoginError:
                   value:
                     code: NEED_LOGIN
                     error: Unauthorized
-                    message: you need to login before logout
+                    message: you need to login before marking notifications as read
                     statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 未登录
+          description: 未登录
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-  /p1/login2:
-    post:
-      operationId: login2
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      summary: 标记通知为已读
       tags:
-        - auth
+        - user
+  /p1/groups/-/posts/{postID}:
+    put:
+      operationId: editGroupReply
+      parameters:
+        - example: 2092074
+          in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              text: new post contents
+            schema:
+              properties:
+                text:
+                  minLength: 1
+                  type: string
+              required:
+                - text
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to edit reply
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - group
+  /p1/groups/-/topics/{id}:
+    get:
+      description: 获取帖子列表
+      operationId: getGroupTopicDetail
+      parameters:
+        - example: 371602
+          in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TopicDetail'
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: topic not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 小组不存在
+          description: 小组不存在
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - topic
+  /p1/groups/-/topics/{topicID}:
+    put:
+      operationId: editGroupTopic
+      parameters:
+        - example: 371602
+          in: path
+          name: topicID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopicCreation'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to edit a topic
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - group
+  /p1/groups/-/topics/{topicID}/replies:
+    post:
+      operationId: createGroupReply
+      parameters:
+        - example: 371602
+          in: path
+          name: topicID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            examples:
+              example1:
+                value:
+                  content: post contents
+              example2:
+                value:
+                  content: post contents
+                  replyTo: 2
+            schema:
+              properties:
+                content:
+                  minLength: 1
+                  type: string
+                replyTo:
+                  default: 0
+                  description: 被回复的 topic ID, `0` 代表回复楼主
+                  examples:
+                    - 0
+                  type: integer
+              required:
+                - content
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasicReply'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                NOT_JOIN_PRIVATE_GROUP_ERROR:
+                  value:
+                    code: NOT_JOIN_PRIVATE_GROUP_ERROR
+                    error: Unauthorized
+                    message: >-
+                      you need to join private group '沙盒' before you create a
+                      post or reply
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - group
+  /p1/groups/{groupName}/members:
+    get:
+      description: 获取帖子列表
+      operationId: listGroupMembersByName
+      parameters:
+        - in: query
+          name: type
+          required: false
+          schema:
+            anyOf:
+              - enum:
+                  - mod
+                type: string
+              - enum:
+                  - normal
+                type: string
+              - enum:
+                  - all
+                type: string
+            default: all
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 30
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+        - in: path
+          name: groupName
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/GroupMember'
+                    type: array
+                  total:
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: topic not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 小组不存在
+          description: 小组不存在
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - topic
+  /p1/groups/{groupName}/profile:
+    get:
+      description: 获取小组首页
+      operationId: getGroupProfile
+      parameters:
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+        - in: path
+          name: groupName
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupProfile'
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: topic not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 小组不存在
+          description: 小组不存在
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - topic
+  /p1/groups/{groupName}/topics:
+    get:
+      description: 获取帖子列表
+      operationId: getGroupTopicsByGroupName
+      parameters:
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 30
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+        - in: path
+          name: groupName
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/Topic'
+                    type: array
+                  total:
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NotFoundError:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: topic not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 小组不存在
+          description: 小组不存在
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - topic
+    post:
+      operationId: createNewGroupTopic
+      parameters:
+        - example: sandbox
+          in: path
+          name: groupName
+          required: true
+          schema:
+            minLength: 1
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TopicCreation'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    description: new topic id
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - group
+  /p1/login:
+    post:
       description: >-
         需要
         [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
@@ -712,68 +1178,33 @@ paths:
 
 
         dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+      operationId: login
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                email:
-                  minLength: 1
-                  type: string
-                password:
-                  minLength: 1
-                  type: string
-                cf-turnstile-response:
-                  minLength: 1
-                  type: string
-              required:
-                - email
-                - password
-                - cf-turnstile-response
-            example:
-              email: treeholechan@gmail.com
-              password: lovemeplease
-              cf-turnstile-response: 10000000-aaaa-bbbb-cccc-000000000001
-        required: true
+              $ref: '#/components/schemas/LoginRequestBody'
       responses:
         '200':
-          description: Default Response
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-              description: 'example: "chiiNextSessionID=12345abc"'
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '400':
           description: Default Response
+          headers:
+            Set-Cookie:
+              description: 'example: "chiiNextSessionID=12345abc"'
+              schema:
+                type: string
+        '400':
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ValidationError'
+          description: Default Response
         '401':
-          description: 验证码错误/账号密码不匹配
-          headers:
-            X-RateLimit-Remaining:
-              schema:
-                type: integer
-              description: remaining rate limit
-            X-RateLimit-Limit:
-              schema:
-                type: integer
-              description: total limit per 10 minutes
-            X-RateLimit-Reset:
-              schema:
-                type: integer
-              description: seconds to reset rate limit
           content:
             application/json:
-              schema:
-                description: 验证码错误/账号密码不匹配
-                $ref: '#/components/schemas/Error'
               examples:
                 CAPTCHA_ERROR:
                   value:
@@ -787,553 +1218,248 @@ paths:
                     error: Unauthorized
                     message: email does not exists or email and password not match
                     statusCode: 401
-        '429':
-          description: 失败次数太多，需要过一段时间再重试
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 验证码错误/账号密码不匹配
+          description: 验证码错误/账号密码不匹配
           headers:
-            X-RateLimit-Remaining:
-              schema:
-                type: integer
-              description: remaining rate limit
             X-RateLimit-Limit:
+              description: total limit per 10 minutes
               schema:
                 type: integer
-              description: limit per 10 minutes
+            X-RateLimit-Remaining:
+              description: remaining rate limit
+              schema:
+                type: integer
             X-RateLimit-Reset:
+              description: seconds to reset rate limit
               schema:
                 type: integer
-              description: seconds to reset rate limit
+        '429':
           content:
             application/json:
-              schema:
-                description: 失败次数太多，需要过一段时间再重试
-                $ref: '#/components/schemas/Error'
               example:
                 code: TOO_MANY_REQUESTS
                 error: Too Many Requests
                 message: too many failed login attempts
                 statusCode: 429
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 失败次数太多，需要过一段时间再重试
+          description: 失败次数太多，需要过一段时间再重试
+          headers:
+            X-RateLimit-Limit:
+              description: limit per 10 minutes
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              description: remaining rate limit
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              description: seconds to reset rate limit
+              schema:
+                type: integer
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-  /p1/groups/{groupName}/profile:
-    get:
-      operationId: getGroupProfile
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
       tags:
-        - topic
-      description: 获取小组首页
-      parameters:
-        - schema:
-            default: 20
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            minLength: 1
-            type: string
-          in: path
-          name: groupName
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/GroupProfile'
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/-/topics/{id}:
-    get:
-      operationId: getGroupTopicDetail
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            type: integer
-          example: 371602
-          in: path
-          name: id
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TopicDetail'
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/{groupName}/members:
-    get:
-      operationId: listGroupMembersByName
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            default: all
-            anyOf:
-              - type: string
-                enum:
-                  - mod
-              - type: string
-                enum:
-                  - normal
-              - type: string
-                enum:
-                  - all
-          in: query
-          name: type
-          required: false
-        - schema:
-            default: 30
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            minLength: 1
-            type: string
-          in: path
-          name: groupName
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/GroupMember'
-                  total:
-                    type: integer
-                required:
-                  - data
-                  - total
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/{groupName}/topics:
-    get:
-      operationId: getGroupTopicsByGroupName
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            default: 30
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            minLength: 1
-            type: string
-          in: path
-          name: groupName
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Topic'
-                  total:
-                    type: integer
-                required:
-                  - data
-                  - total
-        '404':
-          description: 小组不存在
-          content:
-            application/json:
-              schema:
-                description: 小组不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
+        - auth
+  /p1/login2:
     post:
-      operationId: createNewGroupTopic
-      tags:
-        - group
+      deprecated: true
+      description: 'backward compatibility for #login operator'
+      operationId: login2
       requestBody:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                title:
-                  minLength: 1
-                  type: string
-                content:
-                  minLength: 1
-                  type: string
-              required:
-                - title
-                - content
-            example:
-              title: post title
-              content: post contents
-        required: true
-      parameters:
-        - schema:
-            minLength: 1
-            type: string
-          example: sandbox
-          in: path
-          name: groupName
-          required: true
-      security:
-        - CookiesSession: []
+              $ref: '#/components/schemas/LoginRequestBody'
       responses:
         '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
           description: Default Response
+          headers:
+            Set-Cookie:
+              schema:
+                type: string
+        '400':
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    description: new post topic id
-                    type: integer
-                required:
-                  - id
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/subjects/{subjectID}/topics:
-    get:
-      operationId: getSubjectTopicsBySubjectId
-      tags:
-        - topic
-      description: 获取帖子列表
-      parameters:
-        - schema:
-            default: 30
-            type: integer
-          in: query
-          name: limit
-          required: false
-        - schema:
-            default: 0
-            type: integer
-          in: query
-          name: offset
-          required: false
-        - schema:
-            exclusiveMinimum: 0
-            type: integer
-          in: path
-          name: subjectID
-          required: true
-      responses:
-        '200':
+                $ref: '#/components/schemas/ValidationError'
           description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Topic'
-                  total:
-                    type: integer
-                required:
-                  - data
-                  - total
-        '404':
-          description: 条目不存在
-          content:
-            application/json:
-              schema:
-                description: 条目不存在
-                $ref: '#/components/schemas/Error'
-              examples:
-                NotFoundError:
-                  value:
-                    code: NOT_FOUND
-                    error: Not Found
-                    message: topic not found
-                    statusCode: 404
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/groups/-/topics/{topicID}/replies:
-    post:
-      operationId: createGroupReply
-      tags:
-        - group
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                replyTo:
-                  examples:
-                    - 0
-                  default: 0
-                  description: 被回复的 topic ID, `0` 代表回复楼主
-                  type: integer
-                content:
-                  minLength: 1
-                  type: string
-              required:
-                - content
-            examples:
-              example1:
-                value:
-                  content: post contents
-              example2:
-                value:
-                  content: post contents
-                  replyTo: 2
-        required: true
-      parameters:
-        - schema:
-            type: integer
-          example: 371602
-          in: path
-          name: topicID
-          required: true
-      security:
-        - CookiesSession: []
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BasicReply'
         '401':
-          description: Default Response
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
               examples:
-                NOT_JOIN_PRIVATE_GROUP_ERROR:
+                CAPTCHA_ERROR:
                   value:
-                    code: NOT_JOIN_PRIVATE_GROUP_ERROR
+                    code: CAPTCHA_ERROR
                     error: Unauthorized
-                    message: >-
-                      you need to join private group '沙盒' before you create a
-                      post or reply
+                    message: wrong captcha
                     statusCode: 401
+                EMAIL_PASSWORD_ERROR:
+                  value:
+                    code: EMAIL_PASSWORD_ERROR
+                    error: Unauthorized
+                    message: email does not exists or email and password not match
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 验证码错误/账号密码不匹配
+          description: 验证码错误/账号密码不匹配
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+        '429':
+          content:
+            application/json:
+              example:
+                code: TOO_MANY_REQUESTS
+                error: Too Many Requests
+                message: too many failed login attempts
+                statusCode: 429
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 失败次数太多，需要过一段时间再重试
+          description: 失败次数太多，需要过一段时间再重试
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              schema:
+                type: integer
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-  /p1/groups/-/posts/{postID}:
-    put:
-      operationId: editReply
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
       tags:
-        - group
+        - auth
+  /p1/logout:
+    post:
+      description: 登出
+      operationId: logout
       requestBody:
         content:
           application/json:
             schema:
+              properties: {}
               type: object
-              properties:
-                text:
-                  minLength: 1
-                  type: string
-              required:
-                - text
-            example:
-              text: new post contents
-        required: true
-      parameters:
-        - schema:
-            type: integer
-          example: 2092074
-          in: path
-          name: postID
-          required: true
-      security:
-        - CookiesSession: []
       responses:
         '200':
-          description: Default Response
           content:
             application/json:
               schema:
-                type: object
                 properties: {}
-        '401':
+                type: object
           description: Default Response
+        '401':
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
               examples:
-                NOT_ALLOWED:
+                NeedLoginError:
                   value:
-                    code: NOT_ALLOWED
+                    code: NEED_LOGIN
                     error: Unauthorized
-                    message: you don't have permission to edit reply
+                    message: you need to login before logout
                     statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 未登录
+          description: 未登录
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - auth
+  /p1/me:
+    get:
+      operationId: getCurrentUser
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentUser'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              example:
+                code: NEED_LOGIN
+                error: Unauthorized
+                message: you need to login before get current user
+                statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - auth
   /p1/notify:
     get:
       operationId: listNotice
-      summary: 获取未读通知
-      tags:
-        - user
       parameters:
-        - schema:
-            default: 20
-            type: integer
-          in: query
+        - in: query
           name: limit
           required: false
-      security:
-        - CookiesSession: []
+          schema:
+            default: 20
+            type: integer
       responses:
         '200':
-          description: Default Response
           content:
             application/json:
               schema:
-                type: object
                 properties:
                   data:
-                    type: array
                     items:
                       $ref: '#/components/schemas/Notice'
+                    type: array
                   total:
                     type: integer
                 required:
                   - data
                   - total
+                type: object
+          description: Default Response
         '401':
-          description: 未登录
           content:
             application/json:
-              schema:
-                description: 未登录
-                $ref: '#/components/schemas/Error'
               examples:
                 NeedLoginError:
                   value:
@@ -1341,308 +1467,110 @@ paths:
                     error: Unauthorized
                     message: you need to login before getting notifications
                     statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 未登录
+          description: 未登录
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-  /p1/clear-notify:
-    post:
-      operationId: clearNotice
-      summary: 标记通知为已读
-      tags:
-        - user
-      description: |-
-        标记通知为已读
-
-        不传id时会清空所有未读通知
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                id:
-                  type: array
-                  items:
-                    type: integer
-            examples:
-              ClearAll:
-                value: {}
-              ClearSome:
-                value:
-                  id:
-                    - 1
-                    - 2
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
       security:
         - CookiesSession: []
-      responses:
-        '200':
-          description: 没有返回值
-        '401':
-          description: 未登录
-          content:
-            application/json:
-              schema:
-                description: 未登录
-                $ref: '#/components/schemas/Error'
-              examples:
-                NeedLoginError:
-                  value:
-                    code: NEED_LOGIN
-                    error: Unauthorized
-                    message: you need to login before marking notifications as read
-                    statusCode: 401
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/wiki/subjects/{subjectID}/covers:
+      summary: 获取未读通知
+      tags:
+        - user
+  /p1/subjects/{subjectID}/topics:
     get:
-      operationId: listSubjectCovers
-      tags:
-        - wiki
+      description: 获取帖子列表
+      operationId: getSubjectTopicsBySubjectId
       parameters:
-        - schema:
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 30
             type: integer
-          example: 184017
-          in: path
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+        - in: path
           name: subjectID
           required: true
+          schema:
+            exclusiveMinimum: 0
+            type: integer
       responses:
         '200':
-          description: Default Response
           content:
             application/json:
               schema:
-                type: object
                 properties:
-                  current:
-                    type: object
-                    properties:
-                      thumbnail:
-                        type: string
-                      raw:
-                        type: string
-                    required:
-                      - thumbnail
-                      - raw
-                  covers:
-                    type: array
+                  data:
                     items:
-                      type: object
-                      properties:
-                        id:
-                          type: integer
-                        thumbnail:
-                          type: string
-                        raw:
-                          type: string
-                        creator:
-                          title: User
-                          type: object
-                          properties:
-                            id:
-                              examples:
-                                - 1
-                              type: integer
-                            username:
-                              examples:
-                                - sai
-                              type: string
-                            nickname:
-                              examples:
-                                - Sai🖖
-                              type: string
-                            avatar:
-                              title: Avatar
-                              type: object
-                              properties:
-                                small:
-                                  type: string
-                                medium:
-                                  examples:
-                                    - sai
-                                  type: string
-                                large:
-                                  type: string
-                              required:
-                                - small
-                                - medium
-                                - large
-                            sign:
-                              type: string
-                            user_group:
-                              type: integer
-                          required:
-                            - id
-                            - username
-                            - nickname
-                            - avatar
-                            - sign
-                            - user_group
-                        voted:
-                          type: boolean
-                      required:
-                        - id
-                        - thumbnail
-                        - raw
-                        - creator
-                        - voted
+                      $ref: '#/components/schemas/Topic'
+                    type: array
+                  total:
+                    type: integer
                 required:
-                  - covers
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-    post:
-      operationId: uploadSubjectCover
-      tags:
-        - wiki
-      description: 需要 `subjectWikiEdit` 权限
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                content:
-                  format: byte
-                  description: base64 encoded raw bytes, 4mb size limit on **decoded** size
-                  type: string
-              required:
-                - content
-        required: true
-      parameters:
-        - schema:
-            type: integer
-          in: path
-          name: subjectID
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
+                  - data
+                  - total
                 type: object
-                properties: {}
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-  /p1/wiki/subjects/{subjectID}/covers/{imageID}/vote:
-    post:
-      operationId: voteSubjectCover
-      summary: 为条目封面投票
-      tags:
-        - wiki
-      description: 需要 `subjectWikiEdit` 权限
-      parameters:
-        - schema:
-            exclusiveMinimum: 0
-            type: integer
-          in: path
-          name: subjectID
-          required: true
-        - schema:
-            exclusiveMinimum: 0
-            type: integer
-          in: path
-          name: imageID
-          required: true
-      responses:
-        '200':
           description: Default Response
+        '404':
           content:
             application/json:
+              examples:
+                NotFoundError:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: topic not found
+                    statusCode: 404
               schema:
-                type: object
-                properties: {}
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-    delete:
-      operationId: unvoteSubjectCover
-      summary: 撤消条目封面投票
+                description: 条目不存在
+          description: 条目不存在
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
       tags:
-        - wiki
-      description: 需要 `subjectWikiEdit` 权限
-      parameters:
-        - schema:
-            exclusiveMinimum: 0
-            type: integer
-          in: path
-          name: subjectID
-          required: true
-        - schema:
-            exclusiveMinimum: 0
-            type: integer
-          in: path
-          name: imageID
-          required: true
-      responses:
-        '200':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties: {}
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
+        - topic
   /p1/wiki/subjects/{subjectID}:
     get:
-      operationId: subjectInfo
-      tags:
-        - wiki
       description: |-
         获取当前的 wiki 信息
 
         暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      operationId: subjectInfo
       parameters:
-        - schema:
-            minimum: 0
-            type: integer
-          example: 363612
+        - example: 363612
           in: path
           name: subjectID
           required: true
-      security:
-        - CookiesSession: []
+          schema:
+            minimum: 0
+            type: integer
       responses:
         '200':
-          description: Default Response
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/SubjectWikiInfo'
-        '401':
           description: Default Response
+        '401':
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
               examples:
                 INVALID_SYNTAX_ERROR:
                   value:
@@ -1650,39 +1578,37 @@ paths:
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-    put:
-      operationId: putSubjectInfo
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
       tags:
         - wiki
-      description: |-
-        暂时只能修改沙盒条目 184017,309445,354667,354677,363612
-
-        需要 `subjectWikiEdit` 权限
+    patch:
+      description: 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+      operationId: patchSubjectInfo
+      parameters:
+        - example: 363612
+          in: path
+          name: subjectID
+          required: true
+          schema:
+            minimum: 0
+            type: integer
       requestBody:
         content:
           application/json:
-            schema:
-              type: object
-              properties:
-                commitMessage:
-                  minLength: 1
-                  type: string
-                subject:
-                  $ref: '#/components/schemas/SubjectEdit'
-              required:
-                - commitMessage
-                - subject
             example:
               commitMessage: 修正笔误
               subject:
-                name: 沙盒
                 infobox: |-
                   {{Infobox animanga/TVAnime
                   |中文名= 沙盒
@@ -1706,66 +1632,14 @@ paths:
                   [Xbox Series X|S]
                   }
                   }}
-                platform: 0
-                nsfw: false
-                summary: |-
-                  本条目是一个沙盒，可以用于尝试bgm功能。
-
-                  普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
-
-                  https://bgm.tv/group/topic/366812#post_1923517
-        required: true
-      parameters:
-        - schema:
-            minimum: 0
-            type: integer
-          example: 363612
-          in: path
-          name: subjectID
-          required: true
-      security:
-        - CookiesSession: []
-      responses:
-        '200':
-          description: Default Response
-        '401':
-          description: Default Response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-              examples:
-                INVALID_SYNTAX_ERROR:
-                  value:
-                    code: INVALID_SYNTAX_ERROR
-                    error: Bad Request
-                    message: '%s'
-                    statusCode: 400
-        '500':
-          description: 意料之外的服务器错误
-          content:
-            application/json:
-              schema:
-                description: 意料之外的服务器错误
-                $ref: '#/components/schemas/Error'
-    patch:
-      operationId: patchSubjectInfo
-      tags:
-        - wiki
-      description: 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
-      requestBody:
-        content:
-          application/json:
             schema:
-              type: object
               properties:
                 commitMessage:
                   minLength: 1
                   type: string
                 subject:
                   examples:
-                    - name: 沙盒
-                      infobox: |-
+                    - infobox: |-
                         {{Infobox animanga/TVAnime
                         |中文名= 沙盒
                         |别名={
@@ -1788,8 +1662,9 @@ paths:
                         [Xbox Series X|S]
                         }
                         }}
-                      platform: 0
+                      name: 沙盒
                       nsfw: false
+                      platform: 0
                       summary: >-
                         本条目是一个沙盒，可以用于尝试bgm功能。
 
@@ -1798,29 +1673,75 @@ paths:
 
 
                         https://bgm.tv/group/topic/366812#post_1923517
-                  type: object
                   properties:
-                    name:
-                      minLength: 1
+                    date:
+                      examples:
+                        - '0000-00-00'
+                        - '2007-01-30'
+                      pattern: ^\d{4}-\d{2}-\d{2}$
                       type: string
                     infobox:
                       minLength: 1
                       type: string
-                    platform:
-                      type: integer
+                    name:
+                      minLength: 1
+                      type: string
                     nsfw:
                       type: boolean
-                    date:
-                      pattern: ^\d{4}-\d{2}-\d{2}$
-                      examples:
-                        - '0000-00-00'
-                        - '2007-01-30'
-                      type: string
+                    platform:
+                      type: integer
                     summary:
                       type: string
+                  type: object
               required:
                 - commitMessage
                 - subject
+              type: object
+        required: true
+      responses:
+        '200':
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - wiki
+    put:
+      description: |-
+        暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+
+        需要 `subjectWikiEdit` 权限
+      operationId: putSubjectInfo
+      parameters:
+        - example: 363612
+          in: path
+          name: subjectID
+          required: true
+          schema:
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
             example:
               commitMessage: 修正笔误
               subject:
@@ -1847,26 +1768,33 @@ paths:
                   [Xbox Series X|S]
                   }
                   }}
+                name: 沙盒
+                nsfw: false
+                platform: 0
+                summary: |-
+                  本条目是一个沙盒，可以用于尝试bgm功能。
+
+                  普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
+
+                  https://bgm.tv/group/topic/366812#post_1923517
+            schema:
+              properties:
+                commitMessage:
+                  minLength: 1
+                  type: string
+                subject:
+                  $ref: '#/components/schemas/SubjectEdit'
+              required:
+                - commitMessage
+                - subject
+              type: object
         required: true
-      parameters:
-        - schema:
-            minimum: 0
-            type: integer
-          example: 363612
-          in: path
-          name: subjectID
-          required: true
-      security:
-        - CookiesSession: []
       responses:
         '200':
           description: Default Response
         '401':
-          description: Default Response
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
               examples:
                 INVALID_SYNTAX_ERROR:
                   value:
@@ -1874,47 +1802,288 @@ paths:
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
-  /p1/wiki/subjects/{subjectID}/history-summary:
-    get:
-      operationId: subjectEditHistorySummary
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
       tags:
         - wiki
+  /p1/wiki/subjects/{subjectID}/covers:
+    get:
+      operationId: listSubjectCovers
+      parameters:
+        - example: 184017
+          in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  covers:
+                    items:
+                      properties:
+                        creator:
+                          properties:
+                            avatar:
+                              properties:
+                                large:
+                                  type: string
+                                medium:
+                                  examples:
+                                    - sai
+                                  type: string
+                                small:
+                                  type: string
+                              required:
+                                - small
+                                - medium
+                                - large
+                              title: Avatar
+                              type: object
+                            id:
+                              examples:
+                                - 1
+                              type: integer
+                            nickname:
+                              examples:
+                                - Sai🖖
+                              type: string
+                            sign:
+                              type: string
+                            user_group:
+                              type: integer
+                            username:
+                              examples:
+                                - sai
+                              type: string
+                          required:
+                            - id
+                            - username
+                            - nickname
+                            - avatar
+                            - sign
+                            - user_group
+                          title: User
+                          type: object
+                        id:
+                          type: integer
+                        raw:
+                          type: string
+                        thumbnail:
+                          type: string
+                        voted:
+                          type: boolean
+                      required:
+                        - id
+                        - thumbnail
+                        - raw
+                        - creator
+                        - voted
+                      type: object
+                    type: array
+                  current:
+                    properties:
+                      raw:
+                        type: string
+                      thumbnail:
+                        type: string
+                    required:
+                      - thumbnail
+                      - raw
+                    type: object
+                required:
+                  - covers
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - wiki
+    post:
+      description: 需要 `subjectWikiEdit` 权限
+      operationId: uploadSubjectCover
+      parameters:
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                content:
+                  description: base64 encoded raw bytes, 4mb size limit on **decoded** size
+                  format: byte
+                  type: string
+              required:
+                - content
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              examples:
+                IMAGE_FILE_TOO_LARGE:
+                  value:
+                    code: IMAGE_FILE_TOO_LARGE
+                    error: Bad Request
+                    message: uploaded image file is too large
+                    statusCode: 400
+                IMAGE_FORMAT_NOT_SUPPORT:
+                  value:
+                    code: IMAGE_FORMAT_NOT_SUPPORT
+                    error: Bad Request
+                    message: not valid image file, only support jpeg, jpg, png, webp
+                    statusCode: 400
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                NOT_ALLOWED:
+                  value:
+                    code: NOT_ALLOWED
+                    error: Unauthorized
+                    message: you don't have permission to non sandbox subject
+                    statusCode: 401
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      tags:
+        - wiki
+  /p1/wiki/subjects/{subjectID}/covers/{imageID}/vote:
+    delete:
+      description: 需要 `subjectWikiEdit` 权限
+      operationId: unvoteSubjectCover
+      parameters:
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            exclusiveMinimum: 0
+            type: integer
+        - in: path
+          name: imageID
+          required: true
+          schema:
+            exclusiveMinimum: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      summary: 撤消条目封面投票
+      tags:
+        - wiki
+    post:
+      description: 需要 `subjectWikiEdit` 权限
+      operationId: voteSubjectCover
+      parameters:
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            exclusiveMinimum: 0
+            type: integer
+        - in: path
+          name: imageID
+          required: true
+          schema:
+            exclusiveMinimum: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      summary: 为条目封面投票
+      tags:
+        - wiki
+  /p1/wiki/subjects/{subjectID}/history-summary:
+    get:
       description: |-
         获取当前的 wiki 信息
 
         暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+      operationId: subjectEditHistorySummary
       parameters:
-        - schema:
-            minimum: 0
-            type: integer
-          example: 8
+        - example: 8
           in: path
           name: subjectID
           required: true
-      security:
-        - CookiesSession: []
+          schema:
+            minimum: 0
+            type: integer
       responses:
         '200':
-          description: Default Response
           content:
             application/json:
               schema:
-                type: array
                 items:
                   $ref: '#/components/schemas/HistorySummary'
-        '401':
+                type: array
           description: Default Response
+        '401':
           content:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
               examples:
                 INVALID_SYNTAX_ERROR:
                   value:
@@ -1922,10 +2091,17 @@ paths:
                     error: Bad Request
                     message: '%s'
                     statusCode: 400
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
         '500':
-          description: 意料之外的服务器错误
           content:
             application/json:
               schema:
-                description: 意料之外的服务器错误
                 $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - wiki

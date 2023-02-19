@@ -56,3 +56,97 @@ exports[`Form Components form item render properly 1`] = `
   </form>
 </div>
 `;
+
+exports[`Form Components render compact layout properly 1`] = `
+<div>
+  <form
+    class="bgm-form bgm-form--compact"
+  >
+    <div
+      class="bgm-input__wrapper"
+    >
+      <input
+        class="bgm-input"
+        type="text"
+      />
+    </div>
+    <div
+      class="bgm-input__wrapper"
+    >
+      <input
+        class="bgm-input"
+        type="text"
+      />
+    </div>
+    <div
+      class="bgm-editor__form"
+    >
+      <div
+        class="bgm-editor__container"
+      >
+        <div
+          class="bgm-editor__toolbar"
+        >
+          <div
+            class="bgm-editor__toolbox"
+          >
+            <div
+              data-testid="bold"
+              title="粗体 [Ctrl+B]"
+            />
+            <div
+              data-testid="italic"
+              title="斜体 [Ctrl+I]"
+            />
+            <div
+              data-testid="underscore"
+              title="下划线 [Ctrl+U]"
+            />
+            <div
+              data-testid="image"
+              title="图片 [Ctrl+P]"
+            />
+            <div
+              data-testid="link"
+              title="链接 [Ctrl+L]"
+            />
+            <div
+              data-testid="size"
+              title="文字尺寸 [Ctrl+S]"
+            />
+          </div>
+        </div>
+        <textarea
+          class="bgm-editor__text"
+        />
+      </div>
+      <div
+        class="bgm-editor__submit"
+      >
+        <button
+          class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button--primary bgm-button--size-small bgm-button--color-blue"
+        >
+          写好了
+        </button>
+        <button
+          class="bgm-button bgm-editor__button bgm-button--text bgm-button--size-small"
+        >
+          取消
+        </button>
+        <span
+          class="bgm-editor__bbcode-tip"
+        >
+          使用 Ctrl+Enter 或 Alt+S 快速提交 |
+           
+          <a
+            class="bgm-link"
+            href="https://bgm.tv/help/bbcode"
+          >
+            BBCode指南
+          </a>
+        </span>
+      </div>
+    </div>
+  </form>
+</div>
+`;
