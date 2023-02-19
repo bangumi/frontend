@@ -117,7 +117,13 @@ const Comment: FC<CommentProps> = ({
     return (
       <div
         className={headerClassName}
-        onClick={isSpecial ? undefined : () => setShouldCollapsed(false)}
+        onClick={
+          isSpecial
+            ? undefined
+            : () => {
+                setShouldCollapsed(false);
+              }
+        }
         id={elementId}
       >
         <span className='bgm-comment__tip'>
@@ -174,7 +180,9 @@ const Comment: FC<CommentProps> = ({
                   placeholder={`回复 @${creator.nickname}：`}
                   content={replyContent}
                   onChange={setReplyContent}
-                  onCancel={() => setShowReplyEditor(false)}
+                  onCancel={() => {
+                    setShowReplyEditor(false);
+                  }}
                   onSuccess={handleReplySuccess}
                 />
               ) : (
