@@ -110,12 +110,8 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
           e.preventDefault();
         }}
       >
-        <Form.Item>
-          <FormInput quickPost />
-        </Form.Item>
-        <Form.Item>
-          <FormEditor quickPost />
-        </Form.Item>
+        <FormInput quickPost />
+        <FormEditor quickPost />
       </Form>
     );
   }
