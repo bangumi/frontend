@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link as RouterLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { Section } from '@bangumi/design';
+import { Button, Section } from '@bangumi/design';
+import { ArrowRightCircle } from '@bangumi/icons';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
-import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { DescriptionClamp, useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 
 import { useGroupContext } from '../../[name]';
-import CommonStyles from '../../common.module.less';
 import { ClampableContent } from '../../components/ClampableContent';
 import NewTopicForm from '../components/NewTopicForm';
 import TopicsTable from '../components/TopicsTable';
@@ -33,7 +32,6 @@ const GroupHome: React.FC = () => {
     setDescriptionClamp(isClamped ? DescriptionClamp.clamp : DescriptionClamp.unclamp);
   };
 
-  // TODO: XSS defense
   const parsedDescription = renderBBCode(group.group.description);
 
   return (
@@ -48,10 +46,10 @@ const GroupHome: React.FC = () => {
         title='最近讨论'
         wrapperClass={styles.recentTopics}
         renderFooter={() => (
-          <RouterLink to={`/group/${name}/forum`} className={CommonStyles.textButton}>
-            <span>更多组内讨论</span>
-            <RightArrow />
-          </RouterLink>
+          <Button.Link type='text' to={`/group/${name}/forum`} plain>
+            更多组内讨论
+            <ArrowRightCircle />
+          </Button.Link>
         )}
       >
         <TopicsTable topics={recentTopics.data} />

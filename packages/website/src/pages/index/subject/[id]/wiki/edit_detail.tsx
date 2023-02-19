@@ -7,7 +7,6 @@ import React, { createContext, useCallback, useContext, useEffect, useRef, useSt
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
@@ -627,13 +626,15 @@ const WikiEditDetailDetailPage: React.FC = () => {
                 <span className={style.historySuffix}>恢复</span>
               </div>
             ))}
-            <Link
+            <Button.Link
+              type='text'
               to={WikiEditTabsItemsByKey.history.to(subjectId.toString())}
               className={style.historyMore}
+              plain
             >
               更多修改记录
               <ArrowRightCircle />
-            </Link>
+            </Button.Link>
           </div>
         </div>
       }

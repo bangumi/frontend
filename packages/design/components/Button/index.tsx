@@ -12,6 +12,8 @@ export interface ButtonCommonProps {
   shape?: 'square' | 'rounded';
   size?: 'large' | 'medium' | 'small';
   color?: 'default' | 'blue' | 'gray';
+  /** 无内边距、边框及圆角，最小高度 */
+  plain?: boolean;
 }
 
 export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type' | 'onClick'> &
@@ -27,6 +29,7 @@ const Button = ({
   shape = 'rounded',
   size = 'large',
   color = 'default',
+  plain = false,
   children,
   htmlType,
   ...rest
@@ -36,7 +39,7 @@ const Button = ({
       className={classNames(
         'bgm-button',
         className,
-        { 'bgm-button--disabled': disabled },
+        { 'bgm-button--disabled': disabled, 'bgm-button--plain': plain },
         `bgm-button--${type}`,
         {
           [`bgm-button--shape-${shape}`]: shape !== 'rounded',
@@ -62,15 +65,23 @@ export const ButtonLink = ({
   shape = 'rounded',
   size = 'large',
   color = 'default',
+  plain = false,
   ...props
 }: ButtonLinkProps) => {
   return (
     <Typography.Link
-      className={classNames('bgm-button', className, 'bgm-button--link', `bgm-button--${type}`, {
-        [`bgm-button--shape-${shape}`]: shape !== 'rounded',
-        [`bgm-button--size-${size}`]: size !== 'large',
-        [`bgm-button--color-${color}`]: color !== 'default',
-      })}
+      className={classNames(
+        'bgm-button',
+        className,
+        'bgm-button--link',
+        { 'bgm-button--plain': plain },
+        `bgm-button--${type}`,
+        {
+          [`bgm-button--shape-${shape}`]: shape !== 'rounded',
+          [`bgm-button--size-${size}`]: size !== 'large',
+          [`bgm-button--color-${color}`]: color !== 'default',
+        },
+      )}
       noStyle
       {...props}
     >

@@ -1,13 +1,12 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import type { GroupProfile } from '@bangumi/client/group';
-import { Layout, Section, Tab } from '@bangumi/design';
+import { Button, Layout, Section, Tab } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';
 
-import CommonStyles from '../common.module.less';
 import { GroupHeader } from './GroupHeader';
 import styles from './GroupLayout.module.less';
 import GroupNavigation from './GroupNavigation';
@@ -64,13 +63,10 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
               title='最近加入'
               renderFooter={() =>
                 group && (
-                  <Link
-                    to={groupTabsByKey.members.to(group.group.name)}
-                    className={CommonStyles.textButton}
-                  >
-                    <span>更多小组成员</span>
+                  <Button.Link type='text' to={groupTabsByKey.members.to(group.group.name)} plain>
+                    更多小组成员
                     <ArrowRightCircle />
-                  </Link>
+                  </Button.Link>
                 )
               }
             >

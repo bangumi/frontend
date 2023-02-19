@@ -2,6 +2,8 @@ import type { ComponentMeta, Story } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
+import { ArrowRightCircle } from '@bangumi/icons';
+
 import type { ButtonLinkProps, ButtonProps } from '.';
 import Button from '.';
 
@@ -125,4 +127,19 @@ Link.parameters = {
       story: '按钮的链接版本，使用方法与 `Typography.Link` 相同。',
     },
   },
+};
+
+export const LinkWithIcon = ButtonLinkTemplate.bind({});
+LinkWithIcon.args = {
+  to: 'https://bgm.tv',
+  isExternal: true,
+  target: '_blank',
+  type: 'text',
+  plain: true,
+  children: (
+    <>
+      更多小组成员
+      <ArrowRightCircle />
+    </>
+  ),
 };
