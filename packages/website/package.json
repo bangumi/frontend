@@ -23,7 +23,7 @@
     "react-router-dom": "^6.6.1",
     "reset-css": "^5.0.1",
     "rooks": "^7.4.3",
-    "swr": "^2.0.1"
+    "swr": "^2.0.3"
   },
   "devDependencies": {
     "@bangumi/client": "workspace:0.0.0",
