@@ -22,6 +22,7 @@ pull_request_rules:
       - -draft
       - base=master
       - -title~=(?i)\[wip\]
+      - 'created-at<=00:10 ago' # label after PR is created after 10 min
       - -check-failure=lint
       - -check-failure=build
       - -check-failure=test
@@ -35,7 +36,6 @@ pull_request_rules:
     conditions:
       - '#approved-reviews-by>=2'
       - '#changes-requested-reviews-by=0'
-      - 'created-at<=00:10 ago' # label after PR is created after 10 min
       - 'created-at>48:00 ago'
       - -conflict
       - base=master
