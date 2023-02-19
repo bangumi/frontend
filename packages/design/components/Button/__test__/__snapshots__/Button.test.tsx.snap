@@ -120,3 +120,12 @@ exports[`should render button of shape square 1`] = `
   hello world
 </button>
 `;
+
+exports[`should render plain button 1`] = `
+<a
+  class="bgm-button bgm-button--link bgm-button--plain bgm-button--text"
+  href="https://bgm.tv"
+>
+  Bangumi
+</a>
+`;
