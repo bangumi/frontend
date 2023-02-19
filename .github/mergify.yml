@@ -1,52 +1,76 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
+      - '#approved-reviews-by>=2'
       - 'created-at<=48:00 ago'
       - -conflict
       - base=master
       - '#review-threads-unresolved=0'
-      - check-failure!=storybook-build
-      - check-failure!=lint
-      - check-failure!=test
-      - check-failure!=build
+      - -title~=(?i)\[wip\]
+      - or:
+          - check-success=storybook-build
+          - check-skipped=storybook-build
+      - or:
+          - check-success=lint
+          - check-skipped=lint
+      - or:
+          - check-success=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-skipped=build
     actions:
       merge:
         method: squash
 
-  - name: request review
+  - name: label 'waiting-reviewer-approval'
     conditions:
-      - '#approved-reviews-by=0'
-      - '#review-threads-unresolved=0'
+      - '#approved-reviews-by<2'
+      - -conflict
+      - -draft
+      - base=master
+      - label!=waiting-review
+      - -title~=(?i)\[wip\]
+      - or:
+          - check-success=storybook-build
+          - check-skipped=storybook-build
+      - or:
+          - check-success=lint
+          - check-skipped=lint
+      - or:
+          - check-success=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-skipped=build
+    actions:
+      label:
+        toggle:
+          - waiting-reviewer-approval
+
+  - name: label waiting 48h
+    conditions:
+      - '#approved-reviews-by>=2'
       - '#changes-requested-reviews-by=0'
       - -conflict
       - base=master
-      - check-failure!=storybook-build
-      - check-failure!=lint
-      - check-failure!=test
-      - check-failure!=build
-      - label!=waiting-review
-    actions:
-      request_reviews:
-        teams:
-          - '@bangumi/frontend-collaborators'
-      label:
-        add:
-          - waiting-review
-
-  - name: add 48h label
-    conditions:
-      - '#approved-reviews-by>=1'
-      - -conflict
-      - base=master
+      - -draft
       - '#review-threads-unresolved=0'
-      - check-failure!=storybook-build
-      - check-failure!=lint
-      - check-failure!=test
-      - check-failure!=build
+      - -title~=(?i)\[wip\]
+      - or:
+          - check-success=storybook-build
+          - check-skipped=storybook-build
+      - or:
+          - check-success=lint
+          - check-skipped=lint
+      - or:
+          - check-success=test
+          - check-skipped=test
+      - or:
+          - check-success=build
+          - check-skipped=build
     actions:
       label:
-        remove:
-          - waiting-review
         toggle:
           - waiting-opened-48h
 
@@ -99,3 +123,13 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:storybook-build:fail'
+
+queue_rules:
+  - name: default
+    merge_method: squash
+    merge_conditions:
+      - -conflict
+      - -check-failure=lint
+      - -check-failure=build
+      - -check-failure=test
+      - -check-failure=storybook-build

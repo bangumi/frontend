@@ -35,4 +35,9 @@ describe('Input', () => {
     const { container } = render(<Input align='right' />);
     expect(container).toMatchSnapshot();
   });
+
+  it('rounded variant', () => {
+    const { container } = render(<Input rounded />);
+    expect(container).toMatchSnapshot();
+  });
 });

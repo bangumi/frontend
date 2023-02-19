@@ -1,4 +1,5 @@
 @import '../../../theme/base';
+@import (reference) '../../../components/Form/style/index';
 
 @toolbox-width: 215px;
 @text-width: 682px;
@@ -14,6 +15,12 @@
     z-index: 9999;
   }
 
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
   &__toolbox {
     display: flex;
     justify-content: space-between;
@@ -21,11 +28,19 @@
     height: 26px;
     width: @toolbox-width;
     padding: 0 8px;
-    margin-bottom: 10px;
 
     > svg {
       cursor: pointer;
     }
+  }
+
+  &__wordcount {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: @gray-60;
+    margin-right: 9px;
+    white-space: nowrap;
   }
 
   &__text {
@@ -58,12 +73,30 @@
     margin-top: 12px;
     height: 24px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
 
     .bgm-editor__bbcode-tip {
       color: @gray-60;
       line-height: 24px;
+    }
+  }
+
+  .bgm-form &__text {
+    width: auto;
+  }
+
+  // 在 Form 中使用 Editor 而非 EditorForm 的场景
+  .bgm-form--compact > &__container {
+    .compact-form-item();
+  }
+
+  .bgm-form--compact > &__form {
+    align-items: stretch;
+    width: auto;
+
+    .bgm-editor__container {
+      .no-top-border();
     }
   }
 }

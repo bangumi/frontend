@@ -9,33 +9,60 @@ type ItemProps = PropsWithChildren<{
 }>;
 
 function FormItem({ children, label }: ItemProps) {
-  const { labelWidth } = useContext(FormContext);
+  const { labelWidth, compact } = useFormContext();
   return (
     <div className='bgm-form-item'>
-      <div
-        className='bgm-form-item-label'
-        style={{
-          width: `${labelWidth}px`,
-        }}
-      >
-        <label>{label}</label>
-      </div>
+      {!compact && (
+        <div
+          className='bgm-form-item-label'
+          style={{
+            width: `${labelWidth}px`,
+          }}
+        >
+          <label>{label}</label>
+        </div>
+      )}
       {children}
     </div>
   );
 }
 
-const FormContext = createContext<{ labelWidth: number }>({ labelWidth: 12 });
+const FormContext = createContext<{ labelWidth: number; compact: boolean } | null>(null);
+
+export const useFormContext = () => {
+  const context = useContext(FormContext);
+  if (!context) {
+    throw new Error('useFormContext() may only be used in the context of a <Form> component.');
+  }
+  return context;
+};
+
+export const useInFormContext = () => {
+  const context = useContext(FormContext);
+  return context !== null;
+};
 
 type FormProps = PropsWithChildren<{
   labelWidth?: number;
+  compact?: boolean;
 }> &
   JSX.IntrinsicElements['form'];
 
-const Form = ({ children, labelWidth, className, onKeyDown, ...rest }: FormProps) => {
+const Form = ({
+  children,
+  labelWidth,
+  className,
+  onKeyDown,
+  compact = false,
+  ...rest
+}: FormProps) => {
   return (
-    <FormContext.Provider value={{ labelWidth: labelWidth ?? 12 }}>
-      <form className={cn('bgm-form', className)} onKeyDown={onKeyDown} {...rest}>
+    <FormContext.Provider value={{ labelWidth: labelWidth ?? 12, compact }}>
+      <form
+        className={cn('bgm-form', { 'bgm-form--compact': compact }, className)}
+        onKeyDown={onKeyDown}
+        {...rest}
+      >
         {children}
       </form>
     </FormContext.Provider>

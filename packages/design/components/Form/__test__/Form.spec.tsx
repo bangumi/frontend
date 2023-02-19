@@ -3,6 +3,7 @@ import React from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import Button from '../../Button';
+import EditorForm from '../../EditorForm';
 import Input from '../../Input';
 import Form from '..';
 
@@ -57,6 +58,17 @@ describe('Form Components', () => {
             <Input />
           </Input.Group>
         </Form.Item>
+      </Form>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('render compact layout properly', () => {
+    const { container } = render(
+      <Form compact>
+        <Input />
+        <Input />
+        <EditorForm />
       </Form>,
     );
     expect(container).toMatchSnapshot();

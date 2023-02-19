@@ -1,4 +1,5 @@
 @import '../../../theme/base';
+@import (reference) '../../../components/Form/style/index';
 
 .bgm-input {
   font-size: 1rem;
@@ -17,12 +18,33 @@
     justify-content: space-between;
     padding: 0.5rem 1rem;
     border: 2px solid @gray-10;
-    border-radius: 19px;
+    border-radius: 22px;
+
+    &--rounded {
+      padding: 0.5rem 0.75rem;
+      .rounded-mixin();
+    }
 
     &--disabled,
     &--disabled * {
       cursor: not-allowed;
       background: #f4f4f5;
+    }
+  }
+
+  &__prefix {
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+    white-space: nowrap;
+    user-select: none;
+    font-weight: 600;
+    color: @gray-80;
+    line-height: 1.625rem;
+
+    svg {
+      width: 19px;
+      height: 19px;
     }
   }
 
@@ -53,6 +75,19 @@
     }
   }
 
+  .bgm-form &__wrapper {
+    .rounded-mixin();
+
+    .bgm-input::placeholder {
+      color: @gray-60;
+    }
+  }
+
+  .bgm-form--compact > &__wrapper {
+    padding: 0.75rem;
+    .compact-form-item();
+  }
+
   &--align-right {
     text-align: right;
   }
@@ -60,4 +95,8 @@
   &::placeholder {
     color: @gray-10;
   }
+}
+
+.rounded-mixin() {
+  border-radius: 12px;
 }

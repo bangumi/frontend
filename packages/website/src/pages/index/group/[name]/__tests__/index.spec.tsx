@@ -10,7 +10,7 @@ import { server as mockServer } from '@bangumi/website/mocks/server';
 import GroupPage from '@bangumi/website/pages/index/group/[name]';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
-import GroupHome from '..';
+import GroupHome from '../index/index';
 import RecentTopics from './fixtures/recent-topics.json';
 import Sandbox from './fixtures/sandbox.json';
 

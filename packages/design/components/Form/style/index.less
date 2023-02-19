@@ -26,4 +26,30 @@
       }
     }
   }
+
+  &--compact {
+    gap: 0;
+  }
+}
+
+// 点状分隔线，距离左右各 12px，故使用伪元素实现
+.divider-pseudo-element() {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    width: calc(100% - 24px);
+    border-bottom: 2px dotted @gray-10;
+  }
+}
+
+.compact-form-item() {
+  &:not(:first-child) {
+    .no-top-border();
+  }
+
+  &:not(:last-child) {
+    .no-bottom-border();
+    .divider-pseudo-element();
+  }
 }
