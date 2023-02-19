@@ -123,3 +123,13 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:storybook-build:fail'
+
+queue_rules:
+  - name: default
+    merge_method: squash
+    merge_conditions:
+      - -conflict
+      - -check-failure=lint
+      - -check-failure=build
+      - -check-failure=test
+      - -check-failure=storybook-build
