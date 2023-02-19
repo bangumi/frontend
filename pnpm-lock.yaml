@@ -138,7 +138,7 @@ importers:
       msw: ^0.49.3
       react: ^18.2.0
       react-dom: ^18.2.0
-      react-hook-form: ^7.41.5
+      react-hook-form: ^7.43.1
       react-router-dom: ^6.6.1
       reset-css: ^5.0.1
       typescript: ^4.9.4
@@ -166,7 +166,7 @@ importers:
       less: 4.1.3
       lodash: 4.17.21
       msw: 0.49.3_typescript@4.9.4
-      react-hook-form: 7.41.5_react@18.2.0
+      react-hook-form: 7.43.1_react@18.2.0
       react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
       typescript: 4.9.4
       vite: 4.0.3_less@4.1.3
@@ -244,7 +244,7 @@ importers:
       react: ^18.2.0
       react-beautiful-dnd: ^13.1.1
       react-dom: ^18.2.0
-      react-hook-form: ^7.41.5
+      react-hook-form: ^7.43.1
       react-router-dom: ^6.6.1
       reset-css: ^5.0.1
       rooks: ^7.4.3
@@ -267,7 +267,7 @@ importers:
       react: 18.2.0
       react-beautiful-dnd: 13.1.1_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.41.5_react@18.2.0
+      react-hook-form: 7.43.1_react@18.2.0
       react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
       reset-css: 5.0.1
       rooks: 7.4.3_biqbaboplfbrettd7655fr4n2y
@@ -14329,8 +14329,8 @@ packages:
       react-is: 17.0.2
     dev: true
 
-  /react-hook-form/7.41.5_react@18.2.0:
-    resolution: {integrity: sha512-DAKjSJ7X9f16oQrP3TW2/eD9N6HOgrmIahP4LOdFphEWVfGZ2LulFd6f6AQ/YS/0cx/5oc4j8a1PXxuaurWp/Q==}
+  /react-hook-form/7.43.1_react@18.2.0:
+    resolution: {integrity: sha512-+s3+s8LLytRMriwwuSqeLStVjRXFGxgjjx2jED7Z+wz1J/88vpxieRQGvJVvzrzVxshZ0BRuocFERb779m2kNg==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
