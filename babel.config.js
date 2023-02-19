@@ -1,3 +1,4 @@
+// storybook 需要 babel 加载配置文件
 module.exports = {
   presets: [
     ['@babel/preset-env', { targets: { node: 'current' } }],
