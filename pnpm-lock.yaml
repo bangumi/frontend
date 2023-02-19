@@ -23,7 +23,7 @@ importers:
       eslint-config-standard: ^17.0.0
       eslint-config-standard-jsx: ^11.0.0
       eslint-config-standard-react: ^13.0.0
-      eslint-config-standard-with-typescript: ^24.0.0
+      eslint-config-standard-with-typescript: ^34.0.0
       eslint-import-resolver-typescript: ^3.5.3
       eslint-plugin-import: ^2.27.5
       eslint-plugin-jest: ^27.2.1
@@ -31,7 +31,7 @@ importers:
       eslint-plugin-promise: ^6.1.1
       eslint-plugin-react: ^7.32.2
       eslint-plugin-react-hooks: ^4.6.0
-      eslint-plugin-simple-import-sort: ^8.0.0
+      eslint-plugin-simple-import-sort: ^10.0.0
       eslint-plugin-unicorn: ^45.0.2
       eslint-plugin-unused-imports: ^2.0.0
       husky: ^8.0.3
@@ -68,7 +68,7 @@ importers:
       eslint-config-standard: 17.0.0_rwq7hzy2vtlwiajbw6pmw3rkzy
       eslint-config-standard-jsx: 11.0.0_g6zv73k3ihflkspk4fqystlkye
       eslint-config-standard-react: 13.0.0_loxmahvyew7cryq7d67l7ot7zy
-      eslint-config-standard-with-typescript: 24.0.0_s4wyy3hkcfdlicuewz4avpo42q
+      eslint-config-standard-with-typescript: 34.0.0_s4wyy3hkcfdlicuewz4avpo42q
       eslint-import-resolver-typescript: 3.5.3_mvgyw3chnqkp6sgfmmtihyjpnm
       eslint-plugin-import: 2.27.5_gndiqgw2wrzfeqy4ccfxbmtnsi
       eslint-plugin-jest: 27.2.1_ieszo5vfeyfb456lstyviphmwq
@@ -76,7 +76,7 @@ importers:
       eslint-plugin-promise: 6.1.1_eslint@8.34.0
       eslint-plugin-react: 7.32.2_eslint@8.34.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.34.0
-      eslint-plugin-simple-import-sort: 8.0.0_eslint@8.34.0
+      eslint-plugin-simple-import-sort: 10.0.0_eslint@8.34.0
       eslint-plugin-unicorn: 45.0.2_eslint@8.34.0
       eslint-plugin-unused-imports: 2.0.0_vqeavzxdzk2atb75l6fx3anzpi
       husky: 8.0.3
@@ -9518,8 +9518,8 @@ packages:
       eslint-plugin-react-hooks: 4.6.0_eslint@8.34.0
     dev: true
 
-  /eslint-config-standard-with-typescript/24.0.0_s4wyy3hkcfdlicuewz4avpo42q:
-    resolution: {integrity: sha512-vEnGXZ5aiR1enl9652iIP4nTpY3GPcNEwuhrsPbKO3Ce3D6T3yCqZdkUPk8nJetfdL/yO0DLsHg2d/l9iECIdg==}
+  /eslint-config-standard-with-typescript/34.0.0_s4wyy3hkcfdlicuewz4avpo42q:
+    resolution: {integrity: sha512-zhCsI4/A0rJ1ma8sf3RLXYc0gc7yPmdTWRVXMh9dtqeUx3yBQyALH0wosHhk1uQ9QyItynLdNOtcHKNw8G7lQw==}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^5.0.0
       eslint: ^8.0.1
@@ -9739,8 +9739,8 @@ packages:
       string.prototype.matchall: 4.0.8
     dev: true
 
-  /eslint-plugin-simple-import-sort/8.0.0_eslint@8.34.0:
-    resolution: {integrity: sha512-bXgJQ+lqhtQBCuWY/FUWdB27j4+lqcvXv5rUARkzbeWLwea+S5eBZEQrhnO+WgX3ZoJHVj0cn943iyXwByHHQw==}
+  /eslint-plugin-simple-import-sort/10.0.0_eslint@8.34.0:
+    resolution: {integrity: sha512-AeTvO9UCMSNzIHRkg8S6c3RPy5YEwKWSQPx3DYghLedo2ZQxowPFLGDN1AZ2evfg6r6mjBSZSLxLFsWSu3acsw==}
     peerDependencies:
       eslint: '>=5.0.0'
     dependencies:

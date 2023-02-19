@@ -30,7 +30,15 @@ const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, su
   );
 
   return (
-    <li className={className} onClick={onClickEmit && ((e) => onClickEmit(id, e))}>
+    <li
+      className={className}
+      onClick={
+        onClickEmit &&
+        ((e) => {
+          onClickEmit(id, e);
+        })
+      }
+    >
       {label}
       {subMenu && (
         <div className='bgm-menu-item__submenu' data-testid='submenu'>

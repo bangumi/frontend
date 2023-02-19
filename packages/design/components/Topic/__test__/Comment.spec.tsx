@@ -119,12 +119,13 @@ describe('Normal Comment', () => {
 
   it('successful reply should refresh, highlight and hide form otherwise not', async () => {
     const basicReply = { id: 2104702 };
-    const mockApi = (status: number) =>
+    const mockApi = (status: number) => {
       mockServer.use(
         rest.post('/p1/groups/-/topics/1/replies', (_, res, ctx) =>
           res(ctx.status(status), ctx.json(basicReply)),
         ),
       );
+    };
 
     const onSuccess = jest.fn();
     const props = buildProps(false);
