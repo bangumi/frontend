@@ -100,3 +100,39 @@ export const Compact: ComponentStory<typeof Form> = (args) => {
     </Form>
   );
 };
+
+export const CompactWithInputGroup = () => {
+  return (
+    <Form compact style={{ maxWidth: 675 }}>
+      <Form.Item>
+        <Input type='text' placeholder='给新帖取一个标题' />
+      </Form.Item>
+      <Form.Item>
+        <Input.Group>
+          <Input
+            placeholder='项目名'
+            wrapperStyle={{
+              width: '20%',
+            }}
+          />
+          <Input />
+          <Input />
+        </Input.Group>
+      </Form.Item>
+      <Form.Item>
+        <Input type='text' placeholder='给新帖取一个标题' />
+      </Form.Item>
+      <Form.Item>
+        <Input.Group>
+          <Input
+            placeholder='项目名'
+            wrapperStyle={{
+              width: '20%',
+            }}
+          />
+          <Input />
+        </Input.Group>
+      </Form.Item>
+    </Form>
+  );
+};
