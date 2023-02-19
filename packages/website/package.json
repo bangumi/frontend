@@ -14,7 +14,7 @@
     "dayjs": "^1.11.7",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.34.1",
-    "nanoid": "^4.0.0",
+    "nanoid": "^4.0.1",
     "oazapfts": "^4.5.2",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",

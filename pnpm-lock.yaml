@@ -202,12 +202,12 @@ importers:
       '@types/react': ^18.0.28
       js-yaml: ^4.1.0
       lodash: ^4.17.21
-      nanoid: ^4.0.0
+      nanoid: ^4.0.1
       typescript: ^4.9.4
     dependencies:
       '@bgm38/wiki': 0.2.2
       lodash: 4.17.21
-      nanoid: 4.0.0
+      nanoid: 4.0.1
     devDependencies:
       '@types/js-yaml': 4.0.5
       '@types/lodash': 4.14.191
@@ -238,7 +238,7 @@ importers:
       lodash: ^4.17.21
       monaco-editor: ^0.34.1
       msw: ^0.49.3
-      nanoid: ^4.0.0
+      nanoid: ^4.0.1
       oazapfts: ^4.5.2
       openapi-types: ^12.1.0
       postcss: ^8.4.20
@@ -264,7 +264,7 @@ importers:
       dayjs: 1.11.7
       lodash: 4.17.21
       monaco-editor: 0.34.1
-      nanoid: 4.0.0
+      nanoid: 4.0.1
       oazapfts: 4.5.2_openapi-types@12.1.0
       react: 18.2.0
       react-beautiful-dnd: 13.1.1_biqbaboplfbrettd7655fr4n2y
@@ -13875,8 +13875,8 @@ packages:
     hasBin: true
     dev: true
 
-  /nanoid/4.0.0:
-    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+  /nanoid/4.0.1:
+    resolution: {integrity: sha512-udKGtCCUafD3nQtJg9wBhRP3KMbPglUsgV5JVsXhvyBs/oefqb4sqMEhKBBgqZncYowu58p1prsZQBYvAj/Gww==}
     engines: {node: ^14 || ^16 || >=18}
     hasBin: true
     dev: false
