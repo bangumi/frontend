@@ -71,7 +71,7 @@ const TopicPage: FC = () => {
               {user && (
                 <div className={styles.topicActions}>
                   <Button type='secondary' size='small' onClick={startReply}>
-                    评论
+                    回复
                   </Button>
                   {user.id === topicDetail.creator.id && (
                     <>
