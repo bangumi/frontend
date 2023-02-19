@@ -96,7 +96,7 @@ importers:
 
   packages/client:
     specifiers:
-      '@apidevtools/json-schema-ref-parser': ^9.1.2
+      '@apidevtools/json-schema-ref-parser': ^10.1.0
       '@faker-js/faker': ^7.6.0
       change-case: ^4.1.2
       js-yaml: ^4.1.0
@@ -108,7 +108,7 @@ importers:
     dependencies:
       oazapfts: 4.5.2_openapi-types@12.1.0
     devDependencies:
-      '@apidevtools/json-schema-ref-parser': 9.1.2
+      '@apidevtools/json-schema-ref-parser': 10.1.0
       '@faker-js/faker': 7.6.0
       change-case: 4.1.2
       js-yaml: 4.1.0
@@ -339,6 +339,17 @@ packages:
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
+  /@apidevtools/json-schema-ref-parser/10.1.0:
+    resolution: {integrity: sha512-3e+viyMuXdrcK8v5pvP+SDoAQ77FH6OyRmuK48SZKmdHJRFm87RsSs8qm6kP39a/pOPURByJw+OXzQIqcfmKtA==}
+    engines: {node: '>= 16'}
+    dependencies:
+      '@jsdevtools/ono': 7.1.3
+      '@types/json-schema': 7.0.11
+      '@types/lodash.clonedeep': 4.5.7
+      js-yaml: 4.1.0
+      lodash.clonedeep: 4.5.0
+    dev: true
+
   /@apidevtools/json-schema-ref-parser/9.0.6:
     resolution: {integrity: sha512-M3YgsLjI0lZxvrpeGVk9Ap032W6TPQkH6pRAZz81Ac3WUNF79VQooAFnp8umjvVzUmD93NkogxEwbSce7qMsUg==}
     dependencies:
@@ -346,15 +357,6 @@ packages:
       call-me-maybe: 1.0.2
       js-yaml: 3.14.1
     dev: false
-
-  /@apidevtools/json-schema-ref-parser/9.1.2:
-    resolution: {integrity: sha512-r1w81DpR+KyRWd3f+rk6TNqMgedmAxZP5v5KWlXQWlgMUUtyEJch0DKEci1SorPMiSeM8XPl7MZ3miJ60JIpQg==}
-    dependencies:
-      '@jsdevtools/ono': 7.1.3
-      '@types/json-schema': 7.0.11
-      call-me-maybe: 1.0.2
-      js-yaml: 4.1.0
-    dev: true
 
   /@apidevtools/openapi-schemas/2.1.0:
     resolution: {integrity: sha512-Zc1AlqrJlX3SlpupFGpiLi2EbteyP7fXmUOGup6/DnkRgjP9bgMM/ag+n91rsv0U1Gpz0H3VILA/o3bW7Ua6BQ==}
@@ -5905,6 +5907,12 @@ packages:
 
   /@types/json5/0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
+    dev: true
+
+  /@types/lodash.clonedeep/4.5.7:
+    resolution: {integrity: sha512-ccNqkPptFIXrpVqUECi60/DFxjNKsfoQxSQsgcBJCX/fuX1wgyQieojkcWH/KpE3xzLoWN/2k+ZeGqIN3paSvw==}
+    dependencies:
+      '@types/lodash': 4.14.191
     dev: true
 
   /@types/lodash/4.14.191:
@@ -12341,6 +12349,10 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       p-locate: 5.0.0
+    dev: true
+
+  /lodash.clonedeep/4.5.0:
+    resolution: {integrity: sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==}
     dev: true
 
   /lodash.debounce/4.0.8:
