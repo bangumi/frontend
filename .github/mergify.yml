@@ -7,18 +7,10 @@ pull_request_rules:
       - base=master
       - '#review-threads-unresolved=0'
       - -title~=(?i)\[wip\]
-      - or:
-          - check-success=storybook-build
-          - check-skipped=storybook-build
-      - or:
-          - check-success=lint
-          - check-skipped=lint
-      - or:
-          - check-success=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-skipped=build
+      - -check-failure=lint
+      - -check-failure=build
+      - -check-failure=test
+      - -check-failure=storybook-build
     actions:
       merge:
         method: squash
@@ -31,18 +23,10 @@ pull_request_rules:
       - base=master
       - label!=waiting-review
       - -title~=(?i)\[wip\]
-      - or:
-          - check-success=storybook-build
-          - check-skipped=storybook-build
-      - or:
-          - check-success=lint
-          - check-skipped=lint
-      - or:
-          - check-success=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-skipped=build
+      - -check-failure=lint
+      - -check-failure=build
+      - -check-failure=test
+      - -check-failure=storybook-build
     actions:
       label:
         toggle:
@@ -57,18 +41,10 @@ pull_request_rules:
       - -draft
       - '#review-threads-unresolved=0'
       - -title~=(?i)\[wip\]
-      - or:
-          - check-success=storybook-build
-          - check-skipped=storybook-build
-      - or:
-          - check-success=lint
-          - check-skipped=lint
-      - or:
-          - check-success=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-skipped=build
+      - -check-failure=lint
+      - -check-failure=build
+      - -check-failure=test
+      - -check-failure=storybook-build
     actions:
       label:
         toggle:
