@@ -6,6 +6,7 @@ import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import TopicForm from '../../components/TopicForm';
 import TopicsTable from '../components/TopicsTable';
@@ -15,6 +16,7 @@ const GroupForum = () => {
   const { name } = useParams();
   const [, navigate] = useTransitionNavigate();
   const { curPage, offset, pageSize } = usePaginationParams();
+  const { user } = useUser();
 
   const topics = useGroupRecentTopics(name!, {
     offset,
@@ -35,7 +37,7 @@ const GroupForum = () => {
         wrapperClass={styles.pagination}
         onChange={handlePageChange}
       />
-      <TopicForm quickPost groupName={name} />
+      {user && <TopicForm quickPost />}
     </>
   );
 };

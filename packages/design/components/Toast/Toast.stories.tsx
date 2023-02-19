@@ -11,5 +11,13 @@ const componentMeta: ComponentMeta<typeof Toast> = {
 export default componentMeta;
 
 export const Demo = () => {
-  return <button onClick={() => toast('提示信息')}>按下提示</button>;
+  return (
+    <button
+      onClick={() => {
+        toast('提示信息');
+      }}
+    >
+      按下提示
+    </button>
+  );
 };

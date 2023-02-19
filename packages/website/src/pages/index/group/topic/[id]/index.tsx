@@ -119,7 +119,7 @@ const TopicPage: FC = () => {
         }
         rightChildren={
           <>
-            <GroupNavigation group={groupProfile} />
+            {user && <GroupNavigation group={groupProfile} />}
             <GroupInfo group={group} />
           </>
         }

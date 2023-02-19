@@ -7,18 +7,11 @@ pull_request_rules:
       - base=master
       - '#review-threads-unresolved=0'
       - -title~=(?i)\[wip\]
-      - or:
-          - check-success=storybook-build
-          - check-skipped=storybook-build
-      - or:
-          - check-success=lint
-          - check-skipped=lint
-      - or:
-          - check-success=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-skipped=build
+      - and: &ci
+          - -check-failure=lint
+          - -check-failure=build
+          - -check-failure=test
+          - -check-failure=storybook-build
     actions:
       merge:
         method: squash
@@ -29,46 +22,25 @@ pull_request_rules:
       - -conflict
       - -draft
       - base=master
-      - label!=waiting-review
       - -title~=(?i)\[wip\]
-      - or:
-          - check-success=storybook-build
-          - check-skipped=storybook-build
-      - or:
-          - check-success=lint
-          - check-skipped=lint
-      - or:
-          - check-success=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-skipped=build
+      - 'created-at<=00:10 ago' # label after PR is created after 10 min
+      - and: *ci
     actions:
       label:
         toggle:
-          - waiting-reviewer-approval
+          - waiting-approval
 
   - name: label waiting 48h
     conditions:
       - '#approved-reviews-by>=2'
       - '#changes-requested-reviews-by=0'
+      - 'created-at>48:00 ago'
       - -conflict
       - base=master
       - -draft
       - '#review-threads-unresolved=0'
       - -title~=(?i)\[wip\]
-      - or:
-          - check-success=storybook-build
-          - check-skipped=storybook-build
-      - or:
-          - check-success=lint
-          - check-skipped=lint
-      - or:
-          - check-success=test
-          - check-skipped=test
-      - or:
-          - check-success=build
-          - check-skipped=build
+      - and: *ci
     actions:
       label:
         toggle:
@@ -123,3 +95,13 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:storybook-build:fail'
+
+queue_rules:
+  - name: default
+    merge_method: squash
+    merge_conditions:
+      - -conflict
+      - -check-failure=lint
+      - -check-failure=build
+      - -check-failure=test
+      - -check-failure=storybook-build
