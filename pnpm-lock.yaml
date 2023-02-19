@@ -8,7 +8,6 @@ importers:
       '@actions/github': ^5.1.1
       '@babel/core': ^7.20.12
       '@babel/preset-env': ^7.20.2
-      '@babel/preset-react': ^7.18.6
       '@babel/preset-typescript': ^7.18.6
       '@testing-library/jest-dom': ^5.16.5
       '@testing-library/react': ^13.4.0
@@ -20,7 +19,6 @@ importers:
       '@vitejs/plugin-react': ^3.0.0
       '@vitest/coverage-c8': ^0.28.5
       '@vitest/ui': ^0.28.4
-      babel-preset-vite: ^1.1.0
       eslint: ^8.34.0
       eslint-config-prettier: ^8.6.0
       eslint-config-standard: ^17.0.0
@@ -58,7 +56,6 @@ importers:
       '@actions/github': 5.1.1
       '@babel/core': 7.20.12
       '@babel/preset-env': 7.20.2_@babel+core@7.20.12
-      '@babel/preset-react': 7.18.6_@babel+core@7.20.12
       '@babel/preset-typescript': 7.18.6_@babel+core@7.20.12
       '@testing-library/jest-dom': 5.16.5
       '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
@@ -70,7 +67,6 @@ importers:
       '@vitejs/plugin-react': 3.1.0_vite@4.0.3
       '@vitest/coverage-c8': 0.28.5_itn5mhdgoxdt6nk7zeh5bmcq5a
       '@vitest/ui': 0.28.5
-      babel-preset-vite: 1.1.0
       eslint: 8.34.0
       eslint-config-prettier: 8.6.0_eslint@8.34.0
       eslint-config-standard: 17.0.0_rwq7hzy2vtlwiajbw6pmw3rkzy
@@ -5968,35 +5964,6 @@ packages:
     resolution: {integrity: sha512-XTIieEY+gvJ39ChLcB4If5zHtPxt3Syj5rgZR+e1ctpmK8NjPf0zFqsz4JpLJT0xla9GFDKjy8Cpu331nrmE1Q==}
     dev: true
 
-  /@types/babel__core/7.20.0:
-    resolution: {integrity: sha512-+n8dL/9GWblDO0iU6eZAwEIJVr5DWigtle+Q6HLOrh/pdbXOhOtqzq8VPPE2zvNJzSKY4vH/z3iT3tn0A3ypiQ==}
-    dependencies:
-      '@babel/parser': 7.20.15
-      '@babel/types': 7.20.7
-      '@types/babel__generator': 7.6.4
-      '@types/babel__template': 7.4.1
-      '@types/babel__traverse': 7.18.3
-    dev: true
-
-  /@types/babel__generator/7.6.4:
-    resolution: {integrity: sha512-tFkciB9j2K755yrTALxD44McOrk+gfpIpvC3sxHjRawj6PfnQxrse4Clq5y/Rq+G3mrBurMax/lG8Qn2t9mSsg==}
-    dependencies:
-      '@babel/types': 7.20.7
-    dev: true
-
-  /@types/babel__template/7.4.1:
-    resolution: {integrity: sha512-azBFKemX6kMg5Io+/rdGT0dkGreboUVR0Cdm3fz9QJWpaQGJRQXl7C+6hOTCZcMll7KFyEQpgbYI2lHdsS4U7g==}
-    dependencies:
-      '@babel/parser': 7.20.15
-      '@babel/types': 7.20.7
-    dev: true
-
-  /@types/babel__traverse/7.18.3:
-    resolution: {integrity: sha512-1kbcJ40lLB7MHsj39U4Sh1uTd2E7rLEa79kmDpI6cy+XiXsteB3POdQomoq4FxszMrO3ZYchkhYJw7A2862b3w==}
-    dependencies:
-      '@babel/types': 7.20.7
-    dev: true
-
   /@types/chai-subset/1.3.3:
     resolution: {integrity: sha512-frBecisrNGz+F4T6bcc+NLeolfiojh5FxW2klu669+8BARtyQv2C/GkNW6FUodVe4BroGMP/wER/YDGc7rEllw==}
     dependencies:
@@ -7494,38 +7461,6 @@ packages:
       react-docgen: 5.4.3
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /babel-plugin-transform-vite-meta-env/1.0.3:
-    resolution: {integrity: sha512-eyfuDEXrMu667TQpmctHeTlJrZA6jXYHyEJFjcM0yEa60LS/LXlOg2PBbMb8DVS+V9CnTj/j9itdlDVMcY2zEg==}
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@types/babel__core': 7.20.0
-    dev: true
-
-  /babel-plugin-transform-vite-meta-glob/1.0.3:
-    resolution: {integrity: sha512-JW3VnwUjJqpj0FM0vJFxrGdxSBcHOa0j5YMvvtXYPmFshroq53nbK9dqRETgjXlMrfIz0oU/6ki+u1GdVWdNHA==}
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@types/babel__core': 7.20.0
-      glob: 7.2.3
-    dev: true
-
-  /babel-plugin-transform-vite-meta-hot/1.0.0:
-    resolution: {integrity: sha512-qF7T46bDG5UPPOfy4MFgQJyd3mZvm1sGOR2gZ4lIHy6DEcxAVTIt39/adAn89il44CvwestshuEybKPMR+L/Tg==}
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@types/babel__core': 7.20.0
-    dev: true
-
-  /babel-preset-vite/1.1.0:
-    resolution: {integrity: sha512-5OnV5RPD+Byi1KnhQpgzz2e1Bc2PFJ9i6wy1VDMPmYu0NjaxcyJuWy9piBoefCL4tMn1nm3VtvInPNitCHJnbQ==}
-    dependencies:
-      '@babel/runtime': 7.20.7
-      '@types/babel__core': 7.20.0
-      babel-plugin-transform-vite-meta-env: 1.0.3
-      babel-plugin-transform-vite-meta-glob: 1.0.3
-      babel-plugin-transform-vite-meta-hot: 1.0.0
     dev: true
 
   /bail/1.0.5:
