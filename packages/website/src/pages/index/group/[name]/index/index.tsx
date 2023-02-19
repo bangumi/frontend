@@ -58,7 +58,7 @@ const GroupHome: React.FC = () => {
       >
         <TopicsTable topics={recentTopics.data} />
       </Section>
-      {user && <TopicForm quickPost />}
+      {user && <TopicForm quickPost groupName={name} />}
     </>
   );
 };

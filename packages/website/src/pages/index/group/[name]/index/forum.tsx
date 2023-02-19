@@ -37,7 +37,7 @@ const GroupForum = () => {
         wrapperClass={styles.pagination}
         onChange={handlePageChange}
       />
-      {user && <TopicForm quickPost />}
+      {user && <TopicForm quickPost groupName={name} />}
     </>
   );
 };
