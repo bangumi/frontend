@@ -249,7 +249,7 @@ importers:
       react-hook-form: ^7.41.5
       react-router-dom: ^6.6.1
       reset-css: ^5.0.1
-      rooks: ^7.4.2
+      rooks: ^7.4.3
       swr: ^2.0.1
       timezone-mock: ^1.3.6
       typescript: ^4.9.4
@@ -272,7 +272,7 @@ importers:
       react-hook-form: 7.41.5_react@18.2.0
       react-router-dom: 6.6.1_biqbaboplfbrettd7655fr4n2y
       reset-css: 5.0.1
-      rooks: 7.4.2_biqbaboplfbrettd7655fr4n2y
+      rooks: 7.4.3_biqbaboplfbrettd7655fr4n2y
       swr: 2.0.1_react@18.2.0
     devDependencies:
       '@bangumi/client': link:../client
@@ -15970,8 +15970,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /rooks/7.4.2_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-4vpjD3hGkc5hH7NZxViOUTmacwx5HhZH6CJjy0fQd4jR9zXzGjkmUncuFraqXj+vEsAC3LBq/OPHC5k1VBWbyg==}
+  /rooks/7.4.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-SdXdPbw8bSqpjke4mkqLocn7e46jUNRjQs6bOKUHlZmf7b5zoMOn7Xkr+FjT5ZH/0px4Zj2TJRRPzoPJTUt2lQ==}
     engines: {node: '>=v10.24.1'}
     peerDependencies:
       react: ^16.8.0  || ^17.0.0 || ^18.0.0
