@@ -17,7 +17,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.47.1
       '@typescript-eslint/parser': ^5.47.1
       babel-jest: ^29.3.1
-      babel-preset-vite: ^1.0.4
+      babel-preset-vite: ^1.1.0
       eslint: ^8.31.0
       eslint-config-prettier: ^8.5.0
       eslint-config-standard: ^17.0.0
@@ -62,7 +62,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.47.1_axni7f4fgvh6tlufnh6hwgsifq
       '@typescript-eslint/parser': 5.47.1_iukboom6ndih5an6iafl45j2fe
       babel-jest: 29.3.1_@babel+core@7.20.12
-      babel-preset-vite: 1.0.4
+      babel-preset-vite: 1.1.0
       eslint: 8.31.0
       eslint-config-prettier: 8.5.0_eslint@8.31.0
       eslint-config-standard: 17.0.0_bnqb5qzb3pd2ps6dat4mcipgfi
@@ -7239,6 +7239,13 @@ packages:
       glob: 7.2.3
     dev: true
 
+  /babel-plugin-transform-vite-meta-hot/1.0.0:
+    resolution: {integrity: sha512-qF7T46bDG5UPPOfy4MFgQJyd3mZvm1sGOR2gZ4lIHy6DEcxAVTIt39/adAn89il44CvwestshuEybKPMR+L/Tg==}
+    dependencies:
+      '@babel/runtime': 7.20.7
+      '@types/babel__core': 7.1.20
+    dev: true
+
   /babel-preset-current-node-syntax/1.0.1_@babel+core@7.20.12:
     resolution: {integrity: sha512-M7LQ0bxarkxQoN+vz5aJPsLBn77n8QgTFmo8WK0/44auK2xlCXrYcUxHFxgU7qW5Yzw/CjmLRK2uJzaCd7LvqQ==}
     peerDependencies:
@@ -7276,13 +7283,14 @@ packages:
       babel-preset-current-node-syntax: 1.0.1_@babel+core@7.20.12
     dev: true
 
-  /babel-preset-vite/1.0.4:
-    resolution: {integrity: sha512-RZS/wNfEUD8aMliObxqlPw4ZR7R5OsT1G2IHd5nuUmiYKS6zemur8aZ5WPbfQwPpTPe9VEjcrxQA/6PKBWRTkg==}
+  /babel-preset-vite/1.1.0:
+    resolution: {integrity: sha512-5OnV5RPD+Byi1KnhQpgzz2e1Bc2PFJ9i6wy1VDMPmYu0NjaxcyJuWy9piBoefCL4tMn1nm3VtvInPNitCHJnbQ==}
     dependencies:
       '@babel/runtime': 7.20.7
       '@types/babel__core': 7.1.20
       babel-plugin-transform-vite-meta-env: 1.0.3
       babel-plugin-transform-vite-meta-glob: 1.0.3
+      babel-plugin-transform-vite-meta-hot: 1.0.0
     dev: true
 
   /bail/1.0.5:
