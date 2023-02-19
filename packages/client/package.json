@@ -14,7 +14,7 @@
     "oazapfts": "^4.5.2"
   },
   "devDependencies": {
-    "@apidevtools/json-schema-ref-parser": "^9.1.0",
+    "@apidevtools/json-schema-ref-parser": "^9.1.2",
     "@faker-js/faker": "^7.6.0",
     "change-case": "^4.1.2",
     "js-yaml": "^4.1.0",
