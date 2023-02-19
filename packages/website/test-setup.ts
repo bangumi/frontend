@@ -1,9 +1,11 @@
-import 'whatwg-fetch';
-
 import timezoneMock from 'timezone-mock';
-import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+// @ts-expect-error types 没有导出
+import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 import { server } from './src/mocks/server';
+
+vi.stubGlobal('fetch', fetchPolyfill);
 
 beforeAll(() => {
   server.listen();

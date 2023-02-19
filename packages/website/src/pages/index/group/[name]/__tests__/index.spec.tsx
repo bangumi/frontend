@@ -36,13 +36,13 @@ class GroupHomeTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost/p1/groups/${name}/profile`, (req, res, ctx) => {
+      rest.get(`http://localhost:3000/p1/groups/${name}/profile`, (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(mock.group ?? Sandbox));
       }),
     );
 
     mockServer.use(
-      rest.get(`http://localhost/p1/groups/${name}/topics`, (req, res, ctx) => {
+      rest.get(`http://localhost:3000/p1/groups/${name}/topics`, (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics));
       }),
     );
