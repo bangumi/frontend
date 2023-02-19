@@ -24,6 +24,7 @@ export default defineConfig({
     }),
   ],
   test: {
+    globals: true,
     reporters: process.env.GITHUB_ACTIONS ? ['default', new GithubActionsReporter()] : 'default',
     environment: 'jsdom',
     setupFiles: ['./test-setup.ts', './packages/website/test-setup.ts'],

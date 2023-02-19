@@ -39,16 +39,3 @@ exports[`Input > rounded variant 1`] = `
   </div>
 </div>
 `;
-
-exports[`Input rounded variant 1`] = `
-<div>
-  <div
-    class="bgm-input__wrapper bgm-input__wrapper--rounded"
-  >
-    <input
-      class="bgm-input"
-      type="text"
-    />
-  </div>
-</div>
-`;
