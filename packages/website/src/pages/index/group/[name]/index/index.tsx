@@ -5,6 +5,7 @@ import { Section } from '@bangumi/design';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
 import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
 import { DescriptionClamp, useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { useGroupContext } from '../../[name]';
 import CommonStyles from '../../common.module.less';
@@ -20,6 +21,7 @@ const GroupHome: React.FC = () => {
   }
   const groupContext = useGroupContext();
   const recentTopics = useGroupRecentTopics(name);
+  const { user } = useUser();
 
   if (!recentTopics.data.length) {
     return null;
@@ -56,7 +58,7 @@ const GroupHome: React.FC = () => {
       >
         <TopicsTable topics={recentTopics.data} />
       </Section>
-      <NewTopicForm quickPost />
+      {user && <NewTopicForm quickPost />}
     </>
   );
 };
