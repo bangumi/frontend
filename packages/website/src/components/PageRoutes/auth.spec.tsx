@@ -39,7 +39,7 @@ describe('RequireAuth', () => {
   });
 
   it("should redirect to designated page if user isn't authorized", () => {
-    const mockedNavigate = jest.fn();
+    const mockedNavigate = vi.fn();
     mockedUseNavigate.mockReturnValue(mockedNavigate);
     mockedUseUser.mockReturnValue({
       user: {
@@ -52,7 +52,7 @@ describe('RequireAuth', () => {
   });
 
   it('should redirect to login page if user is logged', () => {
-    const mockedRedirectToLogin = jest.fn();
+    const mockedRedirectToLogin = vi.fn();
     mockedUseUser.mockReturnValue({
       user: null,
       redirectToLogin: mockedRedirectToLogin,

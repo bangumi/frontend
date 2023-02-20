@@ -18,7 +18,7 @@ describe('<EditorForm />', () => {
   });
 
   it('onConfirm event', () => {
-    const onConfirm = jest.fn();
+    const onConfirm = vi.fn();
     const { getByText, getByPlaceholderText } = render(
       <TestEditorForm onConfirm={onConfirm} confirmText='Confirm' placeholder='placeholder' />,
     );
@@ -29,14 +29,14 @@ describe('<EditorForm />', () => {
   });
 
   it('onCancel event', () => {
-    const onCancel = jest.fn();
+    const onCancel = vi.fn();
     const { getByText } = render(<TestEditorForm onCancel={onCancel} />);
     getByText('取消').click();
     expect(onCancel).toHaveBeenCalled();
   });
 
   it('Ctrl + Enter & Alt + S should trigger onConfirm event', () => {
-    const onConfirm = jest.fn();
+    const onConfirm = vi.fn();
     const { getByPlaceholderText } = render(
       <TestEditorForm onConfirm={onConfirm} placeholder='placeholder' />,
     );
