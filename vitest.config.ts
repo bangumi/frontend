@@ -10,10 +10,10 @@ const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   resolve: {
     alias: [
+      // mock *.svg file
       { find: /.*\.svg$/, replacement: path.resolve(dirname, 'tests/__mocks__/svg.js') },
       { find: '@bangumi/website', replacement: path.resolve(dirname, './packages/website/src') },
     ],
-    // extensions: ['js', 'tsx', 'ts'],
   },
   plugins: [react()],
   test: {
