@@ -8,7 +8,7 @@ import Form from '..';
 
 describe('Form Components', () => {
   it('should submit when submit button clicked', async () => {
-    const handleSubmit = vi.fn();
+    const handleSubmit = jest.fn();
     const { findByTestId } = render(
       <Form
         onSubmit={(e) => {
@@ -29,7 +29,7 @@ describe('Form Components', () => {
   });
 
   it('key down should work properly', async () => {
-    const onKeyDown = vi.fn();
+    const onKeyDown = jest.fn();
     const { getByTestId } = render(
       <Form data-testid='form' onKeyDown={onKeyDown}>
         <Input id='input' data-testid='input' />

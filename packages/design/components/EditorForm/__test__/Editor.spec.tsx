@@ -145,7 +145,7 @@ describe('EditorForm > Editor', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
-    const prompt = vi.spyOn(window, 'prompt').mockImplementation(() => mockValue);
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
 
     ['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
       // init
@@ -170,7 +170,7 @@ describe('EditorForm > Editor', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
-    const prompt = vi.spyOn(window, 'prompt').mockImplementation(() => mockValue);
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
 
     ['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
       // init
@@ -195,7 +195,7 @@ describe('EditorForm > Editor', () => {
   });
 
   it('onConfirm keyboard event', () => {
-    const onConfirm = vi.fn();
+    const onConfirm = jest.fn();
     const { textarea } = initTextareaTest({ placeholder: 'Hello', onConfirm });
 
     textarea.value = 'test111';
@@ -215,7 +215,7 @@ describe('EditorForm > Editor', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
-    const prompt = vi.spyOn(window, 'prompt').mockImplementation(() => mockValue);
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
 
     for (const key of Object.keys(keyToEvent)) {
       const type = keyToEvent[key as keyof typeof keyToEvent];
@@ -243,7 +243,7 @@ describe('EditorForm > Editor', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
-    const prompt = vi.spyOn(window, 'prompt').mockImplementation(() => mockValue);
+    const prompt = jest.spyOn(window, 'prompt').mockImplementation(() => mockValue);
 
     for (const key of Object.keys(keyToEvent)) {
       const type = keyToEvent[key as keyof typeof keyToEvent];

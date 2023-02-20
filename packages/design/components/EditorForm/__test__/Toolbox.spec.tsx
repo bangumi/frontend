@@ -16,7 +16,7 @@ describe('EditorForm > Toolbox', () => {
   });
 
   it('Toolbox handleClickEvent props', async () => {
-    const handleClickEvent = vi.fn();
+    const handleClickEvent = jest.fn();
     render(<Toolbox handleClickEvent={handleClickEvent} />);
     for (const type of ['bold', 'italic', 'underscore', 'image', 'link', 'size']) {
       await act(() => {

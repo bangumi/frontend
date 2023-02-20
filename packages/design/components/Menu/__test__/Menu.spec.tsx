@@ -26,7 +26,7 @@ it('should render all menu', () => {
 });
 
 it('should trigger onChange when click menus', () => {
-  const handleChange = vi.fn();
+  const handleChange = jest.fn();
   const { getByText } = render(<Menu onClick={handleChange} items={items} />);
   getByText('2').click();
   expect(handleChange.mock.calls[0].length).toBe(2);

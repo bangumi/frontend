@@ -59,10 +59,10 @@ function mockSuccessfulLogin() {
 }
 
 it('should redirect user to homepage after success login', async () => {
-  const mockedNavigate = vi.fn();
+  const mockedNavigate = jest.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'default' } as any);
-  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
+  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), jest.fn()] as any);
 
   mockSuccessfulLogin();
   await waitFor(() => {
@@ -71,10 +71,10 @@ it('should redirect user to homepage after success login', async () => {
 });
 
 it('should bring user back to last page if exists', async () => {
-  const mockedNavigate = vi.fn();
+  const mockedNavigate = jest.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'not-default' } as any);
-  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
+  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), jest.fn()] as any);
 
   mockSuccessfulLogin();
   await waitFor(() => {
@@ -83,12 +83,12 @@ it('should bring user back to last page if exists', async () => {
 });
 
 it('should redirect user to specified page', async () => {
-  const mockedNavigate = vi.fn();
+  const mockedNavigate = jest.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'default' } as any);
   mockedUseSearchParams.mockReturnValue([
     new URLSearchParams({ backTo: '/group/sandbox' }),
-    vi.fn(),
+    jest.fn(),
   ] as any);
 
   mockSuccessfulLogin();
@@ -98,12 +98,12 @@ it('should redirect user to specified page', async () => {
 });
 
 it('should redirect user to home if specified path is invalid', async () => {
-  const mockedNavigate = vi.fn();
+  const mockedNavigate = jest.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'default' } as any);
   mockedUseSearchParams.mockReturnValue([
     new URLSearchParams({ backTo: 'https://bgm.tv/' }),
-    vi.fn(),
+    jest.fn(),
   ] as any);
 
   mockSuccessfulLogin();

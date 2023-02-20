@@ -127,7 +127,7 @@ describe('Normal Comment', () => {
       );
     };
 
-    const onSuccess = vi.fn();
+    const onSuccess = jest.fn();
     const props = buildProps(false);
     const { getByText, container } = render(
       <Comment {...props} onReplySuccess={onSuccess} topicId={1} />,

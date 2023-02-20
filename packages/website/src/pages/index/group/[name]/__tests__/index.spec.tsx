@@ -17,7 +17,7 @@ vi.mock('react-router-dom', async () => {
   return {
     __esModule: true,
     ...(await vi.importActual<typeof import('react-router-dom')>('react-router-dom')),
-    useParams: vi.fn(),
+    useParams: jest.fn(),
   } as unknown;
 });
 

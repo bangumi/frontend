@@ -28,7 +28,7 @@
   },
   "include": [
     "./packages",
-    "./test-setup.ts",
+    "./tests/",
     ".eslintrc.js",
     "vitest.config.ts",
     "./packages/design/.storybook/*"
