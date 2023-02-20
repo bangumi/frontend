@@ -95,7 +95,6 @@ pull_request_rules:
       label:
         remove:
           - conflict
-          - waiting-approval
 
   - name: toggle labels based on lint state
     conditions:
