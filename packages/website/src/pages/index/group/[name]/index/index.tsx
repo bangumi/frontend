@@ -46,7 +46,7 @@ const GroupHome: React.FC = () => {
         title='最近讨论'
         wrapperClass={styles.recentTopics}
         renderFooter={() => (
-          <Button.Link type='text' to={`/group/${name}/forum`} plain>
+          <Button.Link type='plain' to={`/group/${name}/forum`}>
             更多组内讨论
             <ArrowRightCircle />
           </Button.Link>

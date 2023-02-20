@@ -166,7 +166,7 @@ const WikiBeginnerEditor = ({
   const { addOneWikiElement } = useContext(WikiInfoContext) ?? {};
 
   return (
-    <DragDropContext onDragEnd={(res, provided) => onDragEnd(path, res, provided)}>
+    <DragDropContext onDragEnd={(res, provided) => { onDragEnd(path, res, provided); }}>
       <Droppable droppableId={`list-${level}`}>
         {(droppableProvided) => (
           <div ref={droppableProvided.innerRef}>
@@ -522,7 +522,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                       key={type.key}
                       name='editor_mode'
                       label={type.label}
-                      onClick={() => handleSetEditorType(type.key)}
+                      onClick={() => { handleSetEditorType(type.key); }}
                       checked={editorType === type.key}
                       readOnly
                     />
@@ -627,10 +627,9 @@ const WikiEditDetailDetailPage: React.FC = () => {
               </div>
             ))}
             <Button.Link
-              type='text'
+              type='plain'
               to={WikiEditTabsItemsByKey.history.to(subjectId.toString())}
               className={style.historyMore}
-              plain
             >
               更多修改记录
               <ArrowRightCircle />

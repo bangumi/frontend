@@ -64,12 +64,7 @@
   }
 
   &--text {
-    background-color: transparent;
-    color: @gray-60;
-
-    &:hover {
-      color: @blue-100;
-    }
+    .text-button-mixin();
   }
 
   &--size {
@@ -105,5 +100,16 @@
     border: none;
     height: auto;
     line-height: 14px;
+
+    .text-button-mixin();
+  }
+}
+
+.text-button-mixin() {
+  background-color: transparent;
+  color: @gray-60;
+
+  &:hover {
+    color: @blue-100;
   }
 }

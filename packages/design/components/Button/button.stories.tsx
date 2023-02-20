@@ -129,17 +129,23 @@ Link.parameters = {
   },
 };
 
-export const LinkWithIcon = ButtonLinkTemplate.bind({});
-LinkWithIcon.args = {
+export const Plain = ButtonLinkTemplate.bind({});
+Plain.args = {
   to: 'https://bgm.tv',
   isExternal: true,
   target: '_blank',
-  type: 'text',
-  plain: true,
+  type: 'plain',
   children: (
     <>
       更多小组成员
       <ArrowRightCircle />
     </>
   ),
+};
+Plain.parameters = {
+  docs: {
+    description: {
+      story: '无内边距、边框及圆角，最小高度。',
+    },
+  },
 };

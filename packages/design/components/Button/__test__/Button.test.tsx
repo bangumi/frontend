@@ -65,7 +65,7 @@ it('should render button link', () => {
 
 it('should render plain button', () => {
   const { container } = render(
-    <Button.Link to='https://bgm.tv' type='text' plain isExternal>
+    <Button.Link to='https://bgm.tv' type='plain' isExternal>
       Bangumi
     </Button.Link>,
   );
