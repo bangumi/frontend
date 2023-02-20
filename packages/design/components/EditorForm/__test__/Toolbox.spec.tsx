@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
 
 import Toolbox from '../Toolbox';
 
@@ -15,13 +14,11 @@ describe('EditorForm > Toolbox', () => {
     expect(container.firstChild).toHaveStyle('display: none');
   });
 
-  it('Toolbox handleClickEvent props', async () => {
+  it('Toolbox handleClickEvent props', () => {
     const handleClickEvent = vi.fn();
     render(<Toolbox handleClickEvent={handleClickEvent} />);
     for (const type of ['bold', 'italic', 'underscore', 'image', 'link', 'size']) {
-      await act(() => {
-        return fireEvent.click(screen.getByTestId(type));
-      });
+      fireEvent.click(screen.getByTestId(type));
       expect(handleClickEvent).toHaveBeenCalledWith(type);
     }
   });
