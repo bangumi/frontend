@@ -13,7 +13,7 @@ const EditTopicPage = () => {
     throw new Error('BUG: topic id is required');
   }
 
-  const { data } = useGroupTopic(Number(id));
+  const { data, mutate } = useGroupTopic(Number(id));
 
   return (
     <>
@@ -28,7 +28,7 @@ const EditTopicPage = () => {
         </Typography.Link>
       </Typography.Text>
       <div className={styles.form}>
-        <TopicForm topic={data} />
+        <TopicForm topic={{ data, mutate }} />
       </div>
       {/* TODO: add right column */}
     </>

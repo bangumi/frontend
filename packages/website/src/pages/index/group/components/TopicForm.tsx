@@ -1,4 +1,3 @@
-import type { TopicDetail } from 'packages/client/client';
 import React, { useState } from 'react';
 import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
@@ -6,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, Form, Input, toast } from '@bangumi/design';
+import type { UseGroupTopicRet } from '@bangumi/website/hooks/use-group-topic';
 
 import styles from './TopicForm.module.less';
 
@@ -19,7 +19,7 @@ export interface TopicFormProps {
   /** 小组 slug name，指定此参数时为发表话题 */
   groupName?: string;
   /** 话题，指定此参数时为修改话题 */
-  topic?: TopicDetail;
+  topic?: UseGroupTopicRet;
 }
 
 /**
@@ -35,7 +35,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   const navigate = useNavigate();
 
   const { register, handleSubmit, control } = useForm<FormData>({
-    defaultValues: topic,
+    defaultValues: topic?.data,
   });
   const [sending, setSending] = useState(false);
 
@@ -52,6 +52,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   const editTopic = async (data: FormData, id: number) => {
     const response = await ozaClient.editGroupTopic(id, data);
     if (response.status === 200) {
+      await topic?.mutate();
       navigate(`/group/topic/${id}`);
     } else {
       console.error(response);
@@ -64,7 +65,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
     if (groupName) {
       await postNewTopic(data, groupName);
     } else if (topic) {
-      await editTopic(data, topic.id);
+      await editTopic(data, topic.data.id);
     }
     setSending(false);
   };
