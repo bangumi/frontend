@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import React from 'react';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
@@ -25,8 +25,10 @@ it('should show message and disappear after given time', () => {
   const toast: TToast = { message: 'test', tid: '1', timeout: 1000 };
   const { getByText } = render(<Toast toast={toast} />);
 
-  expect(getByText('test')).toBeInTheDocument();
-  // 包含 transition 的时间
-  vi.advanceTimersByTime(1000 + 300);
-  expectToastToBeClosed(toast);
+  act(() => {
+    expect(getByText('test')).toBeInTheDocument();
+    // 包含 transition 的时间
+    vi.advanceTimersByTime(1000 + 300);
+    expectToastToBeClosed(toast);
+  });
 });
