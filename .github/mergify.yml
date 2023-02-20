@@ -7,10 +7,11 @@ pull_request_rules:
       - base=master
       - '#review-threads-unresolved=0'
       - -title~=(?i)\[wip\]
-      - -check-failure=lint
-      - -check-failure=build
-      - -check-failure=test
-      - -check-failure=storybook-build
+      - and: &ci
+          - -check-failure=lint
+          - -check-failure=build
+          - -check-failure=test
+          - -check-failure=storybook-build
     actions:
       merge:
         method: squash
@@ -23,10 +24,7 @@ pull_request_rules:
       - base=master
       - -title~=(?i)\[wip\]
       - 'created-at<=00:10 ago' # label after PR is created after 10 min
-      - -check-failure=lint
-      - -check-failure=build
-      - -check-failure=test
-      - -check-failure=storybook-build
+      - and: *ci
     actions:
       label:
         toggle:
@@ -42,10 +40,7 @@ pull_request_rules:
       - -draft
       - '#review-threads-unresolved=0'
       - -title~=(?i)\[wip\]
-      - -check-failure=lint
-      - -check-failure=build
-      - -check-failure=test
-      - -check-failure=storybook-build
+      - and: *ci
     actions:
       label:
         toggle:
