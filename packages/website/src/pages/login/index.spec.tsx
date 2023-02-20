@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import React, * as MockReact from 'react';
+import React from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { UserProvider } from '../../hooks/use-user';
@@ -8,13 +8,13 @@ import { server as mockServer } from '../../mocks/server';
 import LoginPage from '.';
 
 vi.mock('@marsidev/react-turnstile', () => {
-  const Turnstile = MockReact.forwardRef<
+  const Turnstile = React.forwardRef<
     { reset?: () => void },
     { onSuccess?: (token: string) => void }
   >(({ onSuccess }, ref) => {
-    MockReact.useImperativeHandle(ref, () => ({ reset: () => undefined }));
+    React.useImperativeHandle(ref, () => ({ reset: () => undefined }));
 
-    MockReact.useEffect(() => {
+    React.useEffect(() => {
       onSuccess?.('fake-token');
     });
 
