@@ -82,12 +82,8 @@ const NewTopicForm = ({ quickPost = false }: { quickPost?: boolean }) => {
           e.preventDefault();
         }}
       >
-        <Form.Item>
-          <FormInput quickPost />
-        </Form.Item>
-        <Form.Item>
-          <FormEditor quickPost />
-        </Form.Item>
+        <FormInput quickPost />
+        <FormEditor quickPost />
       </Form>
     );
   }

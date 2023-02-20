@@ -42,10 +42,8 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
     },
     ref,
   ) => {
-    const classNames = classnames('bgm-editor__form', className);
-
     return (
-      <div className={classNames} style={style}>
+      <div className={classnames('bgm-editor__form', className)} style={style}>
         <Editor ref={ref} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button
@@ -62,7 +60,9 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
             </Button>
           )}
           <span className='bgm-editor__bbcode-tip'>
-            使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
+            <span className='bgm-editor__bbcode-tip__left'>
+              使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
+            </span>
             <Link isExternal to='https://bgm.tv/help/bbcode'>
               BBCode指南
             </Link>

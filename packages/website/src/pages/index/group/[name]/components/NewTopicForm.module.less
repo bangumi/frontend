@@ -19,20 +19,13 @@
 
 .contentEditor {
   grid-column: 1;
-
-  :global(.bgm-editor) {
-    &__form,
-    &__text {
-      width: auto;
-    }
-
-    &__container {
-      align-self: stretch;
-    }
-  }
 }
 
 .quickPostForm {
+  @media (max-width: @md) {
+    width: 100%;
+  }
+
+  width: 75%;
   margin-top: 40px;
-  max-width: 682px;
 }
