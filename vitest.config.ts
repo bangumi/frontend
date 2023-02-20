@@ -20,7 +20,7 @@ export default defineConfig({
     globals: true,
     reporters: process.env.GITHUB_ACTIONS ? ['default', new GithubActionsReporter()] : 'default',
     environment: 'jsdom',
-    setupFiles: ['./tests/setup.ts', './packages/website/test-setup.ts'],
+    setupFiles: ['./tests/setup.ts', './tests/website.ts'],
     snapshotFormat: {
       printBasicPrototype: true,
     },
