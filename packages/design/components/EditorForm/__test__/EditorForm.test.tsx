@@ -1,6 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
 import React, { useState } from 'react';
-import { describe, expect, it, vi } from 'vitest';
 
 import type { EditorFormProps } from '..';
 import EditorForm from '..';

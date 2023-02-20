@@ -1,6 +1,5 @@
 import { act, render } from '@testing-library/react';
 import React from 'react';
-import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 import { Toast } from '..';
 import type { Toast as TToast } from '../types';

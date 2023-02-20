@@ -2,7 +2,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { UserGroup } from '@bangumi/client/user';
 

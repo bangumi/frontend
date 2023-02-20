@@ -3,7 +3,6 @@ import { rest } from 'msw';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { expect, it } from 'vitest';
 
 import { server as mockServer } from '../mocks/server';
 import {

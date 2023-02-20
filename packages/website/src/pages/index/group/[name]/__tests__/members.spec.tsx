@@ -3,7 +3,6 @@ import { waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { expect, it, vi } from 'vitest';
 
 import type { GroupMember, ResponseWithPagination } from '@bangumi/client/group';
 

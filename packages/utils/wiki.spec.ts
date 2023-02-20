@@ -3,7 +3,6 @@ import path from 'node:path';
 import url from 'node:url';
 
 import yaml from 'js-yaml';
-import { describe, expect, it, test } from 'vitest';
 
 import {
   fromWikiElement,

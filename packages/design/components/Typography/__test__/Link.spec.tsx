@@ -2,7 +2,6 @@ import { render } from '@testing-library/react';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { expect, it } from 'vitest';
 
 import Link from '../Link';
 

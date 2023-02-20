@@ -2,7 +2,6 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React, * as MockReact from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { expect, it, vi } from 'vitest';
 
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';

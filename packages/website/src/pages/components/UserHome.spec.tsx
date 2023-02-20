@@ -1,7 +1,6 @@
 // @ts-nocheck
 import { render } from '@testing-library/react';
 import React from 'react';
-import { expect, it, vi } from 'vitest';
 
 import { useUser } from '../../hooks/use-user';
 import UserHome from './UserHome';

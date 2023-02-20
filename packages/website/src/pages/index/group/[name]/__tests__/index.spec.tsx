@@ -3,7 +3,6 @@ import { waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
-import { expect, it, vi } from 'vitest';
 
 import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/client/group';
 import { server as mockServer } from '@bangumi/website/mocks/server';

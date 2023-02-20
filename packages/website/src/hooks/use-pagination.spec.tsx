@@ -2,7 +2,6 @@ import { renderHook } from '@testing-library/react';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, test } from 'vitest';
 
 import { usePaginationParams } from './use-pagination';
 

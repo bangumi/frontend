@@ -1,5 +1,3 @@
-import { describe, expect, test } from 'vitest';
-
 import { render, renderNode, renderNodes } from '../html';
 import type { VNode } from '../types';
 

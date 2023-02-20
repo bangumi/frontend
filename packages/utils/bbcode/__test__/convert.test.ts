@@ -1,5 +1,3 @@
-import { describe, expect, test } from 'vitest';
-
 import { STICKER_DOMAIN_URL } from '../constants';
 import { convert } from '../convert';
 import type { CodeNodeTypes, NodeTypes, VNode } from '../types';

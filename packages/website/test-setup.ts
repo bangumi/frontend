@@ -1,5 +1,4 @@
 import timezoneMock from 'timezone-mock';
-import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 import { server } from './src/mocks/server';

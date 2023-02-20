@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import { rest } from 'msw';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import { describe, expect, it, vi } from 'vitest';
 
 import { server as mockServer } from '@bangumi/website/mocks/server';
 

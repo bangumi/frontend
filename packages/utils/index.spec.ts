@@ -1,5 +1,3 @@
-import { describe, expect, test } from 'vitest';
-
 import { keyBy } from './index';
 
 describe('keyBy', () => {

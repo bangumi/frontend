@@ -1,6 +1,5 @@
 import { act, render } from '@testing-library/react';
 import React from 'react';
-import { expect, it, vi } from 'vitest';
 
 import { ToastContainer } from '../ToastContainer';
 import { insertToastEvent, removeToastEvent } from '../utils/event-bus';
