@@ -66,7 +66,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
               title='最近加入'
               renderFooter={() =>
                 group && (
-                  <Button.Link type='text' to={groupTabsByKey.members.to(group.group.name)} plain>
+                  <Button.Link type='plain' to={groupTabsByKey.members.to(group.group.name)}>
                     更多小组成员
                     <ArrowRightCircle />
                   </Button.Link>
