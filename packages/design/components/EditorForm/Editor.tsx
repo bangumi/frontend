@@ -169,7 +169,8 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           (e.altKey && e.key.toLowerCase() === 's')
         ) {
           onConfirm?.(innerRef.current!.value);
-          return e.preventDefault();
+          e.preventDefault();
+          return;
         }
         // https://bgm.tv/help/bbcode
         if (e.ctrlKey || e.metaKey) {
@@ -198,7 +199,9 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           ref={innerRef}
           value={value}
           autoFocus={autoFocus}
-          onChange={(e) => updateContent(e.target.value)}
+          onChange={(e) => {
+            updateContent(e.target.value);
+          }}
           onKeyDown={handleKeyDown}
           rows={rows}
           name={name}

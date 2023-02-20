@@ -2,7 +2,6 @@
 @import (reference) '../../../components/Form/style/index';
 
 @toolbox-width: 215px;
-@text-width: 682px;
 
 .bgm-editor {
   &__container {
@@ -12,7 +11,8 @@
     border: 2px solid @gray-10;
     border-radius: 12px;
     padding: 8px 6px 6px;
-    z-index: 9999;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   &__toolbar {
@@ -46,8 +46,7 @@
   &__text {
     flex: 1 0 auto;
     padding: 0 6px;
-    min-width: @toolbox-width;
-    width: @text-width;
+    resize: vertical;
     border: none;
     outline: none;
     color: @gray-100;
@@ -64,7 +63,6 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: @text-width;
   }
 
   &__submit {
@@ -79,6 +77,10 @@
     .bgm-editor__bbcode-tip {
       color: @gray-60;
       line-height: 24px;
+
+      &__left {
+        .sm-screen-hidden();
+      }
     }
   }
 

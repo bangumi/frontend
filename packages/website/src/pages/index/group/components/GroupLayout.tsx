@@ -6,6 +6,7 @@ import type { GroupProfile } from '@bangumi/client/group';
 import { Button, Layout, Section, Tab } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { GroupHeader } from './GroupHeader';
 import styles from './GroupLayout.module.less';
@@ -43,6 +44,8 @@ type IGroupLayoutProps = PropsWithChildren<{
 }>;
 
 const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }) => {
+  const { user } = useUser();
+
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group!} />
@@ -58,7 +61,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
         leftChildren={children}
         rightChildren={
           <>
-            {group && <GroupNavigation group={group} />}
+            {user && group && <GroupNavigation group={group} />}
             <Section
               title='最近加入'
               renderFooter={() =>
