@@ -18,6 +18,7 @@
     "lint:style": "stylelint \"./packages/**/*.{css,less}\"",
     "lint:style-fix": "pnpm lint:style -- --fix",
     "prettier": "prettier --write --list-different ./",
+    "format": "prettier --write --list-different ./",
     "prettier:check": "prettier --list-different ./",
     "server": "pnpm --filter=@bangumi/server",
     "client": "pnpm --filter=@bangumi/client",
