@@ -13,15 +13,15 @@ import GroupHome from '../index/index';
 import RecentTopics from './fixtures/recent-topics.json';
 import Sandbox from './fixtures/sandbox.json';
 
-jest.mock('react-router-dom', () => {
+vi.mock('react-router-dom', async () => {
   return {
     __esModule: true,
-    ...jest.requireActual('react-router-dom'),
-    useParams: jest.fn(),
+    ...(await vi.importActual<typeof import('react-router-dom')>('react-router-dom')),
+    useParams: vi.fn(),
   } as unknown;
 });
 
-const mockedUseParams = jest.mocked(useParams);
+const mockedUseParams = vi.mocked(useParams);
 
 class GroupHomeTest {
   page: RenderResult;
@@ -35,13 +35,13 @@ class GroupHomeTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost/p1/groups/${name}/profile`, (req, res, ctx) => {
+      rest.get(`http://localhost:3000/p1/groups/${name}/profile`, (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(mock.group ?? Sandbox));
       }),
     );
 
     mockServer.use(
-      rest.get(`http://localhost/p1/groups/${name}/topics`, (req, res, ctx) => {
+      rest.get(`http://localhost:3000/p1/groups/${name}/topics`, (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics));
       }),
     );

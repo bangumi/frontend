@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Normal Comment do not show opinions if not login 1`] = `
+exports[`Normal Comment > do not show opinions if not login 1`] = `
 <div>
   <div>
     <div
@@ -67,7 +67,7 @@ exports[`Normal Comment do not show opinions if not login 1`] = `
 </div>
 `;
 
-exports[`Normal Comment should highlight comment corresponding to hash 1`] = `
+exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
 <div>
   <div>
     <div
@@ -221,7 +221,7 @@ exports[`Normal Comment should highlight comment corresponding to hash 1`] = `
 </div>
 `;
 
-exports[`Normal Comment should render 0 1`] = `
+exports[`Normal Comment > should render 0 1`] = `
 <div>
   <div>
     <div
@@ -302,7 +302,7 @@ exports[`Normal Comment should render 0 1`] = `
 </div>
 `;
 
-exports[`Normal Comment should render 6 1`] = `
+exports[`Normal Comment > should render 6 1`] = `
 <div>
   <div>
     <div
@@ -383,7 +383,7 @@ exports[`Normal Comment should render 6 1`] = `
 </div>
 `;
 
-exports[`Normal Comment should render 7 1`] = `
+exports[`Normal Comment > should render 7 1`] = `
 <div>
   <div>
     <div
@@ -471,7 +471,7 @@ exports[`Normal Comment should render 7 1`] = `
 </div>
 `;
 
-exports[`Normal Comment should render with reply 1`] = `
+exports[`Normal Comment > should render with reply 1`] = `
 <div>
   <div>
     <div
@@ -625,7 +625,7 @@ exports[`Normal Comment should render with reply 1`] = `
 </div>
 `;
 
-exports[`Special Comment should render state is 1 1`] = `
+exports[`Special Comment > should render state is 1 1`] = `
 <div>
   <div
     class="bgm-comment__header bgm-comment__header--collapsed"
@@ -660,7 +660,7 @@ exports[`Special Comment should render state is 1 1`] = `
 </div>
 `;
 
-exports[`Special Comment should render state is 2 1`] = `
+exports[`Special Comment > should render state is 2 1`] = `
 <div>
   <div
     class="bgm-comment__header bgm-comment__header--collapsed"
@@ -695,7 +695,7 @@ exports[`Special Comment should render state is 2 1`] = `
 </div>
 `;
 
-exports[`Special Comment should render state is 5 1`] = `
+exports[`Special Comment > should render state is 5 1`] = `
 <div>
   <div
     class="bgm-comment__header bgm-comment__header--collapsed"

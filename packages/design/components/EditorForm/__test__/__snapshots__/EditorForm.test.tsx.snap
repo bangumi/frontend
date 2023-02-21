@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`<EditorForm /> render correctly with props 1`] = `
+exports[`<EditorForm /> > render correctly with props 1`] = `
 <DocumentFragment>
   <div
     class="bgm-editor__form custom class"

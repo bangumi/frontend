@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Input alignment 1`] = `
+exports[`Input > alignment 1`] = `
 <div>
   <div
     class="bgm-input__wrapper"
@@ -13,7 +13,7 @@ exports[`Input alignment 1`] = `
 </div>
 `;
 
-exports[`Input disabled className 1`] = `
+exports[`Input > disabled className 1`] = `
 <div>
   <div
     class="bgm-input__wrapper bgm-input__wrapper--disabled"
@@ -27,7 +27,7 @@ exports[`Input disabled className 1`] = `
 </div>
 `;
 
-exports[`Input rounded variant 1`] = `
+exports[`Input > rounded variant 1`] = `
 <div>
   <div
     class="bgm-input__wrapper bgm-input__wrapper--rounded"

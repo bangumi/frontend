@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Primary Button should render button of color blue 1`] = `
+exports[`Primary Button > should render button of color blue 1`] = `
 <button
   class="bgm-button bgm-button--primary bgm-button--color-blue"
 >
@@ -8,7 +8,7 @@ exports[`Primary Button should render button of color blue 1`] = `
 </button>
 `;
 
-exports[`Primary Button should render button of color gray 1`] = `
+exports[`Primary Button > should render button of color gray 1`] = `
 <button
   class="bgm-button bgm-button--primary bgm-button--color-gray"
 >
@@ -16,7 +16,7 @@ exports[`Primary Button should render button of color gray 1`] = `
 </button>
 `;
 
-exports[`Primary Button should render button of size large 1`] = `
+exports[`Primary Button > should render button of size large 1`] = `
 <button
   class="bgm-button bgm-button--primary"
 >
@@ -24,7 +24,7 @@ exports[`Primary Button should render button of size large 1`] = `
 </button>
 `;
 
-exports[`Primary Button should render button of size medium 1`] = `
+exports[`Primary Button > should render button of size medium 1`] = `
 <button
   class="bgm-button bgm-button--primary bgm-button--size-medium"
 >
@@ -32,7 +32,7 @@ exports[`Primary Button should render button of size medium 1`] = `
 </button>
 `;
 
-exports[`Primary Button should render button of size small 1`] = `
+exports[`Primary Button > should render button of size small 1`] = `
 <button
   class="bgm-button bgm-button--primary bgm-button--size-small"
 >
@@ -40,7 +40,7 @@ exports[`Primary Button should render button of size small 1`] = `
 </button>
 `;
 
-exports[`Secondary Button should render button of color blue 1`] = `
+exports[`Secondary Button > should render button of color blue 1`] = `
 <button
   class="bgm-button bgm-button--secondary bgm-button--color-blue"
 >
@@ -48,7 +48,7 @@ exports[`Secondary Button should render button of color blue 1`] = `
 </button>
 `;
 
-exports[`Secondary Button should render button of size large 1`] = `
+exports[`Secondary Button > should render button of size large 1`] = `
 <button
   class="bgm-button bgm-button--secondary"
 >
@@ -56,7 +56,7 @@ exports[`Secondary Button should render button of size large 1`] = `
 </button>
 `;
 
-exports[`Secondary Button should render button of size medium 1`] = `
+exports[`Secondary Button > should render button of size medium 1`] = `
 <button
   class="bgm-button bgm-button--secondary bgm-button--size-medium"
 >
@@ -64,7 +64,7 @@ exports[`Secondary Button should render button of size medium 1`] = `
 </button>
 `;
 
-exports[`Secondary Button should render button of size small 1`] = `
+exports[`Secondary Button > should render button of size small 1`] = `
 <button
   class="bgm-button bgm-button--secondary bgm-button--size-small"
 >
@@ -72,7 +72,7 @@ exports[`Secondary Button should render button of size small 1`] = `
 </button>
 `;
 
-exports[`Text Button should render button of size large 1`] = `
+exports[`Text Button > should render button of size large 1`] = `
 <button
   class="bgm-button bgm-button--text"
 >
@@ -80,7 +80,7 @@ exports[`Text Button should render button of size large 1`] = `
 </button>
 `;
 
-exports[`Text Button should render button of size medium 1`] = `
+exports[`Text Button > should render button of size medium 1`] = `
 <button
   class="bgm-button bgm-button--text bgm-button--size-medium"
 >
@@ -88,7 +88,7 @@ exports[`Text Button should render button of size medium 1`] = `
 </button>
 `;
 
-exports[`Text Button should render button of size small 1`] = `
+exports[`Text Button > should render button of size small 1`] = `
 <button
   class="bgm-button bgm-button--text bgm-button--size-small"
 >

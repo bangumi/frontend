@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import Toolbox from '../Toolbox';
@@ -15,11 +15,11 @@ describe('EditorForm > Toolbox', () => {
   });
 
   it('Toolbox handleClickEvent props', () => {
-    const handleClickEvent = jest.fn();
+    const handleClickEvent = vi.fn();
     render(<Toolbox handleClickEvent={handleClickEvent} />);
-    ['bold', 'italic', 'underscore', 'image', 'link', 'size'].forEach((type) => {
-      screen.getByTestId(type).click();
+    for (const type of ['bold', 'italic', 'underscore', 'image', 'link', 'size']) {
+      fireEvent.click(screen.getByTestId(type));
       expect(handleClickEvent).toHaveBeenCalledWith(type);
-    });
+    }
   });
 });

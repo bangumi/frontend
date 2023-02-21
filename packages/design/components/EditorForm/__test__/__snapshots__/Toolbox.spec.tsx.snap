@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`EditorForm > Toolbox render with default classNames 1`] = `
+exports[`EditorForm > Toolbox > render with default classNames 1`] = `
 <DocumentFragment>
   <div
     class="bgm-editor__toolbox"

@@ -2,7 +2,6 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    'jest/globals': true,
   },
   extends: ['standard-with-typescript', 'prettier'],
   plugins: ['unused-imports', 'unicorn', 'simple-import-sort'],
@@ -57,7 +56,7 @@ module.exports = {
         'prettier',
       ],
       parser: '@typescript-eslint/parser',
-      plugins: ['react', '@typescript-eslint', 'jest'],
+      plugins: ['react', '@typescript-eslint'],
       parserOptions: {
         project: './tsconfig.json',
       },
@@ -140,6 +139,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-argument': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
       },
     },
   ],

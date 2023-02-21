@@ -5,9 +5,9 @@ import React from 'react';
 import { useUser } from '../../hooks/use-user';
 import UserHome from './UserHome';
 
-jest.mock('../../hooks/use-user');
+vi.mock('../../hooks/use-user');
 
-const mockedUseUser = jest.mocked(useUser);
+const mockedUseUser = vi.mocked(useUser);
 
 it('should show user name if user is logged', () => {
   mockedUseUser.mockReturnValue({

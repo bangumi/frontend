@@ -82,7 +82,7 @@ it.each(['square', 'rounded'] as const)('should render button of shape %s', (sha
 });
 
 it('should trigger onClick callback', () => {
-  const onClick = jest.fn();
+  const onClick = vi.fn();
   const { getByText } = render(
     <Button type='primary' onClick={onClick}>
       hello world
