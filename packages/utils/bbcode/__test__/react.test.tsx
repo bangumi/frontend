@@ -1,6 +1,3 @@
-/* eslint-disable unused-imports/no-unused-imports */
-import React from 'react';
-
 import { render, renderNode } from '../react';
 import type { VNode } from '../types';
 
@@ -170,5 +167,27 @@ describe('html render bbcode string', () => {
     `;
 
     expect(render(input)).toMatchSnapshot();
+  });
+  test('should produce unique react keys', () => {
+    const checkUniqueKeys = (item: Array<string | React.ReactElement>) => {
+      const keys = new Set<React.Key>();
+      item.forEach((i) => {
+        if (typeof i === 'string') {
+          return;
+        }
+        if (i.key !== null) {
+          expect(keys.has(i.key)).toBe(false);
+          keys.add(i.key);
+        }
+        const props = i.props as Record<string, any>;
+        if (typeof props.children === 'object') {
+          checkUniqueKeys(i.props.children);
+        }
+      });
+    };
+
+    const input = '(bgm38)\n(bgm38)\n';
+    const result = render(input);
+    checkUniqueKeys(result);
   });
 });
