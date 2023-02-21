@@ -45,18 +45,13 @@ export const renderNode = (node: NodeTypes, key?: React.Key): React.ReactElement
     if (splittedStr.length < 2) {
       return splittedStr[0] ?? '';
     }
-    return splittedStr.reduce((pre, curr, idx) => {
+    const children = splittedStr.reduce<Array<string | React.ReactElement>>((pre, curr, idx) => {
       if (idx > 0) {
-        return React.createElement(
-          React.Fragment,
-          { key: idx },
-          pre,
-          React.createElement('br', null),
-          curr,
-        );
+        return [...pre, React.createElement('br', null), curr];
       }
-      return React.createElement(React.Fragment, { key: idx }, pre, curr);
-    }, React.createElement(React.Fragment, { key }));
+      return [...pre, curr];
+    }, []);
+    return React.createElement(React.Fragment, { key }, ...children);
   }
 
   const { type, children } = node;

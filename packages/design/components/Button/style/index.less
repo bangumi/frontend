@@ -9,19 +9,20 @@
   white-space: nowrap;
   overflow: hidden;
   display: flex;
+  gap: 0.25rem;
   align-items: center;
   text-align: center;
   justify-content: center;
   box-sizing: border-box;
   border: 2px transparent solid;
   height: var(--height);
+  line-height: var(--height);
   border-radius: calc(var(--height) / 2);
 
   // 默认大小：large
   --height: 38px;
 
   padding: 0 32px;
-  line-height: 20px;
 
   &--primary {
     background-color: @primary-color;
@@ -63,8 +64,7 @@
   }
 
   &--text {
-    background-color: transparent;
-    color: @gray-60;
+    .text-button-mixin();
   }
 
   &--size {
@@ -72,14 +72,12 @@
       --height: 30px;
 
       padding: 0 13px;
-      line-height: 24px;
     }
 
     &-small {
       --height: 24px;
 
       padding: 0 17px;
-      line-height: 24px;
     }
   }
 
@@ -94,5 +92,24 @@
   &--link {
     display: inline-flex;
     text-decoration: none;
+  }
+
+  &--plain {
+    padding: 0;
+    border-radius: 0;
+    border: none;
+    height: auto;
+    line-height: 14px;
+
+    .text-button-mixin();
+  }
+}
+
+.text-button-mixin() {
+  background-color: transparent;
+  color: @gray-60;
+
+  &:hover {
+    color: @blue-100;
   }
 }
