@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Form Components form item render properly 1`] = `
+exports[`Form Components > form item render properly 1`] = `
 <div>
   <form
     class="bgm-form"
@@ -57,7 +57,7 @@ exports[`Form Components form item render properly 1`] = `
 </div>
 `;
 
-exports[`Form Components render compact layout properly 1`] = `
+exports[`Form Components > render compact layout properly 1`] = `
 <div>
   <form
     class="bgm-form bgm-form--compact"

@@ -5,7 +5,7 @@ import { ToastContainer } from '../ToastContainer';
 import { insertToastEvent, removeToastEvent } from '../utils/event-bus';
 
 it('should call onEmpty callback when no toast remains', () => {
-  const onEmpty = jest.fn();
+  const onEmpty = vi.fn();
   render(<ToastContainer onEmpty={onEmpty} />);
   expect(onEmpty).not.toBeCalled();
 

@@ -1,8 +1,9 @@
-import 'whatwg-fetch';
-
 import timezoneMock from 'timezone-mock';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
-import { server } from './src/mocks/server';
+import { server } from '@bangumi/website/mocks/server';
+
+vi.stubGlobal('fetch', fetchPolyfill);
 
 beforeAll(() => {
   server.listen();

@@ -23,7 +23,7 @@ it('should hightlight current page and not highlight other page', async () => {
 });
 
 it('should response mouse click right', async () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { findAllByTestId } = render(
     <Pagination total={30} pageSize={10} currentPage={1} onChange={onChange} />,
   );
@@ -39,7 +39,7 @@ it('should response mouse click right', async () => {
 });
 
 it('should not response the prev-button clicked', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { queryByTestId } = render(<Pagination total={3000} currentPage={1} onChange={onChange} />);
   const prevButton = queryByTestId('pagination-prev')!;
   fireEvent.click(prevButton);
@@ -49,7 +49,7 @@ it('should not response the prev-button clicked', () => {
   expect(onChange).toHaveBeenLastCalledWith(2);
 });
 it('should not response the next-button clicked', () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { queryByTestId } = render(
     <Pagination total={3000} currentPage={100} onChange={onChange} />,
   );
@@ -62,7 +62,7 @@ it('should not response the next-button clicked', () => {
 });
 
 it('should response next page', async () => {
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { getByTestId } = render(<Pagination total={300} onChange={onChange} />);
   const nextButton = getByTestId('pagination-next');
   fireEvent.click(nextButton);

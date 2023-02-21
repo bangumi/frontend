@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`<Image /> should render box-shadow properly 1`] = `
+exports[`<Image /> > should render box-shadow properly 1`] = `
 <img
   alt="vanilla"
   class="bgm-image bgm-image--withBoxShadow bgm-image--rect"
@@ -9,7 +9,7 @@ exports[`<Image /> should render box-shadow properly 1`] = `
 />
 `;
 
-exports[`<Image /> should render circle shape properly 1`] = `
+exports[`<Image /> > should render circle shape properly 1`] = `
 <img
   alt="vanilla"
   class="bgm-image bgm-image--withBoxShadow bgm-image--circle"
@@ -18,7 +18,7 @@ exports[`<Image /> should render circle shape properly 1`] = `
 />
 `;
 
-exports[`<Image /> should render correctly 1`] = `
+exports[`<Image /> > should render correctly 1`] = `
 <img
   alt="vanilla"
   class="bgm-image bgm-image--rect"
@@ -27,7 +27,7 @@ exports[`<Image /> should render correctly 1`] = `
 />
 `;
 
-exports[`<Image /> should render hovering styles properly 1`] = `
+exports[`<Image /> > should render hovering styles properly 1`] = `
 <img
   alt="vanilla"
   class="bgm-image bgm-image--withBoxShadow bgm-image--rect"

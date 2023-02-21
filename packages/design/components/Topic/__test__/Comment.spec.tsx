@@ -42,7 +42,7 @@ describe('Normal Comment', () => {
 
   it.each([0, 6, 7])('should render %d', (state) => {
     const props = buildProps();
-    const { container } = render(<Comment {...props} state={state as any} />);
+    const { container } = render(<Comment {...props} state={state} />);
     expect(container).toMatchSnapshot();
   });
 
@@ -127,7 +127,7 @@ describe('Normal Comment', () => {
       );
     };
 
-    const onSuccess = jest.fn();
+    const onSuccess = vi.fn();
     const props = buildProps(false);
     const { getByText, container } = render(
       <Comment {...props} onReplySuccess={onSuccess} topicId={1} />,
