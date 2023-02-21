@@ -8,10 +8,11 @@ import type { LinkProps } from '../Typography';
 import Typography from '../Typography';
 
 export interface ButtonCommonProps {
-  type?: 'primary' | 'secondary' | 'text';
+  type?: 'primary' | 'secondary' | 'text' | 'plain';
   shape?: 'square' | 'rounded';
   size?: 'large' | 'medium' | 'small';
   color?: 'default' | 'blue' | 'gray';
+  /** 无内边距、边框及圆角，最小高度 */
 }
 
 export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type' | 'onClick'> &
