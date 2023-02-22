@@ -1,3 +1,4 @@
+/* eslint-disable vitest/expect-expect */
 import type { RenderResult } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
 import { rest } from 'msw';

@@ -1,5 +1,6 @@
 !packages/design/.storybook
 packages/design/storybook-static
 packages/client/types
+packages/eslint/lib/
 node_modules
 dist
