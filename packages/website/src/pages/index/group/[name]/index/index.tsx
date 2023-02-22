@@ -21,10 +21,6 @@ const GroupHome: React.FC = () => {
   const recentTopics = useGroupRecentTopics(name);
   const { user } = useUser();
 
-  if (!recentTopics.data.length) {
-    return null;
-  }
-
   const {
     groupRet: { group, descriptionCollapsed, setDescriptionCollapsed },
   } = groupContext;
