@@ -19,7 +19,5 @@
     "noEmit": false,
     "outDir": "lib"
   },
-  "include": [
-    "./src/"
-  ]
+  "include": ["./src/"]
 }

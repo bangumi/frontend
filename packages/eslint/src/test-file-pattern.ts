@@ -27,7 +27,9 @@ export default rules({
         const m = pattern.exec(filename);
         if (m?.groups?.ext) {
           const ext = m.groups.ext;
-          const f = path.basename(filename).replace(new RegExp(`\\.spec\\.${ext}$`), `.test.${ext}`);
+          const f = path
+            .basename(filename)
+            .replace(new RegExp(`\\.spec\\.${ext}$`), `.test.${ext}`);
           context.report({
             node: p,
             messageId: 'msg',
