@@ -16,6 +16,8 @@ export interface UseGroupRet {
   setDescriptionCollapsed: (val: boolean) => void;
 }
 
+type DescriptionCollapseConfig = Record<string, boolean>;
+
 export function useGroupRecentTopics(
   name: string,
   { limit = 20, offset = 0 }: Partial<PaginationQuery> = {},
@@ -35,14 +37,32 @@ export function useGroup(name: string): UseGroupRet {
     async () => ok(ozaClient.getGroupProfile(name)),
     { suspense: true },
   );
-  const collapseKey = `doesGroupDescriptionNeedCollapse.${name}`;
-  const descriptionCollapse = Boolean(localStorage.getItem(collapseKey) ?? false);
+
+  const getDescriptionCollapseConfig = () => {
+    try {
+      const config = JSON.parse(localStorage.getItem(collapseKey) ?? '{}') as unknown;
+      if (typeof config !== 'object') {
+        return {};
+      }
+      return config as DescriptionCollapseConfig;
+    } catch (e: unknown) {
+      return {};
+    }
+  };
+
+  const collapseKey = 'doesGroupDescriptionNeedCollapse';
+  const collapseConfig = getDescriptionCollapseConfig();
+  const descriptionCollapse = collapseConfig[name] ?? false;
   const [descriptionCollapsedState, setDescriptionCollapsedState] =
     useState<boolean>(descriptionCollapse);
 
   useEffect(() => {
-    localStorage.setItem(collapseKey, String(descriptionCollapsedState));
-  }, [collapseKey, descriptionCollapsedState]);
+    const config = getDescriptionCollapseConfig();
+    localStorage.setItem(
+      collapseKey,
+      JSON.stringify({ ...config, [name]: descriptionCollapsedState }),
+    );
+  }, [name, descriptionCollapsedState]);
 
   return {
     group: groupResp,
