@@ -17,7 +17,7 @@
     "strictNullChecks": true,
     "isolatedModules": false,
     "noEmit": false,
-    "outDir": "lib"
+    "outDir": "dist"
   },
   "include": ["./src/"]
 }
