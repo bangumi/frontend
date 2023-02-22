@@ -9,7 +9,7 @@ vi.mock('../../hooks/use-user');
 
 const mockedUseUser = vi.mocked(useUser);
 
-it('should show user name if user is logged', () => {
+test('should show user name if user is logged', () => {
   mockedUseUser.mockReturnValue({
     user: {
       nickname: 'testuser',

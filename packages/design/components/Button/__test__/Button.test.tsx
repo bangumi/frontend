@@ -4,7 +4,7 @@ import React from 'react';
 import Button from '../index';
 
 describe('Primary Button', () => {
-  it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
+  test.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
     const { container } = render(
       <Button type='primary' size={size}>
         hello world
@@ -13,7 +13,7 @@ describe('Primary Button', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it.each(['blue', 'gray'] as const)('should render button of color %s', (color) => {
+  test.each(['blue', 'gray'] as const)('should render button of color %s', (color) => {
     const { container } = render(
       <Button type='primary' color={color}>
         hello world
@@ -24,7 +24,7 @@ describe('Primary Button', () => {
 });
 
 describe('Secondary Button', () => {
-  it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
+  test.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
     const { container } = render(
       <Button type='secondary' size={size}>
         hello world
@@ -33,7 +33,7 @@ describe('Secondary Button', () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it.each(['blue'] as const)('should render button of color %s', (color) => {
+  test.each(['blue'] as const)('should render button of color %s', (color) => {
     const { container } = render(
       <Button type='secondary' color={color}>
         hello world
@@ -44,7 +44,7 @@ describe('Secondary Button', () => {
 });
 
 describe('Text Button', () => {
-  it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
+  test.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {
     const { container } = render(
       <Button type='text' size={size}>
         hello world
@@ -54,7 +54,7 @@ describe('Text Button', () => {
   });
 });
 
-it('should render button link', () => {
+test('should render button link', () => {
   const { container } = render(
     <Button.Link to='https://bgm.tv' isExternal>
       Bangumi
@@ -63,7 +63,7 @@ it('should render button link', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it('should render plain button', () => {
+test('should render plain button', () => {
   const { container } = render(
     <Button.Link to='https://bgm.tv' type='plain' isExternal>
       Bangumi
@@ -72,7 +72,7 @@ it('should render plain button', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it.each(['square', 'rounded'] as const)('should render button of shape %s', (shape) => {
+test.each(['square', 'rounded'] as const)('should render button of shape %s', (shape) => {
   const { container } = render(
     <Button type='primary' shape={shape}>
       hello world
@@ -81,7 +81,7 @@ it.each(['square', 'rounded'] as const)('should render button of shape %s', (sha
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it('should trigger onClick callback', () => {
+test('should trigger onClick callback', () => {
   const onClick = vi.fn();
   const { getByText } = render(
     <Button type='primary' onClick={onClick}>
@@ -93,7 +93,7 @@ it('should trigger onClick callback', () => {
   expect(onClick).toBeCalledTimes(1);
 });
 
-it('should disable the button if disabled is true', () => {
+test('should disable the button if disabled is true', () => {
   const { getByText } = render(
     <Button type='primary' disabled>
       hello world

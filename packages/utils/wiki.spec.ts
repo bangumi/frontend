@@ -57,7 +57,7 @@ const TVAnimeWiki = parseWiki(WikiTemplate.TVAnime);
 const TVAnimeWikiString = stringifyWiki(TVAnimeWiki);
 
 describe('mergeWiki', () => {
-  it('omit wiki item that has empty key or empty value', () => {
+  test('omit wiki item that has empty key or empty value', () => {
     const mergedWiki = mergeWiki(TVAnimeWiki)({
       type: 'test',
       data: [
@@ -87,7 +87,7 @@ describe('mergeWiki', () => {
     expect(stringifyWiki(mergedWiki)).toBe(TVAnimeWikiString);
   });
 
-  it('omit wiki item that value is "*"', () => {
+  test('omit wiki item that value is "*"', () => {
     const mergedWiki = mergeWiki(TVAnimeWiki)({
       type: 'test',
       data: [
@@ -113,7 +113,7 @@ describe('mergeWiki', () => {
     expect(stringifyWiki(mergedWiki)).toBe(TVAnimeWikiString);
   });
 
-  it('merge wiki properly', () => {
+  test('merge wiki properly', () => {
     const mergedWiki = mergeWiki(TVAnimeWiki)({
       type: 'test',
       data: [

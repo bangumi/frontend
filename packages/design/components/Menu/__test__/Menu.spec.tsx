@@ -16,7 +16,7 @@ const items = [
   },
 ];
 
-it('should render all menu', () => {
+test('should render all menu', () => {
   const { getByText, container } = render(<Menu items={items} />);
   expect(container.firstChild).toHaveClass('bgm-menu', 'bgm-menu--horizontal');
   expect(getByText('1')).toBeInTheDocument();
@@ -25,7 +25,7 @@ it('should render all menu', () => {
   expect(getByText('2')).toHaveClass('class-2');
 });
 
-it('should trigger onChange when click menus', () => {
+test('should trigger onChange when click menus', () => {
   const handleChange = vi.fn();
   const { getByText } = render(<Menu onClick={handleChange} items={items} />);
   getByText('2').click();
@@ -33,7 +33,7 @@ it('should trigger onChange when click menus', () => {
   expect(handleChange.mock.calls[0][0]).toBe('2');
 });
 
-it('render props', () => {
+test('render props', () => {
   const Comp: React.FC<{ label: string }> = ({ label }) => <div>{`Custom:${label}`}</div>;
   const { getByText } = render(
     <Menu items={items}>{(item) => <Comp label={item.label} key={item.key} />}</Menu>,
@@ -41,7 +41,7 @@ it('render props', () => {
   expect(getByText('Custom:1')).toBeInTheDocument();
 });
 
-it('should render subMenu', () => {
+test('should render subMenu', () => {
   const subMenu = <Menu items={items} mode='vertical' />;
   const menuItems = [
     {

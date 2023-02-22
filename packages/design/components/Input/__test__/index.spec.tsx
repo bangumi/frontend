@@ -4,38 +4,38 @@ import React from 'react';
 import Input from '../index';
 
 describe('Input', () => {
-  it('placeholder', () => {
+  test('placeholder', () => {
     const { getByPlaceholderText } = render(<Input placeholder='Hello' />);
     expect(getByPlaceholderText('Hello')).toBeInTheDocument();
   });
 
-  it('ref should forward to input tag', () => {
+  test('ref should forward to input tag', () => {
     const ref = React.createRef<HTMLInputElement>();
     render(<Input ref={ref} />);
     expect(ref.current?.tagName).toBe('INPUT');
   });
 
-  it('prefix should be rendered', () => {
+  test('prefix should be rendered', () => {
     const { getByText } = render(<Input prefix='$' />);
     expect(getByText('$')).toBeInTheDocument();
   });
 
-  it('suffix should be rendered', () => {
+  test('suffix should be rendered', () => {
     const { getByText } = render(<Input suffix='$' />);
     expect(getByText('$')).toBeInTheDocument();
   });
 
-  it('disabled className', () => {
+  test('disabled className', () => {
     const { container } = render(<Input disabled />);
     expect(container).toMatchSnapshot();
   });
 
-  it('alignment', () => {
+  test('alignment', () => {
     const { container } = render(<Input align='right' />);
     expect(container).toMatchSnapshot();
   });
 
-  it('rounded variant', () => {
+  test('rounded variant', () => {
     const { container } = render(<Input rounded />);
     expect(container).toMatchSnapshot();
   });

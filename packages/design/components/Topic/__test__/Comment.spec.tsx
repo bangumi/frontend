@@ -40,19 +40,19 @@ describe('Normal Comment', () => {
     return commentProps;
   }
 
-  it.each([0, 6, 7])('should render %d', (state) => {
+  test.each([0, 6, 7])('should render %d', (state) => {
     const props = buildProps();
     const { container } = render(<Comment {...props} state={state} />);
     expect(container).toMatchSnapshot();
   });
 
-  it('should render with reply', () => {
+  test('should render with reply', () => {
     const props = buildProps(false, repliesComment);
     const { container } = render(<Comment {...props} />);
     expect(container).toMatchSnapshot();
   });
 
-  it('reply should have reply styles', () => {
+  test('reply should have reply styles', () => {
     const props = buildProps(true);
     const { container } = render(<Comment {...props} />);
     // should have reply styles
@@ -62,7 +62,7 @@ describe('Normal Comment', () => {
     expect(container.getElementsByClassName('bgm-comment__header--collapsed').length).toBe(0);
   });
 
-  it('reply end with +1/-1 reply should be collapsed', () => {
+  test('reply end with +1/-1 reply should be collapsed', () => {
     const props = buildProps(true);
     const { container: container1 } = render(<Comment {...props} text='233+123' />);
     expect(container1.getElementsByClassName('bgm-comment__header--collapsed').length).toBe(1);
@@ -75,7 +75,7 @@ describe('Normal Comment', () => {
     expect(container3.getElementsByClassName('bgm-comment__header--collapsed').length).toBe(0);
   });
 
-  it('show icons', () => {
+  test('show icons', () => {
     const props = buildProps(false);
     const { container: container1 } = render(
       <Comment {...props} isFriend originalPosterId={233} />,
@@ -91,7 +91,7 @@ describe('Normal Comment', () => {
     expect(container3.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(4);
   });
 
-  it('show edit and delete button if current user is comment creator', () => {
+  test('show edit and delete button if current user is comment creator', () => {
     const user = { ...mockedCurrentUser, id: 1 };
     const props = buildProps(false, singleComment, '233', 233, user);
     const { getByText } = render(<Comment {...props} />);
@@ -99,13 +99,13 @@ describe('Normal Comment', () => {
     expect(getByText('删除')).toBeInTheDocument();
   });
 
-  it('do not show opinions if not login', () => {
+  test('do not show opinions if not login', () => {
     const props = buildProps(false, singleComment, '233', 233, null as any);
     const { container } = render(<Comment {...props} />);
     expect(container).toMatchSnapshot();
   });
 
-  it('click reply button should show editor form', () => {
+  test('click reply button should show editor form', () => {
     const props = buildProps(false);
     const { getByText, container } = render(<Comment {...props} />);
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
@@ -117,7 +117,7 @@ describe('Normal Comment', () => {
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
   });
 
-  it('successful reply should refresh, highlight and hide form otherwise not', async () => {
+  test('successful reply should refresh, highlight and hide form otherwise not', async () => {
     const basicReply = { id: 2104702 };
     const mockApi = (status: number) => {
       mockServer.use(
@@ -157,7 +157,7 @@ describe('Normal Comment', () => {
     });
   });
 
-  it('should highlight comment corresponding to hash', () => {
+  test('should highlight comment corresponding to hash', () => {
     const props = buildProps(false, repliesComment);
     const { container } = render(<Comment {...props} />, ['/groups/topics/1#post_2104702']);
     expect(container).toMatchSnapshot();
@@ -174,7 +174,7 @@ describe('Special Comment', () => {
     } as unknown as CommentProps;
   }
 
-  it.each([1, 2, 5])('should render state is %d', (state) => {
+  test.each([1, 2, 5])('should render state is %d', (state) => {
     const props = buildProps(state);
     const { container } = render(<Comment {...props} />);
     expect(container).toMatchSnapshot();

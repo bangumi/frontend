@@ -3,7 +3,7 @@ import React from 'react';
 
 import Rate from '..';
 
-it.each([
+test.each([
   [0.1, 0, 0, 5],
   [1.1, 0, 1, 4],
   [2.1, 1, 0, 4],

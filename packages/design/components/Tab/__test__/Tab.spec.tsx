@@ -3,7 +3,7 @@ import React from 'react';
 
 import Tab from '..';
 
-it('should render all tab', () => {
+test('should render all tab', () => {
   const items = [
     {
       key: '1',
@@ -20,7 +20,7 @@ it('should render all tab', () => {
   expect(getByText('1')).toHaveClass('bgm-tab__item--active');
 });
 
-it('should trigger onChange when click tabs', () => {
+test('should trigger onChange when click tabs', () => {
   const items = [
     {
       key: '1',
@@ -38,7 +38,7 @@ it('should trigger onChange when click tabs', () => {
   expect(handleChange).toBeCalledWith('2', items[1]);
 });
 
-it('should render borderless tab', () => {
+test('should render borderless tab', () => {
   const items = [
     {
       key: '1',

@@ -9,13 +9,13 @@ const LinkTestWrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return <MemoryRouter>{children}</MemoryRouter>;
 };
 
-it('should render internal link', () => {
+test('should render internal link', () => {
   const { asFragment } = render(<Link to='/a' />, { wrapper: LinkTestWrapper });
 
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should render external link', () => {
+test('should render external link', () => {
   const { asFragment } = render(<Link to='https://test.com' isExternal />, {
     wrapper: LinkTestWrapper,
   });
@@ -23,7 +23,7 @@ it('should render external link', () => {
   expect(asFragment()).toMatchSnapshot();
 });
 
-it('should render no-style link', () => {
+test('should render no-style link', () => {
   const { asFragment } = render(<Link to='/a' noStyle />, { wrapper: LinkTestWrapper });
 
   expect(asFragment()).toMatchSnapshot();

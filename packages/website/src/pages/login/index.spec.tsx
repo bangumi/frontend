@@ -58,7 +58,7 @@ function mockSuccessfulLogin() {
   fireEvent.click(getByText('登录'));
 }
 
-it('should redirect user to homepage after success login', async () => {
+test('should redirect user to homepage after success login', async () => {
   const mockedNavigate = vi.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'default' } as any);
@@ -70,7 +70,7 @@ it('should redirect user to homepage after success login', async () => {
   });
 });
 
-it('should bring user back to last page if exists', async () => {
+test('should bring user back to last page if exists', async () => {
   const mockedNavigate = vi.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'not-default' } as any);
@@ -82,7 +82,7 @@ it('should bring user back to last page if exists', async () => {
   });
 });
 
-it('should redirect user to specified page', async () => {
+test('should redirect user to specified page', async () => {
   const mockedNavigate = vi.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'default' } as any);
@@ -97,7 +97,7 @@ it('should redirect user to specified page', async () => {
   });
 });
 
-it('should redirect user to home if specified path is invalid', async () => {
+test('should redirect user to home if specified path is invalid', async () => {
   const mockedNavigate = vi.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
   mockedUseLocation.mockReturnValue({ key: 'default' } as any);
@@ -112,7 +112,7 @@ it('should redirect user to home if specified path is invalid', async () => {
   });
 });
 
-it.each([
+test.each([
   {
     statusCode: 401,
     resp: { code: 'CAPTCHA_ERROR' },
@@ -151,7 +151,7 @@ it.each([
   },
 );
 
-it('should validate user input', async () => {
+test('should validate user input', async () => {
   const { getByPlaceholderText, getByText } = render(
     <UserProvider>
       <LoginPage />

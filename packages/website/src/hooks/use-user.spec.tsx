@@ -32,7 +32,7 @@ const wrapper = ({ children }: PropsWithChildren) => (
   </MemoryRouter>
 );
 
-it.each([
+test.each([
   {
     statusCode: 401,
     body: { code: 'CAPTCHA_ERROR' },
@@ -66,7 +66,7 @@ it.each([
   },
 );
 
-it('should refresh me if login succeeded', async () => {
+test('should refresh me if login succeeded', async () => {
   const { result } = renderHook(() => useUser(), { wrapper });
 
   mockLogin(200);

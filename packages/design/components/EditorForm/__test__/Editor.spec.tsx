@@ -115,33 +115,33 @@ function doSelectionTest(
 }
 
 describe('EditorForm > Editor', () => {
-  it('render correctly', () => {
+  test('render correctly', () => {
     const { asFragment } = render(<Editor />);
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('ref should forward to textarea tag', () => {
+  test('ref should forward to textarea tag', () => {
     const ref = React.createRef<HTMLTextAreaElement>();
     render(<Editor ref={ref} />);
     expect(ref.current?.tagName).toBe('TEXTAREA');
   });
 
-  it('placeholder props', () => {
+  test('placeholder props', () => {
     const { getByPlaceholderText } = render(<Editor placeholder='Hello' />);
     expect(getByPlaceholderText('Hello')).toBeInTheDocument();
   });
 
-  it('showToolbox props', () => {
+  test('showToolbox props', () => {
     const { container } = render(<Editor showToolbox={false} />);
     expect(container.querySelector('.bgm-editor__toolbox')).not.toBeInTheDocument();
   });
 
-  it('showWordCount props', () => {
+  test('showWordCount props', () => {
     const { container } = render(<Editor showWordCount={false} />);
     expect(container.querySelector('.bgm-editor__wordcount')).not.toBeInTheDocument();
   });
 
-  it('click toolbox should have correct behavior', () => {
+  test('click toolbox should have correct behavior', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
@@ -166,7 +166,7 @@ describe('EditorForm > Editor', () => {
     });
   });
 
-  it('click toolbox with selection', () => {
+  test('click toolbox with selection', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
@@ -194,7 +194,7 @@ describe('EditorForm > Editor', () => {
     });
   });
 
-  it('onConfirm keyboard event', () => {
+  test('onConfirm keyboard event', () => {
     const onConfirm = vi.fn();
     const { textarea } = initTextareaTest({ placeholder: 'Hello', onConfirm });
 
@@ -211,7 +211,7 @@ describe('EditorForm > Editor', () => {
     expect(onConfirm).lastCalledWith('test3');
   });
 
-  it('BBCode editor keyboard event', () => {
+  test('BBCode editor keyboard event', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
@@ -239,7 +239,7 @@ describe('EditorForm > Editor', () => {
     }
   });
 
-  it('BBCode editor keyboard event with selection', () => {
+  test('BBCode editor keyboard event with selection', () => {
     const { textarea, setValue } = initTextareaTest({ placeholder: 'Hello' });
 
     const mockValue = 'https://lain.bgm.tv/pic/cover/l/65/19/364450_9lB1T.jpg';
@@ -272,7 +272,7 @@ describe('EditorForm > Editor', () => {
     }
   });
 
-  it('word count is working when input contains unicode', () => {
+  test('word count is working when input contains unicode', () => {
     const { getByText } = render(<Editor value='123👍' />);
     expect(getByText('已输入 4 字')).toBeInTheDocument();
   });

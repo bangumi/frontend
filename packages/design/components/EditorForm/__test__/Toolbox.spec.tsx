@@ -4,17 +4,17 @@ import React from 'react';
 import Toolbox from '../Toolbox';
 
 describe('EditorForm > Toolbox', () => {
-  it('render with default classNames', () => {
+  test('render with default classNames', () => {
     const { asFragment } = render(<Toolbox handleClickEvent={null!} />);
     expect(asFragment()).toMatchSnapshot();
   });
 
-  it('Toolbox style props', () => {
+  test('Toolbox style props', () => {
     const { container } = render(<Toolbox handleClickEvent={null!} style={{ display: 'none' }} />);
     expect(container.firstChild).toHaveStyle('display: none');
   });
 
-  it('Toolbox handleClickEvent props', () => {
+  test('Toolbox handleClickEvent props', () => {
     const handleClickEvent = vi.fn();
     render(<Toolbox handleClickEvent={handleClickEvent} />);
     for (const type of ['bold', 'italic', 'underscore', 'image', 'link', 'size']) {

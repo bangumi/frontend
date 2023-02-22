@@ -3,12 +3,12 @@ import React from 'react';
 
 import Pagination from '..';
 
-it('should render correctly', () => {
+test('should render correctly', () => {
   const { getByTestId } = render(<Pagination total={3939} />);
   expect(getByTestId('pagination-wrapper')).toMatchSnapshot();
 });
 
-it('should hightlight current page and not highlight other page', async () => {
+test('should hightlight current page and not highlight other page', async () => {
   const currentPage = 20;
   const { findAllByTestId } = render(<Pagination total={3000} currentPage={currentPage} />);
   const pagers = await findAllByTestId('pagination-pager');
@@ -22,7 +22,7 @@ it('should hightlight current page and not highlight other page', async () => {
   });
 });
 
-it('should response mouse click right', async () => {
+test('should response mouse click right', async () => {
   const onChange = vi.fn();
   const { findAllByTestId } = render(
     <Pagination total={30} pageSize={10} currentPage={1} onChange={onChange} />,
@@ -38,7 +38,7 @@ it('should response mouse click right', async () => {
   expect(onChange).toHaveBeenLastCalledWith(2);
 });
 
-it('should not response the prev-button clicked', () => {
+test('should not response the prev-button clicked', () => {
   const onChange = vi.fn();
   const { queryByTestId } = render(<Pagination total={3000} currentPage={1} onChange={onChange} />);
   const prevButton = queryByTestId('pagination-prev')!;
@@ -48,7 +48,7 @@ it('should not response the prev-button clicked', () => {
   fireEvent.click(nextButton);
   expect(onChange).toHaveBeenLastCalledWith(2);
 });
-it('should not response the next-button clicked', () => {
+test('should not response the next-button clicked', () => {
   const onChange = vi.fn();
   const { queryByTestId } = render(
     <Pagination total={3000} currentPage={100} onChange={onChange} />,
@@ -61,7 +61,7 @@ it('should not response the next-button clicked', () => {
   expect(onChange).toHaveBeenLastCalledWith(99);
 });
 
-it('should response next page', async () => {
+test('should response next page', async () => {
   const onChange = vi.fn();
   const { getByTestId } = render(<Pagination total={300} onChange={onChange} />);
   const nextButton = getByTestId('pagination-next');

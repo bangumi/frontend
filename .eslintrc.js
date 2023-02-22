@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: ['standard-with-typescript', 'prettier'],
-  plugins: ['unused-imports', 'unicorn', 'simple-import-sort'],
+  plugins: ['unused-imports', 'unicorn', 'simple-import-sort', '@bangumi', 'vitest'],
   parserOptions: {
     ecmaVersion: 13,
     sourceType: 'module',
@@ -13,6 +13,10 @@ module.exports = {
     'import/internal-regex': '^@bangumi/',
   },
   rules: {
+    'vitest/consistent-test-it': ['error', { fn: 'test', withinDescribe: 'test' }],
+    'vitest/no-focused-tests': 'error',
+    'vitest/expect-expect': 'warn',
+    '@bangumi/test-file-pattern': 'error',
     curly: 'error',
     'no-unused-vars': 'off',
     'no-else-return': ['error', { allowElseIf: false }],

@@ -27,7 +27,7 @@ const ComponentRequireAuth: React.FC = () => {
 };
 
 describe('RequireAuth', () => {
-  it('should show content if user is authorized properly', () => {
+  test('should show content if user is authorized properly', () => {
     mockedUseUser.mockReturnValue({
       user: {
         user_group: UserGroup.Admin,
@@ -38,7 +38,7 @@ describe('RequireAuth', () => {
     expect(getByText('只有管理员知道的世界')).toBeInTheDocument();
   });
 
-  it("should redirect to designated page if user isn't authorized", () => {
+  test("should redirect to designated page if user isn't authorized", () => {
     const mockedNavigate = vi.fn();
     mockedUseNavigate.mockReturnValue(mockedNavigate);
     mockedUseUser.mockReturnValue({
@@ -51,7 +51,7 @@ describe('RequireAuth', () => {
     expect(mockedNavigate).toBeCalledWith('/', { replace: true });
   });
 
-  it('should redirect to login page if user is logged', () => {
+  test('should redirect to login page if user is logged', () => {
     const mockedRedirectToLogin = vi.fn();
     mockedUseUser.mockReturnValue({
       user: null,

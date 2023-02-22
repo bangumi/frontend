@@ -7,7 +7,7 @@ import Input from '../../Input';
 import Form from '..';
 
 describe('Form Components', () => {
-  it('should submit when submit button clicked', async () => {
+  test('should submit when submit button clicked', async () => {
     const handleSubmit = vi.fn();
     const { findByTestId } = render(
       <Form
@@ -28,7 +28,7 @@ describe('Form Components', () => {
     });
   });
 
-  it('key down should work properly', async () => {
+  test('key down should work properly', async () => {
     const onKeyDown = vi.fn();
     const { getByTestId } = render(
       <Form data-testid='form' onKeyDown={onKeyDown}>
@@ -45,7 +45,7 @@ describe('Form Components', () => {
     });
   });
 
-  it('form item render properly', () => {
+  test('form item render properly', () => {
     const { container } = render(
       <Form labelWidth={120}>
         <Form.Item>
@@ -62,7 +62,7 @@ describe('Form Components', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('render compact layout properly', () => {
+  test('render compact layout properly', () => {
     const { container } = render(
       <Form compact>
         <Input />

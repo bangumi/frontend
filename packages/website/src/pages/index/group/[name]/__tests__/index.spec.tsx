@@ -80,13 +80,13 @@ class GroupHomeTest {
   }
 }
 
-it('should match snapshot properly', async () => {
+test('should match snapshot properly', async () => {
   const test = new GroupHomeTest('test', { group: Sandbox });
 
   await test.assertHeader('沙盒');
 });
 
-it('should list recent topics', async () => {
+test('should list recent topics', async () => {
   const test = new GroupHomeTest('test', {
     group: Sandbox,
     topics: RecentTopics as ResponseWithPagination<Topic[]>,

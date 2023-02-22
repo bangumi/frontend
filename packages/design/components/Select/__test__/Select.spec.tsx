@@ -4,7 +4,7 @@ import React from 'react';
 import Select from '..';
 
 describe('Select Component', () => {
-  it('render properly', () => {
+  test('render properly', () => {
     const { container } = render(
       <Select
         defaultValue='name'

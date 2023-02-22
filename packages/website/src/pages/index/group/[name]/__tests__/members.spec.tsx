@@ -64,7 +64,7 @@ class GroupMembersTest {
   }
 }
 
-it('should list group members', async () => {
+test('should list group members', async () => {
   const test = new GroupMembersTest('test', {
     members: sandboxMembers as ResponseWithPagination<GroupMember[]>,
     modMembers: sandboxModMember as ResponseWithPagination<GroupMember[]>,
