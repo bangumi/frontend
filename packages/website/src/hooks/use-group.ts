@@ -10,15 +10,10 @@ import type {
   Topic,
 } from '@bangumi/client/group';
 
-export enum DescriptionClamp {
-  clamp = 'clamp',
-  unclamp = 'unclamp',
-}
-
 export interface UseGroupRet {
   group: GroupProfile;
-  descriptionClamp: DescriptionClamp;
-  setDescriptionClamp: (val: DescriptionClamp) => void;
+  descriptionCollapsed: boolean;
+  setDescriptionCollapsed: (val: boolean) => void;
 }
 
 export function useGroupRecentTopics(
@@ -40,21 +35,20 @@ export function useGroup(name: string): UseGroupRet {
     async () => ok(ozaClient.getGroupProfile(name)),
     { suspense: true },
   );
-  const clampKey = `doesGroupDescriptionNeedClamp.${name}`;
-  const descriptionClamp =
-    (localStorage.getItem(clampKey) as DescriptionClamp | undefined) ?? DescriptionClamp.unclamp;
-  const [descriptionClampState, setDescriptionClampState] =
-    useState<DescriptionClamp>(descriptionClamp);
+  const collapseKey = `doesGroupDescriptionNeedCollapse.${name}`;
+  const descriptionCollapse = Boolean(localStorage.getItem(collapseKey) ?? false);
+  const [descriptionCollapsedState, setDescriptionCollapsedState] =
+    useState<boolean>(descriptionCollapse);
 
   useEffect(() => {
-    localStorage.setItem(clampKey, descriptionClampState);
-  }, [clampKey, descriptionClampState]);
+    localStorage.setItem(collapseKey, String(descriptionCollapsedState));
+  }, [collapseKey, descriptionCollapsedState]);
 
   return {
     group: groupResp,
-    descriptionClamp: descriptionClampState,
-    setDescriptionClamp(val) {
-      setDescriptionClampState(val);
+    descriptionCollapsed: descriptionCollapsedState,
+    setDescriptionCollapsed(val) {
+      setDescriptionCollapsedState(val);
     },
   };
 }

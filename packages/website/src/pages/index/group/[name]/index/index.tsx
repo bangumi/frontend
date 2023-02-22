@@ -1,14 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button, Section } from '@bangumi/design';
+import { Button, CollapsibleContent, Section } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
-import { DescriptionClamp, useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
+import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { useGroupContext } from '../../[name]';
-import { ClampableContent } from '../../components/ClampableContent';
 import NewTopicForm from '../components/NewTopicForm';
 import TopicsTable from '../components/TopicsTable';
 import styles from './style.module.less';
@@ -27,22 +26,18 @@ const GroupHome: React.FC = () => {
   }
 
   const {
-    groupRet: { group, descriptionClamp, setDescriptionClamp },
+    groupRet: { group, descriptionCollapsed, setDescriptionCollapsed },
   } = groupContext;
-
-  const handleChangeClamp = (isClamped: boolean): void => {
-    setDescriptionClamp(isClamped ? DescriptionClamp.clamp : DescriptionClamp.unclamp);
-  };
 
   const parsedDescription = renderBBCode(group.group.description);
 
   return (
     <>
-      <ClampableContent
+      <CollapsibleContent
         threshold={193}
         content={parsedDescription}
-        isClamped={descriptionClamp === DescriptionClamp.clamp}
-        onChange={handleChangeClamp}
+        collapsed={descriptionCollapsed}
+        onChange={setDescriptionCollapsed}
       />
       <Section
         title='最近讨论'
