@@ -26,7 +26,7 @@ const CollapsibleContent: React.FC<CollapsibleContentProps> = ({
   const [enableCollapse, setEnableCollapse] = React.useState(false);
   const contentRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     if (!contentRef.current) {
       return;
     }
@@ -55,12 +55,10 @@ const CollapsibleContent: React.FC<CollapsibleContentProps> = ({
       return (
         <div>
           ……
-          {onChange ? (
-            <Button type='plain' onClick={handleUncollapse}>
-              展开
-              <ArrowDownCircle />
-            </Button>
-          ) : null}
+          <Button type='plain' onClick={handleUncollapse}>
+            展开
+            <ArrowDownCircle />
+          </Button>
         </div>
       );
     }
