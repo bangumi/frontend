@@ -56,7 +56,7 @@ const CollapsibleContent: React.FC<CollapsibleContentProps> = ({
         <div>
           ……
           {onChange ? (
-            <Button type='text' plain onClick={handleUncollapse}>
+            <Button type='plain' onClick={handleUncollapse}>
               展开
               <ArrowDownCircle />
             </Button>
@@ -65,7 +65,7 @@ const CollapsibleContent: React.FC<CollapsibleContentProps> = ({
       );
     }
     return (
-      <Button type='text' plain onClick={handleCollapse}>
+      <Button type='plain' onClick={handleCollapse}>
         收起
         <ArrowUpCircle />
       </Button>

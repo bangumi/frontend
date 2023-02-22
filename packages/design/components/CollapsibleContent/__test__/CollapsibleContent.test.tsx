@@ -10,7 +10,7 @@ const Template = (args: CollapsibleContentProps) => {
 };
 
 const mockScrollHeight = (height: number) => {
-  jest.spyOn(HTMLDivElement.prototype, 'scrollHeight', 'get').mockImplementation(() => height);
+  vi.spyOn(HTMLDivElement.prototype, 'scrollHeight', 'get').mockImplementation(() => height);
 };
 
 it('should render', () => {
@@ -20,7 +20,7 @@ it('should render', () => {
 
 it('should uncollapse', () => {
   mockScrollHeight(10);
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { getByText, container } = render(
     <CollapsibleContent content='bgm' threshold={1} collapsed onChange={onChange} />,
   );
@@ -34,7 +34,7 @@ it('should uncollapse', () => {
 
 it('should collapse', () => {
   mockScrollHeight(10);
-  const onChange = jest.fn();
+  const onChange = vi.fn();
   const { getByText, container } = render(
     <CollapsibleContent content='bgm' threshold={1} collapsed={false} onChange={onChange} />,
   );
