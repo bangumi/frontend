@@ -85,8 +85,6 @@ pull_request_rules:
       label:
         add:
           - conflict
-        remove: &waiting-approval
-          - waiting-approval
 
   - name: remove conflict label if not needed
     conditions:
@@ -103,7 +101,6 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:lint:fail'
-        remove: *waiting-approval
 
   - name: toggle labels based on test state
     conditions:
@@ -112,7 +109,6 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:test:fail'
-        remove: *waiting-approval
 
   - name: toggle labels based on build state
     conditions:
@@ -121,7 +117,6 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:build:fail'
-        remove: *waiting-approval
 
   - name: toggle labels based on storybook build  state
     conditions:
@@ -130,14 +125,3 @@ pull_request_rules:
       label:
         toggle:
           - 'ci:storybook-build:fail'
-        remove: *waiting-approval
-
-queue_rules:
-  - name: default
-    merge_method: squash
-    merge_conditions:
-      - -conflict
-      - -check-failure=lint
-      - -check-failure=build
-      - -check-failure=test
-      - -check-failure=storybook-build
