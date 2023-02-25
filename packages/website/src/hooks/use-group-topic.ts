@@ -1,10 +1,16 @@
 import { ok } from 'oazapfts';
+import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import type { TopicDetail } from '@bangumi/client/topic';
 
-function useGroupTopic(id: number): { data: TopicDetail; mutate: () => Promise<unknown> } {
+export interface UseGroupTopicRet {
+  data: TopicDetail;
+  mutate: KeyedMutator<TopicDetail>;
+}
+
+function useGroupTopic(id: number): UseGroupTopicRet {
   const { data, mutate } = useSWR(
     `/group/topic/${id}`,
     async () => ok(ozaClient.getGroupTopicDetail(id)),

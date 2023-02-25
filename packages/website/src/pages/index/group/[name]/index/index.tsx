@@ -8,7 +8,7 @@ import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { useGroupContext } from '../../[name]';
-import NewTopicForm from '../components/NewTopicForm';
+import TopicForm from '../../components/TopicForm';
 import TopicsTable from '../components/TopicsTable';
 import styles from './style.module.less';
 
@@ -47,7 +47,7 @@ const GroupHome: React.FC = () => {
       >
         <TopicsTable topics={recentTopics.data} />
       </Section>
-      {user && <NewTopicForm quickPost />}
+      {user && <TopicForm quickPost groupName={name} />}
     </>
   );
 };
