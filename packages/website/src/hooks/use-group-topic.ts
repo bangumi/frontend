@@ -1,4 +1,5 @@
 import { ok } from 'oazapfts';
+import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
@@ -6,7 +7,7 @@ import type { TopicDetail } from '@bangumi/client/topic';
 
 export interface UseGroupTopicRet {
   data: TopicDetail;
-  mutate: () => Promise<unknown>;
+  mutate: KeyedMutator<TopicDetail>;
 }
 
 function useGroupTopic(id: number): UseGroupTopicRet {

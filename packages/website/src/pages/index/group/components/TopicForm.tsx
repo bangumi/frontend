@@ -52,7 +52,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   const editTopic = async (data: FormData, id: number) => {
     const response = await ozaClient.editGroupTopic(id, data);
     if (response.status === 200) {
-      await topic?.mutate();
+      topic?.mutate({ ...topic.data, ...data });
       navigate(`/group/topic/${id}`);
     } else {
       console.error(response);
