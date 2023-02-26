@@ -33,5 +33,5 @@ jobs:
           push-to-fork: bangumi-bot/frontend
           branch: 'update-types'
           token: ${{ secrets.PAT }}
-          author: 'bangumi-bot <trim21me+banmgumi-bot@gmail.com>'
-          committer: 'bangumi-bot <trim21me+banmgumi-bot@gmail.com>'
+          author: 'bangumi-bot <124712095+bangumi-bot@users.noreply.github.com>'
+          committer: 'bangumi-bot <124712095+bangumi-bot@users.noreply.github.com>'
