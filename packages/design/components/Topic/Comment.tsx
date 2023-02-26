@@ -195,10 +195,10 @@ const Comment: FC<CommentProps> = ({
                   </Button>
                   {user.id === creator.id ? (
                     <>
-                      {/* TODO */}
-                      <Button type='text' size='small'>
+                      <Button.Link type='text' size='small' to={`/group/reply/${props.id}/edit`}>
                         编辑
-                      </Button>
+                      </Button.Link>
+                      {/* TODO */}
                       <Button type='text' size='small'>
                         删除
                       </Button>
