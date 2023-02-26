@@ -34,3 +34,4 @@ jobs:
           branch: 'update-types'
           token: ${{ secrets.PAT }}
           author: 'bangumi-bot <bangumi-bot@users.noreply.github.com>'
+          committer: 'bangumi-bot <bangumi-bot@users.noreply.github.com>'
