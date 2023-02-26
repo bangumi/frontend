@@ -33,4 +33,4 @@ jobs:
           push-to-fork: bangumi-bot/frontend
           branch: 'update-types'
           token: ${{ secrets.PAT }}
-          author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+          author: 'bangumi-bot <bangumi-bot@users.noreply.github.com>'
