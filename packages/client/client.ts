@@ -29,6 +29,14 @@ export interface User {
   user_group: number;
   username: string;
 }
+export interface GroupReply {
+  createdAt: number;
+  creator: User;
+  id: number;
+  state: number;
+  text: string;
+  topicID: number;
+}
 export interface Group {
   createdAt: number;
   description: string;
@@ -222,7 +230,25 @@ export async function clearNotice(
     }),
   );
 }
-export async function editGroupReply(
+export async function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: GroupReply;
+      }
+    | {
+        status: 404;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/groups/-/posts/${encodeURIComponent(postId)}`, {
+    ...opts,
+  });
+}
+export async function editGroupPost(
   postId: number,
   body: {
     text: string;
