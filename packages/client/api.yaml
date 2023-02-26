@@ -680,7 +680,7 @@ info:
   description: >-
     关于订阅通知的 socket.io 相关的文档在
     <https://github.com/bangumi/GraphQL/blob/master/docs/socket.io.md>
-  title: hello
+  title: bangumi private api
 openapi: 3.0.3
 paths:
   /p1/clear-notify:
