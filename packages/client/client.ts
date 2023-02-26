@@ -1,5 +1,5 @@
 /**
- * hello
+ * bangumi private api
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
