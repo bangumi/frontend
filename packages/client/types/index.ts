@@ -14,7 +14,8 @@ export interface paths {
     post: operations['clearNotice'];
   };
   '/p1/groups/-/posts/{postID}': {
-    put: operations['editGroupReply'];
+    get: operations['getGroupPost'];
+    put: operations['editGroupPost'];
   };
   '/p1/groups/-/topics/{id}': {
     /** @description 获取帖子列表 */
@@ -183,6 +184,14 @@ export interface components {
       recentAddedMembers: components['schemas']['GroupMember'][];
       topics: components['schemas']['Topic'][];
       totalTopics: number;
+    };
+    GroupReply: {
+      createdAt: number;
+      creator: components['schemas']['User'];
+      id: number;
+      state: number;
+      text: string;
+      topicID: number;
     };
     HistorySummary: {
       commitMessage: string;
@@ -372,7 +381,35 @@ export interface operations {
       };
     };
   };
-  editGroupReply: {
+  getGroupPost: {
+    parameters: {
+      /** @example 2092074 */
+      path: {
+        postID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['GroupReply'];
+        };
+      };
+      /** @description Default Response */
+      404: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  editGroupPost: {
     parameters: {
       /** @example 2092074 */
       path: {

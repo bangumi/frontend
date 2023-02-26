@@ -187,6 +187,28 @@ components:
         - group
         - totalTopics
       type: object
+    GroupReply:
+      properties:
+        createdAt:
+          type: integer
+        creator:
+          $ref: '#/components/schemas/User'
+        id:
+          type: integer
+        state:
+          type: integer
+        text:
+          type: string
+        topicID:
+          type: integer
+      required:
+        - id
+        - creator
+        - createdAt
+        - text
+        - state
+        - topicID
+      type: object
     HistorySummary:
       properties:
         commitMessage:
@@ -716,8 +738,48 @@ paths:
       tags:
         - user
   /p1/groups/-/posts/{postID}:
+    get:
+      operationId: getGroupPost
+      parameters:
+        - example: 2092074
+          in: path
+          name: postID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GroupReply'
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: post not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - group
     put:
-      operationId: editGroupReply
+      operationId: editGroupPost
       parameters:
         - example: 2092074
           in: path
