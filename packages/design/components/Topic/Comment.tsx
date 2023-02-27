@@ -195,7 +195,7 @@ const Comment: FC<CommentProps> = ({
                   </Button>
                   {user.id === creator.id ? (
                     <>
-                      {!replies && (
+                      {!replies?.length && (
                         <Button.Link type='text' size='small' to={`/group/reply/${props.id}/edit`}>
                           编辑
                         </Button.Link>

@@ -99,6 +99,18 @@ describe('Normal Comment', () => {
     expect(getByText('删除')).toBeInTheDocument();
   });
 
+  it('hide edit button if there are subreplies', () => {
+    const user = { ...mockedCurrentUser, id: 1 };
+    const props = buildProps(false, repliesComment, '233', 233, user);
+    const { container } = render(<Comment {...props} />);
+    // 选取主评论的操作区域
+    const actions = container.querySelector(
+      '.bgm-comment__box > .bgm-comment__opinions',
+    )?.textContent;
+    expect(actions?.includes('编辑')).toBeFalsy();
+    expect(actions?.includes('删除')).toBeTruthy();
+  });
+
   it('do not show opinions if not login', () => {
     const props = buildProps(false, singleComment, '233', 233, null as any);
     const { container } = render(<Comment {...props} />);
