@@ -158,9 +158,7 @@ describe('html render bbcode string', () => {
   });
   test('render mask', () => {
     const input = '我是[mask]马赛克文字[/mask]';
-    expect(render(input)).toBe(
-      '我是<span style="background-color:#555;color:#555;border:1px solid #555">马赛克文字</span>',
-    );
+    expect(render(input)).toBe('我是<span class="bgm-mask">马赛克文字</span>');
   });
   test('render color', () => {
     const input = `我是
@@ -178,12 +176,12 @@ describe('html render bbcode string', () => {
   test('render url', () => {
     const input = 'Bangumi 番组计划: [url]http://chii.in/[/url]';
     expect(render(input)).toBe(
-      'Bangumi 番组计划: <a href="http://chii.in/" class="l">http://chii.in/</a>',
+      'Bangumi 番组计划: <a href="http://chii.in/" class="bgm-link">http://chii.in/</a>',
     );
     const input2 = `带文字说明的网站链接：
 [url=http://chii.in]Bangumi 番组计划[/url]`;
     expect(render(input2)).toBe(
-      '带文字说明的网站链接：<br/><a href="http://chii.in" class="l">Bangumi 番组计划</a>',
+      '带文字说明的网站链接：<br/><a href="http://chii.in" class="bgm-link">Bangumi 番组计划</a>',
     );
   });
   test('render img', () => {
