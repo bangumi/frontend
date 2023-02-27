@@ -17,6 +17,7 @@ export { default as Layout } from './components/Layout';
 export { default as Form } from './components/Form';
 export { default as Select } from './components/Select';
 export { default as Radio } from './components/Radio';
+export { default as ErrorMessage } from './components/ErrorMessage';
 export { toast } from './components/Toast';
 
 export type { ButtonProps } from './components/Button';
@@ -33,3 +34,4 @@ export type { EditorFormProps } from './components/EditorForm';
 export type { RichContentProps } from './components/RichContent';
 export type { PaginationProps } from './components/Pagination';
 export type { LayoutProps } from './components/Layout';
+export type { ErrorMessageProps } from './components/ErrorMessage';

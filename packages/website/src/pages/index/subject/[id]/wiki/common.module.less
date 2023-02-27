@@ -167,3 +167,43 @@
 .draggableBox {
   margin-bottom: 0.625rem;
 }
+
+.uploadImg {
+  &Btn {
+    display: flex;
+    align-items: center;
+    margin-block: 20px;
+
+    > .bgm-button {
+      flex: none;
+    }
+
+    > span {
+      flex: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: @gray-60;
+      margin-inline: 20px;
+    }
+  }
+
+  &CoverSelected,
+  &CoverUploaded {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  &CoverItem {
+    margin-right: 16px;
+
+    &Info {
+      margin-block: 10px;
+
+      > span {
+        margin-right: 10px;
+        color: @gray-80;
+      }
+    }
+  }
+}
