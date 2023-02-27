@@ -59,11 +59,7 @@ describe('convert bbcode to html vnode', () => {
         },
         {
           type: 'span',
-          style: {
-            'background-color': '#555',
-            color: '#555',
-            border: '1px solid #555',
-          },
+          className: 'bgm-mask',
           children: ['mask'],
         },
       ],
@@ -120,7 +116,7 @@ describe('convert bbcode to html vnode', () => {
           props: {
             href: 'http://chii.in/',
           },
-          className: 'l',
+          className: 'bgm-link',
           children: ['http://chii.in/'],
         },
       ],
@@ -139,7 +135,7 @@ describe('convert bbcode to html vnode', () => {
             target: '_blank',
             rel: 'nofollow external noopener noreferrer',
           },
-          className: 'l',
+          className: 'bgm-link',
           children: ['测试'],
         },
       ],
