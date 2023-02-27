@@ -130,7 +130,7 @@ describe('Normal Comment', () => {
     const onSuccess = vi.fn();
     const props = buildProps(false);
     const { getByText, container } = render(
-      <Comment {...props} mutateTopic={onSuccess} topicId={1} />,
+      <Comment {...props} onCommentUpdate={onSuccess} topicId={1} />,
     );
     const fillAndSubmit = () => {
       fireEvent.click(getByText('回复'));

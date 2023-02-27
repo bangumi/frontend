@@ -22,7 +22,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicId: number;
   floor: string | number;
   originalPosterId: number;
-  mutateTopic: () => Promise<unknown>;
+  onCommentUpdate: () => Promise<unknown>;
   user?: User;
 };
 
@@ -65,7 +65,7 @@ const Comment: FC<CommentProps> = ({
   state,
   user,
   topicId,
-  mutateTopic,
+  onCommentUpdate,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -147,14 +147,14 @@ const Comment: FC<CommentProps> = ({
     setShowReplyEditor(false);
     navigate(`#post_${reply.id}`);
     // 刷新回复列表
-    await mutateTopic();
+    await onCommentUpdate();
   };
 
   const handleDeleteReply = async () => {
     if (confirm('确认删除这条回复？')) {
       const response = await ozaClient.deleteGroupPost(props.id);
       if (response.status === 200) {
-        mutateTopic();
+        onCommentUpdate();
       } else {
         console.error(response);
         toast(response.data.message);
@@ -228,7 +228,7 @@ const Comment: FC<CommentProps> = ({
           topicId={topicId}
           key={reply.id}
           isReply
-          mutateTopic={mutateTopic}
+          onCommentUpdate={onCommentUpdate}
           floor={`${floor}-${idx + 1}`}
           originalPosterId={originalPosterId}
           user={user}
