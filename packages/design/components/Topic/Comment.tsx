@@ -195,9 +195,11 @@ const Comment: FC<CommentProps> = ({
                   </Button>
                   {user.id === creator.id ? (
                     <>
-                      <Button.Link type='text' size='small' to={`/group/reply/${props.id}/edit`}>
-                        编辑
-                      </Button.Link>
+                      {!replies && (
+                        <Button.Link type='text' size='small' to={`/group/reply/${props.id}/edit`}>
+                          编辑
+                        </Button.Link>
+                      )}
                       {/* TODO */}
                       <Button type='text' size='small'>
                         删除
