@@ -96,7 +96,7 @@ const TopicPage: FC = () => {
                   floor={idx + 2}
                   originalPosterId={originalPosterId}
                   user={user}
-                  onReplySuccess={mutate}
+                  mutateTopic={mutate}
                   {...comment}
                 />
               ))}
