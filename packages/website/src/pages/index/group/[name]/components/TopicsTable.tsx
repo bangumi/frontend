@@ -22,13 +22,12 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
         {topics.map((topic) => {
           return (
             <tr key={topic.id}>
-              <td className={styles.title}>
-                {/* TODO: replace to Link */}
+              <td className={styles.title} title={topic.title}>
                 <Typography.Link to={`/group/topic/${topic.id}`} fontWeight='bold'>
                   {topic.title}
                 </Typography.Link>
               </td>
-              <td className={styles.author}>
+              <td className={styles.author} title={topic.creator.nickname}>
                 <Typography.Link
                   to={getUserProfileLink(topic.creator.username)}
                   fontWeight='bold'

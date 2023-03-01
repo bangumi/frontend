@@ -1,5 +1,5 @@
 /**
- * hello
+ * bangumi private api
  * DO NOT MODIFY - This file has been generated using oazapfts.
  * See https://www.npmjs.com/package/oazapfts
  */
@@ -229,6 +229,29 @@ export async function clearNotice(
       body,
     }),
   );
+}
+export async function deleteGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 401;
+        data: Error;
+      }
+    | {
+        status: 404;
+        data: Error;
+      }
+    | {
+        status: 500;
+        data: Error;
+      }
+  >(`/p1/groups/-/posts/${encodeURIComponent(postId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
 }
 export async function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<

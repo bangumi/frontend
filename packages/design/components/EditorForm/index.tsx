@@ -47,7 +47,6 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
         <Editor ref={ref} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button
-            size='small'
             color='blue'
             className='bgm-editor__button bgm-editor__button--confirm'
             onClick={() => onConfirm?.(props.value ?? '')}
@@ -55,7 +54,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
             {confirmText}
           </Button>
           {!hideCancel && (
-            <Button type='text' size='small' className='bgm-editor__button' onClick={onCancel}>
+            <Button type='text' className='bgm-editor__button' onClick={onCancel}>
               {cancelText}
             </Button>
           )}
