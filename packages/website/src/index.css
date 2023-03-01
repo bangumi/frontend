@@ -24,3 +24,7 @@ textarea {
 kbd {
   margin: 0.25rem;
 }
+
+select {
+  appearance: none;
+}
