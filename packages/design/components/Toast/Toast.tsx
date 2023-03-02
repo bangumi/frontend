@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { delay } from 'lodash';
 import React from 'react';
 
+import Message from '../Message';
 import type { Toast as TToast } from './types';
 import { removeToastEvent } from './utils/event-bus';
 
@@ -39,7 +40,7 @@ export const Toast: React.FC<ToastProps> = ({ toast }) => {
         'bgm-toast--visible': isVisible,
       })}
     >
-      {message}
+      <Message type='info'>{message}</Message>
     </div>
   );
 };
