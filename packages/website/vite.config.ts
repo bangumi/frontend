@@ -19,6 +19,27 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       sourcemap: true,
+      rollupOptions: {
+        output:
+          mode !== 'production'
+            ? undefined
+            : {
+                entryFileNames: 'assets/[name].[hash].min.js',
+                chunkFileNames: '[name]-[hash].min.js',
+                assetFileNames: (a) => {
+                  const name = a.name;
+                  if (!name) {
+                    return 'assets/[name]-[hash].[ext]';
+                  }
+
+                  if (name.endsWith('.css')) {
+                    return 'assets/[name]-[hash].min.[ext]';
+                  }
+
+                  return 'assets/[name]-[hash].[ext]';
+                },
+              },
+      },
     },
     resolve: {
       alias: {
