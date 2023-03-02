@@ -16,6 +16,7 @@ export interface paths {
   '/p1/groups/-/posts/{postID}': {
     get: operations['getGroupPost'];
     put: operations['editGroupPost'];
+    delete: operations['deleteGroupPost'];
   };
   '/p1/groups/-/topics/{id}': {
     /** @description 获取帖子列表 */
@@ -437,6 +438,40 @@ export interface operations {
       };
       /** @description Default Response */
       401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+    };
+  };
+  deleteGroupPost: {
+    parameters: {
+      /** @example 2092074 */
+      path: {
+        postID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description Default Response */
+      401: {
+        content: {
+          'application/json': components['schemas']['Error'];
+        };
+      };
+      /** @description Default Response */
+      404: {
         content: {
           'application/json': components['schemas']['Error'];
         };

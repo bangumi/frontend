@@ -14,9 +14,9 @@
     "dev:csr": "pnpm website dev",
     "dev:ssr": "pnpm server dev",
     "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,tsx",
-    "lint:fix": "pnpm lint -- --fix",
+    "lint:fix": "pnpm lint --fix",
     "lint:style": "stylelint \"./packages/**/*.{css,less}\"",
-    "lint:style-fix": "pnpm lint:style -- --fix",
+    "lint:style-fix": "pnpm lint:style --fix",
     "prettier": "prettier --write --list-different ./",
     "format": "prettier --write --list-different ./",
     "prettier:check": "prettier --list-different ./",
@@ -30,7 +30,7 @@
   },
   "engines": {
     "node": ">=v16",
-    "pnpm": ">=7"
+    "pnpm": "^7"
   },
   "prettier": {
     "printWidth": 100,
