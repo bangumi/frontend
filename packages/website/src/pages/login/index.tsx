@@ -4,7 +4,7 @@ import React, { useRef } from 'react';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useInput } from 'rooks';
 
-import { Button, ErrorMessage, Input } from '@bangumi/design';
+import { Button, Input, Message } from '@bangumi/design';
 import { Password, UserLogin } from '@bangumi/icons';
 
 import {
@@ -107,7 +107,11 @@ const Login: React.FC = () => {
     <div className={style.wrapper}>
       <div className={style.container}>
         <LoginLogo className={style.logo} />
-        {errorMessage && <ErrorMessage message={errorMessage} length='full' />}
+        {errorMessage && (
+          <Message type='error' length='full'>
+            {errorMessage}
+          </Message>
+        )}
         <Input type='email' prefix={<UserLogin />} placeholder='你的 Email 地址' {...email} />
         <Input type='password' prefix={<Password />} placeholder='你的登录密码' {...password} />
         <div className={style.hcaptcha}>

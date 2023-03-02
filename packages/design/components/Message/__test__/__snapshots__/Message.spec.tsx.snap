@@ -1,0 +1,37 @@
+// Vitest Snapshot v1
+
+exports[`<Message /> > should be a error message 1`] = `
+<div
+  class="bgm-message bgm-message-error"
+  data-testid="message"
+>
+  <div>
+    <div />
+    example
+  </div>
+</div>
+`;
+
+exports[`<Message /> > should be a whole line 1`] = `
+<div
+  class="bgm-message bgm-message-info bgm-message-full"
+  data-testid="message"
+>
+  <div>
+    <div />
+    example
+  </div>
+</div>
+`;
+
+exports[`<Message /> > should be self-adaption 1`] = `
+<div
+  class="bgm-message bgm-message-info"
+  data-testid="message"
+>
+  <div>
+    <div />
+    example
+  </div>
+</div>
+`;

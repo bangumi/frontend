@@ -1,20 +1,18 @@
 @import '../../../theme/base';
 
-.bgm-error-message {
+.bgm-message {
   display: inline-block;
-  width: auto; 
-  
+  width: auto;
+
   &-full {
-    width: 100%; 
+    width: 100%;
   }
 
   > div {
-    background-color: #f97f77;
     border-radius: 19px;
     font-weight: 600;
     font-size: 14px;
     line-height: 20px;
-    color: #fff;
     padding: 9px 16px;
     box-sizing: border-box;
     display: flex;
@@ -24,5 +22,15 @@
       flex: none;
       margin-right: 8px;
     }
+  }
+
+  &-error > div {
+    background-color: #f97f77;
+    color: #fff;
+  }
+
+  &-info > div {
+    background: rgba(90, 87, 87, 0.6);
+    color: #fff;
   }
 }
