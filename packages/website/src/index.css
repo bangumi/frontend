@@ -25,6 +25,10 @@ kbd {
   margin: 0.25rem;
 }
 
+select {
+  appearance: none;
+}
+
 .bgm-mask {
   background-color: #555;
   color: #555;
