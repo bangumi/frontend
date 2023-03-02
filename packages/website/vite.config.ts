@@ -24,6 +24,8 @@ export default defineConfig(({ mode }) => {
           mode !== 'production'
             ? undefined
             : {
+                // 把 js/css 文件打包成 `*.min.[ext]` 文件。
+                // 避免 CDN(cloudflare) 重复压缩。
                 entryFileNames: 'assets/[name].[hash].min.js',
                 chunkFileNames: '[name]-[hash].min.js',
                 assetFileNames: (a) => {
