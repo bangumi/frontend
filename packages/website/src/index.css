@@ -28,13 +28,3 @@ kbd {
 select {
   appearance: none;
 }
-
-.bgm-mask {
-  background-color: #555;
-  color: #555;
-  border: 1px solid #555;
-}
-
-.bgm-mask:hover {
-  color: #fff;
-}
