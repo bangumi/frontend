@@ -6,6 +6,13 @@ import Message from '.';
 const componentMeta: ComponentMeta<typeof Message> = {
   title: 'modern/Message',
   component: Message,
+  parameters: {
+    docs: {
+      description: {
+        component: '消息提示块，可以直接用于页面中，也用于Toast组件中。',
+      },
+    },
+  },
   argTypes: {
     children: {
       description: '消息内容',
@@ -25,15 +32,15 @@ const componentMeta: ComponentMeta<typeof Message> = {
       },
       defaultValue: 'info',
     },
-    length: {
-      description: '消息长度：适应文本长度或独占一行',
+    blockWidth: {
+      description: '消息长度：是否占据整行',
       control: { type: 'inline-radio' },
-      options: ['auto', 'full'],
+      options: [true, false],
       table: {
-        type: { summary: 'string' },
-        defaultValue: { summary: 'auto' },
+        type: { summary: 'boolean' },
+        defaultValue: { summary: false },
       },
-      defaultValue: 'auto',
+      defaultValue: false,
     },
   },
   decorators: [
@@ -52,7 +59,11 @@ const componentMeta: ComponentMeta<typeof Message> = {
 export default componentMeta;
 
 const Template: ComponentStory<typeof Message> = (args) => {
-  return <Message {...args} />;
+  return (
+    <>
+      <Message {...args} />
+    </>
+  );
 };
 
 export const Usage = Template.bind({});

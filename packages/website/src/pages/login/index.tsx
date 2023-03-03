@@ -108,7 +108,7 @@ const Login: React.FC = () => {
       <div className={style.container}>
         <LoginLogo className={style.logo} />
         {errorMessage && (
-          <Message type='error' length='full'>
+          <Message type='error' blockWidth>
             {errorMessage}
           </Message>
         )}

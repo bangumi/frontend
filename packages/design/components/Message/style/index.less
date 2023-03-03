@@ -1,18 +1,10 @@
 @import '../../../theme/base';
 
 .bgm-message {
-  display: inline-block;
-  width: auto;
+  display: flex;
 
-  &-full {
-    width: 100%;
-  }
-
-  > div {
+  &__content {
     border-radius: 19px;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
     padding: 9px 16px;
     box-sizing: border-box;
     display: flex;
@@ -20,17 +12,29 @@
 
     > svg {
       flex: none;
+      width: 20px;
+      height: 20px;
       margin-right: 8px;
+    }
+
+    > span {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 20px;
     }
   }
 
-  &-error > div {
-    background-color: #f97f77;
+  &--block > &__content {
+    flex: 1;
+  }
+
+  &--info > &__content {
+    background-color: rgba(90, 87, 87, 0.6);
     color: #fff;
   }
 
-  &-info > div {
-    background: rgba(90, 87, 87, 0.6);
+  &--error > &__content {
+    background-color: #f97f77;
     color: #fff;
   }
 }

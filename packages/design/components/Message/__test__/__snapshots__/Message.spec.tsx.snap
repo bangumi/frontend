@@ -2,36 +2,48 @@
 
 exports[`<Message /> > should be a error message 1`] = `
 <div
-  class="bgm-message bgm-message-error"
+  class="bgm-message bgm-message--error"
   data-testid="message"
 >
-  <div>
+  <div
+    class="bgm-message__content"
+  >
     <div />
-    example
+    <span>
+      example
+    </span>
   </div>
 </div>
 `;
 
 exports[`<Message /> > should be a whole line 1`] = `
 <div
-  class="bgm-message bgm-message-info bgm-message-full"
+  class="bgm-message bgm-message--info bgm-message--block"
   data-testid="message"
 >
-  <div>
+  <div
+    class="bgm-message__content"
+  >
     <div />
-    example
+    <span>
+      example
+    </span>
   </div>
 </div>
 `;
 
 exports[`<Message /> > should be self-adaption 1`] = `
 <div
-  class="bgm-message bgm-message-info"
+  class="bgm-message bgm-message--info"
   data-testid="message"
 >
-  <div>
+  <div
+    class="bgm-message__content"
+  >
     <div />
-    example
+    <span>
+      example
+    </span>
   </div>
 </div>
 `;

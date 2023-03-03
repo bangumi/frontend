@@ -13,10 +13,10 @@ describe('<Message />', () => {
 
   it('should be a whole line', () => {
     const message = 'example';
-    const { getByTestId } = render(<Message length='full'>{message}</Message>);
+    const { getByTestId } = render(<Message blockWidth>{message}</Message>);
 
     expect(getByTestId('message')).toMatchSnapshot();
-    expect(getByTestId('message')).toHaveClass('bgm-message-full');
+    expect(getByTestId('message')).toHaveClass('bgm-message--block');
   });
 
   it('should be a error message', () => {
@@ -24,6 +24,6 @@ describe('<Message />', () => {
     const { getByTestId } = render(<Message type='error'>{message}</Message>);
 
     expect(getByTestId('message')).toMatchSnapshot();
-    expect(getByTestId('message')).toHaveClass('bgm-message-error');
+    expect(getByTestId('message')).toHaveClass('bgm-message--error');
   });
 });
