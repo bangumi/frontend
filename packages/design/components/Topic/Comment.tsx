@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import type { BasicReply } from 'packages/client/client';
 import type { FC } from 'react';
 import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { ozaClient } from '@bangumi/client';
+import type { BasicReply } from '@bangumi/client/client';
 import type { Reply, SubReply, User } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
 import { Friend, OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
@@ -13,6 +14,7 @@ import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
+import { toast } from '../Toast';
 import CommentInfo from './CommentInfo';
 import ReplyForm from './ReplyForm';
 
@@ -20,7 +22,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicId: number;
   floor: string | number;
   originalPosterId: number;
-  onReplySuccess: () => Promise<unknown>;
+  onCommentUpdate: () => Promise<unknown>;
   user?: User;
 };
 
@@ -53,6 +55,20 @@ const RenderContent = memo(({ state, text }: { state: State; text: string }) => 
   }
 });
 
+const SpecialStateIcon = memo(({ state }: { state: State }) => {
+  switch (state) {
+    case State.Normal:
+      return null;
+    case State.Closed:
+      return <TopicClosed />;
+    case State.Reopen:
+      return <TopicReopen />;
+    case State.Silent:
+      return <TopicSilent />;
+  }
+  return null;
+});
+
 const Comment: FC<CommentProps> = ({
   text,
   creator,
@@ -63,7 +79,7 @@ const Comment: FC<CommentProps> = ({
   state,
   user,
   topicId,
-  onReplySuccess,
+  onCommentUpdate,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -71,9 +87,9 @@ const Comment: FC<CommentProps> = ({
   // 1 关闭 2 重开 5 下沉
   const isSpecial = state === State.Closed || state === State.Reopen || state === State.Silent;
   const replies = !isReply ? props.replies : null;
-  const [shouldCollapsed, setShouldCollapsed] = useState(
-    isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted)),
-  );
+  const shouldCollapse = isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted));
+  const [collapsed, setCollapsed] = useState(shouldCollapse);
+
   const [showReplyEditor, setShowReplyEditor] = useState(false);
   const [replyContent, setReplyContent] = useState('');
 
@@ -84,7 +100,7 @@ const Comment: FC<CommentProps> = ({
 
   const headerClassName = classNames('bgm-comment__header', {
     'bgm-comment__header--reply': isReply,
-    'bgm-comment__header--collapsed': shouldCollapsed,
+    'bgm-comment__header--collapsed': collapsed,
     'bgm-comment__header--highlighted': isHighlighted,
   });
 
@@ -97,23 +113,7 @@ const Comment: FC<CommentProps> = ({
     setReplyContent(isReply ? `[quote]${text.slice(0, 30)}[/quote]\n` : '');
   }, [isReply, text]);
 
-  if (shouldCollapsed) {
-    let icon = null;
-    switch (state) {
-      case State.Normal:
-        icon = null;
-        break;
-      case State.Closed:
-        icon = <TopicClosed />;
-        break;
-      case State.Reopen:
-        icon = <TopicReopen />;
-        break;
-      case State.Silent:
-        icon = <TopicSilent />;
-        break;
-    }
-
+  if (collapsed) {
     return (
       <div
         className={headerClassName}
@@ -121,14 +121,14 @@ const Comment: FC<CommentProps> = ({
           isSpecial
             ? undefined
             : () => {
-                setShouldCollapsed(false);
+                setCollapsed(false);
               }
         }
         id={elementId}
       >
         <span className='bgm-comment__tip'>
           <div className='creator-info'>
-            {icon}
+            <SpecialStateIcon state={state} />
             <Link to={url} isExternal>
               {creator.nickname}
             </Link>
@@ -145,8 +145,59 @@ const Comment: FC<CommentProps> = ({
     setShowReplyEditor(false);
     navigate(`#post_${reply.id}`);
     // 刷新回复列表
-    await onReplySuccess();
+    await onCommentUpdate();
   };
+
+  const handleDeleteReply = async () => {
+    if (confirm('确认删除这条回复？')) {
+      const response = await ozaClient.deleteGroupPost(props.id);
+      if (response.status === 200) {
+        onCommentUpdate();
+      } else {
+        // TODO: 统一错误处理方式
+        console.error(response);
+        toast(response.data.message);
+      }
+    }
+  };
+
+  const commentActions = user && !isDeleted && (
+    <div className='bgm-comment__opinions'>
+      {showReplyEditor ? (
+        <ReplyForm
+          autoFocus
+          topicId={topicId}
+          replyTo={props.id}
+          placeholder={`回复 @${creator.nickname}：`}
+          content={replyContent}
+          onChange={setReplyContent}
+          onCancel={() => {
+            setShowReplyEditor(false);
+          }}
+          onSuccess={handleReplySuccess}
+        />
+      ) : (
+        <>
+          <Button type='secondary' size='small' onClick={startReply}>
+            回复
+          </Button>
+          <Button type='secondary' size='small'>
+            +1
+          </Button>
+          {user.id === creator.id ? (
+            <>
+              <Button type='text' size='small'>
+                编辑
+              </Button>
+              <Button type='text' size='small' onClick={handleDeleteReply}>
+                删除
+              </Button>
+            </>
+          ) : null}
+        </>
+      )}
+    </div>
+  );
 
   return (
     <div>
@@ -170,44 +221,7 @@ const Comment: FC<CommentProps> = ({
             </span>
             <RenderContent state={state} text={text} />
           </div>
-          {user ? (
-            <div className='bgm-comment__opinions'>
-              {showReplyEditor ? (
-                <ReplyForm
-                  autoFocus
-                  topicId={topicId}
-                  replyTo={props.id}
-                  placeholder={`回复 @${creator.nickname}：`}
-                  content={replyContent}
-                  onChange={setReplyContent}
-                  onCancel={() => {
-                    setShowReplyEditor(false);
-                  }}
-                  onSuccess={handleReplySuccess}
-                />
-              ) : (
-                <>
-                  <Button type='secondary' size='small' onClick={startReply}>
-                    回复
-                  </Button>
-                  <Button type='secondary' size='small'>
-                    +1
-                  </Button>
-                  {user.id === creator.id ? (
-                    <>
-                      {/* TODO */}
-                      <Button type='text' size='small'>
-                        编辑
-                      </Button>
-                      <Button type='text' size='small'>
-                        删除
-                      </Button>
-                    </>
-                  ) : null}
-                </>
-              )}
-            </div>
-          ) : null}
+          {commentActions}
         </div>
       </div>
       {replies?.map((reply, idx) => (
@@ -215,7 +229,7 @@ const Comment: FC<CommentProps> = ({
           topicId={topicId}
           key={reply.id}
           isReply
-          onReplySuccess={onReplySuccess}
+          onCommentUpdate={onCommentUpdate}
           floor={`${floor}-${idx + 1}`}
           originalPosterId={originalPosterId}
           user={user}

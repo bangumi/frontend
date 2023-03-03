@@ -363,20 +363,6 @@ exports[`Normal Comment > should render 6 1`] = `
             内容已被用户删除
           </div>
         </div>
-        <div
-          class="bgm-comment__opinions"
-        >
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            回复
-          </button>
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            +1
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -450,20 +436,6 @@ exports[`Normal Comment > should render 7 1`] = `
             </a>
             」已被删除
           </div>
-        </div>
-        <div
-          class="bgm-comment__opinions"
-        >
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            回复
-          </button>
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            +1
-          </button>
         </div>
       </div>
     </div>
