@@ -154,6 +154,7 @@ const Comment: FC<CommentProps> = ({
       if (response.status === 200) {
         onCommentUpdate();
       } else {
+        // TODO: 统一错误处理方式
         console.error(response);
         toast(response.data.message);
       }
