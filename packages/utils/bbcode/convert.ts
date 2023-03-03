@@ -55,7 +55,7 @@ function convertUrlNode(node: CodeVNode): VNode {
     props: {
       href,
     },
-    className: 'l',
+    className: 'bgm-link',
   };
   if (node.children) {
     vnode.children = node.children.map((c) => convert(c));
@@ -209,11 +209,7 @@ const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
     }),
   mask: (node) =>
     toVNode(node, 'span', {
-      style: {
-        'background-color': '#555',
-        color: '#555',
-        border: '1px solid #555',
-      },
+      className: 'bgm-mask',
     }),
   color: (node) =>
     toVNode(node, 'span', {
