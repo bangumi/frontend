@@ -3,6 +3,7 @@ import type { FC } from 'react';
 import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { ozaClient } from '@bangumi/client';
 import type { BasicReply } from '@bangumi/client/client';
 import type { Reply, SubReply, User } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
@@ -13,6 +14,7 @@ import Avatar from '../../components/Avatar';
 import Button from '../../components/Button';
 import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
+import { toast } from '../Toast';
 import CommentInfo from './CommentInfo';
 import ReplyForm from './ReplyForm';
 
@@ -20,7 +22,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   topicId: number;
   floor: string | number;
   originalPosterId: number;
-  onReplySuccess: () => Promise<unknown>;
+  onCommentUpdate: () => Promise<unknown>;
   user?: User;
 };
 
@@ -77,7 +79,7 @@ const Comment: FC<CommentProps> = ({
   state,
   user,
   topicId,
-  onReplySuccess,
+  onCommentUpdate,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -143,7 +145,20 @@ const Comment: FC<CommentProps> = ({
     setShowReplyEditor(false);
     navigate(`#post_${reply.id}`);
     // 刷新回复列表
-    await onReplySuccess();
+    await onCommentUpdate();
+  };
+
+  const handleDeleteReply = async () => {
+    if (confirm('确认删除这条回复？')) {
+      const response = await ozaClient.deleteGroupPost(props.id);
+      if (response.status === 200) {
+        onCommentUpdate();
+      } else {
+        // TODO: 统一错误处理方式
+        console.error(response);
+        toast(response.data.message);
+      }
+    }
   };
 
   const commentActions = user && !isDeleted && (
@@ -174,7 +189,7 @@ const Comment: FC<CommentProps> = ({
               <Button type='text' size='small'>
                 编辑
               </Button>
-              <Button type='text' size='small'>
+              <Button type='text' size='small' onClick={handleDeleteReply}>
                 删除
               </Button>
             </>
@@ -214,7 +229,7 @@ const Comment: FC<CommentProps> = ({
           topicId={topicId}
           key={reply.id}
           isReply
-          onReplySuccess={onReplySuccess}
+          onCommentUpdate={onCommentUpdate}
           floor={`${floor}-${idx + 1}`}
           originalPosterId={originalPosterId}
           user={user}
