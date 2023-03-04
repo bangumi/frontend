@@ -193,6 +193,7 @@ export interface components {
       state: number;
       text: string;
       topicID: number;
+      topicTitle: string;
     };
     HistorySummary: {
       commitMessage: string;

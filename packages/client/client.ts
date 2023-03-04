@@ -36,6 +36,7 @@ export interface GroupReply {
   state: number;
   text: string;
   topicID: number;
+  topicTitle: string;
 }
 export interface Group {
   createdAt: number;
