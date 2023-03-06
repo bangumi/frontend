@@ -4,26 +4,18 @@ import React from 'react';
 import Message from '..';
 
 describe('<Message />', () => {
-  it('should be self-adaption', () => {
-    const message = 'example';
-    const { getByTestId } = render(<Message>{message}</Message>);
-
-    expect(getByTestId('message')).toMatchSnapshot();
+  it('should be render a Message', () => {
+    const { container } = render(<Message>example-message</Message>);
+    expect(container).toMatchSnapshot();
   });
 
   it('should be a whole line', () => {
-    const message = 'example';
-    const { getByTestId } = render(<Message blockWidth>{message}</Message>);
-
-    expect(getByTestId('message')).toMatchSnapshot();
-    expect(getByTestId('message')).toHaveClass('bgm-message--block');
+    const { container } = render(<Message blockWidth>example-message-block</Message>);
+    expect(container).toMatchSnapshot();
   });
 
   it('should be a error message', () => {
-    const message = 'example';
-    const { getByTestId } = render(<Message type='error'>{message}</Message>);
-
-    expect(getByTestId('message')).toMatchSnapshot();
-    expect(getByTestId('message')).toHaveClass('bgm-message--error');
+    const { container } = render(<Message type='error'>example-message-error</Message>);
+    expect(container).toMatchSnapshot();
   });
 });

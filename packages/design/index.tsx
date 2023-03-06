@@ -34,4 +34,4 @@ export type { EditorFormProps } from './components/EditorForm';
 export type { RichContentProps } from './components/RichContent';
 export type { PaginationProps } from './components/Pagination';
 export type { LayoutProps } from './components/Layout';
-export type { MessageProps } from './components/Message';
+export type { MessageType } from './components/Message';

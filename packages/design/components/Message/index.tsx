@@ -3,11 +3,12 @@ import './style';
 import classnames from 'classnames';
 import React from 'react';
 
-import { ReactComponent as Error } from '../../../icons/assets/error.svg';
+import { Error } from '@bangumi/icons';
 
+export type MessageType = 'info' | 'error';
 export interface MessageProps {
   /** 消息类型：对应不同样式 */
-  type?: 'info' | 'error';
+  type?: MessageType;
   /** 消息长度：是否占据整行 */
   blockWidth?: boolean;
   /** 自定义类名 */
@@ -28,12 +29,11 @@ const Message = ({
   );
 
   return (
-    <div className={classes} data-testid='message'>
+    <div className={classes}>
       <div className='bgm-message__content'>
         <Error />
         <span>{children}</span>
       </div>
-      {/* <p></p> */}
     </div>
   );
 };

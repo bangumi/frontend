@@ -17,7 +17,7 @@ const DEFAULT_TOAST_TIMEOUT = 5000;
 const FADE_OUT_TIME = 300;
 
 export const Toast: React.FC<ToastProps> = ({ toast }) => {
-  const { message, timeout = DEFAULT_TOAST_TIMEOUT } = toast;
+  const { message, timeout = DEFAULT_TOAST_TIMEOUT, type } = toast;
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -40,7 +40,7 @@ export const Toast: React.FC<ToastProps> = ({ toast }) => {
         'bgm-toast--visible': isVisible,
       })}
     >
-      <Message type='info'>{message}</Message>
+      <Message type={type}>{message}</Message>
     </div>
   );
 };
