@@ -1,0 +1,49 @@
+@import '@bangumi/design/theme/base';
+
+.errorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset: 0;
+}
+
+.errorLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 400px;
+
+  @media (max-width: @sm) {
+    width: 100%;
+  }
+
+  margin: 0 auto;
+
+  .title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 34px;
+
+    /* identical to box height */
+
+    /* Main/Bangumi Main Theme */
+
+    color: @primary-color;
+  }
+
+  .content {
+    /* Text/Gray 80 */
+    color: @gray-80;
+  }
+
+  .footer {
+    font-weight: 600;
+    color: @gray-60;
+
+    .footerDivider {
+      font-weight: 400;
+      margin: 0 6px;
+    }
+  }
+}
