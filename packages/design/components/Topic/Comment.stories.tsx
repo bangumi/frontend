@@ -1,5 +1,6 @@
 import type { ComponentStory } from '@storybook/react';
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { State } from '@bangumi/client/topic';
 
@@ -19,14 +20,16 @@ const Template: ComponentStory<typeof Comment> = (args: CommentProps & { states?
   // 0 正常评论 6 被用户删除 7 违反社区指导原则，已被删除
   // 1 关闭 2 重开 5 下沉
   return (
-    <div style={{ width: 913 }}>
-      {(args.states ?? [0]).map((state, idx) => (
-        <div key={idx} style={{ marginBottom: 20 }}>
-          <h1>State: {state}</h1>
-          <Comment {...args} state={state} />
-        </div>
-      ))}
-    </div>
+    <BrowserRouter>
+      <div style={{ width: 913 }}>
+        {(args.states ?? [0]).map((state, idx) => (
+          <div key={idx} style={{ marginBottom: 20 }}>
+            <h1>State: {state}</h1>
+            <Comment {...args} state={state} />
+          </div>
+        ))}
+      </div>
+    </BrowserRouter>
   );
 };
 

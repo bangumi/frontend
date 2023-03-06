@@ -31,7 +31,7 @@ it('should trigger onChange when click tabs', () => {
       label: '2',
     },
   ];
-  const handleChange = jest.fn();
+  const handleChange = vi.fn();
   const { getByText } = render(<Tab items={items} activeKey='1' onChange={handleChange} />);
   getByText('2').click();
 

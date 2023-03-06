@@ -1,8 +1,8 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
-import type { User, Group } from '@bangumi/client/group';
-import { Avatar, Typography, Topic } from '@bangumi/design';
+import type { Group, User } from '@bangumi/client/group';
+import { Avatar, Topic, Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './GroupTopicHeader.module.less';
@@ -41,4 +41,4 @@ const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group, id }) 
   );
 };
 
-export default GroupTopicHeader;
+export default memo(GroupTopicHeader);

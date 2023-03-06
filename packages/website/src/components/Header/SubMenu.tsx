@@ -1,8 +1,8 @@
 import type { VFC } from 'react';
 import React from 'react';
 
-import { Menu, Divider } from '@bangumi/design';
 import type { MenuItemType } from '@bangumi/design';
+import { Divider, Menu } from '@bangumi/design';
 
 import style from './SubMenu.module.less';
 

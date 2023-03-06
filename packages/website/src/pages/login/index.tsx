@@ -1,10 +1,11 @@
-import HCaptcha from '@hcaptcha/react-hcaptcha';
+import type { TurnstileInstance } from '@marsidev/react-turnstile';
+import { Turnstile } from '@marsidev/react-turnstile';
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { useInput } from 'rooks';
 
-import { Input, Button } from '@bangumi/design';
-import { UserLogin, Password } from '@bangumi/icons';
+import { Button, Input } from '@bangumi/design';
+import { Password, UserLogin } from '@bangumi/icons';
 
 import {
   CaptureError,
@@ -18,12 +19,14 @@ import ErrorMessage from './components/ErrorMessage';
 import style from './index.module.less';
 
 const Login: React.FC = () => {
-  const hCaptcha = useRef<HCaptcha>(null);
-  const [hCaptchaToken, setHCaptchaToken] = React.useState<string | null>(null);
+  const captcha = useRef<TurnstileInstance>(null);
+  const [captchaToken, setCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
   const { login } = useUser();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [searchParams, _] = useSearchParams();
 
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
@@ -35,8 +38,25 @@ const Login: React.FC = () => {
     [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试',
   };
 
+  const successRedirect = () => {
+    // 如果有 backTo 参数，则跳转到指定的页面
+    const backTo = searchParams.get('backTo');
+    if (backTo) {
+      navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
+    }
+    // 如果有 history 则返回上一页
+    // https://github.com/remix-run/react-router/discussions/9788
+    else if (location.key !== 'default') {
+      navigate(-1);
+    }
+    // 否则跳转到首页
+    else {
+      navigate('/', { replace: true });
+    }
+  };
+
   const handleLogin = async () => {
-    if (!hCaptchaToken) {
+    if (!captchaToken) {
       setErrorMessage('请完成验证');
       return;
     }
@@ -52,11 +72,11 @@ const Login: React.FC = () => {
     }
 
     try {
-      await login(email.value, password.value, hCaptchaToken);
-      navigate('/', { replace: true });
+      await login(email.value, password.value, captchaToken);
+      successRedirect();
     } catch (error: unknown) {
-      hCaptcha.current?.resetCaptcha();
-      setHCaptchaToken(null);
+      captcha.current?.reset();
+      setCaptchaToken(null);
       if (error instanceof PasswordUnMatchError) {
         setErrorMessage(`用户名与密码不正确，请检查后重试，您还有 ${error.remain} 次尝试机会`);
         return;
@@ -89,30 +109,26 @@ const Login: React.FC = () => {
       <div className={style.container}>
         <LoginLogo className={style.logo} />
         {errorMessage && <ErrorMessage message={errorMessage} />}
-        <Input
-          type='email'
-          prefix={<UserLogin className={style.icon} />}
-          placeholder='你的 Email 地址'
-          {...email}
-        />
-        <Input
-          type='password'
-          prefix={<Password className={style.icon} />}
-          placeholder='你的登录密码'
-          {...password}
-        />
+        <Input type='email' prefix={<UserLogin />} placeholder='你的 Email 地址' {...email} />
+        <Input type='password' prefix={<Password />} placeholder='你的登录密码' {...password} />
         <div className={style.hcaptcha}>
-          <HCaptcha
-            sitekey={import.meta.env.VITE_HCAPTCHA_SITE_KEY}
-            onVerify={(token: string) => setHCaptchaToken(token)}
-            ref={hCaptcha}
+          <Turnstile
+            options={{
+              theme: 'light',
+              action: 'login',
+            }}
+            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+            onSuccess={(token: string) => {
+              setCaptchaToken(token);
+            }}
+            ref={captcha}
           />
         </div>
         <div className={style.buttonGroup}>
-          <Button className={style.button} type='secondary' shape='rounded' disabled>
+          <Button className={style.button} color='gray' disabled>
             注册新用户
           </Button>
-          <Button className={style.button} type='primary' shape='rounded' onClick={handleLogin}>
+          <Button className={style.button} onClick={handleLogin}>
             登录
           </Button>
         </div>

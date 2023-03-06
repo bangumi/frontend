@@ -1,62 +1,32 @@
 import React from 'react';
-import { useParams, Link as RouterLink } from 'react-router-dom';
+import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 
-import { Section } from '@bangumi/design';
-import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
-import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
-import { DescriptionClamp, useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
+import ErrorBoundary from '@bangumi/website/components/ErrorBoundary';
+import type { UseGroupRet } from '@bangumi/website/hooks/use-group';
+import { useGroup } from '@bangumi/website/hooks/use-group';
 
-import { useGroupContext } from '../[name]';
-import CommonStyles from '../common.module.less';
-import { ClampableContent } from '../components/ClampableContent';
-import TopicsTable from './components/TopicsTable';
-import styles from './style.module.less';
+import GroupLayout from '../components/GroupLayout';
 
-const GroupHome: React.FC = () => {
+interface GroupContext {
+  groupRet: UseGroupRet;
+}
+
+const InternalGroupPage = () => {
   const { name } = useParams();
-  if (!name) {
-    throw new UnreadableCodeError('BUG: name is undefined');
-  }
-  const groupContext = useGroupContext();
-  const recentTopics = useGroupRecentTopics(name);
-
-  if (!groupContext?.groupRet?.group || !recentTopics.data.length) {
-    return null;
-  }
-
-  const {
-    groupRet: { group, descriptionClamp, setDescriptionClamp },
-  } = groupContext;
-
-  const handleChangeClamp = (isClamped: boolean): void => {
-    setDescriptionClamp(isClamped ? DescriptionClamp.clamp : DescriptionClamp.unclamp);
-  };
-
-  // TODO: XSS defense
-  const parsedDescription = renderBBCode(group?.group.description);
+  const groupRet = useGroup(name!);
 
   return (
-    <>
-      <ClampableContent
-        threshold={193}
-        content={parsedDescription}
-        isClamped={descriptionClamp === DescriptionClamp.clamp}
-        onChange={handleChangeClamp}
-      />
-      <Section
-        title='最近讨论'
-        wrapperClass={styles.recentTopics}
-        renderFooter={() => (
-          <RouterLink to={`/group/${name}/forum`} className={CommonStyles.textButton}>
-            <span>更多组内讨论</span>
-            <RightArrow />
-          </RouterLink>
-        )}
-      >
-        <TopicsTable topics={recentTopics.data} />
-      </Section>
-    </>
+    <GroupLayout group={groupRet.group} groupName={name!}>
+      <Outlet context={{ groupRet }} />
+    </GroupLayout>
   );
 };
+const GroupPage = () => (
+  <ErrorBoundary fallback={<>Group Not found</>}>
+    <InternalGroupPage />
+  </ErrorBoundary>
+);
 
-export default GroupHome;
+export const useGroupContext = () => useOutletContext<GroupContext>();
+
+export default GroupPage;

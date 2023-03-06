@@ -3,10 +3,11 @@
 .bgm-tab {
   display: inline-flex;
   flex-direction: row;
-  padding: 4px;
   list-style: none;
   background-color: @pink-60;
   border-radius: 19px;
+  overflow-x: auto;
+  width: 100%;
 
   &--borderless {
     background-color: transparent;
@@ -20,6 +21,7 @@
   padding: 4px 6px;
   color: #fff;
   cursor: pointer;
+  white-space: nowrap;
 
   &--borderless {
     font-weight: 500;

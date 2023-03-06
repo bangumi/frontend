@@ -2,10 +2,9 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    'jest/globals': true,
   },
   extends: ['standard-with-typescript', 'prettier'],
-  plugins: ['unused-imports'],
+  plugins: ['unused-imports', 'unicorn', 'simple-import-sort'],
   parserOptions: {
     ecmaVersion: 13,
     sourceType: 'module',
@@ -18,28 +17,31 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-else-return': ['error', { allowElseIf: false }],
     'unused-imports/no-unused-imports': 'error',
-    'import/order': [
+    'unicorn/prefer-node-protocol': 'error',
+    'import/first': 'error',
+    'import/no-duplicates': 'error',
+    'import/newline-after-import': 'error',
+    'simple-import-sort/imports': [
       'error',
       {
-        alphabetize: {
-          order: 'asc' /* sort in ascending order. Options: ['ignore', 'asc', 'desc'] */,
-          caseInsensitive: true /* ignore case. Options: [true, false] */,
-        },
-        pathGroups: [
-          {
-            pattern: '@bangumi/**',
-            group: 'internal',
-          },
-        ],
-        'newlines-between': 'always',
         groups: [
-          'builtin', // Built-in types are first
-          'external',
-          'internal',
-          ['parent', 'sibling', 'index', 'object'],
+          // Side effect imports.
+          ['^\\u0000'],
+          // Node.js builtins prefixed with `node:`.
+          ['^node:'],
+          // Absolute imports and other imports such as Vue-style `@/foo`.
+          // Anything not matched in another group.
+          ['^'],
+          // Packages.
+          // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+          ['^@bangumi/.*'],
+          // Relative imports.
+          // Anything that starts with a dot.
+          ['^\\.\\.', '^\\.'],
         ],
       },
     ],
+    'import/order': 'off',
   },
   overrides: [
     {
@@ -54,7 +56,7 @@ module.exports = {
         'prettier',
       ],
       parser: '@typescript-eslint/parser',
-      plugins: ['react', '@typescript-eslint', 'jest'],
+      plugins: ['react', '@typescript-eslint'],
       parserOptions: {
         project: './tsconfig.json',
       },
@@ -115,7 +117,7 @@ module.exports = {
         '@typescript-eslint/no-non-null-assertion': 'off',
         '@typescript-eslint/promise-function-async': 'error',
         '@typescript-eslint/no-implicit-any-catch': 'error',
-        '@typescript-eslint/no-floating-promises': 'error',
+        '@typescript-eslint/no-floating-promises': 'off',
         '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
         // 限制了一些不需要显示指明类型的场景，比如自动推导，导致了一些多余代码
         '@typescript-eslint/explicit-function-return-type': 'off',
@@ -137,6 +139,7 @@ module.exports = {
         '@typescript-eslint/no-unsafe-argument': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
       },
     },
   ],

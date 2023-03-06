@@ -1,0 +1,11 @@
+// Vitest Snapshot v1
+
+exports[`should render 1`] = `
+<div
+  class="bgm-collapsible-content"
+>
+  <div>
+    bgm
+  </div>
+</div>
+`;

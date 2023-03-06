@@ -24,4 +24,19 @@ describe('Input', () => {
     const { getByText } = render(<Input suffix='$' />);
     expect(getByText('$')).toBeInTheDocument();
   });
+
+  it('disabled className', () => {
+    const { container } = render(<Input disabled />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('alignment', () => {
+    const { container } = render(<Input align='right' />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('rounded variant', () => {
+    const { container } = render(<Input rounded />);
+    expect(container).toMatchSnapshot();
+  });
 });

@@ -1,3 +1,5 @@
+import './style';
+
 import cn from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';
@@ -7,16 +9,16 @@ import { VerticalLeft, VerticalRight } from '@bangumi/icons';
 import Pager from './Pager';
 
 export interface PaginationProps {
-  /* 当前偏移 */
+  /** 当前偏移 */
   currentPage?: number;
-  /* 单页的数据条数 */
+  /** 单页的数据条数 */
   pageSize?: number;
-  /* 数据的总条数 */
+  /** 数据的总条数 */
   total?: number;
-  /* 页码改变的回调 */
+  /** 页码改变的回调 */
   onChange?: (offset: number) => void;
 
-  /* 自定义 classname */
+  /** 自定义 classname */
   wrapperClass?: string;
 }
 

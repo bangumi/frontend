@@ -5,7 +5,7 @@ import type { TextProps } from './Text';
 import Text from './Text';
 
 export default {
-  title: 'modern/Topology/Text',
+  title: 'modern/Typography/Text',
   component: Text,
 };
 

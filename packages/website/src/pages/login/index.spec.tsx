@@ -1,33 +1,33 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
-import React, { Component as MockComponent } from 'react';
-import '@hcaptcha/react-hcaptcha';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-import LoginPage from '.';
 import { UserProvider } from '../../hooks/use-user';
 import { server as mockServer } from '../../mocks/server';
+import LoginPage from '.';
 
-jest.mock('@hcaptcha/react-hcaptcha', () => {
-  class HCaptcha extends MockComponent<{ onVerify?: (token: string) => void }> {
-    componentDidMount() {
-      this.props?.onVerify?.('fake-token');
-    }
+vi.mock('@marsidev/react-turnstile', () => {
+  const Turnstile = React.forwardRef<
+    { reset?: () => void },
+    { onSuccess?: (token: string) => void }
+  >(({ onSuccess }, ref) => {
+    React.useImperativeHandle(ref, () => ({ reset: () => undefined }));
 
-    resetCaptcha() {
-      void 0;
-    }
+    React.useEffect(() => {
+      onSuccess?.('fake-token');
+    });
 
-    render() {
-      return <div />;
-    }
-  }
+    return <div />;
+  });
 
-  return HCaptcha;
+  return { Turnstile };
 });
 
-jest.mock('react-router-dom');
-const mockedUseNavigate = jest.mocked(useNavigate);
+vi.mock('react-router-dom');
+const mockedUseNavigate = vi.mocked(useNavigate);
+const mockedUseLocation = vi.mocked(useLocation);
+const mockedUseSearchParams = vi.mocked(useSearchParams);
 
 function mockLogin(
   statusCode: number,
@@ -35,16 +35,14 @@ function mockLogin(
   headers: Record<string, string | string[]> = {},
 ): void {
   mockServer.use(
-    rest.post('http://localhost/p1/login', (req, res, ctx) => {
+    rest.post('http://localhost:3000/p1/login2', (req, res, ctx) => {
       return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
     }),
   );
 }
 
-it('should redirect user to homepage after success login', async () => {
+function mockSuccessfulLogin() {
   mockLogin(200);
-  const mockedNavigate = jest.fn();
-  mockedUseNavigate.mockReturnValue(mockedNavigate);
 
   const { getByPlaceholderText, getByText } = render(
     <UserProvider>
@@ -58,7 +56,57 @@ it('should redirect user to homepage after success login', async () => {
   fireEvent.input(getByPlaceholderText('你的登录密码'), { target: { value: fakePassword } });
 
   fireEvent.click(getByText('登录'));
+}
 
+it('should redirect user to homepage after success login', async () => {
+  const mockedNavigate = vi.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
+
+  mockSuccessfulLogin();
+  await waitFor(() => {
+    expect(mockedNavigate).toBeCalledWith('/', { replace: true });
+  });
+});
+
+it('should bring user back to last page if exists', async () => {
+  const mockedNavigate = vi.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'not-default' } as any);
+  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
+
+  mockSuccessfulLogin();
+  await waitFor(() => {
+    expect(mockedNavigate).toBeCalledWith(-1);
+  });
+});
+
+it('should redirect user to specified page', async () => {
+  const mockedNavigate = vi.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+  mockedUseSearchParams.mockReturnValue([
+    new URLSearchParams({ backTo: '/group/sandbox' }),
+    vi.fn(),
+  ] as any);
+
+  mockSuccessfulLogin();
+  await waitFor(() => {
+    expect(mockedNavigate).toBeCalledWith('/group/sandbox', { replace: true });
+  });
+});
+
+it('should redirect user to home if specified path is invalid', async () => {
+  const mockedNavigate = vi.fn();
+  mockedUseNavigate.mockReturnValue(mockedNavigate);
+  mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+  mockedUseSearchParams.mockReturnValue([
+    new URLSearchParams({ backTo: 'https://bgm.tv/' }),
+    vi.fn(),
+  ] as any);
+
+  mockSuccessfulLogin();
   await waitFor(() => {
     expect(mockedNavigate).toBeCalledWith('/', { replace: true });
   });

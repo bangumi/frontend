@@ -1,17 +1,19 @@
+import './style';
+
 import classNames from 'classnames';
 import type { FC } from 'react';
 import React from 'react';
 
 export interface AvatarProps {
-  /* 头像大小 */
+  /** 头像大小 */
   size?: 'small' | 'medium' | 'large';
-  /* 头像的 URL */
+  /** 头像的 URL */
   src: string;
-  /* 替代文本 */
+  /** 替代文本 */
   alt?: string;
-  /* 自定义最外层类名 */
+  /** 自定义最外层类名 */
   wrapperClass?: string;
-  /* 自定义最外层样式 */
+  /** 自定义最外层样式 */
   wrapperStyle?: React.CSSProperties;
 }
 

@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`<EditorForm /> render correctly with props 1`] = `
+exports[`<EditorForm /> > render correctly with props 1`] = `
 <DocumentFragment>
   <div
     class="bgm-editor__form custom class"
@@ -9,26 +9,36 @@ exports[`<EditorForm /> render correctly with props 1`] = `
       class="bgm-editor__container"
     >
       <div
-        class="bgm-editor__toolbox"
+        class="bgm-editor__toolbar"
       >
         <div
-          data-testid="bold"
-        />
-        <div
-          data-testid="italic"
-        />
-        <div
-          data-testid="underscore"
-        />
-        <div
-          data-testid="image"
-        />
-        <div
-          data-testid="link"
-        />
-        <div
-          data-testid="size"
-        />
+          class="bgm-editor__toolbox"
+        >
+          <div
+            data-testid="bold"
+            title="粗体 [Ctrl+B]"
+          />
+          <div
+            data-testid="italic"
+            title="斜体 [Ctrl+I]"
+          />
+          <div
+            data-testid="underscore"
+            title="下划线 [Ctrl+U]"
+          />
+          <div
+            data-testid="image"
+            title="图片 [Ctrl+P]"
+          />
+          <div
+            data-testid="link"
+            title="链接 [Ctrl+L]"
+          />
+          <div
+            data-testid="size"
+            title="文字尺寸 [Ctrl+S]"
+          />
+        </div>
       </div>
       <textarea
         class="bgm-editor__text"
@@ -39,19 +49,23 @@ exports[`<EditorForm /> render correctly with props 1`] = `
       class="bgm-editor__submit"
     >
       <button
-        class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button__primary bgm-button__rounded bgm-button__normal"
+        class="bgm-button bgm-editor__button bgm-editor__button--confirm bgm-button--primary bgm-button--color-blue"
       >
         Confirm
       </button>
       <button
-        class="bgm-button bgm-editor__button bgm-button__text bgm-button__square bgm-button__normal"
+        class="bgm-button bgm-editor__button bgm-button--text"
       >
         取消
       </button>
       <span
         class="bgm-editor__bbcode-tip"
       >
-        使用 Ctrl+Enter 或 Alt+S 快速提交 | 
+        <span
+          class="bgm-editor__bbcode-tip__left"
+        >
+          使用 Ctrl+Enter 或 Alt+S 快速提交 | 
+        </span>
         <a
           class="bgm-link"
           href="https://bgm.tv/help/bbcode"

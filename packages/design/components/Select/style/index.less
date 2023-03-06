@@ -1,0 +1,65 @@
+@import '../../../theme/base';
+
+.bgm-select {
+  display: inline-flex;
+  box-sizing: border-box;
+  position: relative;
+  padding: 0.5rem 1rem;
+  border: 2px solid @gray-10;
+  border-radius: 12px;
+  user-select: none;
+  font-size: 1rem;
+  vertical-align: bottom;
+  cursor: pointer;
+
+  &__dropdown {
+    position: absolute;
+    margin-top: 0.5rem;
+    top: 100%;
+    border: 2px solid @gray-10;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    width: 100%;
+    left: 0;
+    border-radius: 19px;
+    background: white;
+
+    > div {
+      padding: 9px 0;
+    }
+  }
+
+  select {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+  }
+
+  &__box {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: @gray-100;
+    }
+  }
+
+  &-arrow {
+    display: inline-block;
+  }
+
+  .bgm-input-group & {
+    &:not(:last-of-type) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-right: 0;
+    }
+  }
+}

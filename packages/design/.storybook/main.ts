@@ -1,7 +1,6 @@
-import { dirname } from 'path';
+import { dirname } from 'node:path';
 
 import type { StorybookViteConfig } from '@storybook/builder-vite';
-import type { PluginOption } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 const config: StorybookViteConfig = {
@@ -13,6 +12,12 @@ const config: StorybookViteConfig = {
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/react',
   viteFinal: (viteConfig) => {
+    if (!viteConfig.build) {
+      viteConfig.build = { sourcemap: true };
+    } else {
+      viteConfig.build.sourcemap = true;
+    }
+
     // workaround for vite build
     // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
     viteConfig.root = dirname(require.resolve('@storybook/builder-vite'));
@@ -22,18 +27,7 @@ const config: StorybookViteConfig = {
      * https://github.com/styleguidist/react-docgen-typescript/issues/323
      * https://github.com/styleguidist/react-docgen-typescript/issues/393
      * */
-    !viteConfig.plugins && (viteConfig.plugins = []);
-    /* WIP: Temporary patch for style */
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions
-    viteConfig.plugins.push({
-      transform(source, id) {
-        if (id.endsWith('.stories.tsx') && id.includes('components')) {
-          return `${source}
-          import './style'`;
-        }
-        return source;
-      },
-    } as PluginOption);
+    viteConfig.plugins ??= [];
 
     viteConfig.plugins.push(svgr());
     return viteConfig;

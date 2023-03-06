@@ -1,8 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`should refresh me if login succeeded 1`] = `
-{
-  "avatar": {
+Object {
+  "avatar": Object {
     "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg?r=1571167246",
     "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg?r=1571167246",
     "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg?r=1571167246",

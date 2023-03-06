@@ -11,6 +11,13 @@ export { ReactComponent as Password } from './assets/password.svg';
 export { ReactComponent as Captcha } from './assets/captcha.svg';
 export { ReactComponent as VerticalLeft } from './assets/vertical-left.svg';
 export { ReactComponent as VerticalRight } from './assets/vertical-right.svg';
+export { ReactComponent as ArrowDown } from './assets/arrow-down.svg';
+export { ReactComponent as ArrowDownCircle } from './assets/arrow-down-circle.svg';
+export { ReactComponent as ArrowUpCircle } from './assets/arrow-up-circle.svg';
+export { ReactComponent as ArrowRightCircle } from './assets/arrow-right-circle.svg';
+export { ReactComponent as Plus } from './assets/plus.svg';
+export { ReactComponent as Minus } from './assets/minus.svg';
+export { ReactComponent as Cursor } from './assets/cursor.svg';
 
 // BBCode Editor
 
@@ -28,3 +35,5 @@ export { ReactComponent as Friend } from './assets/friend.svg';
 export { ReactComponent as TopicSilent } from './assets/topic-silent.svg';
 export { ReactComponent as TopicClosed } from './assets/topic-closed.svg';
 export { ReactComponent as TopicReopen } from './assets/topic-reopen.svg';
+export { ReactComponent as OpenQuote } from './assets/open-quote.svg';
+export { ReactComponent as CloseQuote } from './assets/close-quote.svg';

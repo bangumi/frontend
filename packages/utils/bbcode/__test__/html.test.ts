@@ -1,5 +1,4 @@
-import { STICKER_DOMAIN_URL } from '../constants';
-import { renderNodes, renderNode, render } from '../html';
+import { render, renderNode, renderNodes } from '../html';
 import type { VNode } from '../types';
 
 describe('html render vnode', () => {
@@ -23,12 +22,12 @@ describe('html render vnode', () => {
       props: {
         href: 'http://chii.in/',
         target: '_blank',
-        ref: 'nofollow external noopener noreferrer',
+        rel: 'nofollow external noopener noreferrer',
       },
       className: ['l', 'test'],
     };
     expect(renderNode(vnode)).toBe(
-      '<a href="http://chii.in/" target="_blank" ref="nofollow external noopener noreferrer" class="l test"/>',
+      '<a href="http://chii.in/" target="_blank" rel="nofollow external noopener noreferrer" class="l test"/>',
     );
   });
   test('render boolean props node', () => {
@@ -159,9 +158,7 @@ describe('html render bbcode string', () => {
   });
   test('render mask', () => {
     const input = '我是[mask]马赛克文字[/mask]';
-    expect(render(input)).toBe(
-      '我是<span style="background-color:#555;color:#555;border:1px solid #555">马赛克文字</span>',
-    );
+    expect(render(input)).toBe('我是<span class="bgm-mask">马赛克文字</span>');
   });
   test('render color', () => {
     const input = `我是
@@ -179,12 +176,12 @@ describe('html render bbcode string', () => {
   test('render url', () => {
     const input = 'Bangumi 番组计划: [url]http://chii.in/[/url]';
     expect(render(input)).toBe(
-      'Bangumi 番组计划: <a href="http://chii.in/" class="l">http://chii.in/</a>',
+      'Bangumi 番组计划: <a href="http://chii.in/" class="bgm-link">http://chii.in/</a>',
     );
     const input2 = `带文字说明的网站链接：
 [url=http://chii.in]Bangumi 番组计划[/url]`;
     expect(render(input2)).toBe(
-      '带文字说明的网站链接：<br/><a href="http://chii.in" class="l">Bangumi 番组计划</a>',
+      '带文字说明的网站链接：<br/><a href="http://chii.in" class="bgm-link">Bangumi 番组计划</a>',
     );
   });
   test('render img', () => {
@@ -196,9 +193,7 @@ describe('html render bbcode string', () => {
   });
   test('render sticker', () => {
     const input = '(bgm38)(bgm23)(=///=)';
-    expect(render(input)).toBe(
-      `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" /><img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" /><img src="${STICKER_DOMAIN_URL}/img/smiles/13.gif" smileid="13" alt="(=///=)" />`,
-    );
+    expect(render(input)).toMatchSnapshot();
   });
   test('render quote', () => {
     const input = '[quote]ss[b]加粗[/b][/quote]';

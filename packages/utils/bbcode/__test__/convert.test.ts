@@ -59,11 +59,7 @@ describe('convert bbcode to html vnode', () => {
         },
         {
           type: 'span',
-          style: {
-            'background-color': '#555',
-            color: '#555',
-            border: '1px solid #555',
-          },
+          className: 'bgm-mask',
           children: ['mask'],
         },
       ],
@@ -120,7 +116,7 @@ describe('convert bbcode to html vnode', () => {
           props: {
             href: 'http://chii.in/',
           },
-          className: 'l',
+          className: 'bgm-link',
           children: ['http://chii.in/'],
         },
       ],
@@ -137,9 +133,9 @@ describe('convert bbcode to html vnode', () => {
           props: {
             href: 'http://test.com/',
             target: '_blank',
-            ref: 'nofollow external noopener noreferrer',
+            rel: 'nofollow external noopener noreferrer',
           },
-          className: 'l',
+          className: 'bgm-link',
           children: ['测试'],
         },
       ],
@@ -172,8 +168,8 @@ describe('convert bbcode to html vnode', () => {
           type: 'img',
           props: {
             src: 'http://test.com/xx.png',
-            referrerpolicy: 'no-referrer',
-            ref: 'noreferrer',
+            referrerPolicy: 'no-referrer',
+            rel: 'noreferrer',
           },
           className: 'code',
         },
@@ -187,8 +183,8 @@ describe('convert bbcode to html vnode', () => {
           type: 'img',
           props: {
             src: 'not-a-website',
-            referrerpolicy: 'no-referrer',
-            ref: 'noreferrer',
+            referrerPolicy: 'no-referrer',
+            rel: 'noreferrer',
           },
           className: 'code',
         },
@@ -250,7 +246,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm33)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/10.gif" smileid="49" alt="(bgm33)" />`,
+        {
+          props: {
+            alt: '(bgm33)',
+            smileid: '49',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/10.gif`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -259,7 +262,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm32)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/09.gif" smileid="48" alt="(bgm32)" />`,
+        {
+          props: {
+            alt: '(bgm32)',
+            smileid: '48',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/09.gif`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -268,7 +278,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm24)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/01.gif" smileid="40" alt="(bgm24)" />`,
+        {
+          props: {
+            alt: '(bgm24)',
+            smileid: '40',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/01.gif`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -277,7 +294,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm114)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/91.gif" smileid="130" alt="(bgm114)" />`,
+        {
+          props: {
+            alt: '(bgm114)',
+            smileid: '130',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/91.gif`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -286,7 +310,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm38)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif" smileid="54" alt="(bgm38)" />`,
+        {
+          props: {
+            alt: '(bgm38)',
+            smileid: '54',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -295,7 +326,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm23)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif" smileid="39" alt="(bgm23)" />`,
+        {
+          props: {
+            alt: '(bgm23)',
+            smileid: '39',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -304,7 +342,14 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(bgm01)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/bgm/01.png" smileid="17" alt="(bgm01)" />`,
+        {
+          props: {
+            alt: '(bgm01)',
+            smileid: '17',
+            src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/01.png`,
+          },
+          type: 'img',
+        },
       ],
       [
         {
@@ -313,7 +358,10 @@ describe('convert bbcode to html vnode', () => {
             stickerId: "(='=)",
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/10.gif" smileid="10" alt="(='=)" />`,
+        {
+          props: { alt: "(='=)", smileid: '10', src: `${STICKER_DOMAIN_URL}/img/smiles/10.gif` },
+          type: 'img',
+        },
       ],
       [
         {
@@ -322,7 +370,10 @@ describe('convert bbcode to html vnode', () => {
             stickerId: '(=///=)',
           },
         },
-        `<img src="${STICKER_DOMAIN_URL}/img/smiles/13.gif" smileid="13" alt="(=///=)" />`,
+        {
+          props: { alt: '(=///=)', smileid: '13', src: `${STICKER_DOMAIN_URL}/img/smiles/13.gif` },
+          type: 'img',
+        },
       ],
       [
         {

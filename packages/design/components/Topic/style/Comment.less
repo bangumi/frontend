@@ -1,5 +1,7 @@
 @import '../../../theme/base';
 
+@highlight-border-color: #369cf8;
+
 .bgm-comment {
   &__header {
     display: flex;
@@ -16,12 +18,23 @@
     &--collapsed {
       padding-top: 12px;
       min-height: 22px;
+
+      .bgm-comment__content {
+        margin-top: 0;
+      }
+    }
+
+    &--highlighted {
+      border: 2px solid @highlight-border-color;
+      border-radius: 5px;
     }
   }
 
   &__box {
     margin-left: 12px;
-    width: 100%;
+    flex: 1;
+    // this trick is same to EditorForm
+    min-width: 0;
   }
 
   &__main {
@@ -56,24 +69,14 @@
 
   &__opinions {
     margin-top: 12px;
-
-    > .bgm-button {
-      height: 24px;
-      line-height: 22px;
-      margin-right: 10px;
-    }
-
-    > .bgm-button__secondary {
-      background-color: #fff;
-      border: 2px solid @gray-10;
-      border-radius: 12px;
-      padding: 0 15px;
-    }
+    display: flex;
+    gap: 10px;
   }
 
   &__content {
     color: @gray-100;
     line-height: 26px;
+    margin-top: 12px;
 
     &--deleted {
       color: @gray-80;

@@ -1,21 +1,48 @@
-import path from 'path';
+import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
-import styleImport from 'vite-plugin-style-import';
 import svgr from 'vite-plugin-svgr';
 
 export default defineConfig(({ mode }) => {
-  const apiDomain =
-    mode === 'loc'
-      ? 'http://127.0.0.1:4000'
-      : mode === 'stage'
-      ? 'https://dev.bgm38.com'
-      : 'https://next.bgm.tv';
+  let apiDomain = 'https://dev.bgm38.com';
+
+  if (mode === 'loc') {
+    apiDomain = 'http://127.0.0.1:4000';
+  } else if (mode === 'production') {
+    apiDomain = 'https://next.bgm.tv';
+  }
+
   console.log('using backend', apiDomain);
 
   return {
+    build: {
+      sourcemap: true,
+      rollupOptions: {
+        output:
+          mode !== 'production'
+            ? undefined
+            : {
+                // 把 js/css 文件打包成 `*.min.[ext]` 文件。
+                // 避免 CDN(cloudflare) 重复压缩。
+                entryFileNames: 'assets/[name].[hash].min.js',
+                chunkFileNames: '[name]-[hash].min.js',
+                assetFileNames: (a) => {
+                  const name = a.name;
+                  if (!name) {
+                    return 'assets/[name]-[hash].[ext]';
+                  }
+
+                  if (name.endsWith('.css')) {
+                    return 'assets/[name]-[hash].min.[ext]';
+                  }
+
+                  return 'assets/[name]-[hash].[ext]';
+                },
+              },
+      },
+    },
     resolve: {
       alias: {
         '@bangumi/website': path.resolve(__dirname, './src'),
@@ -51,8 +78,20 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      react(),
-      svgr(),
+      react(
+        mode === 'production'
+          ? {
+              babel: {
+                plugins: ['babel-plugin-jsx-remove-data-test-id', 'lodash'],
+              },
+            }
+          : undefined,
+      ),
+      svgr({
+        svgrOptions: {
+          titleProp: true,
+        },
+      }),
       pages({
         extensions: ['tsx'],
         importMode: 'async',
@@ -62,16 +101,6 @@ export default defineConfig(({ mode }) => {
           '**/*.spec.tsx',
           '**/*.test.ts',
           '**/*.test.tsx',
-        ],
-      }),
-      styleImport({
-        libs: [
-          {
-            libraryName: '@bangumi/design',
-            libraryNameChangeCase: 'pascalCase',
-            ensureStyleFile: true,
-            resolveStyle: (name: string) => `@bangumi/design/components/${name}/style/index.tsx`,
-          },
         ],
       }),
     ],

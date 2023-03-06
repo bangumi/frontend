@@ -1,5 +1,5 @@
 import { ok } from 'oazapfts';
-import { useState, useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
@@ -10,16 +10,13 @@ import type {
   Topic,
 } from '@bangumi/client/group';
 
-export enum DescriptionClamp {
-  clamp = 'clamp',
-  unclamp = 'unclamp',
+export interface UseGroupRet {
+  group: GroupProfile;
+  descriptionCollapsed: boolean;
+  setDescriptionCollapsed: (val: boolean) => void;
 }
 
-export interface UseGroupRet {
-  group: GroupProfile | undefined;
-  descriptionClamp: DescriptionClamp;
-  setDescriptionClamp: (val: DescriptionClamp) => void;
-}
+type DescriptionCollapseConfig = Record<string, boolean>;
 
 export function useGroupRecentTopics(
   name: string,
@@ -31,7 +28,7 @@ export function useGroupRecentTopics(
     { suspense: true },
   );
 
-  return recentTopicsResp!;
+  return recentTopicsResp;
 }
 
 export function useGroup(name: string): UseGroupRet {
@@ -40,21 +37,39 @@ export function useGroup(name: string): UseGroupRet {
     async () => ok(ozaClient.getGroupProfile(name)),
     { suspense: true },
   );
-  const clampKey = `doesGroupDescriptionNeedClamp.${name}`;
-  const descriptionClamp =
-    (localStorage.getItem(clampKey) as DescriptionClamp | undefined) ?? DescriptionClamp.unclamp;
-  const [descriptionClampState, setDescriptionClampState] =
-    useState<DescriptionClamp>(descriptionClamp);
+
+  const getDescriptionCollapseConfig = () => {
+    try {
+      const config = JSON.parse(localStorage.getItem(collapseKey) ?? '{}') as unknown;
+      if (typeof config !== 'object') {
+        return {};
+      }
+      return config as DescriptionCollapseConfig;
+    } catch (e: unknown) {
+      return {};
+    }
+  };
+
+  const setDescriptionCollapseConfig = useCallback((name: string, collapsed: boolean) => {
+    const config = getDescriptionCollapseConfig();
+    localStorage.setItem(collapseKey, JSON.stringify({ ...config, [name]: collapsed }));
+  }, []);
+
+  const collapseKey = 'doesGroupDescriptionNeedCollapse';
+  const collapseConfig = getDescriptionCollapseConfig();
+  const descriptionCollapse = collapseConfig[name] ?? false;
+  const [descriptionCollapsedState, setDescriptionCollapsedState] =
+    useState<boolean>(descriptionCollapse);
 
   useEffect(() => {
-    localStorage.setItem(clampKey, descriptionClampState);
-  }, [descriptionClampState]);
+    setDescriptionCollapseConfig(name, descriptionCollapsedState);
+  }, [name, descriptionCollapsedState, setDescriptionCollapseConfig]);
 
   return {
     group: groupResp,
-    descriptionClamp: descriptionClampState,
-    setDescriptionClamp(val) {
-      setDescriptionClampState(val);
+    descriptionCollapsed: descriptionCollapsedState,
+    setDescriptionCollapsed(val) {
+      setDescriptionCollapsedState(val);
     },
   };
 }

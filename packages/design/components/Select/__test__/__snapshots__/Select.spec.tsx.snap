@@ -1,0 +1,33 @@
+// Vitest Snapshot v1
+
+exports[`Select Component > render properly 1`] = `
+<div>
+  <div
+    class="bgm-select"
+  >
+    <div
+      class="bgm-select__box"
+    >
+      <span>
+        name
+      </span>
+      <div
+        class="bgm-select-arrow"
+      />
+    </div>
+    <select>
+      <option
+        selected=""
+        value="name"
+      >
+        name
+      </option>
+      <option
+        value="age"
+      >
+        age
+      </option>
+    </select>
+  </div>
+</div>
+`;

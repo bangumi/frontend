@@ -1,33 +1,83 @@
+import './style';
+
 import classnames from 'classnames';
 import React, { forwardRef } from 'react';
 
-export interface InputProps {
-  /* 同原生 input 标签 `type` */
-  type?: string;
-  /* 同原生 `placeholder` */
-  placeholder?: string;
-  /* 外层 wrapper 的样式 */
+export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
+  /** 外层 wrapper 的样式 */
   wrapperStyle?: React.CSSProperties;
-  /* 外层 wrapper 的自定义类名 */
+  /** 外层 wrapper 的自定义类名 */
   wrapperClass?: string;
-  /* 前缀 */
+  /** 前缀 */
   prefix?: React.ReactNode;
-  /* 后缀 */
+  /** 后缀 */
   suffix?: React.ReactNode;
-}
+  /** 对齐方式 */
+  align?: 'right' | 'left';
+  /** 是否为普通圆角，默认为胶囊形全圆角 */
+  rounded?: boolean;
+};
 
-/* eslint-disable react/prop-types */
-// https://github.com/jsx-eslint/eslint-plugin-react/issues/3140
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type = 'text', wrapperStyle, wrapperClass, prefix, suffix, placeholder, ...rest }, ref) => {
+  (
+    {
+      type = 'text',
+      wrapperStyle,
+      wrapperClass,
+      prefix,
+      suffix,
+      align = 'left',
+      disabled,
+      rounded = false,
+      ...rest
+    },
+    ref,
+  ) => {
     return (
-      <div className={classnames('bgm-input__wrapper', wrapperClass)} style={wrapperStyle}>
-        {prefix}
-        <input type={type} className='bgm-input' placeholder={placeholder} ref={ref} {...rest} />
+      <div
+        className={classnames(
+          'bgm-input__wrapper',
+          {
+            'bgm-input__wrapper--disabled': disabled,
+            'bgm-input__wrapper--rounded': rounded,
+          },
+          wrapperClass,
+        )}
+        style={wrapperStyle}
+      >
+        {prefix !== undefined && <div className='bgm-input__prefix'>{prefix}</div>}
+        <input
+          type={type}
+          className={classnames('bgm-input', {
+            'bgm-input--align-right': align === 'right',
+          })}
+          ref={ref}
+          disabled={disabled}
+          {...rest}
+        />
         {suffix}
       </div>
     );
   },
 );
 
-export default Input;
+export type InputGroupProps = JSX.IntrinsicElements['div'];
+
+export const InputGroup = ({ children, className, ...props }: InputGroupProps) => {
+  return (
+    <div className={classnames('bgm-input-group', className)} {...props}>
+      {children}
+    </div>
+  );
+};
+
+/*
+  https://github.com/DefinitelyTyped/DefinitelyTyped/issues/34757#issuecomment-1008349828
+  如果使用
+  `type IInput = React.FC<InputProps> & { Group: React.FC<InputGroupProps> }`
+  `const CompoundedInput = Input as IInput;`
+  这样的形式，会导致 Storybook 无法正常生成文档
+*/
+const CompoundedInput = Object.assign(Input, { Group: InputGroup });
+
+export default CompoundedInput;

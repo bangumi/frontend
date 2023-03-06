@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`should render external link 1`] = `
 <DocumentFragment>
@@ -13,6 +13,14 @@ exports[`should render internal link 1`] = `
 <DocumentFragment>
   <a
     class="bgm-link"
+    href="/a"
+  />
+</DocumentFragment>
+`;
+
+exports[`should render no-style link 1`] = `
+<DocumentFragment>
+  <a
     href="/a"
   />
 </DocumentFragment>

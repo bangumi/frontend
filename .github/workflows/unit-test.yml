@@ -11,12 +11,13 @@ on:
       - '**.md'
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
+
       - uses: ./.github/actions/setup-js-env
 
       - name: Unit Test

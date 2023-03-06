@@ -1,16 +1,16 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import type { GroupProfile } from '@bangumi/client/group';
-import { Section, Tab, Layout } from '@bangumi/design';
+import { Button, Layout, Section, Tab } from '@bangumi/design';
+import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';
-import { ReactComponent as RightArrow } from '@bangumi/website/assets/right-arrow.svg';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
-import CommonStyles from '../common.module.less';
 import { GroupHeader } from './GroupHeader';
 import styles from './GroupLayout.module.less';
+import GroupNavigation from './GroupNavigation';
 import { UserCard } from './UserCard';
 
 export enum GroupTabs {
@@ -23,70 +23,71 @@ const GroupTabsItems = [
   {
     key: GroupTabs.Index,
     label: '小组概览',
-    to: (groupName: string) => `/group/${groupName}`,
+    to: (groupName = '') => `/group/${groupName}`,
   },
   {
     key: GroupTabs.Forum,
     label: '小组讨论',
-    to: (groupName: string) => `/group/${groupName}/forum`,
+    to: (groupName = '') => `/group/${groupName}/forum`,
   },
   {
     key: GroupTabs.Members,
     label: '小组成员',
-    to: (groupName: string) => `/group/${groupName}/members`,
+    to: (groupName = '') => `/group/${groupName}/members`,
   },
 ];
 const groupTabsByKey = keyBy(GroupTabsItems, 'key');
 
 type IGroupLayoutProps = PropsWithChildren<{
   group: GroupProfile | undefined;
-  curTab: GroupTabs;
   groupName: string;
 }>;
 
-const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, curTab, groupName }) => {
-  const [, navigate] = useTransitionNavigate();
+const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }) => {
+  const { user } = useUser();
+
   return (
     <div className={styles.pageContainer}>
       <GroupHeader group={group!} />
-      <Tab
-        type='borderless'
-        items={GroupTabsItems}
-        activeKey={curTab}
-        onChange={(_, value) => navigate(value.to(groupName))}
-      />
+      <Tab.Group type='borderless'>
+        {GroupTabsItems.map((tab) => (
+          <NavLink to={tab.to(groupName)} key={tab.key} end>
+            {({ isActive }) => <Tab.Item isActive={isActive}>{tab.label}</Tab.Item>}
+          </NavLink>
+        ))}
+      </Tab.Group>
       <Layout
         type='alpha'
         leftChildren={children}
         rightChildren={
-          <Section
-            title='最近加入'
-            renderFooter={() =>
-              group && (
-                <Link
-                  to={groupTabsByKey.members.to(group.group.name)}
-                  className={CommonStyles.textButton}
-                >
-                  <span>更多小组成员</span>
-                  <RightArrow />
-                </Link>
-              )
-            }
-          >
-            <div className={styles.newMembers}>
-              {group?.recentAddedMembers.slice(0, 10).map((member) => {
-                return (
-                  <UserCard
-                    user={{
-                      ...member,
-                      avatar: member.avatar.large,
-                    }}
-                    key={member.id}
-                  />
-                );
-              })}
-            </div>
-          </Section>
+          <>
+            {user && group && <GroupNavigation group={group} />}
+            <Section
+              title='最近加入'
+              renderFooter={() =>
+                group && (
+                  <Button.Link type='plain' to={groupTabsByKey.members.to(group.group.name)}>
+                    更多小组成员
+                    <ArrowRightCircle />
+                  </Button.Link>
+                )
+              }
+            >
+              <div className={styles.newMembers}>
+                {group?.recentAddedMembers.slice(0, 10).map((member) => {
+                  return (
+                    <UserCard
+                      user={{
+                        ...member,
+                        avatar: member.avatar.large,
+                      }}
+                      key={member.id}
+                    />
+                  );
+                })}
+              </div>
+            </Section>
+          </>
         }
       />
     </div>

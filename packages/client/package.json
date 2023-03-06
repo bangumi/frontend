@@ -11,17 +11,16 @@
     "build2": "(OPENAPI_URL=http://127.0.0.1:4000/p1/openapi.json node scripts/update-openapi.mjs) && (node scripts/build.mjs) && (oazapfts api.yaml > client.ts) && (prettier -w ./)"
   },
   "dependencies": {
-    "oazapfts": "^4.5.0"
+    "oazapfts": "^4.5.2"
   },
   "devDependencies": {
-    "@apidevtools/json-schema-ref-parser": "^9.0.9",
+    "@apidevtools/json-schema-ref-parser": "^10.1.0",
     "@faker-js/faker": "^7.6.0",
     "change-case": "^4.1.2",
     "js-yaml": "^4.1.0",
-    "msw": "^0.49.0",
+    "msw": "^1.0.1",
     "node-fetch": "^3.3.0",
-    "openapi-types": "^12",
-    "openapi-typescript": "^6.1.0",
-    "orval": "^6.10.3"
+    "openapi-types": "^12.1.0",
+    "openapi-typescript": "^6.1.0"
   }
 }

@@ -1,9 +1,11 @@
+import './style';
+
 import React from 'react';
 
-import { FilledStar, HalfStar, EmptyStar } from '@bangumi/icons';
+import { EmptyStar, FilledStar, HalfStar } from '@bangumi/icons';
 
 export interface RateProps {
-  /* 评分的分值 , 范围 0 ~ 10 */
+  /** 评分的分值, 范围 0 ~ 10 */
   value: number;
 }
 

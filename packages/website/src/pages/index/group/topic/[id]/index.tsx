@@ -1,26 +1,18 @@
+import type { BasicReply } from 'packages/client/client';
 import type { FC } from 'react';
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
-import {
-  EditorForm,
-  RichContent,
-  Avatar,
-  Section,
-  Typography,
-  Button,
-  Topic,
-  Layout,
-} from '@bangumi/design';
-import { render as renderBBCode } from '@bangumi/utils';
+import { Avatar, Button, Layout, RichContent, Topic } from '@bangumi/design';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
+import { useGroup } from '@bangumi/website/hooks/use-group';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
-import { ClampableContent } from '../../components/ClampableContent';
+import GroupInfo from '../../components/GroupInfo';
+import GroupNavigation from '../../components/GroupNavigation';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
-
-const { Link } = Typography;
 
 const { Comment } = Topic;
 
@@ -29,19 +21,36 @@ const TopicPage: FC = () => {
   if (!id || Number.isNaN(Number(id))) {
     throw new Error('BUG: topic id is required');
   }
-  const topicDetail = useGroupTopic(Number(id));
+
+  const { data: topicDetail, mutate } = useGroupTopic(Number(id));
   const { user } = useUser();
   const originalPosterId = topicDetail.creator.id;
-  const parsedText = renderBBCode(topicDetail.text);
   const isClosed = topicDetail.state === 1;
   const { group } = topicDetail;
+  const { group: groupProfile } = useGroup(group.name);
 
-  // Todo: element highlight style https://github.com/bangumi/frontend/pull/113#issuecomment-1328466708
-  // https://github.com/bangumi/frontend/pull/113#issuecomment-1322303601
+  const [replyContent, setReplyContent] = useState('');
+
+  const navigate = useNavigate();
+
+  // 首次渲染时评论列表可能还没加载完，浏览器无法定位，所以需要在评论加载完后再滚动到指定位置
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
     document.getElementById(anchor)?.scrollIntoView(true);
   }, [topicDetail]);
+
+  const handleReplySuccess = async (reply: BasicReply) => {
+    navigate(`#post_${reply.id}`);
+    // 刷新评论列表
+    await mutate();
+    setReplyContent('');
+  };
+
+  const startReply = () => {
+    const replyForm = document.getElementById('replyForm');
+    replyForm?.scrollIntoView(true);
+    replyForm?.querySelector('textarea')?.focus();
+  };
 
   return (
     <>
@@ -58,57 +67,61 @@ const TopicPage: FC = () => {
           <>
             {/* Topic content */}
             <div id={`post_${topicDetail.id}`}>
-              <RichContent html={parsedText} />
+              <RichContent bbcode={topicDetail.text} />
+              {user && (
+                <div className={styles.topicActions}>
+                  <Button type='secondary' size='small' onClick={startReply}>
+                    回复
+                  </Button>
+                  {user.id === topicDetail.creator.id && (
+                    <>
+                      <Button.Link type='text' size='small' to={`/group/topic/${id}/edit`}>
+                        编辑
+                      </Button.Link>
+                      <Button type='text' size='small'>
+                        删除
+                      </Button>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
             {/* Topic Comments */}
             <div className={styles.replies}>
               {topicDetail.replies.map((comment, idx) => (
                 <Comment
+                  topicId={topicDetail.id}
                   key={comment.id}
                   isReply={false}
                   floor={idx + 2}
                   originalPosterId={originalPosterId}
                   user={user}
+                  onCommentUpdate={mutate}
                   {...comment}
                 />
               ))}
               {/* Reply BBCode Editor */}
               {!isClosed && user && (
-                <div className={styles.replyFormContainer}>
+                <div className={styles.replyFormContainer} id='replyForm'>
                   <Avatar src={user.avatar.large} size='medium' />
-                  <EditorForm className={styles.replyForm} placeholder='添加新回复...' />
+                  <ReplyForm
+                    topicId={topicDetail.id}
+                    className={styles.replyForm}
+                    content={replyContent}
+                    onChange={setReplyContent}
+                    onSuccess={handleReplySuccess}
+                    hideCancel
+                  />
                 </div>
               )}
             </div>
           </>
         }
         rightChildren={
-          <Section title='小组信息'>
-            <div className={styles.groupInfo}>
-              <Avatar src={group.icon} size='medium' />
-              <div className={styles.groupDetails}>
-                <Link to={`/group/${group.name}`}>{group.title}</Link>
-                <span>{`${group.totalMembers} 名成员`}</span>
-              </div>
-            </div>
-            <ClampableContent
-              content={renderBBCode(group.description)}
-              containerClassName={styles.groupDescription}
-              threshold={158}
-              isClamped
-            />
-            <div className={styles.groupOpinions}>
-              <Button type='text'>
-                <Link to={`/group/${group.name}`}>小组概览</Link>
-              </Button>
-              <Button type='text'>
-                <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
-              </Button>
-              <Button type='text'>
-                <Link to={`/group/${group.name}/members`}>小组成员</Link>
-              </Button>
-            </div>
-          </Section>
+          <>
+            {user && <GroupNavigation group={groupProfile} />}
+            <GroupInfo group={group} />
+          </>
         }
       />
     </>

@@ -1,7 +1,7 @@
 @import '../../../theme/base';
+@import (reference) '../../../components/Form/style/index';
 
 @toolbox-width: 215px;
-@text-width: 682px;
 
 .bgm-editor {
   &__container {
@@ -10,8 +10,15 @@
     min-height: 162px;
     border: 2px solid @gray-10;
     border-radius: 12px;
-    padding: 8px 0 0 10px;
-    z-index: 9999;
+    padding: 8px 6px 6px;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
   }
 
   &__toolbox {
@@ -20,23 +27,31 @@
     align-items: center;
     height: 26px;
     width: @toolbox-width;
-    padding: 0 4px;
-    margin-bottom: 10px;
+    padding: 0 8px;
 
     > svg {
       cursor: pointer;
     }
   }
 
+  &__wordcount {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: @gray-60;
+    margin-right: 9px;
+    white-space: nowrap;
+  }
+
   &__text {
     flex: 1 0 auto;
-    padding: 0;
-    min-width: @toolbox-width;
-    width: @text-width;
+    padding: 0 6px;
+    resize: vertical;
     border: none;
     outline: none;
     color: @gray-100;
     line-height: 26px;
+    font-size: 16px;
 
     &::placeholder {
       color: @gray-60;
@@ -48,33 +63,45 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    width: @text-width;
   }
 
   &__submit {
     font-size: 14px;
     display: flex;
     margin-top: 12px;
-    height: 24px;
     align-items: center;
-    justify-content: center;
-
-    .bgm-editor__button {
-      font-weight: 600;
-      font-size: 14px;
-      height: 24px;
-      line-height: 24px;
-      padding: 0 16px;
-      margin-right: 10px;
-
-      &--confirm {
-        background-color: @blue-100;
-      }
-    }
+    justify-content: flex-start;
+    gap: 10px;
 
     .bgm-editor__bbcode-tip {
       color: @gray-60;
       line-height: 24px;
+
+      &__left {
+        .sm-screen-hidden();
+      }
+    }
+  }
+
+  &__button {
+    padding: 0 15px;
+  }
+
+  .bgm-form &__text {
+    width: auto;
+  }
+
+  // 在 Form 中使用 Editor 而非 EditorForm 的场景
+  .bgm-form--compact > &__container {
+    .compact-form-item();
+  }
+
+  .bgm-form--compact > &__form {
+    align-items: stretch;
+    width: auto;
+
+    .bgm-editor__container {
+      .no-top-border();
     }
   }
 }

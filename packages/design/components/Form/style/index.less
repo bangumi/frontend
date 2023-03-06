@@ -1,0 +1,55 @@
+@import '../../../theme/base';
+
+.bgm-form {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &-item {
+    display: flex;
+
+    @media (max-width: @sm) {
+      flex-direction: column;
+    }
+
+    &-label {
+      display: inline-block;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 25px;
+      color: @gray-60;
+
+      > label {
+        display: flex;
+        align-items: center;
+        height: 38px;
+      }
+    }
+  }
+
+  &--compact {
+    gap: 0;
+  }
+}
+
+// 点状分隔线，距离左右各 12px，故使用伪元素实现
+.divider-pseudo-element() {
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    width: calc(100% - 24px);
+    border-bottom: 2px dotted @gray-10;
+  }
+}
+
+.compact-form-item() {
+  &:not(:first-child) {
+    .no-top-border();
+  }
+
+  &:not(:last-child) {
+    .no-bottom-border();
+    .divider-pseudo-element();
+  }
+}

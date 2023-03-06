@@ -8,6 +8,7 @@
   "rangeStrategy": "bump",
   "semanticCommits": "enabled",
   "labels": ["dependencies"],
+  "postUpdateOptions": ["pnpmDedupe"],
   "lockFileMaintenance": {
     "extends": ["github>Trim21/renovate-config:monthly"],
     "enabled": true
@@ -24,7 +25,14 @@
     {
       "groupName": "eslint",
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "separateMajorMinor": true,
       "semanticCommitType": "style"
+    },
+    {
+      "groupName": "vite",
+      "matchPackagePrefixes": ["@vitejs/", "vite"],
+      "separateMajorMinor": true,
+      "semanticCommitType": "build"
     },
     {
       "matchManagers": ["github-actions"],

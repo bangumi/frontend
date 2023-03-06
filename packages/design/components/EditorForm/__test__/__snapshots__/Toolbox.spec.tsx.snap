@@ -1,27 +1,33 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`EditorForm > Toolbox render with default classNames 1`] = `
+exports[`EditorForm > Toolbox > render with default classNames 1`] = `
 <DocumentFragment>
   <div
     class="bgm-editor__toolbox"
   >
     <div
       data-testid="bold"
+      title="粗体 [Ctrl+B]"
     />
     <div
       data-testid="italic"
+      title="斜体 [Ctrl+I]"
     />
     <div
       data-testid="underscore"
+      title="下划线 [Ctrl+U]"
     />
     <div
       data-testid="image"
+      title="图片 [Ctrl+P]"
     />
     <div
       data-testid="link"
+      title="链接 [Ctrl+L]"
     />
     <div
       data-testid="size"
+      title="文字尺寸 [Ctrl+S]"
     />
   </div>
 </DocumentFragment>

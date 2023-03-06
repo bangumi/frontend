@@ -1,0 +1,21 @@
+@import '@bangumi/design/theme/base';
+
+.grid {
+  display: grid;
+  row-gap: 1rem;
+  column-gap: 2.5rem;
+  grid-template-columns: 2fr 1fr;
+
+  @media (max-width: @sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tipText {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.groupLink {
+  padding: 0 10px;
+}

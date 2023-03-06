@@ -5,9 +5,6 @@
 .container {
   height: @header-height;
   box-sizing: border-box;
-  left: 0;
-  top: 0;
-  right: 0;
   background: rgba(255, 255, 255, 0.95);
   //backdrop-filter: blur(20px);
   border-bottom: rgba(249, 188, 193, 0.95) solid 1px;
@@ -54,7 +51,6 @@
 .mobileMenuToggle {
   padding: 0 15px;
   margin-left: 16px;
-  font-weight: bold;
   display: none;
 }
 
@@ -70,7 +66,7 @@
   }
 
   .navRight {
-    color: #aaa6a6;
+    color: @gray-60;
 
     /* Todo: use CSS var ? */
 
