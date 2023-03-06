@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 
-import ErrorBoundary from '@bangumi/website/components/ErrorBoundary';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import type { UseGroupRet } from '@bangumi/website/hooks/use-group';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
@@ -11,7 +11,7 @@ interface GroupContext {
   groupRet: UseGroupRet;
 }
 
-const InternalGroupPage = () => {
+function GroupPage() {
   const { name } = useParams();
   const groupRet = useGroup(name!);
 
@@ -20,13 +20,8 @@ const InternalGroupPage = () => {
       <Outlet context={{ groupRet }} />
     </GroupLayout>
   );
-};
-const GroupPage = () => (
-  <ErrorBoundary fallback={<>Group Not found</>}>
-    <InternalGroupPage />
-  </ErrorBoundary>
-);
+}
 
 export const useGroupContext = () => useOutletContext<GroupContext>();
 
-export default GroupPage;
+export default withErrorBoundary(GroupPage);

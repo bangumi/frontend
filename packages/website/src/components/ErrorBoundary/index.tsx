@@ -4,20 +4,17 @@ import React from 'react';
 import ErrorLayout from './ErrorLayout';
 
 type CatchError = Error | null;
-type ErrorBoundaryFallbackFC = (err: CatchError) => JSX.Element;
+type ErrorBoundaryFallbackFC = ((err: CatchError) => JSX.Element) | JSX.Element;
 
 interface ErrorBoundaryState {
   error: CatchError;
 }
 const initialState: ErrorBoundaryState = { error: null };
-const defaultFallback: ErrorBoundaryFallbackFC = (err) => (
-  <div>{err ? err.message : '发生未知错误'}</div>
-);
 
 // Error boundaries currently have to be classes.
 // ref: https://reactjs.org/docs/error-boundaries.html#gatsby-focus-wrapper
 export default class ErrorBoundary extends React.Component<
-  PropsWithChildren<{ fallback: ErrorBoundaryFallbackFC }>,
+  PropsWithChildren<{ fallback?: ErrorBoundaryFallbackFC }>,
   ErrorBoundaryState
 > {
   state = initialState;
@@ -32,7 +29,17 @@ export default class ErrorBoundary extends React.Component<
 
     if (error) {
       const fb = fallback;
-      return <ErrorLayout>{fb(this.state.error)}</ErrorLayout>;
+      return (
+        <ErrorLayout>
+          {fb
+            ? typeof fb === 'function'
+              ? fb(this.state.error)
+              : fb
+            : error.message
+            ? error.message
+            : '发生未知错误'}
+        </ErrorLayout>
+      );
     }
     return this.props.children;
   }
@@ -44,7 +51,7 @@ export const withErrorBoundary = <T extends Object>(
 ) => {
   return function PageWithErrorBoundary(props: T) {
     return (
-      <ErrorBoundary fallback={fallback ?? defaultFallback}>
+      <ErrorBoundary fallback={fallback}>
         <Children {...props} />
       </ErrorBoundary>
     );

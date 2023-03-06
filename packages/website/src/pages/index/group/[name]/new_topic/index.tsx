@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Typography } from '@bangumi/design';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
 import GroupInfo from '../../components/GroupInfo';
@@ -35,4 +36,4 @@ const GroupNewTopicPage = () => {
   );
 };
 
-export default GroupNewTopicPage;
+export default withErrorBoundary(GroupNewTopicPage, <>Group Not found</>);
