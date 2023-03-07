@@ -201,6 +201,8 @@ components:
           type: string
         topicID:
           type: integer
+        topicTitle:
+          type: string
       required:
         - id
         - creator
@@ -208,6 +210,7 @@ components:
         - text
         - state
         - topicID
+        - topicTitle
       type: object
     HistorySummary:
       properties:
