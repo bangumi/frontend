@@ -5,6 +5,7 @@ import { ozaClient } from '@bangumi/client';
 import { EditorForm, toast, Typography } from '@bangumi/design';
 import useGroupPost from '@bangumi/website/hooks/use-group-post';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import styles from './edit.module.less';
 
@@ -14,7 +15,16 @@ const EditReplyPage = () => {
     throw new Error('BUG: post id is required');
   }
 
+  const { user } = useUser();
+  if (!user) {
+    throw new Error('抱歉，当前操作需要登录后才能继续进行');
+  }
+
   const { data, mutate } = useGroupPost(Number(id));
+  if (data.creator.id !== user.id) {
+    throw new Error('抱歉，你只能修改自己发表的帖子。');
+  }
+
   const { data: topic, mutate: mutateTopic } = useGroupTopic(data.topicID);
   const navigate = useNavigate();
 
