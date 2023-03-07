@@ -1,9 +1,10 @@
+import { HttpError } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
 import ErrorLayout from './ErrorLayout';
 
-type CatchError = Error | null;
+type CatchError = HttpError | Error | null;
 type ErrorBoundaryFallbackFC = ((err: CatchError) => JSX.Element) | JSX.Element;
 
 interface ErrorBoundaryState {
@@ -29,15 +30,14 @@ export default class ErrorBoundary extends React.Component<
 
     if (error) {
       const fb = fallback;
+      let msg = error.message ?? '发生未知错误';
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      if (error instanceof HttpError && error.data?.message) {
+        msg = error.data.message;
+      }
       return (
         <ErrorLayout>
-          {fb
-            ? typeof fb === 'function'
-              ? fb(this.state.error)
-              : fb
-            : error.message ?? '发生未知错误'
-            ? error.message
-            : '发生未知错误'}
+          {fb ? (typeof fb === 'function' ? fb(this.state.error) : fb) : msg}
         </ErrorLayout>
       );
     }

@@ -122,6 +122,8 @@ module.exports = {
         // 限制了一些不需要显示指明类型的场景，比如自动推导，导致了一些多余代码
         '@typescript-eslint/explicit-function-return-type': 'off',
         'react/jsx-closing-tag-location': 'off',
+        '@typescript-eslint/no-unsafe-assignment': 'off',
+        '@typescript-eslint/no-unsafe-member-access': 'off',
       },
     },
     {
@@ -135,9 +137,7 @@ module.exports = {
     {
       files: ['*.spec.tsx', '*.test.tsx', '*.stories.tsx'],
       rules: {
-        '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-argument': 'off',
-        '@typescript-eslint/no-unsafe-member-access': 'off',
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/consistent-type-imports': 'off',
       },
