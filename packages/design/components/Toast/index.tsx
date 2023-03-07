@@ -4,8 +4,7 @@ import { defer, uniqueId } from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import type { MessageType } from '@bangumi/design';
-
+import type { MessageType } from '../Message';
 import { ToastContainer } from './ToastContainer';
 import { insertToastEvent } from './utils/event-bus';
 

@@ -22,15 +22,15 @@ const Message = ({
   children,
 }: React.PropsWithChildren<MessageProps>) => {
   const classes = classnames(
-    'bgm-message',
-    `bgm-message--${type}`,
-    { 'bgm-message--block': blockWidth },
+    'bgm-message__content',
+    `bgm-message__content--${type}`,
+    { 'bgm-message__content--block': blockWidth },
     className,
   );
 
   return (
-    <div className={classes}>
-      <div className='bgm-message__content'>
+    <div className='bgm-message'>
+      <div className={classes}>
         <Error />
         <span>{children}</span>
       </div>

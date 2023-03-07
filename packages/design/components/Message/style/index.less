@@ -9,6 +9,9 @@
     box-sizing: border-box;
     display: flex;
     align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
 
     > svg {
       flex: none;
@@ -16,24 +19,18 @@
       height: 20px;
       margin-right: 8px;
     }
-
-    > span {
-      font-weight: 600;
-      font-size: 14px;
-      line-height: 20px;
-    }
   }
 
-  &--block > &__content {
+  &__content--block {
     flex: 1;
   }
 
-  &--info > &__content {
+  &__content--info {
     background-color: rgba(90, 87, 87, 0.6);
     color: #fff;
   }
 
-  &--error > &__content {
+  &__content--error {
     background-color: #f97f77;
     color: #fff;
   }
