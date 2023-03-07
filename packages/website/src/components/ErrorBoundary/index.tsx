@@ -35,7 +35,7 @@ export default class ErrorBoundary extends React.Component<
             ? typeof fb === 'function'
               ? fb(this.state.error)
               : fb
-            : error.message
+            : error.message ?? '发生未知错误'
             ? error.message
             : '发生未知错误'}
         </ErrorLayout>
