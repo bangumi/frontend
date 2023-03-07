@@ -5,7 +5,7 @@ import React from 'react';
 import ErrorLayout from './ErrorLayout';
 
 type CatchError = HttpError | Error | null;
-type ErrorBoundaryFallbackFC = ((err: CatchError) => JSX.Element) | JSX.Element;
+type ErrorBoundaryFallbackFC = Record<number, ((err: CatchError) => JSX.Element) | JSX.Element>;
 
 interface ErrorBoundaryState {
   error: CatchError;
@@ -29,11 +29,15 @@ export default class ErrorBoundary extends React.Component<
     const error = this.state.error;
 
     if (error) {
-      const fb = fallback;
+      let fb; // fb can be a JSX.Element or a function return a JSX.Element
       let msg = error.message ?? '发生未知错误';
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-member-access
       if (error instanceof HttpError && error.data?.message) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         msg = error.data.message;
+        if (fallback) {
+          fb = fallback[error.status];
+        }
       }
       return (
         <ErrorLayout>

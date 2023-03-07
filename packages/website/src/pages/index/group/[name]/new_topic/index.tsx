@@ -36,4 +36,4 @@ const GroupNewTopicPage = () => {
   );
 };
 
-export default withErrorBoundary(GroupNewTopicPage, <>Group Not found</>);
+export default withErrorBoundary(GroupNewTopicPage, { 404: <>Group Not found</> });
