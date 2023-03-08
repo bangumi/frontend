@@ -29,13 +29,16 @@ export default class ErrorBoundary extends React.Component<
     const error = this.state.error;
 
     if (error) {
-      let fb; // fb can be a JSX.Element or a function return a JSX.Element
+      let fb: ((err: CatchError) => JSX.Element) | JSX.Element | undefined;
       let msg = error.message ?? '发生未知错误';
-      // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-member-access
-      if (error instanceof HttpError && error.data?.message) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        msg = error.data.message;
+      if (error instanceof HttpError) {
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-member-access
+        if (error.data?.message) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+          msg = error.data.message;
+        }
         if (fallback) {
+          // 选择对应 status code 的 fallback
           fb = fallback[error.status];
         }
       }
