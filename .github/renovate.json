@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", "schedule:yearly"],
+  "extends": ["config:base", "github>trim21/renovate-config:monthly"],
   "timezone": "Asia/Shanghai",
   "baseBranches": ["master"],
   "separateMajorMinor": true,
