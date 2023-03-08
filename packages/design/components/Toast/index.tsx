@@ -16,13 +16,8 @@ interface ToastOptions {
   type?: MessageType;
   timeout?: number;
 }
-interface ToastType {
-  (message: string, options?: ToastOptions): void;
-  // eslint-disable-next-line
-  [method: string]: any;
-}
 
-export const toast: ToastType = (message: string, options: ToastOptions = {}) => {
+export function toast(message: string, options: ToastOptions = {}) {
   if (document.getElementsByClassName(TOAST_CONTAINER_CLS_NAME).length === 0) {
     const newContainer = document.createElement('div');
     newContainer.className = TOAST_CONTAINER_CLS_NAME;
@@ -43,10 +38,4 @@ export const toast: ToastType = (message: string, options: ToastOptions = {}) =>
       timeout: options.timeout,
     });
   });
-};
-
-['error'].forEach((method: string) => {
-  toast[method] = (message: string, options: ToastOptions = {}) => {
-    toast(message, Object.assign({ type: method }, options));
-  };
-});
+}
