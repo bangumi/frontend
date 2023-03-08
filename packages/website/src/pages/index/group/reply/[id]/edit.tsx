@@ -1,10 +1,11 @@
+import type { TopicDetail } from 'packages/client/client';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSWRConfig } from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, toast, Typography } from '@bangumi/design';
 import useGroupPost from '@bangumi/website/hooks/use-group-post';
-import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import styles from './edit.module.less';
@@ -14,18 +15,19 @@ const EditReplyPage = () => {
   if (!id || Number.isNaN(Number(id))) {
     throw new Error('BUG: post id is required');
   }
+  const postId = Number(id);
 
   const { user } = useUser();
   if (!user) {
     throw new Error('抱歉，当前操作需要登录后才能继续进行');
   }
 
-  const { data, mutate } = useGroupPost(Number(id));
+  const { data, mutate } = useGroupPost(postId);
   if (data.creator.id !== user.id) {
     throw new Error('抱歉，你只能修改自己发表的帖子。');
   }
 
-  const { data: topic, mutate: mutateTopic } = useGroupTopic(data.topicID);
+  const { mutate: mutateTopic } = useSWRConfig();
   const navigate = useNavigate();
 
   const [sending, setSending] = useState(false);
@@ -37,12 +39,23 @@ const EditReplyPage = () => {
       return;
     }
     setSending(true);
-    const response = await ozaClient.editGroupPost(Number(id), { text });
+    const response = await ozaClient.editGroupPost(postId, { text });
     if (response.status === 200) {
-      // 确保再次回到此页面时内容是最新的
-      mutate({ ...data, text });
-      await mutateTopic();
-      navigate(`/group/topic/${data.topicID}`);
+      const topicPath = `/group/topic/${data.topicID}`;
+      // 确保再次回到此页面时内容是最新的，不需要向后端请求数据，因此将 revalidate 设置为 false
+      mutate({ ...data, text }, { revalidate: false });
+      // 乐观更新回复内容
+      await mutateTopic(topicPath, (topic?: TopicDetail) => {
+        if (!topic) {
+          return topic;
+        }
+        const reply = topic.replies.find((reply) => reply.id === postId);
+        if (reply) {
+          reply.text = text;
+        }
+        return topic;
+      });
+      navigate(topicPath);
     } else {
       console.error(response);
       toast(response.data.message);
@@ -59,7 +72,7 @@ const EditReplyPage = () => {
           fontWeight='bold'
           className={styles.topicLink}
         >
-          {topic.title}
+          {data.topicTitle}
         </Typography.Link>
         的回复
       </Typography.Text>
