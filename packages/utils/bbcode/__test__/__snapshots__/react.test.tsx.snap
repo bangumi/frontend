@@ -173,13 +173,8 @@ exports[`html render bbcode string > render mask 1`] = `
 Array [
   "我是",
   <span
-    style={
-      Object {
-        "backgroundColor": "#555",
-        "border": "1px solid #555",
-        "color": "#555",
-      }
-    }
+    className="bgm-mask"
+    style={Object {}}
   >
     马赛克文字
   </span>,
@@ -269,7 +264,7 @@ exports[`html render bbcode string > render url 1`] = `
 Array [
   "Bangumi 番组计划: ",
   <a
-    className="l"
+    className="bgm-link"
     href="http://chii.in/"
     style={Object {}}
   >
@@ -286,7 +281,7 @@ Array [
     
   </React.Fragment>,
   <a
-    className="l"
+    className="bgm-link"
     href="http://chii.in"
     style={Object {}}
   >
