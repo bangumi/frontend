@@ -6,7 +6,6 @@ import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import NotFound from '@bangumi/website/components/NotFound';
 
 import WikiLayout from './components/WikiLayout';
 
@@ -54,7 +53,7 @@ export default withErrorBoundary(function WikiPageRouterGuard() {
   const { id } = useParams();
   const subjectId = parseInt(id!);
   if (isNaN(subjectId)) {
-    return <NotFound />;
+    throw Error('条目 ID 必须为数字');
   }
   return <WikiPage subjectId={subjectId} />;
 });
