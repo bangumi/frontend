@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import ErrorBoundary from '@bangumi/website/components/ErrorBoundary';
 
 const GroupReplyPage = () => (
-  <ErrorBoundary fallback={<>Reply Not found</>}>
+  <ErrorBoundary fallback={{ 404: <>数据库中没有查询到指定话题，话题可能正在审核或已被删除。</> }}>
     <Outlet />
   </ErrorBoundary>
 );
