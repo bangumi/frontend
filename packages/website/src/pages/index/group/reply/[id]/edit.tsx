@@ -15,7 +15,7 @@ const EditReplyPage = () => {
   if (!id || Number.isNaN(Number(id))) {
     throw new Error('BUG: post id is required');
   }
-  const postId = Number(id);
+  const postId = parseInt(id);
 
   const { user } = useUser();
   if (!user) {
