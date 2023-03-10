@@ -12,11 +12,11 @@ test.describe('group', () => {
         name: 'link',
       }),
     ).toHaveClass('bgm-link');
-    await expect(page.getByRole('strong')).toBeVisible();
-    await expect(page.getByRole('emphasis')).toBeVisible();
-    await expect(page.getByText('underline')).toBeVisible();
-    await expect(page.getByText('strike')).toBeVisible();
-    await expect(page.getByText('mask')).toHaveClass('bgm-mask');
+    await expect(page.getByRole('strong').first()).toBeVisible();
+    await expect(page.getByRole('emphasis').first()).toBeVisible();
+    await expect(page.getByText('underline').first()).toBeVisible();
+    await expect(page.getByText('strike').first()).toBeVisible();
+    await expect(page.getByText('mask').first()).toHaveClass('bgm-mask');
 
     await page.getByRole('link', { name: '小组成员' }).click();
     await page.waitForURL('**/group/sandbox/members');
@@ -112,9 +112,11 @@ test.describe('group', () => {
     await page.waitForTimeout(10 * 1000);
 
     await expect(
-      page.getByRole('link', {
-        name: 'example',
-      }),
+      page
+        .getByRole('link', {
+          name: 'example',
+        })
+        .last(),
     ).toBeVisible();
   });
 });
