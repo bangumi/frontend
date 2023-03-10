@@ -17,7 +17,7 @@ export default defineConfig({
   },
   plugins: [react()],
   test: {
-    exclude: ['**/node_modules', '**/dist', '**/e2e', 'git'],
+    exclude: ['**/node_modules', '**/dist', '**/e2e', '.git', '.cache', '.idea'],
     globals: true,
     reporters: process.env.GITHUB_ACTIONS ? ['default', new GithubActionsReporter()] : 'default',
     environment: 'jsdom',

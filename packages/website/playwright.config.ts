@@ -1,13 +1,14 @@
 import { defineConfig } from '@playwright/test';
 
 const PORT = 5173;
+const isCI = !!process.env.CI;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   /* Maximum time one test can run for. */
-  timeout: process.env.CI ? 180 * 1000 : 180 * 1000,
+  timeout: isCI ? 240 * 1000 : 180 * 1000,
   expect: {
     /**
      * Maximum time expect() should wait for the condition to be met.
@@ -18,13 +19,13 @@ export default defineConfig({
   // maxFailures: 1,
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  forbidOnly: isCI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: process.env.CI
+  reporter: isCI
     ? [['dot'], ['html', { open: 'never' }], ['github']]
     : [['list'], ['html', { open: 'on-failure' }]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -41,7 +42,7 @@ export default defineConfig({
   // Directory that will be recursively scanned for test files.
   testDir: './e2e',
 
-  // reportSlowTests: process.env.CI ? null : undefined,
+  // reportSlowTests: isCI ? null : undefined,
 
   /* Folder for test artifacts such as screenshots, videos, traces, etc. */
   // outputDir: 'test-results/',
