@@ -1,4 +1,4 @@
-import { expect,test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('404', () => {
   test('返回首页', async ({ page }) => {

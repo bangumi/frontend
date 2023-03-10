@@ -1,4 +1,4 @@
-import { expect,test } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
 test.describe('group', () => {
   test('未登录用户', async ({ page }) => {
