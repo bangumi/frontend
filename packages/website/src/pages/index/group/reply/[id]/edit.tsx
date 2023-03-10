@@ -12,8 +12,8 @@ import styles from './edit.module.less';
 
 const EditReplyPage = () => {
   const { id } = useParams();
-  if (!id || Number.isNaN(Number(id))) {
-    throw new Error('BUG: post id is required');
+  if (!id || Number.isNaN(parseInt(id))) {
+    throw new Error('参数错误：post ID');
   }
   const postId = parseInt(id);
 
