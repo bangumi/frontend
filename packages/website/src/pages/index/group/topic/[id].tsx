@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 import ErrorBoundary from '@bangumi/website/components/ErrorBoundary';
 
 const GroupTopicPage = () => (
-  <ErrorBoundary fallback={<>Topic Not found</>}>
+  <ErrorBoundary fallback={{ 404: <>Topic Not found</> }}>
     <Outlet />
   </ErrorBoundary>
 );

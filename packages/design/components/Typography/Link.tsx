@@ -1,12 +1,41 @@
 import classNames from 'classnames';
+import type { PropsWithChildren } from 'react';
 import React from 'react';
 import type { LinkProps as RouterLinkProps } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 
-export interface LinkProps extends RouterLinkProps {
+interface PureLinkProps {
   isExternal?: boolean;
   fontWeight?: 'bold';
   noStyle?: boolean;
+}
+
+export type LinkProps = PureLinkProps & RouterLinkProps;
+
+/**
+ * 有些场景，to 属性无法覆盖到，比如返回上一页，我们需要 navigate(-1)，可我们又需要 Link 的样式
+ * 纯 Link 组件就是仅保留了样式，而无任何逻辑。
+ */
+export function PureLink({
+  children,
+  className,
+  fontWeight,
+  ...rest
+}: PropsWithChildren<PureLinkProps & JSX.IntrinsicElements['div']>) {
+  return (
+    <div
+      className={classNames(
+        'bgm-link',
+        {
+          'bgm-link--bold': fontWeight === 'bold',
+        },
+        className,
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  );
 }
 
 const Link: React.FC<LinkProps> = ({
