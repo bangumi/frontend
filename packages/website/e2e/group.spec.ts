@@ -2,24 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test.describe('group', () => {
   test('未登录用户', async ({ page }) => {
-    await page.goto('/group/sandbox');
-    await page.getByRole('link', { name: '小组讨论' }).click();
-    await page.getByRole('link', { name: '--------主题编辑测试--------' }).click();
-    await page.waitForURL('/group/topic/*');
-
-    await expect(
-      page.getByRole('link', {
-        name: 'link',
-      }),
-    ).toHaveClass('bgm-link');
-    await expect(page.getByRole('strong').first()).toBeVisible();
-    await expect(page.getByRole('emphasis').first()).toBeVisible();
-    await expect(page.getByText('underline').first()).toBeVisible();
-    await expect(page.getByText('strike').first()).toBeVisible();
-    await expect(page.getByText('mask').first()).toHaveClass('bgm-mask');
-
-    await page.getByRole('link', { name: '小组成员' }).click();
-    await page.waitForURL('**/group/sandbox/members');
+    await page.goto('/group/sandbox/members');
     await expect(page.getByRole('heading', { name: '小组管理员' })).toBeVisible();
     await expect(page.getByRole('heading', { name: '小组成员' })).toBeVisible();
     await expect(page.getByRole('heading', { name: '最近加入' })).toBeVisible();
@@ -43,7 +26,40 @@ test.describe('group', () => {
     ).toBeVisible();
     await expect(page.getByText('退出该小组')).toBeVisible();
 
-    await page.getByRole('link', { name: '--------主题编辑测试--------' }).click();
+    await page.getByPlaceholder('给新帖取一个标题').click();
+    await page.getByPlaceholder('给新帖取一个标题').fill('测试贴123');
+    await page.getByPlaceholder('想聊点什么的呢…').click();
+    await page.getByTestId('bold').locator('path').click();
+    await page.getByPlaceholder('想聊点什么的呢…').fill('[b]粗体[/b]');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('Enter');
+    await page.getByTestId('italic').locator('path').click();
+    await page.getByPlaceholder('想聊点什么的呢…').fill('[b]粗体[/b]\n[i]斜体[/i]');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('Enter');
+    await page.getByTestId('underscore').click();
+    await page.getByPlaceholder('想聊点什么的呢…').fill('[b]粗体[/b]\n[i]斜体[/i]\n[u]下划线[/u]');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('Enter');
+    await page
+      .getByPlaceholder('想聊点什么的呢…')
+      .fill('[b]粗体[/b]\n[i]斜体[/i]\n[u]下划线[/u]\n[url=http://example.com]链接[/url]');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByRole('button', { name: '快速发帖' }).click();
     await page.waitForURL('/group/topic/*');
 
     await expect(
@@ -56,21 +72,7 @@ test.describe('group', () => {
     await expect(
       page
         .getByRole('button', {
-          name: '+1',
-        })
-        .first(),
-    ).toBeVisible();
-    await expect(
-      page
-        .getByRole('button', {
           name: '删除',
-        })
-        .first(),
-    ).toBeVisible();
-    await expect(
-      page
-        .getByRole('button', {
-          name: '编辑',
         })
         .first(),
     ).toBeVisible();
