@@ -647,20 +647,6 @@ components:
         - user_group
       title: User
       type: object
-    ValidationError:
-      description: request data validation error
-      properties:
-        error:
-          type: string
-        message:
-          type: string
-        statusCode:
-          type: integer
-      required:
-        - error
-        - message
-        - statusCode
-      type: object
     WikiPlatform:
       properties:
         id:
@@ -1319,8 +1305,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationError'
-          description: Default Response
+                $ref: '#/components/schemas/Error'
+                description: request validation error
+          description: request validation error
         '401':
           content:
             application/json:
@@ -1413,8 +1400,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ValidationError'
-          description: Default Response
+                $ref: '#/components/schemas/Error'
+                description: request validation error
+          description: request validation error
         '401':
           content:
             application/json:

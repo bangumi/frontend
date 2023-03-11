@@ -330,12 +330,6 @@ export interface components {
       user_group: number;
       username: string;
     };
-    /** @description request data validation error */
-    ValidationError: {
-      error: string;
-      message: string;
-      statusCode: number;
-    };
     WikiPlatform: {
       id: number;
       text: string;
@@ -750,10 +744,10 @@ export interface operations {
           'application/json': components['schemas']['User'];
         };
       };
-      /** @description Default Response */
+      /** @description request validation error */
       400: {
         content: {
-          'application/json': components['schemas']['ValidationError'];
+          'application/json': components['schemas']['Error'];
         };
       };
       /** @description 验证码错误/账号密码不匹配 */
@@ -812,10 +806,10 @@ export interface operations {
           'application/json': components['schemas']['User'];
         };
       };
-      /** @description Default Response */
+      /** @description request validation error */
       400: {
         content: {
-          'application/json': components['schemas']['ValidationError'];
+          'application/json': components['schemas']['Error'];
         };
       };
       /** @description 验证码错误/账号密码不匹配 */
