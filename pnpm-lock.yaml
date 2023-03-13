@@ -254,7 +254,7 @@ importers:
       react-router-dom: ^6.8.1
       reset-css: ^5.0.1
       rooks: ^7.4.4
-      swr: ^2.0.3
+      swr: ^2.1.0
       typescript: ^4.9.5
       vite: ^4.1.2
       vite-plugin-pages: ^0.28.0
@@ -275,7 +275,7 @@ importers:
       react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
       reset-css: 5.0.1
       rooks: 7.4.4_biqbaboplfbrettd7655fr4n2y
-      swr: 2.0.3_react@18.2.0
+      swr: 2.1.0_react@18.2.0
     devDependencies:
       '@bangumi/client': link:../client
       '@bangumi/design': link:../design
@@ -15120,8 +15120,8 @@ packages:
       - encoding
     dev: false
 
-  /swr/2.0.3_react@18.2.0:
-    resolution: {integrity: sha512-sGvQDok/AHEWTPfhUWXEHBVEXmgGnuahyhmRQbjl9XBYxT/MSlAzvXEKQpyM++bMPaI52vcWS2HiKNaW7+9OFw==}
+  /swr/2.1.0_react@18.2.0:
+    resolution: {integrity: sha512-4hYl5p3/KalQ1MORealM79g/DtLohmud6yyfXw5l4wjtFksYUnocRFudvyaoUtgj3FrVNK9lS25Av9dsZYvz0g==}
     engines: {pnpm: '7'}
     peerDependencies:
       react: ^16.11.0 || ^17.0.0 || ^18.0.0
