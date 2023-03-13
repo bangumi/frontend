@@ -240,7 +240,7 @@ importers:
       dayjs: ^1.11.7
       less: ^4.1.3
       lodash: ^4.17.21
-      monaco-editor: ^0.35.0
+      monaco-editor: ^0.36.1
       msw: ^1.0.1
       nanoid: ^4.0.1
       oazapfts: ^4.5.2
@@ -265,7 +265,7 @@ importers:
       classnames: 2.3.2
       dayjs: 1.11.7
       lodash: 4.17.21
-      monaco-editor: 0.35.0
+      monaco-editor: 0.36.1
       nanoid: 4.0.1
       oazapfts: 4.5.2_openapi-types@12.1.0
       react: 18.2.0
@@ -12121,8 +12121,8 @@ packages:
       ufo: 1.1.0
     dev: true
 
-  /monaco-editor/0.35.0:
-    resolution: {integrity: sha512-BJfkAZ0EJ7JgrgWzqjfBNP9hPSS8NlfECEDMEIIiozV2UaPq22yeuOjgbd3TwMh3anH0krWZirXZfn8KUSxiOA==}
+  /monaco-editor/0.36.1:
+    resolution: {integrity: sha512-/CaclMHKQ3A6rnzBzOADfwdSJ25BFoFT0Emxsc4zYVyav5SkK9iA6lEtIeuN/oRYbwPgviJT+t3l+sjFa28jYg==}
     dev: false
 
   /move-concurrently/1.0.1:
