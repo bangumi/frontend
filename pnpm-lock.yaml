@@ -110,7 +110,7 @@ importers:
       node-fetch: ^3.3.1
       oazapfts: ^4.5.2
       openapi-types: ^12.1.0
-      openapi-typescript: ^6.1.0
+      openapi-typescript: ^6.2.0
     dependencies:
       oazapfts: 4.5.2_openapi-types@12.1.0
     devDependencies:
@@ -121,7 +121,7 @@ importers:
       msw: 1.0.1
       node-fetch: 3.3.1
       openapi-types: 12.1.0
-      openapi-typescript: 6.1.0
+      openapi-typescript: 6.2.0
 
   packages/design:
     specifiers:
@@ -12694,15 +12694,15 @@ packages:
   /openapi-types/12.1.0:
     resolution: {integrity: sha512-XpeCy01X6L5EpP+6Hc3jWN7rMZJ+/k1lwki/kTmWzbVhdPie3jd5O2ZtedEx8Yp58icJ0osVldLMrTB/zslQXA==}
 
-  /openapi-typescript/6.1.0:
-    resolution: {integrity: sha512-4G0hQu9zXHESZe4fZouucmA+6J5oKSBNYzG0gPbV9V4aKBNIwfUY86ur/cxyTMzuN9vQuAiMe//q4ZMXgMvGtQ==}
+  /openapi-typescript/6.2.0:
+    resolution: {integrity: sha512-d1HF70HCUnU+g9hgX5X3MJ+BMgwX16fzwD6mkyfNqdxXuOTOSkm+O+aaFqLNX13aFbCylz4m2WiVe4viAShxiQ==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
       fast-glob: 3.2.12
       js-yaml: 4.1.0
       supports-color: 9.3.1
-      undici: 5.14.0
+      undici: 5.21.0
       yargs-parser: 21.1.1
     dev: true
 
@@ -15606,8 +15606,8 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /undici/5.14.0:
-    resolution: {integrity: sha512-yJlHYw6yXPPsuOH0x2Ib1Km61vu4hLiRRQoafs+WUgX1vO64vgnxiCEN9dpIrhZyHFsai3F0AEj4P9zy19enEQ==}
+  /undici/5.21.0:
+    resolution: {integrity: sha512-HOjK8l6a57b2ZGXOcUsI5NLfoTrfmbOl90ixJDl0AEFG4wgHNDQxtZy15/ZQp7HhjkpaGlp/eneMgtsu1dIlUA==}
     engines: {node: '>=12.18'}
     dependencies:
       busboy: 1.6.0
