@@ -121,7 +121,7 @@ describe('Normal Comment', () => {
     const basicReply = { id: 2104702 };
     const mockApi = (status: number) => {
       mockServer.use(
-        rest.post('/p1/groups/-/topics/1/replies', (_, res, ctx) =>
+        rest.post('/p1/groups/-/topics/1/replies', async (_, res, ctx) =>
           res(ctx.status(status), ctx.json(basicReply)),
         ),
       );
