@@ -30,35 +30,11 @@ test.describe('group', () => {
     await page.getByPlaceholder('给新帖取一个标题').fill('测试贴123');
     await page.getByPlaceholder('想聊点什么的呢…').click();
     await page.getByTestId('bold').locator('path').click();
-    await page.getByPlaceholder('想聊点什么的呢…').fill('[b]粗体[/b]');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('Enter');
-    await page.getByTestId('italic').locator('path').click();
-    await page.getByPlaceholder('想聊点什么的呢…').fill('[b]粗体[/b]\n[i]斜体[/i]');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('Enter');
-    await page.getByTestId('underscore').click();
-    await page.getByPlaceholder('想聊点什么的呢…').fill('[b]粗体[/b]\n[i]斜体[/i]\n[u]下划线[/u]');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('Enter');
-    await page
-      .getByPlaceholder('想聊点什么的呢…')
-      .fill('[b]粗体[/b]\n[i]斜体[/i]\n[u]下划线[/u]\n[url=http://example.com]链接[/url]');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
-    await page.getByPlaceholder('想聊点什么的呢…').press('ArrowRight');
+    await page.getByPlaceholder('想聊点什么的呢…').fill(`[b]粗体[/b]
+    [i]斜体[/i]
+    [u]下划线[/u]
+    [url=http://example.com]链接[/url]`);
+
     await page.getByRole('button', { name: '快速发帖' }).click();
     await page.waitForURL('/group/topic/*');
 
@@ -78,38 +54,10 @@ test.describe('group', () => {
     ).toBeVisible();
 
     await page.getByPlaceholder('添加新回复...').click();
-    await page.getByPlaceholder('添加新回复...').fill('text1;');
-    await page.getByTestId('bold').locator('path').click();
-    await page.getByPlaceholder('添加新回复...').fill('text1;[b]粗体[/b]');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').fill('text1;[b]粗体[/b],');
-    await page.getByTestId('italic').locator('path').click();
-    await page.getByPlaceholder('添加新回复...').fill('text1;[b]粗体[/b],[i]斜体[/i]');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').fill('text1;[b]粗体[/b],[i]斜体[/i],');
-    await page.getByTestId('underscore').click();
-    await page
-      .getByPlaceholder('添加新回复...')
-      .fill('text1;[b]粗体[/b],[i]斜体[/i],[u]下划线[/u]');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page
-      .getByPlaceholder('添加新回复...')
-      .fill('text1;[b]粗体[/b],[i]斜体[/i],[u]下划线[/u][url=http://example.com]example[/url]');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
-    await page.getByPlaceholder('添加新回复...').press('ArrowRight');
+    await page.getByPlaceholder('添加新回复...').fill(`
+    text1;[b]粗体[/b],[i]斜体[/i],
+    [u]下划线[/u]
+    [url=http://example.com]example[/url]`);
     await page.getByRole('button', { name: '写好了' }).click();
     await page.waitForTimeout(10 * 1000);
 
