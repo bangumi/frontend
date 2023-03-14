@@ -10,7 +10,6 @@
   "labels": ["dependencies"],
   "postUpdateOptions": ["pnpmDedupe"],
   "lockFileMaintenance": {
-    "extends": ["github>Trim21/renovate-config:monthly"],
     "enabled": true
   },
   "packageRules": [
