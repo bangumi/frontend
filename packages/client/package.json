@@ -18,7 +18,7 @@
     "@faker-js/faker": "^7.6.0",
     "change-case": "^4.1.2",
     "js-yaml": "^4.1.0",
-    "msw": "~1.0.1",
+    "msw": "~1.1.0",
     "node-fetch": "^3.3.1",
     "openapi-types": "^12.1.0",
     "openapi-typescript": "^6.2.0"
