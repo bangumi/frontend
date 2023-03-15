@@ -9,3 +9,4 @@ dist-ssr
 
 coverage
 .eslintcache
+**/playwright-report

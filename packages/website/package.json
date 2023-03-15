@@ -5,6 +5,9 @@
   "scripts": {
     "build": "tsc --noEmit && vite build",
     "dev": "vite --host 127.0.0.1",
+    "test:e2e": "playwright test",
+    "test:e2e:debug": "playwright test --debug",
+    "install-playwright-deps": "playwright install --with-deps chromium",
     "preview": "pnpm run build --mode stage && vite preview"
   },
   "dependencies": {
@@ -30,6 +33,7 @@
     "@bangumi/design": "workspace:0.0.0",
     "@bangumi/icons": "workspace:0.0.0",
     "@bangumi/utils": "workspace:0.0.0",
+    "@playwright/test": "^1.31.2",
     "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.191",
     "@types/react": "^18.0.28",
