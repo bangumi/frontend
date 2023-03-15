@@ -108,11 +108,11 @@ importers:
       js-yaml: ^4.1.0
       msw: ~1.0.1
       node-fetch: ^3.3.1
-      oazapfts: 4.6.0-throw-with-headers.1
+      oazapfts: ^4.6.0
       openapi-types: ^12.1.0
       openapi-typescript: ^6.2.0
     dependencies:
-      oazapfts: 4.6.0-throw-with-headers.1_openapi-types@12.1.0
+      oazapfts: 4.6.0_openapi-types@12.1.0
     devDependencies:
       '@apidevtools/json-schema-ref-parser': 10.1.0
       '@faker-js/faker': 7.6.0
@@ -244,7 +244,7 @@ importers:
       monaco-editor: ^0.36.1
       msw: ~1.0.1
       nanoid: ^4.0.1
-      oazapfts: 4.6.0-throw-with-headers.1
+      oazapfts: ^4.6.0
       openapi-types: ^12.1.0
       postcss: ^8.4.21
       postcss-less: ^6.0.0
@@ -268,7 +268,7 @@ importers:
       lodash: 4.17.21
       monaco-editor: 0.36.1
       nanoid: 4.0.1
-      oazapfts: 4.6.0-throw-with-headers.1_openapi-types@12.1.0
+      oazapfts: 4.6.0_openapi-types@12.1.0
       react: 18.2.0
       react-beautiful-dnd: 13.1.1_biqbaboplfbrettd7655fr4n2y
       react-dom: 18.2.0_react@18.2.0
@@ -6014,7 +6014,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.21.0
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.1.4_@types+node@18.15.3
+      vite: 4.1.4_less@4.1.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -12567,8 +12567,8 @@ packages:
       yaml: 1.10.2
     dev: false
 
-  /oazapfts/4.6.0-throw-with-headers.1_openapi-types@12.1.0:
-    resolution: {integrity: sha512-99VDMvEzEgGX1fC/wQMoQswB4knfInvMnWOSAEV4w88t0ufZUa/QXGdH/NvVihSGl1qEq78Vxzrq1snK9cmAiQ==}
+  /oazapfts/4.6.0_openapi-types@12.1.0:
+    resolution: {integrity: sha512-pKym3ID9+tFBSIYcj9pjEQtgMew0DeCJBNar4E9S/h+WPU7yBh3+sktbyQIuBV3ieKnM8H27Hjy1HzsRyWgFjw==}
     hasBin: true
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0_openapi-types@12.1.0
@@ -16063,7 +16063,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2
       '@svgr/core': 6.5.1
-      vite: 4.1.4_@types+node@18.15.3
+      vite: 4.1.4_less@4.1.3
     transitivePeerDependencies:
       - rollup
       - supports-color
