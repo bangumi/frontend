@@ -10,7 +10,7 @@ import layoutStyle from './style.module.less';
 export default function ErrorLayout({
   children,
   requestID,
-}: PropsWithChildren<{ requestID: string | null }>) {
+}: PropsWithChildren<{ requestID?: string | null }>) {
   const navigate = useNavigate();
   return (
     <div className={layoutStyle.errorContainer}>
