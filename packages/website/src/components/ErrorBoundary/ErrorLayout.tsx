@@ -30,7 +30,7 @@ export default function ErrorLayout({
         </div>
         {requestID && (
           <div className={layoutStyle.info}>
-            request-id: <pre>{requestID}</pre>
+            <pre>request-id: {requestID}</pre>
           </div>
         )}
       </div>

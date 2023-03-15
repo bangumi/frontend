@@ -64,7 +64,7 @@ export default defineConfig(({ mode }) => {
             proxy.on('proxyRes', (proxyRes) => {
               const h = proxyRes.headers['x-ray'];
               if (h === undefined || h === '') {
-                proxyRes.headers['x-ray'] = 'fake-req-id-' + crypto.randomUUID();
+                proxyRes.headers['x-ray'] = ('fake-' + crypto.randomUUID()).slice(0, 20);
               }
               // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
               // 所以在本地开发时移除 secure attribute
