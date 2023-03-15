@@ -1,4 +1,3 @@
-import { isFunction } from 'lodash';
 import { HttpError } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
@@ -48,7 +47,7 @@ export default class ErrorBoundary extends React.Component<
       }
       return (
         <ErrorLayout requestID={reqID}>
-          {isFunction(fb) ? fb(this.state.error) : fb ?? msg}
+          {typeof fb === 'function' ? fb(this.state.error) : fb ?? msg}
         </ErrorLayout>
       );
     }
