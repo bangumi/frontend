@@ -7,6 +7,15 @@ import type { Error as resError } from '@bangumi/client/client';
 import ErrorLayout from './ErrorLayout';
 
 type CatchError = HttpError | Error | null;
+
+/**
+ * 响应的 error code 的优先级高于 http status code。
+ *
+ * @example - {
+ *     404: <NotFound />,
+ *    'NOT_ALLOWED_ERROR': <NotAllowedPage />.
+ *  }
+ */
 type ErrorBoundaryFallbackFC = Record<string, ((err: CatchError) => JSX.Element) | JSX.Element>;
 
 interface ErrorBoundaryState {
@@ -17,7 +26,7 @@ const initialState: ErrorBoundaryState = { error: null };
 
 // Error boundaries currently have to be classes.
 // ref: https://reactjs.org/docs/error-boundaries.html#gatsby-focus-wrapper
-export default class ErrorBoundary extends React.Component<
+class ErrorBoundary extends React.Component<
   PropsWithChildren<{ fallback?: ErrorBoundaryFallbackFC }>,
   ErrorBoundaryState
 > {
