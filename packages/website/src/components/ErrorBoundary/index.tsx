@@ -32,7 +32,7 @@ export default class ErrorBoundary extends React.Component<
 
     if (error) {
       let fb: ((err: CatchError) => JSX.Element) | JSX.Element | undefined;
-      let msg = error?.message ?? '发生未知错误';
+      let msg = error.message ?? '发生未知错误';
       let reqID: string | null = null;
       if (error instanceof HttpError) {
         reqID = error.headers.get('x-ray');
