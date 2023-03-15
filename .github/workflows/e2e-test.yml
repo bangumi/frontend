@@ -1,0 +1,34 @@
+name: E2E Test
+
+on:
+  push:
+    branches: [master]
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches: [master]
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: ./.github/actions/setup-js-env
+
+      - name: Install Playwright
+        run: pnpm --filter @bangumi/website run install-playwright-deps
+
+      - name: Run test
+        run: pnpm test:e2e
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: packages/website/playwright-report
