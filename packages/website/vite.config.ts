@@ -62,9 +62,11 @@ export default defineConfig(({ mode }) => {
               proxyReq.setHeader('Referer', apiDomain + '/');
             });
             proxy.on('proxyRes', (proxyRes) => {
-              const h = proxyRes.headers['x-ray'];
-              if (h === undefined || h === '') {
-                proxyRes.headers['x-ray'] = ('fake-' + crypto.randomUUID()).slice(0, 20);
+              const h = proxyRes.headers['cf-ray'] ?? '';
+              if (h === '') {
+                proxyRes.headers['cf-ray'] = ('fake-' + crypto.randomUUID()).slice(0, 20);
+              } else if (Array.isArray(h)) {
+                proxyRes.headers['cf-ray'] = h[0] ?? ('fake-' + crypto.randomUUID()).slice(0, 20);
               }
               // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
               // 所以在本地开发时移除 secure attribute

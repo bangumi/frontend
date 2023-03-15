@@ -48,7 +48,7 @@ class ErrorBoundary extends React.Component<
       let msg = error.message ?? '发生未知错误';
       let reqID: string | null = null;
       if (error instanceof HttpError) {
-        reqID = error.headers.get('x-ray');
+        reqID = error.headers.get('cf-ray');
         const { message = msg, code = error.status } = (error.data ?? {}) as Partial<resError>;
         msg = message;
         // 选择对应 statusCode / err code 的 fallback
