@@ -5,11 +5,12 @@ import React from 'react';
 import ErrorLayout from './ErrorLayout';
 
 type CatchError = HttpError | Error | null;
-type ErrorBoundaryFallbackFC = Record<number, ((err: CatchError) => JSX.Element) | JSX.Element>;
+type ErrorBoundaryFallbackFC = Record<string, ((err: CatchError) => JSX.Element) | JSX.Element>;
 
 interface ErrorBoundaryState {
   error: CatchError;
 }
+
 const initialState: ErrorBoundaryState = { error: null };
 
 // Error boundaries currently have to be classes.
@@ -31,19 +32,24 @@ export default class ErrorBoundary extends React.Component<
     if (error) {
       let fb: ((err: CatchError) => JSX.Element) | JSX.Element | undefined;
       let msg = error.message ?? '发生未知错误';
+      let reqID: string | null = null;
       if (error instanceof HttpError) {
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-member-access
-        if (error.data?.message) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          msg = error.data.message;
+        reqID = error.headers.get('x-ray');
+        const { message, code = error.status } = (error.data ?? {}) as {
+          message?: string;
+          code?: string;
+        };
+        if (message) {
+          msg = message;
         }
+
         if (fallback) {
           // 选择对应 status code 的 fallback
-          fb = fallback[error.status];
+          fb = fallback[code];
         }
       }
       return (
-        <ErrorLayout>
+        <ErrorLayout requestID={reqID}>
           {fb ? (typeof fb === 'function' ? fb(this.state.error) : fb) : msg}
         </ErrorLayout>
       );

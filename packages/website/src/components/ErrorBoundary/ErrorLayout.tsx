@@ -7,7 +7,10 @@ import { PureLink } from '@bangumi/design/components/Typography/Link';
 
 import layoutStyle from './style.module.less';
 
-export default function ErrorLayout({ children }: PropsWithChildren<{}>) {
+export default function ErrorLayout({
+  children,
+  requestID,
+}: PropsWithChildren<{ requestID: string | null }>) {
   const navigate = useNavigate();
   return (
     <div className={layoutStyle.errorContainer}>
@@ -25,6 +28,11 @@ export default function ErrorLayout({ children }: PropsWithChildren<{}>) {
             返回上页
           </PureLink>
         </div>
+        {requestID && (
+          <div className={layoutStyle.info}>
+            request-id: <pre>{requestID}</pre>
+          </div>
+        )}
       </div>
     </div>
   );

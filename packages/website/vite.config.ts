@@ -1,3 +1,4 @@
+import * as crypto from 'node:crypto';
 import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
@@ -61,6 +62,11 @@ export default defineConfig(({ mode }) => {
               proxyReq.setHeader('Referer', apiDomain + '/');
             });
             proxy.on('proxyRes', (proxyRes) => {
+              proxyRes.statusCode = 404;
+              const h = proxyRes.headers['x-ray'];
+              if (h === undefined || h === '') {
+                proxyRes.headers['x-ray'] = 'fake-req-id-' + crypto.randomUUID();
+              }
               // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
               // 所以在本地开发时移除 secure attribute
               const setCookies = proxyRes.headers['set-cookie'];
