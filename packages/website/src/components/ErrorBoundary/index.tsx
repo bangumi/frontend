@@ -1,3 +1,4 @@
+import { isFunction } from 'lodash';
 import { HttpError } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
@@ -31,7 +32,7 @@ export default class ErrorBoundary extends React.Component<
 
     if (error) {
       let fb: ((err: CatchError) => JSX.Element) | JSX.Element | undefined;
-      let msg = error.message ?? '发生未知错误';
+      let msg = error?.message ?? '发生未知错误';
       let reqID: string | null = null;
       if (error instanceof HttpError) {
         reqID = error.headers.get('x-ray');
@@ -39,21 +40,19 @@ export default class ErrorBoundary extends React.Component<
           message?: string;
           code?: string;
         };
-        if (message) {
-          msg = message;
-        }
 
-        if (fallback) {
-          // 选择对应 status code 的 fallback
-          fb = fallback[code];
-        }
+        msg = message ?? msg;
+
+        // 选择对应 statusCode / err code 的 fallback
+        fb = fallback?.[code];
       }
       return (
         <ErrorLayout requestID={reqID}>
-          {typeof fb === 'function' ? fb(this.state.error) : fb ?? msg}
+          {isFunction(fb) ? fb(this.state.error) : fb ?? msg}
         </ErrorLayout>
       );
     }
+
     return this.props.children;
   }
 }
