@@ -2,6 +2,8 @@ import { HttpError } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
+import type { Error as resError } from '@bangumi/client/client';
+
 import ErrorLayout from './ErrorLayout';
 
 type CatchError = HttpError | Error | null;
@@ -35,13 +37,8 @@ export default class ErrorBoundary extends React.Component<
       let reqID: string | null = null;
       if (error instanceof HttpError) {
         reqID = error.headers.get('x-ray');
-        const { message = msg, code = error.status } = (error.data ?? {}) as {
-          message?: string;
-          code?: string;
-        };
-
+        const { message = msg, code = error.status } = (error.data ?? {}) as Partial<resError>;
         msg = message;
-
         // 选择对应 statusCode / err code 的 fallback
         fb = fallback?.[code];
       }
