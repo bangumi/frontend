@@ -11,10 +11,13 @@ type CatchError = HttpError | Error | null;
 /**
  * 响应的 error code 的优先级高于 http status code。
  *
- * @example - {
- *     404: <NotFound />,
+ * @example
+ * ```tsx
+ * {
  *    'NOT_ALLOWED_ERROR': <NotAllowedPage />.
- *  }
+ *     404: <NotFound />,
+ * }
+ * ```
  */
 type ErrorBoundaryFallbackFC = Record<string, ((err: CatchError) => JSX.Element) | JSX.Element>;
 
