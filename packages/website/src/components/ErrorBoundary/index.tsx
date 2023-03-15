@@ -29,7 +29,7 @@ const initialState: ErrorBoundaryState = { error: null };
 
 // Error boundaries currently have to be classes.
 // ref: https://reactjs.org/docs/error-boundaries.html#gatsby-focus-wrapper
-class ErrorBoundary extends React.Component<
+export default class ErrorBoundary extends React.Component<
   PropsWithChildren<{ fallback?: ErrorBoundaryFallbackFC }>,
   ErrorBoundaryState
 > {
