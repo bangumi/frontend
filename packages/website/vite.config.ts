@@ -62,7 +62,6 @@ export default defineConfig(({ mode }) => {
               proxyReq.setHeader('Referer', apiDomain + '/');
             });
             proxy.on('proxyRes', (proxyRes) => {
-              proxyRes.statusCode = 404;
               const h = proxyRes.headers['x-ray'];
               if (h === undefined || h === '') {
                 proxyRes.headers['x-ray'] = 'fake-req-id-' + crypto.randomUUID();
