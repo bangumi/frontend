@@ -104,9 +104,10 @@ pull_request_rules:
 
   - name: remove lint fail label
     conditions:
-      - check-success=lint
-      - check-neutral=lint
-      - check-skipped=lint
+      - or:
+          - check-success=lint
+          - check-neutral=lint
+          - check-skipped=lint
     actions:
       label:
         remove:
@@ -122,9 +123,10 @@ pull_request_rules:
 
   - name: remove test fail label
     conditions:
-      - check-success=test
-      - check-neutral=test
-      - check-skipped=test
+      - or:
+          - check-success=test
+          - check-neutral=test
+          - check-skipped=test
     actions:
       label:
         remove:
@@ -140,9 +142,10 @@ pull_request_rules:
 
   - name: remove build fail label
     conditions:
-      - check-success=build
-      - check-neutral=build
-      - check-skipped=build
+      - or:
+          - check-success=build
+          - check-neutral=build
+          - check-skipped=build
     actions:
       label:
         remove:
@@ -158,9 +161,10 @@ pull_request_rules:
 
   - name: remove storybook build fail label
     conditions:
-      - check-success=storybook-build
-      - check-neutral=storybook-build
-      - check-skipped=storybook-build
+      - or:
+          - check-success=storybook-build
+          - check-neutral=storybook-build
+          - check-skipped=storybook-build
     actions:
       label:
         remove:
