@@ -36,12 +36,12 @@ export default class ErrorBoundary extends React.Component<
       let reqID: string | null = null;
       if (error instanceof HttpError) {
         reqID = error.headers.get('x-ray');
-        const { message, code = error.status } = (error.data ?? {}) as {
+        const { message = msg, code = error.status } = (error.data ?? {}) as {
           message?: string;
           code?: string;
         };
 
-        msg = message ?? msg;
+        msg = message;
 
         // 选择对应 statusCode / err code 的 fallback
         fb = fallback?.[code];
