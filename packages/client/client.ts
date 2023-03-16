@@ -129,11 +129,6 @@ export interface LoginRequestBody {
   email: string;
   password: string;
 }
-export interface ValidationError {
-  error: string;
-  message: string;
-  statusCode: number;
-}
 export interface CurrentUser {
   avatar: {
     large: string;
@@ -549,7 +544,7 @@ export async function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts
       }
     | {
         status: 400;
-        data: ValidationError;
+        data: Error;
       }
     | {
         status: 401;
@@ -583,7 +578,7 @@ export async function login2(loginRequestBody?: LoginRequestBody, opts?: Oazapft
       }
     | {
         status: 400;
-        data: ValidationError;
+        data: Error;
       }
     | {
         status: 401;

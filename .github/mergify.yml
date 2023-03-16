@@ -94,20 +94,42 @@ pull_request_rules:
         remove:
           - conflict
 
-  - name: toggle labels based on lint state
+  - name: add lint fail label
     conditions:
       - check-failure=lint
     actions:
       label:
-        toggle:
+        add:
           - 'ci:lint:fail'
 
-  - name: toggle labels based on test state
+  - name: remove lint fail label
+    conditions:
+      - or:
+          - check-success=lint
+          - check-neutral=lint
+          - check-skipped=lint
+    actions:
+      label:
+        remove:
+          - 'ci:lint:fail'
+
+  - name: add test fail label
     conditions:
       - check-failure=test
     actions:
       label:
-        toggle:
+        add:
+          - 'ci:test:fail'
+
+  - name: remove test fail label
+    conditions:
+      - or:
+          - check-success=test
+          - check-neutral=test
+          - check-skipped=test
+    actions:
+      label:
+        remove:
           - 'ci:test:fail'
 
   - name: toggle labels based on build state
@@ -115,13 +137,35 @@ pull_request_rules:
       - check-failure=build
     actions:
       label:
-        toggle:
+        add:
           - 'ci:build:fail'
 
-  - name: toggle labels based on storybook build  state
+  - name: remove build fail label
+    conditions:
+      - or:
+          - check-success=build
+          - check-neutral=build
+          - check-skipped=build
+    actions:
+      label:
+        remove:
+          - 'ci:build:fail'
+
+  - name: add storybook build fail label
     conditions:
       - check-failure=storybook-build
     actions:
       label:
-        toggle:
+        add:
+          - 'ci:storybook-build:fail'
+
+  - name: remove storybook build fail label
+    conditions:
+      - or:
+          - check-success=storybook-build
+          - check-neutral=storybook-build
+          - check-skipped=storybook-build
+    actions:
+      label:
+        remove:
           - 'ci:storybook-build:fail'

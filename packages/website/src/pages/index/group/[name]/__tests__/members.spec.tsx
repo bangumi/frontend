@@ -38,13 +38,13 @@ class GroupMembersTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost:3000/p1/groups/${name}/profile`, (req, res, ctx) => {
+      rest.get(`http://localhost:3000/p1/groups/${name}/profile`, async (req, res, ctx) => {
         return res(ctx.status(200), ctx.json(Sandbox));
       }),
     );
 
     mockServer.use(
-      rest.get(`http://localhost:3000/p1/groups/${name}/members`, (req, res, ctx) => {
+      rest.get(`http://localhost:3000/p1/groups/${name}/members`, async (req, res, ctx) => {
         const isAdmin = req.url.searchParams.get('type') === 'mod';
         return res(ctx.status(200), ctx.json(isAdmin ? mock.modMembers : mock.members));
       }),

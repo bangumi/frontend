@@ -330,12 +330,6 @@ export interface components {
       user_group: number;
       username: string;
     };
-    /** @description request data validation error */
-    ValidationError: {
-      error: string;
-      message: string;
-      statusCode: number;
-    };
     WikiPlatform: {
       id: number;
       text: string;
@@ -352,13 +346,13 @@ export interface components {
 export type external = Record<string, never>;
 
 export interface operations {
+  /**
+   * 标记通知为已读
+   * @description 标记通知为已读
+   *
+   * 不传id时会清空所有未读通知
+   */
   clearNotice: {
-    /**
-     * 标记通知为已读
-     * @description 标记通知为已读
-     *
-     * 不传id时会清空所有未读通知
-     */
     requestBody?: {
       content: {
         'application/json': {
@@ -385,8 +379,8 @@ export interface operations {
   };
   getGroupPost: {
     parameters: {
-      /** @example 2092074 */
       path: {
+        /** @example 2092074 */
         postID: number;
       };
     };
@@ -413,8 +407,8 @@ export interface operations {
   };
   editGroupPost: {
     parameters: {
-      /** @example 2092074 */
       path: {
+        /** @example 2092074 */
         postID: number;
       };
     };
@@ -453,8 +447,8 @@ export interface operations {
   };
   deleteGroupPost: {
     parameters: {
-      /** @example 2092074 */
       path: {
+        /** @example 2092074 */
         postID: number;
       };
     };
@@ -485,11 +479,11 @@ export interface operations {
       };
     };
   };
+  /** @description 获取帖子列表 */
   getGroupTopicDetail: {
-    /** @description 获取帖子列表 */
     parameters: {
-      /** @example 371602 */
       path: {
+        /** @example 371602 */
         id: number;
       };
     };
@@ -516,8 +510,8 @@ export interface operations {
   };
   editGroupTopic: {
     parameters: {
-      /** @example 371602 */
       path: {
+        /** @example 371602 */
         topicID: number;
       };
     };
@@ -555,8 +549,8 @@ export interface operations {
   };
   createGroupReply: {
     parameters: {
-      /** @example 371602 */
       path: {
+        /** @example 371602 */
         topicID: number;
       };
     };
@@ -593,10 +587,10 @@ export interface operations {
       };
     };
   };
+  /** @description 获取帖子列表 */
   listGroupMembersByName: {
-    /** @description 获取帖子列表 */
     parameters: {
-      query?: {
+      query: {
         type?: 'mod' | 'normal' | 'all';
         limit?: number;
         offset?: number;
@@ -629,10 +623,10 @@ export interface operations {
       };
     };
   };
+  /** @description 获取小组首页 */
   getGroupProfile: {
-    /** @description 获取小组首页 */
     parameters: {
-      query?: {
+      query: {
         limit?: number;
         offset?: number;
       };
@@ -661,10 +655,10 @@ export interface operations {
       };
     };
   };
+  /** @description 获取帖子列表 */
   getGroupTopicsByGroupName: {
-    /** @description 获取帖子列表 */
     parameters: {
-      query?: {
+      query: {
         limit?: number;
         offset?: number;
       };
@@ -698,8 +692,8 @@ export interface operations {
   };
   createNewGroupTopic: {
     parameters: {
-      /** @example sandbox */
       path: {
+        /** @example sandbox */
         groupName: string;
       };
     };
@@ -726,14 +720,14 @@ export interface operations {
       };
     };
   };
+  /**
+   * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+   *
+   * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+   *
+   * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
+   */
   login: {
-    /**
-     * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-     *
-     * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-     *
-     * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
-     */
     requestBody?: {
       content: {
         'application/json': components['schemas']['LoginRequestBody'];
@@ -750,10 +744,10 @@ export interface operations {
           'application/json': components['schemas']['User'];
         };
       };
-      /** @description Default Response */
+      /** @description request validation error */
       400: {
         content: {
-          'application/json': components['schemas']['ValidationError'];
+          'application/json': components['schemas']['Error'];
         };
       };
       /** @description 验证码错误/账号密码不匹配 */
@@ -792,11 +786,11 @@ export interface operations {
       };
     };
   };
+  /**
+   * @deprecated
+   * @description backward compatibility for #login operator
+   */
   login2: {
-    /**
-     * @deprecated
-     * @description backward compatibility for #login operator
-     */
     requestBody?: {
       content: {
         'application/json': components['schemas']['LoginRequestBody'];
@@ -812,10 +806,10 @@ export interface operations {
           'application/json': components['schemas']['User'];
         };
       };
-      /** @description Default Response */
+      /** @description request validation error */
       400: {
         content: {
-          'application/json': components['schemas']['ValidationError'];
+          'application/json': components['schemas']['Error'];
         };
       };
       /** @description 验证码错误/账号密码不匹配 */
@@ -848,8 +842,8 @@ export interface operations {
       };
     };
   };
+  /** @description 登出 */
   logout: {
-    /** @description 登出 */
     requestBody?: {
       content: {
         'application/json': Record<string, never>;
@@ -898,10 +892,10 @@ export interface operations {
       };
     };
   };
+  /** 获取未读通知 */
   listNotice: {
-    /** 获取未读通知 */
-    parameters?: {
-      query?: {
+    parameters: {
+      query: {
         limit?: number;
       };
     };
@@ -929,10 +923,10 @@ export interface operations {
       };
     };
   };
+  /** @description 获取帖子列表 */
   getSubjectTopicsBySubjectId: {
-    /** @description 获取帖子列表 */
     parameters: {
-      query?: {
+      query: {
         limit?: number;
         offset?: number;
       };
@@ -964,15 +958,15 @@ export interface operations {
       };
     };
   };
+  /**
+   * @description 获取当前的 wiki 信息
+   *
+   * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+   */
   subjectInfo: {
-    /**
-     * @description 获取当前的 wiki 信息
-     *
-     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
-     */
     parameters: {
-      /** @example 363612 */
       path: {
+        /** @example 363612 */
         subjectID: number;
       };
     };
@@ -997,15 +991,15 @@ export interface operations {
       };
     };
   };
+  /**
+   * @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
+   *
+   * 需要 `subjectWikiEdit` 权限
+   */
   putSubjectInfo: {
-    /**
-     * @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
-     *
-     * 需要 `subjectWikiEdit` 权限
-     */
     parameters: {
-      /** @example 363612 */
       path: {
+        /** @example 363612 */
         subjectID: number;
       };
     };
@@ -1046,11 +1040,11 @@ export interface operations {
       };
     };
   };
+  /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
   patchSubjectInfo: {
-    /** @description 暂时只能修改沙盒条目 184017,309445,354667,354677,363612 */
     parameters: {
-      /** @example 363612 */
       path: {
+        /** @example 363612 */
         subjectID: number;
       };
     };
@@ -1096,8 +1090,8 @@ export interface operations {
   };
   listSubjectCovers: {
     parameters: {
-      /** @example 184017 */
       path: {
+        /** @example 184017 */
         subjectID: number;
       };
     };
@@ -1141,8 +1135,8 @@ export interface operations {
       };
     };
   };
+  /** @description 需要 `subjectWikiEdit` 权限 */
   uploadSubjectCover: {
-    /** @description 需要 `subjectWikiEdit` 权限 */
     parameters: {
       path: {
         subjectID: number;
@@ -1186,11 +1180,11 @@ export interface operations {
       };
     };
   };
+  /**
+   * 为条目封面投票
+   * @description 需要 `subjectWikiEdit` 权限
+   */
   voteSubjectCover: {
-    /**
-     * 为条目封面投票
-     * @description 需要 `subjectWikiEdit` 权限
-     */
     parameters: {
       path: {
         subjectID: number;
@@ -1212,11 +1206,11 @@ export interface operations {
       };
     };
   };
+  /**
+   * 撤消条目封面投票
+   * @description 需要 `subjectWikiEdit` 权限
+   */
   unvoteSubjectCover: {
-    /**
-     * 撤消条目封面投票
-     * @description 需要 `subjectWikiEdit` 权限
-     */
     parameters: {
       path: {
         subjectID: number;
@@ -1238,15 +1232,15 @@ export interface operations {
       };
     };
   };
+  /**
+   * @description 获取当前的 wiki 信息
+   *
+   * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
+   */
   subjectEditHistorySummary: {
-    /**
-     * @description 获取当前的 wiki 信息
-     *
-     * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
-     */
     parameters: {
-      /** @example 8 */
       path: {
+        /** @example 8 */
         subjectID: number;
       };
     };
