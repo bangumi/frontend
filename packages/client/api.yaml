@@ -664,7 +664,7 @@ components:
       type: object
   securitySchemes:
     CookiesSession:
-      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
+      description: 使用 [login](#/auth/login) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
       in: cookie
       name: chiiNextSessionID
       type: apiKey
