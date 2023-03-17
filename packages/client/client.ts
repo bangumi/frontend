@@ -163,6 +163,7 @@ export interface Notice {
   title: string;
   topicID: number;
   type: number;
+  unread: boolean;
 }
 export interface WikiPlatform {
   id: number;
@@ -568,40 +569,6 @@ export async function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts
   );
 }
 /**
- * backward compatibility for #login operator
- */
-export async function login2(loginRequestBody?: LoginRequestBody, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: User;
-      }
-    | {
-        status: 400;
-        data: Error;
-      }
-    | {
-        status: 401;
-        data: Error;
-      }
-    | {
-        status: 429;
-        data: Error;
-      }
-    | {
-        status: 500;
-        data: Error;
-      }
-  >(
-    '/p1/login2',
-    oazapfts.json({
-      ...opts,
-      method: 'POST',
-      body: loginRequestBody,
-    }),
-  );
-}
-/**
  * 登出
  */
 export async function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
@@ -651,8 +618,10 @@ export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
 export async function listNotice(
   {
     limit,
+    unread,
   }: {
     limit?: number;
+    unread?: boolean;
   } = {},
   opts?: Oazapfts.RequestOpts,
 ) {
@@ -676,6 +645,7 @@ export async function listNotice(
     `/p1/notify${QS.query(
       QS.explode({
         limit,
+        unread,
       }),
     )}`,
     {
