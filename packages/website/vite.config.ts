@@ -112,7 +112,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         less: {
           charset: false,
-          additionalData: '@import "./src/style/utils.less";',
+          additionalData: '@import "./src/style/index.less";',
         },
       },
     },
