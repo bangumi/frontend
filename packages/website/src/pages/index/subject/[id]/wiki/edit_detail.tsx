@@ -1,32 +1,29 @@
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import { cloneDeep, concat, filter, flow, isArray, isNumber, set } from 'lodash';
+import { flow } from 'lodash';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
-import { nanoid } from 'nanoid';
-import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
-import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocalstorageState } from 'rooks';
 
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select, toast } from '@bangumi/design';
-import { ArrowRightCircle, Cursor, Minus, Plus } from '@bangumi/icons';
-import type { Wiki } from '@bangumi/utils';
+import { ArrowRightCircle } from '@bangumi/icons';
+import type { Wiki ,
+  WikiElement} from '@bangumi/utils';
 import {
   fromWikiElement,
   mergeWiki,
   parseWiki,
   stringifyWiki,
   toWikiElement,
-  WikiElement,
   WikiSyntaxError,
 } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor';
 import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
-import { reorder } from '@bangumi/website/utils';
 
+import WikiBeginnerEditor from '../components/WikiBeginnerEditor';
 import { useWikiContext } from '../wiki';
 import style from './common.module.less';
 
@@ -64,167 +61,6 @@ const BuiltInCommitMessage = [
   '欢迎',
   '警告',
 ].map((msg, idx) => ({ label: msg, value: idx.toString() }));
-
-type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
-  index: number;
-  item: WikiElement;
-  path: string;
-  level?: number;
-  draggableProvided: DraggableProvided;
-};
-
-interface IWikiInfoContext {
-  els: WikiElement[];
-  addOneWikiElement: (path: string) => void;
-  removeOneWikiElement: (path: string) => void;
-  editOneWikiElement: (path: string, target: 'value' | 'key', value: string) => void;
-  switchWikiElementToArray: (idx: number) => void;
-}
-
-const WikiInfoContext = createContext<IWikiInfoContext | null>(null);
-
-const WikiInfoItem = ({
-  item,
-  level = 1,
-  draggableProvided,
-  path,
-  index,
-  ...rest
-}: WikiInfoItemProps) => {
-  const { editOneWikiElement, removeOneWikiElement, switchWikiElementToArray } =
-    useContext(WikiInfoContext) ?? {};
-
-  return (
-    <div
-      className={cn(style.formDetailInfoItem, isArray(item.value) && style.draggableBox)}
-      onKeyDown={(e) => {
-        if (e.ctrlKey && e.key === 'Enter') {
-          level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
-        }
-        if (e.ctrlKey && e.code === 'KeyX') {
-          removeOneWikiElement?.(path);
-        }
-      }}
-      {...rest}
-    >
-      <Input.Group
-        className={cn(style.formInputGroup, level === 2 && style.formInputGroupSecondary)}
-        onKeyDown={(e) => {
-          // 阻止回车提交表单
-          if (e.key === 'Enter') {
-            e.preventDefault();
-          }
-        }}
-      >
-        <Input
-          wrapperStyle={{
-            width: '170px',
-          }}
-          align={level === 2 ? 'right' : undefined}
-          defaultValue={item.key}
-          onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
-        />
-        <Input
-          id={item._id}
-          wrapperClass={style.formInput}
-          defaultValue={typeof item.value === 'string' ? item.value : ''}
-          disabled={isArray(item.value)}
-          onChange={(v) => editOneWikiElement?.(path, 'value', v.target.value)}
-        />
-      </Input.Group>
-
-      <div
-        {...draggableProvided.dragHandleProps}
-        /**
-         * dragHandleProps 中会设置 tabIndex = 0，导致当激活上面的输入框时，按下 Tab
-         * 无法 focus 下一个输入框，而是 focus 该 Icon，这里将 tabIndex 复写为 -1，
-         * 这样下一个输入框由于有更高的优先级就可以被 focus 了。
-         */
-        tabIndex={-1}
-      >
-        <Cursor className={style.formDetailInfoItemCursor} />
-      </div>
-      <Minus
-        className={style.formDetailInfoItemMinus}
-        onClick={() => removeOneWikiElement?.(path)}
-      />
-    </div>
-  );
-};
-
-const WikiBeginnerEditor = ({
-  els,
-  level = 1,
-  path = '',
-  onDragEnd,
-}: {
-  els: WikiElement[];
-  level?: number;
-  path?: string;
-  onDragEnd: (path: string, result: DropResult, provided: ResponderProvided) => void;
-}) => {
-  const { addOneWikiElement } = useContext(WikiInfoContext) ?? {};
-
-  return (
-    <DragDropContext
-      onDragEnd={(res, provided) => {
-        onDragEnd(path, res, provided);
-      }}
-    >
-      <Droppable droppableId={`list-${level}`}>
-        {(droppableProvided) => (
-          <div ref={droppableProvided.innerRef}>
-            {els.map((el, idx) => {
-              return (
-                <Draggable key={el._id} index={idx} draggableId={el._id}>
-                  {(draggableProvided) => (
-                    <div
-                      ref={draggableProvided.innerRef}
-                      className={style.draggableBox}
-                      {...draggableProvided.draggableProps}
-                    >
-                      <WikiInfoItem
-                        index={idx}
-                        item={el}
-                        level={level}
-                        path={level === 1 ? idx.toString() : `${path}.${idx}`}
-                        draggableProvided={draggableProvided}
-                      />
-
-                      {/* subList */}
-                      {isArray(el.value) && (
-                        <WikiBeginnerEditor
-                          els={el.value}
-                          level={level + 1}
-                          onDragEnd={onDragEnd}
-                          path={level === 1 ? idx.toString() : `${path}.${idx}`}
-                        />
-                      )}
-                    </div>
-                  )}
-                </Draggable>
-              );
-            })}
-            {droppableProvided.placeholder}
-          </div>
-        )}
-      </Droppable>
-      <button
-        className={cn(
-          style.formInput,
-          style.formInputBtn,
-          level === 2 && style.formInputBtnSecondary,
-        )}
-        onClick={() => addOneWikiElement?.(path)}
-        type='button'
-      >
-        <Plus />
-        <span>新增行</span>
-      </button>
-    </DragDropContext>
-  );
-};
-
 interface FormData {
   commitMessage: string;
   subject: ozaClient.SubjectEdit;
@@ -234,7 +70,7 @@ const formatWikiSyntaxErrorMessage = (error: WikiSyntaxError): string => {
   return `${error.lino ? `line ${error.lino}:` : ''} ${error.message}`;
 };
 
-const WikiEditDetailDetailPage: React.FC = () => {
+function WikiEditDetailDetailPage() {
   const { register, handleSubmit, setValue, watch } = useForm<FormData>();
   const prePlatform = watch('subject.platform');
 
@@ -244,15 +80,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
   );
   const wikiRef = useRef<Wiki>();
   const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
-
-  const [inputFocusToId, setInputFocusToId] = useState('');
-  useEffect(() => {
-    const input = document.getElementById(inputFocusToId);
-    if (input) {
-      input.focus();
-    }
-    setInputFocusToId('');
-  }, [inputFocusToId]);
 
   const monoEditorInstanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const { subjectEditHistory, subjectWikiInfo, mutateHistory, subjectId } = useWikiContext();
@@ -346,97 +173,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
     }
   };
 
-  const addOneWikiElement = (path: string) => {
-    const [idx] = path.split('.').map((v) => parseInt(v));
-    setWikiElement((preEls) => {
-      const newEls = cloneDeep(preEls);
-      if (isNumber(idx) && !isNaN(idx)) {
-        const preValue = newEls[idx]?.value as WikiElement[];
-        return set(newEls, `${idx}.value`, concat(preValue, new WikiElement()));
-      }
-      return concat(preEls, new WikiElement());
-    });
-  };
-
-  const removeOneWikiElement = (path: string) => {
-    const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
-    const id = nanoid();
-    if (!isNumber(idx)) return;
-    setWikiElement((preEl) => {
-      if (isNumber(subIdx)) {
-        return preEl.map((el, i) => {
-          if (i === idx && isArray(el.value)) {
-            return {
-              ...el,
-              _id: id,
-              value:
-                el.value.length === 1
-                  ? el.value[0]?.value
-                  : filter(el.value, (_, i) => i !== subIdx),
-            };
-          }
-          return el;
-        });
-      }
-      return filter(preEl, (_, i) => i !== idx);
-    });
-    setInputFocusToId(id);
-  };
-
-  const editOneWikiElement = (path: string, target: 'key' | 'value', value: string) => {
-    const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
-    if (!isNumber(idx)) return;
-    setWikiElement((preEls) => {
-      if (isNumber(subIdx)) {
-        return set(preEls, `${idx}.value.${subIdx}.${target}`, value);
-      }
-      return set(preEls, `${idx}.${target}`, value);
-    });
-  };
-
-  const switchWikiElementToArray = (idx: number) => {
-    const id = nanoid();
-    setWikiElement((preEls) => {
-      const newEls = [...preEls];
-      return set(
-        newEls,
-        idx,
-        new WikiElement({
-          key: preEls[idx]?.key,
-          value: [
-            new WikiElement({
-              id,
-              value: preEls[idx]?.value ?? '',
-            }),
-          ],
-        }),
-      );
-    });
-    setInputFocusToId(id);
-  };
-
-  const onDragEnd = (path: string, result: DropResult, provided: ResponderProvided) => {
-    const { destination, source } = result;
-    const [idx] = path.split('.').map((v) => parseInt(v));
-    if (!destination) return;
-    const level = parseInt(source.droppableId.split('-')[1] ?? '-1');
-    if (level === 1) {
-      setWikiElement((preEls) => reorder(preEls, source.index, destination.index));
-    } else if (level === 2 && isNumber(idx)) {
-      setWikiElement((preEls) =>
-        preEls.map((el, i) => {
-          if (i === idx && isArray(el.value)) {
-            return {
-              ...el,
-              value: reorder(el.value, source.index, destination.index),
-            };
-          }
-          return el;
-        }),
-      );
-    }
-  };
-
   const handlePlatformChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
     (e) => {
       const tpl = e.target.dataset.tpl;
@@ -510,7 +246,7 @@ const WikiEditDetailDetailPage: React.FC = () => {
                       />
                     ))}
                   </Radio.Group>
-                  <div className={style.Tips}>
+                  <div className={style.tips}>
                     注意：切换类型会导致项目顺序发生变化，请先选择好模板再进行排序
                   </div>
                 </div>
@@ -535,33 +271,9 @@ const WikiEditDetailDetailPage: React.FC = () => {
                   ))}
                 </Radio.Group>
 
-                <div
-                  className={style.Tips}
-                  style={{ display: editorType === EditorType.Beginner ? 'block' : 'none' }}
-                >
-                  <div>Tips:</div>
-                  <div>可拖拽改变行顺序</div>
-                  <div>
-                    按<kbd>Ctrl</kbd>+<kbd>Enter</kbd>切换为二级项目
-                  </div>
-                  <div>
-                    按<kbd>Ctrl</kbd>+<kbd>X</kbd>可删除项目
-                  </div>
-                </div>
-
                 {/* 入门编辑模式 */}
                 <div hidden={editorType !== EditorType.Beginner}>
-                  <WikiInfoContext.Provider
-                    value={{
-                      els: wikiElement,
-                      addOneWikiElement,
-                      removeOneWikiElement,
-                      editOneWikiElement,
-                      switchWikiElementToArray,
-                    }}
-                  >
-                    <WikiBeginnerEditor els={wikiElement} onDragEnd={onDragEnd} />
-                  </WikiInfoContext.Provider>
+                  <WikiBeginnerEditor els={wikiElement} onChange={(els) => { setWikiElement(els); }} />
                 </div>
 
                 {/* Wiki 编辑模式 */}
@@ -645,6 +357,6 @@ const WikiEditDetailDetailPage: React.FC = () => {
       }
     />
   );
-};
+}
 
 export default withErrorBoundary(WikiEditDetailDetailPage);
