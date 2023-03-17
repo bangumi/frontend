@@ -1,10 +1,11 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
 import { UnreadableCodeError } from '@bangumi/utils';
+import { useNotify } from '@bangumi/website/hooks/use-notify';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
@@ -90,6 +91,9 @@ if (Musume === undefined) {
 
 const Header: FC = () => {
   const { user } = useUser();
+  const { noticeCount } = useNotify(user);
+
+  const navigate = useNavigate();
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
@@ -142,7 +146,18 @@ const Header: FC = () => {
           {/* Avatar */}
           {user ? (
             <>
-              <Notification className={style.iconNotification} />
+              {noticeCount ? (
+                // TODO: 没有设计稿
+                <div className={style.span}>
+                  <Notification
+                    className={style.iconNotification}
+                    onClick={(e) => { navigate('/notifications'); }}
+                  />
+                  <i className={style.tip} />
+                </div>
+              ) : (
+                <Notification className={style.iconNotification} />
+              )}
               <Setting className={style.iconSetting} />
               <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
             </>
