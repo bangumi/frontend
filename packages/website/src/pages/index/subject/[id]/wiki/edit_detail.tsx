@@ -9,8 +9,7 @@ import { useLocalstorageState } from 'rooks';
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select, toast } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
-import type { Wiki ,
-  WikiElement} from '@bangumi/utils';
+import type { Wiki, WikiElement } from '@bangumi/utils';
 import {
   fromWikiElement,
   mergeWiki,
@@ -273,7 +272,12 @@ function WikiEditDetailDetailPage() {
 
                 {/* 入门编辑模式 */}
                 <div hidden={editorType !== EditorType.Beginner}>
-                  <WikiBeginnerEditor els={wikiElement} onChange={(els) => { setWikiElement(els); }} />
+                  <WikiBeginnerEditor
+                    els={wikiElement}
+                    onChange={(els) => {
+                      setWikiElement(els);
+                    }}
+                  />
                 </div>
 
                 {/* Wiki 编辑模式 */}

@@ -2,15 +2,8 @@ import cn from 'classnames';
 import { cloneDeep, concat, filter, isArray, isNumber, set } from 'lodash';
 import { nanoid } from 'nanoid';
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import type {
-  DraggableProvided,
-  DropResult,
-  ResponderProvided} from 'react-beautiful-dnd';
-import {
-  DragDropContext,
-  Draggable,
-  Droppable
-} from 'react-beautiful-dnd';
+import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { Input } from '@bangumi/design';
 import { Cursor, Minus, Plus } from '@bangumi/icons';
@@ -229,7 +222,8 @@ function WikiBeginnerEditor({
       if (isNumber(idx) && !isNaN(idx)) {
         const preValue = newEls[idx]?.value as WikiElement[];
         // 给二级菜单新增项目
-        onChange(set(newEls, `${idx}.value`, concat(preValue, new WikiElement()))); return;
+        onChange(set(newEls, `${idx}.value`, concat(preValue, new WikiElement())));
+        return;
       }
     }
 
