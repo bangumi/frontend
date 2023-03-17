@@ -3,7 +3,7 @@
     "baseUrl": ".",
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -20,7 +20,13 @@
     "strictNullChecks": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "vite-plugin-svgr/client", "@testing-library/jest-dom", "vitest/globals"],
+    "types": [
+      "node",
+      "web",
+      "vite-plugin-svgr/client",
+      "@testing-library/jest-dom",
+      "vitest/globals"
+    ],
     "paths": {
       // 顺序不能打乱，保证 website 复写 *
       "@bangumi/*": ["packages/*/index.tsx", "packages/*/index.ts"],
