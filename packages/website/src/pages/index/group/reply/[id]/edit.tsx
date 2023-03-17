@@ -35,7 +35,7 @@ const EditReplyPage = () => {
 
   const handleSubmit = async (text: string) => {
     if (!text) {
-      toast('请填写回复内容');
+      toast('请填写回复内容', { type: 'error' });
       return;
     }
     setSending(true);
@@ -58,7 +58,7 @@ const EditReplyPage = () => {
       navigate(topicPath);
     } else {
       console.error(response);
-      toast(response.data.message);
+      toast(response.data.message, { type: 'error' });
     }
     setSending(false);
   };
