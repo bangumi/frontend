@@ -2,14 +2,29 @@ import { HttpError } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
+import type { Error as resError } from '@bangumi/client/client';
+
 import ErrorLayout from './ErrorLayout';
 
 type CatchError = HttpError | Error | null;
-type ErrorBoundaryFallbackFC = Record<number, ((err: CatchError) => JSX.Element) | JSX.Element>;
+
+/**
+ * 响应的 error code 的优先级高于 http status code。
+ *
+ * @example
+ * ```tsx
+ * {
+ *    'NOT_ALLOWED_ERROR': <NotAllowedPage />.
+ *     404: <NotFound />,
+ * }
+ * ```
+ */
+type ErrorBoundaryFallbackFC = Record<string, ((err: CatchError) => JSX.Element) | JSX.Element>;
 
 interface ErrorBoundaryState {
   error: CatchError;
 }
+
 const initialState: ErrorBoundaryState = { error: null };
 
 // Error boundaries currently have to be classes.
@@ -31,23 +46,21 @@ export default class ErrorBoundary extends React.Component<
     if (error) {
       let fb: ((err: CatchError) => JSX.Element) | JSX.Element | undefined;
       let msg = error.message ?? '发生未知错误';
+      let reqID: string | null = null;
       if (error instanceof HttpError) {
-        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions, @typescript-eslint/no-unsafe-member-access
-        if (error.data?.message) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-          msg = error.data.message;
-        }
-        if (fallback) {
-          // 选择对应 status code 的 fallback
-          fb = fallback[error.status];
-        }
+        reqID = error.headers.get('cf-ray');
+        const { message = msg, code = error.status } = (error.data ?? {}) as Partial<resError>;
+        msg = message;
+        // 选择对应 statusCode / err code 的 fallback
+        fb = fallback?.[code];
       }
       return (
-        <ErrorLayout>
-          {fb ? (typeof fb === 'function' ? fb(this.state.error) : fb) : msg}
+        <ErrorLayout requestID={reqID}>
+          {typeof fb === 'function' ? fb(error) : fb ?? msg}
         </ErrorLayout>
       );
     }
+
     return this.props.children;
   }
 }
