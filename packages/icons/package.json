@@ -11,6 +11,6 @@
     "@bangumi/utils": "workspace:0.0.0",
     "@storybook/react": "^6.5.16",
     "@types/react": "^18.0.28",
-    "typescript": "^5.0.1-rc"
+    "typescript": "^5.0.2"
   }
 }
