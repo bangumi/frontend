@@ -1,6 +1,7 @@
+import cn from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
@@ -93,12 +94,12 @@ const Header: FC = () => {
   const { user } = useUser();
   const { noticeCount } = useNotify(user);
 
-  const navigate = useNavigate();
-
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   return (
     <header className={style.container}>
       <div className={style.main}>
+        {/* left */}
         <div className='flex items-center'>
           {/* Logo */}
           <a className={style.logo} href='/'>
@@ -122,7 +123,9 @@ const Header: FC = () => {
             <Menu items={navRight} wrapperClass={style.navRight} />
           </div>
         </div>
-        <div className='flex items-center'>
+
+        {/* right */}
+        <div className={style.headerRight}>
           <div className={style.infoBox}>
             {/* Search Todo */}
             <Input
@@ -146,19 +149,16 @@ const Header: FC = () => {
           {/* Avatar */}
           {user ? (
             <>
-              {noticeCount ? (
-                // TODO: 没有设计稿
-                <div className={style.span}>
-                  <Notification
-                    className={style.iconNotification}
-                    onClick={(e) => { navigate('/notifications'); }}
-                  />
-                  <i className={style.tip} />
-                </div>
-              ) : (
-                <Notification className={style.iconNotification} />
-              )}
-              <Setting className={style.iconSetting} />
+              <Link
+                to='/notifications'
+                className={cn(style.icon, style.iconNotification, {
+                  [style.iconNotificationNotice!]: true,
+                })}
+              >
+                <Notification />
+              </Link>
+
+              <Setting className={style.icon} />
               <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
             </>
           ) : (
