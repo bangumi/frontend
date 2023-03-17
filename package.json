@@ -92,9 +92,9 @@
     "stylelint-config-standard": "^30.0.1",
     "timezone-mock": "^1.3.6",
     "typescript": "^4.9.5",
-    "vite": "^4.1.4",
+    "vite": "^4.2.0",
     "vite-plugin-svgr": "^2.4.0",
-    "vitest": "^0.29.2",
+    "vitest": "^0.29.3",
     "vitest-github-actions-reporter": "^0.10.0",
     "whatwg-fetch": "^3.6.2"
   },
