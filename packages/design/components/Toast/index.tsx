@@ -4,6 +4,7 @@ import { defer, uniqueId } from 'lodash';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import type { MessageType } from '../Message';
 import { ToastContainer } from './ToastContainer';
 import { insertToastEvent } from './utils/event-bus';
 
@@ -12,6 +13,7 @@ export { Toast } from './Toast';
 const TOAST_CONTAINER_CLS_NAME = 'bgm-toast__container';
 
 interface ToastOptions {
+  type?: MessageType;
   timeout?: number;
 }
 
@@ -29,6 +31,11 @@ export function toast(message: string, options: ToastOptions = {}) {
   }
 
   defer(() => {
-    insertToastEvent.emit({ message, tid: uniqueId(), timeout: options.timeout });
+    insertToastEvent.emit({
+      message,
+      tid: uniqueId(),
+      type: options.type,
+      timeout: options.timeout,
+    });
   });
 }

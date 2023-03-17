@@ -1,0 +1,37 @@
+@import '../../../theme/base';
+
+.bgm-message {
+  display: flex;
+
+  &__content {
+    border-radius: 19px;
+    padding: 9px 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+
+    > svg {
+      flex: none;
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+  }
+
+  &__content--block {
+    flex: 1;
+  }
+
+  &__content--info {
+    background-color: rgba(90, 87, 87, 0.6);
+    color: #fff;
+  }
+
+  &__content--error {
+    background-color: #f97f77;
+    color: #fff;
+  }
+}
