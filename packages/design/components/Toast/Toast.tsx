@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { delay } from 'lodash';
 import React from 'react';
 
+import Message from '../Message';
 import type { Toast as TToast } from './types';
 import { removeToastEvent } from './utils/event-bus';
 
@@ -16,7 +17,7 @@ const DEFAULT_TOAST_TIMEOUT = 5000;
 const FADE_OUT_TIME = 300;
 
 export const Toast: React.FC<ToastProps> = ({ toast }) => {
-  const { message, timeout = DEFAULT_TOAST_TIMEOUT } = toast;
+  const { message, timeout = DEFAULT_TOAST_TIMEOUT, type } = toast;
   const [isVisible, setIsVisible] = React.useState(false);
 
   React.useEffect(() => {
@@ -39,7 +40,7 @@ export const Toast: React.FC<ToastProps> = ({ toast }) => {
         'bgm-toast--visible': isVisible,
       })}
     >
-      {message}
+      <Message type={type}>{message}</Message>
     </div>
   );
 };
