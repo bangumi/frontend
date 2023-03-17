@@ -35,7 +35,7 @@ function mockLogin(
   headers: Record<string, string | string[]> = {},
 ): void {
   mockServer.use(
-    rest.post('http://localhost:3000/p1/login2', async (req, res, ctx) => {
+    rest.post('http://localhost:3000/p1/login', async (req, res, ctx) => {
       return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
     }),
   );
