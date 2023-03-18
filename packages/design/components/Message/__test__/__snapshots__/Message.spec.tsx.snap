@@ -1,0 +1,52 @@
+// Vitest Snapshot v1
+
+exports[`<Message /> > should be a error message 1`] = `
+<div>
+  <div
+    class="bgm-message"
+  >
+    <div
+      class="bgm-message__content bgm-message__content--error"
+    >
+      <div />
+      <span>
+        example-message-error
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Message /> > should be a whole line 1`] = `
+<div>
+  <div
+    class="bgm-message"
+  >
+    <div
+      class="bgm-message__content bgm-message__content--info bgm-message__content--block"
+    >
+      <div />
+      <span>
+        example-message-block
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Message /> > should be render a Message 1`] = `
+<div>
+  <div
+    class="bgm-message"
+  >
+    <div
+      class="bgm-message__content bgm-message__content--info"
+    >
+      <div />
+      <span>
+        example-message
+      </span>
+    </div>
+  </div>
+</div>
+`;

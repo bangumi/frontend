@@ -51,13 +51,6 @@ export interface paths {
      */
     post: operations['login'];
   };
-  '/p1/login2': {
-    /**
-     * @deprecated
-     * @description backward compatibility for #login operator
-     */
-    post: operations['login2'];
-  };
   '/p1/logout': {
     /** @description 登出 */
     post: operations['logout'];
@@ -233,6 +226,7 @@ export interface components {
       topicID: number;
       /** @description 查看 `./lib/notify.ts` _settings */
       type: number;
+      unread: boolean;
     };
     Permission: {
       subjectWikiEdit: boolean;
@@ -786,62 +780,6 @@ export interface operations {
       };
     };
   };
-  /**
-   * @deprecated
-   * @description backward compatibility for #login operator
-   */
-  login2: {
-    requestBody?: {
-      content: {
-        'application/json': components['schemas']['LoginRequestBody'];
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        headers: {
-          'Set-Cookie'?: string;
-        };
-        content: {
-          'application/json': components['schemas']['User'];
-        };
-      };
-      /** @description request validation error */
-      400: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 验证码错误/账号密码不匹配 */
-      401: {
-        headers: {
-          'X-RateLimit-Limit'?: number;
-          'X-RateLimit-Remaining'?: number;
-          'X-RateLimit-Reset'?: number;
-        };
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 失败次数太多，需要过一段时间再重试 */
-      429: {
-        headers: {
-          'X-RateLimit-Limit'?: number;
-          'X-RateLimit-Remaining'?: number;
-          'X-RateLimit-Reset'?: number;
-        };
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['Error'];
-        };
-      };
-    };
-  };
   /** @description 登出 */
   logout: {
     requestBody?: {
@@ -897,6 +835,7 @@ export interface operations {
     parameters: {
       query: {
         limit?: number;
+        unread?: boolean;
       };
     };
     responses: {
