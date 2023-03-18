@@ -16,7 +16,7 @@ export function useNotify(user: User | undefined) {
       reconnection: true,
       reconnectionDelay: 5000,
       reconnectionDelayMax: 10000,
-      transports: ['websocket'],
+      transports: ['websocket', 'polling'],
     });
 
     ws.on('notify', (event: string) => {
@@ -25,12 +25,10 @@ export function useNotify(user: User | undefined) {
       // setNoticeCount(count);
     });
 
-    ws.on('connect_error', () => {
-      // fallback to polling in netlify env
-      ws.io.opts.transports = ['polling', 'websocket'];
-    });
+    // fallback to polling in netlify env
+    // ws.on('connect_error', () => {
+    // });
 
-    // setSocket(ws);
     return () => {
       ws.disconnect();
     };
