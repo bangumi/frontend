@@ -1,67 +1,3 @@
-/**
- * TODO: 没有设计稿，只是实现了功能
- */
-
-import './style';
-
-import type { FC } from 'react';
-import React from 'react';
-
-import type { INotice } from '@bangumi/client/user';
-
-export interface NoticeProps extends INotice {
-  onClose?: (id: number) => void;
-}
-
-const Notice: FC<NoticeProps> = ({ id, type, title, postID, topicID, sender, onClose }) => {
-  const setting = _settings[type];
-
-  if (!setting) {
-    return (
-      <div id={`notice_${id}`}>
-        <div>{title}</div>
-      </div>
-    );
-  }
-
-  return (
-    <>
-      <div id={`notice_${id}`} className='bgm-notify'>
-        <div className='avatar'>
-          <img src={sender.avatar.small} alt='' />
-        </div>
-
-        <div className='inner'>
-          <a
-            href={`https://bgm.tv/user/${sender.username}`}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='user'
-          >
-            {sender.nickname}
-          </a>
-          <div>
-            {setting.prefix}{' '}
-            <a
-              href={`${setting.url}/${topicID}${setting.append ?? ''}${setting.anchor}${postID}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              {setting.inner ?? title}
-            </a>{' '}
-            {setting.suffix}
-          </div>
-        </div>
-
-        <div className='close' onClick={() => onClose?.(id)} />
-      </div>
-      <hr />
-    </>
-  );
-};
-
-export default Notice;
-
 interface setting {
   id: number;
   hash: number;
@@ -78,7 +14,7 @@ interface setting {
   merge?: number;
 }
 
-const _settings: Record<number, setting> = {
+export const _settings: Record<number, setting> = {
   1: {
     url: '/group/topic',
     url_mobile: 'MOBILE_URL/topic/group/',

@@ -21,7 +21,7 @@ export function useNotify(user: User | undefined) {
 
     ws.on('notify', (event: string) => {
       const { count } = JSON.parse(event) as { count: number };
-      console.log(count);
+      console.log('new notice:', count);
       // setNoticeCount(count);
     });
 
