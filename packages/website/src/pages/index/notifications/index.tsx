@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import { Button, Input, Tab, Typography } from '@bangumi/design';
+import { Button, Input, Pagination, Tab, Typography } from '@bangumi/design';
 import { Enter } from '@bangumi/icons';
 import { useUser } from '@bangumi/website/hooks/use-user';
 import { _settings } from '@bangumi/website/shared/notifications';
@@ -68,11 +68,11 @@ const useNotifications = () => {
   const { data: notice, mutate } = useSWR(`listNotice`, async () => ok(ozaClient.listNotice()), {
     suspense: true,
   });
-  return { notice: notice?.data ?? [], mutate };
+  return { notice: notice?.data ?? [], mutate, total: notice.total };
 };
 
 function Notifications() {
-  const { notice, mutate } = useNotifications();
+  const { notice, mutate, total } = useNotifications();
 
   return (
     <>
@@ -102,7 +102,18 @@ function Notifications() {
         </Button>
       </div>
 
-      {notice.length === 0 ? '暂无信息' : notice.map((x) => <NoticeItem key={x.id} notice={x} />)}
+      {notice.length === 0 ? (
+        '暂无信息'
+      ) : (
+        <>
+          {notice.map((x) => (
+            <NoticeItem key={x.id} notice={x} />
+          ))}
+          <div>
+            <Pagination total={total} pageSize={20} />
+          </div>
+        </>
+      )}
     </>
   );
 }
