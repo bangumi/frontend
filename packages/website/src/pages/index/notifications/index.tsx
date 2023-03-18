@@ -5,7 +5,6 @@ import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type { INotice } from '@bangumi/client/user';
 import { Button, Input, Tab, Typography } from '@bangumi/design';
 import { Enter } from '@bangumi/icons';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -18,7 +17,7 @@ const NotificationPageTabs = [
   { key: 'msg-sv', label: '短信收发', to: '/msg-sv' },
 ];
 
-function NoticeItem({ notice }: { notice: INotice }) {
+function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
   const { id, type, title, postID, topicID, sender, createdAt, unread } = notice;
 
   const setting = _settings[type];
@@ -33,12 +32,7 @@ function NoticeItem({ notice }: { notice: INotice }) {
 
   return (
     <div id={`notice_${id}`} className={style.noticeItem}>
-      {/* <img src={sender.avatar.small} alt='bgm-notify__avatar' /> */}
-      <img
-        src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAFiUAABYlAUlSJPAAAAFdSURBVGhD7ZvBjYMwEEXdADRAb9AA1AF1QB3QADRANbP8IVEMO8nuSnvAn4n0pGBji4c9Nodx2H7yjizLpGkaGYZBpmmSdV0vybIs+oxVVUlRFKZLxPdCNEIHVucp0HXdJ/FjAd4S3pjVUUrM8yxlWR7cHrwuMH2txikDp9hxY/+DkbUaMHAa6T1mGabxOzC9o5gOGuTWjUxgEVZhmFs3MIJtNjDH7pm6riWkvN/+FZ3WzIvVGXwtBquCGRdmx4XZcWF2XJgdF2bHhdlxYXZcmB0XZseF2XFhdlyYHRdmx4XZcWF2XJgdF2bHhdm5n/CVE7//G+Rc3ioxre97CUjHsyoZ0TTiPM/NSkYeKcQh6fMNv6Vt21e+NHuCONwOCeLgVkcAnjAuYJojHTluHC5ojvHA4cdjPE8w3xHkVkcpgP02itkzZqGCRhhxdHDlUR/HUZ8R01fPNRguO0G+AMzbjzhgCRfaAAAAAElFTkSuQmCC'
-        className={style.noticeItemAvatar}
-        alt=''
-      />
+      <img src={sender.avatar.small} alt='bgm-notify__avatar' className={style.noticeItemAvatar} />
 
       <Typography.Link
         to={`https://bgm.tv/user/${sender.username}`}
@@ -79,14 +73,6 @@ const useNotifications = () => {
 
 function Notifications() {
   const { notice, mutate } = useNotifications();
-
-  const onClose = async (id: number) => {
-    console.log('clear notify', id);
-    await ozaClient.clearNotice({
-      id: [id],
-    });
-    await mutate();
-  };
 
   return (
     <>
