@@ -38,6 +38,7 @@
     "./tests/",
     ".eslintrc.js",
     "vitest.config.ts",
+    ".github/scripts/*",
     "./packages/design/.storybook/*"
   ]
 }

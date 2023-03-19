@@ -314,6 +314,8 @@ components:
         type:
           description: 查看 `./lib/notify.ts` _settings
           type: integer
+        unread:
+          type: boolean
       required:
         - id
         - title
@@ -322,6 +324,7 @@ components:
         - topicID
         - postID
         - createdAt
+        - unread
       type: object
     Permission:
       properties:
@@ -661,7 +664,7 @@ components:
       type: object
   securitySchemes:
     CookiesSession:
-      description: 使用 [login](#/auth/login2) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
+      description: 使用 [login](#/auth/login) 调用 API 登录，或者 使用 [demo](/demo/login) 登录
       in: cookie
       name: chiiNextSessionID
       type: apiKey
@@ -1375,95 +1378,6 @@ paths:
           description: 意料之外的服务器错误
       tags:
         - auth
-  /p1/login2:
-    post:
-      deprecated: true
-      description: 'backward compatibility for #login operator'
-      operationId: login2
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginRequestBody'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-          description: Default Response
-          headers:
-            Set-Cookie:
-              schema:
-                type: string
-        '400':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-                description: request validation error
-          description: request validation error
-        '401':
-          content:
-            application/json:
-              examples:
-                CAPTCHA_ERROR:
-                  value:
-                    code: CAPTCHA_ERROR
-                    error: Unauthorized
-                    message: wrong captcha
-                    statusCode: 401
-                EMAIL_PASSWORD_ERROR:
-                  value:
-                    code: EMAIL_PASSWORD_ERROR
-                    error: Unauthorized
-                    message: email does not exists or email and password not match
-                    statusCode: 401
-              schema:
-                $ref: '#/components/schemas/Error'
-                description: 验证码错误/账号密码不匹配
-          description: 验证码错误/账号密码不匹配
-          headers:
-            X-RateLimit-Limit:
-              schema:
-                type: integer
-            X-RateLimit-Remaining:
-              schema:
-                type: integer
-            X-RateLimit-Reset:
-              schema:
-                type: integer
-        '429':
-          content:
-            application/json:
-              example:
-                code: TOO_MANY_REQUESTS
-                error: Too Many Requests
-                message: too many failed login attempts
-                statusCode: 429
-              schema:
-                $ref: '#/components/schemas/Error'
-                description: 失败次数太多，需要过一段时间再重试
-          description: 失败次数太多，需要过一段时间再重试
-          headers:
-            X-RateLimit-Limit:
-              schema:
-                type: integer
-            X-RateLimit-Remaining:
-              schema:
-                type: integer
-            X-RateLimit-Reset:
-              schema:
-                type: integer
-        '500':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-                description: 意料之外的服务器错误
-          description: 意料之外的服务器错误
-      tags:
-        - auth
   /p1/logout:
     post:
       description: 登出
@@ -1547,6 +1461,11 @@ paths:
           schema:
             default: 20
             type: integer
+        - in: query
+          name: unread
+          required: false
+          schema:
+            type: boolean
       responses:
         '200':
           content:

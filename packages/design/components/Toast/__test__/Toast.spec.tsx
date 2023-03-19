@@ -21,7 +21,7 @@ afterEach(() => {
 });
 
 it('should show message and disappear after given time', () => {
-  const toast: TToast = { message: 'test', tid: '1', timeout: 1000 };
+  const toast: TToast = { message: 'test', tid: '1', type: 'info', timeout: 1000 };
   const { getByText } = render(<Toast toast={toast} />);
 
   act(() => {
