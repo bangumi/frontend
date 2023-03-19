@@ -120,7 +120,7 @@ async function updateComment(
 
   links.unshift(commentComment, '# Preview Deployment');
 
-  await octokit.request('POST /repos/{owner}/{repo}/issues/comments', {
+  await octokit.request('PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
