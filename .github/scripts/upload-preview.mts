@@ -129,7 +129,7 @@ async function updateComment(
 }
 
 async function createComment(octokit: Client, prNumber: number, artifact: string, alias: string) {
-  await octokit.request('POST /repos/{owner}/{repo}/issues/comments', {
+  await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: prNumber,
