@@ -51,12 +51,14 @@ async function main() {
     milestone_number: oldNextMilestone.number,
     title: version,
     state: 'closed',
+    description: '# script is moving issues',
   });
 
   core.info(`create new next milestone`);
   const newNextMileStone = await octokit.request('POST /repos/{owner}/{repo}/milestones', {
     ...repo,
     title: 'next',
+    description: '# script is moving issues',
   });
 
   for (const issue of openIssues) {
@@ -67,6 +69,19 @@ async function main() {
       milestone: newNextMileStone.data.number,
     });
   }
+
+  await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
+    ...repo,
+    milestone_number: oldNextMilestone.number,
+    description: `# milestone for ${version}`,
+  });
+
+  await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
+    ...repo,
+    milestone_number: newNextMileStone.data.number,
+    title: 'next',
+    description: '# milestone for next version',
+  });
 }
 
 main().catch((e) => {
