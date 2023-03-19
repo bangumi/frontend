@@ -1,15 +1,10 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-
 import * as core from '@actions/core';
 import * as github from '@actions/github';
 import type { components } from '@octokit/openapi-types';
 
-type Milestone = components['schemas']['nullable-milestone'];
+import packageJSON from '../../package.json';
 
-const packageJSON = JSON.parse(
-  fs.readFileSync(path.join(__dirname, '../../package.json')).toString(),
-) as { version: string };
+type Milestone = components['schemas']['nullable-milestone'];
 
 const { version } = packageJSON;
 
