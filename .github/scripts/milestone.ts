@@ -9,7 +9,7 @@ type Milestone = components['schemas']['nullable-milestone'];
 
 const packageJSON = JSON.parse(
   fs.readFileSync(path.join(__dirname, '../../package.json')).toString(),
-);
+) as { version: string };
 
 const { version } = packageJSON;
 
