@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@actions/core': ^1.10.0
       '@actions/exec': ^1.1.1
       '@actions/github': ^5.1.1
       '@babel/core': ^7.21.0
@@ -55,6 +56,7 @@ importers:
       vitest-github-actions-reporter: ^0.10.0
       whatwg-fetch: ^3.6.2
     devDependencies:
+      '@actions/core': 1.10.0
       '@actions/exec': 1.1.1
       '@actions/github': 5.1.1
       '@babel/core': 7.21.0

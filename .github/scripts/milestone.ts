@@ -1,8 +1,8 @@
-import * as path from 'node:path';
 import * as fs from 'node:fs';
+import * as path from 'node:path';
 
+import * as core from '@actions/core';
 import * as github from '@actions/github';
-
 import type { components } from '@octokit/openapi-types';
 
 type Milestone = components['schemas']['nullable-milestone'];
@@ -38,6 +38,7 @@ async function main() {
   }
 
   if (!oldNextMilestone) {
+    core.info('missing previous `next` milestone, skipping script');
     return;
   }
 
@@ -49,25 +50,7 @@ async function main() {
     milestone: oldNextMilestone.number as unknown as string,
   });
 
-  await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
-    ...repo,
-    milestone_number: oldNextMilestone.number,
-    title: version,
-  });
-
-  const newNextMileStone = await octokit.request('POST /repos/{owner}/{repo}/milestones', {
-    ...repo,
-    title: 'next-next',
-  });
-
-  for (const issue of openIssues) {
-    await octokit.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
-      ...repo,
-      issue_number: issue.number,
-      milestone: newNextMileStone.data.number,
-    });
-  }
-
+  core.info(`close and rename old milestone ${oldNextMilestone.number}`);
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
     ...repo,
     milestone_number: oldNextMilestone.number,
@@ -75,11 +58,20 @@ async function main() {
     state: 'closed',
   });
 
-  await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
+  core.info(`create new next milestone`);
+  const newNextMileStone = await octokit.request('POST /repos/{owner}/{repo}/milestones', {
     ...repo,
-    milestone_number: newNextMileStone.data.number,
     title: 'next',
   });
+
+  for (const issue of openIssues) {
+    core.info(`moving issue ${issue.number} to new milestone ${newNextMileStone.data.number}`);
+    await octokit.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
+      ...repo,
+      issue_number: issue.number,
+      milestone: newNextMileStone.data.number,
+    });
+  }
 }
 
 main().catch((e) => {
