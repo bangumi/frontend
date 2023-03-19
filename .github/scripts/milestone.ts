@@ -82,7 +82,7 @@ async function main() {
     ...repo,
     milestone_number: newNextMileStone.data.number,
     title: 'next',
-    description: '# milestone for next version',
+    description: 'milestone for next release',
   });
 }
 
