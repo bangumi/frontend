@@ -25,3 +25,14 @@ jobs:
         run: gh release create "$TAG" bangumi-website.tar.gz bangumi-website.tar.gz.sha256
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  milestone:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-js-env
+
+      - name: Update github milestone
+        run: npx tsx .github/scripts/milestone.ts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
