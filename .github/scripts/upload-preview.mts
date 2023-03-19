@@ -1,11 +1,14 @@
-const fs = require('node:fs');
-const path = require('node:path');
+import * as path from 'node:path';
+import * as fs from 'node:fs';
 
-const { exec } = require('@actions/exec');
-const github = require('@actions/github');
-const { context } = require('@actions/github');
+import { context } from '@actions/github';
+import * as github from '@actions/github';
+import { exec } from '@actions/exec';
+import { GitHub } from '@actions/github/lib/utils';
 
-const artifacts = {
+type Client = InstanceType<typeof GitHub>;
+
+const artifacts: Record<string, string> = {
   Build: 'sites',
   'Storybook Build': 'storybook',
 };
@@ -24,11 +27,10 @@ async function main() {
     throw new Error('process.env.workflow_name is empty');
   }
 
-  if (!Object.keys(artifacts).includes(workflowName)) {
+  const artifact = artifacts[workflowName];
+  if (!artifact) {
     throw new Error(`not valid workflow name ${workflowName}`);
   }
-
-  const artifact = artifacts[workflowName];
 
   await exec(
     'gh',
@@ -45,7 +47,7 @@ async function main() {
     ],
     {
       env: {
-        GH_TOKEN: process.env.GH_TOKEN,
+        GH_TOKEN: process.env.GH_TOKEN ?? '',
       },
     },
   );
@@ -56,37 +58,48 @@ async function main() {
 
   await exec('netlify', ['deploy', `--dir=${artifact}`, `--alias="${alias}"`], {
     env: {
-      NETLIFY_AUTH_TOKEN: process.env.NETLIFY_AUTH_TOKEN,
-      NETLIFY_SITE_ID: process.env.NETLIFY_SITE_ID,
-      PATH: process.env.PATH,
+      NETLIFY_AUTH_TOKEN: process.env.NETLIFY_AUTH_TOKEN ?? '',
+      NETLIFY_SITE_ID: process.env.NETLIFY_SITE_ID ?? '',
+      PATH: process.env.PATH ?? '',
     },
   });
 
-  for await (const { data: comments } of octokit.paginate.iterator(
-    octokit.rest.issues.listComments,
+  const comments = await octokit.paginate(
+    'GET /repos/{owner}/{repo}/issues/{issue_number}/comments',
     {
       owner: context.repo.owner,
       repo: context.repo.repo,
       issue_number: prNumber,
     },
-  )) {
-    for (const comment of comments) {
-      if (comment.user.login === 'github-actions[bot]' && comment.body.includes(commentComment)) {
-        return await updateComment(octokit, comment, artifact, alias);
-      }
+  );
+
+  for (const comment of comments) {
+    if (!comment) {
+      continue;
+    }
+
+    if (comment.user?.login === 'github-actions[bot]' && comment.body?.includes(commentComment)) {
+      return await updateComment(
+        octokit,
+        {
+          id: comment.id,
+          body: comment.body ?? '',
+        },
+        artifact,
+        alias,
+      );
     }
   }
 
   await createComment(octokit, prNumber, artifact, alias);
 }
 
-/**
- * @param {InstanceType<typeof GitHub>} octokit
- * @param {string} artifact
- * @param {string} alias
- * @param {{id:number;body:string;}} comment
- */
-async function updateComment(octokit, comment, artifact, alias) {
+async function updateComment(
+  octokit: Client,
+  comment: { id: number; body: string },
+  artifact: string,
+  alias: string,
+) {
   const links = [];
   const s = comment.body.split('\n').filter(Boolean);
 
@@ -104,7 +117,7 @@ async function updateComment(octokit, comment, artifact, alias) {
 
   links.unshift(commentComment, '# Preview Deployment');
 
-  await octokit.rest.issues.updateComment({
+  await octokit.request('POST /repos/{owner}/{repo}/issues/comments', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
@@ -112,14 +125,8 @@ async function updateComment(octokit, comment, artifact, alias) {
   });
 }
 
-/**
- * @param {InstanceType<typeof GitHub>} octokit
- * @param {number} prNumber
- * @param {string} artifact
- * @param {string} alias
- */
-async function createComment(octokit, prNumber, artifact, alias) {
-  await octokit.rest.issues.createComment({
+async function createComment(octokit: Client, prNumber: number, artifact: string, alias: string) {
+  await octokit.request('POST /repos/{owner}/{repo}/issues/comments', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: prNumber,
@@ -134,14 +141,12 @@ async function createComment(octokit, prNumber, artifact, alias) {
 /**
  * @param {string} s
  */
-function toTitle(s) {
+function toTitle(s: string) {
   if (!s) {
     return '';
   }
 
-  return s[0].toUpperCase() + s.slice(1).toLowerCase();
+  return s[0]?.toUpperCase() + s.slice(1).toLowerCase();
 }
 
-main().catch((e) => {
-  throw e;
-});
+await main();
