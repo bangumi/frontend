@@ -101,19 +101,12 @@ function Notifications() {
           一键全部已读
         </Button>
       </div>
-
-      {notice.length === 0 ? (
-        '暂无信息'
-      ) : (
-        <>
-          {notice.map((x) => (
-            <NoticeItem key={x.id} notice={x} />
-          ))}
-          <div>
-            <Pagination total={total} pageSize={20} />
-          </div>
-        </>
-      )}
+      {notice.map((x) => (
+        <NoticeItem key={x.id} notice={x} />
+      ))}
+      <div>
+        <Pagination total={total} pageSize={20} />
+      </div>
     </>
   );
 }
