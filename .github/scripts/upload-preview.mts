@@ -1,10 +1,12 @@
-import * as path from 'node:path';
-import * as fs from 'node:fs';
+/* eslint-disable @typescript-eslint/no-use-before-define */
 
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+
+import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
-import { exec } from '@actions/exec';
-import { GitHub } from '@actions/github/lib/utils';
+import type { GitHub } from '@actions/github/lib/utils';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -39,7 +41,7 @@ async function main() {
       `${github.context.repo.owner}/${github.context.repo.repo}`,
       'run',
       'download',
-      `${process.env.RUN_ID}`,
+      `${context.runId}`,
       '--name',
       artifact,
       '--dir',
@@ -74,12 +76,8 @@ async function main() {
   );
 
   for (const comment of comments) {
-    if (!comment) {
-      continue;
-    }
-
     if (comment.user?.login === 'github-actions[bot]' && comment.body?.includes(commentComment)) {
-      return await updateComment(
+      return updateComment(
         octokit,
         {
           id: comment.id,
@@ -138,15 +136,12 @@ async function createComment(octokit: Client, prNumber: number, artifact: string
   });
 }
 
-/**
- * @param {string} s
- */
 function toTitle(s: string) {
   if (!s) {
     return '';
   }
 
-  return s[0]?.toUpperCase() + s.slice(1).toLowerCase();
+  return (s[0]?.toUpperCase() ?? '') + s.slice(1).toLowerCase();
 }
 
 await main();
