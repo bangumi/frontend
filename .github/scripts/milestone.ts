@@ -44,7 +44,9 @@ async function main() {
   const openIssues = await octokit.paginate('GET /repos/{owner}/{repo}/issues', {
     ...repo,
     state: 'open',
-    milestone: oldNextMilestone.number,
+    // github api 问题，这里的 string 只接受 `*`，不能使用 title,
+    // 只能使用 milestone 的 number，而且这里 API 的 types 不接受 number 类型。
+    milestone: oldNextMilestone.number as unknown as string,
   });
 
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
