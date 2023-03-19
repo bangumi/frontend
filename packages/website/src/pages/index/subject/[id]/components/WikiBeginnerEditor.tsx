@@ -114,7 +114,11 @@ const WikiInfoItem = ({
         />
       </Input.Group>
 
-      <Minus className={style.editorItemMinus} onClick={() => removeOneWikiElement?.(path)} />
+      <Minus
+        className={style.editorItemMinus}
+        data-testid='remove-handler'
+        onClick={() => removeOneWikiElement?.(path)}
+      />
     </div>
   );
 };
@@ -322,7 +326,6 @@ function WikiBeginnerEditor({
           <button
             className={style.footerBtn}
             onClick={() => {
-              // ? some wired behavior here
               // 永远新增一级项目，即使上面是一个二级项目
               addOneWikiElement?.();
             }}
@@ -334,7 +337,6 @@ function WikiBeginnerEditor({
           <button
             className={style.footerBtn}
             onClick={() => {
-              // ? some wired behavior here
               const lastEls = els[els.length - 1];
               // 如果最后一个元素就是一个二级菜单，新增二级项目
               if (lastEls && isArray(lastEls?.value)) {
