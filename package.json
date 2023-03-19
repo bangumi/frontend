@@ -13,7 +13,7 @@
     "dev": "pnpm dev:csr",
     "dev:csr": "pnpm website dev",
     "dev:ssr": "pnpm server dev",
-    "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,tsx",
+    "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,mts,cts,tsx",
     "lint:fix": "pnpm lint --fix",
     "lint:style": "stylelint \"./packages/**/*.{css,less}\"",
     "lint:style-fix": "pnpm lint:style --fix",
