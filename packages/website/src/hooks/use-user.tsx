@@ -74,7 +74,7 @@ export const useUser: () => UserContextType = () => {
 };
 
 async function login(email: string, password: string, cfCaptchaResponse: string): Promise<void> {
-  const res = await ozaClient.login2({
+  const res = await ozaClient.login({
     email,
     password,
     'cf-turnstile-response': cfCaptchaResponse,
