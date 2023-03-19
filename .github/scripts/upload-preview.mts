@@ -34,6 +34,11 @@ async function main() {
     throw new Error(`not valid workflow name ${workflowName}`);
   }
 
+  const RUN_ID = process.env.RUN_ID;
+  if (!RUN_ID) {
+    throw new Error('process.env.RUN_ID is empty');
+  }
+
   await exec(
     'gh',
     [
@@ -41,7 +46,7 @@ async function main() {
       `${github.context.repo.owner}/${github.context.repo.repo}`,
       'run',
       'download',
-      `${context.runId}`,
+      RUN_ID,
       '--name',
       artifact,
       '--dir',
