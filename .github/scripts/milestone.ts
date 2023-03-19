@@ -51,7 +51,9 @@ async function main() {
     milestone_number: oldNextMilestone.number,
     title: version,
     state: 'closed',
-    description: '# script is still moving issues, DO NOT EDIT IT NOW',
+    description:
+      '# script is still moving issues, DO NOT EDIT IT NOW\n' +
+      (oldNextMilestone.description ?? ''),
   });
 
   core.info(`create new next milestone`);
@@ -73,7 +75,7 @@ async function main() {
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
     ...repo,
     milestone_number: oldNextMilestone.number,
-    description: `# milestone for ${version}`,
+    description: oldNextMilestone.description ?? '',
   });
 
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
