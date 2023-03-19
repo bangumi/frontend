@@ -70,12 +70,14 @@ async function main() {
     });
   }
 
+  core.info(`restore issue description`);
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
     ...repo,
     milestone_number: oldNextMilestone.number,
     description: oldNextMilestone.description ?? '',
   });
 
+  core.info(`update new issue next title`);
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
     ...repo,
     milestone_number: newNextMileStone.data.number,
