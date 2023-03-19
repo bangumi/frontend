@@ -33,6 +33,6 @@ jobs:
       - uses: ./.github/actions/setup-js-env
 
       - name: Update github milestone
-        run: npx tsx .github/scripts/milestone.ts
+        run: npx tsx .github/scripts/milestone.mts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

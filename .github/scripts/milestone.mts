@@ -86,6 +86,4 @@ async function main() {
   });
 }
 
-main().catch((e) => {
-  throw e;
-});
+await main();
