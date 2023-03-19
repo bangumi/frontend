@@ -41,13 +41,13 @@
     "trailingComma": "all"
   },
   "lint-staged": {
-    "*.{js,ts,tsx,cjs,mjs}": [
+    "*.{js,ts,mts,cts,tsx,cjs,mjs}": [
       "eslint --fix"
     ],
     "*.{css,less}": [
       "stylelint --fix"
     ],
-    "*.{md,html,js,ts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
+    "*.{md,html,js,ts,mts,cts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
   },
   "devDependencies": {
     "@actions/core": "^1.10.0",
