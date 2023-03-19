@@ -51,14 +51,14 @@ async function main() {
     milestone_number: oldNextMilestone.number,
     title: version,
     state: 'closed',
-    description: '# script is moving issues',
+    description: '# script is still moving issues, DO NOT EDIT IT NOW',
   });
 
   core.info(`create new next milestone`);
   const newNextMileStone = await octokit.request('POST /repos/{owner}/{repo}/milestones', {
     ...repo,
     title: 'next',
-    description: '# script is moving issues',
+    description: '# script is still moving issues, DO NOT EDIT IT NOW',
   });
 
   for (const issue of openIssues) {
