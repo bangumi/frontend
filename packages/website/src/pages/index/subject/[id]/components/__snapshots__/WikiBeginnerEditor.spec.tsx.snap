@@ -86,7 +86,7 @@ Object {
               </div>
               <div
                 class="_editorItemMinus_48b3a8"
-                data-testid="remove-handler"
+                title="删除一项"
               />
             </div>
           </div>
@@ -135,7 +135,7 @@ Object {
               </div>
               <div
                 class="_editorItemMinus_48b3a8"
-                data-testid="remove-handler"
+                title="删除一项"
               />
             </div>
           </div>
@@ -269,7 +269,7 @@ Object {
             </div>
             <div
               class="_editorItemMinus_48b3a8"
-              data-testid="remove-handler"
+              title="删除一项"
             />
           </div>
         </div>
@@ -318,7 +318,7 @@ Object {
             </div>
             <div
               class="_editorItemMinus_48b3a8"
-              data-testid="remove-handler"
+              title="删除一项"
             />
           </div>
         </div>

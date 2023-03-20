@@ -116,7 +116,7 @@ const WikiInfoItem = ({
 
       <Minus
         className={style.editorItemMinus}
-        data-testid='remove-handler'
+        title='删除一项'
         onClick={() => removeOneWikiElement?.(path)}
       />
     </div>

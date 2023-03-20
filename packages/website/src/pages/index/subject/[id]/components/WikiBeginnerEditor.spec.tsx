@@ -55,7 +55,7 @@ it('remove WikiElement properly', () => {
   };
 
   const editor = render(<WikiBeginnerEditor elements={res} onChange={onChange} />);
-  const removeHandlers = editor.getAllByTestId('remove-handler');
+  const removeHandlers = editor.getAllByTitle('删除一项');
   const removeYufi = removeHandlers[0];
   removeYufi?.click();
   expect(res.length).toBe(1);
