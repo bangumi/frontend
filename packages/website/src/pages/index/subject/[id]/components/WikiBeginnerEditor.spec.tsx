@@ -9,38 +9,37 @@ it('should match snapshot', () => {
   const els: WikiElement[] = [{ _id: 'yufi' }, { _id: 'anisu' }];
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   const onChange = () => {};
-  const editor = render(<WikiBeginnerEditor els={els} onChange={onChange} />);
+  const editor = render(<WikiBeginnerEditor elements={els} onChange={onChange} />);
   expect(editor).toMatchSnapshot();
 });
 
 it('add WikiElement properly', async () => {
   let res: WikiElement[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const onChange = (newEls: WikiElement[]) => {
     res = newEls;
   };
 
-  const editor = render(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  const editor = render(<WikiBeginnerEditor elements={res} onChange={onChange} />);
 
   const addRootWikiElementBtn = await editor.findByText('新增一级项目');
   const addSubWikiElementBtn = await editor.findByText('新增二级项目');
 
   //   新增一级项目
   addRootWikiElementBtn.click();
-  editor.rerender(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  editor.rerender(<WikiBeginnerEditor elements={res} onChange={onChange} />);
 
   //   新增一级项目
   addRootWikiElementBtn.click();
-  editor.rerender(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  editor.rerender(<WikiBeginnerEditor elements={res} onChange={onChange} />);
   //   新增二级
   addSubWikiElementBtn.click();
-  editor.rerender(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  editor.rerender(<WikiBeginnerEditor elements={res} onChange={onChange} />);
   addSubWikiElementBtn.click();
-  editor.rerender(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  editor.rerender(<WikiBeginnerEditor elements={res} onChange={onChange} />);
 
   //   新增一级
   addRootWikiElementBtn.click();
-  editor.rerender(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  editor.rerender(<WikiBeginnerEditor elements={res} onChange={onChange} />);
 
   console.log(res);
 
@@ -51,12 +50,11 @@ it('add WikiElement properly', async () => {
 
 it('remove WikiElement properly', () => {
   let res: WikiElement[] = [{ _id: 'yufi' }, { _id: 'anisu' }];
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const onChange = (newEls: WikiElement[]) => {
     res = newEls;
   };
 
-  const editor = render(<WikiBeginnerEditor els={res} onChange={onChange} />);
+  const editor = render(<WikiBeginnerEditor elements={res} onChange={onChange} />);
   const removeHandlers = editor.getAllByTestId('remove-handler');
   const removeYufi = removeHandlers[0];
   removeYufi?.click();

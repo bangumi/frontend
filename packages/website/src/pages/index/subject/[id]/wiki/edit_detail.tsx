@@ -273,7 +273,7 @@ function WikiEditDetailDetailPage() {
                 {/* 入门编辑模式 */}
                 <div hidden={editorType !== EditorType.Beginner}>
                   <WikiBeginnerEditor
-                    els={wikiElement}
+                    elements={wikiElement}
                     onChange={(els) => {
                       setWikiElement(els);
                     }}

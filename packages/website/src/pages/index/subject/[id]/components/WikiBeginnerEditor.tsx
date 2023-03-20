@@ -25,7 +25,7 @@ type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
 };
 
 interface IWikiInfoContext {
-  els: WikiElement[];
+  elements: WikiElement[];
   addOneWikiElement: (path?: string) => void;
   removeOneWikiElement: (path: string) => void;
   editOneWikiElement: (path: string, target: 'value' | 'key', value: string) => void;
@@ -124,17 +124,17 @@ const WikiInfoItem = ({
 };
 
 function WikiBeginnerEditorBlock({
-  els,
+  elements,
   level = 1,
   path = '',
   onDragEnd,
 }: {
-  els: WikiElement[];
+  elements: WikiElement[];
   level?: number;
   path?: string;
   onDragEnd: (path: string, result: DropResult, provided: ResponderProvided) => void;
 }) {
-  //   const { els } = useContext(WikiInfoContext) ?? {};
+  //   const { elements } = useContext(WikiInfoContext) ?? {};
 
   return (
     <DragDropContext
@@ -145,7 +145,7 @@ function WikiBeginnerEditorBlock({
       <Droppable droppableId={`list-${level}`}>
         {(droppableProvided) => (
           <div ref={droppableProvided.innerRef}>
-            {els?.map((el, idx) => {
+            {elements?.map((el, idx) => {
               return (
                 <Draggable key={el._id} index={idx} draggableId={el._id}>
                   {(draggableProvided) => (
@@ -161,7 +161,7 @@ function WikiBeginnerEditorBlock({
                       {/* subList */}
                       {isArray(el.value) && (
                         <WikiBeginnerEditorBlock
-                          els={el.value}
+                          elements={el.value}
                           level={level + 1}
                           onDragEnd={onDragEnd}
                           path={level === 1 ? idx.toString() : `${path}.${idx}`}
@@ -181,11 +181,11 @@ function WikiBeginnerEditorBlock({
 }
 
 function WikiBeginnerEditor({
-  els,
+  elements,
   onChange,
 }: {
-  els: WikiElement[];
-  onChange: (els: WikiElement[]) => void;
+  elements: WikiElement[];
+  onChange: (elements: WikiElement[]) => void;
 }) {
   const [inputFocusToId, setInputFocusToId] = useState('');
   useEffect(() => {
@@ -202,10 +202,10 @@ function WikiBeginnerEditor({
     if (!destination) return;
     const level = parseInt(source.droppableId.split('-')[1] ?? '-1');
     if (level === 1) {
-      onChange(reorder(els, source.index, destination.index));
+      onChange(reorder(elements, source.index, destination.index));
     } else if (level === 2 && isNumber(idx)) {
       onChange(
-        els.map((el, i) => {
+        elements.map((el, i) => {
           if (i === idx && isArray(el.value)) {
             return {
               ...el,
@@ -222,7 +222,7 @@ function WikiBeginnerEditor({
     if (path) {
       const [idx] = path.split('.').map((v) => parseInt(v));
       // 深拷贝 WikiElements
-      const newEls = cloneDeep(els);
+      const newEls = cloneDeep(elements);
       if (isNumber(idx) && !isNaN(idx)) {
         const preValue = newEls[idx]?.value as WikiElement[];
         // 给二级菜单新增项目
@@ -231,7 +231,7 @@ function WikiBeginnerEditor({
       }
     }
 
-    onChange(concat(els, new WikiElement()));
+    onChange(concat(elements, new WikiElement()));
   };
 
   const removeOneWikiElement = (path: string) => {
@@ -256,7 +256,7 @@ function WikiBeginnerEditor({
           });
         }
         return filter(preEl, (_, i) => i !== idx);
-      })(els),
+      })(elements),
     );
     setInputFocusToId(id);
   };
@@ -270,7 +270,7 @@ function WikiBeginnerEditor({
           return set(preEls, `${idx}.value.${subIdx}.${target}`, value);
         }
         return set(preEls, `${idx}.${target}`, value);
-      })(els),
+      })(elements),
     );
   };
 
@@ -292,7 +292,7 @@ function WikiBeginnerEditor({
             ],
           }),
         );
-      })(els),
+      })(elements),
     );
     setInputFocusToId(id);
   };
@@ -300,7 +300,7 @@ function WikiBeginnerEditor({
   return (
     <WikiInfoContext.Provider
       value={{
-        els,
+        elements,
         addOneWikiElement,
         removeOneWikiElement,
         editOneWikiElement,
@@ -318,7 +318,7 @@ function WikiBeginnerEditor({
             按<kbd>Ctrl</kbd>+<kbd>X</kbd>可删除项目
           </div>
         </div>
-        <WikiBeginnerEditorBlock els={els} onDragEnd={onDragEnd} />
+        <WikiBeginnerEditorBlock elements={elements} onDragEnd={onDragEnd} />
         <div className={style.footer}>
           {/* place holder */}
           <Cursor className={style.footerPlaceholder} />
@@ -337,14 +337,14 @@ function WikiBeginnerEditor({
           <button
             className={style.footerBtn}
             onClick={() => {
-              const lastEls = els[els.length - 1];
+              const lastEls = elements[elements.length - 1];
               // 如果最后一个元素就是一个二级菜单，新增二级项目
               if (lastEls && isArray(lastEls?.value)) {
-                addOneWikiElement?.((els.length - 1).toString());
+                addOneWikiElement?.((elements.length - 1).toString());
                 return;
               }
               // 否则将其继续转为二级菜单
-              switchWikiElementToArray(els.length - 1);
+              switchWikiElementToArray(elements.length - 1);
             }}
             type='button'
           >
