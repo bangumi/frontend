@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
@@ -90,6 +90,7 @@ if (Musume === undefined) {
 
 const Header: FC = () => {
   const { user } = useUser();
+  const location = useLocation();
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
@@ -148,7 +149,7 @@ const Header: FC = () => {
             </>
           ) : (
             <span className={style.userLogin}>
-              <Link className={style.link} to='/login'>
+              <Link className={style.link} to={`/login?backTo=${location.pathname}`}>
                 登录
               </Link>
               <Link className={style.link} to='/register'>

@@ -1,7 +1,7 @@
 import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { Turnstile } from '@marsidev/react-turnstile';
 import React, { useRef } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useInput } from 'rooks';
 
 import { Button, Input, Message } from '@bangumi/design';
@@ -24,7 +24,6 @@ const Login: React.FC = () => {
   const password = useInput('' as string);
   const { login } = useUser();
   const navigate = useNavigate();
-  const location = useLocation();
   const [searchParams, _] = useSearchParams();
 
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
@@ -42,11 +41,6 @@ const Login: React.FC = () => {
     const backTo = searchParams.get('backTo');
     if (backTo) {
       navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
-    }
-    // 如果有 history 则返回上一页
-    // https://github.com/remix-run/react-router/discussions/9788
-    else if (location.key !== 'default') {
-      navigate(-1);
     }
     // 否则跳转到首页
     else {
