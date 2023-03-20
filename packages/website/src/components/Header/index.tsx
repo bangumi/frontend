@@ -149,7 +149,10 @@ const Header: FC = () => {
             </>
           ) : (
             <span className={style.userLogin}>
-              <Link className={style.link} to={`/login?backTo=${location.pathname}`}>
+              <Link
+                className={style.link}
+                to={`/login?backTo=${encodeURIComponent(location.pathname)}`}
+              >
                 登录
               </Link>
               <Link className={style.link} to='/register'>
