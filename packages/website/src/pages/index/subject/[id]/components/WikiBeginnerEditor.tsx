@@ -1,7 +1,7 @@
 import cn from 'classnames';
-import { cloneDeep, concat, filter, isArray, isNumber, set } from 'lodash';
+import { concat, filter, isArray, isNumber, set } from 'lodash';
 import { nanoid } from 'nanoid';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
@@ -11,6 +11,15 @@ import { WikiElement } from '@bangumi/utils';
 import { reorder } from '@bangumi/website/utils';
 
 import style from './WikiBeginnerEditor.module.less';
+
+const splitPath = (path: string) =>
+  path.split('.').map((v) => {
+    const idx = parseInt(v);
+    if (!isNumber(idx) || isNaN(idx)) {
+      throw Error('path must be like [number].[number]');
+    }
+    return idx;
+  });
 
 type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
   index: number;
@@ -134,8 +143,6 @@ function WikiBeginnerEditorBlock({
   path?: string;
   onDragEnd: (path: string, result: DropResult, provided: ResponderProvided) => void;
 }) {
-  //   const { elements } = useContext(WikiInfoContext) ?? {};
-
   return (
     <DragDropContext
       onDragEnd={(res, provided) => {
@@ -187,61 +194,65 @@ function WikiBeginnerEditor({
   elements: WikiElement[];
   onChange: (elements: WikiElement[]) => void;
 }) {
-  const [inputFocusToId, setInputFocusToId] = useState('');
-  useEffect(() => {
-    const input = document.getElementById(inputFocusToId);
-    if (input) {
-      input.focus();
-    }
-    setInputFocusToId('');
-  }, [inputFocusToId]);
+  const focusToElement = (id: string) => {
+    const input = document.getElementById(id);
+    input?.focus();
+  };
 
   const onDragEnd = (path: string, result: DropResult, provided: ResponderProvided) => {
     const { destination, source } = result;
-    const [idx] = path.split('.').map((v) => parseInt(v));
+    const [idx] = splitPath(path);
     if (!destination) return;
     const level = parseInt(source.droppableId.split('-')[1] ?? '-1');
     if (level === 1) {
+      // reorder root element.
       onChange(reorder(elements, source.index, destination.index));
     } else if (level === 2 && isNumber(idx)) {
+      // reorder nested element.
       onChange(
-        elements.map((el, i) => {
-          if (i === idx && isArray(el.value)) {
-            return {
-              ...el,
-              value: reorder(el.value, source.index, destination.index),
-            };
-          }
-          return el;
-        }),
+        elements.map((el, i) =>
+          i === idx && isArray(el.value)
+            ? new WikiElement({
+                ...el,
+                value: reorder(el.value, source.index, destination.index),
+              })
+            : el,
+        ),
       );
     }
   };
 
   const addOneWikiElement = (path?: string) => {
     if (path) {
-      const [idx] = path.split('.').map((v) => parseInt(v));
-      // 深拷贝 WikiElements
-      const newEls = cloneDeep(elements);
+      // add nested element
+      const [idx] = splitPath(path);
       if (isNumber(idx) && !isNaN(idx)) {
-        const preValue = newEls[idx]?.value as WikiElement[];
-        // 给二级菜单新增项目
-        onChange(set(newEls, `${idx}.value`, concat(preValue, new WikiElement())));
+        onChange(
+          elements.map((el, i) =>
+            i === idx && isArray(el.value)
+              ? new WikiElement({
+                  ...el,
+                  // 二级菜单新增项目
+                  value: concat(el.value, new WikiElement()),
+                })
+              : el,
+          ),
+        );
         return;
       }
     }
 
+    // add root element
     onChange(concat(elements, new WikiElement()));
   };
 
   const removeOneWikiElement = (path: string) => {
-    const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
+    const [idx, subIdx] = splitPath(path);
     const id = nanoid();
-    if (!isNumber(idx)) return;
     onChange(
-      ((preEl) => {
-        if (isNumber(subIdx)) {
-          return preEl.map((el, i) => {
+      isNumber(subIdx)
+        ? // remove nested WikiElement
+          elements.map((el, i) => {
             if (i === idx && isArray(el.value)) {
               return {
                 ...el,
@@ -253,48 +264,44 @@ function WikiBeginnerEditor({
               };
             }
             return el;
-          });
-        }
-        return filter(preEl, (_, i) => i !== idx);
-      })(elements),
+          })
+        : // remove root WikiElement
+          filter(elements, (_, i) => i !== idx),
     );
-    setInputFocusToId(id);
+    focusToElement(id);
   };
 
   const editOneWikiElement = (path: string, target: 'key' | 'value', value: string) => {
-    const [idx, subIdx] = path.split('.').map((v) => parseInt(v));
-    if (!isNumber(idx)) return;
+    const [idx, subIdx] = splitPath(path);
     onChange(
-      ((preEls) => {
-        if (isNumber(subIdx)) {
-          return set(preEls, `${idx}.value.${subIdx}.${target}`, value);
-        }
-        return set(preEls, `${idx}.${target}`, value);
-      })(elements),
+      isNumber(idx)
+        ? isNumber(subIdx)
+          ? set(elements, `${idx}.value.${subIdx}.${target}`, value)
+          : set(elements, `${idx}.${target}`, value)
+        : elements,
     );
   };
 
   const convertToNestedWikiElement = (idx: number) => {
     const id = nanoid();
     onChange(
-      ((preEls) => {
-        const newEls = [...preEls];
-        return set(
-          newEls,
-          idx,
-          new WikiElement({
-            key: preEls[idx]?.key,
-            value: [
-              new WikiElement({
-                id,
-                value: preEls[idx]?.value ?? '',
-              }),
-            ],
-          }),
-        );
-      })(elements),
+      set(
+        // shallow copy
+        [...elements],
+        idx,
+        new WikiElement({
+          key: elements[idx]?.key,
+          value: [
+            new WikiElement({
+              id,
+              // Copy the root element value to the first child
+              value: elements[idx]?.value ?? '',
+            }),
+          ],
+        }),
+      ),
     );
-    setInputFocusToId(id);
+    focusToElement(id);
   };
 
   return (
