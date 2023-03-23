@@ -29,7 +29,7 @@ interface IWikiInfoContext {
   addOneWikiElement: (path?: string) => void;
   removeOneWikiElement: (path: string) => void;
   editOneWikiElement: (path: string, target: 'value' | 'key', value: string) => void;
-  switchWikiElementToArray: (idx: number) => void;
+  convertToNestedWikiElement: (idx: number) => void;
 }
 
 export const WikiInfoContext = createContext<IWikiInfoContext | null>(null);
@@ -42,7 +42,7 @@ const WikiInfoItem = ({
   index,
   ...rest
 }: WikiInfoItemProps) => {
-  const { editOneWikiElement, removeOneWikiElement, switchWikiElementToArray } =
+  const { editOneWikiElement, removeOneWikiElement, convertToNestedWikiElement } =
     useContext(WikiInfoContext) ?? {};
 
   return (
@@ -50,7 +50,7 @@ const WikiInfoItem = ({
       className={style.editorItem}
       onKeyDown={(e) => {
         if (e.ctrlKey && e.key === 'Enter') {
-          level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
+          level === 1 && convertToNestedWikiElement?.(index); /** 只对一级菜单有效 */
         }
         if (e.ctrlKey && e.code === 'KeyX') {
           removeOneWikiElement?.(path);
@@ -77,7 +77,7 @@ const WikiInfoItem = ({
         )}
         onKeyDown={(e) => {
           if (e.ctrlKey && e.key === 'Enter') {
-            level === 1 && switchWikiElementToArray?.(index); /** 只对一级菜单有效 */
+            level === 1 && convertToNestedWikiElement?.(index); /** 只对一级菜单有效 */
           }
           if (e.ctrlKey && e.code === 'KeyX') {
             removeOneWikiElement?.(path);
@@ -304,7 +304,7 @@ function WikiBeginnerEditor({
         addOneWikiElement,
         removeOneWikiElement,
         editOneWikiElement,
-        switchWikiElementToArray,
+        convertToNestedWikiElement,
       }}
     >
       <div className={style.wikiEditor}>
@@ -344,7 +344,7 @@ function WikiBeginnerEditor({
                 return;
               }
               // 否则将其继续转为二级菜单
-              switchWikiElementToArray(elements.length - 1);
+              convertToNestedWikiElement(elements.length - 1);
             }}
             type='button'
           >
