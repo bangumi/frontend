@@ -274,7 +274,7 @@ function WikiBeginnerEditor({
     );
   };
 
-  const switchWikiElementToArray = (idx: number) => {
+  const convertToNestedWikiElement = (idx: number) => {
     const id = nanoid();
     onChange(
       ((preEls) => {
