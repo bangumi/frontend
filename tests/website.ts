@@ -3,7 +3,9 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';
 
 import { server } from '@bangumi/website/mocks/server';
 
-vi.stubGlobal('fetch', fetchPolyfill);
+import { defaults } from '../packages/client/client';
+
+defaults.fetch = fetchPolyfill;
 
 beforeAll(() => {
   server.listen();
