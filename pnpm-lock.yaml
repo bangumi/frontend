@@ -49,7 +49,7 @@ importers:
       stylelint-config-standard: ^31.0.0
       stylelint-scss: ^4.5.0
       timezone-mock: ^1.3.6
-      tsx: ^3.12.5
+      tsx: ^3.12.6
       typescript: ^5.0.2
       vite: ^4.2.0
       vite-plugin-svgr: ^2.4.0
@@ -102,7 +102,7 @@ importers:
       stylelint-config-standard: 31.0.0_stylelint@15.3.0
       stylelint-scss: 4.5.0_stylelint@15.3.0
       timezone-mock: 1.3.6
-      tsx: 3.12.5
+      tsx: 3.12.6
       typescript: 5.0.2
       vite: 4.2.0_@types+node@18.15.3
       vite-plugin-svgr: 2.4.0_vite@4.2.0
@@ -15587,8 +15587,8 @@ packages:
       typescript: 5.0.2
     dev: true
 
-  /tsx/3.12.5:
-    resolution: {integrity: sha512-/TLj30xF1zcN9JkoFCyROtIQUi8cRQG+AFchsg5YkWou3+RXxTZS/ffWB3nCxyZPoBqF2+8ohs07N815dNb1wQ==}
+  /tsx/3.12.6:
+    resolution: {integrity: sha512-q93WgS3lBdHlPgS0h1i+87Pt6n9K/qULIMNYZo07nSeu2z5QE2CellcAZfofVXBo2tQg9av2ZcRMQ2S2i5oadQ==}
     hasBin: true
     dependencies:
       '@esbuild-kit/cjs-loader': 2.4.2
