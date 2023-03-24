@@ -29,12 +29,6 @@
       "semanticCommitType": "style"
     },
     {
-      "groupName": "vite",
-      "matchPackagePrefixes": ["@vitejs/", "vite"],
-      "separateMajorMinor": true,
-      "semanticCommitType": "build"
-    },
-    {
       "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
