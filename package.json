@@ -97,9 +97,9 @@
     "timezone-mock": "^1.3.6",
     "tsx": "^3.12.5",
     "typescript": "^5.0.2",
-    "vite": "^4.2.0",
+    "vite": "^4.2.1",
     "vite-plugin-svgr": "^2.4.0",
-    "vitest": "^0.29.3",
+    "vitest": "^0.29.7",
     "vitest-github-actions-reporter": "^0.10.0",
     "whatwg-fetch": "^3.6.2"
   },
