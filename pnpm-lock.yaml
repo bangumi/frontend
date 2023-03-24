@@ -41,7 +41,7 @@ importers:
       lint-staged: ^13.2.0
       postcss: ^8.4.21
       postcss-less: ^6.0.0
-      prettier: ^2.8.4
+      prettier: ^2.8.7
       react: ^18.2.0
       react-dom: ^18.2.0
       stylelint: ^15.3.0
@@ -94,7 +94,7 @@ importers:
       lint-staged: 13.2.0
       postcss: 8.4.21
       postcss-less: 6.0.0_postcss@8.4.21
-      prettier: 2.8.4
+      prettier: 2.8.7
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       stylelint: 15.3.0
@@ -2982,7 +2982,7 @@ packages:
       '@babel/plugin-transform-unicode-escapes': 7.18.10
       '@babel/plugin-transform-unicode-regex': 7.18.6
       '@babel/preset-modules': 0.1.5
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
       babel-plugin-polyfill-corejs2: 0.3.3
       babel-plugin-polyfill-corejs3: 0.6.0
       babel-plugin-polyfill-regenerator: 0.4.1
@@ -3071,7 +3071,7 @@ packages:
       '@babel/plugin-transform-unicode-escapes': 7.18.10_@babel+core@7.21.3
       '@babel/plugin-transform-unicode-regex': 7.18.6_@babel+core@7.21.3
       '@babel/preset-modules': 0.1.5_@babel+core@7.21.3
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
       babel-plugin-polyfill-corejs2: 0.3.3_@babel+core@7.21.3
       babel-plugin-polyfill-corejs3: 0.6.0_@babel+core@7.21.3
       babel-plugin-polyfill-regenerator: 0.4.1_@babel+core@7.21.3
@@ -3106,7 +3106,7 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-proposal-unicode-property-regex': 7.18.6
       '@babel/plugin-transform-dotall-regex': 7.18.6
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
       esutils: 2.0.3
     dev: true
 
@@ -3122,7 +3122,7 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-proposal-unicode-property-regex': 7.18.6_@babel+core@7.21.3
       '@babel/plugin-transform-dotall-regex': 7.18.6_@babel+core@7.21.3
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
       esutils: 2.0.3
     dev: true
 
@@ -3226,15 +3226,6 @@ packages:
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
-    dev: true
-
-  /@babel/types/7.21.2:
-    resolution: {integrity: sha512-3wRZSs7jiFaB8AjxiiD+VqN5DTG2iRvJGQ+qYFrs/654lg6kGTQWIOFjlBo5RaXuAZjBmP3+OQH4dmhqiiyYxw==}
-    engines: {node: '>=6.9.0'}
-    dependencies:
-      '@babel/helper-string-parser': 7.19.4
-      '@babel/helper-validator-identifier': 7.19.1
-      to-fast-properties: 2.0.0
     dev: true
 
   /@babel/types/7.21.3:
@@ -6062,7 +6053,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.19.6_@babel+core@7.21.3
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.2.0_@types+node@18.15.3
+      vite: 4.2.0_less@4.1.3
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6954,7 +6945,7 @@ packages:
     resolution: {integrity: sha512-yDZLjK7TCkWl1gpBeBGmuaDIFhZKmkoL+Cu2MUUjv5VxUZx/z7tBGBCBcQs5RI1Bkz5LLmNdjx7paOyQtMovyg==}
     dependencies:
       '@babel/helper-module-imports': 7.18.6
-      '@babel/types': 7.21.2
+      '@babel/types': 7.21.3
       glob: 7.2.3
       lodash: 4.17.21
       require-package-name: 2.0.1
@@ -13406,8 +13397,8 @@ packages:
     hasBin: true
     dev: true
 
-  /prettier/2.8.4:
-    resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
+  /prettier/2.8.7:
+    resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -16126,7 +16117,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 5.0.2
       '@svgr/core': 6.5.1
-      vite: 4.2.0_@types+node@18.15.3
+      vite: 4.2.0_less@4.1.3
     transitivePeerDependencies:
       - rollup
       - supports-color
