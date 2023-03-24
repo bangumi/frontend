@@ -184,16 +184,18 @@ const Comment: FC<CommentProps> = ({
           <Button type='secondary' size='small'>
             +1
           </Button>
-          {user.id === creator.id ? (
+          {user.id === creator.id && (
             <>
-              <Button type='text' size='small'>
-                编辑
-              </Button>
+              {!replies?.length && (
+                <Button.Link type='text' size='small' to={`/group/reply/${props.id}/edit`}>
+                  编辑
+                </Button.Link>
+              )}
               <Button type='text' size='small' onClick={handleDeleteReply}>
                 删除
               </Button>
             </>
-          ) : null}
+          )}
         </>
       )}
     </div>

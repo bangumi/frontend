@@ -10,12 +10,6 @@ on:
       - completed
 
 jobs:
-  debug:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo '${{ toJSON(github) }}'
-      - run: echo 'upload-preview-${{ github.event.workflow_run.head_repository.owner.login }}-${{ github.event.workflow_run.head_branch }}'
-
   upload:
     concurrency:
       group: upload-preview-${{ github.event.workflow_run.head_repository.owner.login }}-${{ github.event.workflow_run.head_branch }}

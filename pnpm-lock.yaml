@@ -3106,7 +3106,7 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-proposal-unicode-property-regex': 7.18.6
       '@babel/plugin-transform-dotall-regex': 7.18.6
-      '@babel/types': 7.21.3
+      '@babel/types': 7.21.2
       esutils: 2.0.3
     dev: true
 
@@ -3122,7 +3122,7 @@ packages:
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/plugin-proposal-unicode-property-regex': 7.18.6_@babel+core@7.21.3
       '@babel/plugin-transform-dotall-regex': 7.18.6_@babel+core@7.21.3
-      '@babel/types': 7.21.3
+      '@babel/types': 7.21.2
       esutils: 2.0.3
     dev: true
 

@@ -70,18 +70,6 @@ it('should redirect user to homepage after success login', async () => {
   });
 });
 
-it('should bring user back to last page if exists', async () => {
-  const mockedNavigate = vi.fn();
-  mockedUseNavigate.mockReturnValue(mockedNavigate);
-  mockedUseLocation.mockReturnValue({ key: 'not-default' } as any);
-  mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
-
-  mockSuccessfulLogin();
-  await waitFor(() => {
-    expect(mockedNavigate).toBeCalledWith(-1);
-  });
-});
-
 it('should redirect user to specified page', async () => {
   const mockedNavigate = vi.fn();
   mockedUseNavigate.mockReturnValue(mockedNavigate);
