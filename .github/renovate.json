@@ -12,6 +12,7 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "automerge": true,
   "packageRules": [
     {
       "matchManagers": ["npm"],
