@@ -45,7 +45,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
+      files: ['*.ts', '*.mts', '*.cts', '*.tsx'],
       extends: [
         'standard-with-typescript',
         'standard-jsx',

@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
@@ -93,6 +93,7 @@ if (Musume === undefined) {
 const Header: FC = () => {
   const { user } = useUser();
   const { noticeCount } = useNotify(user);
+  const location = useLocation();
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -163,7 +164,10 @@ const Header: FC = () => {
             </>
           ) : (
             <span className={style.userLogin}>
-              <Link className={style.link} to='/login'>
+              <Link
+                className={style.link}
+                to={`/login?backTo=${encodeURIComponent(location.pathname)}`}
+              >
                 登录
               </Link>
               <Link className={style.link} to='/register'>
