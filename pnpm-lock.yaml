@@ -15,7 +15,7 @@ importers:
       '@testing-library/react': ^14.0.0
       '@types/node': ^18.15.8
       '@types/testing-library__jest-dom': ^5.14.5
-      '@types/web': ^0.0.98
+      '@types/web': ^0.0.99
       '@typescript-eslint/eslint-plugin': ^5.56.0
       '@typescript-eslint/parser': ^5.56.0
       '@vitejs/plugin-react': ^3.1.0
@@ -68,7 +68,7 @@ importers:
       '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
       '@types/node': 18.15.8
       '@types/testing-library__jest-dom': 5.14.5
-      '@types/web': 0.0.98
+      '@types/web': 0.0.99
       '@typescript-eslint/eslint-plugin': 5.56.0_2hcjazgfnbtq42tcc73br2vup4
       '@typescript-eslint/parser': 5.56.0_j4766f7ecgqbon3u7zlxn5zszu
       '@vitejs/plugin-react': 3.1.0_vite@4.2.0
@@ -5866,8 +5866,8 @@ packages:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
     dev: true
 
-  /@types/web/0.0.98:
-    resolution: {integrity: sha512-eMNFFQU9QrwE9ycYlXD3NzZN0caL8WWIgafGPnNDpLM8LsiZukDr7loummc6cnT9LyPKNZLLSSPdSDhnO7ZfEA==}
+  /@types/web/0.0.99:
+    resolution: {integrity: sha512-xMz3tOvtkZzc7RpQrDNiLe5sfMmP+fz8bOxHIZ/U8qXyvzDX4L4Ss1HCjor/O9DSelba+1iXK1VM7lruX28hiQ==}
     dev: true
 
   /@types/webpack-env/1.18.0:
