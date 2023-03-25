@@ -25,7 +25,7 @@
     "react-hook-form": "^7.43.5",
     "react-router-dom": "^6.9.0",
     "reset-css": "^5.0.1",
-    "rooks": "^7.4.4",
+    "rooks": "^7.8.4",
     "swr": "^2.1.0"
   },
   "devDependencies": {
