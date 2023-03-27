@@ -4,6 +4,7 @@ import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
@@ -16,7 +17,8 @@ try {
   console.log('failed to get build hash');
 }
 
-const BUILD_TIME = dayjs().format('YY-MM-DD HH:mm:ss');
+dayjs.extend(utc);
+const BUILD_TIME = dayjs().utc().format();
 
 export default defineConfig(({ mode }) => {
   let apiDomain = 'https://dev.bgm38.com';
