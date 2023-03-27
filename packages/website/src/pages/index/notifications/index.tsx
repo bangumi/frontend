@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import { Button, Input, Pagination, Tab, Typography } from '@bangumi/design';
-import { Enter } from '@bangumi/icons';
+import { Button, Pagination, Tab, Typography } from '@bangumi/design';
+import { ArrowPath } from '@bangumi/icons';
 import { useUser } from '@bangumi/website/hooks/use-user';
 import { _settings } from '@bangumi/website/shared/notifications';
 
@@ -47,6 +47,11 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
         {setting.prefix}
         <Typography.Link
           to={`${setting.url}/${topicID}${setting.append ?? ''}${setting.anchor}${postID}`}
+          onClick={() => {
+            ozaClient.clearNotice({
+              id: [id],
+            });
+          }}
           target='_blank'
           rel='noopener noreferrer'
           className={style.noticeItemBodyContent}
@@ -74,11 +79,19 @@ const useNotifications = () => {
 
 function Notifications() {
   const { notice, mutate, total } = useNotifications();
+  const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
   return (
     <>
       <div className={style.title}>电波提醒</div>
-      <div className={style.subtile}>更新于 2022-9-20 10:25</div>
+      <div className={style.subtitle}>
+        <span>更新于 {updatedAt}</span>
+        <ArrowPath
+          onClick={() => {
+            mutate();
+          }}
+        />
+      </div>
       <div className={style.tab}>
         <Tab.Group type='borderless'>
           {NotificationPageTabs.map((item) => (
@@ -90,7 +103,8 @@ function Notifications() {
       </div>
 
       <div className={style.filter}>
-        <Input placeholder='筛选所有提醒...' wrapperClass={style.filterInput} suffix={<Enter />} />
+        {/* TODO: 筛选 */}
+        {/* <Input placeholder='筛选所有提醒...' wrapperClass={style.filterInput} suffix={<Enter />} /> */}
         <Button
           type='secondary'
           className={style.readAllBtn}
