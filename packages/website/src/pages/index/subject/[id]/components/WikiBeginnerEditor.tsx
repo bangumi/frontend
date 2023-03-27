@@ -6,7 +6,7 @@ import type { DraggableProvided, DropResult, ResponderProvided } from 'react-bea
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { Input } from '@bangumi/design';
-import { Cursor, Minus, Plus, VerticalRight } from '@bangumi/icons';
+import { Cursor, Minus, Plus, VerticalLeft, VerticalRight } from '@bangumi/icons';
 import { WikiElement } from '@bangumi/utils';
 import { reorder } from '@bangumi/website/utils';
 
@@ -39,6 +39,7 @@ interface IWikiInfoContext {
   removeOneWikiElement: (path: string) => void;
   editOneWikiElement: (path: string, target: 'value' | 'key', value: string) => void;
   convertToNestedWikiElement: (idx: number) => void;
+  hoistOneWikiElement: (path: string, key?: string, value?: string) => void;
 }
 
 export const WikiInfoContext = createContext<IWikiInfoContext | null>(null);
@@ -51,8 +52,12 @@ const WikiInfoItem = ({
   index,
   ...rest
 }: WikiInfoItemProps) => {
-  const { editOneWikiElement, removeOneWikiElement, convertToNestedWikiElement } =
-    useContext(WikiInfoContext) ?? {};
+  const {
+    editOneWikiElement,
+    removeOneWikiElement,
+    convertToNestedWikiElement,
+    hoistOneWikiElement,
+  } = useContext(WikiInfoContext) ?? {};
 
   return (
     <div
@@ -86,7 +91,8 @@ const WikiInfoItem = ({
         )}
         onKeyDown={(e) => {
           if (e.ctrlKey && e.key === 'Enter') {
-            level === 1 && convertToNestedWikiElement?.(index); /** 只对一级菜单有效 */
+            level === 1 && convertToNestedWikiElement?.(index);
+            level === 2 && hoistOneWikiElement?.(path, item.key, item.value as string);
           }
           if (e.ctrlKey && e.code === 'KeyX') {
             removeOneWikiElement?.(path);
@@ -107,16 +113,17 @@ const WikiInfoItem = ({
             level === 1 && index === 0 && style.editorItemTopRadius,
           )}
           // 切回一级功能先不做
-          // prefix={
-          //   level === 2 ? (
-          //     <VerticalLeft
-          //       className={style.editorItemConvertHandler}
-          //       onClick={() => {
-          //         convertToNestedWikiElement?.(index);
-          //       }}
-          //     />
-          //   ) : undefined
-          // }
+          prefix={
+            level === 2 ? (
+              <VerticalLeft
+                className={style.editorItemConvertHandler}
+                onClick={() => {
+                  // 现在最多只有二级，所以二级项一定是 string
+                  hoistOneWikiElement?.(path, item.key, item.value as string);
+                }}
+              />
+            ) : undefined
+          }
           suffix={
             level === 1 &&
             !isArray(item.value) && (
@@ -157,7 +164,7 @@ const WikiInfoItem = ({
 function WikiBeginnerEditorBlock({
   elements,
   level = 1,
-  path = '',
+  path = '0',
   onDragEnd,
 }: {
   elements: WikiElement[];
@@ -325,6 +332,26 @@ function WikiBeginnerEditor({
     focusToElement(id);
   };
 
+  const hoistOneWikiElement = (path: string, key = '', value = '') => {
+    const [idx, subIdx] = splitPath(path);
+    if (!isNumber(idx)) return;
+    onChange([
+      // 取出包括索引为 idx 的子数组
+      ...elements.slice(0, idx + 1).map((el, rootIndex) =>
+        rootIndex === idx && isArray(el.value)
+          ? new WikiElement({
+              ...el,
+              // 有子项移除 subIdx 对应的子项，无子项变为可编辑
+              value: el.value.length === 1 ? '' : filter(el.value, (_, index) => index !== subIdx),
+            })
+          : el,
+      ),
+      // 插入该子项
+      new WikiElement({ key, value }),
+      ...elements.slice(idx + 1, elements.length),
+    ]);
+  };
+
   return (
     <WikiInfoContext.Provider
       value={{
@@ -333,6 +360,7 @@ function WikiBeginnerEditor({
         removeOneWikiElement,
         editOneWikiElement,
         convertToNestedWikiElement,
+        hoistOneWikiElement,
       }}
     >
       <div className={style.wikiEditor}>
