@@ -29,6 +29,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       align = 'left',
       disabled,
       rounded = false,
+      onFocus,
+      onBlur,
       ...rest
     },
     ref,
@@ -55,15 +57,15 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           })}
           ref={ref}
           disabled={disabled}
-          {...rest}
           onFocus={(e) => {
             setFocus(true);
-            rest?.onFocus?.(e);
+            onFocus?.(e);
           }}
           onBlur={(e) => {
             setFocus(false);
-            rest?.onBlur?.(e);
+            onBlur?.(e);
           }}
+          {...rest}
         />
         {suffix}
       </div>
