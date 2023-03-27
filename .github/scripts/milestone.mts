@@ -66,6 +66,12 @@ async function main() {
     await octokit.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
       ...repo,
       issue_number: issue.number,
+      milestone: null,
+    });
+
+    await octokit.request('PATCH /repos/{owner}/{repo}/issues/{issue_number}', {
+      ...repo,
+      issue_number: issue.number,
       milestone: newNextMileStone.data.number,
     });
   }
