@@ -129,7 +129,7 @@ export interface LoginRequestBody {
   email: string;
   password: string;
 }
-export interface CurrentUser {
+export type CurrentUser = {
   avatar: {
     large: string;
     medium: string;
@@ -137,13 +137,14 @@ export interface CurrentUser {
   };
   id: number;
   nickname: string;
-  permission: {
-    subjectWikiEdit: boolean;
-  };
   sign: string;
   user_group: number;
   username: string;
-}
+} & {
+  permission: {
+    subjectWikiEdit: boolean;
+  };
+};
 export interface Notice {
   createdAt: number;
   id: number;

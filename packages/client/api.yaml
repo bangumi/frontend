@@ -36,54 +36,60 @@ components:
         - state
       type: object
     CurrentUser:
-      properties:
-        avatar:
-          properties:
-            large:
+      allOf:
+        - properties:
+            avatar:
+              properties:
+                large:
+                  type: string
+                medium:
+                  examples:
+                    - sai
+                  type: string
+                small:
+                  type: string
+              required:
+                - small
+                - medium
+                - large
+              title: Avatar
+              type: object
+            id:
+              examples:
+                - 1
+              type: integer
+            nickname:
+              examples:
+                - Sai🖖
               type: string
-            medium:
+            sign:
+              type: string
+            user_group:
+              type: integer
+            username:
               examples:
                 - sai
               type: string
-            small:
-              type: string
           required:
-            - small
-            - medium
-            - large
-          title: Avatar
+            - id
+            - username
+            - nickname
+            - avatar
+            - sign
+            - user_group
+          title: User
           type: object
-        id:
-          examples:
-            - 1
-          type: integer
-        nickname:
-          examples:
-            - Sai🖖
-          type: string
-        permission:
-          properties:
-            subjectWikiEdit:
-              type: boolean
+        - properties:
+            permission:
+              properties:
+                subjectWikiEdit:
+                  type: boolean
+              required:
+                - subjectWikiEdit
+              type: object
           required:
-            - subjectWikiEdit
+            - permission
           type: object
-        sign:
-          type: string
-        user_group:
-          type: integer
-        username:
-          examples:
-            - sai
-          type: string
-      required:
-        - id
-        - username
-        - nickname
-        - avatar
-        - sign
-        - user_group
-        - permission
       type: object
     Error:
       description: fastify default error response
@@ -1067,6 +1073,7 @@ paths:
           required: false
           schema:
             default: 30
+            maximum: 40
             type: integer
         - in: query
           name: offset
@@ -1130,12 +1137,14 @@ paths:
           required: false
           schema:
             default: 20
+            maximum: 40
             type: integer
         - in: query
           name: offset
           required: false
           schema:
             default: 0
+            minimum: 0
             type: integer
         - in: path
           name: groupName
@@ -1183,6 +1192,7 @@ paths:
           required: false
           schema:
             default: 30
+            maximum: 40
             type: integer
         - in: query
           name: offset
@@ -1455,11 +1465,13 @@ paths:
     get:
       operationId: listNotice
       parameters:
-        - in: query
+        - description: max 40
+          in: query
           name: limit
           required: false
           schema:
             default: 20
+            maximum: 40
             type: integer
         - in: query
           name: unread
@@ -1519,6 +1531,7 @@ paths:
           required: false
           schema:
             default: 30
+            maximum: 40
             type: integer
         - in: query
           name: offset
