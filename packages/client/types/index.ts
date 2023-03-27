@@ -135,12 +135,13 @@ export interface components {
       };
       id: number;
       nickname: string;
-      permission: {
-        subjectWikiEdit: boolean;
-      };
       sign: string;
       user_group: number;
       username: string;
+    } & {
+      permission: {
+        subjectWikiEdit: boolean;
+      };
     };
     /** @description fastify default error response */
     Error: {
@@ -834,6 +835,7 @@ export interface operations {
   listNotice: {
     parameters: {
       query: {
+        /** @description max 40 */
         limit?: number;
         unread?: boolean;
       };
