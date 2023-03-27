@@ -12,17 +12,15 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-js-env
 
-      - name: Build
-        run: |
-          pnpm build
-          tar -czf bangumi-website.tar.gz  -C ./packages/website/dist .
-          openssl dgst -sha256 bangumi-website.tar.gz > bangumi-website.tar.gz.sha256
+      - run: pnpm build
+      - run: zip -r bangumi-website.zip ./packages/website/dist
+      - run: openssl dgst -sha256 bangumi-website.zip > bangumi-website.zip.sha256
 
       - name: Get Tag Name
         run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Upload Github Release
-        run: gh release create "$TAG" bangumi-website.tar.gz bangumi-website.tar.gz.sha256 --generate-notes
+        run: gh release create "$TAG" bangumi-website.zip bangumi-website.zip.sha256 --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
