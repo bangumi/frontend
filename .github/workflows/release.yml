@@ -22,7 +22,7 @@ jobs:
         run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Upload Github Release
-        run: gh release create "$TAG" bangumi-website.tar.gz bangumi-website.tar.gz.sha256
+        run: gh release create "$TAG" bangumi-website.tar.gz bangumi-website.tar.gz.sha256 --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
