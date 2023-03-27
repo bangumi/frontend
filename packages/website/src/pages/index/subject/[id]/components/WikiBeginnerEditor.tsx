@@ -273,12 +273,11 @@ function WikiBeginnerEditor({
 
   const editOneWikiElement = (path: string, target: 'key' | 'value', value: string) => {
     const [idx, subIdx] = splitPath(path);
+    if (!isNumber(idx)) return;
     onChange(
-      isNumber(idx)
-        ? isNumber(subIdx)
-          ? set(elements, `${idx}.value.${subIdx}.${target}`, value)
-          : set(elements, `${idx}.${target}`, value)
-        : elements,
+      isNumber(subIdx)
+        ? set(elements, `${idx}.value.${subIdx}.${target}`, value)
+        : set(elements, `${idx}.${target}`, value),
     );
   };
 
