@@ -14,7 +14,8 @@ import style from './index.module.less';
 
 const NotificationPageTabs = [
   { key: 'overview', label: '提醒总览', to: '/notifications' },
-  { key: 'msg-sv', label: '短信收发', to: '/msg-sv' },
+  // TODO: 短信收发
+  // { key: 'msg-sv', label: '短信收发', to: '/msg-sv' },
 ];
 
 function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
@@ -94,7 +95,9 @@ function Notifications() {
           type='secondary'
           className={style.readAllBtn}
           onClick={async () => {
-            await ozaClient.clearNotice({});
+            await ozaClient.clearNotice({
+              id: notice.map((x) => x.id),
+            });
             await mutate();
           }}
         >
