@@ -131,7 +131,6 @@ const moreBlock: IBlockItem = {
 const getThisYear = (): string => new Date().getFullYear().toString();
 
 const Footer: FC = () => {
-  const hash = import.meta.env.__COMMIT_HASH__ as string;
   return (
     <div className={style.footerContainer}>
       <div className={style.footerMain}>
@@ -140,10 +139,7 @@ const Footer: FC = () => {
             <BangumiTextLogo className={style.logo} />
             <div className={style.copyright}>
               <p>© 2008-{getThisYear()} Bangumi (a.k.a.Chobits),</p>
-              <p>
-                some rights reserved | ver. {import.meta.env.__APP_VERSION__}
-                {hash ? ' | ' + hash : ''}
-              </p>
+              <p>some rights reserved | ver. {import.meta.env.__APP_VERSION__}</p>
               <p>build at {import.meta.env.__BUILT_TIME__}</p>
             </div>
           </div>

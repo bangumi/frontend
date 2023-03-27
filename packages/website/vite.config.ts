@@ -11,19 +11,12 @@ import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
 
-let COMMIT_HASH = '';
-
 let describedVersion = version;
 
 try {
-  COMMIT_HASH = execSync('git rev-parse --short HEAD').toString();
   describedVersion = execSync('git describe').toString();
 } catch {
   console.log('failed to get git info');
-}
-
-if (describedVersion === version) {
-  COMMIT_HASH = '';
 }
 
 dayjs.extend(utc);
@@ -147,7 +140,6 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       'import.meta.env.__APP_VERSION__': JSON.stringify(describedVersion),
-      'import.meta.env.__COMMIT_HASH__': JSON.stringify(COMMIT_HASH),
       'import.meta.env.__BUILT_TIME__': JSON.stringify(BUILD_TIME),
     },
   };
