@@ -12,6 +12,7 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "automerge": true,
   "packageRules": [
     {
       "matchManagers": ["npm"],
@@ -26,12 +27,6 @@
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "separateMajorMinor": true,
       "semanticCommitType": "style"
-    },
-    {
-      "groupName": "vite",
-      "matchPackagePrefixes": ["@vitejs/", "vite"],
-      "separateMajorMinor": true,
-      "semanticCommitType": "build"
     },
     {
       "matchManagers": ["github-actions"],
