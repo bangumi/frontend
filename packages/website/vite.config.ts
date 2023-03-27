@@ -9,6 +9,8 @@ import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
+import pkg from '../../package.json';
+
 let COMMIT_HASH = '';
 
 try {
@@ -137,7 +139,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
-      'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+      'import.meta.env.__APP_VERSION__': JSON.stringify(pkg.version),
       'import.meta.env.__COMMIT_HASH__': JSON.stringify(COMMIT_HASH),
       'import.meta.env.__BUILT_TIME__': JSON.stringify(BUILD_TIME),
     },
