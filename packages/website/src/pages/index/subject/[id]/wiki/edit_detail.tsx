@@ -332,30 +332,51 @@ function WikiEditDetailDetailPage() {
       }
       rightChildren={
         <div className='flex flex-col'>
-          <div className={style.title}>条目修订历史</div>
-          <Divider className={style.divider} />
-          <div className={style.history}>
-            {subjectEditHistory.map((his, idx) => (
-              <div key={idx} className={style.historyItem}>
-                <span className={style.historyUserName}>{his.creator.username}</span>
-                <span className={style.historyMsg} title={his.commitMessage}>
-                  {his.commitMessage}
-                </span>
-                <span className={cn(style.historySuffix, style.historyCreateAt)}>
-                  @ {dayjs.unix(his.createdAt).format('YYYY-MM-DD HH:mm')}
-                </span>
-                <span className={style.historySuffix}>|</span>
-                <span className={style.historySuffix}>恢复</span>
-              </div>
-            ))}
-            <Button.Link
-              type='plain'
-              to={WikiEditTabsItemsByKey.history.to(subjectId.toString())}
-              className={style.historyMore}
-            >
-              更多修改记录
-              <ArrowRightCircle />
-            </Button.Link>
+          <div className={style.editorHandbook}>
+            <div className={style.title}>编辑说明</div>
+            <Divider className={style.divider} />
+            <div className={style.editorHandbookContent}>
+              <p>切换类型会导致已编辑项目顺序发生变化，请先选择好类型模板再进行排序</p>
+              <p>可拖拽改变行顺序</p>
+              <p>
+                欲把一级项目切换为二级，将光标移至「项目名」输入框最右侧即可看到缩进按钮；从二级切换回一级的按钮位于二级项目名左侧
+              </p>
+              <p>
+                按 <kbd>Ctrl</kbd> + <kbd>Enter</kbd> 可将一级项目切换为二级项目
+              </p>
+              <p>
+                按 <kbd>Ctrl</kbd> + <kbd>X</kbd> 可删除当前行的项目
+              </p>
+            </div>
+          </div>
+
+          {/* history */}
+          <div className='flex flex-col'>
+            <div className={style.title}>条目修订历史</div>
+            <Divider className={style.divider} />
+            <div className={style.history}>
+              {subjectEditHistory.map((his, idx) => (
+                <div key={idx} className={style.historyItem}>
+                  <span className={style.historyUserName}>{his.creator.username}</span>
+                  <span className={style.historyMsg} title={his.commitMessage}>
+                    {his.commitMessage}
+                  </span>
+                  <span className={cn(style.historySuffix, style.historyCreateAt)}>
+                    @ {dayjs.unix(his.createdAt).format('YYYY-MM-DD HH:mm')}
+                  </span>
+                  <span className={style.historySuffix}>|</span>
+                  <span className={style.historySuffix}>恢复</span>
+                </div>
+              ))}
+              <Button.Link
+                type='plain'
+                to={WikiEditTabsItemsByKey.history.to(subjectId.toString())}
+                className={style.historyMore}
+              >
+                更多修改记录
+                <ArrowRightCircle />
+              </Button.Link>
+            </div>
           </div>
         </div>
       }

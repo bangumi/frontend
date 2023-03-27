@@ -314,16 +314,6 @@ function WikiBeginnerEditor({
       }}
     >
       <div className={style.wikiEditor}>
-        <div className={style.tips}>
-          <div>Tips:</div>
-          <div>可拖拽改变行顺序</div>
-          <div>
-            按<kbd>Ctrl</kbd>+<kbd>Enter</kbd>切换为二级项目
-          </div>
-          <div>
-            按<kbd>Ctrl</kbd>+<kbd>X</kbd>可删除项目
-          </div>
-        </div>
         <WikiBeginnerEditorBlock elements={elements} onDragEnd={onDragEnd} />
         <div className={style.footer}>
           {/* place holder */}
