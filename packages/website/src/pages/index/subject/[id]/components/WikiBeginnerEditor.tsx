@@ -6,7 +6,7 @@ import type { DraggableProvided, DropResult, ResponderProvided } from 'react-bea
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { Input } from '@bangumi/design';
-import { Cursor, Minus, Plus } from '@bangumi/icons';
+import { Cursor, Minus, Plus, VerticalRight } from '@bangumi/icons';
 import { WikiElement } from '@bangumi/utils';
 import { reorder } from '@bangumi/website/utils';
 
@@ -106,6 +106,28 @@ const WikiInfoItem = ({
             style.editorItemInput,
             level === 1 && index === 0 && style.editorItemTopRadius,
           )}
+          // 切回一级功能先不做
+          // prefix={
+          //   level === 2 ? (
+          //     <VerticalLeft
+          //       className={style.editorItemConvertHandler}
+          //       onClick={() => {
+          //         convertToNestedWikiElement?.(index);
+          //       }}
+          //     />
+          //   ) : undefined
+          // }
+          suffix={
+            level === 1 &&
+            !isArray(item.value) && (
+              <VerticalRight
+                className={style.editorItemConvertHandler}
+                onClick={() => {
+                  convertToNestedWikiElement?.(index);
+                }}
+              />
+            )
+          }
           align={level === 2 ? 'right' : undefined}
           defaultValue={item.key}
           onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
