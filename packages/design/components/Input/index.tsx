@@ -1,7 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
   /** 外层 wrapper 的样式 */
@@ -33,6 +33,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref,
   ) => {
+    const [focus, setFocus] = useState(false);
     return (
       <div
         className={classnames(
@@ -40,6 +41,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           {
             'bgm-input__wrapper--disabled': disabled,
             'bgm-input__wrapper--rounded': rounded,
+            'bgm-input__wrapper--focus': focus,
           },
           wrapperClass,
         )}
@@ -54,6 +56,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           disabled={disabled}
           {...rest}
+          onFocus={(e) => {
+            setFocus(true);
+            rest?.onFocus?.(e);
+          }}
+          onBlur={(e) => {
+            setFocus(false);
+            rest?.onBlur?.(e);
+          }}
         />
         {suffix}
       </div>
