@@ -8,8 +8,15 @@ import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
-const COMMIT_HASH = execSync('git rev-parse --short HEAD').toString();
-const BUILD_TIME = dayjs().format('YY-MM-DD');
+let COMMIT_HASH = '';
+
+try {
+  COMMIT_HASH = execSync('git rev-parse --short HEAD').toString();
+} catch {
+  console.log('failed to get build hash');
+}
+
+const BUILD_TIME = dayjs().format('YY-MM-DD HH:mm:ss');
 
 export default defineConfig(({ mode }) => {
   let apiDomain = 'https://dev.bgm38.com';
