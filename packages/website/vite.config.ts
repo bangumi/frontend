@@ -9,12 +9,14 @@ import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
+import { version } from '../../package.json';
+
 let COMMIT_HASH = '';
 
 try {
   COMMIT_HASH = execSync('git rev-parse --short HEAD').toString();
 } catch {
-  console.log('failed to get build hash');
+  console.log('failed to get git info');
 }
 
 dayjs.extend(utc);
@@ -137,7 +139,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
-      'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+      'import.meta.env.__APP_VERSION__': JSON.stringify(version),
       'import.meta.env.__COMMIT_HASH__': JSON.stringify(COMMIT_HASH),
       'import.meta.env.__BUILT_TIME__': JSON.stringify(BUILD_TIME),
     },
