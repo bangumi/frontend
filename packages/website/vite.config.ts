@@ -1,10 +1,15 @@
+import { execSync } from 'node:child_process';
 import * as crypto from 'node:crypto';
 import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
+import dayjs from 'dayjs';
 import { defineConfig } from 'vite';
 import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
+
+const COMMIT_HASH = execSync('git rev-parse --short HEAD').toString();
+const BUILD_TIME = dayjs().format('YY-MM-DD');
 
 export default defineConfig(({ mode }) => {
   let apiDomain = 'https://dev.bgm38.com';
@@ -124,6 +129,8 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       'import.meta.env.__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+      'import.meta.env.__COMMIT_HASH__': JSON.stringify(COMMIT_HASH),
+      'import.meta.env.__BUILT_TIME__': JSON.stringify(BUILD_TIME),
     },
   };
 });
