@@ -8,38 +8,6 @@ Object {
       <div
         class="_wikiEditor_48b3a8"
       >
-        <div
-          class="_tips_48b3a8"
-        >
-          <div>
-            Tips:
-          </div>
-          <div>
-            可拖拽改变行顺序
-          </div>
-          <div>
-            按
-            <kbd>
-              Ctrl
-            </kbd>
-            +
-            <kbd>
-              Enter
-            </kbd>
-            切换为二级项目
-          </div>
-          <div>
-            按
-            <kbd>
-              Ctrl
-            </kbd>
-            +
-            <kbd>
-              X
-            </kbd>
-            可删除项目
-          </div>
-        </div>
         <div>
           <div
             data-rbd-draggable-context-id="0"
@@ -71,6 +39,9 @@ Object {
                     class="bgm-input"
                     type="text"
                     value=""
+                  />
+                  <div
+                    class="_editorItemConvertHandler_48b3a8"
                   />
                 </div>
                 <div
@@ -120,6 +91,9 @@ Object {
                     class="bgm-input"
                     type="text"
                     value=""
+                  />
+                  <div
+                    class="_editorItemConvertHandler_48b3a8"
                   />
                 </div>
                 <div
@@ -191,38 +165,6 @@ Object {
     <div
       class="_wikiEditor_48b3a8"
     >
-      <div
-        class="_tips_48b3a8"
-      >
-        <div>
-          Tips:
-        </div>
-        <div>
-          可拖拽改变行顺序
-        </div>
-        <div>
-          按
-          <kbd>
-            Ctrl
-          </kbd>
-          +
-          <kbd>
-            Enter
-          </kbd>
-          切换为二级项目
-        </div>
-        <div>
-          按
-          <kbd>
-            Ctrl
-          </kbd>
-          +
-          <kbd>
-            X
-          </kbd>
-          可删除项目
-        </div>
-      </div>
       <div>
         <div
           data-rbd-draggable-context-id="0"
@@ -254,6 +196,9 @@ Object {
                   class="bgm-input"
                   type="text"
                   value=""
+                />
+                <div
+                  class="_editorItemConvertHandler_48b3a8"
                 />
               </div>
               <div
@@ -303,6 +248,9 @@ Object {
                   class="bgm-input"
                   type="text"
                   value=""
+                />
+                <div
+                  class="_editorItemConvertHandler_48b3a8"
                 />
               </div>
               <div
