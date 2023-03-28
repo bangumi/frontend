@@ -1,19 +1,21 @@
 @import '../../../theme/base.less';
 
 .bgm-layout {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 
   &--alpha {
     gap: 40px;
 
     .bgm-layout__left {
-      width: 913px;
-      flex: 1;
+      grid-column: span 4 / span 4;
+
+      @media (max-width: @lg) {
+        grid-column: span 5 / span 5;
+      }
     }
 
     .bgm-layout__right {
-      width: 427px;
-
       @media (max-width: @lg) {
         display: none;
       }
