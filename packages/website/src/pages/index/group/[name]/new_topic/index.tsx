@@ -5,7 +5,6 @@ import { Typography } from '@bangumi/design';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
-import GroupInfo from '../../components/GroupInfo';
 import TopicForm from '../../components/TopicForm';
 import styles from './style.module.less';
 
@@ -28,9 +27,6 @@ const GroupNewTopicPage = () => {
       </Typography.Text>
       <div className={styles.grid}>
         <TopicForm groupName={name} />
-        <div className={styles.rightColumn}>
-          <GroupInfo group={group.group} />
-        </div>
       </div>
     </>
   );
