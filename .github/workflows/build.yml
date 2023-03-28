@@ -27,10 +27,3 @@ jobs:
         with:
           name: sites
           path: packages/website/dist
-
-      - name: Deploy to Netlify
-        if: ${{ github.event_name == 'push' }}
-        run: netlify deploy --dir=packages/website/dist --alias="sites" --prod
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_PREVIEW_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_PREVIEW_SITE_ID }}

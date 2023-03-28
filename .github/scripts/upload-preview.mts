@@ -18,6 +18,9 @@ const artifacts: Record<string, string> = {
 const commentComment = '<!-- preview comment -->';
 
 async function main() {
+  const NETLIFY_AUTH_TOKEN = process.env.NETLIFY_AUTH_TOKEN ?? '';
+  const NETLIFY_SITE_ID = process.env.NETLIFY_SITE_ID ?? '';
+
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
     throw new Error('process.env.GH_TOKEN is empty');
@@ -39,6 +42,12 @@ async function main() {
     throw new Error('process.env.RUN_ID is empty');
   }
 
+  const { data: run } = await octokit.request(`GET /repos/{owner}/{repo}/actions/runs/{run_id}`, {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    run_id: parseInt(RUN_ID),
+  });
+
   await exec(
     'gh',
     [
@@ -59,14 +68,34 @@ async function main() {
     },
   );
 
+  if (run.event === 'push') {
+    await exec(
+      'netlify',
+      [
+        'deploy',
+        `--dir=${artifact}`,
+        `--alias="${artifact}"`,
+        ...(artifact === 'sites' ? ['--prod'] : []),
+      ],
+      {
+        env: {
+          NETLIFY_AUTH_TOKEN,
+          NETLIFY_SITE_ID,
+          PATH: process.env.PATH ?? '',
+        },
+      },
+    );
+    return;
+  }
+
   const prNumber = parseInt(fs.readFileSync(path.resolve(artifact, 'pr_number')).toString().trim());
 
   const alias = `pr-${prNumber}-${artifact}`;
 
   await exec('netlify', ['deploy', `--dir=${artifact}`, `--alias="${alias}"`], {
     env: {
-      NETLIFY_AUTH_TOKEN: process.env.NETLIFY_AUTH_TOKEN ?? '',
-      NETLIFY_SITE_ID: process.env.NETLIFY_SITE_ID ?? '',
+      NETLIFY_AUTH_TOKEN,
+      NETLIFY_SITE_ID,
       PATH: process.env.PATH ?? '',
     },
   });
