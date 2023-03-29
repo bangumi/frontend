@@ -12,8 +12,9 @@ import styles from './style.module.less';
 
 const GroupNewTopicPage = () => {
   const { name } = useParams();
-  const { group: groupProfile } = useGroup(name!);
-  const { group } = groupProfile;
+  const {
+    group: { group },
+  } = useGroup(name!);
 
   return (
     <>
