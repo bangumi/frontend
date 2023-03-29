@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Button, CollapsibleContent, Section } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
+import Helmet from '@bangumi/website/components/Helmet';
 import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -29,6 +30,7 @@ const GroupHome: React.FC = () => {
 
   return (
     <>
+      <Helmet title={`${group.group.title}小组`} />
       <CollapsibleContent
         threshold={193}
         content={parsedDescription}

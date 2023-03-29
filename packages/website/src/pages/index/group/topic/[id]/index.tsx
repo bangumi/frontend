@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, Button, Layout, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
+import Helmet from '@bangumi/website/components/Helmet';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -54,6 +55,7 @@ const TopicPage: FC = () => {
 
   return (
     <>
+      <Helmet title={topicDetail.title} />
       <GroupTopicHeader
         id={topicDetail.id}
         title={topicDetail.title}
