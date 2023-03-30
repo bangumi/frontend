@@ -24,7 +24,8 @@ const GroupActions = memo(({ groupProfile, className, size }: GroupActionsProps)
       <Button.Link size={size} color='blue' to={`/group/${group.name}/new_topic`}>
         发表新主题
       </Button.Link>
-      <Button size={size} color='blue' type='secondary'>
+      {/* TODO */}
+      <Button size={size} color='blue' type='secondary' disabled>
         {groupProfile.inGroup ? '退出' : '加入'}该小组
       </Button>
     </div>
