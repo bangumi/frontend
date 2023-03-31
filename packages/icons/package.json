@@ -10,7 +10,7 @@
   "devDependencies": {
     "@bangumi/utils": "workspace:0.0.0",
     "@storybook/react": "^6.5.16",
-    "@types/react": "^18.0.29",
+    "@types/react": "^18.0.31",
     "typescript": "^5.0.2"
   }
 }
