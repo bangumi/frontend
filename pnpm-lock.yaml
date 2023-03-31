@@ -265,7 +265,7 @@ importers:
       react-hook-form: ^7.43.8
       react-router-dom: ^6.9.0
       reset-css: ^5.0.1
-      rooks: ^7.8.4
+      rooks: ^7.10.0
       swr: ^2.1.1
       typescript: ^5.0.2
       vite: ^4.2.1
@@ -287,7 +287,7 @@ importers:
       react-hook-form: 7.43.8_react@18.2.0
       react-router-dom: 6.9.0_biqbaboplfbrettd7655fr4n2y
       reset-css: 5.0.1
-      rooks: 7.8.4_biqbaboplfbrettd7655fr4n2y
+      rooks: 7.10.0_biqbaboplfbrettd7655fr4n2y
       swr: 2.1.1_react@18.2.0
     devDependencies:
       '@bangumi/client': link:../client
@@ -14272,8 +14272,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /rooks/7.8.4_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-3/PrSJ2HPgWFXxHFKhwvLsQvWmUFcTlIzXKXET1mzm4N+OCvcBaytAEwL02JrWsnt41eLcO8jK3HgrtIbpKgEQ==}
+  /rooks/7.10.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-aCeYfl7G86bKdBdOva/dzA9uWRYUgo5aOjGsCWBPjFp82SfdMUmQWUPWhCz3+BT/xuZJ5GqEsApMmoTPpupPLg==}
     engines: {node: '>=v10.24.1'}
     peerDependencies:
       react: ^16.8.0  || ^17.0.0 || ^18.0.0
