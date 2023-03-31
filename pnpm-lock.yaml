@@ -120,7 +120,7 @@ importers:
       node-fetch: ^3.3.1
       oazapfts: ^4.6.0
       openapi-types: ^12.1.0
-      openapi-typescript: ^6.2.0
+      openapi-typescript: ^6.2.1
     dependencies:
       oazapfts: 4.6.0_openapi-types@12.1.0
     devDependencies:
@@ -131,7 +131,7 @@ importers:
       msw: 1.2.1
       node-fetch: 3.3.1
       openapi-types: 12.1.0
-      openapi-typescript: 6.2.0
+      openapi-typescript: 6.2.1
 
   packages/design:
     specifiers:
@@ -12811,8 +12811,8 @@ packages:
   /openapi-types/12.1.0:
     resolution: {integrity: sha512-XpeCy01X6L5EpP+6Hc3jWN7rMZJ+/k1lwki/kTmWzbVhdPie3jd5O2ZtedEx8Yp58icJ0osVldLMrTB/zslQXA==}
 
-  /openapi-typescript/6.2.0:
-    resolution: {integrity: sha512-d1HF70HCUnU+g9hgX5X3MJ+BMgwX16fzwD6mkyfNqdxXuOTOSkm+O+aaFqLNX13aFbCylz4m2WiVe4viAShxiQ==}
+  /openapi-typescript/6.2.1:
+    resolution: {integrity: sha512-l0u3fWE7vOCSWl/FxNcB3zu/jDqi/NUCP7MSbffpCZdBwQAbljHbo+CAjPXpf47SAVE+F7ZQKOew+pnXfV1oGA==}
     hasBin: true
     dependencies:
       ansi-colors: 4.1.3
