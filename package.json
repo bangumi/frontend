@@ -59,7 +59,7 @@
     "@octokit/openapi-types": "^16.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
-    "@types/node": "^18.15.8",
+    "@types/node": "^18.15.11",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@types/web": "^0.0.99",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
