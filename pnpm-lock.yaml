@@ -143,7 +143,7 @@ importers:
       '@storybook/builder-vite': ^0.4.2
       '@storybook/react': ^6.5.16
       '@testing-library/react': ^14.0.0
-      '@types/lodash': ^4.14.191
+      '@types/lodash': ^4.14.192
       '@types/react': ^18.0.29
       '@types/react-dom': ^18.0.11
       classnames: ^2.3.2
@@ -175,7 +175,7 @@ importers:
       '@storybook/builder-vite': 0.4.2_k4vfydncnjbwatgxds4voc7cqy
       '@storybook/react': 6.5.16_grokbpfbuuosdhrkscgthnz2vm
       '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.192
       '@types/react': 18.0.29
       '@types/react-dom': 18.0.11
       classnames: 2.3.2
@@ -212,7 +212,7 @@ importers:
     specifiers:
       '@bgm38/wiki': ^0.2.2
       '@types/js-yaml': ^4.0.5
-      '@types/lodash': ^4.14.191
+      '@types/lodash': ^4.14.192
       '@types/react': ^18.0.29
       js-yaml: ^4.1.0
       lodash: ^4.17.21
@@ -224,7 +224,7 @@ importers:
       nanoid: 4.0.1
     devDependencies:
       '@types/js-yaml': 4.0.5
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.192
       '@types/react': 18.0.29
       js-yaml: 4.1.0
       typescript: 5.0.2
@@ -239,7 +239,7 @@ importers:
       '@playwright/test': ^1.32.0
       '@remix-run/router': ^1.4.0
       '@testing-library/react': ^14.0.0
-      '@types/lodash': ^4.14.191
+      '@types/lodash': ^4.14.192
       '@types/react': ^18.0.29
       '@types/react-beautiful-dnd': ^13.1.4
       '@types/react-dom': ^18.0.11
@@ -296,7 +296,7 @@ importers:
       '@bangumi/utils': link:../utils
       '@playwright/test': 1.32.0
       '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.192
       '@types/react': 18.0.29
       '@types/react-beautiful-dnd': 13.1.4
       '@types/react-dom': 18.0.11
@@ -5078,7 +5078,7 @@ packages:
       '@babel/preset-env': 7.20.2
       '@babel/types': 7.21.3
       '@mdx-js/mdx': 1.6.22
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.192
       js-string-escape: 1.0.1
       loader-utils: 2.0.4
       lodash: 4.17.21
@@ -5097,7 +5097,7 @@ packages:
       '@babel/preset-env': 7.20.2_@babel+core@7.21.3
       '@babel/types': 7.21.3
       '@mdx-js/mdx': 1.6.22
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.192
       js-string-escape: 1.0.1
       loader-utils: 2.0.4
       lodash: 4.17.21
@@ -5735,11 +5735,11 @@ packages:
   /@types/lodash.clonedeep/4.5.7:
     resolution: {integrity: sha512-ccNqkPptFIXrpVqUECi60/DFxjNKsfoQxSQsgcBJCX/fuX1wgyQieojkcWH/KpE3xzLoWN/2k+ZeGqIN3paSvw==}
     dependencies:
-      '@types/lodash': 4.14.191
+      '@types/lodash': 4.14.192
     dev: true
 
-  /@types/lodash/4.14.191:
-    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
+  /@types/lodash/4.14.192:
+    resolution: {integrity: sha512-km+Vyn3BYm5ytMO13k9KTp27O75rbQ0NFw+U//g+PX7VZyjCioXaRFisqSIJRECljcTv73G3i6BpglNGHgUQ5A==}
     dev: true
 
   /@types/mdast/3.0.11:

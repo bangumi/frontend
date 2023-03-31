@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
-    "@types/lodash": "^4.14.191",
+    "@types/lodash": "^4.14.192",
     "@types/react": "^18.0.29",
     "js-yaml": "^4.1.0",
     "typescript": "^5.0.2"
