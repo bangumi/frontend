@@ -28,7 +28,7 @@
     "msw": "~1.2.1",
     "react-hook-form": "^7.43.9",
     "react-router-dom": "^6.10.0",
-    "typescript": "^5.0.2",
+    "typescript": "^5.0.3",
     "vite": "^4.2.1",
     "vite-plugin-svgr": "^2.4.0"
   },
