@@ -5,7 +5,6 @@ name: Upload Preview
 on:
   workflow_run:
     workflows: ['Build', 'Storybook Build']
-    branches-ignore: [master]
     types:
       - completed
 

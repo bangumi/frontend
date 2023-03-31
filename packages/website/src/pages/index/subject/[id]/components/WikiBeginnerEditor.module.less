@@ -1,0 +1,99 @@
+@import '@bangumi/design/theme/base';
+
+// 编辑器样式
+.wiki-editor {
+  // 使用多 class 选择器
+  // 提高 css 优先级，覆盖 .form .input__wrapper
+  & .editor-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &-input {
+      &-group {
+        display: flex;
+        flex: 1;
+
+        &-secondary * {
+          background: #fcfcfc;
+        }
+      }
+
+      border-radius: 0;
+      border-bottom: 0;
+      // background-color: white;
+      &:last-child {
+        flex: 1;
+      }
+    }
+
+    &-minus {
+      opacity: 0.3;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      cursor: pointer;
+    }
+
+    &-convert-handler {
+      // visibility: hidden;
+      // 用 visibility 会有问题，原因未知
+      opacity: 0;
+      color: @gray-60;
+      height: 20px;
+      width: 20px;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 1;
+        // visibility: visible;
+      }
+    }
+  }
+
+  // 第一项上圆角
+  & .editor-item-top-radius {
+    &:first-of-type {
+      border-radius: 12px 0 0;
+    }
+
+    &:last-of-type {
+      border-radius: 0 12px 0 0;
+    }
+  }
+}
+
+// 编辑器底部按钮样式
+.footer {
+  display: flex;
+  gap: 4px;
+
+  &-btn {
+    border: 2px dashed @gray-10;
+    flex: 1;
+    height: 44px;
+    font-size: 1rem;
+    color: @gray-60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    &:first-of-type {
+      // left-bottom
+      border-radius: 0 0 0 12px;
+    }
+
+    &:last-of-type {
+      // right-bottom
+      border-left: unset;
+      border-radius: 0 0 12px;
+    }
+  }
+
+  &-placeholder {
+    visibility: hidden;
+  }
+}

@@ -1,9 +1,11 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { UserProvider } from '../../hooks/use-user';
+import { UserProvider } from '@bangumi/website/hooks/use-user';
+
 import { server as mockServer } from '../../mocks/server';
 import LoginPage from '.';
 
@@ -29,6 +31,15 @@ const mockedUseNavigate = vi.mocked(useNavigate);
 const mockedUseLocation = vi.mocked(useLocation);
 const mockedUseSearchParams = vi.mocked(useSearchParams);
 
+const renderLoginPage = () =>
+  render(
+    <HelmetProvider>
+      <UserProvider>
+        <LoginPage />
+      </UserProvider>
+    </HelmetProvider>,
+  );
+
 function mockLogin(
   statusCode: number,
   response: Object = {},
@@ -44,11 +55,7 @@ function mockLogin(
 function mockSuccessfulLogin() {
   mockLogin(200);
 
-  const { getByPlaceholderText, getByText } = render(
-    <UserProvider>
-      <LoginPage />
-    </UserProvider>,
-  );
+  const { getByPlaceholderText, getByText } = renderLoginPage();
   const fakeEmail = 'fake-email';
   const fakePassword = 'fakepassword';
 
@@ -120,11 +127,7 @@ it.each([
   'should show error message when response is $statusCode',
   async ({ statusCode, resp = {}, headers = {}, expectedError }) => {
     mockLogin(statusCode, resp, headers);
-    const { getByPlaceholderText, getByText } = render(
-      <UserProvider>
-        <LoginPage />
-      </UserProvider>,
-    );
+    const { getByPlaceholderText, getByText } = renderLoginPage();
     const fakeEmail = 'fake-email';
     const fakePassword = 'fakepassword';
 
@@ -140,11 +143,7 @@ it.each([
 );
 
 it('should validate user input', async () => {
-  const { getByPlaceholderText, getByText } = render(
-    <UserProvider>
-      <LoginPage />
-    </UserProvider>,
-  );
+  const { getByPlaceholderText, getByText } = renderLoginPage();
 
   fireEvent.click(getByText('登录'));
 

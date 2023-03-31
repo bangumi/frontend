@@ -23,7 +23,7 @@ dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
 
 export default defineConfig(({ mode }) => {
-  let apiDomain = 'https://dev.bgm38.com';
+  let apiDomain = 'https://next.bgm38.com';
 
   if (mode === 'loc') {
     apiDomain = 'http://127.0.0.1:4000';
@@ -36,29 +36,6 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       sourcemap: true,
-      rollupOptions: {
-        output:
-          mode !== 'production'
-            ? undefined
-            : {
-                // 把 js/css 文件打包成 `*.min.[ext]` 文件。
-                // 避免 CDN(cloudflare) 重复压缩。
-                entryFileNames: 'assets/[name].[hash].min.js',
-                chunkFileNames: '[name]-[hash].min.js',
-                assetFileNames: (a) => {
-                  const name = a.name;
-                  if (!name) {
-                    return 'assets/[name]-[hash].[ext]';
-                  }
-
-                  if (name.endsWith('.css')) {
-                    return 'assets/[name]-[hash].min.[ext]';
-                  }
-
-                  return 'assets/[name]-[hash].[ext]';
-                },
-              },
-      },
     },
     resolve: {
       alias: {

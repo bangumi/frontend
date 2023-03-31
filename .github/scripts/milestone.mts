@@ -74,7 +74,7 @@ async function main() {
   await octokit.request('PATCH /repos/{owner}/{repo}/milestones/{milestone_number}', {
     ...repo,
     milestone_number: oldNextMilestone.number,
-    description: oldNextMilestone.description ?? '',
+    description: oldNextMilestone.description?.replaceAll('milestone for next release', '') ?? '',
   });
 
   core.info(`update new issue next title`);
