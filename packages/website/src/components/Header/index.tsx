@@ -153,7 +153,7 @@ const Header: FC = () => {
               <Link
                 to='/notifications'
                 className={cn(style.icon, style.iconNotification, {
-                  [style.iconNotificationNotice!]: true,
+                  [style.iconNotificationNotice!]: noticeCount > 0,
                 })}
               >
                 <Notification />
