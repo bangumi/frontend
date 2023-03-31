@@ -41,8 +41,6 @@ it('add WikiElement properly', async () => {
   addRootWikiElementBtn.click();
   editor.rerender(<WikiBeginnerEditor elements={res} onChange={onChange} />);
 
-  console.log(res);
-
   expect(res[1]).toBeInstanceOf(WikiElement);
   expect(res[1]?.value?.length).toBe(2);
   expect(res.length).toBe(3);
