@@ -236,7 +236,7 @@ importers:
       '@bangumi/icons': workspace:0.0.0
       '@bangumi/utils': workspace:0.0.0
       '@marsidev/react-turnstile': ^0.1.1
-      '@playwright/test': ^1.32.0
+      '@playwright/test': ^1.32.1
       '@remix-run/router': ^1.4.0
       '@testing-library/react': ^14.0.0
       '@types/lodash': ^4.14.192
@@ -294,7 +294,7 @@ importers:
       '@bangumi/design': link:../design
       '@bangumi/icons': link:../icons
       '@bangumi/utils': link:../utils
-      '@playwright/test': 1.32.0
+      '@playwright/test': 1.32.1
       '@testing-library/react': 14.0.0_biqbaboplfbrettd7655fr4n2y
       '@types/lodash': 4.14.192
       '@types/react': 18.0.29
@@ -4004,13 +4004,13 @@ packages:
       tslib: 2.5.0
     dev: true
 
-  /@playwright/test/1.32.0:
-    resolution: {integrity: sha512-zOdGloaF0jeec7hqoLqM5S3L2rR4WxMJs6lgiAeR70JlH7Ml54ZPoIIf3X7cvnKde3Q9jJ/gaxkFh8fYI9s1rg==}
+  /@playwright/test/1.32.1:
+    resolution: {integrity: sha512-FTwjCuhlm1qHUGf4hWjfr64UMJD/z0hXYbk+O387Ioe6WdyZQ+0TBDAc6P+pHjx2xCv1VYNgrKbYrNixFWy4Dg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
       '@types/node': 18.15.8
-      playwright-core: 1.32.0
+      playwright-core: 1.32.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -13275,8 +13275,8 @@ packages:
       pathe: 1.1.0
     dev: true
 
-  /playwright-core/1.32.0:
-    resolution: {integrity: sha512-Z9Ij17X5Z3bjpp6XKujGBp9Gv4eViESac9aDmwgQFUEJBW0K80T21m/Z+XJQlu4cNsvPygw33b6V1Va6Bda5zQ==}
+  /playwright-core/1.32.1:
+    resolution: {integrity: sha512-KZYUQC10mXD2Am1rGlidaalNGYk3LU1vZqqNk0gT4XPty1jOqgup8KDP8l2CUlqoNKhXM5IfGjWgW37xvGllBA==}
     engines: {node: '>=14'}
     hasBin: true
     dev: true
