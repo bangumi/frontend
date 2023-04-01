@@ -6,13 +6,13 @@
   "dependencies": {
     "@bgm38/wiki": "^0.2.2",
     "lodash": "^4.17.21",
-    "nanoid": "^4.0.1"
+    "nanoid": "^4.0.2"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.5",
-    "@types/lodash": "^4.14.191",
-    "@types/react": "^18.0.29",
+    "@types/lodash": "^4.14.192",
+    "@types/react": "^18.0.31",
     "js-yaml": "^4.1.0",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.3"
   }
 }
