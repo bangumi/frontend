@@ -34,15 +34,13 @@ export function useNotify(user: User | undefined) {
 
       socket.on('notify', (event: string) => {
         const { count } = JSON.parse(event) as { count: number };
-        // if (noticeCount) {
-        // document.title = `(${noticeCount})...${document.title}`;
-        // }
         setNoticeCount(count);
       });
     }
 
     return () => {
       socket?.disconnect();
+      socket = null;
     };
   }, [user]);
 
