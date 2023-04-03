@@ -1,3 +1,4 @@
+import { last } from 'lodash';
 import { useEffect, useState } from 'react';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
@@ -9,9 +10,11 @@ export function useNotify(user: User | undefined) {
   const [noticeCount, setNoticeCount] = useState(0);
 
   useEffect(() => {
-    // TODO: reset title when count is 0
-    if (noticeCount > 0) {
-      document.title = `(${noticeCount})...${document.title}`;
+    const originalTitle = last(document.title.split('...'));
+    if (noticeCount > 0 && originalTitle) {
+      document.title = `(${noticeCount})...${originalTitle}`;
+    } else if (originalTitle) {
+      document.title = originalTitle;
     }
     // 正常来说，document.title 变成不会触发 rerender，这个 effect 也不会重新运行
     // 但现在 useNotify 只在 Header 使用，而 Header 使用了 react-router 的 hook，当路由变化时
