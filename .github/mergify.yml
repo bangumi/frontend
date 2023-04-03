@@ -138,7 +138,7 @@ pull_request_rules:
         remove:
           - 'ci:test:fail'
 
-  - name: add test fail label
+  - name: add E2E test fail label
     conditions:
       - check-failure=test-e2e
     actions:
@@ -146,7 +146,7 @@ pull_request_rules:
         add:
           - 'ci:test:e2e:fail'
 
-  - name: remove test fail label
+  - name: remove E2E test fail label
     conditions:
       - or:
           - check-success=test-e2e
