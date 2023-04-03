@@ -86,18 +86,16 @@ function WikiEditDetailDetailPage() {
   });
 
   setGetter(() =>
-    JSON.stringify(
-      // 1. 从表单中获取数据
-      merge(getValues(), {
-        subject: {
-          // 2. 更新 infobox
-          infobox: stringifyWiki({
-            type: wikiRef.current?.type ?? '',
-            data: fromWikiElement(wikiElement),
-          }),
-        },
-      }),
-    ),
+    // 1. 从表单中获取数据
+    merge(getValues(), {
+      subject: {
+        // 2. 更新 infobox
+        infobox: stringifyWiki({
+          type: wikiRef.current?.type ?? '',
+          data: fromWikiElement(wikiElement),
+        }),
+      },
+    }),
   );
 
   const prePlatform = watch('subject.platform');
