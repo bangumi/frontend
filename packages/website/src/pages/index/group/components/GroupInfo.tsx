@@ -1,18 +1,20 @@
-import type { Group } from 'packages/client/group';
+import type { GroupProfile } from 'packages/client/group';
 import React, { memo, useState } from 'react';
 
-import { Avatar, Button, CollapsibleContent, Section, Typography } from '@bangumi/design';
+import { Avatar, Button, CollapsibleContent, Typography } from '@bangumi/design';
 import { render as renderBBCode } from '@bangumi/utils';
 
+import GroupActions from './GroupActions';
 import styles from './GroupInfo.module.less';
 
 const { Link } = Typography;
 
-const GroupInfo = memo(({ group }: { group: Group }) => {
+const GroupInfo = memo(({ groupProfile }: { groupProfile: GroupProfile }) => {
   const [collapsed, setCollapsed] = useState(true);
+  const { group } = groupProfile;
 
   return (
-    <Section title='小组信息'>
+    <>
       <div className={styles.groupInfo}>
         <Avatar src={group.icon} size='medium' />
         <div className={styles.groupDetails}>
@@ -27,18 +29,19 @@ const GroupInfo = memo(({ group }: { group: Group }) => {
         collapsed={collapsed}
         onChange={setCollapsed}
       />
-      <div className={styles.groupOpinions}>
+      <GroupActions groupProfile={groupProfile} size='medium' className={styles.groupButtons} />
+      <div className={styles.groupButtons}>
         <Button.Link type='secondary' size='medium' to={`/group/${group.name}`}>
-          小组概览
+          概览
         </Button.Link>
         <Button.Link type='secondary' size='medium' to={`/group/${group.name}/forum`}>
-          组内讨论
+          讨论
         </Button.Link>
         <Button.Link type='secondary' size='medium' to={`/group/${group.name}/members`}>
-          小组成员
+          成员
         </Button.Link>
       </div>
-    </Section>
+    </>
   );
 });
 

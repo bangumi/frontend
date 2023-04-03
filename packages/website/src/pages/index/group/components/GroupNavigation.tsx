@@ -1,8 +1,9 @@
 import type { GroupProfile } from 'packages/client/group';
 import React from 'react';
 
-import { Button, Section, Typography } from '@bangumi/design';
+import { Section, Typography } from '@bangumi/design';
 
+import GroupActions from './GroupActions';
 import styles from './GroupNavigation.module.less';
 
 const Link = Typography.Link;
@@ -11,14 +12,7 @@ const GroupNavigation = ({ group }: { group: GroupProfile }) => {
   return (
     <Section title='小组功能'>
       <div className={styles.wrapper}>
-        <div className={styles.section}>
-          <Button.Link color='blue' to={`/group/${group.group.name}/new_topic`}>
-            发表新主题
-          </Button.Link>
-          <Button color='blue' type='secondary'>
-            {group.inGroup ? '退出' : '加入'}该小组
-          </Button>
-        </div>
+        <GroupActions groupProfile={group} className={styles.section} />
         <div className={styles.links}>
           <div>
             话题：<Link to='/group/my_topic'>我发表的</Link> |{' '}
