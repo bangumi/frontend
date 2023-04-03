@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { ozaClient } from '@bangumi/client';
 import { Button, Pagination, Tab, Typography } from '@bangumi/design';
 import { ArrowPath } from '@bangumi/icons';
+import Helmet from '@bangumi/website/components/Helmet';
 import { useUser } from '@bangumi/website/hooks/use-user';
 import { _settings } from '@bangumi/website/shared/notifications';
 
@@ -83,6 +84,7 @@ function Notifications() {
 
   return (
     <>
+      <Helmet title='电波提醒' />
       <div className={style.title}>电波提醒</div>
       <div className={style.subtitle}>
         <span>更新于 {updatedAt}</span>
