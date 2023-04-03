@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import dayjs from 'dayjs';
-import { flow, merge } from 'lodash';
+import { flow } from 'lodash';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -21,7 +21,6 @@ import {
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor';
-import { usePersistedStorage } from '@bangumi/website/hooks/use-presisted-storage';
 import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
 
 import WikiBeginnerEditor from '../components/WikiBeginnerEditor';
@@ -74,29 +73,9 @@ const formatWikiSyntaxErrorMessage = (error: WikiSyntaxError): string => {
 function WikiEditDetailDetailPage() {
   const { subjectEditHistory, subjectWikiInfo, mutateHistory, subjectId } = useWikiContext();
 
-  const {
-    data: initForm,
-    setGetter,
-    finish,
-  } = usePersistedStorage<FormData>(`wiki-edit-detail/${subjectId}`);
-  // 存储在 storage 中的数据拥有更高的优先级
-  const defaultForm = merge({ subject: subjectWikiInfo }, initForm);
   const { register, handleSubmit, setValue, watch, getValues } = useForm<FormData>({
-    defaultValues: defaultForm,
+    defaultValues: { subject: { ...subjectWikiInfo } },
   });
-
-  setGetter(() =>
-    // 1. 从表单中获取数据
-    merge(getValues(), {
-      subject: {
-        // 2. 更新 infobox
-        infobox: stringifyWiki({
-          type: wikiRef.current?.type ?? '',
-          data: fromWikiElement(wikiElement),
-        }),
-      },
-    }),
-  );
 
   const prePlatform = watch('subject.platform');
 
@@ -106,7 +85,7 @@ function WikiEditDetailDetailPage() {
   );
 
   const wikiRef = useRef<Wiki>(
-    defaultForm?.subject?.infobox ? parseWiki(defaultForm.subject.infobox) : null,
+    subjectWikiInfo?.infobox ? parseWiki(subjectWikiInfo.infobox) : null,
   );
 
   const [wikiElement, setWikiElement] = useState<WikiElement[]>(
@@ -159,7 +138,6 @@ function WikiEditDetailDetailPage() {
           }
         })
         .then(() => {
-          finish();
           // TODO: jump to other path
           console.log('success');
         })
@@ -167,7 +145,7 @@ function WikiEditDetailDetailPage() {
           toast('提交失败，请稍后再试');
         });
     },
-    [wikiElement, editorType, mutateHistory, subjectId, finish],
+    [wikiElement, editorType, mutateHistory, subjectId],
   );
 
   const handleSetEditorType = (type: EditorType) => {
