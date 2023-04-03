@@ -29,12 +29,19 @@ export function useNotify(user: User | undefined) {
         reconnection: true,
         reconnectionDelay: 5000,
         reconnectionDelayMax: 10000,
-        transports: ['websocket', 'polling'],
+        transports: ['websocket'],
       });
 
       socket.on('notify', (event: string) => {
         const { count } = JSON.parse(event) as { count: number };
         setNoticeCount(count);
+      });
+
+      socket.on('connect_error', () => {
+        // fallback to polling in netlify env
+        if (socket) {
+          socket.io.opts.transports = ['polling', 'websocket'];
+        }
       });
     }
 
