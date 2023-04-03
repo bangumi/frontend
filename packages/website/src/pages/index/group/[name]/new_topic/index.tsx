@@ -6,7 +6,6 @@ import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
-import GroupInfo from '../../components/GroupInfo';
 import TopicForm from '../../components/TopicForm';
 import styles from './style.module.less';
 
@@ -27,10 +26,7 @@ const GroupNewTopicPage = () => {
         发表新话题
       </Typography.Text>
       <div className={styles.grid}>
-        <TopicForm groupName={group.name} />
-        <div className={styles.rightColumn}>
-          <GroupInfo group={group} />
-        </div>
+        <TopicForm groupName={name} />
       </div>
     </>
   );

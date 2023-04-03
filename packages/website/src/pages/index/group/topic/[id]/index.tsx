@@ -11,7 +11,6 @@ import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import GroupInfo from '../../components/GroupInfo';
-import GroupNavigation from '../../components/GroupNavigation';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
@@ -119,12 +118,7 @@ const TopicPage: FC = () => {
             </div>
           </>
         }
-        rightChildren={
-          <>
-            {user && <GroupNavigation group={groupProfile} />}
-            <GroupInfo group={group} />
-          </>
-        }
+        rightChildren={<GroupInfo groupProfile={groupProfile} />}
       />
     </>
   );
