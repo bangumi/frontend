@@ -4,7 +4,7 @@ import { Helmet as BaseHelmet, type HelmetProps } from 'react-helmet-async';
 import { useNotify } from '@bangumi/website/hooks/use-notify.tsx';
 
 const Helmet = (props: React.PropsWithChildren<HelmetProps>) => {
-  const { noticeCount } = useNotify() ?? { noticeCount: 0 };
+  const { noticeCount } = useNotify();
 
   return (
     <BaseHelmet

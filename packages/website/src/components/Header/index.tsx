@@ -92,7 +92,7 @@ if (Musume === undefined) {
 
 const Header: FC = () => {
   const { user } = useUser();
-  const { noticeCount } = useNotify() ?? { noticeCount: 0 };
+  const { noticeCount } = useNotify();
   const location = useLocation();
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);

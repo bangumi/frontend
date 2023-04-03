@@ -56,6 +56,6 @@ export const NoticeProvider: React.FC<PropsWithChildren> = ({ children }) => {
   return <NoticeContext.Provider value={value}> {children} </NoticeContext.Provider>;
 };
 
-export function useNotify(): NoticeContextType | null {
-  return React.useContext(NoticeContext);
+export function useNotify(): NoticeContextType {
+  return React.useContext(NoticeContext) ?? { noticeCount: 0 };
 }
