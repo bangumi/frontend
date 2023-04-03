@@ -11,6 +11,7 @@ pull_request_rules:
           - -check-failure=lint
           - -check-failure=build
           - -check-failure=test
+          - -check-failure=test-e2e
           - -check-failure=storybook-build
     actions:
       merge:
@@ -38,6 +39,10 @@ pull_request_rules:
           - check-neutral=test
           - check-skipped=test
       - or:
+          - check-success=test-e2e
+          - check-neutral=test-e2e
+          - check-skipped=test-e2e
+      - or:
           - check-success=storybook-build
           - check-neutral=storybook-build
           - check-skipped=storybook-build
@@ -54,6 +59,7 @@ pull_request_rules:
           - check-failure=lint
           - check-failure=build
           - check-failure=test
+          - check-failure=test-e2e
           - check-failure=storybook-build
     actions:
       label:
@@ -131,6 +137,25 @@ pull_request_rules:
       label:
         remove:
           - 'ci:test:fail'
+
+  - name: add test fail label
+    conditions:
+      - check-failure=test-e2e
+    actions:
+      label:
+        add:
+          - 'ci:test:e2e:fail'
+
+  - name: remove test fail label
+    conditions:
+      - or:
+          - check-success=test-e2e
+          - check-neutral=test-e2e
+          - check-skipped=test-e2e
+    actions:
+      label:
+        remove:
+          - 'ci:test:e2e:fail'
 
   - name: toggle labels based on build state
     conditions:
