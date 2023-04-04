@@ -7,7 +7,7 @@ import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
-import * as process from 'process';
+import * as process from 'node:process';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -17,9 +17,8 @@ const artifacts: Record<string, string> = {
 };
 
 const now = new Date();
-now.setMilliseconds(0);
 
-function pad(n: number, length: number = 2): string {
+function pad(n: number, length = 2): string {
   return n.toString().padStart(length, '0');
 }
 
@@ -29,7 +28,7 @@ const time = `${now.getUTCFullYear()}-${pad(now.getUTCMonth())}-${pad(now.getUTC
 
 const commentComment = '<!-- preview comment -->';
 
-const tableHeader: ReadonlyArray<string> = [
+const tableHeader: readonly string[] = [
   commentComment,
   '<!-- DO NOT EDIT THIS COMMENT -->',
   '# Preview Deployment',
