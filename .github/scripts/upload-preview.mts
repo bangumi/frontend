@@ -26,7 +26,7 @@ const time = `${now.getUTCFullYear()}-${pad(now.getUTCMonth())}-${pad(now.getUTC
   now.getUTCHours(),
 )}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())}Z`;
 
-const commentComment = '<!-- preview comment -->';
+const commentComment = '<!-- preview comment 2 -->';
 
 const tableHeader: readonly string[] = [
   commentComment,
@@ -82,7 +82,7 @@ async function main() {
     ],
     {
       env: {
-        GH_TOKEN: process.env.GH_TOKEN ?? '',
+        GH_TOKEN: githubToken,
       },
     },
   );
@@ -153,17 +153,15 @@ async function updateComment(
   artifact: string,
   alias: string,
 ) {
-  const builds = [];
   const { line, id } = tableLine(artifact, alias);
+  const builds = [line];
 
   for (const value of comment.body.split('\n')) {
     if (!value.includes(commentTableItem)) {
       continue;
     }
 
-    if (value.includes(id)) {
-      builds.push(line);
-    } else {
+    if (!value.includes(id)) {
       builds.push(value);
     }
   }
