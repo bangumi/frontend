@@ -3,7 +3,7 @@ import { dirname } from 'node:path';
 import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from 'vite-plugin-svgr';
 
-const config: StorybookConfig = {
+export default {
   stories: [
     '../components/**/*.stories.mdx',
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
@@ -38,6 +38,4 @@ const config: StorybookConfig = {
     viteConfig.plugins.push(svgr());
     return viteConfig;
   },
-};
-
-export default config;
+} satisfies StorybookConfig;
