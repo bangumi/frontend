@@ -37,10 +37,8 @@
     "vite-plugin-svgr": "^2.4.0"
   },
   "scripts": {
-    "start": "storybook dev -p 6006",
-    "build": "storybook build",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build"
   },
   "peerDependencies": {
     "lodash": "^4.17.21",
