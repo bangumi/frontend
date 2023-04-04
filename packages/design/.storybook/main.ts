@@ -17,6 +17,9 @@ export default {
     name: '@storybook/react-vite',
     options: {},
   },
+  docs: {
+    autodocs: true,
+  },
   viteFinal: (viteConfig) => {
     if (!viteConfig.build) {
       viteConfig.build = { sourcemap: true };
