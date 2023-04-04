@@ -98,6 +98,6 @@ async function onFiles(files: string[]) {
 if (process.argv.length === 2) {
   await main();
 } else {
-  // with filenames, for lint staged 
+  // with filenames, for lint staged
   await onFiles(process.argv.slice(2));
 }
