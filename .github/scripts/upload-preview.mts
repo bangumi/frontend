@@ -187,7 +187,7 @@ function tableLine(artifact: string, alias: string) {
     id,
     line: `| ${toTitle(
       artifact,
-    )} | <https://${alias}--bangumi-next.netlify.app> | ${time} | ${id} ${commentTableItem}`,
+    )} | [netlify preview](https://${alias}--bangumi-next.netlify.app) | ${time} | ${id} ${commentTableItem}`,
   };
 }
 
