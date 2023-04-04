@@ -25,8 +25,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: ./.github/actions/setup-js-env
 
-      - name: Lint Code
-        run: pnpm lint && pnpm lint:style
-
       - name: Prettier
         run: pnpm prettier:check
+
+      - name: Type Checking
+        run: pnpm type-check
+
+      - name: Lint Code
+        run: pnpm lint && pnpm lint:style

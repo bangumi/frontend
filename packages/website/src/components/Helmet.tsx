@@ -1,5 +1,6 @@
 import React from 'react';
-import { Helmet as BaseHelmet, type HelmetProps } from 'react-helmet-async';
+import type { HelmetProps } from 'react-helmet-async';
+import { Helmet as BaseHelmet } from 'react-helmet-async';
 
 import { useNotify } from '@bangumi/website/hooks/use-notify.tsx';
 
