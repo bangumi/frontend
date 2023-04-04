@@ -1,4 +1,4 @@
-import type { ComponentMeta, Story } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -7,7 +7,7 @@ import { ArrowRightCircle } from '@bangumi/icons';
 import type { ButtonLinkProps, ButtonProps } from '.';
 import Button from '.';
 
-const storyMeta: ComponentMeta<typeof Button> = {
+const storyMeta: Meta<typeof Button> = {
   title: 'modern/Button',
   component: Button,
   subcomponents: { 'Button.Link': Button.Link },
@@ -27,7 +27,7 @@ const storyMeta: ComponentMeta<typeof Button> = {
 
 export default storyMeta;
 
-const Template: Story<ButtonProps> = (args) => {
+const Template: StoryFn<ButtonProps> = (args) => {
   return <Button {...args}>{args.children ?? 'Click Me!'}</Button>;
 };
 
@@ -106,7 +106,7 @@ Disabled.args = {
   children: 'Disabled',
 };
 
-const ButtonLinkTemplate: Story<ButtonLinkProps> = (args) => {
+const ButtonLinkTemplate: StoryFn<ButtonLinkProps> = (args) => {
   return (
     <MemoryRouter>
       <Button.Link {...args}>{args.children}</Button.Link>
