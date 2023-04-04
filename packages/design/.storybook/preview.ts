@@ -1,6 +1,7 @@
 import 'reset-css';
 import './global.css';
 
+import type { Preview } from '@storybook/react';
 import { themes } from '@storybook/theming';
 
 export default {
@@ -16,4 +17,4 @@ export default {
       },
     },
   },
-};
+} satisfies Preview;
