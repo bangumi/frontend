@@ -1,16 +1,25 @@
 import { dirname } from 'node:path';
 
-import type { StorybookViteConfig } from '@storybook/builder-vite';
+import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from 'vite-plugin-svgr';
 
-const config: StorybookViteConfig = {
+export default {
   stories: [
     '../components/**/*.stories.mdx',
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
     '../../icons/index.stories.tsx',
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
-  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-vite',
+  },
+  framework: {
+    name: '@storybook/react-vite',
+    options: {},
+  },
+  docs: {
+    autodocs: true,
+  },
   viteFinal: (viteConfig) => {
     if (!viteConfig.build) {
       viteConfig.build = { sourcemap: true };
@@ -32,8 +41,4 @@ const config: StorybookViteConfig = {
     viteConfig.plugins.push(svgr());
     return viteConfig;
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
-};
-export default config;
+} satisfies StorybookConfig;

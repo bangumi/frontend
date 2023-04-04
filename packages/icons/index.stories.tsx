@@ -1,4 +1,4 @@
-import type { ComponentMeta, Story } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import { UnreadableCodeError } from '@bangumi/utils';
@@ -11,7 +11,7 @@ type IComponent = React.FC<
   }
 >;
 
-const componentMeta: ComponentMeta<IComponent> = {
+const componentMeta: Meta<IComponent> = {
   title: 'Icons',
   subcomponents: Icons,
   decorators: [
@@ -46,7 +46,7 @@ const componentMeta: ComponentMeta<IComponent> = {
 export default componentMeta;
 
 /* eslint-disable react/prop-types */
-const Template: Story<{ height: number; width: number; style: React.CSSProperties }> = ({
+const Template: StoryFn<{ height: number; width: number; style: React.CSSProperties }> = ({
   height,
   width,
   style,
