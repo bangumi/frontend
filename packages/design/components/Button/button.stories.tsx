@@ -1,4 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
+import type { FC } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ import Button from '.';
 const storyMeta: Meta<typeof Button> = {
   title: 'modern/Button',
   component: Button,
-  subcomponents: { 'Button.Link': Button.Link },
+  subcomponents: { 'Button.Link': Button.Link as FC<unknown> },
   argTypes: {
     disabled: { control: 'boolean' },
     color: { control: 'select', options: ['default', 'blue', 'gray'] },
