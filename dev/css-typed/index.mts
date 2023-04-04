@@ -1,5 +1,5 @@
 import * as fs from 'node:fs/promises';
-import {join, parse as parsePath, sep } from 'node:path';
+import { join, parse as parsePath, sep } from 'node:path';
 import url from 'node:url';
 
 import { minimatch } from 'minimatch';
@@ -36,6 +36,7 @@ function dtsPath(path: string) {
 
 async function generateForCssModuleFile(p: string) {
   const dstPath = dtsPath(p);
+  console.log(dstPath);
   const src = await fs.readFile(p);
   const generated = await generateDeclaration(p, src.toString('utf-8'));
   if (await fileExist(dstPath)) {
@@ -48,6 +49,8 @@ async function generateForCssModuleFile(p: string) {
     console.log('create', dstPath);
     await fs.writeFile(dstPath, generated);
   }
+
+  return { dstPath };
 }
 
 async function main() {
@@ -60,22 +63,8 @@ async function main() {
     }
 
     if (cssModulePattern.match(p)) {
-      const dstPath = dtsPath(p);
+      const { dstPath } = await generateForCssModuleFile(p);
       expectedDST.add(dstPath);
-      await limit(async () => {
-        const src = await fs.readFile(p);
-        const generated = await generateDeclaration(p, src.toString('utf-8'));
-        if (await fileExist(dstPath)) {
-          const dst = (await fs.readFile(dstPath)).toString('utf-8');
-          if (dst !== generated) {
-            console.log('updating', dstPath);
-            await fs.writeFile(dstPath, generated);
-          }
-        } else {
-          console.log('create', dstPath);
-          await fs.writeFile(dstPath, generated);
-        }
-      });
     }
   }
 
@@ -99,7 +88,8 @@ async function onFiles(files: string[]) {
     if (cssModulePattern.match(file)) {
       await generateForCssModuleFile(file);
     } else if (dtsPattern.match(file)) {
-      if (await fileExist(file.slice(0, file.length - '.d.ts'.length))) {
+      const sourceFileExist = await fileExist(file.slice(0, file.length - '.d.ts'.length));
+      if (!sourceFileExist) {
         throw new Error('please remove file ' + file);
       }
     }
@@ -107,10 +97,8 @@ async function onFiles(files: string[]) {
 }
 
 if (process.argv.length === 2) {
-  // @ts-expect-error
   await main();
 } else {
   // with filenames
-  // @ts-expect-error
   await onFiles(process.argv.slice(2));
 }
