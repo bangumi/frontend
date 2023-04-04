@@ -42,6 +42,12 @@
     "trailingComma": "all"
   },
   "lint-staged": {
+    "*.module.less": [
+      "tsx ./dev/css-typed/index.mts"
+    ],
+    "*.module.less.d.ts": [
+      "tsx ./dev/css-typed/index.mts"
+    ],
     "*.{js,ts,mts,cts,tsx,cjs,mjs}": [
       "eslint --fix"
     ],
