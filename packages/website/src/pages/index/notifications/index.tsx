@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { ozaClient } from '@bangumi/client';
 import { Button, Pagination, Tab, Typography } from '@bangumi/design';
 import { ArrowPath } from '@bangumi/icons';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 import { PageNeedLoginError } from '@bangumi/website/error';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -140,4 +141,4 @@ function NotificationPage() {
   return <Notifications />;
 }
 
-export default NotificationPage;
+export default withErrorBoundary(NotificationPage);
