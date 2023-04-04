@@ -1,22 +1,23 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
+import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import EditorForm from '.';
 import Editor from './Editor';
 import Toolbox from './Toolbox';
 
-const componentMeta: ComponentMeta<typeof EditorForm> = {
+const componentMeta: Meta<typeof EditorForm> = {
   title: 'Modern/EditorForm',
   component: EditorForm,
   subcomponents: {
     Toolbox,
     Editor,
-  },
+  } as Record<string, FC<unknown>>,
 };
 
 export default componentMeta;
 
-const Template: ComponentStory<typeof EditorForm> = (args) => {
+const Template: StoryFn<typeof EditorForm> = (args) => {
   const [value, setValue] = useState(args.value);
   return <EditorForm {...args} value={value} onChange={setValue} />;
 };

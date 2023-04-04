@@ -51,7 +51,11 @@ export class WikiElement {
 /** 方便 fp */
 export const mergeWiki =
   (template: Wiki) =>
-  (wiki: Wiki): Wiki => {
+  (
+    wiki: Omit<Wiki, 'data'> & {
+      data: Array<Pick<WikiItem, 'key' | 'value' | 'values' | 'array'>>;
+    },
+  ): Wiki => {
     // wiki 去掉 value 为 * 和 空值 的项。
     const wikiMap = flow(
       keyBy('key'),
@@ -62,7 +66,8 @@ export const mergeWiki =
         return isEmpty(key) || isEmpty(item.value) || isEqual(item.value, '*');
       }),
     )(wiki.data);
-    const templateMap = keyBy('key')(template.data); /** template is safe */
+    const templateMap = keyBy('key')(template.data);
+    /** template is safe */
     const mergedWikiItems = Object.values(merge(templateMap, wikiMap) as WikiItem[]);
     return {
       type: template.type,
