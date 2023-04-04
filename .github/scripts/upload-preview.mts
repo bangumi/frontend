@@ -2,12 +2,12 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import * as process from 'node:process';
 
 import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
-import * as process from 'node:process';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -145,6 +145,8 @@ async function main() {
   await createComment(octokit, prNumber, artifact, alias);
 }
 
+const commentTableItem = '<!-- table item -->';
+
 async function updateComment(
   octokit: Client,
   comment: { id: number; body: string },
@@ -152,12 +154,16 @@ async function updateComment(
   alias: string,
 ) {
   const builds = [];
-  const current = tableLine(artifact, alias);
+  const { line, id } = tableLine(artifact, alias);
 
   for (const value of comment.body.split('\n')) {
-    if (value.includes(`<!-- ${artifact} --> <!-- table item -->`)) {
-      builds.push(current);
-    } else if (value.includes('<!-- table item -->')) {
+    if (!value.includes(commentTableItem)) {
+      continue;
+    }
+
+    if (value.includes(id)) {
+      builds.push(line);
+    } else {
       builds.push(value);
     }
   }
@@ -172,10 +178,14 @@ async function updateComment(
   });
 }
 
-function tableLine(artifact: string, alias: string): string {
-  return `| ${toTitle(
-    artifact,
-  )} | <https://${alias}--bangumi-next.netlify.app> | ${time} | <!-- ${artifact} --> <!-- table item -->`;
+function tableLine(artifact: string, alias: string) {
+  const id = `<!-- ${artifact} -->`;
+  return {
+    id,
+    line: `| ${toTitle(
+      artifact,
+    )} | <https://${alias}--bangumi-next.netlify.app> | ${time} | ${id} ${commentTableItem}`,
+  };
 }
 
 async function createComment(octokit: Client, prNumber: number, artifact: string, alias: string) {
@@ -183,7 +193,7 @@ async function createComment(octokit: Client, prNumber: number, artifact: string
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: prNumber,
-    body: [...tableHeader, tableLine(artifact, alias)].join('\n'),
+    body: [...tableHeader, tableLine(artifact, alias).line].join('\n'),
   });
 }
 
