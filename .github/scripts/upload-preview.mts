@@ -15,6 +15,8 @@ const artifacts: Record<string, string> = {
   'Storybook Build': 'storybook',
 };
 
+const now = new Date();
+
 const commentComment = '<!-- preview comment -->';
 
 async function main() {
@@ -132,31 +134,42 @@ async function updateComment(
   artifact: string,
   alias: string,
 ) {
-  const links = [];
+  const builds = [];
+  const body = [];
   const s = comment.body.split('\n').filter(Boolean);
 
-  for (const value of s.slice(2)) {
-    if (value.includes(`<!-- ${artifact} -->`)) {
-      return;
-    }
+  const current = tableLine(artifact, alias);
 
-    links.push(value + '\n');
+  for (const value of s.slice(2)) {
+    if (value.includes(`<!-- ${artifact} --> <!-- table item -->`)) {
+      builds.push(current);
+    } else if (value.includes('<!-- table item -->')) {
+      builds.push(value);
+    }
   }
 
-  links.push(
-    `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->\n`,
-  );
+  builds.sort();
 
-  links.sort();
-
-  links.unshift(commentComment, '# Preview Deployment');
+  body.push([
+    commentComment,
+    '# Preview Deployment',
+    '| Build | URL | time |',
+    '| :-: | :-: | :-: |',
+    ...builds,
+  ]);
 
   await octokit.request('PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
-    body: links.join('\n'),
+    body: body.join('\n'),
   });
+}
+
+function tableLine(artifact: string, alias: string): string {
+  return `| ${toTitle(
+    artifact,
+  )} | <https://${alias}--bangumi-next.netlify.app> | ${now.toISOString()} | <!-- ${artifact} --> <!-- table item -->`;
 }
 
 async function createComment(octokit: Client, prNumber: number, artifact: string, alias: string) {
@@ -167,7 +180,9 @@ async function createComment(octokit: Client, prNumber: number, artifact: string
     body: [
       commentComment,
       '# Preview Deployment',
-      `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->`,
+      '| Build | URL | time |',
+      '| :-: | :-: | :-: |',
+      tableLine(artifact, alias),
     ].join('\n'),
   });
 }
