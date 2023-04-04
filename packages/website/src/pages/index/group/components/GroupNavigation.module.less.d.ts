@@ -6,3 +6,4 @@ export const noTopBorder: string;
 export const noBottomBorder: string;
 export const wrapper: string;
 export const section: string;
+export const links: string;
