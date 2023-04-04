@@ -147,6 +147,8 @@ async function updateComment(
     `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->\n`,
   );
 
+  links.sort();
+
   links.unshift(commentComment, '# Preview Deployment');
 
   await octokit.request('PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}', {
