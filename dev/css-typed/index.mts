@@ -1,5 +1,5 @@
 import * as fs from 'node:fs/promises';
-import { join, parse as parsePath, sep } from 'node:path';
+import { join, sep } from 'node:path';
 import url from 'node:url';
 
 import { minimatch } from 'minimatch';
@@ -25,14 +25,8 @@ async function fileExist(p: string): Promise<boolean> {
   }
 }
 
-function dtsPath(path: string) {
-  const { dir, name, ext } = parsePath(path);
-
-  return join(dir, `${name}${ext}.d.ts`);
-}
-
 async function generateForCssModuleFile(p: string) {
-  const dstPath = dtsPath(p);
+  const dstPath = p + '.d.ts';
   const src = await fs.readFile(p);
   const generated = await generateDeclaration(p, src.toString('utf-8'));
   if (await fileExist(dstPath)) {
