@@ -22,9 +22,14 @@ function pad(n: number, length = 2): string {
   return n.toString().padStart(length, '0');
 }
 
-const time = `${now.getUTCFullYear()}-${pad(now.getUTCMonth())}-${pad(now.getUTCDay())} ${pad(
-  now.getUTCHours(),
-)}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())}Z`;
+const year = now.getUTCFullYear();
+const month = pad(now.getUTCMonth());
+const day = pad(now.getUTCDay());
+const hour = pad(now.getUTCHours());
+const minute = pad(now.getUTCMinutes());
+const second = pad(now.getUTCSeconds());
+
+const time = `${year}-${month}-${day} ${hour}:${minute}:${second}Z`;
 
 const commentComment = '<!-- preview comment 2 -->';
 
