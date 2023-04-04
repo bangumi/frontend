@@ -8,6 +8,7 @@ import { ozaClient } from '@bangumi/client';
 import { Button, Pagination, Tab, Typography } from '@bangumi/design';
 import { ArrowPath } from '@bangumi/icons';
 import Helmet from '@bangumi/website/components/Helmet';
+import { PageNeedLoginError } from '@bangumi/website/error';
 import { useUser } from '@bangumi/website/hooks/use-user';
 import { settings } from '@bangumi/website/shared/notifications';
 
@@ -133,7 +134,7 @@ function Notifications() {
 function NotificationPage() {
   const { user } = useUser();
   if (!user) {
-    return <div>PLEASE LOGIN FIRST</div>;
+    throw PageNeedLoginError;
   }
 
   return <Notifications />;
