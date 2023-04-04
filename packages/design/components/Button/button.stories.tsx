@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import React, { type FC } from 'react';
+import type { FC } from 'react';
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import { ArrowRightCircle } from '@bangumi/icons';
