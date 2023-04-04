@@ -7,6 +7,7 @@ import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
+import * as process from 'process';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -16,8 +17,25 @@ const artifacts: Record<string, string> = {
 };
 
 const now = new Date();
+now.setMilliseconds(0);
+
+function pad(n: number, length: number = 2): string {
+  return n.toString().padStart(length, '0');
+}
+
+const time = `${now.getUTCFullYear()}-${pad(now.getUTCMonth())}-${pad(now.getUTCDay())} ${pad(
+  now.getUTCHours(),
+)}:${pad(now.getUTCMinutes())}:${pad(now.getUTCSeconds())}Z`;
 
 const commentComment = '<!-- preview comment -->';
+
+const tableHeader: ReadonlyArray<string> = [
+  commentComment,
+  '<!-- DO NOT EDIT THIS COMMENT -->',
+  '# Preview Deployment',
+  '| Build | URL | time |',
+  '| :-: | :-: | :-: |',
+];
 
 async function main() {
   const NETLIFY_AUTH_TOKEN = process.env.NETLIFY_AUTH_TOKEN ?? '';
@@ -135,12 +153,9 @@ async function updateComment(
   alias: string,
 ) {
   const builds = [];
-  const body = [];
-  const s = comment.body.split('\n').filter(Boolean);
-
   const current = tableLine(artifact, alias);
 
-  for (const value of s.slice(2)) {
+  for (const value of comment.body.split('\n')) {
     if (value.includes(`<!-- ${artifact} --> <!-- table item -->`)) {
       builds.push(current);
     } else if (value.includes('<!-- table item -->')) {
@@ -150,26 +165,18 @@ async function updateComment(
 
   builds.sort();
 
-  body.push([
-    commentComment,
-    '# Preview Deployment',
-    '| Build | URL | time |',
-    '| :-: | :-: | :-: |',
-    ...builds,
-  ]);
-
   await octokit.request('PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
-    body: body.join('\n'),
+    body: [...tableHeader, ...builds].join('\n'),
   });
 }
 
 function tableLine(artifact: string, alias: string): string {
   return `| ${toTitle(
     artifact,
-  )} | <https://${alias}--bangumi-next.netlify.app> | ${now.toISOString()} | <!-- ${artifact} --> <!-- table item -->`;
+  )} | <https://${alias}--bangumi-next.netlify.app> | ${time} | <!-- ${artifact} --> <!-- table item -->`;
 }
 
 async function createComment(octokit: Client, prNumber: number, artifact: string, alias: string) {
@@ -177,13 +184,7 @@ async function createComment(octokit: Client, prNumber: number, artifact: string
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: prNumber,
-    body: [
-      commentComment,
-      '# Preview Deployment',
-      '| Build | URL | time |',
-      '| :-: | :-: | :-: |',
-      tableLine(artifact, alias),
-    ].join('\n'),
+    body: [...tableHeader, tableLine(artifact, alias)].join('\n'),
   });
 }
 
