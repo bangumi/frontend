@@ -1,4 +1,4 @@
-interface setting {
+interface Setting {
   id: number;
   hash: number;
 
@@ -14,7 +14,7 @@ interface setting {
   merge?: number;
 }
 
-export const _settings: Record<number, setting> = {
+export const settings: Record<number, Setting> = {
   1: {
     url: '/group/topic',
     url_mobile: 'MOBILE_URL/topic/group/',

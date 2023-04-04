@@ -9,7 +9,7 @@ import { Button, Pagination, Tab, Typography } from '@bangumi/design';
 import { ArrowPath } from '@bangumi/icons';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useUser } from '@bangumi/website/hooks/use-user';
-import { _settings } from '@bangumi/website/shared/notifications';
+import { settings } from '@bangumi/website/shared/notifications';
 
 import style from './index.module.less';
 
@@ -22,7 +22,7 @@ const NotificationPageTabs = [
 function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
   const { id, type, title, postID, topicID, sender, createdAt, unread } = notice;
 
-  const setting = _settings[type];
+  const setting = settings[type];
 
   if (!setting) {
     return (
