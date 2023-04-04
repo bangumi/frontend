@@ -23,6 +23,9 @@ try {
 dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
 
+// 跟 <projectRoot>/dev/css-typed/gen.mts 保持同步
+const lessAdditionalData = '@import "./src/style/utils.less";';
+
 export default defineConfig(({ mode }) => {
   let apiDomain = 'https://next.bgm38.com';
 
@@ -113,7 +116,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         less: {
           charset: false,
-          additionalData: '@import "./src/style/utils.less";',
+          additionalData: lessAdditionalData,
         },
       },
     },

@@ -96,8 +96,10 @@ async function onFiles(files: string[]) {
 }
 
 if (process.argv.length === 2) {
+  // @ts-expect-error
   await main();
 } else {
   // with filenames
+  // @ts-expect-error
   await onFiles(process.argv.slice(2));
 }
