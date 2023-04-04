@@ -14,9 +14,11 @@
     "@bangumi/client": "workspace:0.0.0",
     "@bangumi/icons": "workspace:0.0.0",
     "@bangumi/utils": "workspace:0.0.0",
+    "storybook": "^7.0.2",
     "@storybook/addon-essentials": "^7.0.2",
     "@storybook/addon-links": "^7.0.2",
     "@storybook/builder-vite": "^7.0.2",
+    "@storybook/react-vite": "^7.0.2",
     "@storybook/react": "^7.0.2",
     "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.192",
@@ -33,6 +35,8 @@
     "vite-plugin-svgr": "^2.4.0"
   },
   "scripts": {
+    "start": "storybook dev -p 6006",
+    "build": "storybook build",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },

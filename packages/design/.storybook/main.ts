@@ -10,7 +10,12 @@ const config: StorybookViteConfig = {
     '../../icons/index.stories.tsx',
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
-  framework: '@storybook/react',
+  core: {
+    builder: '@storybook/builder-vite',
+  },
+  framework: {
+    name: '@storybook/react-vite',
+  },
   viteFinal: (viteConfig) => {
     if (!viteConfig.build) {
       viteConfig.build = { sourcemap: true };
@@ -32,8 +37,6 @@ const config: StorybookViteConfig = {
     viteConfig.plugins.push(svgr());
     return viteConfig;
   },
-  core: {
-    builder: '@storybook/builder-vite',
-  },
 };
+
 export default config;
