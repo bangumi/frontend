@@ -1,5 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import React, { type FC, useState } from 'react';
+import type { FC } from 'react';
+import React, { useState } from 'react';
 
 import EditorForm from '.';
 import Editor from './Editor';
@@ -9,9 +10,9 @@ const componentMeta: Meta<typeof EditorForm> = {
   title: 'Modern/EditorForm',
   component: EditorForm,
   subcomponents: {
-    Toolbox: Toolbox as FC<unknown>,
-    Editor: Editor as FC<unknown>,
-  },
+    Toolbox,
+    Editor,
+  } as Record<string, FC<unknown>>,
 };
 
 export default componentMeta;
