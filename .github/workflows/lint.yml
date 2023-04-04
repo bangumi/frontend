@@ -28,8 +28,8 @@ jobs:
       - name: Prettier
         run: pnpm prettier:check
 
-      - name: Lint Code
-        run: pnpm lint && pnpm lint:style
-
       - name: Type Checking
         run: pnpm type-check
+
+      - name: Lint Code
+        run: pnpm lint && pnpm lint:style
