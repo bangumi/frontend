@@ -9,27 +9,27 @@ import style from './SubMenu.module.less';
 const buildMenuBottom = (verb: '看' | '读' | '听' | '玩'): MenuItemType[] => [
   {
     key: 'do',
-    className: style['subMenuItem--do'],
+    className: style.subMenuItemDo,
     label: `在${verb}`,
   },
   {
     key: 'wish',
-    className: style['subMenuItem--wish'],
+    className: style.subMenuItemWish,
     label: `想${verb}`,
   },
   {
     key: 'collect',
-    className: style['subMenuItem--collect'],
+    className: style.subMenuItemCollect,
     label: `${verb}过`,
   },
   {
     key: 'on_hold',
-    className: style['subMenuItem--on_hold'],
+    className: style.subMenuItemOnHold,
     label: '搁置',
   },
   {
     key: 'dropped',
-    className: style['subMenuItem--dropped'],
+    className: style.subMenuItemDropped,
     label: '抛弃',
   },
 ];
