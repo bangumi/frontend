@@ -36,7 +36,6 @@ function dtsPath(path: string) {
 
 async function generateForCssModuleFile(p: string) {
   const dstPath = dtsPath(p);
-  console.log(dstPath);
   const src = await fs.readFile(p);
   const generated = await generateDeclaration(p, src.toString('utf-8'));
   if (await fileExist(dstPath)) {

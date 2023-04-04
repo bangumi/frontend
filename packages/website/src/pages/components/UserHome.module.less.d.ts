@@ -6,4 +6,3 @@ export const noTopBorder: string;
 export const noBottomBorder: string;
 export const pageContainer: string;
 export const greets: string;
-export const test: string;
