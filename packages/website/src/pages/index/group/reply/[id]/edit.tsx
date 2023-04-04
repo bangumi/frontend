@@ -5,6 +5,7 @@ import { useSWRConfig } from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, toast, Typography } from '@bangumi/design';
+import Helmet from '@bangumi/website/components/Helmet';
 import useGroupPost from '@bangumi/website/hooks/use-group-post';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -65,6 +66,7 @@ const EditReplyPage = () => {
 
   return (
     <>
+      <Helmet title={`修改主题“${data.topicTitle}”的回复`} />
       <Typography.Text type='secondary' className={styles.tipText}>
         修改主题
         <Typography.Link

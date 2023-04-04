@@ -2,7 +2,7 @@ import type { RenderResult } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
 import { rest } from 'msw';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Outlet, Route, Routes, useParams } from 'react-router-dom';
 
 import type { GroupMember, ResponseWithPagination } from '@bangumi/client/group';
 
@@ -50,7 +50,13 @@ class GroupMembersTest {
       }),
     );
 
-    this.page = renderPage(<GroupMembers />);
+    this.page = renderPage(
+      <Routes>
+        <Route element={<Outlet context={{ groupRet: { group: Sandbox } }} />}>
+          <Route index element={<GroupMembers />} />
+        </Route>
+      </Routes>,
+    );
   }
 
   async assertMembersExist(expectMembers: string[]): Promise<void> {

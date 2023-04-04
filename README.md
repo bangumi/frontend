@@ -43,3 +43,4 @@ pnpm lint
 - [cokemine](https://github.com/cokemine)<<aptx4561@gmail.com>>
 - [trim21](https://github.com/trim21)<<trim21.me@gmail.com>>
 - [FoundTheWOUT](https://github.com/FoundTheWOUT)<<waua@outlook.com>>
+- [y-young](https://github.com/y-young)<<i@gpx.moe>>

@@ -7,4 +7,4 @@ export const noBottomBorder: string;
 export const groupInfo: string;
 export const groupDetails: string;
 export const groupDescription: string;
-export const groupOpinions: string;
+export const groupButtons: string;

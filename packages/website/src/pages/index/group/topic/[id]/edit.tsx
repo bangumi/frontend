@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Typography } from '@bangumi/design';
+import Helmet from '@bangumi/website/components/Helmet';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 
 import TopicForm from '../../components/TopicForm';
@@ -17,6 +18,7 @@ const EditTopicPage = () => {
 
   return (
     <>
+      <Helmet title={`修改主题“${data.title}”`} />
       <Typography.Text type='secondary' className={styles.tipText}>
         修改主题
         <Typography.Link

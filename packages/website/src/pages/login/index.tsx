@@ -6,6 +6,7 @@ import { useInput } from 'rooks';
 
 import { Button, Input, Message } from '@bangumi/design';
 import { Password, UserLogin } from '@bangumi/icons';
+import Helmet from '@bangumi/website/components/Helmet';
 
 import {
   CaptureError,
@@ -98,39 +99,42 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className={style.wrapper}>
-      <div className={style.container}>
-        <LoginLogo className={style.logo} />
-        {errorMessage && (
-          <Message type='error' blockWidth>
-            {errorMessage}
-          </Message>
-        )}
-        <Input type='email' prefix={<UserLogin />} placeholder='你的 Email 地址' {...email} />
-        <Input type='password' prefix={<Password />} placeholder='你的登录密码' {...password} />
-        <div className={style.hcaptcha}>
-          <Turnstile
-            options={{
-              theme: 'light',
-              action: 'login',
-            }}
-            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
-            onSuccess={(token: string) => {
-              setCaptchaToken(token);
-            }}
-            ref={captcha}
-          />
-        </div>
-        <div className={style.buttonGroup}>
-          <Button className={style.button} color='gray' disabled>
-            注册新用户
-          </Button>
-          <Button className={style.button} onClick={handleLogin}>
-            登录
-          </Button>
+    <>
+      <Helmet title='登录' />
+      <div className={style.wrapper}>
+        <div className={style.container}>
+          <LoginLogo className={style.logo} />
+          {errorMessage && (
+            <Message type='error' blockWidth>
+              {errorMessage}
+            </Message>
+          )}
+          <Input type='email' prefix={<UserLogin />} placeholder='你的 Email 地址' {...email} />
+          <Input type='password' prefix={<Password />} placeholder='你的登录密码' {...password} />
+          <div className={style.hcaptcha}>
+            <Turnstile
+              options={{
+                theme: 'light',
+                action: 'login',
+              }}
+              siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+              onSuccess={(token: string) => {
+                setCaptchaToken(token);
+              }}
+              ref={captcha}
+            />
+          </div>
+          <div className={style.buttonGroup}>
+            <Button className={style.button} color='gray' disabled>
+              注册新用户
+            </Button>
+            <Button className={style.button} onClick={handleLogin}>
+              登录
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
