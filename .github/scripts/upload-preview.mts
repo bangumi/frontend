@@ -2,6 +2,7 @@
 
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import * as process from 'node:process';
 
 import { exec } from '@actions/exec';
 import { context } from '@actions/github';
@@ -15,7 +16,30 @@ const artifacts: Record<string, string> = {
   'Storybook Build': 'storybook',
 };
 
-const commentComment = '<!-- preview comment -->';
+const now = new Date();
+
+function pad(n: number, length = 2): string {
+  return n.toString().padStart(length, '0');
+}
+
+const year = now.getUTCFullYear();
+const month = pad(now.getUTCMonth());
+const day = pad(now.getUTCDay());
+const hour = pad(now.getUTCHours());
+const minute = pad(now.getUTCMinutes());
+const second = pad(now.getUTCSeconds());
+
+const time = `${year}-${month}-${day} ${hour}:${minute}:${second}Z`;
+
+const commentComment = '<!-- preview comment 2 -->';
+
+const tableHeader: readonly string[] = [
+  commentComment,
+  '<!-- DO NOT EDIT THIS COMMENT -->',
+  '# Preview Deployment',
+  '| Build | URL | time |',
+  '| :-: | :-: | :-: |',
+];
 
 async function main() {
   const NETLIFY_AUTH_TOKEN = process.env.NETLIFY_AUTH_TOKEN ?? '';
@@ -63,7 +87,7 @@ async function main() {
     ],
     {
       env: {
-        GH_TOKEN: process.env.GH_TOKEN ?? '',
+        GH_TOKEN: githubToken,
       },
     },
   );
@@ -126,35 +150,45 @@ async function main() {
   await createComment(octokit, prNumber, artifact, alias);
 }
 
+const commentTableItem = '<!-- table item -->';
+
 async function updateComment(
   octokit: Client,
   comment: { id: number; body: string },
   artifact: string,
   alias: string,
 ) {
-  const links = [];
-  const s = comment.body.split('\n').filter(Boolean);
+  const { line, id } = tableLine(artifact, alias);
+  const builds = [line];
 
-  for (const value of s.slice(2)) {
-    if (value.includes(`<!-- ${artifact} -->`)) {
-      return;
+  for (const value of comment.body.split('\n')) {
+    if (!value.includes(commentTableItem)) {
+      continue;
     }
 
-    links.push(value + '\n');
+    if (!value.includes(id)) {
+      builds.push(value);
+    }
   }
 
-  links.push(
-    `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->\n`,
-  );
-
-  links.unshift(commentComment, '# Preview Deployment');
+  builds.sort();
 
   await octokit.request('PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
-    body: links.join('\n'),
+    body: [...tableHeader, ...builds].join('\n'),
   });
+}
+
+function tableLine(artifact: string, alias: string) {
+  const id = `<!-- ${artifact} -->`;
+  return {
+    id,
+    line: `| ${toTitle(
+      artifact,
+    )} | [netlify preview](https://${alias}--bangumi-next.netlify.app) | ${time} | ${id} ${commentTableItem}`,
+  };
 }
 
 async function createComment(octokit: Client, prNumber: number, artifact: string, alias: string) {
@@ -162,11 +196,7 @@ async function createComment(octokit: Client, prNumber: number, artifact: string
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: prNumber,
-    body: [
-      commentComment,
-      '# Preview Deployment',
-      `${toTitle(artifact)} <https://${alias}--bangumi-next.netlify.app> <!-- ${artifact} -->`,
-    ].join('\n'),
+    body: [...tableHeader, tableLine(artifact, alias).line].join('\n'),
   });
 }
 
