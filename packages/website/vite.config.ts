@@ -10,6 +10,7 @@ import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
+import typedCssModulesPlugin from './plugins/typed-css-modules.mts';
 
 let COMMIT_HASH = '';
 
@@ -78,6 +79,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
+      typedCssModulesPlugin(),
       react(
         mode === 'production'
           ? {
@@ -111,7 +113,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         less: {
           charset: false,
-          additionalData: '@import "./src/style/utils.less";',
+          // additionalData: '@import "./src/style/utils.less";',
         },
       },
     },
