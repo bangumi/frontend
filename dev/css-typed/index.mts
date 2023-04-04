@@ -3,7 +3,6 @@ import { join, parse as parsePath, sep } from 'node:path';
 import url from 'node:url';
 
 import { minimatch } from 'minimatch';
-import pLimit from 'p-limit';
 
 import { walk } from '../utils/index.mts';
 import { generateDeclaration } from './gen.mts';
@@ -12,8 +11,6 @@ const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 const cssModulePattern = new minimatch.Minimatch('**/*.module.less');
 const dtsPattern = new minimatch.Minimatch('**/*.module.less.d.ts');
-
-const limit = pLimit(4);
 
 async function fileExist(p: string): Promise<boolean> {
   try {
@@ -88,7 +85,7 @@ async function onFiles(files: string[]) {
       await generateForCssModuleFile(file);
     } else if (dtsPattern.match(file)) {
       const sourceFileExist = await fileExist(file.slice(0, file.length - '.d.ts'.length));
-      if (!sourceFileExist) {
+      if (sourceFileExist) {
         throw new Error('please remove file ' + file);
       }
     }
