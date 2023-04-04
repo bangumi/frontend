@@ -1,9 +1,9 @@
 import { dirname } from 'node:path';
 
-import type { StorybookViteConfig } from '@storybook/builder-vite';
+import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from 'vite-plugin-svgr';
 
-const config: StorybookViteConfig = {
+const config: StorybookConfig = {
   stories: [
     '../components/**/*.stories.mdx',
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
@@ -15,6 +15,7 @@ const config: StorybookViteConfig = {
   },
   framework: {
     name: '@storybook/react-vite',
+    options: {},
   },
   viteFinal: (viteConfig) => {
     if (!viteConfig.build) {
