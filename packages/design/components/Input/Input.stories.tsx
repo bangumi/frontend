@@ -1,5 +1,5 @@
-import type { ComponentMeta, Story } from '@storybook/react';
-import React from 'react';
+import type { Meta, StoryFn } from '@storybook/react';
+import React, { type FC } from 'react';
 
 import { Search as SearchIcon, UserLogin } from '@bangumi/icons';
 
@@ -7,15 +7,15 @@ import Select from '../Select';
 import type { InputGroupProps, InputProps } from '.';
 import Input from '.';
 
-const componentMeta: ComponentMeta<typeof Input> = {
+const componentMeta: Meta<typeof Input> = {
   title: 'modern/Input',
   component: Input,
-  subcomponents: { 'Input.Group': Input.Group },
+  subcomponents: { 'Input.Group': Input.Group as FC<unknown> },
 };
 
 export default componentMeta;
 
-const Template: Story<InputProps & React.RefAttributes<HTMLInputElement>> = (args) => {
+const Template: StoryFn<InputProps & React.RefAttributes<HTMLInputElement>> = (args) => {
   return <Input {...args} />;
 };
 

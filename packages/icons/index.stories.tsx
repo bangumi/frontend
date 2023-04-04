@@ -1,5 +1,5 @@
 import type { Meta, StoryFn } from '@storybook/react';
-import React from 'react';
+import React, { type FC } from 'react';
 
 import { UnreadableCodeError } from '@bangumi/utils';
 
@@ -13,7 +13,7 @@ type IComponent = React.FC<
 
 const componentMeta: Meta<IComponent> = {
   title: 'Icons',
-  subcomponents: Icons,
+  subcomponents: Icons as Record<string, FC<unknown>>,
   decorators: [
     (story) => (
       <div
