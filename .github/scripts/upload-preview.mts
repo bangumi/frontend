@@ -16,8 +16,17 @@ const artifacts: Record<string, string> = {
 };
 
 const now = new Date();
+now.setMilliseconds(0);
 
 const commentComment = '<!-- preview comment -->';
+
+const tableHeader: ReadonlyArray<string> = [
+  commentComment,
+  '<!-- DO NOT EDIT THIS COMMENT -->',
+  '# Preview Deployment',
+  '| Build | URL | time |',
+  '| :-: | :-: | :-: |',
+];
 
 async function main() {
   const NETLIFY_AUTH_TOKEN = process.env.NETLIFY_AUTH_TOKEN ?? '';
@@ -135,7 +144,6 @@ async function updateComment(
   alias: string,
 ) {
   const builds = [];
-  const body = [];
   const s = comment.body.split('\n').filter(Boolean);
 
   const current = tableLine(artifact, alias);
@@ -150,19 +158,11 @@ async function updateComment(
 
   builds.sort();
 
-  body.push([
-    commentComment,
-    '# Preview Deployment',
-    '| Build | URL | time |',
-    '| :-: | :-: | :-: |',
-    ...builds,
-  ]);
-
   await octokit.request('PATCH /repos/{owner}/{repo}/issues/comments/{comment_id}', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     comment_id: comment.id,
-    body: body.join('\n'),
+    body: [...tableHeader, ...builds].join('\n'),
   });
 }
 
@@ -177,13 +177,7 @@ async function createComment(octokit: Client, prNumber: number, artifact: string
     owner: context.repo.owner,
     repo: context.repo.repo,
     issue_number: prNumber,
-    body: [
-      commentComment,
-      '# Preview Deployment',
-      '| Build | URL | time |',
-      '| :-: | :-: | :-: |',
-      tableLine(artifact, alias),
-    ].join('\n'),
+    body: [...tableHeader, tableLine(artifact, alias)].join('\n'),
   });
 }
 
