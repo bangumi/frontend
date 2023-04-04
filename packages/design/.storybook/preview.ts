@@ -1,14 +1,19 @@
 import 'reset-css';
 import './global.css';
 
-import type { Parameters as StoryParameters } from '@storybook/react';
+import { themes } from '@storybook/theming';
 
-export const parameters: StoryParameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+export default {
+  parameters: {
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    docs: {
+      theme: themes.light,
+    },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
     },
   },
 };
