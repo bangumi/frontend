@@ -12,3 +12,5 @@ export enum UserGroup {
   User = 10,
   WikiContributor = 11,
 }
+
+export type { Notice as INotice } from './client';

@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
 import { UnreadableCodeError } from '@bangumi/utils';
+import { useNotify } from '@bangumi/website/hooks/use-notify';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
@@ -90,12 +92,15 @@ if (Musume === undefined) {
 
 const Header: FC = () => {
   const { user } = useUser();
+  const { noticeCount } = useNotify();
   const location = useLocation();
 
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   return (
     <header className={style.container}>
       <div className={style.main}>
+        {/* left */}
         <div className='flex items-center'>
           {/* Logo */}
           <a className={style.logo} href='/'>
@@ -119,7 +124,9 @@ const Header: FC = () => {
             <Menu items={navRight} wrapperClass={style.navRight} />
           </div>
         </div>
-        <div className='flex items-center'>
+
+        {/* right */}
+        <div className={style.headerRight}>
           <div className={style.infoBox}>
             {/* Search Todo */}
             <Input
@@ -143,8 +150,16 @@ const Header: FC = () => {
           {/* Avatar */}
           {user ? (
             <>
-              <Notification className={style.iconNotification} />
-              <Setting className={style.iconSetting} />
+              <Link
+                to='/notifications'
+                className={cn(style.icon, style.iconNotification, {
+                  [style.iconNotificationNotice!]: noticeCount > 0,
+                })}
+              >
+                <Notification />
+              </Link>
+
+              <Setting className={style.icon} />
               <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
             </>
           ) : (
