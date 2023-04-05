@@ -24,7 +24,7 @@ dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
 
 // 跟 <projectRoot>/dev/css-typed/gen.mts 保持同步
-const lessAdditionalData = '@import "./src/style/utils.less";';
+const lessAdditionalData = '@import "./src/style/index.less";';
 
 export default defineConfig(({ mode }) => {
   let apiDomain = 'https://next.bgm38.com';
@@ -51,6 +51,7 @@ export default defineConfig(({ mode }) => {
         '/p': {
           target: apiDomain,
           changeOrigin: true,
+          ws: true,
           configure(proxy) {
             proxy.on('proxyReq', (proxyReq) => {
               if (proxyReq.hasHeader('Origin')) {

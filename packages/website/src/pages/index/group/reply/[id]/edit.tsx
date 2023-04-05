@@ -6,6 +6,7 @@ import { useSWRConfig } from 'swr';
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, toast, Typography } from '@bangumi/design';
 import Helmet from '@bangumi/website/components/Helmet';
+import { OperationNeedLoginError } from '@bangumi/website/error';
 import useGroupPost from '@bangumi/website/hooks/use-group-post';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -20,7 +21,7 @@ const EditReplyPage = () => {
 
   const { user } = useUser();
   if (!user) {
-    throw new Error('抱歉，当前操作需要登录后才能继续进行');
+    throw OperationNeedLoginError;
   }
 
   const { data, mutate } = useGroupPost(postId);

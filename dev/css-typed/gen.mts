@@ -8,7 +8,7 @@ import less from 'less';
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 // 跟 '<projectRoot>/packages/website/vite.config.ts' 保持同步
-const lessAdditionalData = '@import "./src/style/utils.less";';
+const lessAdditionalData = '@import "./src/style/index.less";';
 
 export async function generateDeclaration(p: string, content: string) {
   const filename = path.basename(p);
