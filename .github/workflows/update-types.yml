@@ -26,7 +26,7 @@ jobs:
         run: pnpm lint --fix && pnpm prettier
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v5
         with:
           title: 'chore(types): update private API type definition'
           # 使用 token 创建 PR 才能触发默认的 ci
