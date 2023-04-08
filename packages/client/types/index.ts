@@ -237,6 +237,11 @@ export interface components {
       creator: components['schemas']['User'];
       id: number;
       isFriend: boolean;
+      reactions: {
+        selected: boolean;
+        total: number;
+        value: number;
+      }[];
       replies: components['schemas']['SubReply'][];
       state: number;
       text: string;
@@ -306,6 +311,11 @@ export interface components {
       creator: components['schemas']['User'];
       group: components['schemas']['Group'];
       id: number;
+      reactions: {
+        selected: boolean;
+        total: number;
+        value: number;
+      }[];
       replies: components['schemas']['Reply'][];
       state: number;
       text: string;

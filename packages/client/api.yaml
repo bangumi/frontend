@@ -349,6 +349,21 @@ components:
           type: integer
         isFriend:
           type: boolean
+        reactions:
+          items:
+            properties:
+              selected:
+                type: boolean
+              total:
+                type: integer
+              value:
+                type: integer
+            required:
+              - selected
+              - total
+              - value
+            type: object
+          type: array
         replies:
           items:
             $ref: '#/components/schemas/SubReply'
@@ -365,6 +380,7 @@ components:
         - createdAt
         - text
         - state
+        - reactions
       type: object
     SubReply:
       properties:
@@ -593,6 +609,21 @@ components:
           $ref: '#/components/schemas/Group'
         id:
           type: integer
+        reactions:
+          items:
+            properties:
+              selected:
+                type: boolean
+              total:
+                type: integer
+              value:
+                type: integer
+            required:
+              - selected
+              - total
+              - value
+            type: object
+          type: array
         replies:
           items:
             $ref: '#/components/schemas/Reply'
@@ -612,6 +643,7 @@ components:
         - state
         - createdAt
         - replies
+        - reactions
       type: object
     User:
       properties:
