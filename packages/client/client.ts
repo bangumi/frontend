@@ -61,6 +61,11 @@ export interface Reply {
   creator: User;
   id: number;
   isFriend: boolean;
+  reactions: Array<{
+    selected: boolean;
+    total: number;
+    value: number;
+  }>;
   replies: SubReply[];
   state: number;
   text: string;
@@ -70,6 +75,11 @@ export interface TopicDetail {
   creator: User;
   group: Group;
   id: number;
+  reactions: Array<{
+    selected: boolean;
+    total: number;
+    value: number;
+  }>;
   replies: Reply[];
   state: number;
   text: string;
