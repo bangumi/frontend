@@ -2,7 +2,7 @@ import { HttpError } from 'oazapfts';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
-import type { Error as resError } from '@bangumi/client/client';
+import type { ErrorResponse as resError } from '@bangumi/client/client';
 
 import ErrorLayout from './ErrorLayout';
 

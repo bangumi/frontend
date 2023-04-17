@@ -11,7 +11,7 @@ export const defaults: Oazapfts.RequestOpts = {
 };
 const oazapfts = Oazapfts.runtime(defaults);
 export const servers = {};
-export interface Error {
+export interface ErrorResponse {
   code: string;
   error: string;
   message: string;
@@ -223,11 +223,11 @@ export async function clearNotice(
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     '/p1/clear-notify',
@@ -246,15 +246,15 @@ export async function deleteGroupPost(postId: number, opts?: Oazapfts.RequestOpt
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(`/p1/groups/-/posts/${encodeURIComponent(postId)}`, {
     ...opts,
@@ -269,11 +269,11 @@ export async function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) 
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(`/p1/groups/-/posts/${encodeURIComponent(postId)}`, {
     ...opts,
@@ -293,11 +293,11 @@ export async function editGroupPost(
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/-/posts/${encodeURIComponent(postId)}`,
@@ -319,11 +319,11 @@ export async function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpt
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(`/p1/groups/-/topics/${encodeURIComponent(id)}`, {
     ...opts,
@@ -341,15 +341,15 @@ export async function editGroupTopic(
       }
     | {
         status: 400;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/-/topics/${encodeURIComponent(topicId)}`,
@@ -375,11 +375,11 @@ export async function createGroupReply(
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/-/topics/${encodeURIComponent(topicId)}/replies`,
@@ -416,11 +416,11 @@ export async function listGroupMembersByName(
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/${encodeURIComponent(groupName)}/members${QS.query(
@@ -456,11 +456,11 @@ export async function getGroupProfile(
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/${encodeURIComponent(groupName)}/profile${QS.query(
@@ -498,11 +498,11 @@ export async function getGroupTopicsByGroupName(
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/${encodeURIComponent(groupName)}/topics${QS.query(
@@ -530,7 +530,7 @@ export async function createNewGroupTopic(
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/groups/${encodeURIComponent(groupName)}/topics`,
@@ -556,19 +556,19 @@ export async function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts
       }
     | {
         status: 400;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 429;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     '/p1/login',
@@ -590,11 +590,11 @@ export async function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     '/p1/logout',
@@ -613,11 +613,11 @@ export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >('/p1/me', {
     ...opts,
@@ -646,11 +646,11 @@ export async function listNotice(
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/notify${QS.query(
@@ -688,11 +688,11 @@ export async function getSubjectTopicsBySubjectId(
       }
     | {
         status: 404;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/subjects/${encodeURIComponent(subjectId)}/topics${QS.query(
@@ -719,11 +719,11 @@ export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}`, {
     ...opts,
@@ -753,11 +753,11 @@ export async function patchSubjectInfo(
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/wiki/subjects/${encodeURIComponent(subjectId)}`,
@@ -787,11 +787,11 @@ export async function putSubjectInfo(
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/wiki/subjects/${encodeURIComponent(subjectId)}`,
@@ -833,7 +833,7 @@ export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.Reque
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers`, {
     ...opts,
@@ -856,15 +856,15 @@ export async function uploadSubjectCover(
       }
     | {
         status: 400;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers`,
@@ -890,7 +890,7 @@ export async function unvoteSubjectCover(
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers/${encodeURIComponent(imageId)}/vote`,
@@ -915,7 +915,7 @@ export async function voteSubjectCover(
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(
     `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/covers/${encodeURIComponent(imageId)}/vote`,
@@ -938,11 +938,11 @@ export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapf
       }
     | {
         status: 401;
-        data: Error;
+        data: ErrorResponse;
       }
     | {
         status: 500;
-        data: Error;
+        data: ErrorResponse;
       }
   >(`/p1/wiki/subjects/${encodeURIComponent(subjectId)}/history-summary`, {
     ...opts,

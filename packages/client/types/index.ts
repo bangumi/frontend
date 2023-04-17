@@ -143,8 +143,8 @@ export interface components {
         subjectWikiEdit: boolean;
       };
     };
-    /** @description fastify default error response */
-    Error: {
+    /** @description default error response type */
+    ErrorResponse: {
       code: string;
       error: string;
       message: string;
@@ -371,13 +371,13 @@ export interface operations {
       /** @description 未登录 */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -399,13 +399,13 @@ export interface operations {
       /** @description Default Response */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -439,13 +439,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -467,19 +467,19 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description Default Response */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -502,13 +502,13 @@ export interface operations {
       /** @description 小组不存在 */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -535,19 +535,19 @@ export interface operations {
       /** @description Default Response */
       400: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -581,13 +581,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -617,13 +617,13 @@ export interface operations {
       /** @description 小组不存在 */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -649,13 +649,13 @@ export interface operations {
       /** @description 小组不存在 */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -684,13 +684,13 @@ export interface operations {
       /** @description 小组不存在 */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -720,7 +720,7 @@ export interface operations {
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -752,7 +752,7 @@ export interface operations {
       /** @description request validation error */
       400: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 验证码错误/账号密码不匹配 */
@@ -766,7 +766,7 @@ export interface operations {
           'X-RateLimit-Reset'?: number;
         };
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 失败次数太多，需要过一段时间再重试 */
@@ -780,13 +780,13 @@ export interface operations {
           'X-RateLimit-Reset'?: number;
         };
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -808,13 +808,13 @@ export interface operations {
       /** @description 未登录 */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -830,13 +830,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -863,13 +863,13 @@ export interface operations {
       /** @description 未登录 */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -898,13 +898,13 @@ export interface operations {
       /** @description 条目不存在 */
       404: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -931,13 +931,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -980,13 +980,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -1028,13 +1028,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -1081,7 +1081,7 @@ export interface operations {
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -1114,19 +1114,19 @@ export interface operations {
       /** @description Default Response */
       400: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -1152,7 +1152,7 @@ export interface operations {
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -1178,7 +1178,7 @@ export interface operations {
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
@@ -1205,13 +1205,13 @@ export interface operations {
       /** @description Default Response */
       401: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
-          'application/json': components['schemas']['Error'];
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
     };
