@@ -903,7 +903,11 @@ export async function unvoteSubjectCover(
 /**
  * 为条目封面投票
  */
-export async function voteSubjectCover(subjectId: number, imageId: number, opts?: Oazapfts.RequestOpts) {
+export async function voteSubjectCover(
+  subjectId: number,
+  imageId: number,
+  opts?: Oazapfts.RequestOpts,
+) {
   return oazapfts.fetchJson<
     | {
         status: 200;
