@@ -9,7 +9,6 @@
 ```typescript
 import { ozaClient } from '@bangumi/client';
 
-
 async function request() {
   try {
     const res = await ozaClient.$apiCall(...);
@@ -18,7 +17,7 @@ async function request() {
       return
     } else if (res.status === 400) {
       /**
-       * http 请求正常进行，服务器正常返回，但是请求内容不符合预期。
+       * http 请求正常进行，服务器正常返回，但是响应内容不符合预期。比如用户没有登陆/没有对应权限/请求内容格式错误等等原因
        *
        * 具体原因请查看对应的文档或者查看响应内容。
        *
@@ -30,7 +29,6 @@ async function request() {
   } catch (e: unknown) {
     // http 请求失败
   }
-
 }
 ```
 
