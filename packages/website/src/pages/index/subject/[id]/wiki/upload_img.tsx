@@ -61,21 +61,19 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
     }
     setLoadingVote(true);
     try {
-      let res;
-      if (voted) {
-        res = await ozaClient.unvoteSubjectCover(subjectId, coverId);
-      } else {
-        res = await ozaClient.voteSubjectCover(subjectId, coverId);
-      }
+      const res = await (voted
+        ? ozaClient.unvoteSubjectCover(subjectId, coverId)
+        : ozaClient.voteSubjectCover(subjectId, coverId));
       if (res.status === 200) {
         toast('操作成功！');
         onCommentUpdate();
       } else {
-        throw new Error(res.message as string);
+        const err = res.data;
+        throw new Error(err.message, { cause: err });
       }
     } catch (err: unknown) {
       console.error(err);
-      toast('操作失败！', { type: 'error' });
+      toast('未知错误！', { type: 'error' });
     } finally {
       setLoadingVote(false);
     }
@@ -162,6 +160,12 @@ const WikiUploadImgPage: React.FC = () => {
   });
 
   const uploadCover = async () => {
+    // 可能的用户错误类型
+    const userErrorCodeObj: Record<string, string> = {
+      NOT_ALLOWED: '无操作该条目的权限！',
+      IMAGE_FILE_TOO_LARGE: '上传文件过大！',
+      IMAGE_FORMAT_NOT_SUPPORT: '上传文件格式仅限：jpeg, jpg, png, webp',
+    };
     try {
       if (!uploadContent) {
         toast('未找到上传图片！', { type: 'error' });
@@ -177,11 +181,16 @@ const WikiUploadImgPage: React.FC = () => {
         toast('操作成功！');
         mutate();
       } else {
-        throw new Error(res.message as string);
+        const err = res.data;
+        const userMsg: string | undefined = userErrorCodeObj[err.code];
+        if (!userMsg) {
+          throw new Error(err.message, { cause: err });
+        }
+        toast(userMsg, { type: 'error' });
       }
     } catch (err: unknown) {
       console.error(err);
-      toast('操作失败！', { type: 'error' });
+      toast('未知错误！', { type: 'error' });
     } finally {
       setloadingUpload(false);
     }
