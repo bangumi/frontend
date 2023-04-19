@@ -67,13 +67,12 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
       if (res.status === 200) {
         toast('操作成功！');
         onCommentUpdate();
-      } else {
-        const err = res.data;
-        throw new Error(err.message, { cause: err });
       }
     } catch (err: unknown) {
-      console.error(err);
-      toast('未知错误！', { type: 'error' });
+      if (err instanceof Error) {
+        toast(err.message, { type: 'error' });
+        console.error(err);
+      }
     } finally {
       setLoadingVote(false);
     }
@@ -166,34 +165,26 @@ const WikiUploadImgPage: React.FC = () => {
       IMAGE_FILE_TOO_LARGE: '上传文件过大！',
       IMAGE_FORMAT_NOT_SUPPORT: '上传文件格式仅限：jpeg, jpg, png, webp',
     };
-    try {
-      if (!uploadContent) {
-        toast('未找到上传图片！', { type: 'error' });
-        return;
-      }
-      setloadingUpload(true);
-      const res = await ozaClient.uploadSubjectCover(subjectId, { content: uploadContent });
-      if (res.status === 200) {
-        const uploader = document.getElementById('coverUploader') as HTMLInputElement;
-        uploader.value = '';
-        setUploadContent('');
-        setUploadName(uploadNameInitial);
-        toast('操作成功！');
-        mutate();
-      } else {
-        const err = res.data;
-        const userMsg: string | undefined = userErrorCodeObj[err.code];
-        if (!userMsg) {
-          throw new Error(err.message, { cause: err });
-        }
-        toast(userMsg, { type: 'error' });
-      }
-    } catch (err: unknown) {
-      console.error(err);
-      toast('未知错误！', { type: 'error' });
-    } finally {
-      setloadingUpload(false);
+    if (!uploadContent) {
+      toast('未找到上传图片！', { type: 'error' });
+      return;
     }
+    setloadingUpload(true);
+    const res = await ozaClient.uploadSubjectCover(subjectId, { content: uploadContent });
+    if (res.status === 200) {
+      const uploader = document.getElementById('coverUploader') as HTMLInputElement;
+      uploader.value = '';
+      setUploadContent('');
+      setUploadName(uploadNameInitial);
+      toast('操作成功！');
+      mutate();
+    } else {
+      const err = res.data;
+      const userMsg: string | undefined = userErrorCodeObj[err.code];
+      userMsg ? toast(userMsg, { type: 'error' }) : toast(err.message, { type: 'error' });
+      console.error(err);
+    }
+    setloadingUpload(false);
   };
 
   const getShortName = (name: string): string => {
