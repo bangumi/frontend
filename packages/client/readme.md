@@ -13,18 +13,10 @@ async function request() {
   try {
     const res = await ozaClient.$apiCall(...);
     if (res.status === 200) {
-      console.log('请求成功');
+      console.log('操作成功');
       return
     } else if (res.status === 400) {
-      /**
-       * http 请求正常进行，服务器正常返回，但是响应内容不符合预期。比如用户没有登陆/没有对应权限/请求内容格式错误等等原因
-       *
-       * 具体原因请查看对应的文档或者查看响应内容。
-       *
-       * 一般来说正常的http错误相应会有一个 `res.data.code` 作为 error code，在可能的情况下请根据这个进行匹配。
-       *
-       * 生成的 ts client 可以根据 `res.status` 对 res.data 进行 type narrow。
-       */
+      // 在这里 res.data 可以正常进行 type narrow
     } else {
       console.log("未知错误：", res.data)
     }
@@ -33,6 +25,15 @@ async function request() {
   }
 }
 ```
+
+一般来说一个请求有两个错误需要处理：
+
+1. fetch 因为 HTTP 请求未完成时抛出的 `Error`
+2. HTTP 请求完成，但是响应不符合预期。
+
+比如，当用户尝试上传封面而调用 `oazClient.uploadSubjectCover` 时，可能会因为用户不是维基人而返回 http code 401，也有可能因为用户上传的图片格式暂不支持而返回 http code 400。
+
+这里需要针对响应的 `res.status.code` 进行判断，并且分别进行处理。
 
 实际的使用例子：
 
