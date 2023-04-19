@@ -2,7 +2,7 @@
 
 我们使用 [oazapfts](https://github.com/oazapfts/oazapfts) 从 openapi 定义直接生成 js API client
 
-在大多数情况下 ci 会自动对 openapi 进行更新的。
+在大多数情况下 ci 会自动对 openapi 进行更新的，不需要手动操作。
 
 ## 使用
 
@@ -16,9 +16,12 @@ async function request() {
     if (res.status === 200) {
       console.log('请求成功');
       return
-    } else if (res.status === 401) {
+    } else if (res.status === 400) {
       /**
-       * http 请求正常进行，但是服务器正常返回，但是请求错误
+       * http 请求正常进行，服务器正常返回，但是请求内容不符合预期。
+       *
+       * 具体原因请查看对应的文档或者查看响应内容。
+       *
        * 生成的 ts client 可以根据 `res.status` 对 res.data 进行 type narrow。
        */
     } else {
