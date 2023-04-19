@@ -21,6 +21,8 @@ async function request() {
        *
        * 具体原因请查看对应的文档或者查看响应内容。
        *
+       * 一般来说正常的http错误相应会有一个 `res.data.code` 作为 error code，在可能的情况下请根据这个进行匹配。
+       *
        * 生成的 ts client 可以根据 `res.status` 对 res.data 进行 type narrow。
        */
     } else {
