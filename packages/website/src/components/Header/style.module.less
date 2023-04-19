@@ -21,7 +21,7 @@
   .justify-between();
   .h-full();
 
-  max-width: 1440px;
+  max-width: @max-width;
   margin: 0 auto;
 }
 
@@ -57,11 +57,11 @@
 .nav {
   display: flex;
   align-items: center;
-  margin: 0 0 0 63px;
+  margin: 0 0 0 30px;
 
   .divider {
     display: inline-block;
-    margin: 0 35px;
+    margin: 0 27px;
     height: 19px;
   }
 
@@ -86,6 +86,7 @@
   .flex();
   .items-center();
 
+  // Todo: add `flex-gap-polyfill`
   gap: 12px;
 }
 
@@ -197,7 +198,7 @@
 }
 
 /* 临时的移动端适配 */
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: @max-width) {
   .avatar {
     margin-right: 10px;
   }
