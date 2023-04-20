@@ -1,5 +1,5 @@
 import { ok } from 'oazapfts';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
@@ -10,29 +10,6 @@ import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import { useWikiContext } from '../wiki';
 import style from './common.module.less';
 
-interface CoverType {
-  creator: {
-    avatar: {
-      large: string;
-      medium: string;
-      small: string;
-    };
-    id: number;
-    nickname: string;
-    sign: string;
-    user_group: number;
-    username: string;
-  };
-  id: number;
-  raw: string;
-  thumbnail: string;
-  voted: true;
-}
-interface CurrentType {
-  raw: string;
-  thumbnail: string;
-}
-
 interface WikiCoverItemProp {
   id: number;
   thumbnail: string;
@@ -42,6 +19,11 @@ interface WikiCoverItemProp {
   };
   voted: boolean;
   onCommentUpdate: () => Promise<unknown>;
+}
+
+interface CurrentType {
+  raw: string;
+  thumbnail: string;
 }
 
 const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
@@ -67,6 +49,9 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
       if (res.status === 200) {
         toast('操作成功！');
         onCommentUpdate();
+      } else {
+        toast(res.data.message, { type: 'error' });
+        console.error(res.data);
       }
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -118,13 +103,18 @@ const WikiUploadImgPage: React.FC = () => {
   const [uploadName, setUploadName] = useState(uploadNameInitial);
   const [uploadContent, setUploadContent] = useState('');
   const [loadingUpload, setloadingUpload] = useState(false);
+  const uploaderRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const uploader = document.getElementById('coverUploader');
-    const reader = new FileReader();
+    if (!uploaderRef.current) {
+      console.error('uploaderRef获取为空！');
+      return;
+    }
+    const uploaderRefValue = uploaderRef.current;
     // 上传文件和前置校验
-    const readImage = (event: Event) => {
-      const img = (event.target as HTMLInputElement).files?.[0];
+    const readImage = () => {
+      const img = uploaderRefValue.files?.[0];
+      const reader = new FileReader();
       if (!img) {
         toast('图片不存在', { type: 'error' });
         return;
@@ -151,10 +141,10 @@ const WikiUploadImgPage: React.FC = () => {
       reader.readAsDataURL(img);
       setUploadName('加载中…');
     };
-    uploader?.addEventListener('change', readImage);
+    uploaderRefValue.addEventListener('change', readImage);
 
     return () => {
-      uploader?.removeEventListener('change', readImage);
+      uploaderRefValue.removeEventListener('change', readImage);
     };
   });
 
@@ -169,22 +159,27 @@ const WikiUploadImgPage: React.FC = () => {
       toast('未找到上传图片！', { type: 'error' });
       return;
     }
-    setloadingUpload(true);
-    const res = await ozaClient.uploadSubjectCover(subjectId, { content: uploadContent });
-    if (res.status === 200) {
-      const uploader = document.getElementById('coverUploader') as HTMLInputElement;
-      uploader.value = '';
-      setUploadContent('');
-      setUploadName(uploadNameInitial);
-      toast('操作成功！');
-      mutate();
-    } else {
-      const err = res.data;
-      const userMsg: string | undefined = userErrorCodeObj[err.code];
-      userMsg ? toast(userMsg, { type: 'error' }) : toast(err.message, { type: 'error' });
-      console.error(err);
+    try {
+      setloadingUpload(true);
+      const res = await ozaClient.uploadSubjectCover(subjectId, { content: uploadContent });
+      if (res.status === 200) {
+        setUploadContent('');
+        setUploadName(uploadNameInitial);
+        toast('操作成功！');
+        mutate();
+      } else {
+        const userMsg: string | undefined = userErrorCodeObj[res.data.code];
+        userMsg ? toast(userMsg, { type: 'error' }) : toast(res.data.message, { type: 'error' });
+        console.error(res.data);
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast(err.message, { type: 'error' });
+        console.error(err);
+      }
+    } finally {
+      setloadingUpload(false);
     }
-    setloadingUpload(false);
   };
 
   const getShortName = (name: string): string => {
@@ -211,7 +206,7 @@ const WikiUploadImgPage: React.FC = () => {
           <div className={style.title}>已上传的封面图片</div>
           <Divider className={style.divider} />
           <div className={style.uploadImgCoverUploaded}>
-            {covers.map((cover: CoverType) => {
+            {covers.map((cover) => {
               return (
                 <WikiCoverItem
                   key={cover.id}
@@ -233,7 +228,7 @@ const WikiUploadImgPage: React.FC = () => {
             <label htmlFor='coverUploader'>选择本地文件</label>
             <input
               type='file'
-              id='coverUploader'
+              ref={uploaderRef}
               name='coverUploader'
               accept='.webp,.jpg,.jpeg,.png'
             />
