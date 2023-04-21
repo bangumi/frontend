@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.style.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "skipLibCheck": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "noEmit": true
+  }
+}

@@ -10,6 +10,7 @@ import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
+import typedCssModulesPlugin from './plugins/typed-css-modules.mts';
 
 let COMMIT_HASH = '';
 
@@ -21,6 +22,9 @@ try {
 
 dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
+
+// 跟 <projectRoot>/dev/css-typed/gen.mts 保持同步
+const lessAdditionalData = '@import "./src/style/index.less";';
 
 export default defineConfig(({ mode }) => {
   let apiDomain = 'https://next.bgm38.com';
@@ -79,6 +83,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
+      typedCssModulesPlugin(),
       react(
         mode === 'production'
           ? {
@@ -112,7 +117,7 @@ export default defineConfig(({ mode }) => {
       preprocessorOptions: {
         less: {
           charset: false,
-          additionalData: '@import "./src/style/index.less";',
+          additionalData: lessAdditionalData,
         },
       },
     },

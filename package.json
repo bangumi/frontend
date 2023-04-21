@@ -27,6 +27,7 @@
     "website": "pnpm --filter=@bangumi/website",
     "utils": "pnpm --filter=@bangumi/utils",
     "lint-staged": "lint-staged -q",
+    "generate": "tsx ./dev/css-typed/index.mts",
     "type-check": "tsc --noEmit"
   },
   "engines": {
@@ -41,6 +42,12 @@
     "trailingComma": "all"
   },
   "lint-staged": {
+    "*.module.less": [
+      "tsx ./dev/css-typed/index.mts"
+    ],
+    "*.module.less.d.ts": [
+      "tsx ./dev/css-typed/index.mts"
+    ],
     "*.{js,ts,mts,cts,tsx,cjs,mjs}": [
       "eslint --fix"
     ],
@@ -53,9 +60,12 @@
     "@actions/core": "^1.10.0",
     "@actions/exec": "^1.1.1",
     "@actions/github": "^5.1.1",
+    "@bangumi/design": "workspace:*",
     "@octokit/openapi-types": "^16.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/css-tree": "^2.3.1",
+    "@types/less": "^3.0.3",
     "@types/node": "^18.15.11",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@types/web": "^0.0.99",
@@ -64,6 +74,8 @@
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.8",
     "@vitest/ui": "^0.29.8",
+    "camelcase": "^6.0.1",
+    "css-tree": "^2.3.1",
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-config-standard": "^17.0.0",
@@ -81,7 +93,9 @@
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.3",
     "jsdom": "^21.1.1",
+    "less": "^4.1.3",
     "lint-staged": "^13.2.0",
+    "minimatch": "^8.0.3",
     "postcss": "^8.4.21",
     "postcss-less": "^6.0.0",
     "prettier": "^2.8.7",

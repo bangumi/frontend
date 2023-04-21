@@ -1,23 +1,14 @@
 {
+  "extends": "./tsconfig.style.json",
   "compilerOptions": {
     "baseUrl": ".",
     "target": "ESNext",
-    "useDefineForClassFields": true,
     "lib": ["ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noUncheckedIndexedAccess": true,
-    "useUnknownInCatchVariables": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
-    "strictNullChecks": true,
     "noEmit": true,
     "jsx": "react-jsx",
     "types": [
@@ -36,6 +27,7 @@
   "include": [
     "./packages",
     "./tests/",
+    "./dev/",
     ".eslintrc.js",
     "vitest.config.ts",
     ".github/scripts/*",

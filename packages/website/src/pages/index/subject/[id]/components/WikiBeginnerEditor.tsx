@@ -81,7 +81,7 @@ const WikiInfoItem = ({
          */
         tabIndex={-1}
       >
-        <Cursor className={style.editorItemCursor} />
+        <Cursor />
       </div>
 
       <Input.Group
