@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
-import { Notification, Search as SearchIcon, Setting } from '@bangumi/icons';
+import { Notification, Search as SearchIcon } from '@bangumi/icons';
 import { UnreadableCodeError } from '@bangumi/utils';
 import { useNotify } from '@bangumi/website/hooks/use-notify';
 
@@ -158,8 +158,6 @@ const Header: FC = () => {
               >
                 <Notification />
               </Link>
-
-              <Setting className={style.icon} />
               <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
             </>
           ) : (
