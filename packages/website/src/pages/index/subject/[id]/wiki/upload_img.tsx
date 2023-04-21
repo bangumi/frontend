@@ -21,11 +21,6 @@ interface WikiCoverItemProp {
   onCommentUpdate: () => Promise<unknown>;
 }
 
-interface CurrentType {
-  raw: string;
-  thumbnail: string;
-}
-
 const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
   id,
   thumbnail,
@@ -200,9 +195,11 @@ const WikiUploadImgPage: React.FC = () => {
         <div className={style.uploadImg}>
           <div className={style.title}>目前得票最高的封面图片</div>
           <Divider className={style.divider} />
-          <div className={style.uploadImgCoverSelected}>
-            <Image src={(current as CurrentType).thumbnail} />
-          </div>
+          {current?.thumbnail && (
+            <div className={style.uploadImgCoverSelected}>
+              <Image src={current.thumbnail} />
+            </div>
+          )}
           <div className={style.title}>已上传的封面图片</div>
           <Divider className={style.divider} />
           <div className={style.uploadImgCoverUploaded}>
