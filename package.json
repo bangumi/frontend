@@ -31,7 +31,7 @@
   },
   "engines": {
     "node": ">=v16",
-    "pnpm": "^7"
+    "pnpm": "^7 || ^8"
   },
   "prettier": {
     "printWidth": 100,
