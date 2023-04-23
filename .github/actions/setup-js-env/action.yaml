@@ -8,7 +8,13 @@ runs:
       with:
         node-version-file: '.node-version'
 
+    - run: corepack enable
+      shell: bash
+
     - run: corepack prepare
+      shell: bash
+
+    - run: pnpm --version
       shell: bash
 
     - name: Get npm cache directory
