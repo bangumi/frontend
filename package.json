@@ -29,6 +29,7 @@
     "lint-staged": "lint-staged -q",
     "type-check": "tsc --noEmit"
   },
+  "packageManager": "pnpm@8.3.1",
   "engines": {
     "node": ">=v16",
     "pnpm": "^8"
