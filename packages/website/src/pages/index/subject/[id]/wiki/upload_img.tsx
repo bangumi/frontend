@@ -1,5 +1,5 @@
 import { ok } from 'oazapfts';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
@@ -97,51 +97,48 @@ const WikiUploadImgPage: React.FC = () => {
   const uploadNameInitial = '尚未选择任何本地文件';
   const [uploadName, setUploadName] = useState(uploadNameInitial);
   const [uploadContent, setUploadContent] = useState('');
-  const [loadingUpload, setloadingUpload] = useState(false);
-  const uploaderRef = useRef<HTMLInputElement>(null);
+  const [loadingUpload, setLoadingUpload] = useState(false);
 
-  useEffect(() => {
-    if (!uploaderRef.current) {
-      console.error('uploaderRef获取为空！');
+  // 上传文件和前置校验
+  const readImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const img = event.target.files?.[0];
+    if (!img) {
+      toast('图片不存在', { type: 'error' });
       return;
     }
-    const uploaderRefValue = uploaderRef.current;
-    // 上传文件和前置校验
-    const readImage = () => {
-      const img = uploaderRefValue.files?.[0];
-      const reader = new FileReader();
-      if (!img) {
-        toast('图片不存在', { type: 'error' });
-        return;
-      }
-      if (img.size >= 4 * 1024 * 1024) {
-        toast('上传图片原始大小应该小于4mb', { type: 'error' });
-        return;
-      }
-      reader.addEventListener('load', () => {
-        const code = reader?.result as string;
-        // 图片转base64
-        if (!code) {
-          toast('解析图片失败！', { type: 'error' });
-          setUploadName(uploadNameInitial);
-          return;
-        }
-        setUploadName(getShortName(img.name));
-        setUploadContent(code.replace(/^data:image\/\w+;base64,/, ''));
-      });
-      reader.addEventListener('error', () => {
-        toast('解析图片失败！', { type: 'error' });
-        setUploadName(uploadNameInitial);
-      });
-      reader.readAsDataURL(img);
+    if (img.size >= 4 * 1024 * 1024) {
+      toast('上传图片原始大小应该小于4mb', { type: 'error' });
+      return;
+    }
+    try {
       setUploadName('加载中…');
-    };
-    uploaderRefValue.addEventListener('change', readImage);
-
-    return () => {
-      uploaderRefValue.removeEventListener('change', readImage);
-    };
-  });
+      const [name, base64] = await readAsBase64(img);
+      setUploadName(getShortName(name));
+      setUploadContent(base64);
+    } catch (err: unknown) {
+      toast('解析图片失败！', { type: 'error' });
+      setUploadName(uploadNameInitial);
+      setUploadContent('');
+      console.error(err);
+    }
+  };
+  // 读取图片，返回图片名和base64字符串
+  const readAsBase64 = async (img: File): Promise<[string, string]> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const code = reader.result as string;
+        if (!code) {
+          reject(new Error('Failed to read file'));
+        }
+        resolve([img.name, code.replace(/^data:image\/\w+;base64,/, '')]);
+      };
+      reader.onerror = () => {
+        reject(new Error('Failed to read file'));
+      };
+      reader.readAsDataURL(img);
+    });
+  };
 
   const uploadCover = async () => {
     // 可能的用户错误类型
@@ -155,7 +152,7 @@ const WikiUploadImgPage: React.FC = () => {
       return;
     }
     try {
-      setloadingUpload(true);
+      setLoadingUpload(true);
       const res = await ozaClient.uploadSubjectCover(subjectId, { content: uploadContent });
       if (res.status === 200) {
         setUploadContent('');
@@ -173,7 +170,7 @@ const WikiUploadImgPage: React.FC = () => {
         console.error(err);
       }
     } finally {
-      setloadingUpload(false);
+      setLoadingUpload(false);
     }
   };
 
@@ -193,29 +190,35 @@ const WikiUploadImgPage: React.FC = () => {
       type='alpha'
       leftChildren={
         <div className={style.uploadImg}>
-          <div className={style.title}>目前得票最高的封面图片</div>
-          <Divider className={style.divider} />
-          {current?.thumbnail && (
-            <div className={style.uploadImgCoverSelected}>
-              <Image src={current.thumbnail} />
-            </div>
+          {current && (
+            <>
+              <div className={style.title}>目前得票最高的封面图片</div>
+              <Divider className={style.divider} />
+              <div className={style.uploadImgCoverSelected}>
+                <Image src={current.thumbnail} />
+              </div>
+            </>
           )}
-          <div className={style.title}>已上传的封面图片</div>
-          <Divider className={style.divider} />
-          <div className={style.uploadImgCoverUploaded}>
-            {covers.map((cover) => {
-              return (
-                <WikiCoverItem
-                  key={cover.id}
-                  id={cover.id}
-                  voted={cover.voted}
-                  creator={cover.creator}
-                  thumbnail={cover.thumbnail}
-                  onCommentUpdate={mutate}
-                />
-              );
-            })}
-          </div>
+          {Boolean(covers.length) && (
+            <>
+              <div className={style.title}>已上传的封面图片</div>
+              <Divider className={style.divider} />
+              <div className={style.uploadImgCoverUploaded}>
+                {covers.map((cover) => {
+                  return (
+                    <WikiCoverItem
+                      key={cover.id}
+                      id={cover.id}
+                      voted={cover.voted}
+                      creator={cover.creator}
+                      thumbnail={cover.thumbnail}
+                      onCommentUpdate={mutate}
+                    />
+                  );
+                })}
+              </div>
+            </>
+          )}
           <div className={style.title}>从你的电脑上选择新的图片</div>
           <Divider className={style.divider} />
           <Message type='error'>
@@ -225,9 +228,10 @@ const WikiUploadImgPage: React.FC = () => {
             <label htmlFor='coverUploader'>选择本地文件</label>
             <input
               type='file'
-              ref={uploaderRef}
+              id='coverUploader'
               name='coverUploader'
               accept='.webp,.jpg,.jpeg,.png'
+              onChange={readImage}
             />
             <span>{uploadName}</span>
           </div>
