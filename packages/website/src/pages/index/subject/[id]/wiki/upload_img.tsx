@@ -199,7 +199,7 @@ const WikiUploadImgPage: React.FC = () => {
               </div>
             </>
           )}
-          {Boolean(covers.length) && (
+          {covers.length && (
             <>
               <div className={style.title}>已上传的封面图片</div>
               <Divider className={style.divider} />
