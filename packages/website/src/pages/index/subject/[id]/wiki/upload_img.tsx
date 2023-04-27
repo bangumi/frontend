@@ -83,6 +83,36 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
   );
 };
 
+// 对于过长的图片名，省略中间部分
+const getShortName = (name: string): string => {
+  const max = 50;
+  if (!name || name.length <= max) {
+    return name;
+  }
+  const fore = name.slice(0, Math.floor((max * 3) / 5));
+  const aft = name.slice(name.length - Math.floor((max * 2) / 5), name.length);
+
+  return `${fore}……${aft}`;
+};
+
+// 读取图片，返回图片名和base64字符串
+const readAsBase64 = async (img: File): Promise<[string, string]> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const code = reader.result as string;
+      if (!code) {
+        reject(new Error('Failed to read file'));
+      }
+      resolve([img.name, code.replace(/^data:image\/\w+;base64,/, '')]);
+    };
+    reader.onerror = () => {
+      reject(new Error('Failed to read file'));
+    };
+    reader.readAsDataURL(img);
+  });
+};
+
 const WikiUploadImgPage: React.FC = () => {
   const { subjectId } = useWikiContext();
 
@@ -95,9 +125,9 @@ const WikiUploadImgPage: React.FC = () => {
   const { covers, current } = data;
 
   const uploadNameInitial = '尚未选择任何本地文件';
-  const [uploadName, setUploadName] = useState(uploadNameInitial);
-  const [uploadContent, setUploadContent] = useState('');
-  const [loadingUpload, setLoadingUpload] = useState(false);
+  const [uploadName, setUploadName] = useState(uploadNameInitial); // 待上传图片名（展示在页面上）
+  const [uploadContent, setUploadContent] = useState(''); // 待上传图片的base64编码
+  const [loadingUpload, setLoadingUpload] = useState(false); // “上传图片”按钮的loading
 
   // 上传文件和前置校验
   const readImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +143,7 @@ const WikiUploadImgPage: React.FC = () => {
     try {
       setUploadName('加载中…');
       const [name, base64] = await readAsBase64(img);
-      setUploadName(getShortName(name));
+      setUploadName(name);
       setUploadContent(base64);
     } catch (err: unknown) {
       toast('解析图片失败！', { type: 'error' });
@@ -121,23 +151,6 @@ const WikiUploadImgPage: React.FC = () => {
       setUploadContent('');
       console.error(err);
     }
-  };
-  // 读取图片，返回图片名和base64字符串
-  const readAsBase64 = async (img: File): Promise<[string, string]> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const code = reader.result as string;
-        if (!code) {
-          reject(new Error('Failed to read file'));
-        }
-        resolve([img.name, code.replace(/^data:image\/\w+;base64,/, '')]);
-      };
-      reader.onerror = () => {
-        reject(new Error('Failed to read file'));
-      };
-      reader.readAsDataURL(img);
-    });
   };
 
   const uploadCover = async () => {
@@ -174,17 +187,6 @@ const WikiUploadImgPage: React.FC = () => {
     }
   };
 
-  const getShortName = (name: string): string => {
-    const max = 50;
-    if (!name || name.length <= max) {
-      return name;
-    }
-    const fore = name.slice(0, Math.floor((max * 3) / 5));
-    const aft = name.slice(name.length - Math.floor((max * 2) / 5), name.length);
-
-    return `${fore}……${aft}`;
-  };
-
   return (
     <Layout
       type='alpha'
@@ -199,7 +201,7 @@ const WikiUploadImgPage: React.FC = () => {
               </div>
             </>
           )}
-          {covers.length && (
+          {covers.length > 0 && (
             <>
               <div className={style.title}>已上传的封面图片</div>
               <Divider className={style.divider} />
@@ -233,7 +235,7 @@ const WikiUploadImgPage: React.FC = () => {
               accept='.webp,.jpg,.jpeg,.png'
               onChange={readImage}
             />
-            <span>{uploadName}</span>
+            <span>{getShortName(uploadName)}</span>
           </div>
           {uploadContent && (
             <Button
