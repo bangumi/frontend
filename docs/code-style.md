@@ -16,7 +16,7 @@ pre-commit hook 会对修改过的文件运行 `eslint --fix`。
 
 函数注释需要使用 [`tsdoc`](https://tsdoc.org/) (简单来说就是不需要写类型的 `jsdoc`)。
 
-不要直接使用 `// ...` 注释，[TypeScript 无法提取这样的注释](https://github.com/bangumi/frontend/pull/542#discussion_r1179033149)，导致某些编辑器中无法正常显示函数注释。
+不要使用 `// ...` 注释，[TypeScript 无法提取这样的注释](https://github.com/bangumi/frontend/pull/542#discussion_r1179033149)，导致某些编辑器中无法正常显示函数注释。
 
 bad：
 
