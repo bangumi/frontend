@@ -41,7 +41,7 @@ bad：
 ```ts
 /**
  * 将图片以base64编码
- * @param {File} img
+ * @param {File} img 需要处理的图片 Blob
  * @return {[String, String]} 图片名与base64字符串
  */
 const readAsBase64 = async (img: File): Promise<[string, string]>;
