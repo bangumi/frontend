@@ -16,16 +16,16 @@ pre-commit hook 会对修改过的文件运行 `eslint --fix`。
 
 函数注释需要使用 `tsdoc` (简单来说就是不需要写类型的 `jsdoc`)。
 
-不要直接使用 `// ...` 注释，TypeScript 无法提取这样的注释。
+不要直接使用 `// ...` 注释，[TypeScript 无法提取这样的注释](https://github.com/bangumi/frontend/pull/542#discussion_r1179033149)，导致某些编辑器中无法正常显示函数注释。
 
-bad
+bad：
 
 ```ts
 // 对于过长的图片名，省略超出部分但保留文件扩展名
 function getShortName(name: string): string;
 ```
 
-good
+good：
 
 ```ts
 /**
@@ -34,11 +34,9 @@ good
 function getShortName(name: string): string;
 ```
 
-https://github.com/bangumi/frontend/pull/542#discussion_r1179033149
-
 由于我们已经使用了 TypeScript， 所以在注释中不需要也不应该再重复注明类型
 
-bad
+bad：
 
 ```ts
 /**
