@@ -97,8 +97,7 @@ const getShortName = (name: string): string => {
 
 /**
  * @description: 将图片以base64编码
- * @param {File} img
- * @return {[String, String]} 图片名与base64字符串
+ * @return 图片名与base64字符串
  */
 const readAsBase64 = async (img: File): Promise<[string, string]> => {
   return new Promise((resolve, reject) => {
@@ -132,7 +131,6 @@ const WikiUploadImgPage: React.FC = () => {
 
   /**
    * @description: input:file的change监听事件，包括前置校验与图片解析
-   * @param {Event} event
    */
   const readImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const img = event.target.files?.[0];
