@@ -2,7 +2,7 @@
 
 ## 代码格式化
 
-所有的代码都应该使用 `prettier` 进行格式化，确保贡献者们在不同的 ide 和 editor 设置下不会产生无意义的空格修改。
+所有的代码都应该使用 `prettier` 进行格式化，确保贡献者们在不同的 ide 和 editor 设置下不会产生无意义的空格修改，方便进行 code review。
 
 pre-commit hook 会自动运行 `prettier`。
 
