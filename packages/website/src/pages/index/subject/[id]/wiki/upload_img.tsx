@@ -49,10 +49,8 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
         console.error(res.data);
       }
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        toast(err.message, { type: 'error' });
-        console.error(err);
-      }
+      toast('未知错误', { type: 'error' });
+      console.error(err);
     } finally {
       setLoadingVote(false);
     }
@@ -83,31 +81,34 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
   );
 };
 
-// 对于过长的图片名，省略中间部分
+/**
+ * @description: 对于过长的图片名，省略超出部分但保留文件扩展名
+ */
 const getShortName = (name: string): string => {
   const max = 50;
-  if (!name || name.length <= max) {
+  if (name.length <= max) {
     return name;
   }
-  const fore = name.slice(0, Math.floor((max * 3) / 5));
-  const aft = name.slice(name.length - Math.floor((max * 2) / 5), name.length);
+  const fore = name.slice(0, max);
+  const aft = name.match(/\.\w+$/);
 
-  return `${fore}……${aft}`;
+  return aft ? `${fore}···${aft[0]}` : fore;
 };
 
-// 读取图片，返回图片名和base64字符串
+/**
+ * @description: 将图片以base64编码
+ * @param {File} img
+ * @return {[String, String]} 图片名与base64字符串
+ */
 const readAsBase64 = async (img: File): Promise<[string, string]> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => {
       const code = reader.result as string;
-      if (!code) {
-        reject(new Error('Failed to read file'));
-      }
       resolve([img.name, code.replace(/^data:image\/\w+;base64,/, '')]);
     };
-    reader.onerror = () => {
-      reject(new Error('Failed to read file'));
+    reader.onerror = (err: unknown) => {
+      reject(err);
     };
     reader.readAsDataURL(img);
   });
@@ -129,11 +130,16 @@ const WikiUploadImgPage: React.FC = () => {
   const [uploadContent, setUploadContent] = useState(''); // 待上传图片的base64编码
   const [loadingUpload, setLoadingUpload] = useState(false); // “上传图片”按钮的loading
 
-  // 上传文件和前置校验
+  /**
+   * @description: input:file的change监听事件，包括前置校验与图片解析
+   * @param {Event} event
+   */
   const readImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const img = event.target.files?.[0];
     if (!img) {
-      toast('图片不存在', { type: 'error' });
+      toast('未选择图片', { type: 'error' });
+      setUploadName(uploadNameInitial);
+      setUploadContent('');
       return;
     }
     if (img.size >= 4 * 1024 * 1024) {
@@ -178,10 +184,8 @@ const WikiUploadImgPage: React.FC = () => {
         console.error(res.data);
       }
     } catch (err: unknown) {
-      if (err instanceof Error) {
-        toast(err.message, { type: 'error' });
-        console.error(err);
-      }
+      toast('未知错误', { type: 'error' });
+      console.error(err);
     } finally {
       setLoadingUpload(false);
     }
