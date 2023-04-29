@@ -86,19 +86,18 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
  */
 const getShortName = (name: string): string => {
   const max = 50;
-  if (name.length <= max) {
+  const arr = name.split(/(?=\.\w+$)/);
+  const fore = arr[0]!; // 文件名
+  const aft = arr[1]; // 扩展名
+  if (fore.length <= max) {
     return name;
   }
-  const fore = name.slice(0, max);
-  const aft = name.match(/\.\w+$/);
-
-  return aft ? `${fore}···${aft[0]}` : fore;
+  return `${fore.slice(0, max)}···${aft ?? ''}`;
 };
 
 /**
  * @description: 将图片以base64编码
- * @param {File} img
- * @return {[String, String]} 图片名与base64字符串
+ * @return 图片名与base64字符串
  */
 const readAsBase64 = async (img: File): Promise<[string, string]> => {
   return new Promise((resolve, reject) => {
@@ -132,7 +131,6 @@ const WikiUploadImgPage: React.FC = () => {
 
   /**
    * @description: input:file的change监听事件，包括前置校验与图片解析
-   * @param {Event} event
    */
   const readImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const img = event.target.files?.[0];
