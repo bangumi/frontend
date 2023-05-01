@@ -16,8 +16,8 @@ test.describe('main page', () => {
       page
         .locator('div')
         .filter({ hasText: '全部条目动画书籍游戏三次元人物' })
-        .first()
-        .getByRole('img'),
+        .getByRole('img')
+        .first(),
     ).toBeVisible();
   });
 });
