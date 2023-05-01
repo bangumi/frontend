@@ -54,7 +54,7 @@
     "@actions/core": "^1.10.0",
     "@actions/exec": "^1.1.1",
     "@actions/github": "^5.1.1",
-    "@octokit/openapi-types": "^16.0.0",
+    "@octokit/openapi-types": "^16.1.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@types/node": "^18.15.11",
