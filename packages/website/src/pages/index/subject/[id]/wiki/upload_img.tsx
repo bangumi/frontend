@@ -85,14 +85,12 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
  * @description: 对于过长的图片名，省略超出部分但保留文件扩展名
  */
 const getShortName = (name: string): string => {
-  const max = 50;
-  const arr = name.split(/(?=\.\w+$)/);
-  const fore = arr[0]!; // 文件名
-  const aft = arr[1]; // 扩展名
-  if (fore.length <= max) {
+  if (name.length <= 45) {
     return name;
   }
-  return `${fore.slice(0, max)}···${aft ?? ''}`;
+  const fore = name.slice(0, 35);
+  const aft = name.slice(-10);
+  return `${fore}……${aft}`;
 };
 
 /**
@@ -237,7 +235,7 @@ const WikiUploadImgPage: React.FC = () => {
               accept='.webp,.jpg,.jpeg,.png'
               onChange={readImage}
             />
-            <span>{getShortName(uploadName)}</span>
+            <span title={uploadName}>{getShortName(uploadName)}</span>
           </div>
           {uploadContent && (
             <Button
