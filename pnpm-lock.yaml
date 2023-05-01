@@ -344,8 +344,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       monaco-editor:
-        specifier: ^0.36.1
-        version: 0.36.1
+        specifier: ^0.37.1
+        version: 0.37.1
       nanoid:
         specifier: ^4.0.2
         version: 4.0.2
@@ -8482,8 +8482,8 @@ packages:
       ufo: 1.1.1
     dev: true
 
-  /monaco-editor@0.36.1:
-    resolution: {integrity: sha512-/CaclMHKQ3A6rnzBzOADfwdSJ25BFoFT0Emxsc4zYVyav5SkK9iA6lEtIeuN/oRYbwPgviJT+t3l+sjFa28jYg==}
+  /monaco-editor@0.37.1:
+    resolution: {integrity: sha512-jLXEEYSbqMkT/FuJLBZAVWGuhIb4JNwHE9kPTorAVmsdZ4UzHAfgWxLsVtD7pLRFaOwYPhNG9nUCpmFL1t/dIg==}
     dev: false
 
   /mri@1.2.0:
