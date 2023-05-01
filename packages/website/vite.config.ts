@@ -43,6 +43,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      watch: {
+        ignored: ['playwright-report'],
+      },
       proxy: {
         '/p': {
           target: apiDomain,
