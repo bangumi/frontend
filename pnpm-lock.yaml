@@ -374,8 +374,8 @@ importers:
         specifier: ^5.0.1
         version: 5.0.1
       rooks:
-        specifier: ^7.10.0
-        version: 7.10.0(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^7.14.0
+        version: 7.14.0(react-dom@18.2.0)(react@18.2.0)
       socket.io-client:
         specifier: ^4.6.1
         version: 4.6.1
@@ -9884,8 +9884,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /rooks@7.10.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-aCeYfl7G86bKdBdOva/dzA9uWRYUgo5aOjGsCWBPjFp82SfdMUmQWUPWhCz3+BT/xuZJ5GqEsApMmoTPpupPLg==}
+  /rooks@7.14.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-XWoeO8JqoY5uyoScZ7/6qbb7nZi0sfz6xFO9ZVP1oayyzxUCRa54LbLnMjX0YDFdCryLjTZfuX9LNQ9ivXzymA==}
     engines: {node: '>=v10.24.1'}
     peerDependencies:
       react: ^16.8.0  || ^17.0.0 || ^18.0.0
