@@ -329,8 +329,8 @@ importers:
   packages/website:
     dependencies:
       '@marsidev/react-turnstile':
-        specifier: ^0.1.1
-        version: 0.1.1(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.2.1
+        version: 0.2.1(react-dom@18.2.0)(react@18.2.0)
       '@remix-run/router':
         specifier: ^1.5.0
         version: 1.5.0
@@ -2559,8 +2559,8 @@ packages:
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
     dev: true
 
-  /@marsidev/react-turnstile@0.1.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-x0lqhHeY6H8OdVrbdbc7sAqlIJYLKM+QXY9Iwbt4He/fMAe0MUHVlNxYApuA1UfYVh4qrFzMhVe+xb8UFzH5Hw==}
+  /@marsidev/react-turnstile@0.2.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-W/jxe6nn55wvbAwCOAtrm+tIg90/1oqBlbWwWaWJ2zuo3pmEBoaz3cnkU5PO5Hhi7NL51H46qL1syrkq/5CN0Q==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
