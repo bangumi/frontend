@@ -17,14 +17,16 @@ interface WikiCoverItemProp {
     username: string;
     nickname: string;
   };
-  voted: boolean;
-  onCommentUpdate: () => Promise<unknown>;
+  votable?: boolean;
+  voted?: boolean;
+  onCommentUpdate?: () => Promise<unknown>;
 }
 
 const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
   id,
   thumbnail,
   creator,
+  votable = false,
   voted,
   onCommentUpdate,
 }) => {
@@ -35,6 +37,7 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
   const voteCover = async (coverId: number, voted: boolean) => {
     if (!coverId || isNaN(coverId)) {
       toast('封面 ID 有误！', { type: 'error' });
+      return;
     }
     setLoadingVote(true);
     try {
@@ -43,7 +46,7 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
         : ozaClient.voteSubjectCover(subjectId, coverId));
       if (res.status === 200) {
         toast('操作成功！');
-        onCommentUpdate();
+        onCommentUpdate!();
       } else {
         toast(res.data.message, { type: 'error' });
         console.error(res.data);
@@ -67,22 +70,25 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
           {creator.nickname}
         </Typography.Link>
       </div>
-      <Button
-        size='small'
-        type='text'
-        disabled={loadingVote}
-        onClick={() => {
-          voteCover(id, voted);
-        }}
-      >
-        {loadingVote ? '···' : voted ? '撤消' : '投票'}
-      </Button>
+      {votable && (
+        <Button
+          size='small'
+          type='text'
+          disabled={loadingVote}
+          onClick={() => {
+            voteCover(id, voted!);
+          }}
+        >
+          {loadingVote ? '···' : voted ? '撤消' : '投票'}
+        </Button>
+      )}
     </div>
   );
 };
 
 /**
- * @description: 对于过长的图片名，省略超出部分但保留文件扩展名
+ * @description: 对于过长的图片名，截取前后固定长度返回
+ * @return 处理后的图片名
  */
 const getShortName = (name: string): string => {
   if (name.length <= 45) {
@@ -121,6 +127,7 @@ const WikiUploadImgPage: React.FC = () => {
   );
 
   const { covers, current } = data;
+  const currentWithCreator = current ? covers.find((cover) => cover.id === current.id) : undefined;
 
   const uploadNameInitial = '尚未选择任何本地文件';
   const [uploadName, setUploadName] = useState(uploadNameInitial); // 待上传图片名（展示在页面上）
@@ -176,7 +183,7 @@ const WikiUploadImgPage: React.FC = () => {
         mutate();
       } else {
         const userMsg: string | undefined = userErrorCodeObj[res.data.code];
-        toast(userMsg ?? res.data.message, { type: 'error' });
+        userMsg ? toast(userMsg, { type: 'error' }) : toast(res.data.message, { type: 'error' });
         console.error(res.data);
       }
     } catch (err: unknown) {
@@ -192,12 +199,16 @@ const WikiUploadImgPage: React.FC = () => {
       type='alpha'
       leftChildren={
         <div className={style.uploadImg}>
-          {current && (
+          {currentWithCreator && (
             <>
               <div className={style.title}>目前得票最高的封面图片</div>
               <Divider className={style.divider} />
               <div className={style.uploadImgCoverSelected}>
-                <Image src={current.thumbnail} />
+                <WikiCoverItem
+                  id={currentWithCreator.id}
+                  creator={currentWithCreator.creator}
+                  thumbnail={currentWithCreator.thumbnail}
+                />
               </div>
             </>
           )}
@@ -211,6 +222,7 @@ const WikiUploadImgPage: React.FC = () => {
                     <WikiCoverItem
                       key={cover.id}
                       id={cover.id}
+                      votable
                       voted={cover.voted}
                       creator={cover.creator}
                       thumbnail={cover.thumbnail}
