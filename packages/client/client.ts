@@ -826,6 +826,7 @@ export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.Reque
             voted: boolean;
           }>;
           current?: {
+            id: number;
             raw: string;
             thumbnail: string;
           };
