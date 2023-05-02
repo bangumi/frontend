@@ -176,7 +176,7 @@ const WikiUploadImgPage: React.FC = () => {
         mutate();
       } else {
         const userMsg: string | undefined = userErrorCodeObj[res.data.code];
-        userMsg ? toast(userMsg, { type: 'error' }) : toast(res.data.message, { type: 'error' });
+        toast(userMsg ?? res.data.message, { type: 'error' });
         console.error(res.data);
       }
     } catch (err: unknown) {
