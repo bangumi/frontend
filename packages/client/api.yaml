@@ -1967,6 +1967,8 @@ paths:
                     type: array
                   current:
                     properties:
+                      id:
+                        type: integer
                       raw:
                         type: string
                       thumbnail:
@@ -1974,6 +1976,7 @@ paths:
                     required:
                       - thumbnail
                       - raw
+                      - id
                     type: object
                 required:
                   - covers

@@ -1072,6 +1072,7 @@ export interface operations {
               voted: boolean;
             }[];
             current?: {
+              id: number;
               raw: string;
               thumbnail: string;
             };
