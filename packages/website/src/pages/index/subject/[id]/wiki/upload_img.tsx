@@ -46,7 +46,7 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
         : ozaClient.voteSubjectCover(subjectId, coverId));
       if (res.status === 200) {
         toast('操作成功！');
-        onCommentUpdate!();
+        onCommentUpdate?.();
       } else {
         toast(res.data.message, { type: 'error' });
         console.error(res.data);
