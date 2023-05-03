@@ -48,7 +48,9 @@ pnpm dev
 pnpm dev --mode production
 ```
 
-- 提交前确认所有的测试、lint 通过；
+参照[代码风格指印](./docs/code-style.md)
+
+- 提交前确认所有的测试、lint 通过
 
 ```bash
 pnpm test
