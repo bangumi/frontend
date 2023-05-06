@@ -32,4 +32,7 @@ jobs:
         run: pnpm type-check
 
       - name: Lint Code
-        run: pnpm lint --quiet && pnpm lint:style
+        run: pnpm lint --quiet
+
+      - run: pnpm lint:style
+        name: Lint Style
