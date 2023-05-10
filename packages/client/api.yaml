@@ -1419,7 +1419,7 @@ paths:
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
       tags:
-        - auth
+        - user
   /p1/logout:
     post:
       description: 登出
@@ -1460,7 +1460,7 @@ paths:
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
       tags:
-        - auth
+        - user
   /p1/me:
     get:
       operationId: getCurrentUser
@@ -1492,7 +1492,7 @@ paths:
       security:
         - CookiesSession: []
       tags:
-        - auth
+        - user
   /p1/notify:
     get:
       operationId: listNotice
