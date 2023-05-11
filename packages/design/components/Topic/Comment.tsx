@@ -192,8 +192,8 @@ const Comment: FC<CommentProps> = ({
             </span>
             <RenderContent state={state} text={text} />
           </div>
-          <div className='bgm-comment__opinions'>
-            {showReplyEditor && (
+          {showReplyEditor && (
+            <div className='bgm-comment__opinions'>
               <ReplyForm
                 autoFocus
                 topicId={topicId}
@@ -206,8 +206,8 @@ const Comment: FC<CommentProps> = ({
                 }}
                 onSuccess={handleReplySuccess}
               />
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
       {replies?.map((reply, idx) => (
