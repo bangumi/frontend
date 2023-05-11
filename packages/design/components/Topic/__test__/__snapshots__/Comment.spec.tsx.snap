@@ -56,48 +56,6 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
                 |
                   
               </span>
-              <div
-                class="bgm-comment-actions"
-              >
-                <button
-                  class="bgm-button bgm-button--plain bgm-button--size-small"
-                  title="回复"
-                >
-                  <div />
-                </button>
-                <div
-                  class="bgm-popover"
-                >
-                  <button
-                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
-                    title="其他"
-                  >
-                    <div />
-                  </button>
-                  <div
-                    class="bgm-popover__container"
-                  >
-                    <div
-                      class="bgm-popover__content"
-                    >
-                      <div
-                        class="bgm-comment-actions__popover"
-                      >
-                        <button
-                          class="bgm-button bgm-button--text"
-                        >
-                          绝交
-                        </button>
-                        <button
-                          class="bgm-button bgm-button--text"
-                        >
-                          报告疑虑
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </span>
           <div
@@ -496,48 +454,6 @@ exports[`Normal Comment > should render 6 1`] = `
                 |
                   
               </span>
-              <div
-                class="bgm-comment-actions"
-              >
-                <button
-                  class="bgm-button bgm-button--plain bgm-button--size-small"
-                  title="回复"
-                >
-                  <div />
-                </button>
-                <div
-                  class="bgm-popover"
-                >
-                  <button
-                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
-                    title="其他"
-                  >
-                    <div />
-                  </button>
-                  <div
-                    class="bgm-popover__container"
-                  >
-                    <div
-                      class="bgm-popover__content"
-                    >
-                      <div
-                        class="bgm-comment-actions__popover"
-                      >
-                        <button
-                          class="bgm-button bgm-button--text"
-                        >
-                          绝交
-                        </button>
-                        <button
-                          class="bgm-button bgm-button--text"
-                        >
-                          报告疑虑
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </span>
           <div
@@ -608,48 +524,6 @@ exports[`Normal Comment > should render 7 1`] = `
                 |
                   
               </span>
-              <div
-                class="bgm-comment-actions"
-              >
-                <button
-                  class="bgm-button bgm-button--plain bgm-button--size-small"
-                  title="回复"
-                >
-                  <div />
-                </button>
-                <div
-                  class="bgm-popover"
-                >
-                  <button
-                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
-                    title="其他"
-                  >
-                    <div />
-                  </button>
-                  <div
-                    class="bgm-popover__container"
-                  >
-                    <div
-                      class="bgm-popover__content"
-                    >
-                      <div
-                        class="bgm-comment-actions__popover"
-                      >
-                        <button
-                          class="bgm-button bgm-button--text"
-                        >
-                          绝交
-                        </button>
-                        <button
-                          class="bgm-button bgm-button--text"
-                        >
-                          报告疑虑
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </span>
           <div
