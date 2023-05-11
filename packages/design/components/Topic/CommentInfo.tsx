@@ -8,7 +8,7 @@ export interface CommentInfoProps {
   floor: string | number;
   isSpecial?: boolean;
   createdAt: number | string | Date;
-  id?: string;
+  id?: number;
 }
 
 const spaces = '\u00A0'.repeat(2);
@@ -24,10 +24,10 @@ const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false
 
   return !isSpecial ? (
     <span className='bgm-topic__commentInfo'>
-      <a href={`#${id}`}>#{floor}</a>
+      <a href={`#post_${id}`}>#{floor}</a>
       {spaces}|{spaces}
       {date}
-      {spaces}|{spaces}!
+      {spaces}|{spaces}
     </span>
   ) : (
     <span className='bgm-topic__commentInfo'>{date}</span>

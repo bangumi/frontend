@@ -11,10 +11,10 @@ import { Friend, OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
-import Button from '../../components/Button';
 import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
 import { toast } from '../Toast';
+import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
 import ReplyForm from './ReplyForm';
 
@@ -161,46 +161,6 @@ const Comment: FC<CommentProps> = ({
     }
   };
 
-  const commentActions = user && !isDeleted && (
-    <div className='bgm-comment__opinions'>
-      {showReplyEditor ? (
-        <ReplyForm
-          autoFocus
-          topicId={topicId}
-          replyTo={props.id}
-          placeholder={`回复 @${creator.nickname}：`}
-          content={replyContent}
-          onChange={setReplyContent}
-          onCancel={() => {
-            setShowReplyEditor(false);
-          }}
-          onSuccess={handleReplySuccess}
-        />
-      ) : (
-        <>
-          <Button type='secondary' size='small' onClick={startReply}>
-            回复
-          </Button>
-          <Button type='secondary' size='small'>
-            +1
-          </Button>
-          {user.id === creator.id && (
-            <>
-              {!replies?.length && (
-                <Button.Link type='text' size='small' to={`/group/reply/${props.id}/edit`}>
-                  编辑
-                </Button.Link>
-              )}
-              <Button type='text' size='small' onClick={handleDeleteReply}>
-                删除
-              </Button>
-            </>
-          )}
-        </>
-      )}
-    </div>
-  );
-
   return (
     <div>
       <div className={headerClassName} id={`post_${props.id}`}>
@@ -219,11 +179,35 @@ const Comment: FC<CommentProps> = ({
                 {isFriend ? <Friend /> : null}
                 {!isReply && creator.sign ? <span>{`(${creator.sign})`}</span> : null}
               </div>
-              <CommentInfo createdAt={createdAt} floor={floor} id={`post_${props.id}`} />
+              <div className='comment-info'>
+                <CommentInfo createdAt={createdAt} floor={floor} id={props.id} />
+                <CommentActions
+                  id={props.id}
+                  onReply={startReply}
+                  onDelete={handleDeleteReply}
+                  isAuthor={user?.id === creator.id}
+                  editable={!replies?.length}
+                />
+              </div>
             </span>
             <RenderContent state={state} text={text} />
           </div>
-          {commentActions}
+          <div className='bgm-comment__opinions'>
+            {showReplyEditor && (
+              <ReplyForm
+                autoFocus
+                topicId={topicId}
+                replyTo={props.id}
+                placeholder={`回复 @${creator.nickname}：`}
+                content={replyContent}
+                onChange={setReplyContent}
+                onCancel={() => {
+                  setShowReplyEditor(false);
+                }}
+                onSuccess={handleReplySuccess}
+              />
+            )}
+          </div>
         </div>
       </div>
       {replies?.map((reply, idx) => (

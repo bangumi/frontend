@@ -39,3 +39,5 @@ export { ReactComponent as TopicReopen } from './assets/topic-reopen.svg';
 export { ReactComponent as OpenQuote } from './assets/open-quote.svg';
 export { ReactComponent as CloseQuote } from './assets/close-quote.svg';
 export { ReactComponent as Enter } from './assets/enter.svg';
+export { ReactComponent as Comment } from './assets/comment.svg';
+export { ReactComponent as More } from './assets/more.svg';
