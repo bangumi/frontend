@@ -41,6 +41,7 @@ test.describe('group', () => {
         })
         .first(),
     ).toBeVisible();
+    await page.hover('.bgm-comment-actions__more');
     await expect(
       page
         .getByRole('button', {
