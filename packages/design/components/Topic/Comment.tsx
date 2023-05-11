@@ -181,13 +181,15 @@ const Comment: FC<CommentProps> = ({
               </div>
               <div className='comment-info'>
                 <CommentInfo createdAt={createdAt} floor={floor} id={props.id} />
-                <CommentActions
-                  id={props.id}
-                  onReply={startReply}
-                  onDelete={handleDeleteReply}
-                  isAuthor={user?.id === creator.id}
-                  editable={!replies?.length}
-                />
+                {user && !isDeleted && (
+                  <CommentActions
+                    id={props.id}
+                    onReply={startReply}
+                    onDelete={handleDeleteReply}
+                    isAuthor={user?.id === creator.id}
+                    editable={!replies?.length}
+                  />
+                )}
               </div>
             </span>
             <RenderContent state={state} text={text} />
