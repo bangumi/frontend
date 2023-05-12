@@ -1,4 +1,4 @@
-import './style';
+import './style/index.less';
 
 import classNames from 'classnames';
 import React from 'react';
