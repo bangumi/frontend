@@ -13,7 +13,6 @@ export interface CommentInfoProps {
 
 const spaces = '\u00A0'.repeat(2);
 
-// Todo: report
 const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false, id = '' }) => {
   let date: string;
   if (typeof createdAt === 'number') {
@@ -27,7 +26,6 @@ const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false
       <a href={`#post_${id}`}>#{floor}</a>
       {spaces}|{spaces}
       {date}
-      {spaces}|{spaces}
     </span>
   ) : (
     <span className='bgm-topic__commentInfo'>{date}</span>

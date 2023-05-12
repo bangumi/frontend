@@ -52,9 +52,6 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
                 |
                   
                 2022-9-22 06:03
-                  
-                |
-                  
               </span>
             </div>
           </span>
@@ -122,10 +119,8 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                 |
                   
                 2022-9-22 06:03
-                  
-                |
-                  
               </span>
+                |  
               <div
                 class="bgm-comment-actions"
               >
@@ -225,10 +220,8 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                   |
                     
                   2022-9-22 06:03
-                    
-                  |
-                    
                 </span>
+                  |  
                 <div
                   class="bgm-comment-actions"
                 >
@@ -338,10 +331,8 @@ exports[`Normal Comment > should render 0 1`] = `
                 |
                   
                 2022-9-22 06:03
-                  
-                |
-                  
               </span>
+                |  
               <div
                 class="bgm-comment-actions"
               >
@@ -450,9 +441,6 @@ exports[`Normal Comment > should render 6 1`] = `
                 |
                   
                 2022-9-22 06:03
-                  
-                |
-                  
               </span>
             </div>
           </span>
@@ -520,9 +508,6 @@ exports[`Normal Comment > should render 7 1`] = `
                 |
                   
                 2022-9-22 06:03
-                  
-                |
-                  
               </span>
             </div>
           </span>
@@ -597,10 +582,8 @@ exports[`Normal Comment > should render with reply 1`] = `
                 |
                   
                 2022-9-22 06:03
-                  
-                |
-                  
               </span>
+                |  
               <div
                 class="bgm-comment-actions"
               >
@@ -700,10 +683,8 @@ exports[`Normal Comment > should render with reply 1`] = `
                   |
                     
                   2022-9-22 06:03
-                    
-                  |
-                    
                 </span>
+                  |  
                 <div
                   class="bgm-comment-actions"
                 >

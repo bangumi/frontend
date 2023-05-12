@@ -182,13 +182,16 @@ const Comment: FC<CommentProps> = ({
               <div className='comment-info'>
                 <CommentInfo createdAt={createdAt} floor={floor} id={props.id} />
                 {user && !isDeleted && (
-                  <CommentActions
-                    id={props.id}
-                    onReply={startReply}
-                    onDelete={handleDeleteReply}
-                    isAuthor={user?.id === creator.id}
-                    editable={!replies?.length}
-                  />
+                  <>
+                    &nbsp;&nbsp;|&nbsp;&nbsp;
+                    <CommentActions
+                      id={props.id}
+                      onReply={startReply}
+                      onDelete={handleDeleteReply}
+                      isAuthor={user?.id === creator.id}
+                      editable={!replies?.length}
+                    />
+                  </>
                 )}
               </div>
             </span>
