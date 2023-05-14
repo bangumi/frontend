@@ -33,7 +33,7 @@ const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group, id }) 
             <span>»</span>
             <Link to={`/group/${group.name}/forum`}>组内讨论</Link>
           </div>
-          <CommentInfo createdAt={createdAt} floor='1' id={`post_${id}`} />
+          <CommentInfo createdAt={createdAt} floor='1' id={id} />
         </span>
         <h1 className={styles.title}>{title}</h1>
       </div>

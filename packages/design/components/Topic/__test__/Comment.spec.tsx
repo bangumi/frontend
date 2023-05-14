@@ -104,9 +104,7 @@ describe('Normal Comment', () => {
     const props = buildProps(false, repliesComment, '233', 233, user);
     const { container } = render(<Comment {...props} />);
     // 选取主评论的操作区域
-    const actions = container.querySelector(
-      '.bgm-comment__box > .bgm-comment__opinions',
-    )?.textContent;
+    const actions = container.querySelector('.bgm-comment__box .bgm-comment-actions')?.textContent;
     expect(actions?.includes('编辑')).toBeFalsy();
     expect(actions?.includes('删除')).toBeTruthy();
   });
@@ -119,10 +117,10 @@ describe('Normal Comment', () => {
 
   it('click reply button should show editor form', () => {
     const props = buildProps(false);
-    const { getByText, container } = render(<Comment {...props} />);
+    const { getByText, container, getByTitle } = render(<Comment {...props} />);
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(0);
 
-    fireEvent.click(getByText('回复'));
+    fireEvent.click(getByTitle('回复'));
     expect(container.getElementsByClassName('bgm-editor__form').length).toBe(1);
 
     fireEvent.click(getByText('取消'));
@@ -141,11 +139,11 @@ describe('Normal Comment', () => {
 
     const onSuccess = vi.fn();
     const props = buildProps(false);
-    const { getByText, container } = render(
+    const { getByText, container, getByTitle } = render(
       <Comment {...props} onCommentUpdate={onSuccess} topicId={1} />,
     );
     const fillAndSubmit = () => {
-      fireEvent.click(getByText('回复'));
+      fireEvent.click(getByTitle('回复'));
       fireEvent.change(container.querySelector('textarea')!, { target: { value: '233' } });
       fireEvent.click(getByText('写好了'));
     };

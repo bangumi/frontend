@@ -1,0 +1,625 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Basic Usage > should render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="bgm-comment-actions"
+      >
+        <button
+          class="bgm-button bgm-button--plain bgm-button--size-small"
+          title="回复"
+        >
+          <div />
+        </button>
+        <div
+          class="bgm-popover"
+        >
+          <button
+            class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+            title="其他"
+          >
+            <div />
+          </button>
+          <div
+            class="bgm-popover__container"
+          >
+            <div
+              class="bgm-popover__content"
+            >
+              <div
+                class="bgm-comment-actions__popover"
+              >
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  绝交
+                </button>
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  报告疑虑
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="bgm-comment-actions"
+    >
+      <button
+        class="bgm-button bgm-button--plain bgm-button--size-small"
+        title="回复"
+      >
+        <div />
+      </button>
+      <div
+        class="bgm-popover"
+      >
+        <button
+          class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+          title="其他"
+        >
+          <div />
+        </button>
+        <div
+          class="bgm-popover__container"
+        >
+          <div
+            class="bgm-popover__content"
+          >
+            <div
+              class="bgm-comment-actions__popover"
+            >
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                绝交
+              </button>
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                报告疑虑
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Is Author > should render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="bgm-comment-actions"
+      >
+        <button
+          class="bgm-button bgm-button--plain bgm-button--size-small"
+          title="回复"
+        >
+          <div />
+        </button>
+        <div
+          class="bgm-popover"
+        >
+          <button
+            class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+            title="其他"
+          >
+            <div />
+          </button>
+          <div
+            class="bgm-popover__container"
+          >
+            <div
+              class="bgm-popover__content"
+            >
+              <div
+                class="bgm-comment-actions__popover"
+              >
+                <a
+                  class="bgm-button bgm-button--link bgm-button--text bgm-button--size-small"
+                  href="/group/reply/233/edit"
+                >
+                  编辑
+                </a>
+                <button
+                  class="bgm-button bgm-button--text bgm-button--size-small"
+                >
+                  删除
+                </button>
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  绝交
+                </button>
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  报告疑虑
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="bgm-comment-actions"
+    >
+      <button
+        class="bgm-button bgm-button--plain bgm-button--size-small"
+        title="回复"
+      >
+        <div />
+      </button>
+      <div
+        class="bgm-popover"
+      >
+        <button
+          class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+          title="其他"
+        >
+          <div />
+        </button>
+        <div
+          class="bgm-popover__container"
+        >
+          <div
+            class="bgm-popover__content"
+          >
+            <div
+              class="bgm-comment-actions__popover"
+            >
+              <a
+                class="bgm-button bgm-button--link bgm-button--text bgm-button--size-small"
+                href="/group/reply/233/edit"
+              >
+                编辑
+              </a>
+              <button
+                class="bgm-button bgm-button--text bgm-button--size-small"
+              >
+                删除
+              </button>
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                绝交
+              </button>
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                报告疑虑
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Non-editable > should render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="bgm-comment-actions"
+      >
+        <button
+          class="bgm-button bgm-button--plain bgm-button--size-small"
+          title="回复"
+        >
+          <div />
+        </button>
+        <div
+          class="bgm-popover"
+        >
+          <button
+            class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+            title="其他"
+          >
+            <div />
+          </button>
+          <div
+            class="bgm-popover__container"
+          >
+            <div
+              class="bgm-popover__content"
+            >
+              <div
+                class="bgm-comment-actions__popover"
+              >
+                <button
+                  class="bgm-button bgm-button--text bgm-button--size-small"
+                >
+                  删除
+                </button>
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  绝交
+                </button>
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  报告疑虑
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="bgm-comment-actions"
+    >
+      <button
+        class="bgm-button bgm-button--plain bgm-button--size-small"
+        title="回复"
+      >
+        <div />
+      </button>
+      <div
+        class="bgm-popover"
+      >
+        <button
+          class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+          title="其他"
+        >
+          <div />
+        </button>
+        <div
+          class="bgm-popover__container"
+        >
+          <div
+            class="bgm-popover__content"
+          >
+            <div
+              class="bgm-comment-actions__popover"
+            >
+              <button
+                class="bgm-button bgm-button--text bgm-button--size-small"
+              >
+                删除
+              </button>
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                绝交
+              </button>
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                报告疑虑
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`With Text > should render 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="bgm-comment-actions"
+      >
+        <button
+          class="bgm-button bgm-button--plain bgm-button--size-small"
+          title="回复"
+        >
+          <div />
+          回复
+        </button>
+        <div
+          class="bgm-popover"
+        >
+          <button
+            class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+            title="其他"
+          >
+            <div />
+            其他
+          </button>
+          <div
+            class="bgm-popover__container"
+          >
+            <div
+              class="bgm-popover__content"
+            >
+              <div
+                class="bgm-comment-actions__popover"
+              >
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  绝交
+                </button>
+                <button
+                  class="bgm-button bgm-button--text"
+                >
+                  报告疑虑
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="bgm-comment-actions"
+    >
+      <button
+        class="bgm-button bgm-button--plain bgm-button--size-small"
+        title="回复"
+      >
+        <div />
+        回复
+      </button>
+      <div
+        class="bgm-popover"
+      >
+        <button
+          class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+          title="其他"
+        >
+          <div />
+          其他
+        </button>
+        <div
+          class="bgm-popover__container"
+        >
+          <div
+            class="bgm-popover__content"
+          >
+            <div
+              class="bgm-comment-actions__popover"
+            >
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                绝交
+              </button>
+              <button
+                class="bgm-button bgm-button--text"
+              >
+                报告疑虑
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

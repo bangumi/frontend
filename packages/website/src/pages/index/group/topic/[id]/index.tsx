@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Button, Layout, RichContent, Topic } from '@bangumi/design';
+import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useGroup } from '@bangumi/website/hooks/use-group';
@@ -14,7 +14,7 @@ import GroupInfo from '../../components/GroupInfo';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
-const { Comment } = Topic;
+const { Comment, CommentActions } = Topic;
 
 const TopicPage: FC = () => {
   const { id } = useParams();
@@ -71,19 +71,13 @@ const TopicPage: FC = () => {
               <RichContent bbcode={topicDetail.text} />
               {user && (
                 <div className={styles.topicActions}>
-                  <Button type='secondary' size='small' onClick={startReply}>
-                    回复
-                  </Button>
-                  {user.id === topicDetail.creator.id && (
-                    <>
-                      <Button.Link type='text' size='small' to={`/group/topic/${id}/edit`}>
-                        编辑
-                      </Button.Link>
-                      <Button type='text' size='small'>
-                        删除
-                      </Button>
-                    </>
-                  )}
+                  <CommentActions
+                    showText
+                    id={topicDetail.id}
+                    isAuthor={user.id === topicDetail.creator.id}
+                    onReply={startReply}
+                    // TODO: 实现删除主题操作
+                  />
                 </div>
               )}
             </div>

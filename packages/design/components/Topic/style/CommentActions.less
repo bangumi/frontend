@@ -1,0 +1,40 @@
+@import '../../../theme/base';
+
+.bgm-comment-actions {
+  display: flex;
+  gap: 12px;
+
+  .bgm-button {
+    height: 20px;
+    font-weight: 400;
+
+    &.bgm-comment-actions__more:hover {
+      color: @gray-80;
+    }
+  }
+
+  &__popover {
+    border-radius: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    padding: 10px;
+
+    .bgm-button {
+      font-size: 14px;
+      height: 22px;
+      border-radius: 11px;
+      width: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: @gray-80;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f5f5f5;
+      }
+    }
+  }
+}

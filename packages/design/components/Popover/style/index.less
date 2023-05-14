@@ -1,0 +1,29 @@
+@import '../../../theme/base.less';
+
+.bgm-popover {
+  display: inline-block;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__content {
+    border: 1px solid @gray-10;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    background-color: white;
+    border-radius: 17px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.15s linear;
+    z-index: 99;
+  }
+
+  &:hover &__content {
+    visibility: visible;
+    opacity: 1;
+  }
+}

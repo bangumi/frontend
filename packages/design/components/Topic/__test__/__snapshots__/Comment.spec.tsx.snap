@@ -36,24 +36,24 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
                 (我是签名)
               </span>
             </div>
-            <span
-              class="bgm-topic__commentInfo"
+            <div
+              class="comment-info"
             >
-              <a
-                href="#post_2104702"
+              <span
+                class="bgm-topic__commentInfo"
               >
-                #
-                233
-              </a>
-                
-              |
-                
-              2022-9-22 06:03
-                
-              |
-                
-              !
-            </span>
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+              </span>
+            </div>
           </span>
           <div
             class="bgm-rich-content bgm-comment__content"
@@ -103,44 +103,73 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                 (我是签名)
               </span>
             </div>
-            <span
-              class="bgm-topic__commentInfo"
+            <div
+              class="comment-info"
             >
-              <a
-                href="#post_2104702"
+              <span
+                class="bgm-topic__commentInfo"
               >
-                #
-                233
-              </a>
-                
-              |
-                
-              2022-9-22 06:03
-                
-              |
-                
-              !
-            </span>
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+              </span>
+                |  
+              <div
+                class="bgm-comment-actions"
+              >
+                <button
+                  class="bgm-button bgm-button--plain bgm-button--size-small"
+                  title="回复"
+                >
+                  <div />
+                </button>
+                <div
+                  class="bgm-popover"
+                >
+                  <button
+                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                    title="其他"
+                  >
+                    <div />
+                  </button>
+                  <div
+                    class="bgm-popover__container"
+                  >
+                    <div
+                      class="bgm-popover__content"
+                    >
+                      <div
+                        class="bgm-comment-actions__popover"
+                      >
+                        <button
+                          class="bgm-button bgm-button--text"
+                        >
+                          绝交
+                        </button>
+                        <button
+                          class="bgm-button bgm-button--text"
+                        >
+                          报告疑虑
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </span>
           <div
             class="bgm-rich-content bgm-comment__content"
           >
             123456789~~~
           </div>
-        </div>
-        <div
-          class="bgm-comment__opinions"
-        >
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            回复
-          </button>
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            +1
-          </button>
         </div>
       </div>
     </div>
@@ -175,44 +204,73 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                   用户
                 </a>
               </div>
-              <span
-                class="bgm-topic__commentInfo"
+              <div
+                class="comment-info"
               >
-                <a
-                  href="#post_2104702"
+                <span
+                  class="bgm-topic__commentInfo"
                 >
-                  #
-                  233-1
-                </a>
-                  
-                |
-                  
-                2022-9-22 06:03
-                  
-                |
-                  
-                !
-              </span>
+                  <a
+                    href="#post_2104702"
+                  >
+                    #
+                    233-1
+                  </a>
+                    
+                  |
+                    
+                  2022-9-22 06:03
+                </span>
+                  |  
+                <div
+                  class="bgm-comment-actions"
+                >
+                  <button
+                    class="bgm-button bgm-button--plain bgm-button--size-small"
+                    title="回复"
+                  >
+                    <div />
+                  </button>
+                  <div
+                    class="bgm-popover"
+                  >
+                    <button
+                      class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                      title="其他"
+                    >
+                      <div />
+                    </button>
+                    <div
+                      class="bgm-popover__container"
+                    >
+                      <div
+                        class="bgm-popover__content"
+                      >
+                        <div
+                          class="bgm-comment-actions__popover"
+                        >
+                          <button
+                            class="bgm-button bgm-button--text"
+                          >
+                            绝交
+                          </button>
+                          <button
+                            class="bgm-button bgm-button--text"
+                          >
+                            报告疑虑
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </span>
             <div
               class="bgm-rich-content bgm-comment__content"
             >
               123456789~~~
             </div>
-          </div>
-          <div
-            class="bgm-comment__opinions"
-          >
-            <button
-              class="bgm-button bgm-button--secondary bgm-button--size-small"
-            >
-              回复
-            </button>
-            <button
-              class="bgm-button bgm-button--secondary bgm-button--size-small"
-            >
-              +1
-            </button>
           </div>
         </div>
       </div>
@@ -257,44 +315,73 @@ exports[`Normal Comment > should render 0 1`] = `
                 (我是签名)
               </span>
             </div>
-            <span
-              class="bgm-topic__commentInfo"
+            <div
+              class="comment-info"
             >
-              <a
-                href="#post_2104702"
+              <span
+                class="bgm-topic__commentInfo"
               >
-                #
-                233
-              </a>
-                
-              |
-                
-              2022-9-22 06:03
-                
-              |
-                
-              !
-            </span>
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+              </span>
+                |  
+              <div
+                class="bgm-comment-actions"
+              >
+                <button
+                  class="bgm-button bgm-button--plain bgm-button--size-small"
+                  title="回复"
+                >
+                  <div />
+                </button>
+                <div
+                  class="bgm-popover"
+                >
+                  <button
+                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                    title="其他"
+                  >
+                    <div />
+                  </button>
+                  <div
+                    class="bgm-popover__container"
+                  >
+                    <div
+                      class="bgm-popover__content"
+                    >
+                      <div
+                        class="bgm-comment-actions__popover"
+                      >
+                        <button
+                          class="bgm-button bgm-button--text"
+                        >
+                          绝交
+                        </button>
+                        <button
+                          class="bgm-button bgm-button--text"
+                        >
+                          报告疑虑
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </span>
           <div
             class="bgm-rich-content bgm-comment__content"
           >
             123456789~~~
           </div>
-        </div>
-        <div
-          class="bgm-comment__opinions"
-        >
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            回复
-          </button>
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            +1
-          </button>
         </div>
       </div>
     </div>
@@ -338,24 +425,24 @@ exports[`Normal Comment > should render 6 1`] = `
                 (我是签名)
               </span>
             </div>
-            <span
-              class="bgm-topic__commentInfo"
+            <div
+              class="comment-info"
             >
-              <a
-                href="#post_2104702"
+              <span
+                class="bgm-topic__commentInfo"
               >
-                #
-                233
-              </a>
-                
-              |
-                
-              2022-9-22 06:03
-                
-              |
-                
-              !
-            </span>
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+              </span>
+            </div>
           </span>
           <div
             class="bgm-comment__content--deleted"
@@ -405,24 +492,24 @@ exports[`Normal Comment > should render 7 1`] = `
                 (我是签名)
               </span>
             </div>
-            <span
-              class="bgm-topic__commentInfo"
+            <div
+              class="comment-info"
             >
-              <a
-                href="#post_2104702"
+              <span
+                class="bgm-topic__commentInfo"
               >
-                #
-                233
-              </a>
-                
-              |
-                
-              2022-9-22 06:03
-                
-              |
-                
-              !
-            </span>
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+              </span>
+            </div>
           </span>
           <div
             class="bgm-comment__content--deleted"
@@ -479,44 +566,73 @@ exports[`Normal Comment > should render with reply 1`] = `
                 (我是签名)
               </span>
             </div>
-            <span
-              class="bgm-topic__commentInfo"
+            <div
+              class="comment-info"
             >
-              <a
-                href="#post_2104702"
+              <span
+                class="bgm-topic__commentInfo"
               >
-                #
-                233
-              </a>
-                
-              |
-                
-              2022-9-22 06:03
-                
-              |
-                
-              !
-            </span>
+                <a
+                  href="#post_2104702"
+                >
+                  #
+                  233
+                </a>
+                  
+                |
+                  
+                2022-9-22 06:03
+              </span>
+                |  
+              <div
+                class="bgm-comment-actions"
+              >
+                <button
+                  class="bgm-button bgm-button--plain bgm-button--size-small"
+                  title="回复"
+                >
+                  <div />
+                </button>
+                <div
+                  class="bgm-popover"
+                >
+                  <button
+                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                    title="其他"
+                  >
+                    <div />
+                  </button>
+                  <div
+                    class="bgm-popover__container"
+                  >
+                    <div
+                      class="bgm-popover__content"
+                    >
+                      <div
+                        class="bgm-comment-actions__popover"
+                      >
+                        <button
+                          class="bgm-button bgm-button--text"
+                        >
+                          绝交
+                        </button>
+                        <button
+                          class="bgm-button bgm-button--text"
+                        >
+                          报告疑虑
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </span>
           <div
             class="bgm-rich-content bgm-comment__content"
           >
             123456789~~~
           </div>
-        </div>
-        <div
-          class="bgm-comment__opinions"
-        >
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            回复
-          </button>
-          <button
-            class="bgm-button bgm-button--secondary bgm-button--size-small"
-          >
-            +1
-          </button>
         </div>
       </div>
     </div>
@@ -551,44 +667,73 @@ exports[`Normal Comment > should render with reply 1`] = `
                   用户
                 </a>
               </div>
-              <span
-                class="bgm-topic__commentInfo"
+              <div
+                class="comment-info"
               >
-                <a
-                  href="#post_2104702"
+                <span
+                  class="bgm-topic__commentInfo"
                 >
-                  #
-                  233-1
-                </a>
-                  
-                |
-                  
-                2022-9-22 06:03
-                  
-                |
-                  
-                !
-              </span>
+                  <a
+                    href="#post_2104702"
+                  >
+                    #
+                    233-1
+                  </a>
+                    
+                  |
+                    
+                  2022-9-22 06:03
+                </span>
+                  |  
+                <div
+                  class="bgm-comment-actions"
+                >
+                  <button
+                    class="bgm-button bgm-button--plain bgm-button--size-small"
+                    title="回复"
+                  >
+                    <div />
+                  </button>
+                  <div
+                    class="bgm-popover"
+                  >
+                    <button
+                      class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                      title="其他"
+                    >
+                      <div />
+                    </button>
+                    <div
+                      class="bgm-popover__container"
+                    >
+                      <div
+                        class="bgm-popover__content"
+                      >
+                        <div
+                          class="bgm-comment-actions__popover"
+                        >
+                          <button
+                            class="bgm-button bgm-button--text"
+                          >
+                            绝交
+                          </button>
+                          <button
+                            class="bgm-button bgm-button--text"
+                          >
+                            报告疑虑
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </span>
             <div
               class="bgm-rich-content bgm-comment__content"
             >
               123456789~~~
             </div>
-          </div>
-          <div
-            class="bgm-comment__opinions"
-          >
-            <button
-              class="bgm-button bgm-button--secondary bgm-button--size-small"
-            >
-              回复
-            </button>
-            <button
-              class="bgm-button bgm-button--secondary bgm-button--size-small"
-            >
-              +1
-            </button>
           </div>
         </div>
       </div>

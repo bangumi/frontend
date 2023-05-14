@@ -6,7 +6,6 @@
   &__header {
     display: flex;
     align-items: flex-start;
-    max-width: 913px;
     padding-top: 20px;
     padding-bottom: 12px;
     border-bottom: 1px dashed @gray-10;
@@ -59,18 +58,22 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      .bgm-link,
+      svg {
+        padding-right: 12px;
+      }
     }
 
-    div > a,
-    svg {
-      padding-right: 12px;
+    .comment-info {
+      display: flex;
+      font-size: 14px;
+      line-height: 20px;
     }
   }
 
   &__opinions {
     margin-top: 12px;
-    display: flex;
-    gap: 10px;
   }
 
   &__content {
