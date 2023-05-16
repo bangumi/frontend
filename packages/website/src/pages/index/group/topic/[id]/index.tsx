@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
+import { Avatar, Layout, Reactions, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useGroup } from '@bangumi/website/hooks/use-group';
@@ -15,6 +15,7 @@ import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
 const { Comment, CommentActions } = Topic;
+const { List: ReactionsList } = Reactions;
 
 const TopicPage: FC = () => {
   const { id } = useParams();
@@ -67,8 +68,9 @@ const TopicPage: FC = () => {
         leftChildren={
           <>
             {/* Topic content */}
-            <div id={`post_${topicDetail.id}`}>
+            <div id={`post_${topicDetail.id}`} className={styles.content}>
               <RichContent bbcode={topicDetail.text} />
+              <ReactionsList reactions={topicDetail.reactions} />
               {user && (
                 <div className={styles.topicActions}>
                   <CommentActions

@@ -55,6 +55,11 @@ export interface SubReply {
   isFriend: boolean;
   state: number;
   text: string;
+  reactions: Array<{
+    selected: boolean;
+    total: number;
+    value: number;
+  }>;
 }
 export interface Reply {
   createdAt: number;
