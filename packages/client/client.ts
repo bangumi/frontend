@@ -48,11 +48,17 @@ export interface Group {
   title: string;
   totalMembers: number;
 }
+export interface Reaction {
+  selected: boolean;
+  total: number;
+  value: number;
+}
 export interface SubReply {
   createdAt: number;
   creator: User;
   id: number;
   isFriend: boolean;
+  reactions: Reaction[];
   state: number;
   text: string;
 }
@@ -61,11 +67,7 @@ export interface Reply {
   creator: User;
   id: number;
   isFriend: boolean;
-  reactions: Array<{
-    selected: boolean;
-    total: number;
-    value: number;
-  }>;
+  reactions: Reaction[];
   replies: SubReply[];
   state: number;
   text: string;
@@ -75,11 +77,7 @@ export interface TopicDetail {
   creator: User;
   group: Group;
   id: number;
-  reactions: Array<{
-    selected: boolean;
-    total: number;
-    value: number;
-  }>;
+  reactions: Reaction[];
   replies: Reply[];
   state: number;
   text: string;
