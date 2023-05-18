@@ -18,7 +18,6 @@ async function fetchSchema() {
 async function generateType(schema) {
   const data = await openapiTS(schema, { additionalProperties: false });
 
-  await fs.mkdir(path.resolve(__dirname, '../client'), { recursive: true });
   await fs.mkdir(path.resolve(__dirname, '../types'), { recursive: true });
 
   await fs.writeFile(path.resolve(__dirname, '../types/index.ts'), data);

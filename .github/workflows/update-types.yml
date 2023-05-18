@@ -22,9 +22,6 @@ jobs:
       - name: Build Type Definition
         run: pnpm client build
 
-      - name: Format
-        run: pnpm lint --fix && pnpm prettier
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
