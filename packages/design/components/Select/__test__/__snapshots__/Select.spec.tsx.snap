@@ -15,19 +15,6 @@ exports[`Select Component > render properly 1`] = `
         class="bgm-select-arrow"
       />
     </div>
-    <select>
-      <option
-        selected=""
-        value="name"
-      >
-        name
-      </option>
-      <option
-        value="age"
-      >
-        age
-      </option>
-    </select>
   </div>
 </div>
 `;

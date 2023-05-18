@@ -1,17 +1,17 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 
 import Select from '.';
 
-const componentMeta: ComponentMeta<typeof Select> = {
+const componentMeta: Meta<typeof Select> = {
   title: 'Modern/Select',
   component: Select,
 };
 
 export default componentMeta;
 
-const Template: ComponentStory<typeof Select> = () => {
-  return (
+export const Template: StoryObj<typeof Select> = {
+  render: () => (
     <Select
       style={{
         width: 400,
@@ -23,7 +23,5 @@ const Template: ComponentStory<typeof Select> = () => {
       ]}
       defaultValue='age'
     />
-  );
+  ),
 };
-
-export const Default = Template.bind({});
