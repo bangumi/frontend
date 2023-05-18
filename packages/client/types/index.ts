@@ -232,16 +232,17 @@ export interface components {
     Permission: {
       subjectWikiEdit: boolean;
     };
+    Reaction: {
+      selected: boolean;
+      total: number;
+      value: number;
+    };
     Reply: {
       createdAt: number;
       creator: components['schemas']['User'];
       id: number;
       isFriend: boolean;
-      reactions: {
-        selected: boolean;
-        total: number;
-        value: number;
-      }[];
+      reactions: components['schemas']['Reaction'][];
       replies: components['schemas']['SubReply'][];
       state: number;
       text: string;
@@ -251,6 +252,7 @@ export interface components {
       creator: components['schemas']['User'];
       id: number;
       isFriend: boolean;
+      reactions: components['schemas']['Reaction'][];
       state: number;
       text: string;
     };
@@ -311,11 +313,7 @@ export interface components {
       creator: components['schemas']['User'];
       group: components['schemas']['Group'];
       id: number;
-      reactions: {
-        selected: boolean;
-        total: number;
-        value: number;
-      }[];
+      reactions: components['schemas']['Reaction'][];
       replies: components['schemas']['Reply'][];
       state: number;
       text: string;
