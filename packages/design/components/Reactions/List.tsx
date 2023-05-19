@@ -2,16 +2,13 @@ import './style/List.less';
 
 import React from 'react';
 
+import type { Reaction } from '@bangumi/client/client';
+
 import Button from '../Button';
 import { reactionMappings } from './constants';
 
 export interface ReactionsListProps {
-  // TODO: Replace with type
-  reactions: Array<{
-    selected: boolean;
-    total: number;
-    value: number;
-  }>;
+  reactions: Reaction[];
 }
 
 const ReactionsList = ({ reactions }: ReactionsListProps) => {

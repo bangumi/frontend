@@ -5,19 +5,18 @@
  */
 import * as Oazapfts from 'oazapfts/lib/runtime';
 import * as QS from 'oazapfts/lib/runtime/query';
-
 export const defaults: Oazapfts.RequestOpts = {
   baseUrl: '/',
 };
 const oazapfts = Oazapfts.runtime(defaults);
 export const servers = {};
-export interface ErrorResponse {
+export type ErrorResponse = {
   code: string;
   error: string;
   message: string;
   statusCode: number;
-}
-export interface User {
+};
+export type User = {
   avatar: {
     large: string;
     medium: string;
@@ -28,8 +27,8 @@ export interface User {
   sign: string;
   user_group: number;
   username: string;
-}
-export interface GroupReply {
+};
+export type GroupReply = {
   createdAt: number;
   creator: User;
   id: number;
@@ -37,8 +36,8 @@ export interface GroupReply {
   text: string;
   topicID: number;
   topicTitle: string;
-}
-export interface Group {
+};
+export type Group = {
   createdAt: number;
   description: string;
   icon: string;
@@ -47,61 +46,54 @@ export interface Group {
   nsfw: boolean;
   title: string;
   totalMembers: number;
-}
-export interface SubReply {
+};
+export type Reaction = {
+  selected: boolean;
+  total: number;
+  value: number;
+};
+export type SubReply = {
   createdAt: number;
   creator: User;
   id: number;
   isFriend: boolean;
+  reactions: Reaction[];
   state: number;
   text: string;
-  reactions: Array<{
-    selected: boolean;
-    total: number;
-    value: number;
-  }>;
-}
-export interface Reply {
+};
+export type Reply = {
   createdAt: number;
   creator: User;
   id: number;
   isFriend: boolean;
-  reactions: Array<{
-    selected: boolean;
-    total: number;
-    value: number;
-  }>;
+  reactions: Reaction[];
   replies: SubReply[];
   state: number;
   text: string;
-}
-export interface TopicDetail {
+};
+export type TopicDetail = {
   createdAt: number;
   creator: User;
   group: Group;
   id: number;
-  reactions: Array<{
-    selected: boolean;
-    total: number;
-    value: number;
-  }>;
+  reactions: Reaction[];
   replies: Reply[];
   state: number;
   text: string;
   title: string;
-}
-export interface TopicCreation {
+};
+export type TopicCreation = {
   text: string;
   title: string;
-}
-export interface BasicReply {
+};
+export type BasicReply = {
   createdAt: number;
   creator: User;
   id: number;
   state: number;
   text: string;
-}
-export interface GroupMember {
+};
+export type GroupMember = {
   avatar: {
     large: string;
     medium: string;
@@ -111,8 +103,8 @@ export interface GroupMember {
   joinedAt: number;
   nickname: string;
   username: string;
-}
-export interface Topic {
+};
+export type Topic = {
   createdAt: number;
   creator: {
     avatar: {
@@ -131,19 +123,19 @@ export interface Topic {
   repliesCount: number;
   title: string;
   updatedAt: number;
-}
-export interface GroupProfile {
+};
+export type GroupProfile = {
   group: Group;
   inGroup: boolean;
   recentAddedMembers: GroupMember[];
   topics: Topic[];
   totalTopics: number;
-}
-export interface LoginRequestBody {
+};
+export type LoginRequestBody = {
   'cf-turnstile-response': string;
   email: string;
   password: string;
-}
+};
 export type CurrentUser = {
   avatar: {
     large: string;
@@ -160,7 +152,7 @@ export type CurrentUser = {
     subjectWikiEdit: boolean;
   };
 };
-export interface Notice {
+export type Notice = {
   createdAt: number;
   id: number;
   postID: number;
@@ -180,14 +172,14 @@ export interface Notice {
   topicID: number;
   type: number;
   unread: boolean;
-}
-export interface WikiPlatform {
+};
+export type WikiPlatform = {
   id: number;
   text: string;
   wiki_tpl?: string;
-}
+};
 export type SubjectType = 1 | 2 | 3 | 4 | 6;
-export interface SubjectWikiInfo {
+export type SubjectWikiInfo = {
   availablePlatform: WikiPlatform[];
   id: number;
   infobox: string;
@@ -196,27 +188,27 @@ export interface SubjectWikiInfo {
   platform: number;
   summary: string;
   typeID: SubjectType;
-}
-export interface SubjectEdit {
+};
+export type SubjectEdit = {
   date?: string;
   infobox: string;
   name: string;
   nsfw: boolean;
   platform: number;
   summary: string;
-}
-export interface HistorySummary {
+};
+export type HistorySummary = {
   commitMessage: string;
   createdAt: number;
   creator: {
     username: string;
   };
   type: number;
-}
+};
 /**
  * 标记通知为已读
  */
-export async function clearNotice(
+export function clearNotice(
   body?: {
     id?: number[];
   },
@@ -243,7 +235,7 @@ export async function clearNotice(
     }),
   );
 }
-export async function deleteGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
+export function deleteGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -266,7 +258,7 @@ export async function deleteGroupPost(postId: number, opts?: Oazapfts.RequestOpt
     method: 'DELETE',
   });
 }
-export async function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
+export function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -284,7 +276,7 @@ export async function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) 
     ...opts,
   });
 }
-export async function editGroupPost(
+export function editGroupPost(
   postId: number,
   body: {
     text: string;
@@ -316,7 +308,7 @@ export async function editGroupPost(
 /**
  * 获取帖子列表
  */
-export async function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpts) {
+export function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -334,7 +326,7 @@ export async function getGroupTopicDetail(id: number, opts?: Oazapfts.RequestOpt
     ...opts,
   });
 }
-export async function editGroupTopic(
+export function editGroupTopic(
   topicId: number,
   topicCreation?: TopicCreation,
   opts?: Oazapfts.RequestOpts,
@@ -365,7 +357,7 @@ export async function editGroupTopic(
     }),
   );
 }
-export async function createGroupReply(
+export function createGroupReply(
   topicId: number,
   body: {
     content: string;
@@ -398,7 +390,7 @@ export async function createGroupReply(
 /**
  * 获取帖子列表
  */
-export async function listGroupMembersByName(
+export function listGroupMembersByName(
   groupName: string,
   {
     $type,
@@ -443,7 +435,7 @@ export async function listGroupMembersByName(
 /**
  * 获取小组首页
  */
-export async function getGroupProfile(
+export function getGroupProfile(
   groupName: string,
   {
     limit,
@@ -482,7 +474,7 @@ export async function getGroupProfile(
 /**
  * 获取帖子列表
  */
-export async function getGroupTopicsByGroupName(
+export function getGroupTopicsByGroupName(
   groupName: string,
   {
     limit,
@@ -521,7 +513,7 @@ export async function getGroupTopicsByGroupName(
     },
   );
 }
-export async function createNewGroupTopic(
+export function createNewGroupTopic(
   groupName: string,
   topicCreation?: TopicCreation,
   opts?: Oazapfts.RequestOpts,
@@ -553,7 +545,7 @@ export async function createNewGroupTopic(
  *
  * dev.bgm38.com 域名使用测试用的 site-key `1x00000000000000000000AA`
  */
-export async function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts.RequestOpts) {
+export function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -587,7 +579,7 @@ export async function login(loginRequestBody?: LoginRequestBody, opts?: Oazapfts
 /**
  * 登出
  */
-export async function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
+export function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -610,7 +602,7 @@ export async function logout(body?: {}, opts?: Oazapfts.RequestOpts) {
     }),
   );
 }
-export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
+export function getCurrentUser(opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -631,7 +623,7 @@ export async function getCurrentUser(opts?: Oazapfts.RequestOpts) {
 /**
  * 获取未读通知
  */
-export async function listNotice(
+export function listNotice(
   {
     limit,
     unread,
@@ -672,7 +664,7 @@ export async function listNotice(
 /**
  * 获取帖子列表
  */
-export async function getSubjectTopicsBySubjectId(
+export function getSubjectTopicsBySubjectId(
   subjectId: number,
   {
     limit,
@@ -716,7 +708,7 @@ export async function getSubjectTopicsBySubjectId(
  *
  * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
  */
-export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts) {
+export function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -737,7 +729,7 @@ export async function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts
 /**
  * 暂时只能修改沙盒条目 184017,309445,354667,354677,363612
  */
-export async function patchSubjectInfo(
+export function patchSubjectInfo(
   subjectId: number,
   body: {
     commitMessage: string;
@@ -778,7 +770,7 @@ export async function patchSubjectInfo(
  *
  * 需要 `subjectWikiEdit` 权限
  */
-export async function putSubjectInfo(
+export function putSubjectInfo(
   subjectId: number,
   body: {
     commitMessage: string;
@@ -807,12 +799,12 @@ export async function putSubjectInfo(
     }),
   );
 }
-export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts) {
+export function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
         data: {
-          covers: Array<{
+          covers: {
             creator: {
               avatar: {
                 large: string;
@@ -829,7 +821,7 @@ export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.Reque
             raw: string;
             thumbnail: string;
             voted: boolean;
-          }>;
+          }[];
           current?: {
             id: number;
             raw: string;
@@ -848,7 +840,7 @@ export async function listSubjectCovers(subjectId: number, opts?: Oazapfts.Reque
 /**
  * 需要 `subjectWikiEdit` 权限
  */
-export async function uploadSubjectCover(
+export function uploadSubjectCover(
   subjectId: number,
   body: {
     content: string;
@@ -884,7 +876,7 @@ export async function uploadSubjectCover(
 /**
  * 撤消条目封面投票
  */
-export async function unvoteSubjectCover(
+export function unvoteSubjectCover(
   subjectId: number,
   imageId: number,
   opts?: Oazapfts.RequestOpts,
@@ -909,11 +901,7 @@ export async function unvoteSubjectCover(
 /**
  * 为条目封面投票
  */
-export async function voteSubjectCover(
-  subjectId: number,
-  imageId: number,
-  opts?: Oazapfts.RequestOpts,
-) {
+export function voteSubjectCover(subjectId: number, imageId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -936,7 +924,7 @@ export async function voteSubjectCover(
  *
  * 暂时只能修改沙盒条目 184017, 309445, 354667, 354677, 363612
  */
-export async function subjectEditHistorySummary(subjectId: number, opts?: Oazapfts.RequestOpts) {
+export function subjectEditHistorySummary(subjectId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
