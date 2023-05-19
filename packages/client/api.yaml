@@ -339,6 +339,19 @@ components:
       required:
         - subjectWikiEdit
       type: object
+    Reaction:
+      properties:
+        selected:
+          type: boolean
+        total:
+          type: integer
+        value:
+          type: integer
+      required:
+        - selected
+        - total
+        - value
+      type: object
     Reply:
       properties:
         createdAt:
@@ -351,18 +364,7 @@ components:
           type: boolean
         reactions:
           items:
-            properties:
-              selected:
-                type: boolean
-              total:
-                type: integer
-              value:
-                type: integer
-            required:
-              - selected
-              - total
-              - value
-            type: object
+            $ref: '#/components/schemas/Reaction'
           type: array
         replies:
           items:
@@ -392,6 +394,10 @@ components:
           type: integer
         isFriend:
           type: boolean
+        reactions:
+          items:
+            $ref: '#/components/schemas/Reaction'
+          type: array
         state:
           type: integer
         text:
@@ -403,6 +409,7 @@ components:
         - isFriend
         - text
         - state
+        - reactions
       type: object
     SubjectEdit:
       examples:
@@ -611,18 +618,7 @@ components:
           type: integer
         reactions:
           items:
-            properties:
-              selected:
-                type: boolean
-              total:
-                type: integer
-              value:
-                type: integer
-            required:
-              - selected
-              - total
-              - value
-            type: object
+            $ref: '#/components/schemas/Reaction'
           type: array
         replies:
           items:
