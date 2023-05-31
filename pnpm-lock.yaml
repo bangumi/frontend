@@ -301,8 +301,8 @@ importers:
   packages/utils:
     dependencies:
       '@bgm38/wiki':
-        specifier: ^0.2.2
-        version: 0.2.2
+        specifier: ^0.2.6
+        version: 0.2.6
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -2089,8 +2089,8 @@ packages:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
 
-  /@bgm38/wiki@0.2.2:
-    resolution: {integrity: sha512-G1ttxnYBbYOdc8Gwvptdu7FdlWiDmP9EQRabIrDAL1WzjNp3VNLiZeczgN1X3jarN5i8D4kuBfeJ23TKy+cJ2g==}
+  /@bgm38/wiki@0.2.6:
+    resolution: {integrity: sha512-zTcsxNOKjchwqiabiJejJAsR1xnXrEdCJdoeadtvyt14na9Tnq6TZHiQHQWbsWdrNc+kJ2f1LxqjrAGEmbzI1g==}
     engines: {node: '>=16'}
     dev: false
 
