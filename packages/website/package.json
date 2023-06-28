@@ -27,7 +27,7 @@
     "react-router-dom": "^6.11.0",
     "reset-css": "^5.0.1",
     "rooks": "^7.14.0",
-    "socket.io-client": "^4.6.1",
+    "socket.io-client": "^4.7.1",
     "swr": "^2.1.5"
   },
   "devDependencies": {
