@@ -593,7 +593,7 @@ export interface operations {
   /** @description 获取帖子列表 */
   listGroupMembersByName: {
     parameters: {
-      query: {
+      query?: {
         type?: 'mod' | 'normal' | 'all';
         limit?: number;
         offset?: number;
@@ -629,7 +629,7 @@ export interface operations {
   /** @description 获取小组首页 */
   getGroupProfile: {
     parameters: {
-      query: {
+      query?: {
         limit?: number;
         offset?: number;
       };
@@ -661,7 +661,7 @@ export interface operations {
   /** @description 获取帖子列表 */
   getGroupTopicsByGroupName: {
     parameters: {
-      query: {
+      query?: {
         limit?: number;
         offset?: number;
       };
@@ -842,7 +842,7 @@ export interface operations {
   /** 获取未读通知 */
   listNotice: {
     parameters: {
-      query: {
+      query?: {
         /** @description max 40 */
         limit?: number;
         unread?: boolean;
@@ -875,7 +875,7 @@ export interface operations {
   /** @description 获取帖子列表 */
   getSubjectTopicsBySubjectId: {
     parameters: {
-      query: {
+      query?: {
         limit?: number;
         offset?: number;
       };
