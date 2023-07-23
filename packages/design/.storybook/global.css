@@ -1,5 +1,17 @@
 body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'SF Pro SC', 'SF Pro Display',
-    'PingFang SC', 'Microsoft YaHei', 'Lucida Grande', 'Helvetica Neue', 'Segoe UI', Helvetica,
-    Arial, Verdana, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro SC',
+    'SF Pro Display',
+    'PingFang SC',
+    'Microsoft YaHei',
+    'Lucida Grande',
+    'Helvetica Neue',
+    'Segoe UI',
+    Helvetica,
+    Arial,
+    Verdana,
+    sans-serif;
 }
