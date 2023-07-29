@@ -12,7 +12,7 @@ const Logout = () => {
   const [isLogoutSuccess, setIsLogoutSuccess] = useState(false);
 
   useDidMount(() => {
-    ozaClient.logout().then(({ status, data }) => {
+    ozaClient.logout({}).then(({ status, data }) => {
       if (status !== 200) {
         toast(data.message);
         return;
