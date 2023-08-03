@@ -33,7 +33,7 @@
     "react-router-dom": "^6.11.0",
     "storybook": "^7.0.7",
     "typescript": "^5.0.4",
-    "vite": "^4.3.3",
+    "vite": "^4.3.9",
     "vite-plugin-svgr": "^2.4.0"
   },
   "scripts": {
