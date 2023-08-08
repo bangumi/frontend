@@ -1,6 +1,5 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import url from 'node:url';
 
 import yaml from 'js-yaml';
 
@@ -13,9 +12,7 @@ import {
   WikiTemplate,
 } from './index';
 
-const dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const testsDir = path.resolve(dirname, 'wiki-syntax-spec/tests/');
+const testsDir = path.resolve(__dirname, 'wiki-syntax-spec/tests/');
 
 const validTestDir = path.resolve(testsDir, 'valid');
 const invalidTestDir = path.resolve(testsDir, 'invalid');
