@@ -26,7 +26,7 @@ export default defineConfig({
       printBasicPrototype: true,
     },
     coverage: {
-      provider: 'c8',
+      provider: 'v8',
       reporter: ['lcov', 'text-summary'],
     },
   },
