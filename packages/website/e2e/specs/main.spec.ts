@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { login } from './common/login';
+import { login } from '../common/login';
 
 test.describe('main page', () => {
   test('has title', async ({ page }) => {
