@@ -105,6 +105,7 @@ async function main() {
     fs.renameSync('_functions', 'functions');
   }
 
+  //@ts-ignore
   const prNumber: number | undefined = context.payload?.workflow_run.pull_requests[0].number;
   if (!prNumber) {
     console.log(JSON.stringify(context));
