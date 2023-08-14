@@ -106,7 +106,7 @@ async function main() {
   }
 
   /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
-  const prNumber: number | undefined = context.payload?.workflow_run.pull_requests[0].number;
+  const prNumber: number | undefined = context.payload?.workflow_run?.pull_requests?.[0]?.number;
   if (!prNumber) {
     console.log(JSON.stringify(context));
     throw new Error('missing PR number in event payload');
