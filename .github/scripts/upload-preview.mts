@@ -105,7 +105,7 @@ async function main() {
 
   if (artifact === 'sites') {
     const uploadedFunctions = path.resolve(artifact, 'packages/website/public/functions');
-    fs.rmSync(uploadedFunctions);
+    fs.rmSync(uploadedFunctions, { force: true, recursive: true });
     fse.copySync('packages/website/public/functions', uploadedFunctions);
   }
 
@@ -124,6 +124,7 @@ async function main() {
       'deploy',
       `--project-name=${CLOUDFLARE_PROJECT_NAME}`,
       artifact,
+      '--commit-dirty=true',
       `--branch="${alias}"`,
     ],
     {
