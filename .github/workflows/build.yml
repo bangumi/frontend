@@ -20,8 +20,6 @@ jobs:
       - name: Build
         run: pnpm build --mode stage
 
-      - run: echo ${{ github.event.number }} > packages/website/dist/pr_number
-
       - name: upload website build artifact
         uses: actions/upload-artifact@v3
         with:
