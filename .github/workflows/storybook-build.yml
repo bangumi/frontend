@@ -20,8 +20,6 @@ jobs:
       - name: Build Storybook
         run: pnpm design:build-doc
 
-      - run: echo ${{ github.event.number }} > packages/design/storybook-static/pr_number
-
       - name: upload storybook build artifact
         uses: actions/upload-artifact@v3
         with:
