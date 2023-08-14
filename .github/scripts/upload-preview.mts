@@ -107,7 +107,7 @@ async function main() {
   const alias = `pr-${prNumber}-${artifact}`;
 
   await exec(
-    'wrangler ',
+    'wrangler',
     [
       'pages',
       'deploy',
