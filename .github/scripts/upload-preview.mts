@@ -31,6 +31,10 @@ const second = pad(now.getUTCSeconds());
 
 const time = `${year}-${month}-${day} ${hour}:${minute}:${second}Z`;
 
+const CLOUDFLARE_PROJECT_NAME = process.env.CLOUDFLARE_PROJECT_NAME ?? '';
+const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN ?? '';
+const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID ?? '';
+
 /**
  * old preview commit header, should be purged.
  */
@@ -46,10 +50,6 @@ const tableHeader: readonly string[] = [
 ];
 
 async function main() {
-  const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN ?? '';
-  const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID ?? '';
-  const CLOUDFLARE_PROJECT_NAME = process.env.CLOUDFLARE_PROJECT_NAME ?? '';
-
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
     throw new Error('process.env.GH_TOKEN is empty');
@@ -198,7 +198,7 @@ function tableLine(artifact: string, alias: string) {
     id,
     line: `| ${toTitle(
       artifact,
-    )} | [netlify preview](https://${alias}--eclectic-lebkuchen-3ffc90.netlify.app) | ${time} | ${id} ${commentTableItem}`,
+    )} | [netlify preview](https://${alias}.${CLOUDFLARE_PROJECT_NAME}.pages.dev) | ${time} | ${id} ${commentTableItem}`,
   };
 }
 
