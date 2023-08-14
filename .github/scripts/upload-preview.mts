@@ -5,7 +5,7 @@ import * as path from 'node:path';
 import * as process from 'node:process';
 
 import { exec } from '@actions/exec';
-import * as fse from 'fs-extra';
+import fse from 'fs-extra';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
