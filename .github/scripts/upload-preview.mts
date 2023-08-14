@@ -8,7 +8,6 @@ import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
-import * as console from 'console';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -32,7 +31,11 @@ const second = pad(now.getUTCSeconds());
 
 const time = `${year}-${month}-${day} ${hour}:${minute}:${second}Z`;
 
-const commentComment = '<!-- preview comment 2 -->';
+/**
+ * old preview commit header, should be purged.
+ */
+const legacyCommentComment = '<!-- preview comment 2 -->';
+const commentComment = '<!-- preview comment 3 -->';
 
 const tableHeader: readonly string[] = [
   commentComment,
@@ -114,7 +117,8 @@ async function main() {
     ],
     {
       env: {
-        CLOUDFLARE_ACCOUNT_ID: CLOUDFLARE_ACCOUNT_ID,
+        CLOUDFLARE_API_TOKEN,
+        CLOUDFLARE_ACCOUNT_ID,
         PATH: process.env.PATH ?? '',
       },
     },
@@ -130,6 +134,17 @@ async function main() {
   );
 
   for (const comment of comments) {
+    if (
+      comment.user?.login === 'github-actions[bot]' &&
+      comment.body?.includes(legacyCommentComment)
+    ) {
+      await octokit.request('DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}', {
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        comment_id: comment.id,
+      });
+    }
+
     if (comment.user?.login === 'github-actions[bot]' && comment.body?.includes(commentComment)) {
       return updateComment(
         octokit,
