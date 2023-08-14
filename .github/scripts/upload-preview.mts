@@ -104,7 +104,7 @@ async function main() {
   }
 
   if (artifact === 'sites') {
-    const uploadedFunctions = path.resolve(artifact, 'packages/website/public/functions');
+    const uploadedFunctions = path.resolve(artifact, 'functions');
     fs.rmSync(uploadedFunctions, { force: true, recursive: true });
     fse.copySync('packages/website/public/functions', uploadedFunctions);
   }
