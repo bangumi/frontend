@@ -9,7 +9,6 @@ import * as fse from 'fs-extra';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
-import * as console from 'console';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -52,7 +51,6 @@ const tableHeader: readonly string[] = [
 ];
 
 async function main() {
-  console.log(JSON.stringify(context));
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
     throw new Error('process.env.GH_TOKEN is empty');
@@ -111,7 +109,11 @@ async function main() {
     fse.copySync('packages/website/public/functions', uploadedFunctions);
   }
 
-  const prNumber = parseInt(fs.readFileSync(path.resolve(artifact, 'pr_number')).toString().trim());
+  const prNumber: number | undefined = context.payload.workflow_run.pull_requests[0]?.number;
+  if (!prNumber) {
+    console.log(JSON.stringify(context));
+    throw new Error('missing PR number in event payload');
+  }
 
   const alias = `pr-${prNumber}-${artifact}`;
 
