@@ -3,6 +3,7 @@
 import * as fs from 'node:fs';
 import * as process from 'node:process';
 
+import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
@@ -105,12 +106,7 @@ async function main() {
     fs.renameSync('_functions', 'functions');
   }
 
-  /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
-  const prNumber: number | undefined = context.payload?.workflow_run?.pull_requests?.[0]?.number;
-  if (!prNumber) {
-    console.log(JSON.stringify(context));
-    throw new Error('missing PR number in event payload');
-  }
+  const prNumber = await findPullRequestNumber(octokit);
 
   const alias = `pr-${prNumber}-${artifact}`;
 
@@ -168,6 +164,40 @@ async function main() {
   }
 
   await createComment(octokit, prNumber, artifact, alias);
+}
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
+async function findPullRequestNumber(octokit: Client): Promise<number> {
+  const payloadPRNumber: number | undefined =
+    context.payload?.workflow_run?.pull_requests?.[0]?.number;
+  if (payloadPRNumber) {
+    core.info('find pr number from context');
+    return payloadPRNumber;
+  }
+
+  const run: {
+    head_repository: { owner: { login: string } };
+    head_branch: string;
+  } = context.payload?.workflow_run;
+
+  const head = `${run.head_repository.owner.login}:${run.head_branch}`;
+
+  core.info(`try head branch ${head}`);
+
+  const { data } = await octokit.request('GET /repos/{owner}/{repo}/pulls', {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    base: 'master',
+    state: 'open',
+    head,
+  });
+
+  const pr = data[0];
+  if (!pr) {
+    core.error('failed to find PR from context');
+    throw new Error('failed to find PR from context');
+  }
+  return pr.number;
 }
 
 const commentTableItem = '<!-- table item -->';
