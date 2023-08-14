@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/prefer-ts-expect-error */
 
 import * as fs from 'node:fs';
 import * as process from 'node:process';
@@ -105,7 +105,7 @@ async function main() {
     fs.renameSync('_functions', 'functions');
   }
 
-  //@ts-ignore
+  /* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
   const prNumber: number | undefined = context.payload?.workflow_run.pull_requests[0].number;
   if (!prNumber) {
     console.log(JSON.stringify(context));
