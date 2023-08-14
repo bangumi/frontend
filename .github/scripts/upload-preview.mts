@@ -5,9 +5,11 @@ import * as path from 'node:path';
 import * as process from 'node:process';
 
 import { exec } from '@actions/exec';
+import * as fse from 'fs-extra';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
+import * as console from 'console';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -50,6 +52,7 @@ const tableHeader: readonly string[] = [
 ];
 
 async function main() {
+  console.log(JSON.stringify(context));
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
     throw new Error('process.env.GH_TOKEN is empty');
@@ -100,6 +103,12 @@ async function main() {
   if (run.event === 'push') {
     console.log('skip push base event');
     return;
+  }
+
+  if (artifact === 'sites') {
+    const uploadedFunctions = path.resolve(artifact, 'packages/website/public/functions');
+    fs.rmSync(uploadedFunctions);
+    fse.copySync('packages/website/public/functions', uploadedFunctions);
   }
 
   const prNumber = parseInt(fs.readFileSync(path.resolve(artifact, 'pr_number')).toString().trim());
