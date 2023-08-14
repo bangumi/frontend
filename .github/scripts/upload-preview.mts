@@ -104,9 +104,7 @@ async function main() {
   }
 
   if (artifact === 'sites') {
-    const uploadedFunctions = path.resolve(artifact, 'functions');
-    fs.rmSync(uploadedFunctions, { force: true, recursive: true });
-    fse.copySync('packages/website/public/functions', uploadedFunctions);
+    fse.copySync('_functions', 'functions');
   }
 
   const prNumber: number | undefined = context.payload?.workflow_run.pull_requests[0].number;
