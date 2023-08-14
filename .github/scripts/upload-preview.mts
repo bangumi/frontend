@@ -8,6 +8,7 @@ import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
+import * as console from 'console';
 
 type Client = InstanceType<typeof GitHub>;
 
@@ -42,8 +43,9 @@ const tableHeader: readonly string[] = [
 ];
 
 async function main() {
-  const NETLIFY_AUTH_TOKEN = process.env.NETLIFY_AUTH_TOKEN ?? '';
-  const NETLIFY_SITE_ID = process.env.NETLIFY_SITE_ID ?? '';
+  const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN ?? '';
+  const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID ?? '';
+  const CLOUDFLARE_PROJECT_NAME = process.env.CLOUDFLARE_PROJECT_NAME ?? '';
 
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
@@ -93,22 +95,7 @@ async function main() {
   );
 
   if (run.event === 'push') {
-    await exec(
-      'netlify',
-      [
-        'deploy',
-        `--dir=${artifact}`,
-        `--alias="${artifact}"`,
-        ...(artifact === 'sites' ? ['--prod'] : []),
-      ],
-      {
-        env: {
-          NETLIFY_AUTH_TOKEN,
-          NETLIFY_SITE_ID,
-          PATH: process.env.PATH ?? '',
-        },
-      },
-    );
+    console.log('skip push base event');
     return;
   }
 
@@ -116,13 +103,22 @@ async function main() {
 
   const alias = `pr-${prNumber}-${artifact}`;
 
-  await exec('netlify', ['deploy', `--dir=${artifact}`, `--alias="${alias}"`], {
-    env: {
-      NETLIFY_AUTH_TOKEN,
-      NETLIFY_SITE_ID,
-      PATH: process.env.PATH ?? '',
+  await exec(
+    'wrangler ',
+    [
+      'pages',
+      'deploy',
+      `--project-name=${CLOUDFLARE_PROJECT_NAME}`,
+      artifact,
+      `--branch="${alias}"`,
+    ],
+    {
+      env: {
+        CLOUDFLARE_ACCOUNT_ID: CLOUDFLARE_ACCOUNT_ID,
+        PATH: process.env.PATH ?? '',
+      },
     },
-  });
+  );
 
   const comments = await octokit.paginate(
     'GET /repos/{owner}/{repo}/issues/{issue_number}/comments',
