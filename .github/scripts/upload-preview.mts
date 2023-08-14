@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 
 import * as fs from 'node:fs';
-import * as path from 'node:path';
 import * as process from 'node:process';
 
 import { exec } from '@actions/exec';
-import fse from 'fs-extra';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
 import type { GitHub } from '@actions/github/lib/utils';
@@ -104,7 +102,7 @@ async function main() {
   }
 
   if (artifact === 'sites') {
-    fse.copySync('_functions', 'functions');
+    fs.renameSync('_functions', 'functions');
   }
 
   const prNumber: number | undefined = context.payload?.workflow_run.pull_requests[0].number;
