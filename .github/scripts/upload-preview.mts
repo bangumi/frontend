@@ -188,17 +188,17 @@ async function findPullRequestNumber(octokit: Client): Promise<number> {
    * github api 这里有一个 BUG ，
    * 如果head 是 `Ayase-252:refactor-e2e` 这种情况就无法正常用 query 进行筛选。
    * 所以必须要获取所有的 PR，然后手动筛选
-   *
    */
-  const prs = await octokit.paginate('GET /repos/{owner}/{repo}/pulls', {
+  for await (const { data: prs } of octokit.paginate.iterator('GET /repos/{owner}/{repo}/pulls', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     base: 'master',
     state: 'open',
-  });
-  for (const pr of prs) {
-    if (pr.head.label === head) {
-      return pr.number;
+  })) {
+    for (const pr of prs) {
+      if (pr.head.label === head) {
+        return pr.number;
+      }
     }
   }
 
