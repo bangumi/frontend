@@ -184,20 +184,26 @@ async function findPullRequestNumber(octokit: Client): Promise<number> {
 
   core.info(`try head branch ${head}`);
 
-  const { data } = await octokit.request('GET /repos/{owner}/{repo}/pulls', {
+  /**
+   * github api 这里有一个 BUG ，
+   * 如果head 是 `Ayase-252:refactor-e2e` 这种情况就无法正常用 query 进行筛选。
+   * 所以必须要获取所有的 PR，然后手动筛选
+   *
+   */
+  const prs = await octokit.paginate('GET /repos/{owner}/{repo}/pulls', {
     owner: context.repo.owner,
     repo: context.repo.repo,
     base: 'master',
     state: 'open',
-    head,
   });
-
-  const pr = data[0];
-  if (!pr) {
-    core.error('failed to find PR from context');
-    throw new Error('failed to find PR from context');
+  for (const pr of prs) {
+    if (pr.head.label === head) {
+      return pr.number;
+    }
   }
-  return pr.number;
+
+  core.error('failed to find PR from context');
+  throw new Error('failed to find PR from context');
 }
 
 const commentTableItem = '<!-- table item -->';
