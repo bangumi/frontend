@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 5173;
 const isCI = !!process.env.CI;
@@ -7,15 +7,6 @@ const isCI = !!process.env.CI;
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  /* Maximum time one test can run for. */
-  timeout: isCI ? 240 * 1000 : 180 * 1000,
-  expect: {
-    /**
-     * Maximum time expect() should wait for the condition to be met.
-     * For example in `await expect(locator).toHaveText();`
-     */
-    timeout: 15 * 1000,
-  },
   // maxFailures: 1,
   fullyParallel: false,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -52,6 +43,22 @@ export default defineConfig({
     reuseExistingServer: true,
     command: 'npm run dev',
     port: PORT,
-    timeout: 120 * 1000,
   },
+
+  expect: {
+    timeout: 10 * 1000,
+  },
+
+  projects: [
+    {
+      name: 'setup',
+      testDir: './e2e/setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
+    },
+  ],
 });

@@ -1,19 +1,23 @@
 import { expect, test } from '@playwright/test';
 
-import { login } from './common/login';
+import { testAsUser } from '../common/login';
 
-test.describe('group', () => {
+test.describe('未登录用户', () => {
   test('未登录用户', async ({ page }) => {
+    test.slow();
     await page.goto('/group/sandbox/members');
     await expect(page.getByRole('heading', { name: '小组管理员' })).toBeVisible();
     await expect(page.getByRole('heading', { name: '小组成员' })).toBeVisible();
     await expect(page.getByRole('heading', { name: '最近加入' })).toBeVisible();
   });
+});
 
+test.describe('已登录用户', () => {
+  testAsUser('treeholechan');
   test('登录用户', async ({ page }) => {
+    test.slow();
     await page.goto('/group/sandbox');
-    await login(page);
-    await page.waitForURL('**/group/sandbox');
+    await page.pause();
 
     await expect(
       page.getByRole('link', {

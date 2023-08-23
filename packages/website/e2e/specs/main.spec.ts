@@ -1,17 +1,18 @@
 import { expect, test } from '@playwright/test';
 
-import { login } from './common/login';
+import { testAsUser } from '../common/login';
 
 test.describe('main page', () => {
   test('has title', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveTitle('Bangumi 番组计划');
   });
+});
 
-  test('login', async ({ page }) => {
+test.describe('已登录用户', () => {
+  testAsUser('treeholechan');
+  test('应该能够看到收藏菜单', async ({ page }) => {
     await page.goto('/');
-    await login(page);
-    await page.waitForURL('http://127.0.0.1:5173/');
     await expect(
       page
         .locator('div')
