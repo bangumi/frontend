@@ -14,7 +14,7 @@
     "@marsidev/react-turnstile": "^0.2.4",
     "@remix-run/router": "^1.6.0",
     "classnames": "^2.3.2",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.9",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.37.1",
     "nanoid": "^4.0.2",
