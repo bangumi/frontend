@@ -171,8 +171,8 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0
       msw:
-        specifier: ~1.2.1
-        version: 1.2.1(typescript@5.0.4)
+        specifier: ~1.2.5
+        version: 1.2.5(typescript@5.0.4)
       node-fetch:
         specifier: ^3.3.1
         version: 3.3.1
@@ -253,8 +253,8 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       msw:
-        specifier: ~1.2.1
-        version: 1.2.1(typescript@5.0.4)
+        specifier: ~1.2.5
+        version: 1.2.5(typescript@5.0.4)
       react-hook-form:
         specifier: ^7.43.9
         version: 7.43.9(react@18.2.0)
@@ -429,8 +429,8 @@ importers:
         specifier: ^4.1.3
         version: 4.1.3
       msw:
-        specifier: ~1.2.1
-        version: 1.2.1(typescript@5.0.4)
+        specifier: ~1.2.5
+        version: 1.2.5(typescript@5.0.4)
       openapi-types:
         specifier: ^12.1.3
         version: 12.1.3
@@ -6529,14 +6529,6 @@ packages:
       supports-color: 7.2.0
     dev: true
 
-  /chalk@4.1.1:
-    resolution: {integrity: sha512-diHzdDKxcU+bAsUboHLPEDQiw0qEe0qd7SYUn3HgcFlWgbDcfLGswOHYeGrHKzG9z6UYf01d9VFMfZxPM1xZSg==}
-    engines: {node: '>=10'}
-    dependencies:
-      ansi-styles: 4.3.0
-      supports-color: 7.2.0
-    dev: true
-
   /chalk@4.1.2:
     resolution: {integrity: sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==}
     engines: {node: '>=10'}
@@ -9987,13 +9979,13 @@ packages:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
     dev: true
 
-  /msw@1.2.1(typescript@5.0.4):
-    resolution: {integrity: sha512-bF7qWJQSmKn6bwGYVPXOxhexTCGD5oJSZg8yt8IBClxvo3Dx/1W0zqE1nX9BSWmzRsCKWfeGWcB/vpqV6aclpw==}
+  /msw@1.2.5(typescript@5.0.4):
+    resolution: {integrity: sha512-Y3MwnAHX3d162eSWrEUeRdCv3+8hmgz/+Wh7OUkE6VB55+YTswxrep3yU3evZnKWHJGAM63G1s+olAgzIFdYtQ==}
     engines: {node: '>=14'}
     hasBin: true
     requiresBuild: true
     peerDependencies:
-      typescript: '>= 4.4.x <= 5.0.x'
+      typescript: '>= 4.4.x <= 5.1.x'
     peerDependenciesMeta:
       typescript:
         optional: true
@@ -10003,7 +9995,7 @@ packages:
       '@open-draft/until': 1.0.3
       '@types/cookie': 0.4.1
       '@types/js-levenshtein': 1.1.1
-      chalk: 4.1.1
+      chalk: 4.1.2
       chokidar: 3.5.3
       cookie: 0.4.2
       graphql: 16.6.0
