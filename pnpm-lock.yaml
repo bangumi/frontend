@@ -414,7 +414,7 @@ importers:
         specifier: ^18.2.1
         version: 18.2.1
       '@vitejs/plugin-react':
-        specifier: ^4.0.0
+        specifier: ^4.0.4
         version: 4.0.4(vite@4.4.9)
       autoprefixer:
         specifier: ^10.4.14
