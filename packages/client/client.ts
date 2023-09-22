@@ -173,6 +173,16 @@ export type Notice = {
   type: number;
   unread: boolean;
 };
+export type EpisodeWikiInfo = {
+  date?: string;
+  duration: string;
+  ep: number;
+  id: number;
+  name: string;
+  nameCN: string;
+  summary: string;
+  type: number | 1 | 2 | 3 | 4 | 5 | 6;
+};
 export type WikiPlatform = {
   id: number;
   text: string;
@@ -701,6 +711,66 @@ export function getSubjectTopicsBySubjectId(
     {
       ...opts,
     },
+  );
+}
+export function getEpisodeWikiInfo(episodeId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: EpisodeWikiInfo;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/wiki/ep/${encodeURIComponent(episodeId)}`, {
+    ...opts,
+  });
+}
+export function patchEpisodeWikiInfo(
+  episodeId: number,
+  body: {
+    commitMessage: string;
+    episode: {
+      date?: string;
+      duration?: string;
+      ep?: number;
+      name?: string;
+      nameCN?: string;
+      summary?: string;
+      type?: number | 1 | 2 | 3 | 4 | 5 | 6;
+    };
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 400;
+        data: ErrorResponse;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/wiki/ep/${encodeURIComponent(episodeId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body,
+    }),
   );
 }
 /**

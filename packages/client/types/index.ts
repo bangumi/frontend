@@ -66,6 +66,10 @@ export interface paths {
     /** @description 获取帖子列表 */
     get: operations['getSubjectTopicsBySubjectId'];
   };
+  '/p1/wiki/ep/{episodeID}': {
+    get: operations['getEpisodeWikiInfo'];
+    patch: operations['patchEpisodeWikiInfo'];
+  };
   '/p1/wiki/subjects/{subjectID}': {
     /**
      * @description 获取当前的 wiki 信息
@@ -142,6 +146,17 @@ export interface components {
       permission: {
         subjectWikiEdit: boolean;
       };
+    };
+    EpisodeWikiInfo: {
+      /** @description YYYY-MM-DD */
+      date?: string;
+      duration: string;
+      ep: number;
+      id: number;
+      name: string;
+      nameCN: string;
+      summary: string;
+      type: 0 | 1 | 2 | 3 | 4 | 5 | 6;
     };
     /** @description default error response type */
     ErrorResponse: {
@@ -894,6 +909,99 @@ export interface operations {
         };
       };
       /** @description 条目不存在 */
+      404: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getEpisodeWikiInfo: {
+    parameters: {
+      path: {
+        /** @example 1148124 */
+        episodeID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['EpisodeWikiInfo'];
+        };
+      };
+      /** @description Default Response */
+      404: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  patchEpisodeWikiInfo: {
+    parameters: {
+      path: {
+        /** @example 1148124 */
+        episodeID: number;
+      };
+    };
+    requestBody: {
+      content: {
+        /**
+         * @example {
+         *   "commitMessage": "why this episode is edited",
+         *   "episode": {
+         *     "date": "2022-01-20",
+         *     "duration": "24:53",
+         *     "ep": 4,
+         *     "name": "name",
+         *     "nameCN": "中文名",
+         *     "summary": "a short description",
+         *     "type": 0
+         *   }
+         * }
+         */
+        'application/json': {
+          commitMessage: string;
+          episode: {
+            /** @description YYYY-MM-DD */
+            date?: string;
+            duration?: string;
+            ep?: number;
+            name?: string;
+            nameCN?: string;
+            summary?: string;
+            type?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
+          };
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description invalid input */
+      400: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description Default Response */
       404: {
         content: {
           'application/json': components['schemas']['ErrorResponse'];
