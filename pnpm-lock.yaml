@@ -5,8 +5,8 @@ importers:
   .:
     devDependencies:
       '@actions/core':
-        specifier: ^1.10.0
-        version: 1.10.0
+        specifier: ^1.10.1
+        version: 1.10.1
       '@actions/exec':
         specifier: ^1.1.1
         version: 1.1.1
@@ -455,8 +455,8 @@ importers:
 
 packages:
 
-  /@actions/core@1.10.0:
-    resolution: {integrity: sha512-2aZDDa3zrrZbP5ZYg159sNoLRb61nQ7awl5pSvIq5Qpj81vwDzdMRKzkWJGJuwVvWpvZKx7vspJALyvaaIQyug==}
+  /@actions/core@1.10.1:
+    resolution: {integrity: sha512-3lBR9EDAY+iYIpTnTIXmWcNbX3T2kCkAEQGIQx4NVQ0575nk2k3GRZDTPQG+vVtS2izSLmINlxXf0uLtnrTP+g==}
     dependencies:
       '@actions/http-client': 2.1.0
       uuid: 8.3.2
@@ -12821,7 +12821,7 @@ packages:
     peerDependencies:
       vitest: '>=0.28.5'
     dependencies:
-      '@actions/core': 1.10.0
+      '@actions/core': 1.10.1
       vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)
     dev: true
 
