@@ -17,7 +17,6 @@ test.describe('已登录用户', () => {
   test('登录用户', async ({ page }) => {
     test.slow();
     await page.goto('/group/sandbox');
-    await page.pause();
 
     await expect(
       page.getByRole('link', {
