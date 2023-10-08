@@ -14,7 +14,7 @@ test.describe('未登录用户', () => {
 
 test.describe('已登录用户', () => {
   testAsUser('treeholechan');
-  test.only('登录用户', async ({ page }) => {
+  test('登录用户', async ({ page }) => {
     console.log(await page.context().cookies());
     test.slow();
     await page.goto('/group/sandbox');
