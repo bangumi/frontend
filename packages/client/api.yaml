@@ -91,6 +91,60 @@ components:
             - permission
           type: object
       type: object
+    EpisodeWikiInfo:
+      properties:
+        date:
+          description: YYYY-MM-DD
+          examples:
+            - '2022-02-02'
+          pattern: ^\d{4}-\d{2}-\d{2}$
+          type: string
+        duration:
+          examples:
+            - '24:53'
+            - 24m52s
+          type: string
+        ep:
+          type: number
+        id:
+          type: integer
+        name:
+          type: string
+        nameCN:
+          type: string
+        summary:
+          type: string
+        type:
+          anyOf:
+            - const: 0
+              type: number
+            - enum:
+                - 1
+              type: number
+            - enum:
+                - 2
+              type: number
+            - enum:
+                - 3
+              type: number
+            - enum:
+                - 4
+              type: number
+            - enum:
+                - 5
+              type: number
+            - enum:
+                - 6
+              type: number
+      required:
+        - id
+        - name
+        - nameCN
+        - type
+        - ep
+        - duration
+        - summary
+      type: object
     ErrorResponse:
       description: default error response type
       properties:
@@ -1613,6 +1667,173 @@ paths:
           description: 意料之外的服务器错误
       tags:
         - topic
+  /p1/wiki/ep/{episodeID}:
+    get:
+      operationId: getEpisodeWikiInfo
+      parameters:
+        - example: 1148124
+          in: path
+          name: episodeID
+          required: true
+          schema:
+            minimum: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              example:
+                date: '2012-12-23'
+                duration: '00:23:37'
+                ep: 60
+                id: 1148124
+                name: キマリ×ト×ハジマリ
+                nameCN: 结末×与×开始
+                summary: >-
+                  ゴンとキルアはG.I.プレイヤー選考会にいよいよ挑戦する。審査を担当するツェズゲラから提示された合格の条件はただ一つ「練を見せる」こと。合格できる者は200人中32名という狭き門だが、ゴンとキルアはくぐり抜けることができるのか！？
+                type: 0
+              schema:
+                $ref: '#/components/schemas/EpisodeWikiInfo'
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: episode not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - wiki
+    patch:
+      operationId: patchEpisodeWikiInfo
+      parameters:
+        - example: 1148124
+          in: path
+          name: episodeID
+          required: true
+          schema:
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            example:
+              commitMessage: why this episode is edited
+              episode:
+                date: '2022-01-20'
+                duration: '24:53'
+                ep: 4
+                name: name
+                nameCN: 中文名
+                summary: a short description
+                type: 0
+            schema:
+              properties:
+                commitMessage:
+                  type: string
+                episode:
+                  properties:
+                    date:
+                      description: YYYY-MM-DD
+                      examples:
+                        - '2022-02-02'
+                      pattern: ^\d{4}-\d{2}-\d{2}$
+                      type: string
+                    duration:
+                      examples:
+                        - '24:53'
+                        - 24m52s
+                      type: string
+                    ep:
+                      type: number
+                    name:
+                      type: string
+                    nameCN:
+                      type: string
+                    summary:
+                      type: string
+                    type:
+                      anyOf:
+                        - const: 0
+                          type: number
+                        - enum:
+                            - 1
+                          type: number
+                        - enum:
+                            - 2
+                          type: number
+                        - enum:
+                            - 3
+                          type: number
+                        - enum:
+                            - 4
+                          type: number
+                        - enum:
+                            - 5
+                          type: number
+                        - enum:
+                            - 6
+                          type: number
+                  type: object
+              required:
+                - commitMessage
+                - episode
+              type: object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: invalid input
+          description: invalid input
+        '404':
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: episode 1 not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+      tags:
+        - wiki
   /p1/wiki/subjects/{subjectID}:
     get:
       description: |-

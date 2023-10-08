@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/prefer-ts-expect-error */
 
 import * as fs from 'node:fs';
-import * as path from 'node:path';
 import * as process from 'node:process';
 
+import * as core from '@actions/core';
 import { exec } from '@actions/exec';
 import { context } from '@actions/github';
 import * as github from '@actions/github';
@@ -31,7 +31,15 @@ const second = pad(now.getUTCSeconds());
 
 const time = `${year}-${month}-${day} ${hour}:${minute}:${second}Z`;
 
-const commentComment = '<!-- preview comment 2 -->';
+const CLOUDFLARE_PROJECT_NAME = process.env.CLOUDFLARE_PROJECT_NAME ?? '';
+const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN ?? '';
+const CLOUDFLARE_ACCOUNT_ID = process.env.CLOUDFLARE_ACCOUNT_ID ?? '';
+
+/**
+ * old preview commit header, should be purged.
+ */
+const legacyCommentComment = '<!-- preview comment 2 -->';
+const commentComment = '<!-- preview comment 3 -->';
 
 const tableHeader: readonly string[] = [
   commentComment,
@@ -42,9 +50,6 @@ const tableHeader: readonly string[] = [
 ];
 
 async function main() {
-  const NETLIFY_AUTH_TOKEN = process.env.NETLIFY_AUTH_TOKEN ?? '';
-  const NETLIFY_SITE_ID = process.env.NETLIFY_SITE_ID ?? '';
-
   const githubToken = process.env.GH_TOKEN;
   if (!githubToken) {
     throw new Error('process.env.GH_TOKEN is empty');
@@ -93,36 +98,36 @@ async function main() {
   );
 
   if (run.event === 'push') {
-    await exec(
-      'netlify',
-      [
-        'deploy',
-        `--dir=${artifact}`,
-        `--alias="${artifact}"`,
-        ...(artifact === 'sites' ? ['--prod'] : []),
-      ],
-      {
-        env: {
-          NETLIFY_AUTH_TOKEN,
-          NETLIFY_SITE_ID,
-          PATH: process.env.PATH ?? '',
-        },
-      },
-    );
+    console.log('skip push base event');
     return;
   }
 
-  const prNumber = parseInt(fs.readFileSync(path.resolve(artifact, 'pr_number')).toString().trim());
+  if (artifact === 'sites') {
+    fs.renameSync('_functions', 'functions');
+  }
+
+  const prNumber = await findPullRequestNumber(octokit);
 
   const alias = `pr-${prNumber}-${artifact}`;
 
-  await exec('netlify', ['deploy', `--dir=${artifact}`, `--alias="${alias}"`], {
-    env: {
-      NETLIFY_AUTH_TOKEN,
-      NETLIFY_SITE_ID,
-      PATH: process.env.PATH ?? '',
+  await exec(
+    'wrangler',
+    [
+      'pages',
+      'deploy',
+      `--project-name=${CLOUDFLARE_PROJECT_NAME}`,
+      artifact,
+      '--commit-dirty=true',
+      `--branch="${alias}"`,
+    ],
+    {
+      env: {
+        CLOUDFLARE_API_TOKEN,
+        CLOUDFLARE_ACCOUNT_ID,
+        PATH: process.env.PATH ?? '',
+      },
     },
-  });
+  );
 
   const comments = await octokit.paginate(
     'GET /repos/{owner}/{repo}/issues/{issue_number}/comments',
@@ -134,6 +139,17 @@ async function main() {
   );
 
   for (const comment of comments) {
+    if (
+      comment.user?.login === 'github-actions[bot]' &&
+      comment.body?.includes(legacyCommentComment)
+    ) {
+      await octokit.request('DELETE /repos/{owner}/{repo}/issues/comments/{comment_id}', {
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        comment_id: comment.id,
+      });
+    }
+
     if (comment.user?.login === 'github-actions[bot]' && comment.body?.includes(commentComment)) {
       return updateComment(
         octokit,
@@ -148,6 +164,46 @@ async function main() {
   }
 
   await createComment(octokit, prNumber, artifact, alias);
+}
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
+async function findPullRequestNumber(octokit: Client): Promise<number> {
+  const payloadPRNumber: number | undefined =
+    context.payload?.workflow_run?.pull_requests?.[0]?.number;
+  if (payloadPRNumber) {
+    core.info('find pr number from context');
+    return payloadPRNumber;
+  }
+
+  const run: {
+    head_repository: { owner: { login: string } };
+    head_branch: string;
+  } = context.payload?.workflow_run;
+
+  const head = `${run.head_repository.owner.login}:${run.head_branch}`;
+
+  core.info(`try head branch ${head}`);
+
+  /**
+   * github api 这里有一个 BUG ，
+   * 如果head 是 `Ayase-252:refactor-e2e` 这种情况就无法正常用 query 进行筛选。
+   * 所以必须要获取所有的 PR，然后手动筛选
+   */
+  for await (const { data: prs } of octokit.paginate.iterator('GET /repos/{owner}/{repo}/pulls', {
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    base: 'master',
+    state: 'open',
+  })) {
+    for (const pr of prs) {
+      if (pr.head.label === head) {
+        return pr.number;
+      }
+    }
+  }
+
+  core.error('failed to find PR from context');
+  throw new Error('failed to find PR from context');
 }
 
 const commentTableItem = '<!-- table item -->';
@@ -187,7 +243,7 @@ function tableLine(artifact: string, alias: string) {
     id,
     line: `| ${toTitle(
       artifact,
-    )} | [netlify preview](https://${alias}--bangumi-next.netlify.app) | ${time} | ${id} ${commentTableItem}`,
+    )} | [netlify preview](https://${alias}.${CLOUDFLARE_PROJECT_NAME}.pages.dev) | ${time} | ${id} ${commentTableItem}`,
   };
 }
 
