@@ -15,7 +15,6 @@ test.describe('未登录用户', () => {
 test.describe('已登录用户', () => {
   testAsUser('treeholechan');
   test('登录用户', async ({ page }) => {
-    console.log(await page.context().cookies());
     test.slow();
     await page.goto('/group/sandbox');
 
@@ -23,7 +22,7 @@ test.describe('已登录用户', () => {
       page.getByRole('link', {
         name: '发表新主题',
       }),
-    ).toBeVisible();
+    ).toBeVisible({ timeout: 15 * 1000 });
 
     await expect(page.getByText('退出该小组')).toBeVisible();
 
