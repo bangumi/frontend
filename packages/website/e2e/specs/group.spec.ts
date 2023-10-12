@@ -18,12 +18,7 @@ test.describe('已登录用户', () => {
     test.slow();
     await page.goto('/group/sandbox');
 
-    await expect(
-      page.getByRole('link', {
-        name: '发表新主题',
-      }),
-    ).toBeVisible({ timeout: 15 * 1000 });
-
+    await expect(page.getByText('发表新主题')).toBeVisible();
     await expect(page.getByText('退出该小组')).toBeVisible();
 
     await page.getByPlaceholder('给新帖取一个标题').click();
