@@ -83,6 +83,7 @@ export type TopicDetail = {
   title: string;
 };
 export type TopicCreation = {
+  /** bbcode */
   text: string;
   title: string;
 };
@@ -105,6 +106,7 @@ export type GroupMember = {
   username: string;
 };
 export type Topic = {
+  /** 发帖时间，unix time stamp in seconds */
   createdAt: number;
   creator: {
     avatar: {
@@ -118,14 +120,18 @@ export type Topic = {
     user_group: number;
     username: string;
   };
+  /** topic id */
   id: number;
+  /** 小组/条目ID */
   parentID: number;
   repliesCount: number;
   title: string;
+  /** 最后回复时间，unix time stamp in seconds */
   updatedAt: number;
 };
 export type GroupProfile = {
   group: Group;
+  /** 是否已经加入小组 */
   inGroup: boolean;
   recentAddedMembers: GroupMember[];
   topics: Topic[];
@@ -153,6 +159,7 @@ export type CurrentUser = {
   };
 };
 export type Notice = {
+  /** unix timestamp in seconds */
   createdAt: number;
   id: number;
   postID: number;
@@ -170,10 +177,12 @@ export type Notice = {
   };
   title: string;
   topicID: number;
+  /** 查看 `./lib/notify.ts` _settings */
   type: number;
   unread: boolean;
 };
 export type EpisodeWikiInfo = {
+  /** YYYY-MM-DD */
   date?: string;
   duration: string;
   ep: number;
@@ -209,10 +218,12 @@ export type SubjectEdit = {
 };
 export type HistorySummary = {
   commitMessage: string;
+  /** unix timestamp seconds */
   createdAt: number;
   creator: {
     username: string;
   };
+  /** 修改类型。`1` 正常修改， `11` 合并，`103` 锁定/解锁 `104` 未知 */
   type: number;
 };
 /**
@@ -371,6 +382,7 @@ export function createGroupReply(
   topicId: number,
   body: {
     content: string;
+    /** 被回复的 topic ID, `0` 代表回复楼主 */
     replyTo?: number;
   },
   opts?: Oazapfts.RequestOpts,
@@ -532,6 +544,7 @@ export function createNewGroupTopic(
     | {
         status: 200;
         data: {
+          /** new topic id */
           id: number;
         };
       }
@@ -736,6 +749,7 @@ export function patchEpisodeWikiInfo(
   body: {
     commitMessage: string;
     episode: {
+      /** YYYY-MM-DD */
       date?: string;
       duration?: string;
       ep?: number;
@@ -913,6 +927,7 @@ export function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts
 export function uploadSubjectCover(
   subjectId: number,
   body: {
+    /** base64 encoded raw bytes, 4mb size limit on **decoded** size */
     content: string;
   },
   opts?: Oazapfts.RequestOpts,
