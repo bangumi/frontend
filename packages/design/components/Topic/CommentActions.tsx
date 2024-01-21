@@ -4,11 +4,15 @@ import { Comment as CommentIcon, More } from '@bangumi/icons';
 
 import Button from '../../components/Button';
 import Popover from '../Popover';
+import Reactions from '../Reactions';
+
+const ReactionsDropdown = Reactions.Dropdown;
 
 export interface CommentActionsProps {
   id: number;
   onReply?: () => void;
   onDelete?: () => void;
+  onReact?: () => void;
   isAuthor?: boolean;
   editable?: boolean;
   showText?: boolean;
@@ -18,6 +22,7 @@ const CommentActions = ({
   id,
   onReply,
   onDelete,
+  onReact,
   isAuthor = false,
   editable = true,
   showText = false,
@@ -28,7 +33,7 @@ const CommentActions = ({
         <CommentIcon />
         {showText && '回复'}
       </Button>
-      {/* TODO: 实现贴贴功能 */}
+      <ReactionsDropdown showText={showText} onClick={onReact} />
       <Popover
         content={
           <div className='bgm-comment-actions__popover'>

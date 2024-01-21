@@ -13,7 +13,9 @@ export default {
 const Template: StoryFn<CommentActionsProps> = (args) => {
   return (
     <BrowserRouter>
-      <CommentActions {...args} id={375793} />
+      <div style={{ paddingLeft: 100 }}>
+        <CommentActions {...args} id={375793} />
+      </div>
     </BrowserRouter>
   );
 };
