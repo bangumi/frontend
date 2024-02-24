@@ -39,18 +39,24 @@ const Select = ({ options, style, defaultValue, className, onChange }: SelectPro
         <span>{optionsMap[active]?.label}</span>
         <ArrowDown className='bgm-select-arrow' />
       </div>
-      <select
-        defaultValue={defaultValue}
-        onChange={(e) => {
-          handleOptionClick(e.target.value);
-        }}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      {open ? (
+        <ul className={cn('bgm-select__dropdown')} defaultValue={defaultValue}>
+          {options.map((option) => (
+            <li
+              className={cn('bgm-select__dropdown-item')}
+              key={option.value}
+              value={option.value}
+              onClick={() => {
+                handleOptionClick(option.value);
+              }}
+            >
+              {option.label}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
