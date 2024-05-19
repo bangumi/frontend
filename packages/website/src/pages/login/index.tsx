@@ -41,10 +41,14 @@ const Login: React.FC = () => {
     // 如果有 backTo 参数，则跳转到指定的页面
     const backTo = searchParams.get('backTo');
     if (backTo) {
-      navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
-    }
-    // 否则跳转到首页
-    else {
+      // oauth 页面在 server 端，需要特殊处理
+      if (backTo.startsWith('/oauth/')) {
+        window.location.replace(backTo);
+      } else {
+        navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
+      }
+    } else {
+      // 否则跳转到首页
       navigate('/', { replace: true });
     }
   };
