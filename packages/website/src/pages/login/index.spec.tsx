@@ -5,9 +5,14 @@ import { HelmetProvider } from 'react-helmet-async';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
 import { UserProvider } from '@bangumi/website/hooks/use-user';
+import { redirectTo } from '@bangumi/website/utils/route';
 
 import { server as mockServer } from '../../mocks/server';
 import LoginPage from '.';
+
+vi.mock('@bangumi/website/utils/route', () => ({
+  redirectTo: vi.fn(),
+}));
 
 vi.mock('@marsidev/react-turnstile', () => {
   const Turnstile = React.forwardRef<
@@ -73,7 +78,7 @@ it('should redirect user to homepage after success login', async () => {
 
   mockSuccessfulLogin();
   await waitFor(() => {
-    expect(mockedNavigate).toBeCalledWith('/', { replace: true });
+    expect(redirectTo).toBeCalledWith('/');
   });
 });
 
@@ -88,7 +93,7 @@ it('should redirect user to specified page', async () => {
 
   mockSuccessfulLogin();
   await waitFor(() => {
-    expect(mockedNavigate).toBeCalledWith('/group/sandbox', { replace: true });
+    expect(redirectTo).toBeCalledWith('/group/sandbox');
   });
 });
 
@@ -103,7 +108,7 @@ it('should redirect user to home if specified path is invalid', async () => {
 
   mockSuccessfulLogin();
   await waitFor(() => {
-    expect(mockedNavigate).toBeCalledWith('/', { replace: true });
+    expect(redirectTo).toBeCalledWith('/');
   });
 });
 

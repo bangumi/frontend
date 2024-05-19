@@ -1,12 +1,13 @@
 import type { TurnstileInstance } from '@marsidev/react-turnstile';
 import { Turnstile } from '@marsidev/react-turnstile';
 import React, { useRef } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useInput } from 'rooks';
 
 import { Button, Input, Message } from '@bangumi/design';
 import { Password, UserLogin } from '@bangumi/icons';
 import Helmet from '@bangumi/website/components/Helmet';
+import { redirectTo } from '@bangumi/website/utils/route';
 
 import {
   CaptureError,
@@ -24,6 +25,7 @@ const Login: React.FC = () => {
   const email = useInput('' as string);
   const password = useInput('' as string);
   const { login } = useUser();
+  const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
 
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
@@ -40,10 +42,10 @@ const Login: React.FC = () => {
     // 如果有 backTo 参数，则跳转到指定的页面
     const backTo = searchParams.get('backTo');
     if (backTo) {
-      window.location.replace(backTo.startsWith('/') ? backTo : '/');
+      redirectTo(backTo.startsWith('/') ? backTo : '/');
     } else {
       // 否则跳转到首页
-      window.location.replace('/');
+      redirectTo('/');
     }
   };
 
