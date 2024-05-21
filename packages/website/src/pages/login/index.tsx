@@ -7,6 +7,7 @@ import { useInput } from 'rooks';
 import { Button, Input, Message } from '@bangumi/design';
 import { Password, UserLogin } from '@bangumi/icons';
 import Helmet from '@bangumi/website/components/Helmet';
+import { redirectTo } from '@bangumi/website/utils/route';
 
 import {
   CaptureError,
@@ -41,11 +42,10 @@ const Login: React.FC = () => {
     // 如果有 backTo 参数，则跳转到指定的页面
     const backTo = searchParams.get('backTo');
     if (backTo) {
-      navigate(backTo.startsWith('/') ? backTo : '/', { replace: true });
-    }
-    // 否则跳转到首页
-    else {
-      navigate('/', { replace: true });
+      redirectTo(backTo.startsWith('/') ? backTo : '/');
+    } else {
+      // 否则跳转到首页
+      redirectTo('/');
     }
   };
 
