@@ -116,7 +116,8 @@ components:
           type: string
         type:
           anyOf:
-            - const: 0
+            - enum:
+                - 0
               type: number
             - enum:
                 - 1
@@ -1090,8 +1091,7 @@ paths:
                 replyTo:
                   default: 0
                   description: 被回复的 topic ID, `0` 代表回复楼主
-                  examples:
-                    - 0
+                  example: 0
                   type: integer
               required:
                 - content
@@ -1750,14 +1750,11 @@ paths:
                   properties:
                     date:
                       description: YYYY-MM-DD
-                      examples:
-                        - '2022-02-02'
+                      example: '2022-02-02'
                       pattern: ^\d{4}-\d{2}-\d{2}$
                       type: string
                     duration:
-                      examples:
-                        - '24:53'
-                        - 24m52s
+                      example: '24:53'
                       type: string
                     ep:
                       type: number
@@ -1769,7 +1766,8 @@ paths:
                       type: string
                     type:
                       anyOf:
-                        - const: 0
+                        - enum:
+                            - 0
                           type: number
                         - enum:
                             - 1
@@ -1926,46 +1924,44 @@ paths:
                   minLength: 1
                   type: string
                 subject:
-                  examples:
-                    - infobox: |-
-                        {{Infobox animanga/TVAnime
-                        |中文名= 沙盒
-                        |别名={
-                        }
-                        |话数= 7
-                        |放送开始= 0000-10-06
-                        |放送星期= 
-                        |官方网站= 
-                        |播放电视台= 
-                        |其他电视台= 
-                        |播放结束= 
-                        |其他= 
-                        |Copyright= 
-                        |平台={
-                        [龟壳]
-                        [Xbox Series S]
-                        [Xbox Series X]
-                        [Xbox Series X/S]
-                        [PC]
-                        [Xbox Series X|S]
-                        }
-                        }}
-                      name: 沙盒
-                      nsfw: false
-                      platform: 0
-                      summary: >-
-                        本条目是一个沙盒，可以用于尝试bgm功能。
+                  example:
+                    infobox: |-
+                      {{Infobox animanga/TVAnime
+                      |中文名= 沙盒
+                      |别名={
+                      }
+                      |话数= 7
+                      |放送开始= 0000-10-06
+                      |放送星期= 
+                      |官方网站= 
+                      |播放电视台= 
+                      |其他电视台= 
+                      |播放结束= 
+                      |其他= 
+                      |Copyright= 
+                      |平台={
+                      [龟壳]
+                      [Xbox Series S]
+                      [Xbox Series X]
+                      [Xbox Series X/S]
+                      [PC]
+                      [Xbox Series X|S]
+                      }
+                      }}
+                    name: 沙盒
+                    nsfw: false
+                    platform: 0
+                    summary: >-
+                      本条目是一个沙盒，可以用于尝试bgm功能。
 
 
-                        普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
+                      普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。
 
 
-                        https://bgm.tv/group/topic/366812#post_1923517
+                      https://bgm.tv/group/topic/366812#post_1923517
                   properties:
                     date:
-                      examples:
-                        - '0000-00-00'
-                        - '2007-01-30'
+                      example: '0000-00-00'
                       pattern: ^\d{4}-\d{2}-\d{2}$
                       type: string
                     infobox:
@@ -2130,8 +2126,7 @@ paths:
                                 large:
                                   type: string
                                 medium:
-                                  examples:
-                                    - sai
+                                  example: sai
                                   type: string
                                 small:
                                   type: string
@@ -2142,20 +2137,17 @@ paths:
                               title: Avatar
                               type: object
                             id:
-                              examples:
-                                - 1
+                              example: 1
                               type: integer
                             nickname:
-                              examples:
-                                - Sai🖖
+                              example: Sai🖖
                               type: string
                             sign:
                               type: string
                             user_group:
                               type: integer
                             username:
-                              examples:
-                                - sai
+                              example: sai
                               type: string
                           required:
                             - id
