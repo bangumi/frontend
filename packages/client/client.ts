@@ -190,7 +190,7 @@ export type EpisodeWikiInfo = {
   name: string;
   nameCN: string;
   summary: string;
-  type: number | 1 | 2 | 3 | 4 | 5 | 6;
+  type: 0 | 1 | 2 | 3 | 4 | 5 | 6;
 };
 export type WikiPlatform = {
   id: number;
@@ -756,7 +756,7 @@ export function patchEpisodeWikiInfo(
       name?: string;
       nameCN?: string;
       summary?: string;
-      type?: number | 1 | 2 | 3 | 4 | 5 | 6;
+      type?: 0 | 1 | 2 | 3 | 4 | 5 | 6;
     };
   },
   opts?: Oazapfts.RequestOpts,

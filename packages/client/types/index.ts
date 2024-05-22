@@ -579,6 +579,7 @@ export interface operations {
           /**
            * @description 被回复的 topic ID, `0` 代表回复楼主
            * @default 0
+           * @example 0
            */
           replyTo?: number;
         };
@@ -976,8 +977,12 @@ export interface operations {
         'application/json': {
           commitMessage: string;
           episode: {
-            /** @description YYYY-MM-DD */
+            /**
+             * @description YYYY-MM-DD
+             * @example 2022-02-02
+             */
             date?: string;
+            /** @example 24:53 */
             duration?: string;
             ep?: number;
             name?: string;
@@ -1117,7 +1122,17 @@ export interface operations {
          */
         'application/json': {
           commitMessage: string;
+          /**
+           * @example {
+           *   "infobox": "{{Infobox animanga/TVAnime\n|中文名= 沙盒\n|别名={\n}\n|话数= 7\n|放送开始= 0000-10-06\n|放送星期= \n|官方网站= \n|播放电视台= \n|其他电视台= \n|播放结束= \n|其他= \n|Copyright= \n|平台={\n[龟壳]\n[Xbox Series S]\n[Xbox Series X]\n[Xbox Series X/S]\n[PC]\n[Xbox Series X|S]\n}\n}}",
+           *   "name": "沙盒",
+           *   "nsfw": false,
+           *   "platform": 0,
+           *   "summary": "本条目是一个沙盒，可以用于尝试bgm功能。\n\n普通维基人可以随意编辑条目信息以及相关关联查看编辑效果，但是请不要完全删除沙盒说明并且不要关联非沙盒条目/人物/角色。\n\nhttps://bgm.tv/group/topic/366812#post_1923517"
+           * }
+           */
           subject: {
+            /** @example 0000-00-00 */
             date?: string;
             infobox?: string;
             name?: string;
@@ -1163,13 +1178,17 @@ export interface operations {
                 /** Avatar */
                 avatar: {
                   large: string;
+                  /** @example sai */
                   medium: string;
                   small: string;
                 };
+                /** @example 1 */
                 id: number;
+                /** @example Sai🖖 */
                 nickname: string;
                 sign: string;
                 user_group: number;
+                /** @example sai */
                 username: string;
               };
               id: number;
