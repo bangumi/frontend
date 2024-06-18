@@ -13,6 +13,7 @@ export interface GroupActionsProps {
 
 const GroupActions = memo(({ groupProfile, className, size }: GroupActionsProps) => {
   const { user } = useUser();
+  console.log('🚀 ~ file: GroupActions.tsx:16 ~ GroupActions ~ user:', user);
   if (!user) {
     return null;
   }
