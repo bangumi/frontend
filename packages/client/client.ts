@@ -47,6 +47,19 @@ export type Group = {
   title: string;
   totalMembers: number;
 };
+export type Subject = {
+  date: string;
+  id: number;
+  image: string;
+  infobox: string;
+  locked: boolean;
+  name: string;
+  nsfw: boolean;
+  platform: number;
+  redirect: number;
+  summary: string;
+  typeID: number;
+};
 export type Reaction = {
   selected: boolean;
   total: number;
@@ -74,8 +87,8 @@ export type Reply = {
 export type TopicDetail = {
   createdAt: number;
   creator: User;
-  group: Group;
   id: number;
+  parent: Group | Subject;
   reactions: Reaction[];
   replies: Reply[];
   state: number;
@@ -180,6 +193,41 @@ export type Notice = {
   /** 查看 `./lib/notify.ts` _settings */
   type: number;
   unread: boolean;
+};
+export type BaseEpisodeComment = {
+  content: string;
+  createdAt: number;
+  creatorID: number;
+  epID: number;
+  id: number;
+  relatedID: number;
+  state: number;
+  user: {
+    avatar: {
+      large: string;
+      medium: string;
+      small: string;
+    };
+    id: number;
+    nickname: string;
+  } | null;
+};
+export type SubjectInterestComment = {
+  list: {
+    comment: string;
+    rate: number;
+    updatedAt: number;
+    user: {
+      avatar: {
+        large: string;
+        medium: string;
+        small: string;
+      };
+      id: number;
+      nickname: string;
+    } | null;
+  }[];
+  total: number;
 };
 export type EpisodeWikiInfo = {
   /** YYYY-MM-DD */
@@ -685,7 +733,208 @@ export function listNotice(
   );
 }
 /**
+ * 获取条目的剧集评论
+ */
+export function getSubjectEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: ({
+          content: string;
+          createdAt: number;
+          creatorID: number;
+          epID: number;
+          id: number;
+          relatedID: number;
+          state: number;
+          user: {
+            avatar: {
+              large: string;
+              medium: string;
+              small: string;
+            };
+            id: number;
+            nickname: string;
+          } | null;
+        } & {
+          replies: BaseEpisodeComment[];
+        })[];
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/episode/${encodeURIComponent(episodeId)}/comments`, {
+    ...opts,
+  });
+}
+/**
+ * 删除自己创建的条目讨论版回复
+ */
+export function deleteSubjectPost(postId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 401;
+        data: ErrorResponse;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/posts/${encodeURIComponent(postId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 获取条目讨论版回复
+ */
+export function getSubjectPost(postId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: GroupReply;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/posts/${encodeURIComponent(postId)}`, {
+    ...opts,
+  });
+}
+/**
+ * 编辑自己创建的条目讨论版回复
+ */
+export function editSubjectPost(
+  postId: number,
+  body: {
+    text: string;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 401;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/posts/${encodeURIComponent(postId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
+/**
  * 获取帖子列表
+ */
+export function getSubjectTopicDetail(id: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: TopicDetail;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/topics/${encodeURIComponent(id)}`, {
+    ...opts,
+  });
+}
+/**
+ * 编辑自己创建的条目讨论版
+ */
+export function editSubjectTopic(
+  topicId: number,
+  topicCreation?: TopicCreation,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 400;
+        data: ErrorResponse;
+      }
+    | {
+        status: 401;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/topics/${encodeURIComponent(topicId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: topicCreation,
+    }),
+  );
+}
+/**
+ * 获取条目的吐槽箱
+ */
+export function subjectComments(
+  subjectId: number,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: SubjectInterestComment;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/${encodeURIComponent(subjectId)}/comments${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 获取条目讨论版列表
  */
 export function getSubjectTopicsBySubjectId(
   subjectId: number,
