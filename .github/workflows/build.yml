@@ -11,7 +11,7 @@ on:
       - '**.md'
   schedule:
     # build it every month so we always have valid build in actions
-    - cron: "15 5 1 * *"
+    - cron: '15 5 1 * *'
 
 jobs:
   build:
