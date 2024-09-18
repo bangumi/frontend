@@ -51,7 +51,7 @@
     "postcss": "^8.4.31",
     "postcss-less": "^6.0.0",
     "typescript": "^5.0.4",
-    "vite": "^4.5.2",
+    "vite": "^4.5.5",
     "vite-plugin-pages": "^0.29.0",
     "vite-plugin-svgr": "^2.4.0"
   }
