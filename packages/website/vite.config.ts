@@ -23,7 +23,7 @@ dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
 
 export default defineConfig(({ mode }) => {
-  let apiDomain = 'https://next.bgm38.com';
+  let apiDomain = 'https://next.bgm38.tv';
 
   if (mode === 'loc') {
     apiDomain = 'http://127.0.0.1:4000';
