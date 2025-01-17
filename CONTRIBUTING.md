@@ -34,7 +34,7 @@ git checkout -b <BRANCH_NAME>
 
 - 启动开发服务器
 
-使用测试后端（dev.bgm38.com）
+使用测试后端（dev.bgm38.tv）
 
 ```bash
 pnpm dev
