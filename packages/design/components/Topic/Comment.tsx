@@ -13,6 +13,7 @@ import { getUserProfileLink } from '@bangumi/utils/pages';
 import Avatar from '../../components/Avatar';
 import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
+import Reactions from '../Reactions';
 import { toast } from '../Toast';
 import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
@@ -27,6 +28,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
 };
 
 const Link = Typography.Link;
+const ReactionsList = Reactions.List;
 
 const RenderContent = memo(({ state, text }: { state: State; text: string }) => {
   switch (state) {
@@ -79,6 +81,7 @@ const Comment: FC<CommentProps> = ({
   state,
   user,
   topicId,
+  reactions,
   onCommentUpdate,
   ...props
 }) => {
@@ -196,6 +199,7 @@ const Comment: FC<CommentProps> = ({
               </div>
             </span>
             <RenderContent state={state} text={text} />
+            <ReactionsList reactions={reactions} />
           </div>
           {showReplyEditor && (
             <div className='bgm-comment__opinions'>

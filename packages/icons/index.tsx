@@ -41,3 +41,4 @@ export { ReactComponent as CloseQuote } from './assets/close-quote.svg';
 export { ReactComponent as Enter } from './assets/enter.svg';
 export { ReactComponent as Comment } from './assets/comment.svg';
 export { ReactComponent as More } from './assets/more.svg';
+export { ReactComponent as Reaction } from './assets/reaction.svg';

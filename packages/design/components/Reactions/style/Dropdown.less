@@ -1,0 +1,30 @@
+@import '../../../theme/base.less';
+
+.bgm-reactions-dropdown {
+  &:hover &__button {
+    color: @primary-color;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px 8px;
+    padding: 14px 16px;
+  }
+
+  &__item {
+    padding: 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    line-height: 12px;
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
+  }
+
+  &__smile {
+    width: 21px;
+    aspect-ratio: 1;
+  }
+}
