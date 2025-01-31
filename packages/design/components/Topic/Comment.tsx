@@ -4,7 +4,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
-import type { Reply, SubReply, User } from '@bangumi/client/topic';
+import type { Reply, SlimUser, SubReply } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
 import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
 import { getUserProfileLink } from '@bangumi/utils/pages';
@@ -22,7 +22,7 @@ export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply:
   floor: string | number;
   originalPosterId: number;
   onCommentUpdate: () => Promise<unknown>;
-  user?: User;
+  user?: SlimUser;
 };
 
 const Link = Typography.Link;
@@ -138,10 +138,10 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
-  const handleReplySuccess = async (reply: Reply) => {
+  const handleReplySuccess = async (id: number) => {
     // 先隐藏回复框避免scrollIntoView后布局变化
     setShowReplyEditor(false);
-    navigate(`#post_${reply.id}`);
+    navigate(`#post_${id}`);
     // 刷新回复列表
     await onCommentUpdate();
   };
