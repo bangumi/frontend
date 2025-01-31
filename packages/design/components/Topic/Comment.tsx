@@ -4,10 +4,9 @@ import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
-import type { BasicReply } from '@bangumi/client/client';
 import type { Reply, SubReply, User } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
-import { Friend, OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
+import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
@@ -74,7 +73,6 @@ const Comment: FC<CommentProps> = ({
   creator,
   createdAt,
   floor,
-  isFriend,
   originalPosterId,
   state,
   user,
@@ -83,9 +81,9 @@ const Comment: FC<CommentProps> = ({
   ...props
 }) => {
   const isReply = props.isReply;
-  const isDeleted = state === State.DeletedByUser || state === State.DeletedByAdmin;
+  const isDeleted = [State.DeletedByUser, State.DeletedByAdmin].includes(state);
   // 1 关闭 2 重开 5 下沉
-  const isSpecial = state === State.Closed || state === State.Reopen || state === State.Silent;
+  const isSpecial = [State.Closed, State.Reopen, State.Silent].includes(state);
   const replies = !isReply ? props.replies : null;
   const shouldCollapse = isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted));
   const [collapsed, setCollapsed] = useState(shouldCollapse);
@@ -104,7 +102,7 @@ const Comment: FC<CommentProps> = ({
     'bgm-comment__header--highlighted': isHighlighted,
   });
 
-  const url = getUserProfileLink(creator.username);
+  const url = creator ? getUserProfileLink(creator.username) : '';
 
   const navigate = useNavigate();
 
@@ -130,7 +128,7 @@ const Comment: FC<CommentProps> = ({
           <div className='creator-info'>
             <SpecialStateIcon state={state} />
             <Link to={url} isExternal>
-              {creator.nickname}
+              {creator?.nickname}
             </Link>
             <RenderContent state={state} text={text} />
           </div>
@@ -140,7 +138,7 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
-  const handleReplySuccess = async (reply: BasicReply) => {
+  const handleReplySuccess = async (reply: Reply) => {
     // 先隐藏回复框避免scrollIntoView后布局变化
     setShowReplyEditor(false);
     navigate(`#post_${reply.id}`);
@@ -165,7 +163,7 @@ const Comment: FC<CommentProps> = ({
     <div>
       <div className={headerClassName} id={`post_${props.id}`}>
         <Avatar
-          src={isReply ? creator.avatar.medium : creator.avatar.large}
+          src={isReply ? creator?.avatar.medium ?? '' : creator?.avatar.large ?? ''}
           size={isReply ? 'small' : 'medium'}
         />
         <div className='bgm-comment__box'>
@@ -173,11 +171,10 @@ const Comment: FC<CommentProps> = ({
             <span className='bgm-comment__tip'>
               <div className='creator-info'>
                 <Link to={url} isExternal>
-                  {creator.nickname}
+                  {creator?.nickname}
                 </Link>
-                {originalPosterId === creator.id ? <OriginalPoster /> : null}
-                {isFriend ? <Friend /> : null}
-                {!isReply && creator.sign ? <span>{`(${creator.sign})`}</span> : null}
+                {originalPosterId === creator?.id ? <OriginalPoster /> : null}
+                {!isReply && creator?.sign ? <span>{`(${creator.sign})`}</span> : null}
               </div>
               <div className='comment-info'>
                 <CommentInfo createdAt={createdAt} floor={floor} id={props.id} />
@@ -188,7 +185,7 @@ const Comment: FC<CommentProps> = ({
                       id={props.id}
                       onReply={startReply}
                       onDelete={handleDeleteReply}
-                      isAuthor={user?.id === creator.id}
+                      isAuthor={user?.id === creator?.id}
                       editable={!replies?.length}
                     />
                   </>
@@ -203,7 +200,7 @@ const Comment: FC<CommentProps> = ({
                 autoFocus
                 topicId={topicId}
                 replyTo={props.id}
-                placeholder={`回复 @${creator.nickname}：`}
+                placeholder={`回复 @${creator?.nickname ?? ''}：`}
                 content={replyContent}
                 onChange={setReplyContent}
                 onCancel={() => {
