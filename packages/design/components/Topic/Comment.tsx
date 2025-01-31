@@ -128,7 +128,7 @@ const Comment: FC<CommentProps> = ({
           <div className='creator-info'>
             <SpecialStateIcon state={state} />
             <Link to={url} isExternal>
-              {creator?.nickname}
+              {creator?.nickname ?? ''}
             </Link>
             <RenderContent state={state} text={text} />
           </div>
@@ -171,7 +171,7 @@ const Comment: FC<CommentProps> = ({
             <span className='bgm-comment__tip'>
               <div className='creator-info'>
                 <Link to={url} isExternal>
-                  {creator?.nickname}
+                  {creator?.nickname ?? ''}
                 </Link>
                 {originalPosterId === creator?.id ? <OriginalPoster /> : null}
                 {!isReply && creator?.sign ? <span>{`(${creator.sign})`}</span> : null}
