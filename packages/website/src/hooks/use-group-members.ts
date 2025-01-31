@@ -20,7 +20,7 @@ export function useGroupMembers(
 ): UseGroupMembersRet {
   const { data } = useSWR(
     disable ? null : `listGroupMembersByName ${name} ${type} ${limit} ${offset}`,
-    async () => ok(ozaClient.listGroupMembersByName(name, { limit, offset, $type: type })),
+    async () => ok(ozaClient.getGroupMembers(name, { limit, offset, moderator: type === 'mod' })),
     { suspense: true },
   );
 

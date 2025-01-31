@@ -190,13 +190,13 @@ export type UpdateTopic = {
   title: string;
 };
 export type CreatePost = {
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  'cf-turnstile-response': string;
   content: string;
   /** 被回复的帖子 ID, `0` 代表回复楼主 */
   replyTo?: number;
+  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
+  turnstileToken: string;
 };
 export type Group = {
   accessible: boolean;
@@ -236,30 +236,35 @@ export type Topic = {
   updatedAt: number;
 };
 export type CreateTopic = {
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  'cf-turnstile-response': string;
   /** bbcode */
   content: string;
   title: string;
+  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
+  turnstileToken: string;
 };
 export type LoginRequestBody = {
-  'cf-turnstile-response': string;
   email: string;
   password: string;
+  turnstileToken: string;
 };
-export type CurrentUser = {
+export type Permissions = {
+  subjectWikiEdit: boolean;
+};
+export type Profile = {
   avatar: Avatar;
+  bio: string;
+  friendIDs: number[];
+  group: number;
   id: number;
   joinedAt: number;
+  location: string;
   nickname: string;
+  permissions: Permissions;
   sign: string;
+  site: string;
   username: string;
-} & {
-  permission: {
-    subjectWikiEdit: boolean;
-  };
 };
 export type Notice = {
   /** unix timestamp in seconds */
@@ -407,13 +412,13 @@ export type EpisodeCommentBase = {
   user: SlimUser;
 };
 export type CreateEpisodeComment = {
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  'cf-turnstile-response': string;
   content: string;
   /** 被回复的吐槽 ID, `0` 代表发送顶层吐槽 */
   replyTo?: number;
+  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
+  turnstileToken: string;
 };
 export type SubjectCharacter = {
   actors: SlimPerson[];
@@ -544,11 +549,11 @@ export type Timeline = {
   user?: SlimUser;
 };
 export type CreateTimelineSay = {
+  content: string;
   /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  'cf-turnstile-response': string;
-  content: string;
+  turnstileToken: string;
 };
 export type TrendingSubject = {
   count: number;
@@ -614,8 +619,6 @@ export type User = {
   sign: string;
   site: string;
   stats: UserStats;
-  /** deprecated, use group instead */
-  user_group: number;
   username: string;
 };
 export type UserCharacterCollection = {
@@ -1358,7 +1361,7 @@ export function getCurrentUser(opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: CurrentUser;
+        data: Profile;
       }
     | {
         status: 401;

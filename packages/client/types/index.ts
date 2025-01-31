@@ -495,71 +495,59 @@ export interface components {
      */
     CollectionType: 1 | 2 | 3 | 4 | 5;
     CreateEpisodeComment: {
-      /**
-       * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-       * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-       * dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
-       */
-      'cf-turnstile-response': string;
       content: string;
       /**
        * @description 被回复的吐槽 ID, `0` 代表发送顶层吐槽
        * @default 0
        */
       replyTo?: number;
-    };
-    CreatePost: {
       /**
        * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
        * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
        * dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
        */
-      'cf-turnstile-response': string;
+      turnstileToken: string;
+    };
+    CreatePost: {
       content: string;
       /**
        * @description 被回复的帖子 ID, `0` 代表回复楼主
        * @default 0
        */
       replyTo?: number;
-    };
-    CreateTimelineSay: {
       /**
        * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
        * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
        * dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
        */
-      'cf-turnstile-response': string;
+      turnstileToken: string;
+    };
+    CreateTimelineSay: {
       content: string;
+      /**
+       * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+       * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+       * dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
+       */
+      turnstileToken: string;
     };
     /**
      * @example {
-     *   "cf-turnstile-response": "10000000-aaaa-bbbb-cccc-000000000001",
      *   "content": "topic content",
-     *   "title": "topic title"
+     *   "title": "topic title",
+     *   "turnstileToken": "10000000-aaaa-bbbb-cccc-000000000001"
      * }
      */
     CreateTopic: {
+      /** @description bbcode */
+      content: string;
+      title: string;
       /**
        * @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
        * next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
        * dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
        */
-      'cf-turnstile-response': string;
-      /** @description bbcode */
-      content: string;
-      title: string;
-    };
-    CurrentUser: {
-      avatar: components['schemas']['Avatar'];
-      id: number;
-      joinedAt: number;
-      nickname: string;
-      sign: string;
-      username: string;
-    } & {
-      permission: {
-        subjectWikiEdit: boolean;
-      };
+      turnstileToken: string;
     };
     /** Episode */
     Episode: {
@@ -745,15 +733,15 @@ export interface components {
     };
     /**
      * @example {
-     *   "cf-turnstile-response": "10000000-aaaa-bbbb-cccc-000000000001",
      *   "email": "treeholechan@gmail.com",
-     *   "password": "lovemeplease"
+     *   "password": "lovemeplease",
+     *   "turnstileToken": "10000000-aaaa-bbbb-cccc-000000000001"
      * }
      */
     LoginRequestBody: {
-      'cf-turnstile-response': string;
       email: string;
       password: string;
+      turnstileToken: string;
     };
     Notice: {
       /** @description unix timestamp in seconds */
@@ -778,7 +766,8 @@ export interface components {
       type: number;
       unread: boolean;
     };
-    Permission: {
+    /** Permissions */
+    Permissions: {
       subjectWikiEdit: boolean;
     };
     /** Person */
@@ -831,6 +820,21 @@ export interface components {
     PersonWork: {
       positions: components['schemas']['SubjectStaffPosition'][];
       subject: components['schemas']['SlimSubject'];
+    };
+    /** Profile */
+    Profile: {
+      avatar: components['schemas']['Avatar'];
+      bio: string;
+      friendIDs: number[];
+      group: number;
+      id: number;
+      joinedAt: number;
+      location: string;
+      nickname: string;
+      permissions: components['schemas']['Permissions'];
+      sign: string;
+      site: string;
+      username: string;
     };
     /** Reaction */
     Reaction: {
@@ -1523,8 +1527,6 @@ export interface components {
       sign: string;
       site: string;
       stats: components['schemas']['UserStats'];
-      /** @description deprecated, use group instead */
-      user_group: number;
       /** @example sai */
       username: string;
     };
@@ -2286,7 +2288,7 @@ export interface operations {
       /** @description Default Response */
       200: {
         content: {
-          'application/json': components['schemas']['CurrentUser'];
+          'application/json': components['schemas']['Profile'];
         };
       };
       /** @description default error response type */

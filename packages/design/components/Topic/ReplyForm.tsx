@@ -40,7 +40,7 @@ const ReplyForm = ({
       const response = await ozaClient.createGroupReply(topicId, {
         content,
         replyTo,
-        'cf-turnstile-response': '',
+        turnstileToken: '',
       });
       if (response.status === 200) {
         // document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });

@@ -5,10 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type { SlimUser } from '@bangumi/client/user';
+import type { Profile } from '@bangumi/client/user';
 
 interface UserContextType {
-  user?: SlimUser;
+  user?: Profile;
   redirectToLogin: () => void;
   login: (username: string, password: string, captchaResp: string) => Promise<void>;
 }
@@ -77,7 +77,7 @@ async function login(email: string, password: string, cfCaptchaResponse: string)
   const res = await ozaClient.login({
     email,
     password,
-    'cf-turnstile-response': cfCaptchaResponse,
+    turnstileToken: cfCaptchaResponse,
   });
 
   if (res.status === 200) {
