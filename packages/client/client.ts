@@ -1049,10 +1049,16 @@ export function debug(opts?: Oazapfts.RequestOpts) {
  * 删除小组帖子回复
  */
 export function deleteGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(`/p1/groups/-/posts/${encodeURIComponent(postId)}`, {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/groups/-/posts/${encodeURIComponent(postId)}`, {
     ...opts,
     method: 'DELETE',
   });
@@ -1065,10 +1071,16 @@ export function editGroupPost(
   updatePost?: UpdatePost,
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/groups/-/posts/${encodeURIComponent(postId)}`,
     oazapfts.json({
       ...opts,
@@ -1102,10 +1114,16 @@ export function editGroupTopic(
   updateTopic?: UpdateTopic,
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/groups/-/topics/${encodeURIComponent(topicId)}`,
     oazapfts.json({
       ...opts,
@@ -1656,10 +1674,16 @@ export function postP1SubjectsEpisodeByEpisodeIdComments(
  * 删除条目的剧集吐槽
  */
 export function deleteSubjectEpComment(commentId: number, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(`/p1/subjects/-/episodes/-/comments/${encodeURIComponent(commentId)}`, {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/episodes/-/comments/${encodeURIComponent(commentId)}`, {
     ...opts,
     method: 'DELETE',
   });
@@ -1672,10 +1696,16 @@ export function updateSubjectEpComment(
   updateEpisodeComment?: UpdateEpisodeComment,
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/subjects/-/episodes/-/comments/${encodeURIComponent(commentId)}`,
     oazapfts.json({
       ...opts,
@@ -1763,10 +1793,16 @@ export function createSubjectEpComment(
  * 删除条目讨论回复
  */
 export function deleteSubjectPost(postId: number, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(`/p1/subjects/-/posts/${encodeURIComponent(postId)}`, {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/posts/${encodeURIComponent(postId)}`, {
     ...opts,
     method: 'DELETE',
   });
@@ -1779,10 +1815,16 @@ export function editSubjectPost(
   updatePost?: UpdatePost,
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/subjects/-/posts/${encodeURIComponent(postId)}`,
     oazapfts.json({
       ...opts,
@@ -1820,10 +1862,16 @@ export function updateSubjectTopic(
   },
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/subjects/-/topics/${encodeURIComponent(topicId)}`,
     oazapfts.json({
       ...opts,

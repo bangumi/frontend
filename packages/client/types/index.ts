@@ -1959,6 +1959,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -1975,6 +1981,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -2018,6 +2030,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -2519,6 +2537,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -2536,6 +2560,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -2646,6 +2676,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -2662,6 +2698,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {
@@ -2710,6 +2752,12 @@ export interface operations {
       };
     };
     responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         content: {

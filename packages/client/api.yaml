@@ -3148,6 +3148,13 @@ paths:
           schema:
             type: integer
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -3175,6 +3182,13 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdatePost'
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -3232,6 +3246,13 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateTopic'
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -4129,6 +4150,13 @@ paths:
           schema:
             type: integer
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -4157,6 +4185,13 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdateEpisodeComment'
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -4318,6 +4353,13 @@ paths:
           schema:
             type: integer
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -4345,6 +4387,13 @@ paths:
             schema:
               $ref: '#/components/schemas/UpdatePost'
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
@@ -4415,6 +4464,13 @@ paths:
               type: object
         required: true
       responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
         '500':
           content:
             application/json:
