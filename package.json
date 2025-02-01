@@ -82,7 +82,7 @@
     "husky": "^8.0.3",
     "jsdom": "^21.1.1",
     "lint-staged": "^13.2.2",
-    "postcss": "^8.4.31",
+    "postcss": "^8.5.1",
     "postcss-less": "^6.0.0",
     "prettier": "^3.4.2",
     "react": "^18.2.0",
