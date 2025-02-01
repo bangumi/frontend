@@ -43,7 +43,7 @@ importers:
         version: 5.59.1(eslint@8.39.0)(typescript@5.3.3)
       '@vitejs/plugin-react':
         specifier: ^4.0.4
-        version: 4.0.4(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 4.0.4(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       '@vitest/coverage-v8':
         specifier: ^0.34.1
         version: 0.34.1(vitest@0.34.1)
@@ -142,13 +142,13 @@ importers:
         version: 5.3.3
       vite:
         specifier: ^4.5.9
-        version: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+        version: 4.5.9(@types/node@20.12.12)(less@4.2.2)
       vite-plugin-svgr:
         specifier: ^2.4.0
-        version: 2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       vitest:
         specifier: ^0.34.1
-        version: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.1.3)(playwright@1.50.1)
+        version: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.2.2)(playwright@1.50.1)
       vitest-github-actions-reporter:
         specifier: ^0.10.0
         version: 0.10.0(vitest@0.34.1)
@@ -222,7 +222,7 @@ importers:
         version: 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@storybook/builder-vite':
         specifier: ^7.0.7
-        version: 7.0.7(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 7.0.7(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       '@storybook/manager-api':
         specifier: ^7.0.7
         version: 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -231,7 +231,7 @@ importers:
         version: 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)
       '@storybook/react-vite':
         specifier: ^7.0.7
-        version: 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       '@storybook/theming':
         specifier: ^7.0.7
         version: 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -251,8 +251,8 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       less:
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.2.2
+        version: 4.2.2
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -273,10 +273,10 @@ importers:
         version: 5.3.3
       vite:
         specifier: ^4.5.9
-        version: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+        version: 4.5.9(@types/node@20.12.12)(less@4.2.2)
       vite-plugin-svgr:
         specifier: ^2.4.0
-        version: 2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
 
   packages/icons:
     dependencies:
@@ -419,7 +419,7 @@ importers:
         version: 18.2.1
       '@vitejs/plugin-react':
         specifier: ^4.0.4
-        version: 4.0.4(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 4.0.4(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.5.1)
@@ -430,8 +430,8 @@ importers:
         specifier: ^3.3.4
         version: 3.3.4
       less:
-        specifier: ^4.1.3
-        version: 4.1.3
+        specifier: ^4.2.2
+        version: 4.2.2
       msw:
         specifier: ~1.3.5
         version: 1.3.5(typescript@5.3.3)
@@ -449,13 +449,13 @@ importers:
         version: 5.3.3
       vite:
         specifier: ^4.5.9
-        version: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+        version: 4.5.9(@types/node@20.12.12)(less@4.2.2)
       vite-plugin-pages:
         specifier: ^0.29.0
-        version: 0.29.0(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 0.29.0(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       vite-plugin-svgr:
         specifier: ^2.4.0
-        version: 2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+        version: 2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
 
 packages:
 
@@ -4243,8 +4243,8 @@ packages:
     resolution: {integrity: sha512-aXpZJRnTkpK6gQ/z4nk+ZBLd/Qdp118cvPruLSIQzQNRhKwEcdXCOzXuF55VDqIiuAaY3UGZ10DJtvZzDcvsxg==}
     engines: {node: '>=14.0.0'}
 
-  less@4.1.3:
-    resolution: {integrity: sha512-w16Xk/Ta9Hhyei0Gpz9m7VS8F28nieJaL/VyShID7cYvP6IL5oHeL6p4TXSDJqZE/lNv0oJ2pGVjJsRkfwm5FA==}
+  less@4.2.2:
+    resolution: {integrity: sha512-tkuLHQlvWUTeQ3doAqnHbNn8T6WX1KA8yvbKG9x4VtKtIjHsVKQZCH11zRgAfbDAXC2UNIg/K9BYAAcEzUIrNg==}
     engines: {node: '>=6'}
     hasBin: true
 
@@ -7981,13 +7981,13 @@ snapshots:
       '@types/yargs': 17.0.24
       chalk: 4.1.2
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.2.1(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.2.1(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.3.3)
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     optionalDependencies:
       typescript: 5.3.3
 
@@ -8394,7 +8394,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@storybook/builder-vite@7.0.7(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))':
+  '@storybook/builder-vite@7.0.7(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))':
     dependencies:
       '@storybook/channel-postmessage': 7.0.7
       '@storybook/channel-websocket': 7.0.7
@@ -8416,7 +8416,7 @@ snapshots:
       remark-external-links: 8.0.0
       remark-slug: 6.1.0
       rollup: 3.29.5
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     optionalDependencies:
       typescript: 5.3.3
     transitivePeerDependencies:
@@ -8701,19 +8701,19 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
 
-  '@storybook/react-vite@7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))':
+  '@storybook/react-vite@7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.2.1(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.2.1(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       '@rollup/pluginutils': 4.2.1
-      '@storybook/builder-vite': 7.0.7(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+      '@storybook/builder-vite': 7.0.7(typescript@5.3.3)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       '@storybook/react': 7.0.7(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)
-      '@vitejs/plugin-react': 3.1.0(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))
+      '@vitejs/plugin-react': 3.1.0(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))
       ast-types: 0.14.2
       magic-string: 0.27.0
       react: 18.2.0
       react-docgen: 6.0.0-alpha.3
       react-dom: 18.2.0(react@18.2.0)
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - supports-color
@@ -9189,24 +9189,24 @@ snapshots:
       '@typescript-eslint/types': 5.59.1
       eslint-visitor-keys: 3.4.1
 
-  '@vitejs/plugin-react@3.1.0(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))':
+  '@vitejs/plugin-react@3.1.0(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))':
     dependencies:
       '@babel/core': 7.22.10
       '@babel/plugin-transform-react-jsx-self': 7.22.5(@babel/core@7.22.10)
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.22.10)
       magic-string: 0.27.0
       react-refresh: 0.14.0
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     transitivePeerDependencies:
       - supports-color
 
-  '@vitejs/plugin-react@4.0.4(vite@4.5.9(@types/node@20.12.12)(less@4.1.3))':
+  '@vitejs/plugin-react@4.0.4(vite@4.5.9(@types/node@20.12.12)(less@4.2.2))':
     dependencies:
       '@babel/core': 7.22.10
       '@babel/plugin-transform-react-jsx-self': 7.22.5(@babel/core@7.22.10)
       '@babel/plugin-transform-react-jsx-source': 7.22.5(@babel/core@7.22.10)
       react-refresh: 0.14.0
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -9223,7 +9223,7 @@ snapshots:
       std-env: 3.3.3
       test-exclude: 6.0.0
       v8-to-istanbul: 9.1.0
-      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.1.3)(playwright@1.50.1)
+      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.2.2)(playwright@1.50.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -9258,7 +9258,7 @@ snapshots:
       pathe: 1.1.1
       picocolors: 1.1.1
       sirv: 2.0.3
-      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.1.3)(playwright@1.50.1)
+      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.2.2)(playwright@1.50.1)
 
   '@vitest/utils@0.34.1':
     dependencies:
@@ -11564,7 +11564,7 @@ snapshots:
       dotenv: 16.0.3
       dotenv-expand: 10.0.0
 
-  less@4.1.3:
+  less@4.2.2:
     dependencies:
       copy-anything: 2.0.6
       parse-node-version: 1.0.1
@@ -13468,14 +13468,14 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-node@0.34.1(@types/node@20.12.12)(less@4.1.3):
+  vite-node@0.34.1(@types/node@20.12.12)(less@4.2.2):
     dependencies:
       cac: 6.7.14
       debug: 4.3.4
       mlly: 1.4.0
       pathe: 1.1.1
       picocolors: 1.1.1
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -13486,7 +13486,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-pages@0.29.0(vite@4.5.9(@types/node@20.12.12)(less@4.1.3)):
+  vite-plugin-pages@0.29.0(vite@4.5.9(@types/node@20.12.12)(less@4.2.2)):
     dependencies:
       '@types/debug': 4.1.7
       debug: 4.3.4
@@ -13496,21 +13496,21 @@ snapshots:
       json5: 2.2.3
       local-pkg: 0.4.3
       picocolors: 1.1.1
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
       yaml: 2.3.1
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-svgr@2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.1.3)):
+  vite-plugin-svgr@2.4.0(rollup@3.29.5)(vite@4.5.9(@types/node@20.12.12)(less@4.2.2)):
     dependencies:
       '@rollup/pluginutils': 5.0.2(rollup@3.29.5)
       '@svgr/core': 6.5.1
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
     transitivePeerDependencies:
       - rollup
       - supports-color
 
-  vite@4.5.9(@types/node@20.12.12)(less@4.1.3):
+  vite@4.5.9(@types/node@20.12.12)(less@4.2.2):
     dependencies:
       esbuild: 0.18.20
       postcss: 8.5.1
@@ -13518,14 +13518,14 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.12.12
       fsevents: 2.3.3
-      less: 4.1.3
+      less: 4.2.2
 
   vitest-github-actions-reporter@0.10.0(vitest@0.34.1):
     dependencies:
       '@actions/core': 1.11.1
-      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.1.3)(playwright@1.50.1)
+      vitest: 0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.2.2)(playwright@1.50.1)
 
-  vitest@0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.1.3)(playwright@1.50.1):
+  vitest@0.34.1(@vitest/ui@0.34.1)(jsdom@21.1.1)(less@4.2.2)(playwright@1.50.1):
     dependencies:
       '@types/chai': 4.3.5
       '@types/chai-subset': 1.3.3
@@ -13548,8 +13548,8 @@ snapshots:
       strip-literal: 1.0.1
       tinybench: 2.5.0
       tinypool: 0.7.0
-      vite: 4.5.9(@types/node@20.12.12)(less@4.1.3)
-      vite-node: 0.34.1(@types/node@20.12.12)(less@4.1.3)
+      vite: 4.5.9(@types/node@20.12.12)(less@4.2.2)
+      vite-node: 0.34.1(@types/node@20.12.12)(less@4.2.2)
       why-is-node-running: 2.2.2
     optionalDependencies:
       '@vitest/ui': 0.34.1(vitest@0.34.1)
