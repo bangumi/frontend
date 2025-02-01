@@ -4,7 +4,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
-import type { Reply, SlimUser, SubReply } from '@bangumi/client/topic';
+import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
 import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
 import { getUserProfileLink } from '@bangumi/utils/pages';
@@ -17,7 +17,7 @@ import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
 import ReplyForm from './ReplyForm';
 
-export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply: false })) & {
+export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply: false })) & {
   topicId: number;
   floor: string | number;
   originalPosterId: number;
@@ -69,7 +69,7 @@ const SpecialStateIcon = memo(({ state }: { state: State }) => {
 });
 
 const Comment: FC<CommentProps> = ({
-  text,
+  content,
   creator,
   createdAt,
   floor,
@@ -85,7 +85,7 @@ const Comment: FC<CommentProps> = ({
   // 1 关闭 2 重开 5 下沉
   const isSpecial = [State.Closed, State.Reopen, State.Silent].includes(state);
   const replies = !isReply ? props.replies : null;
-  const shouldCollapse = isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted));
+  const shouldCollapse = isSpecial || (isReply && (/[+-]\d+$/.test(content) || isDeleted));
   const [collapsed, setCollapsed] = useState(shouldCollapse);
 
   const [showReplyEditor, setShowReplyEditor] = useState(false);
@@ -108,8 +108,8 @@ const Comment: FC<CommentProps> = ({
 
   const startReply = useCallback(() => {
     setShowReplyEditor(true);
-    setReplyContent(isReply ? `[quote]${text.slice(0, 30)}[/quote]\n` : '');
-  }, [isReply, text]);
+    setReplyContent(isReply ? `[quote]${content.slice(0, 30)}[/quote]\n` : '');
+  }, [isReply, content]);
 
   if (collapsed) {
     return (
@@ -130,7 +130,7 @@ const Comment: FC<CommentProps> = ({
             <Link to={url} isExternal>
               {creator?.nickname ?? ''}
             </Link>
-            <RenderContent state={state} text={text} />
+            <RenderContent state={state} text={content} />
           </div>
           <CommentInfo createdAt={createdAt} floor={floor} isSpecial={isSpecial} />
         </span>
@@ -192,7 +192,7 @@ const Comment: FC<CommentProps> = ({
                 )}
               </div>
             </span>
-            <RenderContent state={state} text={text} />
+            <RenderContent state={state} text={content} />
           </div>
           {showReplyEditor && (
             <div className='bgm-comment__opinions'>

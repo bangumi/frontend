@@ -4,7 +4,8 @@ import { rest } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-import type { GroupProfile, ResponseWithPagination, Topic } from '@bangumi/client/group';
+import type { Group, ResponseWithPagination } from '@bangumi/client/group';
+import type { Topic } from '@bangumi/client/topic';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import GroupPage from '@bangumi/website/pages/index/group/[name]';
 import { renderPage } from '@bangumi/website/utils/test-utils';
@@ -26,10 +27,7 @@ const mockedUseParams = vi.mocked(useParams);
 class GroupHomeTest {
   page: RenderResult;
 
-  constructor(
-    name: string,
-    mock: { group?: GroupProfile; topics?: ResponseWithPagination<Topic[]> },
-  ) {
+  constructor(name: string, mock: { group?: Group; topics?: ResponseWithPagination<Topic[]> }) {
     mockedUseParams.mockReturnValue({
       name,
     });
