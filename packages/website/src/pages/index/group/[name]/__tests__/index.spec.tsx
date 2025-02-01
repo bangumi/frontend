@@ -78,11 +78,11 @@ class GroupHomeTest {
   }
 }
 
-// it('should match snapshot properly', async () => {
-//   const test = new GroupHomeTest('test', { group: Sandbox });
+it('should match snapshot properly', async () => {
+  const test = new GroupHomeTest('test', { group: Sandbox });
 
-//   await test.assertHeader('沙盒');
-// });
+  await test.assertHeader('沙盒');
+});
 
 // it('should list recent topics', async () => {
 //   const test = new GroupHomeTest('test', {

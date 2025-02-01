@@ -10,6 +10,8 @@ import { server as mockServer } from '../../../../../mocks/server';
 import { renderPage } from '../../../../../utils/test-utils';
 import GroupMembers from '../index/members';
 import Sandbox from './fixtures/sandbox.json';
+import sandboxMembers from './fixtures/sandbox-members.json';
+import sandboxModMembers from './fixtures/sandbox-mod-member.json';
 
 vi.mock('react-router-dom', async () => {
   return {
@@ -68,11 +70,11 @@ class GroupMembersTest {
   }
 }
 
-// it('should list group members', async () => {
-//   const test = new GroupMembersTest('test', {
-//     members: sandboxMembers as ResponseWithPagination<GroupMember[]>,
-//     modMembers: sandboxModMember as ResponseWithPagination<GroupMember[]>,
-//   });
+it('should list group members', async () => {
+  const test = new GroupMembersTest('test', {
+    members: sandboxMembers as ResponseWithPagination<GroupMember[]>,
+    modMembers: sandboxModMembers as ResponseWithPagination<GroupMember[]>,
+  });
 
-//   await test.assertMembersExist(['纯セン羽爱']);
-// });
+  await test.assertMembersExist(['bangumi大西王']);
+});
