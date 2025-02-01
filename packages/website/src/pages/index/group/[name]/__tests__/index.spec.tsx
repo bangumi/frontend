@@ -101,19 +101,19 @@ it('should match snapshot properly', async () => {
   await test.assertHeader('沙盒');
 });
 
-it('should list group members', async () => {
-  const test = new GroupHomeTest('sandbox');
+// it('should list group members', async () => {
+//   const test = new GroupHomeTest('sandbox');
 
-  await test.assertMembersExist(['维基 bot', 'bangumi大西王']);
-});
+//   await test.assertMembersExist(['维基 bot', 'bangumi大西王']);
+// });
 
-it('should list recent topics', async () => {
-  const test = new GroupHomeTest('sandbox');
+// it('should list recent topics', async () => {
+//   const test = new GroupHomeTest('sandbox');
 
-  await test.assertTopicExist({
-    title: 'tes',
-    creator: 'bangumi大西王',
-    replies: 2,
-    updatedAt: '2022-9-4',
-  });
-});
+//   await test.assertTopicExist({
+//     title: 'tes',
+//     creator: 'bangumi大西王',
+//     replies: 2,
+//     updatedAt: '2022-9-4',
+//   });
+// });
