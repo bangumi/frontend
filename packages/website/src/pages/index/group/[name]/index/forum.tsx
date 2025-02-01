@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Pagination } from '@bangumi/design';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
-import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
+import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics';
 import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -25,7 +25,7 @@ const GroupForum = () => {
     groupRet: { group },
   } = groupContext;
 
-  const topics = useGroupRecentTopics(name!, {
+  const { data: topics, total } = useGroupTopics(name!, {
     offset,
     limit: pageSize,
   });
@@ -37,9 +37,9 @@ const GroupForum = () => {
   return (
     <>
       <Helmet title={`${group.title}小组的讨论`} />
-      <TopicsTable topics={topics.data} />
+      <TopicsTable topics={topics ?? []} />
       <Pagination
-        total={topics.total}
+        total={total ?? 0}
         pageSize={pageSize}
         currentPage={curPage}
         wrapperClass={styles.pagination}
