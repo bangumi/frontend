@@ -31,8 +31,7 @@
   },
   "packageManager": "pnpm@8.3.1",
   "engines": {
-    "node": ">=v16",
-    "pnpm": "^8"
+    "node": ">=v16"
   },
   "prettier": {
     "printWidth": 100,
