@@ -36,7 +36,7 @@ const GroupForum = () => {
 
   return (
     <>
-      <Helmet title={`${group.group.title}小组的讨论`} />
+      <Helmet title={`${group.title}小组的讨论`} />
       <TopicsTable topics={topics.data} />
       <Pagination
         total={topics.total}

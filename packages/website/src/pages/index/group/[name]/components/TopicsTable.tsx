@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { Topic } from '@bangumi/client/common';
+import type { Topic } from '@bangumi/client/topic';
 import { Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
@@ -27,16 +27,16 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
                   {topic.title}
                 </Typography.Link>
               </td>
-              <td className={styles.author} title={topic.creator.nickname}>
+              <td className={styles.author} title={topic.creator?.nickname}>
                 <Typography.Link
-                  to={getUserProfileLink(topic.creator.username)}
+                  to={getUserProfileLink(topic.creator?.username ?? '')}
                   fontWeight='bold'
                   isExternal
                 >
-                  {topic.creator.nickname}
+                  {topic.creator?.nickname}
                 </Typography.Link>
               </td>
-              <td className={styles.replies}>{topic.repliesCount}</td>
+              <td className={styles.replies}>{topic.replies}</td>
               <td className={styles.updateTime}>
                 {dayjs(topic.updatedAt * 1000).format('YYYY-M-D')}
               </td>

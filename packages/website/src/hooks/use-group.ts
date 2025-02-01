@@ -3,15 +3,11 @@ import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type {
-  GroupProfile,
-  PaginationQuery,
-  ResponseWithPagination,
-  Topic,
-} from '@bangumi/client/group';
+import type { Group, PaginationQuery, ResponseWithPagination } from '@bangumi/client/group';
+import type { Topic } from '@bangumi/client/topic';
 
 export interface UseGroupRet {
-  group: GroupProfile;
+  group: Group;
   descriptionCollapsed: boolean;
   setDescriptionCollapsed: (val: boolean) => void;
 }
@@ -24,7 +20,7 @@ export function useGroupRecentTopics(
 ): ResponseWithPagination<Topic[]> {
   const { data: recentTopicsResp } = useSWR(
     `/group/${name}/topics?${limit}-${offset}`,
-    async () => ok(ozaClient.getGroupTopicsByGroupName(name, { limit, offset })),
+    async () => ok(ozaClient.getGroupTopics(name, { limit, offset })),
     { suspense: true },
   );
 
@@ -32,11 +28,9 @@ export function useGroupRecentTopics(
 }
 
 export function useGroup(name: string): UseGroupRet {
-  const { data: groupResp } = useSWR(
-    `/group/${name}/profile`,
-    async () => ok(ozaClient.getGroupProfile(name)),
-    { suspense: true },
-  );
+  const { data: groupResp } = useSWR(`/group/${name}`, async () => ok(ozaClient.getGroup(name)), {
+    suspense: true,
+  });
 
   const getDescriptionCollapseConfig = () => {
     try {

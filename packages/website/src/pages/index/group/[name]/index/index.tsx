@@ -26,11 +26,11 @@ const GroupHome: React.FC = () => {
     groupRet: { group, descriptionCollapsed, setDescriptionCollapsed },
   } = groupContext;
 
-  const parsedDescription = renderBBCode(group.group.description);
+  const parsedDescription = renderBBCode(group.description);
 
   return (
     <>
-      <Helmet title={`${group.group.title}小组`} />
+      <Helmet title={`${group.title}小组`} />
       <CollapsibleContent
         threshold={193}
         content={parsedDescription}

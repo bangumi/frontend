@@ -51,6 +51,22 @@ export interface paths {
      */
     post: operations['clearNotice'];
   };
+  '/p1/collections/characters': {
+    /** 获取当前用户的角色收藏 */
+    get: operations['getMyCharacterCollections'];
+  };
+  '/p1/collections/indexes': {
+    /** 获取当前用户的目录收藏 */
+    get: operations['getMyIndexCollections'];
+  };
+  '/p1/collections/persons': {
+    /** 获取当前用户的人物收藏 */
+    get: operations['getMyPersonCollections'];
+  };
+  '/p1/collections/subjects': {
+    /** 获取当前用户的条目收藏 */
+    get: operations['getMySubjectCollections'];
+  };
   '/p1/debug': {
     /**
      * debug
@@ -58,7 +74,33 @@ export interface paths {
      */
     get: operations['debug'];
   };
+  '/p1/episodes/-/comments/{commentID}': {
+    /** 编辑条目的剧集吐槽 */
+    put: operations['updateSubjectEpComment'];
+    /** 删除条目的剧集吐槽 */
+    delete: operations['deleteSubjectEpComment'];
+  };
+  '/p1/episodes/{episodeID}': {
+    /** 获取剧集信息 */
+    get: operations['getSubjectEpisode'];
+  };
+  '/p1/episodes/{episodeID}/comments': {
+    /** 获取条目的剧集吐槽箱 */
+    get: operations['getSubjectEpisodeComments'];
+    /** 创建条目的剧集吐槽 */
+    post: operations['createSubjectEpComment'];
+  };
+  '/p1/followers': {
+    /** 获取当前用户的关注者列表 */
+    get: operations['getMyFollowers'];
+  };
+  '/p1/friends': {
+    /** 获取当前用户的好友列表 */
+    get: operations['getMyFriends'];
+  };
   '/p1/groups/-/posts/{postID}': {
+    /** 获取小组帖子回复详情 */
+    get: operations['getGroupPost'];
     /** 编辑小组帖子回复 */
     put: operations['editGroupPost'];
     /** 删除小组帖子回复 */
@@ -130,30 +172,6 @@ export interface paths {
     /** 获取条目列表 */
     get: operations['getSubjects'];
   };
-  '/p1/subjects/-/episode/-/comments/{commentID}': {
-    put: {
-      parameters: {
-        path: {
-          commentID: string;
-        };
-      };
-      responses: {
-        /** @description Default Response */
-        200: never;
-      };
-    };
-    delete: {
-      parameters: {
-        path: {
-          commentID: string;
-        };
-      };
-      responses: {
-        /** @description Default Response */
-        200: never;
-      };
-    };
-  };
   '/p1/subjects/-/episode/{episodeID}': {
     get: {
       parameters: {
@@ -179,7 +197,9 @@ export interface paths {
         200: never;
       };
     };
-    post: {
+  };
+  '/p1/subjects/-/episodes/{episodeID}': {
+    get: {
       parameters: {
         path: {
           episodeID: string;
@@ -191,23 +211,22 @@ export interface paths {
       };
     };
   };
-  '/p1/subjects/-/episodes/-/comments/{commentID}': {
-    /** 编辑条目的剧集吐槽 */
-    put: operations['updateSubjectEpComment'];
-    /** 删除条目的剧集吐槽 */
-    delete: operations['deleteSubjectEpComment'];
-  };
-  '/p1/subjects/-/episodes/{episodeID}': {
-    /** 获取剧集信息 */
-    get: operations['getSubjectEpisode'];
-  };
   '/p1/subjects/-/episodes/{episodeID}/comments': {
-    /** 获取条目的剧集吐槽箱 */
-    get: operations['getSubjectEpisodeComments'];
-    /** 创建条目的剧集吐槽 */
-    post: operations['createSubjectEpComment'];
+    get: {
+      parameters: {
+        path: {
+          episodeID: string;
+        };
+      };
+      responses: {
+        /** @description Default Response */
+        200: never;
+      };
+    };
   };
   '/p1/subjects/-/posts/{postID}': {
+    /** 获取条目讨论回复详情 */
+    get: operations['getSubjectPost'];
     /** 编辑条目讨论回复 */
     put: operations['editSubjectPost'];
     /** 删除条目讨论回复 */
@@ -282,14 +301,6 @@ export interface paths {
      */
     get: operations['getTurnstileToken'];
   };
-  '/p1/users/-/collections/subjects/-/episodes/{episodeID}': {
-    /** 获取用户单个条目的单个章节收藏 */
-    get: operations['getUserSubjectCollectionEpisodeByEpisodeID'];
-  };
-  '/p1/users/-/collections/subjects/{subjectID}/episodes': {
-    /** 获取用户单个条目的章节收藏 */
-    get: operations['getUserSubjectCollectionEpisodesBySubjectID'];
-  };
   '/p1/users/{username}': {
     /** 获取用户信息 */
     get: operations['getUser'];
@@ -302,33 +313,17 @@ export interface paths {
     /** 获取用户角色收藏 */
     get: operations['getUserCharacterCollections'];
   };
-  '/p1/users/{username}/collections/characters/{characterID}': {
-    /** 获取用户单个角色收藏 */
-    get: operations['getUserCharacterCollectionByCharacterID'];
-  };
   '/p1/users/{username}/collections/indexes': {
     /** 获取用户目录收藏 */
     get: operations['getUserIndexCollections'];
-  };
-  '/p1/users/{username}/collections/indexes/{indexID}': {
-    /** 获取用户单个目录收藏 */
-    get: operations['getUserIndexCollectionByIndexID'];
   };
   '/p1/users/{username}/collections/persons': {
     /** 获取用户人物收藏 */
     get: operations['getUserPersonCollections'];
   };
-  '/p1/users/{username}/collections/persons/{personID}': {
-    /** 获取用户单个人物收藏 */
-    get: operations['getUserPersonCollectionByPersonID'];
-  };
   '/p1/users/{username}/collections/subjects': {
     /** 获取用户条目收藏 */
     get: operations['getUserSubjectCollections'];
-  };
-  '/p1/users/{username}/collections/subjects/{subjectID}': {
-    /** 获取用户单个条目收藏 */
-    get: operations['getUserSubjectCollectionBySubjectID'];
   };
   '/p1/users/{username}/followers': {
     /** 获取用户的关注者列表 */
@@ -457,6 +452,7 @@ export interface components {
     };
     /** Character */
     Character: {
+      collectedAt?: number;
       collects: number;
       comment: number;
       id: number;
@@ -560,6 +556,7 @@ export interface components {
       name: string;
       nameCN: string;
       sort: number;
+      status?: components['schemas']['EpisodeCollectionStatus'];
       subject?: components['schemas']['SlimSubject'];
       subjectID: number;
       type: components['schemas']['EpisodeType'];
@@ -579,10 +576,10 @@ export interface components {
       creatorID: number;
       epID: number;
       id: number;
-      reactions: components['schemas']['Reaction'][];
+      reactions?: components['schemas']['Reaction'][];
       relatedID: number;
       state: number;
-      user: components['schemas']['SlimUser'];
+      user?: components['schemas']['SlimUser'];
     };
     EpisodeComments: {
       content: string;
@@ -590,10 +587,10 @@ export interface components {
       creatorID: number;
       epID: number;
       id: number;
-      reactions: components['schemas']['Reaction'][];
+      reactions?: components['schemas']['Reaction'][];
       relatedID: number;
       state: number;
-      user: components['schemas']['SlimUser'];
+      user?: components['schemas']['SlimUser'];
     } & {
       replies: components['schemas']['EpisodeCommentBase'][];
     };
@@ -663,7 +660,7 @@ export interface components {
       accessible: boolean;
       cat: number;
       createdAt: number;
-      creator: components['schemas']['SlimUser'];
+      creator?: components['schemas']['SlimUser'];
       creatorID: number;
       description: string;
       icon: components['schemas']['Avatar'];
@@ -682,6 +679,13 @@ export interface components {
       uid: number;
       user?: components['schemas']['SlimUser'];
     };
+    /** GroupTopic */
+    GroupTopic: components['schemas']['TopicBase'] & {
+      content: string;
+      creator: components['schemas']['SlimUser'];
+      group: components['schemas']['SlimGroup'];
+      replies: components['schemas']['Reply'][];
+    };
     HistorySummary: {
       commitMessage: string;
       /** @description unix timestamp seconds */
@@ -694,9 +698,9 @@ export interface components {
     };
     /** Index */
     Index: {
+      collectedAt?: number;
       collects: number;
       createdAt: number;
-      creator: components['schemas']['SlimUser'];
       desc: string;
       id: number;
       replies: number;
@@ -777,6 +781,7 @@ export interface components {
        * @example producer
        */
       career: string[];
+      collectedAt?: number;
       collects: number;
       comment: number;
       id: number;
@@ -821,6 +826,16 @@ export interface components {
       positions: components['schemas']['SubjectStaffPosition'][];
       subject: components['schemas']['SlimSubject'];
     };
+    /** Post */
+    Post: {
+      content: string;
+      createdAt: number;
+      creator: components['schemas']['SlimUser'];
+      creatorID: number;
+      id: number;
+      state: number;
+      topic: components['schemas']['Topic'];
+    };
     /** Profile */
     Profile: {
       avatar: components['schemas']['Avatar'];
@@ -852,15 +867,18 @@ export interface components {
       }[];
     };
     /** Reply */
-    Reply: {
+    Reply: components['schemas']['ReplyBase'] & {
+      replies: components['schemas']['ReplyBase'][];
+    };
+    /** ReplyBase */
+    ReplyBase: {
+      content: string;
       createdAt: number;
       creator?: components['schemas']['SlimUser'];
       creatorID: number;
       id: number;
-      reactions: components['schemas']['Reaction'][];
-      replies: components['schemas']['SubReply'][];
+      reactions?: components['schemas']['Reaction'][];
       state: number;
-      text: string;
     };
     /** SimpleUser */
     SimpleUser: {
@@ -945,6 +963,7 @@ export interface components {
       id: number;
       images?: components['schemas']['SubjectImages'];
       info: string;
+      interest?: components['schemas']['SlimSubjectInterest'];
       locked: boolean;
       name: string;
       nameCN: string;
@@ -971,16 +990,6 @@ export interface components {
       sign: string;
       /** @example sai */
       username: string;
-    };
-    /** SubReply */
-    SubReply: {
-      createdAt: number;
-      creator?: components['schemas']['SlimUser'];
-      creatorID: number;
-      id: number;
-      reactions: components['schemas']['Reaction'][];
-      state: number;
-      text: string;
     };
     /**
      * Subject
@@ -1183,6 +1192,7 @@ export interface components {
       images?: components['schemas']['SubjectImages'];
       info: string;
       infobox: components['schemas']['Infobox'];
+      interest?: components['schemas']['SubjectInterest'];
       locked: boolean;
       metaTags: string[];
       name: string;
@@ -1355,6 +1365,13 @@ export interface components {
       count: number;
       name: string;
     };
+    /** SubjectTopic */
+    SubjectTopic: components['schemas']['TopicBase'] & {
+      content: string;
+      creator: components['schemas']['SlimUser'];
+      replies: components['schemas']['Reply'][];
+      subject: components['schemas']['SlimSubject'];
+    };
     /**
      * @description 条目类型
      *   - 1 = 书籍
@@ -1461,33 +1478,23 @@ export interface components {
      */
     TimelineSource: 0 | 1 | 2 | 3 | 4 | 5;
     /** Topic */
-    Topic: {
+    Topic: components['schemas']['TopicBase'] & {
+      creator?: components['schemas']['SlimUser'];
+      replies: number;
+    };
+    /** TopicBase */
+    TopicBase: {
       /** @description 发帖时间，unix time stamp in seconds */
       createdAt: number;
-      creator?: components['schemas']['SlimUser'];
       creatorID: number;
       display: number;
       id: number;
       /** @description 小组/条目ID */
       parentID: number;
-      replies: number;
       state: number;
       title: string;
       /** @description 最后回复时间，unix time stamp in seconds */
       updatedAt: number;
-    };
-    /** TopicDetail */
-    TopicDetail: {
-      content: string;
-      createdAt: number;
-      creator: components['schemas']['SlimUser'];
-      display: number;
-      id: number;
-      parent: components['schemas']['SlimGroup'] | components['schemas']['SlimSubject'];
-      reactions: components['schemas']['Reaction'][];
-      replies: components['schemas']['Reply'][];
-      state: number;
-      title: string;
     };
     TrendingSubject: {
       count: number;
@@ -1530,10 +1537,6 @@ export interface components {
       /** @example sai */
       username: string;
     };
-    UserCharacterCollection: {
-      character: components['schemas']['Character'];
-      createdAt: number;
-    };
     /** UserHomepage */
     UserHomepage: {
       left: components['schemas']['UserHomepageSection'][];
@@ -1554,10 +1557,6 @@ export interface components {
       | 'friend'
       | 'group'
       | 'index';
-    UserIndexCollection: {
-      createdAt: number;
-      index: components['schemas']['Index'];
-    };
     /** UserIndexStats */
     UserIndexStats: {
       collect: number;
@@ -1576,10 +1575,6 @@ export interface components {
       title: string;
       url: string;
     };
-    UserPersonCollection: {
-      createdAt: number;
-      person: components['schemas']['Person'];
-    };
     /** UserStats */
     UserStats: {
       blog: number;
@@ -1589,17 +1584,6 @@ export interface components {
       mono: components['schemas']['UserMonoCollectionStats'];
       subject: components['schemas']['UserSubjectCollectionStats'];
     };
-    UserSubjectCollection: {
-      comment: string;
-      epStatus: number;
-      private: boolean;
-      rate: number;
-      subject: components['schemas']['Subject'];
-      tags: string[];
-      type: components['schemas']['CollectionType'];
-      updatedAt: number;
-      volStatus: number;
-    };
     /** UserSubjectCollectionStats */
     UserSubjectCollectionStats: {
       [key: string]:
@@ -1607,10 +1591,6 @@ export interface components {
             [key: string]: number | undefined;
           }
         | undefined;
-    };
-    UserSubjectEpisodeCollection: {
-      episode: components['schemas']['Episode'];
-      type: components['schemas']['EpisodeCollectionStatus'];
     };
     WikiPlatform: {
       id: number;
@@ -1928,6 +1908,126 @@ export interface operations {
       };
     };
   };
+  /** 获取当前用户的角色收藏 */
+  getMyCharacterCollections: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Character'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取当前用户的目录收藏 */
+  getMyIndexCollections: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Index'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取当前用户的人物收藏 */
+  getMyPersonCollections: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Person'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取当前用户的条目收藏 */
+  getMySubjectCollections: {
+    parameters: {
+      query?: {
+        subjectType?: components['schemas']['SubjectType'];
+        type?: components['schemas']['CollectionType'];
+        /** @description 起始时间戳 */
+        since?: number;
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Subject'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   /**
    * debug
    * @description debug 路由
@@ -1938,6 +2038,226 @@ export interface operations {
       200: {
         content: {
           'application/json': unknown;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 编辑条目的剧集吐槽 */
+  updateSubjectEpComment: {
+    parameters: {
+      path: {
+        /** @example 1075440 */
+        commentID: number;
+      };
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateEpisodeComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 删除条目的剧集吐槽 */
+  deleteSubjectEpComment: {
+    parameters: {
+      path: {
+        /** @example 1034989 */
+        commentID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取剧集信息 */
+  getSubjectEpisode: {
+    parameters: {
+      path: {
+        /** @example 1075440 */
+        episodeID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['Episode'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取条目的剧集吐槽箱 */
+  getSubjectEpisodeComments: {
+    parameters: {
+      path: {
+        /** @example 1075440 */
+        episodeID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': ({
+            content: string;
+            createdAt: number;
+            creatorID: number;
+            epID: number;
+            id: number;
+            reactions?: components['schemas']['Reaction'][];
+            relatedID: number;
+            state: number;
+            user?: components['schemas']['SlimUser'];
+          } & {
+            replies: components['schemas']['EpisodeCommentBase'][];
+          })[];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 创建条目的剧集吐槽 */
+  createSubjectEpComment: {
+    parameters: {
+      path: {
+        /** @example 1075440 */
+        episodeID: number;
+      };
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['CreateEpisodeComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            /** @description new reply id */
+            id: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取当前用户的关注者列表 */
+  getMyFollowers: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Friend'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取当前用户的好友列表 */
+  getMyFriends: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': {
+            data: components['schemas']['Friend'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  /** 获取小组帖子回复详情 */
+  getGroupPost: {
+    parameters: {
+      path: {
+        postID: number;
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        content: {
+          'application/json': components['schemas']['Post'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -2008,7 +2328,7 @@ export interface operations {
       /** @description Default Response */
       200: {
         content: {
-          'application/json': components['schemas']['TopicDetail'];
+          'application/json': components['schemas']['GroupTopic'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -2525,136 +2845,18 @@ export interface operations {
       };
     };
   };
-  /** 编辑条目的剧集吐槽 */
-  updateSubjectEpComment: {
+  /** 获取条目讨论回复详情 */
+  getSubjectPost: {
     parameters: {
       path: {
-        /** @example 1075440 */
-        commentID: number;
-      };
-    };
-    requestBody?: {
-      content: {
-        'application/json': components['schemas']['UpdateEpisodeComment'];
+        postID: number;
       };
     };
     responses: {
       /** @description Default Response */
       200: {
         content: {
-          'application/json': Record<string, never>;
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 删除条目的剧集吐槽 */
-  deleteSubjectEpComment: {
-    parameters: {
-      path: {
-        /** @example 1034989 */
-        commentID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': Record<string, never>;
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取剧集信息 */
-  getSubjectEpisode: {
-    parameters: {
-      path: {
-        /** @example 1075440 */
-        episodeID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['Episode'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取条目的剧集吐槽箱 */
-  getSubjectEpisodeComments: {
-    parameters: {
-      path: {
-        /** @example 1075440 */
-        episodeID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': ({
-            content: string;
-            createdAt: number;
-            creatorID: number;
-            epID: number;
-            id: number;
-            reactions: components['schemas']['Reaction'][];
-            relatedID: number;
-            state: number;
-            user: components['schemas']['SlimUser'];
-          } & {
-            replies: components['schemas']['EpisodeCommentBase'][];
-          })[];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 创建条目的剧集吐槽 */
-  createSubjectEpComment: {
-    parameters: {
-      path: {
-        /** @example 1075440 */
-        episodeID: number;
-      };
-    };
-    requestBody?: {
-      content: {
-        'application/json': components['schemas']['CreateEpisodeComment'];
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': {
-            /** @description new reply id */
-            id: number;
-          };
+          'application/json': components['schemas']['Post'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -2725,7 +2927,7 @@ export interface operations {
       /** @description Default Response */
       200: {
         content: {
-          'application/json': components['schemas']['TopicDetail'];
+          'application/json': components['schemas']['SubjectTopic'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -3248,61 +3450,6 @@ export interface operations {
       };
     };
   };
-  /** 获取用户单个条目的单个章节收藏 */
-  getUserSubjectCollectionEpisodeByEpisodeID: {
-    parameters: {
-      path: {
-        episodeID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserSubjectEpisodeCollection'];
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取用户单个条目的章节收藏 */
-  getUserSubjectCollectionEpisodesBySubjectID: {
-    parameters: {
-      query?: {
-        type?: components['schemas']['EpisodeType'];
-        /** @description max 1000 */
-        limit?: number;
-        /** @description min 0 */
-        offset?: number;
-      };
-      path: {
-        subjectID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': {
-            data: components['schemas']['UserSubjectEpisodeCollection'][];
-            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
-            total: number;
-          };
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
   /** 获取用户信息 */
   getUser: {
     parameters: {
@@ -3375,33 +3522,10 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            data: components['schemas']['UserCharacterCollection'][];
+            data: components['schemas']['SlimCharacter'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取用户单个角色收藏 */
-  getUserCharacterCollectionByCharacterID: {
-    parameters: {
-      path: {
-        username: string;
-        characterID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserCharacterCollection'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -3430,33 +3554,10 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            data: components['schemas']['UserIndexCollection'][];
+            data: components['schemas']['SlimIndex'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取用户单个目录收藏 */
-  getUserIndexCollectionByIndexID: {
-    parameters: {
-      path: {
-        username: string;
-        indexID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserIndexCollection'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -3485,33 +3586,10 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            data: components['schemas']['UserPersonCollection'][];
+            data: components['schemas']['SlimPerson'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取用户单个人物收藏 */
-  getUserPersonCollectionByPersonID: {
-    parameters: {
-      path: {
-        username: string;
-        personID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserPersonCollection'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -3528,8 +3606,6 @@ export interface operations {
       query?: {
         subjectType?: components['schemas']['SubjectType'];
         type?: components['schemas']['CollectionType'];
-        /** @description 起始时间戳 */
-        since?: number;
         /** @description max 100 */
         limit?: number;
         /** @description min 0 */
@@ -3544,33 +3620,10 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            data: components['schemas']['UserSubjectCollection'][];
+            data: components['schemas']['SlimSubject'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
-        };
-      };
-      /** @description 意料之外的服务器错误 */
-      500: {
-        content: {
-          'application/json': components['schemas']['ErrorResponse'];
-        };
-      };
-    };
-  };
-  /** 获取用户单个条目收藏 */
-  getUserSubjectCollectionBySubjectID: {
-    parameters: {
-      path: {
-        username: string;
-        subjectID: number;
-      };
-    };
-    responses: {
-      /** @description Default Response */
-      200: {
-        content: {
-          'application/json': components['schemas']['UserSubjectCollection'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -3599,7 +3652,7 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            data: components['schemas']['Friend'][];
+            data: components['schemas']['SlimUser'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
@@ -3631,7 +3684,7 @@ export interface operations {
       200: {
         content: {
           'application/json': {
-            data: components['schemas']['Friend'][];
+            data: components['schemas']['SlimUser'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
