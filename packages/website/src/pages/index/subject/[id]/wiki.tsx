@@ -1,4 +1,4 @@
-import { ok } from 'oazapfts';
+import { ok } from '@oazapfts/runtime';
 import React from 'react';
 import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import type { KeyedMutator } from 'swr';

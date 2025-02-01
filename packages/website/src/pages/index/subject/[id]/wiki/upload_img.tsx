@@ -1,4 +1,4 @@
-import { ok } from 'oazapfts';
+import { ok } from '@oazapfts/runtime';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 

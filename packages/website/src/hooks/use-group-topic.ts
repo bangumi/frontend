@@ -1,4 +1,4 @@
-import { ok } from 'oazapfts';
+import { ok } from '@oazapfts/runtime';
 import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
