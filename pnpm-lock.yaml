@@ -126,8 +126,8 @@ importers:
         specifier: ^4.2.0
         version: 4.2.0(stylelint@15.6.0)
       stylelint-config-standard:
-        specifier: ^31.0.0
-        version: 31.0.0(stylelint@15.6.0)
+        specifier: ^37.0.0
+        version: 37.0.0(stylelint@15.6.0)
       stylelint-scss:
         specifier: ^4.7.0
         version: 4.7.0(stylelint@15.6.0)
@@ -5622,15 +5622,17 @@ packages:
     peerDependencies:
       stylelint: ^14.5.1 || ^15.0.0
 
-  stylelint-config-recommended@11.0.0:
-    resolution: {integrity: sha512-SoGIHNI748OCZn6BxFYT83ytWoYETCINVHV3LKScVAWQQauWdvmdDqJC5YXWjpBbxg2E761Tg5aUGKLFOVhEkA==}
+  stylelint-config-recommended@15.0.0:
+    resolution: {integrity: sha512-9LejMFsat7L+NXttdHdTq94byn25TD+82bzGRiV1Pgasl99pWnwipXS5DguTpp3nP1XjvLXVnEJIuYBfsRjRkA==}
+    engines: {node: '>=18.12.0'}
     peerDependencies:
-      stylelint: ^15.3.0
+      stylelint: ^16.13.0
 
-  stylelint-config-standard@31.0.0:
-    resolution: {integrity: sha512-CUGAmtROCvX0YgMY2+6P9tqSkHj5z/75XxrQ8bGxvkCa1xYdGDx4poM0pa7cXc3s74/PZLJH/okxZZouRfOSGw==}
+  stylelint-config-standard@37.0.0:
+    resolution: {integrity: sha512-+6eBlbSTrOn/il2RlV0zYGQwRTkr+WtzuVSs1reaWGObxnxLpbcspCUYajVQHonVfxVw2U+h42azGhrBvcg8OA==}
+    engines: {node: '>=18.12.0'}
     peerDependencies:
-      stylelint: ^15.3.0
+      stylelint: ^16.13.0
 
   stylelint-scss@4.7.0:
     resolution: {integrity: sha512-TSUgIeS0H3jqDZnby1UO1Qv3poi1N8wUYIJY6D1tuUq2MN3lwp/rITVo0wD+1SWTmRm0tNmGO0b7nKInnqF6Hg==}
@@ -13090,14 +13092,14 @@ snapshots:
     optionalDependencies:
       stylelint-scss: 4.7.0(stylelint@15.6.0)
 
-  stylelint-config-recommended@11.0.0(stylelint@15.6.0):
+  stylelint-config-recommended@15.0.0(stylelint@15.6.0):
     dependencies:
       stylelint: 15.6.0
 
-  stylelint-config-standard@31.0.0(stylelint@15.6.0):
+  stylelint-config-standard@37.0.0(stylelint@15.6.0):
     dependencies:
       stylelint: 15.6.0
-      stylelint-config-recommended: 11.0.0(stylelint@15.6.0)
+      stylelint-config-recommended: 15.0.0(stylelint@15.6.0)
 
   stylelint-scss@4.7.0(stylelint@15.6.0):
     dependencies:
