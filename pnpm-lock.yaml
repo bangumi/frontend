@@ -159,8 +159,8 @@ importers:
   packages/client:
     dependencies:
       oazapfts:
-        specifier: ^4.12.0
-        version: 4.12.0(openapi-types@12.1.3)
+        specifier: ^6.1.0
+        version: 6.1.0(@oazapfts/runtime@1.0.3)(openapi-types@12.1.3)
     devDependencies:
       '@apidevtools/json-schema-ref-parser':
         specifier: ^11.9.0
@@ -354,8 +354,8 @@ importers:
         specifier: ^5.0.9
         version: 5.0.9
       oazapfts:
-        specifier: ^4.12.0
-        version: 4.12.0(openapi-types@12.1.3)
+        specifier: ^6.1.0
+        version: 6.1.0(@oazapfts/runtime@1.0.3)(openapi-types@12.1.3)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -1560,6 +1560,9 @@ packages:
   '@nolyfill/is-core-module@1.0.39':
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
+
+  '@oazapfts/runtime@1.0.3':
+    resolution: {integrity: sha512-8tKiYffhwTGHSHYGnZ3oneLGCjX0po/XAXQ5Ng9fqKkvIdl/xz8+Vh8i+6xjzZqvZ2pLVpUcuSfnvNI/x67L0g==}
 
   '@octokit/auth-token@4.0.0':
     resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
@@ -5005,9 +5008,11 @@ packages:
   oas-validator@5.0.8:
     resolution: {integrity: sha512-cu20/HE5N5HKqVygs3dt94eYJfBi0TsZvPVXDhbXQHiEityDN+RROTleefoKRKKJ9dFAF2JBkDHgvWj0sjKGmw==}
 
-  oazapfts@4.12.0:
-    resolution: {integrity: sha512-hNKRG4eLYceuJuqDDx7Uqsi8p3j5k83gNKSo2qnUOTiiU03sCQOjXxOqCXDbzRcuDFyK94+1PBIpotK4NoxIjw==}
+  oazapfts@6.1.0:
+    resolution: {integrity: sha512-+E0db72jn0AMJ36ZzEXF3qCZ+T4pnOem/tmiJVql1Kx4qkWBE4YGeiUicp3gkzLJ/OrmpvSyAufI8eZ7sODCYg==}
     hasBin: true
+    peerDependencies:
+      '@oazapfts/runtime': '*'
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -7895,6 +7900,8 @@ snapshots:
       fastq: 1.15.0
 
   '@nolyfill/is-core-module@1.0.39': {}
+
+  '@oazapfts/runtime@1.0.3': {}
 
   '@octokit/auth-token@4.0.0': {}
 
@@ -11755,7 +11762,7 @@ snapshots:
     dependencies:
       chalk: 5.4.1
       commander: 13.1.0
-      debug: 4.4.0
+      debug: 4.4.0(supports-color@9.4.0)
       execa: 8.0.1
       lilconfig: 3.1.3
       listr2: 8.2.5
@@ -12137,12 +12144,14 @@ snapshots:
       should: 13.2.3
       yaml: 1.10.2
 
-  oazapfts@4.12.0(openapi-types@12.1.3):
+  oazapfts@6.1.0(@oazapfts/runtime@1.0.3)(openapi-types@12.1.3):
     dependencies:
       '@apidevtools/swagger-parser': 10.1.0(openapi-types@12.1.3)
+      '@oazapfts/runtime': 1.0.3
       lodash: 4.17.21
       minimist: 1.2.8
       swagger2openapi: 7.0.8
+      tapable: 2.2.1
       typescript: 5.7.3
     transitivePeerDependencies:
       - encoding
