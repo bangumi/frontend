@@ -95,7 +95,7 @@
     "tsx": "^4.19.2",
     "typescript": "^5.0.4",
     "vite": "^4.5.9",
-    "vite-plugin-svgr": "^2.4.0",
+    "vite-plugin-svgr": "^4.3.0",
     "vitest": "^0.34.1",
     "vitest-github-actions-reporter": "^0.10.0",
     "whatwg-fetch": "^3.6.20"
