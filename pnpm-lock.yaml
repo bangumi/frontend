@@ -263,8 +263,8 @@ importers:
         specifier: ^7.43.9
         version: 7.43.9(react@18.2.0)
       react-router-dom:
-        specifier: ^6.11.0
-        version: 6.11.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^6.29.0
+        version: 6.29.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       storybook:
         specifier: ^7.0.7
         version: 7.0.7
@@ -336,8 +336,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@remix-run/router':
-        specifier: ^1.6.0
-        version: 1.6.0
+        specifier: ^1.22.0
+        version: 1.22.0
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -372,8 +372,8 @@ importers:
         specifier: ^7.43.9
         version: 7.43.9(react@18.2.0)
       react-router-dom:
-        specifier: ^6.11.0
-        version: 6.11.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^6.29.0
+        version: 6.29.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       reset-css:
         specifier: ^5.0.2
         version: 5.0.2
@@ -1641,9 +1641,9 @@ packages:
   '@polka/url@1.0.0-next.21':
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
 
-  '@remix-run/router@1.6.0':
-    resolution: {integrity: sha512-N13NRw3T2+6Xi9J//3CGLsK2OqC8NMme3d/YX+nh05K9YHWGcv8DycHJrqGScSP4T75o8IN6nqIMhVFU8ohg8w==}
-    engines: {node: '>=14'}
+  '@remix-run/router@1.22.0':
+    resolution: {integrity: sha512-MBOl8MeOzpK0HQQQshKB7pABXbmyHizdTpqnrIseTbsv0nAepwC2ENZa1aaBExNQcpLoXmWthhak8SABLzvGPw==}
+    engines: {node: '>=14.0.0'}
 
   '@rollup/pluginutils@4.2.1':
     resolution: {integrity: sha512-iKnFXr7NkdZAIHiIWE+BX5ULi/ucVFYWD6TbAV+rZctiRTY2PL6tsIKhoIOaoskiWAkgu+VsbXgUVDNLHf+InQ==}
@@ -5134,16 +5134,16 @@ packages:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
 
-  react-router-dom@6.11.0:
-    resolution: {integrity: sha512-Q3mK1c/CYoF++J6ZINz7EZzwlgSOZK/kc7lxIA7PhtWhKju4KfF1WHqlx0kVCIFJAWztuYVpXZeljEbds8z4Og==}
-    engines: {node: '>=14'}
+  react-router-dom@6.29.0:
+    resolution: {integrity: sha512-pkEbJPATRJ2iotK+wUwHfy0xs2T59YPEN8BQxVCPeBZvK7kfPESRc/nyxzdcxR17hXgUPYx2whMwl+eo9cUdnQ==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
 
-  react-router@6.11.0:
-    resolution: {integrity: sha512-hTm6KKNpj9SDG4syIWRjCU219O0RZY8RUPobCFt9p+PlF7nnkRgMoh2DieTKvw3F3Mw6zg565HGnSv8BuoY5oQ==}
-    engines: {node: '>=14'}
+  react-router@6.29.0:
+    resolution: {integrity: sha512-DXZJoE0q+KyeVw75Ck6GkPxFak63C4fGqZGNijnWgzB/HzSP1ZfTlBj5COaGWwhrMQ/R8bXiq5Ooy4KG+ReyjQ==}
+    engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
 
@@ -8144,7 +8144,7 @@ snapshots:
 
   '@polka/url@1.0.0-next.21': {}
 
-  '@remix-run/router@1.6.0': {}
+  '@remix-run/router@1.22.0': {}
 
   '@rollup/pluginutils@4.2.1':
     dependencies:
@@ -12491,16 +12491,16 @@ snapshots:
 
   react-refresh@0.14.0: {}
 
-  react-router-dom@6.11.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+  react-router-dom@6.29.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
-      '@remix-run/router': 1.6.0
+      '@remix-run/router': 1.22.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-router: 6.11.0(react@18.2.0)
+      react-router: 6.29.0(react@18.2.0)
 
-  react-router@6.11.0(react@18.2.0):
+  react-router@6.29.0(react@18.2.0):
     dependencies:
-      '@remix-run/router': 1.6.0
+      '@remix-run/router': 1.22.0
       react: 18.2.0
 
   react@18.2.0:
