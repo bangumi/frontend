@@ -1,5 +1,11 @@
+inputs:
+  node-version:
+    description: 'node version'
+    required: false
+    default: '^22.11.0'
+
 name: 'Setup Node and run npm ci'
-description: 'run actions/setup-node and `npm ci`'
+description: 'setup node env'
 runs:
   using: 'composite'
   steps:
@@ -8,28 +14,20 @@ runs:
       with:
         node-version-file: '.node-version'
 
-    - run: corepack enable
+    - run: |
+        corepack enable
+        corepack prepare --activate
+        pnpm --version
       shell: bash
-
-    - run: corepack prepare
-      shell: bash
-
-    - run: pnpm --version
-      shell: bash
-
-    - name: Get npm cache directory
-      id: npm-cache-dir
-      shell: bash
-      run: echo "dir=$(pnpm store path --silent)" >> $GITHUB_OUTPUT
+      name: install pnpm
 
     - uses: actions/cache@v4
-      id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
       with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+        path: ~/.local/share/pnpm/store/
+        key: ${{ runner.os }}-1-node${{ inputs.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-node-
+          ${{ runner.os }}-1-node${{ inputs.node-version }}-
 
     - name: Install Dependencies
-      run: pnpm install
+      run: pnpm install --frozen-lockfile
       shell: bash
