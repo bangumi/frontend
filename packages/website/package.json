@@ -52,7 +52,7 @@
     "postcss-less": "^6.0.0",
     "typescript": "^5.7.3",
     "vite": "^4.5.9",
-    "vite-plugin-pages": "^0.29.0",
+    "vite-plugin-pages": "^0.32.4",
     "vite-plugin-svgr": "^2.4.0"
   }
 }
