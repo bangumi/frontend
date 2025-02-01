@@ -27,10 +27,10 @@ export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply
 
 const Link = Typography.Link;
 
-const RenderContent = memo(({ state, text }: { state: State; text: string }) => {
+const RenderContent = memo(({ state, content }: { state: State; content: string }) => {
   switch (state) {
     case State.Normal:
-      return <RichContent bbcode={text} classname='bgm-comment__content' />;
+      return <RichContent bbcode={content} classname='bgm-comment__content' />;
     case State.Closed:
       return <div className='bgm-comment__content'>关闭了该主题</div>;
     case State.Reopen:
@@ -130,7 +130,7 @@ const Comment: FC<CommentProps> = ({
             <Link to={url} isExternal>
               {creator?.nickname ?? ''}
             </Link>
-            <RenderContent state={state} text={content} />
+            <RenderContent state={state} content={content} />
           </div>
           <CommentInfo createdAt={createdAt} floor={floor} isSpecial={isSpecial} />
         </span>
@@ -192,7 +192,7 @@ const Comment: FC<CommentProps> = ({
                 )}
               </div>
             </span>
-            <RenderContent state={state} text={content} />
+            <RenderContent state={state} content={content} />
           </div>
           {showReplyEditor && (
             <div className='bgm-comment__opinions'>
