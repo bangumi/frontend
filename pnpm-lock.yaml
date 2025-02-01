@@ -123,8 +123,8 @@ importers:
         specifier: ^15.6.0
         version: 15.6.0
       stylelint-config-css-modules:
-        specifier: ^4.2.0
-        version: 4.2.0(stylelint@15.6.0)
+        specifier: ^4.4.0
+        version: 4.4.0(stylelint@15.6.0)
       stylelint-config-standard:
         specifier: ^31.0.0
         version: 31.0.0(stylelint@15.6.0)
@@ -5726,10 +5726,10 @@ packages:
   style-search@0.1.0:
     resolution: {integrity: sha512-Dj1Okke1C3uKKwQcetra4jSuk0DqbzbYtXipzFlFMZtowbF1x7BKJwB9AayVMyFARvU8EDrZdcax4At/452cAg==}
 
-  stylelint-config-css-modules@4.2.0:
-    resolution: {integrity: sha512-5x7lzPNCc42puQEAFdr7dSzQ00aIg1vCVyV+QPUiSp2oZILpAt8HTgveXaDttazxcwWPBNJrxrLpa556xUP7Bw==}
+  stylelint-config-css-modules@4.4.0:
+    resolution: {integrity: sha512-J93MtxPjRzs/TjwbJ5y9SQy4iIqULXwL1CF1yx2tQCJfS/VZUcDAmoGOwqlLbhHXSQtZO5XQiA75NVWUR3KDCQ==}
     peerDependencies:
-      stylelint: ^14.5.1 || ^15.0.0
+      stylelint: ^14.5.1 || ^15.0.0 || ^16.0.0
 
   stylelint-config-recommended@11.0.0:
     resolution: {integrity: sha512-SoGIHNI748OCZn6BxFYT83ytWoYETCINVHV3LKScVAWQQauWdvmdDqJC5YXWjpBbxg2E761Tg5aUGKLFOVhEkA==}
@@ -5740,11 +5740,6 @@ packages:
     resolution: {integrity: sha512-CUGAmtROCvX0YgMY2+6P9tqSkHj5z/75XxrQ8bGxvkCa1xYdGDx4poM0pa7cXc3s74/PZLJH/okxZZouRfOSGw==}
     peerDependencies:
       stylelint: ^15.3.0
-
-  stylelint-scss@4.7.0:
-    resolution: {integrity: sha512-TSUgIeS0H3jqDZnby1UO1Qv3poi1N8wUYIJY6D1tuUq2MN3lwp/rITVo0wD+1SWTmRm0tNmGO0b7nKInnqF6Hg==}
-    peerDependencies:
-      stylelint: ^14.5.1 || ^15.0.0
 
   stylelint-scss@6.11.0:
     resolution: {integrity: sha512-AvJ6LVzz2iXHxPlPTR9WVy73FC/vmohH54VySNlCKX1NIXNAeuzy/VbIkMJLMyw/xKYqkgY4kAgB+qy5BfCaCg==}
@@ -13157,11 +13152,11 @@ snapshots:
 
   style-search@0.1.0: {}
 
-  stylelint-config-css-modules@4.2.0(stylelint@15.6.0):
+  stylelint-config-css-modules@4.4.0(stylelint@15.6.0):
     dependencies:
       stylelint: 15.6.0
     optionalDependencies:
-      stylelint-scss: 4.7.0(stylelint@15.6.0)
+      stylelint-scss: 6.11.0(stylelint@15.6.0)
 
   stylelint-config-recommended@11.0.0(stylelint@15.6.0):
     dependencies:
@@ -13171,15 +13166,6 @@ snapshots:
     dependencies:
       stylelint: 15.6.0
       stylelint-config-recommended: 11.0.0(stylelint@15.6.0)
-
-  stylelint-scss@4.7.0(stylelint@15.6.0):
-    dependencies:
-      postcss-media-query-parser: 0.2.3
-      postcss-resolve-nested-selector: 0.1.6
-      postcss-selector-parser: 6.0.13
-      postcss-value-parser: 4.2.0
-      stylelint: 15.6.0
-    optional: true
 
   stylelint-scss@6.11.0(stylelint@15.6.0):
     dependencies:
