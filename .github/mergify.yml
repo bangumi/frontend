@@ -85,7 +85,7 @@ pull_request_rules:
   - name: warn on conflicts
     conditions:
       - conflict
-      - "gh_author_login!='renovate[bot]'"
+      - "author!='renovate[bot]'"
     actions:
       comment:
         message: '@{{author}} this pull request is now in conflict 😩'
