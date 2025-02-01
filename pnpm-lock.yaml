@@ -305,8 +305,8 @@ importers:
   packages/utils:
     dependencies:
       '@bgm38/wiki':
-        specifier: ^0.2.6
-        version: 0.2.6
+        specifier: ^0.3.3
+        version: 0.3.3
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
@@ -1150,9 +1150,9 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@bgm38/wiki@0.2.6':
-    resolution: {integrity: sha512-zTcsxNOKjchwqiabiJejJAsR1xnXrEdCJdoeadtvyt14na9Tnq6TZHiQHQWbsWdrNc+kJ2f1LxqjrAGEmbzI1g==}
-    engines: {node: '>=16'}
+  '@bgm38/wiki@0.3.3':
+    resolution: {integrity: sha512-Extj5fsFmH8pqh+XYYjRDUm5Ar1c2KX6Jup4p198sm2Xmjsc/XK83wP71If2wStd3rf7stSgK7ADE/daX/lglA==}
+    engines: {node: '>=18'}
 
   '@colors/colors@1.5.0':
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
@@ -7749,7 +7749,7 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@bgm38/wiki@0.2.6': {}
+  '@bgm38/wiki@0.3.3': {}
 
   '@colors/colors@1.5.0':
     optional: true
