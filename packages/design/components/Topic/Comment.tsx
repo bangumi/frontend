@@ -4,10 +4,9 @@ import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
-import type { BasicReply } from '@bangumi/client/client';
-import type { Reply, SubReply, User } from '@bangumi/client/topic';
+import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
-import { Friend, OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
+import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
@@ -18,20 +17,20 @@ import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
 import ReplyForm from './ReplyForm';
 
-export type CommentProps = ((SubReply & { isReply: true }) | (Reply & { isReply: false })) & {
+export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply: false })) & {
   topicId: number;
   floor: string | number;
   originalPosterId: number;
   onCommentUpdate: () => Promise<unknown>;
-  user?: User;
+  user?: SlimUser;
 };
 
 const Link = Typography.Link;
 
-const RenderContent = memo(({ state, text }: { state: State; text: string }) => {
+const RenderContent = memo(({ state, content }: { state: State; content: string }) => {
   switch (state) {
     case State.Normal:
-      return <RichContent bbcode={text} classname='bgm-comment__content' />;
+      return <RichContent bbcode={content} classname='bgm-comment__content' />;
     case State.Closed:
       return <div className='bgm-comment__content'>关闭了该主题</div>;
     case State.Reopen:
@@ -70,11 +69,10 @@ const SpecialStateIcon = memo(({ state }: { state: State }) => {
 });
 
 const Comment: FC<CommentProps> = ({
-  text,
+  content,
   creator,
   createdAt,
   floor,
-  isFriend,
   originalPosterId,
   state,
   user,
@@ -83,11 +81,11 @@ const Comment: FC<CommentProps> = ({
   ...props
 }) => {
   const isReply = props.isReply;
-  const isDeleted = state === State.DeletedByUser || state === State.DeletedByAdmin;
+  const isDeleted = [State.DeletedByUser, State.DeletedByAdmin].includes(state);
   // 1 关闭 2 重开 5 下沉
-  const isSpecial = state === State.Closed || state === State.Reopen || state === State.Silent;
+  const isSpecial = [State.Closed, State.Reopen, State.Silent].includes(state);
   const replies = !isReply ? props.replies : null;
-  const shouldCollapse = isSpecial || (isReply && (/[+-]\d+$/.test(text) || isDeleted));
+  const shouldCollapse = isSpecial || (isReply && (/[+-]\d+$/.test(content) || isDeleted));
   const [collapsed, setCollapsed] = useState(shouldCollapse);
 
   const [showReplyEditor, setShowReplyEditor] = useState(false);
@@ -104,14 +102,14 @@ const Comment: FC<CommentProps> = ({
     'bgm-comment__header--highlighted': isHighlighted,
   });
 
-  const url = getUserProfileLink(creator.username);
+  const url = creator ? getUserProfileLink(creator.username) : '';
 
   const navigate = useNavigate();
 
   const startReply = useCallback(() => {
     setShowReplyEditor(true);
-    setReplyContent(isReply ? `[quote]${text.slice(0, 30)}[/quote]\n` : '');
-  }, [isReply, text]);
+    setReplyContent(isReply ? `[quote]${content.slice(0, 30)}[/quote]\n` : '');
+  }, [isReply, content]);
 
   if (collapsed) {
     return (
@@ -130,9 +128,9 @@ const Comment: FC<CommentProps> = ({
           <div className='creator-info'>
             <SpecialStateIcon state={state} />
             <Link to={url} isExternal>
-              {creator.nickname}
+              {creator?.nickname ?? ''}
             </Link>
-            <RenderContent state={state} text={text} />
+            <RenderContent state={state} content={content} />
           </div>
           <CommentInfo createdAt={createdAt} floor={floor} isSpecial={isSpecial} />
         </span>
@@ -140,10 +138,10 @@ const Comment: FC<CommentProps> = ({
     );
   }
 
-  const handleReplySuccess = async (reply: BasicReply) => {
+  const handleReplySuccess = async (id: number) => {
     // 先隐藏回复框避免scrollIntoView后布局变化
     setShowReplyEditor(false);
-    navigate(`#post_${reply.id}`);
+    navigate(`#post_${id}`);
     // 刷新回复列表
     await onCommentUpdate();
   };
@@ -165,7 +163,7 @@ const Comment: FC<CommentProps> = ({
     <div>
       <div className={headerClassName} id={`post_${props.id}`}>
         <Avatar
-          src={isReply ? creator.avatar.medium : creator.avatar.large}
+          src={isReply ? creator?.avatar.medium ?? '' : creator?.avatar.large ?? ''}
           size={isReply ? 'small' : 'medium'}
         />
         <div className='bgm-comment__box'>
@@ -173,11 +171,10 @@ const Comment: FC<CommentProps> = ({
             <span className='bgm-comment__tip'>
               <div className='creator-info'>
                 <Link to={url} isExternal>
-                  {creator.nickname}
+                  {creator?.nickname ?? ''}
                 </Link>
-                {originalPosterId === creator.id ? <OriginalPoster /> : null}
-                {isFriend ? <Friend /> : null}
-                {!isReply && creator.sign ? <span>{`(${creator.sign})`}</span> : null}
+                {originalPosterId === creator?.id ? <OriginalPoster /> : null}
+                {!isReply && creator?.sign ? <span>{`(${creator.sign})`}</span> : null}
               </div>
               <div className='comment-info'>
                 <CommentInfo createdAt={createdAt} floor={floor} id={props.id} />
@@ -188,14 +185,14 @@ const Comment: FC<CommentProps> = ({
                       id={props.id}
                       onReply={startReply}
                       onDelete={handleDeleteReply}
-                      isAuthor={user?.id === creator.id}
+                      isAuthor={user?.id === creator?.id}
                       editable={!replies?.length}
                     />
                   </>
                 )}
               </div>
             </span>
-            <RenderContent state={state} text={text} />
+            <RenderContent state={state} content={content} />
           </div>
           {showReplyEditor && (
             <div className='bgm-comment__opinions'>
@@ -203,7 +200,7 @@ const Comment: FC<CommentProps> = ({
                 autoFocus
                 topicId={topicId}
                 replyTo={props.id}
-                placeholder={`回复 @${creator.nickname}：`}
+                placeholder={`回复 @${creator?.nickname ?? ''}：`}
                 content={replyContent}
                 onChange={setReplyContent}
                 onCancel={() => {

@@ -10,17 +10,17 @@ interface UseGroupMembersRet {
 }
 
 type GroupMembersReq = {
-  type: 'mod' | 'normal' | 'all';
+  moderator?: boolean;
   disable?: boolean;
 } & Partial<PaginationQuery>;
 
 export function useGroupMembers(
   name: string,
-  { type, offset = 0, limit = 30, disable = false }: GroupMembersReq,
+  { moderator, offset = 0, limit = 30, disable = false }: GroupMembersReq,
 ): UseGroupMembersRet {
   const { data } = useSWR(
-    disable ? null : `listGroupMembersByName ${name} ${type} ${limit} ${offset}`,
-    async () => ok(ozaClient.listGroupMembersByName(name, { limit, offset, $type: type })),
+    disable ? null : `listGroupMembers ${name} ${moderator ? 'mod' : 'normal'} ${limit} ${offset}`,
+    async () => ok(ozaClient.getGroupMembers(name, { limit, offset, moderator })),
     { suspense: true },
   );
 

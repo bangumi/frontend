@@ -1,35 +1,24 @@
-import type { GroupProfile } from 'packages/client/group';
-import React, { memo, useState } from 'react';
+import type { SlimGroup } from 'packages/client/group';
+import React, { memo } from 'react';
 
-import { Avatar, Button, CollapsibleContent, Typography } from '@bangumi/design';
-import { render as renderBBCode } from '@bangumi/utils';
+import { Avatar, Button, Typography } from '@bangumi/design';
 
 import GroupActions from './GroupActions';
 import styles from './GroupInfo.module.less';
 
 const { Link } = Typography;
 
-const GroupInfo = memo(({ groupProfile }: { groupProfile: GroupProfile }) => {
-  const [collapsed, setCollapsed] = useState(true);
-  const { group } = groupProfile;
-
+const GroupInfo = memo(({ group }: { group: SlimGroup }) => {
   return (
     <>
       <div className={styles.groupInfo}>
-        <Avatar src={group.icon} size='medium' />
+        <Avatar src={group.icon.large} size='medium' />
         <div className={styles.groupDetails}>
           <Link to={`/group/${group.name}`}>{group.title}</Link>
-          <span>{`${group.totalMembers} 名成员`}</span>
+          <span>{`${group.members} 名成员`}</span>
         </div>
       </div>
-      <CollapsibleContent
-        content={renderBBCode(group.description)}
-        containerClassName={styles.groupDescription}
-        threshold={158}
-        collapsed={collapsed}
-        onChange={setCollapsed}
-      />
-      <GroupActions groupProfile={groupProfile} size='medium' className={styles.groupButtons} />
+      <GroupActions group={group} size='medium' className={styles.groupButtons} />
       <div className={styles.groupButtons}>
         <Button.Link type='secondary' size='medium' to={`/group/${group.name}`}>
           概览

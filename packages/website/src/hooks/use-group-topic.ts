@@ -3,17 +3,17 @@ import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type { TopicDetail } from '@bangumi/client/topic';
+import type { GroupTopic } from '@bangumi/client/topic';
 
 export interface UseGroupTopicRet {
-  data: TopicDetail;
-  mutate: KeyedMutator<TopicDetail>;
+  data: GroupTopic;
+  mutate: KeyedMutator<GroupTopic>;
 }
 
 function useGroupTopic(id: number): UseGroupTopicRet {
   const { data, mutate } = useSWR(
     `/group/topic/${id}`,
-    async () => ok(ozaClient.getGroupTopicDetail(id)),
+    async () => ok(ozaClient.getGroupTopic(id)),
     {
       suspense: true,
     },

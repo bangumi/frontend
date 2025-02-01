@@ -51,7 +51,7 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
                   
                 |
                   
-                2022-9-22 06:03
+                1970-1-20 06:10
               </span>
             </div>
           </span>
@@ -118,7 +118,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                   
                 |
                   
-                2022-9-22 06:03
+                1970-1-20 06:10
               </span>
                 |  
               <div
@@ -330,7 +330,7 @@ exports[`Normal Comment > should render 0 1`] = `
                   
                 |
                   
-                2022-9-22 06:03
+                1970-1-20 06:10
               </span>
                 |  
               <div
@@ -440,7 +440,7 @@ exports[`Normal Comment > should render 6 1`] = `
                   
                 |
                   
-                2022-9-22 06:03
+                1970-1-20 06:10
               </span>
             </div>
           </span>
@@ -507,7 +507,7 @@ exports[`Normal Comment > should render 7 1`] = `
                   
                 |
                   
-                2022-9-22 06:03
+                1970-1-20 06:10
               </span>
             </div>
           </span>
@@ -581,7 +581,7 @@ exports[`Normal Comment > should render with reply 1`] = `
                   
                 |
                   
-                2022-9-22 06:03
+                1970-1-20 06:10
               </span>
                 |  
               <div
@@ -770,7 +770,7 @@ exports[`Special Comment > should render state is 1 1`] = `
       <span
         class="bgm-topic__commentInfo"
       >
-        2022-7-17 04:08
+        1970-1-20 06:10
       </span>
     </span>
   </div>
@@ -805,7 +805,7 @@ exports[`Special Comment > should render state is 2 1`] = `
       <span
         class="bgm-topic__commentInfo"
       >
-        2022-7-17 04:08
+        1970-1-20 06:10
       </span>
     </span>
   </div>
@@ -840,7 +840,7 @@ exports[`Special Comment > should render state is 5 1`] = `
       <span
         class="bgm-topic__commentInfo"
       >
-        2022-7-17 04:08
+        1970-1-20 06:10
       </span>
     </span>
   </div>

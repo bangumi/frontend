@@ -11,7 +11,7 @@ import styles from './TopicForm.module.less';
 
 interface FormData {
   title: string;
-  text: string;
+  content: string;
 }
 
 export interface TopicFormProps {
@@ -33,14 +33,16 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   }
 
   const navigate = useNavigate();
-
   const { register, handleSubmit, control } = useForm<FormData>({
-    defaultValues: topic?.data,
+    defaultValues: topic?.data as FormData | undefined,
   });
   const [sending, setSending] = useState(false);
 
   const postNewTopic = async (data: FormData, groupName: string) => {
-    const response = await ozaClient.createNewGroupTopic(groupName, data);
+    const response = await ozaClient.createGroupTopic(groupName, {
+      ...data,
+      turnstileToken: '',
+    });
     if (response.status === 200) {
       navigate(`/group/topic/${response.data.id}`);
     } else {
@@ -84,7 +86,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
 
   const FormEditor = ({ quickPost = false }: TopicFormProps) => (
     <Controller
-      name='text'
+      name='content'
       control={control}
       rules={{ required: '请填写正文内容' }}
       render={({ field }) => (

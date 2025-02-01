@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { memo } from 'react';
 
-import type { Group, User } from '@bangumi/client/group';
+import type { SlimGroup, SlimUser } from '@bangumi/client/group';
 import { Avatar, Topic, Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
@@ -10,8 +10,8 @@ import styles from './GroupTopicHeader.module.less';
 interface Header {
   title: string;
   createdAt: number;
-  creator: User;
-  group: Group;
+  creator: SlimUser;
+  group: SlimGroup;
   id: number;
 }
 

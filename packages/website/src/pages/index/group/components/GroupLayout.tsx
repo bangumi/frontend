@@ -2,10 +2,11 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import type { GroupProfile } from '@bangumi/client/group';
+import type { Group } from '@bangumi/client/group';
 import { Button, Layout, Section, Tab } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';
+import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { GroupHeader } from './GroupHeader';
@@ -39,12 +40,16 @@ const GroupTabsItems = [
 const groupTabsByKey = keyBy(GroupTabsItems, 'key');
 
 type IGroupLayoutProps = PropsWithChildren<{
-  group: GroupProfile | undefined;
+  group: Group | undefined;
   groupName: string;
 }>;
 
 const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }) => {
   const { user } = useUser();
+  const { data: members } = useGroupMembers(groupName, {
+    limit: 10,
+    offset: 0,
+  });
 
   return (
     <div className={styles.pageContainer}>
@@ -66,7 +71,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
               title='最近加入'
               renderFooter={() =>
                 group && (
-                  <Button.Link type='plain' to={groupTabsByKey.members.to(group.group.name)}>
+                  <Button.Link type='plain' to={groupTabsByKey.members.to(group.name)}>
                     更多小组成员
                     <ArrowRightCircle />
                   </Button.Link>
@@ -74,14 +79,15 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
               }
             >
               <div className={styles.newMembers}>
-                {group?.recentAddedMembers.slice(0, 10).map((member) => {
+                {members?.map((member) => {
                   return (
                     <UserCard
                       user={{
-                        ...member,
-                        avatar: member.avatar.large,
+                        nickname: member.user?.nickname ?? '',
+                        username: member.user?.username ?? '',
+                        avatar: member.user?.avatar.large ?? '',
                       }}
-                      key={member.id}
+                      key={member.uid}
                     />
                   );
                 })}

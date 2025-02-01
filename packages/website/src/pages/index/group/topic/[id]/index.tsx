@@ -1,4 +1,4 @@
-import type { BasicReply } from 'packages/client/client';
+import type { Reply } from 'packages/client/client';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -6,7 +6,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import Helmet from '@bangumi/website/components/Helmet';
-import { useGroup } from '@bangumi/website/hooks/use-group';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -22,12 +21,10 @@ const TopicPage: FC = () => {
     throw new Error('BUG: topic id is required');
   }
 
-  const { data: topicDetail, mutate } = useGroupTopic(Number(id));
+  const { data: topic, mutate } = useGroupTopic(Number(id));
   const { user } = useUser();
-  const originalPosterId = topicDetail.creator.id;
-  const isClosed = topicDetail.state === 1;
-  const { group } = topicDetail;
-  const { group: groupProfile } = useGroup(group.name);
+  const originalPosterId = topic.creatorID;
+  const isClosed = topic.state === 1;
 
   const [replyContent, setReplyContent] = useState('');
 
@@ -37,10 +34,10 @@ const TopicPage: FC = () => {
   useEffect(() => {
     const anchor = window.location.hash.slice(1);
     document.getElementById(anchor)?.scrollIntoView(true);
-  }, [topicDetail]);
+  }, [topic]);
 
-  const handleReplySuccess = async (reply: BasicReply) => {
-    navigate(`#post_${reply.id}`);
+  const handleReplySuccess = async (id: number) => {
+    navigate(`#post_${id}`);
     // 刷新评论列表
     await mutate();
     setReplyContent('');
@@ -54,27 +51,27 @@ const TopicPage: FC = () => {
 
   return (
     <>
-      <Helmet title={topicDetail.title} />
+      <Helmet title={topic.title} />
       <GroupTopicHeader
-        id={topicDetail.id}
-        title={topicDetail.title}
-        creator={topicDetail.creator}
-        createdAt={topicDetail.createdAt}
-        group={topicDetail.group}
+        id={topic.id}
+        title={topic.title}
+        creator={topic.creator}
+        createdAt={topic.createdAt}
+        group={topic.group}
       />
       <Layout
         type='alpha'
         leftChildren={
           <>
             {/* Topic content */}
-            <div id={`post_${topicDetail.id}`}>
-              <RichContent bbcode={topicDetail.text} />
+            <div id={`post_${topic.id}`}>
+              <RichContent bbcode={topic.content} />
               {user && (
                 <div className={styles.topicActions}>
                   <CommentActions
                     showText
-                    id={topicDetail.id}
-                    isAuthor={user.id === topicDetail.creator.id}
+                    id={topic.id}
+                    isAuthor={user.id === topic.creatorID}
                     onReply={startReply}
                     // TODO: 实现删除主题操作
                   />
@@ -83,9 +80,9 @@ const TopicPage: FC = () => {
             </div>
             {/* Topic Comments */}
             <div className={styles.replies}>
-              {topicDetail.replies.map((comment, idx) => (
+              {topic.replies.map((comment: Reply, idx: number) => (
                 <Comment
-                  topicId={topicDetail.id}
+                  topicId={topic.id}
                   key={comment.id}
                   isReply={false}
                   floor={idx + 2}
@@ -100,7 +97,7 @@ const TopicPage: FC = () => {
                 <div className={styles.replyFormContainer} id='replyForm'>
                   <Avatar src={user.avatar.large} size='medium' />
                   <ReplyForm
-                    topicId={topicDetail.id}
+                    topicId={topic.id}
                     className={styles.replyForm}
                     content={replyContent}
                     onChange={setReplyContent}
@@ -112,7 +109,7 @@ const TopicPage: FC = () => {
             </div>
           </>
         }
-        rightChildren={<GroupInfo groupProfile={groupProfile} />}
+        rightChildren={<GroupInfo group={topic.group} />}
       />
     </>
   );

@@ -1,27 +1,73 @@
 {
   "data": [
     {
-      "avatar": {
-        "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg?r=1571167246",
-        "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg?r=1571167246",
-        "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg?r=1571167246"
-      },
-      "id": 382951,
-      "nickname": "树洞酱",
-      "username": "382951",
-      "joinedAt": 1640499538
+      "uid": 427613,
+      "moderator": false,
+      "joinedAt": 1531631570,
+      "user": {
+        "id": 427613,
+        "username": "427613",
+        "nickname": "维基 bot",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/42/76/427613.jpg?r=1672778294&hd=1",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/42/76/427613.jpg?r=1672778294&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/42/76/427613.jpg?r=1672778294&hd=1"
+        },
+        "sign": "@trim21 的小号，用于维基自动化",
+        "joinedAt": 1531631455
+      }
     },
     {
-      "avatar": {
-        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
-        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
-        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
-      },
-      "id": 427613,
-      "nickname": "nickname 427613",
-      "username": "427613",
-      "joinedAt": 1531631570
+      "uid": 78670,
+      "moderator": false,
+      "joinedAt": 1640499538,
+      "user": {
+        "id": 78670,
+        "username": "asm13177806",
+        "nickname": "纯セン羽爱",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/07/86/78670.jpg?r=1450932461",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/07/86/78670.jpg?r=1450932461",
+          "large": "https://lain.bgm.tv/pic/user/l/000/07/86/78670.jpg?r=1450932461"
+        },
+        "sign": "純セン羽爱",
+        "joinedAt": 1335681220
+      }
+    },
+    {
+      "uid": 563319,
+      "moderator": false,
+      "joinedAt": 1678914765,
+      "user": {
+        "id": 563319,
+        "username": "strdm",
+        "nickname": "Stardream",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/56/33/563319.jpg?r=1611555490",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/56/33/563319.jpg?r=1611555490",
+          "large": "https://lain.bgm.tv/pic/user/l/000/56/33/563319.jpg?r=1611555490"
+        },
+        "sign": "",
+        "joinedAt": 1605896457
+      }
+    },
+    {
+      "uid": 268422,
+      "moderator": false,
+      "joinedAt": 1716420829,
+      "user": {
+        "id": 268422,
+        "username": "alexio_yorbmapr",
+        "nickname": "海盗丸子",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/26/84/268422.jpg?r=1557848460",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/26/84/268422.jpg?r=1557848460",
+          "large": "https://lain.bgm.tv/pic/user/l/000/26/84/268422.jpg?r=1557848460"
+        },
+        "sign": "",
+        "joinedAt": 1447583814
+      }
     }
   ],
-  "total": 3
+  "total": 4
 }

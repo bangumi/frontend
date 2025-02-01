@@ -1,6 +1,6 @@
 import type { components } from './types';
 
-export type { User, Topic } from './client';
+export type { SlimUser, Profile } from './client';
 export type Avatar = components['schemas']['Avatar'];
 
 export interface PaginationQuery {

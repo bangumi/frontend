@@ -28,14 +28,14 @@ const GroupMembersPage = () => {
   // 仅第一页获取管理员
   const { data: groupModMembers } = useGroupMembers(name, {
     offset,
-    type: 'mod',
+    moderator: true,
     disable: curPage > 1,
   });
 
   const { data, total } = useGroupMembers(name, {
     offset,
     limit: pageSize,
-    type: 'normal',
+    moderator: false,
   });
   const [, navigate] = useTransitionNavigate();
 
@@ -46,15 +46,19 @@ const GroupMembersPage = () => {
   // TODO: 遵循旧站的交互规则，可能需要改动
   return (
     <>
-      <Helmet title={`${group.group.title}小组成员`} />
+      <Helmet title={`${group.title}小组成员`} />
       {curPage === 1 && (
         <Section title='小组管理员'>
           <div className={styles.members}>
             {(groupModMembers ?? []).map((member) => (
               <UserCard
                 mode='horizontal'
-                user={{ ...member, avatar: member.avatar.large }}
-                key={member.id}
+                user={{
+                  nickname: member.user?.nickname ?? '',
+                  username: member.user?.username ?? '',
+                  avatar: member.user?.avatar.large ?? '',
+                }}
+                key={member.uid}
               />
             ))}
           </div>
@@ -66,8 +70,12 @@ const GroupMembersPage = () => {
             return (
               <UserCard
                 mode='horizontal'
-                user={{ ...member, avatar: member.avatar.large }}
-                key={member.id}
+                user={{
+                  nickname: member.user?.nickname ?? '',
+                  username: member.user?.username ?? '',
+                  avatar: member.user?.avatar.large ?? '',
+                }}
+                key={member.uid}
               />
             );
           })}

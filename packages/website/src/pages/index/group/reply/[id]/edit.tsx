@@ -1,4 +1,4 @@
-import type { TopicDetail } from 'packages/client/client';
+import type { GroupTopic } from 'packages/client/client';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSWRConfig } from 'swr';
@@ -25,7 +25,7 @@ const EditReplyPage = () => {
   }
 
   const { data, mutate } = useGroupPost(postId);
-  if (data.creator.id !== user.id) {
+  if (data.creatorID !== user.id) {
     throw new Error('抱歉，你只能修改自己发表的帖子。');
   }
 
@@ -33,27 +33,27 @@ const EditReplyPage = () => {
   const navigate = useNavigate();
 
   const [sending, setSending] = useState(false);
-  const [content, setContent] = useState(data.text);
+  const [content, setContent] = useState(data.content);
 
-  const handleSubmit = async (text: string) => {
-    if (!text) {
+  const handleSubmit = async (content: string) => {
+    if (!content) {
       toast('请填写回复内容', { type: 'error' });
       return;
     }
     setSending(true);
-    const response = await ozaClient.editGroupPost(postId, { text });
+    const response = await ozaClient.editGroupPost(postId, { content });
     if (response.status === 200) {
-      const topicPath = `/group/topic/${data.topicID}`;
+      const topicPath = `/group/topic/${data.topic.id}`;
       // 确保再次回到此页面时内容是最新的，不需要向后端请求数据，因此将 revalidate 设置为 false
-      mutate({ ...data, text }, { revalidate: false });
+      mutate({ ...data, content }, { revalidate: false });
       // 乐观更新回复内容
-      await mutateTopic(topicPath, (topic?: TopicDetail) => {
+      await mutateTopic(topicPath, (topic?: GroupTopic) => {
         if (!topic) {
           return topic;
         }
         const reply = topic.replies.find((reply) => reply.id === postId);
         if (reply) {
-          reply.text = text;
+          reply.content = content;
         }
         return topic;
       });
@@ -67,15 +67,15 @@ const EditReplyPage = () => {
 
   return (
     <>
-      <Helmet title={`修改主题“${data.topicTitle}”的回复`} />
+      <Helmet title={`修改主题“${data.topic.title}”的回复`} />
       <Typography.Text type='secondary' className={styles.tipText}>
         修改主题
         <Typography.Link
-          to={`/group/topic/${data.topicID}`}
+          to={`/group/topic/${data.topic.id}`}
           fontWeight='bold'
           className={styles.topicLink}
         >
-          {data.topicTitle}
+          {data.topic.title}
         </Typography.Link>
         的回复
       </Typography.Text>

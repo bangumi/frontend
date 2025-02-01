@@ -1,71 +1,31 @@
 {
-  "recentAddedMembers": [
-    {
-      "avatar": {
-        "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg?r=1571167246",
-        "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg?r=1571167246",
-        "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg?r=1571167246"
-      },
-      "id": 382951,
-      "nickname": "树洞酱",
-      "username": "382951",
-      "joinedAt": 1640499538
-    },
-    {
-      "avatar": {
-        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
-        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
-        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
-      },
-      "id": 427613,
-      "nickname": "nickname 427613",
-      "username": "427613",
-      "joinedAt": 1531631570
-    },
-    {
-      "avatar": {
-        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
-        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
-        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
-      },
-      "id": 287622,
-      "nickname": "nickname 287622",
-      "username": "287622",
-      "joinedAt": 1531631310
-    }
-  ],
-  "topics": [
-    {
-      "id": 371602,
-      "creator": {
-        "id": 287622,
-        "username": "287622",
-        "avatar": {
-          "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
-          "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
-          "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
-        },
-        "nickname": "nickname 287622",
-        "sign": "sing 287622",
-        "user_group": 0
-      },
-      "title": "tes",
-      "parentID": 4215,
-      "createdAt": 1657885648,
-      "updatedAt": 1662283112,
-      "repliesCount": 2
-    }
-  ],
-  "inGroup": false,
-  "group": {
-    "id": 4215,
-    "name": "sandbox",
-    "nsfw": false,
-    "title": "沙盒",
-    "icon": "https://lain.bgm.tv/pic/icon/s/000/00/42/4215.jpg?r=1531631345",
-    "description": "[s]非[/s]官方沙盒",
-    "totalMembers": 3,
-    "createdAt": 1531631310
+  "id": 4215,
+  "cat": 32,
+  "name": "sandbox",
+  "nsfw": false,
+  "title": "沙盒",
+  "icon": {
+    "small": "https://lain.bgm.tv/pic/icon/s/000/00/42/4215.jpg?r=1531631345",
+    "medium": "https://lain.bgm.tv/pic/icon/m/000/00/42/4215.jpg?r=1531631345",
+    "large": "https://lain.bgm.tv/pic/icon/l/000/00/42/4215.jpg?r=1531631345"
   },
-  "totalTopics": 1
+  "creatorID": 287622,
+  "topics": 6,
+  "posts": 0,
+  "members": 5,
+  "description": "[s]非[/s]官方沙盒",
+  "accessible": true,
+  "createdAt": 1531631310,
+  "creator": {
+    "id": 287622,
+    "username": "trim21",
+    "nickname": "bangumi大西王",
+    "avatar": {
+      "small": "https://lain.bgm.tv/pic/user/s/000/28/76/287622.jpg?r=1672779554&hd=1",
+      "medium": "https://lain.bgm.tv/pic/user/m/000/28/76/287622.jpg?r=1672779554&hd=1",
+      "large": "https://lain.bgm.tv/pic/user/l/000/28/76/287622.jpg?r=1672779554&hd=1"
+    },
+    "sign": "天生万物以养人，人无一物以报天",
+    "joinedAt": 1463075630
+  }
 }

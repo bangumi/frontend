@@ -5,7 +5,7 @@ import { Button, CollapsibleContent, Section } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
 import Helmet from '@bangumi/website/components/Helmet';
-import { useGroupRecentTopics } from '@bangumi/website/hooks/use-group';
+import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { useGroupContext } from '../../[name]';
@@ -19,18 +19,21 @@ const GroupHome: React.FC = () => {
     throw new UnreadableCodeError('BUG: name is undefined');
   }
   const groupContext = useGroupContext();
-  const recentTopics = useGroupRecentTopics(name);
+  const { data: topics } = useGroupTopics(name, {
+    limit: 10,
+    offset: 0,
+  });
   const { user } = useUser();
 
   const {
     groupRet: { group, descriptionCollapsed, setDescriptionCollapsed },
   } = groupContext;
 
-  const parsedDescription = renderBBCode(group.group.description);
+  const parsedDescription = renderBBCode(group.description);
 
   return (
     <>
-      <Helmet title={`${group.group.title}小组`} />
+      <Helmet title={`${group.title}小组`} />
       <CollapsibleContent
         threshold={193}
         content={parsedDescription}
@@ -47,7 +50,7 @@ const GroupHome: React.FC = () => {
           </Button.Link>
         )}
       >
-        <TopicsTable topics={recentTopics.data} />
+        <TopicsTable topics={topics ?? []} />
       </Section>
       {user && <TopicForm quickPost groupName={name} />}
     </>
