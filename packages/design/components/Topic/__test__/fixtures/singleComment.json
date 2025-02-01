@@ -1,6 +1,5 @@
 {
-  "created_at": "2022-09-22T06:03:21Z",
-  "text": "123456789~~~",
+  "content": "123456789~~~",
   "creator": {
     "avatar": {
       "large": "https://lain.bgm.tv/pic/user/l/icon.jpg",
@@ -12,10 +11,9 @@
     "username": "123456789",
     "nickname": "用户",
     "id": 1,
-    "user_group": 11
+    "group": 11
   },
   "replies": [],
   "id": 2104702,
-  "is_friend": false,
   "state": 0
 }
