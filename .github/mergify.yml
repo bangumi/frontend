@@ -95,15 +95,7 @@ pull_request_rules:
       - conflict
     actions:
       label:
-        add:
-          - conflict
-
-  - name: remove conflict label if not needed
-    conditions:
-      - -conflict
-    actions:
-      label:
-        remove:
+        toggle:
           - conflict
 
   - name: add lint fail label
