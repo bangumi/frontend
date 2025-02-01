@@ -163,7 +163,7 @@ const Comment: FC<CommentProps> = ({
     <div>
       <div className={headerClassName} id={`post_${props.id}`}>
         <Avatar
-          src={isReply ? creator?.avatar.medium ?? '' : creator?.avatar.large ?? ''}
+          src={isReply ? (creator?.avatar.medium ?? '') : (creator?.avatar.large ?? '')}
           size={isReply ? 'small' : 'medium'}
         />
         <div className='bgm-comment__box'>

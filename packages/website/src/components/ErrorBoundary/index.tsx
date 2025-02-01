@@ -56,7 +56,7 @@ export default class ErrorBoundary extends React.Component<
       }
       return (
         <ErrorLayout requestID={reqID}>
-          {typeof fb === 'function' ? fb(error) : fb ?? msg}
+          {typeof fb === 'function' ? fb(error) : (fb ?? msg)}
         </ErrorLayout>
       );
     }
