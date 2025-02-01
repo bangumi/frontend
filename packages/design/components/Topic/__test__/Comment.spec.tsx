@@ -64,30 +64,26 @@ describe('Normal Comment', () => {
 
   it('reply end with +1/-1 reply should be collapsed', () => {
     const props = buildProps(true);
-    const { container: container1 } = render(<Comment {...props} text='233+123' />);
+    const { container: container1 } = render(<Comment {...props} content='233+123' />);
     expect(container1.getElementsByClassName('bgm-comment__header--collapsed').length).toBe(1);
 
-    const { container: container2 } = render(<Comment {...props} text='233-123' />);
+    const { container: container2 } = render(<Comment {...props} content='233-123' />);
     expect(container2.getElementsByClassName('bgm-comment__header--collapsed').length).toBe(1);
 
     // should not have collapsed styles if is not reply
-    const { container: container3 } = render(<Comment {...buildProps(false)} text='233-123' />);
+    const { container: container3 } = render(<Comment {...buildProps(false)} content='233-123' />);
     expect(container3.getElementsByClassName('bgm-comment__header--collapsed').length).toBe(0);
   });
 
   it('show icons', () => {
     const props = buildProps(false);
-    const { container: container1 } = render(
-      <Comment {...props} isFriend originalPosterId={233} />,
-    );
+    const { container: container1 } = render(<Comment {...props} originalPosterId={233} />);
     expect(container1.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(3);
 
-    const { container: container2 } = render(
-      <Comment {...props} isFriend={false} originalPosterId={1} />,
-    );
+    const { container: container2 } = render(<Comment {...props} originalPosterId={1} />);
     expect(container2.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(3);
 
-    const { container: container3 } = render(<Comment {...props} isFriend originalPosterId={1} />);
+    const { container: container3 } = render(<Comment {...props} originalPosterId={1} />);
     expect(container3.getElementsByClassName('creator-info')[0]!.childNodes).toHaveLength(4);
   });
 
