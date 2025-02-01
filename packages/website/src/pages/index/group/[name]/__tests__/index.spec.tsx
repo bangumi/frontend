@@ -34,13 +34,13 @@ class GroupHomeTest {
 
     mockServer.use(
       rest.get(`http://localhost:3000/p1/groups/${name}`, async (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(Sandbox));
+        return res(ctx.status(200), ctx.json(mock.group ?? Sandbox));
       }),
     );
 
     mockServer.use(
       rest.get(`http://localhost:3000/p1/groups/${name}/topics`, async (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(RecentTopics));
+        return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics));
       }),
     );
 
