@@ -1,5 +1,5 @@
+import { ok } from '@oazapfts/runtime';
 import dayjs from 'dayjs';
-import { ok } from 'oazapfts';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';

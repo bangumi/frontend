@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import yaml from 'js-yaml';
-import openapiTS from 'openapi-typescript';
+import openapiTS, { astToString } from 'openapi-typescript';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -20,7 +20,7 @@ async function generateType(schema) {
 
   await fs.mkdir(path.resolve(__dirname, '../types'), { recursive: true });
 
-  await fs.writeFile(path.resolve(__dirname, '../types/index.ts'), data);
+  await fs.writeFile(path.resolve(__dirname, '../types/index.ts'), astToString(data));
 }
 
 await generateType(await fetchSchema());

@@ -1,4 +1,4 @@
-import { ok } from 'oazapfts';
+import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';

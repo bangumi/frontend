@@ -1,4 +1,4 @@
-import { ok } from 'oazapfts';
+import { ok } from '@oazapfts/runtime';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';

@@ -1,4 +1,4 @@
-import { HttpError } from 'oazapfts';
+import { HttpError } from '@oazapfts/runtime';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
