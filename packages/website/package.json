@@ -36,7 +36,7 @@
     "@bangumi/icons": "workspace:0.0.0",
     "@bangumi/utils": "workspace:0.0.0",
     "@playwright/test": "^1.50.1",
-    "@testing-library/react": "^14.0.0",
+    "@testing-library/react": "^14.3.1",
     "@types/lodash": "^4.17.15",
     "@types/react": "^18.2.0",
     "@types/react-beautiful-dnd": "^13.1.8",
