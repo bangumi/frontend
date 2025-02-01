@@ -97,7 +97,7 @@
     "vite": "^4.5.9",
     "vite-plugin-svgr": "^2.4.0",
     "vitest": "^0.34.1",
-    "vitest-github-actions-reporter": "^0.10.0",
+    "vitest-github-actions-reporter": "^0.11.1",
     "whatwg-fetch": "^3.6.20"
   },
   "pnpm": {
