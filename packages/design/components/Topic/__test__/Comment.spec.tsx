@@ -31,7 +31,7 @@ describe('Normal Comment', () => {
 
     const commentProps: CommentProps = {
       ...mockedComment,
-      createdAt: dayjs(mockedComment.created_at).unix(),
+      createdAt: dayjs(mockedComment.createdAt).unix(),
       floor,
       originalPosterId,
       user,
@@ -175,7 +175,7 @@ describe('Special Comment', () => {
   function buildProps(state: number) {
     return {
       ...specialComment,
-      createdAt: dayjs(specialComment.created_at).unix(),
+      createdAt: dayjs(specialComment.createdAt).unix(),
       state,
     } as unknown as CommentProps;
   }
