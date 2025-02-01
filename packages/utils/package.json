@@ -6,7 +6,7 @@
   "dependencies": {
     "@bgm38/wiki": "^0.2.6",
     "lodash": "^4.17.21",
-    "nanoid": "^5.0.0"
+    "nanoid": "^5.0.9"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",

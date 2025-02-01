@@ -311,7 +311,7 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       nanoid:
-        specifier: ^5.0.0
+        specifier: ^5.0.9
         version: 5.0.9
     devDependencies:
       '@types/js-yaml':
@@ -351,7 +351,7 @@ importers:
         specifier: ^0.37.1
         version: 0.37.1
       nanoid:
-        specifier: ^5.0.0
+        specifier: ^5.0.9
         version: 5.0.9
       oazapfts:
         specifier: ^4.12.0
