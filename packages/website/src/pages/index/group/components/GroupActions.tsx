@@ -1,4 +1,4 @@
-import type { Group } from 'packages/client/group';
+import type { SlimGroup } from 'packages/client/group';
 import React, { memo } from 'react';
 
 import type { ButtonProps } from '@bangumi/design';
@@ -6,7 +6,7 @@ import { Button } from '@bangumi/design';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 export interface GroupActionsProps {
-  group: Group;
+  group: SlimGroup;
   className?: string;
   size?: ButtonProps['size'];
 }

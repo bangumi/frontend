@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 
 import { Avatar, Button, Typography } from '@bangumi/design';
 
+import GroupActions from './GroupActions';
 import styles from './GroupInfo.module.less';
 
 const { Link } = Typography;
@@ -17,6 +18,7 @@ const GroupInfo = memo(({ group }: { group: SlimGroup }) => {
           <span>{`${group.members} 名成员`}</span>
         </div>
       </div>
+      <GroupActions group={group} size='medium' className={styles.groupButtons} />
       <div className={styles.groupButtons}>
         <Button.Link type='secondary' size='medium' to={`/group/${group.name}`}>
           概览
