@@ -4,8 +4,6 @@ import { rest } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-import type { Group, ResponseWithPagination } from '@bangumi/client/group';
-import type { Topic } from '@bangumi/client/topic';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import GroupPage from '@bangumi/website/pages/index/group/[name]';
 import { renderPage } from '@bangumi/website/utils/test-utils';
@@ -13,6 +11,8 @@ import { renderPage } from '@bangumi/website/utils/test-utils';
 import GroupHome from '../index/index';
 import RecentTopics from './fixtures/recent-topics.json';
 import Sandbox from './fixtures/sandbox.json';
+import sandboxMembers from './fixtures/sandbox-members.json';
+import sandboxModMember from './fixtures/sandbox-mod-member.json';
 
 vi.mock('react-router-dom', async () => {
   return {
@@ -27,20 +27,27 @@ const mockedUseParams = vi.mocked(useParams);
 class GroupHomeTest {
   page: RenderResult;
 
-  constructor(name: string, mock: { group?: Group; topics?: ResponseWithPagination<Topic[]> }) {
+  constructor(name: string) {
     mockedUseParams.mockReturnValue({
       name,
     });
 
     mockServer.use(
       rest.get(`http://localhost:3000/p1/groups/${name}`, async (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(mock.group ?? Sandbox));
+        return res(ctx.status(200), ctx.json(Sandbox));
       }),
     );
 
     mockServer.use(
       rest.get(`http://localhost:3000/p1/groups/${name}/topics`, async (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(mock.topics ?? RecentTopics));
+        return res(ctx.status(200), ctx.json(RecentTopics));
+      }),
+    );
+
+    mockServer.use(
+      rest.get(`http://localhost:3000/p1/groups/${name}/members`, async (req, res, ctx) => {
+        const isAdmin = req.url.searchParams.get('moderator') === 'true';
+        return res(ctx.status(200), ctx.json(isAdmin ? sandboxModMember : sandboxMembers));
       }),
     );
 
@@ -58,6 +65,16 @@ class GroupHomeTest {
 
     await waitFor(() => {
       expect(getByText(expectedHeader)).toBeInTheDocument();
+    });
+  }
+
+  async assertMembersExist(expectMembers: string[]): Promise<void> {
+    const { getByText } = this.page;
+
+    await waitFor(() => {
+      expectMembers.forEach((member) => {
+        expect(getByText(member)).toBeInTheDocument();
+      });
     });
   }
 
@@ -79,16 +96,19 @@ class GroupHomeTest {
 }
 
 it('should match snapshot properly', async () => {
-  const test = new GroupHomeTest('sandbox', { group: Sandbox });
+  const test = new GroupHomeTest('sandbox');
 
   await test.assertHeader('沙盒');
 });
 
+it('should list group members', async () => {
+  const test = new GroupHomeTest('sandbox');
+
+  await test.assertMembersExist(['维基 bot', 'bangumi大西王']);
+});
+
 it('should list recent topics', async () => {
-  const test = new GroupHomeTest('sandbox', {
-    group: Sandbox,
-    topics: RecentTopics as ResponseWithPagination<Topic[]>,
-  });
+  const test = new GroupHomeTest('sandbox');
 
   await test.assertTopicExist({
     title: 'tes',
