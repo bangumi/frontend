@@ -333,8 +333,8 @@ importers:
   packages/website:
     dependencies:
       '@marsidev/react-turnstile':
-        specifier: ^0.2.4
-        version: 0.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^0.7.2
+        version: 0.7.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@remix-run/router':
         specifier: ^1.6.0
         version: 1.6.0
@@ -1567,8 +1567,8 @@ packages:
   '@juggle/resize-observer@3.4.0':
     resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
 
-  '@marsidev/react-turnstile@0.2.4':
-    resolution: {integrity: sha512-wRONlWm46ERR2ME1gZ9JZdd0ImZRM6QVdFcep4MuCE6N5qdaCCgcsnZm4VrTJQZ8RQYUjIjw/3Do5Zgg+uMp2w==}
+  '@marsidev/react-turnstile@0.7.2':
+    resolution: {integrity: sha512-0jwLvAUkcLkaYaS6jBOZB3zzUiKi5dU3kZtlaeBX6yV7Y4CbFEtfHCY352ovphNz1v0ZjpOj6+3QUczJvD56VA==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
@@ -8043,7 +8043,7 @@ snapshots:
 
   '@juggle/resize-observer@3.4.0': {}
 
-  '@marsidev/react-turnstile@0.2.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@marsidev/react-turnstile@0.7.2(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
