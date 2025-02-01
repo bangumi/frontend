@@ -1,15 +1,21 @@
 {
   "data": [
     {
-      "avatar": {
-        "small": "https://lain.bgm.tv/pic/user/s/icon.jpg",
-        "medium": "https://lain.bgm.tv/pic/user/m/icon.jpg",
-        "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
-      },
-      "id": 287622,
-      "nickname": "nickname 287622",
-      "username": "287622",
-      "joinedAt": 1531631310
+      "uid": 287622,
+      "moderator": true,
+      "joinedAt": 1531631310,
+      "user": {
+        "id": 287622,
+        "username": "trim21",
+        "nickname": "bangumi大西王",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/28/76/287622.jpg?r=1672779554&hd=1",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/28/76/287622.jpg?r=1672779554&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/28/76/287622.jpg?r=1672779554&hd=1"
+        },
+        "sign": "天生万物以养人，人无一物以报天",
+        "joinedAt": 1463075630
+      }
     }
   ],
   "total": 1
