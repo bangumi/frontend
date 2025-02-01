@@ -18,8 +18,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       '@octokit/openapi-types':
-        specifier: ^17.2.0
-        version: 17.2.0
+        specifier: ^23.0.1
+        version: 23.0.1
       '@testing-library/jest-dom':
         specifier: ^5.17.0
         version: 5.17.0
@@ -1745,9 +1745,6 @@ packages:
   '@octokit/graphql@7.1.0':
     resolution: {integrity: sha512-r+oZUH7aMFui1ypZnAvZmn0KSqAUgE1/tUXIWaqUCa1758ts/Jio84GZuzsvUkme98kv0WFY8//n0J1Z+vsIsQ==}
     engines: {node: '>= 18'}
-
-  '@octokit/openapi-types@17.2.0':
-    resolution: {integrity: sha512-MazrFNx4plbLsGl+LFesMo96eIXkFgEtaKbnNpdh4aQ0VM10aoylFsTYP1AEjkeoRNZiiPe3T6Gl2Hr8dJWdlQ==}
 
   '@octokit/openapi-types@20.0.0':
     resolution: {integrity: sha512-EtqRBEjp1dL/15V7WiX5LJMIxxkdiGJnabzYx5Apx4FkQIFgAfKumXeYAqqJCj1s+BMX4cPFIFC4OLCR6stlnA==}
@@ -8272,8 +8269,6 @@ snapshots:
       '@octokit/request': 8.4.0
       '@octokit/types': 13.8.0
       universal-user-agent: 6.0.0
-
-  '@octokit/openapi-types@17.2.0': {}
 
   '@octokit/openapi-types@20.0.0': {}
 
