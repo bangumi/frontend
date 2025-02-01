@@ -9,7 +9,7 @@ setup('authenticate as treeholechan', async ({ page }) => {
   await page.getByPlaceholder('你的登录密码').fill('lovemeplease');
   // NOTE: Cloudflare 网络不好可能载入需要花费一些时间
   await expect(page.frameLocator('iframe').locator('span#success-text')).toBeVisible({
-    timeout: 30 * 1000,
+    timeout: 60 * 1000,
   });
   await page.getByRole('button', { name: '登录' }).click();
 

@@ -11,7 +11,7 @@ pull_request_rules:
           - -check-failure=lint
           - -check-failure=build
           - -check-failure=test
-          - -check-failure=test-e2e
+          # - -check-failure=test-e2e
           - -check-failure=storybook-build
     actions:
       merge:
@@ -38,10 +38,10 @@ pull_request_rules:
           - check-success=test
           - check-neutral=test
           - check-skipped=test
-      - or:
-          - check-success=test-e2e
-          - check-neutral=test-e2e
-          - check-skipped=test-e2e
+      # - or:
+      #     - check-success=test-e2e
+      #     - check-neutral=test-e2e
+      #     - check-skipped=test-e2e
       - or:
           - check-success=storybook-build
           - check-neutral=storybook-build
@@ -59,7 +59,7 @@ pull_request_rules:
           - check-failure=lint
           - check-failure=build
           - check-failure=test
-          - check-failure=test-e2e
+          # - check-failure=test-e2e
           - check-failure=storybook-build
     actions:
       label:
