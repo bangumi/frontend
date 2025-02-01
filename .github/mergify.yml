@@ -92,12 +92,20 @@ pull_request_rules:
       comment:
         message: '@{{author}} this pull request is now in conflict 😩'
 
-  - name: label conflicts
+  - name: add label conflicts
     conditions:
       - conflict
     actions:
       label:
-        toggle:
+        add:
+          - conflict
+
+  - name: remove label conflicts
+    conditions:
+      - -conflict
+    actions:
+      label:
+        remove:
           - conflict
 
   - name: add lint fail label
