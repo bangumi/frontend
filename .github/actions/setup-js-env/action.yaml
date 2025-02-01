@@ -1,10 +1,4 @@
-inputs:
-  node-version:
-    description: 'node version'
-    required: false
-    default: '^22.11.0'
-
-name: 'Setup Node and run npm ci'
+name: 'Setup Node and run pnpm i'
 description: 'setup node env'
 runs:
   using: 'composite'
