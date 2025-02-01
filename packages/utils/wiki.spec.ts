@@ -153,18 +153,18 @@ describe('mergeWiki', () => {
       ],
     });
     expect(stringifyWiki(mergedWiki)).toBe(`{{Infobox animanga/TVAnime
-|中文名 = 
+|中文名 =
 |别名 = {
 }
 |话数 = *
 |放送开始 = *
-|放送星期 = 
-|官方网站 = 
-|播放电视台 = 
-|其他电视台 = 
-|播放结束 = 
-|其他 = 
-|Copyright = 
+|放送星期 =
+|官方网站 =
+|播放电视台 =
+|其他电视台 =
+|播放结束 =
+|其他 =
+|Copyright =
 |character = {
 [boqi]
 [nijika]
