@@ -17,7 +17,6 @@ pnpm install
 
 ```bash
 pnpm dev
-pnpm dev --mode loc
 ```
 
 lint 代码风格
