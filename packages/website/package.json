@@ -13,7 +13,7 @@
   "dependencies": {
     "@marsidev/react-turnstile": "^0.7.2",
     "@remix-run/router": "^1.6.0",
-    "classnames": "^2.3.2",
+    "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "monaco-editor": "^0.37.1",
