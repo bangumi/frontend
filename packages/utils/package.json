@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.ts",
   "dependencies": {
-    "@bgm38/wiki": "^0.2.6",
+    "@bgm38/wiki": "^0.3.3",
     "lodash": "^4.17.21",
     "nanoid": "^5.0.0"
   },
