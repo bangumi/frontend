@@ -79,7 +79,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "eslint-plugin-unicorn": "^46.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "husky": "^8.0.3",
+    "husky": "^9.1.7",
     "jsdom": "^21.1.1",
     "lint-staged": "^13.2.2",
     "postcss": "^8.5.1",
