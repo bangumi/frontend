@@ -669,6 +669,7 @@ export type User = {
 export type EpisodeWikiInfo = {
   /** YYYY-MM-DD */
   date?: string;
+  disc?: number;
   duration: string;
   ep: number;
   id: number;
@@ -3148,6 +3149,7 @@ export function patchEpisodeWikiInfo(
     episode: {
       /** YYYY-MM-DD */
       date?: string;
+      disc?: number;
       duration?: string;
       ep?: number;
       name?: string;
@@ -3575,12 +3577,63 @@ export function voteSubjectCover(subjectId: number, imageId: number, opts?: Oaza
   );
 }
 /**
+ * 批量编辑条目章节
+ */
+export function patchEpisodes(
+  subjectId: number,
+  body: {
+    commitMessage: string;
+    episodes: {
+      /** YYYY-MM-DD */
+      date?: string;
+      disc?: number;
+      duration?: string;
+      ep?: number;
+      id: number;
+      name?: string;
+      nameCN?: string;
+      summary?: string;
+      type?: EpisodeType;
+    }[];
+    expectedRevision?: {
+      date?: string;
+      duration?: string;
+      name?: string;
+      nameCN?: string;
+      summary?: string;
+    }[];
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+      }
+    | {
+        status: 401;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/wiki/subjects/${encodeURIComponent(subjectId)}/ep`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body,
+    }),
+  );
+}
+/**
  * 为条目添加新章节
  */
 export function createEpisodes(
   subjectId: number,
   body: {
     episodes: {
+      /** YYYY-MM-DD */
       date?: string;
       disc?: number;
       duration?: string;

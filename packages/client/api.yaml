@@ -473,6 +473,8 @@ components:
           example: '2022-02-02'
           pattern: ^\d{4}-\d{2}-\d{2}$
           type: string
+        disc:
+          type: number
         duration:
           example: '24:53'
           type: string
@@ -500,16 +502,77 @@ components:
         - duration
         - summary
       type: object
+    EpsisodesEdit:
+      properties:
+        commitMessage:
+          type: string
+        episodes:
+          items:
+            properties:
+              date:
+                description: YYYY-MM-DD
+                example: '2022-02-02'
+                pattern: ^\d{4}-\d{2}-\d{2}$
+                type: string
+              disc:
+                type: number
+              duration:
+                example: '24:53'
+                type: string
+              ep:
+                type: number
+              id:
+                type: integer
+              name:
+                type: string
+              nameCN:
+                type: string
+              summary:
+                type: string
+              type:
+                $ref: '#/components/schemas/EpisodeType'
+            required:
+              - id
+            type: object
+          type: array
+        expectedRevision:
+          items:
+            description: >-
+              a optional object to check if input is changed by others
+
+              if some key is given, and current data in database doesn't match
+              input, subject will not be changed
+            properties:
+              date:
+                type: string
+              duration:
+                type: string
+              name:
+                type: string
+              nameCN:
+                type: string
+              summary:
+                type: string
+            type: object
+          type: array
+      required:
+        - commitMessage
+        - episodes
+      type: object
     EpsisodesNew:
       properties:
         episodes:
           items:
             properties:
               date:
+                description: YYYY-MM-DD
+                example: '2022-02-02'
+                pattern: ^\d{4}-\d{2}-\d{2}$
                 type: string
               disc:
                 type: number
               duration:
+                example: '24:53'
                 type: string
               ep:
                 type: number
@@ -6315,6 +6378,8 @@ paths:
                       example: '2022-02-02'
                       pattern: ^\d{4}-\d{2}-\d{2}$
                       type: string
+                    disc:
+                      type: number
                     duration:
                       example: '24:53'
                       type: string
@@ -7222,8 +7287,109 @@ paths:
       tags:
         - wiki
   /p1/wiki/subjects/{subjectID}/ep:
+    patch:
+      description: 需要 `epEdit` 权限，一次最多可以编辑 20 个章节
+      operationId: patchEpisodes
+      parameters:
+        - example: 363612
+          in: path
+          name: subjectID
+          required: true
+          schema:
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                commitMessage:
+                  type: string
+                episodes:
+                  items:
+                    properties:
+                      date:
+                        description: YYYY-MM-DD
+                        example: '2022-02-02'
+                        pattern: ^\d{4}-\d{2}-\d{2}$
+                        type: string
+                      disc:
+                        type: number
+                      duration:
+                        example: '24:53'
+                        type: string
+                      ep:
+                        type: number
+                      id:
+                        type: integer
+                      name:
+                        type: string
+                      nameCN:
+                        type: string
+                      summary:
+                        type: string
+                      type:
+                        $ref: '#/components/schemas/EpisodeType'
+                    required:
+                      - id
+                    type: object
+                  type: array
+                expectedRevision:
+                  items:
+                    description: >-
+                      a optional object to check if input is changed by others
+
+                      if some key is given, and current data in database doesn't
+                      match input, subject will not be changed
+                    properties:
+                      date:
+                        type: string
+                      duration:
+                        type: string
+                      name:
+                        type: string
+                      nameCN:
+                        type: string
+                      summary:
+                        type: string
+                    type: object
+                  type: array
+              required:
+                - commitMessage
+                - episodes
+              type: object
+        required: true
+      responses:
+        '200':
+          description: Default Response
+        '401':
+          content:
+            application/json:
+              examples:
+                INVALID_SYNTAX_ERROR:
+                  value:
+                    code: INVALID_SYNTAX_ERROR
+                    error: Bad Request
+                    message: '%s'
+                    statusCode: 400
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 批量编辑条目章节
+      tags:
+        - wiki
     post:
-      description: 为条目添加新章节
+      description: 需要 `epEdit` 权限，一次最多可以添加 40 个章节
       operationId: createEpisodes
       parameters:
         - in: path
@@ -7241,10 +7407,14 @@ paths:
                   items:
                     properties:
                       date:
+                        description: YYYY-MM-DD
+                        example: '2022-02-02'
+                        pattern: ^\d{4}-\d{2}-\d{2}$
                         type: string
                       disc:
                         type: number
                       duration:
+                        example: '24:53'
                         type: string
                       ep:
                         type: number
@@ -7301,6 +7471,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
+      summary: 为条目添加新章节
       tags:
         - wiki
   /p1/wiki/subjects/{subjectID}/history-summary:
