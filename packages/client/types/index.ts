@@ -1371,12 +1371,19 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    /** @description 为条目添加新章节 */
+    /**
+     * 为条目添加新章节
+     * @description 需要 `epEdit` 权限，一次最多可以添加 40 个章节
+     */
     post: operations['createEpisodes'];
     delete?: never;
     options?: never;
     head?: never;
-    patch?: never;
+    /**
+     * 批量编辑条目章节
+     * @description 需要 `epEdit` 权限，一次最多可以编辑 20 个章节
+     */
+    patch: operations['patchEpisodes'];
     trace?: never;
   };
   '/p1/wiki/subjects/{subjectID}/history-summary': {
@@ -1610,6 +1617,7 @@ export interface components {
        * @example 2022-02-02
        */
       date?: string;
+      disc?: number;
       /** @example 24:53 */
       duration: string;
       ep: number;
@@ -1620,10 +1628,41 @@ export interface components {
       summary: string;
       type: components['schemas']['EpisodeType'];
     };
-    EpsisodesNew: {
+    EpsisodesEdit: {
+      commitMessage: string;
       episodes: {
+        /**
+         * @description YYYY-MM-DD
+         * @example 2022-02-02
+         */
         date?: string;
         disc?: number;
+        /** @example 24:53 */
+        duration?: string;
+        ep?: number;
+        id: number;
+        name?: string;
+        nameCN?: string;
+        summary?: string;
+        type?: components['schemas']['EpisodeType'];
+      }[];
+      expectedRevision?: {
+        date?: string;
+        duration?: string;
+        name?: string;
+        nameCN?: string;
+        summary?: string;
+      }[];
+    };
+    EpsisodesNew: {
+      episodes: {
+        /**
+         * @description YYYY-MM-DD
+         * @example 2022-02-02
+         */
+        date?: string;
+        disc?: number;
+        /** @example 24:53 */
         duration?: string;
         ep: number;
         name?: string;
@@ -5521,6 +5560,7 @@ export interface operations {
              * @example 2022-02-02
              */
             date?: string;
+            disc?: number;
             /** @example 24:53 */
             duration?: string;
             ep?: number;
@@ -6207,8 +6247,13 @@ export interface operations {
       content: {
         'application/json': {
           episodes: {
+            /**
+             * @description YYYY-MM-DD
+             * @example 2022-02-02
+             */
             date?: string;
             disc?: number;
+            /** @example 24:53 */
             duration?: string;
             ep: number;
             name?: string;
@@ -6230,6 +6275,74 @@ export interface operations {
             episodeIDs: number[];
           };
         };
+      };
+      /** @description default error response type */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  patchEpisodes: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        /** @example 363612 */
+        subjectID: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          commitMessage: string;
+          episodes: {
+            /**
+             * @description YYYY-MM-DD
+             * @example 2022-02-02
+             */
+            date?: string;
+            disc?: number;
+            /** @example 24:53 */
+            duration?: string;
+            ep?: number;
+            id: number;
+            name?: string;
+            nameCN?: string;
+            summary?: string;
+            type?: components['schemas']['EpisodeType'];
+          }[];
+          expectedRevision?: {
+            date?: string;
+            duration?: string;
+            name?: string;
+            nameCN?: string;
+            summary?: string;
+          }[];
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content?: never;
       };
       /** @description default error response type */
       401: {
