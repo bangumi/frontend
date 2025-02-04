@@ -3405,12 +3405,11 @@ paths:
     get:
       operationId: getSubjectEpisodeComments
       parameters:
-        - example: 1075440
-          in: path
+        - in: path
           name: episodeID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -4752,12 +4751,11 @@ paths:
     put:
       operationId: updateSubjectTopic
       parameters:
-        - example: 371602
-          in: path
+        - in: path
           name: topicID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -5415,12 +5413,11 @@ paths:
     post:
       operationId: createSubjectTopic
       parameters:
-        - example: 114514
-          in: path
+        - in: path
           name: subjectID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -6234,12 +6231,11 @@ paths:
     get:
       operationId: getEpisodeWikiInfo
       parameters:
-        - example: 1148124
-          in: path
+        - in: path
           name: episodeID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -6286,12 +6282,11 @@ paths:
     patch:
       operationId: patchEpisodeWikiInfo
       parameters:
-        - example: 1148124
-          in: path
+        - in: path
           name: episodeID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -6438,12 +6433,11 @@ paths:
       description: 获取当前的 wiki 信息
       operationId: getPersonWikiInfo
       parameters:
-        - example: 1
-          in: path
+        - in: path
           name: personID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -6487,12 +6481,11 @@ paths:
     patch:
       operationId: patchPersonInfo
       parameters:
-        - example: 1
-          in: path
+        - in: path
           name: personID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -6704,12 +6697,11 @@ paths:
       description: 获取当前的 wiki 信息
       operationId: subjectInfo
       parameters:
-        - example: 363612
-          in: path
+        - in: path
           name: subjectID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -6745,12 +6737,11 @@ paths:
     patch:
       operationId: patchSubjectInfo
       parameters:
-        - example: 363612
-          in: path
+        - in: path
           name: subjectID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -6900,12 +6891,11 @@ paths:
       description: 需要 `subjectWikiEdit` 权限
       operationId: putSubjectInfo
       parameters:
-        - example: 363612
-          in: path
+        - in: path
           name: subjectID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -7171,13 +7161,13 @@ paths:
           name: subjectID
           required: true
           schema:
-            exclusiveMinimum: 0
+            minimum: 1
             type: integer
         - in: path
           name: imageID
           required: true
           schema:
-            exclusiveMinimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -7205,13 +7195,13 @@ paths:
           name: subjectID
           required: true
           schema:
-            exclusiveMinimum: 0
+            minimum: 1
             type: integer
         - in: path
           name: imageID
           required: true
           schema:
-            exclusiveMinimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -7236,12 +7226,11 @@ paths:
       description: 为条目添加新章节
       operationId: createEpisodes
       parameters:
-        - example: 363612
-          in: path
+        - in: path
           name: subjectID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       requestBody:
         content:
@@ -7319,12 +7308,11 @@ paths:
       description: 获取当前的 wiki 信息
       operationId: subjectEditHistorySummary
       parameters:
-        - example: 8
-          in: path
+        - in: path
           name: subjectID
           required: true
           schema:
-            minimum: 0
+            minimum: 1
             type: integer
       responses:
         '200':

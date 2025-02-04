@@ -3303,7 +3303,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1075440 */
         episodeID: number;
       };
       cookie?: never;
@@ -4376,7 +4375,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 371602 */
         topicID: number;
       };
       cookie?: never;
@@ -4853,7 +4851,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 114514 */
         subjectID: number;
       };
       cookie?: never;
@@ -5454,7 +5451,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1148124 */
         episodeID: number;
       };
       cookie?: never;
@@ -5495,7 +5491,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1148124 */
         episodeID: number;
       };
       cookie?: never;
@@ -5628,7 +5623,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1 */
         personID: number;
       };
       cookie?: never;
@@ -5678,7 +5672,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1 */
         personID: number;
       };
       cookie?: never;
@@ -5849,7 +5842,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 363612 */
         subjectID: number;
       };
       cookie?: never;
@@ -5890,7 +5882,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 363612 */
         subjectID: number;
       };
       cookie?: never;
@@ -5954,7 +5945,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 363612 */
         subjectID: number;
       };
       cookie?: never;
@@ -6209,7 +6199,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 363612 */
         subjectID: number;
       };
       cookie?: never;
@@ -6267,7 +6256,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 8 */
         subjectID: number;
       };
       cookie?: never;
