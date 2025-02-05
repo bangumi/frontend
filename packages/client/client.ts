@@ -260,12 +260,12 @@ export type Reaction = {
   users: SimpleUser[];
   value: number;
 };
-export type EpisodeCommentBase = {
+export type CommentBase = {
   content: string;
   createdAt: number;
   creatorID: number;
-  epID: number;
   id: number;
+  mainID: number;
   reactions?: Reaction[];
   relatedID: number;
   state: number;
@@ -477,7 +477,7 @@ export type SubjectCharacter = {
   order: number;
   type: number;
 };
-export type SubjectComment = {
+export type SubjectInterestComment = {
   comment: string;
   id: number;
   rate: number;
@@ -1282,14 +1282,14 @@ export function getSubjectEpisodeComments(episodeId: number, opts?: Oazapfts.Req
           content: string;
           createdAt: number;
           creatorID: number;
-          epID: number;
           id: number;
+          mainID: number;
           reactions?: Reaction[];
           relatedID: number;
           state: number;
           user?: SlimUser;
         } & {
-          replies: EpisodeCommentBase[];
+          replies: CommentBase[];
         })[];
       }
     | {
@@ -2007,32 +2007,6 @@ export function getSubjects(
     },
   );
 }
-export function getP1SubjectsEpisodeByEpisodeId(episodeId: string, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchText(`/p1/subjects/-/episode/${encodeURIComponent(episodeId)}`, {
-    ...opts,
-  });
-}
-export function getP1SubjectsEpisodeByEpisodeIdComments(
-  episodeId: string,
-  opts?: Oazapfts.RequestOpts,
-) {
-  return oazapfts.fetchText(`/p1/subjects/-/episode/${encodeURIComponent(episodeId)}/comments`, {
-    ...opts,
-  });
-}
-export function getP1SubjectsEpisodesByEpisodeId(episodeId: string, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchText(`/p1/subjects/-/episodes/${encodeURIComponent(episodeId)}`, {
-    ...opts,
-  });
-}
-export function getP1SubjectsEpisodesByEpisodeIdComments(
-  episodeId: string,
-  opts?: Oazapfts.RequestOpts,
-) {
-  return oazapfts.fetchText(`/p1/subjects/-/episodes/${encodeURIComponent(episodeId)}/comments`, {
-    ...opts,
-  });
-}
 /**
  * 删除条目讨论回复
  */
@@ -2248,7 +2222,7 @@ export function getSubjectComments(
     | {
         status: 200;
         data: {
-          data: SubjectComment[];
+          data: SubjectInterestComment[];
           /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
           total: number;
         };

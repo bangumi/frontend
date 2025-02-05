@@ -613,146 +613,6 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
-  '/p1/subjects/-/episode/{episodeID}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          episodeID: string;
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/p1/subjects/-/episode/{episodeID}/comments': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          episodeID: string;
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/p1/subjects/-/episodes/{episodeID}': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          episodeID: string;
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  '/p1/subjects/-/episodes/{episodeID}/comments': {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get: {
-      parameters: {
-        query?: never;
-        header?: never;
-        path: {
-          episodeID: string;
-        };
-        cookie?: never;
-      };
-      requestBody?: never;
-      responses: {
-        /** @description Default Response */
-        200: {
-          headers: {
-            [name: string]: unknown;
-          };
-          content?: never;
-        };
-      };
-    };
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
   '/p1/subjects/-/posts/{postID}': {
     parameters: {
       query?: never;
@@ -1505,6 +1365,30 @@ export interface components {
      * @enum {integer}
      */
     CollectionType: 1 | 2 | 3 | 4 | 5;
+    Comment: {
+      content: string;
+      createdAt: number;
+      creatorID: number;
+      id: number;
+      mainID: number;
+      reactions?: components['schemas']['Reaction'][];
+      relatedID: number;
+      state: number;
+      user?: components['schemas']['SlimUser'];
+    } & {
+      replies: components['schemas']['CommentBase'][];
+    };
+    CommentBase: {
+      content: string;
+      createdAt: number;
+      creatorID: number;
+      id: number;
+      mainID: number;
+      reactions?: components['schemas']['Reaction'][];
+      relatedID: number;
+      state: number;
+      user?: components['schemas']['SlimUser'];
+    };
     CreateEpisodeComment: {
       content: string;
       /**
@@ -1575,30 +1459,6 @@ export interface components {
      * @enum {integer}
      */
     EpisodeCollectionStatus: 0 | 1 | 2 | 3;
-    EpisodeCommentBase: {
-      content: string;
-      createdAt: number;
-      creatorID: number;
-      epID: number;
-      id: number;
-      reactions?: components['schemas']['Reaction'][];
-      relatedID: number;
-      state: number;
-      user?: components['schemas']['SlimUser'];
-    };
-    EpisodeComments: {
-      content: string;
-      createdAt: number;
-      creatorID: number;
-      epID: number;
-      id: number;
-      reactions?: components['schemas']['Reaction'][];
-      relatedID: number;
-      state: number;
-      user?: components['schemas']['SlimUser'];
-    } & {
-      replies: components['schemas']['EpisodeCommentBase'][];
-    };
     /**
      * @description 话数类型
      *       - 0 = 本篇
@@ -2260,16 +2120,6 @@ export interface components {
     SubjectCollection: {
       [key: string]: number;
     };
-    /** SubjectComment */
-    SubjectComment: {
-      comment: string;
-      id: number;
-      rate: number;
-      reactions?: components['schemas']['Reaction'][];
-      type: components['schemas']['CollectionType'];
-      updatedAt: number;
-      user: components['schemas']['SlimUser'];
-    };
     /** @example {
      *       "infobox": "{{Infobox animanga/TVAnime\n|中文名= 沙盒\n|别名={\n}\n|话数= 7\n|放送开始= 0000-10-06\n|放送星期= \n|官方网站= \n|播放电视台= \n|其他电视台= \n|播放结束= \n|其他= \n|Copyright= \n|平台={\n[龟壳]\n[Xbox Series S]\n[Xbox Series X]\n[Xbox Series X/S]\n[PC]\n[Xbox Series X|S]\n}\n}}",
      *       "name": "沙盒",
@@ -2305,6 +2155,16 @@ export interface components {
       type: components['schemas']['CollectionType'];
       updatedAt: number;
       volStatus: number;
+    };
+    /** SubjectInterestComment */
+    SubjectInterestComment: {
+      comment: string;
+      id: number;
+      rate: number;
+      reactions?: components['schemas']['Reaction'][];
+      type: components['schemas']['CollectionType'];
+      updatedAt: number;
+      user: components['schemas']['SlimUser'];
     };
     SubjectNew: {
       infobox: string;
@@ -3358,14 +3218,14 @@ export interface operations {
             content: string;
             createdAt: number;
             creatorID: number;
-            epID: number;
             id: number;
+            mainID: number;
             reactions?: components['schemas']['Reaction'][];
             relatedID: number;
             state: number;
             user?: components['schemas']['SlimUser'];
           } & {
-            replies: components['schemas']['EpisodeCommentBase'][];
+            replies: components['schemas']['CommentBase'][];
           })[];
         };
       };
@@ -4582,7 +4442,7 @@ export interface operations {
         };
         content: {
           'application/json': {
-            data: components['schemas']['SubjectComment'][];
+            data: components['schemas']['SubjectInterestComment'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
