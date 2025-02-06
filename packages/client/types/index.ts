@@ -1389,7 +1389,7 @@ export interface components {
       state: number;
       user?: components['schemas']['SlimUser'];
     };
-    CreateEpisodeComment: {
+    CreateComment: {
       content: string;
       /**
        * @description 被回复的吐槽 ID, `0` 代表发送顶层吐槽
@@ -2393,7 +2393,7 @@ export interface components {
       count: number;
       subject: components['schemas']['Subject'];
     };
-    UpdateEpisodeComment: {
+    UpdateComment: {
       content: string;
     };
     UpdatePost: {
@@ -3102,14 +3102,13 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1075440 */
         commentID: number;
       };
       cookie?: never;
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdateEpisodeComment'];
+        'application/json': components['schemas']['UpdateComment'];
       };
     };
     responses: {
@@ -3138,7 +3137,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1034989 */
         commentID: number;
       };
       cookie?: never;
@@ -3170,7 +3168,6 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1075440 */
         episodeID: number;
       };
       cookie?: never;
@@ -3245,14 +3242,13 @@ export interface operations {
       query?: never;
       header?: never;
       path: {
-        /** @example 1075440 */
         episodeID: number;
       };
       cookie?: never;
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateEpisodeComment'];
+        'application/json': components['schemas']['CreateComment'];
       };
     };
     responses: {

@@ -282,7 +282,7 @@ components:
         - content
         - state
       type: object
-    CreateEpisodeComment:
+    CreateComment:
       properties:
         content:
           minLength: 1
@@ -2393,7 +2393,7 @@ components:
         - subject
         - count
       type: object
-    UpdateEpisodeComment:
+    UpdateComment:
       properties:
         content:
           minLength: 1
@@ -3372,11 +3372,11 @@ paths:
     delete:
       operationId: deleteSubjectEpComment
       parameters:
-        - example: 1034989
-          in: path
+        - in: path
           name: commentID
           required: true
           schema:
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -3402,17 +3402,17 @@ paths:
     put:
       operationId: updateSubjectEpComment
       parameters:
-        - example: 1075440
-          in: path
+        - in: path
           name: commentID
           required: true
           schema:
+            minimum: 1
             type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateEpisodeComment'
+              $ref: '#/components/schemas/UpdateComment'
       responses:
         '200':
           content:
@@ -3438,11 +3438,11 @@ paths:
     get:
       operationId: getSubjectEpisode
       parameters:
-        - example: 1075440
-          in: path
+        - in: path
           name: episodeID
           required: true
           schema:
+            minimum: 1
             type: integer
       responses:
         '200':
@@ -3535,17 +3535,17 @@ paths:
     post:
       operationId: createSubjectEpComment
       parameters:
-        - example: 1075440
-          in: path
+        - in: path
           name: episodeID
           required: true
           schema:
+            minimum: 1
             type: integer
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateEpisodeComment'
+              $ref: '#/components/schemas/CreateComment'
       responses:
         '200':
           content:
