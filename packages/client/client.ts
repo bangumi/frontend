@@ -17,6 +17,9 @@ export type ErrorResponse = {
   message: string;
   statusCode: number;
 };
+export type UpdateComment = {
+  content: string;
+};
 export type Avatar = {
   large: string;
   medium: string;
@@ -45,6 +48,35 @@ export type BlogEntry = {
   updatedAt: number;
   user: SlimUser;
   views: number;
+};
+export type SimpleUser = {
+  id: number;
+  nickname: string;
+  username: string;
+};
+export type Reaction = {
+  users: SimpleUser[];
+  value: number;
+};
+export type CommentBase = {
+  content: string;
+  createdAt: number;
+  creatorID: number;
+  id: number;
+  mainID: number;
+  reactions?: Reaction[];
+  relatedID: number;
+  state: number;
+  user?: SlimUser;
+};
+export type CreateComment = {
+  content: string;
+  /** 被回复的吐槽 ID, `0` 代表发送顶层吐槽 */
+  replyTo?: number;
+  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
+  turnstileToken: string;
 };
 export type BlogPhoto = {
   createdAt: number;
@@ -231,9 +263,6 @@ export type Subject = {
   type: SubjectType;
   volumes: number;
 };
-export type UpdateComment = {
-  content: string;
-};
 export type EpisodeCollectionStatus = 0 | 1 | 2 | 3;
 export type EpisodeType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type Episode = {
@@ -250,35 +279,6 @@ export type Episode = {
   subject?: SlimSubject;
   subjectID: number;
   type: EpisodeType;
-};
-export type SimpleUser = {
-  id: number;
-  nickname: string;
-  username: string;
-};
-export type Reaction = {
-  users: SimpleUser[];
-  value: number;
-};
-export type CommentBase = {
-  content: string;
-  createdAt: number;
-  creatorID: number;
-  id: number;
-  mainID: number;
-  reactions?: Reaction[];
-  relatedID: number;
-  state: number;
-  user?: SlimUser;
-};
-export type CreateComment = {
-  content: string;
-  /** 被回复的吐槽 ID, `0` 代表发送顶层吐槽 */
-  replyTo?: number;
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  turnstileToken: string;
 };
 export type Friend = {
   createdAt: number;
@@ -800,6 +800,50 @@ export function removeFromBlocklist(id: number, opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
+ * 删除日志的吐槽
+ */
+export function deleteBlogComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/blogs/-/comments/${encodeURIComponent(commentId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 编辑日志的吐槽
+ */
+export function updateBlogComment(
+  commentId: number,
+  updateComment?: UpdateComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/blogs/-/comments/${encodeURIComponent(commentId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: updateComment,
+    }),
+  );
+}
+/**
  * 获取日志详情
  */
 export function getBlogEntry(entryId: number, opts?: Oazapfts.RequestOpts) {
@@ -815,6 +859,68 @@ export function getBlogEntry(entryId: number, opts?: Oazapfts.RequestOpts) {
   >(`/p1/blogs/${encodeURIComponent(entryId)}`, {
     ...opts,
   });
+}
+/**
+ * 获取日志的吐槽箱
+ */
+export function getBlogComments(entryId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: ({
+          content: string;
+          createdAt: number;
+          creatorID: number;
+          id: number;
+          mainID: number;
+          reactions?: Reaction[];
+          relatedID: number;
+          state: number;
+          user?: SlimUser;
+        } & {
+          replies: CommentBase[];
+        })[];
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/blogs/${encodeURIComponent(entryId)}/comments`, {
+    ...opts,
+  });
+}
+/**
+ * 创建日志的吐槽
+ */
+export function createBlogComment(
+  entryId: number,
+  createComment?: CreateComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          /** new comment id */
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/blogs/${encodeURIComponent(entryId)}/comments`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: createComment,
+    }),
+  );
 }
 /**
  * 获取日志的图片
@@ -888,6 +994,50 @@ export function getCalendar(opts?: Oazapfts.RequestOpts) {
   >('/p1/calendar', {
     ...opts,
   });
+}
+/**
+ * 删除角色的吐槽
+ */
+export function deleteCharacterComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/characters/-/comments/${encodeURIComponent(commentId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 编辑角色的吐槽
+ */
+export function updateCharacterComment(
+  commentId: number,
+  updateComment?: UpdateComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/characters/-/comments/${encodeURIComponent(commentId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: updateComment,
+    }),
+  );
 }
 /**
  * 获取角色
@@ -1000,6 +1150,68 @@ export function getCharacterCollects(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 获取角色的吐槽箱
+ */
+export function getCharacterComments(characterId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: ({
+          content: string;
+          createdAt: number;
+          creatorID: number;
+          id: number;
+          mainID: number;
+          reactions?: Reaction[];
+          relatedID: number;
+          state: number;
+          user?: SlimUser;
+        } & {
+          replies: CommentBase[];
+        })[];
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/characters/${encodeURIComponent(characterId)}/comments`, {
+    ...opts,
+  });
+}
+/**
+ * 创建角色的吐槽
+ */
+export function createCharacterComment(
+  characterId: number,
+  createComment?: CreateComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          /** new comment id */
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/characters/${encodeURIComponent(characterId)}/comments`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: createComment,
+    }),
   );
 }
 /**
@@ -1213,7 +1425,7 @@ export function debug(opts?: Oazapfts.RequestOpts) {
 /**
  * 删除条目的剧集吐槽
  */
-export function deleteSubjectEpComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+export function deleteEpisodeComment(commentId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -1231,7 +1443,7 @@ export function deleteSubjectEpComment(commentId: number, opts?: Oazapfts.Reques
 /**
  * 编辑条目的剧集吐槽
  */
-export function updateSubjectEpComment(
+export function updateEpisodeComment(
   commentId: number,
   updateComment?: UpdateComment,
   opts?: Oazapfts.RequestOpts,
@@ -1257,7 +1469,7 @@ export function updateSubjectEpComment(
 /**
  * 获取剧集信息
  */
-export function getSubjectEpisode(episodeId: number, opts?: Oazapfts.RequestOpts) {
+export function getEpisode(episodeId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -1274,7 +1486,7 @@ export function getSubjectEpisode(episodeId: number, opts?: Oazapfts.RequestOpts
 /**
  * 获取条目的剧集吐槽箱
  */
-export function getSubjectEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpts) {
+export function getEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -1303,7 +1515,7 @@ export function getSubjectEpisodeComments(episodeId: number, opts?: Oazapfts.Req
 /**
  * 创建条目的剧集吐槽
  */
-export function createSubjectEpComment(
+export function createEpisodeComment(
   episodeId: number,
   createComment?: CreateComment,
   opts?: Oazapfts.RequestOpts,
@@ -1312,7 +1524,7 @@ export function createSubjectEpComment(
     | {
         status: 200;
         data: {
-          /** new reply id */
+          /** new comment id */
           id: number;
         };
       }
@@ -1792,6 +2004,50 @@ export function listNotice(
   );
 }
 /**
+ * 删除人物的吐槽
+ */
+export function deletePersonComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/persons/-/comments/${encodeURIComponent(commentId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 编辑人物的吐槽
+ */
+export function updatePersonComment(
+  commentId: number,
+  updateComment?: UpdateComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/persons/-/comments/${encodeURIComponent(commentId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: updateComment,
+    }),
+  );
+}
+/**
  * 获取人物
  */
 export function getPerson(personId: number, opts?: Oazapfts.RequestOpts) {
@@ -1902,6 +2158,68 @@ export function getPersonCollects(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 获取人物的吐槽箱
+ */
+export function getPersonComments(personId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: ({
+          content: string;
+          createdAt: number;
+          creatorID: number;
+          id: number;
+          mainID: number;
+          reactions?: Reaction[];
+          relatedID: number;
+          state: number;
+          user?: SlimUser;
+        } & {
+          replies: CommentBase[];
+        })[];
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/persons/${encodeURIComponent(personId)}/comments`, {
+    ...opts,
+  });
+}
+/**
+ * 创建人物的吐槽
+ */
+export function createPersonComment(
+  personId: number,
+  createComment?: CreateComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          /** new comment id */
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/persons/${encodeURIComponent(personId)}/comments`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: createComment,
+    }),
   );
 }
 /**

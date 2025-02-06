@@ -34,6 +34,24 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/blogs/-/comments/{commentID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 编辑日志的吐槽 */
+    put: operations['updateBlogComment'];
+    post?: never;
+    /** 删除日志的吐槽 */
+    delete: operations['deleteBlogComment'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/blogs/{entryID}': {
     parameters: {
       query?: never;
@@ -45,6 +63,24 @@ export interface paths {
     get: operations['getBlogEntry'];
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/blogs/{entryID}/comments': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取日志的吐槽箱 */
+    get: operations['getBlogComments'];
+    put?: never;
+    /** 创建日志的吐槽 */
+    post: operations['createBlogComment'];
     delete?: never;
     options?: never;
     head?: never;
@@ -102,6 +138,24 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/characters/-/comments/{commentID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 编辑角色的吐槽 */
+    put: operations['updateCharacterComment'];
+    post?: never;
+    /** 删除角色的吐槽 */
+    delete: operations['deleteCharacterComment'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/characters/{characterID}': {
     parameters: {
       query?: never;
@@ -147,6 +201,24 @@ export interface paths {
     get: operations['getCharacterCollects'];
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/characters/{characterID}/comments': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取角色的吐槽箱 */
+    get: operations['getCharacterComments'];
+    put?: never;
+    /** 创建角色的吐槽 */
+    post: operations['createCharacterComment'];
     delete?: never;
     options?: never;
     head?: never;
@@ -272,10 +344,10 @@ export interface paths {
     };
     get?: never;
     /** 编辑条目的剧集吐槽 */
-    put: operations['updateSubjectEpComment'];
+    put: operations['updateEpisodeComment'];
     post?: never;
     /** 删除条目的剧集吐槽 */
-    delete: operations['deleteSubjectEpComment'];
+    delete: operations['deleteEpisodeComment'];
     options?: never;
     head?: never;
     patch?: never;
@@ -289,7 +361,7 @@ export interface paths {
       cookie?: never;
     };
     /** 获取剧集信息 */
-    get: operations['getSubjectEpisode'];
+    get: operations['getEpisode'];
     put?: never;
     post?: never;
     delete?: never;
@@ -306,10 +378,10 @@ export interface paths {
       cookie?: never;
     };
     /** 获取条目的剧集吐槽箱 */
-    get: operations['getSubjectEpisodeComments'];
+    get: operations['getEpisodeComments'];
     put?: never;
     /** 创建条目的剧集吐槽 */
-    post: operations['createSubjectEpComment'];
+    post: operations['createEpisodeComment'];
     delete?: never;
     options?: never;
     head?: never;
@@ -528,6 +600,24 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/persons/-/comments/{commentID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 编辑人物的吐槽 */
+    put: operations['updatePersonComment'];
+    post?: never;
+    /** 删除人物的吐槽 */
+    delete: operations['deletePersonComment'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/persons/{personID}': {
     parameters: {
       query?: never;
@@ -573,6 +663,24 @@ export interface paths {
     get: operations['getPersonCollects'];
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/persons/{personID}/comments': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取人物的吐槽箱 */
+    get: operations['getPersonComments'];
+    put?: never;
+    /** 创建人物的吐槽 */
+    post: operations['createPersonComment'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2598,6 +2706,72 @@ export interface operations {
       };
     };
   };
+  updateBlogComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deleteBlogComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getBlogEntry: {
     parameters: {
       query?: never;
@@ -2616,6 +2790,96 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['BlogEntry'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getBlogComments: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        entryID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': ({
+            content: string;
+            createdAt: number;
+            creatorID: number;
+            id: number;
+            mainID: number;
+            reactions?: components['schemas']['Reaction'][];
+            relatedID: number;
+            state: number;
+            user?: components['schemas']['SlimUser'];
+          } & {
+            replies: components['schemas']['CommentBase'][];
+          })[];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createBlogComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        entryID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['CreateComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            /** @description new comment id */
+            id: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -2716,6 +2980,72 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['Calendar'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  updateCharacterComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deleteCharacterComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -2857,6 +3187,96 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getCharacterComments: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        characterID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': ({
+            content: string;
+            createdAt: number;
+            creatorID: number;
+            id: number;
+            mainID: number;
+            reactions?: components['schemas']['Reaction'][];
+            relatedID: number;
+            state: number;
+            user?: components['schemas']['SlimUser'];
+          } & {
+            replies: components['schemas']['CommentBase'][];
+          })[];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createCharacterComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        characterID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['CreateComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            /** @description new comment id */
+            id: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -3097,7 +3517,7 @@ export interface operations {
       };
     };
   };
-  updateSubjectEpComment: {
+  updateEpisodeComment: {
     parameters: {
       query?: never;
       header?: never;
@@ -3132,7 +3552,7 @@ export interface operations {
       };
     };
   };
-  deleteSubjectEpComment: {
+  deleteEpisodeComment: {
     parameters: {
       query?: never;
       header?: never;
@@ -3163,7 +3583,7 @@ export interface operations {
       };
     };
   };
-  getSubjectEpisode: {
+  getEpisode: {
     parameters: {
       query?: never;
       header?: never;
@@ -3194,7 +3614,7 @@ export interface operations {
       };
     };
   };
-  getSubjectEpisodeComments: {
+  getEpisodeComments: {
     parameters: {
       query?: never;
       header?: never;
@@ -3237,7 +3657,7 @@ export interface operations {
       };
     };
   };
-  createSubjectEpComment: {
+  createEpisodeComment: {
     parameters: {
       query?: never;
       header?: never;
@@ -3259,7 +3679,7 @@ export interface operations {
         };
         content: {
           'application/json': {
-            /** @description new reply id */
+            /** @description new comment id */
             id: number;
           };
         };
@@ -3897,6 +4317,72 @@ export interface operations {
       };
     };
   };
+  updatePersonComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deletePersonComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getPerson: {
     parameters: {
       query?: never;
@@ -4025,6 +4511,96 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getPersonComments: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        personID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': ({
+            content: string;
+            createdAt: number;
+            creatorID: number;
+            id: number;
+            mainID: number;
+            reactions?: components['schemas']['Reaction'][];
+            relatedID: number;
+            state: number;
+            user?: components['schemas']['SlimUser'];
+          } & {
+            replies: components['schemas']['CommentBase'][];
+          })[];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createPersonComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        personID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['CreateComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            /** @description new comment id */
+            id: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
