@@ -9,6 +9,7 @@ runs:
         node-version-file: '.node-version'
 
     - run: |
+        npm i -g corepack
         corepack enable
         corepack prepare --activate
         pnpm --version
