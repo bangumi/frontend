@@ -231,7 +231,7 @@ export type Subject = {
   type: SubjectType;
   volumes: number;
 };
-export type UpdateEpisodeComment = {
+export type UpdateComment = {
   content: string;
 };
 export type EpisodeCollectionStatus = 0 | 1 | 2 | 3;
@@ -271,7 +271,7 @@ export type CommentBase = {
   state: number;
   user?: SlimUser;
 };
-export type CreateEpisodeComment = {
+export type CreateComment = {
   content: string;
   /** 被回复的吐槽 ID, `0` 代表发送顶层吐槽 */
   replyTo?: number;
@@ -1233,7 +1233,7 @@ export function deleteSubjectEpComment(commentId: number, opts?: Oazapfts.Reques
  */
 export function updateSubjectEpComment(
   commentId: number,
-  updateEpisodeComment?: UpdateEpisodeComment,
+  updateComment?: UpdateComment,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1250,7 +1250,7 @@ export function updateSubjectEpComment(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updateEpisodeComment,
+      body: updateComment,
     }),
   );
 }
@@ -1305,7 +1305,7 @@ export function getSubjectEpisodeComments(episodeId: number, opts?: Oazapfts.Req
  */
 export function createSubjectEpComment(
   episodeId: number,
-  createEpisodeComment?: CreateEpisodeComment,
+  createComment?: CreateComment,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1325,7 +1325,7 @@ export function createSubjectEpComment(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createEpisodeComment,
+      body: createComment,
     }),
   );
 }
