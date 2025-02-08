@@ -17,7 +17,7 @@ export type ErrorResponse = {
   message: string;
   statusCode: number;
 };
-export type UpdateComment = {
+export type UpdateContent = {
   content: string;
 };
 export type Avatar = {
@@ -27,6 +27,7 @@ export type Avatar = {
 };
 export type SlimUser = {
   avatar: Avatar;
+  group: number;
   id: number;
   joinedAt: number;
   nickname: string;
@@ -69,10 +70,12 @@ export type CommentBase = {
   state: number;
   user?: SlimUser;
 };
-export type CreateComment = {
+export type CreateReply = {
   content: string;
-  /** 被回复的吐槽 ID, `0` 代表发送顶层吐槽 */
+  /** 被回复的回复 ID, `0` 代表发送顶层回复 */
   replyTo?: number;
+};
+export type TurnstileToken = {
   /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
@@ -312,10 +315,6 @@ export type Post = {
   state: number;
   topic: Topic;
 };
-export type UpdatePost = {
-  /** bbcode */
-  content: string;
-};
 export type SlimGroup = {
   accessible: boolean;
   createdAt: number;
@@ -350,15 +349,6 @@ export type UpdateTopic = {
   content: string;
   title: string;
 };
-export type CreatePost = {
-  content: string;
-  /** 被回复的帖子 ID, `0` 代表回复楼主 */
-  replyTo?: number;
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  turnstileToken: string;
-};
 export type Group = {
   accessible: boolean;
   cat: number;
@@ -385,10 +375,6 @@ export type CreateTopic = {
   /** bbcode */
   content: string;
   title: string;
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  turnstileToken: string;
 };
 export type LoginRequestBody = {
   email: string;
@@ -419,6 +405,7 @@ export type Notice = {
   postID: number;
   sender: {
     avatar: Avatar;
+    group: number;
     id: number;
     joinedAt: number;
     nickname: string;
@@ -598,12 +585,8 @@ export type Timeline = {
   uid: number;
   user?: SlimUser;
 };
-export type CreateTimelineSay = {
+export type CreateContent = {
   content: string;
-  /** 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-    next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-    dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-  turnstileToken: string;
 };
 export type TrendingSubject = {
   count: number;
@@ -822,7 +805,7 @@ export function deleteBlogComment(commentId: number, opts?: Oazapfts.RequestOpts
  */
 export function updateBlogComment(
   commentId: number,
-  updateComment?: UpdateComment,
+  updateContent?: UpdateContent,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -839,7 +822,7 @@ export function updateBlogComment(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updateComment,
+      body: updateContent,
     }),
   );
 }
@@ -898,7 +881,7 @@ export function getBlogComments(entryId: number, opts?: Oazapfts.RequestOpts) {
  */
 export function createBlogComment(
   entryId: number,
-  createComment?: CreateComment,
+  body?: CreateReply & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -918,7 +901,7 @@ export function createBlogComment(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createComment,
+      body,
     }),
   );
 }
@@ -1018,7 +1001,7 @@ export function deleteCharacterComment(commentId: number, opts?: Oazapfts.Reques
  */
 export function updateCharacterComment(
   commentId: number,
-  updateComment?: UpdateComment,
+  updateContent?: UpdateContent,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1035,7 +1018,7 @@ export function updateCharacterComment(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updateComment,
+      body: updateContent,
     }),
   );
 }
@@ -1190,7 +1173,7 @@ export function getCharacterComments(characterId: number, opts?: Oazapfts.Reques
  */
 export function createCharacterComment(
   characterId: number,
-  createComment?: CreateComment,
+  body?: CreateReply & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1210,7 +1193,7 @@ export function createCharacterComment(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createComment,
+      body,
     }),
   );
 }
@@ -1445,7 +1428,7 @@ export function deleteEpisodeComment(commentId: number, opts?: Oazapfts.RequestO
  */
 export function updateEpisodeComment(
   commentId: number,
-  updateComment?: UpdateComment,
+  updateContent?: UpdateContent,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1462,7 +1445,7 @@ export function updateEpisodeComment(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updateComment,
+      body: updateContent,
     }),
   );
 }
@@ -1517,7 +1500,7 @@ export function getEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpt
  */
 export function createEpisodeComment(
   episodeId: number,
-  createComment?: CreateComment,
+  body?: CreateReply & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1537,7 +1520,7 @@ export function createEpisodeComment(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createComment,
+      body,
     }),
   );
 }
@@ -1657,7 +1640,7 @@ export function getGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
  */
 export function editGroupPost(
   postId: number,
-  updatePost?: UpdatePost,
+  updateContent?: UpdateContent,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1674,7 +1657,7 @@ export function editGroupPost(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updatePost,
+      body: updateContent,
     }),
   );
 }
@@ -1726,7 +1709,7 @@ export function editGroupTopic(
  */
 export function createGroupReply(
   topicId: number,
-  createPost?: CreatePost,
+  body?: CreateReply & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1745,7 +1728,7 @@ export function createGroupReply(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createPost,
+      body,
     }),
   );
 }
@@ -1852,7 +1835,7 @@ export function getGroupTopics(
  */
 export function createGroupTopic(
   groupName: string,
-  createTopic?: CreateTopic,
+  body?: CreateTopic & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -1872,7 +1855,7 @@ export function createGroupTopic(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createTopic,
+      body,
     }),
   );
 }
@@ -2026,7 +2009,7 @@ export function deletePersonComment(commentId: number, opts?: Oazapfts.RequestOp
  */
 export function updatePersonComment(
   commentId: number,
-  updateComment?: UpdateComment,
+  updateContent?: UpdateContent,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -2043,7 +2026,7 @@ export function updatePersonComment(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updateComment,
+      body: updateContent,
     }),
   );
 }
@@ -2198,7 +2181,7 @@ export function getPersonComments(personId: number, opts?: Oazapfts.RequestOpts)
  */
 export function createPersonComment(
   personId: number,
-  createComment?: CreateComment,
+  body?: CreateReply & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -2218,7 +2201,7 @@ export function createPersonComment(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createComment,
+      body,
     }),
   );
 }
@@ -2365,7 +2348,7 @@ export function getSubjectPost(postId: number, opts?: Oazapfts.RequestOpts) {
  */
 export function editSubjectPost(
   postId: number,
-  updatePost?: UpdatePost,
+  updateContent?: UpdateContent,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -2382,7 +2365,7 @@ export function editSubjectPost(
     oazapfts.json({
       ...opts,
       method: 'PUT',
-      body: updatePost,
+      body: updateContent,
     }),
   );
 }
@@ -2438,7 +2421,7 @@ export function updateSubjectTopic(
  */
 export function createSubjectReply(
   topicId: number,
-  createPost?: CreatePost,
+  body?: CreateReply & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -2457,7 +2440,7 @@ export function createSubjectReply(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createPost,
+      body,
     }),
   );
 }
@@ -2852,7 +2835,7 @@ export function getSubjectTopics(
  */
 export function createSubjectTopic(
   subjectId: number,
-  createTopic?: CreateTopic,
+  body?: CreateTopic & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -2872,7 +2855,7 @@ export function createSubjectTopic(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createTopic,
+      body,
     }),
   );
 }
@@ -2917,7 +2900,7 @@ export function getTimeline(
  * 发送时间线吐槽
  */
 export function createTimelineSay(
-  createTimelineSay?: CreateTimelineSay,
+  body?: CreateContent & TurnstileToken,
   opts?: Oazapfts.RequestOpts,
 ) {
   return oazapfts.fetchJson<
@@ -2936,7 +2919,7 @@ export function createTimelineSay(
     oazapfts.json({
       ...opts,
       method: 'POST',
-      body: createTimelineSay,
+      body,
     }),
   );
 }
@@ -3759,6 +3742,7 @@ export function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts
           covers: {
             creator: {
               avatar: Avatar;
+              group: number;
               id: number;
               joinedAt: number;
               nickname: string;

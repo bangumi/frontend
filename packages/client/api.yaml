@@ -282,76 +282,27 @@ components:
         - content
         - state
       type: object
-    CreateComment:
+    CreateContent:
+      properties:
+        content:
+          minLength: 1
+          type: string
+      required:
+        - content
+      type: object
+    CreateReply:
       properties:
         content:
           minLength: 1
           type: string
         replyTo:
           default: 0
-          description: 被回复的吐槽 ID, `0` 代表发送顶层吐槽
+          description: 被回复的回复 ID, `0` 代表发送顶层回复
           type: integer
-        turnstileToken:
-          description: >-
-            需要
-            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-
-            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-
-            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
-          minLength: 1
-          type: string
       required:
         - content
-        - turnstileToken
-      type: object
-    CreatePost:
-      properties:
-        content:
-          minLength: 1
-          type: string
-        replyTo:
-          default: 0
-          description: 被回复的帖子 ID, `0` 代表回复楼主
-          type: integer
-        turnstileToken:
-          description: >-
-            需要
-            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-
-            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-
-            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
-          minLength: 1
-          type: string
-      required:
-        - content
-        - turnstileToken
-      type: object
-    CreateTimelineSay:
-      properties:
-        content:
-          minLength: 1
-          type: string
-        turnstileToken:
-          description: >-
-            需要
-            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-
-            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-
-            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
-          minLength: 1
-          type: string
-      required:
-        - content
-        - turnstileToken
       type: object
     CreateTopic:
-      example:
-        content: topic content
-        title: topic title
-        turnstileToken: 10000000-aaaa-bbbb-cccc-000000000001
       properties:
         content:
           description: bbcode
@@ -360,19 +311,9 @@ components:
         title:
           minLength: 1
           type: string
-        turnstileToken:
-          description: >-
-            需要
-            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-
-            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-
-            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
-          type: string
       required:
         - title
         - content
-        - turnstileToken
       type: object
     Episode:
       properties:
@@ -876,6 +817,8 @@ components:
           properties:
             avatar:
               $ref: '#/components/schemas/Avatar'
+            group:
+              type: integer
             id:
               example: 1
               type: integer
@@ -894,6 +837,7 @@ components:
             - username
             - nickname
             - avatar
+            - group
             - sign
             - joinedAt
           title: SlimUser
@@ -1434,6 +1378,8 @@ components:
       properties:
         avatar:
           $ref: '#/components/schemas/Avatar'
+        group:
+          type: integer
         id:
           example: 1
           type: integer
@@ -1452,6 +1398,7 @@ components:
         - username
         - nickname
         - avatar
+        - group
         - sign
         - joinedAt
       title: SlimUser
@@ -2393,18 +2340,23 @@ components:
         - subject
         - count
       type: object
-    UpdateComment:
+    TurnstileToken:
       properties:
-        content:
-          minLength: 1
+        turnstileToken:
+          description: >-
+            需要
+            [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+
+            next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+
+            dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA`
           type: string
       required:
-        - content
+        - turnstileToken
       type: object
-    UpdatePost:
+    UpdateContent:
       properties:
         content:
-          description: bbcode
           minLength: 1
           type: string
       required:
@@ -2782,7 +2734,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateComment'
+              $ref: '#/components/schemas/UpdateContent'
       responses:
         '200':
           content:
@@ -2927,7 +2879,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateComment'
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -3105,7 +3059,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateComment'
+              $ref: '#/components/schemas/UpdateContent'
       responses:
         '200':
           content:
@@ -3415,7 +3369,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateComment'
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -3784,7 +3740,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateComment'
+              $ref: '#/components/schemas/UpdateContent'
       responses:
         '200':
           content:
@@ -3917,7 +3873,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateComment'
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -4115,7 +4073,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePost'
+              $ref: '#/components/schemas/UpdateContent'
       responses:
         '200':
           content:
@@ -4213,7 +4171,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePost'
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -4396,7 +4356,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTopic'
+              allOf:
+                - $ref: '#/components/schemas/CreateTopic'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -4702,7 +4664,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateComment'
+              $ref: '#/components/schemas/UpdateContent'
       responses:
         '200':
           content:
@@ -5012,7 +4974,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateComment'
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -5274,7 +5238,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdatePost'
+              $ref: '#/components/schemas/UpdateContent'
       responses:
         '200':
           content:
@@ -5385,7 +5349,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreatePost'
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -6000,7 +5966,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTopic'
+              allOf:
+                - $ref: '#/components/schemas/CreateTopic'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -6080,7 +6048,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateTimelineSay'
+              allOf:
+                - $ref: '#/components/schemas/CreateContent'
+                - $ref: '#/components/schemas/TurnstileToken'
       responses:
         '200':
           content:
@@ -7596,6 +7566,8 @@ paths:
                           properties:
                             avatar:
                               $ref: '#/components/schemas/Avatar'
+                            group:
+                              type: integer
                             id:
                               example: 1
                               type: integer
@@ -7614,6 +7586,7 @@ paths:
                             - username
                             - nickname
                             - avatar
+                            - group
                             - sign
                             - joinedAt
                           title: SlimUser
