@@ -1497,50 +1497,21 @@ export interface components {
       state: number;
       user?: components['schemas']['SlimUser'];
     };
-    CreateComment: {
+    CreateContent: {
+      content: string;
+    };
+    CreateReply: {
       content: string;
       /**
-       * @description 被回复的吐槽 ID, `0` 代表发送顶层吐槽
+       * @description 被回复的回复 ID, `0` 代表发送顶层回复
        * @default 0
        */
       replyTo: number;
-      /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-       *     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-       *     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-      turnstileToken: string;
     };
-    CreatePost: {
-      content: string;
-      /**
-       * @description 被回复的帖子 ID, `0` 代表回复楼主
-       * @default 0
-       */
-      replyTo: number;
-      /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-       *     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-       *     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-      turnstileToken: string;
-    };
-    CreateTimelineSay: {
-      content: string;
-      /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-       *     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-       *     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-      turnstileToken: string;
-    };
-    /** @example {
-     *       "content": "topic content",
-     *       "title": "topic title",
-     *       "turnstileToken": "10000000-aaaa-bbbb-cccc-000000000001"
-     *     } */
     CreateTopic: {
       /** @description bbcode */
       content: string;
       title: string;
-      /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
-       *     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
-       *     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
-      turnstileToken: string;
     };
     /** Episode */
     Episode: {
@@ -1758,6 +1729,7 @@ export interface components {
       /** SlimUser */
       sender: {
         avatar: components['schemas']['Avatar'];
+        group: number;
         /** @example 1 */
         id: number;
         joinedAt: number;
@@ -1985,6 +1957,7 @@ export interface components {
     /** SlimUser */
     SlimUser: {
       avatar: components['schemas']['Avatar'];
+      group: number;
       /** @example 1 */
       id: number;
       joinedAt: number;
@@ -2501,11 +2474,13 @@ export interface components {
       count: number;
       subject: components['schemas']['Subject'];
     };
-    UpdateComment: {
-      content: string;
+    TurnstileToken: {
+      /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
+       *     next.bgm.tv 域名对应的 site-key 为 `0x4AAAAAAABkMYinukE8nzYS`
+       *     dev.bgm38.tv 域名使用测试用的 site-key `1x00000000000000000000AA` */
+      turnstileToken: string;
     };
-    UpdatePost: {
-      /** @description bbcode */
+    UpdateContent: {
       content: string;
     };
     UpdateTopic: {
@@ -2717,7 +2692,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdateComment'];
+        'application/json': components['schemas']['UpdateContent'];
       };
     };
     responses: {
@@ -2866,7 +2841,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateComment'];
+        'application/json': components['schemas']['CreateReply'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -3004,7 +2980,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdateComment'];
+        'application/json': components['schemas']['UpdateContent'];
       };
     };
     responses: {
@@ -3263,7 +3239,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateComment'];
+        'application/json': components['schemas']['CreateReply'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -3528,7 +3505,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdateComment'];
+        'application/json': components['schemas']['UpdateContent'];
       };
     };
     responses: {
@@ -3668,7 +3645,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateComment'];
+        'application/json': components['schemas']['CreateReply'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -3813,7 +3791,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdatePost'];
+        'application/json': components['schemas']['UpdateContent'];
       };
     };
     responses: {
@@ -3945,7 +3923,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreatePost'];
+        'application/json': components['schemas']['CreateReply'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -4090,7 +4069,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateTopic'];
+        'application/json': components['schemas']['CreateTopic'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -4328,7 +4308,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdateComment'];
+        'application/json': components['schemas']['UpdateContent'];
       };
     };
     responses: {
@@ -4587,7 +4567,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateComment'];
+        'application/json': components['schemas']['CreateReply'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -4755,7 +4736,7 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['UpdatePost'];
+        'application/json': components['schemas']['UpdateContent'];
       };
     };
     responses: {
@@ -4891,7 +4872,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreatePost'];
+        'application/json': components['schemas']['CreateReply'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -5328,7 +5310,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateTopic'];
+        'application/json': components['schemas']['CreateTopic'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -5400,7 +5383,8 @@ export interface operations {
     };
     requestBody?: {
       content: {
-        'application/json': components['schemas']['CreateTimelineSay'];
+        'application/json': components['schemas']['CreateContent'] &
+          components['schemas']['TurnstileToken'];
       };
     };
     responses: {
@@ -6510,6 +6494,7 @@ export interface operations {
               /** SlimUser */
               creator: {
                 avatar: components['schemas']['Avatar'];
+                group: number;
                 /** @example 1 */
                 id: number;
                 joinedAt: number;
