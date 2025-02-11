@@ -186,6 +186,27 @@ components:
         - subject
         - type
       type: object
+    CollectSubject:
+      properties:
+        comment:
+          description: 评价
+          type: string
+        private:
+          description: 仅自己可见
+          type: boolean
+        rate:
+          description: 评分，0 表示删除评分
+          maximum: 10
+          minimum: 0
+          type: integer
+        tags:
+          items:
+            description: 标签, 不能包含空格
+            type: string
+          type: array
+        type:
+          $ref: '#/components/schemas/CollectionType'
+      type: object
     CollectionType:
       description: |-
         条目收藏状态
@@ -2362,6 +2383,25 @@ components:
       required:
         - content
       type: object
+    UpdateEpisodeProgress:
+      properties:
+        batch:
+          description: 是否批量更新(看到当前章节), 批量更新时 type 无效
+          type: boolean
+        type:
+          $ref: '#/components/schemas/EpisodeCollectionStatus'
+      type: object
+    UpdateSubjectProgress:
+      properties:
+        epStatus:
+          description: 书籍条目章节进度
+          minimum: 0
+          type: integer
+        volStatus:
+          description: 书籍条目卷数进度
+          minimum: 0
+          type: integer
+      type: object
     UpdateTopic:
       properties:
         content:
@@ -3505,6 +3545,41 @@ paths:
       summary: 获取当前用户的角色收藏
       tags:
         - collection
+  /p1/collections/episodes/{episodeID}:
+    patch:
+      operationId: updateEpisodeProgress
+      parameters:
+        - in: path
+          name: episodeID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEpisodeProgress'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 更新章节进度
+      tags:
+        - collection
   /p1/collections/indexes:
     get:
       operationId: getMyIndexCollections
@@ -3676,6 +3751,75 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取当前用户的条目收藏
+      tags:
+        - collection
+  /p1/collections/subjects/{subjectID}:
+    patch:
+      operationId: updateSubjectProgress
+      parameters:
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubjectProgress'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 更新条目进度
+      tags:
+        - collection
+    put:
+      operationId: updateSubjectCollection
+      parameters:
+        - in: path
+          name: subjectID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CollectSubject'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 新增或修改条目收藏
       tags:
         - collection
   /p1/debug:
@@ -6074,6 +6218,159 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 发送时间线吐槽
+      tags:
+        - timeline
+  /p1/timeline/{timelineID}:
+    delete:
+      operationId: deleteTimeline
+      parameters:
+        - in: path
+          name: timelineID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties: {}
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 删除时间线
+      tags:
+        - timeline
+  /p1/timeline/{timelineID}/replies:
+    get:
+      operationId: getTimelineReplies
+      parameters:
+        - in: path
+          name: timelineID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  allOf:
+                    - properties:
+                        content:
+                          type: string
+                        createdAt:
+                          type: integer
+                        creatorID:
+                          type: integer
+                        id:
+                          type: integer
+                        mainID:
+                          type: integer
+                        reactions:
+                          items:
+                            $ref: '#/components/schemas/Reaction'
+                          type: array
+                        relatedID:
+                          type: integer
+                        state:
+                          type: integer
+                        user:
+                          $ref: '#/components/schemas/SlimUser'
+                      required:
+                        - id
+                        - mainID
+                        - creatorID
+                        - relatedID
+                        - createdAt
+                        - content
+                        - state
+                      type: object
+                    - properties:
+                        replies:
+                          items:
+                            $ref: '#/components/schemas/CommentBase'
+                          type: array
+                      required:
+                        - replies
+                      type: object
+                  type: object
+                type: array
+          description: Default Response
+        '404':
+          content:
+            application/json:
+              examples:
+                NOT_FOUND:
+                  value:
+                    code: NOT_FOUND
+                    error: Not Found
+                    message: timeline not found
+                    statusCode: 404
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: default error response type
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取时间线回复
+      tags:
+        - timeline
+    post:
+      operationId: createTimelineReply
+      parameters:
+        - in: path
+          name: timelineID
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/CreateReply'
+                - $ref: '#/components/schemas/TurnstileToken'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                required:
+                  - id
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 创建时间线回复
       tags:
         - timeline
   /p1/trending/subjects:

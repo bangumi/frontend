@@ -175,6 +175,12 @@ export type PersonCollect = {
   createdAt: number;
   user: SlimUser;
 };
+export type EpisodeCollectionStatus = 0 | 1 | 2 | 3;
+export type UpdateEpisodeProgress = {
+  /** 是否批量更新(看到当前章节), 批量更新时 type 无效 */
+  batch?: boolean;
+  type?: EpisodeCollectionStatus;
+};
 export type IndexStats = {
   [key: string]: number;
 };
@@ -266,7 +272,22 @@ export type Subject = {
   type: SubjectType;
   volumes: number;
 };
-export type EpisodeCollectionStatus = 0 | 1 | 2 | 3;
+export type UpdateSubjectProgress = {
+  /** 书籍条目章节进度 */
+  epStatus?: number;
+  /** 书籍条目卷数进度 */
+  volStatus?: number;
+};
+export type CollectSubject = {
+  /** 评价 */
+  comment?: string;
+  /** 仅自己可见 */
+  private?: boolean;
+  /** 评分，0 表示删除评分 */
+  rate?: number;
+  tags?: string[];
+  type?: CollectionType;
+};
 export type EpisodeType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type Episode = {
   airdate: string;
@@ -1266,6 +1287,32 @@ export function getMyCharacterCollections(
   );
 }
 /**
+ * 更新章节进度
+ */
+export function updateEpisodeProgress(
+  episodeId: number,
+  updateEpisodeProgress?: UpdateEpisodeProgress,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/collections/episodes/${encodeURIComponent(episodeId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body: updateEpisodeProgress,
+    }),
+  );
+}
+/**
  * 获取当前用户的目录收藏
  */
 export function getMyIndexCollections(
@@ -1386,6 +1433,58 @@ export function getMySubjectCollections(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 更新条目进度
+ */
+export function updateSubjectProgress(
+  subjectId: number,
+  updateSubjectProgress?: UpdateSubjectProgress,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/collections/subjects/${encodeURIComponent(subjectId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body: updateSubjectProgress,
+    }),
+  );
+}
+/**
+ * 新增或修改条目收藏
+ */
+export function updateSubjectCollection(
+  subjectId: number,
+  collectSubject?: CollectSubject,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/collections/subjects/${encodeURIComponent(subjectId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: collectSubject,
+    }),
   );
 }
 /**
@@ -2916,6 +3015,85 @@ export function createTimelineSay(
       }
   >(
     '/p1/timeline',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
+/**
+ * 删除时间线
+ */
+export function deleteTimeline(timelineId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/timeline/${encodeURIComponent(timelineId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 获取时间线回复
+ */
+export function getTimelineReplies(timelineId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: ({
+          content: string;
+          createdAt: number;
+          creatorID: number;
+          id: number;
+          mainID: number;
+          reactions?: Reaction[];
+          relatedID: number;
+          state: number;
+          user?: SlimUser;
+        } & {
+          replies: CommentBase[];
+        })[];
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/timeline/${encodeURIComponent(timelineId)}/replies`, {
+    ...opts,
+  });
+}
+/**
+ * 创建时间线回复
+ */
+export function createTimelineReply(
+  timelineId: number,
+  body?: CreateReply & TurnstileToken,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/timeline/${encodeURIComponent(timelineId)}/replies`,
     oazapfts.json({
       ...opts,
       method: 'POST',

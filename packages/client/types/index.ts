@@ -264,6 +264,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/collections/episodes/{episodeID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /** 更新章节进度 */
+    patch: operations['updateEpisodeProgress'];
+    trace?: never;
+  };
   '/p1/collections/indexes': {
     parameters: {
       query?: never;
@@ -313,6 +330,24 @@ export interface paths {
     options?: never;
     head?: never;
     patch?: never;
+    trace?: never;
+  };
+  '/p1/collections/subjects/{subjectID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 新增或修改条目收藏 */
+    put: operations['updateSubjectCollection'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    /** 更新条目进度 */
+    patch: operations['updateSubjectProgress'];
     trace?: never;
   };
   '/p1/debug': {
@@ -964,6 +999,41 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/timeline/{timelineID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /** 删除时间线 */
+    delete: operations['deleteTimeline'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/timeline/{timelineID}/replies': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取时间线回复 */
+    get: operations['getTimelineReplies'];
+    put?: never;
+    /** 创建时间线回复 */
+    post: operations['createTimelineReply'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/trending/subjects': {
     parameters: {
       query?: never;
@@ -1462,6 +1532,16 @@ export interface components {
     CharacterSubjectRelation: {
       subject: components['schemas']['SlimSubject'];
       type: number;
+    };
+    CollectSubject: {
+      /** @description 评价 */
+      comment?: string;
+      /** @description 仅自己可见 */
+      private?: boolean;
+      /** @description 评分，0 表示删除评分 */
+      rate?: number;
+      tags?: string[];
+      type?: components['schemas']['CollectionType'];
     };
     /**
      * @description 条目收藏状态
@@ -2483,6 +2563,17 @@ export interface components {
     UpdateContent: {
       content: string;
     };
+    UpdateEpisodeProgress: {
+      /** @description 是否批量更新(看到当前章节), 批量更新时 type 无效 */
+      batch?: boolean;
+      type?: components['schemas']['EpisodeCollectionStatus'];
+    };
+    UpdateSubjectProgress: {
+      /** @description 书籍条目章节进度 */
+      epStatus?: number;
+      /** @description 书籍条目卷数进度 */
+      volStatus?: number;
+    };
     UpdateTopic: {
       /** @description bbcode */
       content: string;
@@ -3347,6 +3438,41 @@ export interface operations {
       };
     };
   };
+  updateEpisodeProgress: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        episodeID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateEpisodeProgress'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getMyIndexCollections: {
     parameters: {
       query?: {
@@ -3452,6 +3578,76 @@ export interface operations {
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  updateSubjectCollection: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        subjectID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['CollectSubject'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  updateSubjectProgress: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        subjectID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['UpdateSubjectProgress'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -5384,6 +5580,127 @@ export interface operations {
     requestBody?: {
       content: {
         'application/json': components['schemas']['CreateContent'] &
+          components['schemas']['TurnstileToken'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            id: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deleteTimeline: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        timelineID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getTimelineReplies: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        timelineID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': ({
+            content: string;
+            createdAt: number;
+            creatorID: number;
+            id: number;
+            mainID: number;
+            reactions?: components['schemas']['Reaction'][];
+            relatedID: number;
+            state: number;
+            user?: components['schemas']['SlimUser'];
+          } & {
+            replies: components['schemas']['CommentBase'][];
+          })[];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createTimelineReply: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        timelineID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['CreateReply'] &
           components['schemas']['TurnstileToken'];
       };
     };
