@@ -71,23 +71,31 @@ const formatWikiSyntaxErrorMessage = (error: WikiSyntaxError): string => {
 };
 
 function WikiEditDetailDetailPage() {
-  const { register, handleSubmit, setValue, watch } = useForm<FormData>();
+  const { subjectEditHistory, subjectWikiInfo, mutateHistory, subjectId } = useWikiContext();
+
+  const { register, handleSubmit, setValue, watch, getValues } = useForm<FormData>({
+    defaultValues: { subject: { ...subjectWikiInfo } },
+  });
+
   const prePlatform = watch('subject.platform');
 
   const [editorType, setEditorType] = useLocalstorageState(
     'chii_wiki_editor_type',
     EditorType.Beginner,
   );
-  const wikiRef = useRef<Wiki>();
-  const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
+
+  const wikiRef = useRef<Wiki>(
+    subjectWikiInfo?.infobox ? parseWiki(subjectWikiInfo.infobox) : null,
+  );
+
+  const [wikiElement, setWikiElement] = useState<WikiElement[]>(
+    wikiRef.current ? toWikiElement(wikiRef.current) : [],
+  );
 
   const monoEditorInstanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);
-  const { subjectEditHistory, subjectWikiInfo, mutateHistory, subjectId } = useWikiContext();
 
   useEffect(() => {
-    wikiRef.current = parseWiki(subjectWikiInfo.infobox);
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
-    setWikiElement(toWikiElement(wikiRef.current));
     // https://github.com/bangumi/frontend/pull/312#discussion_r1086401410
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -223,7 +231,6 @@ function WikiEditDetailDetailPage() {
                 <Input
                   type='text'
                   wrapperClass={style.formInput}
-                  defaultValue={subjectWikiInfo.name}
                   {...register('subject.name', { required: true })}
                 />
               </Form.Item>
@@ -293,7 +300,6 @@ function WikiEditDetailDetailPage() {
               <Form.Item label='剧情介绍'>
                 <textarea
                   className={style.formTextArea}
-                  defaultValue={subjectWikiInfo.summary}
                   {...register('subject.summary', { required: true })}
                 />
               </Form.Item>
