@@ -739,6 +739,57 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/search/characters': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 搜索角色 */
+    post: operations['searchCharacters'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/search/persons': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 搜索人物 */
+    post: operations['searchPersons'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/search/subjects': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 搜索条目 */
+    post: operations['searchSubjects'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/subjects': {
     parameters: {
       query?: never;
@@ -1524,6 +1575,12 @@ export interface components {
       /** @description 角色关系: 任职于,从属,聘用,嫁给... */
       relation: number;
     };
+    CharacterSearchFilter: {
+      /** @description 无权限的用户会直接忽略此字段，不会返回 R18 条目。
+       *     `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+       *     `false` 只会返回非 R18 条目。 */
+      nsfw?: boolean;
+    };
     CharacterSubject: {
       actors: components['schemas']['SlimPerson'][];
       subject: components['schemas']['SlimSubject'];
@@ -1870,6 +1927,9 @@ export interface components {
       /** @description 人物关系: 任职于,从属,聘用,嫁给... */
       relation: number;
     };
+    PersonSearchFilter: {
+      career?: string[];
+    };
     PersonWikiInfo: {
       id: number;
       infobox: string;
@@ -1934,6 +1994,22 @@ export interface components {
       id: number;
       reactions?: components['schemas']['Reaction'][];
       state: number;
+    };
+    SearchCharacter: {
+      filter?: components['schemas']['CharacterSearchFilter'];
+      /** @description 搜索关键词 */
+      keyword: string;
+    };
+    SearchPerson: {
+      filter?: components['schemas']['PersonSearchFilter'];
+      /** @description 搜索关键词 */
+      keyword: string;
+    };
+    SearchSubject: {
+      filter?: components['schemas']['SubjectSearchFilter'];
+      /** @description 搜索关键词 */
+      keyword: string;
+      sort?: components['schemas']['SubjectSearchSort'];
     };
     /** SimpleUser */
     SimpleUser: {
@@ -2271,6 +2347,17 @@ export interface components {
       weekday: number;
       year: number;
     };
+    /**
+     * @description 条目浏览排序方式
+     *       - rank = 排名
+     *       - trends = 热度
+     *       - collects = 收藏数
+     *       - date = 发布日期
+     *       - title = 标题
+     * @default rank
+     * @enum {string}
+     */
+    SubjectBrowseSort: 'rank' | 'trends' | 'collects' | 'date' | 'title';
     SubjectCharacter: {
       actors: components['schemas']['SlimPerson'][];
       character: components['schemas']['SlimCharacter'];
@@ -2388,17 +2475,28 @@ export interface components {
       id: number;
       user: components['schemas']['SlimUser'];
     };
+    SubjectSearchFilter: {
+      date?: string[];
+      metaTags?: string[];
+      /** @description 无权限的用户会直接忽略此字段，不会返回 R18 条目。
+       *     `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+       *     `false` 只会返回非 R18 条目。 */
+      nsfw?: boolean;
+      rank?: string[];
+      rating?: string[];
+      tags?: string[];
+      type?: components['schemas']['SubjectType'][];
+    };
     /**
-     * @description 条目排序方式
-     *       - rank = 排名
-     *       - trends = 热度
-     *       - collects = 收藏数
-     *       - date = 发布日期
-     *       - title = 标题
-     * @default rank
+     * @description 条目搜索排序方式
+     *       - match = 匹配程度
+     *       - heat = 收藏人数
+     *       - rank = 排名由高到低
+     *       - score = 评分
+     * @default match
      * @enum {string}
      */
-    SubjectSort: 'rank' | 'trends' | 'collects' | 'date' | 'title';
+    SubjectSearchSort: 'match' | 'heat' | 'rank' | 'score';
     SubjectStaff: {
       positions: components['schemas']['SubjectStaffPosition'][];
       staff: components['schemas']['SlimPerson'];
@@ -2552,7 +2650,7 @@ export interface components {
     };
     TrendingSubject: {
       count: number;
-      subject: components['schemas']['Subject'];
+      subject: components['schemas']['SlimSubject'];
     };
     TurnstileToken: {
       /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
@@ -4843,11 +4941,137 @@ export interface operations {
       };
     };
   };
+  searchCharacters: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['SearchCharacter'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimCharacter'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  searchPersons: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['SearchPerson'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimPerson'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  searchSubjects: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['SearchSubject'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimSubject'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getSubjects: {
     parameters: {
       query: {
         type: components['schemas']['SubjectType'];
-        sort: components['schemas']['SubjectSort'];
+        sort: components['schemas']['SubjectBrowseSort'];
         /** @description min 1 */
         page?: number;
         /** @description 每种条目类型分类不同，具体参考 https://github.com/bangumi/common 的 subject_platforms.yaml */
@@ -4873,7 +5097,7 @@ export interface operations {
         };
         content: {
           'application/json': {
-            data: components['schemas']['Subject'][];
+            data: components['schemas']['SlimSubject'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };

@@ -472,7 +472,45 @@ export type PersonWork = {
   positions: SubjectStaffPosition[];
   subject: SlimSubject;
 };
-export type SubjectSort = 'rank' | 'trends' | 'collects' | 'date' | 'title';
+export type CharacterSearchFilter = {
+  /** 无权限的用户会直接忽略此字段，不会返回 R18 条目。
+    `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+    `false` 只会返回非 R18 条目。 */
+  nsfw?: boolean;
+};
+export type SearchCharacter = {
+  filter?: CharacterSearchFilter;
+  /** 搜索关键词 */
+  keyword: string;
+};
+export type PersonSearchFilter = {
+  career?: string[];
+};
+export type SearchPerson = {
+  filter?: PersonSearchFilter;
+  /** 搜索关键词 */
+  keyword: string;
+};
+export type SubjectSearchFilter = {
+  date?: string[];
+  metaTags?: string[];
+  /** 无权限的用户会直接忽略此字段，不会返回 R18 条目。
+    `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+    `false` 只会返回非 R18 条目。 */
+  nsfw?: boolean;
+  rank?: string[];
+  rating?: string[];
+  tags?: string[];
+  type?: SubjectType[];
+};
+export type SubjectSearchSort = 'match' | 'heat' | 'rank' | 'score';
+export type SearchSubject = {
+  filter?: SubjectSearchFilter;
+  /** 搜索关键词 */
+  keyword: string;
+  sort?: SubjectSearchSort;
+};
+export type SubjectBrowseSort = 'rank' | 'trends' | 'collects' | 'date' | 'title';
 export type SubjectTopic = TopicBase & {
   content: string;
   creator: SlimUser;
@@ -611,7 +649,7 @@ export type CreateContent = {
 };
 export type TrendingSubject = {
   count: number;
-  subject: Subject;
+  subject: SlimSubject;
 };
 export type UserHomepageSection =
   | 'anime'
@@ -2354,11 +2392,134 @@ export function getPersonWorks(
   );
 }
 /**
+ * 搜索角色
+ */
+export function searchCharacters(
+  searchCharacter?: SearchCharacter,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimCharacter[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/search/characters${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: searchCharacter,
+    }),
+  );
+}
+/**
+ * 搜索人物
+ */
+export function searchPersons(
+  searchPerson?: SearchPerson,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimPerson[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/search/persons${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: searchPerson,
+    }),
+  );
+}
+/**
+ * 搜索条目
+ */
+export function searchSubjects(
+  searchSubject?: SearchSubject,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimSubject[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/search/subjects${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: searchSubject,
+    }),
+  );
+}
+/**
  * 获取条目列表
  */
 export function getSubjects(
   $type: SubjectType,
-  sort: SubjectSort,
+  sort: SubjectBrowseSort,
   {
     page,
     cat,
@@ -2380,7 +2541,7 @@ export function getSubjects(
     | {
         status: 200;
         data: {
-          data: Subject[];
+          data: SlimSubject[];
           /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
           total: number;
         };
