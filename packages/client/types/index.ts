@@ -457,6 +457,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/groups': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取小组列表 */
+    get: operations['getGroups'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/groups/-/posts/{postID}': {
     parameters: {
       query?: never;
@@ -464,13 +481,30 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 获取小组帖子回复详情 */
+    /** 获取小组话题回复详情 */
     get: operations['getGroupPost'];
-    /** 编辑小组帖子回复 */
+    /** 编辑小组话题回复 */
     put: operations['editGroupPost'];
     post?: never;
-    /** 删除小组帖子回复 */
+    /** 删除小组话题回复 */
     delete: operations['deleteGroupPost'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/groups/-/topics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取最新的小组话题 */
+    get: operations['getRecentGroupTopics'];
+    put?: never;
+    post?: never;
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -483,9 +517,9 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 获取小组帖子详情 */
+    /** 获取小组话题详情 */
     get: operations['getGroupTopic'];
-    /** @description 编辑小组帖子 */
+    /** @description 编辑小组话题 */
     put: operations['editGroupTopic'];
     post?: never;
     delete?: never;
@@ -503,7 +537,7 @@ export interface paths {
     };
     get?: never;
     put?: never;
-    /** 创建小组帖子回复 */
+    /** 创建小组话题回复 */
     post: operations['createGroupReply'];
     delete?: never;
     options?: never;
@@ -552,10 +586,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 获取小组帖子列表 */
+    /** 获取小组话题列表 */
     get: operations['getGroupTopics'];
     put?: never;
-    /** 创建小组帖子 */
+    /** 创建小组话题 */
     post: operations['createGroupTopic'];
     delete?: never;
     options?: never;
@@ -733,6 +767,57 @@ export interface paths {
     get: operations['getPersonWorks'];
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/search/characters': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 搜索角色 */
+    post: operations['searchCharacters'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/search/persons': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 搜索人物 */
+    post: operations['searchPersons'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/search/subjects': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /** 搜索条目 */
+    post: operations['searchSubjects'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1043,6 +1128,23 @@ export interface paths {
     };
     /** 获取热门条目 */
     get: operations['getTrendingSubjects'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/trending/subjects/topics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取热门条目讨论 */
+    get: operations['getTrendingSubjectTopics'];
     put?: never;
     post?: never;
     delete?: never;
@@ -1510,6 +1612,7 @@ export interface components {
       comment: number;
       id: number;
       images?: components['schemas']['PersonImages'];
+      info: string;
       infobox: components['schemas']['Infobox'];
       lock: boolean;
       name: string;
@@ -1523,6 +1626,12 @@ export interface components {
       character: components['schemas']['SlimCharacter'];
       /** @description 角色关系: 任职于,从属,聘用,嫁给... */
       relation: number;
+    };
+    CharacterSearchFilter: {
+      /** @description 无权限的用户会直接忽略此字段，不会返回 R18 条目。
+       *     `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+       *     `false` 只会返回非 R18 条目。 */
+      nsfw?: boolean;
     };
     CharacterSubject: {
       actors: components['schemas']['SlimPerson'][];
@@ -1697,13 +1806,6 @@ export interface components {
       message: string;
       statusCode: number;
     };
-    /**
-     * @description 过滤模式
-     *       - all = 全站
-     *       - friends = 好友
-     * @enum {string}
-     */
-    FilterMode: 'all' | 'friends';
     /** Friend */
     Friend: {
       createdAt: number;
@@ -1731,17 +1833,47 @@ export interface components {
     /** GroupMember */
     GroupMember: {
       joinedAt: number;
-      moderator: boolean;
+      role: components['schemas']['GroupMemberRole'];
       uid: number;
       user?: components['schemas']['SlimUser'];
     };
+    /**
+     * @description 小组成员角色
+     *       - -2 = 访客
+     *       - -1 = 游客
+     *       - 0 = 小组成员
+     *       - 1 = 小组长
+     *       - 2 = 小组管理员
+     *       - 3 = 禁言成员
+     * @enum {integer}
+     */
+    GroupMemberRole: -2 | -1 | 0 | 1 | 2 | 3;
+    /**
+     * @description 小组排序方式
+     *       - posts = 帖子数
+     *       - topics = 主题数
+     *       - members = 成员数
+     *       - created = 创建时间
+     *       - updated = 最新讨论
+     * @default created
+     * @enum {string}
+     */
+    GroupSort: 'posts' | 'topics' | 'members' | 'created' | 'updated';
     /** GroupTopic */
     GroupTopic: components['schemas']['TopicBase'] & {
-      content: string;
       creator: components['schemas']['SlimUser'];
       group: components['schemas']['SlimGroup'];
       replies: components['schemas']['Reply'][];
     };
+    /**
+     * @description 小组话题过滤模式
+     *       - all = 全站
+     *       - joined = 已加入
+     *       - created = 我创建的
+     *       - replied = 我回复的
+     * @enum {string}
+     */
+    GroupTopicFilterMode: 'all' | 'joined' | 'created' | 'replied';
     HistorySummary: {
       commitMessage: string;
       /** @description unix timestamp seconds */
@@ -1841,6 +1973,7 @@ export interface components {
       comment: number;
       id: number;
       images?: components['schemas']['PersonImages'];
+      info: string;
       infobox: components['schemas']['Infobox'];
       lock: boolean;
       name: string;
@@ -1870,6 +2003,9 @@ export interface components {
       /** @description 人物关系: 任职于,从属,聘用,嫁给... */
       relation: number;
     };
+    PersonSearchFilter: {
+      career?: string[];
+    };
     PersonWikiInfo: {
       id: number;
       infobox: string;
@@ -1895,6 +2031,7 @@ export interface components {
     Profile: {
       avatar: components['schemas']['Avatar'];
       bio: string;
+      blocklist: number[];
       friendIDs: number[];
       group: number;
       id: number;
@@ -1935,6 +2072,22 @@ export interface components {
       reactions?: components['schemas']['Reaction'][];
       state: number;
     };
+    SearchCharacter: {
+      filter?: components['schemas']['CharacterSearchFilter'];
+      /** @description 搜索关键词 */
+      keyword: string;
+    };
+    SearchPerson: {
+      filter?: components['schemas']['PersonSearchFilter'];
+      /** @description 搜索关键词 */
+      keyword: string;
+    };
+    SearchSubject: {
+      filter?: components['schemas']['SubjectSearchFilter'];
+      /** @description 搜索关键词 */
+      keyword: string;
+      sort?: components['schemas']['SubjectSearchSort'];
+    };
     /** SimpleUser */
     SimpleUser: {
       id: number;
@@ -1959,6 +2112,7 @@ export interface components {
       comment: number;
       id: number;
       images?: components['schemas']['PersonImages'];
+      info: string;
       lock: boolean;
       name: string;
       nameCN: string;
@@ -1990,6 +2144,7 @@ export interface components {
       comment: number;
       id: number;
       images?: components['schemas']['PersonImages'];
+      info: string;
       lock: boolean;
       name: string;
       nameCN: string;
@@ -2271,6 +2426,17 @@ export interface components {
       weekday: number;
       year: number;
     };
+    /**
+     * @description 条目浏览排序方式
+     *       - rank = 排名
+     *       - trends = 热度
+     *       - collects = 收藏数
+     *       - date = 发布日期
+     *       - title = 标题
+     * @default rank
+     * @enum {string}
+     */
+    SubjectBrowseSort: 'rank' | 'trends' | 'collects' | 'date' | 'title';
     SubjectCharacter: {
       actors: components['schemas']['SlimPerson'][];
       character: components['schemas']['SlimCharacter'];
@@ -2388,17 +2554,28 @@ export interface components {
       id: number;
       user: components['schemas']['SlimUser'];
     };
+    SubjectSearchFilter: {
+      date?: string[];
+      metaTags?: string[];
+      /** @description 无权限的用户会直接忽略此字段，不会返回 R18 条目。
+       *     `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+       *     `false` 只会返回非 R18 条目。 */
+      nsfw?: boolean;
+      rank?: string[];
+      rating?: string[];
+      tags?: string[];
+      type?: components['schemas']['SubjectType'][];
+    };
     /**
-     * @description 条目排序方式
-     *       - rank = 排名
-     *       - trends = 热度
-     *       - collects = 收藏数
-     *       - date = 发布日期
-     *       - title = 标题
-     * @default rank
+     * @description 条目搜索排序方式
+     *       - match = 匹配程度
+     *       - heat = 收藏人数
+     *       - rank = 排名由高到低
+     *       - score = 评分
+     * @default match
      * @enum {string}
      */
-    SubjectSort: 'rank' | 'trends' | 'collects' | 'date' | 'title';
+    SubjectSearchSort: 'match' | 'heat' | 'rank' | 'score';
     SubjectStaff: {
       positions: components['schemas']['SubjectStaffPosition'][];
       staff: components['schemas']['SlimPerson'];
@@ -2421,7 +2598,6 @@ export interface components {
     };
     /** SubjectTopic */
     SubjectTopic: components['schemas']['TopicBase'] & {
-      content: string;
       creator: components['schemas']['SlimUser'];
       replies: components['schemas']['Reply'][];
       subject: components['schemas']['SlimSubject'];
@@ -2476,6 +2652,13 @@ export interface components {
      * @enum {integer}
      */
     TimelineCat: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+    /**
+     * @description 时间线过滤模式
+     *       - all = 全站
+     *       - friends = 好友
+     * @enum {string}
+     */
+    TimelineFilterMode: 'all' | 'friends';
     /** TimelineMemo */
     TimelineMemo: {
       blog?: components['schemas']['SlimBlogEntry'];
@@ -2552,7 +2735,7 @@ export interface components {
     };
     TrendingSubject: {
       count: number;
-      subject: components['schemas']['Subject'];
+      subject: components['schemas']['SlimSubject'];
     };
     TurnstileToken: {
       /** @description 需要 [turnstile](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/)
@@ -3945,6 +4128,43 @@ export interface operations {
       };
     };
   };
+  getGroups: {
+    parameters: {
+      query: {
+        sort: components['schemas']['GroupSort'];
+        limit?: number;
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimGroup'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getGroupPost: {
     parameters: {
       query?: never;
@@ -4031,6 +4251,31 @@ export interface operations {
           'application/json': Record<string, never>;
         };
       };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getRecentGroupTopics: {
+    parameters: {
+      query: {
+        /** @description 登录时默认为 joined, 未登录或没有加入小组时始终为 all */
+        mode: components['schemas']['GroupTopicFilterMode'];
+        limit?: number;
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
       /** @description 意料之外的服务器错误 */
       500: {
         headers: {
@@ -4180,7 +4425,7 @@ export interface operations {
   getGroupMembers: {
     parameters: {
       query?: {
-        moderator?: boolean;
+        role?: components['schemas']['GroupMemberRole'];
         limit?: number;
         offset?: number;
       };
@@ -4843,11 +5088,137 @@ export interface operations {
       };
     };
   };
+  searchCharacters: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['SearchCharacter'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimCharacter'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  searchPersons: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['SearchPerson'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimPerson'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  searchSubjects: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: {
+      content: {
+        'application/json': components['schemas']['SearchSubject'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimSubject'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getSubjects: {
     parameters: {
       query: {
         type: components['schemas']['SubjectType'];
-        sort: components['schemas']['SubjectSort'];
+        sort: components['schemas']['SubjectBrowseSort'];
         /** @description min 1 */
         page?: number;
         /** @description 每种条目类型分类不同，具体参考 https://github.com/bangumi/common 的 subject_platforms.yaml */
@@ -4873,7 +5244,7 @@ export interface operations {
         };
         content: {
           'application/json': {
-            data: components['schemas']['Subject'][];
+            data: components['schemas']['SlimSubject'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
@@ -5538,7 +5909,7 @@ export interface operations {
     parameters: {
       query?: {
         /** @description 登录时默认为 friends, 未登录或没有好友时始终为 all */
-        mode?: components['schemas']['FilterMode'];
+        mode?: components['schemas']['TimelineFilterMode'];
         /** @description min 1, max 20 */
         limit?: number;
         /** @description max timeline id to fetch from */
@@ -5750,6 +6121,44 @@ export interface operations {
         content: {
           'application/json': {
             data: components['schemas']['TrendingSubject'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getTrendingSubjectTopics: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SubjectTopic'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
