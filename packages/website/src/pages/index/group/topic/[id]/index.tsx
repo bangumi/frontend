@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { Avatar, Layout, RichContent, Topic } from '@bangumi/design';
+import { Avatar, Layout, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import Helmet from '@bangumi/website/components/Helmet';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
@@ -13,7 +13,7 @@ import GroupInfo from '../../components/GroupInfo';
 import GroupTopicHeader from './components/GroupTopicHeader';
 import styles from './index.module.less';
 
-const { Comment, CommentActions } = Topic;
+const { Comment } = Topic;
 
 const TopicPage: FC = () => {
   const { id } = useParams();
@@ -63,21 +63,6 @@ const TopicPage: FC = () => {
         type='alpha'
         leftChildren={
           <>
-            {/* Topic content */}
-            <div id={`post_${topic.id}`}>
-              <RichContent bbcode={topic.content} />
-              {user && (
-                <div className={styles.topicActions}>
-                  <CommentActions
-                    showText
-                    id={topic.id}
-                    isAuthor={user.id === topic.creatorID}
-                    onReply={startReply}
-                    // TODO: 实现删除主题操作
-                  />
-                </div>
-              )}
-            </div>
             {/* Topic Comments */}
             <div className={styles.replies}>
               {topic.replies.map((comment: Reply, idx: number) => (

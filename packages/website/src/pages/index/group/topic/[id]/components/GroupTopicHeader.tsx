@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { memo } from 'react';
 
-import type { SlimGroup, SlimUser } from '@bangumi/client/group';
+import type { SlimGroup, SlimUser } from '@bangumi/client/client';
 import { Avatar, Topic, Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 

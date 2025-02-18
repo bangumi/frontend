@@ -1,6 +1,6 @@
-import type { SlimGroup } from 'packages/client/group';
 import React, { memo } from 'react';
 
+import type { SlimGroup } from '@bangumi/client/client';
 import type { ButtonProps } from '@bangumi/design';
 import { Button } from '@bangumi/design';
 import { useUser } from '@bangumi/website/hooks/use-user';
