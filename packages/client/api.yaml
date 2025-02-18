@@ -120,6 +120,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         infobox:
           $ref: '#/components/schemas/Infobox'
         lock:
@@ -142,6 +144,7 @@ components:
         - nameCN
         - role
         - infobox
+        - info
         - summary
         - comment
         - collects
@@ -160,6 +163,15 @@ components:
       required:
         - character
         - relation
+      type: object
+    CharacterSearchFilter:
+      properties:
+        nsfw:
+          description: |-
+            无权限的用户会直接忽略此字段，不会返回 R18 条目。
+            `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+            `false` 只会返回非 R18 条目。
+          type: boolean
       type: object
     CharacterSubject:
       properties:
@@ -570,21 +582,6 @@ components:
         - message
         - statusCode
       type: object
-    FilterMode:
-      description: |-
-        过滤模式
-          - all = 全站
-          - friends = 好友
-      enum:
-        - all
-        - friends
-      type: string
-      x-enum-varnames:
-        - All
-        - Friends
-      x-ms-enum:
-        modelAsString: true
-        name: FilterMode
     Friend:
       properties:
         createdAt:
@@ -652,24 +649,65 @@ components:
       properties:
         joinedAt:
           type: integer
-        moderator:
-          type: boolean
+        role:
+          $ref: '#/components/schemas/GroupMemberRole'
         uid:
           type: integer
         user:
           $ref: '#/components/schemas/SlimUser'
       required:
         - uid
-        - moderator
+        - role
         - joinedAt
       title: GroupMember
       type: object
+    GroupMemberRole:
+      description: |-
+        小组成员角色
+          - -2 = 访客
+          - -1 = 游客
+          - 0 = 小组成员
+          - 1 = 小组长
+          - 2 = 小组管理员
+          - 3 = 禁言成员
+      enum:
+        - -2
+        - -1
+        - 0
+        - 1
+        - 2
+        - 3
+      type: integer
+      x-enum-varnames:
+        - Visitor
+        - Guest
+        - Member
+        - Creator
+        - Moderator
+        - Blocked
+      x-ms-enum:
+        modelAsString: false
+        name: GroupMemberRole
+    GroupSort:
+      default: created
+      description: |-
+        小组排序方式
+          - posts = 帖子数
+          - topics = 主题数
+          - members = 成员数
+          - created = 创建时间
+          - updated = 最新讨论
+      enum:
+        - posts
+        - topics
+        - members
+        - created
+        - updated
+      type: string
     GroupTopic:
       allOf:
         - $ref: '#/components/schemas/TopicBase'
         - properties:
-            content:
-              type: string
             creator:
               $ref: '#/components/schemas/SlimUser'
             group:
@@ -681,10 +719,30 @@ components:
           required:
             - creator
             - group
-            - content
             - replies
           type: object
       title: GroupTopic
+    GroupTopicFilterMode:
+      description: |-
+        小组话题过滤模式
+          - all = 全站
+          - joined = 已加入
+          - created = 我创建的
+          - replied = 我回复的
+      enum:
+        - all
+        - joined
+        - created
+        - replied
+      type: string
+      x-enum-varnames:
+        - All
+        - Joined
+        - Created
+        - Replied
+      x-ms-enum:
+        modelAsString: true
+        name: GroupTopicFilterMode
     HistorySummary:
       properties:
         commitMessage:
@@ -908,6 +966,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         infobox:
           $ref: '#/components/schemas/Infobox'
         lock:
@@ -930,6 +990,7 @@ components:
         - nameCN
         - type
         - infobox
+        - info
         - career
         - summary
         - comment
@@ -988,6 +1049,24 @@ components:
       required:
         - person
         - relation
+      type: object
+    PersonSearchFilter:
+      properties:
+        career:
+          items:
+            description: |-
+              职业, 可以多次出现。多值之间为 `且` 关系，用 `-` 排除职业。
+                      支持的职业有：
+                      - producer: 制作人
+                      - mangaka: 漫画家
+                      - artist: 艺术家
+                      - illustrator: 插画家
+                      - seiyu: 声优
+                      - writer: 编剧
+                      - actor: 演员
+            example: seiyu
+            type: string
+          type: array
       type: object
     PersonWikiInfo:
       properties:
@@ -1052,6 +1131,10 @@ components:
           $ref: '#/components/schemas/Avatar'
         bio:
           type: string
+        blocklist:
+          items:
+            type: integer
+          type: array
         friendIDs:
           items:
             type: integer
@@ -1086,6 +1169,7 @@ components:
         - location
         - bio
         - friendIDs
+        - blocklist
         - permissions
       title: Profile
       type: object
@@ -1170,6 +1254,38 @@ components:
         - state
       title: ReplyBase
       type: object
+    SearchCharacter:
+      properties:
+        filter:
+          $ref: '#/components/schemas/CharacterSearchFilter'
+        keyword:
+          description: 搜索关键词
+          type: string
+      required:
+        - keyword
+      type: object
+    SearchPerson:
+      properties:
+        filter:
+          $ref: '#/components/schemas/PersonSearchFilter'
+        keyword:
+          description: 搜索关键词
+          type: string
+      required:
+        - keyword
+      type: object
+    SearchSubject:
+      properties:
+        filter:
+          $ref: '#/components/schemas/SubjectSearchFilter'
+        keyword:
+          description: 搜索关键词
+          type: string
+        sort:
+          $ref: '#/components/schemas/SubjectSearchSort'
+      required:
+        - keyword
+      type: object
     SimpleUser:
       properties:
         id:
@@ -1227,6 +1343,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         lock:
           type: boolean
         name:
@@ -1242,6 +1360,7 @@ components:
         - name
         - nameCN
         - role
+        - info
         - comment
         - lock
         - nsfw
@@ -1307,6 +1426,8 @@ components:
           type: integer
         images:
           $ref: '#/components/schemas/PersonImages'
+        info:
+          type: string
         lock:
           type: boolean
         name:
@@ -1322,6 +1443,7 @@ components:
         - name
         - nameCN
         - type
+        - info
         - comment
         - lock
         - nsfw
@@ -1619,6 +1741,31 @@ components:
         - year
       title: SubjectAirtime
       type: object
+    SubjectBrowseSort:
+      default: rank
+      description: |-
+        条目浏览排序方式
+          - rank = 排名
+          - trends = 热度
+          - collects = 收藏数
+          - date = 发布日期
+          - title = 标题
+      enum:
+        - rank
+        - trends
+        - collects
+        - date
+        - title
+      type: string
+      x-enum-varnames:
+        - Rank
+        - Trends
+        - Collects
+        - Date
+        - Title
+      x-ms-enum:
+        modelAsString: true
+        name: SubjectBrowseSort
     SubjectCharacter:
       properties:
         actors:
@@ -1945,31 +2092,73 @@ components:
         - entry
       title: SubjectReview
       type: object
-    SubjectSort:
-      default: rank
+    SubjectSearchFilter:
+      properties:
+        date:
+          items:
+            description: 播出日期/发售日期，日期必需为 YYYY-MM-DD 格式。多值之间为 `且` 关系。
+            example: '>=2020-07-01'
+            type: string
+          type: array
+        metaTags:
+          items:
+            description: 公共标签。多个值之间为 `且` 关系。可以用 `-` 排除标签。比如 `-科幻` 可以排除科幻标签。
+            example: 童年
+            type: string
+          type: array
+        nsfw:
+          description: |-
+            无权限的用户会直接忽略此字段，不会返回 R18 条目。
+            `null` 或者 `true` 会返回包含 R18 的所有搜索结果。
+            `false` 只会返回非 R18 条目。
+          type: boolean
+        rank:
+          items:
+            description: 用于搜索指定排名的条目，多值之间为 `且` 关系。
+            example: '>10'
+            type: string
+          type: array
+        rating:
+          items:
+            description: 用于搜索指定评分的条目，多值之间为 `且` 关系。
+            example: '>=6'
+            type: string
+          type: array
+        tags:
+          items:
+            description: 标签，可以多次出现。多值之间为 `且` 关系。
+            example: 童年
+            type: string
+          type: array
+        type:
+          items:
+            $ref: '#/components/schemas/SubjectType'
+            description: 条目类型, 可以多次出现。多值之间为 `或` 关系。
+            example: 2
+          type: array
+      type: object
+    SubjectSearchSort:
+      default: match
       description: |-
-        条目排序方式
-          - rank = 排名
-          - trends = 热度
-          - collects = 收藏数
-          - date = 发布日期
-          - title = 标题
+        条目搜索排序方式
+          - match = 匹配程度
+          - heat = 收藏人数
+          - rank = 排名由高到低
+          - score = 评分
       enum:
+        - match
+        - heat
         - rank
-        - trends
-        - collects
-        - date
-        - title
+        - score
       type: string
       x-enum-varnames:
+        - Match
+        - Heat
         - Rank
-        - Trends
-        - Collects
-        - Date
-        - Title
+        - Score
       x-ms-enum:
         modelAsString: true
-        name: SubjectSort
+        name: SubjectSearchSort
     SubjectStaff:
       properties:
         positions:
@@ -2026,8 +2215,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/TopicBase'
         - properties:
-            content:
-              type: string
             creator:
               $ref: '#/components/schemas/SlimUser'
             replies:
@@ -2039,7 +2226,6 @@ components:
           required:
             - creator
             - subject
-            - content
             - replies
           type: object
       title: SubjectTopic
@@ -2174,6 +2360,21 @@ components:
       x-ms-enum:
         modelAsString: false
         name: TimelineCat
+    TimelineFilterMode:
+      description: |-
+        时间线过滤模式
+          - all = 全站
+          - friends = 好友
+      enum:
+        - all
+        - friends
+      type: string
+      x-enum-varnames:
+        - All
+        - Friends
+      x-ms-enum:
+        modelAsString: true
+        name: TimelineFilterMode
     TimelineMemo:
       properties:
         blog:
@@ -2356,7 +2557,7 @@ components:
         count:
           type: integer
         subject:
-          $ref: '#/components/schemas/Subject'
+          $ref: '#/components/schemas/SlimSubject'
       required:
         - subject
         - count
@@ -4150,6 +4351,59 @@ paths:
       summary: 获取当前用户的好友列表
       tags:
         - friend
+  /p1/groups:
+    get:
+      operationId: getGroups
+      parameters:
+        - in: query
+          name: sort
+          required: true
+          schema:
+            $ref: '#/components/schemas/GroupSort'
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimGroup'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取小组列表
+      tags:
+        - group
   /p1/groups/-/posts/{postID}:
     delete:
       operationId: deleteGroupPost
@@ -4177,7 +4431,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 删除小组帖子回复
+      summary: 删除小组话题回复
       tags:
         - topic
     get:
@@ -4202,7 +4456,7 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
                 description: 意料之外的服务器错误
           description: 意料之外的服务器错误
-      summary: 获取小组帖子回复详情
+      summary: 获取小组话题回复详情
       tags:
         - topic
     put:
@@ -4236,9 +4490,46 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 编辑小组帖子回复
+      summary: 编辑小组话题回复
       tags:
         - topic
+  /p1/groups/-/topics:
+    get:
+      operationId: getRecentGroupTopics
+      parameters:
+        - description: 登录时默认为 joined, 未登录或没有加入小组时始终为 all
+          in: query
+          name: mode
+          required: true
+          schema:
+            $ref: '#/components/schemas/GroupTopicFilterMode'
+        - in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            type: integer
+        - in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            type: integer
+      responses:
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取最新的小组话题
+      tags:
+        - group
   /p1/groups/-/topics/{topicID}:
     get:
       operationId: getGroupTopic
@@ -4265,11 +4556,11 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取小组帖子详情
+      summary: 获取小组话题详情
       tags:
         - topic
     put:
-      description: 编辑小组帖子
+      description: 编辑小组话题
       operationId: editGroupTopic
       parameters:
         - in: path
@@ -4340,7 +4631,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 创建小组帖子回复
+      summary: 创建小组话题回复
       tags:
         - topic
   /p1/groups/{groupName}:
@@ -4378,11 +4669,10 @@ paths:
       operationId: getGroupMembers
       parameters:
         - in: query
-          name: moderator
+          name: role
           required: false
           schema:
-            default: false
-            type: boolean
+            $ref: '#/components/schemas/GroupMemberRole'
         - in: query
           name: limit
           required: false
@@ -4484,7 +4774,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 获取小组帖子列表
+      summary: 获取小组话题列表
       tags:
         - group
     post:
@@ -4526,7 +4816,7 @@ paths:
       security:
         - CookiesSession: []
           HTTPBearer: []
-      summary: 创建小组帖子
+      summary: 创建小组话题
       tags:
         - group
   /p1/login:
@@ -5228,6 +5518,177 @@ paths:
       summary: 获取人物的参与作品
       tags:
         - person
+  /p1/search/characters:
+    post:
+      operationId: searchCharacters
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchCharacter'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimCharacter'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 搜索角色
+      tags:
+        - search
+  /p1/search/persons:
+    post:
+      operationId: searchPersons
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchPerson'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimPerson'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 搜索人物
+      tags:
+        - search
+  /p1/search/subjects:
+    post:
+      operationId: searchSubjects
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchSubject'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SlimSubject'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 搜索条目
+      tags:
+        - search
   /p1/subjects:
     get:
       operationId: getSubjects
@@ -5241,7 +5702,7 @@ paths:
           name: sort
           required: true
           schema:
-            $ref: '#/components/schemas/SubjectSort'
+            $ref: '#/components/schemas/SubjectBrowseSort'
         - description: min 1
           in: query
           name: page
@@ -5292,7 +5753,7 @@ paths:
                 properties:
                   data:
                     items:
-                      $ref: '#/components/schemas/Subject'
+                      $ref: '#/components/schemas/SlimSubject'
                     type: array
                   total:
                     description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
@@ -6148,7 +6609,7 @@ paths:
           name: mode
           required: false
           schema:
-            $ref: '#/components/schemas/FilterMode'
+            $ref: '#/components/schemas/TimelineFilterMode'
         - description: min 1, max 20
           in: query
           name: limit
@@ -6428,6 +6889,58 @@ paths:
         - CookiesSession: []
           HTTPBearer: []
       summary: 获取热门条目
+      tags:
+        - trending
+  /p1/trending/subjects/topics:
+    get:
+      operationId: getTrendingSubjectTopics
+      parameters:
+        - description: max 100
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 20
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: min 0
+          in: query
+          name: offset
+          required: false
+          schema:
+            default: 0
+            minimum: 0
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SubjectTopic'
+                    type: array
+                  total:
+                    description: limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数
+                    type: integer
+                required:
+                  - data
+                  - total
+                type: object
+          description: Default Response
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+                description: 意料之外的服务器错误
+          description: 意料之外的服务器错误
+      security:
+        - CookiesSession: []
+          HTTPBearer: []
+      summary: 获取热门条目讨论
       tags:
         - trending
   /p1/turnstile:
