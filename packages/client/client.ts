@@ -95,7 +95,6 @@ export type SubjectImages = {
   medium: string;
   small: string;
 };
-export type CollectionType = 1 | 2 | 3 | 4 | 5;
 export type SlimSubjectInterest = {
   comment: string;
   rate: number;
@@ -109,7 +108,6 @@ export type SubjectRating = {
   score: number;
   total: number;
 };
-export type SubjectType = 1 | 2 | 3 | 4 | 6;
 export type SlimSubject = {
   id: number;
   images?: SubjectImages;
@@ -177,7 +175,6 @@ export type PersonCollect = {
   createdAt: number;
   user: SlimUser;
 };
-export type EpisodeCollectionStatus = 0 | 1 | 2 | 3;
 export type UpdateEpisodeProgress = {
   /** 是否批量更新(看到当前章节), 批量更新时 type 无效 */
   batch?: boolean;
@@ -291,7 +288,6 @@ export type CollectSubject = {
   tags?: string[];
   type?: CollectionType;
 };
-export type EpisodeType = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type Episode = {
   airdate: string;
   comment: number;
@@ -313,7 +309,6 @@ export type Friend = {
   grade: number;
   user: SlimUser;
 };
-export type GroupSort = 'posts' | 'topics' | 'members' | 'created' | 'updated';
 export type SlimGroup = {
   accessible: boolean;
   createdAt: number;
@@ -351,7 +346,6 @@ export type Post = {
   state: number;
   topic: Topic;
 };
-export type GroupTopicFilterMode = 'all' | 'joined' | 'created' | 'replied';
 export type ReplyBase = {
   content: string;
   createdAt: number;
@@ -390,7 +384,6 @@ export type Group = {
   title: string;
   topics: number;
 };
-export type GroupMemberRole = -2 | -1 | 0 | 1 | 2 | 3;
 export type GroupMember = {
   joinedAt: number;
   role: GroupMemberRole;
@@ -510,14 +503,12 @@ export type SubjectSearchFilter = {
   tags?: string[];
   type?: SubjectType[];
 };
-export type SubjectSearchSort = 'match' | 'heat' | 'rank' | 'score';
 export type SearchSubject = {
   filter?: SubjectSearchFilter;
   /** 搜索关键词 */
   keyword: string;
   sort?: SubjectSearchSort;
 };
-export type SubjectBrowseSort = 'rank' | 'trends' | 'collects' | 'date' | 'title';
 export type SubjectTopic = TopicBase & {
   creator: SlimUser;
   replies: Reply[];
@@ -585,8 +576,6 @@ export type SubjectPosition = {
   position: SubjectStaffPositionType;
   staffs: SubjectPositionStaff[];
 };
-export type TimelineFilterMode = 'all' | 'friends';
-export type TimelineCat = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 export type SlimIndex = {
   createdAt: number;
   id: number;
@@ -637,7 +626,6 @@ export type TimelineMemo = {
     subject?: SlimSubject;
   };
 };
-export type TimelineSource = 0 | 1 | 2 | 3 | 4 | 5;
 export type Timeline = {
   batch: boolean;
   cat: TimelineCat;
@@ -657,17 +645,6 @@ export type TrendingSubject = {
   count: number;
   subject: SlimSubject;
 };
-export type UserHomepageSection =
-  | 'anime'
-  | 'game'
-  | 'book'
-  | 'music'
-  | 'real'
-  | 'mono'
-  | 'blog'
-  | 'friend'
-  | 'group'
-  | 'index';
 export type UserHomepage = {
   left: UserHomepageSection[];
   right: UserHomepageSection[];
@@ -4444,4 +4421,102 @@ export function unlockSubject(
       body,
     }),
   );
+}
+export enum CollectionType {
+  Wish = 1,
+  Collect = 2,
+  Doing = 3,
+  OnHold = 4,
+  Dropped = 5,
+}
+export enum SubjectType {
+  Book = 1,
+  Anime = 2,
+  Music = 3,
+  Game = 4,
+  Real = 6,
+}
+export enum EpisodeCollectionStatus {
+  None = 0,
+  Wish = 1,
+  Done = 2,
+  Dropped = 3,
+}
+export enum EpisodeType {
+  Normal = 0,
+  Special = 1,
+  Op = 2,
+  Ed = 3,
+  Pre = 4,
+  Mad = 5,
+  Other = 6,
+}
+export enum GroupSort {
+  Posts = 'posts',
+  Topics = 'topics',
+  Members = 'members',
+  Created = 'created',
+  Updated = 'updated',
+}
+export enum GroupTopicFilterMode {
+  All = 'all',
+  Joined = 'joined',
+  Created = 'created',
+  Replied = 'replied',
+}
+export enum GroupMemberRole {
+  Visitor = -2,
+  Guest = -1,
+  Member = 0,
+  Creator = 1,
+  Moderator = 2,
+  Blocked = 3,
+}
+export enum SubjectSearchSort {
+  Match = 'match',
+  Heat = 'heat',
+  Rank = 'rank',
+  Score = 'score',
+}
+export enum SubjectBrowseSort {
+  Rank = 'rank',
+  Trends = 'trends',
+  Collects = 'collects',
+  Date = 'date',
+  Title = 'title',
+}
+export enum TimelineFilterMode {
+  All = 'all',
+  Friends = 'friends',
+}
+export enum TimelineCat {
+  Daily = 1,
+  Wiki = 2,
+  Subject = 3,
+  Progress = 4,
+  Status = 5,
+  Blog = 6,
+  Index = 7,
+  Mono = 8,
+  Doujin = 9,
+}
+export enum TimelineSource {
+  Web = 0,
+  Mobile = 1,
+  OnAir = 2,
+  InTouch = 3,
+  Wp = 4,
+  Api = 5,
+}
+export enum UserHomepageSection {
+  Anime = 'anime',
+  Game = 'game',
+  Book = 'book',
+  Music = 'music',
+  Real = 'real',
+  Mono = 'mono',
+  Blog = 'blog',
+  Friend = 'friend',
+  Group = 'group',
+  Index = 'index',
 }
