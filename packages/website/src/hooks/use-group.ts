@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
-import type { Group } from '@bangumi/client/group';
+import type { Group } from '@bangumi/client/client';
 
 export interface UseGroupRet {
   group: Group;
