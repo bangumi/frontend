@@ -1,13 +1,5 @@
+import { SubjectType } from '@bangumi/client/client';
 import { keyBy, WikiTemplate } from '@bangumi/utils';
-
-export const enum SubjectType {
-  Unknown,
-  Book, // 书籍
-  Anime, // 动画
-  Music, // 音乐
-  Game, // 游戏
-  Real, // 三次元
-}
 
 export enum WikiEditTabs {
   Index = 'edit',
@@ -70,7 +62,7 @@ export const WikiEditTabsItemsByKey = keyBy(WikiEditTabsItems, 'key');
  * @returns 维基模板字符串
  */
 export const getWikiTemplate = (
-  subjectType: number,
+  subjectType: SubjectType,
   targetTemplate: keyof typeof WikiTemplate | string | undefined,
 ) => {
   if (subjectType === SubjectType.Game) return WikiTemplate.Game;

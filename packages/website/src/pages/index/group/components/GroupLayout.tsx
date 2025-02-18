@@ -2,7 +2,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import type { Group } from '@bangumi/client/group';
+import type { Group } from '@bangumi/client/client';
 import { Button, Layout, Section, Tab } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';

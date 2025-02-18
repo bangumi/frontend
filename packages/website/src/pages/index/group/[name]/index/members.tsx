@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+import { GroupMemberRole } from '@bangumi/client/client';
 import { Pagination, Section } from '@bangumi/design';
 import { UnreadableCodeError } from '@bangumi/utils';
 import Helmet from '@bangumi/website/components/Helmet';
@@ -28,14 +29,14 @@ const GroupMembersPage = () => {
   // 仅第一页获取管理员
   const { data: groupModMembers } = useGroupMembers(name, {
     offset,
-    moderator: true,
+    role: GroupMemberRole.Moderator,
     disable: curPage > 1,
   });
 
   const { data, total } = useGroupMembers(name, {
     offset,
     limit: pageSize,
-    moderator: false,
+    role: GroupMemberRole.Member,
   });
   const [, navigate] = useTransitionNavigate();
 

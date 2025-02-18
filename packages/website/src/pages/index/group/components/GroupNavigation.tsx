@@ -1,6 +1,6 @@
-import type { Group } from 'packages/client/group';
 import React from 'react';
 
+import type { Group } from '@bangumi/client/client';
 import { Section, Typography } from '@bangumi/design';
 
 import GroupActions from './GroupActions';

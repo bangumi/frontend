@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 
-import type { Group } from '@bangumi/client/group';
+import type { Group } from '@bangumi/client/client';
 import { CollapsibleContent, Image, Typography } from '@bangumi/design';
 import { render as renderBBCode } from '@bangumi/utils';
 
