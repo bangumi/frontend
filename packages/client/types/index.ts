@@ -1860,8 +1860,7 @@ export interface components {
      */
     GroupSort: 'posts' | 'topics' | 'members' | 'created' | 'updated';
     /** GroupTopic */
-    GroupTopic: components['schemas']['TopicBase'] & {
-      creator: components['schemas']['SlimUser'];
+    GroupTopic: components['schemas']['Topic'] & {
       group: components['schemas']['SlimGroup'];
       replies: components['schemas']['Reply'][];
     };
@@ -2597,8 +2596,7 @@ export interface components {
       name: string;
     };
     /** SubjectTopic */
-    SubjectTopic: components['schemas']['TopicBase'] & {
-      creator: components['schemas']['SlimUser'];
+    SubjectTopic: components['schemas']['Topic'] & {
       replies: components['schemas']['Reply'][];
       subject: components['schemas']['SlimSubject'];
     };
@@ -2715,19 +2713,16 @@ export interface components {
      */
     TimelineSource: 0 | 1 | 2 | 3 | 4 | 5;
     /** Topic */
-    Topic: components['schemas']['TopicBase'] & {
-      creator?: components['schemas']['SlimUser'];
-      replies: number;
-    };
-    /** TopicBase */
-    TopicBase: {
+    Topic: {
       /** @description 发帖时间，unix time stamp in seconds */
       createdAt: number;
+      creator?: components['schemas']['SlimUser'];
       creatorID: number;
       display: number;
       id: number;
       /** @description 小组/条目ID */
       parentID: number;
+      replyCount: number;
       state: number;
       title: string;
       /** @description 最后回复时间，unix time stamp in seconds */

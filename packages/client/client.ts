@@ -320,22 +320,20 @@ export type SlimGroup = {
   nsfw: boolean;
   title: string;
 };
-export type TopicBase = {
+export type Topic = {
   /** 发帖时间，unix time stamp in seconds */
   createdAt: number;
+  creator?: SlimUser;
   creatorID: number;
   display: number;
   id: number;
   /** 小组/条目ID */
   parentID: number;
+  replyCount: number;
   state: number;
   title: string;
   /** 最后回复时间，unix time stamp in seconds */
   updatedAt: number;
-};
-export type Topic = TopicBase & {
-  creator?: SlimUser;
-  replies: number;
 };
 export type Post = {
   content: string;
@@ -358,8 +356,7 @@ export type ReplyBase = {
 export type Reply = ReplyBase & {
   replies: ReplyBase[];
 };
-export type GroupTopic = TopicBase & {
-  creator: SlimUser;
+export type GroupTopic = Topic & {
   group: SlimGroup;
   replies: Reply[];
 };
@@ -509,8 +506,7 @@ export type SearchSubject = {
   keyword: string;
   sort?: SubjectSearchSort;
 };
-export type SubjectTopic = TopicBase & {
-  creator: SlimUser;
+export type SubjectTopic = Topic & {
   replies: Reply[];
   subject: SlimSubject;
 };

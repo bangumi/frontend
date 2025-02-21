@@ -706,10 +706,8 @@ components:
       type: string
     GroupTopic:
       allOf:
-        - $ref: '#/components/schemas/TopicBase'
+        - $ref: '#/components/schemas/Topic'
         - properties:
-            creator:
-              $ref: '#/components/schemas/SlimUser'
             group:
               $ref: '#/components/schemas/SlimGroup'
             replies:
@@ -717,7 +715,6 @@ components:
                 $ref: '#/components/schemas/Reply'
               type: array
           required:
-            - creator
             - group
             - replies
           type: object
@@ -2213,10 +2210,8 @@ components:
       type: object
     SubjectTopic:
       allOf:
-        - $ref: '#/components/schemas/TopicBase'
+        - $ref: '#/components/schemas/Topic'
         - properties:
-            creator:
-              $ref: '#/components/schemas/SlimUser'
             replies:
               items:
                 $ref: '#/components/schemas/Reply'
@@ -2224,7 +2219,6 @@ components:
             subject:
               $ref: '#/components/schemas/SlimSubject'
           required:
-            - creator
             - subject
             - replies
           type: object
@@ -2509,22 +2503,12 @@ components:
         modelAsString: false
         name: TimelineSource
     Topic:
-      allOf:
-        - $ref: '#/components/schemas/TopicBase'
-        - properties:
-            creator:
-              $ref: '#/components/schemas/SlimUser'
-            replies:
-              type: integer
-          required:
-            - replies
-          type: object
-      title: Topic
-    TopicBase:
       properties:
         createdAt:
           description: 发帖时间，unix time stamp in seconds
           type: integer
+        creator:
+          $ref: '#/components/schemas/SlimUser'
         creatorID:
           type: integer
         display:
@@ -2533,6 +2517,8 @@ components:
           type: integer
         parentID:
           description: 小组/条目ID
+          type: integer
+        replyCount:
           type: integer
         state:
           type: integer
@@ -2546,11 +2532,12 @@ components:
         - title
         - creatorID
         - parentID
+        - replyCount
         - createdAt
         - updatedAt
         - state
         - display
-      title: TopicBase
+      title: Topic
       type: object
     TrendingSubject:
       properties:
