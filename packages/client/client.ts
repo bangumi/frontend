@@ -1831,10 +1831,20 @@ export function getRecentGroupTopics(
   } = {},
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: GroupTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/groups/-/topics${QS.query(
       QS.explode({
         mode,
@@ -2676,6 +2686,44 @@ export function editSubjectPost(
       method: 'PUT',
       body: updateContent,
     }),
+  );
+}
+/**
+ * 获取最新的条目讨论
+ */
+export function getRecentSubjectTopics(
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SubjectTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/topics${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
   );
 }
 /**

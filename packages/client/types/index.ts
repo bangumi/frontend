@@ -860,6 +860,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/subjects/-/topics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取最新的条目讨论 */
+    get: operations['getRecentSubjectTopics'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/subjects/-/topics/{topicID}': {
     parameters: {
       query?: never;
@@ -4271,6 +4288,19 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['GroupTopic'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         headers: {
@@ -5340,6 +5370,44 @@ export interface operations {
         };
         content: {
           'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getRecentSubjectTopics: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SubjectTopic'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
