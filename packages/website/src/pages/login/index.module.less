@@ -32,6 +32,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  // 当只有一个按钮时居中显示
+  &:has(.button:only-child) {
+    justify-content: center;
+  }
 }
 
 .button {
