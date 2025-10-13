@@ -6,6 +6,7 @@ dist-ssr
 .vscode
 .idea
 .pnpm-debug.log
+.env
 
 coverage
 .eslintcache
