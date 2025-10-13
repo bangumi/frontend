@@ -38,9 +38,12 @@ const Login: React.FC = () => {
     [LoginErrorCode.E_SERVER_ERROR]: '服务器错误，请稍后重试',
   };
 
+  const backTo = searchParams.get('backTo');
+  // 如果 backTo 参数以 /oauth 开头，则隐藏注册按钮
+  const shouldHideRegisterButton = backTo?.startsWith('/oauth') ?? false;
+
   const successRedirect = () => {
     // 如果有 backTo 参数，则跳转到指定的页面
-    const backTo = searchParams.get('backTo');
     if (backTo) {
       redirectTo(backTo.startsWith('/') ? backTo : '/');
     } else {
@@ -125,9 +128,11 @@ const Login: React.FC = () => {
             />
           </div>
           <div className={style.buttonGroup}>
-            <Button className={style.button} color='gray' disabled>
-              注册新用户
-            </Button>
+            {!shouldHideRegisterButton && (
+              <Button className={style.button} color='gray' disabled>
+                注册新用户
+              </Button>
+            )}
             <Button className={style.button} onClick={handleLogin}>
               登录
             </Button>
