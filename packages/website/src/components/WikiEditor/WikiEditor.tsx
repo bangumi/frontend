@@ -34,6 +34,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
 
       monaco.languages.setMonarchTokensProvider('wiki', {
         default: 'invalid',
+        tokenPostfix: '.wiki',
         brackets: [
           // @ts-expect-error IMonarchLanguageBracket interface problems
           // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.languages.IMonarchLanguageBracket.html
@@ -43,43 +44,128 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
           // @ts-expect-error
           ['{{', '}}', 'delimiter.doubleCurly'],
         ],
-
         keywords: ['Infobox'],
-
         operators: ['='],
-
+        prefix: /Infobox/,
+        nbstr: /[^|]+?/,
+        nsstr: /[^\s]+?/,
+        str: /.+?/,
+        all: /.*?/,
+        W: /\s+/,
+        w: /\s*/,
         tokenizer: {
-          root: [[/{{Infobox/, 'metatag', '@doctype']],
-
-          doctype: [
-            [/[^|]*$/, 'string'],
-            [/\|[^=]+/, 'variable', '@field'],
-            [/\|[^=]+/, 'variable', '@field'],
-            [/}}/, { token: 'metatag', next: '@pop' }],
+          root: [
+            [
+              /({{)(@prefix)(@W?)(@nsstr?)(@w)$/,
+              [
+                'delimiter.bracket',
+                { token: 'keyword', next: '@superblock' },
+                '',
+                'type.identifier',
+                '',
+              ],
+            ],
+            [/@all/, 'invaild'],
           ],
-
-          field: [
-            [/=/, { token: 'delimiter' }],
-            [/{/, 'delimiter', '@array'],
-            [/[^{n]+/, { token: 'string', next: '@pop' }],
+          superblock: [
+            [/^@w(}})@w$/, 'delimiter.bracket', '@pop'],
+            [
+              /^(@w)(\|)(@w)(@str?)(@w)(=)(@w)(@all)(@w)$/,
+              [
+                '',
+                'delimiter',
+                '',
+                'identifier',
+                '',
+                'operator.symbol',
+                '',
+                {
+                  cases: {
+                    '{': { token: 'delimiter.curly', next: '@array' },
+                    '@default': { token: 'string.unquoted' },
+                  },
+                },
+                '',
+              ],
+            ],
+            [/@all/, 'invaild'],
           ],
-
           array: [
-            [/\[/, { token: 'delimiter', next: '@arrayItem' }],
-            [/}/, { token: '@rematch', next: '@doctype' }],
-          ],
-
-          // `日文名|ワンピース]`
-          // `航海王]`
-          arrayItem: [
-            [/(.+)(\|)([^\]]*)/, ['identify', 'delimiter', 'string']],
-            [/[^\]]+/, { token: 'string' }],
-            [/]$/, { token: 'delimiter', next: '@pop' }],
+            [/^@w(})@w$/, 'delimiter.curly', '@pop'],
+            [/^(@w)(\[)(@w)(\])\s*$/, ['', 'delimiter.square', '', 'delimiter.square']],
+            [
+              /^(@w)(\[)(@w)(@nbstr?)(@w)(\])@w$/,
+              ['', 'delimiter.square', '', 'string.unquoted', '', 'delimiter.square'],
+            ],
+            [
+              /^(@w)(\[)(@w)(@nbstr?)(@w)(\|)(@w)(\])@w$/,
+              [
+                '',
+                'delimiter.square',
+                '',
+                'identifier',
+                '',
+                'delimiter.squarekey',
+                '',
+                'delimiter.square',
+              ],
+            ],
+            [
+              /^(@w)(\[)(@w)(@nbstr?)(@w)(\|)(@w)(@str?)(@w)(\])@w$/,
+              [
+                '',
+                'delimiter.square',
+                '',
+                'identifier',
+                '',
+                'delimiter.squarekey',
+                '',
+                'string.unquoted',
+                '',
+                'delimiter.square',
+              ],
+            ],
+            [/@all/, 'invaild'],
           ],
         },
       });
 
+      monaco.editor.defineTheme('wiki', {
+        base: 'vs',
+        inherit: true,
+        colors: {},
+        rules: [
+          { token: 'delimiter.bracket', foreground: '#ca565f' },
+          { token: 'keyword', foreground: '#ca565f' },
+          { token: 'delimiter', foreground: '#004dc0' },
+          { token: 'operator', foreground: '#004dc0' },
+          { token: 'type.identifier', foreground: '#2dabff' },
+          { token: 'identifier', foreground: '#7839af' },
+          { token: 'string', foreground: '#339900' },
+        ],
+      });
+      monaco.editor.defineTheme('wiki-dark', {
+        base: 'vs-dark',
+        inherit: true,
+        colors: {},
+        rules: [
+          { token: 'delimiter.bracket', foreground: '#f09199' },
+          { token: 'keyword', foreground: '#f09199' },
+          { token: 'delimiter', foreground: '#7bb0ff' },
+          { token: 'operator', foreground: '#7bb0ff' },
+          { token: 'type.identifier', foreground: '#aaddff' },
+          { token: 'identifier', foreground: '#ca9ce6' },
+          { token: 'string', foreground: '#a9d861' },
+        ],
+      });
+
+      monaco.languages.setLanguageConfiguration('bangumi-wiki', {
+        folding: {
+          markers: { start: /{/, end: /}/ },
+        },
+      });
       instance.current = monaco.editor.create(editor.current, {
+        theme: 'wiki',
         value: defaultValue,
         language: 'wiki',
         automaticLayout: true,
