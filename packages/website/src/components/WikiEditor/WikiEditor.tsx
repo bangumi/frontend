@@ -12,6 +12,182 @@ interface WikiEditorProps {
   instanceRef: MutableRefObject<monaco.editor.IStandaloneCodeEditor | null>;
 }
 
+function validate(model: monaco.editor.ITextModel) {
+  const text = model.getValue();
+  const markers = [];
+
+  const lines = text.split(/\r?\n/);
+  let cnt = 0;
+  let superblock = null;
+  let array = null;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i] ?? '';
+    if (/^\s*$/.test(line)) continue;
+    const startLineNumber = i + 1;
+    const block = /^\s*{{\s*Infobox(?<type>\s+\S+)?\s*$/.exec(line);
+    if (block) {
+      const startColumn = line.indexOf('{{') + 1;
+      if (!superblock) {
+        superblock = {
+          startLineNumber,
+          startColumn,
+          endLineNumber: startLineNumber,
+          endColumn: startColumn + 9,
+        };
+        if (!block.groups?.type) {
+          markers.push({
+            severity: monaco.MarkerSeverity.Warning,
+            message: '没有类型',
+            ...superblock,
+          });
+        }
+
+        cnt++;
+        if (cnt > 1) {
+          markers.push({
+            severity: monaco.MarkerSeverity.Error,
+            message: "只允许一个 '{{Infobox'",
+            ...superblock,
+          });
+        }
+        continue;
+      } else {
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "没有匹配的 '}}'",
+          ...superblock,
+        });
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "意外的 '{{Infobox'\n上一个 '{{Infobox' 没有匹配的 '}}'",
+          startLineNumber,
+          startColumn,
+          endLineNumber: startLineNumber,
+          endColumn: startColumn + 9,
+        });
+      }
+      continue;
+    }
+    if (/^\s*}}\s*$/.test(line)) {
+      if (!superblock) {
+        const startColumn = line.indexOf('}}') + 1;
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "多余的 '}}'\n可能是漏了 '{{Infobox'",
+          startLineNumber,
+          startColumn,
+          endLineNumber: startLineNumber,
+          endColumn: startColumn + 2,
+        });
+      } else {
+        superblock = null;
+      }
+      continue;
+    }
+    if (/^\s*\|/.test(line)) {
+      const field = /^(?<start>\s*\|\s*)(?<key>[^=]+?)?(?<operator>\s*=\s*)(?<value>.+?)?\s*$/.exec(
+        line,
+      );
+      if (!field) {
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: '错误的字段格式',
+          startLineNumber,
+          startColumn: line.search(/\S/) + 1,
+          endLineNumber: startLineNumber,
+          endColumn: line.length,
+        });
+        continue;
+      }
+      if (array) {
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "缺少匹配的 '}'",
+          ...array,
+        });
+        array = null;
+      }
+      const { start, key, operator, value } = field.groups ?? {};
+      if (value && value.trim() === '{') {
+        const startColumn = (start?.length ?? 0) + (key?.length ?? 0) + (operator?.length ?? 0) + 1;
+        array = {
+          startLineNumber,
+          startColumn,
+          endLineNumber: startLineNumber,
+          endColumn: startColumn + 1,
+        };
+      }
+      continue;
+    }
+    if (/^\s*}\s*$/.test(line)) {
+      if (!array) {
+        const startColumn = line.indexOf('}') + 1;
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "多余的 '}'\n可能是漏了 '{'",
+          startLineNumber,
+          startColumn,
+          endLineNumber: startLineNumber,
+          endColumn: startColumn + 1,
+        });
+      } else {
+        array = null;
+      }
+      continue;
+    }
+    const item = /^(?<start>\s*)(?<open>\[)?(?<content>.*?)(?<close>\])?\s*$/.exec(line);
+    if (item) {
+      if (!array) {
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "意外的数组项\n可能是漏了 '{'",
+          startLineNumber,
+          startColumn: line.search(/\S/) + 1,
+          endLineNumber: startLineNumber,
+          endColumn: line.length,
+        });
+      }
+      if (!item.groups?.open) {
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "缺少 '['",
+          startLineNumber,
+          startColumn: item.groups?.start?.length ?? 0 + 1,
+          endLineNumber: startLineNumber,
+          endColumn: line.length,
+        });
+      }
+      if (!item.groups?.close) {
+        markers.push({
+          severity: monaco.MarkerSeverity.Error,
+          message: "缺少 ']'",
+          startLineNumber,
+          startColumn: item.groups?.start?.length ?? 0 + 1,
+          endLineNumber: startLineNumber,
+          endColumn: line.length,
+        });
+      }
+      continue;
+    }
+    markers.push({
+      severity: monaco.MarkerSeverity.Error,
+      message: '未知内容',
+      startLineNumber,
+      startColumn: line.search(/\S/) + 1,
+      endLineNumber: startLineNumber,
+      endColumn: line.length,
+    });
+  }
+  if (superblock) {
+    markers.push({
+      severity: monaco.MarkerSeverity.Error,
+      message: "缺少匹配的 '}}'",
+      ...superblock,
+    });
+  }
+  monaco.editor.setModelMarkers(model, 'wiki-check', markers);
+}
+
 const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) => {
   const editor = useRef<HTMLDivElement | null>(null);
 
@@ -33,16 +209,12 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
       });
 
       monaco.languages.setMonarchTokensProvider('wiki', {
-        default: 'invalid',
+        defaultToken: 'invalid',
         tokenPostfix: '.wiki',
         brackets: [
-          // @ts-expect-error IMonarchLanguageBracket interface problems
-          // https://microsoft.github.io/monaco-editor/api/interfaces/monaco.languages.IMonarchLanguageBracket.html
-          ['{', '}', 'delimiter.curly'],
-          // @ts-expect-error
-          ['[', ']', 'delimiter.square'],
-          // @ts-expect-error
-          ['{{', '}}', 'delimiter.doubleCurly'],
+          { open: '{', close: '}', token: 'delimiter.bracket' },
+          { open: '[', close: ']', token: 'delimiter.square' },
+          { open: '{{', close: '}}', token: 'delimiter.doubleCurly' },
         ],
         keywords: ['Infobox'],
         operators: ['='],
@@ -65,7 +237,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 '',
               ],
             ],
-            [/@all/, 'invaild'],
+            [/.*/, 'invaild'],
           ],
           superblock: [
             [/^@w(}})@w$/, 'delimiter.bracket', '@pop'],
@@ -88,17 +260,17 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 '',
               ],
             ],
-            [/@all/, 'invaild'],
+            [/.*/, 'invaild'],
           ],
           array: [
             [/^@w(})@w$/, 'delimiter.curly', '@pop'],
-            [/^(@w)(\[)(@w)(\])\s*$/, ['', 'delimiter.square', '', 'delimiter.square']],
+            [/^(@w)(\[)(@w)(\])(@w)$/, ['', 'delimiter.square', '', 'delimiter.square', '']],
             [
-              /^(@w)(\[)(@w)(@nbstr?)(@w)(\])@w$/,
-              ['', 'delimiter.square', '', 'string.unquoted', '', 'delimiter.square'],
+              /^(@w)(\[)(@w)(@nbstr?)(@w)(\])(@w)$/,
+              ['', 'delimiter.square', '', 'string.unquoted', '', 'delimiter.square', ''],
             ],
             [
-              /^(@w)(\[)(@w)(@nbstr?)(@w)(\|)(@w)(\])@w$/,
+              /^(@w)(\[)(@w)(@nbstr?)(@w)(\|)(@w)(\])(@w)$/,
               [
                 '',
                 'delimiter.square',
@@ -108,10 +280,11 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 'delimiter.squarekey',
                 '',
                 'delimiter.square',
+                '',
               ],
             ],
             [
-              /^(@w)(\[)(@w)(@nbstr?)(@w)(\|)(@w)(@str?)(@w)(\])@w$/,
+              /^(@w)(\[)(@w)(@nbstr?)(@w)(\|)(@w)(@str?)(@w)(\])(@w)$/,
               [
                 '',
                 'delimiter.square',
@@ -123,9 +296,10 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 'string.unquoted',
                 '',
                 'delimiter.square',
+                '',
               ],
             ],
-            [/@all/, 'invaild'],
+            [/.*/, 'invaild'],
           ],
         },
       });
@@ -164,15 +338,24 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
           markers: { start: /{/, end: /}/ },
         },
       });
+
+      const uri = monaco.Uri.parse('inmemory://infobox.wiki');
+      const model = monaco.editor.createModel(defaultValue ?? '', 'wiki', uri);
+
       instance.current = monaco.editor.create(editor.current, {
         theme: 'wiki',
-        value: defaultValue,
+        model,
         language: 'wiki',
         automaticLayout: true,
         wordWrap: 'on',
         minimap: {
           enabled: false,
+          showRegionSectionHeaders: false,
         },
+      });
+      validate(model);
+      model.onDidChangeContent(() => {
+        validate(model);
       });
     }
     return () => {
