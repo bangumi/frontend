@@ -333,7 +333,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
         ],
       });
 
-      monaco.languages.setLanguageConfiguration('bangumi-wiki', {
+      monaco.languages.setLanguageConfiguration('wiki', {
         folding: {
           markers: { start: /{/, end: /}/ },
         },
