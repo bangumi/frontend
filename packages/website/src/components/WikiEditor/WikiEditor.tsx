@@ -152,7 +152,7 @@ function validate(model: monaco.editor.ITextModel) {
           severity: monaco.MarkerSeverity.Error,
           message: "缺少 '['",
           startLineNumber,
-          startColumn: item.groups?.start?.length ?? 0 + 1,
+          startColumn: (item.groups?.start?.length ?? 0) + 1,
           endLineNumber: startLineNumber,
           endColumn: line.length,
         });
@@ -162,7 +162,7 @@ function validate(model: monaco.editor.ITextModel) {
           severity: monaco.MarkerSeverity.Error,
           message: "缺少 ']'",
           startLineNumber,
-          startColumn: item.groups?.start?.length ?? 0 + 1,
+          startColumn: (item.groups?.start?.length ?? 0) + 1,
           endLineNumber: startLineNumber,
           endColumn: line.length,
         });
@@ -237,7 +237,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 '',
               ],
             ],
-            [/.*/, 'invaild'],
+            [/.*/, 'invalid'],
           ],
           superblock: [
             [/^@w(}})@w$/, 'delimiter.bracket', '@pop'],
@@ -260,7 +260,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 '',
               ],
             ],
-            [/.*/, 'invaild'],
+            [/.*/, 'invalid'],
           ],
           array: [
             [/^@w(})@w$/, 'delimiter.curly', '@pop'],
@@ -299,7 +299,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
                 '',
               ],
             ],
-            [/.*/, 'invaild'],
+            [/.*/, 'invalid'],
           ],
         },
       });
