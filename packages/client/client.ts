@@ -46,6 +46,7 @@ export type BlogEntry = {
   tags: string[];
   title: string;
   type: number;
+  uid: number;
   updatedAt: number;
   user: SlimUser;
   views: number;
@@ -97,6 +98,7 @@ export type SubjectImages = {
 };
 export type SlimSubjectInterest = {
   comment: string;
+  id: number;
   rate: number;
   tags: string[];
   type: CollectionType;
@@ -156,6 +158,8 @@ export type Character = {
   summary: string;
 };
 export type SlimPerson = {
+  /** 职业 */
+  career: string[];
   comment: number;
   id: number;
   images?: PersonImages;
@@ -175,26 +179,53 @@ export type PersonCollect = {
   createdAt: number;
   user: SlimUser;
 };
+export type IndexStats = {
+  blog?: number;
+  character?: number;
+  episode?: number;
+  groupTopic?: number;
+  person?: number;
+  subject: {
+    anime?: number;
+    book?: number;
+    game?: number;
+    music?: number;
+    real?: number;
+  };
+  subjectTopic?: number;
+};
+export type SlimIndex = {
+  createdAt: number;
+  id: number;
+  private: boolean;
+  stats: IndexStats;
+  title: string;
+  total: number;
+  type: IndexType;
+  uid: number;
+  updatedAt: number;
+};
 export type UpdateEpisodeProgress = {
   /** 是否批量更新(看到当前章节), 批量更新时 type 无效 */
   batch?: boolean;
   type?: EpisodeCollectionStatus;
 };
-export type IndexStats = {
-  [key: string]: number;
-};
 export type Index = {
+  award: number;
   collectedAt?: number;
   collects: number;
   createdAt: number;
   desc: string;
   id: number;
+  private: boolean;
   replies: number;
   stats: IndexStats;
   title: string;
   total: number;
-  type: number;
+  type: IndexType;
+  uid: number;
   updatedAt: number;
+  user?: SlimUser;
 };
 export type Person = {
   /** 职业 */
@@ -226,6 +257,7 @@ export type SubjectCollection = {
 export type SubjectInterest = {
   comment: string;
   epStatus: number;
+  id: number;
   private: boolean;
   rate: number;
   tags: string[];
@@ -283,6 +315,10 @@ export type CollectSubject = {
   comment?: string;
   /** 仅自己可见 */
   private?: boolean;
+  /** 是否自动完成条目进度，仅在 `type` 为 `看过` 时有效，并且不会产生对应的时间线记录：
+              - 书籍条目会检查总的话数和卷数，并更新收藏进度到最新;
+              - 动画和三次元会标记所有正片章节为已完成，并同时更新收藏进度 */
+  progress?: boolean;
   /** 评分，0 表示删除评分 */
   rate?: number;
   tags?: string[];
@@ -290,15 +326,18 @@ export type CollectSubject = {
 };
 export type Episode = {
   airdate: string;
+  collection?: {
+    status: EpisodeCollectionStatus;
+    updatedAt?: number;
+  };
   comment: number;
-  desc?: string;
+  desc: string;
   disc: number;
   duration: string;
   id: number;
   name: string;
   nameCN: string;
   sort: number;
-  status?: EpisodeCollectionStatus;
   subject?: SlimSubject;
   subjectID: number;
   type: EpisodeType;
@@ -320,22 +359,20 @@ export type SlimGroup = {
   nsfw: boolean;
   title: string;
 };
-export type TopicBase = {
+export type Topic = {
   /** 发帖时间，unix time stamp in seconds */
   createdAt: number;
+  creator?: SlimUser;
   creatorID: number;
   display: number;
   id: number;
   /** 小组/条目ID */
   parentID: number;
+  replyCount: number;
   state: number;
   title: string;
   /** 最后回复时间，unix time stamp in seconds */
   updatedAt: number;
-};
-export type Topic = TopicBase & {
-  creator?: SlimUser;
-  replies: number;
 };
 export type Post = {
   content: string;
@@ -358,8 +395,7 @@ export type ReplyBase = {
 export type Reply = ReplyBase & {
   replies: ReplyBase[];
 };
-export type GroupTopic = TopicBase & {
-  creator: SlimUser;
+export type GroupTopic = Topic & {
   group: SlimGroup;
   replies: Reply[];
 };
@@ -367,6 +403,12 @@ export type UpdateTopic = {
   /** bbcode */
   content: string;
   title: string;
+};
+export type GroupMember = {
+  joinedAt: number;
+  role: GroupMemberRole;
+  uid: number;
+  user?: SlimUser;
 };
 export type Group = {
   accessible: boolean;
@@ -378,65 +420,46 @@ export type Group = {
   icon: Avatar;
   id: number;
   members: number;
+  membership?: GroupMember;
   name: string;
   nsfw: boolean;
   posts: number;
   title: string;
   topics: number;
 };
-export type GroupMember = {
-  joinedAt: number;
-  role: GroupMemberRole;
-  uid: number;
-  user?: SlimUser;
-};
 export type CreateTopic = {
   /** bbcode */
   content: string;
   title: string;
 };
-export type LoginRequestBody = {
-  email: string;
-  password: string;
-  turnstileToken: string;
-};
-export type Permissions = {
-  subjectWikiEdit: boolean;
-};
-export type Profile = {
-  avatar: Avatar;
-  bio: string;
-  blocklist: number[];
-  friendIDs: number[];
-  group: number;
-  id: number;
-  joinedAt: number;
-  location: string;
-  nickname: string;
-  permissions: Permissions;
-  sign: string;
-  site: string;
-  username: string;
-};
-export type Notice = {
-  /** unix timestamp in seconds */
-  createdAt: number;
-  id: number;
-  postID: number;
-  sender: {
-    avatar: Avatar;
-    group: number;
-    id: number;
-    joinedAt: number;
-    nickname: string;
-    sign: string;
-    username: string;
-  };
+export type CreateIndex = {
+  /** 目录描述 */
+  desc: string;
+  /** 仅自己可见 */
+  private?: boolean;
+  /** 目录标题 */
   title: string;
-  topicID: number;
-  /** 查看 `./lib/notify.ts` _settings */
+};
+export type UpdateIndex = {
+  /** 目录描述 */
+  desc?: string;
+  /** 仅自己可见 */
+  private?: boolean;
+  /** 目录标题 */
+  title?: string;
+};
+export type SlimBlogEntry = {
+  createdAt: number;
+  icon: string;
+  id: number;
+  public: boolean;
+  replies: number;
+  summary: string;
+  title: string;
   type: number;
-  unread: boolean;
+  uid: number;
+  updatedAt: number;
+  user?: SlimUser;
 };
 export type SlimCharacter = {
   comment: number;
@@ -448,6 +471,72 @@ export type SlimCharacter = {
   nameCN: string;
   nsfw: boolean;
   role: number;
+};
+export type SubjectTopic = Topic & {
+  replies: Reply[];
+  subject: SlimSubject;
+};
+export type IndexRelated = {
+  award: string;
+  blog?: SlimBlogEntry;
+  cat: IndexRelatedCategory;
+  character?: SlimCharacter;
+  comment: string;
+  createdAt: number;
+  episode?: Episode;
+  groupTopic?: GroupTopic;
+  id: number;
+  order: number;
+  person?: SlimPerson;
+  rid: number;
+  sid: number;
+  subject?: SlimSubject;
+  subjectTopic?: SubjectTopic;
+  type: number;
+};
+export type CreateIndexRelated = {
+  award?: string;
+  cat: IndexRelatedCategory;
+  comment?: string;
+  order?: number;
+  sid: number;
+};
+export type UpdateIndexRelated = {
+  comment: string;
+  order: number;
+};
+export type LoginRequestBody = {
+  email: string;
+  password: string;
+  turnstileToken: string;
+};
+export type Permissions = {
+  subjectWikiEdit: boolean;
+};
+export type Profile = {
+  avatar: Avatar;
+  group: number;
+  id: number;
+  joinedAt: number;
+  location: string;
+  nickname: string;
+  permissions: Permissions;
+  sign: string;
+  site: string;
+  username: string;
+};
+export type Notice = {
+  createdAt: number;
+  id: number;
+  /** 对应的 topicID, episodeID, userID ... */
+  mainID: number;
+  /** 对应的 postID ... */
+  relatedID: number;
+  sender: SlimUser;
+  title: string;
+  /** 查看 `./lib/notify.ts` _settings */
+  type: number;
+  unread: boolean;
 };
 export type CharacterSubjectRelation = {
   subject: SlimSubject;
@@ -471,6 +560,14 @@ export type SubjectStaffPosition = {
 export type PersonWork = {
   positions: SubjectStaffPosition[];
   subject: SlimSubject;
+};
+export type CreateReport = {
+  /** 举报说明（可选） */
+  comment?: string;
+  /** 被举报对象的 ID */
+  id: number;
+  type: ReportType;
+  value: ReportReason;
 };
 export type CharacterSearchFilter = {
   /** 无权限的用户会直接忽略此字段，不会返回 R18 条目。
@@ -509,16 +606,15 @@ export type SearchSubject = {
   keyword: string;
   sort?: SubjectSearchSort;
 };
-export type SubjectTopic = TopicBase & {
-  creator: SlimUser;
-  replies: Reply[];
-  subject: SlimSubject;
-};
 export type SubjectCharacter = {
   actors: SlimPerson[];
   character: SlimCharacter;
   order: number;
   type: number;
+};
+export type SubjectCollect = {
+  interest: SlimSubjectInterest;
+  user: SlimUser;
 };
 export type SubjectInterestComment = {
   comment: string;
@@ -546,18 +642,6 @@ export type SubjectRelation = {
   relation: SubjectRelationType;
   subject: SlimSubject;
 };
-export type SlimBlogEntry = {
-  createdAt: number;
-  icon: string;
-  id: number;
-  public: boolean;
-  replies: number;
-  summary: string;
-  title: string;
-  type: number;
-  uid: number;
-  updatedAt: number;
-};
 export type SubjectReview = {
   entry: SlimBlogEntry;
   id: number;
@@ -575,13 +659,6 @@ export type SubjectPositionStaff = {
 export type SubjectPosition = {
   position: SubjectStaffPositionType;
   staffs: SubjectPositionStaff[];
-};
-export type SlimIndex = {
-  createdAt: number;
-  id: number;
-  title: string;
-  total: number;
-  type: number;
 };
 export type TimelineMemo = {
   blog?: SlimBlogEntry;
@@ -618,13 +695,17 @@ export type TimelineMemo = {
   subject?: {
     collectID?: number;
     comment: string;
-    rate: number;
+    rate?: number;
     reactions?: Reaction[];
     subject: SlimSubject;
   }[];
   wiki?: {
     subject?: SlimSubject;
   };
+};
+export type TimelineSource = {
+  name: string;
+  url?: string;
 };
 export type Timeline = {
   batch: boolean;
@@ -734,6 +815,7 @@ export type SubjectWikiInfo = {
   name: string;
   nsfw: boolean;
   platform: number;
+  series?: boolean;
   summary: string;
   typeID: SubjectType;
 };
@@ -744,6 +826,7 @@ export type SubjectEdit = {
   name: string;
   nsfw: boolean;
   platform: number;
+  series?: boolean;
   summary: string;
 };
 export type HistorySummary = {
@@ -757,7 +840,7 @@ export type HistorySummary = {
   type: number;
 };
 /**
- * 获取绝交用户列表
+ * 获取当前用户的绝交用户列表
  */
 export function getBlocklist(opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
@@ -776,14 +859,9 @@ export function getBlocklist(opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
- * 将用户添加到绝交列表
+ * 取消与用户绝交
  */
-export function addToBlocklist(
-  body: {
-    id: number;
-  },
-  opts?: Oazapfts.RequestOpts,
-) {
+export function removeUserFromBlocklist(username: string, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
@@ -792,36 +870,40 @@ export function addToBlocklist(
         };
       }
     | {
-        status: 500;
+        status: 429;
         data: ErrorResponse;
-      }
-  >(
-    '/p1/blocklist',
-    oazapfts.json({
-      ...opts,
-      method: 'POST',
-      body,
-    }),
-  );
-}
-/**
- * 将用户从绝交列表移出
- */
-export function removeFromBlocklist(id: number, opts?: Oazapfts.RequestOpts) {
-  return oazapfts.fetchJson<
-    | {
-        status: 200;
-        data: {
-          blocklist: number[];
-        };
       }
     | {
         status: 500;
         data: ErrorResponse;
       }
-  >(`/p1/blocklist/${encodeURIComponent(id)}`, {
+  >(`/p1/blocklist/${encodeURIComponent(username)}`, {
     ...opts,
     method: 'DELETE',
+  });
+}
+/**
+ * 与用户绝交
+ */
+export function addUserToBlocklist(username: string, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          blocklist: number[];
+        };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/blocklist/${encodeURIComponent(username)}`, {
+    ...opts,
+    method: 'PUT',
   });
 }
 /**
@@ -933,6 +1015,10 @@ export function createBlogComment(
           /** new comment id */
           id: number;
         };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -1227,6 +1313,10 @@ export function createCharacterComment(
         };
       }
     | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
         status: 500;
         data: ErrorResponse;
       }
@@ -1237,6 +1327,45 @@ export function createCharacterComment(
       method: 'POST',
       body,
     }),
+  );
+}
+/**
+ * 获取角色关联的目录
+ */
+export function getCharacterIndexes(
+  characterId: number,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimIndex[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/characters/${encodeURIComponent(characterId)}/indexes${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
   );
 }
 /**
@@ -1251,10 +1380,7 @@ export function clearNotice(
   return oazapfts.fetchJson<
     | {
         status: 200;
-      }
-    | {
-        status: 401;
-        data: ErrorResponse;
+        data: {};
       }
     | {
         status: 500;
@@ -1308,6 +1434,50 @@ export function getMyCharacterCollections(
   );
 }
 /**
+ * 删除角色收藏
+ */
+export function deleteCharacterCollection(characterId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/collections/characters/${encodeURIComponent(characterId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 新增角色收藏
+ */
+export function addCharacterCollection(characterId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/collections/characters/${encodeURIComponent(characterId)}`, {
+    ...opts,
+    method: 'PUT',
+  });
+}
+/**
  * 更新章节进度
  */
 export function updateEpisodeProgress(
@@ -1319,6 +1489,10 @@ export function updateEpisodeProgress(
     | {
         status: 200;
         data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -1372,6 +1546,50 @@ export function getMyIndexCollections(
   );
 }
 /**
+ * 删除目录收藏
+ */
+export function deleteIndexCollection(indexId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/collections/indexes/${encodeURIComponent(indexId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 新增目录收藏
+ */
+export function addIndexCollection(indexId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/collections/indexes/${encodeURIComponent(indexId)}`, {
+    ...opts,
+    method: 'PUT',
+  });
+}
+/**
  * 获取当前用户的人物收藏
  */
 export function getMyPersonCollections(
@@ -1408,6 +1626,50 @@ export function getMyPersonCollections(
       ...opts,
     },
   );
+}
+/**
+ * 删除人物收藏
+ */
+export function deletePersonCollection(personId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/collections/persons/${encodeURIComponent(personId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 新增人物收藏
+ */
+export function addPersonCollection(personId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/collections/persons/${encodeURIComponent(personId)}`, {
+    ...opts,
+    method: 'PUT',
+  });
 }
 /**
  * 获取当前用户的条目收藏
@@ -1470,6 +1732,10 @@ export function updateSubjectProgress(
         data: {};
       }
     | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
         status: 500;
         data: ErrorResponse;
       }
@@ -1494,6 +1760,10 @@ export function updateSubjectCollection(
     | {
         status: 200;
         data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -1526,7 +1796,7 @@ export function debug(opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
- * 删除条目的剧集吐槽
+ * 删除条目的章节吐槽
  */
 export function deleteEpisodeComment(commentId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
@@ -1544,7 +1814,7 @@ export function deleteEpisodeComment(commentId: number, opts?: Oazapfts.RequestO
   });
 }
 /**
- * 编辑条目的剧集吐槽
+ * 编辑条目的章节吐槽
  */
 export function updateEpisodeComment(
   commentId: number,
@@ -1570,7 +1840,57 @@ export function updateEpisodeComment(
   );
 }
 /**
- * 获取剧集信息
+ * 取消条目的章节吐槽点赞
+ */
+export function unlikeEpisodeComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/episodes/-/comments/${encodeURIComponent(commentId)}/like`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 给条目的章节吐槽点赞
+ */
+export function likeEpisodeComment(
+  commentId: number,
+  body: {
+    value: number;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/episodes/-/comments/${encodeURIComponent(commentId)}/like`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
+/**
+ * 获取章节信息
  */
 export function getEpisode(episodeId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
@@ -1587,7 +1907,7 @@ export function getEpisode(episodeId: number, opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
- * 获取条目的剧集吐槽箱
+ * 获取条目的章节吐槽箱
  */
 export function getEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
@@ -1616,7 +1936,7 @@ export function getEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpt
   });
 }
 /**
- * 创建条目的剧集吐槽
+ * 创建条目的章节吐槽
  */
 export function createEpisodeComment(
   episodeId: number,
@@ -1630,6 +1950,10 @@ export function createEpisodeComment(
           /** new comment id */
           id: number;
         };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -1683,6 +2007,25 @@ export function getMyFollowers(
   );
 }
 /**
+ * 获取当前用户的好友 ID 列表
+ */
+export function getFriendlist(opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          friendlist: number[];
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >('/p1/friendlist', {
+    ...opts,
+  });
+}
+/**
  * 获取当前用户的好友列表
  */
 export function getMyFriends(
@@ -1721,14 +2064,61 @@ export function getMyFriends(
   );
 }
 /**
+ * 取消好友
+ */
+export function removeFriend(username: string, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/friends/${encodeURIComponent(username)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 添加好友
+ */
+export function addFriend(username: string, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/friends/${encodeURIComponent(username)}`, {
+    ...opts,
+    method: 'PUT',
+  });
+}
+/**
  * 获取小组列表
  */
 export function getGroups(
-  sort: GroupSort,
   {
+    mode,
+    sort,
     limit,
     offset,
   }: {
+    mode?: GroupFilterMode;
+    sort?: GroupSort;
     limit?: number;
     offset?: number;
   } = {},
@@ -1750,6 +2140,7 @@ export function getGroups(
   >(
     `/p1/groups${QS.query(
       QS.explode({
+        mode,
         sort,
         limit,
         offset,
@@ -1822,23 +2213,84 @@ export function editGroupPost(
   );
 }
 /**
+ * 取消小组话题回复点赞
+ */
+export function unlikeGroupPost(postId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/groups/-/posts/${encodeURIComponent(postId)}/like`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 给小组话题回复点赞
+ */
+export function likeGroupPost(
+  postId: number,
+  body: {
+    value: number;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/groups/-/posts/${encodeURIComponent(postId)}/like`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
+/**
  * 获取最新的小组话题
  */
 export function getRecentGroupTopics(
-  mode: GroupTopicFilterMode,
   {
+    mode,
     limit,
     offset,
   }: {
+    mode?: GroupTopicFilterMode;
     limit?: number;
     offset?: number;
   } = {},
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: GroupTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/groups/-/topics${QS.query(
       QS.explode({
         mode,
@@ -1908,6 +2360,10 @@ export function createGroupReply(
         data: {
           id: number;
         };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -2037,6 +2493,10 @@ export function createGroupTopic(
         };
       }
     | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
         status: 500;
         data: ErrorResponse;
       }
@@ -2046,6 +2506,319 @@ export function createGroupTopic(
       ...opts,
       method: 'POST',
       body,
+    }),
+  );
+}
+/**
+ * 创建目录
+ */
+export function createIndex(createIndex?: CreateIndex, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    '/p1/indexes',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: createIndex,
+    }),
+  );
+}
+/**
+ * 删除目录的评论
+ */
+export function deleteIndexComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/indexes/-/comments/${encodeURIComponent(commentId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 编辑目录的评论
+ */
+export function updateIndexComment(
+  commentId: number,
+  updateContent?: UpdateContent,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes/-/comments/${encodeURIComponent(commentId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: updateContent,
+    }),
+  );
+}
+/**
+ * 删除目录
+ */
+export function deleteIndex(indexId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/indexes/${encodeURIComponent(indexId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 获取目录详情
+ */
+export function getIndex(indexId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: Index;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/indexes/${encodeURIComponent(indexId)}`, {
+    ...opts,
+  });
+}
+/**
+ * 更新目录
+ */
+export function updateIndex(
+  indexId: number,
+  updateIndex?: UpdateIndex,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes/${encodeURIComponent(indexId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body: updateIndex,
+    }),
+  );
+}
+/**
+ * 获取目录的评论
+ */
+export function getIndexComments(indexId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: ({
+          content: string;
+          createdAt: number;
+          creatorID: number;
+          id: number;
+          mainID: number;
+          reactions?: Reaction[];
+          relatedID: number;
+          state: number;
+          user?: SlimUser;
+        } & {
+          replies: CommentBase[];
+        })[];
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/indexes/${encodeURIComponent(indexId)}/comments`, {
+    ...opts,
+  });
+}
+/**
+ * 创建目录的评论
+ */
+export function createIndexComment(
+  indexId: number,
+  body?: CreateReply & TurnstileToken,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          /** new comment id */
+          id: number;
+        };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes/${encodeURIComponent(indexId)}/comments`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
+  );
+}
+/**
+ * 获取目录的关联内容
+ */
+export function getIndexRelated(
+  indexId: number,
+  {
+    cat,
+    $type,
+    limit,
+    offset,
+  }: {
+    cat?: IndexRelatedCategory;
+    $type?: SubjectType;
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: IndexRelated[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes/${encodeURIComponent(indexId)}/related${QS.query(
+      QS.explode({
+        cat,
+        type: $type,
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 添加目录关联内容
+ */
+export function putIndexRelated(
+  indexId: number,
+  createIndexRelated?: CreateIndexRelated,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          id: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes/${encodeURIComponent(indexId)}/related`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: createIndexRelated,
+    }),
+  );
+}
+/**
+ * 删除目录关联内容
+ */
+export function deleteIndexRelated(indexId: number, id: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/indexes/${encodeURIComponent(indexId)}/related/${encodeURIComponent(id)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 更新目录关联内容
+ */
+export function patchIndexRelated(
+  indexId: number,
+  id: number,
+  updateIndexRelated?: UpdateIndexRelated,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes/${encodeURIComponent(indexId)}/related/${encodeURIComponent(id)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body: updateIndexRelated,
     }),
   );
 }
@@ -2155,10 +2928,6 @@ export function listNotice(
           /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
           total: number;
         };
-      }
-    | {
-        status: 401;
-        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -2383,6 +3152,10 @@ export function createPersonComment(
         };
       }
     | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
         status: 500;
         data: ErrorResponse;
       }
@@ -2393,6 +3166,45 @@ export function createPersonComment(
       method: 'POST',
       body,
     }),
+  );
+}
+/**
+ * 获取人物关联的目录
+ */
+export function getPersonIndexes(
+  personId: number,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimIndex[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/persons/${encodeURIComponent(personId)}/indexes${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
   );
 }
 /**
@@ -2442,6 +3254,34 @@ export function getPersonWorks(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 报告疑虑
+ */
+export function createReport(createReport?: CreateReport, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          message: string;
+        };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    '/p1/report',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: createReport,
+    }),
   );
 }
 /**
@@ -2571,9 +3411,9 @@ export function searchSubjects(
  * 获取条目列表
  */
 export function getSubjects(
-  $type: SubjectType,
-  sort: SubjectBrowseSort,
   {
+    $type,
+    sort,
     page,
     cat,
     series,
@@ -2581,6 +3421,8 @@ export function getSubjects(
     month,
     tags,
   }: {
+    $type?: SubjectType;
+    sort?: SubjectBrowseSort;
     page?: number;
     cat?: number;
     series?: boolean;
@@ -2619,6 +3461,56 @@ export function getSubjects(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 取消条目收藏点赞
+ */
+export function unlikeSubjectCollect(collectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/collects/${encodeURIComponent(collectId)}/like`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 给条目收藏点赞
+ */
+export function likeSubjectCollect(
+  collectId: number,
+  body: {
+    value: number;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/collects/${encodeURIComponent(collectId)}/like`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
   );
 }
 /**
@@ -2683,6 +3575,94 @@ export function editSubjectPost(
   );
 }
 /**
+ * 取消条目讨论回复点赞
+ */
+export function unlikeSubjectPost(postId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/posts/${encodeURIComponent(postId)}/like`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 给条目讨论回复点赞
+ */
+export function likeSubjectPost(
+  postId: number,
+  body: {
+    value: number;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/posts/${encodeURIComponent(postId)}/like`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
+/**
+ * 获取最新的条目讨论
+ */
+export function getRecentSubjectTopics(
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SubjectTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/topics${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
  * 获取条目讨论详情
  */
 export function getSubjectTopic(topicId: number, opts?: Oazapfts.RequestOpts) {
@@ -2743,6 +3723,10 @@ export function createSubjectReply(
         data: {
           id: number;
         };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -2817,6 +3801,51 @@ export function getSubjectCharacters(
   );
 }
 /**
+ * 获取条目的收藏用户
+ */
+export function getSubjectCollects(
+  subjectId: number,
+  {
+    $type,
+    mode,
+    limit,
+    offset,
+  }: {
+    $type?: CollectionType;
+    mode?: FilterMode;
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SubjectCollect[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/${encodeURIComponent(subjectId)}/collects${QS.query(
+      QS.explode({
+        type: $type,
+        mode,
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
  * 获取条目的吐槽箱
  */
 export function getSubjectComments(
@@ -2859,7 +3888,7 @@ export function getSubjectComments(
   );
 }
 /**
- * 获取条目的剧集
+ * 获取条目的章节
  */
 export function getSubjectEpisodes(
   subjectId: number,
@@ -2891,6 +3920,45 @@ export function getSubjectEpisodes(
     `/p1/subjects/${encodeURIComponent(subjectId)}/episodes${QS.query(
       QS.explode({
         type: $type,
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 获取条目关联的目录
+ */
+export function getSubjectIndexes(
+  subjectId: number,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimIndex[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/${encodeURIComponent(subjectId)}/indexes${QS.query(
+      QS.explode({
         limit,
         offset,
       }),
@@ -3160,6 +4228,10 @@ export function createSubjectTopic(
         };
       }
     | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
         status: 500;
         data: ErrorResponse;
       }
@@ -3181,7 +4253,7 @@ export function getTimeline(
     limit,
     until,
   }: {
-    mode?: TimelineFilterMode;
+    mode?: FilterMode;
     limit?: number;
     until?: number;
   } = {},
@@ -3222,6 +4294,10 @@ export function createTimelineSay(
         data: {
           id: number;
         };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
       }
     | {
         status: 500;
@@ -3303,6 +4379,10 @@ export function createTimelineReply(
         };
       }
     | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
         status: 500;
         data: ErrorResponse;
       }
@@ -3319,11 +4399,12 @@ export function createTimelineReply(
  * 获取热门条目
  */
 export function getTrendingSubjects(
-  $type: SubjectType,
   {
+    $type,
     limit,
     offset,
   }: {
+    $type?: SubjectType;
     limit?: number;
     offset?: number;
   } = {},
@@ -3863,8 +4944,6 @@ export function patchEpisodeWikiInfo(
       summary?: string;
       type?: EpisodeType;
     };
-    /** a optional object to check if input is changed by others
-    if some key is given, and current data in database doesn't match input, subject will not be changed */
     expectedRevision?: {
       date?: string;
       duration?: string;
@@ -4025,6 +5104,7 @@ export function createNewSubject(
     name: string;
     nsfw: boolean;
     platform: number;
+    series?: boolean;
     summary: string;
     type: SubjectType;
   },
@@ -4082,14 +5162,15 @@ export function subjectInfo(subjectId: number, opts?: Oazapfts.RequestOpts) {
 export function patchSubjectInfo(
   subjectId: number,
   body: {
+    /** when header x-admin-token is provided, use this as author id. */
+    authorID?: number;
     commitMessage: string;
-    /** a optional object to check if input is changed by others
-    if `infobox` is given, and current data in database doesn't match input, subject will not be changed */
     expectedRevision?: {
-      infobox?: string;
-      metaTags?: string[];
-      name?: string;
-      platform?: number;
+      infobox?: null | string;
+      metaTags?: null | string[];
+      name?: null | string;
+      platform?: null | number;
+      summary?: null | string;
     };
     subject: {
       date?: string;
@@ -4098,6 +5179,7 @@ export function patchSubjectInfo(
       name?: string;
       nsfw?: boolean;
       platform?: number;
+      series?: boolean;
       summary?: string;
     };
   },
@@ -4131,13 +5213,12 @@ export function putSubjectInfo(
   subjectId: number,
   body: {
     commitMessage: string;
-    /** a optional object to check if input is changed by others
-    if `infobox` is given, and current data in database doesn't match input, subject will not be changed */
     expectedRevision?: {
-      infobox?: string;
-      metaTags?: string[];
-      name?: string;
-      platform?: number;
+      infobox?: null | string;
+      metaTags?: null | string[];
+      name?: null | string;
+      platform?: null | number;
+      summary?: null | string;
     };
     subject: SubjectEdit;
   },
@@ -4220,7 +5301,7 @@ export function uploadSubjectCover(
         data: ErrorResponse;
       }
     | {
-        status: 401;
+        status: 403;
         data: ErrorResponse;
       }
     | {
@@ -4436,6 +5517,11 @@ export enum SubjectType {
   Game = 4,
   Real = 6,
 }
+export enum IndexType {
+  User = 0,
+  Public = 1,
+  Award = 2,
+}
 export enum EpisodeCollectionStatus {
   None = 0,
   Wish = 1,
@@ -4450,6 +5536,11 @@ export enum EpisodeType {
   Pre = 4,
   Mad = 5,
   Other = 6,
+}
+export enum GroupFilterMode {
+  All = 'all',
+  Joined = 'joined',
+  Managed = 'managed',
 }
 export enum GroupSort {
   Posts = 'posts',
@@ -4472,6 +5563,43 @@ export enum GroupMemberRole {
   Moderator = 2,
   Blocked = 3,
 }
+export enum IndexRelatedCategory {
+  Subject = 0,
+  Character = 1,
+  Person = 2,
+  Episode = 3,
+  Blog = 4,
+  GroupTopic = 5,
+  SubjectTopic = 6,
+}
+export enum ReportType {
+  User = 6,
+  GroupTopic = 7,
+  GroupReply = 8,
+  SubjectTopic = 9,
+  SubjectReply = 10,
+  EpisodeReply = 11,
+  CharacterReply = 12,
+  PersonReply = 13,
+  Blog = 14,
+  BlogReply = 15,
+  Timeline = 16,
+  TimelineReply = 17,
+  Index = 18,
+  IndexReply = 19,
+}
+export enum ReportReason {
+  Abuse = 1,
+  Spam = 2,
+  Political = 3,
+  Illegal = 4,
+  Privacy = 5,
+  CheatScore = 6,
+  Flame = 7,
+  Advertisement = 8,
+  Spoiler = 9,
+  Other = 99,
+}
 export enum SubjectSearchSort {
   Match = 'match',
   Heat = 'heat',
@@ -4485,7 +5613,7 @@ export enum SubjectBrowseSort {
   Date = 'date',
   Title = 'title',
 }
-export enum TimelineFilterMode {
+export enum FilterMode {
   All = 'all',
   Friends = 'friends',
 }
@@ -4499,14 +5627,6 @@ export enum TimelineCat {
   Index = 7,
   Mono = 8,
   Doujin = 9,
-}
-export enum TimelineSource {
-  Web = 0,
-  Mobile = 1,
-  OnAir = 2,
-  InTouch = 3,
-  Wp = 4,
-  Api = 5,
 }
 export enum UserHomepageSection {
   Anime = 'anime',
