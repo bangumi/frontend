@@ -342,8 +342,8 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
       '@remix-run/router':
-        specifier: ^1.22.0
-        version: 1.22.0
+        specifier: ^1.23.2
+        version: 1.23.2
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -2138,6 +2138,10 @@ packages:
 
   '@remix-run/router@1.22.0':
     resolution: {integrity: sha512-MBOl8MeOzpK0HQQQshKB7pABXbmyHizdTpqnrIseTbsv0nAepwC2ENZa1aaBExNQcpLoXmWthhak8SABLzvGPw==}
+    engines: {node: '>=14.0.0'}
+
+  '@remix-run/router@1.23.2':
+    resolution: {integrity: sha512-Ic6m2U/rMjTkhERIa/0ZtXJP17QUi2CbWE7cqx4J58M8aA3QTfW+2UlQ4psvTX9IO1RfNVhK3pcpdjej7L+t2w==}
     engines: {node: '>=14.0.0'}
 
   '@rollup/pluginutils@5.0.2':
@@ -8627,6 +8631,8 @@ snapshots:
       - supports-color
 
   '@remix-run/router@1.22.0': {}
+
+  '@remix-run/router@1.23.2': {}
 
   '@rollup/pluginutils@5.0.2(rollup@3.29.5)':
     dependencies:
