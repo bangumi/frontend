@@ -16,7 +16,7 @@
     "@remix-run/router": "^1.22.0",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "monaco-editor": "^0.52.2",
     "nanoid": "^5.0.9",
     "react": "^18.3.1",
