@@ -29,6 +29,11 @@
       "matchPackageNames": ["@typescript-eslint/**", "eslint", "eslint-**"]
     },
     {
+      "groupName": "oazapfts",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["@oazapfts/runtime", "oazapfts"]
+    },
+    {
       "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
