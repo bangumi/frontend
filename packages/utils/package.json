@@ -11,7 +11,7 @@
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.17.23",
-    "@types/react": "^18.3.18",
+    "@types/react": "^18.3.28",
     "js-yaml": "^4.1.1",
     "typescript": "^5.7.3"
   }
