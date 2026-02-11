@@ -99,14 +99,6 @@ pull_request_rules:
         toggle:
           - waiting-opened-48h
 
-  - name: warn on conflicts
-    conditions:
-      - conflict
-      - 'author!=renovate[bot]'
-    actions:
-      comment:
-        message: '@{{author}} this pull request is now in conflict 😩'
-
   - name: label conflicts
     conditions:
       - conflict
