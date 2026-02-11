@@ -8,7 +8,7 @@
   "rangeStrategy": "bump",
   "semanticCommits": "enabled",
   "prConcurrentLimit": 2,
-  "labels": ["dependencies"],
+  "labels": ["dependencies", "ci:auto-merge"],
   "postUpdateOptions": ["pnpmDedupe"],
   "lockFileMaintenance": {
     "enabled": true
