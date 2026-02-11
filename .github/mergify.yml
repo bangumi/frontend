@@ -10,11 +10,11 @@ pull_request_rules:
               - label=ci:auto-merge
               - '#review-threads-unresolved=0'
               - and:
-                  - -check-success=lint
-                  - -check-success=build
-                  - -check-success=test
-                  # - -check-failure=test-e2e
-                  - -check-success=storybook-build
+                  - check-success=lint
+                  - check-success=build
+                  - check-success=test
+                  - check-success=test-e2e
+                  - check-success=storybook-build
           - and:
               - '#approved-reviews-by>=2'
               - 'created-at<=48:00 ago'
