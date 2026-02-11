@@ -1,9 +1,7 @@
-merge_queue:
-  max_parallel_checks: 1
-
 pull_request_rules:
   - name: Automatic merge on dependency PRs
     conditions:
+      - '#commits-behind=0'
       - or:
           - head!=renovate/lock-file-maintenance
           - 'created-at<=48:00 ago'
@@ -17,7 +15,8 @@ pull_request_rules:
           - check-success=test-e2e
           - check-success=storybook-build
     actions:
-      queue:
+      merge:
+        method: squash
 
   - name: Automatic merge on approval
     conditions:
