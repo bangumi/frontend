@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@actions/core": "^3.0.0",
-    "@actions/exec": "^1.1.1",
+    "@actions/exec": "^3.0.0",
     "@actions/github": "^6.0.1",
     "@octokit/openapi-types": "^27.0.0",
     "@testing-library/jest-dom": "^5.17.0",
