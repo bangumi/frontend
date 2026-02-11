@@ -33,8 +33,8 @@ importers:
         specifier: ^5.14.9
         version: 5.14.9
       '@types/web':
-        specifier: ^0.0.200
-        version: 0.0.200
+        specifier: ^0.0.331
+        version: 0.0.331
       '@typescript-eslint/eslint-plugin':
         specifier: ^5.62.0
         version: 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.7.3))(eslint@8.57.1)(typescript@5.7.3)
@@ -1661,8 +1661,8 @@ packages:
   '@types/testing-library__jest-dom@5.14.9':
     resolution: {integrity: sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==}
 
-  '@types/web@0.0.200':
-    resolution: {integrity: sha512-83EtN8z1w+K9fqIE0bdI87F6Iofm+4h5jN+TbBvumbHnZrdUL/HJRdqtc0qDE18sYp0PxvWVaG0MDx4ahvl3dQ==}
+  '@types/web@0.0.331':
+    resolution: {integrity: sha512-42GksRe3NF9duzArn75JnTtXQNS6vUHMK0eIRZAIjRSaLb1Txu7xNlIhkNycx8o2rNGsTnajClJnAMVSfAN67Q==}
 
   '@types/yargs-parser@21.0.0':
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -6065,7 +6065,7 @@ snapshots:
     dependencies:
       '@types/jest': 29.5.1
 
-  '@types/web@0.0.200': {}
+  '@types/web@0.0.331': {}
 
   '@types/yargs-parser@21.0.0': {}
 
