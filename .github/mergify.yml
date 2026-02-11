@@ -1,18 +1,33 @@
 pull_request_rules:
   - name: Automatic merge on approval
     conditions:
-      - '#approved-reviews-by>=2'
-      - 'created-at<=48:00 ago'
-      - -conflict
-      - base=master
-      - '#review-threads-unresolved=0'
-      - -title~=(?i)\[wip\]
-      - and: &ci
-          - -check-failure=lint
-          - -check-failure=build
-          - -check-failure=test
-          # - -check-failure=test-e2e
-          - -check-failure=storybook-build
+      - or:
+          - and:
+              - or:
+                  - head!=renovate/lock-file-maintenance
+                  - 'created-at<=48:00 ago'
+              - base=master
+              - label=ci:auto-merge
+              - '#review-threads-unresolved=0'
+              - and:
+                  - -check-success=lint
+                  - -check-success=build
+                  - -check-success=test
+                  # - -check-failure=test-e2e
+                  - -check-success=storybook-build
+          - and:
+              - '#approved-reviews-by>=2'
+              - 'created-at<=48:00 ago'
+              - -conflict
+              - base=master
+              - '#review-threads-unresolved=0'
+              - -title~=(?i)\[wip\]
+              - and: &ci
+                  - -check-failure=lint
+                  - -check-failure=build
+                  - -check-failure=test
+                  # - -check-failure=test-e2e
+                  - -check-failure=storybook-build
     actions:
       merge:
         method: squash
