@@ -1,4 +1,4 @@
-import type { ComponentStory } from '@storybook/react';
+import type { StoryFn } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ export default {
   component: Comment,
 };
 
-const Template: ComponentStory<typeof Comment> = (args: CommentProps & { states?: State[] }) => {
+const Template: StoryFn<typeof Comment> = (args: CommentProps & { states?: State[] }) => {
   // 0 正常评论 6 被用户删除 7 违反社区指导原则，已被删除
   // 1 关闭 2 重开 5 下沉
   return (

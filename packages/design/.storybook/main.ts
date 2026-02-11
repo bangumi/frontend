@@ -1,5 +1,3 @@
-import { dirname } from 'node:path';
-
 import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -10,15 +8,9 @@ export default {
     '../../icons/index.stories.tsx',
   ],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
-  core: {
-    builder: '@storybook/builder-vite',
-  },
   framework: {
     name: '@storybook/react-vite',
     options: {},
-  },
-  docs: {
-    autodocs: true,
   },
   viteFinal: (viteConfig) => {
     if (!viteConfig.build) {
@@ -27,9 +19,6 @@ export default {
       viteConfig.build.sourcemap = true;
     }
 
-    // workaround for vite build
-    // Refs: https://github.com/eirslett/storybook-builder-vite/issues/55#issuecomment-871800293
-    viteConfig.root = dirname(require.resolve('@storybook/builder-vite'));
     /*
      * About auto-generated component docs:
      * Please use FC<Props> instead of React.FC<Props> to declare component.

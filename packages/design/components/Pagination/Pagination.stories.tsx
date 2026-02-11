@@ -1,16 +1,16 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Pagination from '.';
 
-const componentMeta: ComponentMeta<typeof Pagination> = {
+const componentMeta: Meta<typeof Pagination> = {
   title: 'modern/Pagination',
   component: Pagination,
 };
 
 export default componentMeta;
 
-const Template: ComponentStory<typeof Pagination> = (args) => {
+const Template: StoryFn<typeof Pagination> = (args) => {
   return <Pagination {...args} />;
 };
 

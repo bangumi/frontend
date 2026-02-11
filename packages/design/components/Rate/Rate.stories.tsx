@@ -1,4 +1,4 @@
-import type { ComponentStory } from '@storybook/react';
+import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Rate from '.';
@@ -14,7 +14,7 @@ export default {
   },
 };
 
-const Template: ComponentStory<typeof Rate> = (args) => {
+const Template: StoryFn<typeof Rate> = (args) => {
   return <Rate {...args} />;
 };
 

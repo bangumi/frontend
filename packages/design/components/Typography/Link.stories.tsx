@@ -1,18 +1,18 @@
-import type { ComponentMeta, Story } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
 import type { LinkProps } from './Link';
 import Link from './Link';
 
-const componentMeta: ComponentMeta<typeof Link> = {
+const componentMeta: Meta<typeof Link> = {
   title: 'modern/Typography/Link',
   component: Link,
 };
 
 export default componentMeta;
 
-const Template: Story<LinkProps> = (props) => {
+const Template: StoryFn<LinkProps> = (props) => {
   return (
     <MemoryRouter>
       <Link {...props}>这是一个链接</Link>

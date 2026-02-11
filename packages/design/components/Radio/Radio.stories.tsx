@@ -1,14 +1,14 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Radio from '.';
 
-const componentMeta: ComponentMeta<typeof Radio> = {
+const componentMeta: Meta<typeof Radio> = {
   title: 'Modern/Radio',
   component: Radio,
 };
 export default componentMeta;
-const Template: ComponentStory<typeof Radio> = () => {
+const Template: StoryFn<typeof Radio> = () => {
   return (
     <>
       <Radio id='beginner' label='入门模式' name='type' />

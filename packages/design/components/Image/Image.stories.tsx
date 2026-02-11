@@ -1,4 +1,4 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Image from '.';
@@ -6,14 +6,14 @@ import Image from '.';
 const src =
   'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K';
 
-const componentMeta: ComponentMeta<typeof Image> = {
+const componentMeta: Meta<typeof Image> = {
   title: 'modern/Image',
   component: Image,
 };
 
 export default componentMeta;
 
-const Template: ComponentStory<typeof Image> = (args) => {
+const Template: StoryFn<typeof Image> = (args) => {
   return <Image {...args} />;
 };
 

@@ -1,9 +1,9 @@
-import type { ComponentMeta } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 import React from 'react';
 
 import { Toast, toast } from '.';
 
-const componentMeta: ComponentMeta<typeof Toast> = {
+const componentMeta: Meta<typeof Toast> = {
   title: 'modern/Toast',
   component: Toast,
 };

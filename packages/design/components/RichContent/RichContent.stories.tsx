@@ -1,4 +1,4 @@
-import type { ComponentStory } from '@storybook/react';
+import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import RichContent from '.';
@@ -20,7 +20,7 @@ export default {
   component: RichContent,
 };
 
-const Template: ComponentStory<typeof RichContent> = (args) => {
+const Template: StoryFn<typeof RichContent> = (args) => {
   return <RichContent {...args} />;
 };
 

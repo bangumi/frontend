@@ -1,4 +1,4 @@
-import type { Story } from '@storybook/react';
+import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import type { MenuItemType, MenuProps } from '.';
@@ -72,7 +72,7 @@ export default {
 };
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
+const Template: StoryFn<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
     <div
       style={{

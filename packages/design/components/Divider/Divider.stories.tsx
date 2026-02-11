@@ -1,9 +1,9 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Divider from '.';
 
-const componentMeta: ComponentMeta<typeof Divider> = {
+const componentMeta: Meta<typeof Divider> = {
   title: 'Grid/Divider',
   component: Divider,
   decorators: [(story) => <div style={{ width: '15vw', height: '15vh' }}>{story()}</div>],
@@ -11,7 +11,7 @@ const componentMeta: ComponentMeta<typeof Divider> = {
 
 export default componentMeta;
 
-const Template: ComponentStory<typeof Divider> = (args) => {
+const Template: StoryFn<typeof Divider> = (args) => {
   const isListItem = args.isListItem;
   const orientation = args.orientation;
 

@@ -1,6 +1,6 @@
 import './Form.stories.less';
 
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
@@ -11,7 +11,7 @@ import Input from '../Input';
 import Select from '../Select';
 import Form from '.';
 
-const componentMeta: ComponentMeta<typeof Form> = {
+const componentMeta: Meta<typeof Form> = {
   title: 'Modern/Form',
   component: Form,
   argTypes: {
@@ -23,7 +23,7 @@ const componentMeta: ComponentMeta<typeof Form> = {
 
 export default componentMeta;
 
-const Template: ComponentStory<typeof Form> = (args) => {
+const Template: StoryFn<typeof Form> = (args) => {
   const innerOnSubmit: SubmitHandler<{}> = (data) => {
     console.log(data);
   };
@@ -85,7 +85,7 @@ const Template: ComponentStory<typeof Form> = (args) => {
 
 export const Default = Template.bind({});
 
-export const Compact: ComponentStory<typeof Form> = (args) => {
+export const Compact: StoryFn<typeof Form> = (args) => {
   const [content, setContent] = useState('');
 
   return (
