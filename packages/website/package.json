@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.4.2",
-    "@oazapfts/runtime": "^1.0.3",
+    "@oazapfts/runtime": "^1.1.0",
     "@remix-run/router": "^1.23.2",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.19",
