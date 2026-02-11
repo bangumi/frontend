@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.tsx",
   "dependencies": {
-    "dayjs": "^1.11.13",
+    "dayjs": "^1.11.19",
     "eventemitter3": "^5.0.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
