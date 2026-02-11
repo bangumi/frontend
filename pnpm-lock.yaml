@@ -141,7 +141,7 @@ importers:
         specifier: ^5.7.3
         version: 5.7.3
       vite:
-        specifier: ^5.0.0
+        specifier: ^5.4.21
         version: 5.4.21(@types/node@22.13.1)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)
       vite-plugin-svgr:
         specifier: ^2.4.0
@@ -266,7 +266,7 @@ importers:
         specifier: ^5.7.3
         version: 5.7.3
       vite:
-        specifier: ^5.0.0
+        specifier: ^5.4.21
         version: 5.4.21(@types/node@22.13.1)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)
       vite-plugin-svgr:
         specifier: ^2.4.0
@@ -448,7 +448,7 @@ importers:
         specifier: ^5.1.0
         version: 5.1.0(typescript@5.7.3)
       vite:
-        specifier: ^5.0.0
+        specifier: ^5.4.21
         version: 5.4.21(@types/node@22.13.1)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)
       vite-plugin-pages:
         specifier: ^0.32.4
