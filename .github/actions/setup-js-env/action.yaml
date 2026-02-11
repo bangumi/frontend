@@ -16,7 +16,7 @@ runs:
       shell: bash
       name: install pnpm
 
-    - uses: actions/cache@v4
+    - uses: actions/cache@v5
       with:
         path: ~/.local/share/pnpm/store/
         key: ${{ runner.os }}-1-node${{ inputs.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
