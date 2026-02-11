@@ -1,4 +1,4 @@
-import type { ComponentMeta, Story } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
 import { render as renderBBCode } from '@bangumi/utils';
@@ -6,14 +6,14 @@ import { render as renderBBCode } from '@bangumi/utils';
 import type { CollapsibleContentProps } from '.';
 import CollapsibleContent from '.';
 
-const storyMeta: ComponentMeta<typeof CollapsibleContent> = {
+const storyMeta: Meta<typeof CollapsibleContent> = {
   title: 'modern/CollapsibleContent',
   component: CollapsibleContent,
 };
 
 export default storyMeta;
 
-const Template: Story<CollapsibleContentProps> = (args) => {
+const Template: StoryFn<CollapsibleContentProps> = (args) => {
   const [collapsed, setCollapsed] = useState(true);
   return <CollapsibleContent {...args} collapsed={collapsed} onChange={setCollapsed} />;
 };

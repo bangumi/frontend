@@ -1,9 +1,9 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Message from '.';
 
-const componentMeta: ComponentMeta<typeof Message> = {
+const componentMeta: Meta<typeof Message> = {
   title: 'modern/Message',
   component: Message,
   parameters: {
@@ -38,7 +38,7 @@ const componentMeta: ComponentMeta<typeof Message> = {
       options: [true, false],
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: false },
+        defaultValue: { summary: 'false' },
       },
       defaultValue: false,
     },
@@ -58,7 +58,7 @@ const componentMeta: ComponentMeta<typeof Message> = {
 };
 export default componentMeta;
 
-const Template: ComponentStory<typeof Message> = (args) => {
+const Template: StoryFn<typeof Message> = (args) => {
   return (
     <>
       <Message {...args} />

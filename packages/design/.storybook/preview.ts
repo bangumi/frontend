@@ -2,7 +2,7 @@ import 'reset-css';
 import './global.css';
 
 import type { Preview } from '@storybook/react';
-import { themes } from '@storybook/theming';
+import { themes } from 'storybook/theming';
 
 export default {
   parameters: {

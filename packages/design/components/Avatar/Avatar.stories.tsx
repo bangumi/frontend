@@ -1,9 +1,9 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
 import Avatar from '.';
 
-const componentMeta: ComponentMeta<typeof Avatar> = {
+const componentMeta: Meta<typeof Avatar> = {
   title: 'modern/Avatar',
   component: Avatar,
   args: {
@@ -13,6 +13,6 @@ const componentMeta: ComponentMeta<typeof Avatar> = {
 };
 export default componentMeta;
 
-const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
+const Template: StoryFn<typeof Avatar> = (args) => <Avatar {...args} />;
 
 export const Usage = Template.bind({});

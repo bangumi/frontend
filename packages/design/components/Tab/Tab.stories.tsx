@@ -1,4 +1,4 @@
-import type { Story } from '@storybook/react';
+import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import type { TabProps } from '.';
@@ -19,7 +19,7 @@ export default {
 };
 
 // eslint-disable-next-line react/prop-types
-const Template: Story<TabProps> = ({ activeKey, type }) => {
+const Template: StoryFn<TabProps> = ({ activeKey, type }) => {
   const items = [
     {
       key: 'all',

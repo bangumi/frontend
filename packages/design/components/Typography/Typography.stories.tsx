@@ -1,4 +1,4 @@
-import type { Story } from '@storybook/react';
+import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
 import type { TextProps } from './Text';
@@ -9,7 +9,7 @@ export default {
   component: Text,
 };
 
-export const Demo: Story<TextProps> = () => {
+export const Demo: StoryFn<TextProps> = () => {
   return (
     <div>
       <Text>text(default)</Text>
