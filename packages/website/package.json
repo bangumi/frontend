@@ -11,7 +11,7 @@
     "preview": "pnpm run build --mode stage && vite preview"
   },
   "dependencies": {
-    "@marsidev/react-turnstile": "^1.1.0",
+    "@marsidev/react-turnstile": "^1.4.2",
     "@oazapfts/runtime": "^1.0.3",
     "@remix-run/router": "^1.22.0",
     "classnames": "^2.5.1",
