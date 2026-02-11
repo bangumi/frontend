@@ -7,7 +7,7 @@ export default {
     '../components/**/*.stories.@(js|jsx|ts|tsx)',
     '../../icons/index.stories.tsx',
   ],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['@storybook/addon-links', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',
     options: {},
