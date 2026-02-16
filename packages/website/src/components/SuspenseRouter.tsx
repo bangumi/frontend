@@ -1,6 +1,5 @@
 import type { BrowserHistory } from '@remix-run/router';
 import { createBrowserHistory } from '@remix-run/router';
-import type { Update } from '@remix-run/router/dist/history';
 import React, { useLayoutEffect, useRef, useState, useTransition } from 'react';
 import type { BrowserRouterProps } from 'react-router-dom';
 import { Router } from 'react-router-dom';
@@ -29,7 +28,10 @@ const SuspenseRouter = ({ basename, children, window }: BrowserRouterProps) => {
     location: history.location,
   });
 
-  const setStateAsync = (update: Update) => {
+  const setStateAsync = (update: {
+    action: typeof history.action;
+    location: typeof history.location;
+  }) => {
     startTransition(() => {
       setState(update);
     });
