@@ -1,7 +1,6 @@
 import * as path from 'node:path';
 import * as url from 'node:url';
 
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 import GithubActionsReporter from 'vitest-github-actions-reporter';
 
@@ -15,7 +14,6 @@ export default defineConfig({
       { find: '@bangumi/website', replacement: path.resolve(dirname, './packages/website/src') },
     ],
   },
-  plugins: [react()],
   test: {
     exclude: ['**/node_modules', '**/dist', '**/e2e', '.git', '.cache', '.idea'],
     globals: true,

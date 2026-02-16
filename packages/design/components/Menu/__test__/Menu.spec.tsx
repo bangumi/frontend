@@ -29,8 +29,10 @@ it('should trigger onChange when click menus', () => {
   const handleChange = vi.fn();
   const { getByText } = render(<Menu onClick={handleChange} items={items} />);
   getByText('2').click();
-  expect(handleChange.mock.calls[0].length).toBe(2);
-  expect(handleChange.mock.calls[0][0]).toBe('2');
+  expect(handleChange).toHaveBeenCalled();
+  const [firstCall] = handleChange.mock.calls;
+  expect(firstCall).toBeDefined();
+  expect(firstCall![0]).toBe('2');
 });
 
 it('render props', () => {
