@@ -90,7 +90,7 @@ it('should trigger onClick callback', () => {
   );
   fireEvent.click(getByText('hello world'));
 
-  expect(onClick).toBeCalledTimes(1);
+  expect(onClick).toHaveBeenCalledTimes(1);
 });
 
 it('should disable the button if disabled is true', () => {

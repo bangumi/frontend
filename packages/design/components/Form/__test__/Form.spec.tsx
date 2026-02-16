@@ -24,7 +24,7 @@ describe('Form Components', () => {
     const btn = await findByTestId('submit');
     btn.click();
     await waitFor(() => {
-      expect(handleSubmit).toBeCalled();
+      expect(handleSubmit).toHaveBeenCalled();
     });
   });
 
@@ -41,7 +41,7 @@ describe('Form Components', () => {
     const form = getByTestId('form');
     fireEvent.keyDown(form, { key: 'Enter', code: 'Enter' });
     await waitFor(() => {
-      expect(onKeyDown).toBeCalled();
+      expect(onKeyDown).toHaveBeenCalled();
     });
   });
 

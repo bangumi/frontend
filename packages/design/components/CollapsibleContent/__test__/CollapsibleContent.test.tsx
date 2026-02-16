@@ -29,7 +29,7 @@ it('should uncollapse', () => {
   expect(button).toBeInTheDocument();
   expect(contentElement).toHaveStyle({ 'max-height': '1px' });
   fireEvent.click(button);
-  expect(onChange).toBeCalledWith(false);
+  expect(onChange).toHaveBeenCalledWith(false);
 });
 
 it('should collapse', () => {
@@ -45,5 +45,5 @@ it('should collapse', () => {
     'max-height': '1px',
   });
   fireEvent.click(button);
-  expect(onChange).toBeCalledWith(true);
+  expect(onChange).toHaveBeenCalledWith(true);
 });
