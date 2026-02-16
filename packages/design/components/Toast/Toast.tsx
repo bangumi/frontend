@@ -1,7 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
-import { delay } from 'lodash';
+import { delay } from 'lodash-es';
 import React from 'react';
 
 import Message from '../Message';

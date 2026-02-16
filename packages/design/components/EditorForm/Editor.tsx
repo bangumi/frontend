@@ -1,4 +1,4 @@
-import { size } from 'lodash';
+import { size } from 'lodash-es';
 import type { FocusEventHandler } from 'react';
 import React, {
   forwardRef,

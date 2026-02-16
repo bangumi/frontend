@@ -1,6 +1,6 @@
 import type { Wiki } from '@bgm38/wiki';
 import { WikiArrayItem, WikiItem } from '@bgm38/wiki';
-import { flow, isArray, isEmpty, isEqual, keyBy, merge, omitBy } from 'lodash/fp';
+import { isArray, isEmpty, isEqual, keyBy, merge, omitBy } from 'lodash-es';
 import { nanoid } from 'nanoid';
 
 // import { keyBy } from '.';
@@ -57,18 +57,15 @@ export const mergeWiki =
     },
   ): Wiki => {
     // wiki 去掉 value 为 * 和 空值 的项。
-    const wikiMap = flow(
-      keyBy('key'),
-      omitBy<WikiItem>((item, key) => {
-        if (isArray(item.values)) return false;
-        key = key.trim();
-        item.value && (item.value = item.value.trim());
-        return isEmpty(key) || isEmpty(item.value) || isEqual(item.value, '*');
-      }),
-    )(wiki.data);
-    const templateMap = keyBy('key')(template.data);
+    const wikiMap = omitBy(keyBy(wiki.data, 'key'), (item, key) => {
+      if (isArray(item.values)) return false;
+      key = key.trim();
+      item.value && (item.value = item.value.trim());
+      return isEmpty(key) || isEmpty(item.value) || isEqual(item.value, '*');
+    });
+    const templateMap = keyBy(template.data, 'key');
     /** template is safe */
-    const mergedWikiItems = Object.values(merge(templateMap, wikiMap) as WikiItem[]);
+    const mergedWikiItems = Object.values(merge(templateMap, wikiMap) as Record<string, WikiItem>);
     return {
       type: template.type,
       data: mergedWikiItems,
