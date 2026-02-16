@@ -135,8 +135,8 @@ importers:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@22.13.1)(@vitest/ui@4.0.18)(jsdom@26.1.0)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.2)
       vitest-github-actions-reporter:
-        specifier: ^0.10.0
-        version: 0.10.0(vitest@4.0.18)
+        specifier: ^0.11.1
+        version: 0.11.1(vitest@4.0.18)
       whatwg-fetch:
         specifier: ^3.6.20
         version: 3.6.20
@@ -4637,8 +4637,8 @@ packages:
       yaml:
         optional: true
 
-  vitest-github-actions-reporter@0.10.0:
-    resolution: {integrity: sha512-ctFM1xlOVsXCNp5+LkaBZBhN1Iq5y9vVMZ9+Czls2CimOUKt0lH24MV1S0EzKysNUT7efs2OOSdmc6lgR8hqXg==}
+  vitest-github-actions-reporter@0.11.1:
+    resolution: {integrity: sha512-ZHHB0wBgOPhMYCB17WKVlJZa+5SdudBZFoVoebwfq3ioIUTeLQGYHwh85vpdJAxRghLP8d0qI/6eCTueGyDVXA==}
     engines: {node: '>=14.16.0'}
     peerDependencies:
       vitest: '>=0.28.5'
@@ -9363,7 +9363,7 @@ snapshots:
       tsx: 4.21.0
       yaml: 2.8.2
 
-  vitest-github-actions-reporter@0.10.0(vitest@4.0.18):
+  vitest-github-actions-reporter@0.11.1(vitest@4.0.18):
     dependencies:
       '@actions/core': 1.11.1
       vitest: 4.0.18(@types/node@22.13.1)(@vitest/ui@4.0.18)(jsdom@26.1.0)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.2)
