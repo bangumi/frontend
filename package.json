@@ -57,7 +57,7 @@
     "@octokit/openapi-types": "^27.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.3.1",
-    "@types/node": "^22.13.1",
+    "@types/node": "^24.10.13",
     "@types/testing-library__jest-dom": "^5.14.9",
     "@types/web": "^0.0.331",
     "@vitejs/plugin-react": "^4.7.0",
