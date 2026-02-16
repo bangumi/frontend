@@ -6,7 +6,7 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="_wikiEditor_48b3a8"
+        class="_wikiEditor_1f9d9f"
       >
         <div>
           <div
@@ -14,7 +14,7 @@ Object {
             data-rbd-draggable-id="yufi"
           >
             <div
-              class="_editorItem_48b3a8"
+              class="_editorItem_1f9d9f"
             >
               <div
                 aria-describedby="rbd-hidden-text-0-hidden-text-0"
@@ -25,14 +25,14 @@ Object {
                 tabindex="-1"
               >
                 <div
-                  class="_editorItemCursor_48b3a8"
+                  class="_editorItemCursor_1f9d9f"
                 />
               </div>
               <div
-                class="bgm-input-group _editorItemInputGroup_48b3a8"
+                class="bgm-input-group _editorItemInputGroup_1f9d9f"
               >
                 <div
-                  class="bgm-input__wrapper _editorItemInput_48b3a8 _editorItemTopRadius_48b3a8"
+                  class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
                   style="width: 170px;"
                 >
                   <input
@@ -41,11 +41,11 @@ Object {
                     value=""
                   />
                   <div
-                    class="_editorItemConvertHandler_48b3a8"
+                    class="_editorItemConvertHandler_1f9d9f"
                   />
                 </div>
                 <div
-                  class="bgm-input__wrapper _editorItemInput_48b3a8 _editorItemTopRadius_48b3a8"
+                  class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
                 >
                   <input
                     class="bgm-input"
@@ -56,7 +56,7 @@ Object {
                 </div>
               </div>
               <div
-                class="_editorItemMinus_48b3a8"
+                class="_editorItemMinus_1f9d9f"
                 title="删除一项"
               />
             </div>
@@ -66,7 +66,7 @@ Object {
             data-rbd-draggable-id="anisu"
           >
             <div
-              class="_editorItem_48b3a8"
+              class="_editorItem_1f9d9f"
             >
               <div
                 aria-describedby="rbd-hidden-text-0-hidden-text-0"
@@ -77,14 +77,14 @@ Object {
                 tabindex="-1"
               >
                 <div
-                  class="_editorItemCursor_48b3a8"
+                  class="_editorItemCursor_1f9d9f"
                 />
               </div>
               <div
-                class="bgm-input-group _editorItemInputGroup_48b3a8"
+                class="bgm-input-group _editorItemInputGroup_1f9d9f"
               >
                 <div
-                  class="bgm-input__wrapper _editorItemInput_48b3a8"
+                  class="bgm-input__wrapper _editorItemInput_1f9d9f"
                   style="width: 170px;"
                 >
                   <input
@@ -93,11 +93,11 @@ Object {
                     value=""
                   />
                   <div
-                    class="_editorItemConvertHandler_48b3a8"
+                    class="_editorItemConvertHandler_1f9d9f"
                   />
                 </div>
                 <div
-                  class="bgm-input__wrapper _editorItemInput_48b3a8"
+                  class="bgm-input__wrapper _editorItemInput_1f9d9f"
                 >
                   <input
                     class="bgm-input"
@@ -108,20 +108,20 @@ Object {
                 </div>
               </div>
               <div
-                class="_editorItemMinus_48b3a8"
+                class="_editorItemMinus_1f9d9f"
                 title="删除一项"
               />
             </div>
           </div>
         </div>
         <div
-          class="_footer_48b3a8"
+          class="_footer_1f9d9f"
         >
           <div
-            class="_footerPlaceholder_48b3a8"
+            class="_footerPlaceholder_1f9d9f"
           />
           <button
-            class="_footerBtn_48b3a8"
+            class="_footerBtn_1f9d9f"
             type="button"
           >
             <div />
@@ -130,7 +130,7 @@ Object {
             </span>
           </button>
           <button
-            class="_footerBtn_48b3a8"
+            class="_footerBtn_1f9d9f"
             type="button"
           >
             <div />
@@ -139,7 +139,7 @@ Object {
             </span>
           </button>
           <div
-            class="_footerPlaceholder_48b3a8"
+            class="_footerPlaceholder_1f9d9f"
           />
         </div>
       </div>
@@ -163,7 +163,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="_wikiEditor_48b3a8"
+      class="_wikiEditor_1f9d9f"
     >
       <div>
         <div
@@ -171,7 +171,7 @@ Object {
           data-rbd-draggable-id="yufi"
         >
           <div
-            class="_editorItem_48b3a8"
+            class="_editorItem_1f9d9f"
           >
             <div
               aria-describedby="rbd-hidden-text-0-hidden-text-0"
@@ -182,14 +182,14 @@ Object {
               tabindex="-1"
             >
               <div
-                class="_editorItemCursor_48b3a8"
+                class="_editorItemCursor_1f9d9f"
               />
             </div>
             <div
-              class="bgm-input-group _editorItemInputGroup_48b3a8"
+              class="bgm-input-group _editorItemInputGroup_1f9d9f"
             >
               <div
-                class="bgm-input__wrapper _editorItemInput_48b3a8 _editorItemTopRadius_48b3a8"
+                class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
                 style="width: 170px;"
               >
                 <input
@@ -198,11 +198,11 @@ Object {
                   value=""
                 />
                 <div
-                  class="_editorItemConvertHandler_48b3a8"
+                  class="_editorItemConvertHandler_1f9d9f"
                 />
               </div>
               <div
-                class="bgm-input__wrapper _editorItemInput_48b3a8 _editorItemTopRadius_48b3a8"
+                class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
               >
                 <input
                   class="bgm-input"
@@ -213,7 +213,7 @@ Object {
               </div>
             </div>
             <div
-              class="_editorItemMinus_48b3a8"
+              class="_editorItemMinus_1f9d9f"
               title="删除一项"
             />
           </div>
@@ -223,7 +223,7 @@ Object {
           data-rbd-draggable-id="anisu"
         >
           <div
-            class="_editorItem_48b3a8"
+            class="_editorItem_1f9d9f"
           >
             <div
               aria-describedby="rbd-hidden-text-0-hidden-text-0"
@@ -234,14 +234,14 @@ Object {
               tabindex="-1"
             >
               <div
-                class="_editorItemCursor_48b3a8"
+                class="_editorItemCursor_1f9d9f"
               />
             </div>
             <div
-              class="bgm-input-group _editorItemInputGroup_48b3a8"
+              class="bgm-input-group _editorItemInputGroup_1f9d9f"
             >
               <div
-                class="bgm-input__wrapper _editorItemInput_48b3a8"
+                class="bgm-input__wrapper _editorItemInput_1f9d9f"
                 style="width: 170px;"
               >
                 <input
@@ -250,11 +250,11 @@ Object {
                   value=""
                 />
                 <div
-                  class="_editorItemConvertHandler_48b3a8"
+                  class="_editorItemConvertHandler_1f9d9f"
                 />
               </div>
               <div
-                class="bgm-input__wrapper _editorItemInput_48b3a8"
+                class="bgm-input__wrapper _editorItemInput_1f9d9f"
               >
                 <input
                   class="bgm-input"
@@ -265,20 +265,20 @@ Object {
               </div>
             </div>
             <div
-              class="_editorItemMinus_48b3a8"
+              class="_editorItemMinus_1f9d9f"
               title="删除一项"
             />
           </div>
         </div>
       </div>
       <div
-        class="_footer_48b3a8"
+        class="_footer_1f9d9f"
       >
         <div
-          class="_footerPlaceholder_48b3a8"
+          class="_footerPlaceholder_1f9d9f"
         />
         <button
-          class="_footerBtn_48b3a8"
+          class="_footerBtn_1f9d9f"
           type="button"
         >
           <div />
@@ -287,7 +287,7 @@ Object {
           </span>
         </button>
         <button
-          class="_footerBtn_48b3a8"
+          class="_footerBtn_1f9d9f"
           type="button"
         >
           <div />
@@ -296,7 +296,7 @@ Object {
           </span>
         </button>
         <div
-          class="_footerPlaceholder_48b3a8"
+          class="_footerPlaceholder_1f9d9f"
         />
       </div>
     </div>

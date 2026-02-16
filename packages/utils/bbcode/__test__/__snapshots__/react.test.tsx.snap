@@ -70,7 +70,6 @@ Array [
   <React.Fragment>
     我是
     <br />
-    
   </React.Fragment>,
   <span
     style={
@@ -136,7 +135,6 @@ Array [
         粗
       </strong>
       <React.Fragment>
-        
         <br />
            
       </React.Fragment>
@@ -159,7 +157,6 @@ Array [
   <React.Fragment>
     存放于其他网络服务器的图片：
     <br />
-    
   </React.Fragment>,
   <img
     className="code"
@@ -278,7 +275,6 @@ Array [
   <React.Fragment>
     带文字说明的网站链接：
     <br />
-    
   </React.Fragment>,
   <a
     className="bgm-link"
@@ -293,11 +289,9 @@ Array [
 exports[`html render bbcode string > should render br 1`] = `
 Array [
   <React.Fragment>
-    
     <br />
         又名：CUP人生茶话会
     <br />
-    
     <br />
         1.上班的时候想要回家的。
     <br />
@@ -310,7 +304,6 @@ Array [
     style={Object {}}
   />,
   <React.Fragment>
-    
     <br />
         2.学校课上打瞌睡的。
   </React.Fragment>,
@@ -321,7 +314,6 @@ Array [
     style={Object {}}
   />,
   <React.Fragment>
-    
     <br />
         2.学校课上打瞌睡的。
   </React.Fragment>,
@@ -332,11 +324,8 @@ Array [
     style={Object {}}
   />,
   <React.Fragment>
-    
     <br />
-    
     <br />
-    
     <br />
         
   </React.Fragment>,

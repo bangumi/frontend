@@ -46,10 +46,10 @@ it.each([
     expectedError: new PasswordUnMatchError(4),
   },
   { statusCode: 400, body: { message: 'a' }, expectedError: new UnknownError('a') },
-  { statusCode: 422, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
-  { statusCode: 418, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
+  { statusCode: 422, expectedError: new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR) },
+  { statusCode: 418, expectedError: new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR) },
   { statusCode: 429, expectedError: new Error(LoginErrorCode.E_TOO_MANY_ERROR) },
-  { statusCode: 502, expectedError: new Error(LoginErrorCode.E_UNKNOWN_ERROR) },
+  { statusCode: 502, expectedError: new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR) },
 ])(
   'should return error if request is failed with failed status $statusCode',
   async ({ statusCode, body = {}, headers = {}, expectedError }) => {

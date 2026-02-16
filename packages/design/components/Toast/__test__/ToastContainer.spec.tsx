@@ -7,15 +7,15 @@ import { insertToastEvent, removeToastEvent } from '../utils/event-bus';
 it('should call onEmpty callback when no toast remains', () => {
   const onEmpty = vi.fn();
   render(<ToastContainer onEmpty={onEmpty} />);
-  expect(onEmpty).not.toBeCalled();
+  expect(onEmpty).not.toHaveBeenCalled();
 
   const newToast = { message: 'test', tid: '1' };
   act(() => {
     insertToastEvent.emit(newToast);
   });
-  expect(onEmpty).not.toBeCalled();
+  expect(onEmpty).not.toHaveBeenCalled();
   act(() => {
     removeToastEvent.emit(newToast);
   });
-  expect(onEmpty).toBeCalled();
+  expect(onEmpty).toHaveBeenCalled();
 });

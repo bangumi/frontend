@@ -200,15 +200,15 @@ describe('EditorForm > Editor', () => {
 
     textarea.value = 'test111';
     fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
-    expect(onConfirm).lastCalledWith('test111');
+    expect(onConfirm).toHaveBeenLastCalledWith('test111');
 
     textarea.value = 'test2';
     fireEvent.keyDown(textarea, { key: 's', altKey: true });
-    expect(onConfirm).lastCalledWith('test2');
+    expect(onConfirm).toHaveBeenLastCalledWith('test2');
 
     textarea.value = 'test3';
     fireEvent.keyDown(textarea, { key: 'S', altKey: true });
-    expect(onConfirm).lastCalledWith('test3');
+    expect(onConfirm).toHaveBeenLastCalledWith('test3');
   });
 
   it('BBCode editor keyboard event', () => {

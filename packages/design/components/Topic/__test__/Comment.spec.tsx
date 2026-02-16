@@ -147,7 +147,7 @@ describe('Normal Comment', () => {
     mockApi(200);
     fillAndSubmit();
     await waitFor(() => {
-      expect(onSuccess).toBeCalled();
+      expect(onSuccess).toHaveBeenCalled();
       expect(document.getElementById(`post_${basicReply.id}`)).toHaveClass(
         'bgm-comment__header--highlighted',
       );
@@ -158,7 +158,7 @@ describe('Normal Comment', () => {
     mockApi(400);
     fillAndSubmit();
     await waitFor(() => {
-      expect(onSuccess).not.toBeCalled();
+      expect(onSuccess).not.toHaveBeenCalled();
       expect(container.getElementsByClassName('bgm-editor__form').length).toBe(1);
     });
   });

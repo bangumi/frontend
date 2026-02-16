@@ -78,7 +78,7 @@ it('should redirect user to homepage after success login', async () => {
 
   mockSuccessfulLogin();
   await waitFor(() => {
-    expect(redirectTo).toBeCalledWith('/');
+    expect(redirectTo).toHaveBeenCalledWith('/');
   });
 });
 
@@ -93,7 +93,7 @@ it('should redirect user to specified page', async () => {
 
   mockSuccessfulLogin();
   await waitFor(() => {
-    expect(redirectTo).toBeCalledWith('/group/sandbox');
+    expect(redirectTo).toHaveBeenCalledWith('/group/sandbox');
   });
 });
 
@@ -108,7 +108,7 @@ it('should redirect user to home if specified path is invalid', async () => {
 
   mockSuccessfulLogin();
   await waitFor(() => {
-    expect(redirectTo).toBeCalledWith('/');
+    expect(redirectTo).toHaveBeenCalledWith('/');
   });
 });
 

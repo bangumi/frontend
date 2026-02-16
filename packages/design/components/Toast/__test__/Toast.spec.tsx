@@ -9,7 +9,7 @@ vi.mock('../utils/event-bus');
 
 function expectToastToBeClosed(toast: TToast) {
   // eslint-disable-next-line @typescript-eslint/unbound-method
-  expect(removeToastEvent.emit).toBeCalledWith(toast);
+  expect(removeToastEvent.emit).toHaveBeenCalledWith(toast);
 }
 
 beforeEach(() => {

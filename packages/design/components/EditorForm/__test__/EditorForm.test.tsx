@@ -25,7 +25,7 @@ describe('<EditorForm />', () => {
     const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
     fireEvent.change(textarea, { target: { value: 'test' } });
     getByText('Confirm').click();
-    expect(onConfirm).lastCalledWith('test');
+    expect(onConfirm).toHaveBeenLastCalledWith('test');
   });
 
   it('onCancel event', () => {
@@ -44,10 +44,10 @@ describe('<EditorForm />', () => {
 
     fireEvent.change(textarea, { target: { value: 'test' } });
     fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
-    expect(onConfirm).lastCalledWith('test');
+    expect(onConfirm).toHaveBeenLastCalledWith('test');
 
     fireEvent.change(textarea, { target: { value: 'test2' } });
     fireEvent.keyDown(textarea, { key: 's', altKey: true });
-    expect(onConfirm).lastCalledWith('test2');
+    expect(onConfirm).toHaveBeenLastCalledWith('test2');
   });
 });

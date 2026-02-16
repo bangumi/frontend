@@ -35,7 +35,7 @@ it('should trigger onChange when click tabs', () => {
   const { getByText } = render(<Tab items={items} activeKey='1' onChange={handleChange} />);
   getByText('2').click();
 
-  expect(handleChange).toBeCalledWith('2', items[1]);
+  expect(handleChange).toHaveBeenCalledWith('2', items[1]);
 });
 
 it('should render borderless tab', () => {

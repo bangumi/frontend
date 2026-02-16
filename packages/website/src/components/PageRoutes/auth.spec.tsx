@@ -48,7 +48,7 @@ describe('RequireAuth', () => {
     });
 
     render(<ComponentRequireAuth />);
-    expect(mockedNavigate).toBeCalledWith('/', { replace: true });
+    expect(mockedNavigate).toHaveBeenCalledWith('/', { replace: true });
   });
 
   it('should redirect to login page if user is logged', () => {
@@ -59,6 +59,6 @@ describe('RequireAuth', () => {
     });
 
     render(<ComponentRequireAuth />);
-    expect(mockedRedirectToLogin).toBeCalled();
+    expect(mockedRedirectToLogin).toHaveBeenCalled();
   });
 });
