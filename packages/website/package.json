@@ -26,7 +26,7 @@
     "react-hook-form": "^7.71.1",
     "react-router-dom": "^7.0.0",
     "reset-css": "^5.0.2",
-    "rooks": "^7.14.0",
+    "rooks": "^9.5.0",
     "socket.io-client": "^4.8.3",
     "swr": "^2.4.0"
   },
