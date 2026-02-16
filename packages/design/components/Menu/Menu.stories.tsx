@@ -71,7 +71,6 @@ export default {
   },
 };
 
-// eslint-disable-next-line react/prop-types
 const Template: StoryFn<MenuProps> = ({ items, activeKey, mode, onClick, style, wrapperClass }) => {
   return (
     <div

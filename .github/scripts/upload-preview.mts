@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-use-before-define,@typescript-eslint/prefer-ts-expect-error */
-
 import * as fs from 'node:fs';
 import * as process from 'node:process';
 
@@ -166,7 +164,6 @@ async function main() {
   await createComment(octokit, prNumber, artifact, alias);
 }
 
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access */
 async function findPullRequestNumber(octokit: Client): Promise<number> {
   const payloadPRNumber: number | undefined =
     context.payload?.workflow_run?.pull_requests?.[0]?.number;

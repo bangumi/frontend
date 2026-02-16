@@ -28,7 +28,6 @@ const createEventOperators = <T extends ToastEvent>(eventName: T) => {
   };
 };
 
-/* eslint-disable @typescript-eslint/unbound-method */
 export const insertToastEvent = createEventOperators(ToastEvent.InsertToast);
 
 export const removeToastEvent = createEventOperators(ToastEvent.RemoveToast);
