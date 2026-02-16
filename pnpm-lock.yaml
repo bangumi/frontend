@@ -95,6 +95,9 @@ importers:
       prettier:
         specifier: ^3.8.1
         version: 3.8.1
+      progress-event-polyfill:
+        specifier: ^1.0.2
+        version: 1.0.2
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -3895,6 +3898,9 @@ packages:
   pretty-format@29.7.0:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  progress-event-polyfill@1.0.2:
+    resolution: {integrity: sha512-Il6jb+6pfUvf/1kYhjmEL6OtIf0chMD6UbJtbsN6T8BYxE5Z8REsDNfl16lPtKcrfb9MhW+DRiwowL/ZI+l/Zg==}
 
   prop-types@15.8.1:
     resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
@@ -8580,6 +8586,8 @@ snapshots:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.2.0
+
+  progress-event-polyfill@1.0.2: {}
 
   prop-types@15.8.1:
     dependencies:

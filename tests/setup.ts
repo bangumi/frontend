@@ -1,3 +1,5 @@
+import 'progress-event-polyfill';
+
 import matchers from '@testing-library/jest-dom/matchers';
 import { cleanup } from '@testing-library/react';
 
