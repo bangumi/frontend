@@ -114,8 +114,8 @@ importers:
         specifier: ^6.14.0
         version: 6.14.0(stylelint@15.6.0)
       timezone-mock:
-        specifier: ^1.4.0
-        version: 1.4.0
+        specifier: ^1.4.1
+        version: 1.4.1
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -4359,8 +4359,8 @@ packages:
   through@2.3.8:
     resolution: {integrity: sha512-w89qg7PI8wAdvX60bMDP+bFoD5Dvhm9oLheFp5O4a2QF0cSBGsBX4qZmadPMvVqlLJBBci+WqGGOAPvcDeNSVg==}
 
-  timezone-mock@1.4.0:
-    resolution: {integrity: sha512-LMnGHctfNWTfGyNghWMGjaIzBQqtnHzOUzi9cL0nDS4dx5yuCwbD7dn9qZbU4jT1HMqQW1khEOloXUTTuxiSaQ==}
+  timezone-mock@1.4.1:
+    resolution: {integrity: sha512-EMdMTqydPUUF/OnMDnARWBXYhk+sNUd+g9qBsA2pn+92tCoVQMfN9l9FiBnQAEC67QqYGC/FxygIcFVSChW76A==}
 
   tiny-invariant@1.3.3:
     resolution: {integrity: sha512-+FbBPE1o9QAYvviau/qC5SE3caw21q3xkvWKBtja5vgqOWIHHJ3ioaq1VPfn/Szqctz2bU/oYeKd9/z5BL+PVg==}
@@ -9071,7 +9071,7 @@ snapshots:
 
   through@2.3.8: {}
 
-  timezone-mock@1.4.0: {}
+  timezone-mock@1.4.1: {}
 
   tiny-invariant@1.3.3: {}
 
