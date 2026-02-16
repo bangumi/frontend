@@ -5,12 +5,12 @@
   "main": "index.ts",
   "dependencies": {
     "@bgm38/wiki": "^0.3.3",
-    "lodash": "^4.17.23",
+    "lodash-es": "^4.17.21",
     "nanoid": "^5.1.6"
   },
   "devDependencies": {
     "@types/js-yaml": "^4.0.9",
-    "@types/lodash": "^4.17.23",
+    "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.3.28",
     "js-yaml": "^4.1.1",
     "typescript": "^5.7.3"

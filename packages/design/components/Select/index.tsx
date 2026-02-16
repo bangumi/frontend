@@ -1,7 +1,7 @@
 import './style';
 
 import cn from 'classnames';
-import { keyBy } from 'lodash';
+import { keyBy } from 'lodash-es';
 import React, { useMemo, useState } from 'react';
 
 import { ArrowDown } from '@bangumi/icons';

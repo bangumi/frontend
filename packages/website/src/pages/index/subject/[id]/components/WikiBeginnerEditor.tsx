@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { concat, filter, isArray, isNumber, set } from 'lodash';
+import { concat, filter, isArray, isNumber, set } from 'lodash-es';
 import { nanoid } from 'nanoid';
 import React, { createContext, useContext } from 'react';
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
