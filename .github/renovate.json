@@ -34,6 +34,11 @@
       "matchPackageNames": ["@oazapfts/runtime", "oazapfts"]
     },
     {
+      "groupName": "stylelint ",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["stylelint", "stylelint-*"]
+    },
+    {
       "matchManagers": ["github-actions"],
       "semanticCommitScope": "",
       "semanticCommitType": "ci"
