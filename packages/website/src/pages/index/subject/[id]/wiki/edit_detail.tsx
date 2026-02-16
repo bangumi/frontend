@@ -89,7 +89,6 @@ function WikiEditDetailDetailPage() {
     monoEditorInstanceRef.current?.setValue(subjectWikiInfo.infobox);
     setWikiElement(toWikiElement(wikiRef.current));
     // https://github.com/bangumi/frontend/pull/312#discussion_r1086401410
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit = useCallback(

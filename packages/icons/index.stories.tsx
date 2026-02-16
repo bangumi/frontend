@@ -46,7 +46,6 @@ const componentMeta: Meta<IComponent> = {
 
 export default componentMeta;
 
-/* eslint-disable react/prop-types */
 const Template: StoryFn<{ height: number; width: number; style: React.CSSProperties }> = ({
   height,
   width,
@@ -67,6 +66,5 @@ const Template: StoryFn<{ height: number; width: number; style: React.CSSPropert
     })}
   </>
 );
-/* eslint-enable react/prop-types */
 
 export const Usage = Template.bind({});

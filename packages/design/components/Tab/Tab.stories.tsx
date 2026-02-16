@@ -18,7 +18,6 @@ export default {
   },
 };
 
-// eslint-disable-next-line react/prop-types
 const Template: StoryFn<TabProps> = ({ activeKey, type }) => {
   const items = [
     {

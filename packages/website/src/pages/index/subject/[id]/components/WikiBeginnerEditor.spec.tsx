@@ -7,7 +7,6 @@ import WikiBeginnerEditor from './WikiBeginnerEditor';
 
 it('should match snapshot', () => {
   const els: WikiElement[] = [{ _id: 'yufi' }, { _id: 'anisu' }];
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   const onChange = () => {};
   const editor = render(<WikiBeginnerEditor elements={els} onChange={onChange} />);
   expect(editor).toMatchSnapshot();

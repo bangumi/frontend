@@ -1,6 +1,0 @@
-!packages/design/.storybook
-packages/design/storybook-static
-packages/client/types
-packages/client/client.ts
-node_modules
-dist

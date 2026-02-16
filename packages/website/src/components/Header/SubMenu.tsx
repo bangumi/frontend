@@ -208,7 +208,6 @@ const subMenuBottomWrapper = (type: string): MenuItemType[] => {
   }
 };
 
-// eslint-disable-next-line react/prop-types
 const SubMenu: VFC<{ itemsTop: MenuItemType[]; itemsBottom: MenuItemType[] }> = ({
   itemsTop,
   itemsBottom,

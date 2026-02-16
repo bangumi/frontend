@@ -31,7 +31,6 @@ function getNodeProp(node: CodeVNode, prop: string): string | undefined {
 
 function isValidUrl(str: string): boolean {
   try {
-    // eslint-disable-next-line no-new
     new URL(str);
   } catch (e: unknown) {
     return false;
