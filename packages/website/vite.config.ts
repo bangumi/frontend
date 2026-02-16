@@ -36,6 +36,18 @@ export default defineConfig(({ mode }) => {
   return {
     build: {
       sourcemap: true,
+      rollupOptions: {
+        onwarn(warning, warn) {
+          if (
+            warning.code === 'INVALID_ANNOTATION' &&
+            warning.id?.includes('react-helmet-async/lib/index.module.js')
+          ) {
+            return;
+          }
+
+          warn(warning);
+        },
+      },
     },
     resolve: {
       alias: {
@@ -86,7 +98,7 @@ export default defineConfig(({ mode }) => {
         mode === 'production'
           ? {
               babel: {
-                plugins: ['babel-plugin-jsx-remove-data-test-id', 'lodash'],
+                plugins: ['babel-plugin-jsx-remove-data-test-id'],
               },
             }
           : undefined,
