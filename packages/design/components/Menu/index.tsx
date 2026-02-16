@@ -44,7 +44,11 @@ const Menu: FC<MenuProps> = ({
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, mode }}>
         {items.map((item) => {
-          return children ? children(item) : <MenuItem {...item} id={item.key} />;
+          if (children) {
+            return children(item);
+          }
+          const { key, ...menuItemProps } = item;
+          return <MenuItem key={key} {...menuItemProps} id={key} />;
         })}
       </MenuContext.Provider>
     </ul>
