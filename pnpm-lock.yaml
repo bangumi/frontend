@@ -36,8 +36,8 @@ importers:
         specifier: ^5.14.9
         version: 5.14.9
       '@types/web':
-        specifier: ^0.0.331
-        version: 0.0.331
+        specifier: ^0.0.336
+        version: 0.0.336
       '@vitejs/plugin-react':
         specifier: ^4.7.0
         version: 4.7.0(vite@7.3.1(@types/node@22.13.1)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -1554,8 +1554,8 @@ packages:
   '@types/testing-library__jest-dom@5.14.9':
     resolution: {integrity: sha512-FSYhIjFlfOpGSRyVoMBMuS3ws5ehFQODymf3vlI7U1K8c7PHwWwFY7VREfmsuzHSOnoKs/9/Y983ayOs7eRzqw==}
 
-  '@types/web@0.0.331':
-    resolution: {integrity: sha512-42GksRe3NF9duzArn75JnTtXQNS6vUHMK0eIRZAIjRSaLb1Txu7xNlIhkNycx8o2rNGsTnajClJnAMVSfAN67Q==}
+  '@types/web@0.0.336':
+    resolution: {integrity: sha512-BF63oBTS3D5d1XEKR2fou32PlxSqiaYZxTCchI/eeS/q6f51mKQdcVvFJcLUPsiO8G6KyEPlSYVvhQfa1KVeSw==}
 
   '@types/yargs-parser@21.0.0':
     resolution: {integrity: sha512-iO9ZQHkZxHn4mSakYV0vFHAVDyEOIJQrV2uZ06HxEPcx+mt8swXoZHIbaaJ2crJYFfErySgktuTZ3BeLz+XmFA==}
@@ -5897,7 +5897,7 @@ snapshots:
     dependencies:
       '@types/jest': 29.5.1
 
-  '@types/web@0.0.331': {}
+  '@types/web@0.0.336': {}
 
   '@types/yargs-parser@21.0.0': {}
 
