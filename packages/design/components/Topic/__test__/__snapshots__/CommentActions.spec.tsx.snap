@@ -181,6 +181,7 @@ Object {
               >
                 <a
                   class="bgm-button bgm-button--link bgm-button--text bgm-button--size-small"
+                  data-discover="true"
                   href="/group/reply/233/edit"
                 >
                   编辑
@@ -237,6 +238,7 @@ Object {
             >
               <a
                 class="bgm-button bgm-button--link bgm-button--text bgm-button--size-small"
+                data-discover="true"
                 href="/group/reply/233/edit"
               >
                 编辑

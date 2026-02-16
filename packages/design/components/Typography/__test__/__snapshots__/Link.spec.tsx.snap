@@ -13,6 +13,7 @@ exports[`should render internal link 1`] = `
 <DocumentFragment>
   <a
     class="bgm-link"
+    data-discover="true"
     href="/a"
   />
 </DocumentFragment>
@@ -21,6 +22,7 @@ exports[`should render internal link 1`] = `
 exports[`should render no-style link 1`] = `
 <DocumentFragment>
   <a
+    data-discover="true"
     href="/a"
   />
 </DocumentFragment>
