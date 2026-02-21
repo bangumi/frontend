@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import { http,HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';

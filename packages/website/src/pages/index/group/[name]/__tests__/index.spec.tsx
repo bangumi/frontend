@@ -1,6 +1,6 @@
 import type { RenderResult } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
-import { http,HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 

@@ -2,7 +2,7 @@ import fsp from 'node:fs/promises';
 import path from 'node:path';
 
 import type { HttpHandler } from 'msw';
-import { http,HttpResponse } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 async function isFileExist(filePath: string): Promise<boolean> {
   try {
