@@ -45,11 +45,7 @@ const renderLoginPage = () =>
     </HelmetProvider>,
   );
 
-function mockLogin(
-  statusCode: number,
-  response: Object = {},
-  headers: Record<string, string | string[]> = {},
-): void {
+function mockLogin(statusCode: number, response: Object = {}, headers: HeadersInit = {}): void {
   mockServer.use(
     http.post('http://localhost:3000/p1/login', () => {
       return HttpResponse.json(response, {
