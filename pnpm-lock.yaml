@@ -28,7 +28,7 @@ importers:
         version: 6.9.1
       '@testing-library/react':
         specifier: ^16.3.2
-        version: 16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@19.2.3(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/node':
         specifier: ^22.19.11
         version: 22.19.11
@@ -216,7 +216,7 @@ importers:
         version: 10.2.8(esbuild@0.27.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.57.1)(storybook@10.2.8(@testing-library/dom@9.3.0)(prettier@3.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(typescript@5.9.3)(vite@7.3.1(@types/node@22.19.11)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.2))
       '@testing-library/react':
         specifier: ^16.3.2
-        version: 16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@19.2.3(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -224,8 +224,8 @@ importers:
         specifier: ^18.3.28
         version: 18.3.28
       '@types/react-dom':
-        specifier: ^18.3.7
-        version: 18.3.7(@types/react@18.3.28)
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@18.3.28)
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -386,7 +386,7 @@ importers:
         version: 1.58.2
       '@testing-library/react':
         specifier: ^16.3.2
-        version: 16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@19.2.3(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/lodash-es':
         specifier: ^4.17.12
         version: 4.17.12
@@ -397,8 +397,8 @@ importers:
         specifier: ^13.1.8
         version: 13.1.8
       '@types/react-dom':
-        specifier: ^18.3.7
-        version: 18.3.7(@types/react@18.3.28)
+        specifier: ^19.2.3
+        version: 19.2.3(@types/react@18.3.28)
       '@vitejs/plugin-react':
         specifier: ^5.1.4
         version: 5.1.4(vite@7.3.1(@types/node@22.19.11)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -1592,10 +1592,10 @@ packages:
   '@types/react-beautiful-dnd@13.1.8':
     resolution: {integrity: sha512-E3TyFsro9pQuK4r8S/OL6G99eq7p8v29sX0PM7oT8Z+PJfZvSQTx4zTQbUJ+QZXioAF0e7TGBEcA1XhYhCweyQ==}
 
-  '@types/react-dom@18.3.7':
-    resolution: {integrity: sha512-MEe3UeoENYVFXzoXEWsvcpg6ZvlrFNlOQ7EOsvhI3CfAXwzPfO8Qwuxd40nepsYKqyyVQnTdEfv68q91yLcKrQ==}
+  '@types/react-dom@19.2.3':
+    resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
     peerDependencies:
-      '@types/react': ^18.0.0
+      '@types/react': ^19.2.0
 
   '@types/react-redux@7.1.25':
     resolution: {integrity: sha512-bAGh4e+w5D8dajd6InASVIyCo4pZLJ66oLb80F9OBLO1gKESbZcRCJpTT6uLXX+HAB57zw1WTdwJdAsewuTweg==}
@@ -5584,7 +5584,7 @@ snapshots:
       picocolors: 1.1.1
       redent: 3.0.0
 
-  '@testing-library/react@16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@18.3.7(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@testing-library/react@16.3.2(@testing-library/dom@9.3.0)(@types/react-dom@19.2.3(@types/react@18.3.28))(@types/react@18.3.28)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.21.5
       '@testing-library/dom': 9.3.0
@@ -5592,7 +5592,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
     optionalDependencies:
       '@types/react': 18.3.28
-      '@types/react-dom': 18.3.7(@types/react@18.3.28)
+      '@types/react-dom': 19.2.3(@types/react@18.3.28)
 
   '@testing-library/user-event@14.6.1(@testing-library/dom@9.3.0)':
     dependencies:
@@ -5695,7 +5695,7 @@ snapshots:
     dependencies:
       '@types/react': 18.3.28
 
-  '@types/react-dom@18.3.7(@types/react@18.3.28)':
+  '@types/react-dom@19.2.3(@types/react@18.3.28)':
     dependencies:
       '@types/react': 18.3.28
 
