@@ -1,6 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
+import type { JSX } from 'react';
 import React, { forwardRef, useState } from 'react';
 
 export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
