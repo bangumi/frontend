@@ -36,8 +36,8 @@ importers:
         specifier: ^6.0.0
         version: 6.0.0
       '@types/web':
-        specifier: ^0.0.336
-        version: 0.0.336
+        specifier: ^0.0.337
+        version: 0.0.337
       '@vitejs/plugin-react':
         specifier: ^5.1.4
         version: 5.1.4(vite@7.3.1(@types/node@22.19.11)(less@4.5.1)(sass@1.84.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -1586,8 +1586,8 @@ packages:
     resolution: {integrity: sha512-bnreXCgus6IIadyHNlN/oI5FfX4dWgvGhOPvpr7zzCYDGAPIfvyIoAozMBINmhmsVuqV0cncejF2y5KC7ScqOg==}
     deprecated: This is a stub types definition. @testing-library/jest-dom provides its own type definitions, so you do not need this installed.
 
-  '@types/web@0.0.336':
-    resolution: {integrity: sha512-BF63oBTS3D5d1XEKR2fou32PlxSqiaYZxTCchI/eeS/q6f51mKQdcVvFJcLUPsiO8G6KyEPlSYVvhQfa1KVeSw==}
+  '@types/web@0.0.337':
+    resolution: {integrity: sha512-vFthyVUhAEFPzVHQ2C3QNAMSS7gv5VKRxOCcyUFzsjqFutOryZUwVVM4+Gf28RcjPo7VrbFQ/Dp1ySrGnuIjFg==}
 
   '@typescript-eslint/eslint-plugin@8.56.0':
     resolution: {integrity: sha512-lRyPDLzNCuae71A3t9NEINBiTn7swyOhvUj3MyUOxb8x6g6vPEFoOU+ZRmGMusNC3X3YMhqMIX7i8ShqhT74Pw==}
@@ -5599,7 +5599,7 @@ snapshots:
     dependencies:
       '@testing-library/jest-dom': 6.9.1
 
-  '@types/web@0.0.336': {}
+  '@types/web@0.0.337': {}
 
   '@typescript-eslint/eslint-plugin@8.56.0(@typescript-eslint/parser@8.56.0(eslint@10.0.0)(typescript@5.9.3))(eslint@10.0.0)(typescript@5.9.3)':
     dependencies:
