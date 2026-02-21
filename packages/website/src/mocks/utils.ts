@@ -1,8 +1,8 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 
-import type { DefaultBodyType, RequestHandler } from 'msw';
-import { rest } from 'msw';
+import type { HttpHandler } from 'msw';
+import { http, HttpResponse } from 'msw';
 
 async function isFileExist(filePath: string): Promise<boolean> {
   try {
@@ -14,7 +14,7 @@ async function isFileExist(filePath: string): Promise<boolean> {
   return true;
 }
 
-async function loadFixture(pathname: string, requestMethod: string): Promise<DefaultBodyType> {
+async function loadFixture(pathname: string, requestMethod: string): Promise<object> {
   const fixturePath = path.join(
     __dirname,
     './fixtures',
@@ -27,14 +27,15 @@ async function loadFixture(pathname: string, requestMethod: string): Promise<Def
     throw new Error(errMessage);
   }
 
-  return JSON.parse((await fsp.readFile(fixturePath)).toString()) as DefaultBodyType;
+  return JSON.parse((await fsp.readFile(fixturePath)).toString()) as object;
 }
 
 type HTTPMethods = 'get' | 'post' | 'put' | 'delete' | 'options';
 
-export function mockAPI(url: string, method: HTTPMethods): RequestHandler {
-  return rest[method](url, async (req, res, ctx) => {
-    const data = await loadFixture(req.url.pathname, req.method);
-    return res(ctx.status(200), ctx.json(data));
+export function mockAPI(url: string, method: HTTPMethods): HttpHandler {
+  return http[method](url, async ({ request }) => {
+    const requestUrl = new URL(request.url);
+    const data = await loadFixture(requestUrl.pathname, request.method);
+    return HttpResponse.json(data, { status: 200 });
   });
 }

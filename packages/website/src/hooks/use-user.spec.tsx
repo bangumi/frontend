@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http, HttpResponse } from 'msw';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
@@ -14,14 +14,13 @@ import {
   useUser,
 } from './use-user';
 
-function mockLogin(
-  statusCode: number,
-  response: Object = {},
-  headers: Record<string, string | string[]> = {},
-): void {
+function mockLogin(statusCode: number, response: Object = {}, headers: HeadersInit = {}): void {
   mockServer.use(
-    rest.post('http://localhost:3000/p1/login', async (req, res, ctx) => {
-      return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
+    http.post('http://localhost:3000/p1/login', () => {
+      return HttpResponse.json(response, {
+        status: statusCode,
+        headers,
+      });
     }),
   );
 }
