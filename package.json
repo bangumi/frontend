@@ -60,7 +60,7 @@
     "@types/node": "^22.19.11",
     "@types/testing-library__jest-dom": "^5.14.9",
     "@types/web": "^0.0.336",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.4",
     "@vitest/coverage-v8": "^4.0.18",
     "@vitest/ui": "^4.0.18",
     "eslint": "^10.0.0",

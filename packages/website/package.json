@@ -41,7 +41,7 @@
     "@types/react": "^18.3.28",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.3.7",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.1.4",
     "autoprefixer": "^10.4.24",
     "babel-plugin-jsx-remove-data-test-id": "^3.0.0",
     "less": "^4.5.1",
