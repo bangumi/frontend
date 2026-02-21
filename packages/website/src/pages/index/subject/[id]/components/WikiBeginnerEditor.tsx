@@ -21,7 +21,7 @@ const splitPath = (path: string) =>
     return idx;
   });
 
-type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
+type WikiInfoItemProps = React.JSX.IntrinsicElements['div'] & {
   index: number;
   item: WikiElement;
   /**

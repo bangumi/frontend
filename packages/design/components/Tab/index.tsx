@@ -11,7 +11,7 @@ interface ItemType {
   label: string;
 }
 
-type ItemProps = JSX.IntrinsicElements['li'] & {
+type ItemProps = React.JSX.IntrinsicElements['li'] & {
   isActive: boolean;
 };
 

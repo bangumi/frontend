@@ -15,10 +15,10 @@ export interface ButtonCommonProps {
   /** 无内边距、边框及圆角，最小高度 */
 }
 
-export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type' | 'onClick'> &
+export type ButtonProps = Omit<React.JSX.IntrinsicElements['button'], 'type' | 'onClick'> &
   ButtonCommonProps & {
     onClick?: MouseEventHandler; // desserts for story book
-    htmlType?: JSX.IntrinsicElements['button']['type'];
+    htmlType?: React.JSX.IntrinsicElements['button']['type'];
   };
 
 const Button = ({

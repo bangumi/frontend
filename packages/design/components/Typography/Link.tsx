@@ -21,7 +21,7 @@ export function PureLink({
   className,
   fontWeight,
   ...rest
-}: PropsWithChildren<PureLinkProps & JSX.IntrinsicElements['div']>) {
+}: PropsWithChildren<PureLinkProps & React.JSX.IntrinsicElements['div']>) {
   return (
     <div
       className={classNames(

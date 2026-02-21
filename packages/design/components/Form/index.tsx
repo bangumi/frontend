@@ -46,7 +46,7 @@ type FormProps = PropsWithChildren<{
   labelWidth?: number;
   compact?: boolean;
 }> &
-  JSX.IntrinsicElements['form'];
+  React.JSX.IntrinsicElements['form'];
 
 const Form = ({
   children,

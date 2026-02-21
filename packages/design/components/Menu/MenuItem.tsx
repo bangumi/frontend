@@ -12,7 +12,7 @@ export interface MenuItemProps {
   /** 自定义类名 */
   className?: string;
   /** 子菜单，鼠标悬浮时显示 */
-  subMenu?: JSX.Element;
+  subMenu?: React.JSX.Element;
 }
 
 const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, subMenu }) => {

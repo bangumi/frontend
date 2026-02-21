@@ -19,7 +19,10 @@ type CatchError = HttpError | Error | null;
  * }
  * ```
  */
-type ErrorBoundaryFallbackFC = Record<string, ((err: CatchError) => JSX.Element) | JSX.Element>;
+type ErrorBoundaryFallbackFC = Record<
+  string,
+  ((err: CatchError) => React.JSX.Element) | React.JSX.Element
+>;
 
 interface ErrorBoundaryState {
   error: CatchError;
@@ -44,7 +47,7 @@ export default class ErrorBoundary extends React.Component<
     const error = this.state.error;
 
     if (error) {
-      let fb: ((err: CatchError) => JSX.Element) | JSX.Element | undefined;
+      let fb: ((err: CatchError) => React.JSX.Element) | React.JSX.Element | undefined;
       let msg = error.message ?? '发生未知错误';
       let reqID: string | null = null;
       if (error instanceof HttpError) {
