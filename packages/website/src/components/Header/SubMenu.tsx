@@ -1,4 +1,4 @@
-import type { VFC } from 'react';
+import type { FC } from 'react';
 import React from 'react';
 
 import type { MenuItemType } from '@bangumi/design';
@@ -208,7 +208,7 @@ const subMenuBottomWrapper = (type: string): MenuItemType[] => {
   }
 };
 
-const SubMenu: VFC<{ itemsTop: MenuItemType[]; itemsBottom: MenuItemType[] }> = ({
+const SubMenu: FC<{ itemsTop: MenuItemType[]; itemsBottom: MenuItemType[] }> = ({
   itemsTop,
   itemsBottom,
 }) => (

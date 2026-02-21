@@ -78,7 +78,7 @@ function WikiEditDetailDetailPage() {
     'chii_wiki_editor_type',
     EditorType.Beginner,
   );
-  const wikiRef = useRef<Wiki>();
+  const wikiRef = useRef<Wiki | null>(null);
   const [wikiElement, setWikiElement] = useState<WikiElement[]>([]);
 
   const monoEditorInstanceRef = useRef<editor.IStandaloneCodeEditor | null>(null);

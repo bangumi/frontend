@@ -11,7 +11,7 @@ describe('Form Components', () => {
     const handleSubmit = vi.fn();
     const { findByTestId } = render(
       <Form
-        onSubmit={(e) => {
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
           handleSubmit();
         }}

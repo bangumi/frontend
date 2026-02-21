@@ -109,7 +109,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
         compact
         className={styles.quickPostForm}
         // 统一由 EditorForm 的 onConfirm 处理
-        onSubmit={(e) => {
+        onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
         }}
       >

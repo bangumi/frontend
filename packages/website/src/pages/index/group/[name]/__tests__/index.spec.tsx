@@ -1,5 +1,5 @@
 import type { RenderResult } from '@testing-library/react';
-import { waitFor } from '@testing-library/react';
+import { act, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
@@ -25,9 +25,9 @@ vi.mock('react-router-dom', async () => {
 const mockedUseParams = vi.mocked(useParams);
 
 class GroupHomeTest {
-  page: RenderResult;
+  page!: RenderResult;
 
-  constructor(name: string) {
+  async setup(name: string): Promise<void> {
     mockedUseParams.mockReturnValue({
       name,
     });
@@ -52,21 +52,26 @@ class GroupHomeTest {
       }),
     );
 
-    this.page = renderPage(
-      <Routes>
-        <Route element={<GroupPage />}>
-          <Route index element={<GroupHome />} />
-        </Route>
-      </Routes>,
-    );
+    await act(async () => {
+      this.page = renderPage(
+        <Routes>
+          <Route element={<GroupPage />}>
+            <Route index element={<GroupHome />} />
+          </Route>
+        </Routes>,
+      );
+    });
+  }
+
+  static async create(name: string): Promise<GroupHomeTest> {
+    const instance = new GroupHomeTest();
+    await instance.setup(name);
+    return instance;
   }
 
   async assertHeader(expectedHeader: string): Promise<void> {
-    const { getByText } = this.page;
-
-    await waitFor(() => {
-      expect(getByText(expectedHeader)).toBeInTheDocument();
-    });
+    const header = await this.page.findByText(expectedHeader);
+    expect(header).toBeInTheDocument();
   }
 
   async assertMembersExist(expectMembers: string[]): Promise<void> {
@@ -97,7 +102,7 @@ class GroupHomeTest {
 }
 
 it('should match snapshot properly', async () => {
-  const test = new GroupHomeTest('sandbox');
+  const test = await GroupHomeTest.create('sandbox');
 
   await test.assertHeader('沙盒');
 });

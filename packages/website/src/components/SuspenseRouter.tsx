@@ -15,7 +15,7 @@ import { TransitionContext } from '../hooks/use-transition-context';
  * https://github.com/remix-run/react-router/blob/98095b8a6c2a911f41cb49ebf8834e67195b9b78/packages/react-router-dom/index.tsx#L287
  */
 const SuspenseRouter = ({ basename, children, window }: BrowserRouterProps) => {
-  const historyRef = useRef<BrowserHistory>();
+  const historyRef = useRef<BrowserHistory | null>(null);
   const [pending, startTransition] = useTransition();
 
   if (historyRef.current == null) {
