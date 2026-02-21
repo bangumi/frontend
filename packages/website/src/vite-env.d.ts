@@ -6,7 +6,7 @@ interface ImportMetaEnv {
 }
 
 declare module '*.svg' {
-  import type { ComponentProps,FC } from 'react';
+  import type { ComponentProps, FC } from 'react';
 
   const src: string;
   export default src;
