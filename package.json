@@ -29,7 +29,7 @@
     "lint-staged": "lint-staged -q",
     "type-check": "tsc --noEmit"
   },
-  "packageManager": "pnpm@10.29.3",
+  "packageManager": "pnpm@10.30.1",
   "engines": {
     "node": ">=22"
   },
