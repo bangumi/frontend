@@ -11,12 +11,5 @@
       }
     ]
   },
-  "include": [
-    "./src",
-    "vite.config.ts",
-    "test-setup.ts",
-    "env.d.ts",
-    "playwright.config.ts",
-    "./e2e"
-  ]
+  "include": ["./src", "vite.config.ts", "test-setup.ts", "playwright.config.ts", "./e2e"]
 }

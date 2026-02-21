@@ -27,7 +27,15 @@ export default {
      * */
     viteConfig.plugins ??= [];
 
-    viteConfig.plugins.push(svgr());
+    viteConfig.plugins.push(
+      svgr({
+        include: '**/*.svg',
+        svgrOptions: {
+          exportType: 'named',
+          namedExport: 'ReactComponent',
+        },
+      }),
+    );
     return viteConfig;
   },
 } satisfies StorybookConfig;
