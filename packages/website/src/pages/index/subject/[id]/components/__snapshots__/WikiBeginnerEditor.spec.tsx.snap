@@ -10,16 +10,16 @@ Object {
       >
         <div>
           <div
-            data-rbd-draggable-context-id="0"
-            data-rbd-draggable-id="yufi"
+            data-rfd-draggable-context-id="_r_0_"
+            data-rfd-draggable-id="yufi"
           >
             <div
               class="_editorItem_1f9d9f"
             >
               <div
-                aria-describedby="rbd-hidden-text-0-hidden-text-0"
-                data-rbd-drag-handle-context-id="0"
-                data-rbd-drag-handle-draggable-id="yufi"
+                aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
+                data-rfd-drag-handle-context-id="_r_0_"
+                data-rfd-drag-handle-draggable-id="yufi"
                 draggable="false"
                 role="button"
                 tabindex="-1"
@@ -61,16 +61,16 @@ Object {
             </div>
           </div>
           <div
-            data-rbd-draggable-context-id="0"
-            data-rbd-draggable-id="anisu"
+            data-rfd-draggable-context-id="_r_0_"
+            data-rfd-draggable-id="anisu"
           >
             <div
               class="_editorItem_1f9d9f"
             >
               <div
-                aria-describedby="rbd-hidden-text-0-hidden-text-0"
-                data-rbd-drag-handle-context-id="0"
-                data-rbd-drag-handle-draggable-id="anisu"
+                aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
+                data-rfd-drag-handle-context-id="_r_0_"
+                data-rfd-drag-handle-draggable-id="anisu"
                 draggable="false"
                 role="button"
                 tabindex="-1"
@@ -145,11 +145,11 @@ Object {
     <div
       aria-atomic="true"
       aria-live="assertive"
-      id="rbd-announcement-0"
+      id="rfd-announcement-_r_0_"
       style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip: rect(0px); clip-path: inset(100%);"
     />
     <div
-      id="rbd-hidden-text-0-hidden-text-0"
+      id="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
       style="display: none;"
     >
       
@@ -165,16 +165,16 @@ Object {
     >
       <div>
         <div
-          data-rbd-draggable-context-id="0"
-          data-rbd-draggable-id="yufi"
+          data-rfd-draggable-context-id="_r_0_"
+          data-rfd-draggable-id="yufi"
         >
           <div
             class="_editorItem_1f9d9f"
           >
             <div
-              aria-describedby="rbd-hidden-text-0-hidden-text-0"
-              data-rbd-drag-handle-context-id="0"
-              data-rbd-drag-handle-draggable-id="yufi"
+              aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
+              data-rfd-drag-handle-context-id="_r_0_"
+              data-rfd-drag-handle-draggable-id="yufi"
               draggable="false"
               role="button"
               tabindex="-1"
@@ -216,16 +216,16 @@ Object {
           </div>
         </div>
         <div
-          data-rbd-draggable-context-id="0"
-          data-rbd-draggable-id="anisu"
+          data-rfd-draggable-context-id="_r_0_"
+          data-rfd-draggable-id="anisu"
         >
           <div
             class="_editorItem_1f9d9f"
           >
             <div
-              aria-describedby="rbd-hidden-text-0-hidden-text-0"
-              data-rbd-drag-handle-context-id="0"
-              data-rbd-drag-handle-draggable-id="anisu"
+              aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
+              data-rfd-drag-handle-context-id="_r_0_"
+              data-rfd-drag-handle-draggable-id="anisu"
               draggable="false"
               role="button"
               tabindex="-1"

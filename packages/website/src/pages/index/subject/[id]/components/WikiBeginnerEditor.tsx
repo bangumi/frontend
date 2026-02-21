@@ -1,10 +1,10 @@
+import type { DraggableProvided, DropResult, ResponderProvided } from '@hello-pangea/dnd';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
 import cn from 'classnames';
 import { concat, filter, isArray, isNumber, set } from 'lodash-es';
 import { nanoid } from 'nanoid';
 import type { JSX } from 'react';
 import React, { createContext, useContext } from 'react';
-import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { Input } from '@bangumi/design';
 import { Cursor, Minus, Plus, VerticalLeft, VerticalRight } from '@bangumi/icons';
