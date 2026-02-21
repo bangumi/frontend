@@ -8,11 +8,11 @@ import { Notification, Search as SearchIcon } from '@bangumi/icons';
 import { UnreadableCodeError } from '@bangumi/utils';
 import { useNotify } from '@bangumi/website/hooks/use-notify';
 
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
-import { ReactComponent as Musume2 } from '../../assets/musume_2.svg';
-import { ReactComponent as Musume3 } from '../../assets/musume_3.svg';
-import { ReactComponent as Musume4 } from '../../assets/musume_4.svg';
+import Logo from '../../assets/logo.svg?react';
+import Musume1 from '../../assets/musume_1.svg?react';
+import Musume2 from '../../assets/musume_2.svg?react';
+import Musume3 from '../../assets/musume_3.svg?react';
+import Musume4 from '../../assets/musume_4.svg?react';
 import { useUser } from '../../hooks/use-user';
 import style from './style.module.less';
 import {
