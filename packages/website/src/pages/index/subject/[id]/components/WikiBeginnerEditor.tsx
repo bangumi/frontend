@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { concat, filter, isArray, isNumber, set } from 'lodash-es';
 import { nanoid } from 'nanoid';
+import type { JSX } from 'react';
 import React, { createContext, useContext } from 'react';
 import type { DraggableProvided, DropResult, ResponderProvided } from 'react-beautiful-dnd';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';

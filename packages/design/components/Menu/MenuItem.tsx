@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import type { FC } from 'react';
+import type { FC, JSX } from 'react';
 import React from 'react';
 
 import { useMenuContext } from '.';

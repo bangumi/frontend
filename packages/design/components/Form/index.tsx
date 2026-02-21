@@ -1,7 +1,7 @@
 import './style';
 
 import cn from 'classnames';
-import type { PropsWithChildren, ReactNode } from 'react';
+import type { JSX, PropsWithChildren, ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
 
 type ItemProps = PropsWithChildren<{

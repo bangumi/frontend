@@ -1,7 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
-import type { PropsWithChildren } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 import React, { createContext, useContext } from 'react';
 
 type StyleType = 'default' | 'borderless';

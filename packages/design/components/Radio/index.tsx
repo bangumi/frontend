@@ -1,6 +1,7 @@
 import './style';
 
 import cn from 'classnames';
+import type { JSX } from 'react';
 import React, { forwardRef } from 'react';
 
 type RadioProps = JSX.IntrinsicElements['input'] & {

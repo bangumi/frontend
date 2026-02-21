@@ -1,7 +1,7 @@
 import './style';
 
 import classNames from 'classnames';
-import type { MouseEventHandler } from 'react';
+import type { JSX, MouseEventHandler } from 'react';
 import React from 'react';
 
 import type { LinkProps } from '../Typography';

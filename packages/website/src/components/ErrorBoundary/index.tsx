@@ -1,5 +1,5 @@
 import { HttpError } from '@oazapfts/runtime';
-import type { PropsWithChildren } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 import React from 'react';
 
 import type { ErrorResponse as resError } from '@bangumi/client/client';
@@ -39,7 +39,7 @@ export default class ErrorBoundary extends React.Component<
     return { error };
   }
 
-  render(): React.JSX.Element {
+  render(): JSX.Element {
     const { fallback } = this.props;
     const error = this.state.error;
 
@@ -69,7 +69,7 @@ export const withErrorBoundary = <T extends Object>(
   Children: React.FC<T>,
   fallback?: ErrorBoundaryFallbackFC,
 ): React.FC<T> => {
-  return function PageWithErrorBoundary(props: T): React.JSX.Element {
+  return function PageWithErrorBoundary(props: T): JSX.Element {
     return (
       <ErrorBoundary fallback={fallback}>
         <Children {...props} />

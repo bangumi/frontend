@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { PropsWithChildren } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 import React from 'react';
 import type { LinkProps as RouterLinkProps } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
