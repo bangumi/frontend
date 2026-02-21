@@ -41,7 +41,7 @@
     {
       "groupName": "react",
       "matchManagers": ["npm"],
-      "matchPackageNames": ["react", "react-*", "*/react", "*-react"]
+      "matchPackageNames": ["react", "react-*", "*/react", "*-react", "*/react-*"]
     },
     {
       "matchManagers": ["github-actions"],
