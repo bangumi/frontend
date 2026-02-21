@@ -30,6 +30,10 @@ export default {
     viteConfig.plugins.push(
       svgr({
         include: '**/*.svg',
+        svgrOptions: {
+          exportType: 'named',
+          namedExport: 'ReactComponent',
+        },
       }),
     );
     return viteConfig;

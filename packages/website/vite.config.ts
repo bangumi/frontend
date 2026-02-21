@@ -106,6 +106,8 @@ export default defineConfig(({ mode }) => {
       svgr({
         include: '**/*.svg',
         svgrOptions: {
+          exportType: 'named',
+          namedExport: 'ReactComponent',
           titleProp: true,
         },
       }),
