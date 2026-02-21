@@ -146,7 +146,7 @@ Object {
       aria-atomic="true"
       aria-live="assertive"
       id="rbd-announcement-0"
-      style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip-path: inset(100%);"
+      style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0px; padding: 0px; overflow: hidden; clip: rect(0px); clip-path: inset(100%);"
     />
     <div
       id="rbd-hidden-text-0-hidden-text-0"
