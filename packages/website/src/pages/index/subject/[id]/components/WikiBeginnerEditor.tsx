@@ -62,7 +62,7 @@ const WikiInfoItem = ({
   return (
     <div
       className={style.editorItem}
-      onKeyDown={(e) => {
+      onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.ctrlKey && e.key === 'Enter') {
           level === 1 && convertToNestedWikiElement?.(index); /** 只对一级菜单有效 */
         }
@@ -89,7 +89,7 @@ const WikiInfoItem = ({
           style.editorItemInputGroup,
           level === 2 && style.editorItemInputGroupSecondary,
         )}
-        onKeyDown={(e) => {
+        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
           if (e.ctrlKey && e.key === 'Enter') {
             level === 1 && convertToNestedWikiElement?.(index);
             level === 2 && hoistOneWikiElement?.(path, item.key, item.value as string);
@@ -137,7 +137,9 @@ const WikiInfoItem = ({
           }
           align={level === 2 ? 'right' : undefined}
           defaultValue={item.key}
-          onChange={(v) => editOneWikiElement?.(path, 'key', v.target.value)}
+          onChange={(v: React.ChangeEvent<HTMLInputElement>) =>
+            editOneWikiElement?.(path, 'key', v.target.value)
+          }
         />
         <Input
           id={item._id}
@@ -148,7 +150,9 @@ const WikiInfoItem = ({
           )}
           defaultValue={typeof item.value === 'string' ? item.value : ''}
           disabled={isArray(item.value)}
-          onChange={(v) => editOneWikiElement?.(path, 'value', v.target.value)}
+          onChange={(v: React.ChangeEvent<HTMLInputElement>) =>
+            editOneWikiElement?.(path, 'value', v.target.value)
+          }
         />
       </Input.Group>
 

@@ -23,7 +23,7 @@ const componentMeta: Meta<typeof Form> = {
 
 export default componentMeta;
 
-const Template: StoryFn<typeof Form> = (args) => {
+const Template: StoryFn<typeof Form> = (args: React.ComponentProps<typeof Form>) => {
   const innerOnSubmit: SubmitHandler<{}> = (data) => {
     console.log(data);
   };
@@ -32,8 +32,7 @@ const Template: StoryFn<typeof Form> = (args) => {
   return (
     <Form
       labelWidth={120}
-      onSubmit={(e) => {
-        args.onSubmit?.(e);
+      onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
         handleSubmit(innerOnSubmit)(e);
       }}
     >
@@ -85,7 +84,7 @@ const Template: StoryFn<typeof Form> = (args) => {
 
 export const Default = Template.bind({});
 
-export const Compact: StoryFn<typeof Form> = (args) => {
+export const Compact: StoryFn<typeof Form> = (args: React.ComponentProps<typeof Form>) => {
   const [content, setContent] = useState('');
 
   return (

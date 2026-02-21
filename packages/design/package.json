@@ -6,8 +6,8 @@
   "dependencies": {
     "dayjs": "^1.11.19",
     "eventemitter3": "^5.0.4",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "reset-css": "^5.0.2"
   },
   "devDependencies": {
@@ -20,8 +20,8 @@
     "@storybook/react-vite": "^10.2.10",
     "@testing-library/react": "^16.3.2",
     "@types/lodash-es": "^4.17.12",
-    "@types/react": "^18.3.28",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "classnames": "^2.5.1",
     "less": "^4.5.1",
     "lodash-es": "^4.17.23",

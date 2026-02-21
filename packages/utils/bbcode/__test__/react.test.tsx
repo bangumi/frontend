@@ -179,9 +179,9 @@ describe('html render bbcode string', () => {
           expect(keys.has(i.key)).toBe(false);
           keys.add(i.key);
         }
-        const props = i.props as Record<string, any>;
-        if (typeof props.children === 'object') {
-          checkUniqueKeys(i.props.children);
+        const props = i.props as { children?: Array<string | React.ReactElement> };
+        if (Array.isArray(props.children)) {
+          checkUniqueKeys(props.children);
         }
       });
     };

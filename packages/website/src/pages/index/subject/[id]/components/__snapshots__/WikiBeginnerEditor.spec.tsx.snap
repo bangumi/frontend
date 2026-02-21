@@ -38,7 +38,6 @@ Object {
                   <input
                     class="bgm-input"
                     type="text"
-                    value=""
                   />
                   <div
                     class="_editorItemConvertHandler_1f9d9f"
@@ -90,7 +89,6 @@ Object {
                   <input
                     class="bgm-input"
                     type="text"
-                    value=""
                   />
                   <div
                     class="_editorItemConvertHandler_1f9d9f"
@@ -195,7 +193,6 @@ Object {
                 <input
                   class="bgm-input"
                   type="text"
-                  value=""
                 />
                 <div
                   class="_editorItemConvertHandler_1f9d9f"
@@ -247,7 +244,6 @@ Object {
                 <input
                   class="bgm-input"
                   type="text"
-                  value=""
                 />
                 <div
                   class="_editorItemConvertHandler_1f9d9f"

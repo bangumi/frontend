@@ -39,7 +39,7 @@ export default class ErrorBoundary extends React.Component<
     return { error };
   }
 
-  render() {
+  render(): React.JSX.Element {
     const { fallback } = this.props;
     const error = this.state.error;
 
@@ -61,15 +61,15 @@ export default class ErrorBoundary extends React.Component<
       );
     }
 
-    return this.props.children;
+    return <>{this.props.children}</>;
   }
 }
 
 export const withErrorBoundary = <T extends Object>(
   Children: React.FC<T>,
   fallback?: ErrorBoundaryFallbackFC,
-) => {
-  return function PageWithErrorBoundary(props: T) {
+): React.FC<T> => {
+  return function PageWithErrorBoundary(props: T): React.JSX.Element {
     return (
       <ErrorBoundary fallback={fallback}>
         <Children {...props} />
