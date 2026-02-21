@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import dayjs from 'dayjs';
 import { flow } from 'lodash-es';
-import type { editor } from 'monaco-editor/esm/vs/editor/editor.api';
+import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocalstorageState } from 'rooks';
