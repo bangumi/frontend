@@ -19,6 +19,9 @@ export default defineConfig({
     globals: true,
     reporters: process.env.GITHUB_ACTIONS ? ['default', new GithubActionsReporter()] : 'default',
     environment: 'jsdom',
+    sequence: {
+      setupFiles: 'list',
+    },
     setupFiles: ['./tests/setup.ts', './tests/website.ts'],
     snapshotFormat: {
       printBasicPrototype: true,
