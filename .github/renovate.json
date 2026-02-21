@@ -34,9 +34,14 @@
       "matchPackageNames": ["@oazapfts/runtime", "oazapfts"]
     },
     {
-      "groupName": "stylelint ",
+      "groupName": "stylelint",
       "matchManagers": ["npm"],
       "matchPackageNames": ["stylelint", "stylelint-*"]
+    },
+    {
+      "groupName": "react",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["react", "react-*", "*/react", "*-react"]
     },
     {
       "matchManagers": ["github-actions"],
