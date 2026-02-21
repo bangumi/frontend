@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import type { FC } from 'react';
+import type { FC, JSX } from 'react';
 import React from 'react';
 
 import { useMenuContext } from '.';
@@ -12,7 +12,7 @@ export interface MenuItemProps {
   /** 自定义类名 */
   className?: string;
   /** 子菜单，鼠标悬浮时显示 */
-  subMenu?: React.JSX.Element;
+  subMenu?: JSX.Element;
 }
 
 const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, subMenu }) => {

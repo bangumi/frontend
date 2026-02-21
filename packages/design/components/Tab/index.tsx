@@ -1,7 +1,7 @@
 import './style';
 
 import classnames from 'classnames';
-import type { PropsWithChildren } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 import React, { createContext, useContext } from 'react';
 
 type StyleType = 'default' | 'borderless';
@@ -11,7 +11,7 @@ interface ItemType {
   label: string;
 }
 
-type ItemProps = React.JSX.IntrinsicElements['li'] & {
+type ItemProps = JSX.IntrinsicElements['li'] & {
   isActive: boolean;
 };
 

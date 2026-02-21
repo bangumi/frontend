@@ -1,9 +1,10 @@
 import './style';
 
 import classnames from 'classnames';
+import type { JSX } from 'react';
 import React, { forwardRef, useState } from 'react';
 
-export type InputProps = Omit<React.JSX.IntrinsicElements['input'], 'prefix'> & {
+export type InputProps = Omit<JSX.IntrinsicElements['input'], 'prefix'> & {
   /** 外层 wrapper 的样式 */
   wrapperStyle?: React.CSSProperties;
   /** 外层 wrapper 的自定义类名 */
@@ -73,7 +74,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-export type InputGroupProps = React.JSX.IntrinsicElements['div'];
+export type InputGroupProps = JSX.IntrinsicElements['div'];
 
 export const InputGroup = ({ children, className, ...props }: InputGroupProps) => {
   return (

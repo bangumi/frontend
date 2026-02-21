@@ -1,14 +1,15 @@
 import './style';
 
 import cn from 'classnames';
+import type { JSX } from 'react';
 import React, { forwardRef } from 'react';
 
-type RadioProps = React.JSX.IntrinsicElements['input'] & {
+type RadioProps = JSX.IntrinsicElements['input'] & {
   label: string;
 };
 
 type IRadio = React.ForwardRefExoticComponent<RadioProps> & {
-  Group: React.FC<React.JSX.IntrinsicElements['div']>;
+  Group: React.FC<JSX.IntrinsicElements['div']>;
 };
 
 /**
@@ -26,7 +27,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   );
 }) as IRadio;
 
-function RadioGroup({ children, className, ...props }: React.JSX.IntrinsicElements['div']) {
+function RadioGroup({ children, className, ...props }: JSX.IntrinsicElements['div']) {
   return (
     <div className={cn('bgm-radio-group', className)} {...props}>
       {children}

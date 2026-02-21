@@ -1,7 +1,7 @@
 import './style';
 
 import classNames from 'classnames';
-import type { MouseEventHandler } from 'react';
+import type { JSX, MouseEventHandler } from 'react';
 import React from 'react';
 
 import type { LinkProps } from '../Typography';
@@ -15,10 +15,10 @@ export interface ButtonCommonProps {
   /** 无内边距、边框及圆角，最小高度 */
 }
 
-export type ButtonProps = Omit<React.JSX.IntrinsicElements['button'], 'type' | 'onClick'> &
+export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type' | 'onClick'> &
   ButtonCommonProps & {
     onClick?: MouseEventHandler; // desserts for story book
-    htmlType?: React.JSX.IntrinsicElements['button']['type'];
+    htmlType?: JSX.IntrinsicElements['button']['type'];
   };
 
 const Button = ({
