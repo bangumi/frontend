@@ -1,5 +1,5 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http,HttpResponse } from 'msw';
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
@@ -51,8 +51,11 @@ function mockLogin(
   headers: Record<string, string | string[]> = {},
 ): void {
   mockServer.use(
-    rest.post('http://localhost:3000/p1/login', async (req, res, ctx) => {
-      return res(ctx.status(statusCode), ctx.set(headers), ctx.json(response));
+    http.post('http://localhost:3000/p1/login', () => {
+      return HttpResponse.json(response, {
+        status: statusCode,
+        headers,
+      });
     }),
   );
 }

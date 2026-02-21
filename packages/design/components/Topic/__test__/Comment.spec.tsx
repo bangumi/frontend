@@ -1,6 +1,6 @@
 import { fireEvent, render as _render, waitFor } from '@testing-library/react';
 import dayjs from 'dayjs';
-import { rest } from 'msw';
+import { http,HttpResponse } from 'msw';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -127,9 +127,7 @@ describe('Normal Comment', () => {
     const basicReply = { id: 2104702 };
     const mockApi = (status: number) => {
       mockServer.use(
-        rest.post('/p1/groups/-/topics/1/replies', async (_, res, ctx) =>
-          res(ctx.status(status), ctx.json(basicReply)),
-        ),
+        http.post('/p1/groups/-/topics/1/replies', () => HttpResponse.json(basicReply, { status })),
       );
     };
 

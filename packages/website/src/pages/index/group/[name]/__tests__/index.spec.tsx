@@ -1,6 +1,6 @@
 import type { RenderResult } from '@testing-library/react';
 import { waitFor } from '@testing-library/react';
-import { rest } from 'msw';
+import { http,HttpResponse } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
@@ -33,21 +33,22 @@ class GroupHomeTest {
     });
 
     mockServer.use(
-      rest.get(`http://localhost:3000/p1/groups/${name}`, async (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(Sandbox));
+      http.get(`http://localhost:3000/p1/groups/${name}`, () => {
+        return HttpResponse.json(Sandbox, { status: 200 });
       }),
     );
 
     mockServer.use(
-      rest.get(`http://localhost:3000/p1/groups/${name}/topics`, async (req, res, ctx) => {
-        return res(ctx.status(200), ctx.json(RecentTopics));
+      http.get(`http://localhost:3000/p1/groups/${name}/topics`, () => {
+        return HttpResponse.json(RecentTopics, { status: 200 });
       }),
     );
 
     mockServer.use(
-      rest.get(`http://localhost:3000/p1/groups/${name}/members`, async (req, res, ctx) => {
-        const isAdmin = req.url.searchParams.get('moderator') === 'true';
-        return res(ctx.status(200), ctx.json(isAdmin ? sandboxModMember : sandboxMembers));
+      http.get(`http://localhost:3000/p1/groups/${name}/members`, ({ request }) => {
+        const requestUrl = new URL(request.url);
+        const isAdmin = requestUrl.searchParams.get('moderator') === 'true';
+        return HttpResponse.json(isAdmin ? sandboxModMember : sandboxMembers, { status: 200 });
       }),
     );
 
