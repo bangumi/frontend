@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import BangumiTextLogo from '../../assets/logo.svg?react';
+import BangumiTextLogo from '../../assets/logo.svg';
 import style from './style.module.less';
 
 interface IBlockItem {

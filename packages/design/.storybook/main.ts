@@ -27,7 +27,11 @@ export default {
      * */
     viteConfig.plugins ??= [];
 
-    viteConfig.plugins.push(svgr());
+    viteConfig.plugins.push(
+      svgr({
+        include: '**/*.svg',
+      }),
+    );
     return viteConfig;
   },
 } satisfies StorybookConfig;

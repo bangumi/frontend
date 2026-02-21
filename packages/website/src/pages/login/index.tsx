@@ -16,7 +16,7 @@ import {
   UnknownError,
   useUser,
 } from '../../hooks/use-user';
-import LoginLogo from './assets/login-logo.svg?react';
+import LoginLogo from './assets/login-logo.svg';
 import style from './index.module.less';
 
 const Login: React.FC = () => {

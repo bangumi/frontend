@@ -104,6 +104,7 @@ export default defineConfig(({ mode }) => {
           : undefined,
       ),
       svgr({
+        include: '**/*.svg',
         svgrOptions: {
           titleProp: true,
         },
