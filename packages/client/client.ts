@@ -320,22 +320,20 @@ export type SlimGroup = {
   nsfw: boolean;
   title: string;
 };
-export type TopicBase = {
+export type Topic = {
   /** 发帖时间，unix time stamp in seconds */
   createdAt: number;
+  creator?: SlimUser;
   creatorID: number;
   display: number;
   id: number;
   /** 小组/条目ID */
   parentID: number;
+  replyCount: number;
   state: number;
   title: string;
   /** 最后回复时间，unix time stamp in seconds */
   updatedAt: number;
-};
-export type Topic = TopicBase & {
-  creator?: SlimUser;
-  replies: number;
 };
 export type Post = {
   content: string;
@@ -358,8 +356,7 @@ export type ReplyBase = {
 export type Reply = ReplyBase & {
   replies: ReplyBase[];
 };
-export type GroupTopic = TopicBase & {
-  creator: SlimUser;
+export type GroupTopic = Topic & {
   group: SlimGroup;
   replies: Reply[];
 };
@@ -509,8 +506,7 @@ export type SearchSubject = {
   keyword: string;
   sort?: SubjectSearchSort;
 };
-export type SubjectTopic = TopicBase & {
-  creator: SlimUser;
+export type SubjectTopic = Topic & {
   replies: Reply[];
   subject: SlimSubject;
 };
@@ -1835,10 +1831,20 @@ export function getRecentGroupTopics(
   } = {},
   opts?: Oazapfts.RequestOpts,
 ) {
-  return oazapfts.fetchJson<{
-    status: 500;
-    data: ErrorResponse;
-  }>(
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: GroupTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
     `/p1/groups/-/topics${QS.query(
       QS.explode({
         mode,
@@ -2680,6 +2686,44 @@ export function editSubjectPost(
       method: 'PUT',
       body: updateContent,
     }),
+  );
+}
+/**
+ * 获取最新的条目讨论
+ */
+export function getRecentSubjectTopics(
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SubjectTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/topics${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
   );
 }
 /**
