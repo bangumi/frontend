@@ -160,8 +160,8 @@ importers:
         specifier: ^3.3.2
         version: 3.3.2
       oazapfts:
-        specifier: ^7.4.0
-        version: 7.4.1(@oazapfts/runtime@1.2.0)(openapi-types@12.1.3)
+        specifier: ^7.4.2
+        version: 7.4.2(@oazapfts/runtime@1.2.0)(openapi-types@12.1.3)
       openapi-types:
         specifier: ^12.1.3
         version: 12.1.3
@@ -3318,11 +3318,11 @@ packages:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
 
-  oazapfts@7.4.1:
-    resolution: {integrity: sha512-ARU8jYl42w4h9xot9yeKVfmKaImPBVLe19nMrNA/E6bzLT2ROdvteYoJeSpUWHiWkhhWuWjunrFTNPlvSLXVkQ==}
+  oazapfts@7.4.2:
+    resolution: {integrity: sha512-yIH3XzlaK5TWeFFVbiNX2f/EGXs3IRMx2bV/oFxU0bkr2ksWMwVxomjbMCNygeklFg5oPPcTiAXTxmMdTbiveQ==}
     hasBin: true
     peerDependencies:
-      '@oazapfts/runtime': 0.0.0-development || ^1.2.0
+      '@oazapfts/runtime': ^1.2.0
 
   object-assign@4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
@@ -7452,7 +7452,7 @@ snapshots:
 
   normalize-path@3.0.0: {}
 
-  oazapfts@7.4.1(@oazapfts/runtime@1.2.0)(openapi-types@12.1.3):
+  oazapfts@7.4.2(@oazapfts/runtime@1.2.0)(openapi-types@12.1.3):
     dependencies:
       '@apidevtools/swagger-parser': 12.1.0(openapi-types@12.1.3)
       '@oazapfts/resolve': 1.0.0
