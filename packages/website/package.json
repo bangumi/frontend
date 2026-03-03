@@ -28,7 +28,7 @@
     "reset-css": "^5.0.2",
     "rooks": "^9.5.0",
     "socket.io-client": "^4.8.3",
-    "swr": "^2.4.0"
+    "swr": "^2.4.1"
   },
   "devDependencies": {
     "@bangumi/client": "workspace:0.0.0",
