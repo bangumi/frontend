@@ -43,7 +43,7 @@
     "@vitejs/plugin-react": "^5.2.0",
     "autoprefixer": "^10.4.27",
     "babel-plugin-jsx-remove-data-test-id": "^3.0.0",
-    "less": "^4.5.1",
+    "less": "^4.6.4",
     "msw": "~2.12.10",
     "openapi-types": "^12.1.3",
     "postcss": "^8.5.8",

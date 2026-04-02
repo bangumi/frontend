@@ -23,7 +23,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "classnames": "^2.5.1",
-    "less": "^4.5.1",
+    "less": "^4.6.4",
     "lodash-es": "^4.17.23",
     "msw": "~2.12.10",
     "react-hook-form": "^7.71.2",
