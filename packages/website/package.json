@@ -16,7 +16,7 @@
     "@oazapfts/runtime": "^1.2.0",
     "@remix-run/router": "^1.23.2",
     "classnames": "^2.5.1",
-    "dayjs": "^1.11.19",
+    "dayjs": "^1.11.20",
     "lodash-es": "^4.17.23",
     "monaco-editor": "^0.55.1",
     "nanoid": "^5.1.6",

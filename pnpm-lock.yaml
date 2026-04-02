@@ -172,7 +172,7 @@ importers:
   packages/design:
     dependencies:
       dayjs:
-        specifier: ^1.11.19
+        specifier: ^1.11.20
         version: 1.11.20
       eventemitter3:
         specifier: ^5.0.4
@@ -324,7 +324,7 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       dayjs:
-        specifier: ^1.11.19
+        specifier: ^1.11.20
         version: 1.11.20
       lodash-es:
         specifier: ^4.17.23
