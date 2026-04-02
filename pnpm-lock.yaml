@@ -36,7 +36,7 @@ importers:
         specifier: ^0.0.345
         version: 0.0.345
       '@vitejs/plugin-react':
-        specifier: ^5.1.4
+        specifier: ^5.2.0
         version: 5.2.0(vite@7.3.1(@types/node@22.19.15)(less@4.6.4)(sass@1.98.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.3))
       '@vitest/coverage-v8':
         specifier: ^4.0.18
@@ -391,7 +391,7 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.14)
       '@vitejs/plugin-react':
-        specifier: ^5.1.4
+        specifier: ^5.2.0
         version: 5.2.0(vite@7.3.1(@types/node@22.19.15)(less@4.6.4)(sass@1.98.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.3))
       autoprefixer:
         specifier: ^10.4.27
