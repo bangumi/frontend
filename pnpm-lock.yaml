@@ -224,7 +224,7 @@ importers:
         specifier: ^2.5.1
         version: 2.5.1
       less:
-        specifier: ^4.5.1
+        specifier: ^4.6.4
         version: 4.6.4
       lodash-es:
         specifier: ^4.17.23
@@ -400,7 +400,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0(@babel/core@7.29.0)
       less:
-        specifier: ^4.5.1
+        specifier: ^4.6.4
         version: 4.6.4
       msw:
         specifier: ~2.12.10
