@@ -25,7 +25,7 @@
     "classnames": "^2.5.1",
     "less": "^4.6.4",
     "lodash-es": "^4.18.1",
-    "msw": "~2.12.10",
+    "msw": "~2.12.14",
     "react-hook-form": "^7.71.2",
     "react-router-dom": "^7.13.1",
     "storybook": "^10.2.14",

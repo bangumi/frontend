@@ -154,7 +154,7 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       msw:
-        specifier: ~2.12.10
+        specifier: ~2.12.14
         version: 2.12.14(@types/node@22.19.15)(typescript@5.9.3)
       node-fetch:
         specifier: ^3.3.2
@@ -230,7 +230,7 @@ importers:
         specifier: ^4.18.1
         version: 4.18.1
       msw:
-        specifier: ~2.12.10
+        specifier: ~2.12.14
         version: 2.12.14(@types/node@22.19.15)(typescript@5.9.3)
       react-hook-form:
         specifier: ^7.71.2
@@ -403,7 +403,7 @@ importers:
         specifier: ^4.6.4
         version: 4.6.4
       msw:
-        specifier: ~2.12.10
+        specifier: ~2.12.14
         version: 2.12.14(@types/node@22.19.15)(typescript@5.9.3)
       openapi-types:
         specifier: ^12.1.3
