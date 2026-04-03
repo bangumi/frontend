@@ -227,7 +227,7 @@ importers:
         specifier: ^4.6.4
         version: 4.6.4
       lodash-es:
-        specifier: ^4.17.23
+        specifier: ^4.18.1
         version: 4.18.1
       msw:
         specifier: ~2.12.10
@@ -284,7 +284,7 @@ importers:
         specifier: ^0.3.3
         version: 0.3.3
       lodash-es:
-        specifier: ^4.17.23
+        specifier: ^4.18.1
         version: 4.18.1
       nanoid:
         specifier: ^5.1.6
@@ -327,7 +327,7 @@ importers:
         specifier: ^1.11.20
         version: 1.11.20
       lodash-es:
-        specifier: ^4.17.23
+        specifier: ^4.18.1
         version: 4.18.1
       monaco-editor:
         specifier: ^0.55.1
