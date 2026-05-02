@@ -15,7 +15,7 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@actions/github':
-        specifier: ^9.0.0
+        specifier: ^9.1.1
         version: 9.1.1
       '@eslint/js':
         specifier: ^10.0.1
