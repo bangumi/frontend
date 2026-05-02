@@ -145,7 +145,7 @@ importers:
         specifier: ^15.3.5
         version: 15.3.5(@types/json-schema@7.0.15)
       '@faker-js/faker':
-        specifier: ^10.3.0
+        specifier: ^10.4.0
         version: 10.4.0
       change-case:
         specifier: ^5.4.4
