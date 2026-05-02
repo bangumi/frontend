@@ -50,7 +50,7 @@
     "*.{md,html,js,ts,mts,cts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
   },
   "devDependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "^3.0.1",
     "@actions/exec": "^3.0.0",
     "@actions/github": "^9.0.0",
     "@eslint/js": "^10.0.1",
