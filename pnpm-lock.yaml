@@ -354,7 +354,7 @@ importers:
         specifier: ^5.0.2
         version: 5.0.2
       rooks:
-        specifier: ^9.5.0
+        specifier: ^9.8.0
         version: 9.8.0(react-dom@19.2.5(react@19.2.5))(react@19.2.5)
       socket.io-client:
         specifier: ^4.8.3
