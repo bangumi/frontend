@@ -123,7 +123,7 @@ importers:
         specifier: ^8.59.1
         version: 8.59.1(eslint@10.2.1)(typescript@5.9.3)
       vite:
-        specifier: ^7.3.1
+        specifier: ^7.3.2
         version: 7.3.2(@types/node@22.19.17)(less@4.6.4)(sass@1.99.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.3)
       vite-plugin-svgr:
         specifier: ^4.5.0
@@ -245,7 +245,7 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
       vite:
-        specifier: ^7.3.1
+        specifier: ^7.3.2
         version: 7.3.2(@types/node@22.19.17)(less@4.6.4)(sass@1.99.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.3)
       vite-plugin-svgr:
         specifier: ^4.5.0
@@ -421,7 +421,7 @@ importers:
         specifier: ^5.2.0
         version: 5.2.0(typescript@5.9.3)
       vite:
-        specifier: ^7.3.1
+        specifier: ^7.3.2
         version: 7.3.2(@types/node@22.19.17)(less@4.6.4)(sass@1.99.0)(stylus@0.62.0)(tsx@4.21.0)(yaml@2.8.3)
       vite-plugin-pages:
         specifier: ^0.33.3
