@@ -85,7 +85,7 @@
     "stylelint-config-standard": "^40.0.0",
     "stylelint-scss": "^7.0.0",
     "timezone-mock": "^1.4.2",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.4",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.59.1",
     "vite": "^7.3.2",
