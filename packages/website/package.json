@@ -14,7 +14,7 @@
     "@hello-pangea/dnd": "^18.0.1",
     "@marsidev/react-turnstile": "^1.5.2",
     "@oazapfts/runtime": "^1.2.0",
-    "@remix-run/router": "^1.23.2",
+    "@remix-run/router": "^1.23.3",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.21",
     "lodash-es": "^4.18.1",
