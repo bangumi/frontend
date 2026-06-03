@@ -18,7 +18,7 @@
     "@apidevtools/json-schema-ref-parser": "^15.3.5",
     "@faker-js/faker": "^10.4.0",
     "change-case": "^5.4.4",
-    "js-yaml": "^4.1.1",
+    "js-yaml": "^4.2.0",
     "msw": "~2.12.14",
     "node-fetch": "^3.3.2",
     "openapi-types": "^12.1.3",
