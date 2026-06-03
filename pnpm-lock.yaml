@@ -99,7 +99,7 @@ importers:
         specifier: ^19.2.7
         version: 19.2.7(react@19.2.7)
       stylelint:
-        specifier: ^17.3.0
+        specifier: ^17.12.0
         version: 17.12.0(typescript@5.9.3)
       stylelint-config-css-modules:
         specifier: ^4.6.0
@@ -108,8 +108,8 @@ importers:
         specifier: ^40.0.0
         version: 40.0.0(stylelint@17.12.0(typescript@5.9.3))
       stylelint-scss:
-        specifier: ^7.0.0
-        version: 7.1.1(stylelint@17.12.0(typescript@5.9.3))
+        specifier: ^7.2.0
+        version: 7.2.0(stylelint@17.12.0(typescript@5.9.3))
       timezone-mock:
         specifier: ^1.4.2
         version: 1.4.2
@@ -4477,8 +4477,8 @@ packages:
     peerDependencies:
       stylelint: ^17.0.0
 
-  stylelint-scss@7.1.1:
-    resolution: {integrity: sha512-pLPXJZ7RtAFNLXe8gqarf3B56ScVTd1vPiL9IFgcJkIZsYPzAgLJPh2h9NHrp3BFeKrtAkIgwQ08QSmhvlv1gA==}
+  stylelint-scss@7.2.0:
+    resolution: {integrity: sha512-6E79Bachv0Iz0gqRUZgdqdXCsiq26DWBWIBNHYtjTmAp3wJu6cp/I37VfW7BPntmh2puF3bY09XWl4HZGrLhzw==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       stylelint: ^16.8.2 || ^17.0.0
@@ -9046,7 +9046,7 @@ snapshots:
     dependencies:
       stylelint: 17.12.0(typescript@5.9.3)
     optionalDependencies:
-      stylelint-scss: 7.1.1(stylelint@17.12.0(typescript@5.9.3))
+      stylelint-scss: 7.2.0(stylelint@17.12.0(typescript@5.9.3))
 
   stylelint-config-recommended@18.0.0(stylelint@17.12.0(typescript@5.9.3)):
     dependencies:
@@ -9057,7 +9057,7 @@ snapshots:
       stylelint: 17.12.0(typescript@5.9.3)
       stylelint-config-recommended: 18.0.0(stylelint@17.12.0(typescript@5.9.3))
 
-  stylelint-scss@7.1.1(stylelint@17.12.0(typescript@5.9.3)):
+  stylelint-scss@7.2.0(stylelint@17.12.0(typescript@5.9.3)):
     dependencies:
       '@csstools/css-calc': 3.2.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
