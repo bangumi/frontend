@@ -9,7 +9,7 @@
       "updatedAt": 1662283112,
       "state": 2,
       "display": 1,
-      "replies": 2,
+      "replyCount": 2,
       "creator": {
         "id": 287622,
         "username": "trim21",
@@ -32,7 +32,7 @@
       "updatedAt": 1687677475,
       "state": 0,
       "display": 1,
-      "replies": 41,
+      "replyCount": 41,
       "creator": {
         "id": 287622,
         "username": "trim21",

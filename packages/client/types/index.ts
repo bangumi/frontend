@@ -860,6 +860,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/subjects/-/topics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取最新的条目讨论 */
+    get: operations['getRecentSubjectTopics'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/subjects/-/topics/{topicID}': {
     parameters: {
       query?: never;
@@ -1860,8 +1877,7 @@ export interface components {
      */
     GroupSort: 'posts' | 'topics' | 'members' | 'created' | 'updated';
     /** GroupTopic */
-    GroupTopic: components['schemas']['TopicBase'] & {
-      creator: components['schemas']['SlimUser'];
+    GroupTopic: components['schemas']['Topic'] & {
       group: components['schemas']['SlimGroup'];
       replies: components['schemas']['Reply'][];
     };
@@ -2597,8 +2613,7 @@ export interface components {
       name: string;
     };
     /** SubjectTopic */
-    SubjectTopic: components['schemas']['TopicBase'] & {
-      creator: components['schemas']['SlimUser'];
+    SubjectTopic: components['schemas']['Topic'] & {
       replies: components['schemas']['Reply'][];
       subject: components['schemas']['SlimSubject'];
     };
@@ -2715,19 +2730,16 @@ export interface components {
      */
     TimelineSource: 0 | 1 | 2 | 3 | 4 | 5;
     /** Topic */
-    Topic: components['schemas']['TopicBase'] & {
-      creator?: components['schemas']['SlimUser'];
-      replies: number;
-    };
-    /** TopicBase */
-    TopicBase: {
+    Topic: {
       /** @description 发帖时间，unix time stamp in seconds */
       createdAt: number;
+      creator?: components['schemas']['SlimUser'];
       creatorID: number;
       display: number;
       id: number;
       /** @description 小组/条目ID */
       parentID: number;
+      replyCount: number;
       state: number;
       title: string;
       /** @description 最后回复时间，unix time stamp in seconds */
@@ -4276,6 +4288,19 @@ export interface operations {
     };
     requestBody?: never;
     responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['GroupTopic'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
       /** @description 意料之外的服务器错误 */
       500: {
         headers: {
@@ -5345,6 +5370,44 @@ export interface operations {
         };
         content: {
           'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getRecentSubjectTopics: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SubjectTopic'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
