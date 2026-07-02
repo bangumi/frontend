@@ -33,8 +33,8 @@ importers:
         specifier: ^22.19.19
         version: 22.20.0
       '@types/web':
-        specifier: ^0.0.350
-        version: 0.0.350
+        specifier: ^0.0.352
+        version: 0.0.352
       '@vitejs/plugin-react':
         specifier: ^5.2.0
         version: 5.2.0(vite@7.3.5(@types/node@22.20.0)(less@4.6.6)(sass@1.101.0)(stylus@0.62.0)(tsx@4.22.4)(yaml@2.9.0))
@@ -2024,8 +2024,8 @@ packages:
   '@types/use-sync-external-store@0.0.6':
     resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
 
-  '@types/web@0.0.350':
-    resolution: {integrity: sha512-XFISASo1wPsKKtI5v1nJ51YuZYkjUE9kduDFpfHCOKEMbHtRLHX0k3V3bpBeQx2L1VvcxTIECHvC3r3Rfmu0YA==}
+  '@types/web@0.0.352':
+    resolution: {integrity: sha512-UOZDC0FwpYm4zgRK/98jFGXgRirawQYN2TIkhpFbTW4dbQie/GNHJ9uMwJ/BkFxPIhgAEdkIF3AE6qNVaJn1NA==}
 
   '@typescript-eslint/eslint-plugin@8.62.0':
     resolution: {integrity: sha512-o+mpz7EYiMzXoySXiKmzlabIvTVqUuK5yLrAedRPRDA0IpPFMUV1IXt6OqljIxX/kumN6EjUYp41Hqelh6p/Dw==}
@@ -6307,7 +6307,7 @@ snapshots:
 
   '@types/use-sync-external-store@0.0.6': {}
 
-  '@types/web@0.0.350': {}
+  '@types/web@0.0.352': {}
 
   '@typescript-eslint/eslint-plugin@8.62.0(@typescript-eslint/parser@8.62.0(eslint@10.5.0)(typescript@5.9.3))(eslint@10.5.0)(typescript@5.9.3)':
     dependencies:
