@@ -360,7 +360,7 @@ importers:
         specifier: ^4.8.3
         version: 4.8.3
       swr:
-        specifier: ^2.4.1
+        specifier: ^2.4.2
         version: 2.4.2(react@19.2.7)
     devDependencies:
       '@bangumi/client':
