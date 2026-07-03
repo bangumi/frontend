@@ -19,7 +19,7 @@
     "dayjs": "^1.11.21",
     "lodash-es": "^4.18.1",
     "monaco-editor": "^0.55.1",
-    "nanoid": "^5.1.11",
+    "nanoid": "^5.1.16",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-helmet-async": "^2.0.5",
