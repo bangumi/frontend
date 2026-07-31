@@ -1,4 +1,9 @@
 import { ok } from '@oazapfts/runtime';
+import type {
+  AuthenticationResponseJSON,
+  PublicKeyCredentialRequestOptionsJSON,
+} from '@simplewebauthn/browser';
+import { startAuthentication } from '@simplewebauthn/browser';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +16,8 @@ interface UserContextType {
   user?: Profile;
   redirectToLogin: () => void;
   login: (username: string, password: string, captchaResp: string) => Promise<void>;
+  /** 使用 Passkey 登录，成功返回 true，用户取消返回 false */
+  passkeyLogin: () => Promise<boolean>;
 }
 
 const UserContext = React.createContext<UserContextType>(null!);
@@ -63,6 +70,13 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       await login(email, password, captchaResp);
       await mutate();
     },
+    passkeyLogin: async () => {
+      const ok = await passkeyLogin();
+      if (ok) {
+        await mutate();
+      }
+      return ok;
+    },
     user,
   };
 
@@ -101,4 +115,53 @@ async function login(email: string, password: string, cfCaptchaResponse: string)
   }
 
   throw new UnknownError(LoginErrorCode.E_UNKNOWN_ERROR);
+}
+
+/**
+ * Passkey 登录流程：
+ * 1. 请求 WebAuthn authentication options（usernameless 模式）
+ * 2. 调用浏览器 API 让用户验证 passkey
+ * 3. 将凭证交给服务端验证并签发 session
+ *
+ * 服务端接口为私有 API，未包含在 @bangumi/client 生成的客户端中，因此直接使用 fetch。
+ */
+async function passkeyLogin(): Promise<boolean> {
+  const optionsRes = await fetch('/p1/passkey/login/options', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({}),
+  });
+
+  if (!optionsRes.ok) {
+    throw new Error(LoginErrorCode.E_UNKNOWN_ERROR);
+  }
+
+  const { options, challenge } = (await optionsRes.json()) as {
+    options: PublicKeyCredentialRequestOptionsJSON;
+    challenge: string;
+    rpId: string;
+  };
+
+  let credential: AuthenticationResponseJSON;
+  try {
+    credential = await startAuthentication({ optionsJSON: options });
+  } catch (err) {
+    // 用户取消或选择器关闭，静默返回
+    if ((err as { name?: string } | null)?.name === 'NotAllowedError') {
+      return false;
+    }
+    throw err;
+  }
+
+  const verifyRes = await fetch('/p1/passkey/login/verify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ challenge, credential }),
+  });
+
+  if (!verifyRes.ok) {
+    throw new Error(LoginErrorCode.E_UNKNOWN_ERROR);
+  }
+
+  return true;
 }
