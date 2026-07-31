@@ -22,7 +22,7 @@ const NotificationPageTabs = [
 ];
 
 function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
-  const { id, type, title, postID, topicID, sender, createdAt, unread } = notice;
+  const { id, type, title, mainID, relatedID, sender, createdAt, unread } = notice;
 
   const setting = settings[type];
 
@@ -49,7 +49,7 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
       <span className={style.noticeItemBody}>
         {setting.prefix}
         <Typography.Link
-          to={`${setting.url}/${topicID}${setting.append ?? ''}${setting.anchor}${postID}`}
+          to={`${setting.url}/${mainID}${setting.append ?? ''}${setting.anchor}${relatedID}`}
           onClick={() => {
             ozaClient.clearNotice({
               id: [id],

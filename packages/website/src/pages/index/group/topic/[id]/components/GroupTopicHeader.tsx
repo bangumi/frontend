@@ -10,7 +10,7 @@ import styles from './GroupTopicHeader.module.less';
 interface Header {
   title: string;
   createdAt: number;
-  creator: SlimUser;
+  creator?: SlimUser;
   group: SlimGroup;
   id: number;
 }
@@ -21,12 +21,12 @@ const CommentInfo = Topic.CommentInfo;
 const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group, id }) => {
   return (
     <div className={styles.groupTopicHeader}>
-      <Avatar src={creator.avatar.large} size='medium' />
+      <Avatar src={creator?.avatar.large ?? ''} size='medium' />
       <div className={styles.headerMain}>
         <span className={styles.navBar}>
           <div>
-            <Link to={getUserProfileLink(creator.username)} isExternal>
-              {creator.nickname}
+            <Link to={getUserProfileLink(creator?.username ?? '')} isExternal>
+              {creator?.nickname}
             </Link>
             <span>发表于</span>
             <Link to={`/group/${group.name}`}>{group.title}</Link>

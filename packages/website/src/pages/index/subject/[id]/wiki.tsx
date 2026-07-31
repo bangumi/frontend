@@ -12,8 +12,8 @@ import WikiLayout from './components/WikiLayout';
 interface WikiContext {
   subjectId: number;
   subjectWikiInfo: ozaClient.SubjectWikiInfo;
-  subjectEditHistory: ozaClient.HistorySummary[];
-  mutateHistory: KeyedMutator<ozaClient.HistorySummary[]>;
+  subjectEditHistory: ozaClient.RevisionHistory[];
+  mutateHistory: KeyedMutator<ozaClient.RevisionHistory[]>;
 }
 
 const WikiPage = ({ subjectId }: { subjectId: number }) => {
@@ -27,7 +27,7 @@ const WikiPage = ({ subjectId }: { subjectId: number }) => {
 
   const { data: history, mutate: mutateHistory } = useSWR(
     `/wiki/subjects/${subjectId}/history`,
-    async () => ok(ozaClient.subjectEditHistorySummary(subjectId)),
+    async () => (await ok(ozaClient.subjectEditHistorySummary(subjectId, { limit: 20 }))).data,
     {
       suspense: true,
     },
