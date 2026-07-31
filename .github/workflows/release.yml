@@ -2,8 +2,14 @@ name: Release
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -12,25 +18,19 @@ jobs:
       - uses: actions/checkout@v6
       - uses: ./.github/actions/setup-js-env
 
+      - name: Get Version
+        id: version
+        run: |
+          today=$(date +%Y.%m.%d)
+          count=$(git ls-remote --tags origin "${today}.*" | wc -l)
+          echo "version=${today}.$((count + 1))" >> "$GITHUB_OUTPUT"
+
       - run: pnpm build
       - run: zip -r bangumi-website.zip ./packages/website/dist
       - run: openssl dgst -sha256 bangumi-website.zip > bangumi-website.zip.sha256
 
-      - name: Get Tag Name
-        run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
-
       - name: Upload Github Release
-        run: gh release create "$TAG" bangumi-website.zip bangumi-website.zip.sha256 --generate-notes
+        run: gh release create "$VERSION" bangumi-website.zip bangumi-website.zip.sha256 --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  milestone:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: ./.github/actions/setup-js-env
-
-      - name: Update github milestone
-        run: npx tsx .github/scripts/milestone.mts
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
