@@ -24,9 +24,14 @@ const Login: React.FC = () => {
   const [captchaToken, setCaptchaToken] = React.useState<string | null>(null);
   const email = useInput('' as string);
   const password = useInput('' as string);
-  const { login } = useUser();
+  const { login, passkeyLogin } = useUser();
   const navigate = useNavigate();
   const [searchParams, _] = useSearchParams();
+
+  // WebAuthn 不可用时隐藏 Passkey 登录按钮
+  const [passkeySupported] = React.useState(
+    () => typeof window !== 'undefined' && window.PublicKeyCredential != null,
+  );
 
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
@@ -101,6 +106,18 @@ const Login: React.FC = () => {
     }
   };
 
+  const handlePasskeyLogin = async () => {
+    try {
+      const ok = await passkeyLogin();
+      if (ok) {
+        successRedirect();
+      }
+    } catch (error: unknown) {
+      console.error(error);
+      setErrorMessage('Passkey 登录失败，请稍后再试');
+    }
+  };
+
   return (
     <>
       <Helmet title='登录' />
@@ -127,6 +144,11 @@ const Login: React.FC = () => {
               ref={captcha}
             />
           </div>
+          {passkeySupported && (
+            <Button className={style.passkeyButton} color='gray' onClick={handlePasskeyLogin}>
+              使用 Passkey 登录
+            </Button>
+          )}
           <div className={style.buttonGroup}>
             {!shouldHideRegisterButton && (
               <Button className={style.button} color='gray' disabled>

@@ -1,3 +1,5 @@
+import type { AuthenticationResponseJSON } from '@simplewebauthn/browser';
+import { startAuthentication } from '@simplewebauthn/browser';
 import { renderHook, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import type { PropsWithChildren } from 'react';
@@ -14,6 +16,24 @@ import {
   useUser,
 } from './use-user';
 
+vi.mock('@simplewebauthn/browser', () => ({
+  startAuthentication: vi.fn(),
+}));
+
+const mockedStartAuthentication = vi.mocked(startAuthentication);
+
+const fakeCredential: AuthenticationResponseJSON = {
+  id: 'fake-id',
+  rawId: 'fake-raw-id',
+  type: 'public-key',
+  response: {
+    clientDataJSON: 'fake-client-data',
+    authenticatorData: 'fake-authenticator-data',
+    signature: 'fake-signature',
+  },
+  clientExtensionResults: {},
+};
+
 function mockLogin(statusCode: number, response: Object = {}, headers: HeadersInit = {}): void {
   mockServer.use(
     http.post('http://localhost:3000/p1/login', () => {
@@ -24,6 +44,32 @@ function mockLogin(statusCode: number, response: Object = {}, headers: HeadersIn
     }),
   );
 }
+
+function mockPasskeyOptions(statusCode: number, response: Object = {}): void {
+  mockServer.use(
+    http.post('http://localhost:3000/p1/passkey/login/options', () => {
+      return HttpResponse.json(response, { status: statusCode });
+    }),
+  );
+}
+
+function mockPasskeyVerify(statusCode: number, response: Object = {}): void {
+  mockServer.use(
+    http.post('http://localhost:3000/p1/passkey/login/verify', () => {
+      return HttpResponse.json(response, { status: statusCode });
+    }),
+  );
+}
+
+function mockSuccessfulPasskeyLogin(): void {
+  mockPasskeyOptions(200, { options: {}, challenge: 'fake-challenge', rpId: 'bgm.tv' });
+  mockedStartAuthentication.mockResolvedValue(fakeCredential);
+  mockPasskeyVerify(200, { id: 1, username: 'fakeuser' });
+}
+
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
 const wrapper = ({ children }: PropsWithChildren) => (
   <MemoryRouter>
@@ -72,5 +118,56 @@ it('should refresh me if login succeeded', async () => {
   await waitFor(async () => {
     await result.current.login('fakeuser', 'fakepassword', 'fake-token');
     expect(result.current.user).toMatchSnapshot();
+  });
+});
+
+it('should return true if passkey login succeeded', async () => {
+  const { result } = renderHook(() => useUser(), { wrapper });
+
+  mockSuccessfulPasskeyLogin();
+  await waitFor(async () => {
+    await expect(result.current.passkeyLogin()).resolves.toBe(true);
+  });
+  expect(mockedStartAuthentication).toHaveBeenCalledWith({ optionsJSON: {} });
+});
+
+it('should throw if passkey options request failed', async () => {
+  const { result } = renderHook(() => useUser(), { wrapper });
+
+  mockPasskeyOptions(500);
+  await waitFor(async () => {
+    await expect(result.current.passkeyLogin()).rejects.toThrow();
+  });
+  expect(mockedStartAuthentication).not.toHaveBeenCalled();
+});
+
+it('should throw if passkey verify request failed', async () => {
+  const { result } = renderHook(() => useUser(), { wrapper });
+
+  mockPasskeyOptions(200, { options: {}, challenge: 'fake-challenge', rpId: 'bgm.tv' });
+  mockedStartAuthentication.mockResolvedValue(fakeCredential);
+  mockPasskeyVerify(401);
+  await waitFor(async () => {
+    await expect(result.current.passkeyLogin()).rejects.toThrow();
+  });
+});
+
+it('should return false if user cancelled authentication', async () => {
+  const { result } = renderHook(() => useUser(), { wrapper });
+
+  mockPasskeyOptions(200, { options: {}, challenge: 'fake-challenge', rpId: 'bgm.tv' });
+  mockedStartAuthentication.mockRejectedValue(new DOMException('canceled', 'NotAllowedError'));
+  await waitFor(async () => {
+    await expect(result.current.passkeyLogin()).resolves.toBe(false);
+  });
+});
+
+it('should throw if authentication failed with unexpected error', async () => {
+  const { result } = renderHook(() => useUser(), { wrapper });
+
+  mockPasskeyOptions(200, { options: {}, challenge: 'fake-challenge', rpId: 'bgm.tv' });
+  mockedStartAuthentication.mockRejectedValue(new Error('browser error'));
+  await waitFor(async () => {
+    await expect(result.current.passkeyLogin()).rejects.toThrow('browser error');
   });
 });

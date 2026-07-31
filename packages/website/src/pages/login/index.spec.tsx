@@ -1,3 +1,5 @@
+import type { AuthenticationResponseJSON } from '@simplewebauthn/browser';
+import { startAuthentication } from '@simplewebauthn/browser';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
@@ -9,6 +11,24 @@ import { redirectTo } from '@bangumi/website/utils/route';
 
 import { server as mockServer } from '../../mocks/server';
 import LoginPage from '.';
+
+vi.mock('@simplewebauthn/browser', () => ({
+  startAuthentication: vi.fn(),
+}));
+
+const mockedStartAuthentication = vi.mocked(startAuthentication);
+
+const fakeCredential: AuthenticationResponseJSON = {
+  id: 'fake-id',
+  rawId: 'fake-raw-id',
+  type: 'public-key',
+  response: {
+    clientDataJSON: 'fake-client-data',
+    authenticatorData: 'fake-authenticator-data',
+    signature: 'fake-signature',
+  },
+  clientExtensionResults: {},
+};
 
 vi.mock('@bangumi/website/utils/route', () => ({
   redirectTo: vi.fn(),
@@ -162,5 +182,73 @@ it('should validate user input', async () => {
 
   await waitFor(() => {
     expect(getByText('请输入密码'));
+  });
+});
+
+describe('passkey login', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.stubGlobal('PublicKeyCredential', class PublicKeyCredential {});
+    mockServer.use(
+      http.post('http://localhost:3000/p1/passkey/login/options', () =>
+        HttpResponse.json({ options: {}, challenge: 'fake-challenge', rpId: 'bgm.tv' }),
+      ),
+      http.post('http://localhost:3000/p1/passkey/login/verify', () =>
+        HttpResponse.json({ id: 1, username: 'fakeuser' }),
+      ),
+    );
+    mockedStartAuthentication.mockResolvedValue(fakeCredential);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it('should show passkey login button when WebAuthn is supported', () => {
+    const { getByText } = renderLoginPage();
+
+    expect(getByText('使用 Passkey 登录')).toBeInTheDocument();
+  });
+
+  it('should hide passkey login button when WebAuthn is not supported', () => {
+    vi.unstubAllGlobals();
+    const { queryByText } = renderLoginPage();
+
+    expect(queryByText('使用 Passkey 登录')).not.toBeInTheDocument();
+  });
+
+  it('should redirect user to homepage after passkey login succeeded', async () => {
+    const mockedNavigate = vi.fn();
+    mockedUseNavigate.mockReturnValue(mockedNavigate);
+    mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+    mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
+
+    const { getByText } = renderLoginPage();
+    fireEvent.click(getByText('使用 Passkey 登录'));
+
+    await waitFor(() => {
+      expect(redirectTo).toHaveBeenCalledWith('/');
+    });
+  });
+
+  it('should show error message when passkey login failed', async () => {
+    const mockedNavigate = vi.fn();
+    mockedUseNavigate.mockReturnValue(mockedNavigate);
+    mockedUseLocation.mockReturnValue({ key: 'default' } as any);
+    mockedUseSearchParams.mockReturnValue([new URLSearchParams(), vi.fn()] as any);
+
+    mockServer.use(
+      http.post('http://localhost:3000/p1/passkey/login/verify', () =>
+        HttpResponse.json({ message: 'passkey login failed' }, { status: 401 }),
+      ),
+    );
+
+    const { getByText } = renderLoginPage();
+    fireEvent.click(getByText('使用 Passkey 登录'));
+
+    await waitFor(() => {
+      expect(getByText('Passkey 登录失败，请稍后再试')).toBeInTheDocument();
+    });
+    expect(redirectTo).not.toHaveBeenCalled();
   });
 });
