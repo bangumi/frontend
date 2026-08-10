@@ -1,6 +1,7 @@
 import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
+import { SWRConfig } from 'swr';
 
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
@@ -40,7 +41,13 @@ describe('HomePage', () => {
 
   const renderHome = async () => {
     await act(async () => {
-      renderPage(<HomePage />);
+      renderPage(
+        <SWRConfig value={{ provider: () => new Map() }}>
+          <React.Suspense fallback={null}>
+            <HomePage />
+          </React.Suspense>
+        </SWRConfig>,
+      );
     });
   };
 
@@ -75,6 +82,118 @@ describe('HomePage', () => {
       expect(link).not.toHaveAttribute('target');
     }
     expect(document.querySelector('a[href="https://bgm.tv/subject/12"]')).not.toBeInTheDocument();
+  });
+
+  it('should render timeline subject cards and action summaries', async () => {
+    const baseTimeline = homeFixture.timeline[0];
+    const anime = {
+      id: 268070,
+      name: '荒ぶる季節の乙女どもよ。',
+      nameCN: '骚动时节的少女们啊',
+      type: 2,
+      info: '12话 / 2019年7月5日 / 安藤真裕',
+      metaTags: [],
+      rating: { rank: 0, count: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], score: 0, total: 0 },
+      locked: false,
+      nsfw: false,
+      images: {
+        large: '/anime-large.jpg',
+        common: '/anime-common.jpg',
+        medium: '/anime-medium.jpg',
+        small: '/anime-small.jpg',
+        grid: '/anime-grid.jpg',
+      },
+    };
+    const book = {
+      ...anime,
+      id: 467390,
+      name: '冒険者になれなかった俺',
+      nameCN: '没能成为冒险者的我',
+      type: 1,
+      info: '2024-09-27 / ぺい / KADOKAWA',
+      images: {
+        large: '/book-large.jpg',
+        common: '/book-common.jpg',
+        medium: '/book-medium.jpg',
+        small: '/book-small.jpg',
+        grid: '/book-grid.jpg',
+      },
+    };
+
+    mockServer.use(
+      http.get('http://localhost:3000/p1/home', () =>
+        HttpResponse.json({
+          ...homeFixture,
+          timeline: [
+            {
+              ...baseTimeline,
+              id: 9002,
+              cat: 4,
+              type: 2,
+              source: { name: 'Chobits iOS', url: 'https://bgm.tv/group/topic/1' },
+              memo: {
+                progress: {
+                  single: {
+                    subject: anime,
+                    episode: {
+                      id: 893064,
+                      subjectID: anime.id,
+                      sort: 6,
+                      type: 0,
+                      disc: 0,
+                      name: '乙女は森のなか',
+                      nameCN: '少女隐于林',
+                      duration: '24m',
+                      airdate: '2019-08-09',
+                      comment: 0,
+                      desc: '',
+                    },
+                  },
+                },
+              },
+            },
+            {
+              ...baseTimeline,
+              id: 9003,
+              cat: 4,
+              type: 0,
+              memo: {
+                progress: {
+                  batch: {
+                    epsTotal: '??',
+                    epsUpdate: 26,
+                    volsTotal: '??',
+                    subject: book,
+                  },
+                },
+              },
+            },
+            {
+              ...baseTimeline,
+              id: 9004,
+              cat: 3,
+              type: 13,
+              memo: { subject: [{ subject: book, comment: '', rate: 0 }] },
+            },
+          ],
+        }),
+      ),
+    );
+    await renderHome();
+
+    const episodeLink = await screen.findByRole('link', { name: 'ep.6 乙女は森のなか' });
+    expect(episodeLink).toHaveAttribute('href', '/ep/893064');
+    expect(screen.getByRole('img', { name: '骚动时节的少女们啊' })).toHaveAttribute(
+      'src',
+      '/anime-grid.jpg',
+    );
+    expect(screen.getByText(/读过.*第26话/)).toBeInTheDocument();
+    expect(screen.getByText(/搁置了/)).toBeInTheDocument();
+    expect(screen.getByText('2024-09-27 / ぺい / KADOKAWA')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Chobits iOS' })).toHaveAttribute(
+      'href',
+      'https://bgm.tv/group/topic/1',
+    );
   });
 
   it('should mark the last unwatched episode as watched', async () => {

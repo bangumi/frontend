@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
-import { TimelineCat } from '@bangumi/client/client';
+import { SubjectType, TimelineCat } from '@bangumi/client/client';
 import { Avatar, toast, Typography } from '@bangumi/design';
 import {
   getBlogLink,
+  getEpisodeLink,
   getIndexLink,
   getSubjectLink,
   getUserProfileLink,
@@ -36,6 +37,28 @@ const PRIMARY_TIMELINE_CATEGORIES = new Set<TimelineCat>([
   TimelineCat.Blog,
 ]);
 
+const SUBJECT_ACTIONS: Record<number, string> = {
+  1: '想读',
+  2: '想看',
+  3: '想听',
+  4: '想玩',
+  5: '读过',
+  6: '看过',
+  7: '听过',
+  8: '玩过',
+  9: '在读',
+  10: '在看',
+  11: '在听',
+  12: '在玩',
+  13: '搁置了',
+  14: '抛弃了',
+};
+
+interface TimelineContent {
+  summary: React.ReactNode;
+  attachment?: React.ReactNode;
+}
+
 /** 相对时间，对齐 PHP GlobalCore::make_descriptive_time */
 function makeDescriptiveTime(timestamp: number): string {
   const now = DateTime.now();
@@ -57,109 +80,184 @@ function makeDescriptiveTime(timestamp: number): string {
   return time.toFormat('MM-dd');
 }
 
-function SubjectName({ subject }: { subject: SlimSubject }) {
-  return <Link to={getSubjectLink(subject.id)}>{subject.nameCN || subject.name}</Link>;
-}
-
-function renderStatus(timeline: Timeline): React.ReactNode {
-  const status = timeline.memo.status;
-  if (status?.nickname) {
-    return (
-      <>
-        将昵称修改为
-        <strong>{status.nickname.after}</strong>
-      </>
-    );
-  }
-  const text = status?.sign ?? status?.tsukkomi;
-  if (text) {
-    return <p className={styles.statusText}>{text}</p>;
-  }
-  return null;
-}
-
-function renderSubject(timeline: Timeline): React.ReactNode {
-  const list = timeline.memo.subject ?? [];
+function SubjectName({ subject, original = false }: { subject: SlimSubject; original?: boolean }) {
   return (
-    <>
-      {list.map((item, i) => (
-        <span key={i}>
-          {i > 0 && '、'}
-          <SubjectName subject={item.subject} />
-        </span>
-      ))}
-      已收藏
-      {list[0]?.comment && <p className={styles.statusText}>{list[0].comment}</p>}
-    </>
+    <Link to={getSubjectLink(subject.id)}>
+      {original ? subject.name : subject.nameCN || subject.name}
+    </Link>
   );
 }
 
-function renderProgress(timeline: Timeline): React.ReactNode {
-  const progress = timeline.memo.progress;
-  if (progress?.single) {
-    const { subject, episode } = progress.single;
-    return (
-      <>
-        看过
-        <SubjectName subject={subject} />第 {episode.sort} 话
-      </>
-    );
+function SubjectCard({ subject, detailed = false }: { subject: SlimSubject; detailed?: boolean }) {
+  const name = subject.nameCN || subject.name;
+  const image = detailed ? subject.images?.small : subject.images?.grid;
+
+  return (
+    <div className={`${styles.subjectCard} ${detailed ? styles.subjectCardDetailed : ''}`}>
+      {image && (
+        <Link to={getSubjectLink(subject.id)} noStyle className={styles.subjectCoverLink}>
+          <img className={styles.subjectCover} src={image} alt={name} loading='lazy' />
+        </Link>
+      )}
+      <div className={styles.subjectInfo}>
+        <Link to={getSubjectLink(subject.id)} noStyle className={styles.subjectTitle}>
+          {name}
+        </Link>
+        {detailed && subject.info && <div className={styles.subjectMeta}>{subject.info}</div>}
+      </div>
+    </div>
+  );
+}
+
+function renderStatus(timeline: Timeline): TimelineContent | null {
+  const status = timeline.memo.status;
+  if (status?.nickname) {
+    return {
+      summary: (
+        <>
+          将昵称修改为
+          <strong>{status.nickname.after}</strong>
+        </>
+      ),
+    };
   }
-  if (progress?.batch) {
-    const { subject, epsUpdate, epsTotal, volsUpdate, volsTotal } = progress.batch;
-    return (
-      <>
-        更新了
-        <SubjectName subject={subject} />
-        的进度到 {epsUpdate ?? '?'}/{epsTotal}
-        {volsTotal ? ` (${volsUpdate ?? '?'}/${volsTotal} 卷)` : ''}
-      </>
-    );
+  const text = status?.sign ?? status?.tsukkomi;
+  if (text) {
+    return { summary: <p className={styles.statusText}>{text}</p> };
   }
   return null;
 }
 
-function renderWiki(timeline: Timeline): React.ReactNode {
+function renderSubject(timeline: Timeline): TimelineContent | null {
+  const list = timeline.memo.subject ?? [];
+  if (list.length === 0) {
+    return null;
+  }
+
+  return {
+    summary: (
+      <>
+        {SUBJECT_ACTIONS[timeline.type] ?? '收藏了'}{' '}
+        {list.map((item, i) => (
+          <React.Fragment key={item.subject.id}>
+            {i > 0 && '、'}
+            <SubjectName subject={item.subject} original />
+          </React.Fragment>
+        ))}
+      </>
+    ),
+    attachment: (
+      <div className={styles.subjectCards}>
+        {list.map((item) => (
+          <div key={item.subject.id}>
+            {item.comment && <p className={styles.subjectComment}>{item.comment}</p>}
+            <SubjectCard subject={item.subject} detailed />
+          </div>
+        ))}
+      </div>
+    ),
+  };
+}
+
+function completedVerb(subjectType: SubjectType): string {
+  switch (subjectType) {
+    case SubjectType.Book:
+      return '读过';
+    case SubjectType.Music:
+      return '听过';
+    case SubjectType.Game:
+      return '玩过';
+    default:
+      return '看过';
+  }
+}
+
+function renderProgress(timeline: Timeline): TimelineContent | null {
+  const progress = timeline.memo.progress;
+  if (progress?.single) {
+    const { subject, episode } = progress.single;
+    return {
+      summary: (
+        <>
+          {timeline.type === 1 ? '想看' : timeline.type === 3 ? '抛弃' : '看过'}{' '}
+          <Link to={getEpisodeLink(episode.id)}>
+            ep.{episode.sort} {episode.name || episode.nameCN}
+          </Link>
+        </>
+      ),
+      attachment: <SubjectCard subject={subject} />,
+    };
+  }
+  if (progress?.batch) {
+    const { subject, epsUpdate, epsTotal, volsUpdate, volsTotal } = progress.batch;
+    return {
+      summary: (
+        <>
+          {subject.type === SubjectType.Book ? completedVerb(subject.type) : '完成了'}{' '}
+          <SubjectName subject={subject} original />{' '}
+          {subject.type === SubjectType.Book ? (
+            <>
+              {volsUpdate != null && volsUpdate > 0 && `第${volsUpdate}卷 `}
+              {epsUpdate != null && epsUpdate > 0 && `第${epsUpdate}话`}
+            </>
+          ) : (
+            `${epsUpdate ?? '?'} of ${epsTotal} 话`
+          )}
+        </>
+      ),
+      attachment: <SubjectCard subject={subject} />,
+    };
+  }
+  return null;
+}
+
+function renderWiki(timeline: Timeline): TimelineContent | null {
   const subject = timeline.memo.wiki?.subject;
   if (!subject) {
     return null;
   }
-  return (
-    <>
-      编辑了
-      <SubjectName subject={subject} />
-      的维基信息
-    </>
-  );
+  return {
+    summary: (
+      <>
+        编辑了
+        <SubjectName subject={subject} />
+        的维基信息
+      </>
+    ),
+  };
 }
 
-function renderBlog(timeline: Timeline): React.ReactNode {
+function renderBlog(timeline: Timeline): TimelineContent | null {
   const blog = timeline.memo.blog;
   if (!blog) {
     return null;
   }
-  return (
-    <>
-      发表了日志
-      <Link to={getBlogLink(blog.id)}>{blog.title}</Link>
-    </>
-  );
+  return {
+    summary: (
+      <>
+        发表了日志
+        <Link to={getBlogLink(blog.id)}>{blog.title}</Link>
+      </>
+    ),
+  };
 }
 
-function renderIndex(timeline: Timeline): React.ReactNode {
+function renderIndex(timeline: Timeline): TimelineContent | null {
   const index = timeline.memo.index;
   if (!index) {
     return null;
   }
-  return (
-    <>
-      更新了目录
-      <Link to={getIndexLink(index.id)}>{index.title}</Link>
-    </>
-  );
+  return {
+    summary: (
+      <>
+        更新了目录
+        <Link to={getIndexLink(index.id)}>{index.title}</Link>
+      </>
+    ),
+  };
 }
 
-function renderMono(timeline: Timeline): React.ReactNode {
+function renderMono(timeline: Timeline): TimelineContent | null {
   const mono = timeline.memo.mono;
   if (!mono) {
     return null;
@@ -167,10 +265,10 @@ function renderMono(timeline: Timeline): React.ReactNode {
   const names = [...mono.characters.map((c) => c.name), ...mono.persons.map((p) => p.name)].join(
     '、',
   );
-  return names ? <>更新了人物/角色：{names}</> : null;
+  return names ? { summary: <>更新了人物/角色：{names}</> } : null;
 }
 
-function renderDaily(timeline: Timeline): React.ReactNode {
+function renderDaily(timeline: Timeline): TimelineContent | null {
   const daily = timeline.memo.daily;
   if (!daily) {
     return null;
@@ -179,10 +277,10 @@ function renderDaily(timeline: Timeline): React.ReactNode {
     ...(daily.groups ?? []).map((g) => g.title),
     ...(daily.users ?? []).map((u) => u.nickname),
   ].join('、');
-  return names ? <>更新了每日推荐：{names}</> : null;
+  return names ? { summary: <>更新了每日推荐：{names}</> } : null;
 }
 
-function renderDesc(timeline: Timeline): React.ReactNode {
+function renderContent(timeline: Timeline): TimelineContent | null {
   switch (timeline.cat as TimelineCat) {
     case TimelineCat.Status:
       return renderStatus(timeline);
@@ -210,8 +308,8 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
   if (!user) {
     return null;
   }
-  const desc = renderDesc(timeline);
-  if (desc == null) {
+  const content = renderContent(timeline);
+  if (content == null) {
     return null;
   }
 
@@ -222,20 +320,30 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
         className={styles.avatarLink}
         title={user.nickname}
       >
-        <Avatar src={user.avatar.large} size='medium' />
+        <Avatar src={user.avatar.large} size='small' wrapperClass={styles.avatar} />
       </Link>
       <div className={styles.info}>
-        <div>
-          <Link to={getUserProfileLink(user.username)} fontWeight='bold'>
-            {user.nickname}
-          </Link>{' '}
-          <span className={styles.desc}>{desc}</span>
+        <div className={styles.summary}>
+          <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>{' '}
+          <span className={styles.desc}>{content.summary}</span>
         </div>
+        {content.attachment}
         <div className={styles.time}>
           <span title={DateTime.fromSeconds(timeline.createdAt).toFormat('yyyy-MM-dd HH:mm')}>
             {makeDescriptiveTime(timeline.createdAt)}
           </span>
-          {timeline.source.name != null && <span> · {timeline.source.name}</span>}
+          {timeline.source.name != null && (
+            <>
+              <span> · </span>
+              {timeline.source.url ? (
+                <Link isExternal to={timeline.source.url} className={styles.sourceLink}>
+                  {timeline.source.name}
+                </Link>
+              ) : (
+                <span>{timeline.source.name}</span>
+              )}
+            </>
+          )}
         </div>
       </div>
     </li>
