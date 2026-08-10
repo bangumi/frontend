@@ -273,11 +273,25 @@ function renderDaily(timeline: Timeline): TimelineContent | null {
   if (!daily) {
     return null;
   }
-  const names = [
-    ...(daily.groups ?? []).map((g) => g.title),
-    ...(daily.users ?? []).map((u) => u.nickname),
-  ].join('、');
-  return names ? { summary: <>更新了每日推荐：{names}</> } : null;
+  switch (timeline.type) {
+    case 2: {
+      // 添加好友
+      const names = (daily.users ?? []).map((u) => u.nickname).join('、');
+      return names ? { summary: <>和 {names} 成为了好友</> } : null;
+    }
+    case 3: {
+      // 加入小组
+      const names = (daily.groups ?? []).map((g) => g.title).join('、');
+      return names ? { summary: <>加入了小组 {names}</> } : null;
+    }
+    case 4: {
+      // 创建小组
+      const names = (daily.groups ?? []).map((g) => g.title).join('、');
+      return names ? { summary: <>创建了小组 {names}</> } : null;
+    }
+    default:
+      return null;
+  }
 }
 
 function renderContent(timeline: Timeline): TimelineContent | null {
