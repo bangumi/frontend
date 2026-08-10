@@ -62,9 +62,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
             <span className='bgm-editor__bbcode-tip__left'>
               使用 Ctrl+Enter 或 Alt+S 快速提交 |{' '}
             </span>
-            <Link isExternal to='https://bgm.tv/help/bbcode'>
-              BBCode指南
-            </Link>
+            <Link to='/help/bbcode'>BBCode指南</Link>
           </span>
         </div>
       </div>

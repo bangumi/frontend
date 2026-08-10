@@ -26,11 +26,11 @@ const SideTopicList: React.FC<{ items: SideTopicItem[] }> = ({ items }) => {
     <ul className={styles.list}>
       {items.map((item) => (
         <li key={item.id} className={styles.item}>
-          <Link to={getUserProfileLink(item.creatorUsername)} isExternal>
+          <Link to={getUserProfileLink(item.creatorUsername)}>
             <Avatar src={item.creatorAvatar} size='small' alt='' />
           </Link>
           <div className={styles.info}>
-            <Link to={item.topicLink} isExternal className={styles.title} title={item.title}>
+            <Link to={item.topicLink} className={styles.title} title={item.title}>
               {item.title}
             </Link>
             <small className={styles.replies}>(+{item.replyCount})</small>

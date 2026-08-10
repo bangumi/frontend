@@ -43,9 +43,7 @@ const RenderContent = memo(({ state, content }: { state: State; content: string 
       return (
         <div className='bgm-comment__content--deleted'>
           内容因违反「
-          <Link to='https://bgm.tv/about/guideline' isExternal>
-            社区指导原则
-          </Link>
+          <Link to='/about/guideline'>社区指导原则</Link>
           」已被删除
         </div>
       );
@@ -127,9 +125,7 @@ const Comment: FC<CommentProps> = ({
         <span className='bgm-comment__tip'>
           <div className='creator-info'>
             <SpecialStateIcon state={state} />
-            <Link to={url} isExternal>
-              {creator?.nickname ?? ''}
-            </Link>
+            <Link to={url}>{creator?.nickname ?? ''}</Link>
             <RenderContent state={state} content={content} />
           </div>
           <CommentInfo createdAt={createdAt} floor={floor} isSpecial={isSpecial} />
@@ -170,9 +166,7 @@ const Comment: FC<CommentProps> = ({
           <div className='bgm-comment__main'>
             <span className='bgm-comment__tip'>
               <div className='creator-info'>
-                <Link to={url} isExternal>
-                  {creator?.nickname ?? ''}
-                </Link>
+                <Link to={url}>{creator?.nickname ?? ''}</Link>
                 {originalPosterId === creator?.id ? <OriginalPoster /> : null}
                 {!isReply && creator?.sign ? <span>{`(${creator.sign})`}</span> : null}
               </div>

@@ -2,7 +2,7 @@ import React from 'react';
 
 import type { GroupTopic, SlimGroup } from '@bangumi/client/client';
 import { Avatar, Typography } from '@bangumi/design';
-import { getGroupTopicLink } from '@bangumi/utils/pages';
+import { getGroupLink, getGroupListLink, getGroupTopicLink } from '@bangumi/utils/pages';
 
 import styles from './GroupTopicsBlock.module.less';
 import HomeSidePanel from './HomeSidePanel';
@@ -26,9 +26,7 @@ const GroupTopicsBlock: React.FC<{
             {famousGroups.slice(0, 8).map((group) => (
               <li key={group.id} className={styles.groupItem}>
                 <Link
-                  to={`https://bgm.tv/group/${group.name}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
+                  to={getGroupLink(group.name)}
                   className={styles.groupLink}
                   title={group.title}
                 >
@@ -40,9 +38,7 @@ const GroupTopicsBlock: React.FC<{
             ))}
           </ul>
           <div className={styles.more}>
-            <Link to='https://bgm.tv/group/all' target='_blank' rel='noopener noreferrer'>
-              更多小组 »
-            </Link>
+            <Link to={getGroupListLink()}>更多小组 »</Link>
           </div>
         </div>
       ) : (
@@ -54,15 +50,7 @@ const GroupTopicsBlock: React.FC<{
             creatorAvatar: topic.creator?.avatar.small ?? '',
             creatorUsername: topic.creator?.username ?? '',
             topicLink: getGroupTopicLink(topic.id),
-            extra: (
-              <Link
-                to={`https://bgm.tv/group/${topic.group.name}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {topic.group.title}
-              </Link>
-            ),
+            extra: <Link to={getGroupLink(topic.group.name)}>{topic.group.title}</Link>,
           }))}
         />
       )}

@@ -1,6 +1,8 @@
 import React, { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 
+import LegacyRedirect from './components/PageRoutes/LegacyRedirect';
+
 const RootIndex = lazy(async () => import('./pages/index'));
 const MatchAll = lazy(async () => import('./pages/index/[...slug]'));
 const HomeIndex = lazy(async () => import('./pages/index/index'));
@@ -24,11 +26,56 @@ const WikiHome = lazy(async () => import('./pages/index/subject/[id]/wiki/index'
 const WikiUploadImg = lazy(async () => import('./pages/index/subject/[id]/wiki/upload_img'));
 const Login = lazy(async () => import('./pages/login'));
 
+const legacyPagePaths = [
+  'about',
+  'about/guideline',
+  'about/copyright',
+  'about/link2us',
+  'award/2021',
+  'blog/:id',
+  'calendar',
+  'character/:id',
+  'dev/app',
+  'dollars',
+  'ep/:id',
+  'goodies',
+  'group/all',
+  'group/discover',
+  'group/mine',
+  'group/my_reply',
+  'group/my_topic',
+  'help/bbcode',
+  'index',
+  'index/:id',
+  'index/:id/comments',
+  'magi',
+  'onair',
+  'person/:id',
+  'register',
+  'subject/:id/board',
+  'subject/:id/characters',
+  'subject/:id/collections',
+  'subject/:id/comments',
+  'subject/:id/ep',
+  'subject/:id/persons',
+  'subject/:id/relations',
+  'subject/:id/reviews',
+  'subject/:id/stats',
+  'subject/ep/:id',
+  'subject/tag/:tag',
+  'subject/topic/:id',
+  'tokei',
+  'user/:username',
+  'user/:username/timeline/status/:id',
+  'wiki',
+] as const;
+
 export const pageRoutes: RouteObject[] = [
   {
     path: '/',
     element: <RootIndex />,
     children: [
+      ...legacyPagePaths.map((path) => ({ path, element: <LegacyRedirect /> })),
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
       { path: 'notifications', element: <Notifications /> },

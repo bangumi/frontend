@@ -49,6 +49,19 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();
   });
 
+  it('should use centralized subject links', async () => {
+    setup();
+    await renderSubject();
+
+    // header 标题链接指向站内 subject 页
+    expect(screen.getByTitle('测试动画')).toHaveAttribute('href', '/subject/12');
+    // 相关作品/推荐中的 subject 链接不再跳转旧站
+    expect(document.querySelector('a[href="https://bgm.tv/subject/13"]')).not.toBeInTheDocument();
+    expect(
+      document.querySelector('a[href="/subject/12/collections?filter=3"]'),
+    ).toBeInTheDocument();
+  });
+
   it('should collect subject when not collected', async () => {
     setup();
     let patchedBody: unknown = null;

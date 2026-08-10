@@ -14,7 +14,22 @@ import type {
 } from '@bangumi/client/client';
 import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
 import { Avatar, Rate, Typography } from '@bangumi/design';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import {
+  getBlogLink,
+  getCharacterLink,
+  getEpisodeLink,
+  getPersonLink,
+  getSubjectBoardLink,
+  getSubjectCharactersLink,
+  getSubjectCommentsLink,
+  getSubjectEpisodesLink,
+  getSubjectLink,
+  getSubjectRelationsLink,
+  getSubjectReviewsLink,
+  getSubjectTagLink,
+  getSubjectTopicLink,
+  getUserProfileLink,
+} from '@bangumi/utils/pages';
 
 import CollectionPanel from './CollectionPanel';
 import { CAST_TYPE_DESC, COLLECT_DESC } from './subject-common';
@@ -60,9 +75,7 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
         return (
           <li key={ep.id}>
             <Link
-              to={`https://bgm.tv/ep/${ep.id}`}
-              target='_blank'
-              rel='noopener noreferrer'
+              to={getEpisodeLink(ep.id)}
               className={classNames(styles.epBtn, done ? styles.epDone : undefined)}
               title={`ep.${ep.sort} ${ep.name || ep.nameCN}`}
             >
@@ -77,15 +90,7 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
   return (
     <SubjectSection
       title='章节列表'
-      extra={
-        <Link
-          to={`https://bgm.tv/subject/${subject.id}/ep`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          [全部]
-        </Link>
-      }
+      extra={<Link to={getSubjectEpisodesLink(subject.id)}>[全部]</Link>}
     >
       {renderEpGrid(normals)}
       {specials.length > 0 && (
@@ -117,11 +122,7 @@ function TagsSection({ tags }: { tags: Subject['tags'] }) {
       <ul className={styles.tagList}>
         {tags.map((tag) => (
           <li key={tag.name}>
-            <Link
-              to={`https://bgm.tv/subject/tag/${encodeURIComponent(tag.name)}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <Link to={getSubjectTagLink(tag.name)}>
               {tag.name} ({tag.count})
             </Link>
           </li>
@@ -145,47 +146,25 @@ function CharactersSection({
   return (
     <SubjectSection
       title='角色介绍'
-      extra={
-        <Link
-          to={`https://bgm.tv/subject/${subjectId}/characters`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          更多角色 »
-        </Link>
-      }
+      extra={<Link to={getSubjectCharactersLink(subjectId)}>更多角色 »</Link>}
     >
       <ul className={styles.coverGrid}>
         {characters.map(({ character, casts }) => (
           <li key={character.id} className={styles.coverItem}>
             <Link
-              to={`https://bgm.tv/character/${character.id}`}
-              target='_blank'
-              rel='noopener noreferrer'
+              to={getCharacterLink(character.id)}
               className={styles.coverLink}
               title={character.nameCN || character.name}
             >
               <img src={character.images?.grid} className={styles.cover} loading='lazy' alt='' />
             </Link>
             <p className={styles.coverTitle}>
-              <Link
-                to={`https://bgm.tv/character/${character.id}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {character.nameCN || character.name}
-              </Link>
+              <Link to={getCharacterLink(character.id)}>{character.nameCN || character.name}</Link>
             </p>
             {casts.map((cast) => (
               <p key={cast.person.id} className={styles.coverInfo}>
                 <span>{CAST_TYPE_DESC[cast.relation] ?? '出演'}</span>{' '}
-                <Link
-                  to={`https://bgm.tv/person/${cast.person.id}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  {cast.person.name}
-                </Link>
+                <Link to={getPersonLink(cast.person.id)}>{cast.person.name}</Link>
               </p>
             ))}
           </li>
@@ -211,15 +190,7 @@ function RelationsSection({
   return (
     <SubjectSection
       title='关联条目'
-      extra={
-        <Link
-          to={`https://bgm.tv/subject/${subjectId}/relations`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          更多关联 »
-        </Link>
-      }
+      extra={<Link to={getSubjectRelationsLink(subjectId)}>更多关联 »</Link>}
     >
       <ul className={styles.coverGrid}>
         {relations.map(({ subject, relation }) => {
@@ -229,22 +200,14 @@ function RelationsSection({
             <li key={subject.id} className={styles.coverItem}>
               {showSep && <span className={styles.relationSep}>{relation.cn}</span>}
               <Link
-                to={`https://bgm.tv/subject/${subject.id}`}
-                target='_blank'
-                rel='noopener noreferrer'
+                to={getSubjectLink(subject.id)}
                 className={styles.coverLink}
                 title={subject.nameCN || subject.name}
               >
                 <img src={subject.images?.grid} className={styles.cover} loading='lazy' alt='' />
               </Link>
               <p className={styles.coverTitle}>
-                <Link
-                  to={`https://bgm.tv/subject/${subject.id}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  {subject.name}
-                </Link>
+                <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
               </p>
             </li>
           );
@@ -265,22 +228,14 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
         {recs.map(({ subject }) => (
           <li key={subject.id} className={styles.coverItem}>
             <Link
-              to={`https://bgm.tv/subject/${subject.id}`}
-              target='_blank'
-              rel='noopener noreferrer'
+              to={getSubjectLink(subject.id)}
               className={styles.coverLink}
               title={subject.nameCN || subject.name}
             >
               <img src={subject.images?.grid} className={styles.cover} loading='lazy' alt='' />
             </Link>
             <p className={styles.coverTitle}>
-              <Link
-                to={`https://bgm.tv/subject/${subject.id}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {subject.name}
-              </Link>
+              <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
             </p>
           </li>
         ))}
@@ -297,36 +252,20 @@ function ReviewsSection({ subjectId, reviews }: { subjectId: number; reviews: Su
   return (
     <SubjectSection
       title='评论'
-      extra={
-        <Link
-          to={`https://bgm.tv/subject/${subjectId}/reviews`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          更多评论 »
-        </Link>
-      }
+      extra={<Link to={getSubjectReviewsLink(subjectId)}>更多评论 »</Link>}
     >
       <ul className={styles.textList}>
         {reviews.map((review) => (
           <li key={review.id}>
             <Link
-              to={`https://bgm.tv/blog/${review.entry.id}`}
-              target='_blank'
-              rel='noopener noreferrer'
+              to={getBlogLink(review.entry.id)}
               className={styles.textTitle}
               title={review.entry.title}
             >
               {review.entry.title}
             </Link>
             <p className={styles.textInfo}>
-              <Link
-                to={`https://bgm.tv/user/${review.user.username}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                {review.user.nickname}
-              </Link>
+              <Link to={getUserProfileLink(review.user.username)}>{review.user.nickname}</Link>
               <span>{dayjs.unix(review.entry.updatedAt).format('YYYY-M-D')}</span>
             </p>
           </li>
@@ -348,21 +287,12 @@ function TopicsSection({ subjectId, topics }: { subjectId: number; topics: Topic
           {topics.map((topic) => (
             <tr key={topic.id}>
               <td className={styles.topicSubject}>
-                <Link
-                  to={`https://bgm.tv/subject/topic/${topic.id}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  title={topic.title}
-                >
+                <Link to={getSubjectTopicLink(topic.id)} title={topic.title}>
                   {topic.title}
                 </Link>
               </td>
               <td className={styles.topicInfo}>
-                <Link
-                  to={`https://bgm.tv/user/${topic.creator?.username ?? ''}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
+                <Link to={getUserProfileLink(topic.creator?.username ?? '')}>
                   {topic.creator?.nickname ?? ''}
                 </Link>
               </td>
@@ -372,13 +302,7 @@ function TopicsSection({ subjectId, topics }: { subjectId: number; topics: Topic
           ))}
           <tr>
             <td colSpan={4} className={styles.topicMore}>
-              <Link
-                to={`https://bgm.tv/subject/${subjectId}/board`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                更多讨论 »
-              </Link>
+              <Link to={getSubjectBoardLink(subjectId)}>更多讨论 »</Link>
             </td>
           </tr>
         </tbody>
@@ -401,25 +325,17 @@ function CommentsSection({
   return (
     <SubjectSection
       title='吐槽箱'
-      extra={
-        <Link
-          to={`https://bgm.tv/subject/${subjectId}/comments`}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          更多吐槽 »
-        </Link>
-      }
+      extra={<Link to={getSubjectCommentsLink(subjectId)}>更多吐槽 »</Link>}
     >
       <ul className={styles.commentList}>
         {comments.map((comment) => (
           <li key={comment.id}>
-            <Link to={getUserProfileLink(comment.user.username)} isExternal>
+            <Link to={getUserProfileLink(comment.user.username)}>
               <Avatar src={comment.user.avatar.medium} size='small' alt='' />
             </Link>
             <div className={styles.commentInfo}>
               <div className={styles.commentHeader}>
-                <Link to={getUserProfileLink(comment.user.username)} isExternal fontWeight='bold'>
+                <Link to={getUserProfileLink(comment.user.username)} fontWeight='bold'>
                   {comment.user.nickname}
                 </Link>
                 {comment.rate > 0 && <Rate value={comment.rate} />}

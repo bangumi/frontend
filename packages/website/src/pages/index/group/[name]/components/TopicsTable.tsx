@@ -31,7 +31,6 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
                 <Typography.Link
                   to={getUserProfileLink(topic.creator?.username ?? '')}
                   fontWeight='bold'
-                  isExternal
                 >
                   {topic.creator?.nickname}
                 </Typography.Link>

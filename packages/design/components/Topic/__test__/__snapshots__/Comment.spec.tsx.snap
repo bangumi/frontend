@@ -28,7 +28,8 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
             >
               <a
                 class="bgm-link"
-                href="https://bgm.tv/user/123456789"
+                data-discover="true"
+                href="/user/123456789"
               >
                 用户
               </a>
@@ -95,7 +96,8 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
             >
               <a
                 class="bgm-link"
-                href="https://bgm.tv/user/123456789"
+                data-discover="true"
+                href="/user/123456789"
               >
                 用户
               </a>
@@ -199,7 +201,8 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
               >
                 <a
                   class="bgm-link"
-                  href="https://bgm.tv/user/123456789"
+                  data-discover="true"
+                  href="/user/123456789"
                 >
                   用户
                 </a>
@@ -307,7 +310,8 @@ exports[`Normal Comment > should render 0 1`] = `
             >
               <a
                 class="bgm-link"
-                href="https://bgm.tv/user/123456789"
+                data-discover="true"
+                href="/user/123456789"
               >
                 用户
               </a>
@@ -417,7 +421,8 @@ exports[`Normal Comment > should render 6 1`] = `
             >
               <a
                 class="bgm-link"
-                href="https://bgm.tv/user/123456789"
+                data-discover="true"
+                href="/user/123456789"
               >
                 用户
               </a>
@@ -484,7 +489,8 @@ exports[`Normal Comment > should render 7 1`] = `
             >
               <a
                 class="bgm-link"
-                href="https://bgm.tv/user/123456789"
+                data-discover="true"
+                href="/user/123456789"
               >
                 用户
               </a>
@@ -517,7 +523,8 @@ exports[`Normal Comment > should render 7 1`] = `
             内容因违反「
             <a
               class="bgm-link"
-              href="https://bgm.tv/about/guideline"
+              data-discover="true"
+              href="/about/guideline"
             >
               社区指导原则
             </a>
@@ -558,7 +565,8 @@ exports[`Normal Comment > should render with reply 1`] = `
             >
               <a
                 class="bgm-link"
-                href="https://bgm.tv/user/123456789"
+                data-discover="true"
+                href="/user/123456789"
               >
                 用户
               </a>
@@ -662,7 +670,8 @@ exports[`Normal Comment > should render with reply 1`] = `
               >
                 <a
                   class="bgm-link"
-                  href="https://bgm.tv/user/123456789"
+                  data-discover="true"
+                  href="/user/123456789"
                 >
                   用户
                 </a>
@@ -757,7 +766,8 @@ exports[`Special Comment > should render state is 1 1`] = `
         <div />
         <a
           class="bgm-link"
-          href="https://bgm.tv/user/123456789"
+          data-discover="true"
+          href="/user/123456789"
         >
           用户
         </a>
@@ -792,7 +802,8 @@ exports[`Special Comment > should render state is 2 1`] = `
         <div />
         <a
           class="bgm-link"
-          href="https://bgm.tv/user/123456789"
+          data-discover="true"
+          href="/user/123456789"
         >
           用户
         </a>
@@ -827,7 +838,8 @@ exports[`Special Comment > should render state is 5 1`] = `
         <div />
         <a
           class="bgm-link"
-          href="https://bgm.tv/user/123456789"
+          data-discover="true"
+          href="/user/123456789"
         >
           用户
         </a>

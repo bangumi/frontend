@@ -144,7 +144,8 @@ exports[`Form Components > render compact layout properly 1`] = `
           </span>
           <a
             class="bgm-link"
-            href="https://bgm.tv/help/bbcode"
+            data-discover="true"
+            href="/help/bbcode"
           >
             BBCode指南
           </a>
