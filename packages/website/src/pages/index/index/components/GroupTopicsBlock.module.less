@@ -1,0 +1,85 @@
+@import '@bangumi/design/theme/base';
+
+.inner {
+  margin: 5px 10px;
+  font-size: 13px;
+}
+
+.tip {
+  color: @gray-60;
+  margin: 0 0 8px;
+}
+
+.groups {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.groupItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  overflow: hidden;
+}
+
+.groupLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.groupTitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.members {
+  color: @gray-60;
+  flex: none;
+}
+
+.more {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.topicList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topicItem {
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid @gray-10;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.topicInfo {
+  min-width: 0;
+  line-height: 1.5;
+}
+
+.topicTitle {
+  word-break: break-all;
+}
+
+.replies {
+  color: @gray-60;
+}
+
+.groupName {
+  margin: 2px 0 0;
+  color: @gray-60;
+  font-size: 12px;
+}

@@ -6,12 +6,12 @@ import fetch from 'node-fetch';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-const openapiURL = process.env.OPENAPI_URL || 'https://bangumi.github.io/dev-docs/api.yaml';
+const openapiURL = process.env.OPENAPI_URL || 'https://bangumi.github.io/dev-docs/api.json';
 
 async function fetchSchema(url) {
   const res = await fetch(url);
   const text = await res.text();
-  await fs.writeFile(path.resolve(__dirname, '..', 'api.yaml'), text);
+  await fs.writeFile(path.resolve(__dirname, '..', 'api.json'), text);
 }
 
 await fetchSchema(openapiURL);

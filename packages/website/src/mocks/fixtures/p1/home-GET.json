@@ -1,0 +1,415 @@
+{
+  "progress": [
+    {
+      "subject": {
+        "id": 12,
+        "type": 2,
+        "name": "Test Anime",
+        "nameCN": "测试动画",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/12.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/12.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/12.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/12.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/12.jpg"
+        },
+        "info": "",
+        "locked": false,
+        "metaTags": [],
+        "nsfw": false,
+        "rating": {
+          "rank": 100,
+          "total": 1234,
+          "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "score": 8.1
+        },
+        "eps": 12,
+        "volumes": 0,
+        "series": false,
+        "doing": 4321,
+        "airDate": "2026-04-01",
+        "weekday": 3
+      },
+      "interest": {
+        "id": 1,
+        "type": 3,
+        "epStatus": 5,
+        "volStatus": 0,
+        "comment": "",
+        "tags": [],
+        "rate": 0,
+        "private": false,
+        "updatedAt": 1775000000
+      },
+      "percent": 41.67,
+      "todayOnAir": false,
+      "lastUnwatchedEp": { "id": 100, "sort": 6 },
+      "eps": [
+        {
+          "id": 100,
+          "type": 0,
+          "sort": 1,
+          "name": "第1话",
+          "nameCN": "",
+          "airdate": "2026-04-01",
+          "duration": "24m",
+          "disc": 0,
+          "desc": "",
+          "comment": 0,
+          "subjectID": 12,
+          "collection": { "status": 2 }
+        },
+        {
+          "id": 101,
+          "type": 0,
+          "sort": 2,
+          "name": "第2话",
+          "nameCN": "",
+          "airdate": "2026-04-08",
+          "duration": "24m",
+          "disc": 0,
+          "desc": "",
+          "comment": 0,
+          "subjectID": 12
+        }
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "id": 9001,
+      "uid": 382951,
+      "user": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "cat": 5,
+      "type": 0,
+      "memo": {
+        "status": {
+          "sign": "今天天气真好"
+        }
+      },
+      "replies": 0,
+      "batch": false,
+      "source": { "name": "Web" },
+      "createdAt": 1775000000
+    }
+  ],
+  "groupTopics": [
+    {
+      "id": 101,
+      "title": "小组话题标题",
+      "creator": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "creatorID": 382951,
+      "parentID": 4215,
+      "replyCount": 3,
+      "state": 0,
+      "display": 1,
+      "createdAt": 1774000000,
+      "updatedAt": 1774500000,
+      "group": {
+        "id": 4215,
+        "name": "sandbox",
+        "title": "测试小组",
+        "icon": {
+          "large": "https://lain.bgm.tv/img/icon/l/00/00/4215.jpg",
+          "medium": "https://lain.bgm.tv/img/icon/m/00/00/4215.jpg",
+          "small": "https://lain.bgm.tv/img/icon/s/00/00/4215.jpg"
+        },
+        "members": 1234,
+        "accessible": true,
+        "nsfw": false,
+        "createdAt": 1500000000,
+        "creatorID": 382951
+      },
+      "replies": []
+    }
+  ],
+  "famousGroups": [
+    {
+      "id": 4215,
+      "name": "sandbox",
+      "title": "热门测试小组",
+      "icon": {
+        "large": "https://lain.bgm.tv/img/icon/l/00/00/4215.jpg",
+        "medium": "https://lain.bgm.tv/img/icon/m/00/00/4215.jpg",
+        "small": "https://lain.bgm.tv/img/icon/s/00/00/4215.jpg"
+      },
+      "members": 9999,
+      "accessible": true,
+      "nsfw": false,
+      "createdAt": 1500000000,
+      "creatorID": 382951
+    }
+  ],
+  "hotSubjectTopics": [
+    {
+      "id": 202,
+      "title": "热门讨论标题",
+      "creator": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "creatorID": 382951,
+      "parentID": 12,
+      "replyCount": 8,
+      "state": 0,
+      "display": 1,
+      "createdAt": 1774000000,
+      "updatedAt": 1774500000,
+      "subject": {
+        "id": 12,
+        "type": 2,
+        "name": "Test Anime",
+        "nameCN": "测试动画",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/12.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/12.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/12.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/12.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/12.jpg"
+        },
+        "info": "",
+        "locked": false,
+        "metaTags": [],
+        "nsfw": false,
+        "rating": {
+          "rank": 100,
+          "total": 1234,
+          "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          "score": 8.1
+        }
+      },
+      "replies": []
+    }
+  ],
+  "calendar": {
+    "1": [
+      {
+        "subject": {
+          "id": 1,
+          "type": 2,
+          "name": "Mon Anime",
+          "nameCN": "周一动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/01.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/01.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/01.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/01.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/01.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 1,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 8.5
+          }
+        },
+        "watchers": 100
+      }
+    ],
+    "2": [
+      {
+        "subject": {
+          "id": 2,
+          "type": 2,
+          "name": "Tue Anime",
+          "nameCN": "周二动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/02.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/02.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/02.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/02.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/02.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 2,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 8.4
+          }
+        },
+        "watchers": 200
+      }
+    ],
+    "3": [
+      {
+        "subject": {
+          "id": 3,
+          "type": 2,
+          "name": "Wed Anime",
+          "nameCN": "周三动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/03.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/03.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/03.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/03.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/03.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 3,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 8.3
+          }
+        },
+        "watchers": 300
+      }
+    ],
+    "4": [
+      {
+        "subject": {
+          "id": 4,
+          "type": 2,
+          "name": "Thu Anime",
+          "nameCN": "周四动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/04.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/04.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/04.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/04.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/04.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 4,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 8.2
+          }
+        },
+        "watchers": 400
+      }
+    ],
+    "5": [
+      {
+        "subject": {
+          "id": 5,
+          "type": 2,
+          "name": "Fri Anime",
+          "nameCN": "周五动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/05.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/05.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/05.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/05.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/05.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 5,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 8.1
+          }
+        },
+        "watchers": 500
+      }
+    ],
+    "6": [
+      {
+        "subject": {
+          "id": 6,
+          "type": 2,
+          "name": "Sat Anime",
+          "nameCN": "周六动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/06.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/06.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/06.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/06.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/06.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 6,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 8.0
+          }
+        },
+        "watchers": 600
+      }
+    ],
+    "7": [
+      {
+        "subject": {
+          "id": 7,
+          "type": 2,
+          "name": "Sun Anime",
+          "nameCN": "周日动画",
+          "images": {
+            "large": "https://lain.bgm.tv/pic/cover/l/00/00/07.jpg",
+            "common": "https://lain.bgm.tv/pic/cover/c/00/00/07.jpg",
+            "medium": "https://lain.bgm.tv/pic/cover/m/00/00/07.jpg",
+            "small": "https://lain.bgm.tv/pic/cover/s/00/00/07.jpg",
+            "grid": "https://lain.bgm.tv/pic/cover/g/00/00/07.jpg"
+          },
+          "info": "",
+          "locked": false,
+          "metaTags": [],
+          "nsfw": false,
+          "rating": {
+            "rank": 7,
+            "total": 100,
+            "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            "score": 7.9
+          }
+        },
+        "watchers": 700
+      }
+    ]
+  }
+}

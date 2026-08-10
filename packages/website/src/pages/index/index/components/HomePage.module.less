@@ -1,0 +1,43 @@
+@import '@bangumi/design/theme/base';
+
+.page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.greets {
+  font-size: 24px;
+  margin: 0 0 10px;
+
+  @media (max-width: @sm) {
+    font-size: 20px;
+  }
+}
+
+.columns {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.columnLeft {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.columnRight {
+  flex: 0 0 280px;
+  width: 280px;
+  box-sizing: border-box;
+}
+
+@media (max-width: @md) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .columnRight {
+    flex: none;
+    width: 100%;
+  }
+}
