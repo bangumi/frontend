@@ -1,8 +1,9 @@
 import type { RenderResult } from '@testing-library/react';
-import { act, screen, waitFor } from '@testing-library/react';
+import { act, screen } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
 import userFixture from '@bangumi/website/mocks/fixtures/p1/users/sai-GET.json';
 import { server as mockServer } from '@bangumi/website/mocks/server';
@@ -18,6 +19,7 @@ vi.mock('react-router-dom', async () => {
 });
 
 const mockedUseParams = vi.mocked(useParams);
+const asyncQueryOptions = { timeout: 5000 };
 
 class UserHomeTest {
   page!: RenderResult;
@@ -32,7 +34,11 @@ class UserHomeTest {
     );
 
     await act(async () => {
-      this.page = renderPage(<UserHomePage />);
+      this.page = renderPage(
+        <SWRConfig value={{ provider: () => new Map() }}>
+          <UserHomePage />
+        </SWRConfig>,
+      );
     });
   }
 
@@ -61,21 +67,31 @@ describe('UserHomePage', () => {
     const test = await UserHomeTest.create('sai');
 
     // 收藏块标题（我的动画/我的书籍）
-    expect(await test.page.findByText('我的动画')).toBeInTheDocument();
-    expect(screen.getByText('我的书籍')).toBeInTheDocument();
+    expect(
+      await test.page.findByText('我的动画', undefined, asyncQueryOptions),
+    ).toBeInTheDocument();
+    expect(
+      await test.page.findByText('我的书籍', undefined, asyncQueryOptions),
+    ).toBeInTheDocument();
     // 收藏块中的条目
-    await waitFor(() => {
-      expect(screen.getAllByText('测试动画').length).toBeGreaterThan(0);
-    });
-    expect(screen.getAllByText('测试书籍').length).toBeGreaterThan(0);
+    expect(
+      (await test.page.findAllByText('测试动画', undefined, asyncQueryOptions)).length,
+    ).toBeGreaterThan(0);
+    expect(
+      (await test.page.findAllByText('测试书籍', undefined, asyncQueryOptions)).length,
+    ).toBeGreaterThan(0);
   });
 
   it('should render timeline and stats blocks', async () => {
     const test = await UserHomeTest.create('sai');
 
     // 时间胶囊：progress 条目渲染条目链接；status 条目渲染吐槽文本
-    expect(await test.page.findByText('我的时间胶囊')).toBeInTheDocument();
-    expect(screen.getByText('今天天气真好')).toBeInTheDocument();
+    expect(
+      await test.page.findByRole('heading', { name: /我的时间胶囊/ }, asyncQueryOptions),
+    ).toBeInTheDocument();
+    expect(
+      await test.page.findByText('今天天气真好', undefined, asyncQueryOptions),
+    ).toBeInTheDocument();
     expect(screen.getAllByText('测试动画').length).toBeGreaterThan(0);
     // 收藏统计
     expect(screen.getByText('收藏统计')).toBeInTheDocument();
