@@ -1,11 +1,8 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - master
-    paths-ignore:
-      - '**.md'
+  schedule:
+    - cron: '15 3 * * *'
 
 concurrency:
   group: release
