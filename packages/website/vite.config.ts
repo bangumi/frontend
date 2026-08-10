@@ -6,7 +6,6 @@ import react from '@vitejs/plugin-react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { defineConfig } from 'vite';
-import pages from 'vite-plugin-pages';
 import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
@@ -110,17 +109,6 @@ export default defineConfig(({ mode }) => {
           namedExport: 'ReactComponent',
           titleProp: true,
         },
-      }),
-      pages({
-        extensions: ['tsx'],
-        importMode: 'async',
-        exclude: [
-          '**/components/**/*.tsx',
-          '**/*.spec.ts',
-          '**/*.spec.tsx',
-          '**/*.test.ts',
-          '**/*.test.tsx',
-        ],
       }),
     ],
     css: {
