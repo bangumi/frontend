@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import type { Group } from '@bangumi/client/client';
 import { CollapsibleContent, Image, Typography } from '@bangumi/design';
-import { render as renderBBCode } from '@bangumi/utils';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 
 import GroupActions from './GroupActions';
 import styles from './GroupHeader.module.less';

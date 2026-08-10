@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { render as renderBBCode } from '@bangumi/utils';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 
 import type { CollapsibleContentProps } from '.';
 import CollapsibleContent from '.';

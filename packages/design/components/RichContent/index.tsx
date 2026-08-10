@@ -3,7 +3,7 @@ import './style';
 import classNames from 'classnames';
 import React from 'react';
 
-import { render } from '@bangumi/utils';
+import { render } from '@bangumi/utils/bbcode/react';
 
 export interface RichContentProps {
   bbcode: string;

@@ -2,11 +2,7 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from 'vite-plugin-svgr';
 
 export default {
-  stories: [
-    '../components/**/*.stories.mdx',
-    '../components/**/*.stories.@(js|jsx|ts|tsx)',
-    '../../icons/index.stories.tsx',
-  ],
+  stories: ['../components/**/*.stories.@(js|jsx|ts|tsx)', '../../icons/index.stories.tsx'],
   addons: ['@storybook/addon-links', '@storybook/addon-themes'],
   framework: {
     name: '@storybook/react-vite',
@@ -25,6 +21,30 @@ export default {
     // ("[vite:css] [less] timed-out") on CPU-contended CI runners.
     viteConfig.css ??= {};
     viteConfig.css.preprocessorMaxWorkers = 0;
+
+    // react-router 7 ships only its development build, whose "use client"
+    // directives are ignored by Rollup and whose broken sourcemaps make
+    // warning locations unresolvable; silence that third-party noise.
+    viteConfig.build ??= {};
+    viteConfig.build.rollupOptions ??= {};
+    const originalOnwarn = viteConfig.build.rollupOptions.onwarn;
+    viteConfig.build.rollupOptions.onwarn = (warning, warn) => {
+      if (
+        warning.id?.includes('node_modules') &&
+        (warning.code === 'MODULE_LEVEL_DIRECTIVE' || warning.code === 'SOURCEMAP_ERROR')
+      ) {
+        return;
+      }
+      if (originalOnwarn) {
+        originalOnwarn(warning, warn);
+      } else {
+        warn(warning);
+      }
+    };
+
+    // The Storybook iframe bundle bundles all stories by design; raise the
+    // default 500 kB threshold so the build stops warning about it.
+    viteConfig.build.chunkSizeWarningLimit = 1200;
 
     /*
      * About auto-generated component docs:
