@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { Typography } from '@bangumi/design';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { useGroup } from '@bangumi/website/hooks/use-group';
 
 import TopicForm from '../../components/TopicForm';
@@ -14,7 +15,7 @@ const GroupNewTopicPage = () => {
   const { group } = useGroup(name!);
 
   return (
-    <>
+    <PageContainer as='main'>
       <Helmet title={`在${group.title}小组发表新话题`} />
       <Typography.Text type='secondary' className={styles.tipText}>
         在
@@ -26,7 +27,7 @@ const GroupNewTopicPage = () => {
       <div className={styles.grid}>
         <TopicForm groupName={name} />
       </div>
-    </>
+    </PageContainer>
   );
 };
 

@@ -19,6 +19,7 @@ import {
   getSubjectWikiEditLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import PageContainer from '@bangumi/website/components/PageContainer';
 
 import CollectionPanel from './CollectionPanel';
 import styles from './SubjectDetail.module.less';
@@ -238,7 +239,7 @@ function SubjectCollectStats({ subject }: { subject: Subject }) {
 const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
-    <main className={styles.page}>
+    <PageContainer as='main' className={styles.page}>
       <SubjectHeader subject={subject} />
       <div className={styles.columns}>
         <div className={styles.columnLeft}>
@@ -253,7 +254,7 @@ const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
           <CollectionPanel subject={subject} />
         </aside>
       </div>
-    </main>
+    </PageContainer>
   );
 };
 

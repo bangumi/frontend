@@ -52,8 +52,13 @@ describe('UserCollectionsPage', () => {
     for (const label of ['动画', '书籍', '音乐', '游戏', '三次元']) {
       expect(screen.getAllByText(label).length).toBeGreaterThan(0);
     }
-    // 右栏收藏统计
-    expect(screen.getByText('20')).toBeInTheDocument();
+    // 右栏收藏统计：默认展示全部类型（动画 20 + 书籍 6 = 26）
+    expect(screen.getByText('26')).toBeInTheDocument();
+    // 切换到动画类型（类型 tab 与统计 tab 均有「动画」按钮，取统计 tab 的）
+    await act(async () => {
+      screen.getAllByRole('button', { name: '动画' }).at(-1)!.click();
+    });
+    expect(await screen.findByText('20')).toBeInTheDocument();
   });
 
   it('should render status groups with subjects in overview mode', async () => {

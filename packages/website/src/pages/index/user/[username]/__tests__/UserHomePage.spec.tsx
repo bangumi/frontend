@@ -49,19 +49,20 @@ describe('UserHomePage', () => {
 
     expect(await test.page.findByText('Sai')).toBeInTheDocument();
     expect(screen.getByText('@sai')).toBeInTheDocument();
-    expect(screen.getByText('测试签名')).toBeInTheDocument();
-    // 网络服务与 bio
-    expect(screen.getByText('2010-01-01 加入')).toBeInTheDocument();
+    // 导航标签：时光机（当前页）与收藏
+    expect(screen.getByText('时光机')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '收藏' })).toBeInTheDocument();
+    // 签名区：bio 与服务标签
     expect(screen.getByText('测试简介')).toBeInTheDocument();
-    // 收藏统计：动画类型 20 条收藏
-    expect(screen.getByText('20')).toBeInTheDocument();
+    expect(screen.getByText('2010-1-1 加入')).toBeInTheDocument();
   });
 
   it('should render subject collect blocks', async () => {
     const test = await UserHomeTest.create('sai');
 
-    // 收藏统计块与收藏块标题中都会出现“动画”
-    expect((await test.page.findAllByText('动画')).length).toBeGreaterThan(0);
+    // 收藏块标题（我的动画/我的书籍）
+    expect(await test.page.findByText('我的动画')).toBeInTheDocument();
+    expect(screen.getByText('我的书籍')).toBeInTheDocument();
     // 收藏块中的条目
     await waitFor(() => {
       expect(screen.getAllByText('测试动画').length).toBeGreaterThan(0);
@@ -69,17 +70,17 @@ describe('UserHomePage', () => {
     expect(screen.getAllByText('测试书籍').length).toBeGreaterThan(0);
   });
 
-  it('should render friend, group, index and blog blocks', async () => {
+  it('should render timeline and stats blocks', async () => {
     const test = await UserHomeTest.create('sai');
 
-    expect(await test.page.findByText('Sai的好友')).toBeInTheDocument();
-    expect(screen.getByText('好友甲')).toBeInTheDocument();
-    expect(screen.getByText('Sai参加的小组')).toBeInTheDocument();
-    expect(screen.getByText('沙盒')).toBeInTheDocument();
-    expect(screen.getByText('Sai的目录')).toBeInTheDocument();
-    expect(screen.getByText('我的测试目录')).toBeInTheDocument();
-    expect(screen.getByText('Sai的日志')).toBeInTheDocument();
-    expect(screen.getByText('测试日志')).toBeInTheDocument();
+    // 时间胶囊：progress 条目渲染条目链接；status 条目渲染吐槽文本
+    expect(await test.page.findByText('我的时间胶囊')).toBeInTheDocument();
+    expect(screen.getByText('今天天气真好')).toBeInTheDocument();
+    expect(screen.getAllByText('测试动画').length).toBeGreaterThan(0);
+    // 收藏统计
+    expect(screen.getByText('收藏统计')).toBeInTheDocument();
+    expect(screen.getByText('完成')).toBeInTheDocument();
+    expect(screen.getByText('完成率')).toBeInTheDocument();
   });
 
   it('should show not found page when user does not exist', async () => {

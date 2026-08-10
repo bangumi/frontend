@@ -1,61 +1,102 @@
 import React, { useState } from 'react';
 
-import type { CollectionType, User } from '@bangumi/client/client';
-import { Tab } from '@bangumi/design';
+import type { User } from '@bangumi/client/client';
+import { CollectionType, SubjectType } from '@bangumi/client/client';
 
-import { COLLECTION_LABELS, SUBJECT_BLOCK_LIST } from './constants';
 import styles from './UserStatsBlock.module.less';
 
-type SubjectStats = Record<string, number>;
+/** 收藏统计标签展示顺序，对齐旧版用户主页 */
+const STAT_TABS = [
+  { key: SubjectType.Book, label: '书籍' },
+  { key: SubjectType.Anime, label: '动画' },
+  { key: SubjectType.Music, label: '音乐' },
+  { key: SubjectType.Game, label: '游戏' },
+  { key: SubjectType.Real, label: '电视剧' },
+] as const;
 
-/** 某类型条目的收藏统计，缺失的状态按 0 处理 */
-function renderStatItems(stats?: SubjectStats): { label: string; value: number }[] {
-  const types = [1, 2, 3, 4, 5] as CollectionType[];
-  const total = stats ? Object.values(stats).reduce((sum, count) => sum + count, 0) : 0;
+type Stats = Record<string, number>;
+
+interface StatItem {
+  label: string;
+  value: string;
+  color: 'blue' | 'green' | 'orange' | 'pink' | 'purple' | 'sky';
+}
+
+/** 汇总所有类型的收藏统计 */
+function mergeAllStats(subject: User['stats']['subject']): Stats {
+  const merged: Stats = {};
+  for (const stats of Object.values(subject)) {
+    for (const [type, count] of Object.entries(stats)) {
+      merged[type] = (merged[type] ?? 0) + count;
+    }
+  }
+  return merged;
+}
+
+/** 某类型条目的收藏统计（缺失的状态按 0 处理），评分相关数据暂不展示 */
+function renderStatItems(stats: Stats): StatItem[] {
+  const total = Object.values(stats).reduce((sum, count) => sum + count, 0);
+  const collect = stats[CollectionType.Collect] ?? 0;
+  const rate = total > 0 ? (collect / total) * 100 : 0;
   return [
-    { label: '收藏', value: total },
-    ...types.map((type) => ({
-      label: COLLECTION_LABELS[type],
-      value: stats?.[type] ?? 0,
-    })),
+    { label: '收藏', value: String(total), color: 'pink' },
+    { label: '完成', value: String(collect), color: 'green' },
+    { label: '完成率', value: `${rate.toFixed(1)}%`, color: 'blue' },
+    { label: '平均分', value: '--', color: 'orange' },
+    { label: '标准差', value: '--', color: 'purple' },
+    { label: '评分数', value: '0', color: 'sky' },
   ];
 }
 
+const SCORE_LABELS = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1] as const;
+
 const UserStatsBlock: React.FC<{ user: User }> = ({ user }) => {
   const { subject } = user.stats;
-  const available = SUBJECT_BLOCK_LIST.filter(({ subjectType }) => {
-    const stats = subject[subjectType];
-    return stats != null && Object.values(stats).some((count) => count > 0);
-  });
+  const allStats = mergeAllStats(subject);
 
-  const [activeType, setActiveType] = useState(available[0]?.subjectType);
+  const [activeKey, setActiveKey] = useState<SubjectType | 'all'>('all');
 
-  if (available.length === 0) {
-    return null;
-  }
-
-  const active = available.find((item) => item.subjectType === activeType) ?? available[0]!;
-  const activeStats = subject[active.subjectType];
+  const activeStats = activeKey === 'all' ? allStats : (subject[activeKey] ?? {});
   const statItems = renderStatItems(activeStats);
 
   return (
     <section className={styles.block}>
       <h2 className={styles.title}>收藏统计</h2>
-      {available.length > 1 && (
-        <Tab
-          items={available.map((item) => ({ key: item.subjectType, label: item.label }))}
-          activeKey={active.subjectType}
-          onChange={(key) => setActiveType(key as typeof active.subjectType)}
-        />
-      )}
+      <div className={styles.tabs}>
+        <button
+          type='button'
+          className={`${styles.tab} ${activeKey === 'all' ? styles.tabActive : ''}`}
+          onClick={() => setActiveKey('all')}
+        >
+          全部
+        </button>
+        {STAT_TABS.map(({ key, label }) => (
+          <button
+            key={key}
+            type='button'
+            className={`${styles.tab} ${activeKey === key ? styles.tabActive : ''}`}
+            onClick={() => setActiveKey(key)}
+          >
+            {label}
+          </button>
+        ))}
+      </div>
       <div className={styles.grid}>
-        {statItems.map(({ label, value }) => (
-          <div key={label} className={styles.item}>
+        {statItems.map(({ label, value, color }) => (
+          <div key={label} className={`${styles.item} ${styles[color]}`}>
             <span className={styles.num}>{value}</span>
             <span className={styles.desc}>{label}</span>
           </div>
         ))}
       </div>
+      <ol className={styles.chart} aria-label='评分分布暂无数据'>
+        {SCORE_LABELS.map((score) => (
+          <li key={score}>
+            <span className={styles.bar} />
+            <span>{score}</span>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 };

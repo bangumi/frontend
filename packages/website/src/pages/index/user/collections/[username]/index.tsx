@@ -5,6 +5,7 @@ import { CollectionType } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
 import { UnreadableCodeError } from '@bangumi/utils';
 import Helmet from '@bangumi/website/components/Helmet';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { useUserHome } from '@bangumi/website/hooks/use-user-home';
 
 import {
@@ -57,59 +58,61 @@ const UserCollectionsPage: React.FC<UserCollectionsPageProps> = ({ subjectType }
   return (
     <>
       <Helmet title={`${user.nickname}的收藏 - ${meta.label}`} />
-      <main className={styles.page}>
+      <main>
         <UserHeader user={user} />
-        <div className={styles.typeTabs}>
-          {SUBJECT_BLOCK_LIST.map((item) => (
-            <Link
-              key={item.path}
-              to={`/${item.path}/list/${username}`}
-              className={item.path === meta.path ? styles.active : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
-        <div className={styles.columns}>
-          <div className={styles.columnLeft}>
-            <div className={styles.statusTabs}>
+        <PageContainer className={styles.content}>
+          <div className={styles.typeTabs}>
+            {SUBJECT_BLOCK_LIST.map((item) => (
               <Link
-                to={`/${meta.path}/list/${username}`}
-                className={!status ? styles.active : undefined}
+                key={item.path}
+                to={`/${item.path}/list/${username}`}
+                className={item.path === meta.path ? styles.active : undefined}
               >
-                全部
+                {item.label}
               </Link>
-              {STATUS_LIST.map((type) => {
-                const count = subjectStats?.[type] ?? 0;
-                if (count === 0) {
-                  return null;
-                }
-                const statusPath = COLLECTION_STATUS_PATHS[type];
-                return (
-                  <Link
-                    key={type}
-                    to={`/${meta.path}/list/${username}/${statusPath}`}
-                    className={status === statusPath ? styles.active : undefined}
-                  >
-                    {COLLECTION_LABELS[type]} ({count})
-                  </Link>
-                );
-              })}
+            ))}
+          </div>
+          <div className={styles.columns}>
+            <div className={styles.columnLeft}>
+              <div className={styles.statusTabs}>
+                <Link
+                  to={`/${meta.path}/list/${username}`}
+                  className={!status ? styles.active : undefined}
+                >
+                  全部
+                </Link>
+                {STATUS_LIST.map((type) => {
+                  const count = subjectStats?.[type] ?? 0;
+                  if (count === 0) {
+                    return null;
+                  }
+                  const statusPath = COLLECTION_STATUS_PATHS[type];
+                  return (
+                    <Link
+                      key={type}
+                      to={`/${meta.path}/list/${username}/${statusPath}`}
+                      className={status === statusPath ? styles.active : undefined}
+                    >
+                      {COLLECTION_LABELS[type]} ({count})
+                    </Link>
+                  );
+                })}
+              </div>
+              {statusType !== undefined ? (
+                <CollectionList
+                  username={username}
+                  subjectType={meta.subjectType}
+                  type={statusType}
+                />
+              ) : (
+                <CollectionGroup user={user} subjectType={meta.subjectType} />
+              )}
             </div>
-            {statusType !== undefined ? (
-              <CollectionList
-                username={username}
-                subjectType={meta.subjectType}
-                type={statusType}
-              />
-            ) : (
-              <CollectionGroup user={user} subjectType={meta.subjectType} />
-            )}
+            <div className={styles.columnRight}>
+              <UserStatsBlock user={user} />
+            </div>
           </div>
-          <div className={styles.columnRight}>
-            <UserStatsBlock user={user} />
-          </div>
-        </div>
+        </PageContainer>
       </main>
     </>
   );

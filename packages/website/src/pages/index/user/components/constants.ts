@@ -2,11 +2,41 @@ import { CollectionType, SubjectType } from '@bangumi/client/client';
 
 /** 用户主页可展示的条目收藏模块（homepage 配置中的 block 名） */
 export const SUBJECT_BLOCK_LIST = [
-  { block: 'anime', subjectType: SubjectType.Anime, label: '动画', path: 'anime' },
-  { block: 'book', subjectType: SubjectType.Book, label: '书籍', path: 'book' },
-  { block: 'music', subjectType: SubjectType.Music, label: '音乐', path: 'music' },
-  { block: 'game', subjectType: SubjectType.Game, label: '游戏', path: 'game' },
-  { block: 'real', subjectType: SubjectType.Real, label: '三次元', path: 'real' },
+  {
+    block: 'anime',
+    subjectType: SubjectType.Anime,
+    label: '动画',
+    homepageTitle: '我的动画',
+    path: 'anime',
+  },
+  {
+    block: 'book',
+    subjectType: SubjectType.Book,
+    label: '书籍',
+    homepageTitle: '我的书籍',
+    path: 'book',
+  },
+  {
+    block: 'music',
+    subjectType: SubjectType.Music,
+    label: '音乐',
+    homepageTitle: '我的音乐',
+    path: 'music',
+  },
+  {
+    block: 'game',
+    subjectType: SubjectType.Game,
+    label: '游戏',
+    homepageTitle: '我的游戏',
+    path: 'game',
+  },
+  {
+    block: 'real',
+    subjectType: SubjectType.Real,
+    label: '三次元',
+    homepageTitle: '我的电视剧',
+    path: 'real',
+  },
 ] as const;
 
 export const SUBJECT_BLOCKS: Record<string, (typeof SUBJECT_BLOCK_LIST)[number]> =

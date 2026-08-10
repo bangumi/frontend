@@ -10,6 +10,7 @@ import { ArrowPath } from '@bangumi/icons';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { PageNeedLoginError } from '@bangumi/website/error';
 import { useUser } from '@bangumi/website/hooks/use-user';
 import { settings } from '@bangumi/website/shared/notifications';
@@ -87,7 +88,7 @@ function Notifications() {
   const updatedAt = dayjs().format('YYYY-MM-DD HH:mm:ss');
 
   return (
-    <>
+    <PageContainer as='main'>
       <Helmet title='电波提醒' />
       <div className={style.title}>电波提醒</div>
       <div className={style.subtitle}>
@@ -130,7 +131,7 @@ function Notifications() {
       <div>
         <Pagination total={total} pageSize={20} />
       </div>
-    </>
+    </PageContainer>
   );
 }
 

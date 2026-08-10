@@ -4,12 +4,14 @@ import { useParams } from 'react-router-dom';
 import { UnreadableCodeError } from '@bangumi/utils';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { useUserHome } from '@bangumi/website/hooks/use-user-home';
 
 import UserHeader from '../components/UserHeader';
 import UserStatsBlock from '../components/UserStatsBlock';
 import { HomeLeftBlocks, HomeRightBlocks } from './components/HomeBlocks';
 import UserInfoCard from './components/UserInfoCard';
+import UserTimelineBlock from './components/UserTimelineBlock';
 import styles from './index.module.less';
 
 const UserHomePage: React.FC = () => {
@@ -27,18 +29,19 @@ const UserHomePage: React.FC = () => {
   return (
     <>
       <Helmet title={`${user.nickname}的主页`} />
-      <main className={styles.page}>
+      <main>
         <UserHeader user={user} />
-        <div className={styles.columns}>
+        <PageContainer gutterOnly className={styles.columns}>
           <div className={styles.columnLeft}>
             <UserInfoCard user={user} />
             <HomeLeftBlocks user={user} />
           </div>
           <div className={styles.columnRight}>
+            <UserTimelineBlock user={user} />
             <UserStatsBlock user={user} />
             <HomeRightBlocks user={user} />
           </div>
-        </div>
+        </PageContainer>
       </main>
     </>
   );

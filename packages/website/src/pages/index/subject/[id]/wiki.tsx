@@ -6,6 +6,7 @@ import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
+import PageContainer from '@bangumi/website/components/PageContainer';
 
 import WikiLayout from './components/WikiLayout';
 
@@ -34,16 +35,18 @@ const WikiPage = ({ subjectId }: { subjectId: number }) => {
   );
 
   return (
-    <WikiLayout id={subjectId.toString()} name={data.name}>
-      <Outlet
-        context={{
-          subjectId,
-          subjectWikiInfo: data,
-          subjectEditHistory: history,
-          mutateHistory,
-        }}
-      />
-    </WikiLayout>
+    <PageContainer>
+      <WikiLayout id={subjectId.toString()} name={data.name}>
+        <Outlet
+          context={{
+            subjectId,
+            subjectWikiInfo: data,
+            subjectEditHistory: history,
+            mutateHistory,
+          }}
+        />
+      </WikiLayout>
+    </PageContainer>
   );
 };
 

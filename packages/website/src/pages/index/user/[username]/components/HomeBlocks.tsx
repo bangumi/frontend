@@ -25,17 +25,16 @@ function renderBlock(user: User, block: string): JSX.Element | null {
     case 'index':
       return <IndexBlock key={block} user={user} />;
     default:
-      // mono 等模块暂未实现
       return null;
   }
 }
 
-/** 渲染用户主页左侧模块（收藏块/日志） */
+/** 渲染用户主页左侧模块 */
 export const HomeLeftBlocks: React.FC<{ user: User }> = ({ user }) => (
   <>{user.homepage.left.map((block) => renderBlock(user, block))}</>
 );
 
-/** 渲染用户主页右侧模块（好友/小组/目录） */
+/** 渲染用户主页右侧模块 */
 export const HomeRightBlocks: React.FC<{ user: User }> = ({ user }) => (
   <>{user.homepage.right.map((block) => renderBlock(user, block))}</>
 );
