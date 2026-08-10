@@ -1,6 +1,7 @@
 import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
+import { SWRConfig } from 'swr';
 
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
@@ -40,7 +41,11 @@ describe('HomePage', () => {
 
   const renderHome = async () => {
     await act(async () => {
-      renderPage(<HomePage />);
+      renderPage(
+        <SWRConfig value={{ provider: () => new Map() }}>
+          <HomePage />
+        </SWRConfig>,
+      );
     });
   };
 
