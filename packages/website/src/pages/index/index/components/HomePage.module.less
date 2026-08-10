@@ -2,7 +2,13 @@
 
 .page {
   width: 100%;
+  max-width: 1180px;
   box-sizing: border-box;
+  margin: 0 auto;
+
+  :global(.bgm-link) {
+    color: #0084b4;
+  }
 }
 
 .greets {
@@ -17,17 +23,17 @@
 .columns {
   display: flex;
   align-items: flex-start;
-  gap: 16px;
+  gap: 10px;
 }
 
 .columnLeft {
-  flex: 1 1 auto;
+  flex: 7 1 0;
   min-width: 0;
 }
 
 .columnRight {
-  flex: 0 0 290px;
-  width: 290px;
+  flex: 3 1 0;
+  min-width: 0;
   box-sizing: border-box;
 }
 

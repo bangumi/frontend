@@ -2,7 +2,7 @@
 
 .block {
   background: #fff;
-  border: 1px solid @gray-10;
+  border: 1px solid #eee;
   border-radius: 14px;
   margin: 0 0 20px;
   overflow: hidden;
@@ -108,11 +108,11 @@
 }
 
 .dayTitle {
-  margin: 0;
-  padding: 9px 10px 6px;
-  border-bottom: 1px solid @gray-10;
-  color: #149bc5;
-  font-size: 15px;
+  margin: 10px 0 5px;
+  padding: 0 0 5px 10px;
+  border-bottom: 1px solid #e8e8e8;
+  color: #1175a8;
+  font-size: 14px;
   font-weight: normal;
 }
 
@@ -124,13 +124,9 @@
 
 .item {
   display: flex;
-  gap: 8px;
-  padding: 10px;
-  border-bottom: 1px dotted @gray-10;
-
-  &:last-child {
-    border-bottom: none;
-  }
+  align-items: flex-start;
+  margin: 5px 0;
+  padding: 5px 0 0;
 }
 
 .empty {
@@ -160,17 +156,39 @@
 }
 
 .avatarLink {
-  flex: none;
+  flex: 0 0 50px;
+  width: 50px;
+  height: 50px;
+  margin: 0 5px;
+  overflow: hidden;
+}
+
+.avatar {
+  border: 0;
+  border-radius: 50%;
+
+  img {
+    border-radius: 50%;
+  }
 }
 
 .info {
+  flex: 1 1 auto;
   min-width: 0;
-  font-size: 13px;
-  line-height: 1.6;
+  min-height: 35px;
+  padding: 0 5px 5px 0;
+  border-bottom: 1px dotted #e8e8e8;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.2;
+
+  :global(.bgm-link) {
+    color: #0084b4;
+  }
 }
 
 .desc {
-  color: @gray-100;
+  color: #555;
   overflow-wrap: anywhere;
 
   p {
@@ -179,14 +197,119 @@
 }
 
 .statusText {
-  color: @gray-80;
-  margin: 2px 0 0;
+  margin: 5px 10px 0 0;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.5;
   overflow-wrap: anywhere;
   white-space: pre-wrap;
 }
 
+.subjectCards {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.subjectCard {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: min(600px, 100%);
+  min-height: 36px;
+  max-height: 36px;
+  box-sizing: border-box;
+  margin-top: 5px;
+  padding: 5px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.subjectCardDetailed {
+  align-items: center;
+  min-height: 80px;
+  max-height: none;
+  padding: 5px;
+
+  .subjectCover {
+    width: 60px;
+    height: 70px;
+  }
+}
+
+.subjectCoverLink {
+  display: block;
+  flex: none;
+}
+
+.subjectCover {
+  display: block;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.subjectInfo {
+  min-width: 0;
+}
+
+.subjectTitle {
+  display: block;
+  color: #454545;
+  font-size: 13px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.subjectMeta {
+  height: 25px;
+  overflow: hidden;
+  color: #999;
+  font-size: 13px;
+  line-height: 25px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.subjectComment {
+  width: min(600px, 100%);
+  box-sizing: border-box;
+  margin: 5px 0;
+  padding: 5px 10px;
+  border: 1px solid #e8e8e8;
+  border-radius: 10px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
 .time {
-  color: @gray-60;
-  font-size: 12px;
-  margin-top: 4px;
+  margin-top: 5px;
+  color: #999;
+  font-size: 10px;
+  line-height: 1.2;
+}
+
+.sourceLink {
+  font-weight: normal;
+}
+
+@media (max-width: @sm) {
+  .item {
+    margin: 0;
+    padding: 5px 10px 0;
+  }
+
+  .subjectCardDetailed .subjectCover {
+    width: 60px;
+    height: 70px;
+  }
 }
