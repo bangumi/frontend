@@ -6,10 +6,10 @@ import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useUserHome } from '@bangumi/website/hooks/use-user-home';
 
+import UserHeader from '../components/UserHeader';
+import UserStatsBlock from '../components/UserStatsBlock';
 import { HomeLeftBlocks, HomeRightBlocks } from './components/HomeBlocks';
-import UserHeader from './components/UserHeader';
 import UserInfoCard from './components/UserInfoCard';
-import UserStatsBlock from './components/UserStatsBlock';
 import styles from './index.module.less';
 
 const UserHomePage: React.FC = () => {

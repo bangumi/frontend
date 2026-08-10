@@ -20,3 +20,21 @@ export const COLLECTION_LABELS: Record<CollectionType, string> = {
   [CollectionType.OnHold]: '搁置',
   [CollectionType.Dropped]: '抛弃',
 };
+
+/** 收藏列表页 URL 中的状态段 → CollectionType */
+export const COLLECTION_STATUS_ALIASES: Record<string, CollectionType> = {
+  wish: CollectionType.Wish,
+  collect: CollectionType.Collect,
+  doing: CollectionType.Doing,
+  onhold: CollectionType.OnHold,
+  dropped: CollectionType.Dropped,
+};
+
+/** CollectionType → 收藏列表页 URL 中的状态段 */
+export const COLLECTION_STATUS_PATHS: Record<CollectionType, string> = {
+  [CollectionType.Wish]: 'wish',
+  [CollectionType.Collect]: 'collect',
+  [CollectionType.Doing]: 'doing',
+  [CollectionType.OnHold]: 'onhold',
+  [CollectionType.Dropped]: 'dropped',
+};
