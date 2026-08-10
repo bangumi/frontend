@@ -24,7 +24,7 @@ jobs:
         run: pnpm build --mode stage
 
       - name: upload website build artifact
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: sites
           path: packages/website/dist
