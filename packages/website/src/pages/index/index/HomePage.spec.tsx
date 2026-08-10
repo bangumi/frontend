@@ -1,4 +1,4 @@
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
 
@@ -60,7 +60,7 @@ describe('HomePage', () => {
     setupHome();
     let patchedBody: unknown = null;
     mockServer.use(
-      http.patch('http://localhost:3000/p1/collections/episodes/100', async ({ request }) => {
+      http.patch('http://localhost:3000/p1/collections/episodes/105', async ({ request }) => {
         patchedBody = await request.json();
         return HttpResponse.json({}, { status: 200 });
       }),
@@ -93,6 +93,68 @@ describe('HomePage', () => {
 
     await waitFor(() => {
       expect(patchedBody).toEqual({ epStatus: 8 });
+    });
+  });
+
+  it('should switch to grid view and render episode buttons', async () => {
+    setupHome();
+    await renderHome();
+
+    // 默认列表视图没有集数按钮
+    expect(screen.queryByTitle('ep.1 第1话')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: '网格视图' }));
+
+    // 12 集全部渲染
+    await waitFor(() => {
+      expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
+    });
+    // 已看集数标记为 pressed，未看集数不是
+    expect(screen.getByTitle('ep.1 第1话')).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByTitle('ep.5 第5话')).toHaveAttribute('aria-pressed', 'true');
+    expect(screen.getByTitle('ep.6 第6话')).toHaveAttribute('aria-pressed', 'false');
+    expect(screen.getByTitle('ep.12 第12话')).toHaveAttribute('aria-pressed', 'false');
+
+    // 切回列表视图
+    fireEvent.click(screen.getByRole('button', { name: '列表视图' }));
+    expect(screen.queryByTitle('ep.1 第1话')).not.toBeInTheDocument();
+  });
+
+  it('should update episode status from the grid view detail popover', async () => {
+    setupHome();
+    let patchedBody: unknown = null;
+    mockServer.use(
+      http.patch('http://localhost:3000/p1/collections/episodes/105', async ({ request }) => {
+        patchedBody = await request.json();
+        return HttpResponse.json({}, { status: 200 });
+      }),
+    );
+
+    await renderHome();
+
+    fireEvent.click(screen.getByRole('button', { name: '网格视图' }));
+    await waitFor(() => {
+      expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
+    });
+
+    // 详情浮层由 CSS hover 控制显隐，内容始终渲染在 DOM 中
+    const ep6Detail = document.querySelector('[data-ep-id="105"]');
+    expect(ep6Detail).not.toBeNull();
+    expect(ep6Detail).toHaveTextContent('ep.6 第6话');
+    expect(ep6Detail).toHaveTextContent('中文标题');
+    expect(ep6Detail).toHaveTextContent('命运之夜');
+    expect(ep6Detail).toHaveTextContent('首播');
+    expect(ep6Detail).toHaveTextContent('2026-05-06');
+    expect(ep6Detail).toHaveTextContent('时长');
+    expect(ep6Detail).toHaveTextContent('25m');
+    // 讨论数
+    expect(ep6Detail).toHaveTextContent('讨论');
+    expect(ep6Detail).toHaveTextContent('+8');
+
+    fireEvent.click(within(ep6Detail as HTMLElement).getByRole('button', { name: '看过' }));
+
+    await waitFor(() => {
+      expect(patchedBody).toEqual({ type: 2 });
     });
   });
 });
