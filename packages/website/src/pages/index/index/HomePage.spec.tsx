@@ -196,6 +196,55 @@ describe('HomePage', () => {
     );
   });
 
+  it('should render daily timeline actions by type', async () => {
+    const baseTimeline = homeFixture.timeline[0]!;
+    const user = baseTimeline.user!;
+    const friendA = { ...user, id: 1001, username: 'friend-a', nickname: '好友甲' };
+    const friendB = { ...user, id: 1002, username: 'friend-b', nickname: '好友乙' };
+    const groupA = { id: 1, name: 'sakura', nsfw: false, title: '樱花庄的宠物女孩' };
+    const groupB = { id: 2, name: 'majo', nsfw: false, title: '魔女之旅' };
+
+    mockServer.use(
+      http.get('http://localhost:3000/p1/home', () =>
+        HttpResponse.json({
+          ...homeFixture,
+          timeline: [
+            {
+              ...baseTimeline,
+              id: 9011,
+              cat: 1,
+              type: 2,
+              batch: true,
+              memo: { daily: { users: [friendA, friendB] } },
+            },
+            {
+              ...baseTimeline,
+              id: 9012,
+              cat: 1,
+              type: 3,
+              memo: { daily: { groups: [groupA] } },
+            },
+            {
+              ...baseTimeline,
+              id: 9013,
+              cat: 1,
+              type: 4,
+              memo: { daily: { groups: [groupB] } },
+            },
+            // 加入乐园等未解析的 daily 类型不渲染
+            { ...baseTimeline, id: 9014, cat: 1, type: 5, memo: {} },
+          ],
+        }),
+      ),
+    );
+    await renderHome();
+
+    expect(screen.getByText('和 好友甲、好友乙 成为了好友')).toBeInTheDocument();
+    expect(screen.getByText('加入了小组 樱花庄的宠物女孩')).toBeInTheDocument();
+    expect(screen.getByText('创建了小组 魔女之旅')).toBeInTheDocument();
+    expect(screen.queryByText(/每日推荐/)).not.toBeInTheDocument();
+  });
+
   it('should mark the last unwatched episode as watched', async () => {
     setupHome();
     let patchedBody: unknown = null;
