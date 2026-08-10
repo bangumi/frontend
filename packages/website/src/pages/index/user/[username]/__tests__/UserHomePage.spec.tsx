@@ -3,7 +3,6 @@ import { act, screen } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { SWRConfig } from 'swr';
 
 import userFixture from '@bangumi/website/mocks/fixtures/p1/users/sai-GET.json';
 import { server as mockServer } from '@bangumi/website/mocks/server';
@@ -34,13 +33,7 @@ class UserHomeTest {
     );
 
     await act(async () => {
-      this.page = renderPage(
-        <SWRConfig value={{ provider: () => new Map() }}>
-          <React.Suspense fallback={null}>
-            <UserHomePage />
-          </React.Suspense>
-        </SWRConfig>,
-      );
+      this.page = renderPage(<UserHomePage />);
     });
   }
 
