@@ -44,6 +44,18 @@ describe('HomePage', () => {
     expect(await screen.findByText('公告')).toBeInTheDocument();
   });
 
+  it('should use internal links for subjects', async () => {
+    setupHome();
+    await renderHome();
+
+    const subjectLinks = document.querySelectorAll<HTMLAnchorElement>('a[href="/subject/12"]');
+    expect(subjectLinks.length).toBeGreaterThan(0);
+    for (const link of subjectLinks) {
+      expect(link).not.toHaveAttribute('target');
+    }
+    expect(document.querySelector('a[href="https://bgm.tv/subject/12"]')).not.toBeInTheDocument();
+  });
+
   it('should mark the last unwatched episode as watched', async () => {
     setupHome();
     let patchedBody: unknown = null;

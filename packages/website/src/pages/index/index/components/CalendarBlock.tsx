@@ -3,6 +3,7 @@ import React from 'react';
 
 import type { Calendar } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
+import { getSubjectLink } from '@bangumi/utils/pages';
 
 import styles from './CalendarBlock.module.less';
 import HomeSidePanel from './HomeSidePanel';
@@ -74,9 +75,7 @@ const CalendarBlock: React.FC<{ calendar: Calendar }> = ({ calendar }) => {
                 {items.map((item) => (
                   <Link
                     key={item.subject.id}
-                    to={`https://bgm.tv/subject/${item.subject.id}`}
-                    target='_blank'
-                    rel='noopener noreferrer'
+                    to={getSubjectLink(item.subject.id)}
                     title={`${item.subject.name}\n${item.subject.nameCN}`}
                   >
                     <img src={item.subject.images?.grid} width={48} loading='lazy' alt='' />
