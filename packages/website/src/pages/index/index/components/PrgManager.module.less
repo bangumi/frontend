@@ -3,22 +3,28 @@
 .block {
   background: #fff;
   border: 1px solid @gray-10;
-  border-radius: 3px;
+  border-radius: 14px;
   margin: 0 0 20px;
+  overflow: hidden;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
 .tabs {
   display: flex;
   align-items: center;
+  min-height: 42px;
+  padding: 0 8px;
   border-bottom: 1px solid @gray-10;
 }
 
 .tab {
-  padding: 8px 14px;
+  min-width: 62px;
+  padding: 7px 14px;
   border: none;
+  border-radius: 18px;
   background: none;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 15px;
   color: @gray-60;
 
   &:hover {
@@ -27,40 +33,39 @@
 }
 
 .tabActive {
-  color: @primary-color;
-  border-bottom: 2px solid @primary-color;
-  margin-bottom: -1px;
+  color: #fff;
+  background: @primary-color;
 }
 
 .viewSwitch {
-  margin-left: auto;
   display: flex;
-  gap: 2px;
-  padding-right: 10px;
+  align-self: stretch;
+  gap: 10px;
+  margin-left: auto;
+  padding-right: 4px;
 }
 
 .viewBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 24px;
+  width: 32px;
+  height: 100%;
   padding: 0;
-  border: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
   background: none;
-  cursor: pointer;
   color: @gray-60;
-  border-radius: 3px;
 
   &:hover {
     color: @gray-100;
-    background: @gray-10;
   }
 }
 
 .viewActive {
   color: @primary-color;
-  background: @gray-10;
+  border-bottom-color: @primary-color;
 }
 
 .empty {
@@ -74,6 +79,131 @@
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.splitView {
+  display: grid;
+  grid-template-columns: 225px minmax(0, 1fr);
+  height: 234px;
+  min-height: 0;
+}
+
+.subjectList {
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+  border-right: 1px solid @gray-10;
+  background: #fff;
+}
+
+.navItem {
+  border-bottom: 1px solid @gray-10;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  height: 36px;
+  padding: 3px 8px;
+  border: 0;
+  background: #fff;
+  color: @gray-100;
+  text-align: left;
+
+  &:hover,
+  &Active {
+    background: #fafafa;
+  }
+}
+
+.navButtonActive {
+  background: #f8f8f8;
+}
+
+.navCover {
+  flex: none;
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 4px;
+  background: @gray-10;
+}
+
+.navInfo {
+  display: block;
+  min-width: 0;
+  flex: 1;
+}
+
+.navHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  min-width: 0;
+}
+
+.navName {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.navProgressText {
+  flex: none;
+  color: #2878e8;
+  font-size: 12px;
+}
+
+.navProgressBar {
+  display: block;
+  width: 86px;
+  height: 4px;
+  margin-top: 5px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #e3e7f5;
+}
+
+.navProgressInner {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #b9c7e9;
+}
+
+.subjectDetail {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  list-style: none;
+
+  .card {
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .cardCover {
+    width: 64px;
+    height: 64px;
+  }
+
+  .cardName {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .epList {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid @gray-10;
+  }
 }
 
 .row {
@@ -228,15 +358,67 @@
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: @gray-10;
+  grid-auto-rows: minmax(98px, auto);
+  background: #fff;
+
+  .card {
+    gap: 14px;
+    min-height: 98px;
+    padding: 14px 12px;
+    box-sizing: border-box;
+    border: 0;
+  }
+
+  .cardCover {
+    width: 58px;
+    height: 58px;
+    border-radius: 9px;
+  }
+
+  .cardInfo {
+    padding-top: 2px;
+  }
+
+  .cardHeader {
+    gap: 4px;
+    margin-bottom: 6px;
+  }
+
+  .cardName {
+    color: @gray-100;
+    font-size: 16px;
+  }
+
+  .percentText,
+  .editLink {
+    color: #087af5;
+    font-size: 15px;
+  }
+
+  .epGroup {
+    gap: 5px;
+  }
+
+  .epBtn {
+    border-color: #008cff;
+    color: #087af5;
+    background: #f2f8ff;
+  }
 }
 
 .card {
+  position: relative;
   display: flex;
   gap: 10px;
   padding: 10px;
   background: #fff;
+}
+
+.allEpisodes {
+  position: absolute;
+  right: 10px;
+  bottom: 7px;
+  font-size: 14px;
 }
 
 .cardCoverLink {
@@ -266,10 +448,92 @@
   margin-bottom: 6px;
 }
 
+.watchingCount {
+  margin: 0 0 6px;
+  color: @gray-60;
+  font-size: 13px;
+}
+
+.detailProgressRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: @gray-60;
+  font-size: 13px;
+
+  > span:not(.detailProgressBar) {
+    white-space: nowrap;
+  }
+}
+
+.detailProgressInput {
+  width: 42px;
+  box-sizing: border-box;
+  padding: 3px 5px;
+  border: 1px solid @gray-10;
+  border-radius: 5px;
+  color: @gray-100;
+  font-size: 14px;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
+}
+
+.detailProgressBar {
+  position: relative;
+  display: block;
+  width: 82px;
+  height: 22px;
+  overflow: hidden;
+  border: 1px solid @gray-10;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.detailProgressInner {
+  display: block;
+  height: 100%;
+  background: linear-gradient(#59d5f2, #00adea);
+}
+
+.detailCheckInBtn {
+  margin-left: auto;
+  padding: 5px 9px;
+  border: 1px solid @gray-10;
+  border-radius: 8px;
+  color: @blue-100;
+  font-size: 13px;
+  white-space: nowrap;
+
+  &:hover {
+    border-color: @blue-100;
+  }
+}
+
+.subjectActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 5px;
+  font-size: 13px;
+}
+
 .cardName {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.editLink {
+  flex: none;
 }
 
 .epList {
@@ -292,16 +556,70 @@
 }
 
 .epBtn,
-.epBtnWatched {
-  min-width: 22px;
-  padding: 1px 3px;
+.epBtnWatched,
+.epBtnUnavailable {
+  min-width: 29px;
+  padding: 3px 5px;
   border: 1px solid @gray-10;
-  border-radius: 2px;
-  font-size: 11px;
-  line-height: 16px;
+  border-radius: 4px;
+  font-size: 13px;
+  line-height: 18px;
   text-align: center;
   cursor: pointer;
   font-family: 'Lucida Grande', 'Lucida Sans', Helvetica, Arial, Verdana, sans-serif;
+}
+
+@media (max-width: @sm) {
+  .tabs {
+    overflow-x: auto;
+  }
+
+  .tab {
+    min-width: auto;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .splitView {
+    grid-template-columns: 132px minmax(0, 1fr);
+    height: 300px;
+  }
+
+  .navButton {
+    height: 44px;
+    padding: 4px 6px;
+  }
+
+  .navCover {
+    width: 30px;
+    height: 42px;
+  }
+
+  .navProgressText,
+  .navProgressBar {
+    display: none;
+  }
+
+  .subjectDetail .card {
+    padding: 8px;
+  }
+
+  .subjectDetail .cardCoverLink {
+    display: none;
+  }
+
+  .detailProgressBar {
+    width: 52px;
+  }
+
+  .detailCheckInBtn {
+    padding: 4px;
+    font-size: 12px;
+  }
+
+  .subjectActions {
+    flex-wrap: wrap;
+  }
 }
 
 .epBtn {
@@ -318,6 +636,13 @@
   color: #fff;
   background: @blue-100;
   border-color: @blue-100;
+}
+
+.epBtnUnavailable {
+  border-color: #bcbcbc;
+  color: @gray-60;
+  background: #e5e5e5;
+  cursor: default;
 }
 
 /* 单集详情浮层 */

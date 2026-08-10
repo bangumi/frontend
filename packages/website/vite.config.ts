@@ -5,6 +5,7 @@ import path from 'node:path';
 import react from '@vitejs/plugin-react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import { ProxyAgent } from 'proxy-agent';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -22,7 +23,7 @@ dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
 
 export default defineConfig(({ mode }) => {
-  let apiDomain = 'https://next.bgm38.tv';
+  let apiDomain = 'https://next.bgm.tv';
 
   if (mode === 'loc') {
     apiDomain = 'http://127.0.0.1:4000';
@@ -31,6 +32,8 @@ export default defineConfig(({ mode }) => {
   }
 
   console.log('using backend', apiDomain);
+
+  const access_token = process.env.ACCESS_TOKEN;
 
   return {
     build: {
@@ -60,22 +63,20 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '/p': {
           target: apiDomain,
+          headers: access_token
+            ? {
+                authorization: `Bearer ${access_token}`,
+              }
+            : {},
           changeOrigin: true,
+          rewriteWsOrigin: true,
+          toProxy: true,
+          agent: new ProxyAgent(),
           ws: true,
           configure(proxy) {
-            proxy.on('proxyReq', (proxyReq) => {
-              if (proxyReq.hasHeader('Origin')) {
-                proxyReq.setHeader('Origin', apiDomain);
-              }
-              proxyReq.setHeader('Referer', apiDomain + '/');
-            });
             proxy.on('proxyRes', (proxyRes) => {
-              const h = proxyRes.headers['cf-ray'] ?? '';
-              if (h === '') {
-                proxyRes.headers['cf-ray'] = ('fake-' + crypto.randomUUID()).slice(0, 20);
-              } else if (Array.isArray(h)) {
-                proxyRes.headers['cf-ray'] = h[0] ?? ('fake-' + crypto.randomUUID()).slice(0, 20);
-              }
+              proxyRes.headers['cf-ray'] =
+                proxyRes.headers['cf-ray'] ?? ('fake-' + crypto.randomUUID()).slice(0, 20);
               // 本地开发环境没有 https 带有 secure attribute 的 set-cookies 无效，
               // 所以在本地开发时移除 secure attribute
               const setCookies = proxyRes.headers['set-cookie'];

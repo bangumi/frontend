@@ -3,17 +3,117 @@
 .block {
   background: #fff;
   border: 1px solid @gray-10;
-  border-radius: 3px;
+  border-radius: 14px;
   margin: 0 0 20px;
   overflow: hidden;
 }
 
-.title {
-  font-size: 16px;
-  font-weight: normal;
-  margin: 0;
-  padding: 8px 10px;
+.toolbar {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 8px;
   border-bottom: 1px solid @gray-10;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.filter {
+  padding: 7px 12px;
+  border: 0;
+  border-radius: 18px;
+  background: transparent;
+  color: @gray-60;
+  font-size: 14px;
+
+  &:hover {
+    color: @gray-100;
+  }
+}
+
+.filterActive {
+  color: #fff;
+  background: @primary-color;
+
+  &:hover {
+    color: #fff;
+  }
+}
+
+.crawl {
+  margin-left: auto;
+  color: @gray-60;
+  font-size: 14px;
+}
+
+.composer {
+  padding: 12px 10px 8px;
+  background: #fafafa;
+}
+
+.composerInput {
+  display: block;
+  width: 100%;
+  height: 72px;
+  box-sizing: border-box;
+  padding: 9px;
+  resize: vertical;
+  border: 1px solid @gray-10;
+  border-radius: 5px;
+  outline: 0;
+  background: #fff;
+  color: @gray-100;
+  font-size: 14px;
+  line-height: 1.5;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  &:focus {
+    border-color: @primary-color;
+  }
+
+  &::placeholder {
+    color: @gray-60;
+  }
+}
+
+.composerActions {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  padding-top: 5px;
+}
+
+.submitButton {
+  min-width: 76px;
+  margin-left: auto;
+  padding: 5px 16px;
+  border: 0;
+  border-radius: 18px;
+  background: @primary-color;
+  color: #fff;
+  font-size: 14px;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: default;
+  }
+}
+
+.dayGroup {
+  background: #fff;
+}
+
+.dayTitle {
+  margin: 0;
+  padding: 9px 10px 6px;
+  border-bottom: 1px solid @gray-10;
+  color: #149bc5;
+  font-size: 15px;
+  font-weight: normal;
 }
 
 .list {
@@ -26,10 +126,36 @@
   display: flex;
   gap: 8px;
   padding: 10px;
-  border-bottom: 1px solid @gray-10;
+  border-bottom: 1px dotted @gray-10;
 
   &:last-child {
     border-bottom: none;
+  }
+}
+
+.empty {
+  margin: 0;
+  padding: 24px 10px;
+  color: @gray-60;
+  text-align: center;
+}
+
+@media (max-width: @sm) {
+  .toolbar {
+    overflow-x: auto;
+  }
+
+  .filters {
+    flex: none;
+  }
+
+  .filter {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .crawl {
+    display: none;
   }
 }
 

@@ -8,7 +8,28 @@ import { renderPage } from '@bangumi/website/utils/test-utils';
 import homeFixture from '../../../mocks/fixtures/p1/home-GET.json';
 import HomePage from './components/HomePage';
 
+function createLocalStorage(): Storage {
+  const values = new Map<string, string>();
+  return {
+    get length() {
+      return values.size;
+    },
+    clear: () => values.clear(),
+    getItem: (key) => values.get(key) ?? null,
+    key: (index) => [...values.keys()][index] ?? null,
+    removeItem: (key) => values.delete(key),
+    setItem: (key, value) => values.set(key, String(value)),
+  };
+}
+
 describe('HomePage', () => {
+  beforeEach(() => {
+    Object.defineProperty(window, 'localStorage', {
+      configurable: true,
+      value: createLocalStorage(),
+    });
+  });
+
   const setupHome = () => {
     mockServer.use(
       http.get('http://localhost:3000/p1/home', () => {
@@ -100,8 +121,8 @@ describe('HomePage', () => {
     setupHome();
     await renderHome();
 
-    // 默认列表视图没有集数按钮
-    expect(screen.queryByTitle('ep.1 第1话')).not.toBeInTheDocument();
+    // 默认分栏视图展示当前选中条目的集数按钮
+    expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
 
     fireEvent.click(screen.getByRole('button', { name: '网格视图' }));
 
@@ -115,9 +136,23 @@ describe('HomePage', () => {
     expect(screen.getByTitle('ep.6 第6话')).toHaveAttribute('aria-pressed', 'false');
     expect(screen.getByTitle('ep.12 第12话')).toHaveAttribute('aria-pressed', 'false');
 
-    // 切回列表视图
+    // 切回分栏视图后，当前条目的集数按钮仍然可用
     fireEvent.click(screen.getByRole('button', { name: '列表视图' }));
-    expect(screen.queryByTitle('ep.1 第1话')).not.toBeInTheDocument();
+    expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
+  });
+
+  it('should restore the progress manager view', async () => {
+    window.localStorage.setItem('bangumi-home-progress-view', 'grid');
+    setupHome();
+    await renderHome();
+
+    expect(screen.getByRole('button', { name: '网格视图' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    );
+
+    fireEvent.click(screen.getByRole('button', { name: '列表视图' }));
+    expect(window.localStorage.getItem('bangumi-home-progress-view')).toBe('list');
   });
 
   it('should update episode status from the grid view detail popover', async () => {
