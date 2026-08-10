@@ -1,0 +1,19 @@
+import { ok } from '@oazapfts/runtime';
+import useSWR from 'swr';
+
+import { ozaClient } from '@bangumi/client';
+import type { SlimUser } from '@bangumi/client/client';
+
+/** 获取用户的好友列表 */
+export function useUserFriends(
+  username: string,
+  limit: number,
+): { data: SlimUser[] | undefined; total: number | undefined } {
+  const { data } = useSWR(
+    `user-friends ${username} ${limit}`,
+    async () => ok(ozaClient.getUserFriends(username, { limit })),
+    { suspense: true },
+  );
+
+  return data ?? { data: undefined, total: undefined };
+}

@@ -79,6 +79,31 @@ export function getGroupLink(groupName: string): string {
   return `/group/${groupName}`;
 }
 
+/** 用户收藏列表页，subjectTypePath 为 anime/book/music/game/real */
+export function getUserCollectionsLink(subjectTypePath: string, username: string): string {
+  return `/${subjectTypePath}/list/${username}`;
+}
+
+export function getUserFriendsPageLink(username: string): string {
+  return `/user/${username}/friends`;
+}
+
+export function getUserGroupsPageLink(username: string): string {
+  return `/user/${username}/groups`;
+}
+
+export function getUserBlogsPageLink(username: string): string {
+  return `/user/${username}/blog`;
+}
+
+export function getUserIndexesPageLink(username: string): string {
+  return `/user/${username}/index`;
+}
+
+export function getUserMonoPageLink(username: string): string {
+  return `/user/${username}/mono`;
+}
+
 export function getGroupTopicLink(topicId: number): string {
   return `/group/topic/${topicId}`;
 }

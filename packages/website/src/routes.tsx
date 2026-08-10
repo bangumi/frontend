@@ -25,6 +25,7 @@ const WikiHistory = lazy(async () => import('./pages/index/subject/[id]/wiki/his
 const WikiHome = lazy(async () => import('./pages/index/subject/[id]/wiki/index'));
 const WikiUploadImg = lazy(async () => import('./pages/index/subject/[id]/wiki/upload_img'));
 const Login = lazy(async () => import('./pages/login'));
+const UserHome = lazy(async () => import('./pages/index/user/[username]'));
 
 const legacyPagePaths = [
   'about',
@@ -65,7 +66,6 @@ const legacyPagePaths = [
   'subject/tag/:tag',
   'subject/topic/:id',
   'tokei',
-  'user/:username',
   'user/:username/timeline/status/:id',
   'wiki',
 ] as const;
@@ -146,6 +146,10 @@ export const pageRoutes: RouteObject[] = [
             ],
           },
         ],
+      },
+      {
+        path: 'user',
+        children: [{ path: ':username', element: <UserHome /> }],
       },
     ],
   },

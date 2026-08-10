@@ -25,7 +25,7 @@ it('redirects a registered legacy path to the legacy site', async () => {
 
 it.each([
   '/calendar',
-  '/user/test',
+  '/blog/42',
   '/subject/12/collections',
   '/subject/12/stats',
   '/subject/topic/42',

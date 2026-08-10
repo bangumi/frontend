@@ -1,0 +1,33 @@
+@import '@bangumi/design/theme/base';
+
+.page {
+  padding: 23px 46px;
+}
+
+.columns {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.columnLeft {
+  flex: 0 0 220px;
+  width: 220px;
+  min-width: 0;
+}
+
+.columnRight {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: @md) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .columnLeft {
+    flex: none;
+    width: 100%;
+  }
+}
