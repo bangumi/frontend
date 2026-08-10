@@ -54,7 +54,8 @@ pnpm prettier:check      # 检查 Prettier 格式
 - 在 `packages/website/src/routes.tsx` 显式注册路由。页面组件位于
   `packages/website/src/pages`；使用 `[param]` 命名的页面目录时，路由表中对应为 `:param`。
   嵌套路由需要与页面中的 `Outlet` 保持一致。
-- 实现 UI 时遵循从大到小、先整体后细节的顺序：优先搭建整体布局和页面结构，保证组件树与语义结构完整，再逐层细化每个区域的具体实现与样式细节。
+- 实现 UI 时遵循从大到小、先整体后细节的顺序：优先搭建整体布局和页面结构，保证组件树与
+  语义结构完整，再逐层细化每个区域的具体实现与样式细节。
 - 单元测试不得请求真实 API。使用 MSW，并在 `packages/website/src/mocks/handlers.ts` 注册
   handler；`mockAPI` 对应的响应 fixture 放在 `packages/website/src/mocks/fixtures`，文件名遵循
   `<path>-<METHOD>.json`。
