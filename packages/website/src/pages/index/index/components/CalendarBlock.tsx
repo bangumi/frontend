@@ -3,7 +3,7 @@ import React from 'react';
 
 import type { Calendar } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
-import { getSubjectLink } from '@bangumi/utils/pages';
+import { getCalendarLink, getSubjectLink } from '@bangumi/utils/pages';
 
 import styles from './CalendarBlock.module.less';
 import HomeSidePanel from './HomeSidePanel';
@@ -52,9 +52,7 @@ const CalendarBlock: React.FC<{ calendar: Calendar }> = ({ calendar }) => {
           每日放送{' '}
           <small className={styles.titleSmall}>
             {dayjs().format('YYYY年M月D日')} {getWeekdayDesc(today).cn}{' '}
-            <Link to='https://bgm.tv/calendar' target='_blank' rel='noopener noreferrer'>
-              ...more
-            </Link>
+            <Link to={getCalendarLink()}>...more</Link>
           </small>
         </>
       }

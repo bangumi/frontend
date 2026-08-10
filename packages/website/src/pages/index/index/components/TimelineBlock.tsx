@@ -4,7 +4,12 @@ import React from 'react';
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
 import { TimelineCat } from '@bangumi/client/client';
 import { Avatar, Typography } from '@bangumi/design';
-import { getSubjectLink, getUserProfileLink } from '@bangumi/utils/pages';
+import {
+  getBlogLink,
+  getIndexLink,
+  getSubjectLink,
+  getUserProfileLink,
+} from '@bangumi/utils/pages';
 
 import styles from './TimelineBlock.module.less';
 
@@ -115,9 +120,7 @@ function renderBlog(timeline: Timeline): React.ReactNode {
   return (
     <>
       发表了日志
-      <Link to={`https://bgm.tv/blog/${blog.id}`} target='_blank' rel='noopener noreferrer'>
-        {blog.title}
-      </Link>
+      <Link to={getBlogLink(blog.id)}>{blog.title}</Link>
     </>
   );
 }
@@ -130,9 +133,7 @@ function renderIndex(timeline: Timeline): React.ReactNode {
   return (
     <>
       更新了目录
-      <Link to={`https://bgm.tv/index/${index.id}`} target='_blank' rel='noopener noreferrer'>
-        {index.title}
-      </Link>
+      <Link to={getIndexLink(index.id)}>{index.title}</Link>
     </>
   );
 }
@@ -197,7 +198,6 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
     <li className={styles.item}>
       <Link
         to={getUserProfileLink(user.username)}
-        isExternal
         className={styles.avatarLink}
         title={user.nickname}
       >
@@ -205,7 +205,7 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
       </Link>
       <div className={styles.info}>
         <div>
-          <Link to={getUserProfileLink(user.username)} isExternal fontWeight='bold'>
+          <Link to={getUserProfileLink(user.username)} fontWeight='bold'>
             {user.nickname}
           </Link>{' '}
           <span className={styles.desc}>{desc}</span>

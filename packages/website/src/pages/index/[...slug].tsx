@@ -1,9 +1,17 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import NotFound from '@bangumi/website/components/NotFound';
+import { getLegacyPageLink } from '@bangumi/utils/pages';
+import { redirectTo } from '@bangumi/website/utils/route';
 
 const matchAll = () => {
-  return <NotFound />;
+  const { pathname, search, hash } = useLocation();
+
+  useEffect(() => {
+    redirectTo(getLegacyPageLink(`${pathname}${search}${hash}`));
+  }, [hash, pathname, search]);
+
+  return null;
 };
 
 export default matchAll;

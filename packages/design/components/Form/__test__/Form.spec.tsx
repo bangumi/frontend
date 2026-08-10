@@ -1,5 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import Button from '../../Button';
 import EditorForm from '../../EditorForm';
@@ -64,11 +65,13 @@ describe('Form Components', () => {
 
   it('render compact layout properly', () => {
     const { container } = render(
-      <Form compact>
-        <Input />
-        <Input />
-        <EditorForm />
-      </Form>,
+      <MemoryRouter>
+        <Form compact>
+          <Input />
+          <Input />
+          <EditorForm />
+        </Form>
+      </MemoryRouter>,
     );
     expect(container).toMatchSnapshot();
   });

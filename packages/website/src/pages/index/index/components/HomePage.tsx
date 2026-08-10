@@ -27,10 +27,7 @@ const HomePage: React.FC = () => {
   return (
     <main className={styles.page}>
       <div className={styles.greets}>
-        Hi!{' '}
-        <Link to={getUserProfileLink(user.username)} isExternal>
-          {user.nickname}
-        </Link>
+        Hi! <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>
       </div>
       <div className={styles.columns}>
         <div className={styles.columnLeft}>

@@ -5,6 +5,7 @@ import { ozaClient } from '@bangumi/client';
 import type { Subject } from '@bangumi/client/client';
 import { CollectionType } from '@bangumi/client/client';
 import { Button, toast, Typography } from '@bangumi/design';
+import { getSubjectStatsLink } from '@bangumi/utils/pages';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 
 import styles from './CollectionPanel.module.less';
@@ -185,7 +186,7 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
       )}
 
       <div className={styles.rating}>
-        <Link to={`https://bgm.tv/subject/${subject.id}/stats`} isExternal>
+        <Link to={getSubjectStatsLink(subject.id)}>
           <div className={styles.scoreBlock}>
             <span className={styles.score}>{rating.score.toFixed(1)}</span>
             <span className={styles.rankDesc}>{rating.rank === 0 ? '--' : `#${rating.rank}`}</span>

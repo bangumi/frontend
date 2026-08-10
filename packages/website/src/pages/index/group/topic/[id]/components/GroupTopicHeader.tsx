@@ -25,9 +25,7 @@ const GroupTopicHeader: FC<Header> = ({ title, createdAt, creator, group, id }) 
       <div className={styles.headerMain}>
         <span className={styles.navBar}>
           <div>
-            <Link to={getUserProfileLink(creator?.username ?? '')} isExternal>
-              {creator?.nickname}
-            </Link>
+            <Link to={getUserProfileLink(creator?.username ?? '')}>{creator?.nickname}</Link>
             <span>发表于</span>
             <Link to={`/group/${group.name}`}>{group.title}</Link>
             <span>»</span>

@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { ozaClient } from '@bangumi/client';
 import { Button, Pagination, Tab, Typography } from '@bangumi/design';
 import { ArrowPath } from '@bangumi/icons';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 import { PageNeedLoginError } from '@bangumi/website/error';
@@ -20,6 +21,15 @@ const NotificationPageTabs = [
   // TODO: 短信收发
   // { key: 'msg-sv', label: '短信收发', to: '/msg-sv' },
 ];
+
+function getNoticeLink(
+  setting: (typeof settings)[number],
+  mainID: number,
+  relatedID: number,
+): string {
+  const path = setting.url.replace(/^(SITE_URL|DOUJIN_URL)/, '').replace(/\/+$/, '');
+  return `${path}/${mainID}${setting.append ?? ''}${setting.anchor}${relatedID}`;
+}
 
 function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
   const { id, type, title, mainID, relatedID, sender, createdAt, unread } = notice;
@@ -38,25 +48,17 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
     <div id={`notice_${id}`} className={style.noticeItem}>
       <img src={sender.avatar.small} alt='bgm-notify__avatar' className={style.noticeItemAvatar} />
 
-      <Typography.Link
-        to={`https://bgm.tv/user/${sender.username}`}
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        {sender.nickname}
-      </Typography.Link>
+      <Typography.Link to={getUserProfileLink(sender.username)}>{sender.nickname}</Typography.Link>
 
       <span className={style.noticeItemBody}>
         {setting.prefix}
         <Typography.Link
-          to={`${setting.url}/${mainID}${setting.append ?? ''}${setting.anchor}${relatedID}`}
+          to={getNoticeLink(setting, mainID, relatedID)}
           onClick={() => {
             ozaClient.clearNotice({
               id: [id],
             });
           }}
-          target='_blank'
-          rel='noopener noreferrer'
           className={style.noticeItemBodyContent}
         >
           {setting.inner ?? title}

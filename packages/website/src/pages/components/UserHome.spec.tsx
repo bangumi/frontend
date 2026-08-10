@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { render } from '@testing-library/react';
 import React from 'react';
+import { MemoryRouter } from 'react-router-dom';
 
 import { useUser } from '../../hooks/use-user';
 import UserHome from './UserHome';
@@ -17,7 +18,11 @@ it('should show user name if user is logged', () => {
     },
   });
 
-  const { getByText } = render(<UserHome />);
+  const { getByText } = render(
+    <MemoryRouter>
+      <UserHome />
+    </MemoryRouter>,
+  );
 
-  expect(getByText('testuser')).toHaveAttribute('href', 'https://bgm.tv/user/testuser-123');
+  expect(getByText('testuser')).toHaveAttribute('href', '/user/testuser-123');
 });

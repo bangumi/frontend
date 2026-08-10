@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { ReactComponent as BangumiTextLogo } from '../../assets/logo.svg';
 import style from './style.module.less';
@@ -15,7 +16,7 @@ const FooterBlockItem: FC<{ block: IBlockItem }> = ({ block }) => {
       <h2 className={style.title}>{block.title}</h2>
       {block.items.map(({ key, label }) => (
         <div key={key}>
-          <a href={key}>{label}</a>
+          <Link to={key}>{label}</Link>
         </div>
       ))}
     </div>
@@ -26,19 +27,19 @@ const aboutBlock: IBlockItem = {
   title: '关于我们',
   items: [
     {
-      key: 'https://bgm.tv/about',
+      key: '/about',
       label: '关于我们',
     },
     {
-      key: 'https://bgm.tv/about/guideline',
+      key: '/about/guideline',
       label: '社区指导原则',
     },
     {
-      key: 'https://bgm.tv/about/copyright',
+      key: '/about/copyright',
       label: '版权声明',
     },
     {
-      key: 'https://bgm.tv/about/link2us',
+      key: '/about/link2us',
       label: '链接我们',
     },
   ],
@@ -48,19 +49,19 @@ const helpBlock: IBlockItem = {
   title: '获得帮助',
   items: [
     {
-      key: 'https://bgm.tv/help/bbcode',
+      key: '/help/bbcode',
       label: 'BBCode',
     },
     {
-      key: 'https://bgm.tv/group/forum',
+      key: '/group/forum',
       label: '站务论坛',
     },
     {
-      key: 'https://bgm.tv/group/wiki',
+      key: '/group/wiki',
       label: '番組 WIKI 計画',
     },
     {
-      key: 'https://bgm.tv/group/doujin',
+      key: '/group/doujin',
       label: '天窗站务',
     },
   ],
@@ -70,19 +71,19 @@ const devBlock: IBlockItem = {
   title: '开发相关',
   items: [
     {
-      key: 'https://bgm.tv/group/dev',
+      key: '/group/dev',
       label: '番组开发',
     },
     {
-      key: 'https://bgm.tv/dev/app',
+      key: '/dev/app',
       label: '开发者平台',
     },
     {
-      key: 'https://bgm.tv/group/issues',
+      key: '/group/issues',
       label: 'BUG 追踪',
     },
     {
-      key: 'https://bgm.tv/onair',
+      key: '/onair',
       label: '客户端',
     },
   ],
@@ -92,15 +93,15 @@ const specialBlock: IBlockItem = {
   title: '特别推荐',
   items: [
     {
-      key: 'https://bgm.tv/award/2021',
+      key: '/award/2021',
       label: 'Bangumi 年鉴',
     },
     {
-      key: 'https://bgm.tv/magi',
+      key: '/magi',
       label: 'MAGI 问答',
     },
     {
-      key: 'https://bgm.tv/tokei',
+      key: '/tokei',
       label: 'etokei 绘时计',
     },
   ],
@@ -110,19 +111,19 @@ const moreBlock: IBlockItem = {
   title: '更多',
   items: [
     {
-      key: 'https://bgm.tv/index',
+      key: '/index',
       label: '目录',
     },
     {
-      key: 'https://bgm.tv/wiki',
+      key: '/wiki',
       label: '维基人',
     },
     {
-      key: 'https://bgm.tv/goodies',
+      key: '/goodies',
       label: '周边',
     },
     {
-      key: 'https://bgm.tv/dollars',
+      key: '/dollars',
       label: 'Dollars',
     },
   ],

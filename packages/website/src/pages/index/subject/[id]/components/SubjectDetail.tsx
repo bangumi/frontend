@@ -4,6 +4,21 @@ import { NavLink } from 'react-router-dom';
 import type { SlimIndex, Subject, SubjectHomeResponse } from '@bangumi/client/client';
 import { CollectionType, SubjectType } from '@bangumi/client/client';
 import { Tab, Typography } from '@bangumi/design';
+import {
+  getIndexLink,
+  getSubjectBoardLink,
+  getSubjectCharactersLink,
+  getSubjectCollectionsLink,
+  getSubjectCommentsLink,
+  getSubjectEpisodesLink,
+  getSubjectLink,
+  getSubjectPersonsLink,
+  getSubjectRelationsLink,
+  getSubjectReviewsLink,
+  getSubjectStatsLink,
+  getSubjectWikiEditLink,
+  getUserProfileLink,
+} from '@bangumi/utils/pages';
 
 import styles from './SubjectDetail.module.less';
 import { SubjectBlocks } from './SubjectDetailBlocks';
@@ -40,28 +55,63 @@ function SubjectHeader({ subject }: { subject: Subject }) {
     subject.type === SubjectType.Real;
   const epLabel = subject.type === SubjectType.Music ? '曲目' : '章节';
 
-  const tabs: { key: string; label: string; to: string; external: boolean }[] = [
-    { key: 'overview', label: '概览', to: `/subject/${subject.id}`, external: false },
-    { key: 'ep', label: epLabel, to: `/subject/${subject.id}/ep`, external: true },
-    { key: 'characters', label: '角色', to: `/subject/${subject.id}/characters`, external: true },
+  const tabs: { key: string; label: string; to: string; implemented: boolean }[] = [
+    { key: 'overview', label: '概览', to: getSubjectLink(subject.id), implemented: true },
+    { key: 'ep', label: epLabel, to: getSubjectEpisodesLink(subject.id), implemented: false },
+    {
+      key: 'characters',
+      label: '角色',
+      to: getSubjectCharactersLink(subject.id),
+      implemented: false,
+    },
     {
       key: 'persons',
       label: '制作人员',
-      to: `/subject/${subject.id}/persons?group=position`,
-      external: true,
+      to: getSubjectPersonsLink(subject.id),
+      implemented: false,
     },
-    { key: 'relations', label: '关联', to: `/subject/${subject.id}/relations`, external: true },
-    { key: 'comments', label: '吐槽', to: `/subject/${subject.id}/comments`, external: true },
-    { key: 'reviews', label: '评论', to: `/subject/${subject.id}/reviews`, external: true },
-    { key: 'board', label: '讨论版', to: `/subject/${subject.id}/board`, external: true },
-    { key: 'stats', label: '透视', to: `/subject/${subject.id}/stats`, external: true },
-    { key: 'wiki', label: 'Wiki', to: `/subject/${subject.id}/wiki/edit`, external: false },
+    {
+      key: 'relations',
+      label: '关联',
+      to: getSubjectRelationsLink(subject.id),
+      implemented: false,
+    },
+    {
+      key: 'comments',
+      label: '吐槽',
+      to: getSubjectCommentsLink(subject.id),
+      implemented: false,
+    },
+    {
+      key: 'reviews',
+      label: '评论',
+      to: getSubjectReviewsLink(subject.id),
+      implemented: false,
+    },
+    {
+      key: 'board',
+      label: '讨论版',
+      to: getSubjectBoardLink(subject.id),
+      implemented: false,
+    },
+    {
+      key: 'stats',
+      label: '透视',
+      to: getSubjectStatsLink(subject.id),
+      implemented: false,
+    },
+    {
+      key: 'wiki',
+      label: 'Wiki',
+      to: getSubjectWikiEditLink(subject.id),
+      implemented: true,
+    },
   ];
 
   return (
     <div className={styles.header}>
       <h1 className={styles.name}>
-        <Link to={`/subject/${subject.id}`} title={subject.nameCN}>
+        <Link to={getSubjectLink(subject.id)} title={subject.nameCN}>
           {subject.name}
         </Link>
         {subject.nameCN != null && subject.nameCN !== '' && (
@@ -77,13 +127,8 @@ function SubjectHeader({ subject }: { subject: Subject }) {
           {tabs
             .filter((tab) => tab.key !== 'ep' || showEpTab)
             .map((tab) =>
-              tab.external ? (
-                <Link
-                  key={tab.key}
-                  to={`https://bgm.tv${tab.to}`}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
+              !tab.implemented ? (
+                <Link key={tab.key} to={tab.to}>
                   <Tab.Item isActive={false}>{tab.label}</Tab.Item>
                 </Link>
               ) : (
@@ -146,22 +191,12 @@ function SubjectIndexes({ indexes }: { indexes: SlimIndex[] }) {
       <ul className={styles.indexList}>
         {indexes.slice(0, 5).map((index) => (
           <li key={index.id}>
-            <Link
-              to={`https://bgm.tv/index/${index.id}`}
-              target='_blank'
-              rel='noopener noreferrer'
-              className={styles.indexTitle}
-              title={index.title}
-            >
+            <Link to={getIndexLink(index.id)} className={styles.indexTitle} title={index.title}>
               {index.title}
             </Link>
             <small className={styles.indexBy}>
               by{' '}
-              <Link
-                to={`https://bgm.tv/user/${index.user?.username ?? ''}`}
-                target='_blank'
-                rel='noopener noreferrer'
-              >
+              <Link to={getUserProfileLink(index.user?.username ?? '')}>
                 {index.user?.nickname ?? ''}
               </Link>
             </small>
@@ -189,11 +224,7 @@ function SubjectCollectStats({ subject }: { subject: Subject }) {
       <ul className={styles.collectStats}>
         {counts.map((entry) => (
           <li key={entry.type}>
-            <Link
-              to={`https://bgm.tv/subject/${subject.id}/collections?filter=${entry.type}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <Link to={getSubjectCollectionsLink(subject.id, entry.type)}>
               {entry.count}人{COLLECT_DESC[entry.type]}
             </Link>
           </li>
