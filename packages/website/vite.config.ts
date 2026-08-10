@@ -116,6 +116,11 @@ export default defineConfig(({ mode }) => {
       modules: {
         localsConvention: 'camelCaseOnly',
       },
+      // Compile less in the main thread instead of worker threads: Vite's CSS
+      // preprocessor workers wait on a 5s synchronous lock for the main process
+      // to resolve imports, which intermittently times out
+      // ("[vite:css] [less] timed-out") on CPU-contended CI runners.
+      preprocessorMaxWorkers: 0,
       preprocessorOptions: {
         less: {
           charset: false,

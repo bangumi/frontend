@@ -19,6 +19,13 @@ export default {
       viteConfig.build.sourcemap = true;
     }
 
+    // Compile less in the main thread instead of worker threads: Vite's CSS
+    // preprocessor workers wait on a 5s synchronous lock for the main process
+    // to resolve imports, which intermittently times out
+    // ("[vite:css] [less] timed-out") on CPU-contended CI runners.
+    viteConfig.css ??= {};
+    viteConfig.css.preprocessorMaxWorkers = 0;
+
     /*
      * About auto-generated component docs:
      * Please use FC<Props> instead of React.FC<Props> to declare component.
