@@ -1,5 +1,5 @@
 import { ok } from '@oazapfts/runtime';
-import dayjs from 'dayjs';
+import { DateTime } from 'luxon';
 import React, { useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
@@ -7,7 +7,7 @@ import type { Episode, ProgressItem, UpdateSubjectProgress } from '@bangumi/clie
 import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
 import { Popover, toast, Typography } from '@bangumi/design';
 import { GridView, ListView } from '@bangumi/icons';
-import { getSubjectLink } from '@bangumi/utils/pages';
+import { getSubjectLink, getSubjectWikiEditLink } from '@bangumi/utils/pages';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
 import styles from './PrgManager.module.less';
@@ -22,6 +22,23 @@ const CATEGORIES = [
 ];
 
 type ViewMode = 'list' | 'grid';
+
+const VIEW_STORAGE_KEY = 'bangumi-home-progress-view';
+
+function getViewStorage(): Storage | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+  try {
+    return window.localStorage ?? null;
+  } catch {
+    return null;
+  }
+}
+
+function getInitialView(): ViewMode {
+  return getViewStorage()?.getItem(VIEW_STORAGE_KEY) === 'grid' ? 'grid' : 'list';
+}
 
 /** 非本篇章节类型的分组标题，对齐 PHP EpCore::getTypeInfoByType */
 const EP_TYPE_LABELS: Partial<Record<EpisodeType, string>> = {
@@ -44,6 +61,13 @@ function totalText(total: number): string {
   return total === 0 ? '??' : String(total);
 }
 
+function isEpisodeUnavailable(airdate: string): boolean {
+  const airDate = DateTime.fromISO(airdate);
+  return (
+    airDate.isValid && airDate.startOf('day').toMillis() > DateTime.now().startOf('day').toMillis()
+  );
+}
+
 function getErrorMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
@@ -63,149 +87,6 @@ function groupEps(eps: Episode[]): [EpisodeType, Episode[]][] {
     type,
     [...list].sort((a, b) => a.sort - b.sort),
   ]);
-}
-
-function PrgRow({ item }: { item: ProgressItem }) {
-  const { mutate } = useHomePage();
-  const [epValue, setEpValue] = useState(String(item.interest.epStatus));
-  const [volValue, setVolValue] = useState(String(item.interest.volStatus));
-  const [submitting, setSubmitting] = useState(false);
-
-  const { subject } = item;
-  const isBook = subject.type === SubjectType.Book;
-  const lastUnwatchedEp = item.lastUnwatchedEp;
-
-  const submit = async (body: UpdateSubjectProgress) => {
-    setSubmitting(true);
-    try {
-      await ok(ozaClient.updateSubjectProgress(subject.id, body));
-      await mutate();
-    } catch (error) {
-      toast(getErrorMessage(error), { type: 'error' });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleBatchUpdate = (event: React.FormEvent) => {
-    event.preventDefault();
-    const ep = Number(epValue);
-    if (Number.isNaN(ep) || ep < 0) {
-      toast('请输入有效的章节进度', { type: 'error' });
-      return;
-    }
-    const body: UpdateSubjectProgress = { epStatus: ep };
-    if (isBook && subject.series) {
-      const vol = Number(volValue);
-      if (Number.isNaN(vol) || vol < 0) {
-        toast('请输入有效的卷数进度', { type: 'error' });
-        return;
-      }
-      body.volStatus = vol;
-    }
-    void submit(body);
-  };
-
-  const handleCheckIn = async (epId: number) => {
-    setSubmitting(true);
-    try {
-      await ok(ozaClient.updateEpisodeProgress(epId, { type: EpisodeCollectionStatus.Done }));
-      await mutate();
-    } catch (error) {
-      toast(getErrorMessage(error), { type: 'error' });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  return (
-    <li className={styles.row}>
-      <Link
-        to={getSubjectLink(subject.id)}
-        className={styles.coverLink}
-        title={subject.nameCN || subject.name}
-      >
-        <img src={subject.images?.large} className={styles.cover} loading='lazy' alt='' />
-        {item.todayOnAir && <span className={styles.onAir}>放送中</span>}
-      </Link>
-      <div className={styles.info}>
-        <div className={styles.header}>
-          <Link
-            to={getSubjectLink(subject.id)}
-            className={styles.subjectName}
-            title={subject.nameCN || subject.name}
-          >
-            {subject.nameCN || subject.name}
-          </Link>
-          <small className={styles.percentText}>
-            [{item.interest.epStatus}/{totalText(subject.eps)}]
-          </small>
-        </div>
-
-        <div className={styles.progressBar}>
-          <div className={styles.progressInner} style={{ width: `${item.percent}%` }} />
-        </div>
-
-        <div className={styles.actions}>
-          {!isBook && lastUnwatchedEp && (
-            <button
-              type='button'
-              className={styles.checkInBtn}
-              disabled={submitting}
-              onClick={() => void handleCheckIn(lastUnwatchedEp.id)}
-              title={`标记 ep.${lastUnwatchedEp.sort} 为看过`}
-            >
-              ep.{lastUnwatchedEp.sort} 看过
-            </button>
-          )}
-          <form className={styles.batchForm} onSubmit={handleBatchUpdate}>
-            {isBook ? (
-              <>
-                <label className={styles.batchLabel}>
-                  Chap.
-                  <input
-                    className={styles.batchInput}
-                    type='number'
-                    min={0}
-                    value={epValue}
-                    onChange={(e) => setEpValue(e.target.value)}
-                  />
-                  / {totalText(subject.eps)}
-                </label>
-                {subject.series && (
-                  <label className={styles.batchLabel}>
-                    Vol.
-                    <input
-                      className={styles.batchInput}
-                      type='number'
-                      min={0}
-                      value={volValue}
-                      onChange={(e) => setVolValue(e.target.value)}
-                    />
-                    / {totalText(subject.volumes)}
-                  </label>
-                )}
-              </>
-            ) : (
-              <label className={styles.batchLabel}>
-                <input
-                  className={styles.batchInput}
-                  type='number'
-                  min={0}
-                  value={epValue}
-                  onChange={(e) => setEpValue(e.target.value)}
-                />
-                / {totalText(subject.eps)}
-              </label>
-            )}
-            <button type='submit' className={styles.updateBtn} disabled={submitting}>
-              更新
-            </button>
-          </form>
-        </div>
-      </div>
-    </li>
-  );
 }
 
 /** 单集详情浮层，hover 集数按钮时显示，对齐 PHP 首页的 ep 信息浮层 */
@@ -282,7 +163,8 @@ function EpDetail({
       {status !== undefined && ep.collection?.updatedAt && (
         <p className={styles.epInfoLine}>
           <span>记录</span>
-          {STATUS_TEXT[status]}: {dayjs.unix(ep.collection.updatedAt).format('YYYY-M-D HH:mm')}
+          {STATUS_TEXT[status]}:{' '}
+          {DateTime.fromSeconds(ep.collection.updatedAt).toFormat('yyyy-M-d HH:mm')}
         </p>
       )}
     </div>
@@ -299,6 +181,13 @@ function EpButton({
   onUpdate: (type: EpisodeCollectionStatus) => void;
 }) {
   const watched = ep.collection?.status === EpisodeCollectionStatus.Done;
+  const unavailable = Boolean(ep.airdate) && isEpisodeUnavailable(ep.airdate);
+  const buttonClass = watched
+    ? styles.epBtnWatched
+    : unavailable
+      ? styles.epBtnUnavailable
+      : styles.epBtn;
+
   return (
     <Popover
       className={styles.epPopover}
@@ -306,9 +195,10 @@ function EpButton({
     >
       <button
         type='button'
-        className={watched ? styles.epBtnWatched : styles.epBtn}
+        className={buttonClass}
         title={`ep.${ep.sort} ${ep.name}`}
         aria-pressed={watched}
+        disabled={unavailable}
       >
         {String(ep.sort).padStart(2, '0')}
       </button>
@@ -316,8 +206,43 @@ function EpButton({
   );
 }
 
+function PrgNavItem({
+  item,
+  active,
+  onSelect,
+}: {
+  item: ProgressItem;
+  active: boolean;
+  onSelect: () => void;
+}) {
+  const { subject } = item;
+
+  return (
+    <li className={styles.navItem}>
+      <button
+        type='button'
+        className={`${styles.navButton} ${active ? styles.navButtonActive : ''}`}
+        onClick={onSelect}
+      >
+        <img src={subject.images?.small} className={styles.navCover} loading='lazy' alt='' />
+        <span className={styles.navInfo}>
+          <span className={styles.navHeader}>
+            <span className={styles.navName}>{subject.nameCN || subject.name}</span>
+            <small className={styles.navProgressText}>
+              [{item.interest.epStatus}/{totalText(subject.eps)}]
+            </small>
+          </span>
+          <span className={styles.navProgressBar}>
+            <span className={styles.navProgressInner} style={{ width: `${item.percent}%` }} />
+          </span>
+        </span>
+      </button>
+    </li>
+  );
+}
+
 /** 网格视图卡片：封面 + 标题 + 进度 + 逐集按钮，对齐 PHP home_prg_item_eps */
-function PrgCard({ item }: { item: ProgressItem }) {
+function PrgCard({ item, detailed = false }: { item: ProgressItem; detailed?: boolean }) {
   const { mutate } = useHomePage();
   const [epValue, setEpValue] = useState(String(item.interest.epStatus));
   const [volValue, setVolValue] = useState(String(item.interest.volStatus));
@@ -369,29 +294,83 @@ function PrgCard({ item }: { item: ProgressItem }) {
     }
   };
 
+  const handleCheckIn = async (epId: number) => {
+    setSubmitting(true);
+    try {
+      await ok(ozaClient.updateEpisodeProgress(epId, { type: EpisodeCollectionStatus.Done }));
+      await mutate();
+    } catch (error) {
+      toast(getErrorMessage(error), { type: 'error' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <li className={styles.card}>
-      <Link
-        to={getSubjectLink(subject.id)}
-        className={styles.cardCoverLink}
-        title={subject.nameCN || subject.name}
-      >
-        <img src={subject.images?.large} className={styles.cardCover} loading='lazy' alt='' />
+      <Link to={getSubjectLink(subject.id)} className={styles.cardCoverLink} title={subject.name}>
+        <img
+          src={detailed ? subject.images?.large : subject.images?.grid}
+          className={styles.cardCover}
+          loading='lazy'
+          alt=''
+        />
         {item.todayOnAir && <span className={styles.onAir}>放送中</span>}
       </Link>
       <div className={styles.cardInfo}>
         <div className={styles.cardHeader}>
-          <Link
-            to={getSubjectLink(subject.id)}
-            className={styles.cardName}
-            title={subject.nameCN || subject.name}
-          >
-            {subject.nameCN || subject.name}
+          <Link to={getSubjectLink(subject.id)} className={styles.cardName} title={subject.name}>
+            {subject.name}
           </Link>
           <small className={styles.percentText}>
             [{item.interest.epStatus}/{totalText(subject.eps)}]
           </small>
+          {!detailed && (
+            <Link to={getSubjectWikiEditLink(subject.id)} className={styles.editLink}>
+              edit
+            </Link>
+          )}
         </div>
+        {!isBook && detailed && (
+          <>
+            <p className={styles.watchingCount}>{subject.doing} 人在看</p>
+            <form className={styles.detailProgressRow} onSubmit={handleBatchUpdate}>
+              <span className={styles.detailProgressBar}>
+                <span
+                  className={styles.detailProgressInner}
+                  style={{ width: `${item.percent}%` }}
+                />
+              </span>
+              <input
+                className={styles.detailProgressInput}
+                type='number'
+                min={0}
+                value={epValue}
+                aria-label='章节进度'
+                onChange={(event) => setEpValue(event.target.value)}
+              />
+              <span>/ {totalText(subject.eps)}</span>
+              <button type='submit' className={styles.visuallyHidden} disabled={submitting}>
+                更新
+              </button>
+              {item.lastUnwatchedEp && (
+                <button
+                  type='button'
+                  className={styles.detailCheckInBtn}
+                  disabled={submitting}
+                  onClick={() => void handleCheckIn(item.lastUnwatchedEp!.id)}
+                >
+                  ep.{item.lastUnwatchedEp.sort} 看过
+                </button>
+              )}
+            </form>
+            <div className={styles.subjectActions}>
+              <Link to={`${getSubjectLink(subject.id)}/comments`}>参与讨论</Link>
+              <Link to={`${getSubjectLink(subject.id)}/comments`}>观吐槽</Link>
+              <Link to={`${getSubjectLink(subject.id)}/reviews`}>写长评</Link>
+            </div>
+          </>
+        )}
         {isBook ? (
           <form className={styles.batchForm} onSubmit={handleBatchUpdate}>
             <label className={styles.batchLabel}>
@@ -442,20 +421,37 @@ function PrgCard({ item }: { item: ProgressItem }) {
           </ul>
         )}
       </div>
+      {detailed && (
+        <div className={styles.allEpisodes}>
+          <Link to={`${getSubjectLink(subject.id)}/ep`}>全部章节 »</Link>
+        </div>
+      )}
     </li>
   );
 }
 
 /**
  * 进度管理器，对齐 PHP home_prg：分类 tab + 列表/网格视图切换
- * 列表视图为行内快捷看过 + 批量更新；网格视图展示逐集按钮，hover 单集可查看详情与操作
+ * 列表视图为左侧条目导航 + 右侧详情；网格视图展示全部条目及逐集操作
  */
 const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
   const [activeType, setActiveType] = useState(0);
-  const [view, setView] = useState<ViewMode>('list');
+  const [view, setView] = useState<ViewMode>(getInitialView);
+  const [selectedSubjectId, setSelectedSubjectId] = useState(progress[0]?.subject.id);
 
   const filtered =
     activeType === 0 ? progress : progress.filter((item) => item.subject.type === activeType);
+  const selected =
+    filtered.find((item) => item.subject.id === selectedSubjectId) ?? filtered[0] ?? null;
+
+  const switchView = (nextView: ViewMode) => {
+    setView(nextView);
+    try {
+      getViewStorage()?.setItem(VIEW_STORAGE_KEY, nextView);
+    } catch {
+      // 浏览器禁用持久化时仍允许切换当前页面的视图。
+    }
+  };
 
   return (
     <section className={styles.block}>
@@ -474,18 +470,20 @@ const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
           <button
             type='button'
             className={`${styles.viewBtn} ${view === 'list' ? styles.viewActive : ''}`}
-            onClick={() => setView('list')}
+            onClick={() => switchView('list')}
             title='列表视图'
             aria-label='列表视图'
+            aria-pressed={view === 'list'}
           >
             <ListView />
           </button>
           <button
             type='button'
             className={`${styles.viewBtn} ${view === 'grid' ? styles.viewActive : ''}`}
-            onClick={() => setView('grid')}
+            onClick={() => switchView('grid')}
             title='网格视图'
             aria-label='网格视图'
+            aria-pressed={view === 'grid'}
           >
             <GridView />
           </button>
@@ -494,11 +492,21 @@ const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
       {filtered.length === 0 ? (
         <p className={styles.empty}>还没有在看的番组，去搜索看看？</p>
       ) : view === 'list' ? (
-        <ul className={styles.list}>
-          {filtered.map((item) => (
-            <PrgRow key={item.subject.id} item={item} />
-          ))}
-        </ul>
+        <div className={styles.splitView}>
+          <ul className={styles.subjectList}>
+            {filtered.map((item) => (
+              <PrgNavItem
+                key={item.subject.id}
+                item={item}
+                active={selected?.subject.id === item.subject.id}
+                onSelect={() => setSelectedSubjectId(item.subject.id)}
+              />
+            ))}
+          </ul>
+          <ul className={styles.subjectDetail}>
+            {selected && <PrgCard key={selected.subject.id} item={selected} detailed />}
+          </ul>
+        </div>
       ) : (
         <ul className={styles.gridList}>
           {filtered.map((item) => (

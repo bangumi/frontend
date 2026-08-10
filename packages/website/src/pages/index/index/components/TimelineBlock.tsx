@@ -1,39 +1,60 @@
-import dayjs from 'dayjs';
-import React from 'react';
+import { ok } from '@oazapfts/runtime';
+import { DateTime } from 'luxon';
+import React, { useState } from 'react';
 
+import { ozaClient } from '@bangumi/client';
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
 import { TimelineCat } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import { Avatar, toast, Typography } from '@bangumi/design';
 import {
   getBlogLink,
   getIndexLink,
   getSubjectLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
 import styles from './TimelineBlock.module.less';
 
 const { Link } = Typography;
 
+const TIMELINE_FILTERS = [
+  { key: 'all', label: '动态' },
+  { key: 'status', label: '吐槽' },
+  { key: 'subject', label: '收藏' },
+  { key: 'progress', label: '进度' },
+  { key: 'blog', label: '日志' },
+  { key: 'more', label: '更多' },
+] as const;
+
+type TimelineFilter = (typeof TIMELINE_FILTERS)[number]['key'];
+
+const PRIMARY_TIMELINE_CATEGORIES = new Set<TimelineCat>([
+  TimelineCat.Status,
+  TimelineCat.Subject,
+  TimelineCat.Progress,
+  TimelineCat.Blog,
+]);
+
 /** 相对时间，对齐 PHP GlobalCore::make_descriptive_time */
 function makeDescriptiveTime(timestamp: number): string {
-  const now = dayjs();
-  const time = dayjs.unix(timestamp);
-  const diffMin = now.diff(time, 'minute');
+  const now = DateTime.now();
+  const time = DateTime.fromSeconds(timestamp);
+  const diffMin = Math.floor(now.diff(time, 'minutes').minutes);
   if (diffMin < 1) {
     return '刚刚';
   }
   if (diffMin < 60) {
     return `${diffMin} 分钟前`;
   }
-  const diffHour = now.diff(time, 'hour');
+  const diffHour = Math.floor(now.diff(time, 'hours').hours);
   if (diffHour < 24) {
     return `${diffHour} 小时前`;
   }
-  if (now.startOf('day').diff(time.startOf('day'), 'day') === 1) {
+  if (now.startOf('day').diff(time.startOf('day'), 'days').days === 1) {
     return '昨天';
   }
-  return time.format('MM-DD');
+  return time.toFormat('MM-dd');
 }
 
 function SubjectName({ subject }: { subject: SlimSubject }) {
@@ -211,7 +232,7 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
           <span className={styles.desc}>{desc}</span>
         </div>
         <div className={styles.time}>
-          <span title={dayjs.unix(timeline.createdAt).format('YYYY-MM-DD HH:mm')}>
+          <span title={DateTime.fromSeconds(timeline.createdAt).toFormat('yyyy-MM-dd HH:mm')}>
             {makeDescriptiveTime(timeline.createdAt)}
           </span>
           {timeline.source.name != null && <span> · {timeline.source.name}</span>}
@@ -221,18 +242,117 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
   );
 }
 
-const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
-  if (timeline.length === 0) {
-    return null;
+function matchesFilter(timeline: Timeline, filter: TimelineFilter): boolean {
+  if (filter === 'all') {
+    return true;
   }
+  if (filter === 'status') {
+    return timeline.cat === TimelineCat.Status;
+  }
+  if (filter === 'subject') {
+    return timeline.cat === TimelineCat.Subject;
+  }
+  if (filter === 'progress') {
+    return timeline.cat === TimelineCat.Progress;
+  }
+  if (filter === 'blog') {
+    return timeline.cat === TimelineCat.Blog;
+  }
+  return !PRIMARY_TIMELINE_CATEGORIES.has(timeline.cat);
+}
+
+function timelineDay(timestamp: number): string {
+  const date = DateTime.fromSeconds(timestamp);
+  const now = DateTime.now();
+  if (date.hasSame(now, 'day')) {
+    return '今天';
+  }
+  if (date.hasSame(now.minus({ days: 1 }), 'day')) {
+    return '昨天';
+  }
+  return date.toFormat('M月d日');
+}
+
+const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
+  const { mutate } = useHomePage();
+  const [filter, setFilter] = useState<TimelineFilter>('all');
+  const [content, setContent] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
+  const filtered = timeline.filter((item) => matchesFilter(item, filter));
+  const grouped = new Map<string, Timeline[]>();
+  for (const item of filtered) {
+    const label = timelineDay(item.createdAt);
+    grouped.set(label, [...(grouped.get(label) ?? []), item]);
+  }
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    const value = content.trim();
+    if (!value || submitting) {
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await ok(ozaClient.createTimelineSay({ content: value, turnstileToken: '' }));
+      setContent('');
+      await mutate();
+    } catch (error) {
+      toast(error instanceof Error ? error.message : '发布失败，请稍后再试', { type: 'error' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <section className={styles.block}>
-      <h2 className={styles.title}>抓抓</h2>
-      <ul className={styles.list}>
-        {timeline.map((item) => (
-          <TimelineItem key={item.id} timeline={item} />
-        ))}
-      </ul>
+      <div className={styles.toolbar}>
+        <div className={styles.filters}>
+          {TIMELINE_FILTERS.map((item) => (
+            <button
+              key={item.key}
+              type='button'
+              className={`${styles.filter} ${filter === item.key ? styles.filterActive : ''}`}
+              onClick={() => setFilter(item.key)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+        <span className={styles.crawl}>抓抓</span>
+      </div>
+      <form className={styles.composer} onSubmit={(event) => void handleSubmit(event)}>
+        <textarea
+          className={styles.composerInput}
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
+          placeholder='说点什么...'
+          rows={3}
+        />
+        <div className={styles.composerActions}>
+          <button
+            type='submit'
+            className={styles.submitButton}
+            disabled={!content.trim() || submitting}
+          >
+            写好了
+          </button>
+        </div>
+      </form>
+      {grouped.size === 0 ? (
+        <p className={styles.empty}>这里暂时没有动态</p>
+      ) : (
+        [...grouped.entries()].map(([label, items]) => (
+          <div key={label} className={styles.dayGroup}>
+            <h3 className={styles.dayTitle}>{label}</h3>
+            <ul className={styles.list}>
+              {items.map((item) => (
+                <TimelineItem key={item.id} timeline={item} />
+              ))}
+            </ul>
+          </div>
+        ))
+      )}
     </section>
   );
 };

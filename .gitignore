@@ -7,6 +7,8 @@ dist-ssr
 .idea
 .pnpm-debug.log
 .env
+.env.*
+.envrc
 
 coverage
 .eslintcache

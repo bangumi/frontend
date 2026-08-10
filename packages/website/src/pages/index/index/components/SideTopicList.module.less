@@ -9,8 +9,8 @@
 .item {
   display: flex;
   gap: 8px;
-  padding: 8px 10px;
-  border-bottom: 1px solid @gray-10;
+  padding: 8px 5px;
+  border-bottom: 1px dotted @gray-10;
 
   &:last-child {
     border-bottom: none;
@@ -18,12 +18,14 @@
 }
 
 .info {
+  flex: 1;
   min-width: 0;
-  line-height: 1.5;
+  line-height: 1.35;
 }
 
 .title {
-  word-break: break-all;
+  font-size: 14px;
+  overflow-wrap: anywhere;
 }
 
 .replies {
@@ -31,9 +33,9 @@
 }
 
 .extra {
-  margin: 2px 0 0;
-  color: @gray-60;
-  font-size: 12px;
+  margin: 3px 0 0;
+  color: @gray-80;
+  font-size: 13px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
