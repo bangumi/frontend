@@ -1,0 +1,265 @@
+@import '@bangumi/design/theme/base';
+
+/* 章节/曲目 */
+.musicList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.musicList li {
+  display: flex;
+  gap: 8px;
+  padding: 4px 0;
+  font-size: 13px;
+  line-height: 1.6;
+  border-bottom: 1px solid @gray-10;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.musicSort {
+  color: @gray-60;
+  flex: none;
+}
+
+.musicName {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.musicDuration {
+  color: @gray-60;
+  flex: none;
+}
+
+.epSubtitle {
+  font-size: 12px;
+  color: @gray-60;
+  margin: 8px 0 4px;
+}
+
+.epGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.epBtn {
+  display: inline-block;
+  min-width: 28px;
+  padding: 3px 5px;
+  text-align: center;
+  border: 1px solid @gray-10;
+  border-radius: 3px;
+  font-size: 12px;
+  color: @gray-100;
+}
+
+.epDone {
+  background: @blue-doing;
+  border-color: @blue-doing;
+  color: #fff;
+}
+
+/* 简介 */
+.summary {
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 标签 */
+.tagList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tagList li {
+  padding: 2px 8px;
+  border: 1px solid @gray-10;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+/* 封面网格（角色/关联/推荐） */
+.coverGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.coverItem {
+  width: 72px;
+  text-align: center;
+  position: relative;
+}
+
+.coverLink {
+  display: block;
+}
+
+.cover {
+  width: 72px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 3px;
+  background: @gray-10;
+}
+
+.coverTitle {
+  margin: 4px 0 0;
+  font-size: 12px;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.coverInfo {
+  margin: 0;
+  font-size: 11px;
+  color: @gray-60;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.relationSep {
+  display: block;
+  width: 100%;
+  font-size: 13px;
+  color: @gray-60;
+  margin: 6px 0 0;
+}
+
+/* 文本列表（评论/日志） */
+.textList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.textList li {
+  padding: 6px 0;
+  border-bottom: 1px solid @gray-10;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.textTitle {
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.textInfo {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: @gray-60;
+
+  span {
+    margin-left: 8px;
+  }
+}
+
+/* 讨论版 */
+.topicTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.topicTable tr {
+  border-bottom: 1px solid @gray-10;
+}
+
+.topicSubject {
+  padding: 6px 4px;
+  text-align: left;
+  max-width: 0;
+
+  a {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.topicInfo {
+  padding: 6px 4px;
+  width: 16%;
+  text-align: right;
+  color: @gray-60;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.topicMore {
+  padding: 6px 4px;
+  text-align: right;
+}
+
+/* 吐槽 */
+.commentList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.commentList > li {
+  display: flex;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid @gray-10;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.commentInfo {
+  min-width: 0;
+  flex: 1;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 13px;
+}
+
+.commentMeta {
+  color: @gray-60;
+  font-size: 12px;
+}
+
+.commentText {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: @gray-100;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
