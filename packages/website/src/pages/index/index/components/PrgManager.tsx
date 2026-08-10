@@ -5,6 +5,7 @@ import { ozaClient } from '@bangumi/client';
 import type { ProgressItem, UpdateSubjectProgress } from '@bangumi/client/client';
 import { EpisodeCollectionStatus, SubjectType } from '@bangumi/client/client';
 import { toast, Typography } from '@bangumi/design';
+import { getSubjectLink } from '@bangumi/utils/pages';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
 import styles from './PrgManager.module.less';
@@ -85,9 +86,7 @@ function PrgRow({ item }: { item: ProgressItem }) {
   return (
     <li className={styles.row}>
       <Link
-        to={`https://bgm.tv/subject/${subject.id}`}
-        target='_blank'
-        rel='noopener noreferrer'
+        to={getSubjectLink(subject.id)}
         className={styles.coverLink}
         title={subject.nameCN || subject.name}
       >
@@ -97,9 +96,7 @@ function PrgRow({ item }: { item: ProgressItem }) {
       <div className={styles.info}>
         <div className={styles.header}>
           <Link
-            to={`https://bgm.tv/subject/${subject.id}`}
-            target='_blank'
-            rel='noopener noreferrer'
+            to={getSubjectLink(subject.id)}
             className={styles.subjectName}
             title={subject.nameCN || subject.name}
           >

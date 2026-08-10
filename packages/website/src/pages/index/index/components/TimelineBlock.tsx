@@ -4,7 +4,7 @@ import React from 'react';
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
 import { TimelineCat } from '@bangumi/client/client';
 import { Avatar, Typography } from '@bangumi/design';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getSubjectLink, getUserProfileLink } from '@bangumi/utils/pages';
 
 import styles from './TimelineBlock.module.less';
 
@@ -32,11 +32,7 @@ function makeDescriptiveTime(timestamp: number): string {
 }
 
 function SubjectName({ subject }: { subject: SlimSubject }) {
-  return (
-    <Link to={`https://bgm.tv/subject/${subject.id}`} target='_blank' rel='noopener noreferrer'>
-      {subject.nameCN || subject.name}
-    </Link>
-  );
+  return <Link to={getSubjectLink(subject.id)}>{subject.nameCN || subject.name}</Link>;
 }
 
 function renderStatus(timeline: Timeline): React.ReactNode {
