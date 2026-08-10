@@ -1,4 +1,4 @@
-import { act, fireEvent, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import React from 'react';
 
@@ -36,17 +36,34 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText(/中文名/)).toBeInTheDocument();
     expect(await screen.findByText('推荐本条目的目录')).toBeInTheDocument();
     expect(await screen.findByText(/人看过/)).toBeInTheDocument();
-    // 右栏：ep / 标签 / 收藏盒
+    // 主栏：ep / 标签
     expect(await screen.findByText('章节列表')).toBeInTheDocument();
     expect(await screen.findByText('标签')).toBeInTheDocument();
+    // 右栏：收藏盒
     expect(await screen.findByText('收藏盒')).toBeInTheDocument();
-    // 右栏：角色 / 关联 / 推荐 / 评论 / 讨论 / 吐槽
+    expect(screen.getAllByRole('button', { pressed: false })).toHaveLength(5);
+    expect(screen.getByRole('link', { name: 'Bangumi Anime Ranked: #100' })).toBeInTheDocument();
+    expect(
+      within(screen.getByRole('list', { name: '评分分布' })).getAllByRole('listitem'),
+    ).toHaveLength(10);
+    // 主栏：角色 / 关联 / 推荐 / 评论 / 讨论 / 吐槽
     expect(await screen.findByText('角色介绍')).toBeInTheDocument();
     expect(await screen.findByText('关联条目')).toBeInTheDocument();
     expect(await screen.findByText('喜欢这部作品的会员大概会喜欢')).toBeInTheDocument();
     expect(await screen.findByText('测试动画长评')).toBeInTheDocument();
     expect(await screen.findByText('讨论版测试话题')).toBeInTheDocument();
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();
+  });
+
+  it('should render the collection panel in a separate sidebar', async () => {
+    setup();
+    await renderSubject();
+
+    const tagsSection = (await screen.findByRole('heading', { name: '标签' })).closest('section');
+    const collectionSection = screen.getByRole('heading', { name: '收藏盒' }).closest('section');
+
+    expect(tagsSection?.parentElement).not.toBe(collectionSection?.parentElement);
+    expect(collectionSection?.closest('aside')).not.toBeNull();
   });
 
   it('should use centralized subject links', async () => {

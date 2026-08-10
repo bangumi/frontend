@@ -31,7 +31,6 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 
-import CollectionPanel from './CollectionPanel';
 import { CAST_TYPE_DESC, COLLECT_DESC } from './subject-common';
 import styles from './SubjectDetailBlocks.module.less';
 import SubjectSection from './SubjectSection';
@@ -355,7 +354,7 @@ function CommentsSection({
   );
 }
 
-/** 右栏所有区块的组合，按 PHP 布局顺序渲染 */
+/** 主内容区块的组合，按 PHP 布局顺序渲染 */
 export const SubjectBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
@@ -365,7 +364,6 @@ export const SubjectBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data })
         <SummarySection summary={subject.summary} />
       )}
       <TagsSection tags={subject.tags} />
-      <CollectionPanel subject={subject} />
       <CharactersSection subjectId={subject.id} characters={data.characters} />
       <RelationsSection subjectId={subject.id} relations={data.relations} />
       <RecsSection recs={data.recs} />
