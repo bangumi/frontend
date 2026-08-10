@@ -14,6 +14,8 @@ import type { Profile } from '@bangumi/client/user';
 
 interface UserContextType {
   user?: Profile;
+  /** 是否正在请求当前用户信息，加载完成前不应据此判断登录状态 */
+  isLoading: boolean;
   redirectToLogin: () => void;
   login: (username: string, password: string, captchaResp: string) => Promise<void>;
   /** 使用 Passkey 登录，成功返回 true，用户取消返回 false */
@@ -57,7 +59,11 @@ export class PasswordUnMatchError extends Error {
 }
 
 export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
-  const { data: user, mutate } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()));
+  const {
+    data: user,
+    mutate,
+    isLoading,
+  } = useSWR('/me', async () => ok(ozaClient.getCurrentUser()));
   const navigate = useNavigate();
 
   function redirectToLogin(): void {
@@ -78,6 +84,7 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
       return ok;
     },
     user,
+    isLoading,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
