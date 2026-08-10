@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/utils/pages';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -25,7 +26,7 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <main className={styles.page}>
+    <PageContainer as='main' className={styles.page}>
       <div className={styles.greets}>
         Hi! <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>
       </div>
@@ -41,7 +42,7 @@ const HomePage: React.FC = () => {
           <AnnouncementBlock />
         </div>
       </div>
-    </main>
+    </PageContainer>
   );
 };
 

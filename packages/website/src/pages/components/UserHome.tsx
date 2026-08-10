@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Typography } from '@bangumi/design';
 import { getUserProfileLink } from '@bangumi/utils/pages';
+import PageContainer from '@bangumi/website/components/PageContainer';
 
 import { useUser } from '../../hooks/use-user';
 import styles from './UserHome.module.less';
@@ -16,11 +17,11 @@ const UserHome: React.FC = () => {
   }
 
   return (
-    <main className={styles.pageContainer}>
+    <PageContainer as='main'>
       <div className={styles.greets}>
         Hi! <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>
       </div>
-    </main>
+    </PageContainer>
   );
 };
 

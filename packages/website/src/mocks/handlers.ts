@@ -9,4 +9,5 @@ export const handlers = [
   mockAPI('/p1/users/:username/indexes', 'get'),
   mockAPI('/p1/users/:username/blogs', 'get'),
   mockAPI('/p1/users/:username/collections/subjects', 'get'),
+  mockAPI('/p1/users/:username/timeline', 'get'),
 ];

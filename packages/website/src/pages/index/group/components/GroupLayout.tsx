@@ -6,6 +6,7 @@ import type { Group } from '@bangumi/client/client';
 import { Button, Layout, Section, Tab } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { keyBy } from '@bangumi/utils';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -52,7 +53,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
   });
 
   return (
-    <div className={styles.pageContainer}>
+    <PageContainer className={styles.pageContainer}>
       <GroupHeader group={group!} />
       <Tab.Group type='borderless'>
         {GroupTabsItems.map((tab) => (
@@ -96,7 +97,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
           </>
         }
       />
-    </div>
+    </PageContainer>
   );
 };
 
