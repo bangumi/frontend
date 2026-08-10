@@ -36,7 +36,9 @@ class UserHomeTest {
     await act(async () => {
       this.page = renderPage(
         <SWRConfig value={{ provider: () => new Map() }}>
-          <UserHomePage />
+          <React.Suspense fallback={null}>
+            <UserHomePage />
+          </React.Suspense>
         </SWRConfig>,
       );
     });
