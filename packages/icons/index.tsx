@@ -20,6 +20,8 @@ export { ReactComponent as Plus } from './assets/plus.svg';
 export { ReactComponent as Minus } from './assets/minus.svg';
 export { ReactComponent as Cursor } from './assets/cursor.svg';
 export { ReactComponent as Error } from './assets/error.svg';
+export { ReactComponent as ListView } from './assets/list-view.svg';
+export { ReactComponent as GridView } from './assets/grid-view.svg';
 // BBCode Editor
 
 export { ReactComponent as Bold } from './assets/bold.svg';

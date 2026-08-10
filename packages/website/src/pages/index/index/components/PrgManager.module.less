@@ -5,11 +5,11 @@
   border: 1px solid @gray-10;
   border-radius: 3px;
   margin: 0 0 20px;
-  overflow: hidden;
 }
 
 .tabs {
   display: flex;
+  align-items: center;
   border-bottom: 1px solid @gray-10;
 }
 
@@ -30,6 +30,37 @@
   color: @primary-color;
   border-bottom: 2px solid @primary-color;
   margin-bottom: -1px;
+}
+
+.viewSwitch {
+  margin-left: auto;
+  display: flex;
+  gap: 2px;
+  padding-right: 10px;
+}
+
+.viewBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: @gray-60;
+  border-radius: 3px;
+
+  &:hover {
+    color: @gray-100;
+    background: @gray-10;
+  }
+}
+
+.viewActive {
+  color: @primary-color;
+  background: @gray-10;
 }
 
 .empty {
@@ -150,6 +181,7 @@
   gap: 8px;
   font-size: 12px;
   color: @gray-60;
+  flex-wrap: wrap;
 }
 
 .batchLabel {
@@ -185,5 +217,188 @@
     color: @gray-60;
     cursor: default;
     background: #fff;
+  }
+}
+
+/* 网格视图 */
+
+.gridList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: @gray-10;
+}
+
+.card {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: #fff;
+}
+
+.cardCoverLink {
+  flex: none;
+  position: relative;
+  display: block;
+}
+
+.cardCover {
+  display: block;
+  width: 64px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 2px;
+  background: @gray-10;
+}
+
+.cardInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.cardName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.epList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.epGroup {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.epSubtitle {
+  font-size: 11px;
+  color: @gray-60;
+  margin-right: 2px;
+}
+
+.epBtn,
+.epBtnWatched {
+  min-width: 22px;
+  padding: 1px 3px;
+  border: 1px solid @gray-10;
+  border-radius: 2px;
+  font-size: 11px;
+  line-height: 16px;
+  text-align: center;
+  cursor: pointer;
+  font-family: 'Lucida Grande', 'Lucida Sans', Helvetica, Arial, Verdana, sans-serif;
+}
+
+.epBtn {
+  color: @gray-60;
+  background: #fff;
+
+  &:hover {
+    border-color: @blue-100;
+    color: @blue-100;
+  }
+}
+
+.epBtnWatched {
+  color: #fff;
+  background: @blue-100;
+  border-color: @blue-100;
+}
+
+/* 单集详情浮层 */
+
+.epPopover {
+  :global(.bgm-popover__content) {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+}
+
+.epDetail {
+  width: 240px;
+  font-size: 12px;
+  color: @gray-100;
+}
+
+.epDetailHeader {
+  background: @primary-color;
+  color: #fff;
+  padding: 6px 10px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.epActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-bottom: 1px solid @gray-10;
+}
+
+.epActionBtn {
+  border: none;
+  background: none;
+  color: @gray-60;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+
+  &:hover {
+    color: @blue-100;
+  }
+
+  &:disabled {
+    color: @gray-10;
+    cursor: default;
+  }
+}
+
+.epWatchedBtn {
+  margin-left: auto;
+  border: none;
+  background: @primary-color;
+  color: #fff;
+  border-radius: 3px;
+  padding: 3px 12px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+}
+
+.epInfoLine {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 4px 10px;
+
+  span {
+    flex: none;
+    color: @gray-60;
   }
 }
