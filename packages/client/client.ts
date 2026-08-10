@@ -799,6 +799,18 @@ export type SubjectCollect = {
   user: SlimUser;
   interest: SlimSubjectInterest;
 };
+export type SubjectHomeResponse = {
+  subject: Subject;
+  episodes: Episode[];
+  characters: SubjectCharacter[];
+  staff: SubjectStaff[];
+  relations: SubjectRelation[];
+  recs: SubjectRec[];
+  comments: SubjectInterestComment[];
+  reviews: SubjectReview[];
+  indexes: SlimIndex[];
+  topics: Topic[];
+};
 export type CreateContent = {
   content: string;
 };
@@ -5158,6 +5170,23 @@ export function createSubjectReply(
       body,
     }),
   );
+}
+/**
+ * 获取条目首页数据
+ */
+export function getSubjectHome(subjectId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: SubjectHomeResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/${encodeURIComponent(subjectId)}/home`, {
+    ...opts,
+  });
 }
 /**
  * 获取时间线

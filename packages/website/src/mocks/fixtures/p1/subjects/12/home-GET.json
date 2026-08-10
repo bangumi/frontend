@@ -1,0 +1,284 @@
+{
+  "subject": {
+    "id": 12,
+    "type": 2,
+    "name": "Test Anime",
+    "nameCN": "测试动画",
+    "images": {
+      "large": "https://lain.bgm.tv/pic/cover/l/00/00/12.jpg",
+      "common": "https://lain.bgm.tv/pic/cover/c/00/00/12.jpg",
+      "medium": "https://lain.bgm.tv/pic/cover/m/00/00/12.jpg",
+      "small": "https://lain.bgm.tv/pic/cover/s/00/00/12.jpg",
+      "grid": "https://lain.bgm.tv/pic/cover/g/00/00/12.jpg"
+    },
+    "info": "",
+    "infobox": [
+      { "key": "中文名", "values": [{ "v": "测试动画" }] },
+      { "key": "话数", "values": [{ "v": "12" }] },
+      { "key": "放送开始", "values": [{ "v": "2026年4月1日" }] }
+    ],
+    "summary": "这是一个用于测试的动画条目。",
+    "locked": false,
+    "metaTags": [],
+    "nsfw": false,
+    "rating": {
+      "rank": 100,
+      "total": 4321,
+      "count": [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
+      "score": 8.1
+    },
+    "collection": { "1": 100, "2": 2000, "3": 1500, "4": 300, "5": 200 },
+    "eps": 12,
+    "volumes": 0,
+    "series": false,
+    "seriesEntry": 0,
+    "redirect": 0,
+    "platform": { "id": 1, "type": "tv", "typeCN": "TV", "alias": "TV" },
+    "airtime": { "year": 2026, "month": 4, "date": "04-01", "weekday": 3 },
+    "tags": [
+      { "name": "科幻", "count": 100 },
+      { "name": "日常", "count": 80 }
+    ],
+    "interest": null
+  },
+  "episodes": [
+    {
+      "id": 100,
+      "type": 0,
+      "sort": 1,
+      "name": "第1话",
+      "nameCN": "",
+      "airdate": "2026-04-01",
+      "duration": "24m",
+      "disc": 0,
+      "desc": "",
+      "comment": 0,
+      "subjectID": 12,
+      "collection": { "status": 2 }
+    },
+    {
+      "id": 101,
+      "type": 0,
+      "sort": 2,
+      "name": "第2话",
+      "nameCN": "",
+      "airdate": "2026-04-08",
+      "duration": "24m",
+      "disc": 0,
+      "desc": "",
+      "comment": 0,
+      "subjectID": 12
+    }
+  ],
+  "characters": [
+    {
+      "character": {
+        "id": 5,
+        "name": "Test Character",
+        "nameCN": "测试角色",
+        "role": 1,
+        "info": "",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/00/00/05.jpg",
+          "medium": "https://lain.bgm.tv/pic/crt/m/00/00/05.jpg",
+          "small": "https://lain.bgm.tv/pic/crt/s/00/00/05.jpg",
+          "grid": "https://lain.bgm.tv/pic/crt/g/00/00/05.jpg"
+        },
+        "comment": 10,
+        "lock": false,
+        "nsfw": false
+      },
+      "casts": [
+        {
+          "person": {
+            "id": 8,
+            "name": "Test CV",
+            "nameCN": "测试声优",
+            "type": 1,
+            "info": "",
+            "career": ["声优"],
+            "images": {
+              "large": "https://lain.bgm.tv/pic/prsn/l/00/00/08.jpg",
+              "medium": "https://lain.bgm.tv/pic/prsn/m/00/00/08.jpg",
+              "small": "https://lain.bgm.tv/pic/prsn/s/00/00/08.jpg",
+              "grid": "https://lain.bgm.tv/pic/prsn/g/00/00/08.jpg"
+            },
+            "comment": 1,
+            "lock": false,
+            "nsfw": false
+          },
+          "relation": 0,
+          "summary": ""
+        }
+      ],
+      "type": 1,
+      "order": 1
+    }
+  ],
+  "staff": [],
+  "relations": [
+    {
+      "subject": {
+        "id": 13,
+        "type": 2,
+        "name": "Test Anime 2",
+        "nameCN": "测试动画2",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/13.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/13.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/13.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/13.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/13.jpg"
+        },
+        "info": "",
+        "locked": false,
+        "metaTags": [],
+        "nsfw": false,
+        "rating": { "rank": 0, "total": 0, "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "score": 0 }
+      },
+      "relation": { "id": 1, "en": "续集", "cn": "续集", "jp": "続編", "desc": "" },
+      "order": 1
+    }
+  ],
+  "recs": [
+    {
+      "subject": {
+        "id": 14,
+        "type": 2,
+        "name": "Recommended Anime",
+        "nameCN": "推荐动画",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/14.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/14.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/14.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/14.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/14.jpg"
+        },
+        "info": "",
+        "locked": false,
+        "metaTags": [],
+        "nsfw": false,
+        "rating": { "rank": 0, "total": 0, "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "score": 0 }
+      },
+      "sim": 0.9,
+      "count": 10
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "user": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "type": 3,
+      "rate": 8,
+      "comment": "这部动画很好看！",
+      "updatedAt": 1775000000
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "user": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "entry": {
+        "id": 5,
+        "type": 1,
+        "uid": 382951,
+        "user": {
+          "id": 382951,
+          "username": "382951",
+          "nickname": "树洞酱",
+          "avatar": {
+            "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+            "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+            "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+          },
+          "group": 10,
+          "joinedAt": 1500000000,
+          "sign": ""
+        },
+        "title": "测试动画长评",
+        "icon": "",
+        "summary": "这是一篇长评",
+        "replies": 0,
+        "public": true,
+        "createdAt": 1774000000,
+        "updatedAt": 1774500000
+      }
+    }
+  ],
+  "indexes": [
+    {
+      "id": 3,
+      "title": "测试目录",
+      "uid": 382951,
+      "user": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "type": 1,
+      "private": false,
+      "total": 10,
+      "stats": { "ncollect": 0, "nsubject": 10 },
+      "createdAt": 1700000000,
+      "updatedAt": 1774000000
+    }
+  ],
+  "topics": [
+    {
+      "id": 50,
+      "title": "讨论版测试话题",
+      "creator": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "joinedAt": 1500000000,
+        "sign": ""
+      },
+      "creatorID": 382951,
+      "parentID": 12,
+      "replyCount": 5,
+      "state": 0,
+      "display": 1,
+      "createdAt": 1773000000,
+      "updatedAt": 1774000000
+    }
+  ]
+}

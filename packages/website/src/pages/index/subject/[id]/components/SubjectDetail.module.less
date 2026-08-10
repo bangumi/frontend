@@ -1,0 +1,134 @@
+@import '@bangumi/design/theme/base';
+
+.page {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  margin: 0 0 20px;
+}
+
+.name {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.nameCn {
+  font-size: 14px;
+  color: @gray-60;
+  margin-left: 8px;
+}
+
+.platform {
+  font-size: 12px;
+  color: @gray-60;
+  margin-left: 8px;
+}
+
+.tabs {
+  border-bottom: 1px solid @gray-10;
+}
+
+/* 布局 */
+.columns {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.columnLeft {
+  flex: 0 0 220px;
+  width: 220px;
+}
+
+.columnRight {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: @md) {
+  .columns {
+    flex-direction: column;
+  }
+
+  .columnLeft {
+    flex: none;
+    width: 100%;
+  }
+}
+
+/* 左栏：信息框 */
+.infobox {
+  background: #fff;
+  border: 1px solid @gray-10;
+  border-radius: 3px;
+  margin: 0 0 20px;
+  padding: 12px;
+}
+
+.coverWrapper {
+  text-align: center;
+  margin: 0 0 12px;
+}
+
+.cover {
+  max-width: 100%;
+  border-radius: 3px;
+}
+
+.infoList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.8;
+  word-break: break-all;
+}
+
+.tip {
+  color: @gray-60;
+}
+
+/* 左栏：侧栏面板（目录/收藏统计） */
+.sidePanel {
+  background: #fff;
+  border: 1px solid @gray-10;
+  border-radius: 3px;
+  margin: 0 0 20px;
+  padding: 12px;
+}
+
+.sidePanelTitle {
+  font-size: 13px;
+  font-weight: normal;
+  margin: 0 0 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid @gray-10;
+}
+
+.indexList,
+.collectStats {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.indexList li {
+  padding: 4px 0;
+}
+
+.indexTitle {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.indexBy {
+  color: @gray-60;
+}

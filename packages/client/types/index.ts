@@ -1707,6 +1707,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/subjects/{subjectID}/home': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * 获取条目首页数据
+     * @description 聚合条目详情页所需的全部数据：条目信息、章节、角色、制作人员、相关条目、推荐、吐槽、相关日志、收录与讨论。已登录时返回个人收藏状态与章节观看状态。各个区块独立计算，单个区块失败时返回空数据，不影响其他区块。
+     */
+    get: operations['getSubjectHome'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/timeline': {
     parameters: {
       query?: never;
@@ -4321,6 +4341,19 @@ export interface components {
       famousGroups: components['schemas']['SlimGroup'][];
       hotSubjectTopics: components['schemas']['SubjectTopic'][];
       calendar: components['schemas']['Calendar'];
+    };
+    /** SubjectHomeResponse */
+    SubjectHomeResponse: {
+      subject: components['schemas']['Subject'];
+      episodes: components['schemas']['Episode'][];
+      characters: components['schemas']['SubjectCharacter'][];
+      staff: components['schemas']['SubjectStaff'][];
+      relations: components['schemas']['SubjectRelation'][];
+      recs: components['schemas']['SubjectRec'][];
+      comments: components['schemas']['SubjectInterestComment'][];
+      reviews: components['schemas']['SubjectReview'][];
+      indexes: components['schemas']['SlimIndex'][];
+      topics: components['schemas']['Topic'][];
     };
     TrendingSubject: {
       subject: components['schemas']['SlimSubject'];
@@ -9956,6 +9989,37 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getSubjectHome: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        subjectID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['SubjectHomeResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */

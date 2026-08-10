@@ -3929,6 +3929,81 @@
           }
         }
       },
+      "SubjectHomeResponse": {
+        "type": "object",
+        "required": [
+          "subject",
+          "episodes",
+          "characters",
+          "staff",
+          "relations",
+          "recs",
+          "comments",
+          "reviews",
+          "indexes",
+          "topics"
+        ],
+        "properties": {
+          "subject": {
+            "$ref": "#/components/schemas/Subject"
+          },
+          "episodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Episode"
+            }
+          },
+          "characters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectCharacter"
+            }
+          },
+          "staff": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectStaff"
+            }
+          },
+          "relations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectRelation"
+            }
+          },
+          "recs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectRec"
+            }
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectInterestComment"
+            }
+          },
+          "reviews": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubjectReview"
+            }
+          },
+          "indexes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SlimIndex"
+            }
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Topic"
+            }
+          }
+        },
+        "title": "SubjectHomeResponse"
+      },
       "TrendingSubject": {
         "type": "object",
         "required": ["subject", "count"],
@@ -13990,6 +14065,52 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/subjects/{subjectID}/home": {
+      "get": {
+        "operationId": "getSubjectHome",
+        "summary": "获取条目首页数据",
+        "tags": ["subject"],
+        "description": "聚合条目详情页所需的全部数据：条目信息、章节、角色、制作人员、相关条目、推荐、吐槽、相关日志、收录与讨论。已登录时返回个人收藏状态与章节观看状态。各个区块独立计算，单个区块失败时返回空数据，不影响其他区块。",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "subjectID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubjectHomeResponse"
                 }
               }
             }

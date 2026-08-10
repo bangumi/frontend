@@ -1,0 +1,191 @@
+@import '@bangumi/design/theme/base';
+
+.interestNow {
+  font-size: 14px;
+  margin: 0 0 8px;
+}
+
+.modifyBtn {
+  border: none;
+  background: none;
+  color: @blue-100;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: 8px;
+  padding: 0;
+
+  &:disabled {
+    color: @gray-60;
+    cursor: default;
+  }
+}
+
+.myRate {
+  font-size: 12px;
+  color: @gray-60;
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.myComment {
+  font-size: 13px;
+  margin: 4px 0 0;
+  color: @gray-100;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+
+.collectButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.collectBtn {
+  padding: 4px 12px;
+  border: 1px solid @blue-100;
+  color: @blue-100;
+  background: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+
+  &:hover {
+    background: @blue-100;
+    color: #fff;
+  }
+
+  &:disabled {
+    border-color: @gray-10;
+    color: @gray-60;
+    cursor: default;
+    background: #fff;
+  }
+}
+
+.editForm {
+  margin-top: 10px;
+  border-top: 1px solid @gray-10;
+  padding-top: 10px;
+}
+
+.formRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.formLabel {
+  flex: none;
+  color: @gray-60;
+  padding-top: 2px;
+}
+
+.typeOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.typeOption {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.rateStars {
+  display: flex;
+  gap: 2px;
+}
+
+.rateStar {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: @gray-10;
+  padding: 0;
+  line-height: 1;
+}
+
+.rateStarFilled {
+  color: @pink-wish;
+}
+
+.rateValue {
+  color: @gray-60;
+  font-size: 12px;
+  padding-top: 2px;
+}
+
+.commentInput {
+  flex: 1;
+  min-width: 0;
+  padding: 6px;
+  border: 1px solid @gray-10;
+  border-radius: 3px;
+  font-size: 13px;
+  resize: vertical;
+}
+
+.formActions {
+  text-align: right;
+}
+
+.rating {
+  margin-top: 12px;
+  border-top: 1px solid @gray-10;
+  padding-top: 10px;
+}
+
+.scoreBlock {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.score {
+  font-size: 24px;
+  font-weight: bold;
+  color: @gray-100;
+}
+
+.rankDesc {
+  font-size: 12px;
+  color: @gray-60;
+}
+
+.ratingChart {
+  margin-top: 8px;
+}
+
+.votes {
+  font-size: 12px;
+  color: @gray-60;
+}
+
+.chart {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 40px;
+}
+
+.chartItem {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+}
+
+.chartBar {
+  width: 100%;
+  background: @blue-doing;
+  border-radius: 1px 1px 0 0;
+}
