@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "id": 100,
+      "uid": 1,
+      "type": "normal",
+      "title": "我的测试目录",
+      "private": false,
+      "total": 3,
+      "stats": {
+        "subject": { "anime": 3 }
+      },
+      "createdAt": 1600000000,
+      "updatedAt": 1600000100
+    }
+  ],
+  "total": 1
+}

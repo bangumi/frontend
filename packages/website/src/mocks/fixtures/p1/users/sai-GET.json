@@ -1,0 +1,40 @@
+{
+  "id": 1,
+  "username": "sai",
+  "nickname": "Sai",
+  "avatar": {
+    "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+    "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+    "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+  },
+  "group": 2,
+  "joinedAt": 1262304000,
+  "sign": "测试签名",
+  "site": "example.com",
+  "location": "上海",
+  "bio": "测试简介",
+  "networkServices": [
+    {
+      "name": "weibo",
+      "title": "微博",
+      "url": "https://weibo.com/sai",
+      "color": "#E6162D",
+      "account": "sai"
+    }
+  ],
+  "homepage": {
+    "left": ["anime", "book", "blog"],
+    "right": ["friend", "group", "index"]
+  },
+  "stats": {
+    "subject": {
+      "2": { "1": 5, "2": 10, "3": 3, "4": 1, "5": 1 },
+      "1": { "1": 2, "2": 4 }
+    },
+    "mono": { "character": 2, "person": 1 },
+    "blog": 0,
+    "friend": 1,
+    "group": 2,
+    "index": 1
+  }
+}

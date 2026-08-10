@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "sandbox",
+      "nsfw": false,
+      "title": "沙盒",
+      "icon": {
+        "small": "https://lain.bgm.tv/pic/icon/s/00/00/1.jpg",
+        "medium": "https://lain.bgm.tv/pic/icon/m/00/00/1.jpg",
+        "large": "https://lain.bgm.tv/pic/icon/l/00/00/1.jpg"
+      },
+      "creatorID": 1,
+      "members": 42,
+      "accessible": true,
+      "createdAt": 1500000000
+    }
+  ],
+  "total": 2
+}

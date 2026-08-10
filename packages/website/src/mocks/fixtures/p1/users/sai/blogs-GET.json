@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 200,
+      "type": 1,
+      "uid": 1,
+      "title": "测试日志",
+      "icon": "",
+      "summary": "日志摘要",
+      "replies": 0,
+      "public": true,
+      "createdAt": 1600000000,
+      "updatedAt": 1600000000
+    }
+  ],
+  "total": 1
+}

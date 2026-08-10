@@ -1,0 +1,72 @@
+@import '@bangumi/design/theme/base';
+
+.block {
+  background: #fff;
+  border: 1px solid @gray-10;
+  border-radius: 3px;
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: @gray-100;
+
+  a {
+    color: @blue-100;
+  }
+}
+
+.statList {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+
+  li {
+    display: flex;
+    gap: 4px;
+    font-size: 12px;
+    color: @gray-60;
+  }
+}
+
+.statCount {
+  color: @gray-100;
+}
+
+.coverList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.coverItem {
+  a {
+    display: block;
+    text-decoration: none;
+  }
+
+  img {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 3px;
+  }
+}
+
+.coverName {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: @gray-80;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

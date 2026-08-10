@@ -1,0 +1,18 @@
+{
+  "data": [
+    {
+      "id": 2,
+      "username": "sai-2",
+      "nickname": "好友甲",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+      },
+      "group": 10,
+      "sign": "",
+      "joinedAt": 1600000000
+    }
+  ],
+  "total": 1
+}

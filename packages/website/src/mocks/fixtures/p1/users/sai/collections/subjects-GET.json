@@ -1,0 +1,41 @@
+{
+  "data": [
+    {
+      "id": 12,
+      "name": "Test Anime",
+      "nameCN": "测试动画",
+      "type": 2,
+      "images": {
+        "large": "https://lain.bgm.tv/pic/cover/l/00/00/12.jpg",
+        "common": "https://lain.bgm.tv/pic/cover/c/00/00/12.jpg",
+        "medium": "https://lain.bgm.tv/pic/cover/m/00/00/12.jpg",
+        "small": "https://lain.bgm.tv/pic/cover/s/00/00/12.jpg",
+        "grid": "https://lain.bgm.tv/pic/cover/g/00/00/12.jpg"
+      },
+      "info": "",
+      "metaTags": [],
+      "rating": { "rank": 10, "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "score": 8.5, "total": 100 },
+      "locked": false,
+      "nsfw": false
+    },
+    {
+      "id": 13,
+      "name": "Test Book",
+      "nameCN": "测试书籍",
+      "type": 1,
+      "images": {
+        "large": "https://lain.bgm.tv/pic/cover/l/00/00/13.jpg",
+        "common": "https://lain.bgm.tv/pic/cover/c/00/00/13.jpg",
+        "medium": "https://lain.bgm.tv/pic/cover/m/00/00/13.jpg",
+        "small": "https://lain.bgm.tv/pic/cover/s/00/00/13.jpg",
+        "grid": "https://lain.bgm.tv/pic/cover/g/00/00/13.jpg"
+      },
+      "info": "",
+      "metaTags": [],
+      "rating": { "rank": 20, "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "score": 7.5, "total": 50 },
+      "locked": false,
+      "nsfw": false
+    }
+  ],
+  "total": 2
+}
