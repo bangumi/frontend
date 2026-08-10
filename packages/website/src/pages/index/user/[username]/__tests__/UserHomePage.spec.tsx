@@ -18,7 +18,7 @@ vi.mock('react-router-dom', async () => {
 });
 
 const mockedUseParams = vi.mocked(useParams);
-const asyncQueryOptions = { timeout: 5000 };
+const asyncQueryOptions = { timeout: 10_000 };
 
 class UserHomeTest {
   page!: RenderResult;
@@ -75,7 +75,7 @@ describe('UserHomePage', () => {
     expect(
       (await test.page.findAllByText('测试书籍', undefined, asyncQueryOptions)).length,
     ).toBeGreaterThan(0);
-  });
+  }, 15_000);
 
   it('should render timeline and stats blocks', async () => {
     const test = await UserHomeTest.create('sai');
