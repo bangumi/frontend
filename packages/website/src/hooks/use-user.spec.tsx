@@ -5,6 +5,7 @@ import { http, HttpResponse } from 'msw';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
 import { server as mockServer } from '../mocks/server';
 import {
@@ -73,7 +74,9 @@ beforeEach(() => {
 
 const wrapper = ({ children }: PropsWithChildren) => (
   <MemoryRouter>
-    <UserProvider>{children}</UserProvider>
+    <SWRConfig value={{ provider: () => new Map() }}>
+      <UserProvider>{children}</UserProvider>
+    </SWRConfig>
   </MemoryRouter>
 );
 
@@ -119,6 +122,33 @@ it('should refresh me if login succeeded', async () => {
     await result.current.login('fakeuser', 'fakepassword', 'fake-token');
     expect(result.current.user).toMatchSnapshot();
   });
+});
+
+it('should stay loading until /me request resolves', async () => {
+  let resolveMe!: (value: unknown) => void;
+  mockServer.use(
+    http.get('http://localhost:3000/p1/me', async () => {
+      return new Promise((resolve) => {
+        resolveMe = resolve as (value: unknown) => void;
+      });
+    }),
+  );
+
+  const { result } = renderHook(() => useUser(), { wrapper });
+
+  // 等待请求发出，随后验证请求未完成时的状态
+  await waitFor(() => {
+    expect(typeof resolveMe).toBe('function');
+  });
+  expect(result.current.isLoading).toBe(true);
+  expect(result.current.user).toBeUndefined();
+
+  resolveMe(HttpResponse.json({ id: 1, username: 'fakeuser' }, { status: 200 }));
+
+  await waitFor(() => {
+    expect(result.current.isLoading).toBe(false);
+  });
+  expect(result.current.user).toEqual({ id: 1, username: 'fakeuser' });
 });
 
 it('should return true if passkey login succeeded', async () => {
