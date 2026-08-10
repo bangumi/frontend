@@ -2,7 +2,6 @@ import * as fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import yaml from 'js-yaml';
 import openapiTS, { astToString } from 'openapi-typescript';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -12,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * @return {Promise<import('openapi-typescript').OpenAPI3>}
  */
 async function fetchSchema() {
-  return yaml.load(await fs.readFile(path.resolve(__dirname, '..', 'api.yaml'), 'utf8'), {});
+  return JSON.parse(await fs.readFile(path.resolve(__dirname, '..', 'api.json'), 'utf8'));
 }
 
 async function generateType(schema) {
