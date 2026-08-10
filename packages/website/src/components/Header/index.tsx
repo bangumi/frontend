@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Avatar, Button, Divider, Input, Menu } from '@bangumi/design';
 import { Notification, Search as SearchIcon } from '@bangumi/icons';
 import { UnreadableCodeError } from '@bangumi/utils';
+import { getUserProfileLink } from '@bangumi/utils/pages';
 import { useNotify } from '@bangumi/website/hooks/use-notify';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
@@ -158,7 +159,9 @@ const Header: FC = () => {
               >
                 <Notification />
               </Link>
-              <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
+              <Link to={getUserProfileLink(user.username)}>
+                <Avatar src={user.avatar.large} wrapperClass={style.avatar} />
+              </Link>
             </>
           ) : (
             <span className={style.userLogin}>
