@@ -34,29 +34,38 @@
 
 /* 布局 */
 .columns {
-  display: flex;
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 280px;
   align-items: flex-start;
   gap: 20px;
 }
 
 .columnLeft {
-  flex: 0 0 220px;
-  width: 220px;
+  min-width: 0;
 }
 
+.columnMain,
 .columnRight {
-  flex: 1 1 auto;
   min-width: 0;
+}
+
+@media (max-width: @lg) {
+  .columns {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .columnRight {
+    grid-column: 2;
+  }
 }
 
 @media (max-width: @md) {
   .columns {
-    flex-direction: column;
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .columnLeft {
-    flex: none;
-    width: 100%;
+  .columnRight {
+    grid-column: auto;
   }
 }
 

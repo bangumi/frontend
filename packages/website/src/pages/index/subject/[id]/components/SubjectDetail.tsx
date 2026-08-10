@@ -20,6 +20,7 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 
+import CollectionPanel from './CollectionPanel';
 import styles from './SubjectDetail.module.less';
 import { SubjectBlocks } from './SubjectDetailBlocks';
 
@@ -245,9 +246,12 @@ const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
           <SubjectIndexes indexes={data.indexes} />
           <SubjectCollectStats subject={subject} />
         </div>
-        <div className={styles.columnRight}>
+        <div className={styles.columnMain}>
           <SubjectBlocks data={data} />
         </div>
+        <aside className={styles.columnRight}>
+          <CollectionPanel subject={subject} />
+        </aside>
       </div>
     </main>
   );
