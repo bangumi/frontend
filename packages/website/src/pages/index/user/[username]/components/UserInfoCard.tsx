@@ -3,7 +3,7 @@ import React from 'react';
 
 import type { User } from '@bangumi/client/client';
 import { OpenQuote } from '@bangumi/icons';
-import { render as renderBBCode } from '@bangumi/utils';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 
 import styles from './UserInfoCard.module.less';
 

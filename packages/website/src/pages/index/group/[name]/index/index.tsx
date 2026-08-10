@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 
 import { Button, CollapsibleContent, Section } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
-import { render as renderBBCode, UnreadableCodeError } from '@bangumi/utils';
+import { UnreadableCodeError } from '@bangumi/utils';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics';
 import { useUser } from '@bangumi/website/hooks/use-user';
