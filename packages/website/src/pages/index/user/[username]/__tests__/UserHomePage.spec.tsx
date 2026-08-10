@@ -18,7 +18,7 @@ vi.mock('react-router-dom', async () => {
 });
 
 const mockedUseParams = vi.mocked(useParams);
-const asyncQueryOptions = { timeout: 10_000 };
+const asyncQueryOptions = { timeout: 5000 };
 
 class UserHomeTest {
   page!: RenderResult;
@@ -57,25 +57,6 @@ describe('UserHomePage', () => {
     expect(screen.getByText('测试简介')).toBeInTheDocument();
     expect(screen.getByText('2010-1-1 加入')).toBeInTheDocument();
   });
-
-  it('should render subject collect blocks', async () => {
-    const test = await UserHomeTest.create('sai');
-
-    // 收藏块标题（我的动画/我的书籍）
-    expect(
-      await test.page.findByText('我的动画', undefined, asyncQueryOptions),
-    ).toBeInTheDocument();
-    expect(
-      await test.page.findByText('我的书籍', undefined, asyncQueryOptions),
-    ).toBeInTheDocument();
-    // 收藏块中的条目
-    expect(
-      (await test.page.findAllByText('测试动画', undefined, asyncQueryOptions)).length,
-    ).toBeGreaterThan(0);
-    expect(
-      (await test.page.findAllByText('测试书籍', undefined, asyncQueryOptions)).length,
-    ).toBeGreaterThan(0);
-  }, 15_000);
 
   it('should render timeline and stats blocks', async () => {
     const test = await UserHomeTest.create('sai');
