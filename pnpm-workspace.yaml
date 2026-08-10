@@ -1,2 +1,8 @@
 packages:
   - 'packages/*'
+allowBuilds:
+  '@parcel/watcher': true
+  esbuild: true
+  msw: true
+  unrs-resolver: true
+minimumReleaseAge: 0
