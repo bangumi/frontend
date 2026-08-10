@@ -43,7 +43,9 @@ describe('HomePage', () => {
     await act(async () => {
       renderPage(
         <SWRConfig value={{ provider: () => new Map() }}>
-          <HomePage />
+          <React.Suspense fallback={null}>
+            <HomePage />
+          </React.Suspense>
         </SWRConfig>,
       );
     });
