@@ -5,7 +5,7 @@ import { Image, Typography } from '@bangumi/design';
 import { getSubjectLink, getUserCollectionsLink } from '@bangumi/utils/pages';
 import { useUserSubjectCollections } from '@bangumi/website/hooks/use-user-collections';
 
-import { COLLECTION_LABELS, SUBJECT_BLOCKS } from './constants';
+import { COLLECTION_LABELS, SUBJECT_BLOCKS } from '../../components/constants';
 import styles from './SubjectCollectBlock.module.less';
 
 const { Link } = Typography;
@@ -17,7 +17,9 @@ const SubjectCollectBlock: React.FC<{ user: User; block: string }> = ({ user, bl
     return null;
   }
 
-  const { data: collections } = useUserSubjectCollections(user.username, meta.subjectType, 8);
+  const { data: collections } = useUserSubjectCollections(user.username, meta.subjectType, {
+    limit: 8,
+  });
 
   if (!collections || collections.length === 0) {
     return null;

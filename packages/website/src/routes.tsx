@@ -26,6 +26,9 @@ const WikiHome = lazy(async () => import('./pages/index/subject/[id]/wiki/index'
 const WikiUploadImg = lazy(async () => import('./pages/index/subject/[id]/wiki/upload_img'));
 const Login = lazy(async () => import('./pages/login'));
 const UserHome = lazy(async () => import('./pages/index/user/[username]'));
+const UserCollections = lazy(async () => import('./pages/index/user/collections/[username]'));
+
+const userCollectionTypes = ['anime', 'book', 'music', 'game', 'real'] as const;
 
 const legacyPagePaths = [
   'about',
@@ -79,6 +82,15 @@ export const pageRoutes: RouteObject[] = [
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
       { path: 'notifications', element: <Notifications /> },
+      ...userCollectionTypes.map((type) => ({
+        path: type,
+        children: [
+          {
+            path: 'list/:username',
+            children: [{ path: ':status?', element: <UserCollections subjectType={type} /> }],
+          },
+        ],
+      })),
       {
         path: 'group',
         children: [
