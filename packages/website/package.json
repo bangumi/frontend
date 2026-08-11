@@ -12,6 +12,7 @@
     "screenshot": "node ./scripts/screenshot.mjs"
   },
   "dependencies": {
+    "@bangumi/styled-system": "workspace:0.0.0",
     "@hello-pangea/dnd": "^18.0.1",
     "@marsidev/react-turnstile": "^1.5.2",
     "@oazapfts/runtime": "^1.2.0",

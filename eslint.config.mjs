@@ -25,6 +25,7 @@ export default [
       '**/packages/design/storybook-static/**',
       '**/packages/client/types/**',
       '**/packages/client/client.ts',
+      '**/styled-system/**',
       '**/node_modules/**',
       '**/dist/**',
     ],

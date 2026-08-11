@@ -3,7 +3,7 @@
   "version": "0.0.0-alpha.9",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky install && panda codegen",
     "preinstall": "npx only-allow pnpm",
     "build": "pnpm website build",
     "build:client": "pnpm client update-openapi && pnpm client build",
@@ -27,6 +27,7 @@
     "website": "pnpm --filter=@bangumi/website",
     "utils": "pnpm --filter=@bangumi/utils",
     "lint-staged": "lint-staged -q",
+    "panda:codegen": "panda codegen",
     "type-check": "tsc --noEmit"
   },
   "packageManager": "pnpm@11.21.0",
@@ -55,6 +56,7 @@
     "@actions/github": "^9.1.1",
     "@eslint/js": "^10.0.1",
     "@octokit/openapi-types": "^27.0.0",
+    "@pandacss/dev": "^1.12.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@types/luxon": "^3.7.4",

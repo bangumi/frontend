@@ -37,6 +37,7 @@
     "./packages",
     "./tests/",
     "vitest.config.ts",
+    "panda.config.ts",
     ".github/scripts/*",
     "./packages/design/.storybook/*"
   ]
