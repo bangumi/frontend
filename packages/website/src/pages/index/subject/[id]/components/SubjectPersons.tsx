@@ -131,52 +131,54 @@ export default function SubjectPersons({
   const groups = groupByPosition(staffs);
 
   return (
-    <PageContainer as='main'>
+    <>
       <SubjectHeader subject={subject} />
-      <div className={columns}>
-        <div className={personGroups}>
-          {groups.length === 0 && <p className={empty}>暂无制作人员</p>}
-          {groups.map((group) => (
-            <section key={group.key} aria-labelledby={`${group.key}-heading`}>
-              <h2 id={`${group.key}-heading`} className={groupTitle}>
-                {group.label}
-              </h2>
-              <ul className={personList}>
-                {group.items.map(({ staff, summary, appearEps }) => (
-                  <li key={staff.id} className={personItem}>
-                    <Link
-                      to={getPersonLink(staff.id)}
-                      className={avatarLink}
-                      title={personTitle(staff)}
-                    >
-                      {staff.images?.grid ? (
-                        <img src={staff.images.grid} className={avatar} loading='lazy' alt='' />
-                      ) : (
-                        <span className={avatarFallback}>{personTitle(staff).slice(0, 1)}</span>
-                      )}
-                    </Link>
-                    <div className={personInfo}>
+      <PageContainer as='main'>
+        <div className={columns}>
+          <div className={personGroups}>
+            {groups.length === 0 && <p className={empty}>暂无制作人员</p>}
+            {groups.map((group) => (
+              <section key={group.key} aria-labelledby={`${group.key}-heading`}>
+                <h2 id={`${group.key}-heading`} className={groupTitle}>
+                  {group.label}
+                </h2>
+                <ul className={personList}>
+                  {group.items.map(({ staff, summary, appearEps }) => (
+                    <li key={staff.id} className={personItem}>
                       <Link
                         to={getPersonLink(staff.id)}
-                        className={name}
+                        className={avatarLink}
                         title={personTitle(staff)}
                       >
-                        {staff.name}
+                        {staff.images?.grid ? (
+                          <img src={staff.images.grid} className={avatar} loading='lazy' alt='' />
+                        ) : (
+                          <span className={avatarFallback}>{personTitle(staff).slice(0, 1)}</span>
+                        )}
                       </Link>
-                      {(summary !== '' || appearEps !== '') && (
-                        <p className={info}>
-                          {[summary, appearEps].filter((text) => text !== '').join(' / ')}
-                        </p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+                      <div className={personInfo}>
+                        <Link
+                          to={getPersonLink(staff.id)}
+                          className={name}
+                          title={personTitle(staff)}
+                        >
+                          {staff.name}
+                        </Link>
+                        {(summary !== '' || appearEps !== '') && (
+                          <p className={info}>
+                            {[summary, appearEps].filter((text) => text !== '').join(' / ')}
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+          <SubjectSummaryCard subject={subject} />
         </div>
-        <SubjectSummaryCard subject={subject} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 }

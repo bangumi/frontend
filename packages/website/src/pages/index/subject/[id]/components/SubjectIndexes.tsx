@@ -186,65 +186,70 @@ const SubjectIndexes: React.FC<{
   const { user } = useUser();
 
   return (
-    <PageContainer as='main'>
+    <>
       <SubjectHeader subject={subject} />
-      <div className={columns}>
-        <div className={listColumn}>
-          {user && (
-            <a
-              className={collectButton}
-              href={getLegacyPageLink(
-                `/user/${user.username}/index?add_related=${subject.id}&ajax=1&keepThis=false&TB_iframe=true&height=350&width=500`,
-              )}
-              title='收集至我的目录'
-            >
-              收集至我的目录
-            </a>
-          )}
-          <ul className={indexList}>
-            {indexes.map((index) => (
-              <li key={index.id} className={item}>
-                <span className={avatar}>
-                  {index.user && (
-                    <Link to={getUserProfileLink(index.user.username)} title={index.user.nickname}>
-                      <Avatar src={index.user.avatar.medium} alt={index.user.nickname} />
-                    </Link>
-                  )}
-                </span>
-                <span className={info}>
-                  <div className={head}>
-                    <Link to={getIndexLink(index.id)} className={title} title={index.title}>
-                      <h3>{index.title}</h3>
-                    </Link>
-                    <IndexStatsList stats={index.stats} />
-                  </div>
-                  <span className={time}>
+      <PageContainer as='main'>
+        <div className={columns}>
+          <div className={listColumn}>
+            {user && (
+              <a
+                className={collectButton}
+                href={getLegacyPageLink(
+                  `/user/${user.username}/index?add_related=${subject.id}&ajax=1&keepThis=false&TB_iframe=true&height=350&width=500`,
+                )}
+                title='收集至我的目录'
+              >
+                收集至我的目录
+              </a>
+            )}
+            <ul className={indexList}>
+              {indexes.map((index) => (
+                <li key={index.id} className={item}>
+                  <span className={avatar}>
                     {index.user && (
-                      <Link to={getUserProfileLink(index.user.username)}>
-                        {index.user.nickname}
+                      <Link
+                        to={getUserProfileLink(index.user.username)}
+                        title={index.user.nickname}
+                      >
+                        <Avatar src={index.user.avatar.medium} alt={index.user.nickname} />
                       </Link>
                     )}
-                    <span className={dates}>
-                      创建 <span className={date}>{formatDate(index.createdAt)}</span> · 更新{' '}
-                      <span className={date}>{formatDate(index.updatedAt)}</span>
+                  </span>
+                  <span className={info}>
+                    <div className={head}>
+                      <Link to={getIndexLink(index.id)} className={title} title={index.title}>
+                        <h3>{index.title}</h3>
+                      </Link>
+                      <IndexStatsList stats={index.stats} />
+                    </div>
+                    <span className={time}>
+                      {index.user && (
+                        <Link to={getUserProfileLink(index.user.username)}>
+                          {index.user.nickname}
+                        </Link>
+                      )}
+                      <span className={dates}>
+                        创建 <span className={date}>{formatDate(index.createdAt)}</span> · 更新{' '}
+                        <span className={date}>{formatDate(index.updatedAt)}</span>
+                      </span>
                     </span>
                   </span>
-                </span>
-              </li>
-            ))}
-          </ul>
-          {indexes.length === 0 && <p className={empty}>暂无目录</p>}
-          <Pagination
-            total={total}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            onChange={onPageChange}
-            wrapperClass={pagination}
-          />
+                </li>
+              ))}
+            </ul>
+            {indexes.length === 0 && <p className={empty}>暂无目录</p>}
+            <Pagination
+              total={total}
+              currentPage={currentPage}
+              pageSize={pageSize}
+              onChange={onPageChange}
+              wrapperClass={pagination}
+            />
+          </div>
+          <SubjectSummaryCard subject={subject} />
         </div>
-        <SubjectSummaryCard subject={subject} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 };
 
