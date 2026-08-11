@@ -1,0 +1,81 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "type": 1,
+      "sender": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        }
+      },
+      "title": "测试小组话题",
+      "mainID": 100,
+      "relatedID": 200,
+      "createdAt": 1735689600,
+      "unread": true
+    },
+    {
+      "id": 2,
+      "type": 22,
+      "sender": {
+        "id": 2,
+        "username": "chobits",
+        "nickname": "小叽",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+        }
+      },
+      "title": "这个场景太棒了",
+      "mainID": 300,
+      "relatedID": 400,
+      "createdAt": 1735689600,
+      "unread": true
+    },
+    {
+      "id": 3,
+      "type": 35,
+      "sender": {
+        "id": 3,
+        "username": "patch-bot",
+        "nickname": "Patch 管理员",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/3.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/3.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/3.jpg"
+        }
+      },
+      "title": "修改条目简介的 patch",
+      "mainID": 500,
+      "relatedID": 600,
+      "createdAt": 1735689600,
+      "unread": true
+    },
+    {
+      "id": 4,
+      "type": 47,
+      "sender": {
+        "id": 4,
+        "username": "patch-reply",
+        "nickname": "Patch 参与者",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/4.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/4.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/4.jpg"
+        }
+      },
+      "title": "修改条目标题",
+      "mainID": 700,
+      "relatedID": 800,
+      "createdAt": 1735689600,
+      "unread": false
+    }
+  ],
+  "total": 4
+}

@@ -115,6 +115,8 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
     );
   }
 
+  const noticeLink = getNoticeLink(setting, mainID, relatedID);
+
   return (
     <div id={`notice_${id}`} className={noticeItem}>
       <img src={sender.avatar.small} alt='bgm-notify__avatar' className={noticeItemAvatar} />
@@ -124,7 +126,8 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
       <span className={noticeItemBody}>
         {setting.prefix}
         <Typography.Link
-          to={getNoticeLink(setting, mainID, relatedID)}
+          to={noticeLink}
+          isExternal={noticeLink.startsWith('http')}
           onClick={() => {
             ozaClient.clearNotice({
               id: [id],
