@@ -1,0 +1,235 @@
+{
+  "data": [
+    {
+      "character": {
+        "id": 217861,
+        "name": "柴田",
+        "nameCN": "柴田",
+        "role": 1,
+        "info": "性别 男",
+        "comment": 0,
+        "lock": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/b0/51/217861_crt_Po360.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/crt/l/b0/51/217861_crt_Po360.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/crt/l/b0/51/217861_crt_Po360.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/b0/51/217861_crt_Po360.jpg"
+        }
+      },
+      "relations": [
+        {
+          "subject": {
+            "id": 622206,
+            "name": "ヤニねこ",
+            "nameCN": "尼古喵喵",
+            "type": 2,
+            "info": "2026年7月2日 / 木村拓 / にゃんにゃんファクトリー（講談社「ヤングマガジン」連載） / 松浦力",
+            "metaTags": ["TV", "喜剧", "日常", "日本", "漫画改", "青年向"],
+            "rating": {
+              "rank": 1862,
+              "count": [36, 12, 21, 37, 116, 402, 1255, 981, 177, 119],
+              "score": 7.19,
+              "total": 3156
+            },
+            "locked": false,
+            "nsfw": false,
+            "images": {
+              "large": "https://lain.bgm.tv/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+              "common": "https://lain.bgm.tv/r/400/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+              "medium": "https://lain.bgm.tv/r/200/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+              "small": "https://lain.bgm.tv/r/100/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+              "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/6a/b3/622206_dpWcC.jpg"
+            }
+          },
+          "type": 2
+        }
+      ]
+    },
+    {
+      "character": {
+        "id": 207328,
+        "name": "インゴ",
+        "nameCN": "英格",
+        "role": 1,
+        "info": "性别 男",
+        "comment": 0,
+        "lock": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/6a/c8/207328_crt_HzRfr.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/crt/l/6a/c8/207328_crt_HzRfr.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/crt/l/6a/c8/207328_crt_HzRfr.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/6a/c8/207328_crt_HzRfr.jpg"
+        }
+      },
+      "relations": [
+        {
+          "subject": {
+            "id": 469104,
+            "name": "本好きの下剋上～司書になるためには手段を選んでいられません～ 領主の養女",
+            "nameCN": "小书痴的下克上 〜为了成为图书管理员而不择手段〜 领主的养女",
+            "type": 2,
+            "info": "24话 / 2026年4月4日 / 岩崎良明 / 香月美夜（TOブックス刊） / 簑輪愛子",
+            "metaTags": ["TV", "日本", "奇幻", "穿越", "小说改"],
+            "rating": {
+              "rank": 2778,
+              "count": [5, 2, 2, 5, 11, 61, 149, 65, 11, 14],
+              "score": 6.95,
+              "total": 325
+            },
+            "locked": false,
+            "nsfw": false,
+            "images": {
+              "large": "https://lain.bgm.tv/pic/cover/l/ed/e6/469104_SMf0k.jpg",
+              "common": "https://lain.bgm.tv/r/400/pic/cover/l/ed/e6/469104_SMf0k.jpg",
+              "medium": "https://lain.bgm.tv/r/200/pic/cover/l/ed/e6/469104_SMf0k.jpg",
+              "small": "https://lain.bgm.tv/r/100/pic/cover/l/ed/e6/469104_SMf0k.jpg",
+              "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/ed/e6/469104_SMf0k.jpg"
+            }
+          },
+          "type": 2
+        }
+      ]
+    },
+    {
+      "character": {
+        "id": 189694,
+        "name": "Jubei",
+        "nameCN": "十兵卫",
+        "role": 1,
+        "info": "",
+        "comment": 0,
+        "lock": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/ac/af/189694_crt_r19zZ.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/crt/l/ac/af/189694_crt_r19zZ.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/crt/l/ac/af/189694_crt_r19zZ.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/ac/af/189694_crt_r19zZ.jpg"
+        }
+      },
+      "relations": [
+        {
+          "subject": {
+            "id": 515103,
+            "name": "Ghost of Yōtei",
+            "nameCN": "羊蹄山之魂",
+            "type": 4,
+            "info": "2025年10月2日 / PS5 / ARPG / Sucker Punch Productions",
+            "metaTags": ["ARPG", "游戏", "PS5"],
+            "rating": {
+              "rank": 2035,
+              "count": [2, 1, 1, 2, 8, 17, 62, 67, 24, 3],
+              "score": 7.34,
+              "total": 187
+            },
+            "locked": false,
+            "nsfw": false,
+            "images": {
+              "large": "https://lain.bgm.tv/pic/cover/l/ae/07/515103_Un56U.jpg",
+              "common": "https://lain.bgm.tv/r/400/pic/cover/l/ae/07/515103_Un56U.jpg",
+              "medium": "https://lain.bgm.tv/r/200/pic/cover/l/ae/07/515103_Un56U.jpg",
+              "small": "https://lain.bgm.tv/r/100/pic/cover/l/ae/07/515103_Un56U.jpg",
+              "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/ae/07/515103_Un56U.jpg"
+            }
+          },
+          "type": 2
+        }
+      ]
+    },
+    {
+      "character": {
+        "id": 151689,
+        "name": "ティム",
+        "nameCN": "提姆",
+        "role": 1,
+        "info": "性别 男",
+        "comment": 0,
+        "lock": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/27/8b/151689_crt_7sWwq.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/crt/l/27/8b/151689_crt_7sWwq.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/crt/l/27/8b/151689_crt_7sWwq.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/27/8b/151689_crt_7sWwq.jpg"
+        }
+      },
+      "relations": [
+        {
+          "subject": {
+            "id": 285813,
+            "name": "GREAT PRETENDER",
+            "nameCN": "大欺诈师",
+            "type": 2,
+            "info": "23话 / 2020年7月8日 / 鏑木ひろ / WIT STUDIO / 貞本義行",
+            "metaTags": ["悬疑", "TV", "日本", "原创", "剧情"],
+            "rating": {
+              "rank": 1904,
+              "count": [9, 5, 24, 56, 192, 643, 1662, 1438, 230, 70],
+              "score": 7.17,
+              "total": 4329
+            },
+            "locked": false,
+            "nsfw": false,
+            "images": {
+              "large": "https://lain.bgm.tv/pic/cover/l/96/1a/285813_mpzM4.jpg",
+              "common": "https://lain.bgm.tv/r/400/pic/cover/l/96/1a/285813_mpzM4.jpg",
+              "medium": "https://lain.bgm.tv/r/200/pic/cover/l/96/1a/285813_mpzM4.jpg",
+              "small": "https://lain.bgm.tv/r/100/pic/cover/l/96/1a/285813_mpzM4.jpg",
+              "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/96/1a/285813_mpzM4.jpg"
+            }
+          },
+          "type": 2
+        }
+      ]
+    },
+    {
+      "character": {
+        "id": 119197,
+        "name": "中山大尉",
+        "nameCN": "",
+        "role": 1,
+        "info": "性别 男",
+        "comment": 0,
+        "lock": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/f5/2f/119197_crt_mE0AY.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/crt/l/f5/2f/119197_crt_mE0AY.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/crt/l/f5/2f/119197_crt_mE0AY.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/f5/2f/119197_crt_mE0AY.jpg"
+        }
+      },
+      "relations": [
+        {
+          "subject": {
+            "id": 361095,
+            "name": "ゴールデンカムイ 第4期",
+            "nameCN": "黄金神威 第四季",
+            "type": 2,
+            "info": "13话 / 2022年10月3日 / すがはらしずたか(菅原静貴) / 野田サトル（集英社ヤングジャンプ コミックス刊） / 山川拓己",
+            "metaTags": ["TV", "日本", "漫画改", "战斗", "冒险"],
+            "rating": {
+              "rank": 643,
+              "count": [1, 2, 1, 7, 20, 140, 675, 938, 205, 78],
+              "score": 7.66,
+              "total": 2067
+            },
+            "locked": false,
+            "nsfw": false,
+            "images": {
+              "large": "https://lain.bgm.tv/pic/cover/l/1c/55/361095_7GgQq.jpg",
+              "common": "https://lain.bgm.tv/r/400/pic/cover/l/1c/55/361095_7GgQq.jpg",
+              "medium": "https://lain.bgm.tv/r/200/pic/cover/l/1c/55/361095_7GgQq.jpg",
+              "small": "https://lain.bgm.tv/r/100/pic/cover/l/1c/55/361095_7GgQq.jpg",
+              "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/1c/55/361095_7GgQq.jpg"
+            }
+          },
+          "type": 2
+        }
+      ]
+    }
+  ],
+  "total": 7
+}

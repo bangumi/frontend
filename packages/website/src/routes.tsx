@@ -20,6 +20,7 @@ const GroupTopicHome = lazy(async () => import('./pages/index/group/topic/[id]/i
 const Subject = lazy(async () => import('./pages/index/subject/[id]/index'));
 const SubjectEpisodes = lazy(async () => import('./pages/index/subject/[id]/ep'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]'));
+const Person = lazy(async () => import('./pages/index/person/[id]'));
 const Wiki = lazy(async () => import('./pages/index/subject/[id]/wiki'));
 const WikiEdit = lazy(async () => import('./pages/index/subject/[id]/wiki/edit'));
 const WikiEditDetail = lazy(async () => import('./pages/index/subject/[id]/wiki/edit_detail'));
@@ -56,7 +57,6 @@ const legacyPagePaths = [
   'index/:id/comments',
   'magi',
   'onair',
-  'person/:id',
   'register',
   'subject/:id/board',
   'subject/:id/characters',
@@ -160,6 +160,10 @@ export const pageRoutes: RouteObject[] = [
             ],
           },
         ],
+      },
+      {
+        path: 'person/:id',
+        element: <Person />,
       },
       {
         path: 'subject_search/:keyword',

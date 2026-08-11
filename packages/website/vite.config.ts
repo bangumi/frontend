@@ -61,7 +61,7 @@ export default defineConfig(({ mode }) => {
         ignored: ['playwright-report'],
       },
       proxy: {
-        '/p': {
+        '/p1': {
           target: apiDomain,
           headers: access_token
             ? {
