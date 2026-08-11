@@ -15,6 +15,7 @@ import Typography from '../../components/Typography';
 import { toast } from '../Toast';
 import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
+import Reactions from './Reactions';
 import ReplyForm from './ReplyForm';
 
 export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply: false })) & {
@@ -23,6 +24,10 @@ export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply
   originalPosterId: number;
   onCommentUpdate: () => Promise<unknown>;
   user?: Pick<SlimUser, 'id'>;
+  /** 是否为主题帖（第一楼） */
+  isMainPost?: boolean;
+  /** 主题帖的回复总数，用于在主题帖底部展示回复数 */
+  replyCount?: number;
 };
 
 const Link = Typography.Link;
@@ -76,6 +81,8 @@ const Comment: FC<CommentProps> = ({
   user,
   topicId,
   onCommentUpdate,
+  isMainPost = false,
+  replyCount,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -96,6 +103,7 @@ const Comment: FC<CommentProps> = ({
 
   const headerClassName = classNames('bgm-comment__header', {
     'bgm-comment__header--reply': isReply,
+    'bgm-comment__header--main-post': isMainPost,
     'bgm-comment__header--collapsed': collapsed,
     'bgm-comment__header--highlighted': isHighlighted,
   });
@@ -160,7 +168,7 @@ const Comment: FC<CommentProps> = ({
       <div className={headerClassName} id={`post_${props.id}`}>
         <Avatar
           src={isReply ? (creator?.avatar.medium ?? '') : (creator?.avatar.large ?? '')}
-          size={isReply ? 'small' : 'medium'}
+          size={isReply ? 'xsmall' : isMainPost ? 'post' : 'small'}
         />
         <div className='bgm-comment__box'>
           <div className='bgm-comment__main'>
@@ -181,12 +189,28 @@ const Comment: FC<CommentProps> = ({
                       onDelete={handleDeleteReply}
                       isAuthor={user?.id === creator?.id}
                       editable={!replies?.length}
+                      reactions={props.reactions}
+                      user={user}
+                      onReacted={onCommentUpdate}
                     />
                   </>
                 )}
               </div>
             </span>
             <RenderContent state={state} content={content} />
+            {!isDeleted && (
+              <Reactions
+                reactions={props.reactions}
+                postId={props.id}
+                user={user}
+                onReacted={onCommentUpdate}
+              />
+            )}
+            {isMainPost && replyCount != null && (
+              <div className='bgm-comment__post-actions'>
+                <span className='bgm-comment__post-reply-count'>{`${replyCount} 回复`}</span>
+              </div>
+            )}
           </div>
           {showReplyEditor && (
             <div className='bgm-comment__opinions'>

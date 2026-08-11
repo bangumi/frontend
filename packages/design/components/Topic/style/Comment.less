@@ -6,12 +6,24 @@
   &__header {
     display: flex;
     align-items: flex-start;
-    padding-top: 20px;
-    padding-bottom: 12px;
-    border-bottom: 1px dashed @gray-10;
+    padding: 15px 15px 10px;
+    border-bottom: 1px dotted @gray-10;
+
+    &--main-post {
+      padding: 10px 5px;
+      border-bottom: none;
+
+      .bgm-comment__box {
+        margin-left: 12px;
+      }
+    }
 
     &--reply {
-      margin-left: 72px;
+      margin-left: 70px;
+
+      .bgm-comment__box {
+        margin-left: 13px;
+      }
     }
 
     &--collapsed {
@@ -27,10 +39,32 @@
       border: 2px solid @highlight-border-color;
       border-radius: 5px;
     }
+
+    @media (max-width: 640px) {
+      padding: 10px 5px;
+
+      .bgm-comment__box {
+        margin-left: 10px;
+      }
+
+      &--main-post {
+        .bgm-comment__box {
+          margin-left: 12px;
+        }
+      }
+
+      &--reply {
+        margin-left: 55px;
+
+        .bgm-comment__box {
+          margin-left: 13px;
+        }
+      }
+    }
   }
 
   &__box {
-    margin-left: 12px;
+    margin-left: 15px;
     flex: 1;
     // this trick is same to EditorForm
     min-width: 0;
@@ -70,6 +104,13 @@
       font-size: 14px;
       line-height: 20px;
     }
+  }
+
+  &__post-actions {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 20px;
+    color: @gray-60;
   }
 
   &__opinions {

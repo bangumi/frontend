@@ -10,6 +10,7 @@ export type { Wiki } from '@bgm38/wiki';
 export { formatSubjectInfobox } from './infobox';
 export type { Infobox, InfoboxItem, InfoboxValue } from './infobox';
 export * from './bbcode';
+export { ALLOWED_REACTIONS, getReactionEmojiUrl } from './reactions';
 
 /**
  * 输入一个对象数组，提取对象中的某个值作为新对象中的键，值为对象本身

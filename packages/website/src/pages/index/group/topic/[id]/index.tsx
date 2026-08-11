@@ -52,13 +52,7 @@ const TopicPage: FC = () => {
   return (
     <>
       <Helmet title={topic.title} />
-      <GroupTopicHeader
-        id={topic.id}
-        title={topic.title}
-        creator={topic.creator}
-        createdAt={topic.createdAt}
-        group={topic.group}
-      />
+      <GroupTopicHeader title={topic.title} group={topic.group} />
       <Layout
         type='alpha'
         leftChildren={
@@ -70,7 +64,9 @@ const TopicPage: FC = () => {
                   topicId={topic.id}
                   key={comment.id}
                   isReply={false}
-                  floor={idx + 2}
+                  isMainPost={idx === 0}
+                  replyCount={topic.replyCount}
+                  floor={idx + 1}
                   originalPosterId={originalPosterId}
                   user={user}
                   onCommentUpdate={mutate}
@@ -80,7 +76,7 @@ const TopicPage: FC = () => {
               {/* Reply BBCode Editor */}
               {!isClosed && user && (
                 <div className={styles.replyFormContainer} id='replyForm'>
-                  <Avatar src={user.avatar.large} size='medium' />
+                  <Avatar src={user.avatar.large} size='small' />
                   <ReplyForm
                     topicId={topic.id}
                     className={styles.replyForm}

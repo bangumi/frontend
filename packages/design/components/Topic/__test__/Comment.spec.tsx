@@ -18,28 +18,28 @@ function render(component: React.ReactElement, routerEntries?: string[]) {
 }
 
 // 0 正常评论 6 被用户删除 7 违反社区指导原则，已被删除
+function buildProps(
+  isReply = false,
+  comment?: any,
+  floor = '233',
+  originalPosterId = 233,
+  user = mockedCurrentUser,
+) {
+  const reply = repliesComment.replies[0];
+  const mockedComment = comment ?? (isReply ? reply : singleComment);
+
+  const commentProps: CommentProps = {
+    ...mockedComment,
+    createdAt: dayjs(mockedComment.createdAt).unix(),
+    floor,
+    originalPosterId,
+    user,
+    isReply,
+  };
+  return commentProps;
+}
+
 describe('Normal Comment', () => {
-  function buildProps(
-    isReply = false,
-    comment?: any,
-    floor = '233',
-    originalPosterId = 233,
-    user = mockedCurrentUser,
-  ) {
-    const reply = repliesComment.replies[0];
-    const mockedComment = comment ?? (isReply ? reply : singleComment);
-
-    const commentProps: CommentProps = {
-      ...mockedComment,
-      createdAt: dayjs(mockedComment.createdAt).unix(),
-      floor,
-      originalPosterId,
-      user,
-      isReply,
-    };
-    return commentProps;
-  }
-
   it.each([0, 6, 7])('should render %d', (state) => {
     const props = buildProps();
     const { container } = render(<Comment {...props} state={state} />);
@@ -165,6 +165,92 @@ describe('Normal Comment', () => {
     const props = buildProps(false, repliesComment);
     const { container } = render(<Comment {...props} />, ['/groups/topics/1#post_2104702']);
     expect(container).toMatchSnapshot();
+  });
+});
+
+// reactions（贴贴）
+describe('Reactions', () => {
+  const reactions = [
+    {
+      value: 0,
+      users: [
+        { id: 1, username: 'u1', nickname: '用户1' },
+        { id: 2, username: 'u2', nickname: '用户2' },
+      ],
+    },
+    { value: 79, users: [{ id: 3, username: 'u3', nickname: '用户3' }] },
+  ];
+
+  it('should render reactions list', () => {
+    const props = buildProps(false);
+    const { container } = render(<Comment {...props} reactions={reactions} />);
+    const items = container.getElementsByClassName('bgm-reactions__item');
+    expect(items.length).toBe(2);
+    // 当前用户（id=10）没有点赞任何 reaction，不应有 selected 样式
+    expect(items[0]!.className).not.toContain('--selected');
+  });
+
+  it('should mark selected if current user reacted', () => {
+    const props = buildProps(false);
+    const { container } = render(
+      <Comment
+        {...props}
+        reactions={[{ value: 0, users: [{ id: 10, username: 'u10', nickname: '用户10' }] }]}
+      />,
+    );
+    expect(container.getElementsByClassName('bgm-reactions__item--selected').length).toBe(1);
+  });
+
+  it('should call like API and refresh on reaction click', async () => {
+    const likeSpy = vi.fn();
+    mockServer.use(
+      http.put('/p1/groups/-/posts/2104702/like', () => {
+        likeSpy();
+        return HttpResponse.json({});
+      }),
+    );
+    const onReacted = vi.fn();
+    const props = buildProps(false);
+    const { container } = render(
+      <Comment {...props} reactions={reactions} onCommentUpdate={onReacted} />,
+    );
+    fireEvent.click(container.getElementsByClassName('bgm-reactions__item')[0]!);
+    await waitFor(() => {
+      expect(likeSpy).toHaveBeenCalled();
+      expect(onReacted).toHaveBeenCalled();
+    });
+  });
+
+  it('should call unlike API if already reacted', async () => {
+    const unlikeSpy = vi.fn();
+    mockServer.use(
+      http.delete('/p1/groups/-/posts/2104702/like', () => {
+        unlikeSpy();
+        return HttpResponse.json({});
+      }),
+    );
+    const onReacted = vi.fn();
+    const props = buildProps(false);
+    const { container } = render(
+      <Comment
+        {...props}
+        onCommentUpdate={onReacted}
+        reactions={[{ value: 0, users: [{ id: 10, username: 'u10', nickname: '用户10' }] }]}
+      />,
+    );
+    fireEvent.click(container.getElementsByClassName('bgm-reactions__item')[0]!);
+    await waitFor(() => {
+      expect(unlikeSpy).toHaveBeenCalled();
+      expect(onReacted).toHaveBeenCalled();
+    });
+  });
+
+  it('should disable reactions for not-logged-in users', () => {
+    const props = buildProps(false, singleComment, '233', 233, null as any);
+    const { container } = render(<Comment {...props} reactions={reactions} />);
+    const items = container.getElementsByClassName('bgm-reactions__item');
+    expect(items.length).toBe(2);
+    expect((items[0] as HTMLButtonElement).disabled).toBe(true);
   });
 });
 
