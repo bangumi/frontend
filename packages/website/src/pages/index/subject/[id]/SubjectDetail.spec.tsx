@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
 import type { PropsWithChildren } from 'react';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
@@ -31,15 +31,18 @@ describe('SubjectDetail', () => {
     });
   };
 
-  // 独立的 SWR 缓存：避免前序测试已缓存 /p1/me 的登录结果
+  // 独立的 SWR 缓存：避免前序测试已缓存 /p1/me 的登录结果；
+  // Suspense boundary 是 React 19 下 SWR suspense 挂起所必需的
   const renderSubjectLoggedOut = async () => {
     const wrapper = ({ children }: PropsWithChildren) => (
       <SWRConfig value={{ provider: () => new Map() }}>
-        <MemoryRouter>
-          <HelmetProvider>
-            <UserProvider>{children}</UserProvider>
-          </HelmetProvider>
-        </MemoryRouter>
+        <Suspense fallback={null}>
+          <MemoryRouter>
+            <HelmetProvider>
+              <UserProvider>{children}</UserProvider>
+            </HelmetProvider>
+          </MemoryRouter>
+        </Suspense>
       </SWRConfig>
     );
     await act(async () => {
@@ -144,6 +147,7 @@ describe('SubjectDetail', () => {
   });
 
   it('should hide 收集至我的目录 when logged out', async () => {
+    setup();
     mockServer.use(
       http.get('http://localhost:3000/p1/me', () => {
         return HttpResponse.json({}, { status: 401 });
