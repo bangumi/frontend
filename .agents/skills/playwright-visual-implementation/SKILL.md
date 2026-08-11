@@ -49,6 +49,7 @@ Useful options:
 
 - `--width` / `--height`: viewport size (default 1440×900)
 - `--device-scale-factor <n>`: device scale factor (default 1)
+- `--quality <0-100>`: JPEG quality (default 60); output must end in `.jpg`/`.jpeg`, PNG is not supported
 - `--full-page`: capture the full scrollable page
 - `--wait-until <state>`: `commit`, `domcontentloaded`, `load`, or `networkidle` (default `domcontentloaded`)
 - `--wait-for <selector>`: wait for a selector to become visible
@@ -60,7 +61,7 @@ Examples:
 
 ```bash
 pnpm run build
-pnpm website screenshot /user/sai /tmp/user.png --full-page
+pnpm website screenshot /user/sai /tmp/user.jpg --full-page
 pnpm website screenshot --wait-for main --local-storage view=grid
 ```
 
