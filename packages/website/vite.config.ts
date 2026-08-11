@@ -10,6 +10,7 @@ import { defineConfig, loadEnv } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
+import { pandaDevHmr } from './panda-dev-hmr';
 
 let COMMIT_HASH = '';
 
@@ -104,6 +105,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
+      pandaDevHmr(),
       react(
         mode === 'production'
           ? {
