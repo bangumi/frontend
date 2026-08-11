@@ -35,6 +35,7 @@ describe('SubjectDetail', () => {
     // 左栏：信息框 / 目录 / 收藏统计
     expect(await screen.findByText(/中文名/)).toBeInTheDocument();
     expect(await screen.findByText('推荐本条目的目录')).toBeInTheDocument();
+    expect(await screen.findByText('谁看这部动画?')).toBeInTheDocument();
     expect(await screen.findByText(/人看过/)).toBeInTheDocument();
     // 主栏：ep / 标签
     expect(await screen.findByText('章节列表')).toBeInTheDocument();
@@ -55,6 +56,82 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('测试动画长评')).toBeInTheDocument();
     expect(await screen.findByText('讨论版测试话题')).toBeInTheDocument();
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();
+  });
+
+  it('should render the subject index panel with avatars and tips', async () => {
+    setup();
+    await renderSubject();
+
+    // 目录项：作者头像 + 标题链接 + by 作者（fixture 为真实数据 5 条）
+    const indexList = screen.getByRole('list', { name: '推荐本条目的目录列表' });
+    expect(within(indexList).getAllByRole('listitem')).toHaveLength(5);
+    expect(screen.getByAltText('失窃预告函')).toBeInTheDocument();
+    expect(within(indexList).getByRole('link', { name: '测试目录' })).toHaveAttribute(
+      'href',
+      '/index/101917',
+    );
+    expect(within(indexList).getByText('by 失窃预告函')).toBeInTheDocument();
+
+    // 底部：更多目录指向旧站；收集至我的目录仅登录用户可见
+    expect(screen.getByRole('link', { name: '更多目录' })).toHaveAttribute(
+      'href',
+      'https://bgm.tv/subject/12/index',
+    );
+    expect(screen.getByRole('link', { name: '收集至我的目录' })).toHaveAttribute(
+      'href',
+      'https://bgm.tv/user/382951/index',
+    );
+  });
+
+  it('should render recent collectors with status and collection stats', async () => {
+    setup();
+    await renderSubject();
+
+    // 收藏用户列表（fixture 5 人）
+    const collectList = await screen.findByRole('list', { name: '最近收藏用户列表' });
+    const items = within(collectList).getAllByRole('listitem');
+    expect(items).toHaveLength(5);
+
+    // 用户名链接指向用户主页
+    expect(within(collectList).getByRole('link', { name: 'Madeline' })).toHaveAttribute(
+      'href',
+      '/user/1272395',
+    );
+
+    // 每项状态：相对时间 + 收藏状态（时间文本不固定，只断言状态后缀）
+    const statuses = within(collectList).getAllByText(/前(想看|看过|在看|搁置|抛弃)$/);
+    expect(statuses).toHaveLength(5);
+
+    // rate > 0 的用户渲染星星（fixture 中 datura rate=7）
+    expect(within(collectList).getAllByTestId('filled').length).toBeGreaterThan(0);
+
+    // 底部统计链接按收藏类型排序
+    expect(screen.getByRole('link', { name: '100人想看' })).toHaveAttribute(
+      'href',
+      '/subject/12/collections?filter=1',
+    );
+    expect(screen.getByRole('link', { name: '2000人看过' })).toHaveAttribute(
+      'href',
+      '/subject/12/collections?filter=2',
+    );
+    expect(screen.getByRole('link', { name: '1500人在看' })).toHaveAttribute(
+      'href',
+      '/subject/12/collections?filter=3',
+    );
+  });
+
+  it('should hide 收集至我的目录 when logged out', async () => {
+    mockServer.use(
+      http.get('http://localhost:3000/p1/me', () => {
+        return HttpResponse.json({}, { status: 401 });
+      }),
+    );
+
+    await renderSubject();
+
+    expect(await screen.findByText('推荐本条目的目录')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '更多目录' })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: '收集至我的目录' })).not.toBeInTheDocument();
   });
 
   it('should render the collection panel in a separate sidebar', async () => {

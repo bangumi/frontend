@@ -1,13 +1,19 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import type { SlimIndex, Subject, SubjectHomeResponse } from '@bangumi/client/client';
-import { CollectionType, SubjectType } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type {
+  CollectionType,
+  SlimIndex,
+  Subject,
+  SubjectHomeResponse,
+} from '@bangumi/client/client';
+import { SubjectType } from '@bangumi/client/client';
+import { Rate, Typography } from '@bangumi/design';
 import { Link as LinkIcon } from '@bangumi/icons';
 import { formatSubjectInfobox } from '@bangumi/utils';
 import {
   getIndexLink,
+  getLegacyPageLink,
   getSubjectBoardLink,
   getSubjectCharactersLink,
   getSubjectCollectionsLink,
@@ -22,34 +28,67 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 import PageContainer from '@bangumi/website/components/PageContainer';
+import { useSubjectCollects } from '@bangumi/website/hooks/use-subject-collects';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import CollectionPanel from './CollectionPanel';
+import { COLLECT_DESC, collectVerb } from './subject-common';
 import styles from './SubjectDetail.module.less';
 import { SubjectPrimaryBlocks, SubjectSecondaryBlocks } from './SubjectDetailBlocks';
 
 const { Link } = Typography;
 
-const COLLECT_DESC: Record<CollectionType, string> = {
-  [CollectionType.Wish]: '想看',
-  [CollectionType.Collect]: '看过',
-  [CollectionType.Doing]: '在看',
-  [CollectionType.OnHold]: '搁置',
-  [CollectionType.Dropped]: '抛弃',
-};
+/** 相对时间，对齐 PHP GlobalCore::make_descriptive_time（如「1小时25分钟前」） */
+function makeDescriptiveTime(timestamp: number): string {
+  const YEAR = 86400 * 365;
+  const MONTH = 86400 * 30;
+  const DAY = 86400;
+  const HOUR = 3600;
+  const MINUTE = 60;
 
-/** 收藏动词：看/读/听/玩 */
-function collectVerb(subjectType: number): string {
-  switch (subjectType) {
-    case 1:
-      return '读';
-    case 3:
-      return '听';
-    case 4:
-      return '玩';
-    default:
-      return '看';
+  const diff = Math.floor(Date.now() / 1000) - timestamp;
+
+  if (diff > YEAR) {
+    const years = Math.floor(diff / YEAR);
+    const rest = diff - years * YEAR;
+    if (rest > MONTH) {
+      return `${years}年${Math.floor(rest / MONTH)}月前`;
+    }
+    return `${years}年前`;
   }
+  if (diff > MONTH) {
+    const months = Math.floor(diff / MONTH);
+    const rest = diff - months * MONTH;
+    if (rest > DAY) {
+      return `${months}月${Math.floor(rest / DAY)}天前`;
+    }
+    return `${months}月前`;
+  }
+  if (diff > DAY) {
+    const days = Math.floor(diff / DAY);
+    const rest = diff - days * DAY;
+    if (rest > HOUR) {
+      return `${days}天${Math.floor(rest / HOUR)}小时前`;
+    }
+    return `${days}天前`;
+  }
+  if (diff > HOUR) {
+    const hours = Math.floor(diff / HOUR);
+    const rest = diff - hours * HOUR;
+    if (rest > MINUTE) {
+      return `${hours}小时${Math.floor(rest / MINUTE)}分钟前`;
+    }
+    return `${hours}小时前`;
+  }
+  if (diff > MINUTE) {
+    const minutes = Math.floor(diff / MINUTE);
+    const rest = diff - minutes * MINUTE;
+    if (rest > 0) {
+      return `${minutes}分${rest}秒前`;
+    }
+    return `${minutes}分钟前`;
+  }
+  return `${diff}秒前`;
 }
 
 /** 条目标题与导航 tabs，对齐 PHP subject_header */
@@ -185,34 +224,79 @@ function SubjectInfobox({ subject }: { subject: Subject }) {
 }
 
 /** 左栏：推荐本条目的目录，对齐 PHP panel_subject_index */
-function SubjectIndexes({ indexes }: { indexes: SlimIndex[] }) {
+function SubjectIndexes({ subject, indexes }: { subject: Subject; indexes: SlimIndex[] }) {
+  const { user } = useUser();
   if (indexes.length === 0) {
     return null;
   }
   return (
     <div className={styles.sidePanel}>
       <h2 className={styles.sidePanelTitle}>推荐本条目的目录</h2>
-      <ul className={styles.indexList}>
+      <ul className={styles.groupLineList} aria-label='推荐本条目的目录列表'>
         {indexes.slice(0, 5).map((index) => (
-          <li key={index.id}>
-            <Link to={getIndexLink(index.id)} className={styles.indexTitle} title={index.title}>
-              {index.title}
-            </Link>
-            <small className={styles.indexBy}>
-              by{' '}
-              <Link to={getUserProfileLink(index.user?.username ?? '')}>
-                {index.user?.nickname ?? ''}
+          <li key={index.id} className={styles.groupLineItem}>
+            {index.user != null && (
+              <Link
+                to={getUserProfileLink(index.user.username)}
+                noStyle
+                className={styles.groupLineAvatar}
+                title={index.user.nickname}
+              >
+                <img src={index.user.avatar.large} alt={index.user.nickname} />
               </Link>
-            </small>
+            )}
+            <div className={styles.groupLineBody}>
+              <Link to={getIndexLink(index.id)} className={styles.indexTitle} title={index.title}>
+                {index.title}
+              </Link>
+              {index.user != null && (
+                <small className={styles.indexBy}>
+                  by{' '}
+                  <Link to={getUserProfileLink(index.user.username)} noStyle>
+                    {index.user.nickname}
+                  </Link>
+                </small>
+              )}
+            </div>
           </li>
         ))}
       </ul>
+      <span className={styles.indexTips}>
+        {' '}
+        / <Link to={getLegacyPageLink(`/subject/${subject.id}/index`)}>更多目录</Link>
+        {user != null && (
+          <>
+            {' '}
+            / <Link to={getLegacyPageLink(`/user/${user.username}/index`)}>收集至我的目录</Link>
+          </>
+        )}
+      </span>
     </div>
   );
 }
 
-/** 左栏：各收藏类型人数统计（panel_collect 简化版，聚合 API 未提供收藏者列表） */
-function SubjectCollectStats({ subject }: { subject: Subject }) {
+/** 左栏面板标题，对齐 PHP panel_collect 的标题逻辑 */
+function collectPanelTitle(subject: Subject): string {
+  switch (subject.type) {
+    case SubjectType.Book:
+      return subject.series ? '谁读这个系列?' : '谁读这本书?';
+    case SubjectType.Anime:
+      return '谁看这部动画?';
+    case SubjectType.Music:
+      return '谁听这张唱片?';
+    case SubjectType.Game:
+      return '谁玩这部游戏?';
+    case SubjectType.Real:
+      return '谁看这部影视?';
+    default:
+      return `谁${collectVerb(subject.type)}这部作品?`;
+  }
+}
+
+/** 左栏：最近收藏用户与人数统计，对齐 PHP panel_collect */
+function SubjectCollectPanel({ subject }: { subject: Subject }) {
+  const { data: collects } = useSubjectCollects(subject.id, 5);
+
   const counts = Object.entries(subject.collection)
     .map(([key, count]) => ({ type: Number(key) as CollectionType, count }))
     .filter((entry) => COLLECT_DESC[entry.type] != null)
@@ -224,16 +308,49 @@ function SubjectCollectStats({ subject }: { subject: Subject }) {
 
   return (
     <div className={styles.sidePanel}>
-      <h2 className={styles.sidePanelTitle}>谁{collectVerb(subject.type)}这部作品?</h2>
-      <ul className={styles.collectStats}>
+      <h2 className={styles.sidePanelTitle}>{collectPanelTitle(subject)}</h2>
+      {collects != null && collects.length > 0 && (
+        <ul className={styles.groupLineList} aria-label='最近收藏用户列表'>
+          {collects.map((collect) => (
+            <li key={collect.user.id} className={styles.groupLineItem}>
+              <Link
+                to={getUserProfileLink(collect.user.username)}
+                noStyle
+                className={styles.groupLineAvatar}
+                title={collect.user.nickname}
+              >
+                <img src={collect.user.avatar.large} alt={collect.user.nickname} />
+              </Link>
+              <div className={styles.groupLineBody}>
+                <Link
+                  to={getUserProfileLink(collect.user.username)}
+                  noStyle
+                  className={styles.collectUserName}
+                >
+                  {collect.user.nickname}
+                </Link>
+                {collect.interest.rate > 0 && <Rate value={collect.interest.rate} />}
+                <br />
+                <small className={styles.collectStatus}>
+                  {makeDescriptiveTime(collect.interest.updatedAt)}
+                  {COLLECT_DESC[collect.interest.type]}
+                </small>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      <span className={styles.indexTips}>
         {counts.map((entry) => (
-          <li key={entry.type}>
+          <React.Fragment key={entry.type}>
+            {' '}
+            /{' '}
             <Link to={getSubjectCollectionsLink(subject.id, entry.type)}>
               {entry.count}人{COLLECT_DESC[entry.type]}
             </Link>
-          </li>
+          </React.Fragment>
         ))}
-      </ul>
+      </span>
     </div>
   );
 }
@@ -297,8 +414,8 @@ const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
         <div className={styles.columns}>
           <div className={styles.columnLeft}>
             <SubjectInfobox subject={subject} />
-            <SubjectIndexes indexes={data.indexes} />
-            <SubjectCollectStats subject={subject} />
+            <SubjectIndexes subject={subject} indexes={data.indexes} />
+            <SubjectCollectPanel subject={subject} />
           </div>
           <div className={styles.columnContent}>
             <div className={styles.primaryColumns}>

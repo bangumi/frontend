@@ -1,0 +1,125 @@
+{
+  "data": [
+    {
+      "user": {
+        "id": 1272395,
+        "username": "1272395",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1786441140,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 52536889,
+        "rate": 0,
+        "type": 3,
+        "comment": "",
+        "tags": ["2002", "\u5c0f\u53fd", "\u604b\u7231", "\u6cbb\u6108"],
+        "updatedAt": 1786462711
+      }
+    },
+    {
+      "user": {
+        "id": 1254125,
+        "username": "1254125",
+        "nickname": "\u6211\u4e00\u65f6\u627e\u4e0d\u5230\u6070\u5f53\u7684\u8bed\u8a00\u53d6 ...",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/icon.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/icon.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1780333629,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 52534213,
+        "rate": 0,
+        "type": 1,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786457846
+      }
+    },
+    {
+      "user": {
+        "id": 1011443,
+        "username": "1011443",
+        "nickname": "datura",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/icon.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/icon.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1746341348,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 51556092,
+        "rate": 7,
+        "type": 2,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786423598
+      }
+    },
+    {
+      "user": {
+        "id": 792498,
+        "username": "792498",
+        "nickname": "MasterJH5574",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/79/24/792498.jpg?r=1701539393&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/79/24/792498.jpg?r=1701539393&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/79/24/792498.jpg?r=1701539393&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1684911353,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 37554662,
+        "rate": 0,
+        "type": 3,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786421266
+      }
+    },
+    {
+      "user": {
+        "id": 1231244,
+        "username": "1231244",
+        "nickname": "\u62c9\u83f2\u827e\u62c9",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/23/12/1231244_222C9.jpg?r=1786391439&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/23/12/1231244_222C9.jpg?r=1786391439&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/23/12/1231244_222C9.jpg?r=1786391439&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1774801168,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 52517714,
+        "rate": 0,
+        "type": 2,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786391725
+      }
+    }
+  ],
+  "total": 13996
+}
