@@ -6,7 +6,7 @@ import { chromium } from '@playwright/test';
 import { preview } from 'vite';
 
 const DEFAULT_ROUTE = '/';
-const DEFAULT_OUTPUT = '/tmp/website-screenshot.png';
+const DEFAULT_OUTPUT = '/tmp/website-screenshot.jpg';
 const WAIT_UNTIL_VALUES = new Set(['commit', 'domcontentloaded', 'load', 'networkidle']);
 const invocationDirectory = process.env.INIT_CWD ?? process.cwd();
 const websiteDirectory = path.resolve(import.meta.dirname, '..');
@@ -22,7 +22,8 @@ Usage:
 
 Arguments:
   route                       Website route (default: ${DEFAULT_ROUTE})
-  output                      PNG output path (default: ${DEFAULT_OUTPUT})
+  output                      JPEG output path; only .jpg/.jpeg is supported
+                              (default: ${DEFAULT_OUTPUT})
 
 Options:
   -u, --url <route>           Website route; overrides the positional route
@@ -31,6 +32,7 @@ Options:
       --width <pixels>        Viewport width (default: 1440)
       --height <pixels>       Viewport height (default: 900)
       --device-scale-factor   Device scale factor (default: 1)
+      --quality <0-100>       JPEG quality (default: 60)
       --full-page             Capture the full scrollable page
       --wait-until <state>    commit, domcontentloaded, load, or networkidle
                               (default: domcontentloaded)
@@ -47,7 +49,7 @@ Options:
 
 Examples:
   pnpm run build
-  pnpm website screenshot /user/sai /tmp/user.png --full-page
+  pnpm website screenshot /user/sai /tmp/user.jpg --full-page
   pnpm website screenshot --wait-for main --local-storage view=grid
 `;
 
@@ -60,6 +62,7 @@ const { values, positionals } = parseArgs({
     width: { type: 'string', default: '1440' },
     height: { type: 'string', default: '900' },
     'device-scale-factor': { type: 'string', default: '1' },
+    quality: { type: 'string', default: '60' },
     'full-page': { type: 'boolean', default: false },
     'wait-until': { type: 'string', default: 'domcontentloaded' },
     'wait-for': { type: 'string' },
@@ -148,12 +151,24 @@ function getRoute(value) {
 
 const route = getRoute(values.url ?? positionals[0] ?? DEFAULT_ROUTE);
 const output = path.resolve(invocationDirectory, values.output ?? positionals[1] ?? DEFAULT_OUTPUT);
+if (!/\.jpe?g$/i.test(output)) {
+  throw new Error(
+    `Only JPEG output is supported; the output path must end in .jpg or .jpeg: ${output}`,
+  );
+}
 const width = parsePositiveNumber(values.width, '--width', { integer: true });
 const height = parsePositiveNumber(values.height, '--height', { integer: true });
 const deviceScaleFactor = parsePositiveNumber(
   values['device-scale-factor'],
   '--device-scale-factor',
 );
+const quality = parsePositiveNumber(values.quality, '--quality', {
+  allowZero: true,
+  integer: true,
+});
+if (quality > 100) {
+  throw new Error('--quality must be between 0 and 100');
+}
 const waitMs = parsePositiveNumber(values['wait-ms'], '--wait-ms', {
   allowZero: true,
   integer: true,
@@ -269,6 +284,8 @@ try {
 
     await page.screenshot({
       path: output,
+      type: 'jpeg',
+      quality,
       fullPage: values['full-page'],
       animations: 'disabled',
       caret: 'hide',
