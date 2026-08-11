@@ -1,12 +1,37 @@
 import React from 'react';
 
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { getGroupTopicLink } from '@bangumi/utils/pages';
 
-import styles from './AnnouncementBlock.module.less';
 import HomeSidePanel from './HomeSidePanel';
 
 const { Link } = Typography;
+
+const list = css({
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+});
+
+const listItem = css({
+  display: 'flex',
+  gap: '8px',
+  padding: '6px 10px',
+  fontSize: '13px',
+  lineHeight: '1.6',
+});
+
+const date = css({
+  flex: 'none',
+  color: '#9f9b9b',
+  fontSize: '12px',
+});
+
+const content = css({
+  minWidth: 0,
+  wordBreak: 'break-all',
+});
 
 /** 公告为静态内容，内容对齐 PHP home_announcement.htm */
 const ANNOUNCEMENTS: { date: string; content: React.ReactNode }[] = [
@@ -49,11 +74,11 @@ const ANNOUNCEMENTS: { date: string; content: React.ReactNode }[] = [
 const AnnouncementBlock: React.FC = () => {
   return (
     <HomeSidePanel title='公告'>
-      <ul className={styles.list}>
+      <ul className={list}>
         {ANNOUNCEMENTS.map((item, i) => (
-          <li key={i} className={styles.item}>
-            <span className={styles.date}>{item.date}</span>
-            <span className={styles.content}>{item.content}</span>
+          <li key={i} className={listItem}>
+            <span className={date}>{item.date}</span>
+            <span className={content}>{item.content}</span>
           </li>
         ))}
       </ul>

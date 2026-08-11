@@ -7,6 +7,7 @@ import useSWR from 'swr';
 import { ozaClient } from '@bangumi/client';
 import { Button, Pagination, Tab, Typography } from '@bangumi/design';
 import { ArrowPath } from '@bangumi/icons';
+import { css } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
@@ -15,7 +16,76 @@ import { PageNeedLoginError } from '@bangumi/website/error';
 import { useUser } from '@bangumi/website/hooks/use-user';
 import { settings } from '@bangumi/website/shared/notifications';
 
-import style from './index.module.less';
+const pageTitle = css({
+  fontWeight: '600',
+  fontSize: '24px',
+  lineHeight: '34px',
+  color: '#1f1c1c',
+});
+
+const subtitle = css({
+  display: 'flex',
+  gap: '10px',
+  alignItems: 'center',
+  height: '22px',
+  color: '#9f9b9b',
+  '& > svg': { cursor: 'pointer' },
+});
+
+const tab = css({
+  marginTop: '24px',
+  marginBottom: '20px',
+});
+
+const readAllBtn = css({ height: '34px' });
+
+const filter = css({
+  display: 'flex',
+  justifyContent: 'space-between',
+  marginBottom: '10px',
+});
+
+const filterInput = css({ height: '34px' });
+
+const noticeItem = css({
+  display: 'flex',
+  alignItems: 'center',
+  height: '40px',
+  gap: '10px',
+  borderBottom: '1px dashed #e8e3e3',
+  color: '#595555',
+  '& a, & span': { whiteSpace: 'nowrap' },
+  '& a': { fontWeight: '600' },
+});
+
+const noticeItemAvatar = css({
+  height: '30px',
+  width: '30px',
+  borderRadius: '6px',
+});
+
+const noticeItemBody = css({
+  display: 'flex',
+  gap: '4px',
+  maxWidth: '60%',
+});
+
+const noticeItemBodyContent = css({
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
+const noticeItemDate = css({ color: '#e8e3e3' });
+
+const noticeItemRedDot = css({
+  width: '12px',
+  height: '12px',
+  borderRadius: '9999px',
+  marginLeft: 'auto',
+  marginRight: '4px',
+  background: '#f97f77',
+});
 
 const NotificationPageTabs = [
   { key: 'overview', label: '提醒总览', to: '/notifications' },
@@ -46,12 +116,12 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
   }
 
   return (
-    <div id={`notice_${id}`} className={style.noticeItem}>
-      <img src={sender.avatar.small} alt='bgm-notify__avatar' className={style.noticeItemAvatar} />
+    <div id={`notice_${id}`} className={noticeItem}>
+      <img src={sender.avatar.small} alt='bgm-notify__avatar' className={noticeItemAvatar} />
 
       <Typography.Link to={getUserProfileLink(sender.username)}>{sender.nickname}</Typography.Link>
 
-      <span className={style.noticeItemBody}>
+      <span className={noticeItemBody}>
         {setting.prefix}
         <Typography.Link
           to={getNoticeLink(setting, mainID, relatedID)}
@@ -60,18 +130,16 @@ function NoticeItem({ notice }: { notice: ozaClient.Notice }) {
               id: [id],
             });
           }}
-          className={style.noticeItemBodyContent}
+          className={noticeItemBodyContent}
         >
           {setting.inner ?? title}
         </Typography.Link>
         {setting.suffix}
       </span>
 
-      <span className={style.noticeItemDate}>
-        @{dayjs.unix(createdAt).format('YYYY-MM-DD HH:mm')}
-      </span>
+      <span className={noticeItemDate}>@{dayjs.unix(createdAt).format('YYYY-MM-DD HH:mm')}</span>
 
-      {unread && <span className={style.noticeItemRedDot} />}
+      {unread && <span className={noticeItemRedDot} />}
     </div>
   );
 }
@@ -90,8 +158,8 @@ function Notifications() {
   return (
     <PageContainer as='main'>
       <Helmet title='电波提醒' />
-      <div className={style.title}>电波提醒</div>
-      <div className={style.subtitle}>
+      <div className={pageTitle}>电波提醒</div>
+      <div className={subtitle}>
         <span>更新于 {updatedAt}</span>
         <ArrowPath
           onClick={() => {
@@ -99,7 +167,7 @@ function Notifications() {
           }}
         />
       </div>
-      <div className={style.tab}>
+      <div className={tab}>
         <Tab.Group type='borderless'>
           {NotificationPageTabs.map((item) => (
             <NavLink to={item.to} key={item.key}>
@@ -109,12 +177,12 @@ function Notifications() {
         </Tab.Group>
       </div>
 
-      <div className={style.filter}>
+      <div className={filter}>
         {/* TODO: 筛选 */}
-        {/* <Input placeholder='筛选所有提醒...' wrapperClass={style.filterInput} suffix={<Enter />} /> */}
+        {/* <Input placeholder='筛选所有提醒...' wrapperClass={filterInput} suffix={<Enter />} /> */}
         <Button
           type='secondary'
-          className={style.readAllBtn}
+          className={readAllBtn}
           onClick={async () => {
             await ozaClient.clearNotice({
               id: notice.map((x) => x.id),

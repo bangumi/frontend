@@ -5,12 +5,26 @@ import { useSWRConfig } from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, toast, Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import Helmet from '@bangumi/website/components/Helmet';
 import { OperationNeedLoginError } from '@bangumi/website/error';
 import useGroupPost from '@bangumi/website/hooks/use-group-post';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
-import styles from './edit.module.less';
+const form = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+});
+
+const tipText = css({
+  display: 'block',
+  marginBottom: '10px',
+});
+
+const topicLink = css({
+  padding: '0 10px',
+});
 
 const EditReplyPage = () => {
   const { id } = useParams();
@@ -68,18 +82,18 @@ const EditReplyPage = () => {
   return (
     <>
       <Helmet title={`修改主题“${data.topic.title}”的回复`} />
-      <Typography.Text type='secondary' className={styles.tipText}>
+      <Typography.Text type='secondary' className={tipText}>
         修改主题
         <Typography.Link
           to={`/group/topic/${data.topic.id}`}
           fontWeight='bold'
-          className={styles.topicLink}
+          className={topicLink}
         >
           {data.topic.title}
         </Typography.Link>
         的回复
       </Typography.Text>
-      <div className={styles.form}>
+      <div className={form}>
         <EditorForm
           placeholder='回复内容…'
           hideCancel

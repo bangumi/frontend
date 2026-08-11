@@ -3,6 +3,7 @@ import React from 'react';
 import type { SubjectType, User } from '@bangumi/client/client';
 import { CollectionType } from '@bangumi/client/client';
 import { Image, Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { getSubjectLink } from '@bangumi/utils/pages';
 import { useUserSubjectCollections } from '@bangumi/website/hooks/use-user-collections';
 
@@ -11,9 +12,60 @@ import {
   COLLECTION_STATUS_PATHS,
   SUBJECT_BLOCK_LIST,
 } from '../../../components/constants';
-import styles from './CollectionGroup.module.less';
 
 const { Link } = Typography;
+
+const group = css({
+  marginBottom: '20px',
+});
+
+const title = css({
+  margin: '0 0 10px',
+  fontSize: '16px',
+  '& a': {
+    color: '#1f1c1c',
+    textDecoration: 'none',
+    _hover: {
+      color: '#54b5df',
+    },
+  },
+});
+
+const coverList = css({
+  listStyle: 'none',
+  margin: '0',
+  padding: '0',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  gap: '10px',
+});
+
+const coverItem = css({
+  '& a': {
+    display: 'block',
+    textDecoration: 'none',
+  },
+  '& img': {
+    width: '100%',
+    aspectRatio: '3 / 4',
+    objectFit: 'cover',
+    borderRadius: '3px',
+  },
+});
+
+const coverName = css({
+  display: 'block',
+  marginTop: '4px',
+  fontSize: '12px',
+  color: '#595555',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
+const empty = css({
+  color: '#9f9b9b',
+});
 
 /** 概览模式下按收藏状态分组渲染的条目封面网格 */
 export const CollectionGroup: React.FC<{ user: User; subjectType: SubjectType }> = ({
@@ -27,7 +79,7 @@ export const CollectionGroup: React.FC<{ user: User; subjectType: SubjectType }>
   ) as CollectionType[];
 
   if (!meta || availableStatuses.length === 0) {
-    return <p className={styles.empty}>还没有收藏条目</p>;
+    return <p className={empty}>还没有收藏条目</p>;
   }
 
   return (
@@ -62,18 +114,18 @@ const CollectionGroupItem: React.FC<{
   }
 
   return (
-    <section className={styles.group}>
-      <h2 className={styles.title}>
+    <section className={group}>
+      <h2 className={title}>
         <Link to={`/${meta.path}/list/${user.username}/${statusPath}`}>
           {label} ({count})
         </Link>
       </h2>
-      <ul className={styles.coverList}>
+      <ul className={coverList}>
         {data.map((subject) => (
-          <li key={subject.id} className={styles.coverItem}>
+          <li key={subject.id} className={coverItem}>
             <Link to={getSubjectLink(subject.id)} title={subject.nameCN || subject.name}>
               <Image src={subject.images?.medium ?? ''} alt={subject.nameCN || subject.name} />
-              <span className={styles.coverName}>{subject.nameCN || subject.name}</span>
+              <span className={coverName}>{subject.nameCN || subject.name}</span>
             </Link>
           </li>
         ))}

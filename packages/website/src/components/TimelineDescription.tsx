@@ -4,6 +4,7 @@ import React from 'react';
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
 import { TimelineCat } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import {
   getBlogLink,
   getIndexLink,
@@ -11,9 +12,14 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 
-import styles from './TimelineDescription.module.less';
-
 const { Link } = Typography;
+
+const statusText = css({
+  color: '#595555',
+  margin: '2px 0 0',
+  overflowWrap: 'anywhere',
+  whiteSpace: 'pre-wrap',
+});
 
 /** 相对时间，对齐 PHP GlobalCore::make_descriptive_time */
 export function makeDescriptiveTime(timestamp: number): string {
@@ -52,7 +58,7 @@ function renderStatus(timeline: Timeline): React.ReactNode {
   }
   const text = status?.sign ?? status?.tsukkomi;
   if (text) {
-    return <p className={styles.statusText}>{text}</p>;
+    return <p className={statusText}>{text}</p>;
   }
   return null;
 }
@@ -68,7 +74,7 @@ function renderSubject(timeline: Timeline): React.ReactNode {
         </span>
       ))}
       已收藏
-      {list[0]?.comment && <p className={styles.statusText}>{list[0].comment}</p>}
+      {list[0]?.comment && <p className={statusText}>{list[0].comment}</p>}
     </>
   );
 }

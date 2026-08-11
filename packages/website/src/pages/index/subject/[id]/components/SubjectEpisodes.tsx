@@ -4,14 +4,86 @@ import React from 'react';
 import type { Episode, Subject } from '@bangumi/client/client';
 import { EpisodeType, SubjectType } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { getEpisodeLink } from '@bangumi/utils/pages';
 import PageContainer from '@bangumi/website/components/PageContainer';
 
 import { SubjectHeader } from './SubjectDetail';
-import styles from './SubjectEpisodes.module.less';
 import SubjectSummaryCard from './SubjectSummaryCard';
 
 const { Link } = Typography;
+
+const columns = css({
+  display: 'grid',
+  gridTemplateColumns: 'minmax(0, 7fr) minmax(260px, 3fr)',
+  alignItems: 'start',
+  gap: '20px',
+  '@media (max-width: 768px)': { gridTemplateColumns: 'minmax(0, 1fr)' },
+});
+
+const episodeGroups = css({ minWidth: '0' });
+
+const groupTitle = css({
+  margin: '0',
+  padding: '5px 10px',
+  borderTop: '1px solid #e8e3e3',
+  borderBottom: '1px solid #e8e3e3',
+  color: '#595555',
+  fontSize: '13px',
+  fontWeight: 'normal',
+  lineHeight: '18px',
+});
+
+const episodeList = css({ margin: '0', padding: '0', listStyle: 'none' });
+
+const episodeRow = css({
+  padding: '6px 5px',
+  borderBottom: '1px dotted #e0e0e0',
+  fontSize: '14px',
+  lineHeight: '1.6',
+  '&:nth-child(even)': { background: '#f9f9f9' },
+});
+
+const episodeTitleClass = css({
+  minWidth: '0',
+  overflowWrap: 'anywhere',
+});
+
+const airedStatus = css({
+  display: 'inline-block',
+  width: '8px',
+  height: '8px',
+  margin: '0 5px 1px 1px',
+  borderRadius: '50%',
+  background: '#3db3f5',
+});
+
+const futureStatus = css({
+  display: 'inline-block',
+  width: '8px',
+  height: '8px',
+  margin: '0 5px 1px 1px',
+  borderRadius: '50%',
+  background: '#d9dfe1',
+});
+
+const episodeNameCN = css({ color: '#595555' });
+
+const episodeMeta = css({
+  margin: '0',
+  color: '#9f9b9b',
+  fontSize: '12px',
+  lineHeight: '19px',
+});
+
+const empty = css({
+  margin: '0',
+  padding: '16px 10px',
+  borderTop: '1px solid #e8e3e3',
+  borderBottom: '1px dotted #e8e3e3',
+  color: '#9f9b9b',
+  fontSize: '13px',
+});
 
 const EPISODE_TYPE_LABELS: Record<EpisodeType, string> = {
   [EpisodeType.Normal]: '本篇',
@@ -75,18 +147,18 @@ function EpisodeRow({ episode, showAirStatus }: { episode: Episode; showAirStatu
   ].filter(Boolean);
 
   return (
-    <li className={styles.episodeRow}>
-      <div className={styles.episodeTitle}>
+    <li className={episodeRow}>
+      <div className={episodeTitleClass}>
         {showAirStatus && (
           <span
-            className={isFutureEpisode(episode.airdate) ? styles.futureStatus : styles.airedStatus}
+            className={isFutureEpisode(episode.airdate) ? futureStatus : airedStatus}
             title={isFutureEpisode(episode.airdate) ? '未播出' : '已播出'}
           />
         )}
         <Link to={getEpisodeLink(episode.id)}>{episodeTitle(episode)}</Link>
-        {episode.nameCN && <span className={styles.episodeNameCN}> / {episode.nameCN}</span>}
+        {episode.nameCN && <span className={episodeNameCN}> / {episode.nameCN}</span>}
       </div>
-      <p className={styles.episodeMeta}>
+      <p className={episodeMeta}>
         {broadcastInfo.join(' / ')}
         {broadcastInfo.length > 0 && ' '}/ 讨论:+{episode.comment}
       </p>
@@ -107,15 +179,15 @@ export default function SubjectEpisodes({
   return (
     <PageContainer as='main'>
       <SubjectHeader subject={subject} />
-      <div className={styles.columns}>
-        <div className={styles.episodeGroups}>
-          {groups.length === 0 && <p className={styles.empty}>暂无章节</p>}
+      <div className={columns}>
+        <div className={episodeGroups}>
+          {groups.length === 0 && <p className={empty}>暂无章节</p>}
           {groups.map((group) => (
             <section key={group.key} aria-labelledby={`${group.key}-heading`}>
-              <h2 id={`${group.key}-heading`} className={styles.groupTitle}>
+              <h2 id={`${group.key}-heading`} className={groupTitle}>
                 {group.label}
               </h2>
-              <ol className={styles.episodeList}>
+              <ol className={episodeList}>
                 {group.episodes.map((episode) => (
                   <EpisodeRow key={episode.id} episode={episode} showAirStatus={showAirStatus} />
                 ))}

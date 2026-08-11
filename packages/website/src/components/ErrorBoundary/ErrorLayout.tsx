@@ -4,8 +4,41 @@ import { useNavigate } from 'react-router-dom';
 
 import { Typography } from '@bangumi/design';
 import { PureLink } from '@bangumi/design/components/Typography/Link';
+import { css } from '@bangumi/styled-system/css';
 
-import layoutStyle from './style.module.less';
+const errorContainer = css({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'absolute',
+  inset: 0,
+});
+
+const errorLayout = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '12px',
+  width: '400px',
+  margin: '0 auto',
+  '@media (max-width: 640px)': {
+    width: '50%',
+  },
+});
+
+const title = css({
+  fontWeight: '600',
+  fontSize: '24px',
+  lineHeight: '34px',
+  color: '#f09199',
+});
+
+const content = css({ color: '#595555' });
+
+const info = css({ color: '#595555', fontSize: '14px' });
+
+const footer = css({ fontWeight: '600', color: '#9f9b9b' });
+
+const footerDivider = css({ fontWeight: '400', margin: '0 6px' });
 
 export default function ErrorLayout({
   children,
@@ -13,13 +46,13 @@ export default function ErrorLayout({
 }: PropsWithChildren<{ requestID?: string | null }>) {
   const navigate = useNavigate();
   return (
-    <div className={layoutStyle.errorContainer}>
-      <div className={layoutStyle.errorLayout}>
-        <div className={layoutStyle.title}>呜咕，出错了…</div>
-        <div className={layoutStyle.content}>{children}</div>
-        <div className={layoutStyle.footer}>
+    <div className={errorContainer}>
+      <div className={errorLayout}>
+        <div className={title}>呜咕，出错了…</div>
+        <div className={content}>{children}</div>
+        <div className={footer}>
           <Typography.Link to='/'>返回首页</Typography.Link>
-          <span className={layoutStyle.footerDivider}>或</span>
+          <span className={footerDivider}>或</span>
           <PureLink
             onClick={() => {
               navigate(-1);
@@ -29,7 +62,7 @@ export default function ErrorLayout({
           </PureLink>
         </div>
         {requestID && (
-          <div className={layoutStyle.info}>
+          <div className={info}>
             <pre>request-id: {requestID}</pre>
           </div>
         )}

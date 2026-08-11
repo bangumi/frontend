@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { Button, CollapsibleContent, Section } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
+import { css } from '@bangumi/styled-system/css';
 import { UnreadableCodeError } from '@bangumi/utils';
 import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 import Helmet from '@bangumi/website/components/Helmet';
@@ -12,7 +13,10 @@ import { useUser } from '@bangumi/website/hooks/use-user';
 import { useGroupContext } from '../../[name]';
 import TopicForm from '../../components/TopicForm';
 import TopicsTable from '../components/TopicsTable';
-import styles from './style.module.less';
+
+const recentTopics = css({
+  marginTop: '40px',
+});
 
 const GroupHome: React.FC = () => {
   const { name } = useParams();
@@ -43,7 +47,7 @@ const GroupHome: React.FC = () => {
       />
       <Section
         title='最近讨论'
-        wrapperClass={styles.recentTopics}
+        wrapperClass={recentTopics}
         renderFooter={() => (
           <Button.Link type='plain' to={`/group/${name}/forum`}>
             更多组内讨论

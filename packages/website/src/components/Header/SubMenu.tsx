@@ -3,33 +3,53 @@ import React from 'react';
 
 import type { MenuItemType } from '@bangumi/design';
 import { Divider, Menu } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 
-import style from './SubMenu.module.less';
+const subMenu = css({
+  fontSize: '12px',
+  fontWeight: '400',
+});
+
+const subMenuDivider = css({
+  width: '62px',
+  height: '1px',
+  margin: '0 auto',
+});
+
+const subMenuItemDo = css({ _hover: { backgroundColor: '#8fcaec' } });
+
+const subMenuItemWish = css({ _hover: { backgroundColor: '#f68ab1' } });
+
+const subMenuItemCollect = css({ _hover: { backgroundColor: '#3db3f5' } });
+
+const subMenuItemOnHold = css({ _hover: { backgroundColor: '#999ea1' } });
+
+const subMenuItemDropped = css({ _hover: { backgroundColor: '#585c5e' } });
 
 const buildMenuBottom = (verb: '看' | '读' | '听' | '玩'): MenuItemType[] => [
   {
     key: 'do',
-    className: style['subMenuItem--do'],
+    className: subMenuItemDo,
     label: `在${verb}`,
   },
   {
     key: 'wish',
-    className: style['subMenuItem--wish'],
+    className: subMenuItemWish,
     label: `想${verb}`,
   },
   {
     key: 'collect',
-    className: style['subMenuItem--collect'],
+    className: subMenuItemCollect,
     label: `${verb}过`,
   },
   {
     key: 'on_hold',
-    className: style['subMenuItem--on_hold'],
+    className: subMenuItemOnHold,
     label: '搁置',
   },
   {
     key: 'dropped',
-    className: style['subMenuItem--dropped'],
+    className: subMenuItemDropped,
     label: '抛弃',
   },
 ];
@@ -213,9 +233,9 @@ const SubMenu: FC<{ itemsTop: MenuItemType[]; itemsBottom: MenuItemType[] }> = (
   itemsBottom,
 }) => (
   <>
-    <Menu items={itemsTop} mode='vertical' wrapperClass={style.subMenu} />
-    <Divider className={style.subMenuDivider} />
-    <Menu items={itemsBottom} mode='vertical' wrapperClass={style.subMenu} />
+    <Menu items={itemsTop} mode='vertical' wrapperClass={subMenu} />
+    <Divider className={subMenuDivider} />
+    <Menu items={itemsBottom} mode='vertical' wrapperClass={subMenu} />
   </>
 );
 

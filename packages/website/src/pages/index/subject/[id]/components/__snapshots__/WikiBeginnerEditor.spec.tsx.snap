@@ -5,16 +5,14 @@ Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="_wikiEditor_1f9d9f"
-      >
+      <div>
         <div>
           <div
             data-rfd-draggable-context-id="_r_0_"
             data-rfd-draggable-id="yufi"
           >
             <div
-              class="_editorItem_1f9d9f"
+              class="d_flex ai_center gap_4px"
             >
               <div
                 aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
@@ -24,15 +22,13 @@ Object {
                 role="button"
                 tabindex="-1"
               >
-                <div
-                  class="_editorItemCursor_1f9d9f"
-                />
+                <div />
               </div>
               <div
-                class="bgm-input-group _editorItemInputGroup_1f9d9f"
+                class="bgm-input-group d_flex flex_1"
               >
                 <div
-                  class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
+                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
                   style="width: 170px;"
                 >
                   <input
@@ -40,11 +36,11 @@ Object {
                     type="text"
                   />
                   <div
-                    class="_editorItemConvertHandler_1f9d9f"
+                    class="op_0 c_#9f9b9b [&[class]]:w_20px [&[class]]:h_20px hover:cursor_pointer hover:op_1"
                   />
                 </div>
                 <div
-                  class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
+                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
                 >
                   <input
                     class="bgm-input"
@@ -55,7 +51,7 @@ Object {
                 </div>
               </div>
               <div
-                class="_editorItemMinus_1f9d9f"
+                class="op_0.3 hover:op_1 cursor_pointer"
                 title="删除一项"
               />
             </div>
@@ -65,7 +61,7 @@ Object {
             data-rfd-draggable-id="anisu"
           >
             <div
-              class="_editorItem_1f9d9f"
+              class="d_flex ai_center gap_4px"
             >
               <div
                 aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
@@ -75,15 +71,13 @@ Object {
                 role="button"
                 tabindex="-1"
               >
-                <div
-                  class="_editorItemCursor_1f9d9f"
-                />
+                <div />
               </div>
               <div
-                class="bgm-input-group _editorItemInputGroup_1f9d9f"
+                class="bgm-input-group d_flex flex_1"
               >
                 <div
-                  class="bgm-input__wrapper _editorItemInput_1f9d9f"
+                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
                   style="width: 170px;"
                 >
                   <input
@@ -91,11 +85,11 @@ Object {
                     type="text"
                   />
                   <div
-                    class="_editorItemConvertHandler_1f9d9f"
+                    class="op_0 c_#9f9b9b [&[class]]:w_20px [&[class]]:h_20px hover:cursor_pointer hover:op_1"
                   />
                 </div>
                 <div
-                  class="bgm-input__wrapper _editorItemInput_1f9d9f"
+                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
                 >
                   <input
                     class="bgm-input"
@@ -106,20 +100,20 @@ Object {
                 </div>
               </div>
               <div
-                class="_editorItemMinus_1f9d9f"
+                class="op_0.3 hover:op_1 cursor_pointer"
                 title="删除一项"
               />
             </div>
           </div>
         </div>
         <div
-          class="_footer_1f9d9f"
+          class="d_flex gap_4px"
         >
           <div
-            class="_footerPlaceholder_1f9d9f"
+            class="vis_hidden"
           />
           <button
-            class="_footerBtn_1f9d9f"
+            class="bd_2px_dashed_#e8e3e3 flex_1 h_44px fs_1rem c_#9f9b9b d_flex ai_center jc_center gap_10px [&:first-of-type]:bdr_0_0_0_12px [&:last-of-type]:bd-l_unset [&:last-of-type]:bdr_0_0_12px"
             type="button"
           >
             <div />
@@ -128,7 +122,7 @@ Object {
             </span>
           </button>
           <button
-            class="_footerBtn_1f9d9f"
+            class="bd_2px_dashed_#e8e3e3 flex_1 h_44px fs_1rem c_#9f9b9b d_flex ai_center jc_center gap_10px [&:first-of-type]:bdr_0_0_0_12px [&:last-of-type]:bd-l_unset [&:last-of-type]:bdr_0_0_12px"
             type="button"
           >
             <div />
@@ -137,7 +131,7 @@ Object {
             </span>
           </button>
           <div
-            class="_footerPlaceholder_1f9d9f"
+            class="vis_hidden"
           />
         </div>
       </div>
@@ -160,16 +154,14 @@ Object {
     </div>
   </body>,
   "container": <div>
-    <div
-      class="_wikiEditor_1f9d9f"
-    >
+    <div>
       <div>
         <div
           data-rfd-draggable-context-id="_r_0_"
           data-rfd-draggable-id="yufi"
         >
           <div
-            class="_editorItem_1f9d9f"
+            class="d_flex ai_center gap_4px"
           >
             <div
               aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
@@ -179,15 +171,13 @@ Object {
               role="button"
               tabindex="-1"
             >
-              <div
-                class="_editorItemCursor_1f9d9f"
-              />
+              <div />
             </div>
             <div
-              class="bgm-input-group _editorItemInputGroup_1f9d9f"
+              class="bgm-input-group d_flex flex_1"
             >
               <div
-                class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
+                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
                 style="width: 170px;"
               >
                 <input
@@ -195,11 +185,11 @@ Object {
                   type="text"
                 />
                 <div
-                  class="_editorItemConvertHandler_1f9d9f"
+                  class="op_0 c_#9f9b9b [&[class]]:w_20px [&[class]]:h_20px hover:cursor_pointer hover:op_1"
                 />
               </div>
               <div
-                class="bgm-input__wrapper _editorItemInput_1f9d9f _editorItemTopRadius_1f9d9f"
+                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
               >
                 <input
                   class="bgm-input"
@@ -210,7 +200,7 @@ Object {
               </div>
             </div>
             <div
-              class="_editorItemMinus_1f9d9f"
+              class="op_0.3 hover:op_1 cursor_pointer"
               title="删除一项"
             />
           </div>
@@ -220,7 +210,7 @@ Object {
           data-rfd-draggable-id="anisu"
         >
           <div
-            class="_editorItem_1f9d9f"
+            class="d_flex ai_center gap_4px"
           >
             <div
               aria-describedby="rfd-hidden-text-_r_0_-hidden-text-_r_1_"
@@ -230,15 +220,13 @@ Object {
               role="button"
               tabindex="-1"
             >
-              <div
-                class="_editorItemCursor_1f9d9f"
-              />
+              <div />
             </div>
             <div
-              class="bgm-input-group _editorItemInputGroup_1f9d9f"
+              class="bgm-input-group d_flex flex_1"
             >
               <div
-                class="bgm-input__wrapper _editorItemInput_1f9d9f"
+                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
                 style="width: 170px;"
               >
                 <input
@@ -246,11 +234,11 @@ Object {
                   type="text"
                 />
                 <div
-                  class="_editorItemConvertHandler_1f9d9f"
+                  class="op_0 c_#9f9b9b [&[class]]:w_20px [&[class]]:h_20px hover:cursor_pointer hover:op_1"
                 />
               </div>
               <div
-                class="bgm-input__wrapper _editorItemInput_1f9d9f"
+                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
               >
                 <input
                   class="bgm-input"
@@ -261,20 +249,20 @@ Object {
               </div>
             </div>
             <div
-              class="_editorItemMinus_1f9d9f"
+              class="op_0.3 hover:op_1 cursor_pointer"
               title="删除一项"
             />
           </div>
         </div>
       </div>
       <div
-        class="_footer_1f9d9f"
+        class="d_flex gap_4px"
       >
         <div
-          class="_footerPlaceholder_1f9d9f"
+          class="vis_hidden"
         />
         <button
-          class="_footerBtn_1f9d9f"
+          class="bd_2px_dashed_#e8e3e3 flex_1 h_44px fs_1rem c_#9f9b9b d_flex ai_center jc_center gap_10px [&:first-of-type]:bdr_0_0_0_12px [&:last-of-type]:bd-l_unset [&:last-of-type]:bdr_0_0_12px"
           type="button"
         >
           <div />
@@ -283,7 +271,7 @@ Object {
           </span>
         </button>
         <button
-          class="_footerBtn_1f9d9f"
+          class="bd_2px_dashed_#e8e3e3 flex_1 h_44px fs_1rem c_#9f9b9b d_flex ai_center jc_center gap_10px [&:first-of-type]:bdr_0_0_0_12px [&:last-of-type]:bd-l_unset [&:last-of-type]:bdr_0_0_12px"
           type="button"
         >
           <div />
@@ -292,7 +280,7 @@ Object {
           </span>
         </button>
         <div
-          class="_footerPlaceholder_1f9d9f"
+          class="vis_hidden"
         />
       </div>
     </div>

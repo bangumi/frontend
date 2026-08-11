@@ -8,10 +8,9 @@ import React, { createContext, useContext } from 'react';
 
 import { Input } from '@bangumi/design';
 import { Cursor, Minus, Plus, VerticalLeft, VerticalRight } from '@bangumi/icons';
+import { css } from '@bangumi/styled-system/css';
 import { WikiElement } from '@bangumi/utils';
 import { reorder } from '@bangumi/website/utils';
-
-import style from './WikiBeginnerEditor.module.less';
 
 const splitPath = (path: string) =>
   path.split('.').map((v) => {
@@ -21,6 +20,73 @@ const splitPath = (path: string) =>
     }
     return idx;
   });
+
+// 编辑器样式，保持原 less 的多 class 选择器优先级，覆盖 Input 组件内部的 .bgm-input__wrapper
+const editorItem = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+});
+
+const editorItemInput = css({
+  '&.bgm-input__wrapper': {
+    borderRadius: '0',
+    borderBottom: '0',
+    '&:last-child': { flex: '1' },
+  },
+});
+
+const editorItemInputGroup = css({
+  display: 'flex',
+  flex: '1',
+});
+
+const editorItemInputGroupSecondary = css({
+  '&.bgm-input-group *': { background: '#fcfcfc' },
+});
+
+const editorItemMinus = css({
+  opacity: '0.3',
+  _hover: { opacity: '1' },
+  cursor: 'pointer',
+});
+
+const editorItemConvertHandler = css({
+  opacity: '0',
+  color: '#9f9b9b',
+  // 需要胜过 .bgm-input__prefix svg 的 19px 尺寸，用 [class] 提升优先级
+  '&[class]': { width: '20px', height: '20px' },
+  _hover: { cursor: 'pointer', opacity: '1' },
+});
+
+const editorItemTopRadius = css({
+  '&.bgm-input__wrapper:first-of-type': { borderRadius: '12px 0 0' },
+  '&.bgm-input__wrapper:last-of-type': { borderRadius: '0 12px 0 0' },
+});
+
+// 编辑器底部按钮样式
+const footer = css({
+  display: 'flex',
+  gap: '4px',
+});
+
+const footerBtn = css({
+  border: '2px dashed #e8e3e3',
+  flex: '1',
+  height: '44px',
+  fontSize: '1rem',
+  color: '#9f9b9b',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: '10px',
+  '&:first-of-type': { borderRadius: '0 0 0 12px' },
+  '&:last-of-type': { borderLeft: 'unset', borderRadius: '0 0 12px' },
+});
+
+const footerPlaceholder = css({
+  visibility: 'hidden',
+});
 
 type WikiInfoItemProps = JSX.IntrinsicElements['div'] & {
   index: number;
@@ -62,7 +128,7 @@ const WikiInfoItem = ({
 
   return (
     <div
-      className={style.editorItem}
+      className={editorItem}
       onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
         if (e.ctrlKey && e.key === 'Enter') {
           level === 1 && convertToNestedWikiElement?.(index); /** 只对一级菜单有效 */
@@ -82,14 +148,11 @@ const WikiInfoItem = ({
          */
         tabIndex={-1}
       >
-        <Cursor className={style.editorItemCursor} />
+        <Cursor />
       </div>
 
       <Input.Group
-        className={cn(
-          style.editorItemInputGroup,
-          level === 2 && style.editorItemInputGroupSecondary,
-        )}
+        className={cn(editorItemInputGroup, level === 2 && editorItemInputGroupSecondary)}
         onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
           if (e.ctrlKey && e.key === 'Enter') {
             level === 1 && convertToNestedWikiElement?.(index);
@@ -109,15 +172,12 @@ const WikiInfoItem = ({
             width: '170px',
           }}
           //   一级菜单的第一项，上圆角
-          wrapperClass={cn(
-            style.editorItemInput,
-            level === 1 && index === 0 && style.editorItemTopRadius,
-          )}
+          wrapperClass={cn(editorItemInput, level === 1 && index === 0 && editorItemTopRadius)}
           // 切回一级功能先不做
           prefix={
             level === 2 ? (
               <VerticalLeft
-                className={style.editorItemConvertHandler}
+                className={editorItemConvertHandler}
                 onClick={() => {
                   // 现在最多只有二级，所以二级项一定是 string
                   hoistOneWikiElement?.(path, item.key, item.value as string);
@@ -129,7 +189,7 @@ const WikiInfoItem = ({
             level === 1 &&
             !isArray(item.value) && (
               <VerticalRight
-                className={style.editorItemConvertHandler}
+                className={editorItemConvertHandler}
                 onClick={() => {
                   convertToNestedWikiElement?.(index);
                 }}
@@ -145,9 +205,9 @@ const WikiInfoItem = ({
         <Input
           id={item._id}
           wrapperClass={cn(
-            style.editorItemInput,
+            editorItemInput,
             //   一级菜单的第一项，上圆角
-            level === 1 && index === 0 && style.editorItemTopRadius,
+            level === 1 && index === 0 && editorItemTopRadius,
           )}
           defaultValue={typeof item.value === 'string' ? item.value : ''}
           disabled={isArray(item.value)}
@@ -158,7 +218,7 @@ const WikiInfoItem = ({
       </Input.Group>
 
       <Minus
-        className={style.editorItemMinus}
+        className={editorItemMinus}
         title='删除一项'
         onClick={() => removeOneWikiElement?.(path)}
       />
@@ -368,14 +428,14 @@ function WikiBeginnerEditor({
         hoistOneWikiElement,
       }}
     >
-      <div className={style.wikiEditor}>
+      <div>
         <WikiBeginnerEditorBlock elements={elements} onDragEnd={onDragEnd} />
-        <div className={style.footer}>
+        <div className={footer}>
           {/* place holder */}
-          <Cursor className={style.footerPlaceholder} />
+          <Cursor className={footerPlaceholder} />
 
           <button
-            className={style.footerBtn}
+            className={footerBtn}
             onClick={() => {
               // 永远新增一级项目，即使上面是一个二级项目
               addOneWikiElement?.();
@@ -386,7 +446,7 @@ function WikiBeginnerEditor({
             <span>新增一级项目</span>
           </button>
           <button
-            className={style.footerBtn}
+            className={footerBtn}
             onClick={() => {
               const lastEls = elements[elements.length - 1];
               // 如果最后一个元素就是一个二级菜单，新增二级项目
@@ -404,7 +464,7 @@ function WikiBeginnerEditor({
           </button>
 
           {/* place holder */}
-          <Minus className={style.footerPlaceholder} />
+          <Minus className={footerPlaceholder} />
         </div>
       </div>
     </WikiInfoContext.Provider>

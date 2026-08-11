@@ -5,13 +5,13 @@ import { NavLink } from 'react-router-dom';
 import type { Group } from '@bangumi/client/client';
 import { Button, Layout, Section, Tab } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
+import { css } from '@bangumi/styled-system/css';
 import { keyBy } from '@bangumi/utils';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { GroupHeader } from './GroupHeader';
-import styles from './GroupLayout.module.less';
 import GroupNavigation from './GroupNavigation';
 import { UserCard } from './UserCard';
 
@@ -40,6 +40,19 @@ const GroupTabsItems = [
 ];
 const groupTabsByKey = keyBy(GroupTabsItems, 'key');
 
+const pageContainer = css({
+  '& > *': {
+    marginBottom: '10px',
+  },
+});
+
+const newMembers = css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(5, 1fr)',
+  columnGap: '30px',
+  rowGap: '15px',
+});
+
 type IGroupLayoutProps = PropsWithChildren<{
   group: Group | undefined;
   groupName: string;
@@ -53,7 +66,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
   });
 
   return (
-    <PageContainer className={styles.pageContainer}>
+    <PageContainer className={pageContainer}>
       <GroupHeader group={group!} />
       <Tab.Group type='borderless'>
         {GroupTabsItems.map((tab) => (
@@ -79,7 +92,7 @@ const GroupLayout: React.FC<IGroupLayoutProps> = ({ group, children, groupName }
                 )
               }
             >
-              <div className={styles.newMembers}>
+              <div className={newMembers}>
                 {members?.map((member) => {
                   return (
                     <UserCard

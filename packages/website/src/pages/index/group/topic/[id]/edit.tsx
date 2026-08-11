@@ -2,11 +2,26 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import Helmet from '@bangumi/website/components/Helmet';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 
 import TopicForm from '../../components/TopicForm';
-import styles from './edit.module.less';
+
+const form = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '1rem',
+});
+
+const tipText = css({
+  display: 'block',
+  marginBottom: '10px',
+});
+
+const topicLink = css({
+  padding: '0 10px',
+});
 
 const EditTopicPage = () => {
   const { id } = useParams();
@@ -19,17 +34,13 @@ const EditTopicPage = () => {
   return (
     <>
       <Helmet title={`修改主题“${data.title}”`} />
-      <Typography.Text type='secondary' className={styles.tipText}>
+      <Typography.Text type='secondary' className={tipText}>
         修改主题
-        <Typography.Link
-          to={`/group/topic/${data.id}`}
-          fontWeight='bold'
-          className={styles.topicLink}
-        >
+        <Typography.Link to={`/group/topic/${data.id}`} fontWeight='bold' className={topicLink}>
           {data.title}
         </Typography.Link>
       </Typography.Text>
-      <div className={styles.form}>
+      <div className={form}>
         <TopicForm topic={{ data, mutate }} />
       </div>
       {/* TODO: add right column */}

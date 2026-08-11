@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { GroupMemberRole } from '@bangumi/client/client';
 import { Pagination, Section } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { UnreadableCodeError } from '@bangumi/utils';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
@@ -11,7 +12,18 @@ import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 
 import { UserCard } from '../../components/UserCard';
 import { useGroupContext } from '..';
-import styles from './style.module.less';
+
+const members = css({
+  marginBottom: '20px',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 290px)',
+  columnGap: '14px',
+  rowGap: '20px',
+});
+
+const pagination = css({
+  marginTop: '20px',
+});
 
 const GroupMembersPage = () => {
   const { curPage, offset, pageSize } = usePaginationParams(30);
@@ -50,7 +62,7 @@ const GroupMembersPage = () => {
       <Helmet title={`${group.title}小组成员`} />
       {curPage === 1 && (
         <Section title='小组管理员'>
-          <div className={styles.members}>
+          <div className={members}>
             {(groupModMembers ?? []).map((member) => (
               <UserCard
                 mode='horizontal'
@@ -66,7 +78,7 @@ const GroupMembersPage = () => {
         </Section>
       )}
       <Section title='小组成员'>
-        <div className={styles.members}>
+        <div className={members}>
           {(data ?? []).map((member) => {
             return (
               <UserCard
@@ -82,7 +94,7 @@ const GroupMembersPage = () => {
           })}
         </div>
         <Pagination
-          wrapperClass={styles.pagination}
+          wrapperClass={pagination}
           total={total}
           currentPage={curPage}
           onChange={handlePageChange}

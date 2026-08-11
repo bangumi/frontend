@@ -8,10 +8,62 @@ import useSWR from 'swr';
 import { ozaClient } from '@bangumi/client';
 import { EpisodeType } from '@bangumi/client/client';
 import { Button, Form, Input, toast, Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 
-import styles from './edit.module.less';
+const page = css({
+  maxWidth: '760px',
+  margin: '0 auto',
+  padding: '32px 30px 48px',
+  '@media (max-width: 768px)': {
+    padding: '24px 16px 36px',
+  },
+});
+
+const title = css({
+  margin: '8px 0 24px',
+  color: '#1f1c1c',
+  fontSize: '22px',
+  fontWeight: '500',
+});
+
+const form = css({ maxWidth: '640px' });
+
+const input = css({ width: '100%' });
+
+const numberInput = css({ width: '100%', maxWidth: '180px' });
+
+const dateInput = css({ width: '100%', maxWidth: '220px' });
+
+const select = css({
+  minWidth: '150px',
+  minHeight: '32px',
+  padding: '4px 8px',
+  border: '1px solid #d8d3d3',
+  borderRadius: '4px',
+  background: '#fff',
+  color: '#1f1c1c',
+});
+
+const textarea = css({
+  boxSizing: 'border-box',
+  width: '100%',
+  padding: '8px',
+  border: '1px solid #d8d3d3',
+  borderRadius: '4px',
+  color: '#1f1c1c',
+  font: 'inherit',
+  lineHeight: '1.5',
+  resize: 'vertical',
+});
+
+const actions = css({
+  display: 'flex',
+  justifyContent: 'flex-end',
+  gap: '10px',
+  marginTop: '24px',
+});
 
 const episodeTypes: { label: string; value: EpisodeType }[] = [
   { label: '本篇', value: EpisodeType.Normal },
@@ -107,25 +159,25 @@ function EpisodeEditPage() {
   };
 
   return (
-    <main className={styles.page}>
+    <main className={page}>
       <Helmet title={`编辑章节 ${episode.ep} - ${episode.name}`} />
       <Typography.Text type='secondary'>正在编辑章节 #{episode.id}</Typography.Text>
-      <h1 className={styles.title}>编辑章节</h1>
-      <Form labelWidth={92} className={styles.form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
+      <h1 className={title}>编辑章节</h1>
+      <Form labelWidth={92} className={form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <Form.Item label='原名'>
           <Input
             aria-label='原名'
-            wrapperClass={styles.input}
+            wrapperClass={input}
             {...register('name', { required: '请填写章节原名' })}
           />
         </Form.Item>
         <Form.Item label='中文名'>
-          <Input aria-label='中文名' wrapperClass={styles.input} {...register('nameCN')} />
+          <Input aria-label='中文名' wrapperClass={input} {...register('nameCN')} />
         </Form.Item>
         <Form.Item label='类型'>
           <select
             aria-label='类型'
-            className={styles.select}
+            className={select}
             {...register('type', { valueAsNumber: true })}
           >
             {episodeTypes.map((type) => (
@@ -140,7 +192,7 @@ function EpisodeEditPage() {
             type='number'
             aria-label='章节编号'
             step='0.1'
-            wrapperClass={styles.numberInput}
+            wrapperClass={numberInput}
             {...register('ep', { required: '请填写章节编号', valueAsNumber: true })}
           />
         </Form.Item>
@@ -150,7 +202,7 @@ function EpisodeEditPage() {
             aria-label='碟号'
             min='0'
             step='1'
-            wrapperClass={styles.numberInput}
+            wrapperClass={numberInput}
             {...register('disc', {
               setValueAs: (value) => (value === '' ? undefined : Number(value)),
             })}
@@ -160,34 +212,24 @@ function EpisodeEditPage() {
           <Input
             aria-label='时长'
             placeholder='例如 24:53'
-            wrapperClass={styles.input}
+            wrapperClass={input}
             {...register('duration')}
           />
         </Form.Item>
         <Form.Item label='首播日期'>
-          <Input
-            type='date'
-            aria-label='首播日期'
-            wrapperClass={styles.dateInput}
-            {...register('date')}
-          />
+          <Input type='date' aria-label='首播日期' wrapperClass={dateInput} {...register('date')} />
         </Form.Item>
         <Form.Item label='简介'>
-          <textarea
-            aria-label='简介'
-            className={styles.textarea}
-            rows={8}
-            {...register('summary')}
-          />
+          <textarea aria-label='简介' className={textarea} rows={8} {...register('summary')} />
         </Form.Item>
         <Form.Item label='编辑摘要'>
           <Input
             aria-label='编辑摘要'
-            wrapperClass={styles.input}
+            wrapperClass={input}
             {...register('commitMessage', { required: '请填写编辑摘要' })}
           />
         </Form.Item>
-        <div className={styles.actions}>
+        <div className={actions}>
           <Button
             type='plain'
             onClick={() => {
