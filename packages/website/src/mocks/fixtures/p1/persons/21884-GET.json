@@ -1,0 +1,46 @@
+{
+  "id": 21884,
+  "name": "中村章吾",
+  "nameCN": "中村章吾",
+  "type": 1,
+  "infobox": [
+    { "key": "简体中文名", "values": [{ "v": "中村章吾" }] },
+    {
+      "key": "别名",
+      "values": [
+        { "v": "", "k": "第二中文名" },
+        { "v": "", "k": "英文名" },
+        { "v": "中村 章吾", "k": "日文名" },
+        { "v": "なかむら しょうご", "k": "纯假名" },
+        { "v": "Nakamura Shōgo", "k": "罗马字" },
+        { "v": "", "k": "昵称" }
+      ]
+    },
+    { "key": "性别", "values": [{ "v": "男" }] },
+    { "key": "生日", "values": [{ "v": "1986-12-10" }] },
+    { "key": "血型", "values": [{ "v": "" }] },
+    { "key": "身高", "values": [{ "v": "174cm" }] },
+    { "key": "体重", "values": [{ "v": "" }] },
+    { "key": "BWH", "values": [{ "v": "" }] },
+    {
+      "key": "引用来源",
+      "values": [{ "v": "http://www.pro-tanc.com/male/nakamurashougo/" }]
+    },
+    { "key": "出身地", "values": [{ "v": "鹿児島市" }] },
+    { "key": "事务所", "values": [{ "v": "プロダクション・タンク" }] }
+  ],
+  "info": "性别 男 / 生日 1986-12-10 / 身高 174cm",
+  "career": ["seiyu", "actor"],
+  "summary": "日本の男性俳優、声優。\r\n鹿児島県鹿児島市出身。プロダクション・タンク所属。\r\n専門学校東京アナウンス学院放送声優科、劇団青年座研究所実習科卒業。",
+  "comment": 0,
+  "collects": 1,
+  "lock": false,
+  "redirect": 0,
+  "nsfw": false,
+  "images": {
+    "large": "https://lain.bgm.tv/pic/crt/l/05/82/21884_prsn_TNXnc.jpg",
+    "medium": "https://lain.bgm.tv/r/200/pic/crt/l/05/82/21884_prsn_TNXnc.jpg",
+    "small": "https://lain.bgm.tv/r/100/pic/crt/l/05/82/21884_prsn_TNXnc.jpg",
+    "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/05/82/21884_prsn_TNXnc.jpg"
+  }
+}

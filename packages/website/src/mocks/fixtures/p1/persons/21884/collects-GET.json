@@ -1,0 +1,21 @@
+{
+  "data": [
+    {
+      "user": {
+        "id": 78670,
+        "username": "asm13177806",
+        "nickname": "纯セン羽爱",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/07/86/78670.jpg?r=1450932461",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/07/86/78670.jpg?r=1450932461",
+          "large": "https://lain.bgm.tv/pic/user/l/000/07/86/78670.jpg?r=1450932461"
+        },
+        "group": 11,
+        "sign": "純セン羽爱",
+        "joinedAt": 1335681220
+      },
+      "createdAt": 1457152103
+    }
+  ],
+  "total": 1
+}
