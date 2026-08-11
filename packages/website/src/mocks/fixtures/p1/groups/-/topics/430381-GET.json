@@ -1,0 +1,2501 @@
+{
+  "id": 430381,
+  "title": "[投票结果] 关于连载书籍连载平台子分类的关联问题",
+  "creatorID": 21804,
+  "parentID": 128,
+  "replyCount": 107,
+  "createdAt": 1753694225,
+  "updatedAt": 1786465803,
+  "state": 0,
+  "display": 1,
+  "group": {
+    "id": 128,
+    "name": "wiki",
+    "nsfw": false,
+    "title": "番組WIKI計画",
+    "icon": {
+      "small": "https://lain.bgm.tv/r/100/pic/icon/l/000/00/01/128.jpg",
+      "medium": "https://lain.bgm.tv/r/200/pic/icon/l/000/00/01/128.jpg",
+      "large": "https://lain.bgm.tv/pic/icon/l/000/00/01/128.jpg"
+    },
+    "creatorID": 271,
+    "members": 8099,
+    "accessible": true,
+    "createdAt": 1233321099
+  },
+  "replies": [
+    {
+      "id": 3386777,
+      "creatorID": 21804,
+      "createdAt": 1753694225,
+      "content": "截止2025-8-18 11:11 投票结果\r\n\r\n[b]|连载杂志= 電撃コミック レグルス【不写平台，在链接处写平台名字及其链接】\r\n9 / 75.00 %[/b]\r\n|连载杂志= 電撃コミック レグルス @カドコミ、ニコニコ漫画 【同时关联三个】\r\n3 / 25.00 %\r\n\r\n结论：\r\n满足以下三个链接，算连载杂志，主网站只把简称填到链接\r\n1. 网址有子域名\r\n2. 有独立logo或社交账号\r\n3. 可以直接在网页上阅读（单话付费购买的为电子单话，为书系）\r\n\r\n=================================================\r\n前情提要1：\r\n[url]https://bgm.tv/group/topic/406949#post_3227954[/url]\r\n由[user=searock]searock[/user] 提出レーベル的质疑\r\n\r\n前情提要2：\r\n[url]https://bgm.tv/group/topic/423940#post_3318633[/url]\r\n\r\n简单一点来说争议点就是一个连载网站的子分类（日本现在写的レーベル，但此Label并不是出版书的レーベル<书系>）到底需不需要被关联为“连载杂志”？\r\n\r\n[user=30894]夏目残夏[/user] 整理的目录\r\n[url]https://bgm.tv/index/78555[/url]\r\n\r\nカドコミ的Label列表\r\n[url]https://comic-walker.com/label[/url]\r\n\r\n这里面有的Label是自称“マンガ誌/コミック誌”的，但实际他就是个特设页（可能背后的编辑部不一样）……\r\n\r\n按照传统的理解，就算是电子杂志也是应该每期有一个封面的↓\r\n[url]https://bgm.tv/person/55136[/url]\r\n[url]https://bgm.tv/person/67543[/url]\r\n[url]https://bgm.tv/person/38533[/url]\r\n\r\n类比国内的连载平台，也有子频道，但是没有强调杂志的概念，id也是通的，个人感觉国内这种子频道是完全没必要拆分的。\r\n\r\n晋江-纯爱\r\n[url]https://www.jjwxc.net/fenzhan/noyq/[/url]\r\n[url]https://www.jjwxc.net/onebook.php?novelid=6126256[/url]\r\n\r\n起点-二次元\r\n[url]https://www.qidian.com/2cy/[/url]\r\n[url]https://www.qidian.com/book/1044889491/[/url]\r\n\r\nps. 起点女生网的话是直接域名都变了，这个拆开应该没什么问题\r\n[url]https://www.qdmm.com/[/url]\r\n\r\n那么看看カドコミ……\r\n\r\nカドコミ-comic bridge\r\n[url]https://comic-walker.com/label/comicbridge[/url]\r\n[url]https://comic-walker.com/detail/KC_003497_S[/url]\r\n\r\n单从url来看好像……没差？(bgm38)\r\n\r\n那现在争议点就是日本的强调自己是コミック誌了，也有自称サイト的（本质其实就是叫法不同？），因为是个新概念所以还是决定开个投票问问大家的意见(bgm38)\r\n\r\n补充：这类连载レーベル会在单行本被标作“初出”\r\n[url]https://www.kodansha.co.jp/comic/products/0000397932[/url]\r\n[url]https://comic-days.com/search?q=%E3%82%AB%E3%83%9F%E3%83%A6%EF%BC%8B%EF%BC%91%EF%BC%92&from=gmagakichi[/url]\r\n\r\n[color=red]注：本讨论只适用于传统纸质杂志转网络连载，不适用电子单话配信[/color]",
+      "state": 0,
+      "replies": [],
+      "creator": {
+        "id": 21804,
+        "username": "mizudiwood",
+        "nickname": "mizudiwood🤖",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+        },
+        "group": 9,
+        "sign": "25年小结→bgm.tv/blog/366790",
+        "joinedAt": 1300359959,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3386778,
+      "creatorID": 21804,
+      "createdAt": 1753694322,
+      "content": "投票选项由[user=30894]夏目残夏[/user] 提供\r\n\r\n[list]\r\n[*](bgm67):|连载杂志= 電撃コミック レグルス【不写平台，在链接处写平台名字及其链接】\r\n[*](bgm63):|连载杂志= 電撃コミック レグルス @カドコミ、ニコニコ漫画 【同时关联三个】\r\n[*](bgm38):|连载杂志= 電撃コミック レグルス (カドコミ、ニコニコ漫画) 【仅关联カドコミ、ニコニコ漫画】\r\n[*](bgm124):|连载杂志= カドコミ、ニコニコ漫画【不写Label，只写平台】\r\n[*](bgm125):其他意见\r\n[*][url=https://bgm.tv/dev/app/3792]投票组件[/url]\r\n[/list]",
+      "state": 0,
+      "replies": [],
+      "creator": {
+        "id": 21804,
+        "username": "mizudiwood",
+        "nickname": "mizudiwood🤖",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+        },
+        "group": 9,
+        "sign": "25年小结→bgm.tv/blog/366790",
+        "joinedAt": 1300359959,
+        "isFriend": false
+      },
+      "reactions": [
+        {
+          "users": [
+            { "id": 8766, "username": "xeo", "nickname": "企鹅" },
+            { "id": 21804, "username": "mizudiwood", "nickname": "mizudiwood🤖" },
+            { "id": 22748, "username": "ciciholic", "nickname": "羊排" },
+            { "id": 30894, "username": "30894", "nickname": "夏目残夏" },
+            { "id": 315566, "username": "searock", "nickname": "searock" },
+            { "id": 435535, "username": "e_onion", "nickname": "ᛖᛚᛗᛟ" },
+            { "id": 789297, "username": "renye_ren", "nickname": "忍ren" },
+            { "id": 811644, "username": "whatasiger", "nickname": "Whatasiger" },
+            { "id": 821894, "username": "821894", "nickname": "记忆中樱花" }
+          ],
+          "value": 0
+        },
+        {
+          "users": [
+            { "id": 368617, "username": "ix", "nickname": "Nine" },
+            { "id": 528511, "username": "sdvndong", "nickname": "Sdvn" },
+            { "id": 863382, "username": "v3ve", "nickname": "V3VE" }
+          ],
+          "value": 79
+        }
+      ]
+    },
+    {
+      "id": 3386830,
+      "creatorID": 30894,
+      "createdAt": 1753697310,
+      "content": "补充一下，除了カドコミ上的，还有pixivコミック、LINEマンガ、一迅社プラス、コミックDAYS上连载之类的漫画，也有同样的问题(bgm38)\r\n\r\n看看大家的意见，方便日后编辑",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3386915,
+          "creatorID": 21804,
+          "createdAt": 1753702232,
+          "content": "某不愿透露姓名的人说コミックDAYS单行本页面会写“初出”，是不是可以参考那个整理那些算“连载杂志”……？\r\n[url]https://www.kodansha.co.jp/comic/new-releases/p[/url]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386921,
+          "creatorID": 30894,
+          "createdAt": 1753702622,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 某不愿透露姓名的人说コミックDAYS单行本页面会写“初出”，是不是可以参考那个整理那些算“连载杂志”……？\nhttps://www.kodansha.co.jp/comic/new-releases/...[/quote]\n对，讲谈社的我通常会翻官网的单行本页面，三大家里面最详细的\n那这样的话月マガ基地应该算作连载杂志，单独条目并关联(bgm38)？\n\n特设页面：[url]https://getsumagakichi.com/[/url] ；\n现在常见的写法：[url]https://bgm.tv/subject/497648[/url]（例）月マガ基地@コミックDAYS，关联的コミックDAYS",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386924,
+          "creatorID": 21804,
+          "createdAt": 1753702856,
+          "content": "[quote][b]夏目残夏[/b] 说: 对，讲谈社的我通常会翻官网的单行本页面，三大家里面最详细的\n那这样的话月マガ基地应该算作连载杂志，单独条目并关联？\n\n特设页面：https://getsumagakichi.com/ ；\n现在常见的写...[/quote]\ny1s1我感觉这个特设页面比角川的走心多了(bgm38)\n可以按这个思路找一下规律？好像有些有label的单行本初出就直接写的コミックdays",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386931,
+          "creatorID": 30894,
+          "createdAt": 1753703407,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: y1s1我感觉这个特设页面比角川的走心多了\n可以按这个思路找一下规律？好像有些有label的单行本初出就直接写的コミックdays[/quote]\n是的，按讲谈社这个来分コミックdays和月マガ基地分开的(bgm38)。\n讲谈社官网有列出来全，名叫レーベル，实则コミック誌。[url]https://www.kodansha.co.jp/comic/labels[/url]。",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386935,
+          "creatorID": 21804,
+          "createdAt": 1753703581,
+          "content": "[quote][b]夏目残夏[/b] 说: 是的，按讲谈社这个来分コミックdays和月マガ基地分开的。\n讲谈社官网有列出来全，名叫レーベル，实则コミック誌。https://www.kodansha.co.jp/comic/labels。[/quote]\n那我觉得如果跟单行本的初出对得上那就是合理的？讲谈社的问题是不是解决了(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386940,
+          "creatorID": 21804,
+          "createdAt": 1753703796,
+          "content": "[quote][b]夏目残夏[/b] 说: 是的，按讲谈社这个来分コミックdays和月マガ基地分开的。\n讲谈社官网有列出来全，名叫レーベル，实则コミック誌。https://www.kodansha.co.jp/comic/labels。[/quote]\n[url]https://www.kodansha.co.jp/comic/products/0000392894[/url]\n这个怎么说，上面写的コミックdays下面写的『モーニング・ツー』(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386953,
+          "creatorID": 30894,
+          "createdAt": 1753704581,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 那我觉得如果跟单行本的初出对得上那就是合理的？讲谈社的问题是不是解决了[/quote]\n这样的话，一迅社的参考官网\n[url]https://www.ichijinsha.co.jp/[/url]，在一迅社プラス上连载的comic HOWL、comic LAKE（pixivコミック限定）也单独算作连载杂志了，另外一迅プラス本身也有自己独占的漫画(bgm38)\n\ncomic HOWL\n2023年1月25日(水)に新レーベル「comic HOWL」を創刊いたしました。「comic HOWL」はボカロやホラー、エモーショナルな青春など、若者がまさに“今”ドキドキできるものが詰まったWEBマンガ誌です。\nURL： [url]https://ichijin-plus.com/howl/[/url]\n\ncomic LAKE\n2022年3月4日(金)に新レーベル『comic LAKE』を創刊いたしました。『comic LAKE』は『comic POOL』を姉妹レーベルとし、あたらしい世界でちがう自分と出会える、異世界ファンタジーWEBマンガ誌です。pixivコミックにて、女性向けの異世界転生ものコミカライズ作品を中心に展開いたします。\nURL：[url]https://comic.pixiv.net/magazines/302[/url]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386955,
+          "creatorID": 30894,
+          "createdAt": 1753704710,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: https://www.kodansha.co.jp/comic/products/0000392894\n这个怎么说，上面写的コミックdays下面写的『モーニング・ツー』[/quote]\n(bgm38) 算『モーニング・ツー』的？[url]https://morning.kodansha.co.jp/news/5558.html[/url]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386976,
+          "creatorID": 21804,
+          "createdAt": 1753705362,
+          "content": "[quote][b]夏目残夏[/b] 说: 这样的话，一迅社的参考官网\nhttps://www.ichijinsha.co.jp/，在一迅社プラス上连载的comic HOWL、comic LAKE（pixivコミック限定）也单独算作连载杂志了，...[/quote]\n这个单行本也写了初出吗，单看这个跟カドコミ好像没啥区别？",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386983,
+          "creatorID": 30894,
+          "createdAt": 1753705735,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 这个单行本也写了初出吗，单看这个跟カドコミ好像没啥区别？[/quote]\n有的，像这个：[url]https://bgm.tv/subject/337546[/url]，我翻了下单行本，在单行本尾页就写的是初出comic POOL（comic LAKE姐妹杂志）→ [url]https://www.cmoa.jp/bib/speedreader/?cid=0000227390_jp_0001&u0=1&u1=0&rurl=https%3A%2F%2Fwww.cmoa.jp%2Ftitle%2F227390%2F[/url]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3386996,
+          "creatorID": 21804,
+          "createdAt": 1753706319,
+          "content": "[quote][b]夏目残夏[/b] 说: 有的，像这个：https://bgm.tv/subject/337546，我翻了下单行本，在单行本尾页就写的是初出comic POOL（comic LAKE姐妹杂志）→ https://www.cmo...[/quote]\r\n那我感觉没什么问题了\r\n或者问题简化一点，有独立编辑部（比如有单独的sns）并且自称xx志xxsite有logo的都可以算杂志？\r\n国内没这东西当然不用分x\r\n（如果是这种情况的话我倾向于不写カドコミ只留链接了）\r\n[s]怎么还没有第三个人出现[/s]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387205,
+          "creatorID": 30894,
+          "createdAt": 1753712078,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 那我感觉没什么问题了\n或者问题简化一点，有独立编辑部（比如有单独的sns）并且自称xx志xxsite有logo的都可以算杂志？\n国内没这东西当然不用分x\n（如果是这种情况的话我倾向于不写カドコミ只留链...[/quote]\n上面按这个标准的区分的话就清楚很多了(bgm38)，目测大部分维基人都是这样填，[s]这两周我新建的回头修正下[/s]。\n\n还有一种，电子单话配信的，例：\n1.曾经发售过电子杂志（[url]https://www.cmoa.jp/title/85977/vol/2/[/url]），后面变成在电子书店单话配信的，这样连载杂志还是写【素敵なロマンス】？\n\n2.没有过杂志形式，一直都是单话的（例：[url]https://mechacomic.jp/books/184778[/url]），但是有单独的Logo和特设页面的,URL：[url]https://original.mechacomic.jp/comicmiw/about/[/url]，连载杂志就写Comic miw，而不写めちゃコミック？\n\n因为现在有些电子书店平台也会和出版社一起搞新label，在自家平台独占先行，这样我更倾向于在连载杂志写他们联名的label名字，再放链接了\n\n[s]书籍区的维基人还没下班吗[/s]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387235,
+          "creatorID": 21804,
+          "createdAt": 1753712636,
+          "content": "[quote][b]夏目残夏[/b] 说: 上面按这个标准的区分的话就清楚很多了，目测大部分维基人都是这样填，这两周我新建的回头修正下。\r\n\r\n还有一种，电子单话配信的，例：\r\n1.曾经发售过电子杂志（https://www.cmoa.jp/titl...[/quote]\r\n那这样说之前的电子单话レーベル都填的书系岂不是全部完蛋，有点不想面对这个问题……(bgm38)……但是也不对啊，这些我看了都是有同名杂志的\r\n[url]https://bgm.tv/index/62815[/url]\r\n\r\n[url]https://bgm.tv/book/tag/%E7%94%B5%E5%AD%90%E5%8D%95%E8%AF%9D[/url]\r\n虽然这个标签很少",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387267,
+          "creatorID": 30894,
+          "createdAt": 1753713509,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 那这样说之前的电子单话レーベル都填的书系岂不是全部完蛋，有点不想面对这个问题……\n\nhttps://bgm.tv/book/tag/%E7%94%B5%E5%AD%90%E5%8D%95%E8%AF%...[/quote]\n单话这个倒是容易改，但这里的书系有点多[url]https://bgm.tv/index/62815[/url] (bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387270,
+          "creatorID": 21804,
+          "createdAt": 1753713602,
+          "content": "[quote][b]夏目残夏[/b] 说: 单话这个倒是容易改，但这里的书系有点多https://bgm.tv/index/62815 [/quote]\r\n[url]https://bgm.tv/person/68042[/url]\r\n[url]https://bgm.tv/person/68044[/url]\r\n比如这两个真的不一样啊，我觉得电子单话不要レーベル=连载杂志吧，太混乱了(bgm38)\r\n\r\n[url]https://www.cmoa.jp/title/201088/[/url]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387316,
+          "creatorID": 30894,
+          "createdAt": 1753715046,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: https://bgm.tv/person/68042\nhttps://bgm.tv/person/68044\n比如这两个真的不一样啊，我觉得电子单话不要レーベル=连载杂志吧，太混乱了\n\nhttps:...[/quote]\n啊，这个作品是直接出版，没有在杂志连载。\nFlos Comic也有类似的情况，引进的韩漫出的日版，书系就归到Flos Comic，但不是在カドコミ连载的。\n[url]https://bgm.tv/subject/303474[/url]、[url]https://bgm.tv/subject/328159[/url]\n\n这种情况下要分两个条目吗(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387327,
+          "creatorID": 21804,
+          "createdAt": 1753715253,
+          "content": "[quote][b]夏目残夏[/b] 说: 啊，这个作品是直接出版，没有在杂志连载。\nFlos Comic也有类似的情况，引进的韩漫出的日版，书系就归到Flos Comic，但不是在カドコミ连载的。\nhttps://bgm.tv/subject...[/quote]\n什么？现在议题到哪了？我少看了几层楼？怎么看不懂？(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387332,
+          "creatorID": 21804,
+          "createdAt": 1753715447,
+          "content": "[quote][b]夏目残夏[/b] 说: 啊，这个作品是直接出版，没有在杂志连载。\nFlos Comic也有类似的情况，引进的韩漫出的日版，书系就归到Flos Comic，但不是在カドコミ连载的。\nhttps://bgm.tv/subject...[/quote]\n如果你说的是全新的话题，直接出版的不填连载杂志啊，这不是一个必填项(bgm38)\n\n所以出版社直接出版电子单话的不用填连载杂志吧(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387335,
+          "creatorID": 21804,
+          "createdAt": 1753715525,
+          "content": "[quote][b]夏目残夏[/b] 说: 啊，这个作品是直接出版，没有在杂志连载。\r\nFlos Comic也有类似的情况，引进的韩漫出的日版，书系就归到Flos Comic，但不是在カドコミ连载的。\r\nhttps://bgm.tv/subject...[/quote]\r\n为啥这个分了两个条目，是重新画了还是单行本卷数不一样，关联的是改编？诶这不是漫画和小说吗(bgm38)\r\n我晕了(@_@)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387347,
+          "creatorID": 30894,
+          "createdAt": 1753716123,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 如果你说的是全新的话题，直接出版的不填连载杂志啊，这不是一个必填项\n\n所以出版社直接出版电子单话的不用填连载杂志吧[/quote]\n我没表达清楚。是from RED个为啥分了两个条目(bgm38)，要按书系和杂志区分开吗？\n[url]https://bgm.tv/person/68042[/url]\n[url]https://bgm.tv/person/68044[/url]\n\nBoy Love这种情况，一般会直接将这个关联书系，而不写连载杂志吧？\n\n继母和橡树之下，这两本是举个栗子，引进出版纸质的书系是Flos Comic，没有必要像from RED这样分开两个条目（一个关联书系，一个关联连载杂志）？不是要拆这两个漫画条目(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387353,
+          "creatorID": 21804,
+          "createdAt": 1753716396,
+          "content": "[quote][b]夏目残夏[/b] 说: 我没表达清楚。是from RED个为啥分了两个条目，要按书系和杂志区分开吗？\r\nhttps://bgm.tv/person/68042\r\nhttps://bgm.tv/person/68044\r\n\r\nBoy ...[/quote]\r\n不是，他真的有杂志啊，见我那个链接，就是一期一期的，有封面也有排版，现在出到42期，是完整的电子书（杂志）\r\n书系是另外的，是出电子单话用的，用这个label出版的电子单话不一定在杂志上，反之亦然",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387359,
+          "creatorID": 21804,
+          "createdAt": 1753716535,
+          "content": "[quote][b]夏目残夏[/b] 说: 我没表达清楚。是from RED个为啥分了两个条目，要按书系和杂志区分开吗？\r\nhttps://bgm.tv/person/68042\r\nhttps://bgm.tv/person/68044\r\n\r\nBoy ...[/quote]\r\n纸质书的label是出版书用的书系啊，如果他也有同名的连载杂志或者网站叫Flos Comic那确实是要分开，不是一个概念",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387370,
+          "creatorID": 30894,
+          "createdAt": 1753717034,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 纸质书的label是出版书用的书系啊，如果他也有同名的连载杂志或者网站叫Flos Comic那确实是要分开，不是一个概念[/quote]\n懂了(bgm38) 还好这个关联的不是很多",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387393,
+          "creatorID": 21804,
+          "createdAt": 1753717664,
+          "content": "[quote][b]夏目残夏[/b] 说: 懂了 还好这个关联的不是很多[/quote]\n所以聊了半天根本无人在意(bgm38)\n如果等半个月没有其他意见就按“有编辑部的”网络连载算连载杂志来？不填大网站？（不包括每话收费的电子单话）",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387397,
+          "creatorID": 30894,
+          "createdAt": 1753717716,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 如果你说的是全新的话题，直接出版的不填连载杂志啊，这不是一个必填项\n\n所以出版社直接出版电子单话的不用填连载杂志吧[/quote]\n→所以出版社直接出版电子单话的不用填连载杂志吧，对对，不填连载杂志了，[s]不然工程浩大[/s](bgm38)  按现在的标准，这个（[url]https://bgm.tv/subject/440218[/url]）的应该改成|书系= Bivy comic、NuPu(电子)，对吧(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387400,
+          "creatorID": 30894,
+          "createdAt": 1753717835,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 所以聊了半天根本无人在意\n如果等半个月没有其他意见就按“有编辑部的”网络连载算连载杂志来？不填大网站？（不包括每话收费的电子单话）[/quote]\n(bgm38) 我没有意见（。大网站直接丢链接里头就好了，还方便后续维护，不用每次搜索",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387415,
+          "creatorID": 21804,
+          "createdAt": 1753718274,
+          "content": "[quote][b]夏目残夏[/b] 说: →所以出版社直接出版电子单话的不用填连载杂志吧，对对，不填连载杂志了，不然工程浩大&nbsp;&nbsp;按现在的标准，这个（https://bgm.tv/subject/440218）的应该改成|书...[/quote]\n对，连载杂志删掉（除非真的在from red那种电子杂志上连载）\n我个人是前面那个人如果没写电子单话的信息我只写纸质书的，写了就保留一下(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387421,
+          "creatorID": 21804,
+          "createdAt": 1753718469,
+          "content": "[quote][b]夏目残夏[/b] 说: →所以出版社直接出版电子单话的不用填连载杂志吧，对对，不填连载杂志了，不然工程浩大&nbsp;&nbsp;按现在的标准，这个（https://bgm.tv/subject/440218）的应该改成|书...[/quote]\n不过关于电子单话都是我有一段时间自己研究整理的结论，当时bangumi的条目乱到眼前发黑，强行规范了一下，可能也有理解有误的(bgm38)，电子单话的标签也是我后来才加上的",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387478,
+          "creatorID": 30894,
+          "createdAt": 1753719884,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 不过关于电子单话都是我有一段时间自己研究整理的结论，当时bangumi的条目乱到眼前发黑，强行规范了一下，可能也有理解有误的，电子单话的标签也是我后来才加上的[/quote]\n电子单话应该是指在电子书店直接上架，单话收费配信的吧，不过个人感觉除非有汉化，否则连载中基本无人问津(bgm38) 都是等到出单行本了才可能有条目",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387482,
+          "creatorID": 21804,
+          "createdAt": 1753719988,
+          "content": "[quote][b]夏目残夏[/b] 说: 电子单话应该是指在电子书店直接上架，单话收费配信的吧，不过个人感觉除非有汉化，否则连载中基本无人问津 都是等到出单行本了才可能有条目[/quote]\n你不知道他们加黄本的有多疯狂，啥也不写看起来跟同人志完全没区别，看得我太难受了(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387521,
+          "creatorID": 30894,
+          "createdAt": 1753721117,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 你不知道他们加黄本的有多疯狂，啥也不写看起来跟同人志完全没区别，看得我太难受了[/quote]\n偶尔见到过(bgm38) ，我会上某天堂网站找，实在不行用Google Lens以图搜图，韩漫特别多（x",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3387524,
+          "creatorID": 21804,
+          "createdAt": 1753721199,
+          "content": "[quote][b]夏目残夏[/b] 说: 偶尔见到过 ，我会上某天堂网站找，实在不行用Google Lens以图搜图，韩漫特别多（x[/quote]\n韩漫我已经放弃了，全是鸟语，都靠维基人举报(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389602,
+          "creatorID": 821894,
+          "createdAt": 1753838595,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 不是，他真的有杂志啊，见我那个链接，就是一期一期的，有封面也有排版，现在出到42期，是完整的电子书（杂志）\n书系是另外的，是出电子单话用的，用这个label出版的电子单话不一定在杂志上，反之亦然[/quote]\n这么说好像清晰不少，前辈们辛苦了(bgm38)能否理解成连载杂志/平台应该是固定的（对应到“初处”），而电子单话往往在各个书店发行（上架）、此处的レーベル感觉更接近实体出版里レーベル丛书系列/品牌的定位[s]（那么这个还有可能写进书系里吗）[/s]",
+          "state": 0,
+          "creator": {
+            "id": 821894,
+            "username": "821894",
+            "nickname": "记忆中樱花",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1"
+            },
+            "group": 11,
+            "sign": "SNS戒断希望",
+            "joinedAt": 1695459630,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389606,
+          "creatorID": 21804,
+          "createdAt": 1753838838,
+          "content": "[quote][b]记忆中樱花[/b] 说: 这么说好像清晰不少，前辈们辛苦了能否理解成连载杂志/平台应该是固定的（对应到“初处”），而电子单话往往在各个书店发行（上架）、此处的レーベル感觉更接近实体出版里レーベル丛书系列/品牌的定位（那么这个还...[/quote]\r\n“初出”，但字面意思只是第一次发表，第一次出现在合志也算“初出”，这里只针对在线定期连载的情况\r\n固定也不一定啊，比如杂志停刊，或者某些原因搬家，这个看具体情况\r\n电子单话也有各种原因搬家的（比如公司合并），但我个人理解此处的レーベル完全没有写成连载杂志的意义，他甚至连个自己的特设页都没有，也不能在线阅读（最多就是专页指向各个卖书网站的链接），更接近纸质书的上架分类（个人理解）",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": [
+            {
+              "users": [{ "id": 821894, "username": "821894", "nickname": "记忆中樱花" }],
+              "value": 0
+            }
+          ]
+        },
+        {
+          "id": 3389641,
+          "creatorID": 21804,
+          "createdAt": 1753840871,
+          "content": "[quote][b]夏目残夏[/b] 说: 对，讲谈社的我通常会翻官网的单行本页面，三大家里面最详细的\r\n那这样的话月マガ基地应该算作连载杂志，单独条目并关联？\r\n\r\n特设页面：https://getsumagakichi.com/ ；\r\n现在常见的写...[/quote]\r\n话说你这个为什么上面的图标是月刊マガジン\r\n月刊マガジン和月マガ基地又是什么关系",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389693,
+          "creatorID": 30894,
+          "createdAt": 1753843794,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 话说你这个为什么上面的图标是月刊マガジン\n月刊マガジン和月マガ基地又是什么关系[/quote]\n沒有吧，LOGO是「月マガ基地」，加了個[s]友情[/s]链接給本誌互相引流吧(bgm38)\n\n应该就是「月刊少年マガジン」的子品牌。\n「月刊少年マガジン」ブランドの新WEB媒体「月マガ基地」始まります！（URL:[url]https://prtimes.jp/main/html/rd/p/000004874.000001719.html[/url])\n\n这个才是「月刊少年マガジン」的官网：[url]https://gmaga.co/[/url]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389711,
+          "creatorID": 21804,
+          "createdAt": 1753844438,
+          "content": "[quote][b]夏目残夏[/b] 说: 沒有吧，LOGO是「月マガ基地」，加了個友情链接給本誌互相引流吧\r\n\r\n应该就是「月刊少年マガジン」的子品牌。\r\n「月刊少年マガジン」ブランドの新WEB媒体「月マガ基地」始まります！（URL:https:/...[/quote]\r\n[url]https://www.kodansha.co.jp/comic/products/0000397932[/url]\r\n你看嘛，\r\n原作： 三重　真流 ，\r\n著： 雨蛙　ガメ\r\n[b]月刊マガジン[/b]\r\n\r\n点不动，不是链接\r\n\r\n上面的导航也是\r\nトップ > コミックトップ > 月刊少年マガジン > カミユ＋１２ > カミユ＋１２（１）",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389714,
+          "creatorID": 21804,
+          "createdAt": 1753844669,
+          "content": "[quote][b]夏目残夏[/b] 说: 沒有吧，LOGO是「月マガ基地」，加了個友情链接給本誌互相引流吧\n\n应该就是「月刊少年マガジン」的子品牌。\n「月刊少年マガジン」ブランドの新WEB媒体「月マガ基地」始まります！（URL:https:/...[/quote]\n[url]https://www.kodansha.co.jp/comic/products/0000399014[/url]\n\n这个才是真的月マガ基地的图标",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389746,
+          "creatorID": 30894,
+          "createdAt": 1753846579,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: https://www.kodansha.co.jp/comic/products/0000397932\n你看嘛，\n原作： 三重　真流 ，\n著： 雨蛙　ガメ\n月刊マガジン\n\n点不动，不是链接\n\n上面的...[/quote]\n我用这两个对比了一下\n\nMyther的图标是月刊少年マガジン，[url]https://www.kodansha.co.jp/comic/products/0000413427[/url]\n罪と罰のスピカ的图标是月マガ基地，[url]https://www.kodansha.co.jp/comic/products/0000413126[/url]\n\n初出都是标注的月マガ基地，\n\n(bgm38)虽然他们纸质书的LABEL都是KCデラックス，\n但！在电子书店，他们的LABEL是不一样的！\n\nコミックシーモア【雑誌・レーベル】\n[url]https://www.cmoa.jp/title/325622/[/url]\n[url]https://www.cmoa.jp/title/306093/[/url]\n\nまんが王国【掲載雑誌】\n[url]https://comic.k-manga.jp/title/223974/[/url]\n[url]https://comic.k-manga.jp/title/210850/[/url]\n\nBookWalker\n[url]https://bookwalker.jp/de1a6c9c38-ef01-4f3b-9418-c4d094b3ddf6/[/url]\n[url]https://bookwalker.jp/de7b47b663-4e71-4c54-ac5a-61985a8004f5/[/url]\n\n由此可得，这个书籍页面这个Logo代表的是他们的电子版Label？(bgm38) [s]推测可能背后跟他们所属编辑部有关系[/s]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389775,
+          "creatorID": 21804,
+          "createdAt": 1753847752,
+          "content": "[quote][b]夏目残夏[/b] 说: 我用这两个对比了一下\n\nMyther的图标是月刊少年マガジン，https://www.kodansha.co.jp/comic/products/0000413427\n罪と罰のスピカ的图标是月マガ基地...[/quote]\n啊？按照我们之前的讨论了这个label就是代表编辑部吗，那这个意思Myther和カミユ＋１２连载杂志不是月刊基地是月刊少年マガジン？那初出怎么说(@_@)\n\n[s]说不定我们研究半天人家就是随便乱写的[/s]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389795,
+          "creatorID": 30894,
+          "createdAt": 1753848561,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 啊？按照我们之前的讨论了这个label就是代表编辑部吗，那这个意思Myther和カミユ＋１２连载杂志不是月刊基地是月刊少年マガジン？那初出怎么说\n\n说不定我们研究半天人家就是随便乱写的[/quote]\n按初出？他们的确都是在月マガ基地上连载的，没有在纸质杂志上刊登过，那连载杂志还是写月マガ基地比较准确。(bgm38) \n\n[s]说不定我们研究半天人家就是随便乱写的 ←有可能，也不是没有出错过[/s]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3389809,
+          "creatorID": 21804,
+          "createdAt": 1753849169,
+          "content": "[quote][b]夏目残夏[/b] 说: 按初出？他们的确都是在月マガ基地上连载的，没有在纸质杂志上刊登过，那连载杂志还是写月マガ基地比较准确。 \n\n说不定我们研究半天人家就是随便乱写的 ←有可能，也不是没有出错过[/quote]\n行吧，最后看投票结果，细节的把控就得维基人自己查了(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3390693,
+          "creatorID": 821894,
+          "createdAt": 1753883809,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: “初出”，但字面意思只是第一次发表，第一次出现在合志也算“初出”，这里只针对在线定期连载的情况\n固定也不一定啊，比如杂志停刊，或者某些原因搬家，这个看具体情况\n电子单话也有各种原因搬家的（比如公司合并...[/quote]\n原来如此，前置条件理解了（嗯、），是说作为“杂志连载”作品的话、要是杂志停刊或移籍一般也有个落脚处吧（唔，应该说“确定”？）x 相对单话更新通常会上架各处书店的情况，确实不好说是杂志x\n不过总觉得随着这类作品变得更多，以后还是要面对填写相关信息的情况吧(bgm38)平台的势力越来越大了（）",
+          "state": 0,
+          "creator": {
+            "id": 821894,
+            "username": "821894",
+            "nickname": "记忆中樱花",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1"
+            },
+            "group": 11,
+            "sign": "SNS戒断希望",
+            "joinedAt": 1695459630,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3390932,
+          "creatorID": 21804,
+          "createdAt": 1753889774,
+          "content": "[quote][b]记忆中樱花[/b] 说: 原来如此，前置条件理解了（嗯、），是说作为“杂志连载”作品的话、要是杂志停刊或移籍一般也有个落脚处吧（唔，应该说“确定”？）x 相对单话更新通常会上架各处书店的情况，确实不好说是杂志x\n不过总觉得随着...[/quote]\n你在说啥，没看懂(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3391171,
+          "creatorID": 821894,
+          "createdAt": 1753896675,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 你在说啥，没看懂[/quote]\r\n啊啊啊不好意思！只是感慨电子市场发展太快了x\r\n之前还以为电子单话作品在书店上的レーベル信息不会往infobox里填，但脑子转过来 其实是可以填书系一栏的……？（只是不能填连载杂志一栏）[s]印象里漫画条目也不都填书系的样子x[/s] 语死早土下座orz",
+          "state": 0,
+          "creator": {
+            "id": 821894,
+            "username": "821894",
+            "nickname": "记忆中樱花",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1"
+            },
+            "group": 11,
+            "sign": "SNS戒断希望",
+            "joinedAt": 1695459630,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3391343,
+          "creatorID": 21804,
+          "createdAt": 1753919198,
+          "content": "[quote][b]记忆中樱花[/b] 说: 啊啊啊不好意思！只是感慨电子市场发展太快了x\n之前还以为电子单话作品在书店上的レーベル信息不会往infobox里填，但脑子转过来 其实是可以填书系一栏的……？（只是不能填连载杂志一栏）印象里漫画条目也...[/quote]\n漫画肯定要填书系啊，只不过这个字段这两年才加的老条目没填",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3391364,
+          "creatorID": 821894,
+          "createdAt": 1753922131,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 漫画肯定要填书系啊，只不过这个字段这两年才加的老条目没填[/quote]\n原来如此，是我注意不够了(bgm38)以后也会注意的x 辛苦了前辈——",
+          "state": 0,
+          "creator": {
+            "id": 821894,
+            "username": "821894",
+            "nickname": "记忆中樱花",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/82/18/821894.jpg?r=1695459831&hd=1"
+            },
+            "group": 11,
+            "sign": "SNS戒断希望",
+            "joinedAt": 1695459630,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3455071,
+          "creatorID": 21804,
+          "createdAt": 1756565151,
+          "content": "你那个目录里的书系跑成连载杂志了，其他的不知道怎么跑(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457443,
+          "creatorID": 21804,
+          "createdAt": 1756658250,
+          "content": "[url]https://bgm.tv/person/12446[/url]\n[url]https://bgm.tv/person/38909[/url]\n\n这算重复条目吗",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457857,
+          "creatorID": 30894,
+          "createdAt": 1756697076,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: https://bgm.tv/person/12446\nhttps://bgm.tv/person/38909\n\n这算重复条目吗[/quote]\n这个我记得好像很久之前有维基人讨论，[s]但是那个帖子找不到了，我只记得纯セン羽爱大佬有参与讨论过[/s]，印象中早期是的确要分开的，可以参照维基百科的说法。[url]https://ja.wikipedia.org/wiki/%E3%83%8B%E3%82%B3%E3%83%8B%E3%82%B3%E9%9D%99%E7%94%BB[/url]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457858,
+          "creatorID": 30894,
+          "createdAt": 1756697196,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 你那个目录里的书系跑成连载杂志了，其他的不知道怎么跑[/quote]\n关联到平台的可能还要重新找出来 [s]我打算手动整理[/s]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457866,
+          "creatorID": 21804,
+          "createdAt": 1756697508,
+          "content": "[quote][b]夏目残夏[/b] 说: 关联到平台的可能还要重新找出来 我打算手动整理[/quote]\n你那个目录里的 关联的kadokami、ninonico静画/漫画、pixiv comic的关联我都删了\n\n昨天我跟leins讨论了一下这种情况是不是该统一链接写ninonico漫画（因为静画会自动跳转到漫画连接），除了无label的不再关联，另外niconico好像有一些非商连载应该是不允许收录\n\n[s]你简单整理的话可以只添加连载杂志的关联然后丢给我跑脚本[/s]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457879,
+          "creatorID": 30894,
+          "createdAt": 1756697659,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 你那个目录里的 关联的kadokami、ninonico静画/漫画、pixiv comic的关联我都删了\n\n昨天我跟leins讨论了一下这种情况是不是该统一链接写ninonico漫画（因为静画会自动跳...[/quote]\n我个人是觉得niconico漫画是商业连载平台，静画像是个人投稿平台？不过有些漫画也是先是个人投稿转商业的  [s]我慢慢搞[/s]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457888,
+          "creatorID": 21804,
+          "createdAt": 1756697860,
+          "content": "[quote][b]夏目残夏[/b] 说: 我个人是觉得niconico漫画是商业连载平台，静画像是个人投稿平台？不过有些漫画也是先是个人投稿转商业的&nbsp;&nbsp;我慢慢搞[/quote]\n但实际关联的好像不是这样……有的商业的只关联了静画……",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457958,
+          "creatorID": 30894,
+          "createdAt": 1756701880,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 但实际关联的好像不是这样……有的商业的只关联了静画……[/quote]\n看了下挺多都是关联不对的(bgm38) 特別是KADOKAWA以外的出版社，大部分應該关联到对应的漫画誌。或者我先把要改关联的条目整理出来？",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457959,
+          "creatorID": 21804,
+          "createdAt": 1756701933,
+          "content": "[quote][b]夏目残夏[/b] 说: 看了下挺多都是关联不对的 特別是KADOKAWA以外的出版社，大部分應該关联到对应的漫画誌。或者我先把要改关联的条目整理出来？[/quote]\n你慢慢搞吧，需要的时候呼叫我(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3457960,
+          "creatorID": 30894,
+          "createdAt": 1756702011,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 你慢慢搞吧，需要的时候呼叫我[/quote]\n(bgm38)好",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 30894,
+        "username": "30894",
+        "nickname": "夏目残夏",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+          "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+        },
+        "group": 11,
+        "sign": "不加好友，谢谢。",
+        "joinedAt": 1304945023,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3387781,
+      "creatorID": 528511,
+      "createdAt": 1753750846,
+      "content": "按照我之前的写法，\n\nカドコミ：都是[label名称]@カドコミ，カドコミオリジナル的只写カドコミ；链接写カドコミ。有纸质刊物（比如青骑士）的不写カドコミ也不写链接。\n\nコミックDAYS：月マガ基地上的写月マガ基地@コミックDAYS；モーニング・ツー的只写モーニング・ツー（因为原先是纸质刊），然后链接写コミックDAYS\n\n一迅プラス：[label名称]@一迅プラス，链接写一迅プラス。\n\n之前也有其它写法没改（比如[url]https://bgm.tv/subject/451375[/url]），但是后来应该都统一这么写了",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3387784,
+          "creatorID": 21804,
+          "createdAt": 1753751150,
+          "content": "不只有写法问题，还有关联问题，你投2是认同那个写法还是觉得要三个都关联(bgm38)\r\n\r\n现在有了那个一键关联组件，即使你不关联后面的人也可能给你关联上(bgm39)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3388006,
+          "creatorID": 528511,
+          "createdAt": 1753761864,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 不只有写法问题，还有关联问题，你投2是认同那个写法还是觉得要三个都关联\n\n现在有了那个一键关联组件，即使你不关联后面的人也可能给你关联上[/quote]\n我投都关联(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 528511,
+            "username": "sdvndong",
+            "nickname": "Sdvn",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+              "large": "https://lain.bgm.tv/pic/user/l/000/52/85/528511.jpg?r=1635212561"
+            },
+            "group": 11,
+            "sign": "",
+            "joinedAt": 1583408127,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3388588,
+          "creatorID": 30894,
+          "createdAt": 1753787265,
+          "content": "官方其实没有统一，是我个人的编集习惯，因为@ 有时候有两种格式，所以我习惯用半角括号(bgm38)，这次讨论能得出个格式+关联结果就规范很多了",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 528511,
+        "username": "sdvndong",
+        "nickname": "Sdvn",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+          "large": "https://lain.bgm.tv/pic/user/l/000/52/85/528511.jpg?r=1635212561"
+        },
+        "group": 11,
+        "sign": "",
+        "joinedAt": 1583408127,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3390949,
+      "creatorID": 203946,
+      "createdAt": 1753890297,
+      "content": "[quote]“纸媒的时代的落幕，连载杂志也要出乱子了”[/quote]\n其实早就有问题了，我前几天遇到一个，这个几百年前的花与梦，\n[url]https://bgm.tv/person/67115[/url]\n有的地方是杂志有的地方是书系，我也没搞懂是什么",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3391341,
+          "creatorID": 21804,
+          "createdAt": 1753918865,
+          "content": "这个条目毫无疑问是书系，连载杂志只有你关联啊，是你自己搞错了",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 203946,
+        "username": "whyjxz14",
+        "nickname": "OH_toothache",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/20/39/203946.jpg?r=1402563980",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/20/39/203946.jpg?r=1402563980",
+          "large": "https://lain.bgm.tv/pic/user/l/000/20/39/203946.jpg?r=1402563980"
+        },
+        "group": 11,
+        "sign": "小圣杯邀请码: whyjxz14#576501",
+        "joinedAt": 1402563900,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3390959,
+      "creatorID": 203946,
+      "createdAt": 1753890635,
+      "content": "反正日本的情况是按编辑部拆分成书系，目前我遇到过的都是这样的，目前没遇到例外的\n有问题的更多的还是前情提要1里的情况，花与梦也是这种，就是它主要是出连载过的内容的，但也出新内容。",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3391345,
+          "creatorID": 21804,
+          "createdAt": 1753919321,
+          "content": "首先你说的问题跟这个讨论完全无关\n其次你概念完全理解错了，这个才是花与梦的连载杂志……\n[url]https://bangumi.tv/person/8407[/url]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3391346,
+          "creatorID": 21804,
+          "createdAt": 1753919420,
+          "content": "艹，看了几个你编辑的条目全部写错了，书系全部写到连载杂志了\r\n出版书括号里那一坨（封面或者书册的小图标）填到书系！你自己改一下吧……",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 203946,
+        "username": "whyjxz14",
+        "nickname": "OH_toothache",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/20/39/203946.jpg?r=1402563980",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/20/39/203946.jpg?r=1402563980",
+          "large": "https://lain.bgm.tv/pic/user/l/000/20/39/203946.jpg?r=1402563980"
+        },
+        "group": 11,
+        "sign": "小圣杯邀请码: whyjxz14#576501",
+        "joinedAt": 1402563900,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3398189,
+      "creatorID": 21804,
+      "createdAt": 1754277592,
+      "content": "如果本月中旬没有其他人投票就按结果1了啊(bgm38)",
+      "state": 0,
+      "replies": [],
+      "creator": {
+        "id": 21804,
+        "username": "mizudiwood",
+        "nickname": "mizudiwood🤖",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+        },
+        "group": 9,
+        "sign": "25年小结→bgm.tv/blog/366790",
+        "joinedAt": 1300359959,
+        "isFriend": false
+      },
+      "reactions": [
+        { "users": [{ "id": 30894, "username": "30894", "nickname": "夏目残夏" }], "value": 140 }
+      ]
+    },
+    {
+      "id": 3400612,
+      "creatorID": 689460,
+      "createdAt": 1754397694,
+      "content": "",
+      "state": 6,
+      "replies": [
+        {
+          "id": 3400622,
+          "creatorID": 21804,
+          "createdAt": 1754398186,
+          "content": "你在说啥，这栋楼的讨论跟出版书的书系没有关系(bgm38)\n国内的丛书也可大可小啊，大的约等于书系，小的就是系列（单个条目）",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400670,
+          "creatorID": 689460,
+          "createdAt": 1754400148,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 你在说啥，这栋楼的讨论跟出版书的书系没有关系\n国内的丛书也可大可小啊，大的约等于书系，小的就是系列（单个条目）[/quote]\n如果打扰到本楼讨论我待会儿自删（。\n其实是最近在刮削手头已有电子图书的元数据在考虑要不要特意为日本漫画统一添加书系信息。国内出版若是作为丛书出版，丛书名一般都是会直接写在封面上，而且丛书名往往能看出丛书收录的出版物的一些特质（如理想国译丛，计算机黑皮书，新世纪高等院校精品教材etc）(bgm85)\n但日本的书系好像没有这种功能？我观察了下bgm上的日本书籍条目，轻小说很多都会填写所属书库，但漫画基本是不填。我看很多确定有所属书系日本漫画出版物也不会特意标明自己所属的书系，是否说明对于日本漫画而言，书系信息对于读者无关紧要？而且现在网络连载成为趋势，漫画书系信息既分散又不好确认，还有可能出现前面楼层提及的“认真讨论半天结果是出版社随手乱填”的现象……(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 689460,
+            "username": "shirokikaze",
+            "nickname": "新大陆的白风",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1"
+            },
+            "group": 11,
+            "sign": "未来をつくろう",
+            "joinedAt": 1651471310,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400700,
+          "creatorID": 21804,
+          "createdAt": 1754401328,
+          "content": "[quote][b]新大陆的白风[/b] 说: 如果打扰到本楼讨论我待会儿自删（。\r\n其实是最近在刮削手头已有电子图书的元数据在考虑要不要特意为日本漫画统一添加书系信息。国内出版若是作为丛书出版，丛书名一般都是会直接写在封面上，而且丛书名往往能看出丛...[/quote]\r\n你在说什么啊，不填是只是因为他们懒(bgm38)，日亚和ndl书名括号里那部分绝大多数都是书系（不绝对），每家卖书的都会写封面也有logo，我完全不知道你在说啥\r\n网络连不连载跟出版书的书系又有什么关系\r\n你是否基本概念搞错了呢(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400712,
+          "creatorID": 21804,
+          "createdAt": 1754401736,
+          "content": "[url]https://bangumi.tv/group/topic/406949[/url]\n我感觉我这里写的很清楚啊\n当然我也写了有点复杂，不清楚可以不填",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400762,
+          "creatorID": 689460,
+          "createdAt": 1754403888,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: https://bgm.tv/group/topic/406949\r\n我感觉我这里写的很清楚啊\r\n当然我也写了有点复杂，不清楚可以不填[/quote]\r\n和bgm怎么填书系没关系，我问的不是这个。(bgm38)\r\n比如我们提及国内的“理想国译丛”，圈内人除了知道这是广西师大出版社出版的，还知道这个丛书里都是旨趣偏向自由主义的社会科学译丛，“计算机黑皮书”则是电子工业出版社出版，收录的都是国外非常经典的计算机理论教材。而且哪怕是圈外人，看丛书名字多多少少也能猜出从书里的书都有什么特点。\r\n但是像ジャンプコミックス、シリウスKC、週刊少年マガジンコミックス等，除了知道是在哪本杂志上连载的漫画之外就看不出任何其他有效信息了（王道热血？后宫？悬疑？科幻？一概不知）。我看日本漫画是不追杂志连载的，难道是连载杂志平台承担了这个职能吗？(bgm38)\r\n至于说到网络连载是因为很多网络连载漫画（包括部分杂志连载）只有电子单行本，ndl上根本查不到……(bgm38)，如果是R18很可能连日亚也没有……(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 689460,
+            "username": "shirokikaze",
+            "nickname": "新大陆的白风",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1"
+            },
+            "group": 11,
+            "sign": "未来をつくろう",
+            "joinedAt": 1651471310,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400785,
+          "creatorID": 21804,
+          "createdAt": 1754404686,
+          "content": "[quote][b]新大陆的白风[/b] 说: 和bgm怎么填书系没关系，我问的不是这个。\n比如我们提及国内的“理想国译丛”，圈内人除了知道这是广西师大出版社出版的，还知道这个丛书里都是旨趣偏向自由主义的社会科学译丛，“计算机黑皮书”则是电子工业出...[/quote]\n大陆的书系不系统，不推荐填，台湾是有的，有都写了啊为什么又问一遍(bgm38)\n\n电子单行本你确定是可以收录的真的单行本吗有的话卖书的网站一般都有写……",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400852,
+          "creatorID": 689460,
+          "createdAt": 1754406650,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 大陆的书系不系统，不推荐填，台湾是有的，有都写了啊为什么又问一遍\r\n\r\n电子单行本你确定是可以收录的真的单行本吗有的话卖书的网站一般都有写……[/quote]\r\n我自己创建的条目肯定都是符合编辑要求，不是合本版……还有一种情况是连载杂志漫画前期有纸质版，但是后期就一转“電子のみ”了……(bgm38) 总之谢谢解答。",
+          "state": 0,
+          "creator": {
+            "id": 689460,
+            "username": "shirokikaze",
+            "nickname": "新大陆的白风",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1"
+            },
+            "group": 11,
+            "sign": "未来をつくろう",
+            "joinedAt": 1651471310,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3400881,
+          "creatorID": 21804,
+          "createdAt": 1754407117,
+          "content": "[quote][b]新大陆的白风[/b] 说: 我自己创建的条目肯定都是符合编辑要求，不是合本版……还有一种情况是连载杂志漫画前期有纸质版，但是后期就一转“電子のみ”了…… 总之谢谢解答。[/quote]\n大出版社肯定都有书系的",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 689460,
+        "username": "shirokikaze",
+        "nickname": "新大陆的白风",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/68/94/689460.jpg?r=1712406982&hd=1"
+        },
+        "group": 11,
+        "sign": "未来をつくろう",
+        "joinedAt": 1651471310,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3426221,
+      "creatorID": 21804,
+      "createdAt": 1755486789,
+      "content": "没有新的投票，如无异议按投票结果1执行",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3426223,
+          "creatorID": 21804,
+          "createdAt": 1755486827,
+          "content": "[user=sdvndong]Sdvn[/user]\n[user=v3ve]V3夢翼[/user]\n[user=368617]Nine[/user]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3426865,
+          "creatorID": 528511,
+          "createdAt": 1755506674,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: ＠Sdvn\n＠V3夢翼\n＠Nine[/quote]\nOK",
+          "state": 0,
+          "creator": {
+            "id": 528511,
+            "username": "sdvndong",
+            "nickname": "Sdvn",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+              "large": "https://lain.bgm.tv/pic/user/l/000/52/85/528511.jpg?r=1635212561"
+            },
+            "group": 11,
+            "sign": "",
+            "joinedAt": 1583408127,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3428474,
+          "creatorID": 863382,
+          "createdAt": 1755572621,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: ＠Sdvn\n＠V3夢翼\n＠Nine[/quote]\n好",
+          "state": 0,
+          "creator": {
+            "id": 863382,
+            "username": "v3ve",
+            "nickname": "V3VE",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/86/33/863382_4OO54.jpg?r=1780121611&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/86/33/863382_4OO54.jpg?r=1780121611&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/86/33/863382_4OO54.jpg?r=1780121611&hd=1"
+            },
+            "group": 11,
+            "sign": "大都会今天赢球了吗",
+            "joinedAt": 1710631209,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3430597,
+          "creatorID": 368617,
+          "createdAt": 1755657429,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: ＠Sdvn\n＠V3夢翼\n＠Nine[/quote]\n同意",
+          "state": 0,
+          "creator": {
+            "id": 368617,
+            "username": "ix",
+            "nickname": "Nine",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/36/86/368617.jpg?r=1634724433",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/36/86/368617.jpg?r=1634724433",
+              "large": "https://lain.bgm.tv/pic/user/l/000/36/86/368617.jpg?r=1634724433"
+            },
+            "group": 11,
+            "sign": "",
+            "joinedAt": 1507371452,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 21804,
+        "username": "mizudiwood",
+        "nickname": "mizudiwood🤖",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+        },
+        "group": 9,
+        "sign": "25年小结→bgm.tv/blog/366790",
+        "joinedAt": 1300359959,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3578949,
+      "creatorID": 528511,
+      "createdAt": 1762415359,
+      "content": "按照最终意见，是不是[url=https://bgm.tv/person/39324/works]这个页面[/url]下的所有作品也要重新关联到[url=https://viewer.heros-web.com/]该平台[/url]下属的三个label(bgm38)",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3578975,
+          "creatorID": 21804,
+          "createdAt": 1762416165,
+          "content": "[user=30894]夏目残夏[/user] 我最近腦子不太好使，你幫他看看呢(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3580021,
+          "creatorID": 30894,
+          "createdAt": 1762485982,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: @夏目残夏 我最近腦子不太好使，你幫他看看呢[/quote]\r\n應該不用。查了下官方的公關文（[url]https://presswalker.jp/press/79224[/url]），最下面的有寫ヒーローズ、ふらっとヒーローズ、わいるどヒーローズという特色の違う３つのレーベルがおくる毎週金曜12時更新の“マンガシアター”（WEBマンガサイト）。\r\n\r\n這三個都屬於LABEL，也沒有提過是單獨的漫畫誌\r\n\r\n按照主樓的標準→\r\n1. 网址有子域名（都是同個網站）\r\n2. 有独立logo或社交账号（無）\r\n3. 可以直接在网页上阅读（单话付费购买的为电子单话，为书系）←可\r\n\r\n應該不需要重新關聯，沿用コミプレ就可以了",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": [
+            {
+              "users": [
+                { "id": 21804, "username": "mizudiwood", "nickname": "mizudiwood🤖" },
+                { "id": 528511, "username": "sdvndong", "nickname": "Sdvn" }
+              ],
+              "value": 79
+            }
+          ]
+        },
+        {
+          "id": 3580280,
+          "creatorID": 528511,
+          "createdAt": 1762496025,
+          "content": "[quote][b]夏目残夏[/b] 说: 應該不用。查了下官方的公關文（https://presswalker.jp/press/79224），最下面的有寫ヒーローズ、ふらっとヒーローズ、わいるどヒーローズという特色の違う３つのレーベルがおく...[/quote]\nok",
+          "state": 0,
+          "creator": {
+            "id": 528511,
+            "username": "sdvndong",
+            "nickname": "Sdvn",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+              "large": "https://lain.bgm.tv/pic/user/l/000/52/85/528511.jpg?r=1635212561"
+            },
+            "group": 11,
+            "sign": "",
+            "joinedAt": 1583408127,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 528511,
+        "username": "sdvndong",
+        "nickname": "Sdvn",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/52/85/528511.jpg?r=1635212561",
+          "large": "https://lain.bgm.tv/pic/user/l/000/52/85/528511.jpg?r=1635212561"
+        },
+        "group": 11,
+        "sign": "",
+        "joinedAt": 1583408127,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3781462,
+      "creatorID": 21804,
+      "createdAt": 1773636518,
+      "content": "[url]https://prtimes.jp/main/html/rd/p/000019000.000007006.html[/url]\n\n『プロの身代わり』は2026年3月13日（金）よりカドコミ「アルコリリカ」レーベルにて連載開始。\n\n「アルコリリカ」算连载杂志？我没搜到条目，这个还在『月刊コミックジーン　2026年4月号』连载",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3781463,
+          "creatorID": 21804,
+          "createdAt": 1773636544,
+          "content": "[user=30894]夏目残夏[/user]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3781472,
+          "creatorID": 21804,
+          "createdAt": 1773636914,
+          "content": "好像『月刊コミックジーン　2026年4月号』只是广告？\r\n\r\n[url]https://comic-walker.com/label[/url]\r\n是不是这下面的都算，你只是没加全\r\n\r\n[url]https://bgm.tv/person/89859[/url]\r\n加了……",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3783214,
+          "creatorID": 30894,
+          "createdAt": 1773745306,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 好像『月刊コミックジーン　2026年4月号』只是广告？\n\nhttps://comic-walker.com/label\n是不是这下面的都算，你只是没加全\n\nhttps://bgm.tv/person/...[/quote]\n4月号的好像是特别揭载1话（打个广告）\n我之前差点改成在月刊コミックジーン连载，结果发现是在カドコミ上网络连载(bgm38)\nアルコリリカ←这个好像是26年新label\n[url]https://prtimes.jp/main/html/rd/p/000018675.000007006.html[/url]\nカドコミ陆陆续续多了不少label，有些没有及时跟进",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3783215,
+          "creatorID": 21804,
+          "createdAt": 1773745427,
+          "content": "[quote][b]夏目残夏[/b] 说: 4月号的好像是特别揭载1话（打个广告）\n我之前差点改成在月刊コミックジーン连载，结果发现是在カドコミ上网络连载\nアルコリリカ←这个好像是26年新label\nhttps://prtimes.jp/mai...[/quote]\n我已经改了然后又改回来了，迷惑性极强(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 4005353,
+          "creatorID": 21804,
+          "createdAt": 1786465803,
+          "content": "[quote][b]夏目残夏[/b] 说: 4月号的好像是特别揭载1话（打个广告）\r\n我之前差点改成在月刊コミックジーン连载，结果发现是在カドコミ上网络连载\r\nアルコリリカ←这个好像是26年新label\r\nhttps://prtimes.jp/mai...[/quote]\r\n这玩意现在要出版了，除了书系还写了个角川青羽，然后我一搜…\r\n\r\n[url]https://www.kadokawa.co.jp/topics/14703/[/url]\r\n[url]https://comic-walker.com/label/aohane[/url]\r\n难道要关联成连载杂志\r\n\r\n站内的那个词条是上海公司，难道是同名词条\r\n[url]https://group.kadokawa.co.jp/information/news_release/2021072901.html[/url]\r\n\r\n21年成立的公司，25年创立的label（连载杂志）\r\n\r\n[url]https://www.animate-onlineshop.jp/sphone/products/detail.php?product_id=3556687[/url]\r\n我现在是出版书用到了orz",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 21804,
+        "username": "mizudiwood",
+        "nickname": "mizudiwood🤖",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+        },
+        "group": 9,
+        "sign": "25年小结→bgm.tv/blog/366790",
+        "joinedAt": 1300359959,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3834847,
+      "creatorID": 21804,
+      "createdAt": 1776394795,
+      "content": "[url]https://publishing.unext.co.jp/comic[/url]\r\n[url]https://bgm.tv/person/55856[/url]\r\n\r\n这玩意是电子单话吧，电子单话应该填书系吧，大label下又分了四个(musume_21)\r\n[url]https://note.com/unext_co/n/n271881db7296[/url]\r\n[quote]「ハネコイ」「ゲキヌマ」「ゼロスト」の3つの小レーベルがあるのですが、それぞれの大きなテーマはあります。[/quote]\r\n\r\n[quote]動画配信サービス「U-NEXT」は、2023年10月11日（水）より、オリジナルコミックレーベル「U-NEXT Comic」として縦スクロールマンガの提供をスタートします。第1弾として、10月中に4作品をリリースするとともに外部調達も開始し、縦スクロールマンガのラインナップを増やしてまいります。[/quote]\r\n\r\n縦スクロールマンガ应该不算小label？\r\n\r\n[url]https://publishing.unext.co.jp/comic/title_list/zerosuto[/url]\r\n这样看又像连载杂志，下面单话版和网页连载版都有\r\n\r\n[url]https://publishing.unext.co.jp/comic/title/6aNpHZBBfTpIvYaqVFRLSq[/url]\r\n有的是有“単行本”的\r\n\r\n[url]https://www.amazon.co.jp/-/zh/dp/B0CG1SCFFK/ref=tmm_kin_swatch_0[/url]\r\n然后还有电子书\r\n\r\nps.实体是kadokawa\r\n[url]https://www.amazon.co.jp/-/zh/dp/4041149797[/url]\r\n\r\n[user=30894]夏目残夏[/user]\r\n\r\n完全不知道怎么填了(musume_20)\r\n\r\n所以是按纸质书→单行本（电子书）→网络连载→电子单话的优先级填比较好？",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3834884,
+          "creatorID": 21804,
+          "createdAt": 1776397329,
+          "content": "所以[url]https://bgm.tv/person/55856[/url]应该只会出现在縦スクロールマンガ的书系里\n我把连载杂志关联全部删了\n[user=shrante]スラント[/user]  [user=wikiaka]​ウィキ専用垢[/user]  [user=shameimaru_aya]ぁまぃあゃ[/user] [user=mothersaqua]妈的阿库娅[/user]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3834915,
+          "creatorID": 21804,
+          "createdAt": 1776399415,
+          "content": "[user=ayai]ayai[/user] 电子单行本不用急着加吧，这个好些后面还是出了纸质书，除非你后面重新改回来\r\n[url]https://bgm.tv/subject/641349[/url]\r\n[url]https://bgm.tv/subject/641351[/url]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835048,
+          "creatorID": 915105,
+          "createdAt": 1776407915,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: ＠ayai 电子单行本不用急着加吧，这个好些后面还是出了纸质书，除非你后面重新改回来\nhttps://bgm.tv/subject/641349\nhttps://bgm.tv/subject/6413...[/quote]\n(musume_20)我后面盯着吧，如果出了纸质书版就改成纸质书版的",
+          "state": 0,
+          "creator": {
+            "id": 915105,
+            "username": "ayai",
+            "nickname": "ayai",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/91/51/915105.jpg?r=1726426279&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/91/51/915105.jpg?r=1726426279&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/91/51/915105.jpg?r=1726426279&hd=1"
+            },
+            "group": 11,
+            "sign": "",
+            "joinedAt": 1726377942,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835061,
+          "creatorID": 21804,
+          "createdAt": 1776409022,
+          "content": "[quote][b]ayai[/b] 说: 我后面盯着吧，如果出了纸质书版就改成纸质书版的[/quote]\n加电子书本身是没啥问题，就是万一出了纸质书会反向增加工作量(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835418,
+          "creatorID": 30894,
+          "createdAt": 1776423978,
+          "content": "縦スクロールマンガ → 不算label，就是和传统的漫画做了区分\n\n→ [url]https://www.cmoa.jp/search/magazine/12263/[/url]\n在其他电子书店平台也是，只有条漫是写 雑誌・レーベル： U-NEXT Comic，\n其他的是：U-NEXT Comic / ハネコイ\n所以就是三个电子label，「ハネコイ」「ゲキヌマ」「ゼロスト」\n\n电子单行本和电子书都是自己平台出的合集本吧，出版社都是U-NEXT，\n感觉只有部分影视化或者受欢迎的才有可能被出版社看中发行纸单行本。\n像[url]https://bgm.tv/subject/444471[/url]这个\n\n但我感觉他家大部分作品可能也就只能发售电子书了\n所以还是按 纸质书→单行本（电子书）→网络连载→电子单话的优先级填吧\n\n[s]个人感觉比较省事的做法就是只加系列，暂时不加电子单行本[/s]\n之前有好几部作品，都是作品完结了，出的电子单行本，我也添加了电子单行本，结果过了一两年出了纸本(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835526,
+          "creatorID": 21804,
+          "createdAt": 1776427463,
+          "content": "[quote][b]夏目残夏[/b] 说: 縦スクロールマンガ → 不算label，就是和传统的漫画做了区分\r\n\r\n→ https://www.cmoa.jp/search/magazine/12263/\r\n在其他电子书店平台也是，只有条漫是写 雑誌...[/quote]\r\n他官网上每个作品有几个级别（不一定都有）\r\nアプリ连载（网络连载）\r\n分冊版（电子单话）\r\n単行本（电子书）\r\n\r\n其中电子书那个如果出了纸质版是可以直接在日亚切换的，姑且当他是正经（？）电子书单行本？\r\n\r\n所以结论就是，一个大label三个小label\r\n\r\n只有连载：只写连载杂志（U-Next）\r\n电子单话/电子书：出版社是U-Next，书系写小label，没有小label时写大label，可加写连载杂志（不建议加电子书单行本，加了如果出纸质得善后）\r\n※有的只有电子单话的就不写连载杂志\r\n有纸质书：只写纸质书信息（都写太乱了），可加写连载杂志\r\n\r\n↑是这样吧",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835605,
+          "creatorID": 30894,
+          "createdAt": 1776430240,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 他官网上每个作品有几个级别（不一定都有）\nアプリ连载（网络连载）\n分冊版（电子单话）\n単行本（电子书）\n\n其中电子书那个如果出了纸质版是可以直接在日亚切换的，姑且当他是正经（？）电子书单行本？\n\n所以...[/quote]\n對的(bgm24)",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835638,
+          "creatorID": 21804,
+          "createdAt": 1776431485,
+          "content": "[quote][b]夏目残夏[/b] 说: 對的[/quote]\n那我汇总一下写过去（反正其他人也不在意）\n\n[s]电子类的越来越复杂了[/s](musume_16)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835672,
+          "creatorID": 30894,
+          "createdAt": 1776432286,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 那我汇总一下写过去（反正其他人也不在意）\n\n电子类的越来越复杂了[/quote]\n书系也越来越细化了(bgm38) 像DREコミックス，现在作品多了，就再开设一个 DREコミックスF（女性向异世界）、ドリコミ（原创作品）。\n\n上个月我在整理出版社与对应的连载杂志和书系，结果发现时不时出个新的，时不时又搞个RENEWAL改名，(bgm526) 整了1/3就看小说去了",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3835702,
+          "creatorID": 21804,
+          "createdAt": 1776432774,
+          "content": "[quote][b]夏目残夏[/b] 说: 书系也越来越细化了 像DREコミックス，现在作品多了，就再开设一个 DREコミックスF（女性向异世界）、ドリコミ（原创作品）。\n\n上个月我在整理出版社与对应的连载杂志和书系，结果发现时不时出个新的，时...[/quote]\n所以我除了纸质书从来不加\n但是看到别人加的又烦\n这个我就是发现他们全部关联的连载杂志(bgm527)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3880422,
+          "creatorID": 21804,
+          "createdAt": 1778737724,
+          "content": "[quote][b]夏目残夏[/b] 说: 书系也越来越细化了 像DREコミックス，现在作品多了，就再开设一个 DREコミックスF（女性向异世界）、ドリコミ（原创作品）。\n\n上个月我在整理出版社与对应的连载杂志和书系，结果发现时不时出个新的，时...[/quote]\n[url]https://kirapo.jp/[/url]\n这个是不是也算是连载\n[url]https://bgm.tv/person/8374[/url]\n[url]https://bgm.tv/person/77446[/url]",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 21804,
+        "username": "mizudiwood",
+        "nickname": "mizudiwood🤖",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+        },
+        "group": 9,
+        "sign": "25年小结→bgm.tv/blog/366790",
+        "joinedAt": 1300359959,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 3880465,
+      "creatorID": 30894,
+      "createdAt": 1778739860,
+      "content": "对，原本是分开的网站，后面出版社就统一在一个网站连载，但是统合后还分开了不同频道的（对应不同的编辑部），有点像comic days那种情况(bgm38) →[url]https://prtimes.jp/main/html/rd/p/000000533.000022823.html[/url]，我更倾向于把「COMICメテオ」「COMICポラリス」这些当连载杂志，きら星ポータル出现在链接的名称里（不确定之前关联的时候有没有搞错）",
+      "state": 0,
+      "replies": [
+        {
+          "id": 3880497,
+          "creatorID": 21804,
+          "createdAt": 1778742718,
+          "content": "旧链接好像已经全部失效了？只能用きらポ的链接(bgm38)",
+          "state": 0,
+          "creator": {
+            "id": 21804,
+            "username": "mizudiwood",
+            "nickname": "mizudiwood🤖",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+              "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+            },
+            "group": 9,
+            "sign": "25年小结→bgm.tv/blog/366790",
+            "joinedAt": 1300359959,
+            "isFriend": false
+          },
+          "reactions": []
+        },
+        {
+          "id": 3880501,
+          "creatorID": 30894,
+          "createdAt": 1778743100,
+          "content": "[quote][b]mizudiwood🤖[/b] 说: 旧链接好像已经全部失效了？只能用きらポ的链接[/quote]\n对哦(bgm38)换域名了，好像还有哪家也有类似的情况的，[s]我是漫画完结的时候顺手改，大概率也无人在意[/s]",
+          "state": 0,
+          "creator": {
+            "id": 30894,
+            "username": "30894",
+            "nickname": "夏目残夏",
+            "avatar": {
+              "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+              "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+            },
+            "group": 11,
+            "sign": "不加好友，谢谢。",
+            "joinedAt": 1304945023,
+            "isFriend": false
+          },
+          "reactions": []
+        }
+      ],
+      "creator": {
+        "id": 30894,
+        "username": "30894",
+        "nickname": "夏目残夏",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+          "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+        },
+        "group": 11,
+        "sign": "不加好友，谢谢。",
+        "joinedAt": 1304945023,
+        "isFriend": false
+      },
+      "reactions": []
+    }
+  ],
+  "creator": {
+    "id": 21804,
+    "username": "mizudiwood",
+    "nickname": "mizudiwood🤖",
+    "avatar": {
+      "small": "https://lain.bgm.tv/r/100/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+      "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1",
+      "large": "https://lain.bgm.tv/pic/user/l/000/02/18/21804_2Oro7.jpg?r=1757342413&hd=1"
+    },
+    "group": 9,
+    "sign": "25年小结→bgm.tv/blog/366790",
+    "joinedAt": 1300359959,
+    "isFriend": false
+  }
+}

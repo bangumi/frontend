@@ -1,9 +1,11 @@
 import React from 'react';
 
+import type { Reaction, SlimUser } from '@bangumi/client/topic';
 import { Comment as CommentIcon, More } from '@bangumi/icons';
 
 import Button from '../../components/Button';
 import Popover from '../Popover';
+import { ReactionMenu } from './Reactions';
 
 export interface CommentActionsProps {
   id: number;
@@ -12,6 +14,9 @@ export interface CommentActionsProps {
   isAuthor?: boolean;
   editable?: boolean;
   showText?: boolean;
+  reactions?: Reaction[];
+  user?: Pick<SlimUser, 'id'>;
+  onReacted?: () => Promise<unknown>;
 }
 
 const CommentActions = ({
@@ -21,6 +26,9 @@ const CommentActions = ({
   isAuthor = false,
   editable = true,
   showText = false,
+  reactions,
+  user,
+  onReacted,
 }: CommentActionsProps) => {
   return (
     <div className='bgm-comment-actions'>
@@ -28,7 +36,17 @@ const CommentActions = ({
         <CommentIcon />
         {showText && '回复'}
       </Button>
-      {/* TODO: 实现贴贴功能 */}
+      {user && onReacted && (
+        <Popover
+          content={
+            <ReactionMenu reactions={reactions} postId={id} user={user} onReacted={onReacted} />
+          }
+        >
+          <Button type='plain' size='small' title='贴贴'>
+            贴贴
+          </Button>
+        </Popover>
+      )}
       <Popover
         content={
           <div className='bgm-comment-actions__popover'>

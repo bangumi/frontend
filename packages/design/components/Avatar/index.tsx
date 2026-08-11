@@ -6,7 +6,7 @@ import React from 'react';
 
 export interface AvatarProps {
   /** 头像大小 */
-  size?: 'small' | 'medium' | 'large';
+  size?: 'xsmall' | 'small' | 'post' | 'medium' | 'large';
   /** 头像的 URL */
   src: string;
   /** 替代文本 */

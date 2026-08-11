@@ -8,7 +8,7 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
       id="post_2104702"
     >
       <div
-        class="bgm-avatar bgm-avatar--medium"
+        class="bgm-avatar bgm-avatar--small"
       >
         <img
           src="https://lain.bgm.tv/pic/user/l/icon.jpg"
@@ -76,7 +76,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
       id="post_2104702"
     >
       <div
-        class="bgm-avatar bgm-avatar--medium"
+        class="bgm-avatar bgm-avatar--small"
       >
         <img
           src="https://lain.bgm.tv/pic/user/l/icon.jpg"
@@ -181,7 +181,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
         id="post_2104702"
       >
         <div
-          class="bgm-avatar bgm-avatar--small"
+          class="bgm-avatar bgm-avatar--xsmall"
         >
           <img
             src="https://lain.bgm.tv/pic/user/m/icon.jpg"
@@ -290,7 +290,7 @@ exports[`Normal Comment > should render 0 1`] = `
       id="post_2104702"
     >
       <div
-        class="bgm-avatar bgm-avatar--medium"
+        class="bgm-avatar bgm-avatar--small"
       >
         <img
           src="https://lain.bgm.tv/pic/user/l/icon.jpg"
@@ -401,7 +401,7 @@ exports[`Normal Comment > should render 6 1`] = `
       id="post_2104702"
     >
       <div
-        class="bgm-avatar bgm-avatar--medium"
+        class="bgm-avatar bgm-avatar--small"
       >
         <img
           src="https://lain.bgm.tv/pic/user/l/icon.jpg"
@@ -469,7 +469,7 @@ exports[`Normal Comment > should render 7 1`] = `
       id="post_2104702"
     >
       <div
-        class="bgm-avatar bgm-avatar--medium"
+        class="bgm-avatar bgm-avatar--small"
       >
         <img
           src="https://lain.bgm.tv/pic/user/l/icon.jpg"
@@ -545,7 +545,7 @@ exports[`Normal Comment > should render with reply 1`] = `
       id="post_2104702"
     >
       <div
-        class="bgm-avatar bgm-avatar--medium"
+        class="bgm-avatar bgm-avatar--small"
       >
         <img
           src="https://lain.bgm.tv/pic/user/l/icon.jpg"
@@ -650,7 +650,7 @@ exports[`Normal Comment > should render with reply 1`] = `
         id="post_2104702"
       >
         <div
-          class="bgm-avatar bgm-avatar--small"
+          class="bgm-avatar bgm-avatar--xsmall"
         >
           <img
             src="https://lain.bgm.tv/pic/user/m/icon.jpg"

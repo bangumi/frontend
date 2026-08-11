@@ -20,3 +20,13 @@ it('Avatar Size', () => {
 
   expect(img).toHaveClass('bgm-avatar--medium');
 });
+
+it('Avatar Extra Size', () => {
+  const { container, rerender } = render(<Avatar src='urlLink' size='xsmall' />);
+  const img = container.children[0];
+  expect(img).toHaveClass('bgm-avatar--xsmall');
+
+  rerender(<Avatar src='urlLink' size='post' />);
+
+  expect(img).toHaveClass('bgm-avatar--post');
+});
