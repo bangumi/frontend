@@ -99,6 +99,12 @@
   font-size: 12px;
   line-height: 22px;
   color: @gray-100;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+  }
 }
 
 .epDone {
@@ -129,7 +135,7 @@
   :global(.bgm-popover__content) {
     top: 5px;
     left: 12px;
-    width: 275px;
+    width: min(275px, calc(100vw - 20px));
     overflow: visible;
     border: 0;
     border-radius: 5px;
@@ -164,8 +170,37 @@
   }
 }
 
+.epPopoverOpen.epPopoverOpen :global(.bgm-popover__content) {
+  visibility: visible;
+  opacity: 1;
+}
+
+.epPopoverLeft {
+  :global(.bgm-popover__content) {
+    right: 12px;
+    left: auto;
+  }
+
+  :global(.bgm-popover__content)::before {
+    right: -10px;
+    left: auto;
+    border-right: 0;
+    border-left: 11px solid transparent;
+  }
+
+  :global(.bgm-popover__content)::after {
+    right: -12px;
+    left: auto;
+  }
+}
+
+.epPopoverDismissed.epPopoverDismissed :global(.bgm-popover__content) {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .epPopoverContent {
-  width: 275px;
+  width: 100%;
   border-radius: 5px;
   background: rgba(254, 254, 254, 0.96);
   color: @gray-100;
@@ -173,16 +208,44 @@
   line-height: 1.5;
 }
 
+.epAllLink.epAllLink {
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+  }
+}
+
 .epPopoverTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 8px 10px;
-  overflow: hidden;
   border-radius: 5px 5px 0 0;
   background: @primary-color;
   color: #fff;
   font-size: 13px;
   line-height: 18px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+
+  span {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  button {
+    flex: none;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    line-height: inherit;
+  }
 }
 
 .epPopoverBody {
@@ -200,12 +263,75 @@
   }
 }
 
+.epStatusActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 31px;
+  margin: 0 0 5px;
+  border-radius: 5px;
+  background: #f5f5f5;
+
+  button {
+    padding: 5px 10px;
+    border: 0;
+    border-radius: 5px;
+    background: transparent;
+    color: @blue-100;
+    cursor: pointer;
+    font: inherit;
+    line-height: 21px;
+
+    &:hover,
+    &:focus-visible {
+      background: @primary-color;
+      color: #fff;
+      outline: none;
+    }
+
+    &:disabled {
+      cursor: wait;
+      opacity: 0.55;
+    }
+  }
+}
+
+.epCurrentStatus {
+  align-self: stretch;
+  margin-left: auto;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: @primary-color;
+  color: #fff;
+  line-height: 21px;
+}
+
+.epPopoverFooter {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
 .epDiscussionLink.epDiscussionLink {
   color: @blue-100;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+  }
 
   small {
     color: @gray-60;
   }
+}
+
+.epUpdatedAt {
+  overflow: hidden;
+  color: @gray-60;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* 简介 */

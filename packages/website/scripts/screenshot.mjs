@@ -42,6 +42,7 @@ Options:
       --wait-until <state>    commit, domcontentloaded, load, or networkidle
                               (default: domcontentloaded)
       --wait-for <selector>   Wait for a selector to become visible
+      --hover <selector>      Hover an element before capture; repeatable
       --wait-ms <ms>          Additional delay after loading (default: 1000)
       --timeout <ms>          Navigation and selector timeout (default: 60000)
       --storage-state <path>  Playwright storage-state JSON for authentication
@@ -56,6 +57,7 @@ Examples:
   pnpm run build
   pnpm website screenshot /user/sai /tmp/user.jpg --full-page
   pnpm website screenshot /user/sai /tmp/avatar.jpg --element '#user-avatar'
+  pnpm website screenshot /subject/12 /tmp/episode.jpg --hover '[title^="ep.1 "]'
   pnpm website screenshot --wait-for main --local-storage view=grid
 `;
 
@@ -73,6 +75,7 @@ const { values, positionals } = parseArgs({
     element: { type: 'string' },
     'wait-until': { type: 'string', default: 'domcontentloaded' },
     'wait-for': { type: 'string' },
+    hover: { type: 'string', multiple: true, default: [] },
     'wait-ms': { type: 'string', default: '1000' },
     timeout: { type: 'string', default: '60000' },
     'storage-state': { type: 'string' },
@@ -291,6 +294,9 @@ try {
     }
     if (waitMs > 0) {
       await page.waitForTimeout(waitMs);
+    }
+    for (const selector of values.hover) {
+      await page.locator(selector).hover({ timeout });
     }
 
     if (values.element) {
