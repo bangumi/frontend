@@ -12,6 +12,7 @@ const invocationDirectory = process.env.INIT_CWD ?? process.cwd();
 const websiteDirectory = path.resolve(import.meta.dirname, '..');
 const viteConfigPath = path.join(websiteDirectory, 'vite.config.ts');
 const distIndexPath = path.join(websiteDirectory, 'dist', 'index.html');
+const fixturesDirectory = path.join(websiteDirectory, 'src', 'mocks', 'fixtures');
 
 const HELP = `
 Capture a built website page with Playwright.
@@ -38,6 +39,10 @@ Options:
       --timeout <ms>          Navigation and selector timeout (default: 60000)
       --storage-state <path>  Playwright storage-state JSON for authentication
       --local-storage <k=v>   Set local storage before navigation; repeatable
+      --use-fixtures          Intercept /p1 API requests with local JSON fixtures from
+                              src/mocks/fixtures (fixture named <pathname>-<METHOD>.json);
+                              requests without a matching fixture fall through to the
+                              API proxy
   -h, --help                  Show this help
 
 Examples:
@@ -62,6 +67,7 @@ const { values, positionals } = parseArgs({
     timeout: { type: 'string', default: '60000' },
     'storage-state': { type: 'string' },
     'local-storage': { type: 'string', multiple: true, default: [] },
+    'use-fixtures': { type: 'boolean', default: false },
     help: { type: 'boolean', short: 'h', default: false },
   },
 });
@@ -96,6 +102,35 @@ function parseLocalStorage(entries) {
     }
     return [entry.slice(0, separator), entry.slice(separator + 1)];
   });
+}
+
+/** 按 mocks/utils.ts 的命名约定加载 JSON fixture；无匹配文件时返回 undefined */
+async function loadFixture(pathname, method) {
+  const fixturePath = path.join(fixturesDirectory, `${pathname}-${method.toUpperCase()}.json`);
+  try {
+    await fs.access(fixturePath);
+  } catch {
+    return undefined;
+  }
+  return JSON.parse(await fs.readFile(fixturePath, 'utf8'));
+}
+
+/**
+ * RAII 式资源管理：作用域结束（含异常路径）后按逆序释放所有 asyncDisposable 资源。
+ * 单个资源的释放失败只记录日志，不影响其余资源释放，也不会覆盖主流程异常。
+ */
+async function withDisposables(disposables, fn) {
+  try {
+    return await fn();
+  } finally {
+    for (const disposable of [...disposables].reverse()) {
+      try {
+        await disposable[Symbol.asyncDispose]();
+      } catch (error) {
+        console.error(`Failed to dispose resource: ${error.message}`);
+      }
+    }
+  }
 }
 
 function getRoute(value) {
@@ -161,49 +196,90 @@ if (!address || typeof address === 'string') {
 }
 
 const url = new URL(route, `http://127.0.0.1:${address.port}/`).href;
-let browser;
+
+/** 需随作用域结束释放的资源；browser 在启动后动态加入 */
+const disposables = [
+  {
+    [Symbol.asyncDispose]: () =>
+      Promise.race([previewServer.close(), new Promise((resolve) => setTimeout(resolve, 2000))]),
+  },
+];
+
+let exitCode = 0;
 try {
-  browser = await chromium.launch();
-  const context = await browser.newContext({
-    viewport: { width, height },
-    deviceScaleFactor,
-    storageState: values['storage-state']
-      ? path.resolve(invocationDirectory, values['storage-state'])
-      : undefined,
-  });
-  const page = await context.newPage();
+  await withDisposables(disposables, async () => {
+    const browser = await chromium.launch();
+    disposables.push({ [Symbol.asyncDispose]: () => browser.close() });
+    const context = await browser.newContext({
+      viewport: { width, height },
+      deviceScaleFactor,
+      storageState: values['storage-state']
+        ? path.resolve(invocationDirectory, values['storage-state'])
+        : undefined,
+    });
+    const page = await context.newPage();
 
-  page.on('console', (message) => {
-    if (message.type() === 'error') {
-      console.error(`CONSOLE ERROR: ${message.text()}`);
-    }
-  });
-  page.on('pageerror', (error) => console.error(`PAGE ERROR: ${error.message}`));
-
-  if (localStorageEntries.length > 0) {
-    await page.addInitScript((entries) => {
-      for (const [key, value] of entries) {
-        localStorage.setItem(key, value);
+    page.on('console', (message) => {
+      if (message.type() === 'error') {
+        console.error(`CONSOLE ERROR: ${message.text()}`);
       }
-    }, localStorageEntries);
-  }
+    });
+    page.on('pageerror', (error) => console.error(`PAGE ERROR: ${error.message}`));
 
-  await page.goto(url, { waitUntil, timeout });
-  if (values['wait-for']) {
-    await page.locator(values['wait-for']).waitFor({ state: 'visible', timeout });
-  }
-  if (waitMs > 0) {
-    await page.waitForTimeout(waitMs);
-  }
+    if (localStorageEntries.length > 0) {
+      await page.addInitScript((entries) => {
+        for (const [key, value] of entries) {
+          localStorage.setItem(key, value);
+        }
+      }, localStorageEntries);
+    }
 
-  await page.screenshot({
-    path: output,
-    fullPage: values['full-page'],
-    animations: 'disabled',
-    caret: 'hide',
+    if (values['use-fixtures']) {
+      await page.route(
+        (url) => url.pathname.startsWith('/p1/'),
+        async (route) => {
+          const { pathname } = new URL(route.request().url());
+          let fixture;
+          try {
+            fixture = await loadFixture(pathname, route.request().method());
+          } catch (error) {
+            console.error(`Failed to load fixture for ${pathname}: ${error.message}`);
+            return route.abort();
+          }
+          if (fixture === undefined) {
+            // 未匹配的 API 请求直接失败，避免透传到真实后端导致行为不可复现或挂起
+            return route.abort();
+          }
+          return route.fulfill({
+            status: 200,
+            contentType: 'application/json',
+            body: JSON.stringify(fixture),
+          });
+        },
+      );
+    }
+
+    await page.goto(url, { waitUntil, timeout });
+    if (values['wait-for']) {
+      await page.locator(values['wait-for']).waitFor({ state: 'visible', timeout });
+    }
+    if (waitMs > 0) {
+      await page.waitForTimeout(waitMs);
+    }
+
+    await page.screenshot({
+      path: output,
+      fullPage: values['full-page'],
+      animations: 'disabled',
+      caret: 'hide',
+    });
+    console.log(`Screenshot saved to ${output}`);
   });
-  console.log(`Screenshot saved to ${output}`);
+} catch (error) {
+  exitCode = 1;
+  console.error(error);
 } finally {
-  await browser?.close();
-  await previewServer.close();
+  // vite 加载 TS 配置文件时启动的 esbuild service 未被释放，会阻止进程自然退出，
+  // 因此在资源清理完成后显式退出
+  process.exit(exitCode);
 }
