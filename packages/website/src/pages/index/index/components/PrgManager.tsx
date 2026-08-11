@@ -476,8 +476,9 @@ const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
   const [view, setView] = useState<ViewMode>(getInitialView);
   const [selectedSubjectId, setSelectedSubjectId] = useState(progress[0]?.subject.id);
 
-  const filtered =
-    activeType === 0 ? progress : progress.filter((item) => item.subject.type === activeType);
+  const filtered = progress.filter((item) =>
+    activeType === 0 ? item.subject.type !== SubjectType.Book : item.subject.type === activeType,
+  );
   const selected =
     filtered.find((item) => item.subject.id === selectedSubjectId) ?? filtered[0] ?? null;
 
