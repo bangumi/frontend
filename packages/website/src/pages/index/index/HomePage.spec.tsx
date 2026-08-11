@@ -3,6 +3,7 @@ import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { SWRConfig } from 'swr';
 
+import { SubjectType } from '@bangumi/client/client';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
@@ -300,6 +301,32 @@ describe('HomePage', () => {
 
     fireEvent.click(screen.getByRole('button', { name: '列表视图' }));
     expect(window.localStorage.getItem('bangumi-home-progress-view')).toBe('list');
+  });
+
+  it('should hide books from the default progress filter', async () => {
+    const progress = homeFixture.progress[0]!;
+    const bookProgress = {
+      ...progress,
+      subject: {
+        ...progress.subject,
+        id: 13,
+        type: SubjectType.Book,
+        name: 'Test Book',
+        nameCN: '测试书籍',
+      },
+      eps: [],
+    };
+    mockServer.use(
+      http.get('http://localhost:3000/p1/home', () =>
+        HttpResponse.json({ ...homeFixture, progress: [progress, bookProgress] }, { status: 200 }),
+      ),
+    );
+    await renderHome();
+
+    expect(screen.queryByText('Test Book')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: '书籍' }));
+    expect(await screen.findByText('Test Book')).toBeInTheDocument();
   });
 
   it('should update episode status from the grid view detail popover', async () => {
