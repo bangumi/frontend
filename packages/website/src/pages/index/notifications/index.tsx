@@ -50,7 +50,8 @@ const filterInput = css({ height: '34px' });
 const noticeItem = css({
   display: 'flex',
   alignItems: 'center',
-  height: '40px',
+  flexWrap: 'wrap',
+  minHeight: '40px',
   gap: '10px',
   borderBottom: '1px dashed #e8e3e3',
   color: '#595555',
@@ -67,7 +68,10 @@ const noticeItemAvatar = css({
 const noticeItemBody = css({
   display: 'flex',
   gap: '4px',
+  flex: '1 1 auto',
+  minWidth: '0',
   maxWidth: '60%',
+  overflow: 'hidden',
 });
 
 const noticeItemBodyContent = css({
@@ -76,7 +80,16 @@ const noticeItemBodyContent = css({
   whiteSpace: 'nowrap',
 });
 
-const noticeItemDate = css({ color: '#e8e3e3' });
+const noticeItemDate = css({
+  color: '#e8e3e3',
+  flexShrink: '1',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  '@media (max-width: 640px)': {
+    order: '2',
+    marginLeft: '40px',
+  },
+});
 
 const noticeItemRedDot = css({
   width: '12px',
