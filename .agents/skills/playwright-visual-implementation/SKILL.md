@@ -34,14 +34,15 @@ Fix in that order. CSS cannot repair the wrong component structure or data state
 
 ## 3. Capture A Controlled Baseline
 
-Reuse an existing dev server when the user provides one. Otherwise start the repository's normal server and report its URL.
-
 Use the repository's Playwright installation. Capture to `/tmp` unless the project has an established visual-test artifact directory.
+
+Build the website first, then use the screenshot CLI. The CLI starts a temporary Vite preview server for the built `dist` assets, applies the configured `/p1` API proxy, selects an unused local port, and closes the server after capture. Do not ask the user to start or keep a Vite dev server running for visual work.
 
 Prefer the repository's screenshot CLI, `pnpm website screenshot` (`packages/website/scripts/screenshot.mjs`):
 
 ```bash
-pnpm website screenshot <url> <output> [options]
+pnpm run build
+pnpm website screenshot <route> <output> [options]
 ```
 
 Useful options:
@@ -58,23 +59,43 @@ Useful options:
 Examples:
 
 ```bash
-pnpm website screenshot http://127.0.0.1:5173/user/sai /tmp/user.png --full-page
+pnpm run build
+pnpm website screenshot /user/sai /tmp/user.png --full-page
 pnpm website screenshot --wait-for main --local-storage view=grid
 ```
 
-Write a small temporary Playwright script only when the CLI cannot express the needed state, for example to intercept API responses with fixtures via `page.route`:
+Pass a route such as `/anime`, rather than the address of a manually started server. The CLI accepts a legacy loopback URL by extracting its route, but new commands should use a route. Use the same `--mode` for the build and screenshot command when a non-default Vite mode is required.
+
+Write a small temporary Playwright script only when the CLI cannot express the needed state, for example for clicks, form input, or intercepting API responses with fixtures. It must start the same temporary Vite preview server for the built assets; do not point it at a dev server:
 
 ```js
+import { preview } from 'vite';
+import { chromium } from '@playwright/test';
+
+const previewServer = await preview({
+  root: 'packages/website',
+  mode: 'production',
+  preview: { host: '127.0.0.1', port: 0, strictPort: true },
+});
+const { port } = previewServer.httpServer.address();
+const browser = await chromium.launch();
 const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
 const page = await context.newPage();
 
-await page.route('**/api/page-data', (route) =>
-  route.fulfill({ status: 200, contentType: 'application/json', body: fixture }),
-);
+try {
+  await page.route('**/api/page-data', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: fixture }),
+  );
 
-await page.goto(url, { waitUntil: 'networkidle' });
-await page.locator('[data-ready]').waitFor();
-await page.screenshot({ path: output, fullPage: true });
+  await page.goto(`http://127.0.0.1:${port}/target-route`, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: 'Show details' }).click();
+  await page.locator('[data-ready]').waitFor();
+  await page.screenshot({ path: output, fullPage: true });
+} finally {
+  await context.close();
+  await browser.close();
+  await previewServer.close();
+}
 ```
 
 Use authentication storage supplied by the project or intercept APIs with existing fixtures. Never place credentials or bearer tokens in screenshot scripts. Keep fixture data representative: include long text, odd item counts, future/disabled items, and enough rows to expose the target layout.

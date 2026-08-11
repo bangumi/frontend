@@ -3,25 +3,30 @@ import path from 'node:path';
 import { parseArgs } from 'node:util';
 
 import { chromium } from '@playwright/test';
+import { preview } from 'vite';
 
-const DEFAULT_URL = 'http://127.0.0.1:5173/';
+const DEFAULT_ROUTE = '/';
 const DEFAULT_OUTPUT = '/tmp/website-screenshot.png';
 const WAIT_UNTIL_VALUES = new Set(['commit', 'domcontentloaded', 'load', 'networkidle']);
 const invocationDirectory = process.env.INIT_CWD ?? process.cwd();
+const websiteDirectory = path.resolve(import.meta.dirname, '..');
+const viteConfigPath = path.join(websiteDirectory, 'vite.config.ts');
+const distIndexPath = path.join(websiteDirectory, 'dist', 'index.html');
 
 const HELP = `
-Capture a webpage with Playwright.
+Capture a built website page with Playwright.
 
 Usage:
-  pnpm website screenshot [url] [output] [options]
+  pnpm website screenshot [route] [output] [options]
 
 Arguments:
-  url                         Page URL (default: ${DEFAULT_URL})
+  route                       Website route (default: ${DEFAULT_ROUTE})
   output                      PNG output path (default: ${DEFAULT_OUTPUT})
 
 Options:
-  -u, --url <url>             Page URL; overrides the positional URL
+  -u, --url <route>           Website route; overrides the positional route
   -o, --output <path>         Output path; overrides the positional output
+      --mode <mode>           Vite mode used to configure the API proxy (default: production)
       --width <pixels>        Viewport width (default: 1440)
       --height <pixels>       Viewport height (default: 900)
       --device-scale-factor   Device scale factor (default: 1)
@@ -36,7 +41,8 @@ Options:
   -h, --help                  Show this help
 
 Examples:
-  pnpm website screenshot http://127.0.0.1:5173/user/sai /tmp/user.png --full-page
+  pnpm run build
+  pnpm website screenshot /user/sai /tmp/user.png --full-page
   pnpm website screenshot --wait-for main --local-storage view=grid
 `;
 
@@ -45,6 +51,7 @@ const { values, positionals } = parseArgs({
   options: {
     url: { type: 'string', short: 'u' },
     output: { type: 'string', short: 'o' },
+    mode: { type: 'string', default: 'production' },
     width: { type: 'string', default: '1440' },
     height: { type: 'string', default: '900' },
     'device-scale-factor': { type: 'string', default: '1' },
@@ -91,7 +98,20 @@ function parseLocalStorage(entries) {
   });
 }
 
-const url = values.url ?? positionals[0] ?? DEFAULT_URL;
+function getRoute(value) {
+  if (!value.includes('://')) {
+    return value.startsWith('/') ? value : `/${value}`;
+  }
+
+  const url = new URL(value);
+  if (!['127.0.0.1', '::1', 'localhost'].includes(url.hostname)) {
+    throw new Error('The screenshot route must be a path within the built website');
+  }
+
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+const route = getRoute(values.url ?? positionals[0] ?? DEFAULT_ROUTE);
 const output = path.resolve(invocationDirectory, values.output ?? positionals[1] ?? DEFAULT_OUTPUT);
 const width = parsePositiveNumber(values.width, '--width', { integer: true });
 const height = parsePositiveNumber(values.height, '--height', { integer: true });
@@ -111,10 +131,39 @@ if (!WAIT_UNTIL_VALUES.has(waitUntil)) {
   throw new Error(`--wait-until must be one of: ${[...WAIT_UNTIL_VALUES].join(', ')}`);
 }
 
+try {
+  await fs.access(distIndexPath);
+} catch {
+  throw new Error(
+    'Built website assets are missing. Run "pnpm run build" before taking a screenshot.',
+  );
+}
+
 await fs.mkdir(path.dirname(output), { recursive: true });
 
-const browser = await chromium.launch();
+const previewServer = await preview({
+  root: websiteDirectory,
+  configFile: viteConfigPath,
+  envDir: websiteDirectory,
+  mode: values.mode,
+  logLevel: 'error',
+  preview: {
+    host: '127.0.0.1',
+    port: 0,
+    strictPort: true,
+  },
+});
+
+const address = previewServer.httpServer.address();
+if (!address || typeof address === 'string') {
+  await previewServer.close();
+  throw new Error('Could not determine the temporary preview server address');
+}
+
+const url = new URL(route, `http://127.0.0.1:${address.port}/`).href;
+let browser;
 try {
+  browser = await chromium.launch();
   const context = await browser.newContext({
     viewport: { width, height },
     deviceScaleFactor,
@@ -155,5 +204,6 @@ try {
   });
   console.log(`Screenshot saved to ${output}`);
 } finally {
-  await browser.close();
+  await browser?.close();
+  await previewServer.close();
 }
