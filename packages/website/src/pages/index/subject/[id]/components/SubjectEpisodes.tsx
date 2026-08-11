@@ -4,11 +4,12 @@ import React from 'react';
 import type { Episode, Subject } from '@bangumi/client/client';
 import { EpisodeType, SubjectType } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
-import { getEpisodeLink, getSubjectLink } from '@bangumi/utils/pages';
+import { getEpisodeLink } from '@bangumi/utils/pages';
 import PageContainer from '@bangumi/website/components/PageContainer';
 
 import { SubjectHeader } from './SubjectDetail';
 import styles from './SubjectEpisodes.module.less';
+import SubjectSummaryCard from './SubjectSummaryCard';
 
 const { Link } = Typography;
 
@@ -90,26 +91,6 @@ function EpisodeRow({ episode, showAirStatus }: { episode: Episode; showAirStatu
         {broadcastInfo.length > 0 && ' '}/ 讨论:+{episode.comment}
       </p>
     </li>
-  );
-}
-
-function SubjectSummaryCard({ subject }: { subject: Subject }) {
-  return (
-    <aside className={styles.subjectCard}>
-      {subject.images?.small && (
-        <Link to={getSubjectLink(subject.id)} noStyle className={styles.coverLink}>
-          <img src={subject.images.small} alt='' className={styles.cover} />
-        </Link>
-      )}
-      <div className={styles.subjectCardContent}>
-        <Link to={getSubjectLink(subject.id)} className={styles.subjectName}>
-          {subject.name}
-        </Link>
-        <Link to={getSubjectLink(subject.id)} className={styles.returnLink}>
-          返回条目
-        </Link>
-      </div>
-    </aside>
   );
 }
 

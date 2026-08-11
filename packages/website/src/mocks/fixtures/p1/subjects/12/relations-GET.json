@@ -1,0 +1,104 @@
+{
+  "data": [
+    {
+      "subject": {
+        "id": 13,
+        "type": 2,
+        "name": "Test Anime 2",
+        "nameCN": "测试动画2",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/13.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/13.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/13.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/13.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/13.jpg"
+        },
+        "info": "",
+        "metaTags": [],
+        "locked": false,
+        "nsfw": false,
+        "rating": {
+          "rank": 0,
+          "total": 0,
+          "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          "score": 0
+        }
+      },
+      "relation": {
+        "id": 1,
+        "en": "sequel",
+        "cn": "续作",
+        "jp": "続編",
+        "desc": ""
+      },
+      "order": 1
+    },
+    {
+      "subject": {
+        "id": 11,
+        "type": 2,
+        "name": "Test Anime 0",
+        "nameCN": "测试动画0",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/11.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/11.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/11.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/11.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/11.jpg"
+        },
+        "info": "",
+        "metaTags": [],
+        "locked": false,
+        "nsfw": false,
+        "rating": {
+          "rank": 0,
+          "total": 0,
+          "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          "score": 0
+        }
+      },
+      "relation": {
+        "id": 2,
+        "en": "prequel",
+        "cn": "前传",
+        "jp": "前日譚",
+        "desc": ""
+      },
+      "order": 0
+    },
+    {
+      "subject": {
+        "id": 14,
+        "type": 2,
+        "name": "Test Anime Movie",
+        "nameCN": "测试动画剧场版",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/14.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/14.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/14.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/14.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/14.jpg"
+        },
+        "info": "",
+        "metaTags": [],
+        "locked": false,
+        "nsfw": false,
+        "rating": {
+          "rank": 0,
+          "total": 0,
+          "count": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+          "score": 0
+        }
+      },
+      "relation": {
+        "id": 1,
+        "en": "sequel",
+        "cn": "续作",
+        "jp": "続編",
+        "desc": ""
+      },
+      "order": 2
+    }
+  ],
+  "total": 3
+}
