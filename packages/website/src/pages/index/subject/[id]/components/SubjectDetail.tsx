@@ -5,6 +5,7 @@ import type { SlimIndex, Subject, SubjectHomeResponse } from '@bangumi/client/cl
 import { CollectionType, SubjectType } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
 import { Link as LinkIcon } from '@bangumi/icons';
+import { formatSubjectInfobox } from '@bangumi/utils';
 import {
   getIndexLink,
   getSubjectBoardLink,
@@ -147,6 +148,7 @@ export function SubjectHeader({ subject }: { subject: Subject }) {
 
 /** 左栏：封面与信息框，对齐 PHP subject_infobox */
 function SubjectInfobox({ subject }: { subject: Subject }) {
+  const infobox = formatSubjectInfobox(subject.infobox);
   return (
     <div className={styles.infobox}>
       {subject.images?.large != null && (
@@ -163,7 +165,7 @@ function SubjectInfobox({ subject }: { subject: Subject }) {
         </div>
       )}
       <ul className={styles.infoList}>
-        {subject.infobox.map((item) => (
+        {infobox.map((item) => (
           <li key={item.key}>
             <span className={styles.tip}>{item.key}: </span>
             <span>

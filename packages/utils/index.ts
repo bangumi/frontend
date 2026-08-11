@@ -7,6 +7,8 @@ export {
 } from '@bgm38/wiki';
 export { toWikiElement, fromWikiElement, WikiElement, mergeWiki, WikiTemplate } from './wiki';
 export type { Wiki } from '@bgm38/wiki';
+export { formatSubjectInfobox } from './infobox';
+export type { Infobox, InfoboxItem, InfoboxValue } from './infobox';
 export * from './bbcode';
 
 /**
