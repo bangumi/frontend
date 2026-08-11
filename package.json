@@ -3,9 +3,9 @@
   "version": "0.0.0-alpha.9",
   "private": true,
   "scripts": {
-    "prepare": "husky install && panda codegen",
+    "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
-    "build": "pnpm website build",
+    "build": "panda codegen && panda cssgen && pnpm website build",
     "build:client": "pnpm client update-openapi && pnpm client build",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design dev",
@@ -15,7 +15,7 @@
     "dev:ssr": "pnpm server dev",
     "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,mts,cts,tsx",
     "lint:fix": "pnpm lint --fix",
-    "lint:style": "stylelint \"./packages/**/*.{css,less}\"",
+    "lint:style": "stylelint \"./packages/**/*.{css,less}\" --ignore-pattern \"packages/styled-system/**\"",
     "lint:style-fix": "pnpm lint:style --fix",
     "prettier": "prettier --write --list-different ./",
     "format": "prettier --write --list-different ./",
@@ -28,6 +28,7 @@
     "utils": "pnpm --filter=@bangumi/utils",
     "lint-staged": "lint-staged -q",
     "panda:codegen": "panda codegen",
+    "panda:cssgen": "panda cssgen",
     "type-check": "tsc --noEmit"
   },
   "packageManager": "pnpm@11.21.0",
