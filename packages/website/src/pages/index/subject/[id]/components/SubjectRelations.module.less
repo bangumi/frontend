@@ -7,7 +7,7 @@
   gap: 20px;
 }
 
-.episodeGroups {
+.relationGroups {
   min-width: 0;
 }
 
@@ -22,54 +22,54 @@
   line-height: 18px;
 }
 
-.episodeList {
-  margin: 0;
+.relationList {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 10px 0 0;
   padding: 0;
   list-style: none;
 }
 
-.episodeRow {
-  padding: 6px 5px;
-  border-bottom: 1px dotted #e0e0e0;
-  font-size: 14px;
-  line-height: 1.6;
-
-  &:nth-child(even) {
-    background: #f9f9f9;
-  }
-}
-
-.episodeTitle {
+.relationItem {
+  width: 80px;
   min-width: 0;
-  overflow-wrap: anywhere;
+  text-align: left;
 }
 
-.airedStatus,
-.futureStatus {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: 0 5px 1px 1px;
-  border-radius: 50%;
+.coverLink {
+  display: block;
 }
 
-.airedStatus {
-  background: @blue-collect;
+.cover {
+  display: block;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 
-.futureStatus {
-  background: #d9dfe1;
-}
-
-.episodeNameCN {
-  color: @gray-80;
-}
-
-.episodeMeta {
-  margin: 0;
+.coverFallback {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background: @gray-10;
   color: @gray-60;
-  font-size: 12px;
-  line-height: 19px;
+  font-size: 24px;
+}
+
+.coverTitle {
+  max-height: 52px;
+  margin: 5px 0 0;
+  overflow: hidden;
+  font-size: 11px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
 }
 
 .empty {
