@@ -9,28 +9,7 @@ import { renderPage } from '@bangumi/website/utils/test-utils';
 import homeFixture from '../../../mocks/fixtures/p1/home-GET.json';
 import HomePage from './components/HomePage';
 
-function createLocalStorage(): Storage {
-  const values = new Map<string, string>();
-  return {
-    get length() {
-      return values.size;
-    },
-    clear: () => values.clear(),
-    getItem: (key) => values.get(key) ?? null,
-    key: (index) => [...values.keys()][index] ?? null,
-    removeItem: (key) => values.delete(key),
-    setItem: (key, value) => values.set(key, String(value)),
-  };
-}
-
 describe('HomePage', () => {
-  beforeEach(() => {
-    Object.defineProperty(window, 'localStorage', {
-      configurable: true,
-      value: createLocalStorage(),
-    });
-  });
-
   const setupHome = () => {
     mockServer.use(
       http.get('http://localhost:3000/p1/home', () => {
