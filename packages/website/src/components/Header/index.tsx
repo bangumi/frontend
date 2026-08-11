@@ -289,7 +289,6 @@ const icon = css({ width: '18px', height: '18px' });
 
 const notificationIcon = css({
   position: 'relative',
-  smDown: { display: 'none' },
 });
 
 const notificationNotice = css({
@@ -357,7 +356,6 @@ const mobilePanelStyle = css({
     top: '100%',
     left: '0',
     zIndex: '1',
-    display: 'block',
     width: '100%',
     padding: '4px 10px 0',
     boxSizing: 'border-box',
@@ -365,6 +363,10 @@ const mobilePanelStyle = css({
     borderBottom: '1px solid rgba(249, 188, 193, 0.95)',
     boxShadow: '0 0 0 2px rgba(0, 0, 0, 0.04)',
   },
+});
+
+const mobilePanelOpen = css({
+  smDown: { display: 'block' },
 });
 
 const mobileSearch = css({
@@ -443,13 +445,13 @@ const Header: FC = () => {
   const [searchCategory, setSearchCategory] = useState('all');
   const searchInputRef = useRef<HTMLInputElement>(null);
   const showMobileMenu = mobilePanel === 'menu';
-  const showMobileSearch = mobilePanel !== 'closed';
+  const showMobilePanel = mobilePanel !== 'closed';
 
   useEffect(() => {
-    if (showMobileSearch) {
+    if (mobilePanel === 'search') {
       searchInputRef.current?.focus();
     }
-  }, [showMobileSearch]);
+  }, [mobilePanel]);
 
   const toggleMobileMenu = (): void => {
     setMobilePanel((panel) => (panel === 'menu' ? 'closed' : 'menu'));
@@ -500,7 +502,7 @@ const Header: FC = () => {
             className={mobileSearchButton}
             type='button'
             aria-controls='mobile-search-panel'
-            aria-expanded={showMobileSearch}
+            aria-expanded={showMobilePanel}
             aria-label='搜索'
             onClick={() => {
               setMobilePanel((panel) => (panel === 'search' ? 'closed' : 'search'));
@@ -553,7 +555,10 @@ const Header: FC = () => {
           )}
         </div>
       </div>
-      <div id='mobile-search-panel' hidden={!showMobileSearch} className={mobilePanelStyle}>
+      <div
+        id='mobile-search-panel'
+        className={cx(mobilePanelStyle, showMobilePanel && mobilePanelOpen)}
+      >
         <form className={mobileSearchForm} onSubmit={handleMobileSearch}>
           <Input
             ref={searchInputRef}

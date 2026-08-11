@@ -13,8 +13,8 @@ test.describe('main page', () => {
     await page.goto('/');
 
     const headerContent = page.locator('header > div').first();
-    await expect(headerContent).toHaveCSS('padding-left', '16px');
-    await expect(headerContent).toHaveCSS('padding-right', '16px');
+    await expect(headerContent).toHaveCSS('padding-left', '5px');
+    await expect(headerContent).toHaveCSS('padding-right', '5px');
     await expect
       .poll(async () => page.evaluate(() => document.documentElement.scrollWidth))
       .toBe(375);
@@ -33,8 +33,19 @@ test.describe('main page', () => {
     await expect(toggle).toHaveAccessibleName('关闭菜单');
     await expect(toggle).toHaveAttribute('aria-expanded', 'true');
     await expect(navigation).toBeVisible();
-    await expect(navigation.getByRole('textbox', { name: '搜索' })).toBeVisible();
+    await expect(
+      page.locator('#mobile-search-panel').getByRole('textbox', { name: '搜索' }),
+    ).toBeVisible();
     await expect(navigation.getByRole('link', { name: '动画' })).toBeVisible();
+  });
+
+  test('移动端初始状态搜索面板不可见', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/');
+
+    // 回归测试：header 迁移 Panda CSS 后，smDown 内无条件 display:block 曾覆盖 hidden 属性，
+    // 导致搜索面板在移动端无条件显示（#995）
+    await expect(page.locator('#mobile-search-panel')).toBeHidden();
   });
 
   test('移动端已登录操作区保持水平对齐', async ({ page }) => {
