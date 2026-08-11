@@ -9,13 +9,15 @@ export interface MenuItemProps {
   id: string;
   /** 菜单标题 */
   label: string;
+  /** 菜单项链接 */
+  href?: string;
   /** 自定义类名 */
   className?: string;
   /** 子菜单，鼠标悬浮时显示 */
   subMenu?: JSX.Element;
 }
 
-const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, subMenu }) => {
+const MenuItem: FC<MenuItemProps> = ({ id, label, href, className: customClassName, subMenu }) => {
   const { onClick: onClickEmit, activeKey, mode } = useMenuContext();
 
   const isActive = id === activeKey;
@@ -39,7 +41,13 @@ const MenuItem: FC<MenuItemProps> = ({ id, label, className: customClassName, su
         })
       }
     >
-      {label}
+      {href ? (
+        <a className='bgm-menu-item__link' href={href}>
+          {label}
+        </a>
+      ) : (
+        label
+      )}
       {subMenu && (
         <div className='bgm-menu-item__submenu' data-testid='submenu'>
           {subMenu}

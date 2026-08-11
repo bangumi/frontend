@@ -57,3 +57,9 @@ it('should render subMenu', () => {
   expect(getByText('1')).toHaveClass('class-1');
   expect(getByTestId('submenu')).toBeInTheDocument();
 });
+
+it('should render a menu item link', () => {
+  const { getByRole } = render(<Menu items={[{ key: 'anime', label: '动画', href: '/anime' }]} />);
+
+  expect(getByRole('link', { name: '动画' })).toHaveAttribute('href', '/anime');
+});

@@ -183,6 +183,40 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/channels/{type}/blogs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取频道日志 */
+    get: operations['getChannelBlogs'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/channels/{type}/tags': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取频道热门标签 */
+    get: operations['getChannelTags'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/characters/{characterID}': {
     parameters: {
       query?: never;
@@ -368,6 +402,23 @@ export interface paths {
     post?: never;
     /** 删除角色的吐槽 */
     delete: operations['deleteCharacterComment'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/me/friends/subject-collections': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取好友最近的条目收藏 */
+    get: operations['getFriendsSubjectCollections'];
+    put?: never;
+    post?: never;
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -1842,7 +1893,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 获取热门条目讨论 */
+    /** 获取条目讨论 */
     get: operations['getTrendingSubjectTopics'];
     put?: never;
     post?: never;
@@ -3790,6 +3841,8 @@ export interface components {
       group: number;
       sign: string;
       joinedAt: number;
+      /** @description Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship */
+      isFriend: boolean;
     };
     /**
      * Subject
@@ -4239,6 +4292,8 @@ export interface components {
       }[];
       homepage: components['schemas']['UserHomepage'];
       stats: components['schemas']['UserStats'];
+      /** @description Whether the authenticated user has added this user as a friend; false when unauthenticated */
+      isFriend: boolean;
     };
     /** UserNetworkService */
     UserNetworkService: {
@@ -4315,6 +4370,14 @@ export interface components {
       subject: components['schemas']['SlimSubject'];
       watchers: number;
     };
+    /** FriendSubjectCollectionActivity */
+    FriendSubjectCollectionActivity: {
+      user: components['schemas']['SlimUser'];
+      subject: components['schemas']['SlimSubject'];
+      collectionType: components['schemas']['CollectionType'];
+      /** @description 收藏最后修改时间，unix time stamp in seconds */
+      updatedAt: number;
+    };
     ProgressSubject: components['schemas']['SlimSubject'] & {
       eps: number;
       volumes: number;
@@ -4358,6 +4421,16 @@ export interface components {
     TrendingSubject: {
       subject: components['schemas']['SlimSubject'];
       count: number;
+    };
+    /** ChannelSubjectTopic */
+    ChannelSubjectTopic: {
+      id: number;
+      title: string;
+      replyCount: number;
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+      creator?: components['schemas']['SlimUser'];
+      subject: components['schemas']['SlimSubject'];
     };
     /**
      * @example {
@@ -5047,6 +5120,86 @@ export interface operations {
       };
     };
   };
+  getChannelBlogs: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path: {
+        type: components['schemas']['SubjectType'];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SlimBlogEntry'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getChannelTags: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path: {
+        type: components['schemas']['SubjectType'];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['SubjectTag'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
   getCharacter: {
     parameters: {
       query?: never;
@@ -5680,6 +5833,45 @@ export interface operations {
         };
         content: {
           'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getFriendsSubjectCollections: {
+    parameters: {
+      query: {
+        subjectType: components['schemas']['SubjectType'];
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['FriendSubjectCollectionActivity'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -10399,6 +10591,7 @@ export interface operations {
   getTrendingSubjectTopics: {
     parameters: {
       query?: {
+        type?: components['schemas']['SubjectType'];
         /** @description max 100 */
         limit?: number;
         /** @description min 0 */
@@ -10417,7 +10610,7 @@ export interface operations {
         };
         content: {
           'application/json': {
-            data: components['schemas']['SubjectTopic'][];
+            data: components['schemas']['ChannelSubjectTopic'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
@@ -10903,6 +11096,8 @@ export interface operations {
                 group: number;
                 sign: string;
                 joinedAt: number;
+                /** @description Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship */
+                isFriend: boolean;
               };
               voted: boolean;
             }[];

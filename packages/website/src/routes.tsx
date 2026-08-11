@@ -6,7 +6,7 @@ import LegacyRedirect from './components/PageRoutes/LegacyRedirect';
 const RootIndex = lazy(async () => import('./pages/index'));
 const MatchAll = lazy(async () => import('./pages/index/[...slug]'));
 const HomeIndex = lazy(async () => import('./pages/index/index'));
-const Anime = lazy(async () => import('./pages/index/anime'));
+const Channel = lazy(async () => import('./pages/index/channel'));
 const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
@@ -39,14 +39,16 @@ const UserCollections = lazy(async () => import('./pages/index/user/collections/
 const userCollectionTypes = ['anime', 'book', 'music', 'game', 'real'] as const;
 
 const legacyPagePaths = [
+  ...userCollectionTypes.flatMap((type) => [
+    `${type}/blog`,
+    `${type}/browser/*`,
+    `${type}/chart`,
+    `${type}/tag/*`,
+  ]),
   'about',
   'about/guideline',
   'about/copyright',
   'about/link2us',
-  'anime/blog',
-  'anime/browser/*',
-  'anime/chart',
-  'anime/tag/*',
   'award/2021',
   'blog/:id',
   'calendar',
@@ -94,7 +96,7 @@ export const pageRoutes: RouteObject[] = [
       ...userCollectionTypes.map((type) => ({
         path: type,
         children: [
-          ...(type === 'anime' ? [{ path: '', element: <Anime /> }] : []),
+          { path: '', element: <Channel channel={type} /> },
           {
             path: 'list/:username',
             children: [{ path: ':status?', element: <UserCollections subjectType={type} /> }],

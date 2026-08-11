@@ -1,0 +1,17 @@
+{
+  "data": [
+    {
+      "id": 10003,
+      "type": 1,
+      "uid": 1,
+      "title": "本月音乐记录",
+      "icon": "",
+      "summary": "",
+      "replies": 2,
+      "public": true,
+      "createdAt": 1786000000,
+      "updatedAt": 1786000000
+    }
+  ],
+  "total": 1
+}

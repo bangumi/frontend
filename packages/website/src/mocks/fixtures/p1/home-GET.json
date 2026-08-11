@@ -224,7 +224,8 @@
         },
         "group": 10,
         "joinedAt": 1500000000,
-        "sign": ""
+        "sign": "",
+        "isFriend": false
       },
       "cat": 5,
       "type": 0,
@@ -254,7 +255,8 @@
         },
         "group": 10,
         "joinedAt": 1500000000,
-        "sign": ""
+        "sign": "",
+        "isFriend": false
       },
       "creatorID": 382951,
       "parentID": 4215,
@@ -313,7 +315,8 @@
         },
         "group": 10,
         "joinedAt": 1500000000,
-        "sign": ""
+        "sign": "",
+        "isFriend": false
       },
       "creatorID": 382951,
       "parentID": 12,

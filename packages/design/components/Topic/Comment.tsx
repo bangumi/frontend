@@ -22,7 +22,7 @@ export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply
   floor: string | number;
   originalPosterId: number;
   onCommentUpdate: () => Promise<unknown>;
-  user?: SlimUser;
+  user?: Pick<SlimUser, 'id'>;
 };
 
 const Link = Typography.Link;

@@ -35,6 +35,8 @@ export type SlimUser = {
   group: number;
   sign: string;
   joinedAt: number;
+  /** Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship */
+  isFriend: boolean;
 };
 export type BlogEntry = {
   id: number;
@@ -134,6 +136,23 @@ export type Calendar = {
     subject: SlimSubject;
     watchers: number;
   }[];
+};
+export type SlimBlogEntry = {
+  id: number;
+  type: number;
+  uid: number;
+  user?: SlimUser;
+  title: string;
+  icon: string;
+  summary: string;
+  replies: number;
+  public: boolean;
+  createdAt: number;
+  updatedAt: number;
+};
+export type SubjectTag = {
+  name: string;
+  count: number;
 };
 export type Infobox = {
   key: string;
@@ -267,6 +286,13 @@ export type SlimIndex = {
   createdAt: number;
   updatedAt: number;
 };
+export type FriendSubjectCollectionActivity = {
+  user: SlimUser;
+  subject: SlimSubject;
+  collectionType: CollectionType;
+  /** 收藏最后修改时间，unix time stamp in seconds */
+  updatedAt: number;
+};
 export type SubjectAirtime = {
   date: string;
   month: number;
@@ -286,10 +312,6 @@ export type SubjectPlatform = {
   wikiTpl?: string;
   searchString?: string;
   sortKeys?: string[];
-};
-export type SubjectTag = {
-  name: string;
-  count: number;
 };
 export type SubjectInterest = {
   id: number;
@@ -512,19 +534,6 @@ export type ProgressItem = {
     sort: number;
   };
   eps: Episode[];
-};
-export type SlimBlogEntry = {
-  id: number;
-  type: number;
-  uid: number;
-  user?: SlimUser;
-  title: string;
-  icon: string;
-  summary: string;
-  replies: number;
-  public: boolean;
-  createdAt: number;
-  updatedAt: number;
 };
 export type TimelineMemo = {
   daily?: {
@@ -818,6 +827,15 @@ export type TrendingSubject = {
   subject: SlimSubject;
   count: number;
 };
+export type ChannelSubjectTopic = {
+  id: number;
+  title: string;
+  replyCount: number;
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+  creator?: SlimUser;
+  subject: SlimSubject;
+};
 export type UserHomepage = {
   left: UserHomepageSection[];
   right: UserHomepageSection[];
@@ -863,6 +881,8 @@ export type User = {
   }[];
   homepage: UserHomepage;
   stats: UserStats;
+  /** Whether the authenticated user has added this user as a friend; false when unauthenticated */
+  isFriend: boolean;
 };
 export type WikiPlatform = {
   id: number;
@@ -1397,6 +1417,84 @@ export function getCalendar(opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
+ * 获取频道日志
+ */
+export function getChannelBlogs(
+  $type: SubjectType,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SlimBlogEntry[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/channels/${encodeURIComponent($type)}/blogs${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 获取频道热门标签
+ */
+export function getChannelTags(
+  $type: SubjectType,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: SubjectTag[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/channels/${encodeURIComponent($type)}/tags${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
  * 获取角色
  */
 export function getCharacter(characterId: number, opts?: Oazapfts.RequestOpts) {
@@ -1888,6 +1986,46 @@ export function deleteCharacterComment(commentId: number, opts?: Oazapfts.Reques
     ...opts,
     method: 'DELETE',
   });
+}
+/**
+ * 获取好友最近的条目收藏
+ */
+export function getFriendsSubjectCollections(
+  subjectType: SubjectType,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: FriendSubjectCollectionActivity[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/me/friends/subject-collections${QS.query(
+      QS.explode({
+        subjectType,
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
 }
 /**
  * 获取当前用户的条目收藏
@@ -5469,13 +5607,15 @@ export function getTrendingSubjects(
   );
 }
 /**
- * 获取热门条目讨论
+ * 获取条目讨论
  */
 export function getTrendingSubjectTopics(
   {
+    $type,
     limit,
     offset,
   }: {
+    $type?: SubjectType;
     limit?: number;
     offset?: number;
   } = {},
@@ -5485,7 +5625,7 @@ export function getTrendingSubjectTopics(
     | {
         status: 200;
         data: {
-          data: SubjectTopic[];
+          data: ChannelSubjectTopic[];
           /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
           total: number;
         };
@@ -5497,6 +5637,7 @@ export function getTrendingSubjectTopics(
   >(
     `/p1/trending/subjects/topics${QS.query(
       QS.explode({
+        type: $type,
         limit,
         offset,
       }),
@@ -5937,6 +6078,8 @@ export function listSubjectCovers(subjectId: number, opts?: Oazapfts.RequestOpts
               group: number;
               sign: string;
               joinedAt: number;
+              /** Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship */
+              isFriend: boolean;
             };
             voted: boolean;
           }[];

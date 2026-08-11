@@ -1,0 +1,8 @@
+{
+  "data": [
+    { "name": "PC", "count": 25000 },
+    { "name": "RPG", "count": 17000 },
+    { "name": "独立游戏", "count": 6200 }
+  ],
+  "total": 3
+}

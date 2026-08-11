@@ -19,7 +19,8 @@
       },
       "group": 10,
       "sign": "干正事唉声叹气，搞闲事兴致盎然的摸鱼先锋 ...",
-      "joinedAt": 1467013898
+      "joinedAt": 1467013898,
+      "isFriend": false
     }
   },
   {
@@ -42,7 +43,8 @@
       },
       "group": 10,
       "sign": "",
-      "joinedAt": 1626555138
+      "joinedAt": 1626555138,
+      "isFriend": false
     },
     "reactions": [
       {
@@ -83,7 +85,8 @@
           },
           "group": 10,
           "sign": "初步给分靠观感，细化评分看脉络",
-          "joinedAt": 1628074000
+          "joinedAt": 1628074000,
+          "isFriend": false
         }
       }
     ],
@@ -98,7 +101,8 @@
       },
       "group": 10,
       "sign": "",
-      "joinedAt": 1510378726
+      "joinedAt": 1510378726,
+      "isFriend": false
     }
   }
 ]
