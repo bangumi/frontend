@@ -581,8 +581,14 @@
   }
 
   .splitView {
-    grid-template-columns: 132px minmax(0, 1fr);
-    height: 300px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 160px auto;
+    height: auto;
+  }
+
+  .subjectList {
+    border-right: none;
+    border-bottom: 1px solid @gray-10;
   }
 
   .navButton {
@@ -619,6 +625,10 @@
 
   .subjectActions {
     flex-wrap: wrap;
+  }
+
+  .gridList {
+    grid-template-columns: 1fr;
   }
 }
 
