@@ -3,7 +3,7 @@
 ## 项目概览
 
 这是 Bangumi 新前端项目，使用 React、TypeScript、Vite 和 pnpm workspace。
-项目要求 Node.js `>=22`，包管理器固定为 pnpm `10.34.1`。
+项目要求 Node.js `>=22`，包管理器固定为 pnpm `11.21.0`（见根 `package.json` 的 `packageManager` 字段）。
 
 主要 workspace：
 
@@ -15,6 +15,17 @@
 - `packages/server`：服务端 workspace。
 - `tests`：Vitest 全局 setup、网站测试配置和测试 mock。
 - `docs`：路由、CSS 命名和代码风格等项目文档。
+
+### Workspace 布局
+
+- `pnpm-workspace.yaml` 声明 `packages: ['packages/*']`；根 `package.json` 只放根级共享
+  devDependencies 和汇总脚本，各包依赖声明在各自 `package.json`。
+- pnpm 采用非提升（isolated）依赖布局：包的依赖安装在各包自己的 `node_modules`（经
+  `.pnpm` store 链接），根目录 `node_modules` 不含各包依赖。Node 模块解析从脚本文件
+  所在目录向上查找，因此独立脚本只能解析它所在 workspace 包声明过的依赖。
+- 例如 `@playwright/test` 是 `packages/website` 的 devDependency：在仓库根目录写
+  `import { chromium } from '@playwright/test'` 会报 `ERR_MODULE_NOT_FOUND`，脚本放在
+  `packages/website` 下才能解析成功。
 
 ## 开发命令
 
@@ -39,6 +50,33 @@ pnpm prettier:check      # 检查 Prettier 格式
 需要验证代码效果时，可以使用仓库内的 Playwright、截图工具，或由验证流程临时启动并在完成后
 立即关闭的 Vite preview；优先使用执行完成后会自行退出的构建、测试或截图命令，不得遗留后台
 进程。
+
+### 编写和运行 Playwright 脚本
+
+- 截图、视觉对比、按截图实现/修复 UI 等任务遵循 `playwright-visual-implementation`
+  skill（`.agents/skills/playwright-visual-implementation/SKILL.md`）：优先使用仓库截图
+  CLI `pnpm website screenshot`（`packages/website/scripts/screenshot.mjs`），先
+  `pnpm run build`，它再启动用完即关的临时 Vite preview。该脚本是 agent 可按需修改的
+  截图工具：CLI 选项不足以表达目标状态（点击、表单输入、等待某个元素出现/消失）时，
+  直接往脚本里加对应步骤（如新增可重复的 `--click <selector>` 选项），改完仍用
+  `pnpm website screenshot` 运行，不要另起炉灶写临时脚本。
+- 确需独立临时 Playwright 脚本时（不便改动仓库文件等场景），放在
+  `packages/website/scripts/` 下、用 `pnpm website <script>`（即
+  `pnpm --filter=@bangumi/website run <script>`）运行，并参照 `scripts/screenshot.mjs`
+  处理路径：`pnpm website` 运行时 cwd 是该包目录，取用户调用目录用
+  `process.env.INIT_CWD ?? process.cwd()`，定位仓库内文件基于 `import.meta.dirname`
+  相对推算。
+- `@playwright/test` 已由项目声明为 `packages/website` 的 devDependency，`pnpm install`
+  后即可 import；chromium 浏览器由用户环境预先安装。agent **不得自行安装** playwright
+  或其浏览器，不要运行 `pnpm add`、`npm install`、`playwright install`、
+  `pnpm website install-playwright-deps` 等命令；缺依赖或浏览器时报环境问题即可。
+- 脚本 import playwright 能否成功取决于文件位置（见上文 Workspace 布局）：放在
+  `packages/website/` 内才能 `import { chromium } from '@playwright/test'`；放在仓库
+  根目录会报 `ERR_MODULE_NOT_FOUND`。这是布局问题而非依赖缺失，不要因此安装依赖或
+  往根 `package.json` 添加依赖，把脚本放进 `packages/website/` 内即可。
+- 临时跑 Playwright CLI（如指定单个 spec 或加参数）可用
+  `pnpm website exec playwright test <args>`，config 默认取
+  `packages/website/playwright.config.ts`；日常跑 e2e 用 `pnpm test:e2e`。
 
 ## 代码约定
 
