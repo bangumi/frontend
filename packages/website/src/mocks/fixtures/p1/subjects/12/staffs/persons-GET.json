@@ -1,0 +1,62 @@
+{
+  "data": [
+    {
+      "staff": {
+        "id": 1,
+        "name": "Test Director",
+        "nameCN": "测试监督",
+        "type": 1,
+        "info": "",
+        "career": ["导演", "分镜"],
+        "images": {
+          "large": "https://lain.bgm.tv/pic/prsn/l/00/00/01.jpg",
+          "medium": "https://lain.bgm.tv/pic/prsn/m/00/00/01.jpg",
+          "small": "https://lain.bgm.tv/pic/prsn/s/00/00/01.jpg",
+          "grid": "https://lain.bgm.tv/pic/prsn/g/00/00/01.jpg"
+        },
+        "comment": 5,
+        "lock": false,
+        "nsfw": false
+      },
+      "positions": [
+        {
+          "type": { "id": 1, "en": "director", "cn": "监督", "jp": "監督" },
+          "summary": "",
+          "appearEps": ""
+        },
+        {
+          "type": { "id": 3, "en": "storyboard", "cn": "分镜", "jp": "絵コンテ" },
+          "summary": "第1-3话",
+          "appearEps": ""
+        }
+      ]
+    },
+    {
+      "staff": {
+        "id": 2,
+        "name": "Test Writer",
+        "nameCN": "测试脚本",
+        "type": 1,
+        "info": "",
+        "career": ["脚本"],
+        "images": {
+          "large": "https://lain.bgm.tv/pic/prsn/l/00/00/02.jpg",
+          "medium": "https://lain.bgm.tv/pic/prsn/m/00/00/02.jpg",
+          "small": "https://lain.bgm.tv/pic/prsn/s/00/00/02.jpg",
+          "grid": "https://lain.bgm.tv/pic/prsn/g/00/00/02.jpg"
+        },
+        "comment": 3,
+        "lock": false,
+        "nsfw": false
+      },
+      "positions": [
+        {
+          "type": { "id": 2, "en": "writer", "cn": "脚本", "jp": "脚本" },
+          "summary": "系列构成",
+          "appearEps": "1-12"
+        }
+      ]
+    }
+  ],
+  "total": 2
+}

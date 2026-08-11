@@ -688,6 +688,18 @@
     margin: 10px 0;
 }
 
+  .p_5px_10px {
+    padding: 5px 10px;
+}
+
+  .p_10px {
+    padding: 10px;
+}
+
+  .bg_\#e8e3e3 {
+    background: #e8e3e3;
+}
+
   .p_2px_8px_2px_5px {
     padding: 2px 8px 2px 5px;
 }
@@ -806,6 +818,10 @@
 
   .bd-b_1px_dotted_\#e8e3e3 {
     border-bottom: 1px dotted #e8e3e3;
+}
+
+  .gap_20px {
+    gap: 20px;
 }
 
   .gap_5px {
@@ -1101,6 +1117,18 @@
     background-size: 15px 100px;
 }
 
+  .asp_1 {
+    aspect-ratio: 1;
+}
+
+  .obj-f_cover {
+    object-fit: cover;
+}
+
+  .ov-wrap_anywhere {
+    overflow-wrap: anywhere;
+}
+
   .page_1 {
     page: 1px;
 }
@@ -1307,6 +1335,14 @@
 
   .h_15px {
     height: 15px;
+}
+
+  .w_60px {
+    width: 60px;
+}
+
+  .mb_4px {
+    margin-bottom: 4px;
 }
 
   .mt_8px {
