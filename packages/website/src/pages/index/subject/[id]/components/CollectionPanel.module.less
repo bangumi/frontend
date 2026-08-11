@@ -2,23 +2,30 @@
 
 .panel {
   overflow: hidden;
-  margin: 0 0 20px;
+  margin: 0 0 15px;
+  padding: 0;
   border: 1px solid @gray-10;
-  border-radius: 6px;
+  border-radius: 15px;
   background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.09);
+  font-size: 12px;
+  overflow-wrap: break-word;
 }
 
 .panelTitle {
+  height: 40px;
   margin: 0;
-  padding: 11px 14px;
-  border-bottom: 1px solid @gray-10;
-  background: #fafafa;
-  font-size: 15px;
+  padding: 0 10px;
+  border: 0;
+  background: #f7f7f7;
+  color: @gray-80;
+  font-size: 13px;
   font-weight: normal;
+  line-height: 40px;
 }
 
 .panelBody {
-  padding: 10px 12px 12px;
+  padding: 10px;
 }
 
 .interestDetails {
@@ -71,7 +78,7 @@
 
 .collectBtn {
   min-width: 0;
-  height: 32px;
+  height: 28px;
   padding: 0 2px;
   border: 1px solid @blue-100;
   border-right-width: 0;
@@ -178,16 +185,40 @@
 }
 
 .rating {
-  margin-top: 12px;
+  margin-top: 10px;
   border-top: 1px solid @gray-10;
   padding-top: 10px;
+}
+
+.ratingAnonymous {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .ratingHeadline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+  justify-content: flex-start;
+  gap: 6px;
+}
+
+.ratingInfo {
+  min-width: 0;
+}
+
+.rateEmo {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid @primary-color;
+  color: @primary-color;
+  font-size: 9px;
+  font-weight: bold;
+  line-height: 1;
 }
 
 .scoreLink {
@@ -197,7 +228,7 @@
 }
 
 .score {
-  font-size: 26px;
+  font-size: 22px;
   font-weight: bold;
   color: @primary-color;
   line-height: 1;
@@ -210,8 +241,8 @@
 
 .rankDesc {
   display: block;
-  margin-top: 5px;
-  font-size: 12px;
+  margin-top: 2px;
+  font-size: 10px;
   color: @gray-80;
 
   strong {
@@ -221,6 +252,7 @@
 }
 
 .votes {
+  margin-left: auto;
   flex: none;
   padding: 2px 5px;
   background: #f3f1f1;
@@ -248,7 +280,7 @@
 .chartBarArea {
   display: flex;
   width: 100%;
-  height: 46px;
+  height: 62px;
   align-items: flex-end;
   justify-content: center;
 }

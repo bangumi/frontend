@@ -7,6 +7,7 @@ import { CollectionType, SubjectType } from '@bangumi/client/client';
 import { Button, toast, Typography } from '@bangumi/design';
 import { getSubjectStatsLink } from '@bangumi/utils/pages';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import styles from './CollectionPanel.module.less';
 import { COLLECT_DESC } from './subject-common';
@@ -71,6 +72,7 @@ function ClickableRate({ value, onChange }: { value: number; onChange: (value: n
  * 收藏盒：我的收藏状态 + 收藏操作 + 全局评分，对齐 PHP panel_interest
  */
 const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
+  const { user } = useUser();
   const { mutate } = useSubjectHome(subject.id);
   const interest = subject.interest;
 
@@ -129,24 +131,26 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
     <section className={styles.panel}>
       <h2 className={styles.panelTitle}>收藏盒</h2>
       <div className={styles.panelBody}>
-        <div className={styles.collectButtons}>
-          {COLLECT_OPTIONS.map((option) => (
-            <button
-              key={option.type}
-              type='button'
-              className={`${styles.collectBtn} ${
-                interest?.type === option.type ? styles.collectBtnActive : ''
-              }`}
-              aria-pressed={interest?.type === option.type}
-              disabled={sending}
-              onClick={() => void updateType(option.type)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+        {user && (
+          <div className={styles.collectButtons}>
+            {COLLECT_OPTIONS.map((option) => (
+              <button
+                key={option.type}
+                type='button'
+                className={`${styles.collectBtn} ${
+                  interest?.type === option.type ? styles.collectBtnActive : ''
+                }`}
+                aria-pressed={interest?.type === option.type}
+                disabled={sending}
+                onClick={() => void updateType(option.type)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
 
-        {interest != null ? (
+        {user && interest != null ? (
           <div className={styles.interestDetails}>
             <p className={styles.interestNow}>
               我{COLLECT_DESC[interest.type]}这部作品
@@ -171,7 +175,7 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
           </div>
         ) : null}
 
-        {editing && (
+        {user && editing && (
           <div className={styles.editForm}>
             <div className={styles.formRow}>
               <span className={styles.formLabel}>收藏状态</span>
@@ -212,18 +216,23 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
           </div>
         )}
 
-        <div className={styles.rating}>
+        <div className={user ? styles.rating : `${styles.rating} ${styles.ratingAnonymous}`}>
           <div className={styles.ratingHeadline}>
-            <Link to={getSubjectStatsLink(subject.id)} className={styles.scoreLink}>
-              <span className={styles.score}>{rating.score.toFixed(1)}</span>
-              <span className={styles.ratingLabel}>{getRatingLabel(rating.score)}</span>
-            </Link>
+            <span className={styles.rateEmo} aria-hidden='true'>
+              ≥▽≤
+            </span>
+            <div className={styles.ratingInfo}>
+              <Link to={getSubjectStatsLink(subject.id)} className={styles.scoreLink}>
+                <span className={styles.score}>{rating.score.toFixed(1)}</span>
+                <span className={styles.ratingLabel}>{getRatingLabel(rating.score)}</span>
+              </Link>
+              <Link to={getSubjectStatsLink(subject.id)} className={styles.rankDesc}>
+                Bangumi {RATING_CATEGORY[subject.type]} Ranked:{' '}
+                <strong>{rating.rank === 0 ? '--' : `#${rating.rank}`}</strong>
+              </Link>
+            </div>
             <div className={styles.votes}>{rating.total} votes</div>
           </div>
-          <Link to={getSubjectStatsLink(subject.id)} className={styles.rankDesc}>
-            Bangumi {RATING_CATEGORY[subject.type]} Ranked:{' '}
-            <strong>{rating.rank === 0 ? '--' : `#${rating.rank}`}</strong>
-          </Link>
           <ul className={styles.chart} aria-label='评分分布'>
             {ratingCounts.map(({ count, score }) => (
               <li key={score} className={styles.chartItem} title={`${score}分: ${count}人`}>
