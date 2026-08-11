@@ -5,7 +5,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { UserProvider } from '@bangumi/website/hooks/use-user';
 
 import Header from '.';
-import style from './style.module.less';
 
 const renderHeader = () =>
   render(
@@ -46,7 +45,6 @@ describe('Header', () => {
 
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
     expect(navigation).toHaveAttribute('hidden');
-    expect(navigation).not.toHaveClass(style.mobileNavigationOpen!);
 
     fireEvent.click(toggle);
 
@@ -55,7 +53,19 @@ describe('Header', () => {
       'true',
     );
     expect(navigation).not.toHaveAttribute('hidden');
-    expect(navigation).toHaveClass(style.mobileNavigationOpen!);
     expect(screen.getByRole('textbox', { name: '搜索' })).toBeInTheDocument();
+  });
+
+  it('点击搜索按钮会展开并聚焦移动端搜索框', async () => {
+    const { container } = renderHeader();
+
+    const button = screen.getByRole('button', { name: '搜索' });
+    fireEvent.click(button);
+
+    expect(button).toHaveAttribute('aria-expanded', 'true');
+    expect(container.querySelector('#mobile-navigation')).toHaveAttribute('hidden');
+    await waitFor(() => {
+      expect(screen.getByRole('textbox', { name: '搜索' })).toHaveFocus();
+    });
   });
 });

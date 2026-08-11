@@ -1,15 +1,25 @@
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
+import { css } from '@bangumi/styled-system/css';
+
 import Footer from '../Footer';
 import Header from '../Header';
-import styles from './style.module.less';
+
+const container = css({ minHeight: '100vh', display: 'flex', flexDirection: 'column' });
+
+const contentWrapper = css({
+  position: 'relative',
+  flex: '1 0 auto',
+  width: '100%',
+  boxSizing: 'border-box',
+});
 
 const GlobalLayout = (props: PropsWithChildren<{}>) => {
   return (
-    <div className={styles.container}>
+    <div className={container}>
       <Header />
-      <div className={styles.contentWrapper}>{props.children}</div>
+      <div className={contentWrapper}>{props.children}</div>
       <Footer />
     </div>
   );
