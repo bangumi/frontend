@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "preinstall": "npx only-allow pnpm",
-    "build": "panda codegen && panda cssgen && pnpm website build",
+    "build": "pnpm website build",
     "build:client": "pnpm client update-openapi && pnpm client build",
     "design": "pnpm --filter=@bangumi/design",
     "design:doc": "pnpm design dev",
