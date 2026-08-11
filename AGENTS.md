@@ -46,8 +46,8 @@ pnpm prettier:check      # 检查 Prettier 格式
 - 遵循根目录 Prettier 配置：单引号、JSX 单引号、分号、尾随逗号、行宽 100。
 - ESLint 会检查未使用导入、导入顺序、Node 内置模块的 `node:` 协议、TypeScript 类型导入等。
   保持导入分组和 `simple-import-sort` 可通过，不要用禁用规则掩盖问题。
-- 页面及页面级组件使用 CSS Modules；共享组件样式遵循 BEM 派生命名：
-  `.bgm-组件名`、`.bgm-组件名__元素`、`.bgm-组件名--修饰符`。
+- 新代码和新样式使用 Panda CSS，并从 `@bangumi/styled-system` 导入类型化样式 API。现有 Less
+  和 CSS Modules 保持可用并逐步迁移；修改存量样式时沿用其 CSS Modules 或 BEM 命名约定。
 - 注释只写必要的设计或行为说明。函数、变量、类的文档使用 TSDoc `/** ... */`，不要用
   `//` 代替可被 TypeScript 工具识别的文档注释，也不要在 TSDoc 中重复 TypeScript 类型。
 - 优先复用 `@bangumi/design`、`@bangumi/icons`、`@bangumi/utils` 和现有 hooks；新增跨页面

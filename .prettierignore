@@ -1,5 +1,6 @@
 dist
 packages/design/storybook-static
+packages/styled-system
 pnpm-lock.yaml
 *.snap
 # submodules

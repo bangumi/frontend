@@ -1,0 +1,30 @@
+{
+  "name": "@bangumi/styled-system",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./css": {
+      "types": "./css/index.d.ts",
+      "import": "./css/index.mjs"
+    },
+    "./jsx": {
+      "types": "./jsx/index.d.ts",
+      "import": "./jsx/index.mjs"
+    },
+    "./patterns": {
+      "types": "./patterns/index.d.ts",
+      "import": "./patterns/index.mjs"
+    },
+    "./tokens": {
+      "types": "./tokens/index.d.ts",
+      "import": "./tokens/index.mjs"
+    },
+    "./types": {
+      "types": "./types/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

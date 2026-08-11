@@ -1,5 +1,8 @@
 # CSS 编码规范
 
+新代码和新样式使用 Panda CSS，并从 `@bangumi/styled-system` 导入类型化样式 API。以下命名规范
+适用于尚未迁移的 Less 和 CSS Modules；修改存量样式时继续沿用，后续逐步迁移到 Panda CSS。
+
 ## 组件库 CSS 编码规范
 
 1. 组件库 CSS 命名规范由 BEM 派生出来。其中，
