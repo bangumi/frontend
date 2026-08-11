@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "id": 49410,
+      "name": "巨人网络",
+      "nameCN": "",
+      "type": 2,
+      "info": "生日 2004年11月18日",
+      "career": ["producer"],
+      "comment": 0,
+      "lock": false,
+      "nsfw": false,
+      "images": {
+        "large": "https://lain.bgm.tv/pic/crt/l/09/f9/49410_prsn_bSUAD.jpg",
+        "medium": "https://lain.bgm.tv/r/200/pic/crt/l/09/f9/49410_prsn_bSUAD.jpg",
+        "small": "https://lain.bgm.tv/r/100/pic/crt/l/09/f9/49410_prsn_bSUAD.jpg",
+        "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/09/f9/49410_prsn_bSUAD.jpg"
+      }
+    },
+    {
+      "id": 15791,
+      "name": "コロッサス",
+      "nameCN": "巨人",
+      "type": 1,
+      "info": "",
+      "career": ["producer"],
+      "comment": 0,
+      "lock": false,
+      "nsfw": false,
+      "images": {
+        "large": "https://lain.bgm.tv/pic/crt/l/d0/67/15791_prsn_VMmHi.jpg",
+        "medium": "https://lain.bgm.tv/r/200/pic/crt/l/d0/67/15791_prsn_VMmHi.jpg",
+        "small": "https://lain.bgm.tv/r/100/pic/crt/l/d0/67/15791_prsn_VMmHi.jpg",
+        "grid": "https://lain.bgm.tv/r/100x100/pic/crt/l/d0/67/15791_prsn_VMmHi.jpg"
+      }
+    },
+    {
+      "id": 50980,
+      "name": "石川森彦",
+      "nameCN": "",
+      "type": 1,
+      "info": "性别 男 / 生日 1951年7月1日",
+      "career": ["mangaka"],
+      "comment": 0,
+      "lock": false,
+      "nsfw": false
+    }
+  ],
+  "total": 3
+}
