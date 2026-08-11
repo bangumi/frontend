@@ -35,6 +35,11 @@ pnpm prettier:check      # 检查 Prettier 格式
 可使用 workspace 脚本定向执行任务，例如 `pnpm website build`、`pnpm utils test`、
 `pnpm design dev`。修改共享组件时，必要时运行 `pnpm design:doc` 查看 Storybook。
 
+除非用户明确要求，否则不得启动开发服务器、预览服务器、watcher 或任何会持续运行的后台进程。
+需要验证代码效果时，可以使用仓库内的 Playwright、截图工具，或由验证流程临时启动并在完成后
+立即关闭的 Vite preview；优先使用执行完成后会自行退出的构建、测试或截图命令，不得遗留后台
+进程。
+
 ## 代码约定
 
 - 使用 TypeScript；React 组件使用函数组件和项目现有 hooks/组件模式。
