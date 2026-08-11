@@ -30,7 +30,7 @@ async function loadFixture(pathname: string, requestMethod: string): Promise<obj
   return JSON.parse((await fsp.readFile(fixturePath)).toString()) as object;
 }
 
-type HTTPMethods = 'get' | 'post' | 'put' | 'delete' | 'options';
+type HTTPMethods = 'get' | 'post' | 'put' | 'patch' | 'delete' | 'options';
 
 export function mockAPI(url: string, method: HTTPMethods): HttpHandler {
   return http[method](url, async ({ request }) => {

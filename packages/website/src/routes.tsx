@@ -8,6 +8,7 @@ const MatchAll = lazy(async () => import('./pages/index/[...slug]'));
 const HomeIndex = lazy(async () => import('./pages/index/index'));
 const Anime = lazy(async () => import('./pages/index/anime'));
 const Episode = lazy(async () => import('./pages/index/ep/[id]'));
+const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
 const Group = lazy(async () => import('./pages/index/group/[name]/index'));
 const GroupForum = lazy(async () => import('./pages/index/group/[name]/index/forum'));
@@ -88,6 +89,7 @@ export const pageRoutes: RouteObject[] = [
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
       { path: 'ep/:id', element: <Episode /> },
+      { path: 'ep/:id/edit', element: <EpisodeEdit /> },
       { path: 'notifications', element: <Notifications /> },
       ...userCollectionTypes.map((type) => ({
         path: type,

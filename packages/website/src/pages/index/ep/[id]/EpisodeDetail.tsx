@@ -20,6 +20,7 @@ import {
 import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import type { EpisodePageData } from '@bangumi/website/hooks/use-episode-page';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import styles from './style.module.less';
 
@@ -253,6 +254,7 @@ function EpisodeSidebar({ episode, episodes }: { episode: Episode; episodes: Epi
 
 export default function EpisodeDetail({ data }: { data: EpisodePageData }) {
   const { episode } = data;
+  const { user } = useUser();
   const title = `${episodeLabel(episode)} ${episode.nameCN || episode.name}`;
 
   return (
@@ -266,6 +268,11 @@ export default function EpisodeDetail({ data }: { data: EpisodePageData }) {
               <h1>
                 <span>{episodeLabel(episode)}</span> {episode.name}
               </h1>
+              {user?.permissions?.subjectWikiEdit && (
+                <Link to={`/ep/${episode.id}/edit`} className={styles.editLink}>
+                  编辑章节
+                </Link>
+              )}
               {episode.nameCN && <p className={styles.episodeNameCN}>{episode.nameCN}</p>}
               <p className={styles.episodeMeta}>
                 {episode.duration && <span>时长 {episode.duration}</span>}
