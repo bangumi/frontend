@@ -744,6 +744,50 @@
     padding: 0 10px;
 }
 
+  .m_5px_0 {
+    margin: 5px 0;
+}
+
+  .p_5px_25px {
+    padding: 5px 25px;
+}
+
+  .bg_\#f09199 {
+    background: #f09199;
+}
+
+  .m_10px_0 {
+    margin: 10px 0;
+}
+
+  .bd_0 {
+    border: 0;
+}
+
+  .bg_\#e0dcdc {
+    background: #e0dcdc;
+}
+
+  .p_8px_5px_8px_0 {
+    padding: 8px 5px 8px 0;
+}
+
+  .p_0_5px_0_0 {
+    padding: 0 5px 0 0;
+}
+
+  .p_0_0_0_5px {
+    padding: 0 0 0 5px;
+}
+
+  .p_0_5px_0_10px {
+    padding: 0 5px 0 10px;
+}
+
+  .p_16px_10px {
+    padding: 16px 10px;
+}
+
   .p_5px_10px {
     padding: 5px 10px;
 }
@@ -764,22 +808,6 @@
     background: #d9dfe1;
 }
 
-  .p_16px_10px {
-    padding: 16px 10px;
-}
-
-  .m_5px_0 {
-    margin: 5px 0;
-}
-
-  .p_5px_25px {
-    padding: 5px 25px;
-}
-
-  .bg_\#f09199 {
-    background: #f09199;
-}
-
   .p_5px_0 {
     padding: 5px 0;
 }
@@ -794,10 +822,6 @@
 
   .p_0_5px_0_17px {
     padding: 0 5px 0 17px;
-}
-
-  .m_10px_0 {
-    margin: 10px 0;
 }
 
   .p_10px {
@@ -816,12 +840,12 @@
     margin: 5px 0 0;
 }
 
-  .m_0_0_5px {
-    margin: 0 0 5px;
+  .p_15px_10px {
+    padding: 15px 10px;
 }
 
-  .p_0_5px_0_0 {
-    padding: 0 5px 0 0;
+  .m_0_0_5px {
+    margin: 0 0 5px;
 }
 
   .bd_1px_solid_\#e8e3e3 {
@@ -1012,6 +1036,10 @@
     gap: 1rem;
 }
 
+  .bdr_50px {
+    border-radius: 50px;
+}
+
   .bd-t_1px_solid_\#e8e3e3 {
     border-top: 1px solid #e8e3e3;
 }
@@ -1024,16 +1052,16 @@
     border-radius: 50%;
 }
 
-  .bdr_50px {
-    border-radius: 50px;
-}
-
   .flex_0_0_50px {
     flex: 0 0 50px;
 }
 
   .flex_1_1_auto {
     flex: 1 1 auto;
+}
+
+  .gap_5px {
+    gap: 5px;
 }
 
   .flex_0_0_48px {
@@ -1070,10 +1098,6 @@
 
   .gap_4px_14px {
     gap: 4px 14px;
-}
-
-  .gap_5px {
-    gap: 5px;
 }
 
   .bdr_10px {
@@ -1421,24 +1445,12 @@
     flex-basis: 75%;
 }
 
-  .inset-e_overview {
-    inset-inline-end: overview;
-}
-
   .grid-tc_minmax\(0\,_7fr\)_minmax\(260px\,_3fr\) {
     grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
 }
 
   .ai_start {
     align-items: start;
-}
-
-  .lh_18px {
-    line-height: 18px;
-}
-
-  .lh_19px {
-    line-height: 19px;
 }
 
   .c_\#fff {
@@ -1451,6 +1463,34 @@
 
   .ta_center {
     text-align: center;
+}
+
+  .bd-cl_collapse {
+    border-collapse: collapse;
+}
+
+  .ta_left {
+    text-align: left;
+}
+
+  .c_\#888 {
+    color: #888;
+}
+
+  .fs_10px {
+    font-size: 10px;
+}
+
+  .inset-e_overview {
+    inset-inline-end: overview;
+}
+
+  .lh_18px {
+    line-height: 18px;
+}
+
+  .lh_19px {
+    line-height: 19px;
 }
 
   .lh_15px {
@@ -1473,12 +1513,16 @@
     object-fit: cover;
 }
 
-  .ta_left {
-    text-align: left;
-}
-
   .fs_11px {
     font-size: 11px;
+}
+
+  .lh_140\% {
+    line-height: 140%;
+}
+
+  .lh_170\% {
+    line-height: 170%;
 }
 
   .fw_300 {
@@ -1925,6 +1969,18 @@
     margin-top: 10px;
 }
 
+  .mb_23px {
+    margin-bottom: 23px;
+}
+
+  .w_40px {
+    width: 40px;
+}
+
+  .w_90px {
+    width: 90px;
+}
+
   .w_8px {
     width: 8px;
 }
@@ -1967,10 +2023,6 @@
 
   .h_44px {
     height: 44px;
-}
-
-  .mb_23px {
-    margin-bottom: 23px;
 }
 
   .mt_21px {
@@ -2063,6 +2115,14 @@
 
   .\[\&_th\,_\&_td\]\:p_11px_4px th,.\[\&_th\,_\&_td\]\:p_11px_4px td {
     padding: 11px 4px;
+}
+
+  .\[\&_tr\.even\]\:bg_\#f9f9f9 tr.even {
+    background: #f9f9f9;
+}
+
+  .\[\&_td\]\:p_8px_4px td {
+    padding: 8px 4px;
 }
 
   .\[\&\:nth-child\(even\)\]\:bg_\#f9f9f9:nth-child(even) {
@@ -2309,6 +2369,14 @@
     text-align: left;
 }
 
+  .\[\&_a\]\:c_\#595555 a {
+    color: #595555;
+}
+
+  .\[\&_a\]\:fw_normal a {
+    font-weight: var(--font-weights-normal);
+}
+
   .\[\&_\.bgm-avatar\]\:d_block .bgm-avatar {
     display: block;
 }
@@ -2333,12 +2401,20 @@
     white-space: nowrap;
 }
 
-  .\[\&_a\]\:c_\#54b5df a {
-    color: #54b5df;
+  .\[\&_a\]\:c_\#1f1c1c a {
+    color: #1f1c1c;
 }
 
-  .\[\&_a\]\:c_\#595555 a {
-    color: #595555;
+  .\[\&_a\]\:d_block a {
+    display: block;
+}
+
+  .\[\&_a\]\:c_\#9f9b9b a {
+    color: #9f9b9b;
+}
+
+  .\[\&_a\]\:c_\#54b5df a {
+    color: #54b5df;
 }
 
   .\[\&_a\]\:d_flex a {
@@ -2395,14 +2471,6 @@
 
   .\[\&_a\]\:fs_13px a {
     font-size: 13px;
-}
-
-  .\[\&_a\]\:c_\#1f1c1c a {
-    color: #1f1c1c;
-}
-
-  .\[\&_a\]\:d_block a {
-    display: block;
 }
 
   .\[\&_img\]\:asp_3_\/_4 img {

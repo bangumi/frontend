@@ -1,0 +1,63 @@
+{
+  "data": [
+    {
+      "id": 201,
+      "user": {
+        "id": 1272395,
+        "username": "1272395",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1786441140,
+        "isFriend": false
+      },
+      "entry": {
+        "id": 301,
+        "type": 2,
+        "uid": 1272395,
+        "title": "测试动画的观后感：值得一看的宝藏作品",
+        "icon": "",
+        "summary": "这部动画的作画和音乐都非常出色，尤其是第 5 集的演出令人印象深刻，强烈推荐给喜欢日常治愈系作品的朋友。",
+        "replies": 3,
+        "public": true,
+        "createdAt": 1767225600,
+        "updatedAt": 1767229200
+      }
+    },
+    {
+      "id": 202,
+      "user": {
+        "id": 1272395,
+        "username": "1272395",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1786441140,
+        "isFriend": false
+      },
+      "entry": {
+        "id": 302,
+        "type": 2,
+        "uid": 1272395,
+        "title": "从制作角度分析结局的铺垫",
+        "icon": "",
+        "summary": "最后一话的脚本其实早在第 3 话就埋下了伏笔，本篇从分镜、台词与配乐三个角度逐一对照分析。",
+        "replies": 8,
+        "public": true,
+        "createdAt": 1767398400,
+        "updatedAt": 1767402000
+      }
+    }
+  ],
+  "total": 2
+}
