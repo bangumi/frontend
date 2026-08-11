@@ -1,4 +1,5 @@
 import type { ozaClient } from '@bangumi/client';
+import type { JsonFixture, SuccessfulData } from '@bangumi/website/mocks/utils';
 
 import personJson from '../21884-GET.json';
 import castsJson from './casts-GET.json';
@@ -7,25 +8,6 @@ import commentsJson from './comments-GET.json';
 import indexesJson from './indexes-GET.json';
 import relationsJson from './relations-GET.json';
 import worksJson from './works-GET.json';
-
-type ApiFunction = (...args: never[]) => Promise<unknown>;
-
-type SuccessfulData<T extends ApiFunction> = Extract<
-  Awaited<ReturnType<T>>,
-  { status: 200 }
->['data'];
-
-type JsonFixture<T> = T extends number
-  ? number
-  : T extends string
-    ? string
-    : T extends boolean
-      ? boolean
-      : T extends (infer Item)[]
-        ? JsonFixture<Item>[]
-        : T extends object
-          ? { [Key in keyof T]: JsonFixture<T[Key]> }
-          : T;
 
 export const personFixture: JsonFixture<SuccessfulData<typeof ozaClient.getPerson>> = personJson;
 

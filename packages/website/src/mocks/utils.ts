@@ -39,3 +39,23 @@ export function mockAPI(url: string, method: HTTPMethods): HttpHandler {
     return HttpResponse.json(data, { status: 200 });
   });
 }
+
+export type ApiFunction = (...args: never[]) => Promise<unknown>;
+
+export type SuccessfulData<T extends ApiFunction> = Extract<
+  Awaited<ReturnType<T>>,
+  { status: 200 }
+>['data'];
+
+/** 将 API 响应类型递归映射为纯 JSON 可赋值的类型，用于类型化 mock fixture */
+export type JsonFixture<T> = T extends number
+  ? number
+  : T extends string
+    ? string
+    : T extends boolean
+      ? boolean
+      : T extends (infer Item)[]
+        ? JsonFixture<Item>[]
+        : T extends object
+          ? { [Key in keyof T]: JsonFixture<T[Key]> }
+          : T;
