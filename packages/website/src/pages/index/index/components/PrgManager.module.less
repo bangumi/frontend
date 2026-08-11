@@ -659,8 +659,13 @@
 
 .epPopover {
   :global(.bgm-popover__content) {
+    display: none;
     border-radius: 4px;
     overflow: hidden;
+  }
+
+  &:hover :global(.bgm-popover__content) {
+    display: block;
   }
 }
 

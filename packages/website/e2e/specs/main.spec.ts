@@ -8,13 +8,14 @@ test.describe('main page', () => {
     await expect(page).toHaveTitle('Bangumi 番组计划');
   });
 
-  test('移动端 Header 与页面主体使用相同的水平留白', async ({ page }) => {
+  test('移动端首页不应横向溢出', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
 
     const headerContent = page.locator('header > div').first();
     await expect(headerContent).toHaveCSS('padding-left', '16px');
     await expect(headerContent).toHaveCSS('padding-right', '16px');
+    await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
   });
 });
 
