@@ -15,7 +15,9 @@ test.describe('main page', () => {
     const headerContent = page.locator('header > div').first();
     await expect(headerContent).toHaveCSS('padding-left', '16px');
     await expect(headerContent).toHaveCSS('padding-right', '16px');
-    await expect.poll(async () => page.evaluate(() => document.documentElement.scrollWidth)).toBe(375);
+    await expect
+      .poll(async () => page.evaluate(() => document.documentElement.scrollWidth))
+      .toBe(375);
   });
 });
 
