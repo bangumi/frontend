@@ -19,6 +19,49 @@ test.describe('main page', () => {
       .poll(async () => page.evaluate(() => document.documentElement.scrollWidth))
       .toBe(375);
   });
+
+  test('移动端可以展开导航菜单', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/');
+
+    const toggle = page.getByRole('button', { name: '菜单' });
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+
+    await toggle.click();
+
+    const navigation = page.locator('#mobile-navigation');
+    await expect(toggle).toHaveAccessibleName('关闭菜单');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+    await expect(navigation).toBeVisible();
+    await expect(navigation.getByRole('textbox', { name: '搜索' })).toBeVisible();
+    await expect(navigation.getByRole('link', { name: '动画' })).toBeVisible();
+  });
+
+  test('移动端已登录操作区保持水平对齐', async ({ page }) => {
+    await page.route('**/p1/me', async (route) => {
+      await route.fulfill({
+        json: {
+          id: 1,
+          username: 'test-user',
+          nickname: '测试用户',
+          avatar: {
+            small: '/favicon.ico',
+            medium: '/favicon.ico',
+            large: '/favicon.ico',
+          },
+        },
+      });
+    });
+    await page.setViewportSize({ width: 436, height: 812 });
+    await page.goto('/');
+
+    const actions = page.locator('header > div > div:last-child');
+    await expect(actions).toHaveCSS('display', 'flex');
+    await expect(actions).toHaveCSS('align-items', 'center');
+    await expect(page.getByRole('button', { name: '搜索' })).toBeVisible();
+    await expect(page.locator('a[href="/notifications"]')).toBeVisible();
+    await expect(page.locator('header a[href="/user/test-user"]')).toBeVisible();
+  });
 });
 
 test.describe('已登录用户', () => {
