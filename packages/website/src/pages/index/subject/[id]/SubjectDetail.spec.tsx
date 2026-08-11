@@ -6,15 +6,16 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
+import type { SubjectHomeResponse } from '@bangumi/client/client';
 import { CollectionType, EpisodeCollectionStatus } from '@bangumi/client/client';
 import { UserProvider } from '@bangumi/website/hooks/use-user';
-import { subjectHomeFixture } from '@bangumi/website/mocks/fixtures/p1/subjects/12';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
+import fixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
 import SubjectDetail from './components/SubjectDetail';
 
-const homeData = subjectHomeFixture;
+const homeData = fixture as unknown as SubjectHomeResponse;
 
 describe('SubjectDetail', () => {
   const setup = () => {
@@ -192,7 +193,9 @@ describe('SubjectDetail', () => {
     await act(async () => {
       renderPage(<SubjectDetail data={progressData} />);
     });
-    fireEvent.click(await screen.findByRole('button', { name: '想看' }));
+    const episodePopover = document.querySelector('[data-ep-id="100"]');
+    expect(episodePopover).not.toBeNull();
+    fireEvent.click(within(episodePopover as HTMLElement).getByRole('button', { name: '想看' }));
 
     await waitFor(() => {
       expect(requestBody).toEqual({ type: EpisodeCollectionStatus.Wish });

@@ -1,17 +1,19 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import { subjectHomeFixture } from '@bangumi/website/mocks/fixtures/p1/subjects/12';
+import type { SubjectHomeResponse } from '@bangumi/client/client';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
+import homeFixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
 import relationsFixture from '../../../../mocks/fixtures/p1/subjects/12/relations-GET.json';
 import SubjectRelations from './components/SubjectRelations';
 
+const homeData = homeFixture as unknown as SubjectHomeResponse;
 const relations = relationsFixture.data;
 
 describe('SubjectRelations', () => {
   it('renders relation groups with subject links', () => {
-    renderPage(<SubjectRelations subject={subjectHomeFixture.subject} relations={relations} />);
+    renderPage(<SubjectRelations subject={homeData.subject} relations={relations} />);
 
     expect(screen.getByRole('heading', { name: '续作' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: '前传' })).toBeInTheDocument();
@@ -34,7 +36,7 @@ describe('SubjectRelations', () => {
   });
 
   it('renders an empty state when the subject has no relations', () => {
-    renderPage(<SubjectRelations subject={subjectHomeFixture.subject} relations={[]} />);
+    renderPage(<SubjectRelations subject={homeData.subject} relations={[]} />);
 
     expect(screen.getByText('暂无关联条目')).toBeInTheDocument();
   });

@@ -38,7 +38,8 @@
     "tags": [
       { "name": "科幻", "count": 100 },
       { "name": "日常", "count": 80 }
-    ]
+    ],
+    "interest": null
   },
   "episodes": [
     {
@@ -177,8 +178,7 @@
         },
         "group": 10,
         "joinedAt": 1500000000,
-        "sign": "",
-        "isFriend": false
+        "sign": ""
       },
       "type": 3,
       "rate": 8,
@@ -200,8 +200,7 @@
         },
         "group": 10,
         "joinedAt": 1500000000,
-        "sign": "",
-        "isFriend": false
+        "sign": ""
       },
       "entry": {
         "id": 5,
@@ -218,8 +217,7 @@
           },
           "group": 10,
           "joinedAt": 1500000000,
-          "sign": "",
-          "isFriend": false
+          "sign": ""
         },
         "title": "测试动画长评",
         "icon": "",
@@ -404,8 +402,7 @@
         },
         "group": 10,
         "joinedAt": 1500000000,
-        "sign": "",
-        "isFriend": false
+        "sign": ""
       },
       "creatorID": 382951,
       "parentID": 12,

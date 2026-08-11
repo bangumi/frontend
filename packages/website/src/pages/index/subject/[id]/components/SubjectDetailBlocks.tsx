@@ -21,7 +21,7 @@ import {
   EpisodeType,
   SubjectType,
 } from '@bangumi/client/client';
-import { Avatar, Popover, Rate, toast, Typography } from '@bangumi/design';
+import { Avatar, Rate, toast, Typography } from '@bangumi/design';
 import {
   getBlogLink,
   getCharacterLink,
@@ -38,6 +38,7 @@ import {
   getSubjectTopicLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import EpisodeProgressPopover from '@bangumi/website/components/EpisodeProgressPopover';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -47,128 +48,8 @@ import SubjectSection from './SubjectSection';
 
 const { Link } = Typography;
 
-const EPISODE_STATUS_TEXT: Record<EpisodeCollectionStatus, string> = {
-  [EpisodeCollectionStatus.None]: '没看过',
-  [EpisodeCollectionStatus.Wish]: '想看',
-  [EpisodeCollectionStatus.Done]: '看过',
-  [EpisodeCollectionStatus.Dropped]: '抛弃',
-};
-
 function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : '操作失败，请稍后再试';
-}
-
-function EpisodePopover({
-  episode,
-  canManage,
-  submitting,
-  onUpdate,
-  onClose,
-}: {
-  episode: Episode;
-  canManage: boolean;
-  submitting: boolean;
-  onUpdate: (body: UpdateEpisodeProgress) => void;
-  onClose: () => void;
-}) {
-  const title = `ep.${episode.sort} ${episode.name || episode.nameCN}`;
-  const status = episode.collection?.status;
-  const updatedAt = episode.collection?.updatedAt;
-
-  return (
-    <div className={styles.epPopoverContent}>
-      <div className={styles.epPopoverTitle}>
-        <span>{title}</span>
-        <button type='button' onClick={onClose} aria-label='关闭章节信息'>
-          X
-        </button>
-      </div>
-      <div className={styles.epPopoverBody}>
-        {canManage && (
-          <div className={styles.epStatusActions}>
-            {status !== EpisodeCollectionStatus.Done && (
-              <>
-                <button
-                  type='button'
-                  disabled={submitting}
-                  onClick={() => onUpdate({ type: EpisodeCollectionStatus.Done })}
-                >
-                  看过
-                </button>
-                {episode.type === EpisodeType.Normal && (
-                  <button
-                    type='button'
-                    disabled={submitting}
-                    onClick={() => onUpdate({ batch: true })}
-                  >
-                    看到
-                  </button>
-                )}
-              </>
-            )}
-            {status !== EpisodeCollectionStatus.Wish && (
-              <button
-                type='button'
-                disabled={submitting}
-                onClick={() => onUpdate({ type: EpisodeCollectionStatus.Wish })}
-              >
-                想看
-              </button>
-            )}
-            {status !== EpisodeCollectionStatus.Dropped && (
-              <button
-                type='button'
-                disabled={submitting}
-                onClick={() => onUpdate({ type: EpisodeCollectionStatus.Dropped })}
-              >
-                抛弃
-              </button>
-            )}
-            {episode.collection && (
-              <button
-                type='button'
-                disabled={submitting}
-                onClick={() => onUpdate({ type: EpisodeCollectionStatus.None })}
-              >
-                撤消
-              </button>
-            )}
-            {status !== undefined && (
-              <span className={styles.epCurrentStatus} title={EPISODE_STATUS_TEXT[status]}>
-                {EPISODE_STATUS_TEXT[status]}
-              </span>
-            )}
-          </div>
-        )}
-        {episode.nameCN && (
-          <p>
-            <span>中文标题:</span> {episode.nameCN}
-          </p>
-        )}
-        {episode.airdate && (
-          <p>
-            <span>首播:</span> {episode.airdate}
-          </p>
-        )}
-        {episode.duration && (
-          <p>
-            <span>时长:</span> {episode.duration}
-          </p>
-        )}
-        <hr />
-        <div className={styles.epPopoverFooter}>
-          <Link to={getEpisodeLink(episode.id)} className={styles.epDiscussionLink}>
-            讨论 <small>(+{episode.comment})</small>
-          </Link>
-          {canManage && updatedAt && status !== undefined && (
-            <span className={styles.epUpdatedAt}>
-              {EPISODE_STATUS_TEXT[status]}: {dayjs.unix(updatedAt).format('YYYY-M-D HH:mm')}
-            </span>
-          )}
-        </div>
-      </div>
-    </div>
-  );
 }
 
 function EpisodePopoverItem({
@@ -182,89 +63,34 @@ function EpisodePopoverItem({
   submitting: boolean;
   onUpdate: (body: UpdateEpisodeProgress) => void;
 }) {
-  const itemRef = React.useRef<HTMLLIElement>(null);
-  const touchInteractionRef = React.useRef(false);
-  const [opensLeft, setOpensLeft] = React.useState(false);
-  const [dismissed, setDismissed] = React.useState(false);
-  const [touchOpen, setTouchOpen] = React.useState(false);
-
-  const alignPopover = () => {
-    const item = itemRef.current;
-    const content = item?.querySelector<HTMLElement>('.bgm-popover__content');
-    const trigger = item?.querySelector<HTMLElement>('a');
-    if (!content || !trigger) {
-      return;
-    }
-
-    const triggerBounds = trigger.getBoundingClientRect();
-    const contentWidth = content.getBoundingClientRect().width;
-    const roomOnRight = window.innerWidth - triggerBounds.right;
-    const roomOnLeft = triggerBounds.left;
-    setOpensLeft(roomOnRight < contentWidth && roomOnLeft > roomOnRight);
-  };
-
   return (
-    <li
-      ref={itemRef}
-      onMouseEnter={alignPopover}
-      onMouseLeave={() => setDismissed(false)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) {
-          setTouchOpen(false);
-        }
-      }}
-    >
-      <Popover
-        className={classNames(
-          styles.epPopover,
-          opensLeft && styles.epPopoverLeft,
-          touchOpen && styles.epPopoverOpen,
-          dismissed && styles.epPopoverDismissed,
-        )}
-        content={
-          <EpisodePopover
-            episode={episode}
-            canManage={canManage}
-            submitting={submitting}
-            onUpdate={onUpdate}
-            onClose={() => {
-              setDismissed(true);
-              setTouchOpen(false);
-            }}
-          />
-        }
+    <li>
+      <EpisodeProgressPopover
+        episode={episode}
+        canManage={canManage}
+        submitting={submitting}
+        onUpdate={onUpdate}
       >
-        <Link
-          to={getEpisodeLink(episode.id)}
-          className={classNames(
-            styles.epBtn,
-            episode.collection?.status === EpisodeCollectionStatus.Done
-              ? styles.epDone
-              : episode.airdate !== '' &&
-                  dayjs(episode.airdate).isValid() &&
-                  dayjs(episode.airdate).isAfter(dayjs(), 'day')
-                ? styles.epUpcoming
-                : styles.epAired,
-          )}
-          title={`ep.${episode.sort} ${episode.name || episode.nameCN}`}
-          onPointerDown={(event) => {
-            touchInteractionRef.current = event.pointerType !== 'mouse';
-            if (touchInteractionRef.current) {
-              alignPopover();
-            }
-          }}
-          onClick={(event) => {
-            if (touchInteractionRef.current) {
-              event.preventDefault();
-              setDismissed(false);
-              setTouchOpen(true);
-              touchInteractionRef.current = false;
-            }
-          }}
-        >
-          {String(episode.sort).padStart(2, '0')}
-        </Link>
-      </Popover>
+        {(triggerProps) => (
+          <Link
+            {...triggerProps}
+            to={getEpisodeLink(episode.id)}
+            className={classNames(
+              styles.epBtn,
+              episode.collection?.status === EpisodeCollectionStatus.Done
+                ? styles.epDone
+                : episode.airdate !== '' &&
+                    dayjs(episode.airdate).isValid() &&
+                    dayjs(episode.airdate).isAfter(dayjs(), 'day')
+                  ? styles.epUpcoming
+                  : styles.epAired,
+            )}
+            title={`ep.${episode.sort} ${episode.name || episode.nameCN}`}
+          >
+            {String(episode.sort).padStart(2, '0')}
+          </Link>
+        )}
+      </EpisodeProgressPopover>
     </li>
   );
 }

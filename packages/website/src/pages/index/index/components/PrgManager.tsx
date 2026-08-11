@@ -10,9 +10,10 @@ import type {
   UpdateSubjectProgress,
 } from '@bangumi/client/client';
 import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
-import { Popover, toast, Typography } from '@bangumi/design';
+import { toast, Typography } from '@bangumi/design';
 import { GridView, ListView } from '@bangumi/icons';
 import { getSubjectLink, getSubjectWikiEditLink } from '@bangumi/utils/pages';
+import EpisodeProgressPopover from '@bangumi/website/components/EpisodeProgressPopover';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
 import styles from './PrgManager.module.less';
@@ -55,13 +56,6 @@ const EP_TYPE_LABELS: Partial<Record<EpisodeType, string>> = {
   [EpisodeType.Other]: '其他',
 };
 
-const STATUS_TEXT: Record<EpisodeCollectionStatus, string> = {
-  [EpisodeCollectionStatus.None]: '没看过',
-  [EpisodeCollectionStatus.Wish]: '想看',
-  [EpisodeCollectionStatus.Done]: '看过',
-  [EpisodeCollectionStatus.Dropped]: '抛弃',
-};
-
 function totalText(total: number): string {
   return total === 0 ? '??' : String(total);
 }
@@ -94,120 +88,6 @@ function groupEps(eps: Episode[]): [EpisodeType, Episode[]][] {
   ]);
 }
 
-/** 单集详情浮层，hover 集数按钮时显示，对齐 PHP 首页的 ep 信息浮层 */
-function EpDetail({
-  ep,
-  submitting,
-  onUpdate,
-}: {
-  ep: Episode;
-  submitting: boolean;
-  onUpdate: (body: UpdateEpisodeProgress) => void;
-}) {
-  const status = ep.collection?.status;
-  return (
-    <div className={styles.epDetail} data-ep-id={ep.id}>
-      <div className={styles.epDetailHeader}>
-        <span>
-          ep.{ep.sort} {ep.name}
-        </span>
-      </div>
-      <div className={styles.epActions}>
-        {status !== EpisodeCollectionStatus.Done && (
-          <>
-            <button
-              type='button'
-              className={styles.epActionBtn}
-              disabled={submitting}
-              onClick={() => onUpdate({ type: EpisodeCollectionStatus.Done })}
-            >
-              看过
-            </button>
-            {ep.type === EpisodeType.Normal && (
-              <button
-                type='button'
-                className={styles.epActionBtn}
-                disabled={submitting}
-                onClick={() => onUpdate({ batch: true })}
-              >
-                看到
-              </button>
-            )}
-          </>
-        )}
-        {status !== EpisodeCollectionStatus.Wish && (
-          <button
-            type='button'
-            className={styles.epActionBtn}
-            disabled={submitting}
-            onClick={() => onUpdate({ type: EpisodeCollectionStatus.Wish })}
-          >
-            想看
-          </button>
-        )}
-        {status !== EpisodeCollectionStatus.Dropped && (
-          <button
-            type='button'
-            className={styles.epActionBtn}
-            disabled={submitting}
-            onClick={() => onUpdate({ type: EpisodeCollectionStatus.Dropped })}
-          >
-            抛弃
-          </button>
-        )}
-        {ep.collection && (
-          <button
-            type='button'
-            className={styles.epActionBtn}
-            disabled={submitting}
-            onClick={() => onUpdate({ type: EpisodeCollectionStatus.None })}
-          >
-            撤消
-          </button>
-        )}
-        {ep.collection && (
-          <span
-            className={styles.epCurrentStatus}
-            title={
-              ep.collection.updatedAt
-                ? DateTime.fromSeconds(ep.collection.updatedAt).toFormat('yyyy-M-d HH:mm')
-                : undefined
-            }
-          >
-            {STATUS_TEXT[ep.collection.status]}
-          </span>
-        )}
-      </div>
-      {ep.nameCN && (
-        <p className={styles.epInfoLine}>
-          <span>中文标题</span>
-          {ep.nameCN}
-        </p>
-      )}
-      <p className={styles.epInfoLine}>
-        <span>首播</span>
-        {ep.airdate || '-'}
-      </p>
-      <p className={styles.epInfoLine}>
-        <span>时长</span>
-        {ep.duration || '-'}
-      </p>
-      {ep.comment > 0 && (
-        <p className={styles.epInfoLine}>
-          <span>讨论</span>+{ep.comment}
-        </p>
-      )}
-      {status !== undefined && ep.collection?.updatedAt && (
-        <p className={styles.epInfoLine}>
-          <span>记录</span>
-          {STATUS_TEXT[status]}:{' '}
-          {DateTime.fromSeconds(ep.collection.updatedAt).toFormat('yyyy-M-d HH:mm')}
-        </p>
-      )}
-    </div>
-  );
-}
-
 function EpButton({
   ep,
   submitting,
@@ -226,20 +106,20 @@ function EpButton({
       : styles.epBtn;
 
   return (
-    <Popover
-      className={styles.epPopover}
-      content={<EpDetail ep={ep} submitting={submitting} onUpdate={onUpdate} />}
-    >
-      <button
-        type='button'
-        className={buttonClass}
-        title={`ep.${ep.sort} ${ep.name}`}
-        aria-pressed={watched}
-        disabled={unavailable}
-      >
-        {String(ep.sort).padStart(2, '0')}
-      </button>
-    </Popover>
+    <EpisodeProgressPopover episode={ep} submitting={submitting} onUpdate={onUpdate}>
+      {(triggerProps) => (
+        <button
+          {...triggerProps}
+          type='button'
+          className={buttonClass}
+          title={`ep.${ep.sort} ${ep.name}`}
+          aria-pressed={watched}
+          disabled={unavailable}
+        >
+          {String(ep.sort).padStart(2, '0')}
+        </button>
+      )}
+    </EpisodeProgressPopover>
   );
 }
 

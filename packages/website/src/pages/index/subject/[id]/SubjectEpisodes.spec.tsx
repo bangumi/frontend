@@ -1,19 +1,17 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import { subjectHomeFixture } from '@bangumi/website/mocks/fixtures/p1/subjects/12';
+import type { SubjectHomeResponse } from '@bangumi/client/client';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
+import fixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
 import SubjectEpisodes from './components/SubjectEpisodes';
+
+const homeData = fixture as unknown as SubjectHomeResponse;
 
 describe('SubjectEpisodes', () => {
   it('renders episode groups, metadata, and the subject return card', () => {
-    renderPage(
-      <SubjectEpisodes
-        subject={subjectHomeFixture.subject}
-        episodes={subjectHomeFixture.episodes}
-      />,
-    );
+    renderPage(<SubjectEpisodes subject={homeData.subject} episodes={homeData.episodes} />);
 
     expect(screen.getByRole('heading', { name: '本篇' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: '1.第1话' })).toHaveAttribute('href', '/ep/100');
@@ -22,7 +20,7 @@ describe('SubjectEpisodes', () => {
   });
 
   it('renders an empty state when the subject has no episodes', () => {
-    renderPage(<SubjectEpisodes subject={subjectHomeFixture.subject} episodes={[]} />);
+    renderPage(<SubjectEpisodes subject={homeData.subject} episodes={[]} />);
 
     expect(screen.getByText('暂无章节')).toBeInTheDocument();
   });
