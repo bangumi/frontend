@@ -30,6 +30,7 @@ const GroupTopicEdit = lazy(async () => import('./pages/index/group/topic/[id]/e
 const GroupTopicHome = lazy(async () => import('./pages/index/group/topic/[id]/index'));
 const Character = lazy(async () => import('./pages/index/character/[id]/index'));
 const SubjectCharacters = lazy(async () => import('./pages/index/subject/[id]/characters'));
+const SubjectPersons = lazy(async () => import('./pages/index/subject/[id]/persons'));
 const Subject = lazy(async () => import('./pages/index/subject/[id]/index'));
 const SubjectIndexes = lazy(async () => import('./pages/index/subject/[id]/indexes'));
 const SubjectEpisodes = lazy(async () => import('./pages/index/subject/[id]/ep'));
@@ -70,7 +71,6 @@ const legacyPagePaths = [
   'subject/:id/board',
   'subject/:id/collections',
   'subject/:id/comments',
-  'subject/:id/persons',
   'subject/:id/reviews',
   'subject/:id/stats',
   'subject/ep/:id',
@@ -173,6 +173,7 @@ export const pageRoutes: RouteObject[] = [
             children: [
               { path: '', element: <Subject /> },
               { path: 'characters', element: <SubjectCharacters /> },
+              { path: 'persons', element: <SubjectPersons /> },
               { path: 'index', element: <SubjectIndexes /> },
               { path: 'ep', element: <SubjectEpisodes /> },
               { path: 'relations', element: <SubjectRelations /> },
