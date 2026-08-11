@@ -58,68 +58,70 @@ export default function SubjectCharacters({
   const groups = groupCharacters(characters);
 
   return (
-    <PageContainer as='main'>
+    <>
       <SubjectHeader subject={subject} />
-      <div className={styles.columns}>
-        <div className={styles.characterGroups}>
-          {groups.length === 0 && <p className={styles.empty}>暂无角色</p>}
-          {groups.map((group) => (
-            <section key={group.type} aria-labelledby={`character-group-${group.type}-heading`}>
-              <h2 id={`character-group-${group.type}-heading`} className={styles.groupTitle}>
-                {group.label}
-              </h2>
-              <ul className={styles.characterList}>
-                {group.items.map(({ character, casts }) => (
-                  <li key={character.id} className={styles.characterItem}>
-                    <Link
-                      to={getCharacterLink(character.id)}
-                      className={styles.avatarLink}
-                      title={characterTitle(character)}
-                    >
-                      {character.images?.grid ? (
-                        <img
-                          src={character.images.grid}
-                          className={styles.avatar}
-                          loading='lazy'
-                          alt=''
-                        />
-                      ) : (
-                        <span className={styles.avatarFallback}>
-                          {characterTitle(character).slice(0, 1)}
-                        </span>
-                      )}
-                    </Link>
-                    <div className={styles.characterInfo}>
+      <PageContainer as='main'>
+        <div className={styles.columns}>
+          <div className={styles.characterGroups}>
+            {groups.length === 0 && <p className={styles.empty}>暂无角色</p>}
+            {groups.map((group) => (
+              <section key={group.type} aria-labelledby={`character-group-${group.type}-heading`}>
+                <h2 id={`character-group-${group.type}-heading`} className={styles.groupTitle}>
+                  {group.label}
+                </h2>
+                <ul className={styles.characterList}>
+                  {group.items.map(({ character, casts }) => (
+                    <li key={character.id} className={styles.characterItem}>
                       <Link
                         to={getCharacterLink(character.id)}
-                        className={styles.name}
+                        className={styles.avatarLink}
                         title={characterTitle(character)}
                       >
-                        {characterTitle(character)}
+                        {character.images?.grid ? (
+                          <img
+                            src={character.images.grid}
+                            className={styles.avatar}
+                            loading='lazy'
+                            alt=''
+                          />
+                        ) : (
+                          <span className={styles.avatarFallback}>
+                            {characterTitle(character).slice(0, 1)}
+                          </span>
+                        )}
                       </Link>
-                      {character.info !== '' && <p className={styles.info}>{character.info}</p>}
-                      {casts.length > 0 && (
-                        <p className={styles.casts}>
-                          {casts.map((cast, index) => (
-                            <React.Fragment key={cast.person.id}>
-                              {index > 0 && ' / '}
-                              <span className={styles.castLabel}>
-                                {CAST_TYPE_DESC[cast.relation] ?? '出演'}:
-                              </span>{' '}
-                              <Link to={getPersonLink(cast.person.id)}>{cast.person.name}</Link>
-                            </React.Fragment>
-                          ))}
-                        </p>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+                      <div className={styles.characterInfo}>
+                        <Link
+                          to={getCharacterLink(character.id)}
+                          className={styles.name}
+                          title={characterTitle(character)}
+                        >
+                          {characterTitle(character)}
+                        </Link>
+                        {character.info !== '' && <p className={styles.info}>{character.info}</p>}
+                        {casts.length > 0 && (
+                          <p className={styles.casts}>
+                            {casts.map((cast, index) => (
+                              <React.Fragment key={cast.person.id}>
+                                {index > 0 && ' / '}
+                                <span className={styles.castLabel}>
+                                  {CAST_TYPE_DESC[cast.relation] ?? '出演'}:
+                                </span>{' '}
+                                <Link to={getPersonLink(cast.person.id)}>{cast.person.name}</Link>
+                              </React.Fragment>
+                            ))}
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+          <SubjectSummaryCard subject={subject} />
         </div>
-        <SubjectSummaryCard subject={subject} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 }

@@ -177,26 +177,28 @@ export default function SubjectEpisodes({
   const showAirStatus = subject.type !== SubjectType.Music;
 
   return (
-    <PageContainer as='main'>
+    <>
       <SubjectHeader subject={subject} />
-      <div className={columns}>
-        <div className={episodeGroups}>
-          {groups.length === 0 && <p className={empty}>暂无章节</p>}
-          {groups.map((group) => (
-            <section key={group.key} aria-labelledby={`${group.key}-heading`}>
-              <h2 id={`${group.key}-heading`} className={groupTitle}>
-                {group.label}
-              </h2>
-              <ol className={episodeList}>
-                {group.episodes.map((episode) => (
-                  <EpisodeRow key={episode.id} episode={episode} showAirStatus={showAirStatus} />
-                ))}
-              </ol>
-            </section>
-          ))}
+      <PageContainer as='main'>
+        <div className={columns}>
+          <div className={episodeGroups}>
+            {groups.length === 0 && <p className={empty}>暂无章节</p>}
+            {groups.map((group) => (
+              <section key={group.key} aria-labelledby={`${group.key}-heading`}>
+                <h2 id={`${group.key}-heading`} className={groupTitle}>
+                  {group.label}
+                </h2>
+                <ol className={episodeList}>
+                  {group.episodes.map((episode) => (
+                    <EpisodeRow key={episode.id} episode={episode} showAirStatus={showAirStatus} />
+                  ))}
+                </ol>
+              </section>
+            ))}
+          </div>
+          <SubjectSummaryCard subject={subject} />
         </div>
-        <SubjectSummaryCard subject={subject} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 }

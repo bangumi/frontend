@@ -130,43 +130,47 @@ export default function SubjectRelations({
   const groups = groupRelations(relations);
 
   return (
-    <PageContainer as='main'>
+    <>
       <SubjectHeader subject={subject} />
-      <div className={columns}>
-        <div className={relationGroups}>
-          {groups.length === 0 && <p className={empty}>暂无关联条目</p>}
-          {groups.map((group) => (
-            <section key={group.key} aria-labelledby={`${group.key}-heading`}>
-              <h2 id={`${group.key}-heading`} className={groupTitle}>
-                {group.label}
-              </h2>
-              <ul className={relationList}>
-                {group.items.map(({ subject: related }) => (
-                  <li key={related.id} className={relationItem}>
-                    <Link
-                      to={getSubjectLink(related.id)}
-                      className={coverLink}
-                      title={relationTitle(related)}
-                    >
-                      {related.images?.grid ? (
-                        <img src={related.images.grid} className={cover} loading='lazy' alt='' />
-                      ) : (
-                        <span className={coverFallback}>{relationTitle(related).slice(0, 1)}</span>
-                      )}
-                    </Link>
-                    <p className={coverTitle}>
-                      <Link to={getSubjectLink(related.id)} title={relationTitle(related)}>
-                        {relationTitle(related)}
+      <PageContainer as='main'>
+        <div className={columns}>
+          <div className={relationGroups}>
+            {groups.length === 0 && <p className={empty}>暂无关联条目</p>}
+            {groups.map((group) => (
+              <section key={group.key} aria-labelledby={`${group.key}-heading`}>
+                <h2 id={`${group.key}-heading`} className={groupTitle}>
+                  {group.label}
+                </h2>
+                <ul className={relationList}>
+                  {group.items.map(({ subject: related }) => (
+                    <li key={related.id} className={relationItem}>
+                      <Link
+                        to={getSubjectLink(related.id)}
+                        className={coverLink}
+                        title={relationTitle(related)}
+                      >
+                        {related.images?.grid ? (
+                          <img src={related.images.grid} className={cover} loading='lazy' alt='' />
+                        ) : (
+                          <span className={coverFallback}>
+                            {relationTitle(related).slice(0, 1)}
+                          </span>
+                        )}
                       </Link>
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
+                      <p className={coverTitle}>
+                        <Link to={getSubjectLink(related.id)} title={relationTitle(related)}>
+                          {relationTitle(related)}
+                        </Link>
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+          <SubjectSummaryCard subject={subject} />
         </div>
-        <SubjectSummaryCard subject={subject} />
-      </div>
-    </PageContainer>
+      </PageContainer>
+    </>
   );
 }
