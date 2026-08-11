@@ -3,6 +3,7 @@
 @header-height: 60px;
 
 .container {
+  position: relative;
   height: @header-height;
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.95);
@@ -55,6 +56,15 @@
   display: none;
 }
 
+.mobileNavigation,
+.mobileSearchButton {
+  display: none;
+}
+
+.headerLeft {
+  min-width: 0;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -83,7 +93,7 @@
   }
 }
 
-.header-right {
+.headerRight {
   .flex();
   .items-center();
 
@@ -234,37 +244,216 @@
   }
 }
 
-@media screen and (max-width: 768px) {
-  .mobileMenuToggle {
-    display: block;
+@media screen and (max-width: @sm) {
+  .nav {
+    display: none;
   }
 
-  .navLeft {
-    display: none !important;
+  .mobileMenuToggle {
+    display: block;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 32px;
+    padding: 0;
+    margin-left: 10px;
+    color: @gray-60;
+    background: transparent;
+    border: 1px solid @gray-10;
+
+    --height: 32px;
+  }
+
+  .mobileMenuToggle.mobileMenuToggleOpen {
+    color: #fff;
+    background: @primary-color;
+    border-color: @primary-color;
+  }
+
+  .mobileMenuIcon {
+    position: relative;
+    width: 14px;
+    height: 2px;
+    background: currentcolor;
+    border-radius: 1px;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 14px;
+      height: 2px;
+      content: '';
+      background: currentcolor;
+      border-radius: 1px;
+    }
+
+    &::before {
+      top: -5px;
+    }
+
+    &::after {
+      top: 5px;
+    }
+  }
+
+  .mobileMenuToggleOpen .mobileMenuIcon {
+    background: transparent;
+
+    &::before,
+    &::after {
+      top: 0;
+    }
+
+    &::before {
+      transform: rotate(45deg);
+    }
+
+    &::after {
+      transform: rotate(-45deg);
+    }
+  }
+
+  .mobileNavigation {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    padding: 4px 10px 0;
+    box-sizing: border-box;
+    background: rgba(254, 254, 254, 0.9);
+    border-bottom: rgba(249, 188, 193, 0.95) solid 1px;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(5px);
+
+    &.mobileNavigationOpen {
+      display: block;
+    }
+  }
+
+  .mobileSearch {
+    display: flex;
+    width: 100%;
+    height: 34px;
+    padding: 3px 12px;
+    margin-bottom: 16px;
+
+    .mobileSearchSelect {
+      appearance: none;
+      padding: 0;
+      outline: none;
+      border: none;
+      color: @gray-80;
+      background: transparent;
+      font-weight: 600;
+    }
+
+    .mobileSearchDivider {
+      display: inline-block;
+      height: 20px;
+      margin: 0 9px 0 7px;
+      flex-shrink: 0;
+    }
+
+    .mobileSearchInputIcon {
+      width: 18px;
+      height: 18px;
+      margin-left: 8px;
+    }
+  }
+
+  .mobileNavigationMenu {
+    display: flex;
+    align-items: stretch;
+    width: calc(100% + 20px);
+    padding: 0;
+    margin: 0 -10px;
+
+    > :global(.bgm-menu-item) {
+      width: 100%;
+      padding: 5px 0;
+      box-sizing: border-box;
+      color: @gray-60;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 30px;
+      text-align: center;
+
+      &:nth-child(-n + 5) {
+        background: #f7f7f7;
+      }
+
+      &:first-child {
+        color: #fff;
+        background: @primary-color;
+      }
+    }
+  }
+
+  .infoBox {
+    display: none;
+  }
+
+  .mobileSearchButton {
+    display: flex;
+    padding: 0;
+    color: @pink-80;
+    background: transparent;
+    border: 0;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
 @media screen and (max-width: @sm) {
   .main {
-    padding-right: 16px;
-    padding-left: 16px;
+    padding-right: 5px;
+    padding-left: 5px;
   }
-}
 
-@media screen and (max-width: 576px) {
   .container {
     height: 50px;
   }
 
   .logo {
-    width: 110px;
+    width: 143px;
+    height: 50px;
 
     .musume {
-      display: none;
+      display: block;
+      width: 36px;
+      height: 42px;
     }
 
     .textLogo {
+      top: 5px;
       width: 110px;
+      height: 32px;
+    }
+  }
+
+  .headerRight {
+    gap: 18px;
+  }
+
+  .userLogin {
+    width: 78px;
+
+    a {
+      font-size: 12px;
+
+      &:first-of-type {
+        padding-right: 7px;
+      }
+
+      &:last-of-type {
+        padding-left: 7px;
+      }
     }
   }
 }

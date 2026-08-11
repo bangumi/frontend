@@ -86,6 +86,8 @@ const navRight = [
   },
 ];
 
+const mobileNav = [...navLeft, ...navRight];
+
 function getRandomNumber(n: number): number {
   return Math.floor(Math.random() * n);
 }
@@ -107,7 +109,7 @@ const Header: FC = () => {
     <header className={style.container}>
       <div className={style.main}>
         {/* left */}
-        <div className='flex items-center'>
+        <div className={cn('flex items-center', style.headerLeft)}>
           {/* Logo */}
           <a className={style.logo} href='/'>
             <Musume className={style.musume} />
@@ -115,13 +117,18 @@ const Header: FC = () => {
           </a>
           {/* Mobile Menu Toggle Button */}
           <Button
-            className={style.mobileMenuToggle}
-            color={showMobileMenu ? 'default' : 'gray'}
+            className={cn(style.mobileMenuToggle, {
+              [style.mobileMenuToggleOpen!]: showMobileMenu,
+            })}
+            color='gray'
+            aria-controls='mobile-navigation'
+            aria-expanded={showMobileMenu}
+            aria-label={showMobileMenu ? '关闭菜单' : '菜单'}
             onClick={() => {
               setShowMobileMenu((show) => !show);
             }}
           >
-            {showMobileMenu ? '关闭' : '菜单'}
+            <span className={style.mobileMenuIcon} aria-hidden='true' />
           </Button>
           {/* Menu */}
           <div className={style.nav}>
@@ -133,6 +140,9 @@ const Header: FC = () => {
 
         {/* right */}
         <div className={style.headerRight}>
+          <button className={style.mobileSearchButton} type='button' aria-label='搜索'>
+            <SearchIcon />
+          </button>
           <div className={style.infoBox}>
             {/* Search Todo */}
             <Input
@@ -183,6 +193,41 @@ const Header: FC = () => {
           )}
         </div>
       </div>
+      <nav
+        id='mobile-navigation'
+        aria-label='主导航'
+        hidden={!showMobileMenu}
+        className={cn(style.mobileNavigation, {
+          [style.mobileNavigationOpen!]: showMobileMenu,
+        })}
+      >
+        <Input
+          aria-label='搜索'
+          prefix={
+            <>
+              <select name='mobile-cat' className={style.mobileSearchSelect} defaultValue='value1'>
+                <option value='value1'>动画</option>
+                <option value='value2'>书籍</option>
+                <option value='value3'>音乐</option>
+                <option value='value4'>游戏</option>
+                <option value='value5'>三次元</option>
+                <option value='value6'>人物</option>
+              </select>
+              <Divider orientation='vertical' className={style.mobileSearchDivider} />
+            </>
+          }
+          suffix={<SearchIcon className={style.mobileSearchInputIcon} />}
+          wrapperClass={style.mobileSearch}
+        />
+        <Menu
+          items={mobileNav}
+          mode='vertical'
+          onClick={() => {
+            setShowMobileMenu(false);
+          }}
+          wrapperClass={style.mobileNavigationMenu}
+        />
+      </nav>
     </header>
   );
 };
