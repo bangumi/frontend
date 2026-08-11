@@ -1,0 +1,112 @@
+{
+  "data": [
+    {
+      "character": {
+        "id": 5,
+        "name": "Test Character",
+        "nameCN": "测试角色",
+        "role": 1,
+        "info": "测试角色的简介，用于验证角色介绍在列表中的展示与两行截断效果。",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/00/00/05.jpg",
+          "medium": "https://lain.bgm.tv/pic/crt/m/00/00/05.jpg",
+          "small": "https://lain.bgm.tv/pic/crt/s/00/00/05.jpg",
+          "grid": "https://lain.bgm.tv/pic/crt/g/00/00/05.jpg"
+        },
+        "comment": 10,
+        "lock": false,
+        "nsfw": false
+      },
+      "casts": [
+        {
+          "person": {
+            "id": 8,
+            "name": "Test CV",
+            "nameCN": "测试声优",
+            "type": 1,
+            "info": "",
+            "career": ["声优"],
+            "images": {
+              "large": "https://lain.bgm.tv/pic/prsn/l/00/00/08.jpg",
+              "medium": "https://lain.bgm.tv/pic/prsn/m/00/00/08.jpg",
+              "small": "https://lain.bgm.tv/pic/prsn/s/00/00/08.jpg",
+              "grid": "https://lain.bgm.tv/pic/prsn/g/00/00/08.jpg"
+            },
+            "comment": 1,
+            "lock": false,
+            "nsfw": false
+          },
+          "relation": 0,
+          "summary": ""
+        }
+      ],
+      "type": 1,
+      "order": 1
+    },
+    {
+      "character": {
+        "id": 6,
+        "name": "Test Character B",
+        "nameCN": "测试配角",
+        "role": 1,
+        "info": "",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/00/00/06.jpg",
+          "medium": "https://lain.bgm.tv/pic/crt/m/00/00/06.jpg",
+          "small": "https://lain.bgm.tv/pic/crt/s/00/00/06.jpg",
+          "grid": "https://lain.bgm.tv/pic/crt/g/00/00/06.jpg"
+        },
+        "comment": 2,
+        "lock": false,
+        "nsfw": false
+      },
+      "casts": [
+        {
+          "person": {
+            "id": 9,
+            "name": "Test Voice Actor",
+            "nameCN": "测试配音演员",
+            "type": 1,
+            "info": "",
+            "career": ["配音演员"],
+            "images": {
+              "large": "https://lain.bgm.tv/pic/prsn/l/00/00/09.jpg",
+              "medium": "https://lain.bgm.tv/pic/prsn/m/00/00/09.jpg",
+              "small": "https://lain.bgm.tv/pic/prsn/s/00/00/09.jpg",
+              "grid": "https://lain.bgm.tv/pic/prsn/g/00/00/09.jpg"
+            },
+            "comment": 0,
+            "lock": false,
+            "nsfw": false
+          },
+          "relation": 3,
+          "summary": ""
+        }
+      ],
+      "type": 2,
+      "order": 2
+    },
+    {
+      "character": {
+        "id": 7,
+        "name": "Test Cameo",
+        "nameCN": "测试客串",
+        "role": 2,
+        "info": "",
+        "images": {
+          "large": "https://lain.bgm.tv/pic/crt/l/00/00/07.jpg",
+          "medium": "https://lain.bgm.tv/pic/crt/m/00/00/07.jpg",
+          "small": "https://lain.bgm.tv/pic/crt/s/00/00/07.jpg",
+          "grid": "https://lain.bgm.tv/pic/crt/g/00/00/07.jpg"
+        },
+        "comment": 0,
+        "lock": false,
+        "nsfw": false
+      },
+      "casts": [],
+      "type": 3,
+      "order": 3
+    }
+  ],
+  "total": 3
+}

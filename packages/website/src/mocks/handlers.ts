@@ -15,6 +15,7 @@ export const handlers = [
   mockAPI('/p1/subjects/:subjectID/episodes', 'get'),
   mockAPI('/p1/subjects/:subjectID/indexes', 'get'),
   mockAPI('/p1/subjects/:subjectID/relations', 'get'),
+  mockAPI('/p1/subjects/:subjectID/characters', 'get'),
   mockAPI('/p1/subjects/:subjectID/collects', 'get'),
   mockAPI('/p1/persons/:personID', 'get'),
   mockAPI('/p1/persons/:personID/casts', 'get'),
