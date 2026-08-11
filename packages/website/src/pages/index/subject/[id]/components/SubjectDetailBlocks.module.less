@@ -99,6 +99,12 @@
   font-size: 12px;
   line-height: 22px;
   color: @gray-100;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
+  }
 }
 
 .epDone {
@@ -119,92 +125,12 @@
   color: #909090;
 }
 
-.epPopover {
-  vertical-align: top;
+.epAllLink.epAllLink {
+  text-decoration: none;
 
-  :global(.bgm-popover__container) {
-    align-items: flex-start;
-  }
-
-  :global(.bgm-popover__content) {
-    top: 5px;
-    left: 12px;
-    width: 275px;
-    overflow: visible;
-    border: 0;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(80, 80, 80, 0.5);
-  }
-
-  :global(.bgm-popover__content)::before {
-    position: absolute;
-    top: 0;
-    left: -10px;
-    width: 0;
-    height: 0;
-    border-top: 11px solid @primary-color;
-    border-bottom: 11px solid transparent;
-    border-left: 0;
-    border-right: 11px solid transparent;
-    content: '';
-  }
-
-  :global(.bgm-popover__content)::after {
-    position: absolute;
-    top: -5px;
-    left: -12px;
-    width: 36px;
-    height: 5px;
-    content: '';
-  }
-
-  &:focus-within :global(.bgm-popover__content) {
-    visibility: visible;
-    opacity: 1;
-  }
-}
-
-.epPopoverContent {
-  width: 275px;
-  border-radius: 5px;
-  background: rgba(254, 254, 254, 0.96);
-  color: @gray-100;
-  font-size: 12px;
-  line-height: 1.5;
-}
-
-.epPopoverTitle {
-  padding: 8px 10px;
-  overflow: hidden;
-  border-radius: 5px 5px 0 0;
-  background: @primary-color;
-  color: #fff;
-  font-size: 13px;
-  line-height: 18px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.epPopoverBody {
-  padding: 5px 10px 7px;
-
-  p {
-    margin: 0;
-  }
-
-  hr {
-    height: 1px;
-    margin: 5px 0;
-    border: 0;
-    background: @gray-10;
-  }
-}
-
-.epDiscussionLink.epDiscussionLink {
-  color: @blue-100;
-
-  small {
-    color: @gray-60;
+  &:hover,
+  &:focus-visible {
+    text-decoration: none;
   }
 }
 
@@ -376,28 +302,6 @@
 }
 
 @media (max-width: @sm) {
-  .epPopover {
-    :global(.bgm-popover__content) {
-      position: fixed;
-      top: 35vh;
-      right: 5vw;
-      left: 5vw;
-      width: auto;
-    }
-
-    :global(.bgm-popover__content)::before {
-      display: none;
-    }
-
-    :global(.bgm-popover__content)::after {
-      display: none;
-    }
-  }
-
-  .epPopoverContent {
-    width: auto;
-  }
-
   .coverGrid {
     margin-right: 0;
   }

@@ -74,11 +74,13 @@ export default defineConfig(({ mode }) => {
       proxy: {
         '/p1': {
           target: apiDomain,
-          headers: access_token
-            ? {
-                authorization: `Bearer ${access_token}`,
-              }
-            : {},
+          headers: {
+            ...(access_token ? { authorization: `Bearer ${access_token}` } : {}),
+            // 浏览器发出的 Referer 指向 localhost，改写为 API 域名以贴近生产环境。
+            // 必须在 headers 里设置：走 ProxyAgent 时 proxyReq 事件触发时请求头已发送
+            // （headersSent 为 true），在其中 setHeader 会抛 ERR_HTTP_HEADERS_SENT
+            referer: `${apiDomain}/`,
+          },
           changeOrigin: true,
           rewriteWsOrigin: true,
           toProxy: true,

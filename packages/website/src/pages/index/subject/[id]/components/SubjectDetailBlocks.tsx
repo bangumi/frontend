@@ -1,7 +1,9 @@
+import { ok } from '@oazapfts/runtime';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 import React from 'react';
 
+import { ozaClient } from '@bangumi/client';
 import type {
   Episode,
   Subject,
@@ -11,9 +13,15 @@ import type {
   SubjectRelation,
   SubjectReview,
   Topic,
+  UpdateEpisodeProgress,
 } from '@bangumi/client/client';
-import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
-import { Avatar, Popover, Rate, Typography } from '@bangumi/design';
+import {
+  CollectionType,
+  EpisodeCollectionStatus,
+  EpisodeType,
+  SubjectType,
+} from '@bangumi/client/client';
+import { Avatar, Rate, toast, Typography } from '@bangumi/design';
 import {
   getBlogLink,
   getCharacterLink,
@@ -30,6 +38,9 @@ import {
   getSubjectTopicLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import EpisodeProgressPopover from '@bangumi/website/components/EpisodeProgressPopover';
+import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { CAST_TYPE_DESC, COLLECT_DESC } from './subject-common';
 import styles from './SubjectDetailBlocks.module.less';
@@ -37,41 +48,73 @@ import SubjectSection from './SubjectSection';
 
 const { Link } = Typography;
 
-function EpisodePopover({ episode }: { episode: Episode }) {
-  const title = `ep.${episode.sort} ${episode.name || episode.nameCN}`;
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : '操作失败，请稍后再试';
+}
 
+function EpisodePopoverItem({
+  episode,
+  canManage,
+  submitting,
+  onUpdate,
+}: {
+  episode: Episode;
+  canManage: boolean;
+  submitting: boolean;
+  onUpdate: (body: UpdateEpisodeProgress) => void;
+}) {
   return (
-    <div className={styles.epPopoverContent}>
-      <div className={styles.epPopoverTitle}>{title}</div>
-      <div className={styles.epPopoverBody}>
-        {episode.nameCN && (
-          <p>
-            <span>中文标题:</span> {episode.nameCN}
-          </p>
+    <li>
+      <EpisodeProgressPopover
+        episode={episode}
+        canManage={canManage}
+        submitting={submitting}
+        onUpdate={onUpdate}
+      >
+        {(triggerProps) => (
+          <Link
+            {...triggerProps}
+            to={getEpisodeLink(episode.id)}
+            className={classNames(
+              styles.epBtn,
+              episode.collection?.status === EpisodeCollectionStatus.Done
+                ? styles.epDone
+                : episode.airdate !== '' &&
+                    dayjs(episode.airdate).isValid() &&
+                    dayjs(episode.airdate).isAfter(dayjs(), 'day')
+                  ? styles.epUpcoming
+                  : styles.epAired,
+            )}
+            title={`ep.${episode.sort} ${episode.name || episode.nameCN}`}
+          >
+            {String(episode.sort).padStart(2, '0')}
+          </Link>
         )}
-        {episode.airdate && (
-          <p>
-            <span>首播:</span> {episode.airdate}
-          </p>
-        )}
-        {episode.duration && (
-          <p>
-            <span>时长:</span> {episode.duration}
-          </p>
-        )}
-        <hr />
-        <Link to={getEpisodeLink(episode.id)} className={styles.epDiscussionLink}>
-          讨论 <small>(+{episode.comment})</small>
-        </Link>
-      </div>
-    </div>
+      </EpisodeProgressPopover>
+    </li>
   );
 }
 
 /** 章节/曲目列表，对齐 PHP subject_box_prg */
 function EpListSection({ subject, episodes }: { subject: Subject; episodes: Episode[] }) {
+  const { user } = useUser();
+  const { mutate } = useSubjectHome(subject.id);
+  const [submittingEpisodeID, setSubmittingEpisodeID] = React.useState<number>();
   const isAnimeLike = subject.type === SubjectType.Anime || subject.type === SubjectType.Real;
   const isMusic = subject.type === SubjectType.Music;
+  const canManage = Boolean(user) && subject.interest?.type === CollectionType.Doing;
+
+  const updateEpisode = async (episode: Episode, body: UpdateEpisodeProgress) => {
+    setSubmittingEpisodeID(episode.id);
+    try {
+      await ok(ozaClient.updateEpisodeProgress(episode.id, body));
+      await mutate();
+    } catch (error) {
+      toast(getErrorMessage(error), { type: 'error' });
+    } finally {
+      setSubmittingEpisodeID(undefined);
+    }
+  };
 
   if ((!isAnimeLike && !isMusic) || episodes.length === 0) {
     return null;
@@ -100,36 +143,26 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
 
   const renderEpGrid = (list: Episode[]) => (
     <ul className={styles.epGrid}>
-      {list.map((ep) => {
-        const done = ep.collection?.status === EpisodeCollectionStatus.Done;
-        const upcoming =
-          ep.airdate !== '' &&
-          dayjs(ep.airdate).isValid() &&
-          dayjs(ep.airdate).isAfter(dayjs(), 'day');
-        return (
-          <li key={ep.id}>
-            <Popover className={styles.epPopover} content={<EpisodePopover episode={ep} />}>
-              <Link
-                to={getEpisodeLink(ep.id)}
-                className={classNames(
-                  styles.epBtn,
-                  done ? styles.epDone : upcoming ? styles.epUpcoming : styles.epAired,
-                )}
-                title={`ep.${ep.sort} ${ep.name || ep.nameCN}`}
-              >
-                {String(ep.sort).padStart(2, '0')}
-              </Link>
-            </Popover>
-          </li>
-        );
-      })}
+      {list.map((ep) => (
+        <EpisodePopoverItem
+          key={ep.id}
+          episode={ep}
+          canManage={canManage}
+          submitting={submittingEpisodeID === ep.id}
+          onUpdate={(body) => void updateEpisode(ep, body)}
+        />
+      ))}
     </ul>
   );
 
   return (
     <SubjectSection
-      title='章节列表'
-      extra={<Link to={getSubjectEpisodesLink(subject.id)}>[全部]</Link>}
+      title={user ? '观看进度管理' : '章节列表'}
+      extra={
+        <Link to={getSubjectEpisodesLink(subject.id)} className={styles.epAllLink}>
+          [全部]
+        </Link>
+      }
       className={styles.primarySection}
     >
       {renderEpGrid(normals)}

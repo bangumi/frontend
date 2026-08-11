@@ -7,6 +7,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
 import type { SubjectHomeResponse } from '@bangumi/client/client';
+import { CollectionType, EpisodeCollectionStatus } from '@bangumi/client/client';
 import { UserProvider } from '@bangumi/website/hooks/use-user';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
@@ -62,7 +63,7 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('谁看这部动画?')).toBeInTheDocument();
     expect(await screen.findByText(/人看过/)).toBeInTheDocument();
     // 主栏：ep / 标签
-    expect(await screen.findByText('章节列表')).toBeInTheDocument();
+    expect(await screen.findByText('观看进度管理')).toBeInTheDocument();
     expect(
       await screen.findByRole('heading', { name: '大家将 Test Anime 标注为' }),
     ).toBeInTheDocument();
@@ -157,8 +158,48 @@ describe('SubjectDetail', () => {
     await renderSubjectLoggedOut();
 
     expect(await screen.findByText('推荐本条目的目录')).toBeInTheDocument();
+    expect(screen.getByText('章节列表')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: '更多目录' })).toBeInTheDocument();
     expect(screen.queryByRole('link', { name: '收集至我的目录' })).not.toBeInTheDocument();
+  });
+
+  it('should update episode progress when the subject is being watched', async () => {
+    const progressData = {
+      ...homeData,
+      subject: {
+        ...homeData.subject,
+        interest: {
+          id: 1,
+          rate: 0,
+          type: CollectionType.Doing,
+          comment: '',
+          tags: [],
+          epStatus: 1,
+          volStatus: 0,
+          private: false,
+          updatedAt: 1775000000,
+        },
+      },
+    };
+    let requestBody: unknown;
+    mockServer.use(
+      http.get('http://localhost:3000/p1/subjects/12/home', () => HttpResponse.json(progressData)),
+      http.patch('http://localhost:3000/p1/collections/episodes/100', async ({ request }) => {
+        requestBody = await request.json();
+        return HttpResponse.json({});
+      }),
+    );
+
+    await act(async () => {
+      renderPage(<SubjectDetail data={progressData} />);
+    });
+    const episodePopover = document.querySelector('[data-ep-id="100"]');
+    expect(episodePopover).not.toBeNull();
+    fireEvent.click(within(episodePopover as HTMLElement).getByRole('button', { name: '想看' }));
+
+    await waitFor(() => {
+      expect(requestBody).toEqual({ type: EpisodeCollectionStatus.Wish });
+    });
   });
 
   it('should render the collection panel in a separate sidebar', async () => {
