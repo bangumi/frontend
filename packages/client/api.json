@@ -2585,7 +2585,16 @@
       },
       "SlimUser": {
         "type": "object",
-        "required": ["id", "username", "nickname", "avatar", "group", "sign", "joinedAt"],
+        "required": [
+          "id",
+          "username",
+          "nickname",
+          "avatar",
+          "group",
+          "sign",
+          "joinedAt",
+          "isFriend"
+        ],
         "properties": {
           "id": {
             "type": "integer",
@@ -2610,6 +2619,10 @@
           },
           "joinedAt": {
             "type": "integer"
+          },
+          "isFriend": {
+            "type": "boolean",
+            "description": "Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship"
           }
         },
         "title": "SlimUser"
@@ -3552,7 +3565,8 @@
           "bio",
           "networkServices",
           "homepage",
-          "stats"
+          "stats",
+          "isFriend"
         ],
         "properties": {
           "id": {
@@ -3618,6 +3632,10 @@
           },
           "stats": {
             "$ref": "#/components/schemas/UserStats"
+          },
+          "isFriend": {
+            "type": "boolean",
+            "description": "Whether the authenticated user has added this user as a friend; false when unauthenticated"
           }
         },
         "title": "User"
@@ -3808,6 +3826,26 @@
             "type": "integer"
           }
         }
+      },
+      "FriendSubjectCollectionActivity": {
+        "type": "object",
+        "required": ["user", "subject", "collectionType", "updatedAt"],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/SlimSubject"
+          },
+          "collectionType": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "收藏最后修改时间，unix time stamp in seconds"
+          }
+        },
+        "title": "FriendSubjectCollectionActivity"
       },
       "ProgressSubject": {
         "allOf": [
@@ -4015,6 +4053,32 @@
             "type": "integer"
           }
         }
+      },
+      "ChannelSubjectTopic": {
+        "type": "object",
+        "required": ["id", "title", "replyCount", "updatedAt", "subject"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "replyCount": {
+            "type": "integer"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/SlimSubject"
+          }
+        },
+        "title": "ChannelSubjectTopic"
       },
       "SubjectEdit": {
         "type": "object",
@@ -5402,6 +5466,168 @@
         }
       }
     },
+    "/p1/channels/{type}/blogs": {
+      "get": {
+        "operationId": "getChannelBlogs",
+        "summary": "获取频道日志",
+        "tags": ["blog"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 6,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          },
+          {
+            "schema": {
+              "$ref": "#/components/schemas/SubjectType"
+            },
+            "in": "path",
+            "name": "type",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SlimBlogEntry"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/channels/{type}/tags": {
+      "get": {
+        "operationId": "getChannelTags",
+        "summary": "获取频道热门标签",
+        "tags": ["subject"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          },
+          {
+            "schema": {
+              "$ref": "#/components/schemas/SubjectType"
+            },
+            "in": "path",
+            "name": "type",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/SubjectTag"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/p1/characters/{characterID}": {
       "get": {
         "operationId": "getCharacter",
@@ -6578,6 +6804,87 @@
         }
       }
     },
+    "/p1/me/friends/subject-collections": {
+      "get": {
+        "operationId": "getFriendsSubjectCollections",
+        "summary": "获取好友最近的条目收藏",
+        "tags": ["collection"],
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/SubjectType"
+            },
+            "in": "query",
+            "name": "subjectType",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FriendSubjectCollectionActivity"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/p1/collections/subjects": {
       "get": {
         "operationId": "getMySubjectCollections",
@@ -7482,6 +7789,12 @@
             "in": "path",
             "name": "episodeID",
             "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
           }
         ],
         "responses": {
@@ -8899,6 +9212,12 @@
             "in": "path",
             "name": "postID",
             "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
           }
         ],
         "responses": {
@@ -13766,6 +14085,12 @@
             "required": true
           }
         ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Default Response",
@@ -14768,9 +15093,17 @@
     "/p1/trending/subjects/topics": {
       "get": {
         "operationId": "getTrendingSubjectTopics",
-        "summary": "获取热门条目讨论",
+        "summary": "获取条目讨论",
         "tags": ["trending"],
         "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/SubjectType"
+            },
+            "in": "query",
+            "name": "type",
+            "required": false
+          },
           {
             "schema": {
               "type": "integer",
@@ -14813,7 +15146,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/SubjectTopic"
+                        "$ref": "#/components/schemas/ChannelSubjectTopic"
                       }
                     },
                     "total": {
@@ -15768,7 +16101,8 @@
                               "avatar",
                               "group",
                               "sign",
-                              "joinedAt"
+                              "joinedAt",
+                              "isFriend"
                             ],
                             "properties": {
                               "id": {
@@ -15794,6 +16128,10 @@
                               },
                               "joinedAt": {
                                 "type": "integer"
+                              },
+                              "isFriend": {
+                                "type": "boolean",
+                                "description": "Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship"
                               }
                             },
                             "title": "SlimUser"

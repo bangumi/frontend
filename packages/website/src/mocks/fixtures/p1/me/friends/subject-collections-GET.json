@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "user": {
+        "id": 63429,
+        "username": "akb49",
+        "nickname": "老白",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/06/34/63429.jpg?r=1474365768",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/06/34/63429.jpg?r=1474365768",
+          "large": "https://lain.bgm.tv/pic/user/l/000/06/34/63429.jpg?r=1474365768"
+        }
+      },
+      "subject": {
+        "id": 622206,
+        "name": "ヤニねこ",
+        "nameCN": "尼古喵喵",
+        "type": 2
+      },
+      "collectionType": 3,
+      "updatedAt": 1786000000
+    }
+  ],
+  "total": 1
+}

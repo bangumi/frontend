@@ -32,26 +32,31 @@ const navLeft = [
   {
     key: 'animation',
     label: '动画',
+    href: '/anime',
     subMenu: animeSubMenu,
   },
   {
     key: 'book',
     label: '书籍',
+    href: '/book',
     subMenu: bookSubMenu,
   },
   {
     key: 'music',
     label: '音乐',
+    href: '/music',
     subMenu: musicSubMenu,
   },
   {
     key: 'game',
     label: '游戏',
+    href: '/game',
     subMenu: gameSubMenu,
   },
   {
     key: 'drama',
     label: '三次元',
+    href: '/real',
     subMenu: realSubMenu,
   },
 ];

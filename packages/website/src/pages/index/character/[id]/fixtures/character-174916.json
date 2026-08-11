@@ -209,7 +209,8 @@
         },
         "group": 10,
         "sign": "动漫真好看，不好看，好看",
-        "joinedAt": 1667374389
+        "joinedAt": 1667374389,
+        "isFriend": false
       },
       "createdAt": 1786378405
     },
@@ -225,7 +226,8 @@
         },
         "group": 10,
         "sign": "什么也不知道~",
-        "joinedAt": 1758366699
+        "joinedAt": 1758366699,
+        "isFriend": false
       },
       "createdAt": 1786282494
     },
@@ -241,7 +243,8 @@
         },
         "group": 10,
         "sign": "",
-        "joinedAt": 1759005462
+        "joinedAt": 1759005462,
+        "isFriend": false
       },
       "createdAt": 1786054723
     },
@@ -257,7 +260,8 @@
         },
         "group": 10,
         "sign": "",
-        "joinedAt": 1603107817
+        "joinedAt": 1603107817,
+        "isFriend": false
       },
       "createdAt": 1785767534
     },
@@ -273,7 +277,8 @@
         },
         "group": 10,
         "sign": "夕暮れの涙が出そうな赤",
-        "joinedAt": 1780341859
+        "joinedAt": 1780341859,
+        "isFriend": false
       },
       "createdAt": 1785606323
     }
@@ -309,7 +314,8 @@
             },
             "group": 10,
             "sign": "",
-            "joinedAt": 1641544401
+            "joinedAt": 1641544401,
+            "isFriend": false
           }
         }
       ],
@@ -325,7 +331,8 @@
         },
         "group": 10,
         "sign": "",
-        "joinedAt": 1641544401
+        "joinedAt": 1641544401,
+        "isFriend": false
       }
     },
     {
@@ -349,7 +356,8 @@
         },
         "group": 10,
         "sign": "爱写歪诗评动画，糖精厕纸也风流。",
-        "joinedAt": 1720020786
+        "joinedAt": 1720020786,
+        "isFriend": false
       }
     },
     {
@@ -373,7 +381,8 @@
         },
         "group": 10,
         "sign": "",
-        "joinedAt": 1576886626
+        "joinedAt": 1576886626,
+        "isFriend": false
       }
     }
   ],
@@ -401,7 +410,8 @@
         },
         "group": 10,
         "sign": "你喜欢这所学校吗？我非常非常喜欢......",
-        "joinedAt": 1707618431
+        "joinedAt": 1707618431,
+        "isFriend": false
       }
     },
     {
@@ -425,7 +435,8 @@
         },
         "group": 10,
         "sign": "中国农民,热爱土地与种子",
-        "joinedAt": 1731408688
+        "joinedAt": 1731408688,
+        "isFriend": false
       }
     },
     {
@@ -449,7 +460,8 @@
         },
         "group": 10,
         "sign": "",
-        "joinedAt": 1712486906
+        "joinedAt": 1712486906,
+        "isFriend": false
       }
     },
     {
@@ -473,7 +485,8 @@
         },
         "group": 10,
         "sign": "再看一部番",
-        "joinedAt": 1651858223
+        "joinedAt": 1651858223,
+        "isFriend": false
       }
     }
   ],
