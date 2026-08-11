@@ -1,0 +1,80 @@
+{
+  "data": [
+    {
+      "id": 101,
+      "title": "这是一条测试讨论主题，标题可能比较长，用于验证省略号截断效果",
+      "creatorID": 1272395,
+      "creator": {
+        "id": 1272395,
+        "username": "1272395",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1786441140,
+        "isFriend": false
+      },
+      "parentID": 12,
+      "replyCount": 5,
+      "createdAt": 1767225600,
+      "updatedAt": 1767312000,
+      "state": 0,
+      "display": 0
+    },
+    {
+      "id": 102,
+      "title": "第二集讨论串",
+      "creatorID": 1272395,
+      "creator": {
+        "id": 1272395,
+        "username": "1272395",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1786441140,
+        "isFriend": false
+      },
+      "parentID": 12,
+      "replyCount": 12,
+      "createdAt": 1767398400,
+      "updatedAt": 1767484800,
+      "state": 0,
+      "display": 0
+    },
+    {
+      "id": 103,
+      "title": "完结纪念帖",
+      "creatorID": 1272395,
+      "creator": {
+        "id": 1272395,
+        "username": "1272395",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/27/23/1272395_SC9al.jpg?r=1786441385&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1786441140,
+        "isFriend": false
+      },
+      "parentID": 12,
+      "replyCount": 20,
+      "createdAt": 1768003200,
+      "updatedAt": 1768089600,
+      "state": 0,
+      "display": 0
+    }
+  ],
+  "total": 3
+}
