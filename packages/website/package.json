@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "prebuild": "pnpm --dir ../.. panda:cssgen",
+    "predev": "pnpm --dir ../.. panda:cssgen",
     "build": "tsc --noEmit && vite build",
     "dev": "vite --host 127.0.0.1",
     "test:e2e": "playwright test",

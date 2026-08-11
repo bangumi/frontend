@@ -110,6 +110,10 @@ pnpm prettier:check      # 检查 Prettier 格式
 `packages/client/client.ts`、`packages/client/types` 等 API 产物由 OpenAPI 脚本生成，不要手工
 编辑。需要更新 API 时使用 `pnpm client update-openapi && pnpm client build`，并检查生成差异。
 
+Panda CSS 生成的 `packages/styled-system` 目录（包括 `styles.css`）是需要提交的仓库产物。修改
+Panda 样式或配置后运行 `pnpm panda:codegen && pnpm panda:cssgen`，检查并提交生成差异，不要将其
+加入忽略规则。
+
 ## 验证和提交
 
 提交前至少运行与改动相关的测试、`pnpm lint`、`pnpm type-check` 和格式检查；UI 或样式改动
