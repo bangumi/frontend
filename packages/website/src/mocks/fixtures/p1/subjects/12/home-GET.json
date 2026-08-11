@@ -231,28 +231,160 @@
   ],
   "indexes": [
     {
-      "id": 3,
-      "title": "测试目录",
-      "uid": 382951,
+      "id": 102268,
+      "uid": 685440,
+      "type": 0,
+      "title": "拖延期|一类想看",
+      "private": false,
+      "total": 40,
+      "stats": {
+        "subject": {
+          "anime": 40
+        }
+      },
+      "createdAt": 1786278341,
+      "updatedAt": 1786283215,
       "user": {
-        "id": 382951,
-        "username": "382951",
-        "nickname": "树洞酱",
+        "id": 685440,
+        "username": "685440",
+        "nickname": "失窃预告函",
         "avatar": {
-          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
-          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
-          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/68/54/685440.jpg?r=1650445913",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/68/54/685440.jpg?r=1650445913",
+          "large": "https://lain.bgm.tv/pic/user/l/000/68/54/685440.jpg?r=1650445913"
         },
         "group": 10,
-        "joinedAt": 1500000000,
-        "sign": ""
-      },
-      "type": 1,
+        "sign": "一位寻路者，TA希冀能找到自己真正的归处",
+        "joinedAt": 1650248982,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 102098,
+      "uid": 837219,
+      "type": 0,
+      "title": "bangumi条目序号1~100",
       "private": false,
-      "total": 10,
-      "stats": { "ncollect": 0, "nsubject": 10 },
-      "createdAt": 1700000000,
-      "updatedAt": 1774000000
+      "total": 98,
+      "stats": {
+        "subject": {
+          "anime": 5,
+          "book": 66,
+          "music": 10,
+          "game": 17
+        }
+      },
+      "createdAt": 1785833191,
+      "updatedAt": 1785888985,
+      "user": {
+        "id": 837219,
+        "username": "837219",
+        "nickname": "银河映像fans",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/83/72/837219.jpg?r=1736942001&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/83/72/837219.jpg?r=1736942001&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/83/72/837219.jpg?r=1736942001&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1700747591,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 90607,
+      "uid": 1073018,
+      "type": 2,
+      "title": "我的 2025 年度精选",
+      "private": false,
+      "total": 26,
+      "stats": {
+        "subject": {
+          "anime": 12,
+          "book": 4,
+          "music": 1,
+          "game": 6
+        }
+      },
+      "createdAt": 1767967010,
+      "updatedAt": 1785694080,
+      "user": {
+        "id": 1073018,
+        "username": "simperror_",
+        "nickname": "SimpERROR_",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/07/30/1073018_E7AQ2.jpg?r=1770366651&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/07/30/1073018_E7AQ2.jpg?r=1770366651&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/07/30/1073018_E7AQ2.jpg?r=1770366651&hd=1"
+        },
+        "group": 10,
+        "sign": "Ciallo～(∠・ω< )⌒☆",
+        "joinedAt": 1753269394,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 101917,
+      "uid": 1073018,
+      "type": 0,
+      "title": "测试目录",
+      "private": false,
+      "total": 9,
+      "stats": {
+        "subject": {
+          "anime": 1,
+          "music": 1,
+          "game": 1,
+          "real": 1
+        },
+        "character": 4,
+        "person": 1
+      },
+      "createdAt": 1785430862,
+      "updatedAt": 1785697663,
+      "user": {
+        "id": 1073018,
+        "username": "simperror_",
+        "nickname": "SimpERROR_",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/07/30/1073018_E7AQ2.jpg?r=1770366651&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/07/30/1073018_E7AQ2.jpg?r=1770366651&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/07/30/1073018_E7AQ2.jpg?r=1770366651&hd=1"
+        },
+        "group": 10,
+        "sign": "Ciallo～(∠・ω< )⌒☆",
+        "joinedAt": 1753269394,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 101167,
+      "uid": 1230351,
+      "type": 0,
+      "title": "b站推荐",
+      "private": false,
+      "total": 48,
+      "stats": {
+        "subject": {
+          "anime": 48
+        }
+      },
+      "createdAt": 1783522293,
+      "updatedAt": 1783523683,
+      "user": {
+        "id": 1230351,
+        "username": "1230351",
+        "nickname": "CK",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/001/23/03/1230351_MXZWW.jpg?r=1774625439&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/001/23/03/1230351_MXZWW.jpg?r=1774625439&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/001/23/03/1230351_MXZWW.jpg?r=1774625439&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1774623282,
+        "isFriend": false
+      }
     }
   ],
   "topics": [

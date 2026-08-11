@@ -1,0 +1,125 @@
+{
+  "data": [
+    {
+      "user": {
+        "id": 807861,
+        "username": "wenshengzhong",
+        "nickname": "文升中",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/80/78/807861.jpg?r=1715142653&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/80/78/807861.jpg?r=1715142653&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/80/78/807861.jpg?r=1715142653&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1690631558,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 48537369,
+        "rate": 0,
+        "type": 4,
+        "comment": "",
+        "tags": ["东映", "2026", "TV"],
+        "updatedAt": 1786463582
+      }
+    },
+    {
+      "user": {
+        "id": 1077390,
+        "username": "1077390",
+        "nickname": "打死你个小3",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/icon.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/icon.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1753670949,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 49327265,
+        "rate": 0,
+        "type": 3,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786462268
+      }
+    },
+    {
+      "user": {
+        "id": 301809,
+        "username": "hlccwill",
+        "nickname": "何来惆怅",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/30/18/301809.jpg?r=1618478223",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/30/18/301809.jpg?r=1618478223",
+          "large": "https://lain.bgm.tv/pic/user/l/000/30/18/301809.jpg?r=1618478223"
+        },
+        "group": 10,
+        "sign": "再次鼓起丧失的勇气",
+        "joinedAt": 1471780324,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 46296941,
+        "rate": 0,
+        "type": 3,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786460956
+      }
+    },
+    {
+      "user": {
+        "id": 266281,
+        "username": "jostar",
+        "nickname": "jostar",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/26/62/266281.jpg?r=1524563422",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/26/62/266281.jpg?r=1524563422",
+          "large": "https://lain.bgm.tv/pic/user/l/000/26/62/266281.jpg?r=1524563422"
+        },
+        "group": 10,
+        "sign": "爱看动画的friends！",
+        "joinedAt": 1445491162,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 46317912,
+        "rate": 0,
+        "type": 3,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786459872
+      }
+    },
+    {
+      "user": {
+        "id": 840190,
+        "username": "christina204",
+        "nickname": "Christina",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/84/01/840190_1eiSK.jpg?r=1757774252&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/84/01/840190_1eiSK.jpg?r=1757774252&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/84/01/840190_1eiSK.jpg?r=1757774252&hd=1"
+        },
+        "group": 10,
+        "sign": "Bloom the smile, Bloom the dream!",
+        "joinedAt": 1701604145,
+        "isFriend": false
+      },
+      "interest": {
+        "id": 47008509,
+        "rate": 6,
+        "type": 3,
+        "comment": "",
+        "tags": [],
+        "updatedAt": 1786459708
+      }
+    }
+  ],
+  "total": 1028
+}
