@@ -3,6 +3,8 @@ import { mockAPI } from './utils';
 export const handlers = [
   mockAPI('/p1/me', 'get'),
   mockAPI('/p1/home', 'get'),
+  mockAPI('/p1/trending/subjects', 'get'),
+  mockAPI('/p1/trending/subjects/topics', 'get'),
   mockAPI('/p1/persons/:personID', 'get'),
   mockAPI('/p1/persons/:personID/casts', 'get'),
   mockAPI('/p1/persons/:personID/works', 'get'),
