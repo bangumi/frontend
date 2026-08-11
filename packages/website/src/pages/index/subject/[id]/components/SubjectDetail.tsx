@@ -50,7 +50,7 @@ function collectVerb(subjectType: number): string {
 }
 
 /** 条目标题与导航 tabs，对齐 PHP subject_header */
-function SubjectHeader({ subject }: { subject: Subject }) {
+export function SubjectHeader({ subject }: { subject: Subject }) {
   const showEpTab =
     subject.type === SubjectType.Anime ||
     subject.type === SubjectType.Music ||
@@ -59,7 +59,7 @@ function SubjectHeader({ subject }: { subject: Subject }) {
 
   const tabs: { key: string; label: string; to: string; implemented: boolean }[] = [
     { key: 'overview', label: '概览', to: getSubjectLink(subject.id), implemented: true },
-    { key: 'ep', label: epLabel, to: getSubjectEpisodesLink(subject.id), implemented: false },
+    { key: 'ep', label: epLabel, to: getSubjectEpisodesLink(subject.id), implemented: true },
     {
       key: 'characters',
       label: '角色',
@@ -134,7 +134,7 @@ function SubjectHeader({ subject }: { subject: Subject }) {
                   <Tab.Item isActive={false}>{tab.label}</Tab.Item>
                 </Link>
               ) : (
-                <NavLink to={tab.to} key={tab.key}>
+                <NavLink to={tab.to} key={tab.key} end={tab.key === 'overview'}>
                   {({ isActive }) => <Tab.Item isActive={isActive}>{tab.label}</Tab.Item>}
                 </NavLink>
               ),
