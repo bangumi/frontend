@@ -365,6 +365,7 @@
   .card {
     gap: 14px;
     min-height: 98px;
+    min-width: 0;
     padding: 14px 12px;
     box-sizing: border-box;
     border: 0;
@@ -397,7 +398,7 @@
   }
 
   .epGroup {
-    gap: 5px;
+    gap: 3px;
   }
 
   .epBtn {
@@ -631,7 +632,7 @@
   }
 
   .gridList {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .epBtn,
