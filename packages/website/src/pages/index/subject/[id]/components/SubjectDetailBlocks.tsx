@@ -13,7 +13,7 @@ import type {
   Topic,
 } from '@bangumi/client/client';
 import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
-import { Avatar, Rate, Typography } from '@bangumi/design';
+import { Avatar, Popover, Rate, Typography } from '@bangumi/design';
 import {
   getBlogLink,
   getCharacterLink,
@@ -37,6 +37,37 @@ import SubjectSection from './SubjectSection';
 
 const { Link } = Typography;
 
+function EpisodePopover({ episode }: { episode: Episode }) {
+  const title = `ep.${episode.sort} ${episode.name || episode.nameCN}`;
+
+  return (
+    <div className={styles.epPopoverContent}>
+      <div className={styles.epPopoverTitle}>{title}</div>
+      <div className={styles.epPopoverBody}>
+        {episode.nameCN && (
+          <p>
+            <span>中文标题:</span> {episode.nameCN}
+          </p>
+        )}
+        {episode.airdate && (
+          <p>
+            <span>首播:</span> {episode.airdate}
+          </p>
+        )}
+        {episode.duration && (
+          <p>
+            <span>时长:</span> {episode.duration}
+          </p>
+        )}
+        <hr />
+        <Link to={getEpisodeLink(episode.id)} className={styles.epDiscussionLink}>
+          讨论 <small>(+{episode.comment})</small>
+        </Link>
+      </div>
+    </div>
+  );
+}
+
 /** 章节/曲目列表，对齐 PHP subject_box_prg */
 function EpListSection({ subject, episodes }: { subject: Subject; episodes: Episode[] }) {
   const isAnimeLike = subject.type === SubjectType.Anime || subject.type === SubjectType.Real;
@@ -48,7 +79,7 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
 
   if (isMusic) {
     return (
-      <SubjectSection title='曲目列表'>
+      <SubjectSection title='曲目列表' className={styles.primarySection}>
         <ul className={styles.musicList}>
           {episodes.map((ep) => (
             <li key={ep.id}>
@@ -71,15 +102,24 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
     <ul className={styles.epGrid}>
       {list.map((ep) => {
         const done = ep.collection?.status === EpisodeCollectionStatus.Done;
+        const upcoming =
+          ep.airdate !== '' &&
+          dayjs(ep.airdate).isValid() &&
+          dayjs(ep.airdate).isAfter(dayjs(), 'day');
         return (
           <li key={ep.id}>
-            <Link
-              to={getEpisodeLink(ep.id)}
-              className={classNames(styles.epBtn, done ? styles.epDone : undefined)}
-              title={`ep.${ep.sort} ${ep.name || ep.nameCN}`}
-            >
-              {String(ep.sort).padStart(2, '0')}
-            </Link>
+            <Popover className={styles.epPopover} content={<EpisodePopover episode={ep} />}>
+              <Link
+                to={getEpisodeLink(ep.id)}
+                className={classNames(
+                  styles.epBtn,
+                  done ? styles.epDone : upcoming ? styles.epUpcoming : styles.epAired,
+                )}
+                title={`ep.${ep.sort} ${ep.name || ep.nameCN}`}
+              >
+                {String(ep.sort).padStart(2, '0')}
+              </Link>
+            </Popover>
           </li>
         );
       })}
@@ -90,6 +130,7 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
     <SubjectSection
       title='章节列表'
       extra={<Link to={getSubjectEpisodesLink(subject.id)}>[全部]</Link>}
+      className={styles.primarySection}
     >
       {renderEpGrid(normals)}
       {specials.length > 0 && (
@@ -104,25 +145,47 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
 
 /** 简介，对齐 PHP subject_summary */
 function SummarySection({ summary }: { summary: string }) {
+  const contentRef = React.useRef<HTMLDivElement>(null);
+  const [collapsed, setCollapsed] = React.useState(true);
+  const [collapsible, setCollapsible] = React.useState(false);
+
+  React.useLayoutEffect(() => {
+    setCollapsible((contentRef.current?.scrollHeight ?? 0) > 250);
+  }, [summary]);
+
   return (
-    <SubjectSection>
-      <div className={styles.summary}>{summary}</div>
+    <SubjectSection className={styles.summarySection}>
+      <div
+        ref={contentRef}
+        className={`${styles.summary} ${collapsible && collapsed ? styles.summaryCollapsed : ''}`}
+      >
+        {summary}
+      </div>
+      {collapsible && (
+        <button
+          type='button'
+          className={styles.summaryToggle}
+          onClick={() => setCollapsed((value) => !value)}
+        >
+          {collapsed ? 'more...' : '收起'}
+        </button>
+      )}
     </SubjectSection>
   );
 }
 
 /** 标签，对齐 PHP subject_box_tag */
-function TagsSection({ tags }: { tags: Subject['tags'] }) {
-  if (tags.length === 0) {
+function TagsSection({ subject }: { subject: Subject }) {
+  if (subject.tags.length === 0) {
     return null;
   }
   return (
-    <SubjectSection title='标签'>
+    <SubjectSection title={`大家将 ${subject.name} 标注为`} className={styles.tagSection}>
       <ul className={styles.tagList}>
-        {tags.map((tag) => (
+        {subject.tags.map((tag) => (
           <li key={tag.name}>
             <Link to={getSubjectTagLink(tag.name)}>
-              {tag.name} ({tag.count})
+              {tag.name} <small className={styles.tagCount}>{tag.count}</small>
             </Link>
           </li>
         ))}
@@ -147,7 +210,7 @@ function CharactersSection({
       title='角色介绍'
       extra={<Link to={getSubjectCharactersLink(subjectId)}>更多角色 »</Link>}
     >
-      <ul className={styles.coverGrid}>
+      <ul className={classNames(styles.coverGrid, styles.characterGrid)}>
         {characters.map(({ character, casts }) => (
           <li key={character.id} className={styles.coverItem}>
             <Link
@@ -155,7 +218,12 @@ function CharactersSection({
               className={styles.coverLink}
               title={character.nameCN || character.name}
             >
-              <img src={character.images?.grid} className={styles.cover} loading='lazy' alt='' />
+              <img
+                src={character.images?.grid}
+                className={classNames(styles.cover, styles.characterCover)}
+                loading='lazy'
+                alt=''
+              />
             </Link>
             <p className={styles.coverTitle}>
               <Link to={getCharacterLink(character.id)}>{character.nameCN || character.name}</Link>
@@ -191,7 +259,7 @@ function RelationsSection({
       title='关联条目'
       extra={<Link to={getSubjectRelationsLink(subjectId)}>更多关联 »</Link>}
     >
-      <ul className={styles.coverGrid}>
+      <ul className={classNames(styles.coverGrid, styles.relationGrid)}>
         {relations.map(({ subject, relation }) => {
           const showSep = relation.id !== lastRelationId;
           lastRelationId = relation.id;
@@ -203,7 +271,12 @@ function RelationsSection({
                 className={styles.coverLink}
                 title={subject.nameCN || subject.name}
               >
-                <img src={subject.images?.grid} className={styles.cover} loading='lazy' alt='' />
+                <img
+                  src={subject.images?.grid}
+                  className={classNames(styles.cover, styles.subjectCover)}
+                  loading='lazy'
+                  alt=''
+                />
               </Link>
               <p className={styles.coverTitle}>
                 <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
@@ -223,7 +296,7 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
   }
   return (
     <SubjectSection title='喜欢这部作品的会员大概会喜欢'>
-      <ul className={styles.coverGrid}>
+      <ul className={classNames(styles.coverGrid, styles.recommendationGrid)}>
         {recs.map(({ subject }) => (
           <li key={subject.id} className={styles.coverItem}>
             <Link
@@ -231,7 +304,12 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
               className={styles.coverLink}
               title={subject.nameCN || subject.name}
             >
-              <img src={subject.images?.grid} className={styles.cover} loading='lazy' alt='' />
+              <img
+                src={subject.images?.grid}
+                className={classNames(styles.cover, styles.subjectCover)}
+                loading='lazy'
+                alt=''
+              />
             </Link>
             <p className={styles.coverTitle}>
               <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
@@ -355,7 +433,7 @@ function CommentsSection({
 }
 
 /** 主内容区块的组合，按 PHP 布局顺序渲染 */
-export const SubjectBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
+export const SubjectPrimaryBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
     <>
@@ -363,7 +441,15 @@ export const SubjectBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data })
       {subject.summary != null && subject.summary !== '' && (
         <SummarySection summary={subject.summary} />
       )}
-      <TagsSection tags={subject.tags} />
+      <TagsSection subject={subject} />
+    </>
+  );
+};
+
+export const SubjectSecondaryBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
+  const { subject } = data;
+  return (
+    <>
       <CharactersSection subjectId={subject.id} characters={data.characters} />
       <RelationsSection subjectId={subject.id} relations={data.relations} />
       <RecsSection recs={data.recs} />
@@ -373,3 +459,10 @@ export const SubjectBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data })
     </>
   );
 };
+
+export const SubjectBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => (
+  <>
+    <SubjectPrimaryBlocks data={data} />
+    <SubjectSecondaryBlocks data={data} />
+  </>
+);

@@ -1,5 +1,38 @@
 @import '@bangumi/design/theme/base';
 
+.primarySection.primarySection {
+  margin: 0 0 10px;
+  padding: 0 0 5px;
+
+  > div {
+    justify-content: flex-start;
+    gap: 4px;
+  }
+
+  h2 {
+    font-size: 14px;
+    font-weight: normal;
+  }
+}
+
+.summarySection.summarySection {
+  margin: 0;
+  padding: 0 0 5px;
+  border-bottom: 0;
+}
+
+.tagSection.tagSection {
+  margin: 5px 0 10px;
+  padding: 10px;
+  border: 0;
+  border-radius: 5px;
+  background: #f7f7f7;
+
+  h2 {
+    font-size: 14px;
+  }
+}
+
 /* 章节/曲目 */
 .musicList {
   list-style: none;
@@ -50,17 +83,20 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 3px;
 }
 
 .epBtn {
   display: inline-block;
-  min-width: 28px;
-  padding: 3px 5px;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  padding: 0;
   text-align: center;
   border: 1px solid @gray-10;
   border-radius: 3px;
   font-size: 12px;
+  line-height: 22px;
   color: @gray-100;
 }
 
@@ -70,12 +106,143 @@
   color: #fff;
 }
 
+.epAired {
+  border-color: #00a8ff;
+  background: #e5f5ff;
+  color: #06c;
+}
+
+.epUpcoming {
+  border-color: #b6b6b6;
+  background: #e0e0e0;
+  color: #909090;
+}
+
+.epPopover {
+  vertical-align: top;
+
+  :global(.bgm-popover__container) {
+    align-items: flex-start;
+  }
+
+  :global(.bgm-popover__content) {
+    top: 5px;
+    left: 12px;
+    width: 275px;
+    overflow: visible;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(80, 80, 80, 0.5);
+  }
+
+  :global(.bgm-popover__content)::before {
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 11px solid @primary-color;
+    border-bottom: 11px solid transparent;
+    border-left: 0;
+    border-right: 11px solid transparent;
+    content: '';
+  }
+
+  :global(.bgm-popover__content)::after {
+    position: absolute;
+    top: -5px;
+    left: -12px;
+    width: 36px;
+    height: 5px;
+    content: '';
+  }
+
+  &:focus-within :global(.bgm-popover__content) {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.epPopoverContent {
+  width: 275px;
+  border-radius: 5px;
+  background: rgba(254, 254, 254, 0.96);
+  color: @gray-100;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.epPopoverTitle {
+  padding: 8px 10px;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+  background: @primary-color;
+  color: #fff;
+  font-size: 13px;
+  line-height: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.epPopoverBody {
+  padding: 5px 10px 7px;
+
+  p {
+    margin: 0;
+  }
+
+  hr {
+    height: 1px;
+    margin: 5px 0;
+    border: 0;
+    background: @gray-10;
+  }
+}
+
+.epDiscussionLink.epDiscussionLink {
+  color: @blue-100;
+
+  small {
+    color: @gray-60;
+  }
+}
+
 /* 简介 */
 .summary {
-  font-size: 13px;
-  line-height: 1.8;
+  color: @gray-100;
+  font-size: 14px;
+  line-height: 1.65;
   white-space: pre-wrap;
   word-break: break-all;
+}
+
+.summaryCollapsed {
+  position: relative;
+  max-height: 250px;
+  overflow: hidden;
+
+  &::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 42px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+    content: '';
+    pointer-events: none;
+  }
+}
+
+.summaryToggle {
+  display: block;
+  margin: -2px 0 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: @blue-100;
+  cursor: pointer;
+  font-size: 11px;
+  line-height: 18px;
 }
 
 /* 标签 */
@@ -85,14 +252,22 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 2px 4px;
 }
 
 .tagList li {
-  padding: 2px 8px;
+  padding: 1px 5px;
   border: 1px solid @gray-10;
-  border-radius: 10px;
+  border-radius: 20px;
+  background: #fff;
   font-size: 12px;
+  line-height: 1.4;
+}
+
+.tagCount {
+  margin-left: 2px;
+  color: @gray-60;
+  font-size: 10px;
 }
 
 /* 封面网格（角色/关联/推荐） */
@@ -102,14 +277,15 @@
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 10px;
-  align-items: flex-end;
 }
 
 .coverItem {
-  width: 72px;
-  text-align: center;
   position: relative;
+  width: 80px;
+  min-width: 0;
+  text-align: left;
 }
 
 .coverLink {
@@ -117,20 +293,67 @@
 }
 
 .cover {
-  width: 72px;
-  height: 96px;
+  display: block;
+  width: 75px;
+  height: 75px;
   object-fit: cover;
-  border-radius: 3px;
+  object-position: center top;
+  border-radius: 8px;
   background: @gray-10;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.characterGrid {
+  flex-wrap: nowrap;
+  gap: 15px;
+  padding: 5px;
+  overflow-x: auto;
+
+  .coverItem {
+    flex: 0 0 85px;
+    width: 85px;
+  }
+
+  .coverTitle {
+    font-size: 13px;
+  }
+}
+
+.characterCover {
+  width: 85px;
+  height: auto;
+  min-height: 100px;
+  aspect-ratio: 3 / 4;
+}
+
+.relationGrid {
+  gap: 5px 10px;
+}
+
+.recommendationGrid {
+  flex-wrap: nowrap;
+  gap: 9px;
+  overflow-x: auto;
+
+  .coverItem {
+    flex: 0 0 80px;
+  }
+}
+
+.subjectCover {
+  aspect-ratio: 1;
 }
 
 .coverTitle {
-  margin: 4px 0 0;
-  font-size: 12px;
-  line-height: 1.4;
+  max-height: 52px;
+  margin: 5px 0 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  overflow-wrap: break-word;
 }
 
 .coverInfo {
@@ -145,9 +368,42 @@
 .relationSep {
   display: block;
   width: 100%;
-  font-size: 13px;
+  height: 18px;
+  font-size: 12px;
   color: @gray-60;
-  margin: 6px 0 0;
+  line-height: 18px;
+}
+
+@media (max-width: @sm) {
+  .epPopover {
+    :global(.bgm-popover__content) {
+      position: fixed;
+      top: 35vh;
+      right: 5vw;
+      left: 5vw;
+      width: auto;
+    }
+
+    :global(.bgm-popover__content)::before {
+      display: none;
+    }
+
+    :global(.bgm-popover__content)::after {
+      display: none;
+    }
+  }
+
+  .epPopoverContent {
+    width: auto;
+  }
+
+  .coverGrid {
+    margin-right: 0;
+  }
+
+  .characterGrid .coverItem {
+    flex-basis: 20vw;
+  }
 }
 
 /* 文本列表（评论/日志） */
