@@ -138,6 +138,8 @@ const Reactions: FC<ReactionsProps> = ({ reactions = [], postId, user, onReacted
           <button
             key={reaction.value}
             type='button'
+            data-reaction-value={reaction.value}
+            data-reaction-selected={selected || undefined}
             className={cx(item, selected && itemSelected)}
             title={reaction.users.map((item) => item.nickname).join('、')}
             disabled={!user || pending !== null}

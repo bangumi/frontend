@@ -184,10 +184,10 @@ describe('Reactions', () => {
   it('should render reactions list', () => {
     const props = buildProps(false);
     const { container } = render(<Comment {...props} reactions={reactions} />);
-    const items = container.getElementsByClassName('bgm-reactions__item');
+    const items = container.querySelectorAll('button[data-reaction-value]');
     expect(items.length).toBe(2);
-    // 当前用户（id=10）没有点赞任何 reaction，不应有 selected 样式
-    expect(items[0]!.className).not.toContain('--selected');
+    // 当前用户（id=10）没有点赞任何 reaction，不应有 selected 标记
+    expect(items[0]!.getAttribute('data-reaction-selected')).toBeNull();
   });
 
   it('should mark selected if current user reacted', () => {
@@ -198,7 +198,7 @@ describe('Reactions', () => {
         reactions={[{ value: 0, users: [{ id: 10, username: 'u10', nickname: '用户10' }] }]}
       />,
     );
-    expect(container.getElementsByClassName('bgm-reactions__item--selected').length).toBe(1);
+    expect(container.querySelectorAll('button[data-reaction-selected]').length).toBe(1);
   });
 
   it('should call like API and refresh on reaction click', async () => {
@@ -214,7 +214,7 @@ describe('Reactions', () => {
     const { container } = render(
       <Comment {...props} reactions={reactions} onCommentUpdate={onReacted} />,
     );
-    fireEvent.click(container.getElementsByClassName('bgm-reactions__item')[0]!);
+    fireEvent.click(container.querySelector('button[data-reaction-value="0"]')!);
     await waitFor(() => {
       expect(likeSpy).toHaveBeenCalled();
       expect(onReacted).toHaveBeenCalled();
@@ -238,7 +238,7 @@ describe('Reactions', () => {
         reactions={[{ value: 0, users: [{ id: 10, username: 'u10', nickname: '用户10' }] }]}
       />,
     );
-    fireEvent.click(container.getElementsByClassName('bgm-reactions__item')[0]!);
+    fireEvent.click(container.querySelector('button[data-reaction-value="0"]')!);
     await waitFor(() => {
       expect(unlikeSpy).toHaveBeenCalled();
       expect(onReacted).toHaveBeenCalled();
@@ -248,7 +248,7 @@ describe('Reactions', () => {
   it('should disable reactions for not-logged-in users', () => {
     const props = buildProps(false, singleComment, '233', 233, null as any);
     const { container } = render(<Comment {...props} reactions={reactions} />);
-    const items = container.getElementsByClassName('bgm-reactions__item');
+    const items = container.querySelectorAll('button[data-reaction-value]');
     expect(items.length).toBe(2);
     expect((items[0] as HTMLButtonElement).disabled).toBe(true);
   });
