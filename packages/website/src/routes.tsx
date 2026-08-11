@@ -6,6 +6,14 @@ import LegacyRedirect from './components/PageRoutes/LegacyRedirect';
 const RootIndex = lazy(async () => import('./pages/index'));
 const MatchAll = lazy(async () => import('./pages/index/[...slug]'));
 const HomeIndex = lazy(async () => import('./pages/index/index'));
+const About = lazy(async () => import('./pages/index/about'));
+const AboutGuideline = lazy(async () => import('./pages/index/about/guideline'));
+const AboutCopyright = lazy(async () => import('./pages/index/about/copyright'));
+const AboutLink2Us = lazy(async () => import('./pages/index/about/link2us'));
+const BBCodeHelp = lazy(async () => import('./pages/index/help/bbcode'));
+const DevApp = lazy(async () => import('./pages/index/dev/app'));
+const Dollars = lazy(async () => import('./pages/index/dollars'));
+const Goodies = lazy(async () => import('./pages/index/goodies'));
 const Channel = lazy(async () => import('./pages/index/channel'));
 const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
@@ -46,28 +54,18 @@ const legacyPagePaths = [
     `${type}/chart`,
     `${type}/tag/*`,
   ]),
-  'about',
-  'about/guideline',
-  'about/copyright',
-  'about/link2us',
-  'award/2021',
   'blog/:id',
   'calendar',
-  'dev/app',
-  'dollars',
-  'goodies',
   'group/all',
   'group/discover',
   'group/mine',
   'group/my_reply',
   'group/my_topic',
-  'help/bbcode',
   'index',
   'index/:id',
   'index/:id/comments',
   'magi',
   'onair',
-  'register',
   'subject/:id/board',
   'subject/:id/characters',
   'subject/:id/collections',
@@ -91,6 +89,19 @@ export const pageRoutes: RouteObject[] = [
       ...legacyPagePaths.map((path) => ({ path, element: <LegacyRedirect /> })),
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
+      {
+        path: 'about',
+        children: [
+          { path: '', element: <About /> },
+          { path: 'guideline', element: <AboutGuideline /> },
+          { path: 'copyright', element: <AboutCopyright /> },
+          { path: 'link2us', element: <AboutLink2Us /> },
+        ],
+      },
+      { path: 'help/bbcode', element: <BBCodeHelp /> },
+      { path: 'dev/app', element: <DevApp /> },
+      { path: 'dollars', element: <Dollars /> },
+      { path: 'goodies', element: <Goodies /> },
       { path: 'ep/:id', element: <Episode /> },
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },
       { path: 'notifications', element: <Notifications /> },
