@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
@@ -9,12 +10,46 @@ import { useUser } from '@bangumi/website/hooks/use-user';
 import AnnouncementBlock from './AnnouncementBlock';
 import CalendarBlock from './CalendarBlock';
 import GroupTopicsBlock from './GroupTopicsBlock';
-import styles from './HomePage.module.less';
 import HotSubjectTopicsBlock from './HotSubjectTopicsBlock';
 import PrgManager from './PrgManager';
 import TimelineBlock from './TimelineBlock';
 
 const { Link } = Typography;
+
+const page = css({
+  '& .bgm-link': { color: '#0084b4' },
+});
+
+const greets = css({
+  fontSize: '24px',
+  margin: '0 0 12px',
+  '@media (max-width: 640px)': { fontSize: '20px' },
+});
+
+const columns = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: '10px',
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+    alignItems: 'stretch',
+  },
+});
+
+const columnLeft = css({
+  flex: '7 1 0',
+  minWidth: 0,
+});
+
+const columnRight = css({
+  flex: '3 1 0',
+  minWidth: 0,
+  boxSizing: 'border-box',
+  '@media (max-width: 768px)': {
+    flex: 'none',
+    width: '100%',
+  },
+});
 
 const HomePage: React.FC = () => {
   const { data } = useHomePage();
@@ -26,16 +61,16 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <PageContainer as='main' className={styles.page}>
-      <div className={styles.greets}>
+    <PageContainer as='main' className={page}>
+      <div className={greets}>
         Hi! <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>
       </div>
-      <div className={styles.columns}>
-        <div className={styles.columnLeft}>
+      <div className={columns}>
+        <div className={columnLeft}>
           <PrgManager progress={data.progress} />
           <TimelineBlock timeline={data.timeline} />
         </div>
-        <div className={styles.columnRight}>
+        <div className={columnRight}>
           <GroupTopicsBlock groupTopics={data.groupTopics} famousGroups={data.famousGroups} />
           <HotSubjectTopicsBlock topics={data.hotSubjectTopics} />
           <CalendarBlock calendar={data.calendar} />

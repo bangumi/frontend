@@ -5,9 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, Form, Input, toast } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import type { UseGroupTopicRet } from '@bangumi/website/hooks/use-group-topic';
-
-import styles from './TopicForm.module.less';
 
 interface FormData {
   title: string;
@@ -27,6 +26,32 @@ export interface TopicFormProps {
  *
  * groupName 和 topic 必须且只能指定其一
  */
+const titleInput = css({
+  display: 'flex',
+  gridColumn: '1',
+  '& .bgm-input': {
+    fontSize: '1.125rem',
+    '&::placeholder': {
+      color: '#9f9b9b',
+    },
+  },
+  '& .bgm-input__wrapper': {
+    flex: '1',
+  },
+});
+
+const contentEditor = css({
+  gridColumn: '1',
+});
+
+const quickPostForm = css({
+  width: '75%',
+  marginTop: '40px',
+  '@media (max-width: 768px)': {
+    width: '100%',
+  },
+});
+
 const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   if ((!!groupName && !!topic) || (!groupName && !topic)) {
     throw Error('Invalid usage: should specify either groupName or topic');
@@ -107,7 +132,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
     return (
       <Form
         compact
-        className={styles.quickPostForm}
+        className={quickPostForm}
         // 统一由 EditorForm 的 onConfirm 处理
         onSubmit={(e: React.FormEvent<HTMLFormElement>) => {
           e.preventDefault();
@@ -121,10 +146,10 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
 
   return (
     <>
-      <div className={styles.titleInput}>
+      <div className={titleInput}>
         <FormInput />
       </div>
-      <div className={styles.contentEditor}>
+      <div className={contentEditor}>
         <FormEditor />
       </div>
     </>

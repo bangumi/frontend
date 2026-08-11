@@ -6,6 +6,7 @@ import { useInput } from 'rooks';
 
 import { Button, Input, Message } from '@bangumi/design';
 import { Password, UserLogin } from '@bangumi/icons';
+import { css } from '@bangumi/styled-system/css';
 import Helmet from '@bangumi/website/components/Helmet';
 import { redirectTo } from '@bangumi/website/utils/route';
 
@@ -17,7 +18,41 @@ import {
   useUser,
 } from '../../hooks/use-user';
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg';
-import style from './index.module.less';
+
+const wrapper = css({
+  width: '100vw',
+  height: '100vh',
+});
+
+const container = css({
+  width: '320px',
+  position: 'absolute',
+  left: '50%',
+  top: '50%',
+  transform: 'translateX(-50%) translateY(-80%)',
+  display: 'flex',
+  gap: '20px',
+  flexDirection: 'column',
+  alignItems: 'center',
+  '& > *': { width: '100%' },
+});
+
+const logo = css({ marginBottom: '25px' });
+
+const hcaptcha = css({
+  '& div': { height: '78px', textAlign: 'center' },
+});
+
+const buttonGroup = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  '&:has(button:only-child)': { justifyContent: 'center' },
+});
+
+const button = css({ width: '150px' });
+
+const passkeyButton = css({ width: '100%' });
 
 const Login: React.FC = () => {
   const captcha = useRef<TurnstileInstance>(null);
@@ -121,9 +156,9 @@ const Login: React.FC = () => {
   return (
     <>
       <Helmet title='登录' />
-      <div className={style.wrapper}>
-        <div className={style.container}>
-          <LoginLogo className={style.logo} />
+      <div className={wrapper}>
+        <div className={container}>
+          <LoginLogo className={logo} />
           {errorMessage && (
             <Message type='error' blockWidth>
               {errorMessage}
@@ -131,7 +166,7 @@ const Login: React.FC = () => {
           )}
           <Input type='email' prefix={<UserLogin />} placeholder='你的 Email 地址' {...email} />
           <Input type='password' prefix={<Password />} placeholder='你的登录密码' {...password} />
-          <div className={style.hcaptcha}>
+          <div className={hcaptcha}>
             <Turnstile
               options={{
                 theme: 'light',
@@ -145,17 +180,17 @@ const Login: React.FC = () => {
             />
           </div>
           {passkeySupported && (
-            <Button className={style.passkeyButton} color='gray' onClick={handlePasskeyLogin}>
+            <Button className={passkeyButton} color='gray' onClick={handlePasskeyLogin}>
               使用 Passkey 登录
             </Button>
           )}
-          <div className={style.buttonGroup}>
+          <div className={buttonGroup}>
             {!shouldHideRegisterButton && (
-              <Button className={style.button} color='gray' disabled>
+              <Button className={button} color='gray' disabled>
                 注册新用户
               </Button>
             )}
-            <Button className={style.button} onClick={handleLogin}>
+            <Button className={button} onClick={handleLogin}>
               登录
             </Button>
           </div>

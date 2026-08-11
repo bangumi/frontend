@@ -5,15 +5,33 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { Avatar, Layout, Topic } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
+import { css } from '@bangumi/styled-system/css';
 import Helmet from '@bangumi/website/components/Helmet';
 import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import GroupInfo from '../../components/GroupInfo';
 import GroupTopicHeader from './components/GroupTopicHeader';
-import styles from './index.module.less';
 
 const { Comment } = Topic;
+
+const replies = css({
+  marginTop: '10px',
+});
+
+const replyFormContainer = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  marginTop: '20px',
+});
+
+const replyForm = css({
+  flexBasis: '75%',
+  marginLeft: '10px',
+  '@media (max-width: 768px)': {
+    flexBasis: '100%',
+  },
+});
 
 const TopicPage: FC = () => {
   const { id } = useParams();
@@ -58,7 +76,7 @@ const TopicPage: FC = () => {
         leftChildren={
           <>
             {/* Topic Comments */}
-            <div className={styles.replies}>
+            <div className={replies}>
               {topic.replies.map((comment: Reply, idx: number) => (
                 <Comment
                   topicId={topic.id}
@@ -75,11 +93,11 @@ const TopicPage: FC = () => {
               ))}
               {/* Reply BBCode Editor */}
               {!isClosed && user && (
-                <div className={styles.replyFormContainer} id='replyForm'>
+                <div className={replyFormContainer} id='replyForm'>
                   <Avatar src={user.avatar.large} size='small' />
                   <ReplyForm
                     topicId={topic.id}
-                    className={styles.replyForm}
+                    className={replyForm}
                     content={replyContent}
                     onChange={setReplyContent}
                     onSuccess={handleReplySuccess}

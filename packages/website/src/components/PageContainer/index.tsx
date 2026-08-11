@@ -2,7 +2,25 @@ import classNames from 'classnames';
 import type { HTMLAttributes } from 'react';
 import React from 'react';
 
-import styles from './style.module.less';
+import { css } from '@bangumi/styled-system/css';
+
+const container = css({
+  position: 'relative',
+  width: '100%',
+  maxWidth: '1260px',
+  margin: '0 auto',
+  padding: '24px 30px',
+  boxSizing: 'border-box',
+  '@media (max-width: 640px)': {
+    paddingRight: '16px',
+    paddingLeft: '16px',
+  },
+});
+
+const gutterOnlyStyle = css({
+  paddingTop: 0,
+  paddingBottom: 0,
+});
 
 interface PageContainerProps extends HTMLAttributes<HTMLElement> {
   as?: 'div' | 'main' | 'nav' | 'section';
@@ -17,7 +35,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
   ...props
 }) => (
   <Component
-    className={classNames(styles.container, gutterOnly && styles.gutterOnly, className)}
+    className={classNames(container, gutterOnly && gutterOnlyStyle, className)}
     {...props}
   />
 );

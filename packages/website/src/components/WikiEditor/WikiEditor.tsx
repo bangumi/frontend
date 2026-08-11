@@ -5,7 +5,16 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api.js';
 import type { MutableRefObject } from 'react';
 import React, { useEffect, useRef } from 'react';
 
-import style from './WikiEditor.module.less';
+import { css } from '@bangumi/styled-system/css';
+
+const editorStyle = css({
+  minHeight: '500px',
+  padding: '9px 0',
+  border: '2px solid #e8e3e3',
+  borderRadius: '19px',
+  overflow: 'hidden',
+  resize: 'vertical',
+});
 
 interface WikiEditorProps {
   defaultValue?: string;
@@ -371,7 +380,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
     }
   }, [defaultValue, instance]);
 
-  return <div id='bgm-wiki-editor' ref={editor} className={style.editor} />;
+  return <div id='bgm-wiki-editor' ref={editor} className={editorStyle} />;
 };
 
 export default WikiEditor;

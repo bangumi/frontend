@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { CollectionType } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { UnreadableCodeError } from '@bangumi/utils';
 import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
@@ -18,9 +19,72 @@ import UserHeader from '../../components/UserHeader';
 import UserStatsBlock from '../../components/UserStatsBlock';
 import { CollectionGroup } from './components/CollectionGroup';
 import { CollectionList } from './components/CollectionList';
-import styles from './index.module.less';
 
 const { Link } = Typography;
+
+const content = css({
+  paddingTop: '23px',
+});
+
+const typeTabs = css({
+  display: 'flex',
+  gap: '16px',
+  marginBottom: '16px',
+  paddingBottom: '8px',
+  borderBottom: '1px solid #e8e3e3',
+  '& a': {
+    fontSize: '15px',
+    color: '#595555',
+    textDecoration: 'none',
+    _hover: {
+      color: '#54b5df',
+    },
+  },
+});
+
+const active = css({
+  color: '#54b5df !important',
+  fontWeight: 'bold',
+});
+
+const columns = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: '20px',
+  '@media (max-width: 768px)': {
+    flexDirection: 'column',
+  },
+});
+
+const columnLeft = css({
+  flex: '1 1 auto',
+  minWidth: '0',
+});
+
+const columnRight = css({
+  flex: '0 0 220px',
+  width: '220px',
+  minWidth: '0',
+  '@media (max-width: 768px)': {
+    flex: 'none',
+    width: '100%',
+  },
+});
+
+const statusTabs = css({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '4px 14px',
+  marginBottom: '14px',
+  '& a': {
+    fontSize: '13px',
+    color: '#595555',
+    textDecoration: 'none',
+    _hover: {
+      color: '#54b5df',
+    },
+  },
+});
 
 const STATUS_LIST = [
   CollectionType.Wish,
@@ -60,24 +124,24 @@ const UserCollectionsPage: React.FC<UserCollectionsPageProps> = ({ subjectType }
       <Helmet title={`${user.nickname}的收藏 - ${meta.label}`} />
       <main>
         <UserHeader user={user} />
-        <PageContainer className={styles.content}>
-          <div className={styles.typeTabs}>
+        <PageContainer className={content}>
+          <div className={typeTabs}>
             {SUBJECT_BLOCK_LIST.map((item) => (
               <Link
                 key={item.path}
                 to={`/${item.path}/list/${username}`}
-                className={item.path === meta.path ? styles.active : undefined}
+                className={item.path === meta.path ? active : undefined}
               >
                 {item.label}
               </Link>
             ))}
           </div>
-          <div className={styles.columns}>
-            <div className={styles.columnLeft}>
-              <div className={styles.statusTabs}>
+          <div className={columns}>
+            <div className={columnLeft}>
+              <div className={statusTabs}>
                 <Link
                   to={`/${meta.path}/list/${username}`}
-                  className={!status ? styles.active : undefined}
+                  className={!status ? active : undefined}
                 >
                   全部
                 </Link>
@@ -91,7 +155,7 @@ const UserCollectionsPage: React.FC<UserCollectionsPageProps> = ({ subjectType }
                     <Link
                       key={type}
                       to={`/${meta.path}/list/${username}/${statusPath}`}
-                      className={status === statusPath ? styles.active : undefined}
+                      className={status === statusPath ? active : undefined}
                     >
                       {COLLECTION_LABELS[type]} ({count})
                     </Link>
@@ -108,7 +172,7 @@ const UserCollectionsPage: React.FC<UserCollectionsPageProps> = ({ subjectType }
                 <CollectionGroup user={user} subjectType={meta.subjectType} />
               )}
             </div>
-            <div className={styles.columnRight}>
+            <div className={columnRight}>
               <UserStatsBlock user={user} />
             </div>
           </div>

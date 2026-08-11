@@ -3,24 +3,56 @@ import React, { useState } from 'react';
 
 import type { Group } from '@bangumi/client/client';
 import { CollapsibleContent, Image, Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 
 import GroupActions from './GroupActions';
-import styles from './GroupHeader.module.less';
 
 const { Text } = Typography;
+
+const groupHeader = css({
+  display: 'flex',
+  '& > *': {
+    marginRight: '20px',
+  },
+});
+
+const title = css({
+  fontSize: '24px',
+  lineHeight: '34px',
+  fontWeight: '600',
+  color: '#1f1c1c',
+});
+
+const thumbnail = css({
+  width: '75px',
+  height: '75px',
+  borderRadius: '19px',
+});
+
+const infoCol = css({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
+  padding: '7.5px 0',
+});
+
+// 原 GroupHeader.module.less 未定义这两个类，className 原本为 undefined
+const groupDescription = css({});
+const groupButtons = css({});
+
 export const GroupHeader: React.FC<{ group: Group }> = ({ group }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   return (
-    <div className={styles.groupHeader}>
-      <div className={styles.thumbnail}>
+    <div className={groupHeader}>
+      <div className={thumbnail}>
         {group.icon.large && (
-          <Image className={styles.thumbnail} src={group.icon.large} alt={`${group.title} 头像`} />
+          <Image className={thumbnail} src={group.icon.large} alt={`${group.title} 头像`} />
         )}
       </div>
-      <div className={styles.infoCol}>
-        <div className={styles.title}>{group.title}</div>
+      <div className={infoCol}>
+        <div className={title}>{group.title}</div>
         <div>
           <Text type='secondary'>
             {' '}
@@ -30,12 +62,12 @@ export const GroupHeader: React.FC<{ group: Group }> = ({ group }) => {
         </div>
         <CollapsibleContent
           content={renderBBCode(group.description)}
-          containerClassName={styles.groupDescription}
+          containerClassName={groupDescription}
           threshold={158}
           collapsed={collapsed}
           onChange={setCollapsed}
         />
-        <GroupActions group={group} size='medium' className={styles.groupButtons} />
+        <GroupActions group={group} size='medium' className={groupButtons} />
       </div>
     </div>
   );

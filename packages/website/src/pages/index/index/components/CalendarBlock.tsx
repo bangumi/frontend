@@ -3,12 +3,57 @@ import React from 'react';
 
 import type { Calendar } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { getCalendarLink, getSubjectLink } from '@bangumi/utils/pages';
 
-import styles from './CalendarBlock.module.less';
 import HomeSidePanel from './HomeSidePanel';
 
 const { Link } = Typography;
+
+const titleSmall = css({
+  fontSize: '12px',
+  fontWeight: 'normal',
+  color: '#9f9b9b',
+});
+
+const list = css({
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+  fontSize: '13px',
+});
+
+const dayItem = css({
+  padding: '8px 10px',
+  borderBottom: '1px solid #e8e3e3',
+});
+
+const dayTitle = css({
+  fontSize: '13px',
+  fontWeight: 'bold',
+  margin: '0 0 6px',
+});
+
+const dayEn = css({
+  fontWeight: 'normal',
+  color: '#9f9b9b',
+  marginLeft: '4px',
+});
+
+const coverList = css({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '4px',
+  '& img': {
+    display: 'block',
+    borderRadius: '2px',
+  },
+});
+
+const tip = css({
+  padding: '8px 10px',
+  color: '#9f9b9b',
+});
 
 const WEEKDAY_DESC: Record<number, { en: string; cn: string }> = {
   1: { en: 'Mon', cn: '星期一' },
@@ -50,26 +95,26 @@ const CalendarBlock: React.FC<{ calendar: Calendar }> = ({ calendar }) => {
       title={
         <>
           每日放送{' '}
-          <small className={styles.titleSmall}>
+          <small className={titleSmall}>
             {dayjs().format('YYYY年M月D日')} {getWeekdayDesc(today).cn}{' '}
             <Link to={getCalendarLink()}>...more</Link>
           </small>
         </>
       }
     >
-      <ul className={styles.list}>
+      <ul className={list}>
         {days.map((day) => {
           const items = calendar[String(day.id)] ?? [];
           if (items.length === 0) {
             return null;
           }
           return (
-            <li key={day.id} className={styles.dayItem}>
-              <h3 className={styles.dayTitle}>
+            <li key={day.id} className={dayItem}>
+              <h3 className={dayTitle}>
                 {day.label}
-                <small className={styles.dayEn}>{getWeekdayDesc(day.id).en}</small>
+                <small className={dayEn}>{getWeekdayDesc(day.id).en}</small>
               </h3>
-              <div className={styles.coverList}>
+              <div className={coverList}>
                 {items.map((item) => (
                   <Link
                     key={item.subject.id}
@@ -83,7 +128,7 @@ const CalendarBlock: React.FC<{ calendar: Calendar }> = ({ calendar }) => {
             </li>
           );
         })}
-        <li className={styles.tip}>
+        <li className={tip}>
           今日上映 <strong>{todayItems.length}</strong> 部。共 {todayWatchers} 人收看今日番组。
         </li>
       </ul>
