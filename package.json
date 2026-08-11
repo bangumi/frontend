@@ -47,7 +47,7 @@
       "eslint --fix"
     ],
     "*.{css,less}": [
-      "stylelint --fix"
+      "stylelint --fix --allow-empty-input"
     ],
     "*.{md,html,js,ts,mts,cts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
   },
