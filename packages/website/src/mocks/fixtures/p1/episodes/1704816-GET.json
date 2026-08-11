@@ -1,0 +1,36 @@
+{
+  "id": 1704816,
+  "subjectID": 501963,
+  "sort": 1,
+  "type": 0,
+  "disc": 0,
+  "name": "燃えよ狂犬",
+  "nameCN": "燃烧吧，狂犬",
+  "duration": "00:23:40",
+  "airdate": "2026-07-04",
+  "comment": 151,
+  "desc": "ルーデウスと結ばれたものの、己の未熟さを痛感したエリスは彼のもとを去った。ギレーヌと共に剣の聖地にたどり着いたエリスは、打倒・龍神オルステッドを宣言し、剣神ガル・ファリオンのもとで修業する。そこには剣聖として同じく修行に励む少女・ニナの姿もあり…。",
+  "subject": {
+    "id": 501963,
+    "name": "無職転生Ⅲ ～異世界行ったら本気だす～",
+    "nameCN": "无职转生 第三季 ～到了异世界就拿出真本事～",
+    "type": 2,
+    "info": "14话 / 2026年7月4日 / 渋谷亮介 / 理不尽な孫の手（MFブックス／KADOKAWA刊） / 嶋田真恵・古川良太",
+    "metaTags": ["后宫", "TV", "日本", "奇幻", "冒险", "小说改"],
+    "rating": {
+      "rank": 311,
+      "count": [60, 14, 14, 14, 52, 131, 551, 1388, 504, 392],
+      "score": 7.9,
+      "total": 3120
+    },
+    "locked": false,
+    "nsfw": false,
+    "images": {
+      "large": "https://lain.bgm.tv/pic/cover/l/1f/9e/501963_bXlEP.jpg",
+      "common": "https://lain.bgm.tv/r/400/pic/cover/l/1f/9e/501963_bXlEP.jpg",
+      "medium": "https://lain.bgm.tv/r/200/pic/cover/l/1f/9e/501963_bXlEP.jpg",
+      "small": "https://lain.bgm.tv/r/100/pic/cover/l/1f/9e/501963_bXlEP.jpg",
+      "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/1f/9e/501963_bXlEP.jpg"
+    }
+  }
+}

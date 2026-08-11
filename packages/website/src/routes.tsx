@@ -6,6 +6,7 @@ import LegacyRedirect from './components/PageRoutes/LegacyRedirect';
 const RootIndex = lazy(async () => import('./pages/index'));
 const MatchAll = lazy(async () => import('./pages/index/[...slug]'));
 const HomeIndex = lazy(async () => import('./pages/index/index'));
+const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
 const Group = lazy(async () => import('./pages/index/group/[name]/index'));
 const GroupForum = lazy(async () => import('./pages/index/group/[name]/index/forum'));
@@ -44,7 +45,6 @@ const legacyPagePaths = [
   'character/:id',
   'dev/app',
   'dollars',
-  'ep/:id',
   'goodies',
   'group/all',
   'group/discover',
@@ -82,6 +82,7 @@ export const pageRoutes: RouteObject[] = [
       ...legacyPagePaths.map((path) => ({ path, element: <LegacyRedirect /> })),
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
+      { path: 'ep/:id', element: <Episode /> },
       { path: 'notifications', element: <Notifications /> },
       ...userCollectionTypes.map((type) => ({
         path: type,
