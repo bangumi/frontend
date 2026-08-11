@@ -1,0 +1,131 @@
+@import '@bangumi/design/theme/base';
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.episodeGroups {
+  min-width: 0;
+}
+
+.groupTitle {
+  margin: 0;
+  padding: 5px 10px;
+  border-top: 1px solid @gray-10;
+  border-bottom: 1px solid @gray-10;
+  color: @gray-80;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+}
+
+.episodeList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.episodeRow {
+  padding: 6px 5px;
+  border-bottom: 1px dotted #e0e0e0;
+  font-size: 14px;
+  line-height: 1.6;
+
+  &:nth-child(even) {
+    background: #f9f9f9;
+  }
+}
+
+.episodeTitle {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.airedStatus,
+.futureStatus {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: 0 5px 1px 1px;
+  border-radius: 50%;
+}
+
+.airedStatus {
+  background: @blue-collect;
+}
+
+.futureStatus {
+  background: #d9dfe1;
+}
+
+.episodeNameCN {
+  color: @gray-80;
+}
+
+.episodeMeta {
+  margin: 0;
+  color: @gray-60;
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.subjectCard {
+  display: flex;
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid @gray-10;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+}
+
+.coverLink {
+  flex: 0 0 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+
+.cover {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.subjectCardContent {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.subjectName {
+  max-width: 100%;
+  overflow: hidden;
+  color: @gray-80;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.returnLink {
+  font-size: 12px;
+}
+
+.empty {
+  margin: 0;
+  padding: 16px 10px;
+  border-top: 1px solid @gray-10;
+  border-bottom: 1px dotted @gray-10;
+  color: @gray-60;
+  font-size: 13px;
+}
+
+@media (max-width: @md) {
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

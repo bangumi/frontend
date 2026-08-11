@@ -52,7 +52,7 @@ function collectVerb(subjectType: number): string {
 }
 
 /** 条目标题与导航 tabs，对齐 PHP subject_header */
-function SubjectHeader({ subject }: { subject: Subject }) {
+export function SubjectHeader({ subject }: { subject: Subject }) {
   const { user } = useUser();
   const showEpTab =
     subject.type === SubjectType.Anime ||
