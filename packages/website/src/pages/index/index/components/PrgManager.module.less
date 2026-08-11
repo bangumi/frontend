@@ -5,7 +5,7 @@
   border: 1px solid @gray-10;
   border-radius: 14px;
   margin: 0 0 20px;
-  overflow: hidden;
+  overflow: visible;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
 }
 
@@ -181,7 +181,7 @@
   min-width: 0;
   margin: 0;
   padding: 0;
-  overflow: hidden;
+  overflow: visible;
   list-style: none;
 
   .card {
@@ -674,6 +674,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  min-height: 31px;
   padding: 8px 10px;
   border-bottom: 1px solid @gray-10;
 }
@@ -696,24 +697,14 @@
   }
 }
 
-.epWatchedBtn {
+.epCurrentStatus {
   margin-left: auto;
-  border: none;
   background: @primary-color;
   color: #fff;
   border-radius: 3px;
   padding: 3px 12px;
   font-size: 12px;
-  cursor: pointer;
-
-  &:hover {
-    filter: brightness(0.95);
-  }
-
-  &:disabled {
-    opacity: 0.6;
-    cursor: default;
-  }
+  white-space: nowrap;
 }
 
 .epInfoLine {

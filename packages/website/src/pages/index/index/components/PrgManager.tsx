@@ -3,7 +3,12 @@ import { DateTime } from 'luxon';
 import React, { useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
-import type { Episode, ProgressItem, UpdateSubjectProgress } from '@bangumi/client/client';
+import type {
+  Episode,
+  ProgressItem,
+  UpdateEpisodeProgress,
+  UpdateSubjectProgress,
+} from '@bangumi/client/client';
 import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
 import { Popover, toast, Typography } from '@bangumi/design';
 import { GridView, ListView } from '@bangumi/icons';
@@ -97,7 +102,7 @@ function EpDetail({
 }: {
   ep: Episode;
   submitting: boolean;
-  onUpdate: (type: EpisodeCollectionStatus) => void;
+  onUpdate: (body: UpdateEpisodeProgress) => void;
 }) {
   const status = ep.collection?.status;
   return (
@@ -108,38 +113,70 @@ function EpDetail({
         </span>
       </div>
       <div className={styles.epActions}>
-        <button
-          type='button'
-          className={styles.epActionBtn}
-          disabled={submitting}
-          onClick={() => onUpdate(EpisodeCollectionStatus.Wish)}
-        >
-          想看
-        </button>
-        <button
-          type='button'
-          className={styles.epActionBtn}
-          disabled={submitting}
-          onClick={() => onUpdate(EpisodeCollectionStatus.Dropped)}
-        >
-          抛弃
-        </button>
-        <button
-          type='button'
-          className={styles.epActionBtn}
-          disabled={submitting}
-          onClick={() => onUpdate(EpisodeCollectionStatus.None)}
-        >
-          撤消
-        </button>
-        <button
-          type='button'
-          className={styles.epWatchedBtn}
-          disabled={submitting}
-          onClick={() => onUpdate(EpisodeCollectionStatus.Done)}
-        >
-          看过
-        </button>
+        {status !== EpisodeCollectionStatus.Done && (
+          <>
+            <button
+              type='button'
+              className={styles.epActionBtn}
+              disabled={submitting}
+              onClick={() => onUpdate({ type: EpisodeCollectionStatus.Done })}
+            >
+              看过
+            </button>
+            {ep.type === EpisodeType.Normal && (
+              <button
+                type='button'
+                className={styles.epActionBtn}
+                disabled={submitting}
+                onClick={() => onUpdate({ batch: true })}
+              >
+                看到
+              </button>
+            )}
+          </>
+        )}
+        {status !== EpisodeCollectionStatus.Wish && (
+          <button
+            type='button'
+            className={styles.epActionBtn}
+            disabled={submitting}
+            onClick={() => onUpdate({ type: EpisodeCollectionStatus.Wish })}
+          >
+            想看
+          </button>
+        )}
+        {status !== EpisodeCollectionStatus.Dropped && (
+          <button
+            type='button'
+            className={styles.epActionBtn}
+            disabled={submitting}
+            onClick={() => onUpdate({ type: EpisodeCollectionStatus.Dropped })}
+          >
+            抛弃
+          </button>
+        )}
+        {ep.collection && (
+          <button
+            type='button'
+            className={styles.epActionBtn}
+            disabled={submitting}
+            onClick={() => onUpdate({ type: EpisodeCollectionStatus.None })}
+          >
+            撤消
+          </button>
+        )}
+        {ep.collection && (
+          <span
+            className={styles.epCurrentStatus}
+            title={
+              ep.collection.updatedAt
+                ? DateTime.fromSeconds(ep.collection.updatedAt).toFormat('yyyy-M-d HH:mm')
+                : undefined
+            }
+          >
+            {STATUS_TEXT[ep.collection.status]}
+          </span>
+        )}
       </div>
       {ep.nameCN && (
         <p className={styles.epInfoLine}>
@@ -178,7 +215,7 @@ function EpButton({
 }: {
   ep: Episode;
   submitting: boolean;
-  onUpdate: (type: EpisodeCollectionStatus) => void;
+  onUpdate: (body: UpdateEpisodeProgress) => void;
 }) {
   const watched = ep.collection?.status === EpisodeCollectionStatus.Done;
   const unavailable = Boolean(ep.airdate) && isEpisodeUnavailable(ep.airdate);
@@ -282,10 +319,10 @@ function PrgCard({ item, detailed = false }: { item: ProgressItem; detailed?: bo
     void submit(body);
   };
 
-  const handleEpStatus = async (ep: Episode, type: EpisodeCollectionStatus) => {
+  const handleEpStatus = async (ep: Episode, body: UpdateEpisodeProgress) => {
     setSubmitting(true);
     try {
-      await ok(ozaClient.updateEpisodeProgress(ep.id, { type }));
+      await ok(ozaClient.updateEpisodeProgress(ep.id, body));
       await mutate();
     } catch (error) {
       toast(getErrorMessage(error), { type: 'error' });
@@ -413,7 +450,7 @@ function PrgCard({ item, detailed = false }: { item: ProgressItem; detailed?: bo
                     key={ep.id}
                     ep={ep}
                     submitting={submitting}
-                    onUpdate={(epType) => void handleEpStatus(ep, epType)}
+                    onUpdate={(body) => void handleEpStatus(ep, body)}
                   />
                 ))}
               </li>

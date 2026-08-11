@@ -6,7 +6,7 @@ import { SWRConfig } from 'swr';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
-import homeFixture from '../../../mocks/fixtures/p1/home-GET.json';
+import { homeResponseFixture as homeFixture } from '../../../mocks/fixtures/p1/home-GET';
 import HomePage from './components/HomePage';
 
 describe('HomePage', () => {
@@ -337,6 +337,60 @@ describe('HomePage', () => {
 
     await waitFor(() => {
       expect(patchedBody).toEqual({ type: 2 });
+    });
+  });
+
+  it('should render episode actions based on collection status', async () => {
+    const progress = homeFixture.progress[0]!;
+    const [done, wish, dropped, none] = progress.eps;
+    let patchedBody: unknown = null;
+    mockServer.use(
+      http.get('http://localhost:3000/p1/home', () =>
+        HttpResponse.json({
+          ...homeFixture,
+          progress: [
+            {
+              ...progress,
+              eps: [
+                { ...done, collection: { status: 2, updatedAt: 1775000000 } },
+                { ...wish, collection: { status: 1, updatedAt: 1775000000 } },
+                { ...dropped, collection: { status: 3, updatedAt: 1775000000 } },
+                { ...none, collection: undefined },
+              ],
+            },
+          ],
+        }),
+      ),
+      http.patch(
+        `http://localhost:3000/p1/collections/episodes/${none!.id}`,
+        async ({ request }) => {
+          patchedBody = await request.json();
+          return HttpResponse.json({}, { status: 200 });
+        },
+      ),
+    );
+    await renderHome();
+
+    const doneDetail = document.querySelector(`[data-ep-id='${done!.id}']`)!;
+    expect(within(doneDetail as HTMLElement).queryByRole('button', { name: '看过' })).toBeNull();
+    expect(within(doneDetail as HTMLElement).getByText('看过')).toBeInTheDocument();
+    expect(
+      within(doneDetail as HTMLElement).getByRole('button', { name: '撤消' }),
+    ).toBeInTheDocument();
+
+    const wishDetail = document.querySelector(`[data-ep-id='${wish!.id}']`)!;
+    expect(within(wishDetail as HTMLElement).queryByRole('button', { name: '想看' })).toBeNull();
+    expect(within(wishDetail as HTMLElement).getByText('想看')).toBeInTheDocument();
+
+    const droppedDetail = document.querySelector(`[data-ep-id='${dropped!.id}']`)!;
+    expect(within(droppedDetail as HTMLElement).queryByRole('button', { name: '抛弃' })).toBeNull();
+    expect(within(droppedDetail as HTMLElement).getByText('抛弃')).toBeInTheDocument();
+
+    const noneDetail = document.querySelector(`[data-ep-id='${none!.id}']`)!;
+    expect(within(noneDetail as HTMLElement).queryByRole('button', { name: '撤消' })).toBeNull();
+    fireEvent.click(within(noneDetail as HTMLElement).getByRole('button', { name: '看到' }));
+    await waitFor(() => {
+      expect(patchedBody).toEqual({ batch: true });
     });
   });
 });
