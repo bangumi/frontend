@@ -51,6 +51,7 @@ Useful options:
 - `--device-scale-factor <n>`: device scale factor (default 1)
 - `--quality <0-100>`: JPEG quality (default 60); output must end in `.jpg`/`.jpeg`, PNG is not supported
 - `--full-page`: capture the full scrollable page
+- `--element <selector>`: capture only the element matching a CSS selector (e.g. `#user-avatar`) at its natural size instead of the whole page; mutually exclusive with `--full-page`. Use it to screenshot a single UI component in isolation
 - `--wait-until <state>`: `commit`, `domcontentloaded`, `load`, or `networkidle` (default `domcontentloaded`)
 - `--wait-for <selector>`: wait for a selector to become visible
 - `--wait-ms <ms>`: additional delay after loading (default 1000)
@@ -62,6 +63,7 @@ Examples:
 ```bash
 pnpm run build
 pnpm website screenshot /user/sai /tmp/user.jpg --full-page
+pnpm website screenshot /user/sai /tmp/avatar.jpg --element '#user-avatar'
 pnpm website screenshot --wait-for main --local-storage view=grid
 ```
 

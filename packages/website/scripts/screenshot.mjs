@@ -33,7 +33,12 @@ Options:
       --height <pixels>       Viewport height (default: 900)
       --device-scale-factor   Device scale factor (default: 1)
       --quality <0-100>       JPEG quality (default: 60)
-      --full-page             Capture the full scrollable page
+      --full-page             Capture the full scrollable page; mutually exclusive
+                              with --element
+      --element <selector>    Capture only the element matching the CSS selector
+                              (e.g. --element '#user-avatar') instead of the whole
+                              page; the element is scrolled into view and captured
+                              at its natural size
       --wait-until <state>    commit, domcontentloaded, load, or networkidle
                               (default: domcontentloaded)
       --wait-for <selector>   Wait for a selector to become visible
@@ -50,6 +55,7 @@ Options:
 Examples:
   pnpm run build
   pnpm website screenshot /user/sai /tmp/user.jpg --full-page
+  pnpm website screenshot /user/sai /tmp/avatar.jpg --element '#user-avatar'
   pnpm website screenshot --wait-for main --local-storage view=grid
 `;
 
@@ -64,6 +70,7 @@ const { values, positionals } = parseArgs({
     'device-scale-factor': { type: 'string', default: '1' },
     quality: { type: 'string', default: '60' },
     'full-page': { type: 'boolean', default: false },
+    element: { type: 'string' },
     'wait-until': { type: 'string', default: 'domcontentloaded' },
     'wait-for': { type: 'string' },
     'wait-ms': { type: 'string', default: '1000' },
@@ -181,6 +188,10 @@ if (!WAIT_UNTIL_VALUES.has(waitUntil)) {
   throw new Error(`--wait-until must be one of: ${[...WAIT_UNTIL_VALUES].join(', ')}`);
 }
 
+if (values.element && values['full-page']) {
+  throw new Error('--element and --full-page are mutually exclusive');
+}
+
 try {
   await fs.access(distIndexPath);
 } catch {
@@ -282,14 +293,26 @@ try {
       await page.waitForTimeout(waitMs);
     }
 
-    await page.screenshot({
-      path: output,
-      type: 'jpeg',
-      quality,
-      fullPage: values['full-page'],
-      animations: 'disabled',
-      caret: 'hide',
-    });
+    if (values.element) {
+      const element = page.locator(values.element);
+      await element.waitFor({ state: 'visible', timeout });
+      await element.screenshot({
+        path: output,
+        type: 'jpeg',
+        quality,
+        animations: 'disabled',
+        caret: 'hide',
+      });
+    } else {
+      await page.screenshot({
+        path: output,
+        type: 'jpeg',
+        quality,
+        fullPage: values['full-page'],
+        animations: 'disabled',
+        caret: 'hide',
+      });
+    }
     console.log(`Screenshot saved to ${output}`);
   });
 } catch (error) {
