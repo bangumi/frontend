@@ -67,14 +67,18 @@ pnpm website screenshot --wait-for main --local-storage view=grid
 
 Pass a route such as `/anime`, rather than the address of a manually started server. The CLI accepts a legacy loopback URL by extracting its route, but new commands should use a route. Use the same `--mode` for the build and screenshot command when a non-default Vite mode is required.
 
-Write a small temporary Playwright script only when the CLI cannot express the needed state, for example for clicks, form input, or intercepting API responses with fixtures. It must start the same temporary Vite preview server for the built assets; do not point it at a dev server:
+Extend `packages/website/scripts/screenshot.mjs` when the CLI options cannot express the needed state — for example clicks, form input, or waiting for an element to appear or disappear. It is the repository's capture tool and is meant to be modified as needed: add the extra steps (such as a repeatable `--click <selector>` option) to the capture flow, then run it with `pnpm website screenshot` as usual. It starts a temporary Vite preview server for the built assets; do not point it at a dev server, and build the website first (`pnpm run build`).
+
+Write a separate temporary Playwright script only if extending the CLI is impractical. Place it inside `packages/website/` (e.g. `packages/website/scripts/`) and run it with `pnpm website run <script>`; do not run it from the repo root, where `@playwright/test` is not resolvable in this pnpm workspace (`ERR_MODULE_NOT_FOUND`). Follow `screenshot.mjs`: derive the website directory from `import.meta.dirname` instead of a cwd-relative path, because the runner sets cwd to the package directory:
 
 ```js
+import path from 'node:path';
 import { preview } from 'vite';
 import { chromium } from '@playwright/test';
 
+const websiteDirectory = path.resolve(import.meta.dirname, '..');
 const previewServer = await preview({
-  root: 'packages/website',
+  root: websiteDirectory,
   mode: 'production',
   preview: { host: '127.0.0.1', port: 0, strictPort: true },
 });
