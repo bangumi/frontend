@@ -1,8 +1,13 @@
-import { act, fireEvent, screen, waitFor, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
+import type { PropsWithChildren } from 'react';
 import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import { MemoryRouter } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
 import type { SubjectHomeResponse } from '@bangumi/client/client';
+import { UserProvider } from '@bangumi/website/hooks/use-user';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
@@ -23,6 +28,22 @@ describe('SubjectDetail', () => {
   const renderSubject = async () => {
     await act(async () => {
       renderPage(<SubjectDetail data={homeData} />);
+    });
+  };
+
+  // 独立的 SWR 缓存：避免前序测试已缓存 /p1/me 的登录结果
+  const renderSubjectLoggedOut = async () => {
+    const wrapper = ({ children }: PropsWithChildren) => (
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <MemoryRouter>
+          <HelmetProvider>
+            <UserProvider>{children}</UserProvider>
+          </HelmetProvider>
+        </MemoryRouter>
+      </SWRConfig>
+    );
+    await act(async () => {
+      render(<SubjectDetail data={homeData} />, { wrapper });
     });
   };
 
@@ -70,7 +91,8 @@ describe('SubjectDetail', () => {
       'href',
       '/index/101917',
     );
-    expect(within(indexList).getByText('by 失窃预告函')).toBeInTheDocument();
+    // 头像链接 + by 作者链接，accessible name 均为昵称
+    expect(within(indexList).getAllByRole('link', { name: '失窃预告函' })).toHaveLength(2);
 
     // 底部：更多目录指向旧站；收集至我的目录仅登录用户可见
     expect(screen.getByRole('link', { name: '更多目录' })).toHaveAttribute(
@@ -92,8 +114,9 @@ describe('SubjectDetail', () => {
     const items = within(collectList).getAllByRole('listitem');
     expect(items).toHaveLength(5);
 
-    // 用户名链接指向用户主页
-    expect(within(collectList).getByRole('link', { name: 'Madeline' })).toHaveAttribute(
+    // 用户名链接 + 头像链接指向用户主页（accessible name 均为昵称）
+    expect(within(collectList).getAllByRole('link', { name: 'Madeline' })).toHaveLength(2);
+    expect(within(collectList).getAllByRole('link', { name: 'Madeline' })[0]).toHaveAttribute(
       'href',
       '/user/1272395',
     );
@@ -127,7 +150,7 @@ describe('SubjectDetail', () => {
       }),
     );
 
-    await renderSubject();
+    await renderSubjectLoggedOut();
 
     expect(await screen.findByText('推荐本条目的目录')).toBeInTheDocument();
     expect(screen.getByRole('link', { name: '更多目录' })).toBeInTheDocument();
