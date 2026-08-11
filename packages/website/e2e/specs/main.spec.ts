@@ -7,10 +7,20 @@ test.describe('main page', () => {
     await page.goto('/');
     await expect(page).toHaveTitle('Bangumi 番组计划');
   });
+
+  test('移动端 Header 与页面主体使用相同的水平留白', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/');
+
+    const headerContent = page.locator('header > div').first();
+    await expect(headerContent).toHaveCSS('padding-left', '16px');
+    await expect(headerContent).toHaveCSS('padding-right', '16px');
+  });
 });
 
 test.describe('已登录用户', () => {
   testAsUser('treeholechan');
+
   test('应该能够看到收藏菜单', async ({ page }) => {
     await page.goto('/');
     await expect(
