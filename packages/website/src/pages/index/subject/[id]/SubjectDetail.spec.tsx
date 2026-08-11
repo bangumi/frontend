@@ -38,7 +38,9 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText(/人看过/)).toBeInTheDocument();
     // 主栏：ep / 标签
     expect(await screen.findByText('章节列表')).toBeInTheDocument();
-    expect(await screen.findByText('标签')).toBeInTheDocument();
+    expect(
+      await screen.findByRole('heading', { name: '大家将 Test Anime 标注为' }),
+    ).toBeInTheDocument();
     // 右栏：收藏盒
     expect(await screen.findByText('收藏盒')).toBeInTheDocument();
     expect(screen.getAllByRole('button', { pressed: false })).toHaveLength(5);
@@ -59,7 +61,9 @@ describe('SubjectDetail', () => {
     setup();
     await renderSubject();
 
-    const tagsSection = (await screen.findByRole('heading', { name: '标签' })).closest('section');
+    const tagsSection = (
+      await screen.findByRole('heading', { name: '大家将 Test Anime 标注为' })
+    ).closest('section');
     const collectionSection = screen.getByRole('heading', { name: '收藏盒' }).closest('section');
 
     expect(tagsSection?.parentElement).not.toBe(collectionSection?.parentElement);
