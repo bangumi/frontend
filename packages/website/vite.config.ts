@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import { ProxyAgent } from 'proxy-agent';
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
@@ -21,8 +21,13 @@ try {
 
 dayjs.extend(utc);
 const BUILD_TIME = dayjs().utc().format();
+const TURNSTILE_TEST_SITE_KEY = '1x00000000000000000000AA';
+const TURNSTILE_PRODUCTION_SITE_KEY = '0x4AAAAAAABkMYinukE8nzYS';
 
 export default defineConfig(({ mode }) => {
+  const environment = loadEnv(mode, __dirname, '');
+  const httpProxy = environment.HTTP_PROXY ?? environment.http_proxy;
+  const httpsProxy = environment.HTTPS_PROXY ?? environment.https_proxy ?? httpProxy;
   let apiDomain = 'https://next.bgm.tv';
 
   if (mode === 'loc') {
@@ -33,7 +38,12 @@ export default defineConfig(({ mode }) => {
 
   console.log('using backend', apiDomain);
 
-  const access_token = process.env.ACCESS_TOKEN;
+  const access_token = environment.ACCESS_TOKEN;
+  const turnstileSiteKey =
+    mode === 'production' ? TURNSTILE_PRODUCTION_SITE_KEY : TURNSTILE_TEST_SITE_KEY;
+  const proxyAgent = new ProxyAgent({
+    getProxyForUrl: (url) => (new URL(url).protocol === 'https:' ? httpsProxy : httpProxy) ?? '',
+  });
 
   return {
     build: {
@@ -71,7 +81,7 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
           rewriteWsOrigin: true,
           toProxy: true,
-          agent: new ProxyAgent(),
+          agent: proxyAgent,
           ws: true,
           configure(proxy) {
             proxy.on('proxyRes', (proxyRes) => {
@@ -129,6 +139,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     define: {
+      'import.meta.env.VITE_TURNSTILE_SITE_KEY': JSON.stringify(turnstileSiteKey),
       'import.meta.env.__APP_VERSION__': JSON.stringify(version),
       'import.meta.env.__COMMIT_HASH__': JSON.stringify(COMMIT_HASH),
       'import.meta.env.__BUILT_TIME__': JSON.stringify(BUILD_TIME),
