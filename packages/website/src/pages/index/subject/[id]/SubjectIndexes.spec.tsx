@@ -1,7 +1,12 @@
-import { screen, waitFor } from '@testing-library/react';
+import { act, render, screen } from '@testing-library/react';
 import { http, HttpResponse } from 'msw';
-import React from 'react';
+import type { PropsWithChildren } from 'react';
+import React, { Suspense } from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import { MemoryRouter } from 'react-router-dom';
+import { SWRConfig } from 'swr';
 
+import { UserProvider } from '@bangumi/website/hooks/use-user';
 import { server as mockServer } from '@bangumi/website/mocks/server';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
@@ -26,6 +31,38 @@ describe('SubjectIndexes', () => {
       />,
     );
 
+  // 独立的 SWR 缓存：避免前序测试已缓存 /p1/me 的登录结果；
+  // Suspense boundary 是 React 19 下 SWR suspense 挂起所必需的
+  const renderIndexesLoggedOut = async (
+    props: Partial<React.ComponentProps<typeof SubjectIndexes>> = {},
+  ) => {
+    const wrapper = ({ children }: PropsWithChildren) => (
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <Suspense fallback={null}>
+          <MemoryRouter>
+            <HelmetProvider>
+              <UserProvider>{children}</UserProvider>
+            </HelmetProvider>
+          </MemoryRouter>
+        </Suspense>
+      </SWRConfig>
+    );
+    await act(async () => {
+      render(
+        <SubjectIndexes
+          subject={subject}
+          indexes={indexes}
+          total={total}
+          currentPage={1}
+          pageSize={20}
+          onPageChange={() => undefined}
+          {...props}
+        />,
+        { wrapper },
+      );
+    });
+  };
+
   it('should render the index list with stats and timestamps', async () => {
     renderIndexes();
 
@@ -35,7 +72,8 @@ describe('SubjectIndexes', () => {
     // 统计：条目类型图标 + 数量（sprite 图标，数字作为可见文本，类型在 aria-label）
     expect(await screen.findByLabelText('动画 51')).toHaveTextContent('51');
     // 创建/更新时间（fixture 时间戳为 UTC，测试环境固定为 Etc/GMT）
-    expect(screen.getByText('创建 2026-1-1 03:41 · 更新 2026-7-16 14:58')).toBeInTheDocument();
+    expect(screen.getByText('2026-1-1 03:41')).toBeInTheDocument();
+    expect(screen.getByText('2026-7-16 14:58')).toBeInTheDocument();
     // 创建者链接（时间行中的昵称）
     expect(screen.getByText('曙光虹').closest('a')).toHaveAttribute('href', '/user/sgjs');
     // 多类型统计（96523：动画 67 + 书籍 1）
@@ -66,11 +104,10 @@ describe('SubjectIndexes', () => {
       http.get('http://localhost:3000/p1/me', () => HttpResponse.json({}, { status: 401 })),
     );
 
-    renderIndexes();
+    await renderIndexesLoggedOut();
 
-    await waitFor(() => {
-      expect(screen.queryByRole('link', { name: '收集至我的目录' })).not.toBeInTheDocument();
-    });
+    expect(await screen.findByRole('heading', { name: '2026年追番目录' })).toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: '收集至我的目录' })).not.toBeInTheDocument();
   });
 
   it('should render an empty state when there are no indexes', () => {
