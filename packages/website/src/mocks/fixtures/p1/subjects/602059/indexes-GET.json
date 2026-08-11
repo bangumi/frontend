@@ -1,0 +1,325 @@
+{
+  "data": [
+    {
+      "id": 87073,
+      "uid": 771631,
+      "type": 0,
+      "title": "2026年追番目录",
+      "private": false,
+      "total": 51,
+      "stats": {
+        "subject": {
+          "anime": 51
+        }
+      },
+      "createdAt": 1767238871,
+      "updatedAt": 1784213895,
+      "user": {
+        "id": 771631,
+        "username": "sgjs",
+        "nickname": "曙光虹",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/77/16/771631.jpg?r=1690226831&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/77/16/771631.jpg?r=1690226831&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/77/16/771631.jpg?r=1690226831&hd=1"
+        },
+        "group": 10,
+        "sign": "主观感受协调客观质量，评价内容反映价值分数。",
+        "joinedAt": 1676997446,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 29122,
+      "uid": 30894,
+      "type": 0,
+      "title": "どうも、中村悠一です【2019-2026】",
+      "private": false,
+      "total": 132,
+      "stats": {
+        "subject": {
+          "anime": 132
+        }
+      },
+      "createdAt": 1569285236,
+      "updatedAt": 1779776197,
+      "user": {
+        "id": 30894,
+        "username": "30894",
+        "nickname": "夏目残夏",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/03/08/30894.jpg?r=1389629579",
+          "large": "https://lain.bgm.tv/pic/user/l/000/03/08/30894.jpg?r=1389629579"
+        },
+        "group": 11,
+        "sign": "不加好友，谢谢。",
+        "joinedAt": 1304945023,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 98428,
+      "uid": 668665,
+      "type": 0,
+      "title": "海贼王特别篇&剧场版观看节点",
+      "private": false,
+      "total": 37,
+      "stats": {
+        "subject": {
+          "anime": 37
+        }
+      },
+      "createdAt": 1778289428,
+      "updatedAt": 1783151344,
+      "user": {
+        "id": 668665,
+        "username": "ashion",
+        "nickname": ".ZiP",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/66/86/668665.jpg?r=1708615974&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/66/86/668665.jpg?r=1708615974&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/66/86/668665.jpg?r=1708615974&hd=1"
+        },
+        "group": 10,
+        "sign": "再见了，所有的格子奴",
+        "joinedAt": 1644569077,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 84175,
+      "uid": 862811,
+      "type": 0,
+      "title": "我的收藏",
+      "private": false,
+      "total": 34,
+      "stats": {
+        "subject": {
+          "anime": 34
+        }
+      },
+      "createdAt": 1761749796,
+      "updatedAt": 1776612646,
+      "user": {
+        "id": 862811,
+        "username": "w5599555",
+        "nickname": "䨩",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/86/28/862811_xLF6L.jpg?r=1761752396&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/86/28/862811_xLF6L.jpg?r=1761752396&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/86/28/862811_xLF6L.jpg?r=1761752396&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1710388977,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 97328,
+      "uid": 386892,
+      "type": 0,
+      "title": "2026.4",
+      "private": false,
+      "total": 15,
+      "stats": {
+        "subject": {
+          "anime": 15
+        }
+      },
+      "createdAt": 1776597094,
+      "updatedAt": 1776597458,
+      "user": {
+        "id": 386892,
+        "username": "386892",
+        "nickname": "我不是汪汪汪",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/38/68/386892.jpg?r=1552261676",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/38/68/386892.jpg?r=1552261676",
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/68/386892.jpg?r=1552261676"
+        },
+        "group": 11,
+        "sign": "happy ice cream!",
+        "joinedAt": 1513438941,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 58846,
+      "uid": 660423,
+      "type": 0,
+      "title": "无条目/合并条目",
+      "private": false,
+      "total": 708,
+      "stats": {
+        "subject": {
+          "anime": 708
+        }
+      },
+      "createdAt": 1713753296,
+      "updatedAt": 1786436282,
+      "user": {
+        "id": 660423,
+        "username": "660423",
+        "nickname": "这是一个小号",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/icon.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/icon.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/icon.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1642181344,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 96523,
+      "uid": 485439,
+      "type": 0,
+      "title": "2026，4月ANK,WAT新番评分汇总",
+      "private": false,
+      "total": 68,
+      "stats": {
+        "subject": {
+          "anime": 67,
+          "book": 1
+        }
+      },
+      "createdAt": 1775145555,
+      "updatedAt": 1786289391,
+      "user": {
+        "id": 485439,
+        "username": "485439",
+        "nickname": "瘦猴哥哥的狮子",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/48/54/485439.jpg?r=1705115534&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/48/54/485439.jpg?r=1705115534&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/48/54/485439.jpg?r=1705115534&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1563466771,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 96799,
+      "uid": 7932,
+      "type": 0,
+      "title": "2026年4月（共69部）",
+      "private": false,
+      "total": 69,
+      "stats": {
+        "subject": {
+          "anime": 69
+        }
+      },
+      "createdAt": 1775549926,
+      "updatedAt": 1775550914,
+      "user": {
+        "id": 7932,
+        "username": "lilyurey",
+        "nickname": "优莉雅",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/00/79/7932.jpg?r=1369489635",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/00/79/7932.jpg?r=1369489635",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/79/7932.jpg?r=1369489635"
+        },
+        "group": 11,
+        "sign": "打不开目录请到bgm设置页开启 “显示受限条目内容”！",
+        "joinedAt": 1265854864,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 96315,
+      "uid": 605732,
+      "type": 0,
+      "title": "2026 春 TVA",
+      "private": false,
+      "total": 14,
+      "stats": {
+        "subject": {
+          "anime": 14
+        }
+      },
+      "createdAt": 1774762232,
+      "updatedAt": 1775545548,
+      "user": {
+        "id": 605732,
+        "username": "kio",
+        "nickname": "きお",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/60/57/605732_9OZvn.jpg?r=1765990994&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/60/57/605732_9OZvn.jpg?r=1765990994&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/60/57/605732_9OZvn.jpg?r=1765990994&hd=1"
+        },
+        "group": 10,
+        "sign": "因为我很喜欢女高中生，所以拜托你了",
+        "joinedAt": 1624302068,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 95789,
+      "uid": 901710,
+      "type": 0,
+      "title": "日本2026年春季动画アニメ",
+      "private": false,
+      "total": 86,
+      "stats": {
+        "subject": {
+          "anime": 86
+        }
+      },
+      "createdAt": 1773713769,
+      "updatedAt": 1780653918,
+      "user": {
+        "id": 901710,
+        "username": "901710",
+        "nickname": "久梦",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/90/17/901710.jpg?r=1747302182&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/90/17/901710.jpg?r=1747302182&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/90/17/901710.jpg?r=1747302182&hd=1"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1722594855,
+        "isFriend": false
+      }
+    },
+    {
+      "id": 95427,
+      "uid": 794980,
+      "type": 0,
+      "title": "2026年春季",
+      "private": false,
+      "total": 78,
+      "stats": {
+        "subject": {
+          "anime": 78
+        }
+      },
+      "createdAt": 1773033999,
+      "updatedAt": 1777738858,
+      "user": {
+        "id": 794980,
+        "username": "yujianjuzi",
+        "nickname": "遇见橘子",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/79/49/794980.jpg?r=1702315851&hd=1",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/79/49/794980.jpg?r=1702315851&hd=1",
+          "large": "https://lain.bgm.tv/pic/user/l/000/79/49/794980.jpg?r=1702315851&hd=1"
+        },
+        "group": 10,
+        "sign": "知行合一",
+        "joinedAt": 1685940223,
+        "isFriend": false
+      }
+    }
+  ],
+  "total": 13
+}
