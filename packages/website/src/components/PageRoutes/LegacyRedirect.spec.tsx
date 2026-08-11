@@ -29,7 +29,6 @@ it.each([
   '/subject/12/collections',
   '/subject/12/stats',
   '/subject/topic/42',
-  '/character/8',
 ])('registers %s as a legacy route', (path) => {
   const matches = matchRoutes(pageRoutes, path);
   const element = matches?.at(-1)?.route.element;

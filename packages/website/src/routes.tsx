@@ -17,6 +17,7 @@ const GroupReplyEdit = lazy(async () => import('./pages/index/group/reply/[id]/e
 const GroupTopic = lazy(async () => import('./pages/index/group/topic/[id]'));
 const GroupTopicEdit = lazy(async () => import('./pages/index/group/topic/[id]/edit'));
 const GroupTopicHome = lazy(async () => import('./pages/index/group/topic/[id]/index'));
+const Character = lazy(async () => import('./pages/index/character/[id]/index'));
 const Subject = lazy(async () => import('./pages/index/subject/[id]/index'));
 const SubjectEpisodes = lazy(async () => import('./pages/index/subject/[id]/ep'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]'));
@@ -41,7 +42,6 @@ const legacyPagePaths = [
   'award/2021',
   'blog/:id',
   'calendar',
-  'character/:id',
   'dev/app',
   'dollars',
   'ep/:id',
@@ -137,6 +137,10 @@ export const pageRoutes: RouteObject[] = [
             ],
           },
         ],
+      },
+      {
+        path: 'character/:id',
+        element: <Character />,
       },
       {
         path: 'subject',
