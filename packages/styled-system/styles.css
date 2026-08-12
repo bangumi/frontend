@@ -688,6 +688,14 @@
     font: inherit;
 }
 
+  .bg_\#f7f7f4 {
+    background: #f7f7f4;
+}
+
+  .p_15px {
+    padding: 15px;
+}
+
   .p_7\.5px_0 {
     padding: 7.5px 0;
 }
@@ -880,10 +888,6 @@
     border: 2px dashed #e8e3e3;
 }
 
-  .bg_\#f7f7f4 {
-    background: #f7f7f4;
-}
-
   .p_2px_10px {
     padding: 2px 10px;
 }
@@ -1014,6 +1018,10 @@
 
   .bdr_4px {
     border-radius: 4px;
+}
+
+  .bdr_15px {
+    border-radius: 15px;
 }
 
   .gap_20px_30px {
@@ -1429,12 +1437,24 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+  .c_\#777 {
+    color: #777;
+}
+
   .tbl_fixed {
     table-layout: fixed;
 }
 
   .ta_right {
     text-align: right;
+}
+
+  .c_\#0084b4 {
+    color: #0084b4;
+}
+
+  .cursor_pointer {
+    cursor: pointer;
 }
 
   .ai_flex-start {
@@ -1477,8 +1497,8 @@
     line-height: 1.35;
 }
 
-  .grid-tc_repeat\(3\,_290px\) {
-    grid-template-columns: repeat(3, 290px);
+  .grid-tc_repeat\(auto-fill\,_minmax\(290px\,_1fr\)\) {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
 }
 
   .cg_14px {
@@ -1587,10 +1607,6 @@
 
   .op_0\.3 {
     opacity: 0.3;
-}
-
-  .cursor_pointer {
-    cursor: pointer;
 }
 
   .op_0 {
@@ -1973,10 +1989,6 @@
     width: 80px;
 }
 
-  .w_40px {
-    width: 40px;
-}
-
   .w_90px {
     width: 90px;
 }
@@ -2051,6 +2063,10 @@
 
   .w_120px {
     width: 120px;
+}
+
+  .w_40px {
+    width: 40px;
 }
 
   .h_40px {
@@ -2769,6 +2785,10 @@
     color: #54b5df;
 }
 
+  .hover\:c_\#02a3fb:is(:hover, [data-hover]) {
+    color: #02a3fb;
+}
+
   .hover\:c_\#fff:is(:hover, [data-hover]) {
     color: #fff;
 }
@@ -2919,6 +2939,9 @@
     .\[\@media_\(max-width\:_640px\)\]\:fs_20px {
       font-size: 20px;
 }
+    .\[\@media_\(max-width\:_640px\)\]\:grid-tc_repeat\(auto-fill\,_minmax\(160px\,_1fr\)\) {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
     .\[\@media_\(max-width\:_640px\)\]\:grid-tc_1fr {
       grid-template-columns: 1fr;
 }
@@ -2936,6 +2959,9 @@
 }
     .\[\@media_\(max-width\:_640px\)\]\:ml_40px {
       margin-left: 40px;
+}
+    .\[\@media_\(max-width\:_640px\)\]\:w_100\% {
+      width: 100%;
 }
     .\[\@media_\(max-width\:_640px\)\]\:mb_24px {
       margin-bottom: 24px;

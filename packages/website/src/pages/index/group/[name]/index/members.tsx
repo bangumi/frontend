@@ -16,9 +16,13 @@ import { useGroupContext } from '..';
 const members = css({
   marginBottom: '20px',
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 290px)',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
   columnGap: '14px',
   rowGap: '20px',
+  // 移动端每行至少两个成员，容器够宽时自动增加列数
+  '@media (max-width: 640px)': {
+    gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
+  },
 });
 
 const pagination = css({
