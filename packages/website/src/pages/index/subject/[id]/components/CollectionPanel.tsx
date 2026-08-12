@@ -6,15 +6,49 @@ import { ozaClient } from '@bangumi/client';
 import type { Subject, SubjectInterest, UpdateSubjectProgress } from '@bangumi/client/client';
 import { CollectionType, SubjectType } from '@bangumi/client/client';
 import { Button, toast, Typography } from '@bangumi/design';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import { getSubjectStatsLink } from '@bangumi/utils/pages';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
-import styles from './CollectionPanel.module.less';
 import { COLLECT_DESC, makeDescriptiveTime } from './subject-common';
 
 const { Link } = Typography;
+
+const panel = css({
+  overflow: 'hidden',
+  margin: '0 0 15px',
+  padding: '0',
+  border: '1px solid #e8e3e3',
+  borderRadius: '15px',
+  background: '#fff',
+  boxShadow: '0 5px 10px rgba(0, 0, 0, 0.09)',
+  fontSize: '12px',
+  overflowWrap: 'break-word',
+});
+
+const panelTitle = css({
+  height: '40px',
+  margin: '0',
+  padding: '0 10px',
+  border: '0',
+  background: '#f7f7f7',
+  color: '#595555',
+  fontSize: '13px',
+  fontWeight: 'normal',
+  lineHeight: '40px',
+});
+
+const panelBody = css({ padding: '10px' });
+
+const interestDetails = css({
+  marginBottom: '10px',
+});
+
+const interestNow = css({
+  fontSize: '13px',
+  margin: '0 0 4px',
+});
 
 const privateTag = css({ marginLeft: '6px', color: '#9f9b9b' });
 
@@ -24,7 +58,254 @@ const interestTime = css({
   fontSize: '12px',
 });
 
-/* 我的完成度，对齐 PHP block_prg_manager */
+const modifyBtn = css({
+  border: 'none',
+  background: 'none',
+  color: '#54b5df',
+  cursor: 'pointer',
+  fontSize: '12px',
+  marginLeft: '8px',
+  padding: '0',
+  _disabled: {
+    color: '#9f9b9b',
+    cursor: 'default',
+  },
+});
+
+const myRate = css({
+  fontSize: '12px',
+  color: '#9f9b9b',
+  margin: '0 0 4px',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '6px',
+});
+
+const myComment = css({
+  fontSize: '13px',
+  margin: '4px 0 0',
+  color: '#1f1c1c',
+  wordBreak: 'break-all',
+  whiteSpace: 'pre-wrap',
+});
+
+const collectButtons = css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+});
+
+const collectBtn = css({
+  minWidth: '0',
+  height: '28px',
+  padding: '0 2px',
+  border: '1px solid #54b5df',
+  borderRightWidth: '0',
+  color: '#54b5df',
+  background: '#fff',
+  cursor: 'pointer',
+  fontSize: '12px',
+  '&:first-child': {
+    borderRadius: '4px 0 0 4px',
+  },
+  '&:last-child': {
+    borderRightWidth: '1px',
+    borderRadius: '0 4px 4px 0',
+  },
+  _hover: {
+    background: '#edf8fc',
+  },
+  '&.collectBtnActive': {
+    background: '#54b5df',
+    color: '#fff',
+  },
+  _disabled: {
+    borderColor: '#e8e3e3',
+    color: '#9f9b9b',
+    cursor: 'default',
+    background: '#fff',
+  },
+});
+
+const editForm = css({
+  marginTop: '10px',
+  borderTop: '1px solid #e8e3e3',
+  paddingTop: '10px',
+});
+
+const formRow = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: '8px',
+  margin: '0 0 8px',
+  fontSize: '13px',
+});
+
+const formLabel = css({
+  flex: 'none',
+  color: '#9f9b9b',
+  paddingTop: '2px',
+});
+
+const typeOptions = css({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '10px',
+});
+
+const typeOption = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '3px',
+});
+
+const rateStars = css({
+  display: 'flex',
+  gap: '2px',
+});
+
+const rateStar = css({
+  border: 'none',
+  background: 'none',
+  cursor: 'pointer',
+  fontSize: '18px',
+  color: '#e8e3e3',
+  padding: '0',
+  lineHeight: '1',
+});
+
+const rateStarFilled = css({
+  color: '#f68ab1',
+});
+
+const rateValue = css({
+  color: '#9f9b9b',
+  fontSize: '12px',
+  paddingTop: '2px',
+});
+
+const commentInput = css({
+  flex: '1',
+  minWidth: '0',
+  padding: '6px',
+  border: '1px solid #e8e3e3',
+  borderRadius: '3px',
+  fontSize: '13px',
+  resize: 'vertical',
+});
+
+const formActions = css({ textAlign: 'right' });
+
+const ratingBlock = css({
+  marginTop: '10px',
+  borderTop: '1px solid #e8e3e3',
+  paddingTop: '10px',
+});
+
+const ratingAnonymous = css({
+  marginTop: '0',
+  paddingTop: '0',
+  borderTop: '0',
+});
+
+const ratingHeadline = css({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'flex-start',
+  gap: '6px',
+});
+
+const ratingInfo = css({ minWidth: '0' });
+
+const rateEmo = css({
+  display: 'flex',
+  width: '30px',
+  height: '30px',
+  flex: 'none',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: '2px solid #f09199',
+  color: '#f09199',
+  fontSize: '9px',
+  fontWeight: 'bold',
+  lineHeight: '1',
+});
+
+const scoreLink = css({
+  display: 'flex',
+  alignItems: 'baseline',
+  gap: '5px',
+});
+
+const score = css({
+  fontSize: '22px',
+  fontWeight: 'bold',
+  color: '#f09199',
+  lineHeight: '1',
+});
+
+const ratingLabel = css({
+  color: '#595555',
+  fontSize: '13px',
+});
+
+const rankDesc = css({
+  display: 'block',
+  marginTop: '2px',
+  fontSize: '10px',
+  color: '#595555',
+  '& strong': {
+    marginLeft: '3px',
+    color: '#1f1c1c',
+  },
+});
+
+const votes = css({
+  marginLeft: 'auto',
+  flex: 'none',
+  padding: '2px 5px',
+  background: '#f3f1f1',
+  fontSize: '12px',
+  color: '#9f9b9b',
+});
+
+const chart = css({
+  listStyle: 'none',
+  margin: '10px 0 0',
+  padding: '0',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(10, minmax(0, 1fr))',
+  gap: '3px',
+  borderBottom: '1px solid #e8e3e3',
+});
+
+const chartItem = css({
+  display: 'flex',
+  minWidth: '0',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
+const chartBarArea = css({
+  display: 'flex',
+  width: '100%',
+  height: '62px',
+  alignItems: 'flex-end',
+  justifyContent: 'center',
+});
+
+const chartBar = css({
+  width: 'min(100%, 13px)',
+  minHeight: '1px',
+  background: '#9f9b9b',
+  borderRadius: '2px 2px 0 0',
+});
+
+const chartLabel = css({
+  fontSize: '10px',
+  lineHeight: '16px',
+  color: '#9f9b9b',
+});
+
 const progressBlock = css({
   marginTop: '10px',
   paddingTop: '10px',
@@ -33,9 +314,9 @@ const progressBlock = css({
 
 const progressTitle = css({
   margin: '0 0 6px',
+  color: '#595555',
   fontSize: '13px',
   fontWeight: 'normal',
-  color: '#595555',
 });
 
 const progressBar = css({
@@ -68,8 +349,8 @@ const progressForm = css({
   flexWrap: 'wrap',
   gap: '8px',
   marginTop: '8px',
-  fontSize: '12px',
   color: '#9f9b9b',
+  fontSize: '12px',
 });
 
 const progressLabel = css({
@@ -87,9 +368,9 @@ const progressInput = css({
 });
 
 const progressUpdate = css({
+  padding: '3px 12px',
   border: '1px solid #54b5df',
   borderRadius: '3px',
-  padding: '3px 12px',
   background: '#fff',
   color: '#54b5df',
   cursor: 'pointer',
@@ -97,9 +378,9 @@ const progressUpdate = css({
   _hover: { background: '#54b5df', color: '#fff' },
   _disabled: {
     borderColor: '#e8e3e3',
+    background: '#fff',
     color: '#9f9b9b',
     cursor: 'default',
-    background: '#fff',
   },
 });
 
@@ -119,7 +400,6 @@ const RATING_CATEGORY: Record<SubjectType, string> = {
   [SubjectType.Real]: 'Real',
 };
 
-/** 支持进度管理的条目类型，对齐 PHP SubjectCore::$enable_progress_manager */
 const PROGRESS_MANAGE_TYPES: SubjectType[] = [
   SubjectType.Book,
   SubjectType.Anime,
@@ -145,14 +425,9 @@ function getErrorMessage(error: unknown): string {
   return '操作失败，请稍后再试';
 }
 
-/** 进度百分比，对齐 PHP SubjectCore::GetProgress */
 function getProgressPercent(total: number, recent: number): number {
-  if (total <= 0) {
-    return 1;
-  }
-  if (recent > total) {
-    return 50;
-  }
+  if (total <= 0) return 1;
+  if (recent > total) return 50;
   const progress = Math.round((recent * 100) / total);
   return progress === 0 ? 1 : progress;
 }
@@ -164,23 +439,22 @@ function totalText(total: number): string {
 /** 可点击评分星星（1-10 分，每颗星 2 分） */
 function ClickableRate({ value, onChange }: { value: number; onChange: (value: number) => void }) {
   return (
-    <div className={styles.rateStars}>
+    <span className={rateStars}>
       {[1, 2, 3, 4, 5].map((i) => (
         <button
           key={i}
           type='button'
-          className={`${styles.rateStar} ${value >= i * 2 ? styles.rateStarFilled : ''}`}
+          className={cx(rateStar, value >= i * 2 && rateStarFilled)}
           onClick={() => onChange(i * 2)}
           title={`${i * 2} 分`}
         >
           ★
         </button>
       ))}
-    </div>
+    </span>
   );
 }
 
-/** 我的完成度，对齐 PHP block_prg_manager：进度条 + 章节/卷数输入 + 更新 */
 function ProgressManager({
   subject,
   interest,
@@ -233,7 +507,7 @@ function ProgressManager({
           </small>
         </span>
       </div>
-      <form className={progressForm} onSubmit={(e) => void submit(e)}>
+      <form className={progressForm} onSubmit={(event) => void submit(event)}>
         {isBook && (
           <label className={progressLabel}>
             Chap.
@@ -242,7 +516,7 @@ function ProgressManager({
               type='number'
               min={0}
               value={epValue}
-              onChange={(e) => setEpValue(e.target.value)}
+              onChange={(event) => setEpValue(event.target.value)}
             />
             / {totalText(subject.eps)}
           </label>
@@ -255,7 +529,7 @@ function ProgressManager({
               type='number'
               min={0}
               value={volValue}
-              onChange={(e) => setVolValue(e.target.value)}
+              onChange={(event) => setVolValue(event.target.value)}
             />
             / {totalText(subject.volumes)}
           </label>
@@ -268,7 +542,7 @@ function ProgressManager({
               min={0}
               value={epValue}
               aria-label='章节进度'
-              onChange={(e) => setEpValue(e.target.value)}
+              onChange={(event) => setEpValue(event.target.value)}
             />
             / {totalText(subject.eps)}
           </label>
@@ -341,67 +615,68 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
   const ratingCounts = rating.count.map((count, index) => ({ count, score: index + 1 })).reverse();
 
   return (
-    <section className={styles.panel}>
-      <h2 className={styles.panelTitle}>收藏盒</h2>
-      <div className={styles.panelBody}>
-        {user &&
-          (interest != null ? (
-            <div className={styles.interestDetails}>
-              <p className={styles.interestNow}>
-                我{COLLECT_DESC[interest.type]}这部作品
-                {interest.private && <span className={privateTag}>[私密]</span>}
-                <button
-                  type='button'
-                  className={styles.modifyBtn}
-                  onClick={() => setEditing(!editing)}
-                  disabled={sending}
-                >
-                  {editing ? '取消' : '修改'}
-                </button>
+    <section className={panel}>
+      <h2 className={panelTitle}>收藏盒</h2>
+      <div className={panelBody}>
+        {user && interest == null && (
+          <div className={collectButtons}>
+            {COLLECT_OPTIONS.map((option) => (
+              <button
+                key={option.type}
+                type='button'
+                className={collectBtn}
+                aria-pressed={false}
+                disabled={sending}
+                onClick={() => void updateType(option.type)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {user && interest != null ? (
+          <div className={interestDetails}>
+            <p className={interestNow}>
+              我{COLLECT_DESC[interest.type]}这部作品
+              {interest.private && <span className={privateTag}>[私密]</span>}
+              <button
+                type='button'
+                className={modifyBtn}
+                onClick={() => setEditing(!editing)}
+                disabled={sending}
+              >
+                {editing ? '取消' : '修改'}
+              </button>
+            </p>
+            <p className={interestTime}>
+              {dayjs.unix(interest.updatedAt).format('YYYY-M-D HH:mm')}
+              <span> / {makeDescriptiveTime(interest.updatedAt)}</span>
+            </p>
+            {!editing && interest.rate > 0 && (
+              <p className={myRate}>
+                我的评价：
+                <ClickableRate value={interest.rate} onChange={() => undefined} />
               </p>
-              <p className={interestTime}>
-                {dayjs.unix(interest.updatedAt).format('YYYY-M-D HH:mm')}
-                <span> / {makeDescriptiveTime(interest.updatedAt)}</span>
-              </p>
-              {!editing && interest.rate > 0 && (
-                <p className={styles.myRate}>
-                  我的评价：
-                  <ClickableRate value={interest.rate} onChange={() => undefined} />
-                </p>
+            )}
+            {!editing && interest.comment != null && interest.comment !== '' && (
+              <p className={myComment}>{interest.comment}</p>
+            )}
+            {!editing &&
+              interest.type !== CollectionType.Wish &&
+              PROGRESS_MANAGE_TYPES.includes(subject.type) && (
+                <ProgressManager subject={subject} interest={interest} mutate={mutate} />
               )}
-              {!editing && interest.comment !== '' && (
-                <p className={styles.myComment}>{interest.comment}</p>
-              )}
-              {!editing &&
-                interest.type !== CollectionType.Wish &&
-                PROGRESS_MANAGE_TYPES.includes(subject.type) && (
-                  <ProgressManager subject={subject} interest={interest} mutate={mutate} />
-                )}
-            </div>
-          ) : (
-            <div className={styles.collectButtons}>
-              {COLLECT_OPTIONS.map((option) => (
-                <button
-                  key={option.type}
-                  type='button'
-                  className={styles.collectBtn}
-                  aria-pressed={false}
-                  disabled={sending}
-                  onClick={() => void updateType(option.type)}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          ))}
+          </div>
+        ) : null}
 
         {user && editing && (
-          <div className={styles.editForm}>
-            <div className={styles.formRow}>
-              <span className={styles.formLabel}>收藏状态</span>
-              <div className={styles.typeOptions}>
+          <div className={editForm}>
+            <div className={formRow}>
+              <span className={formLabel}>收藏状态</span>
+              <div className={typeOptions}>
                 {COLLECT_OPTIONS.map((option) => (
-                  <label key={option.type} className={styles.typeOption}>
+                  <label key={option.type} className={typeOption}>
                     <input
                       type='radio'
                       name='collect-type'
@@ -413,22 +688,22 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
                 ))}
               </div>
             </div>
-            <div className={styles.formRow}>
-              <span className={styles.formLabel}>评分</span>
+            <div className={formRow}>
+              <span className={formLabel}>评分</span>
               <ClickableRate value={rate} onChange={setRate} />
-              {rate > 0 && <span className={styles.rateValue}>{rate} 分</span>}
+              {rate > 0 && <span className={rateValue}>{rate} 分</span>}
             </div>
-            <div className={styles.formRow}>
-              <span className={styles.formLabel}>吐槽</span>
+            <div className={formRow}>
+              <span className={formLabel}>吐槽</span>
               <textarea
-                className={styles.commentInput}
+                className={commentInput}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={3}
                 placeholder='说点什么...'
               />
             </div>
-            <div className={styles.formActions}>
+            <div className={formActions}>
               <Button type='primary' onClick={() => void submit()} disabled={sending} size='small'>
                 保存
               </Button>
@@ -436,33 +711,33 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
           </div>
         )}
 
-        <div className={user ? styles.rating : `${styles.rating} ${styles.ratingAnonymous}`}>
-          <div className={styles.ratingHeadline}>
-            <span className={styles.rateEmo} aria-hidden='true'>
+        <div className={cx(ratingBlock, !user && ratingAnonymous)}>
+          <div className={ratingHeadline}>
+            <span className={rateEmo} aria-hidden='true'>
               ≥▽≤
             </span>
-            <div className={styles.ratingInfo}>
-              <Link to={getSubjectStatsLink(subject.id)} className={styles.scoreLink}>
-                <span className={styles.score}>{rating.score.toFixed(1)}</span>
-                <span className={styles.ratingLabel}>{getRatingLabel(rating.score)}</span>
+            <div className={ratingInfo}>
+              <Link to={getSubjectStatsLink(subject.id)} className={scoreLink}>
+                <span className={score}>{rating.score.toFixed(1)}</span>
+                <span className={ratingLabel}>{getRatingLabel(rating.score)}</span>
               </Link>
-              <Link to={getSubjectStatsLink(subject.id)} className={styles.rankDesc}>
+              <Link to={getSubjectStatsLink(subject.id)} className={rankDesc}>
                 Bangumi {RATING_CATEGORY[subject.type]} Ranked:{' '}
                 <strong>{rating.rank === 0 ? '--' : `#${rating.rank}`}</strong>
               </Link>
             </div>
-            <div className={styles.votes}>{rating.total} votes</div>
+            <div className={votes}>{rating.total} votes</div>
           </div>
-          <ul className={styles.chart} aria-label='评分分布'>
+          <ul className={chart} aria-label='评分分布'>
             {ratingCounts.map(({ count, score }) => (
-              <li key={score} className={styles.chartItem} title={`${score}分: ${count}人`}>
-                <span className={styles.chartBarArea}>
+              <li key={score} className={chartItem} title={`${score}分: ${count}人`}>
+                <span className={chartBarArea}>
                   <span
-                    className={styles.chartBar}
+                    className={chartBar}
                     style={{ height: `${Math.round((count / maxRateCount) * 100)}%` }}
                   />
                 </span>
-                <span className={styles.chartLabel}>{score}</span>
+                <span className={chartLabel}>{score}</span>
               </li>
             ))}
           </ul>

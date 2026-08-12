@@ -6,6 +6,7 @@ import { ozaClient } from '@bangumi/client';
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
 import { SubjectType, TimelineCat } from '@bangumi/client/client';
 import { Avatar, toast, Typography } from '@bangumi/design';
+import { css, cx } from '@bangumi/styled-system/css';
 import {
   getBlogLink,
   getEpisodeLink,
@@ -17,7 +18,289 @@ import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
-import styles from './TimelineBlock.module.less';
+const block = css({
+  background: '#fff',
+  border: '1px solid #eee',
+  borderRadius: '14px',
+  margin: '0 0 20px',
+  overflow: 'hidden',
+});
+
+const toolbar = css({
+  display: 'flex',
+  alignItems: 'center',
+  minHeight: '42px',
+  padding: '0 8px',
+  borderBottom: '1px solid #e8e3e3',
+  '@media (max-width: 640px)': {
+    overflowX: 'auto',
+  },
+});
+
+const filters = css({
+  display: 'flex',
+  alignItems: 'center',
+  minWidth: '0',
+  '@media (max-width: 640px)': {
+    flex: 'none',
+  },
+});
+
+const filterBtn = css({
+  padding: '7px 12px',
+  border: '0',
+  borderRadius: '18px',
+  background: 'transparent',
+  color: '#9f9b9b',
+  fontSize: '14px',
+  _hover: { color: '#1f1c1c' },
+  '@media (max-width: 640px)': {
+    paddingRight: '10px',
+    paddingLeft: '10px',
+  },
+});
+
+const filterActive = css({
+  color: '#fff',
+  background: '#f09199',
+  _hover: { color: '#fff' },
+});
+
+const crawl = css({
+  marginLeft: 'auto',
+  color: '#9f9b9b',
+  fontSize: '14px',
+  '@media (max-width: 640px)': {
+    display: 'none',
+  },
+});
+
+const composer = css({
+  padding: '12px 10px 8px',
+  background: '#fafafa',
+});
+
+const composerInput = css({
+  display: 'block',
+  width: '100%',
+  height: '72px',
+  boxSizing: 'border-box',
+  padding: '9px',
+  resize: 'vertical',
+  border: '1px solid #e8e3e3',
+  borderRadius: '5px',
+  outline: '0',
+  background: '#fff',
+  color: '#1f1c1c',
+  fontSize: '14px',
+  lineHeight: '1.5',
+  boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.06)',
+  _focus: {
+    borderColor: '#f09199',
+  },
+  '&::placeholder': {
+    color: '#9f9b9b',
+  },
+});
+
+const composerActions = css({
+  display: 'flex',
+  alignItems: 'center',
+  minHeight: '36px',
+  paddingTop: '5px',
+});
+
+const submitButton = css({
+  minWidth: '76px',
+  marginLeft: 'auto',
+  padding: '5px 16px',
+  border: '0',
+  borderRadius: '18px',
+  background: '#f09199',
+  color: '#fff',
+  fontSize: '14px',
+  _disabled: {
+    opacity: '0.55',
+    cursor: 'default',
+  },
+});
+
+const dayGroup = css({ background: '#fff' });
+
+const dayTitle = css({
+  margin: '10px 0 5px',
+  padding: '0 0 5px 10px',
+  borderBottom: '1px solid #e8e8e8',
+  color: '#1175a8',
+  fontSize: '14px',
+  fontWeight: 'normal',
+});
+
+const list = css({
+  listStyle: 'none',
+  margin: '0',
+  padding: '0',
+});
+
+const listItem = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  margin: '5px 0',
+  padding: '5px 0 0',
+  '@media (max-width: 640px)': {
+    margin: '0',
+    padding: '5px 10px 0',
+  },
+});
+
+const empty = css({
+  margin: '0',
+  padding: '24px 10px',
+  color: '#9f9b9b',
+  textAlign: 'center',
+});
+
+const avatarLink = css({
+  flex: '0 0 50px',
+  width: '50px',
+  height: '50px',
+  margin: '0 5px',
+  overflow: 'hidden',
+});
+
+const avatar = css({
+  border: '0',
+  borderRadius: '50%',
+  '& img': {
+    borderRadius: '50%',
+  },
+});
+
+const info = css({
+  flex: '1 1 auto',
+  minWidth: '0',
+  minHeight: '35px',
+  padding: '0 5px 5px 0',
+  borderBottom: '1px dotted #e8e8e8',
+  color: '#666',
+  fontSize: '14px',
+  lineHeight: '1.2',
+  '& .bgm-link': {
+    color: '#0084b4',
+  },
+});
+
+const desc = css({
+  color: '#555',
+  overflowWrap: 'anywhere',
+  '& p': {
+    margin: '2px 0 0',
+  },
+});
+
+const statusText = css({
+  margin: '5px 10px 0 0',
+  color: '#333',
+  fontSize: '15px',
+  lineHeight: '1.5',
+  overflowWrap: 'anywhere',
+  whiteSpace: 'pre-wrap',
+});
+
+const subjectCards = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '6px',
+});
+
+const subjectCard = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '5px',
+  width: 'min(600px, 100%)',
+  minHeight: '36px',
+  maxHeight: '36px',
+  boxSizing: 'border-box',
+  marginTop: '5px',
+  padding: '5px',
+  overflow: 'hidden',
+  border: '1px solid #eee',
+  borderRadius: '10px',
+  background: '#fff',
+});
+
+const subjectCardDetailed = css({
+  alignItems: 'center',
+  minHeight: '80px',
+  maxHeight: 'none',
+  padding: '5px',
+});
+
+const subjectCoverLink = css({
+  display: 'block',
+  flex: 'none',
+});
+
+const subjectCover = css({
+  display: 'block',
+  borderRadius: '5px',
+  objectFit: 'cover',
+});
+
+const subjectCoverCompact = css({
+  width: '25px',
+  height: '25px',
+});
+
+const subjectCoverDetailed = css({
+  width: '60px',
+  height: '70px',
+});
+
+const subjectInfo = css({ minWidth: '0' });
+
+const subjectTitle = css({
+  display: 'block',
+  color: '#454545',
+  fontSize: '13px',
+  lineHeight: '1.2',
+  overflowWrap: 'anywhere',
+  _hover: {
+    textDecoration: 'underline',
+  },
+});
+
+const subjectMeta = css({
+  height: '25px',
+  overflow: 'hidden',
+  color: '#999',
+  fontSize: '13px',
+  lineHeight: '25px',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
+const subjectComment = css({
+  width: 'min(600px, 100%)',
+  boxSizing: 'border-box',
+  margin: '5px 0',
+  padding: '5px 10px',
+  border: '1px solid #e8e8e8',
+  borderRadius: '10px',
+  color: '#555',
+  fontSize: '15px',
+  lineHeight: '1.6',
+  whiteSpace: 'pre-wrap',
+});
+
+const time = css({
+  marginTop: '5px',
+  color: '#999',
+  fontSize: '10px',
+  lineHeight: '1.2',
+});
+
+const sourceLink = css({ fontWeight: 'normal' });
 
 const { Link } = Typography;
 
@@ -95,17 +378,22 @@ function SubjectCard({ subject, detailed = false }: { subject: SlimSubject; deta
   const image = detailed ? subject.images?.small : subject.images?.grid;
 
   return (
-    <div className={`${styles.subjectCard} ${detailed ? styles.subjectCardDetailed : ''}`}>
+    <div className={cx(subjectCard, detailed && subjectCardDetailed)}>
       {image && (
-        <Link to={getSubjectLink(subject.id)} noStyle className={styles.subjectCoverLink}>
-          <img className={styles.subjectCover} src={image} alt={name} loading='lazy' />
+        <Link to={getSubjectLink(subject.id)} noStyle className={subjectCoverLink}>
+          <img
+            className={cx(subjectCover, detailed ? subjectCoverDetailed : subjectCoverCompact)}
+            src={image}
+            alt={name}
+            loading='lazy'
+          />
         </Link>
       )}
-      <div className={styles.subjectInfo}>
-        <Link to={getSubjectLink(subject.id)} noStyle className={styles.subjectTitle}>
+      <div className={subjectInfo}>
+        <Link to={getSubjectLink(subject.id)} noStyle className={subjectTitle}>
           {name}
         </Link>
-        {detailed && subject.info && <div className={styles.subjectMeta}>{subject.info}</div>}
+        {detailed && subject.info && <div className={subjectMeta}>{subject.info}</div>}
       </div>
     </div>
   );
@@ -125,7 +413,7 @@ function renderStatus(timeline: Timeline): TimelineContent | null {
   }
   const text = status?.sign ?? status?.tsukkomi;
   if (text) {
-    return { summary: <p className={styles.statusText}>{text}</p> };
+    return { summary: <p className={statusText}>{text}</p> };
   }
   return null;
 }
@@ -149,10 +437,10 @@ function renderSubject(timeline: Timeline): TimelineContent | null {
       </>
     ),
     attachment: (
-      <div className={styles.subjectCards}>
+      <div className={subjectCards}>
         {list.map((item) => (
           <div key={item.subject.id}>
-            {item.comment && <p className={styles.subjectComment}>{item.comment}</p>}
+            {item.comment && <p className={subjectComment}>{item.comment}</p>}
             <SubjectCard subject={item.subject} detailed />
           </div>
         ))}
@@ -330,21 +618,17 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
   }
 
   return (
-    <li className={styles.item}>
-      <Link
-        to={getUserProfileLink(user.username)}
-        className={styles.avatarLink}
-        title={user.nickname}
-      >
-        <Avatar src={user.avatar.large} size='small' wrapperClass={styles.avatar} />
+    <li className={listItem}>
+      <Link to={getUserProfileLink(user.username)} className={avatarLink} title={user.nickname}>
+        <Avatar src={user.avatar.large} size='small' wrapperClass={avatar} />
       </Link>
-      <div className={styles.info}>
-        <div className={styles.summary}>
+      <div className={info}>
+        <div>
           <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>{' '}
-          <span className={styles.desc}>{content.summary}</span>
+          <span className={desc}>{content.summary}</span>
         </div>
         {content.attachment}
-        <div className={styles.time}>
+        <div className={time}>
           <span title={DateTime.fromSeconds(timeline.createdAt).toFormat('yyyy-MM-dd HH:mm')}>
             {makeDescriptiveTime(timeline.createdAt)}
           </span>
@@ -352,7 +636,7 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
             <>
               <span> · </span>
               {timeline.source.url ? (
-                <Link isExternal to={timeline.source.url} className={styles.sourceLink}>
+                <Link isExternal to={timeline.source.url} className={sourceLink}>
                   {timeline.source.name}
                 </Link>
               ) : (
@@ -455,48 +739,44 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
   };
 
   return (
-    <section className={styles.block}>
-      <div className={styles.toolbar}>
-        <div className={styles.filters}>
+    <section className={block}>
+      <div className={toolbar}>
+        <div className={filters}>
           {TIMELINE_FILTERS.map((item) => (
             <button
               key={item.key}
               type='button'
-              className={`${styles.filter} ${filter === item.key ? styles.filterActive : ''}`}
+              className={`${filterBtn} ${filter === item.key ? filterActive : ''}`}
               onClick={() => setFilter(item.key)}
             >
               {item.label}
             </button>
           ))}
         </div>
-        <span className={styles.crawl}>抓抓</span>
+        <span className={crawl}>抓抓</span>
       </div>
-      <form className={styles.composer} onSubmit={(event) => void handleSubmit(event)}>
+      <form className={composer} onSubmit={(event) => void handleSubmit(event)}>
         <textarea
-          className={styles.composerInput}
+          className={composerInput}
           value={content}
           onChange={(event) => setContent(event.target.value)}
           placeholder='说点什么...'
           rows={3}
         />
-        <div className={styles.composerActions}>
-          <button
-            type='submit'
-            className={styles.submitButton}
-            disabled={!content.trim() || submitting}
-          >
+        <div className={composerActions}>
+          <button type='submit' className={submitButton} disabled={!content.trim() || submitting}>
             写好了
           </button>
           <TurnstileCaptcha action='post_timeline' onToken={setTurnstileToken} />
         </div>
       </form>
       {grouped.size === 0 ? (
-        <p className={styles.empty}>这里暂时没有动态</p>
+        <p className={empty}>这里暂时没有动态</p>
       ) : (
         [...grouped.entries()].map(([label, items]) => (
-          <div key={label} className={styles.dayGroup}>
-            <h3 className={styles.dayTitle}>{label}</h3>
-            <ul className={styles.list}>
+          <div key={label} className={dayGroup}>
+            <h3 className={dayTitle}>{label}</h3>
+            <ul className={list}>
               {items.map((item) => (
                 <TimelineItem key={item.id} timeline={item} />
               ))}

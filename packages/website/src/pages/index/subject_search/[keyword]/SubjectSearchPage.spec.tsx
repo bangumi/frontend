@@ -53,7 +53,7 @@ it('renders typed search fixtures and persists the selected view', async () => {
     '/subject/41983',
   );
   expect(screen.getByText('找到 62 个条目')).toBeInTheDocument();
-  expect(screen.getByRole('link', { name: '动画' }).className).toContain('categorySelected');
+  expect(screen.getByRole('link', { name: '动画' }).className).toContain('bg_#f09199');
   expect(screen.getByRole('heading', { name: '相关人物' })).toBeInTheDocument();
 
   fireEvent.click(screen.getByRole('button', { name: '网格视图' }));

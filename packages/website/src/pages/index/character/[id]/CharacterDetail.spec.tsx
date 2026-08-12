@@ -68,6 +68,9 @@ describe('CharacterDetail', () => {
     // 出演（夏吉ゆうこ 在两个出演条目中重复出现）
     expect(await screen.findByText('出演')).toBeInTheDocument();
     expect((await screen.findAllByText('夏吉ゆうこ')).length).toBeGreaterThan(0);
+    const castCoverLink = document.querySelector<HTMLAnchorElement>('a[href="/subject/445083"]');
+    expect(castCoverLink?.className).toContain('[&_img]:w_48px');
+    expect(castCoverLink?.className).toContain('[&_img]:h_48px');
     // 关联角色
     expect(await screen.findByText('关联角色')).toBeInTheDocument();
     expect(await screen.findByText('妹子')).toBeInTheDocument();

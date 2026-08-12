@@ -83,6 +83,11 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText(/人看过/)).toBeInTheDocument();
     // 主栏：ep / 标签
     expect(await screen.findByText('观看进度管理')).toBeInTheDocument();
+    expect(screen.getByText('这是一个用于测试的动画条目。')).toHaveClass(
+      'fs_14px',
+      'lh_1.65',
+      'white-space_pre-wrap',
+    );
     expect(
       await screen.findByRole('heading', { name: '大家将 Test Anime 标注为' }),
     ).toBeInTheDocument();
@@ -97,6 +102,18 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('角色介绍')).toBeInTheDocument();
     expect(await screen.findByText('关联条目')).toBeInTheDocument();
     expect(await screen.findByText('喜欢这部作品的会员大概会喜欢')).toBeInTheDocument();
+    expect(document.querySelector('img[src$="/crt/g/00/00/05.jpg"]')).toHaveClass(
+      'w_85px',
+      'h_auto',
+    );
+    expect(document.querySelector('img[src$="/cover/g/00/00/13.jpg"]')).toHaveClass(
+      'w_75px',
+      'h_75px',
+    );
+    expect(document.querySelector('img[src$="/cover/g/00/00/14.jpg"]')).toHaveClass(
+      'w_75px',
+      'h_75px',
+    );
     expect(await screen.findByText('测试动画长评')).toBeInTheDocument();
     expect(await screen.findByText('讨论版测试话题')).toBeInTheDocument();
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();

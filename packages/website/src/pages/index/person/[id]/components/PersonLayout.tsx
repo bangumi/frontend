@@ -5,8 +5,7 @@ import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home';
 
-import { PersonHeader, PersonInfobox } from '../PersonDetail';
-import styles from '../PersonDetail.module.less';
+import { columnMain, columns, page, PersonHeader, PersonInfobox } from '../PersonDetail';
 
 /** 人物页面共享布局：Header + 左栏 Infobox + 主栏内容，各 tab 复用 */
 const PersonLayout: React.FC<{
@@ -17,10 +16,10 @@ const PersonLayout: React.FC<{
   <>
     {title != null && <Helmet title={title} />}
     <PersonHeader person={data.person} />
-    <PageContainer as='main' className={styles.page}>
-      <div className={styles.columns}>
+    <PageContainer as='main' className={page}>
+      <div className={columns}>
         <PersonInfobox data={data} />
-        <div className={styles.columnMain}>{children}</div>
+        <div className={columnMain}>{children}</div>
       </div>
     </PageContainer>
   </>

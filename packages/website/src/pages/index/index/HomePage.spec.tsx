@@ -167,6 +167,11 @@ describe('HomePage', () => {
       'src',
       '/anime-grid.jpg',
     );
+    const timelineCover = document.querySelector<HTMLImageElement>('img[src="/book-small.jpg"]');
+    expect(timelineCover).not.toBeNull();
+    expect(timelineCover?.className).toContain('w_60px');
+    expect(timelineCover?.className).toContain('h_70px');
+    expect(timelineCover?.className).not.toContain('w_25px');
     expect(screen.getByText(/读过.*第26话/)).toBeInTheDocument();
     expect(screen.getByText(/搁置了/)).toBeInTheDocument();
     expect(screen.getByText('2024-09-27 / ぺい / KADOKAWA')).toBeInTheDocument();
@@ -271,6 +276,7 @@ describe('HomePage', () => {
 
     // 默认分栏视图展示当前选中条目的集数按钮
     expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
+    expect(screen.getByText('Test Anime')).toHaveClass('c_#1f1c1c');
 
     fireEvent.click(screen.getByRole('button', { name: '网格视图' }));
 
@@ -283,6 +289,13 @@ describe('HomePage', () => {
     expect(screen.getByTitle('ep.5 第5话')).toHaveAttribute('data-episode-status', 'done');
     expect(screen.getByTitle('ep.6 第6话')).toHaveAttribute('data-episode-status', 'none');
     expect(screen.getByTitle('ep.12 第12话')).toHaveAttribute('data-episode-status', 'none');
+    const gridCover = document.querySelector<HTMLImageElement>(
+      'img[src="https://lain.bgm.tv/pic/cover/g/00/00/12.jpg"]',
+    );
+    expect(gridCover).not.toBeNull();
+    expect(gridCover?.className).toContain('w_58px');
+    expect(gridCover?.className).toContain('h_58px');
+    expect(gridCover?.className).not.toContain('h_90px');
 
     // 切回分栏视图后，当前条目的集数按钮仍然可用
     fireEvent.click(screen.getByRole('button', { name: '列表视图' }));

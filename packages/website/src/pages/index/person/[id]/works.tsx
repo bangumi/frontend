@@ -9,8 +9,7 @@ import { usePersonHome } from '@bangumi/website/hooks/use-person-home';
 import { usePersonWorks } from '@bangumi/website/hooks/use-person-works';
 
 import PersonLayout from './components/PersonLayout';
-import { WorkList } from './PersonDetail';
-import styles from './PersonDetail.module.less';
+import { sectionHeader, WorkList } from './PersonDetail';
 
 const PAGE_SIZE = 20;
 
@@ -32,7 +31,7 @@ function PersonWorksPage() {
 
   return (
     <PersonLayout data={data} title={`${data.person.name} - 作品`}>
-      <div className={styles.sectionHeader}>
+      <div className={sectionHeader}>
         <h2>「{data.person.name}」的作品</h2>
       </div>
       <WorkList works={works} />

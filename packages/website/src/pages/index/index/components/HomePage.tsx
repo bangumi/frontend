@@ -16,10 +16,6 @@ import TimelineBlock from './TimelineBlock';
 
 const { Link } = Typography;
 
-const page = css({
-  '& .bgm-link': { color: '#0084b4' },
-});
-
 const greets = css({
   fontSize: '24px',
   margin: '0 0 12px',
@@ -61,7 +57,7 @@ const HomePage: React.FC = () => {
   }
 
   return (
-    <PageContainer as='main' className={page}>
+    <PageContainer as='main'>
       <div className={greets}>
         Hi! <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>
       </div>
