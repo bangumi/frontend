@@ -18,6 +18,13 @@ const recentTopics = css({
   marginTop: '40px',
 });
 
+const descriptionBox = css({
+  // 对齐旧版 grp_box 的浅灰背景
+  background: '#f7f7f4',
+  borderRadius: '15px',
+  padding: '15px',
+});
+
 const GroupHome: React.FC = () => {
   const { name } = useParams();
   if (!name) {
@@ -40,6 +47,7 @@ const GroupHome: React.FC = () => {
     <>
       <Helmet title={`${group.title}小组`} />
       <CollapsibleContent
+        containerClassName={descriptionBox}
         threshold={193}
         content={parsedDescription}
         collapsed={descriptionCollapsed}

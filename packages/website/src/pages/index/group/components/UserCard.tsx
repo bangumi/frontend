@@ -30,6 +30,10 @@ const userCardMode = {
   }),
   horizontal: css({
     width: '290px',
+    // 移动端网格列宽小于 290px，宽度自适应
+    '@media (max-width: 640px)': {
+      width: '100%',
+    },
   }),
 } satisfies Record<NonNullable<UserCardProps['mode']>, string>;
 

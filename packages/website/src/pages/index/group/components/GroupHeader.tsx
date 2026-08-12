@@ -1,17 +1,18 @@
 import dayjs from 'dayjs';
-import React, { useState } from 'react';
+import React from 'react';
 
 import type { Group } from '@bangumi/client/client';
-import { CollapsibleContent, Image, Typography } from '@bangumi/design';
+import { Image, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
-import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
-
-import GroupActions from './GroupActions';
 
 const { Text } = Typography;
 
 const groupHeader = css({
   display: 'flex',
+  // 对齐旧版 grp_box 的浅灰背景
+  background: '#f7f7f4',
+  borderRadius: '15px',
+  padding: '15px',
   '& > *': {
     marginRight: '20px',
   },
@@ -37,13 +38,7 @@ const infoCol = css({
   padding: '7.5px 0',
 });
 
-// 原 GroupHeader.module.less 未定义这两个类，className 原本为 undefined
-const groupDescription = css({});
-const groupButtons = css({});
-
 export const GroupHeader: React.FC<{ group: Group }> = ({ group }) => {
-  const [collapsed, setCollapsed] = useState(true);
-
   return (
     <div className={groupHeader}>
       <div className={thumbnail}>
@@ -60,14 +55,6 @@ export const GroupHeader: React.FC<{ group: Group }> = ({ group }) => {
             名成员{' '}
           </Text>
         </div>
-        <CollapsibleContent
-          content={renderBBCode(group.description)}
-          containerClassName={groupDescription}
-          threshold={158}
-          collapsed={collapsed}
-          onChange={setCollapsed}
-        />
-        <GroupActions group={group} size='medium' className={groupButtons} />
       </div>
     </div>
   );

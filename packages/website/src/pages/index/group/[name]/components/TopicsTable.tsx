@@ -6,9 +6,12 @@ import { Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
+import { topicListLink } from '../../components/topicListLink';
+
 const topicTable = css({
   width: '100%',
-  color: '#9f9b9b',
+  color: '#777',
+  fontSize: '13px',
   tableLayout: 'fixed',
   '& th, & td': {
     padding: '11px 4px',
@@ -17,8 +20,6 @@ const topicTable = css({
     borderBottom: '1px dotted #e8e3e3',
   },
   '& thead': {
-    fontSize: '18px',
-    lineHeight: '18px',
     textAlign: 'left',
     '& th': {
       fontWeight: 'normal',
@@ -27,24 +28,23 @@ const topicTable = css({
 });
 
 const title = css({
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
+  overflowWrap: 'anywhere',
 });
 
 const author = css({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  width: '120px',
+  width: '90px',
 });
 
 const replies = css({
-  width: '60px',
+  width: '30px',
+  textAlign: 'right',
 });
 
 const updateTime = css({
-  width: '100px',
+  width: '90px',
   textAlign: 'right',
 });
 
@@ -55,7 +55,7 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
         <tr>
           <th className={title}>标题</th>
           <th className={author}>作者</th>
-          <th className={replies}>回复数</th>
+          <th className={replies}>回复</th>
           <th className={updateTime}>最后回复于</th>
         </tr>
       </thead>
@@ -64,14 +64,15 @@ const TopicsTable: React.FC<{ topics: Topic[] }> = ({ topics }) => {
           return (
             <tr key={topic.id}>
               <td className={title} title={topic.title}>
-                <Typography.Link to={`/group/topic/${topic.id}`} fontWeight='bold'>
+                <Typography.Link to={`/group/topic/${topic.id}`} noStyle className={topicListLink}>
                   {topic.title}
                 </Typography.Link>
               </td>
               <td className={author} title={topic.creator?.nickname}>
                 <Typography.Link
                   to={getUserProfileLink(topic.creator?.username ?? '')}
-                  fontWeight='bold'
+                  noStyle
+                  className={topicListLink}
                 >
                   {topic.creator?.nickname}
                 </Typography.Link>
