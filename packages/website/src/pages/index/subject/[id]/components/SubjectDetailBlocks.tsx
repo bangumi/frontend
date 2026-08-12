@@ -15,17 +15,11 @@ import type {
   Topic,
   UpdateEpisodeProgress,
 } from '@bangumi/client/client';
-import {
-  CollectionType,
-  EpisodeCollectionStatus,
-  EpisodeType,
-  SubjectType,
-} from '@bangumi/client/client';
+import { CollectionType, EpisodeType, SubjectType } from '@bangumi/client/client';
 import { Avatar, Rate, toast, Typography } from '@bangumi/design';
 import {
   getBlogLink,
   getCharacterLink,
-  getEpisodeLink,
   getPersonLink,
   getSubjectBoardLink,
   getSubjectCharactersLink,
@@ -38,7 +32,7 @@ import {
   getSubjectTopicLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
-import EpisodeProgressPopover from '@bangumi/website/components/EpisodeProgressPopover';
+import EpisodeButton from '@bangumi/website/components/EpisodeButton';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -50,49 +44,6 @@ const { Link } = Typography;
 
 function getErrorMessage(error: unknown): string {
   return error instanceof Error ? error.message : '操作失败，请稍后再试';
-}
-
-function EpisodePopoverItem({
-  episode,
-  canManage,
-  submitting,
-  onUpdate,
-}: {
-  episode: Episode;
-  canManage: boolean;
-  submitting: boolean;
-  onUpdate: (body: UpdateEpisodeProgress) => void;
-}) {
-  return (
-    <li>
-      <EpisodeProgressPopover
-        episode={episode}
-        canManage={canManage}
-        submitting={submitting}
-        onUpdate={onUpdate}
-      >
-        {(triggerProps) => (
-          <Link
-            {...triggerProps}
-            to={getEpisodeLink(episode.id)}
-            className={classNames(
-              styles.epBtn,
-              episode.collection?.status === EpisodeCollectionStatus.Done
-                ? styles.epDone
-                : episode.airdate !== '' &&
-                    dayjs(episode.airdate).isValid() &&
-                    dayjs(episode.airdate).isAfter(dayjs(), 'day')
-                  ? styles.epUpcoming
-                  : styles.epAired,
-            )}
-            title={`ep.${episode.sort} ${episode.name || episode.nameCN}`}
-          >
-            {String(episode.sort).padStart(2, '0')}
-          </Link>
-        )}
-      </EpisodeProgressPopover>
-    </li>
-  );
 }
 
 /** 章节/曲目列表，对齐 PHP subject_box_prg */
@@ -144,13 +95,14 @@ function EpListSection({ subject, episodes }: { subject: Subject; episodes: Epis
   const renderEpGrid = (list: Episode[]) => (
     <ul className={styles.epGrid}>
       {list.map((ep) => (
-        <EpisodePopoverItem
-          key={ep.id}
-          episode={ep}
-          canManage={canManage}
-          submitting={submittingEpisodeID === ep.id}
-          onUpdate={(body) => void updateEpisode(ep, body)}
-        />
+        <li key={ep.id}>
+          <EpisodeButton
+            episode={ep}
+            canManage={canManage}
+            submitting={submittingEpisodeID === ep.id}
+            onUpdate={(body) => void updateEpisode(ep, body)}
+          />
+        </li>
       ))}
     </ul>
   );

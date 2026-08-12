@@ -278,11 +278,11 @@ describe('HomePage', () => {
     await waitFor(() => {
       expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
     });
-    // 已看集数标记为 pressed，未看集数不是
-    expect(screen.getByTitle('ep.1 第1话')).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByTitle('ep.5 第5话')).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getByTitle('ep.6 第6话')).toHaveAttribute('aria-pressed', 'false');
-    expect(screen.getByTitle('ep.12 第12话')).toHaveAttribute('aria-pressed', 'false');
+    // 已看集数标记为已收藏，未看集数不是
+    expect(screen.getByTitle('ep.1 第1话')).toHaveAttribute('data-episode-status', 'done');
+    expect(screen.getByTitle('ep.5 第5话')).toHaveAttribute('data-episode-status', 'done');
+    expect(screen.getByTitle('ep.6 第6话')).toHaveAttribute('data-episode-status', 'none');
+    expect(screen.getByTitle('ep.12 第12话')).toHaveAttribute('data-episode-status', 'none');
 
     // 切回分栏视图后，当前条目的集数按钮仍然可用
     fireEvent.click(screen.getByRole('button', { name: '列表视图' }));
@@ -397,6 +397,24 @@ describe('HomePage', () => {
       ),
     );
     await renderHome();
+
+    // 章节按钮样式随收藏状态变化
+    expect(screen.getByTitle(`ep.${done!.sort} ${done!.name}`)).toHaveAttribute(
+      'data-episode-status',
+      'done',
+    );
+    expect(screen.getByTitle(`ep.${wish!.sort} ${wish!.name}`)).toHaveAttribute(
+      'data-episode-status',
+      'wish',
+    );
+    expect(screen.getByTitle(`ep.${dropped!.sort} ${dropped!.name}`)).toHaveAttribute(
+      'data-episode-status',
+      'dropped',
+    );
+    expect(screen.getByTitle(`ep.${none!.sort} ${none!.name}`)).toHaveAttribute(
+      'data-episode-status',
+      'none',
+    );
 
     const doneDetail = document.querySelector(`[data-ep-id='${done!.id}']`)!;
     expect(within(doneDetail as HTMLElement).queryByRole('button', { name: '看过' })).toBeNull();

@@ -400,12 +400,6 @@
   .epGroup {
     gap: 3px;
   }
-
-  .epBtn {
-    border-color: #008cff;
-    color: #087af5;
-    background: #f2f8ff;
-  }
 }
 
 .card {
@@ -559,20 +553,6 @@
   margin-right: 2px;
 }
 
-.epBtn,
-.epBtnWatched,
-.epBtnUnavailable {
-  min-width: 24px;
-  padding: 2px 4px;
-  border: 1px solid @gray-10;
-  border-radius: 4px;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  cursor: pointer;
-  font-family: 'Lucida Grande', 'Lucida Sans', Helvetica, Arial, Verdana, sans-serif;
-}
-
 @media (max-width: @sm) {
   .tabs {
     overflow-x: auto;
@@ -634,35 +614,4 @@
   .gridList {
     grid-template-columns: minmax(0, 1fr);
   }
-
-  .epBtn,
-  .epBtnWatched,
-  .epBtnUnavailable {
-    min-width: 22px;
-    padding: 1px 3px;
-    font-size: 11px;
-  }
-}
-
-.epBtn {
-  color: @gray-60;
-  background: #fff;
-
-  &:hover {
-    border-color: @blue-100;
-    color: @blue-100;
-  }
-}
-
-.epBtnWatched {
-  color: #fff;
-  background: @blue-100;
-  border-color: @blue-100;
-}
-
-.epBtnUnavailable {
-  border-color: #bcbcbc;
-  color: @gray-60;
-  background: #e5e5e5;
-  cursor: default;
 }

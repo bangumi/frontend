@@ -202,6 +202,42 @@ describe('SubjectDetail', () => {
     });
   });
 
+  it('should style episode buttons by collection status', async () => {
+    const [doneEp, noneEp] = homeData.episodes;
+    const progressData = {
+      ...homeData,
+      episodes: [
+        {
+          ...doneEp!,
+          collection: { status: EpisodeCollectionStatus.Done, updatedAt: 1775000000 },
+        },
+        {
+          ...noneEp!,
+          collection: { status: EpisodeCollectionStatus.Wish, updatedAt: 1775000000 },
+        },
+        {
+          ...noneEp!,
+          id: 102,
+          sort: 3,
+          name: '第3话',
+          collection: { status: EpisodeCollectionStatus.Dropped, updatedAt: 1775000000 },
+        },
+        { ...noneEp!, id: 103, sort: 4, name: '第4话', collection: undefined },
+      ],
+    };
+
+    await act(async () => {
+      renderPage(<SubjectDetail data={progressData} />);
+    });
+
+    // 章节按钮样式随收藏状态变化
+    const epBtn = (sort: number) => screen.getByTitle(`ep.${sort} 第${sort}话`);
+    expect(epBtn(1)).toHaveAttribute('data-episode-status', 'done');
+    expect(epBtn(2)).toHaveAttribute('data-episode-status', 'wish');
+    expect(epBtn(3)).toHaveAttribute('data-episode-status', 'dropped');
+    expect(epBtn(4)).toHaveAttribute('data-episode-status', 'none');
+  });
+
   it('should render the collection panel in a separate sidebar', async () => {
     setup();
     await renderSubject();

@@ -1,5 +1,4 @@
 import { ok } from '@oazapfts/runtime';
-import { DateTime } from 'luxon';
 import React, { useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
@@ -13,7 +12,7 @@ import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/clie
 import { toast, Typography } from '@bangumi/design';
 import { GridView, ListView } from '@bangumi/icons';
 import { getSubjectLink, getSubjectWikiEditLink } from '@bangumi/utils/pages';
-import EpisodeProgressPopover from '@bangumi/website/components/EpisodeProgressPopover';
+import EpisodeButton from '@bangumi/website/components/EpisodeButton';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
 import styles from './PrgManager.module.less';
@@ -60,13 +59,6 @@ function totalText(total: number): string {
   return total === 0 ? '??' : String(total);
 }
 
-function isEpisodeUnavailable(airdate: string): boolean {
-  const airDate = DateTime.fromISO(airdate);
-  return (
-    airDate.isValid && airDate.startOf('day').toMillis() > DateTime.now().startOf('day').toMillis()
-  );
-}
-
 function getErrorMessage(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
@@ -86,41 +78,6 @@ function groupEps(eps: Episode[]): [EpisodeType, Episode[]][] {
     type,
     [...list].sort((a, b) => a.sort - b.sort),
   ]);
-}
-
-function EpButton({
-  ep,
-  submitting,
-  onUpdate,
-}: {
-  ep: Episode;
-  submitting: boolean;
-  onUpdate: (body: UpdateEpisodeProgress) => void;
-}) {
-  const watched = ep.collection?.status === EpisodeCollectionStatus.Done;
-  const unavailable = Boolean(ep.airdate) && isEpisodeUnavailable(ep.airdate);
-  const buttonClass = watched
-    ? styles.epBtnWatched
-    : unavailable
-      ? styles.epBtnUnavailable
-      : styles.epBtn;
-
-  return (
-    <EpisodeProgressPopover episode={ep} submitting={submitting} onUpdate={onUpdate}>
-      {(triggerProps) => (
-        <button
-          {...triggerProps}
-          type='button'
-          className={buttonClass}
-          title={`ep.${ep.sort} ${ep.name}`}
-          aria-pressed={watched}
-          disabled={unavailable}
-        >
-          {String(ep.sort).padStart(2, '0')}
-        </button>
-      )}
-    </EpisodeProgressPopover>
-  );
 }
 
 function PrgNavItem({
@@ -326,9 +283,9 @@ function PrgCard({ item, detailed = false }: { item: ProgressItem; detailed?: bo
                   <span className={styles.epSubtitle}>{EP_TYPE_LABELS[type]}</span>
                 )}
                 {eps.map((ep) => (
-                  <EpButton
+                  <EpisodeButton
                     key={ep.id}
-                    ep={ep}
+                    episode={ep}
                     submitting={submitting}
                     onUpdate={(body) => void handleEpStatus(ep, body)}
                   />
