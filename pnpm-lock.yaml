@@ -183,6 +183,9 @@ importers:
       '@bangumi/styled-system':
         specifier: workspace:0.0.0
         version: link:../styled-system
+      '@marsidev/react-turnstile':
+        specifier: ^1.5.2
+        version: 1.5.3(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       dayjs:
         specifier: ^1.11.21
         version: 1.11.21

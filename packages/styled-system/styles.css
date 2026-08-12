@@ -2593,6 +2593,10 @@
     height: 100%;
 }
 
+  .\[\&_div\]\:h_78px div {
+    height: 78px;
+}
+
   .before\:top_-5px::before {
     top: -5px;
 }
@@ -2667,10 +2671,6 @@
 
   .\[\&_\>_\.bgm-menu-item\]\:w_100\% > .bgm-menu-item,.\[\&_\>_\*\]\:w_100\% > * {
     width: 100%;
-}
-
-  .\[\&_div\]\:h_78px div {
-    height: 78px;
 }
 
   .last\:mb_0:last-child {

@@ -63,6 +63,8 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    // 允许在窄容器（如移动端）内收缩，避免内容按 max-content 撑开
+    min-width: 0;
   }
 
   &__submit {
@@ -72,6 +74,8 @@
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
+    // 验证码等额外内容在窄屏放不下时换行，避免横向溢出
+    flex-wrap: wrap;
 
     .bgm-editor__bbcode-tip {
       color: @gray-60;

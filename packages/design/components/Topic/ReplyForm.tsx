@@ -1,7 +1,9 @@
+import { Turnstile } from '@marsidev/react-turnstile';
 import React, { memo, useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
 
+import { toast } from '../..';
 import type { EditorFormProps } from '../../components/EditorForm';
 import EditorForm from '../../components/EditorForm';
 
@@ -31,16 +33,21 @@ const ReplyForm = ({
   ...props
 }: ReplyFormProps) => {
   const [sending, setSending] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const sendReply = async () => {
     if (!content) return; // TODO: show validation message
     if (sending) return; // TODO: disable button instead
+    if (!turnstileToken) {
+      toast('请先完成验证码验证');
+      return;
+    }
     setSending(true);
     try {
       const response = await ozaClient.createGroupReply(topicId, {
         content,
         replyTo,
-        turnstileToken: '',
+        turnstileToken,
       });
       if (response.status === 200) {
         // document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });
@@ -56,16 +63,27 @@ const ReplyForm = ({
   };
 
   return (
-    <EditorForm
-      onCancel={onCancel}
-      placeholder={placeholder}
-      value={content}
-      // TODO: use loading state
-      confirmText={sending ? '...' : undefined}
-      onChange={onChange}
-      onConfirm={sendReply}
-      {...props}
-    />
+    <>
+      <EditorForm
+        onCancel={onCancel}
+        placeholder={placeholder}
+        value={content}
+        // TODO: use loading state
+        confirmText={sending ? '...' : undefined}
+        onChange={onChange}
+        onConfirm={sendReply}
+        submitExtra={
+          <Turnstile
+            options={{ theme: 'light', size: 'invisible', action: 'post_reply' }}
+            siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+            onSuccess={setTurnstileToken}
+            onError={() => setTurnstileToken(null)}
+            onExpire={() => setTurnstileToken(null)}
+          />
+        }
+        {...props}
+      />
+    </>
   );
 };
 

@@ -13,6 +13,7 @@ import {
   getSubjectLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
 import styles from './TimelineBlock.module.less';
@@ -400,6 +401,7 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
   const [filter, setFilter] = useState<TimelineFilter>('all');
   const [content, setContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const filtered = timeline.filter((item) => matchesFilter(item, filter));
   const grouped = new Map<string, Timeline[]>();
@@ -414,9 +416,13 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
     if (!value || submitting) {
       return;
     }
+    if (!turnstileToken) {
+      toast('请先完成验证码验证');
+      return;
+    }
     setSubmitting(true);
     try {
-      await ok(ozaClient.createTimelineSay({ content: value, turnstileToken: '' }));
+      await ok(ozaClient.createTimelineSay({ content: value, turnstileToken }));
       setContent('');
       await mutate();
     } catch (error) {
@@ -459,6 +465,7 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
           >
             写好了
           </button>
+          <TurnstileCaptcha action='post_timeline' onToken={setTurnstileToken} />
         </div>
       </form>
       {grouped.size === 0 ? (

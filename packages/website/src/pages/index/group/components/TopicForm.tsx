@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { ozaClient } from '@bangumi/client';
 import { EditorForm, Form, Input, toast } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
+import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
 import type { UseGroupTopicRet } from '@bangumi/website/hooks/use-group-topic';
 
 interface FormData {
@@ -62,11 +63,16 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
     defaultValues: topic?.data as FormData | undefined,
   });
   const [sending, setSending] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const postNewTopic = async (data: FormData, groupName: string) => {
+    if (!turnstileToken) {
+      toast('请先完成验证码验证');
+      return;
+    }
     const response = await ozaClient.createGroupTopic(groupName, {
       ...data,
-      turnstileToken: '',
+      turnstileToken,
     });
     if (response.status === 200) {
       navigate(`/group/topic/${response.data.id}`);
@@ -121,6 +127,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
           onConfirm={async () => handleSubmit(onSubmit, showErrors)()}
           // TODO: use loading state
           confirmText={sending ? '...' : quickPost ? '快速发帖' : undefined}
+          submitExtra={<TurnstileCaptcha action='post_topic' onToken={setTurnstileToken} />}
           rows={!quickPost ? 15 : undefined}
           {...field}
         />

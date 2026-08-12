@@ -21,6 +21,8 @@ export interface EditorFormProps extends EditorProps {
   cancelText?: string;
   /** 取消按钮的回调 */
   onCancel?: () => void;
+  /** 渲染在确认按钮右侧的额外内容（如验证码） */
+  submitExtra?: React.ReactNode;
   /**
    * 是否隐藏取消按钮
    * @default false
@@ -37,6 +39,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
       onConfirm,
       cancelText = '取消',
       onCancel,
+      submitExtra,
       hideCancel = false,
       ...props
     },
@@ -53,6 +56,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
           >
             {confirmText}
           </Button>
+          {submitExtra}
           {!hideCancel && (
             <Button type='text' className='bgm-editor__button' onClick={onCancel}>
               {cancelText}
