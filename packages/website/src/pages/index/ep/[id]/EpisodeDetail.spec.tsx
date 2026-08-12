@@ -55,6 +55,9 @@ describe('EpisodeDetail', () => {
       'href',
       '/subject/501963',
     );
+    const activeTab = screen.getByRole('link', { name: '章节' });
+    expect(activeTab.className).toContain('p_10px_10px_9px');
+    expect(activeTab.className).toContain('c_#f09199');
 
     // 主栏：章节 label、名称与简介
     expect(screen.getByRole('heading', { name: /EP\.1 燃えよ狂犬/ })).toBeInTheDocument();

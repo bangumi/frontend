@@ -5,6 +5,7 @@ import type { CollectionType, Subject, SubjectHomeResponse } from '@bangumi/clie
 import { SubjectType } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
 import { Link as LinkIcon } from '@bangumi/icons';
+import { css, cx } from '@bangumi/styled-system/css';
 import { formatSubjectInfobox } from '@bangumi/utils';
 import {
   getLegacyPageLink,
@@ -27,10 +28,215 @@ import { useUser } from '@bangumi/website/hooks/use-user';
 
 import CollectionPanel from './CollectionPanel';
 import { COLLECT_DESC, collectVerb, makeDescriptiveTime } from './subject-common';
-import styles from './SubjectDetail.module.less';
 import { SubjectPrimaryBlocks, SubjectSecondaryBlocks } from './SubjectDetailBlocks';
 
 const { Link } = Typography;
+
+const page = css({
+  padding: '10px 15px 24px',
+});
+
+const header = css({ margin: '0' });
+
+const name = css({
+  margin: '15px 0',
+  fontSize: '20px',
+  fontWeight: 'bold',
+  lineHeight: '1.3',
+  '& a': {
+    color: '#1f1c1c',
+    fontWeight: 'bold',
+    _hover: { color: '#54b5df' },
+  },
+});
+
+const headerInner = css({
+  paddingRight: '15px',
+  paddingLeft: '15px',
+});
+
+const tabsInner = headerInner;
+
+const platform = css({
+  marginLeft: '8px',
+  color: '#9f9b9b',
+  fontSize: '12px',
+  fontWeight: 'normal',
+});
+
+const tabsStyle = css({
+  borderTop: '1px solid #fefefe',
+  borderBottom: '1px solid #e8e3e3',
+  background: '#fbfbfb',
+});
+
+const tabsScroll = css({
+  overflowX: 'auto',
+  scrollbarWidth: 'none',
+  '&::-webkit-scrollbar': {
+    display: 'none',
+  },
+});
+
+const tabList = css({
+  display: 'flex',
+  width: 'max-content',
+  minWidth: '100%',
+  margin: '0',
+  padding: '0',
+  gap: '5px',
+  listStyle: 'none',
+});
+
+const tabLink = css({
+  display: 'block',
+  padding: '10px 10px 9px',
+  borderBottom: '2px solid transparent',
+  color: '#9f9b9b',
+  fontSize: '14px',
+  whiteSpace: 'nowrap',
+  _hover: {
+    borderBottomColor: '#54b5df',
+    color: '#54b5df',
+    textDecoration: 'none',
+  },
+});
+
+const tabLinkActive = css({
+  borderBottomColor: '#f09199',
+  color: '#f09199',
+});
+
+const columns = css({
+  display: 'grid',
+  gridTemplateColumns: 'minmax(200px, 2.5fr) minmax(0, 7.5fr)',
+  alignItems: 'flex-start',
+  gap: '10px',
+  '@media (max-width: 640px)': {
+    display: 'block',
+  },
+});
+
+const columnLeft = css({
+  minWidth: '0',
+  '@media (max-width: 640px)': {
+    marginBottom: '10px',
+  },
+});
+
+const columnContent = css({ minWidth: '0' });
+
+const columnMain = css({ minWidth: '0' });
+
+const columnRight = css({
+  minWidth: '0',
+  '@media (max-width: 640px)': {
+    marginTop: '10px',
+  },
+});
+
+const primaryColumns = css({
+  display: 'grid',
+  gridTemplateColumns: 'minmax(0, 6.5fr) minmax(0, 3.5fr)',
+  gap: '20px',
+  padding: '0 18px 0 10px',
+  '@media (max-width: 640px)': {
+    display: 'block',
+    padding: '0',
+  },
+});
+
+const infoboxStyle = css({
+  margin: '0 0 15px',
+  padding: '0 0 10px',
+  wordBreak: 'break-all',
+});
+
+const coverWrapper = css({
+  margin: '0 0 12px',
+  textAlign: 'center',
+});
+
+const cover = css({
+  width: '255px',
+  maxWidth: '100%',
+  height: 'auto',
+  aspectRatio: '5 / 7',
+  boxSizing: 'border-box',
+  marginBottom: '5px',
+  padding: '2px',
+  border: '1px solid #a9a9ab',
+  borderTopColor: '#c7c7c9',
+  borderBottomColor: '#858486',
+  background: '#fff',
+  boxShadow: '0 1px 5px #aaa',
+  objectFit: 'cover',
+});
+
+const infoList = css({
+  margin: '0',
+  padding: '0',
+  listStyle: 'none',
+  fontSize: '14px',
+  wordBreak: 'break-all',
+  '& li': {
+    padding: '5px',
+    borderBottom: '1px solid #e8e3e3',
+    lineHeight: '1.4',
+  },
+});
+
+const tip = css({
+  color: '#9f9b9b',
+  fontSize: '14px',
+});
+
+const shareTools = css({
+  alignItems: 'center',
+  gap: '7px',
+  padding: '2px 3px',
+  color: '#9f9b9b',
+  fontSize: '12px',
+});
+
+const copyButton = css({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '3px',
+  padding: '0',
+  border: '0',
+  background: 'transparent',
+  color: '#9f9b9b',
+  cursor: 'pointer',
+  font: 'inherit',
+  '& svg': {
+    width: '15px',
+    height: '15px',
+  },
+});
+
+const shareIcon = css({
+  display: 'inline-flex',
+  width: '16px',
+  height: '16px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '2px',
+  color: '#fff',
+  fontSize: '10px',
+  fontWeight: 'bold',
+  lineHeight: '16px',
+  _hover: {
+    color: '#fff',
+    textDecoration: 'none',
+  },
+});
+
+const shareWeibo = css({ background: '#e34b4b' });
+
+const shareDouban = css({ background: '#3b8f55' });
+
+const shareTwitter = css({ background: '#45bde0' });
 
 /** 条目标题与导航 tabs，对齐 PHP subject_header */
 export function SubjectHeader({ subject }: { subject: Subject }) {
@@ -82,21 +288,21 @@ export function SubjectHeader({ subject }: { subject: Subject }) {
   ];
 
   return (
-    <header className={styles.header}>
-      <PageContainer gutterOnly className={styles.headerInner}>
-        <h1 className={styles.name}>
+    <header className={header}>
+      <PageContainer gutterOnly className={headerInner}>
+        <h1 className={name}>
           <Link to={getSubjectLink(subject.id)} title={subject.nameCN}>
             {subject.name}
           </Link>
           {subject.platform.typeCN != null && subject.platform.typeCN !== '' && (
-            <small className={styles.platform}>{subject.platform.typeCN}</small>
+            <small className={platform}>{subject.platform.typeCN}</small>
           )}
-          {subject.series && <small className={styles.platform}>系列</small>}
+          {subject.series && <small className={platform}>系列</small>}
         </h1>
       </PageContainer>
-      <nav className={styles.tabs} aria-label='条目导航'>
-        <PageContainer gutterOnly className={styles.tabsInner}>
-          <ul className={styles.tabList}>
+      <nav className={tabsStyle} aria-label='条目导航'>
+        <PageContainer gutterOnly className={cx(tabsInner, tabsScroll)}>
+          <ul className={tabList}>
             {tabs
               .filter(
                 (tab) => (tab.key !== 'ep' || showEpTab) && (tab.key !== 'wiki' || user != null),
@@ -106,9 +312,7 @@ export function SubjectHeader({ subject }: { subject: Subject }) {
                   <NavLink
                     to={tab.to}
                     end={tab.key === 'overview'}
-                    className={({ isActive }) =>
-                      isActive ? `${styles.tabLink} ${styles.tabLinkActive}` : styles.tabLink
-                    }
+                    className={({ isActive }) => cx(tabLink, isActive && tabLinkActive)}
                   >
                     {tab.label}
                   </NavLink>
@@ -125,9 +329,9 @@ export function SubjectHeader({ subject }: { subject: Subject }) {
 function SubjectInfobox({ subject }: { subject: Subject }) {
   const infobox = formatSubjectInfobox(subject.infobox);
   return (
-    <div className={styles.infobox}>
+    <div className={infoboxStyle}>
       {subject.images?.large != null && (
-        <div className={styles.coverWrapper}>
+        <div className={coverWrapper}>
           <Link
             to={subject.images.large}
             isExternal
@@ -135,18 +339,18 @@ function SubjectInfobox({ subject }: { subject: Subject }) {
             rel='noopener noreferrer'
             title={`${subject.name} ${subject.nameCN}`}
           >
-            <img src={subject.images.large} className={styles.cover} alt={subject.name} />
+            <img src={subject.images.large} className={cover} alt={subject.name} />
           </Link>
         </div>
       )}
-      <ul className={styles.infoList}>
+      <ul className={infoList}>
         {infobox.map((item) => (
           <li key={item.key}>
-            <span className={styles.tip}>{item.key}: </span>
+            <span className={tip}>{item.key}: </span>
             <span>
               {item.values.map((v, i) => (
                 <span key={i}>
-                  {v.k != null && v.k !== '' && <span className={styles.tip}>{v.k}</span>}
+                  {v.k != null && v.k !== '' && <span className={tip}>{v.k}</span>}
                   {v.v}
                   {i < item.values.length - 1 && ' / '}
                 </span>
@@ -224,10 +428,10 @@ function SubjectShare({ subject }: { subject: Subject }) {
   const shareText = `「${subject.name}」`;
 
   return (
-    <div className={styles.shareTools} aria-label='分享条目'>
+    <div className={shareTools} aria-label='分享条目'>
       <button
         type='button'
-        className={styles.copyButton}
+        className={copyButton}
         onClick={() => void navigator.clipboard.writeText(shareUrl)}
       >
         <LinkIcon />
@@ -238,7 +442,7 @@ function SubjectShare({ subject }: { subject: Subject }) {
         href={`https://service.weibo.com/share/share.php?url=${encodeURIComponent(
           shareUrl,
         )}&title=${encodeURIComponent(shareText)}`}
-        className={`${styles.shareIcon} ${styles.shareWeibo}`}
+        className={cx(shareIcon, shareWeibo)}
         target='_blank'
         rel='noopener noreferrer'
         title='分享到微博'
@@ -247,7 +451,7 @@ function SubjectShare({ subject }: { subject: Subject }) {
       </a>
       <a
         href={`https://www.douban.com/share/service?href=${encodeURIComponent(shareUrl)}`}
-        className={`${styles.shareIcon} ${styles.shareDouban}`}
+        className={cx(shareIcon, shareDouban)}
         target='_blank'
         rel='noopener noreferrer'
         title='分享到豆瓣'
@@ -258,7 +462,7 @@ function SubjectShare({ subject }: { subject: Subject }) {
         href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(
           shareUrl,
         )}&text=${encodeURIComponent(shareText)}`}
-        className={`${styles.shareIcon} ${styles.shareTwitter}`}
+        className={cx(shareIcon, shareTwitter)}
         target='_blank'
         rel='noopener noreferrer'
         title='分享到 X'
@@ -275,9 +479,9 @@ const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   return (
     <>
       <SubjectHeader subject={subject} />
-      <PageContainer as='main' className={styles.page}>
-        <div className={styles.columns}>
-          <div className={styles.columnLeft}>
+      <PageContainer as='main' className={page}>
+        <div className={columns}>
+          <div className={columnLeft}>
             <SubjectInfobox subject={subject} />
             <IndexSidePanel
               indexes={data.indexes}
@@ -293,12 +497,12 @@ const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
             />
             <SubjectCollectPanel subject={subject} />
           </div>
-          <div className={styles.columnContent}>
-            <div className={styles.primaryColumns}>
-              <div className={styles.columnMain}>
+          <div className={columnContent}>
+            <div className={primaryColumns}>
+              <div className={columnMain}>
                 <SubjectPrimaryBlocks data={data} />
               </div>
-              <aside className={styles.columnRight}>
+              <aside className={columnRight}>
                 <CollectionPanel subject={subject} />
                 <SubjectShare subject={subject} />
               </aside>

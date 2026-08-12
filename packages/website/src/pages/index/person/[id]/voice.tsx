@@ -9,8 +9,7 @@ import { usePersonCasts } from '@bangumi/website/hooks/use-person-casts';
 import { usePersonHome } from '@bangumi/website/hooks/use-person-home';
 
 import PersonLayout from './components/PersonLayout';
-import { CastList } from './PersonDetail';
-import styles from './PersonDetail.module.less';
+import { CastList, sectionHeader } from './PersonDetail';
 
 const PAGE_SIZE = 20;
 
@@ -32,7 +31,7 @@ function PersonVoicePage() {
 
   return (
     <PersonLayout data={data} title={`${data.person.name} - 角色`}>
-      <div className={styles.sectionHeader}>
+      <div className={sectionHeader}>
         <h2>「{data.person.name}」的角色</h2>
       </div>
       <CastList casts={casts} />
