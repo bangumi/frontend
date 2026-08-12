@@ -44,7 +44,8 @@ const GroupNavigation = ({ group }: { group: Group }) => {
             <br />
           </div>
           <div>
-            小组：<Link to='#'>我管理的</Link> | <Link to='/group/mine'>我参加的</Link>
+            小组：<Link to='/group/mine?mode=managed'>我管理的</Link> |{' '}
+            <Link to='/group/mine'>我参加的</Link>
           </div>
         </div>
       </div>

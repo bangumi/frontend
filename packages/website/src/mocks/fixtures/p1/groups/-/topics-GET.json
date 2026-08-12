@@ -1,0 +1,83 @@
+{
+  "data": [
+    {
+      "id": 430381,
+      "title": "[投票结果] 关于连载书籍平台子分类的关联问题",
+      "creatorID": 21804,
+      "parentID": 128,
+      "replyCount": 107,
+      "createdAt": 1753694225,
+      "updatedAt": 1786465803,
+      "state": 0,
+      "display": 1,
+      "group": {
+        "id": 128,
+        "name": "wiki",
+        "nsfw": false,
+        "title": "番組WIKI計画",
+        "icon": {
+          "small": "https://lain.bgm.tv/r/100/pic/icon/l/000/00/01/128.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/icon/l/000/00/01/128.jpg",
+          "large": "https://lain.bgm.tv/pic/icon/l/000/00/01/128.jpg"
+        },
+        "creatorID": 271,
+        "members": 8099,
+        "accessible": true,
+        "createdAt": 1233321099
+      },
+      "replies": [],
+      "creator": {
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/00000.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/00/00/00000.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/00/00/00000.jpg"
+        },
+        "sign": "测试",
+        "username": "test_user",
+        "nickname": "测试用户",
+        "user_group": 0,
+        "id": 21804
+      }
+    },
+    {
+      "id": 430382,
+      "title": "新番组 2026 年春季动画讨论帖",
+      "creatorID": 21805,
+      "parentID": 129,
+      "replyCount": 32,
+      "createdAt": 1753694300,
+      "updatedAt": 1786465900,
+      "state": 0,
+      "display": 1,
+      "group": {
+        "id": 129,
+        "name": "sandbox",
+        "nsfw": false,
+        "title": "新番组",
+        "icon": {
+          "small": "https://lain.bgm.tv/r/100/pic/icon/l/000/00/01/129.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/icon/l/000/00/01/129.jpg",
+          "large": "https://lain.bgm.tv/pic/icon/l/000/00/01/129.jpg"
+        },
+        "creatorID": 271,
+        "members": 1234,
+        "accessible": true,
+        "createdAt": 1233321100
+      },
+      "replies": [],
+      "creator": {
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/00000.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/00/00/00000.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/00/00/00000.jpg"
+        },
+        "sign": "",
+        "username": "test_user2",
+        "nickname": "测试用户2",
+        "user_group": 0,
+        "id": 21805
+      }
+    }
+  ],
+  "total": 2
+}

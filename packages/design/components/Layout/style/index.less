@@ -20,5 +20,11 @@
         display: none;
       }
     }
+
+    // 窄屏隐藏右侧栏后，固定 246px 的侧栏列与 gap 仍占空间导致 grid 溢出，
+    // 收窄为单列让主栏占满容器
+    @media (max-width: @lg) {
+      grid-template-columns: minmax(0, 1fr);
+    }
   }
 }
