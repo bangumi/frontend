@@ -75,14 +75,6 @@ const navRight = [
     label: '小组',
     subMenu: groupSubMenu,
   },
-  {
-    key: 'explore',
-    label: '探索',
-  },
-  {
-    key: 'doujin',
-    label: '天窗联盟',
-  },
 ];
 
 const mobileNav = [...navLeft, ...navRight];
@@ -215,8 +207,10 @@ const nav = css({
 
 const navDivider = css({
   display: 'inline-block',
+  width: '1px',
   height: '19px',
   margin: '0 27px',
+  background: '#e8e3e3',
   '@media (max-width: 1260px)': { margin: '0 20px' },
   '@media (max-width: 992px)': { display: 'none' },
 });
@@ -263,8 +257,10 @@ const searchSelect = css({
 const searchDivider = css({
   display: 'inline-block',
   flexShrink: '0',
+  width: '1px',
   height: '14px',
   margin: '0 9px 0 5px',
+  background: '#e8e3e3',
 });
 
 const mobileSearchButton = css({
@@ -396,8 +392,10 @@ const mobileSearchSelect = css({
 const mobileSearchDivider = css({
   display: 'inline-block',
   flexShrink: '0',
+  width: '1px',
   height: '20px',
   margin: '0 9px 0 7px',
+  background: '#e8e3e3',
 });
 
 const mobileSearchInputIcon = css({ width: '18px', height: '18px', marginLeft: '8px' });

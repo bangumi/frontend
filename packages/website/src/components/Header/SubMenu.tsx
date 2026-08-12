@@ -14,6 +14,8 @@ const subMenuDivider = css({
   width: '62px',
   height: '1px',
   margin: '0 auto',
+  background: '#e8e3e3',
+  border: 'none',
 });
 
 const subMenuItemDo = css({ _hover: { backgroundColor: '#8fcaec' } });
