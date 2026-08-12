@@ -13,11 +13,21 @@ import { version } from '../../package.json';
 import { pandaDevHmr } from './panda-dev-hmr';
 
 let COMMIT_HASH = '';
+let VERSION = '';
 
 try {
-  COMMIT_HASH = execSync('git rev-parse --short HEAD').toString();
+  COMMIT_HASH = execSync('git rev-parse --short HEAD').toString().trim();
 } catch {
   console.log('failed to get git info');
+}
+
+// 版本号优先使用 CI 注入的 VERSION（release 流程先构建后打 tag，git describe 拿不到本次版本），
+// 其次使用最近的 git tag（本地 / preview 构建），最后 fallback 到 package.json version。
+try {
+  VERSION =
+    process.env.VERSION?.trim() || execSync('git describe --tags --abbrev=0').toString().trim();
+} catch {
+  console.log('failed to get version from git, fallback to package.json version');
 }
 
 dayjs.extend(utc);
@@ -144,7 +154,7 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       'import.meta.env.VITE_TURNSTILE_SITE_KEY': JSON.stringify(turnstileSiteKey),
-      'import.meta.env.__APP_VERSION__': JSON.stringify(version),
+      'import.meta.env.__APP_VERSION__': JSON.stringify(VERSION || version),
       'import.meta.env.__COMMIT_HASH__': JSON.stringify(COMMIT_HASH),
       'import.meta.env.__BUILT_TIME__': JSON.stringify(BUILD_TIME),
     },

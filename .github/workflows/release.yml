@@ -24,6 +24,9 @@ jobs:
           echo "version=${today}.$((count + 1))" >> "$GITHUB_OUTPUT"
 
       - run: pnpm build
+        env:
+          # 先构建后打 tag，git describe 拿不到本次版本号，必须显式注入
+          VERSION: ${{ steps.version.outputs.version }}
       - run: zip -r bangumi-website.zip ./packages/website/dist
       - run: openssl dgst -sha256 bangumi-website.zip > bangumi-website.zip.sha256
 

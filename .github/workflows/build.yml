@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # 拉取全部历史与 tag，让构建能通过 git describe 拿到最近发布版本
+          fetch-depth: 0
+          fetch-tags: true
       - uses: ./.github/actions/setup-js-env
 
       - name: Build
