@@ -235,6 +235,8 @@ const characterGrid = css({
   gap: '15px',
   padding: '5px',
   overflowX: 'auto',
+  scrollbarWidth: 'none',
+  '&::-webkit-scrollbar': { display: 'none' },
 });
 
 const characterCoverItem = css({
