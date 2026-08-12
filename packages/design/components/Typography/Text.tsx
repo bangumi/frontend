@@ -1,6 +1,7 @@
-import classNames from 'classnames';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
 
 export interface TextProps {
   className?: string;
@@ -8,16 +9,14 @@ export interface TextProps {
   type?: 'default' | 'secondary';
 }
 
+const text = css({ color: '#1f1c1c' });
+
+const textSecondary = css({ color: '#9f9b9b' });
+
 const Text = ({ children, className, style, type = 'default' }: PropsWithChildren<TextProps>) => {
   return (
     <span
-      className={classNames(
-        'bgm-text',
-        {
-          'bgm-text--secondary': type === 'secondary',
-        },
-        className,
-      )}
+      className={cx('bgm-text', type === 'secondary' && textSecondary, className)}
       style={style}
     >
       {children}
