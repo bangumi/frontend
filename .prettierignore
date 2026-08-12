@@ -3,6 +3,9 @@ packages/design/storybook-static
 packages/styled-system
 pnpm-lock.yaml
 *.snap
+# playwright 产物
+packages/website/playwright-report
+packages/website/test-results
 # submodules
 packages/utils/wiki-syntax-spec/
 

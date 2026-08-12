@@ -23,20 +23,29 @@ it('redirects a registered legacy path to the legacy site', async () => {
   });
 });
 
-it.each([
-  '/calendar',
-  '/blog/42',
-  '/subject/12/collections',
-  '/subject/12/stats',
-  '/subject/topic/42',
-])('registers %s as a legacy route', (path) => {
-  const matches = matchRoutes(pageRoutes, path);
-  const element = matches?.at(-1)?.route.element;
-  expect(React.isValidElement(element)).toBe(true);
-  if (React.isValidElement(element)) {
-    expect(element.type).toBe(LegacyRedirect);
-  }
-});
+it.each(['/calendar', '/blog/42', '/subject/12/collections', '/subject/12/stats'])(
+  'registers %s as a legacy route',
+  (path) => {
+    const matches = matchRoutes(pageRoutes, path);
+    const element = matches?.at(-1)?.route.element;
+    expect(React.isValidElement(element)).toBe(true);
+    if (React.isValidElement(element)) {
+      expect(element.type).toBe(LegacyRedirect);
+    }
+  },
+);
+
+it.each(['/subject/topic/42', '/subject/ep/42'])(
+  'forwards %s to the new frontend instead of the legacy site',
+  (path) => {
+    const matches = matchRoutes(pageRoutes, path);
+    const element = matches?.at(-1)?.route.element;
+    expect(React.isValidElement(element)).toBe(true);
+    if (React.isValidElement(element)) {
+      expect(element.type).not.toBe(LegacyRedirect);
+    }
+  },
+);
 
 it('keeps unknown paths on the not-found route', () => {
   const matches = matchRoutes(pageRoutes, '/not-a-known-page');

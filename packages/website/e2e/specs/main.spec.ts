@@ -1,14 +1,16 @@
 import { expect, test } from '@playwright/test';
 
-import { testAsUser } from '../common/login';
+import { useFixtures } from '../common/fixtures';
 
 test.describe('main page', () => {
   test('has title', async ({ page }) => {
+    useFixtures(page);
     await page.goto('/');
     await expect(page).toHaveTitle('Bangumi 番组计划');
   });
 
   test('移动端首页不应横向溢出', async ({ page }) => {
+    useFixtures(page);
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
 
@@ -21,6 +23,7 @@ test.describe('main page', () => {
   });
 
   test('移动端可以展开导航菜单', async ({ page }) => {
+    useFixtures(page);
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
 
@@ -40,6 +43,7 @@ test.describe('main page', () => {
   });
 
   test('移动端初始状态搜索面板不可见', async ({ page }) => {
+    useFixtures(page);
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto('/');
 
@@ -49,20 +53,7 @@ test.describe('main page', () => {
   });
 
   test('移动端已登录操作区保持水平对齐', async ({ page }) => {
-    await page.route('**/p1/me', async (route) => {
-      await route.fulfill({
-        json: {
-          id: 1,
-          username: 'test-user',
-          nickname: '测试用户',
-          avatar: {
-            small: '/favicon.ico',
-            medium: '/favicon.ico',
-            large: '/favicon.ico',
-          },
-        },
-      });
-    });
+    useFixtures(page);
     await page.setViewportSize({ width: 436, height: 812 });
     await page.goto('/');
 
@@ -71,14 +62,11 @@ test.describe('main page', () => {
     await expect(actions).toHaveCSS('align-items', 'center');
     await expect(page.getByRole('button', { name: '搜索' })).toBeVisible();
     await expect(page.locator('a[href="/notifications"]')).toBeVisible();
-    await expect(page.locator('header a[href="/user/test-user"]')).toBeVisible();
+    await expect(page.locator('header a[href="/user/382951"]')).toBeVisible();
   });
-});
 
-test.describe('已登录用户', () => {
-  testAsUser('treeholechan');
-
-  test('应该能够看到收藏菜单', async ({ page }) => {
+  test('登录用户可以看到收藏菜单', async ({ page }) => {
+    useFixtures(page);
     await page.goto('/');
     await expect(
       page

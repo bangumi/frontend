@@ -26,12 +26,10 @@ jobs:
         run: pnpm --filter @bangumi/website run install-playwright-deps
 
       - name: Run test
-        if: ${{ false }}
         run: pnpm test:e2e
 
       - name: Upload test results
-        # if: always()
-        if: ${{ false }}
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report
