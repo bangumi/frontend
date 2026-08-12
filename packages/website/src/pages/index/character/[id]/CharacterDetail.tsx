@@ -56,11 +56,7 @@ function CharacterHeader({ character }: { character: Character }) {
   };
 
   const baseLink = getCharacterLink(character.id);
-  const tabs = [
-    { label: '概览', to: baseLink, end: true },
-    { label: '相册', to: `${baseLink}/album`, end: false },
-    { label: '收藏', to: `${baseLink}/collections`, end: false },
-  ];
+  const tabs = [{ label: '概览', to: baseLink, end: true }];
 
   return (
     <header className={styles.header}>

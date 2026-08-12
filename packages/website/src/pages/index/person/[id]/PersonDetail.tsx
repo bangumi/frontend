@@ -46,11 +46,8 @@ export function PersonHeader({ person }: { person: PersonHomeData['person'] }) {
   const basePath = getPersonLink(person.id);
   const tabs = [
     { label: '概览', to: basePath, end: true },
-    { label: '相册', to: `${basePath}/album` },
     { label: '角色', to: `${basePath}/works/voice` },
     { label: '作品', to: `${basePath}/works` },
-    { label: '合作', to: `${basePath}/collabs` },
-    { label: '收藏', to: `${basePath}/collections` },
   ];
 
   return (
