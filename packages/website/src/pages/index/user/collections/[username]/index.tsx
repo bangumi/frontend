@@ -53,6 +53,8 @@ const columns = css({
   gap: '20px',
   '@media (max-width: 768px)': {
     flexDirection: 'column',
+    // 单列时让子项占满容器宽度，避免内容按 max-content 撑开导致横向溢出
+    alignItems: 'stretch',
   },
 });
 

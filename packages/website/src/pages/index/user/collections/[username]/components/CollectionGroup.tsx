@@ -36,7 +36,8 @@ const coverList = css({
   margin: '0',
   padding: '0',
   display: 'grid',
-  gridTemplateColumns: 'repeat(5, 1fr)',
+  // minmax(0, 1fr) 允许列收缩到容器宽度，避免封面图固有宽度撑开网格
+  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
   gap: '10px',
 });
 
@@ -123,7 +124,8 @@ const CollectionGroupItem: React.FC<{
       <ul className={coverList}>
         {data.map((subject) => (
           <li key={subject.id} className={coverItem}>
-            <Link to={getSubjectLink(subject.id)} title={subject.nameCN || subject.name}>
+            {/* noStyle：.bgm-link 的 less 样式（display: inline-block）会覆盖 coverItem 的 display: block，导致封面按内容宽度撑开 */}
+            <Link to={getSubjectLink(subject.id)} noStyle title={subject.nameCN || subject.name}>
               <Image src={subject.images?.medium ?? ''} alt={subject.nameCN || subject.name} />
               <span className={coverName}>{subject.nameCN || subject.name}</span>
             </Link>
