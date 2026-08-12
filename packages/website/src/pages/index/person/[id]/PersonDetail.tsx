@@ -17,11 +17,11 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 import CollectSidePanel from '@bangumi/website/components/CollectSidePanel';
-import Helmet from '@bangumi/website/components/Helmet';
 import IndexSidePanel from '@bangumi/website/components/IndexSidePanel';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home';
 
+import PersonLayout from './components/PersonLayout';
 import styles from './PersonDetail.module.less';
 
 const { Link } = Typography;
@@ -42,15 +42,12 @@ const CHARACTER_ROLE_LABELS: Record<number, string> = {
   3: '客串',
 };
 
-function PersonHeader({ person }: { person: PersonHomeData['person'] }) {
+export function PersonHeader({ person }: { person: PersonHomeData['person'] }) {
   const basePath = getPersonLink(person.id);
   const tabs = [
     { label: '概览', to: basePath, end: true },
-    { label: '相册', to: `${basePath}/album` },
     { label: '角色', to: `${basePath}/works/voice` },
     { label: '作品', to: `${basePath}/works` },
-    { label: '合作', to: `${basePath}/collabs` },
-    { label: '收藏', to: `${basePath}/collections` },
   ];
 
   return (
@@ -126,7 +123,7 @@ function InfoItem({ item }: { item: Infobox[number] }) {
   );
 }
 
-function PersonInfobox({ data }: { data: PersonHomeData }) {
+export function PersonInfobox({ data }: { data: PersonHomeData }) {
   const { person } = data;
   return (
     <aside className={styles.columnLeft}>
@@ -179,7 +176,7 @@ function SectionHeader({ title, more }: { title: string; more?: React.ReactNode 
   );
 }
 
-function CastList({ casts }: { casts: PersonCharacter[] }) {
+export function CastList({ casts }: { casts: PersonCharacter[] }) {
   return (
     <ul className={styles.castList}>
       {casts.map(({ character, relations }) => (
@@ -220,7 +217,7 @@ function CastList({ casts }: { casts: PersonCharacter[] }) {
   );
 }
 
-function WorkList({ works }: { works: PersonWork[] }) {
+export function WorkList({ works }: { works: PersonWork[] }) {
   return (
     <ul className={styles.workList}>
       {works.map(({ subject, positions }) => (
@@ -297,54 +294,45 @@ export default function PersonDetail({ data }: { data: PersonHomeData }) {
   const basePath = getPersonLink(data.person.id);
 
   return (
-    <>
-      <Helmet title={`${data.person.nameCN} ${data.person.name}`} />
-      <PersonHeader person={data.person} />
-      <PageContainer as='main' className={styles.page}>
-        <div className={styles.columns}>
-          <PersonInfobox data={data} />
-          <div className={styles.columnMain}>
-            {career && <h2 className={styles.career}>职业: {career}</h2>}
-            {data.person.summary && <p className={styles.summary}>{data.person.summary}</p>}
+    <PersonLayout data={data} title={`${data.person.nameCN} ${data.person.name}`}>
+      {career && <h2 className={styles.career}>职业: {career}</h2>}
+      {data.person.summary && <p className={styles.summary}>{data.person.summary}</p>}
 
-            <section className={styles.section}>
-              <SectionHeader
-                title='最近演出角色'
-                more={
-                  data.castsTotal > data.casts.length ? (
-                    <Link to={`${basePath}/works/voice`}>更多角色 »</Link>
-                  ) : undefined
-                }
-              />
-              <CastList casts={data.casts} />
-            </section>
+      <section className={styles.section}>
+        <SectionHeader
+          title='最近演出角色'
+          more={
+            data.castsTotal > data.casts.length ? (
+              <Link to={`${basePath}/works/voice`}>更多角色 »</Link>
+            ) : undefined
+          }
+        />
+        <CastList casts={data.casts} />
+      </section>
 
-            <section className={styles.section}>
-              <SectionHeader
-                title='最近参与'
-                more={
-                  data.worksTotal > data.works.length ? (
-                    <Link to={`${basePath}/works`}>更多作品 »</Link>
-                  ) : undefined
-                }
-              />
-              <WorkList works={data.works} />
-            </section>
+      <section className={styles.section}>
+        <SectionHeader
+          title='最近参与'
+          more={
+            data.worksTotal > data.works.length ? (
+              <Link to={`${basePath}/works`}>更多作品 »</Link>
+            ) : undefined
+          }
+        />
+        <WorkList works={data.works} />
+      </section>
 
-            {data.relations.length > 0 && (
-              <section className={styles.section}>
-                <SectionHeader title='关联人物' />
-                <RelationGrid relations={data.relations} />
-              </section>
-            )}
+      {data.relations.length > 0 && (
+        <section className={styles.section}>
+          <SectionHeader title='关联人物' />
+          <RelationGrid relations={data.relations} />
+        </section>
+      )}
 
-            <section className={styles.section}>
-              <SectionHeader title='吐槽箱' />
-              <CommentList comments={data.comments} />
-            </section>
-          </div>
-        </div>
-      </PageContainer>
-    </>
+      <section className={styles.section}>
+        <SectionHeader title='吐槽箱' />
+        <CommentList comments={data.comments} />
+      </section>
+    </PersonLayout>
   );
 }

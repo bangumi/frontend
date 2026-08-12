@@ -40,6 +40,8 @@ const SubjectComments = lazy(async () => import('./pages/index/subject/[id]/comm
 const SubjectReviews = lazy(async () => import('./pages/index/subject/[id]/reviews'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]'));
 const Person = lazy(async () => import('./pages/index/person/[id]'));
+const PersonVoice = lazy(async () => import('./pages/index/person/[id]/voice'));
+const PersonWorks = lazy(async () => import('./pages/index/person/[id]/works'));
 const Wiki = lazy(async () => import('./pages/index/subject/[id]/wiki'));
 const WikiEdit = lazy(async () => import('./pages/index/subject/[id]/wiki/edit'));
 const WikiEditDetail = lazy(async () => import('./pages/index/subject/[id]/wiki/edit_detail'));
@@ -197,7 +199,11 @@ export const pageRoutes: RouteObject[] = [
       },
       {
         path: 'person/:id',
-        element: <Person />,
+        children: [
+          { path: '', element: <Person /> },
+          { path: 'works', element: <PersonWorks /> },
+          { path: 'works/voice', element: <PersonVoice /> },
+        ],
       },
       {
         path: 'subject_search/:keyword',

@@ -112,7 +112,7 @@ describe('PersonDetail', () => {
     // 最近演出角色
     expect(screen.getByRole('heading', { name: '最近演出角色' })).toBeInTheDocument();
     expect(screen.getAllByText('柴田').length).toBeGreaterThan(0);
-    expect(screen.getByRole('link', { name: 'ヤニねこ' })).toHaveAttribute(
+    expect(screen.getAllByRole('link', { name: 'ヤニねこ' })[0]).toHaveAttribute(
       'href',
       '/subject/622206',
     );
