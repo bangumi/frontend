@@ -1,0 +1,32 @@
+{
+  "id": 2,
+  "creatorID": 382951,
+  "creator": {
+    "id": 382951,
+    "username": "382951",
+    "nickname": "树洞酱",
+    "avatar": {
+      "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+      "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+      "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+    },
+    "group": 10,
+    "sign": "",
+    "joinedAt": 1500000000,
+    "isFriend": false
+  },
+  "createdAt": 1774100000,
+  "content": "回复内容",
+  "state": 0,
+  "topic": {
+    "id": 202,
+    "title": "热门讨论标题",
+    "creatorID": 382951,
+    "parentID": 12,
+    "replyCount": 8,
+    "createdAt": 1774000000,
+    "updatedAt": 1774500000,
+    "state": 0,
+    "display": 1
+  }
+}

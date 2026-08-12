@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { Subject } from '@bangumi/client/client';
+import type { SlimSubject } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import { getSubjectLink } from '@bangumi/utils/pages';
@@ -51,7 +51,7 @@ const returnLink = css({
 });
 
 /** 条目子页侧栏卡片：封面 + 名称 + 返回条目，供章节/关联等子页复用 */
-function SubjectSummaryCard({ subject }: { subject: Subject }) {
+function SubjectSummaryCard({ subject }: { subject: SlimSubject }) {
   return (
     <aside className={subjectCard}>
       {subject.images?.small && (

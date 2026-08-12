@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { ozaClient } from '@bangumi/client';
 import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
 import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
@@ -17,6 +16,8 @@ import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
 import Reactions from './Reactions';
 import ReplyForm from './ReplyForm';
+import type { TopicApi } from './topic-api';
+import { groupTopicApi } from './topic-api';
 
 // 昵称/签名/内容可能包含长文本或 URL，允许换行避免移动端水平溢出；
 // tip 是 flex 容器，内部 flex 项默认 min-width: auto 不收缩，需显式允许收缩；
@@ -140,6 +141,8 @@ export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply
   isMainPost?: boolean;
   /** 主题帖的回复总数，用于在主题帖底部展示回复数 */
   replyCount?: number;
+  /** 话题操作实现，默认小组话题 */
+  api?: TopicApi;
 };
 
 const Link = Typography.Link;
@@ -195,6 +198,7 @@ const Comment: FC<CommentProps> = ({
   onCommentUpdate,
   isMainPost = false,
   replyCount,
+  api = groupTopicApi,
   ...props
 }) => {
   const isReply = props.isReply;
@@ -266,7 +270,7 @@ const Comment: FC<CommentProps> = ({
 
   const handleDeleteReply = async () => {
     if (confirm('确认删除这条回复？')) {
-      const response = await ozaClient.deleteGroupPost(props.id);
+      const response = await api.deletePost(props.id);
       if (response.status === 200) {
         onCommentUpdate();
       } else {
@@ -306,6 +310,7 @@ const Comment: FC<CommentProps> = ({
                       reactions={props.reactions}
                       user={user}
                       onReacted={onCommentUpdate}
+                      api={api}
                     />
                   </>
                 )}
@@ -318,6 +323,7 @@ const Comment: FC<CommentProps> = ({
                 postId={props.id}
                 user={user}
                 onReacted={onCommentUpdate}
+                api={api}
               />
             )}
             {isMainPost && replyCount != null && (
@@ -332,6 +338,7 @@ const Comment: FC<CommentProps> = ({
                 autoFocus
                 topicId={topicId}
                 replyTo={props.id}
+                api={api}
                 placeholder={`回复 @${creator?.nickname ?? ''}：`}
                 content={replyContent}
                 onChange={setReplyContent}
