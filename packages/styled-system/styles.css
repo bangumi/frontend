@@ -1641,8 +1641,8 @@
     color: #54b5df !important;
 }
 
-  .grid-tc_repeat\(5\,_1fr\) {
-    grid-template-columns: repeat(5, 1fr);
+  .grid-tc_repeat\(5\,_minmax\(0\,_1fr\)\) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
   .page_1 {
