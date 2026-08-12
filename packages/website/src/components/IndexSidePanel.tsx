@@ -47,12 +47,15 @@ const body = css({ flex: '1 1 auto', minWidth: '0' });
 
 const indexTitle = css({
   display: 'block',
+  width: '100%',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
+// 对齐旧版 `<a>标题</a><br /><small>by ...</small>`：by 作者始终换行显示
 const indexBy = css({
+  display: 'block',
   color: '#9f9b9b',
   fontSize: '10px',
   '& a': { color: '#9f9b9b' },

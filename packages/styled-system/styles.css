@@ -1653,16 +1653,16 @@
     min-width: var(--sizes-0);
 }
 
+  .w_100\% {
+    width: 100%;
+}
+
   .w_400px {
     width: 400px;
 }
 
   .min-h_100vh {
     min-height: 100vh;
-}
-
-  .w_100\% {
-    width: 100%;
 }
 
   .w_62px {
