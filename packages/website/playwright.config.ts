@@ -51,14 +51,23 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'setup',
-      testDir: './e2e/setup',
-      testMatch: /.*\.setup\.ts/,
-    },
-    {
-      name: 'chromium',
+      // 离线可跑：页面渲染/布局/404，API 全部用本地 fixtures 拦截
+      name: 'fixtures',
       use: { ...devices['Desktop Chrome'] },
-      dependencies: ['setup'],
+      testMatch: /(main|404)\.spec\.ts/,
     },
+    // TODO: 需要真实后端（本地 next.bgm.tv 或 CI 的 server-private），
+    // server 集成就绪后恢复以下 project（group.spec.ts / e2e/setup）
+    // {
+    //   name: 'setup',
+    //   testDir: './e2e/setup',
+    //   testMatch: /.*\.setup\.ts/,
+    // },
+    // {
+    //   name: 'server',
+    //   use: { ...devices['Desktop Chrome'] },
+    //   dependencies: ['setup'],
+    //   testMatch: /group\.spec\.ts/,
+    // },
   ],
 });

@@ -1,7 +1,10 @@
 import { expect, test } from '@playwright/test';
 
+import { useFixtures } from '../common/fixtures';
+
 test.describe('404', () => {
   test('返回首页', async ({ page }) => {
+    useFixtures(page);
     await page.goto('/');
     await page.goto('/anypage');
     await expect(page.getByText('呜咕，出错了…')).toBeVisible();
@@ -10,6 +13,7 @@ test.describe('404', () => {
   });
 
   test('返回上页', async ({ page }) => {
+    useFixtures(page);
     await page.goto('/');
     await page.goto('/anypage');
     await expect(page.getByText('呜咕，出错了…')).toBeVisible();

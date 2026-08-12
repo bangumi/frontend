@@ -1,5 +1,6 @@
 import React, { lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import LegacyRedirect from './components/PageRoutes/LegacyRedirect';
 
@@ -76,13 +77,23 @@ const legacyPagePaths = [
   'onair',
   'subject/:id/collections',
   'subject/:id/stats',
-  'subject/ep/:id',
   'subject/tag/:tag',
-  'subject/topic/:id',
   'tokei',
   'user/:username/timeline/status/:id',
   'wiki',
 ] as const;
+
+/** 旧版条目页剧集 URL 转发到新版 ep/:id */
+const EpisodeRedirect: React.FC = () => {
+  const { id } = useParams();
+  return <Navigate to={`/ep/${id}`} replace />;
+};
+
+/** 旧版条目讨论区话题 URL 转发到新版 /group/topic/:id */
+const TopicRedirect: React.FC = () => {
+  const { id } = useParams();
+  return <Navigate to={`/group/topic/${id}`} replace />;
+};
 
 export const pageRoutes: RouteObject[] = [
   {
@@ -90,6 +101,8 @@ export const pageRoutes: RouteObject[] = [
     element: <RootIndex />,
     children: [
       ...legacyPagePaths.map((path) => ({ path, element: <LegacyRedirect /> })),
+      { path: 'subject/ep/:id', element: <EpisodeRedirect /> },
+      { path: 'subject/topic/:id', element: <TopicRedirect /> },
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
       {
