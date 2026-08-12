@@ -912,6 +912,18 @@
     padding: 0 10px;
 }
 
+  .bg_\#54b5df {
+    background: #54b5df;
+}
+
+  .p_2px_4px {
+    padding: 2px 4px;
+}
+
+  .bd_1px_solid_\#54b5df {
+    border: 1px solid #54b5df;
+}
+
   .m_5px_0 {
     margin: 5px 0;
 }
@@ -1328,12 +1340,16 @@
     gap: 1rem;
 }
 
-  .bdr_50px {
-    border-radius: 50px;
-}
-
   .bd-t_1px_solid_\#e8e3e3 {
     border-top: 1px solid #e8e3e3;
+}
+
+  .bdr_2px {
+    border-radius: 2px;
+}
+
+  .bdr_50px {
+    border-radius: 50px;
 }
 
   .gap_4px_0 {
@@ -1958,6 +1974,10 @@
     flex-basis: 75%;
 }
 
+  .fs_11px {
+    font-size: 11px;
+}
+
   .grid-tc_minmax\(0\,_7fr\)_minmax\(260px\,_3fr\) {
     grid-template-columns: minmax(0, 7fr) minmax(260px, 3fr);
 }
@@ -2004,10 +2024,6 @@
 
   .obj-f_cover {
     object-fit: cover;
-}
-
-  .fs_11px {
-    font-size: 11px;
 }
 
   .lh_140\% {
@@ -2627,6 +2643,26 @@
     margin-top: 10px;
 }
 
+  .ml_6px {
+    margin-left: 6px;
+}
+
+  .pt_10px {
+    padding-top: 10px;
+}
+
+  .top_0 {
+    top: var(--spacing-0);
+}
+
+  .left_6px {
+    left: 6px;
+}
+
+  .w_48px {
+    width: 48px;
+}
+
   .mb_23px {
     margin-bottom: 23px;
 }
@@ -2669,10 +2705,6 @@
 
   .h_48px {
     height: 48px;
-}
-
-  .w_48px {
-    width: 48px;
 }
 
   .max-w_100\% {
@@ -2895,6 +2927,10 @@
     padding: 0 14px;
 }
 
+  .disabled\:bg_\#fff:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    background: #fff;
+}
+
   .\[\&_tr\.even\]\:bg_\#f9f9f9 tr.even {
     background: #f9f9f9;
 }
@@ -3101,6 +3137,10 @@
 
   .\[\&_a\]\:bd-b_2px_solid_\#f09199 a {
     border-bottom: 2px solid #f09199;
+}
+
+  .disabled\:bd-c_\#e8e3e3:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    border-color: #e8e3e3;
 }
 
   .\[\&\:first-child\]\:bd-t_none:first-child {
@@ -3561,6 +3601,14 @@
 
   .\[\&_li\]\:fs_13px li {
     font-size: 13px;
+}
+
+  .disabled\:c_\#9f9b9b:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    color: #9f9b9b;
+}
+
+  .disabled\:cursor_default:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
+    cursor: default;
 }
 
   .\[\&_a\]\:fw_normal a {
@@ -4194,10 +4242,6 @@
     cursor: pointer;
 }
 
-  .disabled\:cursor_default:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
-    cursor: default;
-}
-
   .\[\&_img\]\:w_100\% img {
     width: 100%;
 }
@@ -4668,6 +4712,10 @@
 
   .hover\:bg_\#f09199:is(:hover, [data-hover]) {
     background: #f09199;
+}
+
+  .hover\:bg_\#54b5df:is(:hover, [data-hover]) {
+    background: #54b5df;
 }
 
   .hover\:bg_\#e7848e:is(:hover, [data-hover]) {

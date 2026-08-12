@@ -51,6 +51,25 @@ describe('SubjectDetail', () => {
     });
   };
 
+  // 独立 SWR 缓存 + Suspense，用于依赖登录态数据（如 subject.interest）的用例，
+  // 避免前序测试已缓存同 key 的 subject home 数据
+  const renderSubjectData = async (data: SubjectHomeResponse) => {
+    const wrapper = ({ children }: PropsWithChildren) => (
+      <SWRConfig value={{ provider: () => new Map() }}>
+        <Suspense fallback={null}>
+          <MemoryRouter>
+            <HelmetProvider>
+              <UserProvider>{children}</UserProvider>
+            </HelmetProvider>
+          </MemoryRouter>
+        </Suspense>
+      </SWRConfig>
+    );
+    await act(async () => {
+      render(<SubjectDetail data={data} />, { wrapper });
+    });
+  };
+
   it('should render all blocks', async () => {
     setup();
     await renderSubject();
@@ -281,5 +300,109 @@ describe('SubjectDetail', () => {
     await waitFor(() => {
       expect(patchedBody).toEqual({ type: 3 });
     });
+  });
+
+  it('should render collection details and progress manager when collected', async () => {
+    const progressData = {
+      ...homeData,
+      subject: {
+        ...homeData.subject,
+        interest: {
+          id: 1,
+          rate: 6,
+          type: CollectionType.Doing,
+          comment: '不错',
+          tags: [],
+          epStatus: 1,
+          volStatus: 0,
+          private: false,
+          updatedAt: 1775000000,
+        },
+      },
+    };
+    mockServer.use(
+      http.get('http://localhost:3000/p1/subjects/12/home', () => HttpResponse.json(progressData)),
+    );
+
+    await renderSubjectData(progressData);
+
+    // 已收藏：不再显示收藏按钮，改为状态文字 + 收藏时间
+    expect(screen.queryByRole('button', { name: '在看' })).not.toBeInTheDocument();
+    expect(await screen.findByText(/我在看这部作品/)).toBeInTheDocument();
+    // 收藏时间（页面中可能同时出现其他时间文本，取第一个）
+    expect(screen.getAllByText(/2026-\d+-\d+ \d+:\d+/)[0]).toBeInTheDocument();
+    // 我的评价与吐槽
+    expect(screen.getByText(/我的评价：/)).toBeInTheDocument();
+    expect(screen.getByText('不错')).toBeInTheDocument();
+    // 我的完成度
+    expect(screen.getByText('我的完成度')).toBeInTheDocument();
+    expect(screen.getByText('1/12')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: '更新' })).toBeInTheDocument();
+  });
+
+  it('should update subject progress from collection panel', async () => {
+    const progressData = {
+      ...homeData,
+      subject: {
+        ...homeData.subject,
+        interest: {
+          id: 1,
+          rate: 0,
+          type: CollectionType.Doing,
+          comment: '',
+          tags: [],
+          epStatus: 1,
+          volStatus: 0,
+          private: false,
+          updatedAt: 1775000000,
+        },
+      },
+    };
+    let requestBody: unknown = null;
+    mockServer.use(
+      http.get('http://localhost:3000/p1/subjects/12/home', () => HttpResponse.json(progressData)),
+      http.patch('http://localhost:3000/p1/collections/subjects/12', async ({ request }) => {
+        requestBody = await request.json();
+        return HttpResponse.json({});
+      }),
+    );
+
+    await renderSubjectData(progressData);
+
+    const input = await screen.findByDisplayValue('1');
+    fireEvent.change(input, { target: { value: '2' } });
+    fireEvent.click(screen.getByRole('button', { name: '更新' }));
+
+    await waitFor(() => {
+      expect(requestBody).toEqual({ epStatus: 2 });
+    });
+  });
+
+  it('should hide progress manager for wish collection', async () => {
+    const progressData = {
+      ...homeData,
+      subject: {
+        ...homeData.subject,
+        interest: {
+          id: 1,
+          rate: 0,
+          type: CollectionType.Wish,
+          comment: '',
+          tags: [],
+          epStatus: 0,
+          volStatus: 0,
+          private: false,
+          updatedAt: 1775000000,
+        },
+      },
+    };
+    mockServer.use(
+      http.get('http://localhost:3000/p1/subjects/12/home', () => HttpResponse.json(progressData)),
+    );
+
+    await renderSubjectData(progressData);
+
+    expect(await screen.findByText(/我想看这部作品/)).toBeInTheDocument();
+    expect(screen.queryByText('我的完成度')).not.toBeInTheDocument();
   });
 });
