@@ -92,9 +92,6 @@ importers:
       postcss:
         specifier: ^8.5.16
         version: 8.5.23
-      postcss-less:
-        specifier: ^6.0.0
-        version: 6.0.0(postcss@8.5.23)
       prettier:
         specifier: ^3.8.3
         version: 3.8.4
@@ -238,12 +235,6 @@ importers:
       autoprefixer:
         specifier: ^10.5.4
         version: 10.5.4(postcss@8.5.23)
-      classnames:
-        specifier: ^2.5.1
-        version: 2.5.1
-      less:
-        specifier: ^4.6.7
-        version: 4.6.7
       lodash-es:
         specifier: ^4.18.1
         version: 4.18.1
@@ -350,9 +341,6 @@ importers:
       '@simplewebauthn/browser':
         specifier: ^13.3.0
         version: 13.3.0
-      classnames:
-        specifier: ^2.5.1
-        version: 2.5.1
       dayjs:
         specifier: ^1.11.21
         version: 1.11.21
@@ -432,9 +420,6 @@ importers:
       babel-plugin-jsx-remove-data-test-id:
         specifier: ^3.0.0
         version: 3.0.0(@babel/core@7.29.7(supports-color@10.2.2))
-      less:
-        specifier: ^4.6.7
-        version: 4.6.7
       msw:
         specifier: ~2.14.6
         version: 2.14.6(@types/node@22.20.0)(typescript@5.9.3)
@@ -444,9 +429,6 @@ importers:
       postcss:
         specifier: ^8.5.16
         version: 8.5.23
-      postcss-less:
-        specifier: ^6.0.0
-        version: 6.0.0(postcss@8.5.23)
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -2829,9 +2811,6 @@ packages:
     resolution: {integrity: sha512-77PSwercCZU2Fc4sX94eF8k8Pxte6JAwL4/ICZLFjJLqegs7kCuAsqqj/70NQF6TvDpgFjkubQB2FW2ZZddvQg==}
     engines: {node: '>=8'}
 
-  classnames@2.5.1:
-    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
-
   clean-regexp@1.0.0:
     resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==}
     engines: {node: '>=4'}
@@ -4485,12 +4464,6 @@ packages:
     engines: {node: ^18.12.0 || ^20.9.0 || >=22.0}
     peerDependencies:
       postcss: ^8.4.32
-
-  postcss-less@6.0.0:
-    resolution: {integrity: sha512-FPX16mQLyEjLzEuuJtxA8X3ejDLNGGEG503d2YGZR5Ask1SpDN8KmZUMpzCvyalWRywAn1n1VOA5dcqfCLo5rg==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      postcss: ^8.3.5
 
   postcss-load-config@3.1.4:
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
@@ -7746,8 +7719,6 @@ snapshots:
 
   ci-info@4.4.0: {}
 
-  classnames@2.5.1: {}
-
   clean-regexp@1.0.0:
     dependencies:
       escape-string-regexp: 1.0.5
@@ -9605,10 +9576,6 @@ snapshots:
   postcss-discard-empty@7.0.1(postcss@8.5.14):
     dependencies:
       postcss: 8.5.14
-
-  postcss-less@6.0.0(postcss@8.5.23):
-    dependencies:
-      postcss: 8.5.23
 
   postcss-load-config@3.1.4(postcss@8.5.23):
     dependencies:

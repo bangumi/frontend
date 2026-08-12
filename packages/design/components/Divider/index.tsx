@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import type { FC } from 'react';
 import React from 'react';
 
@@ -18,20 +17,12 @@ export interface DividerProps {
 const Divider: FC<DividerProps> = (props) => {
   const { orientation = 'horizontal', isListItem = false, className } = props;
 
-  const classes = classnames(
-    'bgm-divider',
-    {
-      'bgm-divider--vertical': orientation === 'vertical',
-    },
-    className,
-  );
-
   return (
     <>
       {isListItem ? (
-        <li className={classes} role='separator' />
+        <li className={className} role='separator' aria-orientation={orientation} />
       ) : (
-        <hr className={classes} role='separator' />
+        <hr className={className} role='separator' aria-orientation={orientation} />
       )}
     </>
   );

@@ -1,6 +1,5 @@
 module.exports = {
   extends: ['stylelint-config-standard', 'stylelint-config-css-modules'],
-  customSyntax: 'postcss-less',
   rules: {
     'import-notation': null,
     'selector-class-pattern': null,

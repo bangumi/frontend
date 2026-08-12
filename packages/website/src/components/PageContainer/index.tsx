@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import type { HTMLAttributes } from 'react';
 import React from 'react';
 
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 
 const container = css({
   position: 'relative',
@@ -33,11 +32,6 @@ const PageContainer: React.FC<PageContainerProps> = ({
   className,
   gutterOnly = false,
   ...props
-}) => (
-  <Component
-    className={classNames(container, gutterOnly && gutterOnlyStyle, className)}
-    {...props}
-  />
-);
+}) => <Component className={cx(container, gutterOnly && gutterOnlyStyle, className)} {...props} />;
 
 export default PageContainer;

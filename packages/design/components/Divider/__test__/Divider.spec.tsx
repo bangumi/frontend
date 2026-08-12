@@ -9,6 +9,7 @@ describe('<Divider />', () => {
     const { getByRole } = render(<Divider orientation={orientation} />);
 
     expect(getByRole('separator')).toBeInTheDocument();
+    expect(getByRole('separator')).toHaveAttribute('aria-orientation', orientation);
   });
 
   it('should be vertical', () => {
@@ -16,13 +17,13 @@ describe('<Divider />', () => {
     const { getByRole } = render(<Divider orientation={orientation} />);
 
     expect(getByRole('separator')).toBeInTheDocument();
-    expect(getByRole('separator')).toHaveClass('bgm-divider--vertical');
+    expect(getByRole('separator')).toHaveAttribute('aria-orientation', orientation);
   });
 
   it('should be list item', () => {
     const orientation = 'horizontal';
     const { getByRole } = render(<Divider orientation={orientation} isListItem />);
 
-    expect(getByRole('separator')).toContainHTML('<li class="bgm-divider" role="separator" />');
+    expect(getByRole('separator').tagName).toBe('LI');
   });
 });

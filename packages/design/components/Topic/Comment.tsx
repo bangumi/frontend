@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import type { FC } from 'react';
 import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -245,7 +244,7 @@ const Comment: FC<CommentProps> = ({
         }
         id={elementId}
       >
-        <span className={classNames('bgm-comment__tip', commentTip)}>
+        <span className={cx('bgm-comment__tip', commentTip)}>
           <div className='creator-info'>
             <SpecialStateIcon state={state} />
             <Link to={url}>{creator?.nickname ?? ''}</Link>
@@ -285,9 +284,9 @@ const Comment: FC<CommentProps> = ({
           src={isReply ? (creator?.avatar.medium ?? '') : (creator?.avatar.large ?? '')}
           size={isReply ? 'xsmall' : isMainPost ? 'post' : 'small'}
         />
-        <div className={classNames('bgm-comment__box', commentBody)}>
-          <div className={classNames('bgm-comment__main', commentBody)}>
-            <span className={classNames('bgm-comment__tip', commentTip)}>
+        <div className={cx('bgm-comment__box', commentBody)}>
+          <div className={cx('bgm-comment__main', commentBody)}>
+            <span className={cx('bgm-comment__tip', commentTip)}>
               <div className='creator-info'>
                 <Link to={url}>{creator?.nickname ?? ''}</Link>
                 {originalPosterId === creator?.id ? <OriginalPoster /> : null}

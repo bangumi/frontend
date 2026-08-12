@@ -1,6 +1,5 @@
 import type { DraggableProvided, DropResult, ResponderProvided } from '@hello-pangea/dnd';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
-import cn from 'classnames';
 import { concat, filter, isArray, isNumber, set } from 'lodash-es';
 import { nanoid } from 'nanoid';
 import type { JSX } from 'react';
@@ -8,7 +7,7 @@ import React, { createContext, useContext } from 'react';
 
 import { Input } from '@bangumi/design';
 import { Cursor, Minus, Plus, VerticalLeft, VerticalRight } from '@bangumi/icons';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import { WikiElement } from '@bangumi/utils';
 import { reorder } from '@bangumi/website/utils';
 
@@ -152,7 +151,7 @@ const WikiInfoItem = ({
       </div>
 
       <Input.Group
-        className={cn(editorItemInputGroup, level === 2 && editorItemInputGroupSecondary)}
+        className={cx(editorItemInputGroup, level === 2 && editorItemInputGroupSecondary)}
         onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
           if (e.ctrlKey && e.key === 'Enter') {
             level === 1 && convertToNestedWikiElement?.(index);
@@ -172,7 +171,7 @@ const WikiInfoItem = ({
             width: '170px',
           }}
           //   一级菜单的第一项，上圆角
-          wrapperClass={cn(editorItemInput, level === 1 && index === 0 && editorItemTopRadius)}
+          wrapperClass={cx(editorItemInput, level === 1 && index === 0 && editorItemTopRadius)}
           // 切回一级功能先不做
           prefix={
             level === 2 ? (
@@ -204,7 +203,7 @@ const WikiInfoItem = ({
         />
         <Input
           id={item._id}
-          wrapperClass={cn(
+          wrapperClass={cx(
             editorItemInput,
             //   一级菜单的第一项，上圆角
             level === 1 && index === 0 && editorItemTopRadius,

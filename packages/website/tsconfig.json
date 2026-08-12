@@ -5,7 +5,6 @@
       {
         "name": "typescript-plugin-css-modules",
         "options": {
-          "additionalData": "@import \"./src/style/index.less\";",
           "classnameTransform": "camelCaseOnly"
         }
       }

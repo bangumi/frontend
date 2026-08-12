@@ -1,5 +1,3 @@
-import './Form.stories.less';
-
 import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';

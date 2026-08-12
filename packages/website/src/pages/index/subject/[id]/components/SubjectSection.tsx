@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import type { PropsWithChildren } from 'react';
 import React from 'react';
 
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 
 const section = css({
   margin: '0 0 5px',
@@ -39,7 +38,7 @@ const SubjectSection: React.FC<
   PropsWithChildren<{ title?: React.ReactNode; extra?: React.ReactNode; className?: string }>
 > = ({ title, extra, className, children }) => {
   return (
-    <section className={classNames(section, className)}>
+    <section className={cx(section, className)}>
       {title != null && (
         <div className={header}>
           <h2 className={sectionTitle}>{title}</h2>

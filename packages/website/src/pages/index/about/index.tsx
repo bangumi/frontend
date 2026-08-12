@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
 
@@ -85,7 +84,7 @@ export const AboutNav: React.FC = () => (
         key={item.to}
         to={item.to}
         end={item.end}
-        className={({ isActive }) => classNames(navLink, isActive && active)}
+        className={({ isActive }) => cx(navLink, isActive && active)}
       >
         {item.label}
       </NavLink>
