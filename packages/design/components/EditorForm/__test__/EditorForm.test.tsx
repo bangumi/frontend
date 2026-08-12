@@ -55,4 +55,27 @@ describe('<EditorForm />', () => {
     fireEvent.keyDown(textarea, { key: 's', altKey: true });
     expect(onConfirm).toHaveBeenLastCalledWith('test2');
   });
+
+  it('disabled should prevent onConfirm via button click and keyboard shortcut', () => {
+    const onConfirm = vi.fn();
+    const { getByText, getByPlaceholderText } = renderEditorForm(
+      <TestEditorForm
+        onConfirm={onConfirm}
+        confirmText='Confirm'
+        placeholder='placeholder'
+        disabled
+      />,
+    );
+    const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
+
+    fireEvent.change(textarea, { target: { value: 'test' } });
+    const button = getByText('Confirm') as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+    fireEvent.click(button);
+    expect(onConfirm).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
+    fireEvent.keyDown(textarea, { key: 's', altKey: true });
+    expect(onConfirm).not.toHaveBeenCalled();
+  });
 });
