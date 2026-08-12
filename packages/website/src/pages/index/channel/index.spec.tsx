@@ -81,6 +81,7 @@ describe('ChannelPageContent', () => {
   it('renders all channel data sections', () => {
     renderPage(<ChannelPageContent config={CHANNEL_CONFIGS.anime} data={createData()} />);
 
+    expect(document.querySelector('main')?.className).toContain('max-w_1260px');
     expect(screen.getAllByText('尼古喵喵')).toHaveLength(2);
     expect(screen.getByRole('heading', { name: '好友动态' })).toBeInTheDocument();
     expect(screen.getByText('七月新番第一话短评合集')).toBeInTheDocument();

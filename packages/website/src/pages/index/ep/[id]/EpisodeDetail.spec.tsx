@@ -13,6 +13,15 @@ import { renderPage } from '@bangumi/website/utils/test-utils';
 
 import EpisodePage from '.';
 
+vi.mock('@bangumi/website/hooks/use-user', async () => ({
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+    '@bangumi/website/hooks/use-user',
+  )),
+  useUser: () => ({
+    user: { permissions: { subjectWikiEdit: true } },
+  }),
+}));
+
 vi.mock('react-router-dom', async () => {
   return {
     __esModule: true,
@@ -58,10 +67,22 @@ describe('EpisodeDetail', () => {
     const activeTab = screen.getByRole('link', { name: '章节' });
     expect(activeTab.className).toContain('p_10px_10px_9px');
     expect(activeTab.className).toContain('c_#f09199');
+    expect(document.querySelector('main')?.className).toContain('max-w_1260px');
+    expect(document.querySelector('main')?.className).toContain('p_10px_15px_24px');
 
     // 主栏：章节 label、名称与简介
-    expect(screen.getByRole('heading', { name: /EP\.1 燃えよ狂犬/ })).toBeInTheDocument();
+    const episodeHeading = screen.getByRole('heading', { name: /EP\.1 燃えよ狂犬/ });
+    expect(episodeHeading).toBeInTheDocument();
+    const editLink = screen.getByRole('link', { name: '[修改]' });
+    expect(editLink).toHaveAttribute('href', '/ep/1704816/edit');
+    expect(episodeHeading).toContainElement(editLink);
+    const patchLink = screen.getByRole('link', { name: '[提供修改建议]' });
+    expect(patchLink).toHaveAttribute('href', 'https://patch.bgm38.tv/edit/episode/1704816');
+    expect(patchLink).toHaveAttribute('target', '_blank');
+    expect(patchLink).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(episodeHeading).toContainElement(patchLink);
     expect(screen.getAllByText('燃烧吧，狂犬').length).toBeGreaterThan(0);
+    expect(screen.getByText('时长:00:23:40 / 首播:2026-07-04')).toBeInTheDocument();
     expect(screen.getByText(/ルーデウスと結ばれたものの/)).toBeInTheDocument();
 
     // 吐槽箱：评论作者与内容

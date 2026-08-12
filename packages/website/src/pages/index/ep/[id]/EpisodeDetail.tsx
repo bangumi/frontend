@@ -24,20 +24,12 @@ import type { EpisodePageData } from '@bangumi/website/hooks/use-episode-page';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 const page = css({
-  maxWidth: '1040px',
-  padding: '10px 30px 32px',
-  '@media (max-width: 640px)': {
-    padding: '8px 10px 24px',
-  },
+  padding: '10px 15px 24px',
 });
 
 const headerInner = css({
-  paddingRight: '30px',
-  paddingLeft: '30px',
-  '@media (max-width: 640px)': {
-    paddingRight: '10px',
-    paddingLeft: '10px',
-  },
+  paddingRight: '15px',
+  paddingLeft: '15px',
 });
 
 const subjectTitle = css({
@@ -140,52 +132,53 @@ const sidebar = css({
 });
 
 const episodeInfo = css({
-  padding: '6px 5px 22px',
+  padding: '6px 5px 18px',
   borderBottom: '1px solid #e8e3e3',
-  '& h1': {
-    margin: '0',
-    color: '#1f1c1c',
-    fontSize: '22px',
-    fontWeight: '400',
-    lineHeight: '1.4',
-    overflowWrap: 'anywhere',
-    '& > span': {
-      color: '#f09199',
-      fontSize: '16px',
-      fontWeight: '600',
-    },
-  },
   '@media (max-width: 640px)': {
     paddingRight: '2px',
     paddingLeft: '2px',
-    '& h1': {
-      fontSize: '19px',
-    },
   },
 });
 
+const episodeTitle = css({
+  margin: '0',
+  color: '#595555',
+  fontSize: '22px',
+  fontWeight: '400',
+  lineHeight: '1.4',
+  overflowWrap: 'anywhere',
+  '@media (max-width: 640px)': {
+    fontSize: '19px',
+  },
+});
+
+const episodeLabelStyle = css({
+  color: '#f09199',
+  fontSize: 'inherit',
+  fontWeight: 'inherit',
+});
+
 const episodeNameCN = css({
-  margin: '3px 0 0',
+  margin: '2px 0 0',
   color: '#9f9b9b',
   fontSize: '14px',
 });
 
-const editLink = css({
-  display: 'inline-block',
-  marginTop: '8px',
+const editLinks = css({
+  marginLeft: '8px',
   fontSize: '13px',
+  fontWeight: '400',
+  whiteSpace: 'nowrap',
 });
 
 const episodeMeta = css({
-  display: 'flex',
-  margin: '14px 0 0',
+  margin: '10px 0 0',
   color: '#9f9b9b',
   fontSize: '12px',
-  gap: '18px',
 });
 
 const description = css({
-  margin: '12px 0 0',
+  margin: '8px 0 0',
   color: '#595555',
   fontSize: '14px',
   lineHeight: '1.75',
@@ -193,7 +186,7 @@ const description = css({
 });
 
 const emptyDescription = css({
-  margin: '12px 0 0',
+  margin: '8px 0 0',
   color: '#9f9b9b',
   fontSize: '14px',
   lineHeight: '1.75',
@@ -723,18 +716,27 @@ export default function EpisodeDetail({ data }: { data: EpisodePageData }) {
         <div className={columns}>
           <div className={mainColumn}>
             <section className={episodeInfo}>
-              <h1>
-                <span>{episodeLabel(episode)}</span> {episode.name}
+              <h1 className={episodeTitle}>
+                <span className={episodeLabelStyle}>{episodeLabel(episode)}</span> {episode.name}
+                <small className={editLinks}>
+                  {user?.permissions?.subjectWikiEdit && (
+                    <Link to={`/ep/${episode.id}/edit`}>[修改]</Link>
+                  )}
+                  <Link
+                    to={`https://patch.bgm38.tv/edit/episode/${episode.id}`}
+                    isExternal
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    [提供修改建议]
+                  </Link>
+                </small>
               </h1>
-              {user?.permissions?.subjectWikiEdit && (
-                <Link to={`/ep/${episode.id}/edit`} className={editLink}>
-                  编辑章节
-                </Link>
-              )}
               {episode.nameCN && <p className={episodeNameCN}>{episode.nameCN}</p>}
               <p className={episodeMeta}>
-                {episode.duration && <span>时长 {episode.duration}</span>}
-                {episode.airdate && <span>首播 {episode.airdate}</span>}
+                {episode.duration && <>时长:{episode.duration}</>}
+                {episode.duration && episode.airdate && ' / '}
+                {episode.airdate && <>首播:{episode.airdate}</>}
               </p>
               {episode.desc ? (
                 <p className={description}>{episode.desc}</p>
