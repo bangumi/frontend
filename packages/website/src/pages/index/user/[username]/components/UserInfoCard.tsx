@@ -36,6 +36,7 @@ const quoteIcon = css({
 });
 
 const bioText = css({
+  minWidth: '0',
   color: '#1f1c1c',
   fontSize: '14px',
   lineHeight: '1.6',
