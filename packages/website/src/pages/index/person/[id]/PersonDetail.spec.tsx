@@ -86,7 +86,21 @@ describe('PersonDetail', () => {
       'http://www.pro-tanc.com/male/nakamurashougo/',
     );
     expect(screen.getByRole('heading', { name: '谁收藏了中村章吾?' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: '纯セン羽爱' })).toHaveAttribute(
+    // 头像链接 + 昵称链接 + 目录面板 by 作者均为同一昵称
+    expect(screen.getAllByRole('link', { name: '纯セン羽爱' })[0]).toHaveAttribute(
+      'href',
+      '/user/asm13177806',
+    );
+    // 收藏人数统计（collects fixture total=1）
+    expect(screen.getByText('1人收藏')).toBeInTheDocument();
+
+    // 左栏：推荐本条目的目录
+    expect(screen.getByRole('heading', { name: '推荐本条目的目录' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '声优安利目录' })).toHaveAttribute(
+      'href',
+      '/index/602059',
+    );
+    expect(screen.getAllByRole('link', { name: '纯セン羽爱' })[0]).toHaveAttribute(
       'href',
       '/user/asm13177806',
     );

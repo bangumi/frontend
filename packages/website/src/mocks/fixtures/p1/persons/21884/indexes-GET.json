@@ -1,1 +1,71 @@
-{ "data": [], "total": 0 }
+{
+  "data": [
+    {
+      "id": 602059,
+      "uid": 78670,
+      "user": {
+        "id": 78670,
+        "username": "asm13177806",
+        "nickname": "纯セン羽爱",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/07/86/78670.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/07/86/78670.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/07/86/78670.jpg"
+        },
+        "group": 11,
+        "sign": "純セン羽爱",
+        "joinedAt": 1335681220,
+        "isFriend": false
+      },
+      "type": 1,
+      "title": "声优安利目录",
+      "private": false,
+      "total": 8,
+      "stats": {
+        "subject": {
+          "anime": 3,
+          "book": 2,
+          "music": 1,
+          "game": 1,
+          "real": 1
+        }
+      },
+      "createdAt": 1457152103,
+      "updatedAt": 1457152103
+    },
+    {
+      "id": 602060,
+      "uid": 1272395,
+      "user": {
+        "id": 1272395,
+        "username": "Madeline",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/12/72/1272395.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/12/72/1272395.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/12/72/1272395.jpg"
+        },
+        "group": 11,
+        "sign": "",
+        "joinedAt": 1335681220,
+        "isFriend": false
+      },
+      "type": 1,
+      "title": "中村章吾出演作品",
+      "private": false,
+      "total": 6,
+      "stats": {
+        "subject": {
+          "anime": 3,
+          "book": 2,
+          "music": 1,
+          "game": 1,
+          "real": 1
+        }
+      },
+      "createdAt": 1457152103,
+      "updatedAt": 1457152103
+    }
+  ],
+  "total": 2
+}

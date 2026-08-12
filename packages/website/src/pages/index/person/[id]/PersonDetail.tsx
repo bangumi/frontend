@@ -12,12 +12,13 @@ import type {
 import { Typography } from '@bangumi/design';
 import {
   getCharacterLink,
-  getIndexLink,
   getPersonLink,
   getSubjectLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import CollectSidePanel from '@bangumi/website/components/CollectSidePanel';
 import Helmet from '@bangumi/website/components/Helmet';
+import IndexSidePanel from '@bangumi/website/components/IndexSidePanel';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home';
 
@@ -150,51 +151,22 @@ function PersonInfobox({ data }: { data: PersonHomeData }) {
 }
 
 function IndexPanel({ personID, indexes }: { personID: number; indexes: SlimIndex[] }) {
-  return (
-    <section className={styles.sidePanel}>
-      <h2>推荐本条目的目录</h2>
-      {indexes.length > 0 && (
-        <ul className={styles.indexList}>
-          {indexes.slice(0, 5).map((index) => (
-            <li key={index.id}>
-              <Link to={getIndexLink(index.id)}>{index.title}</Link>
-              {index.user && (
-                <small>
-                  by <Link to={getUserProfileLink(index.user.username)}>{index.user.nickname}</Link>
-                </small>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-      <Link className={styles.sideMore} to={`/person/${personID}/indices`}>
-        / 更多目录
-      </Link>
-    </section>
-  );
+  return <IndexSidePanel indexes={indexes} moreLink={`/person/${personID}/indices`} />;
 }
 
 function CollectPanel({ data }: { data: PersonHomeData }) {
   return (
-    <section className={styles.sidePanel}>
-      <h2>谁收藏了{data.person.name}?</h2>
-      <ul className={styles.collectList}>
-        {data.collects.map((collect) => (
-          <li key={collect.user.id}>
-            <Link to={getUserProfileLink(collect.user.username)} className={styles.userAvatarLink}>
-              <img src={collect.user.avatar.small} alt='' className={styles.userAvatar} />
-            </Link>
-            <div>
-              <Link to={getUserProfileLink(collect.user.username)}>{collect.user.nickname}</Link>
-              <small>{dayjs.unix(collect.createdAt).format('YYYY-M-D')}</small>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <Link className={styles.sideMore} to={`/person/${data.person.id}/collections`}>
-        全部收藏会员 »
-      </Link>
-    </section>
+    <CollectSidePanel
+      title={`谁收藏了${data.person.name}?`}
+      listLabel='收藏用户列表'
+      items={data.collects.map((collect) => ({
+        user: collect.user,
+        status: dayjs.unix(collect.createdAt).format('YYYY-M-D'),
+      }))}
+      moreLink={`/person/${data.person.id}/collections`}
+      moreLabel='全部收藏会员'
+      stats={`${data.collectsTotal}人收藏`}
+    />
   );
 }
 

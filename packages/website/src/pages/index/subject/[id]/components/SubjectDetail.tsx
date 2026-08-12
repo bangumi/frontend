@@ -1,18 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import type {
-  CollectionType,
-  SlimIndex,
-  Subject,
-  SubjectHomeResponse,
-} from '@bangumi/client/client';
+import type { CollectionType, Subject, SubjectHomeResponse } from '@bangumi/client/client';
 import { SubjectType } from '@bangumi/client/client';
-import { Rate, Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design';
 import { Link as LinkIcon } from '@bangumi/icons';
 import { formatSubjectInfobox } from '@bangumi/utils';
 import {
-  getIndexLink,
   getLegacyPageLink,
   getSubjectBoardLink,
   getSubjectCharactersLink,
@@ -24,8 +18,9 @@ import {
   getSubjectRelationsLink,
   getSubjectReviewsLink,
   getSubjectWikiEditLink,
-  getUserProfileLink,
 } from '@bangumi/utils/pages';
+import CollectSidePanel from '@bangumi/website/components/CollectSidePanel';
+import IndexSidePanel from '@bangumi/website/components/IndexSidePanel';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import { useSubjectCollects } from '@bangumi/website/hooks/use-subject-collects';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -164,58 +159,6 @@ function SubjectInfobox({ subject }: { subject: Subject }) {
   );
 }
 
-/** 左栏：推荐本条目的目录，对齐 PHP panel_subject_index */
-function SubjectIndexes({ subject, indexes }: { subject: Subject; indexes: SlimIndex[] }) {
-  const { user } = useUser();
-  if (indexes.length === 0) {
-    return null;
-  }
-  return (
-    <div className={styles.sidePanel}>
-      <h2 className={styles.sidePanelTitle}>推荐本条目的目录</h2>
-      <ul className={styles.groupLineList} aria-label='推荐本条目的目录列表'>
-        {indexes.slice(0, 5).map((index) => (
-          <li key={index.id} className={styles.groupLineItem}>
-            {index.user != null && (
-              <Link
-                to={getUserProfileLink(index.user.username)}
-                noStyle
-                className={styles.groupLineAvatar}
-                title={index.user.nickname}
-              >
-                <img src={index.user.avatar.large} alt={index.user.nickname} />
-              </Link>
-            )}
-            <div className={styles.groupLineBody}>
-              <Link to={getIndexLink(index.id)} className={styles.indexTitle} title={index.title}>
-                {index.title}
-              </Link>
-              {index.user != null && (
-                <small className={styles.indexBy}>
-                  by{' '}
-                  <Link to={getUserProfileLink(index.user.username)} noStyle>
-                    {index.user.nickname}
-                  </Link>
-                </small>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
-      <span className={styles.indexTips}>
-        {' '}
-        / <Link to={getLegacyPageLink(`/subject/${subject.id}/index`)}>更多目录</Link>
-        {user != null && (
-          <>
-            {' '}
-            / <Link to={getLegacyPageLink(`/user/${user.username}/index`)}>收集至我的目录</Link>
-          </>
-        )}
-      </span>
-    </div>
-  );
-}
-
 /** 左栏面板标题，对齐 PHP panel_collect 的标题逻辑 */
 function collectPanelTitle(subject: Subject): string {
   switch (subject.type) {
@@ -248,51 +191,31 @@ function SubjectCollectPanel({ subject }: { subject: Subject }) {
   }
 
   return (
-    <div className={styles.sidePanel}>
-      <h2 className={styles.sidePanelTitle}>{collectPanelTitle(subject)}</h2>
-      {collects != null && collects.length > 0 && (
-        <ul className={styles.groupLineList} aria-label='最近收藏用户列表'>
-          {collects.map((collect) => (
-            <li key={collect.user.id} className={styles.groupLineItem}>
-              <Link
-                to={getUserProfileLink(collect.user.username)}
-                noStyle
-                className={styles.groupLineAvatar}
-                title={collect.user.nickname}
-              >
-                <img src={collect.user.avatar.large} alt={collect.user.nickname} />
-              </Link>
-              <div className={styles.groupLineBody}>
-                <Link
-                  to={getUserProfileLink(collect.user.username)}
-                  noStyle
-                  className={styles.collectUserName}
-                >
-                  {collect.user.nickname}
-                </Link>
-                {collect.interest.rate > 0 && <Rate value={collect.interest.rate} />}
-                <br />
-                <small className={styles.collectStatus}>
-                  {makeDescriptiveTime(collect.interest.updatedAt)}
-                  {COLLECT_DESC[collect.interest.type]}
-                </small>
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-      <span className={styles.indexTips}>
-        {counts.map((entry) => (
-          <React.Fragment key={entry.type}>
-            {' '}
-            /{' '}
-            <Link to={getSubjectCollectionsLink(subject.id, entry.type)}>
-              {entry.count}人{COLLECT_DESC[entry.type]}
-            </Link>
-          </React.Fragment>
-        ))}
-      </span>
-    </div>
+    <CollectSidePanel
+      title={collectPanelTitle(subject)}
+      listLabel='最近收藏用户列表'
+      items={
+        collects?.map((collect) => ({
+          user: collect.user,
+          rate: collect.interest.rate,
+          status: (
+            <>
+              {makeDescriptiveTime(collect.interest.updatedAt)}
+              {COLLECT_DESC[collect.interest.type]}
+            </>
+          ),
+        })) ?? []
+      }
+      stats={counts.map((entry) => (
+        <React.Fragment key={entry.type}>
+          {' '}
+          /{' '}
+          <Link to={getSubjectCollectionsLink(subject.id, entry.type)}>
+            {entry.count}人{COLLECT_DESC[entry.type]}
+          </Link>
+        </React.Fragment>
+      ))}
+    />
   );
 }
 
@@ -348,6 +271,7 @@ function SubjectShare({ subject }: { subject: Subject }) {
 
 const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
+  const { user } = useUser();
   return (
     <>
       <SubjectHeader subject={subject} />
@@ -355,7 +279,18 @@ const SubjectDetail: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
         <div className={styles.columns}>
           <div className={styles.columnLeft}>
             <SubjectInfobox subject={subject} />
-            <SubjectIndexes subject={subject} indexes={data.indexes} />
+            <IndexSidePanel
+              indexes={data.indexes}
+              moreLink={getLegacyPageLink(`/subject/${subject.id}/index`)}
+              extraLink={
+                user != null
+                  ? {
+                      to: getLegacyPageLink(`/user/${user.username}/index`),
+                      label: '收集至我的目录',
+                    }
+                  : undefined
+              }
+            />
             <SubjectCollectPanel subject={subject} />
           </div>
           <div className={styles.columnContent}>
