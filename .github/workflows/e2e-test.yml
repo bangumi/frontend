@@ -37,27 +37,18 @@ jobs:
 
   test-e2e-server:
     runs-on: ubuntu-24.04
-    services:
-      mysql:
-        image: mysql:5.7.33
-        env:
-          MYSQL_ROOT_PASSWORD: secret
-          MYSQL_DATABASE: bangumi
-          MYSQL_USER: user
-          MYSQL_PASSWORD: password
-        ports:
-          - 3306:3306
-        options: >-
-          --health-cmd="mysqladmin ping -ppassword" --health-interval=5s --health-timeout=5s --health-retries=20
-      redis:
-        image: redis:7
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd="redis-cli ping" --health-interval=5s --health-timeout=5s --health-retries=20
     env:
       E2E_BACKEND: loc
     steps:
+      # 复用 dev-env 的基建：docker compose 起 mysql（自动导入 dist.sql 种子数据）+ redis，与 server-private 仓库 CI 一致
+      - uses: actions/checkout@v7
+        with:
+          repository: 'bangumi/dev-env'
+          path: 'dev-env'
+          ref: gh-pages
+      - run: mv dev-env $HOME/dev-env
+      - run: cd ~/dev-env && docker compose up -d
+
       - uses: actions/checkout@v7
         with:
           submodules: recursive
@@ -67,17 +58,15 @@ jobs:
       - name: Install Playwright
         run: pnpm --filter @bangumi/website run install-playwright-deps
 
-      - name: Import dev-env test data
-        run: |
-          curl -sL https://bangumi.github.io/dev-env/dist.sql -o /tmp/dist.sql
-          docker run --rm --network=host mysql:5.7.33 mysql -h127.0.0.1 -uroot -psecret bangumi < /tmp/dist.sql
+      - name: Wait for mysql
+        run: bash $HOME/dev-env/wait_mysql_ready.sh
 
       - name: Start server-private
         run: |
           docker pull ghcr.io/bangumi/server-private:master
           docker run -d --name server-private --network=host \
             -e NODE_ENV=development \
-            -e REDIS_URI=redis://127.0.0.1:6379/0 \
+            -e REDIS_URI='redis://:redis-pass@127.0.0.1:6379/0' \
             ghcr.io/bangumi/server-private:master dist/index.mjs
 
       - name: Wait for server-private
