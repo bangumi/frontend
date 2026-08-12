@@ -26,11 +26,79 @@ jobs:
         run: pnpm --filter @bangumi/website run install-playwright-deps
 
       - name: Run test
-        run: pnpm test:e2e
+        run: pnpm test:e2e --project=fixtures
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v7
         with:
           name: playwright-report
+          path: packages/website/playwright-report
+
+  test-e2e-server:
+    runs-on: ubuntu-24.04
+    services:
+      mysql:
+        image: mysql:5.7.33
+        env:
+          MYSQL_ROOT_PASSWORD: secret
+          MYSQL_DATABASE: bangumi
+          MYSQL_USER: user
+          MYSQL_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -ppassword" --health-interval=5s --health-timeout=5s --health-retries=20
+      redis:
+        image: redis:7
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping" --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      E2E_BACKEND: loc
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: recursive
+
+      - uses: ./.github/actions/setup-js-env
+
+      - name: Install Playwright
+        run: pnpm --filter @bangumi/website run install-playwright-deps
+
+      - name: Import dev-env test data
+        run: |
+          curl -sL https://bangumi.github.io/dev-env/dist.sql -o /tmp/dist.sql
+          docker run --rm --network=host mysql:5.7.33 mysql -h127.0.0.1 -uroot -psecret bangumi < /tmp/dist.sql
+
+      - name: Start server-private
+        run: |
+          docker pull ghcr.io/bangumi/server-private:master
+          docker run -d --name server-private --network=host \
+            -e NODE_ENV=development \
+            -e REDIS_URI=redis://127.0.0.1:6379/0 \
+            ghcr.io/bangumi/server-private:master dist/index.mjs
+
+      - name: Wait for server-private
+        run: |
+          for i in $(seq 1 60); do
+            if curl -sf http://127.0.0.1:4000/p1/openapi.yaml > /dev/null 2>&1; then
+              echo "server-private ready"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "server-private failed to start"
+          docker logs server-private
+          exit 1
+
+      - name: Run server e2e
+        run: pnpm test:e2e --project=server
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report-server
           path: packages/website/playwright-report

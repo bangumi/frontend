@@ -2,6 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 const PORT = 5173;
 const isCI = !!process.env.CI;
+// E2E_BACKEND=loc 时前端 API 代理指向本地 server-private（127.0.0.1:4000）
+const devCommand = process.env.E2E_BACKEND === 'loc' ? 'npm run dev -- --mode loc' : 'npm run dev';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -41,7 +43,7 @@ export default defineConfig({
   /* Run your local dev server before starting the tests */
   webServer: {
     reuseExistingServer: true,
-    command: 'npm run dev',
+    command: devCommand,
     port: PORT,
   },
 
@@ -56,18 +58,18 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
       testMatch: /(main|404)\.spec\.ts/,
     },
-    // TODO: 需要真实后端（本地 next.bgm.tv 或 CI 的 server-private），
-    // server 集成就绪后恢复以下 project（group.spec.ts / e2e/setup）
-    // {
-    //   name: 'setup',
-    //   testDir: './e2e/setup',
-    //   testMatch: /.*\.setup\.ts/,
-    // },
-    // {
-    //   name: 'server',
-    //   use: { ...devices['Desktop Chrome'] },
-    //   dependencies: ['setup'],
-    //   testMatch: /group\.spec\.ts/,
-    // },
+    {
+      // 登录态生成：需要真实后端（本地 next.bgm.tv 或 CI 的 server-private）
+      name: 'setup',
+      testDir: './e2e/setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      // 登录/发帖/回复等交互：需要真实后端
+      name: 'server',
+      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
+      testMatch: /group\.spec\.ts/,
+    },
   ],
 });
