@@ -100,6 +100,8 @@ export interface EditorProps {
   rows?: number;
   name?: string;
   onBlur?: FocusEventHandler<HTMLTextAreaElement>;
+  /** 禁用快捷键提交（Ctrl+Enter / Alt+S） */
+  disabled?: boolean;
 }
 
 const keyToEvent: Record<string, string> = {
@@ -124,6 +126,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
       rows,
       name,
       onBlur,
+      disabled,
     },
     ref,
   ) => {
@@ -234,8 +237,9 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
       (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
         // Ctrl + Enter & Alt + S 触发提交
         if (
-          ((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
-          (e.altKey && e.key.toLowerCase() === 's')
+          !disabled &&
+          (((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
+            (e.altKey && e.key.toLowerCase() === 's'))
         ) {
           onConfirm?.(innerRef.current!.value);
           e.preventDefault();
@@ -251,7 +255,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           }
         }
       },
-      [onConfirm, handleToolboxEvent],
+      [onConfirm, handleToolboxEvent, disabled],
     );
 
     return (
