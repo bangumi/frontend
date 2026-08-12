@@ -1,5 +1,3 @@
-import './style';
-
 import Link from './Link';
 import Text from './Text';
 

@@ -1,8 +1,19 @@
-import classNames from 'classnames';
 import type { JSX, PropsWithChildren } from 'react';
 import React from 'react';
 import type { LinkProps as RouterLinkProps } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
+
+import { css, cx } from '@bangumi/styled-system/css';
+
+const link = css({
+  display: 'inline-block',
+  color: '#54b5df',
+  cursor: 'pointer',
+  '&:link, &:visited, &:active': { textDecoration: 'none' },
+  _hover: { textDecoration: 'underline' },
+});
+
+const linkBold = css({ fontWeight: 'bold' });
 
 interface PureLinkProps {
   isExternal?: boolean;
@@ -23,16 +34,7 @@ export function PureLink({
   ...rest
 }: PropsWithChildren<PureLinkProps & JSX.IntrinsicElements['div']>) {
   return (
-    <div
-      className={classNames(
-        'bgm-link',
-        {
-          'bgm-link--bold': fontWeight === 'bold',
-        },
-        className,
-      )}
-      {...rest}
-    >
+    <div className={cx('bgm-link', fontWeight === 'bold' && linkBold, className)} {...rest}>
       {children}
     </div>
   );
@@ -49,13 +51,7 @@ const Link: React.FC<LinkProps> = ({
 }) => {
   const resolvedClassnames = noStyle
     ? className
-    : classNames(
-        'bgm-link',
-        {
-          'bgm-link--bold': fontWeight === 'bold',
-        },
-        className,
-      );
+    : cx('bgm-link', fontWeight === 'bold' && linkBold, className);
 
   if (isExternal && typeof to === 'string') {
     return (

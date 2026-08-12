@@ -21,7 +21,11 @@ const title = css({
   fontSize: '16px',
   color: '#1f1c1c',
   '& a': {
-    color: '#54b5df',
+    color: 'inherit',
+    textDecoration: 'none',
+    _hover: {
+      color: '#54b5df',
+    },
   },
 });
 
