@@ -15,7 +15,7 @@
     "dev:ssr": "pnpm server dev",
     "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,mts,cts,tsx",
     "lint:fix": "pnpm lint --fix",
-    "lint:style": "stylelint \"./packages/**/*.{css,less}\" --ignore-pattern \"packages/styled-system/**\"",
+    "lint:style": "stylelint \"./packages/**/*.css\" --ignore-pattern \"packages/styled-system/**\"",
     "lint:style-fix": "pnpm lint:style --fix",
     "prettier": "prettier --write --list-different ./",
     "format": "prettier --write --list-different ./",
@@ -46,10 +46,10 @@
     "*.{js,ts,mts,cts,tsx,cjs,mjs}": [
       "eslint --fix"
     ],
-    "*.{css,less}": [
+    "*.css": [
       "stylelint --fix --allow-empty-input"
     ],
-    "*.{md,html,js,ts,mts,cts,tsx,css,less,cjs,mjs,yaml,yml,json}": "prettier --write"
+    "*.{md,html,js,ts,mts,cts,tsx,css,cjs,mjs,yaml,yml,json}": "prettier --write"
   },
   "devDependencies": {
     "@actions/core": "^3.0.1",
@@ -80,7 +80,6 @@
     "jsdom": "^28.1.0",
     "lint-staged": "^16.4.0",
     "postcss": "^8.5.16",
-    "postcss-less": "^6.0.0",
     "prettier": "^3.8.3",
     "proxy-agent": "^8.0.2",
     "react": "^19.2.7",

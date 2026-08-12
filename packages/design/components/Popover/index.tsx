@@ -1,7 +1,6 @@
-import classNames from 'classnames';
 import React from 'react';
 
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 
 export interface PopoverProps {
   content: React.ReactNode;
@@ -41,7 +40,7 @@ const popover = css({
 
 const Popover = ({ children, content, className }: PopoverProps) => {
   return (
-    <div className={classNames('bgm-popover', popover, className)}>
+    <div className={cx(popover, className)}>
       {children}
       {/* 添加一个wrapper使绝对定位元素能够水平居中 */}
       <div className='bgm-popover__container'>

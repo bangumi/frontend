@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 
 import { ArrowDownCircle, ArrowUpCircle } from '@bangumi/icons';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 
 import Button from '../Button';
 
@@ -78,7 +77,7 @@ const CollapsibleContent: React.FC<CollapsibleContentProps> = ({
   };
 
   return (
-    <div className={classNames('bgm-collapsible-content', collapsibleContent, containerClassName)}>
+    <div className={cx(collapsibleContent, containerClassName)}>
       <div ref={contentRef} style={enableCollapse && collapsed ? collapsedStyle : undefined}>
         {content}
       </div>

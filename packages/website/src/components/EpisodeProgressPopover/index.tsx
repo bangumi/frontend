@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import dayjs from 'dayjs';
 import React from 'react';
 
 import type { Episode, UpdateEpisodeProgress } from '@bangumi/client/client';
 import { EpisodeCollectionStatus, EpisodeType } from '@bangumi/client/client';
 import { Popover, Typography } from '@bangumi/design';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import { getEpisodeLink } from '@bangumi/utils/pages';
 
 const { Link } = Typography;
@@ -402,7 +401,7 @@ export default function EpisodeProgressPopover({
       }}
     >
       <Popover
-        className={classNames(
+        className={cx(
           popover,
           opensLeft && opensLeftStyle,
           touchOpen && open,

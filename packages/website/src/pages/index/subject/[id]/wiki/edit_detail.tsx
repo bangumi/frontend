@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import dayjs from 'dayjs';
 import { flow } from 'lodash-es';
 import type { editor } from 'monaco-editor/esm/vs/editor/editor.api.js';
@@ -9,6 +8,7 @@ import { useLocalstorageState } from 'rooks';
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Form, Input, Layout, Radio, Select, toast } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
+import { css, cx } from '@bangumi/styled-system/css';
 import type { Wiki, WikiElement } from '@bangumi/utils';
 import {
   fromWikiElement,
@@ -82,6 +82,10 @@ const BuiltInCommitMessage = [
   '欢迎',
   '警告',
 ].map((msg, idx) => ({ label: msg, value: idx.toString() }));
+
+const flexColumn = css({ display: 'flex', flexDirection: 'column' });
+const flexOne = css({ flex: '1' });
+
 interface FormData {
   commitMessage: string;
   subject: ozaClient.SubjectEdit;
@@ -250,7 +254,7 @@ function WikiEditDetailDetailPage() {
 
               {subjectWikiInfo.availablePlatform.length && (
                 <Form.Item label='类型'>
-                  <div className='flex-1'>
+                  <div className={flexOne}>
                     <Radio.Group>
                       {subjectWikiInfo.availablePlatform.map((type) => (
                         <Radio
@@ -354,7 +358,7 @@ function WikiEditDetailDetailPage() {
           </>
         }
         rightChildren={
-          <div className='flex flex-col'>
+          <div className={flexColumn}>
             <div className={editorHandbook}>
               <div className={title}>编辑说明</div>
               <Divider className={divider} />
@@ -374,7 +378,7 @@ function WikiEditDetailDetailPage() {
             </div>
 
             {/* history */}
-            <div className='flex flex-col'>
+            <div className={flexColumn}>
               <div className={title}>条目修订历史</div>
               <Divider className={divider} />
               <div className={history}>
@@ -384,7 +388,7 @@ function WikiEditDetailDetailPage() {
                     <span className={historyMsg} title={his.commitMessage}>
                       {his.commitMessage}
                     </span>
-                    <span className={cn(historySuffix, historyCreateAt)}>
+                    <span className={cx(historySuffix, historyCreateAt)}>
                       @ {dayjs.unix(his.createdAt).format('YYYY-MM-DD HH:mm')}
                     </span>
                     <span className={historySuffix}>|</span>
