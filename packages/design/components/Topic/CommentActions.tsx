@@ -7,6 +7,8 @@ import { css, cx } from '@bangumi/styled-system/css';
 import Button from '../../components/Button';
 import Popover from '../Popover';
 import { ReactionMenu } from './Reactions';
+import type { TopicApi } from './topic-api';
+import { groupTopicApi } from './topic-api';
 
 const commentActions = css({
   display: 'flex',
@@ -49,6 +51,8 @@ export interface CommentActionsProps {
   reactions?: Reaction[];
   user?: Pick<SlimUser, 'id'>;
   onReacted?: () => Promise<unknown>;
+  /** 话题操作实现，默认小组话题 */
+  api?: TopicApi;
 }
 
 const CommentActions = ({
@@ -61,6 +65,7 @@ const CommentActions = ({
   reactions,
   user,
   onReacted,
+  api = groupTopicApi,
 }: CommentActionsProps) => {
   return (
     <div className={cx('bgm-comment-actions', commentActions)}>
@@ -71,7 +76,13 @@ const CommentActions = ({
       {user && onReacted && (
         <Popover
           content={
-            <ReactionMenu reactions={reactions} postId={id} user={user} onReacted={onReacted} />
+            <ReactionMenu
+              reactions={reactions}
+              postId={id}
+              user={user}
+              onReacted={onReacted}
+              api={api}
+            />
           }
         >
           <Button type='plain' size='small' title='贴贴'>
@@ -85,7 +96,7 @@ const CommentActions = ({
             {isAuthor && (
               <>
                 {editable && (
-                  <Button.Link type='text' size='small' to={`/group/reply/${id}/edit`}>
+                  <Button.Link type='text' size='small' to={api.replyEditPath(id)}>
                     编辑
                   </Button.Link>
                 )}

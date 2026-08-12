@@ -1,0 +1,96 @@
+{
+  "id": 202,
+  "title": "热门讨论标题",
+  "creatorID": 382951,
+  "parentID": 12,
+  "replyCount": 8,
+  "createdAt": 1774000000,
+  "updatedAt": 1774500000,
+  "state": 0,
+  "display": 1,
+  "subject": {
+    "id": 12,
+    "type": 2,
+    "name": "Test Anime",
+    "nameCN": "测试动画",
+    "images": {
+      "large": "https://lain.bgm.tv/pic/cover/l/00/00/12.jpg",
+      "common": "https://lain.bgm.tv/pic/cover/c/00/00/12.jpg",
+      "medium": "https://lain.bgm.tv/pic/cover/m/00/00/12.jpg",
+      "small": "https://lain.bgm.tv/pic/cover/s/00/00/12.jpg",
+      "grid": "https://lain.bgm.tv/pic/cover/g/00/00/12.jpg"
+    },
+    "info": "",
+    "locked": false,
+    "metaTags": [],
+    "nsfw": false,
+    "rating": {
+      "rank": 100,
+      "total": 1234,
+      "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "score": 8.1
+    }
+  },
+  "replies": [
+    {
+      "id": 1,
+      "creatorID": 382951,
+      "createdAt": 1774000000,
+      "content": "楼主内容 [b]加粗[/b]",
+      "state": 0,
+      "replies": [],
+      "creator": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1500000000,
+        "isFriend": false
+      },
+      "reactions": []
+    },
+    {
+      "id": 2,
+      "creatorID": 1001,
+      "createdAt": 1774100000,
+      "content": "回复内容",
+      "state": 0,
+      "replies": [],
+      "creator": {
+        "id": 1001,
+        "username": "friend-a",
+        "nickname": "好友甲",
+        "avatar": {
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/10/1001.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/10/1001.jpg",
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/10/1001.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 1500000000,
+        "isFriend": false
+      },
+      "reactions": []
+    }
+  ],
+  "creator": {
+    "id": 382951,
+    "username": "382951",
+    "nickname": "树洞酱",
+    "avatar": {
+      "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg",
+      "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+      "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg"
+    },
+    "group": 10,
+    "sign": "",
+    "joinedAt": 1500000000,
+    "isFriend": false
+  }
+}

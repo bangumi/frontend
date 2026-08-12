@@ -1,10 +1,10 @@
 import { Turnstile } from '@marsidev/react-turnstile';
 import React, { memo, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-
 import type { EditorFormProps } from '../../components/EditorForm';
 import EditorForm from '../../components/EditorForm';
+import type { TopicApi } from './topic-api';
+import { groupTopicApi } from './topic-api';
 
 interface ReplyFormProps extends EditorFormProps {
   topicId: number;
@@ -19,6 +19,8 @@ interface ReplyFormProps extends EditorFormProps {
   onCancel?: () => void;
   /** 回复成功时的回调函数 */
   onSuccess?: (id: number) => void;
+  /** 话题操作实现，默认小组话题 */
+  api?: TopicApi;
 }
 
 const ReplyForm = ({
@@ -29,6 +31,7 @@ const ReplyForm = ({
   onChange,
   onCancel,
   onSuccess,
+  api = groupTopicApi,
   ...props
 }: ReplyFormProps) => {
   const [sending, setSending] = useState(false);
@@ -39,7 +42,7 @@ const ReplyForm = ({
     if (sending) return; // TODO: disable button instead
     setSending(true);
     try {
-      const response = await ozaClient.createGroupReply(topicId, {
+      const response = await api.createReply(topicId, {
         content,
         replyTo,
         turnstileToken: turnstileToken ?? '',

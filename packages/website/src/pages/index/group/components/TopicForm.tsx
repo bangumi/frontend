@@ -7,19 +7,30 @@ import { ozaClient } from '@bangumi/client';
 import { EditorForm, Form, Input, toast } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
-import type { UseGroupTopicRet } from '@bangumi/website/hooks/use-group-topic';
 
 interface FormData {
   title: string;
   content: string;
 }
 
-export interface TopicFormProps {
+/** 可编辑话题数据，编辑表单只需要 id/title/content */
+export interface EditableTopic {
+  id: number;
+  title: string;
+  content?: string;
+}
+
+export interface TopicFormProps<T extends EditableTopic = EditableTopic> {
   quickPost?: boolean;
   /** 小组 slug name，指定此参数时为发表话题 */
   groupName?: string;
   /** 话题，指定此参数时为修改话题 */
-  topic?: UseGroupTopicRet;
+  topic?: {
+    data: T;
+    mutate: (data: T) => Promise<unknown>;
+  };
+  /** 话题类型，决定修改时调用的 API 与跳转 URL，默认小组话题 */
+  topicKind?: 'group' | 'subject';
 }
 
 /**
@@ -53,7 +64,12 @@ const quickPostForm = css({
   },
 });
 
-const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
+const TopicForm = <T extends EditableTopic = EditableTopic>({
+  quickPost = false,
+  groupName,
+  topic,
+  topicKind = 'group',
+}: TopicFormProps<T>) => {
   if ((!!groupName && !!topic) || (!groupName && !topic)) {
     throw Error('Invalid usage: should specify either groupName or topic');
   }
@@ -79,10 +95,13 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   };
 
   const editTopic = async (data: FormData, id: number) => {
-    const response = await ozaClient.editGroupTopic(id, data);
+    const response =
+      topicKind === 'subject'
+        ? await ozaClient.updateSubjectTopic(id, data)
+        : await ozaClient.editGroupTopic(id, data);
     if (response.status === 200) {
       topic?.mutate({ ...topic.data, ...data });
-      navigate(`/group/topic/${id}`);
+      navigate(topicKind === 'subject' ? `/subject/topic/${id}` : `/group/topic/${id}`);
     } else {
       console.error(response);
       toast(response.data.message);
@@ -103,7 +122,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
     toast(Object.values(errors).map((field) => field.message)[0]!);
   };
 
-  const FormInput = ({ quickPost = false }: TopicFormProps) => (
+  const FormInput = ({ quickPost = false }: { quickPost?: boolean }) => (
     <Input
       rounded
       placeholder={quickPost ? '给新帖取一个标题' : '取个标题…'}
@@ -111,7 +130,7 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
     />
   );
 
-  const FormEditor = ({ quickPost = false }: TopicFormProps) => (
+  const FormEditor = ({ quickPost = false }: { quickPost?: boolean }) => (
     <Controller
       name='content'
       control={control}

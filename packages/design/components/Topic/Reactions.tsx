@@ -1,10 +1,12 @@
 import type { FC } from 'react';
 import React, { useCallback, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
 import type { Reaction, SlimUser } from '@bangumi/client/topic';
 import { css, cx } from '@bangumi/styled-system/css';
 import { ALLOWED_REACTIONS, getReactionEmojiUrl } from '@bangumi/utils';
+
+import type { TopicApi } from './topic-api';
+import { groupTopicApi } from './topic-api';
 
 export interface ReactionsProps {
   reactions?: Reaction[];
@@ -12,6 +14,8 @@ export interface ReactionsProps {
   user?: Pick<SlimUser, 'id'>;
   /** 点赞/取消点赞成功后的回调，用于刷新数据 */
   onReacted: () => Promise<unknown>;
+  /** 话题操作实现，默认小组话题 */
+  api?: TopicApi;
 }
 
 const container = css({
@@ -86,6 +90,7 @@ function useReactionToggle(
   postId: number,
   user: ReactionsProps['user'],
   onReacted: ReactionsProps['onReacted'],
+  api: NonNullable<ReactionsProps['api']>,
 ) {
   const [pending, setPending] = useState<number | null>(null);
 
@@ -106,8 +111,8 @@ function useReactionToggle(
       setPending(value);
       try {
         const response = isSelected(reactions, value)
-          ? await ozaClient.unlikeGroupPost(postId)
-          : await ozaClient.likeGroupPost(postId, { value });
+          ? await api.unlikePost(postId)
+          : await api.likePost(postId, value);
         if (response.status === 200) {
           await onReacted();
         }
@@ -115,15 +120,21 @@ function useReactionToggle(
         setPending(null);
       }
     },
-    [user, pending, postId, isSelected, onReacted],
+    [user, pending, postId, isSelected, onReacted, api],
   );
 
   return { pending, isSelected, toggle };
 }
 
 /** 评论内容下方的 reactions 列表，点击切换点赞状态 */
-const Reactions: FC<ReactionsProps> = ({ reactions = [], postId, user, onReacted }) => {
-  const { pending, isSelected, toggle } = useReactionToggle(postId, user, onReacted);
+const Reactions: FC<ReactionsProps> = ({
+  reactions = [],
+  postId,
+  user,
+  onReacted,
+  api = groupTopicApi,
+}) => {
+  const { pending, isSelected, toggle } = useReactionToggle(postId, user, onReacted, api);
 
   if (reactions.length === 0) {
     return null;
@@ -157,8 +168,14 @@ const Reactions: FC<ReactionsProps> = ({ reactions = [], postId, user, onReacted
 };
 
 /** 反应选择菜单，供操作区"贴贴"按钮使用 */
-export const ReactionMenu: FC<ReactionsProps> = ({ reactions = [], postId, user, onReacted }) => {
-  const { pending, isSelected, toggle } = useReactionToggle(postId, user, onReacted);
+export const ReactionMenu: FC<ReactionsProps> = ({
+  reactions = [],
+  postId,
+  user,
+  onReacted,
+  api = groupTopicApi,
+}) => {
+  const { pending, isSelected, toggle } = useReactionToggle(postId, user, onReacted, api);
 
   return (
     <div className={menu}>

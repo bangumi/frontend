@@ -46,6 +46,11 @@ const SubjectBoard = lazy(async () => import('./pages/index/subject/[id]/board')
 const SubjectComments = lazy(async () => import('./pages/index/subject/[id]/comments'));
 const SubjectReviews = lazy(async () => import('./pages/index/subject/[id]/reviews'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]'));
+const SubjectTopic = lazy(async () => import('./pages/index/subject/topic/[id]'));
+const SubjectTopicEdit = lazy(async () => import('./pages/index/subject/topic/[id]/edit'));
+const SubjectTopicHome = lazy(async () => import('./pages/index/subject/topic/[id]/index'));
+const SubjectReply = lazy(async () => import('./pages/index/subject/reply/[id]'));
+const SubjectReplyEdit = lazy(async () => import('./pages/index/subject/reply/[id]/edit'));
 const Person = lazy(async () => import('./pages/index/person/[id]'));
 const PersonVoice = lazy(async () => import('./pages/index/person/[id]/voice'));
 const PersonWorks = lazy(async () => import('./pages/index/person/[id]/works'));
@@ -89,12 +94,6 @@ const EpisodeRedirect: React.FC = () => {
   return <Navigate to={`/ep/${id}`} replace />;
 };
 
-/** 旧版条目讨论区话题 URL 转发到新版 /group/topic/:id */
-const TopicRedirect: React.FC = () => {
-  const { id } = useParams();
-  return <Navigate to={`/group/topic/${id}`} replace />;
-};
-
 export const pageRoutes: RouteObject[] = [
   {
     path: '/',
@@ -102,7 +101,19 @@ export const pageRoutes: RouteObject[] = [
     children: [
       ...legacyPagePaths.map((path) => ({ path, element: <LegacyRedirect /> })),
       { path: 'subject/ep/:id', element: <EpisodeRedirect /> },
-      { path: 'subject/topic/:id', element: <TopicRedirect /> },
+      {
+        path: 'subject/topic/:id',
+        element: <SubjectTopic />,
+        children: [
+          { path: 'edit', element: <SubjectTopicEdit /> },
+          { path: '', element: <SubjectTopicHome /> },
+        ],
+      },
+      {
+        path: 'subject/reply/:id',
+        element: <SubjectReply />,
+        children: [{ path: 'edit', element: <SubjectReplyEdit /> }],
+      },
       { path: '*', element: <MatchAll /> },
       { path: '', element: <HomeIndex /> },
       {
