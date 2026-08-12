@@ -4313,16 +4313,7 @@ export interface components {
      * @enum {string}
      */
     UserHomepageSection:
-      | 'anime'
-      | 'game'
-      | 'book'
-      | 'music'
-      | 'real'
-      | 'mono'
-      | 'blog'
-      | 'friend'
-      | 'group'
-      | 'index';
+      'anime' | 'game' | 'book' | 'music' | 'real' | 'mono' | 'blog' | 'friend' | 'group' | 'index';
     /** UserIndexStats */
     UserIndexStats: {
       create: number;
