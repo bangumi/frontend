@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
 import type {
@@ -20,7 +20,13 @@ import {
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
-import { useChannel } from '@bangumi/website/hooks/use-channel';
+import {
+  useChannelBlogs,
+  useChannelTags,
+  useFriendActivities,
+  useTrendingSubjects,
+  useTrendingSubjectTopics,
+} from '@bangumi/website/hooks/use-channel';
 
 import type { ChannelConfig, ChannelKey } from './config';
 import { CHANNEL_CONFIGS } from './config';
@@ -681,13 +687,13 @@ function ChannelBlogs({ blogs, config }: { blogs: SlimBlogEntry[]; config: Chann
 }
 
 function ChannelSidebar({
-  tags,
-  blogs,
   config,
+  blogSection,
+  tagSection,
 }: {
-  tags: SubjectTag[];
-  blogs: SlimBlogEntry[];
   config: ChannelConfig;
+  blogSection: React.ReactNode;
+  tagSection: React.ReactNode;
 }) {
   return (
     <aside className={sidebar}>
@@ -714,31 +720,64 @@ function ChannelSidebar({
         </nav>
       </section>
 
-      <ChannelBlogs blogs={blogs} config={config} />
+      {blogSection}
 
-      {tags.length > 0 && (
-        <section className={sidePanel}>
-          <h2>
-            标签汇总
-            <small>
-              <Link to={`/${config.key}/tag`}>more</Link>
-            </small>
-          </h2>
-          <div className={tagCloud}>
-            {tags.map((tag) => (
-              <Link
-                key={tag.name}
-                to={`/${config.key}/tag/${encodeURIComponent(tag.name)}`}
-                className={TAG_LEVEL_STYLES[getTagLevel(tag.count, tags)]}
-                title={`${tag.count.toLocaleString()} 个条目`}
-              >
-                {tag.name}
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+      {tagSection}
     </aside>
+  );
+}
+
+function ChannelTags({ tags, config }: { tags: SubjectTag[]; config: ChannelConfig }) {
+  if (tags.length === 0) {
+    return null;
+  }
+
+  return (
+    <section className={sidePanel}>
+      <h2>
+        标签汇总
+        <small>
+          <Link to={`/${config.key}/tag`}>more</Link>
+        </small>
+      </h2>
+      <div className={tagCloud}>
+        {tags.map((tag) => (
+          <Link
+            key={tag.name}
+            to={`/${config.key}/tag/${encodeURIComponent(tag.name)}`}
+            className={TAG_LEVEL_STYLES[getTagLevel(tag.count, tags)]}
+            title={`${tag.count.toLocaleString()} 个条目`}
+          >
+            {tag.name}
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/** 频道页整体框架：页头 + 主列 + 侧栏 */
+function ChannelFrame({
+  config,
+  main,
+  sidebar,
+}: {
+  config: ChannelConfig;
+  main: React.ReactNode;
+  sidebar: React.ReactNode;
+}) {
+  return (
+    <PageContainer as='main' className={page}>
+      <header className={pageHeader}>
+        <h1>
+          <span>{config.title}</span>频道
+        </h1>
+      </header>
+      <div className={columns}>
+        <div className={mainColumn}>{main}</div>
+        {sidebar}
+      </div>
+    </PageContainer>
   );
 }
 
@@ -759,14 +798,10 @@ export function ChannelPageContent({
   data: ChannelPageData;
 }) {
   return (
-    <PageContainer as='main' className={page}>
-      <header className={pageHeader}>
-        <h1>
-          <span>{config.title}</span>频道
-        </h1>
-      </header>
-      <div className={columns}>
-        <div className={mainColumn}>
+    <ChannelFrame
+      config={config}
+      main={
+        <>
           <TrendingSubjects subjects={data.subjects} config={config} />
           {data.showFriendActivities && (
             <>
@@ -779,21 +814,94 @@ export function ChannelPageContent({
           )}
           <div className={divider} />
           <TopicList topics={data.topics} config={config} />
-        </div>
-        <ChannelSidebar tags={data.tags} blogs={data.blogs} config={config} />
-      </div>
-    </PageContainer>
+        </>
+      }
+      sidebar={
+        <ChannelSidebar
+          config={config}
+          blogSection={<ChannelBlogs blogs={data.blogs} config={config} />}
+          tagSection={<ChannelTags tags={data.tags} config={config} />}
+        />
+      }
+    />
   );
+}
+
+/** 各区块独立数据加载：某个接口慢只阻塞自身，不影响其他区块 */
+function TrendingSubjectsSection({ config }: { config: ChannelConfig }) {
+  const subjects = useTrendingSubjects(config.type);
+  return <TrendingSubjects subjects={subjects} config={config} />;
+}
+
+function TopicListSection({ config }: { config: ChannelConfig }) {
+  const topics = useTrendingSubjectTopics(config.type);
+  return <TopicList topics={topics} config={config} />;
+}
+
+function FriendActivitySection({ config }: { config: ChannelConfig }) {
+  const { friendActivities, showFriendActivities } = useFriendActivities(config.type);
+  if (!showFriendActivities) {
+    return null;
+  }
+
+  return (
+    <>
+      <div className={divider} />
+      <section className={section}>
+        <h2 className={sectionTitle}>好友动态</h2>
+        <FriendActivityList activities={friendActivities} config={config} />
+      </section>
+    </>
+  );
+}
+
+function BlogSection({ config }: { config: ChannelConfig }) {
+  const blogs = useChannelBlogs(config.type);
+  return <ChannelBlogs blogs={blogs} config={config} />;
+}
+
+function TagSection({ config }: { config: ChannelConfig }) {
+  const tags = useChannelTags(config.type);
+  return <ChannelTags tags={tags} config={config} />;
 }
 
 function ChannelIndex({ channel }: { channel: ChannelKey }) {
   const config = CHANNEL_CONFIGS[channel];
-  const data = useChannel(config);
 
   return (
     <>
       <Helmet title={config.title} />
-      <ChannelPageContent config={config} data={data} />
+      <ChannelFrame
+        config={config}
+        main={
+          <>
+            <Suspense fallback={null}>
+              <TrendingSubjectsSection config={config} />
+            </Suspense>
+            <Suspense fallback={null}>
+              <FriendActivitySection config={config} />
+            </Suspense>
+            <Suspense fallback={null}>
+              <TopicListSection config={config} />
+            </Suspense>
+          </>
+        }
+        sidebar={
+          <ChannelSidebar
+            config={config}
+            blogSection={
+              <Suspense fallback={null}>
+                <BlogSection config={config} />
+              </Suspense>
+            }
+            tagSection={
+              <Suspense fallback={null}>
+                <TagSection config={config} />
+              </Suspense>
+            }
+          />
+        }
+      />
     </>
   );
 }
