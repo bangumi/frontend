@@ -2,10 +2,42 @@ import React from 'react';
 
 import type { Reaction, SlimUser } from '@bangumi/client/topic';
 import { Comment as CommentIcon, More } from '@bangumi/icons';
+import { css, cx } from '@bangumi/styled-system/css';
 
 import Button from '../../components/Button';
 import Popover from '../Popover';
 import { ReactionMenu } from './Reactions';
+
+const commentActions = css({
+  display: 'flex',
+  gap: '12px',
+  '& .bgm-button': {
+    height: '20px',
+    fontWeight: '400',
+    '&.bgm-comment-actions__more:hover': { color: '#595555' },
+  },
+});
+
+const commentActionsPopover = css({
+  borderRadius: '17px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '10px',
+  alignItems: 'center',
+  padding: '10px',
+  '& .bgm-button': {
+    fontSize: '14px',
+    height: '22px',
+    borderRadius: '11px',
+    width: '70px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: '#595555',
+    cursor: 'pointer',
+    _hover: { backgroundColor: '#f5f5f5' },
+  },
+});
 
 export interface CommentActionsProps {
   id: number;
@@ -31,7 +63,7 @@ const CommentActions = ({
   onReacted,
 }: CommentActionsProps) => {
   return (
-    <div className='bgm-comment-actions'>
+    <div className={cx('bgm-comment-actions', commentActions)}>
       <Button type='plain' size='small' onClick={onReply} title='回复'>
         <CommentIcon />
         {showText && '回复'}
@@ -49,7 +81,7 @@ const CommentActions = ({
       )}
       <Popover
         content={
-          <div className='bgm-comment-actions__popover'>
+          <div className={cx('bgm-comment-actions__popover', commentActionsPopover)}>
             {isAuthor && (
               <>
                 {editable && (

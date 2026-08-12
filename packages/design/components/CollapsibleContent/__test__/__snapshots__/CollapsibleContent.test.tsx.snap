@@ -2,7 +2,7 @@
 
 exports[`should render 1`] = `
 <div
-  class="bgm-collapsible-content"
+  class="bgm-collapsible-content d_flex flex-d_column ai_flex-start gap_0.5rem lh_24px"
 >
   <div>
     bgm

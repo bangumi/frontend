@@ -3,15 +3,15 @@
 exports[`should render borderless tab 1`] = `
 <div>
   <ul
-    class="bgm-tab bgm-tab--borderless"
+    class="bgm-tab bgm-tab--borderless d_inline-flex flex-d_row li-s_none bg-c_#facdd0 bdr_19px ov-x_auto w_100% [&.bgm-tab--borderless]:bg-c_transparent"
   >
     <li
-      class="bgm-tab__item bgm-tab__item--borderless bgm-tab__item--active"
+      class="bgm-tab__item bgm-tab__item--borderless fs_14px fw_bold lh_14px p_4px_6px c_#fff cursor_pointer white-space_nowrap [&.bgm-tab__item--borderless]:fw_500 [&.bgm-tab__item--borderless]:lh_20px [&.bgm-tab__item--borderless]:c_#595555 [&.bgm-tab__item--borderless]:p_4px_20px [&.bgm-tab__item--borderless]:[&.bgm-tab__item--active]:c_#fff [&.bgm-tab__item--active]:bg-c_#f09199 [&.bgm-tab__item--active]:bdr_18px bgm-tab__item--active"
     >
       1
     </li>
     <li
-      class="bgm-tab__item bgm-tab__item--borderless"
+      class="bgm-tab__item bgm-tab__item--borderless fs_14px fw_bold lh_14px p_4px_6px c_#fff cursor_pointer white-space_nowrap [&.bgm-tab__item--borderless]:fw_500 [&.bgm-tab__item--borderless]:lh_20px [&.bgm-tab__item--borderless]:c_#595555 [&.bgm-tab__item--borderless]:p_4px_20px [&.bgm-tab__item--borderless]:[&.bgm-tab__item--active]:c_#fff [&.bgm-tab__item--active]:bg-c_#f09199 [&.bgm-tab__item--active]:bdr_18px"
     >
       2
     </li>

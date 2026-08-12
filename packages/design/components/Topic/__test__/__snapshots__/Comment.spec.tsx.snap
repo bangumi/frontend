@@ -4,7 +4,7 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
 <div>
   <div>
     <div
-      class="bgm-comment__header"
+      class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555"
       id="post_2104702"
     >
       <div
@@ -41,7 +41,7 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
               class="comment-info"
             >
               <span
-                class="bgm-topic__commentInfo"
+                class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
               >
                 <a
                   href="#post_2104702"
@@ -57,7 +57,8 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            class="bgm-rich-content lh_24px fs_16px c_#1f1c1c [&_a]:c_#54b5df [&_a]:td_none [&_img]:max-w_99% [&_>_.quote]:c_#9f9b9b [&_>_.quote]:[&:not(:last-child)]:mb_12px [&_>_.quote]:[&::before,_&::after]:content_"" [&_>_.quote]:[&::before,_&::after]:lh_0 [&_>_.quote]:[&::before,_&::after]:d_inline [&_>_.quote]:[&::before,_&::after]:p_0_7px [&_>_.quote]:[&::before,_&::after]:bg-r_no-repeat [&_>_.quote]:[&::before]:bg-i_var(--quote-before) [&_>_.quote]:[&::before]:mr_10px [&_>_.quote]:[&::after]:bg-i_var(--quote-after) [&_>_.quote]:[&::after]:ml_10px [&_strong]:fw_600 [&_em]:font-style_italic [&_.bgm-mask]:bg-c_#555 [&_.bgm-mask]:c_#555 [&_.bgm-mask]:bd_1px_solid_#555 [&_.bgm-mask]:hover:c_#fff ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            style="--quote-before: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M11.372%205.621C12.942%205.621%2014%206.713%2014%208.331C14%209.787%2012.784%2011%2011.137%2011C9.333%2011%208%209.544%208%207.32C8%202.265%2011.686%200.243%2014%200V2.224C12.431%202.507%2010.667%204.084%2010.588%205.824C10.667%205.784%2010.98%205.621%2011.372%205.621ZM3.373%205.621C4.941%205.621%206%206.713%206%208.331C6%209.787%204.784%2011%203.137%2011C1.333%2011%200%209.544%200%207.32C0%202.265%203.686%200.243%206%200V2.224C4.431%202.507%202.667%204.084%202.588%205.824C2.667%205.784%202.98%205.621%203.373%205.621V5.621Z'%20fill='%239F9B9B'/%3e%3c/svg%3e); --quote-after: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.627%205.379C1.06%205.379%200%204.287%200%202.669C0%201.213%201.216%200%202.863%200C4.667%200%206%201.456%206%203.68C6%208.735%202.314%2010.757%200%2011V8.776C1.569%208.493%203.333%206.916%203.412%205.176C3.333%205.216%203.02%205.379%202.627%205.379V5.379ZM10.627%205.379C9.059%205.379%208%204.287%208%202.669C8%201.213%209.216%200%2010.863%200C12.667%200%2014%201.456%2014%203.68C14%208.735%2010.314%2010.757%208%2011V8.776C9.569%208.493%2011.333%206.916%2011.412%205.176C11.333%205.216%2011.02%205.379%2010.627%205.379Z'%20fill='%239F9B9B'/%3e%3c/svg%3e);"
           >
             123456789~~~
           </div>
@@ -72,7 +73,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
 <div>
   <div>
     <div
-      class="bgm-comment__header bgm-comment__header--highlighted"
+      class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555 bgm-comment__header--highlighted"
       id="post_2104702"
     >
       <div
@@ -109,7 +110,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
               class="comment-info"
             >
               <span
-                class="bgm-topic__commentInfo"
+                class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
               >
                 <a
                   href="#post_2104702"
@@ -124,19 +125,19 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
               </span>
                 |  
               <div
-                class="bgm-comment-actions"
+                class="bgm-comment-actions d_flex gap_12px [&_.bgm-button]:h_20px [&_.bgm-button]:fw_400 [&_.bgm-button]:[&.bgm-comment-actions__more:hover]:c_#595555"
               >
                 <button
-                  class="bgm-button bgm-button--plain bgm-button--size-small"
+                  class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--plain bgm-button--size-small"
                   title="回复"
                 >
                   <div />
                 </button>
                 <div
-                  class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
+                  class="bgm-popover d_inline-block [&_.bgm-popover__container]:pos_relative [&_.bgm-popover__container]:d_flex [&_.bgm-popover__container]:flex-d_column [&_.bgm-popover__container]:ai_center [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:pos_absolute [&_.bgm-popover__content]:vis_hidden [&_.bgm-popover__content]:op_0 [&_.bgm-popover__content]:trs_visibility_0s,_opacity_0.15s_linear [&_.bgm-popover__content]:z_99 [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:vis_visible hover:[&_.bgm-popover__content]:op_1 hover:[&_.bgm-popover__content]:d_block"
                 >
                   <button
-                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                    class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
                     title="其他"
                   >
                     <div />
@@ -148,15 +149,15 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                       class="bgm-popover__content"
                     >
                       <div
-                        class="bgm-comment-actions__popover"
+                        class="bgm-comment-actions__popover bdr_17px d_flex flex-d_column gap_10px ai_center p_10px [&_.bgm-button]:fs_14px [&_.bgm-button]:h_22px [&_.bgm-button]:bdr_11px [&_.bgm-button]:w_70px [&_.bgm-button]:d_flex [&_.bgm-button]:jc_center [&_.bgm-button]:ai_center [&_.bgm-button]:c_#595555 [&_.bgm-button]:cursor_pointer [&_.bgm-button]:hover:bg-c_#f5f5f5"
                       >
                         <button
-                          class="bgm-button bgm-button--text"
+                          class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                         >
                           绝交
                         </button>
                         <button
-                          class="bgm-button bgm-button--text"
+                          class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                         >
                           报告疑虑
                         </button>
@@ -168,7 +169,8 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            class="bgm-rich-content lh_24px fs_16px c_#1f1c1c [&_a]:c_#54b5df [&_a]:td_none [&_img]:max-w_99% [&_>_.quote]:c_#9f9b9b [&_>_.quote]:[&:not(:last-child)]:mb_12px [&_>_.quote]:[&::before,_&::after]:content_"" [&_>_.quote]:[&::before,_&::after]:lh_0 [&_>_.quote]:[&::before,_&::after]:d_inline [&_>_.quote]:[&::before,_&::after]:p_0_7px [&_>_.quote]:[&::before,_&::after]:bg-r_no-repeat [&_>_.quote]:[&::before]:bg-i_var(--quote-before) [&_>_.quote]:[&::before]:mr_10px [&_>_.quote]:[&::after]:bg-i_var(--quote-after) [&_>_.quote]:[&::after]:ml_10px [&_strong]:fw_600 [&_em]:font-style_italic [&_.bgm-mask]:bg-c_#555 [&_.bgm-mask]:c_#555 [&_.bgm-mask]:bd_1px_solid_#555 [&_.bgm-mask]:hover:c_#fff ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            style="--quote-before: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M11.372%205.621C12.942%205.621%2014%206.713%2014%208.331C14%209.787%2012.784%2011%2011.137%2011C9.333%2011%208%209.544%208%207.32C8%202.265%2011.686%200.243%2014%200V2.224C12.431%202.507%2010.667%204.084%2010.588%205.824C10.667%205.784%2010.98%205.621%2011.372%205.621ZM3.373%205.621C4.941%205.621%206%206.713%206%208.331C6%209.787%204.784%2011%203.137%2011C1.333%2011%200%209.544%200%207.32C0%202.265%203.686%200.243%206%200V2.224C4.431%202.507%202.667%204.084%202.588%205.824C2.667%205.784%202.98%205.621%203.373%205.621V5.621Z'%20fill='%239F9B9B'/%3e%3c/svg%3e); --quote-after: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.627%205.379C1.06%205.379%200%204.287%200%202.669C0%201.213%201.216%200%202.863%200C4.667%200%206%201.456%206%203.68C6%208.735%202.314%2010.757%200%2011V8.776C1.569%208.493%203.333%206.916%203.412%205.176C3.333%205.216%203.02%205.379%202.627%205.379V5.379ZM10.627%205.379C9.059%205.379%208%204.287%208%202.669C8%201.213%209.216%200%2010.863%200C12.667%200%2014%201.456%2014%203.68C14%208.735%2010.314%2010.757%208%2011V8.776C9.569%208.493%2011.333%206.916%2011.412%205.176C11.333%205.216%2011.02%205.379%2010.627%205.379Z'%20fill='%239F9B9B'/%3e%3c/svg%3e);"
           >
             123456789~~~
           </div>
@@ -177,7 +179,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
     </div>
     <div>
       <div
-        class="bgm-comment__header bgm-comment__header--reply bgm-comment__header--highlighted"
+        class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555 bgm-comment__header--reply bgm-comment__header--highlighted"
         id="post_2104702"
       >
         <div
@@ -211,7 +213,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                 class="comment-info"
               >
                 <span
-                  class="bgm-topic__commentInfo"
+                  class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
                 >
                   <a
                     href="#post_2104702"
@@ -226,19 +228,19 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                 </span>
                   |  
                 <div
-                  class="bgm-comment-actions"
+                  class="bgm-comment-actions d_flex gap_12px [&_.bgm-button]:h_20px [&_.bgm-button]:fw_400 [&_.bgm-button]:[&.bgm-comment-actions__more:hover]:c_#595555"
                 >
                   <button
-                    class="bgm-button bgm-button--plain bgm-button--size-small"
+                    class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--plain bgm-button--size-small"
                     title="回复"
                   >
                     <div />
                   </button>
                   <div
-                    class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
+                    class="bgm-popover d_inline-block [&_.bgm-popover__container]:pos_relative [&_.bgm-popover__container]:d_flex [&_.bgm-popover__container]:flex-d_column [&_.bgm-popover__container]:ai_center [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:pos_absolute [&_.bgm-popover__content]:vis_hidden [&_.bgm-popover__content]:op_0 [&_.bgm-popover__content]:trs_visibility_0s,_opacity_0.15s_linear [&_.bgm-popover__content]:z_99 [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:vis_visible hover:[&_.bgm-popover__content]:op_1 hover:[&_.bgm-popover__content]:d_block"
                   >
                     <button
-                      class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                      class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
                       title="其他"
                     >
                       <div />
@@ -250,15 +252,15 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                         class="bgm-popover__content"
                       >
                         <div
-                          class="bgm-comment-actions__popover"
+                          class="bgm-comment-actions__popover bdr_17px d_flex flex-d_column gap_10px ai_center p_10px [&_.bgm-button]:fs_14px [&_.bgm-button]:h_22px [&_.bgm-button]:bdr_11px [&_.bgm-button]:w_70px [&_.bgm-button]:d_flex [&_.bgm-button]:jc_center [&_.bgm-button]:ai_center [&_.bgm-button]:c_#595555 [&_.bgm-button]:cursor_pointer [&_.bgm-button]:hover:bg-c_#f5f5f5"
                         >
                           <button
-                            class="bgm-button bgm-button--text"
+                            class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                           >
                             绝交
                           </button>
                           <button
-                            class="bgm-button bgm-button--text"
+                            class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                           >
                             报告疑虑
                           </button>
@@ -270,7 +272,8 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
               </div>
             </span>
             <div
-              class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+              class="bgm-rich-content lh_24px fs_16px c_#1f1c1c [&_a]:c_#54b5df [&_a]:td_none [&_img]:max-w_99% [&_>_.quote]:c_#9f9b9b [&_>_.quote]:[&:not(:last-child)]:mb_12px [&_>_.quote]:[&::before,_&::after]:content_"" [&_>_.quote]:[&::before,_&::after]:lh_0 [&_>_.quote]:[&::before,_&::after]:d_inline [&_>_.quote]:[&::before,_&::after]:p_0_7px [&_>_.quote]:[&::before,_&::after]:bg-r_no-repeat [&_>_.quote]:[&::before]:bg-i_var(--quote-before) [&_>_.quote]:[&::before]:mr_10px [&_>_.quote]:[&::after]:bg-i_var(--quote-after) [&_>_.quote]:[&::after]:ml_10px [&_strong]:fw_600 [&_em]:font-style_italic [&_.bgm-mask]:bg-c_#555 [&_.bgm-mask]:c_#555 [&_.bgm-mask]:bd_1px_solid_#555 [&_.bgm-mask]:hover:c_#fff ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+              style="--quote-before: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M11.372%205.621C12.942%205.621%2014%206.713%2014%208.331C14%209.787%2012.784%2011%2011.137%2011C9.333%2011%208%209.544%208%207.32C8%202.265%2011.686%200.243%2014%200V2.224C12.431%202.507%2010.667%204.084%2010.588%205.824C10.667%205.784%2010.98%205.621%2011.372%205.621ZM3.373%205.621C4.941%205.621%206%206.713%206%208.331C6%209.787%204.784%2011%203.137%2011C1.333%2011%200%209.544%200%207.32C0%202.265%203.686%200.243%206%200V2.224C4.431%202.507%202.667%204.084%202.588%205.824C2.667%205.784%202.98%205.621%203.373%205.621V5.621Z'%20fill='%239F9B9B'/%3e%3c/svg%3e); --quote-after: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.627%205.379C1.06%205.379%200%204.287%200%202.669C0%201.213%201.216%200%202.863%200C4.667%200%206%201.456%206%203.68C6%208.735%202.314%2010.757%200%2011V8.776C1.569%208.493%203.333%206.916%203.412%205.176C3.333%205.216%203.02%205.379%202.627%205.379V5.379ZM10.627%205.379C9.059%205.379%208%204.287%208%202.669C8%201.213%209.216%200%2010.863%200C12.667%200%2014%201.456%2014%203.68C14%208.735%2010.314%2010.757%208%2011V8.776C9.569%208.493%2011.333%206.916%2011.412%205.176C11.333%205.216%2011.02%205.379%2010.627%205.379Z'%20fill='%239F9B9B'/%3e%3c/svg%3e);"
             >
               123456789~~~
             </div>
@@ -286,7 +289,7 @@ exports[`Normal Comment > should render 0 1`] = `
 <div>
   <div>
     <div
-      class="bgm-comment__header"
+      class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555"
       id="post_2104702"
     >
       <div
@@ -323,7 +326,7 @@ exports[`Normal Comment > should render 0 1`] = `
               class="comment-info"
             >
               <span
-                class="bgm-topic__commentInfo"
+                class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
               >
                 <a
                   href="#post_2104702"
@@ -338,19 +341,19 @@ exports[`Normal Comment > should render 0 1`] = `
               </span>
                 |  
               <div
-                class="bgm-comment-actions"
+                class="bgm-comment-actions d_flex gap_12px [&_.bgm-button]:h_20px [&_.bgm-button]:fw_400 [&_.bgm-button]:[&.bgm-comment-actions__more:hover]:c_#595555"
               >
                 <button
-                  class="bgm-button bgm-button--plain bgm-button--size-small"
+                  class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--plain bgm-button--size-small"
                   title="回复"
                 >
                   <div />
                 </button>
                 <div
-                  class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
+                  class="bgm-popover d_inline-block [&_.bgm-popover__container]:pos_relative [&_.bgm-popover__container]:d_flex [&_.bgm-popover__container]:flex-d_column [&_.bgm-popover__container]:ai_center [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:pos_absolute [&_.bgm-popover__content]:vis_hidden [&_.bgm-popover__content]:op_0 [&_.bgm-popover__content]:trs_visibility_0s,_opacity_0.15s_linear [&_.bgm-popover__content]:z_99 [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:vis_visible hover:[&_.bgm-popover__content]:op_1 hover:[&_.bgm-popover__content]:d_block"
                 >
                   <button
-                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                    class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
                     title="其他"
                   >
                     <div />
@@ -362,15 +365,15 @@ exports[`Normal Comment > should render 0 1`] = `
                       class="bgm-popover__content"
                     >
                       <div
-                        class="bgm-comment-actions__popover"
+                        class="bgm-comment-actions__popover bdr_17px d_flex flex-d_column gap_10px ai_center p_10px [&_.bgm-button]:fs_14px [&_.bgm-button]:h_22px [&_.bgm-button]:bdr_11px [&_.bgm-button]:w_70px [&_.bgm-button]:d_flex [&_.bgm-button]:jc_center [&_.bgm-button]:ai_center [&_.bgm-button]:c_#595555 [&_.bgm-button]:cursor_pointer [&_.bgm-button]:hover:bg-c_#f5f5f5"
                       >
                         <button
-                          class="bgm-button bgm-button--text"
+                          class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                         >
                           绝交
                         </button>
                         <button
-                          class="bgm-button bgm-button--text"
+                          class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                         >
                           报告疑虑
                         </button>
@@ -382,7 +385,8 @@ exports[`Normal Comment > should render 0 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            class="bgm-rich-content lh_24px fs_16px c_#1f1c1c [&_a]:c_#54b5df [&_a]:td_none [&_img]:max-w_99% [&_>_.quote]:c_#9f9b9b [&_>_.quote]:[&:not(:last-child)]:mb_12px [&_>_.quote]:[&::before,_&::after]:content_"" [&_>_.quote]:[&::before,_&::after]:lh_0 [&_>_.quote]:[&::before,_&::after]:d_inline [&_>_.quote]:[&::before,_&::after]:p_0_7px [&_>_.quote]:[&::before,_&::after]:bg-r_no-repeat [&_>_.quote]:[&::before]:bg-i_var(--quote-before) [&_>_.quote]:[&::before]:mr_10px [&_>_.quote]:[&::after]:bg-i_var(--quote-after) [&_>_.quote]:[&::after]:ml_10px [&_strong]:fw_600 [&_em]:font-style_italic [&_.bgm-mask]:bg-c_#555 [&_.bgm-mask]:c_#555 [&_.bgm-mask]:bd_1px_solid_#555 [&_.bgm-mask]:hover:c_#fff ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            style="--quote-before: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M11.372%205.621C12.942%205.621%2014%206.713%2014%208.331C14%209.787%2012.784%2011%2011.137%2011C9.333%2011%208%209.544%208%207.32C8%202.265%2011.686%200.243%2014%200V2.224C12.431%202.507%2010.667%204.084%2010.588%205.824C10.667%205.784%2010.98%205.621%2011.372%205.621ZM3.373%205.621C4.941%205.621%206%206.713%206%208.331C6%209.787%204.784%2011%203.137%2011C1.333%2011%200%209.544%200%207.32C0%202.265%203.686%200.243%206%200V2.224C4.431%202.507%202.667%204.084%202.588%205.824C2.667%205.784%202.98%205.621%203.373%205.621V5.621Z'%20fill='%239F9B9B'/%3e%3c/svg%3e); --quote-after: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.627%205.379C1.06%205.379%200%204.287%200%202.669C0%201.213%201.216%200%202.863%200C4.667%200%206%201.456%206%203.68C6%208.735%202.314%2010.757%200%2011V8.776C1.569%208.493%203.333%206.916%203.412%205.176C3.333%205.216%203.02%205.379%202.627%205.379V5.379ZM10.627%205.379C9.059%205.379%208%204.287%208%202.669C8%201.213%209.216%200%2010.863%200C12.667%200%2014%201.456%2014%203.68C14%208.735%2010.314%2010.757%208%2011V8.776C9.569%208.493%2011.333%206.916%2011.412%205.176C11.333%205.216%2011.02%205.379%2010.627%205.379Z'%20fill='%239F9B9B'/%3e%3c/svg%3e);"
           >
             123456789~~~
           </div>
@@ -397,7 +401,7 @@ exports[`Normal Comment > should render 6 1`] = `
 <div>
   <div>
     <div
-      class="bgm-comment__header"
+      class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555"
       id="post_2104702"
     >
       <div
@@ -434,7 +438,7 @@ exports[`Normal Comment > should render 6 1`] = `
               class="comment-info"
             >
               <span
-                class="bgm-topic__commentInfo"
+                class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
               >
                 <a
                   href="#post_2104702"
@@ -465,7 +469,7 @@ exports[`Normal Comment > should render 7 1`] = `
 <div>
   <div>
     <div
-      class="bgm-comment__header"
+      class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555"
       id="post_2104702"
     >
       <div
@@ -502,7 +506,7 @@ exports[`Normal Comment > should render 7 1`] = `
               class="comment-info"
             >
               <span
-                class="bgm-topic__commentInfo"
+                class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
               >
                 <a
                   href="#post_2104702"
@@ -541,7 +545,7 @@ exports[`Normal Comment > should render with reply 1`] = `
 <div>
   <div>
     <div
-      class="bgm-comment__header"
+      class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555"
       id="post_2104702"
     >
       <div
@@ -578,7 +582,7 @@ exports[`Normal Comment > should render with reply 1`] = `
               class="comment-info"
             >
               <span
-                class="bgm-topic__commentInfo"
+                class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
               >
                 <a
                   href="#post_2104702"
@@ -593,19 +597,19 @@ exports[`Normal Comment > should render with reply 1`] = `
               </span>
                 |  
               <div
-                class="bgm-comment-actions"
+                class="bgm-comment-actions d_flex gap_12px [&_.bgm-button]:h_20px [&_.bgm-button]:fw_400 [&_.bgm-button]:[&.bgm-comment-actions__more:hover]:c_#595555"
               >
                 <button
-                  class="bgm-button bgm-button--plain bgm-button--size-small"
+                  class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--plain bgm-button--size-small"
                   title="回复"
                 >
                   <div />
                 </button>
                 <div
-                  class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
+                  class="bgm-popover d_inline-block [&_.bgm-popover__container]:pos_relative [&_.bgm-popover__container]:d_flex [&_.bgm-popover__container]:flex-d_column [&_.bgm-popover__container]:ai_center [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:pos_absolute [&_.bgm-popover__content]:vis_hidden [&_.bgm-popover__content]:op_0 [&_.bgm-popover__content]:trs_visibility_0s,_opacity_0.15s_linear [&_.bgm-popover__content]:z_99 [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:vis_visible hover:[&_.bgm-popover__content]:op_1 hover:[&_.bgm-popover__content]:d_block"
                 >
                   <button
-                    class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                    class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
                     title="其他"
                   >
                     <div />
@@ -617,15 +621,15 @@ exports[`Normal Comment > should render with reply 1`] = `
                       class="bgm-popover__content"
                     >
                       <div
-                        class="bgm-comment-actions__popover"
+                        class="bgm-comment-actions__popover bdr_17px d_flex flex-d_column gap_10px ai_center p_10px [&_.bgm-button]:fs_14px [&_.bgm-button]:h_22px [&_.bgm-button]:bdr_11px [&_.bgm-button]:w_70px [&_.bgm-button]:d_flex [&_.bgm-button]:jc_center [&_.bgm-button]:ai_center [&_.bgm-button]:c_#595555 [&_.bgm-button]:cursor_pointer [&_.bgm-button]:hover:bg-c_#f5f5f5"
                       >
                         <button
-                          class="bgm-button bgm-button--text"
+                          class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                         >
                           绝交
                         </button>
                         <button
-                          class="bgm-button bgm-button--text"
+                          class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                         >
                           报告疑虑
                         </button>
@@ -637,7 +641,8 @@ exports[`Normal Comment > should render with reply 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            class="bgm-rich-content lh_24px fs_16px c_#1f1c1c [&_a]:c_#54b5df [&_a]:td_none [&_img]:max-w_99% [&_>_.quote]:c_#9f9b9b [&_>_.quote]:[&:not(:last-child)]:mb_12px [&_>_.quote]:[&::before,_&::after]:content_"" [&_>_.quote]:[&::before,_&::after]:lh_0 [&_>_.quote]:[&::before,_&::after]:d_inline [&_>_.quote]:[&::before,_&::after]:p_0_7px [&_>_.quote]:[&::before,_&::after]:bg-r_no-repeat [&_>_.quote]:[&::before]:bg-i_var(--quote-before) [&_>_.quote]:[&::before]:mr_10px [&_>_.quote]:[&::after]:bg-i_var(--quote-after) [&_>_.quote]:[&::after]:ml_10px [&_strong]:fw_600 [&_em]:font-style_italic [&_.bgm-mask]:bg-c_#555 [&_.bgm-mask]:c_#555 [&_.bgm-mask]:bd_1px_solid_#555 [&_.bgm-mask]:hover:c_#fff ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+            style="--quote-before: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M11.372%205.621C12.942%205.621%2014%206.713%2014%208.331C14%209.787%2012.784%2011%2011.137%2011C9.333%2011%208%209.544%208%207.32C8%202.265%2011.686%200.243%2014%200V2.224C12.431%202.507%2010.667%204.084%2010.588%205.824C10.667%205.784%2010.98%205.621%2011.372%205.621ZM3.373%205.621C4.941%205.621%206%206.713%206%208.331C6%209.787%204.784%2011%203.137%2011C1.333%2011%200%209.544%200%207.32C0%202.265%203.686%200.243%206%200V2.224C4.431%202.507%202.667%204.084%202.588%205.824C2.667%205.784%202.98%205.621%203.373%205.621V5.621Z'%20fill='%239F9B9B'/%3e%3c/svg%3e); --quote-after: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.627%205.379C1.06%205.379%200%204.287%200%202.669C0%201.213%201.216%200%202.863%200C4.667%200%206%201.456%206%203.68C6%208.735%202.314%2010.757%200%2011V8.776C1.569%208.493%203.333%206.916%203.412%205.176C3.333%205.216%203.02%205.379%202.627%205.379V5.379ZM10.627%205.379C9.059%205.379%208%204.287%208%202.669C8%201.213%209.216%200%2010.863%200C12.667%200%2014%201.456%2014%203.68C14%208.735%2010.314%2010.757%208%2011V8.776C9.569%208.493%2011.333%206.916%2011.412%205.176C11.333%205.216%2011.02%205.379%2010.627%205.379Z'%20fill='%239F9B9B'/%3e%3c/svg%3e);"
           >
             123456789~~~
           </div>
@@ -646,7 +651,7 @@ exports[`Normal Comment > should render with reply 1`] = `
     </div>
     <div>
       <div
-        class="bgm-comment__header bgm-comment__header--reply"
+        class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555 bgm-comment__header--reply"
         id="post_2104702"
       >
         <div
@@ -680,7 +685,7 @@ exports[`Normal Comment > should render with reply 1`] = `
                 class="comment-info"
               >
                 <span
-                  class="bgm-topic__commentInfo"
+                  class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
                 >
                   <a
                     href="#post_2104702"
@@ -695,19 +700,19 @@ exports[`Normal Comment > should render with reply 1`] = `
                 </span>
                   |  
                 <div
-                  class="bgm-comment-actions"
+                  class="bgm-comment-actions d_flex gap_12px [&_.bgm-button]:h_20px [&_.bgm-button]:fw_400 [&_.bgm-button]:[&.bgm-comment-actions__more:hover]:c_#595555"
                 >
                   <button
-                    class="bgm-button bgm-button--plain bgm-button--size-small"
+                    class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--plain bgm-button--size-small"
                     title="回复"
                   >
                     <div />
                   </button>
                   <div
-                    class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
+                    class="bgm-popover d_inline-block [&_.bgm-popover__container]:pos_relative [&_.bgm-popover__container]:d_flex [&_.bgm-popover__container]:flex-d_column [&_.bgm-popover__container]:ai_center [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:pos_absolute [&_.bgm-popover__content]:vis_hidden [&_.bgm-popover__content]:op_0 [&_.bgm-popover__content]:trs_visibility_0s,_opacity_0.15s_linear [&_.bgm-popover__content]:z_99 [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:vis_visible hover:[&_.bgm-popover__content]:op_1 hover:[&_.bgm-popover__content]:d_block"
                   >
                     <button
-                      class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
+                      class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
                       title="其他"
                     >
                       <div />
@@ -719,15 +724,15 @@ exports[`Normal Comment > should render with reply 1`] = `
                         class="bgm-popover__content"
                       >
                         <div
-                          class="bgm-comment-actions__popover"
+                          class="bgm-comment-actions__popover bdr_17px d_flex flex-d_column gap_10px ai_center p_10px [&_.bgm-button]:fs_14px [&_.bgm-button]:h_22px [&_.bgm-button]:bdr_11px [&_.bgm-button]:w_70px [&_.bgm-button]:d_flex [&_.bgm-button]:jc_center [&_.bgm-button]:ai_center [&_.bgm-button]:c_#595555 [&_.bgm-button]:cursor_pointer [&_.bgm-button]:hover:bg-c_#f5f5f5"
                         >
                           <button
-                            class="bgm-button bgm-button--text"
+                            class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                           >
                             绝交
                           </button>
                           <button
-                            class="bgm-button bgm-button--text"
+                            class="bgm-button cursor_pointer us_none fs_14px fw_600 tov_ellipsis white-space_nowrap ov_hidden d_flex gap_0.25rem ai_center ta_center jc_center bx-s_border-box bd_2px_transparent_solid h_var(--height) lh_var(--height) bdr_calc(var(--height)_/_2) --height_38px p_0_32px [&.bgm-button--primary]:bg-c_#f09199 [&.bgm-button--primary]:c_#fff [&.bgm-button--primary]:[&.bgm-button--color-blue]:bg-c_#54b5df [&.bgm-button--primary]:[&.bgm-button--color-gray]:bg-c_#e8e3e3 [&.bgm-button--primary]:[&.bgm-button--color-gray]:c_#595555 [&.bgm-button--secondary]:bg-c_transparent [&.bgm-button--secondary]:bd-c_#e8e3e3 [&.bgm-button--secondary]:c_#9f9b9b [&.bgm-button--secondary]:hover:bg-c_#e8e3e3 [&.bgm-button--secondary]:hover:c_#595555 [&.bgm-button--secondary]:[&.bgm-button--color-blue]:bd-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:bg-c_#54b5df [&.bgm-button--secondary]:[&.bgm-button--color-blue]:hover:c_#fff [&.bgm-button--text]:bg-c_transparent [&.bgm-button--text]:c_#9f9b9b [&.bgm-button--text]:hover:c_#54b5df [&.bgm-button--size-medium]:--height_30px [&.bgm-button--size-medium]:p_0_13px [&.bgm-button--size-small]:--height_24px [&.bgm-button--size-small]:p_0_17px [&.bgm-button--shape-square]:bdr_0 [&.bgm-button--disabled]:cursor_default [&.bgm-button--link]:d_inline-flex [&.bgm-button--link]:td_none [&.bgm-button--plain]:p_0 [&.bgm-button--plain]:bdr_0 [&.bgm-button--plain]:bd_none [&.bgm-button--plain]:h_auto [&.bgm-button--plain]:lh_14px [&.bgm-button--plain]:bg-c_transparent [&.bgm-button--plain]:c_#9f9b9b [&.bgm-button--plain]:hover:c_#54b5df bgm-button--text"
                           >
                             报告疑虑
                           </button>
@@ -739,7 +744,8 @@ exports[`Normal Comment > should render with reply 1`] = `
               </div>
             </span>
             <div
-              class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+              class="bgm-rich-content lh_24px fs_16px c_#1f1c1c [&_a]:c_#54b5df [&_a]:td_none [&_img]:max-w_99% [&_>_.quote]:c_#9f9b9b [&_>_.quote]:[&:not(:last-child)]:mb_12px [&_>_.quote]:[&::before,_&::after]:content_"" [&_>_.quote]:[&::before,_&::after]:lh_0 [&_>_.quote]:[&::before,_&::after]:d_inline [&_>_.quote]:[&::before,_&::after]:p_0_7px [&_>_.quote]:[&::before,_&::after]:bg-r_no-repeat [&_>_.quote]:[&::before]:bg-i_var(--quote-before) [&_>_.quote]:[&::before]:mr_10px [&_>_.quote]:[&::after]:bg-i_var(--quote-after) [&_>_.quote]:[&::after]:ml_10px [&_strong]:fw_600 [&_em]:font-style_italic [&_.bgm-mask]:bg-c_#555 [&_.bgm-mask]:c_#555 [&_.bgm-mask]:bd_1px_solid_#555 [&_.bgm-mask]:hover:c_#fff ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
+              style="--quote-before: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M11.372%205.621C12.942%205.621%2014%206.713%2014%208.331C14%209.787%2012.784%2011%2011.137%2011C9.333%2011%208%209.544%208%207.32C8%202.265%2011.686%200.243%2014%200V2.224C12.431%202.507%2010.667%204.084%2010.588%205.824C10.667%205.784%2010.98%205.621%2011.372%205.621ZM3.373%205.621C4.941%205.621%206%206.713%206%208.331C6%209.787%204.784%2011%203.137%2011C1.333%2011%200%209.544%200%207.32C0%202.265%203.686%200.243%206%200V2.224C4.431%202.507%202.667%204.084%202.588%205.824C2.667%205.784%202.98%205.621%203.373%205.621V5.621Z'%20fill='%239F9B9B'/%3e%3c/svg%3e); --quote-after: url(data:image/svg+xml,%3csvg%20width='14'%20height='11'%20viewBox='0%200%2014%2011'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M2.627%205.379C1.06%205.379%200%204.287%200%202.669C0%201.213%201.216%200%202.863%200C4.667%200%206%201.456%206%203.68C6%208.735%202.314%2010.757%200%2011V8.776C1.569%208.493%203.333%206.916%203.412%205.176C3.333%205.216%203.02%205.379%202.627%205.379V5.379ZM10.627%205.379C9.059%205.379%208%204.287%208%202.669C8%201.213%209.216%200%2010.863%200C12.667%200%2014%201.456%2014%203.68C14%208.735%2010.314%2010.757%208%2011V8.776C9.569%208.493%2011.333%206.916%2011.412%205.176C11.333%205.216%2011.02%205.379%2010.627%205.379Z'%20fill='%239F9B9B'/%3e%3c/svg%3e);"
             >
               123456789~~~
             </div>
@@ -754,7 +760,7 @@ exports[`Normal Comment > should render with reply 1`] = `
 exports[`Special Comment > should render state is 1 1`] = `
 <div>
   <div
-    class="bgm-comment__header bgm-comment__header--collapsed"
+    class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555 bgm-comment__header--collapsed"
     id="post_2056216"
   >
     <span
@@ -778,7 +784,7 @@ exports[`Special Comment > should render state is 1 1`] = `
         </div>
       </div>
       <span
-        class="bgm-topic__commentInfo"
+        class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
       >
         1970-1-20 06:10
       </span>
@@ -790,7 +796,7 @@ exports[`Special Comment > should render state is 1 1`] = `
 exports[`Special Comment > should render state is 2 1`] = `
 <div>
   <div
-    class="bgm-comment__header bgm-comment__header--collapsed"
+    class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555 bgm-comment__header--collapsed"
     id="post_2056216"
   >
     <span
@@ -814,7 +820,7 @@ exports[`Special Comment > should render state is 2 1`] = `
         </div>
       </div>
       <span
-        class="bgm-topic__commentInfo"
+        class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
       >
         1970-1-20 06:10
       </span>
@@ -826,7 +832,7 @@ exports[`Special Comment > should render state is 2 1`] = `
 exports[`Special Comment > should render state is 5 1`] = `
 <div>
   <div
-    class="bgm-comment__header bgm-comment__header--collapsed"
+    class="bgm-comment__header d_flex ai_flex-start p_15px_15px_10px bd-b_1px_dotted_#e8e3e3 [&.bgm-comment__header--main-post]:p_10px_5px [&.bgm-comment__header--main-post]:bd-b_none [&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [&.bgm-comment__header--reply]:ml_70px [&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&.bgm-comment__header--collapsed]:pt_12px [&.bgm-comment__header--collapsed]:min-h_22px [&.bgm-comment__header--collapsed]:[&_.bgm-comment__content]:mt_0 [&.bgm-comment__header--highlighted]:bd_2px_solid_#369cf8 [&.bgm-comment__header--highlighted]:bdr_5px [@media_(max-width:_640px)]:p_10px_5px [@media_(max-width:_640px)]:[&_.bgm-comment__box]:ml_10px [@media_(max-width:_640px)]:[&.bgm-comment__header--main-post]:[&_.bgm-comment__box]:ml_12px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:ml_55px [@media_(max-width:_640px)]:[&.bgm-comment__header--reply]:[&_.bgm-comment__box]:ml_13px [&_.bgm-comment__box]:ml_15px [&_.bgm-comment__box]:flex_1 [&_.bgm-comment__box]:min-w_0 [&_.bgm-comment__main]:min-h_60px [&_.bgm-comment__main]:d_flex [&_.bgm-comment__main]:flex-d_column [&_.bgm-comment__main]:ai_flex-start [&_.bgm-comment__main]:jc_space-between [&_.bgm-comment__main]:w_100% [&_.bgm-comment__tip]:fs_16px [&_.bgm-comment__tip]:lh_22px [&_.bgm-comment__tip]:d_flex [&_.bgm-comment__tip]:ai_center [&_.bgm-comment__tip]:jc_space-between [&_.bgm-comment__tip]:c_#9f9b9b [&_.bgm-comment__tip]:w_100% [&_.bgm-comment__tip]:[&_.creator-info]:d_flex [&_.bgm-comment__tip]:[&_.creator-info]:ai_center [&_.bgm-comment__tip]:[&_.creator-info]:jc_space-between [&_.bgm-comment__tip]:[&_.creator-info]:[&_.bgm-link,_&_svg]:pr_12px [&_.bgm-comment__tip]:[&_.comment-info]:d_flex [&_.bgm-comment__tip]:[&_.comment-info]:fs_14px [&_.bgm-comment__tip]:[&_.comment-info]:lh_20px [&_.bgm-comment__post-actions]:mt_8px [&_.bgm-comment__post-actions]:fs_14px [&_.bgm-comment__post-actions]:lh_20px [&_.bgm-comment__post-actions]:c_#9f9b9b [&_.bgm-comment__opinions]:mt_12px [&_.bgm-comment__content]:c_#1f1c1c [&_.bgm-comment__content]:lh_26px [&_.bgm-comment__content]:mt_12px [&_.bgm-comment__content--deleted]:c_#595555 bgm-comment__header--collapsed"
     id="post_2056216"
   >
     <span
@@ -850,7 +856,7 @@ exports[`Special Comment > should render state is 5 1`] = `
         </div>
       </div>
       <span
-        class="bgm-topic__commentInfo"
+        class="bgm-topic__commentInfo c_#9f9b9b fs_14px lh_20px [&_a]:c_#9f9b9b [&_a]:td_none"
       >
         1970-1-20 06:10
       </span>

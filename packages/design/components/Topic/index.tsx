@@ -1,5 +1,3 @@
-import './style';
-
 import Comment from './Comment';
 import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';

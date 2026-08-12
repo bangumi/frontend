@@ -3,16 +3,16 @@
 exports[`Select Component > render properly 1`] = `
 <div>
   <div
-    class="bgm-select"
+    class="bgm-select d_inline-flex bx-s_border-box pos_relative p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_12px us_none fs_1rem va_bottom cursor_pointer [&_select]:pos_absolute [&_select]:left_0 [&_select]:top_0 [&_select]:h_100% [&_select]:w_100% [&_select]:op_0 [.bgm-input-group_&]:[&:not(:last-of-type)]:bdr-tr_0 [.bgm-input-group_&]:[&:not(:last-of-type)]:bdr-br_0 [.bgm-input-group_&]:[&:not(:last-of-type)]:bd-r_0"
   >
     <div
-      class="bgm-select__box"
+      class="d_flex flex_1 ai_center jc_space-between [&_span]:fs_1rem [&_span]:lh_1.5rem [&_span]:c_#1f1c1c"
     >
       <span>
         name
       </span>
       <div
-        class="bgm-select-arrow"
+        class="d_inline-block"
       />
     </div>
     <select>

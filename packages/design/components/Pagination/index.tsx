@@ -1,12 +1,38 @@
-import './style';
-
-import cn from 'classnames';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
 import { VerticalLeft, VerticalRight } from '@bangumi/icons';
+import { css, cx } from '@bangumi/styled-system/css';
 
 import Pager from './Pager';
+
+const pagination = css({
+  display: 'flex',
+});
+
+const paginationNav = css({
+  userSelect: 'none',
+  cursor: 'pointer',
+  height: '34px',
+  width: '80px',
+  borderRadius: '17px',
+  border: 'solid 2px #e8e3e3',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  _hover: {
+    backgroundColor: '#f09199',
+    borderColor: '#f09199',
+    '& .bgm-pagination-icon': { fill: '#fff' },
+  },
+  '&.bgm-pagination-prev': { marginRight: '30px' },
+  '&.bgm-pagination-next': { marginLeft: '30px' },
+  '&.bgm-pagination-prev--hide, &.bgm-pagination-next--hide': {
+    visibility: 'hidden',
+  },
+});
+
+const paginationIcon = css({ fill: '#9f9b9b' });
 
 export interface PaginationProps {
   /** 当前偏移 */
@@ -64,11 +90,9 @@ const Pagination: FC<PaginationProps> = ({
     <li
       onClick={prev}
       data-testid='pagination-prev'
-      className={cn('bgm-pagination-prev', {
-        'bgm-pagination-prev--hide': !hasPrev,
-      })}
+      className={cx('bgm-pagination-prev', paginationNav, !hasPrev && 'bgm-pagination-prev--hide')}
     >
-      <VerticalLeft className='bgm-pagination-icon' />
+      <VerticalLeft className={cx('bgm-pagination-icon', paginationIcon)} />
     </li>
   );
 
@@ -76,11 +100,9 @@ const Pagination: FC<PaginationProps> = ({
     <li
       onClick={next}
       data-testid='pagination-next'
-      className={cn('bgm-pagination-next', {
-        'bgm-pagination-next--hide': !hasNext,
-      })}
+      className={cx('bgm-pagination-next', paginationNav, !hasNext && 'bgm-pagination-next--hide')}
     >
-      <VerticalRight className='bgm-pagination-icon' />
+      <VerticalRight className={cx('bgm-pagination-icon', paginationIcon)} />
     </li>
   );
 
@@ -114,7 +136,7 @@ const Pagination: FC<PaginationProps> = ({
     }
   }
   return (
-    <ul className={cn('bgm-pagination', wrapperClass)} data-testid='pagination-wrapper'>
+    <ul className={cx('bgm-pagination', pagination, wrapperClass)} data-testid='pagination-wrapper'>
       {prevButton}
       {pagerList}
       {nextButton}

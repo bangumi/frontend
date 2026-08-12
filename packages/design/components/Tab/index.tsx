@@ -1,8 +1,43 @@
-import './style';
-
-import classnames from 'classnames';
 import type { JSX, PropsWithChildren } from 'react';
 import React, { createContext, useContext } from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
+
+const tab = css({
+  display: 'inline-flex',
+  flexDirection: 'row',
+  listStyle: 'none',
+  backgroundColor: '#facdd0',
+  borderRadius: '19px',
+  overflowX: 'auto',
+  width: '100%',
+  '&.bgm-tab--borderless': {
+    backgroundColor: 'transparent',
+  },
+});
+
+const tabItem = css({
+  fontSize: '14px',
+  fontWeight: 'bold',
+  lineHeight: '14px',
+  padding: '4px 6px',
+  color: '#fff',
+  cursor: 'pointer',
+  whiteSpace: 'nowrap',
+  '&.bgm-tab__item--borderless': {
+    fontWeight: '500',
+    lineHeight: '20px',
+    color: '#595555',
+    padding: '4px 20px',
+    '&.bgm-tab__item--active': {
+      color: '#fff',
+    },
+  },
+  '&.bgm-tab__item--active': {
+    backgroundColor: '#f09199',
+    borderRadius: '18px',
+  },
+});
 
 type StyleType = 'default' | 'borderless';
 
@@ -36,9 +71,12 @@ const TabItem: React.FC<ItemProps> = ({ isActive, ...props }) => {
   const { type } = useContext(TabContext);
   return (
     <li
-      className={classnames('bgm-tab__item', `bgm-tab__item--${type}`, {
-        'bgm-tab__item--active': isActive,
-      })}
+      className={cx(
+        'bgm-tab__item',
+        `bgm-tab__item--${type}`,
+        tabItem,
+        isActive && 'bgm-tab__item--active',
+      )}
       {...props}
     />
   );
@@ -47,7 +85,7 @@ const TabItem: React.FC<ItemProps> = ({ isActive, ...props }) => {
 function TabGroup({ children, type = 'default' }: GroupProps) {
   return (
     <TabContext.Provider value={{ type }}>
-      <ul className={classnames('bgm-tab', `bgm-tab--${type}`)}>{children}</ul>
+      <ul className={cx('bgm-tab', `bgm-tab--${type}`, tab)}>{children}</ul>
     </TabContext.Provider>
   );
 }

@@ -1,8 +1,31 @@
-import './style';
-
-import cn from 'classnames';
 import type { JSX } from 'react';
 import React, { forwardRef } from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
+
+const radio = css({
+  '& > input': {
+    appearance: 'none',
+    height: '0.75rem',
+    width: '0.75rem',
+    borderRadius: '9999px',
+    boxShadow: 'inset 0 0 0 1px #595555, inset 0 0 0 3px white', // ring style!!
+    margin: '0',
+    marginRight: '8px',
+    '&:checked': {
+      background: '#595555',
+    },
+  },
+  '& > label': {
+    userSelect: 'none',
+    fontSize: '1rem',
+  },
+});
+
+const radioGroup = css({
+  display: 'inline-flex',
+  gap: '0.5rem',
+});
 
 type RadioProps = JSX.IntrinsicElements['input'] & {
   label: string;
@@ -20,7 +43,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
   ref,
 ) {
   return (
-    <div className={cn('bgm-radio', className)} onClick={onClick}>
+    <div className={cx('bgm-radio', radio, className)} onClick={onClick}>
       <input ref={ref} type={type} id={id} {...props} />
       <label htmlFor={id}>{label}</label>
     </div>
@@ -29,7 +52,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(function Radio(
 
 function RadioGroup({ children, className, ...props }: JSX.IntrinsicElements['div']) {
   return (
-    <div className={cn('bgm-radio-group', className)} {...props}>
+    <div className={cx('bgm-radio-group', radioGroup, className)} {...props}>
       {children}
     </div>
   );

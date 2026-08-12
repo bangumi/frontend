@@ -25,14 +25,14 @@ Object {
                 <div />
               </div>
               <div
-                class="bgm-input-group d_flex flex_1"
+                class="bgm-input-group white-space_nowrap [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-tl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-bl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bd-l_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:pos_absolute [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:left_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:content_"" [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:h_70% [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:w_1px [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:bg_#e8e3e3 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-tr_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-br_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bd-r_0 d_flex flex_1"
               >
                 <div
-                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
+                  class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
                   style="width: 170px;"
                 >
                   <input
-                    class="bgm-input"
+                    class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                     type="text"
                   />
                   <div
@@ -40,10 +40,10 @@ Object {
                   />
                 </div>
                 <div
-                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
+                  class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
                 >
                   <input
-                    class="bgm-input"
+                    class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                     id="yufi"
                     type="text"
                     value=""
@@ -74,14 +74,14 @@ Object {
                 <div />
               </div>
               <div
-                class="bgm-input-group d_flex flex_1"
+                class="bgm-input-group white-space_nowrap [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-tl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-bl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bd-l_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:pos_absolute [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:left_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:content_"" [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:h_70% [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:w_1px [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:bg_#e8e3e3 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-tr_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-br_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bd-r_0 d_flex flex_1"
               >
                 <div
-                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
+                  class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
                   style="width: 170px;"
                 >
                   <input
-                    class="bgm-input"
+                    class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                     type="text"
                   />
                   <div
@@ -89,10 +89,10 @@ Object {
                   />
                 </div>
                 <div
-                  class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
+                  class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
                 >
                   <input
-                    class="bgm-input"
+                    class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                     id="anisu"
                     type="text"
                     value=""
@@ -174,14 +174,14 @@ Object {
               <div />
             </div>
             <div
-              class="bgm-input-group d_flex flex_1"
+              class="bgm-input-group white-space_nowrap [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-tl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-bl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bd-l_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:pos_absolute [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:left_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:content_"" [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:h_70% [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:w_1px [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:bg_#e8e3e3 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-tr_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-br_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bd-r_0 d_flex flex_1"
             >
               <div
-                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
+                class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
                 style="width: 170px;"
               >
                 <input
-                  class="bgm-input"
+                  class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                   type="text"
                 />
                 <div
@@ -189,10 +189,10 @@ Object {
                 />
               </div>
               <div
-                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
+                class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1 [&.bgm-input__wrapper:first-of-type]:bdr_12px_0_0 [&.bgm-input__wrapper:last-of-type]:bdr_0_12px_0_0"
               >
                 <input
-                  class="bgm-input"
+                  class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                   id="yufi"
                   type="text"
                   value=""
@@ -223,14 +223,14 @@ Object {
               <div />
             </div>
             <div
-              class="bgm-input-group d_flex flex_1"
+              class="bgm-input-group white-space_nowrap [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-tl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bdr-bl_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:bd-l_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:pos_absolute [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:left_0 [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:content_"" [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:h_70% [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:w_1px [&_.bgm-input__wrapper]:[&:not(:first-of-type)]:[&::before]:bg_#e8e3e3 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-tr_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bdr-br_0 [&_.bgm-input__wrapper]:[&:not(:last-of-type)]:bd-r_0 d_flex flex_1"
             >
               <div
-                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
+                class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
                 style="width: 170px;"
               >
                 <input
-                  class="bgm-input"
+                  class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                   type="text"
                 />
                 <div
@@ -238,10 +238,10 @@ Object {
                 />
               </div>
               <div
-                class="bgm-input__wrapper [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
+                class="bgm-input__wrapper d_inline-flex pos_relative bx-s_border-box ai_center jc_space-between p_0.5rem_1rem bd_2px_solid_#e8e3e3 bdr_22px [&.bgm-input__wrapper--rounded]:p_0.5rem_0.75rem [&.bgm-input__wrapper--rounded]:bdr_12px [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:cursor_not-allowed [&.bgm-input__wrapper--disabled,_&.bgm-input__wrapper--disabled_*]:bg_#f4f4f5 [&.bgm-input__wrapper--focus]:bd-c_#c8c2c2 [&_.bgm-input__prefix]:d_flex [&_.bgm-input__prefix]:ai_center [&_.bgm-input__prefix]:mr_12px [&_.bgm-input__prefix]:white-space_nowrap [&_.bgm-input__prefix]:us_none [&_.bgm-input__prefix]:fw_600 [&_.bgm-input__prefix]:c_#595555 [&_.bgm-input__prefix]:lh_1.625rem [&_.bgm-input__prefix]:[&_svg]:w_19px [&_.bgm-input__prefix]:[&_svg]:h_19px [.bgm-form_&]:bdr_12px [.bgm-form_&]:[&_.bgm-input::placeholder]:c_#9f9b9b [.bgm-form--compact_>_&]:p_0.75rem [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3 [&.bgm-input__wrapper]:bdr_0 [&.bgm-input__wrapper]:bd-b_0 [&.bgm-input__wrapper]:[&:last-child]:flex_1"
               >
                 <input
-                  class="bgm-input"
+                  class="bgm-input fs_1rem lh_1.5rem outline-style_none bd_none c_#1f1c1c p_0 w_100% [&.bgm-input--align-right]:ta_right [&::placeholder]:c_#e8e3e3"
                   id="anisu"
                   type="text"
                   value=""

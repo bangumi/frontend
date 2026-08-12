@@ -1,10 +1,50 @@
-import './style';
-
-import cn from 'classnames';
 import { keyBy } from 'lodash-es';
 import React, { useMemo, useState } from 'react';
 
 import { ArrowDown } from '@bangumi/icons';
+import { css, cx } from '@bangumi/styled-system/css';
+
+const bgmSelect = css({
+  display: 'inline-flex',
+  boxSizing: 'border-box',
+  position: 'relative',
+  padding: '0.5rem 1rem',
+  border: '2px solid #e8e3e3',
+  borderRadius: '12px',
+  userSelect: 'none',
+  fontSize: '1rem',
+  verticalAlign: 'bottom',
+  cursor: 'pointer',
+  '& select': {
+    position: 'absolute',
+    left: '0',
+    top: '0',
+    height: '100%',
+    width: '100%',
+    opacity: '0',
+  },
+  '.bgm-input-group &': {
+    '&:not(:last-of-type)': {
+      borderTopRightRadius: '0',
+      borderBottomRightRadius: '0',
+      borderRight: '0',
+    },
+  },
+});
+
+const selectBox = css({
+  display: 'flex',
+  flex: '1',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  '& span': {
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
+    color: '#1f1c1c',
+  },
+});
+
+const selectArrow = css({ display: 'inline-block' });
 
 interface Option {
   label: string;
@@ -34,10 +74,10 @@ const Select = ({ options, style, defaultValue, className, onChange }: SelectPro
   };
 
   return (
-    <div className={cn('bgm-select', className)} onClick={handleClick} style={style}>
-      <div className='bgm-select__box'>
+    <div className={cx('bgm-select', bgmSelect, className)} onClick={handleClick} style={style}>
+      <div className={selectBox}>
         <span>{optionsMap[active]?.label}</span>
-        <ArrowDown className='bgm-select-arrow' />
+        <ArrowDown className={selectArrow} />
       </div>
       <select
         defaultValue={defaultValue}

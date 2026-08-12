@@ -1,8 +1,34 @@
-import './style';
-
-import cn from 'classnames';
 import type { JSX, PropsWithChildren, ReactNode } from 'react';
 import React, { createContext, useContext } from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
+
+const form = css({
+  display: 'inline-flex',
+  flexDirection: 'column',
+  gap: '1rem',
+  '&.bgm-form--compact': { gap: '0' },
+});
+
+const formItem = css({
+  display: 'flex',
+  '@media (max-width: 640px)': {
+    flexDirection: 'column',
+  },
+});
+
+const formItemLabel = css({
+  display: 'inline-block',
+  fontWeight: '400',
+  fontSize: '1.125rem',
+  lineHeight: '25px',
+  color: '#9f9b9b',
+  '& > label': {
+    display: 'flex',
+    alignItems: 'center',
+    height: '38px',
+  },
+});
 
 type ItemProps = PropsWithChildren<{
   label?: ReactNode;
@@ -11,10 +37,10 @@ type ItemProps = PropsWithChildren<{
 function FormItem({ children, label }: ItemProps) {
   const { labelWidth, compact } = useFormContext();
   return (
-    <div className='bgm-form-item'>
+    <div className={formItem}>
       {!compact && (
         <div
-          className='bgm-form-item-label'
+          className={formItemLabel}
           style={{
             width: `${labelWidth}px`,
           }}
@@ -59,7 +85,7 @@ const Form = ({
   return (
     <FormContext.Provider value={{ labelWidth: labelWidth ?? 12, compact }}>
       <form
-        className={cn('bgm-form', { 'bgm-form--compact': compact }, className)}
+        className={cx('bgm-form', compact && 'bgm-form--compact', className)}
         onKeyDown={onKeyDown}
         {...rest}
       >
