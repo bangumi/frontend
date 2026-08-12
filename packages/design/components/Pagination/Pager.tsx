@@ -1,6 +1,32 @@
-import classNames from 'classnames';
 import type { FC } from 'react';
 import React from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
+
+const pager = css({
+  userSelect: 'none',
+  width: '34px',
+  height: '34px',
+  borderRadius: '34px',
+  border: 'solid 2px #e8e3e3',
+  color: '#9f9b9b',
+  cursor: 'pointer',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  '& + &': { marginLeft: '10px' },
+  '&.bgm-pagination-pager--active': {
+    color: '#fff',
+    backgroundColor: '#f09199',
+    borderColor: '#f09199',
+    cursor: 'default',
+  },
+  _hover: {
+    color: '#fff',
+    backgroundColor: '#f09199',
+    borderColor: '#f09199',
+  },
+});
 
 export interface PagerProps {
   page: number;
@@ -10,10 +36,13 @@ export interface PagerProps {
 
 const Pager: FC<PagerProps> = (props) => {
   const prefixCls = 'bgm-pagination-pager';
-  const actualClassnames = classNames(prefixCls, `${prefixCls}--${props.page}`, {
-    [`${prefixCls}--active`]: props.active,
-    [`${prefixCls}--disabled`]: !props.page,
-  });
+  const actualClassnames = cx(
+    prefixCls,
+    pager,
+    `${prefixCls}--${props.page}`,
+    props.active && `${prefixCls}--active`,
+    !props.page && `${prefixCls}--disabled`,
+  );
 
   const handleClick = (): void => {
     props.onClick(props.page);

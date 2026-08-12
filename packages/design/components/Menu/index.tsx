@@ -1,11 +1,51 @@
-import './style';
-
-import classnames from 'classnames';
 import type { FC } from 'react';
 import React, { createContext, useContext } from 'react';
 
+import { css, cx } from '@bangumi/styled-system/css';
+
 import type { MenuItemProps } from './MenuItem';
 import MenuItem from './MenuItem';
+
+const menu = css({
+  display: 'inline-flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: '14px',
+  margin: '0',
+  padding: '0',
+  listStyle: 'none',
+  color: '#595555',
+  fontStyle: 'normal',
+  fontWeight: '500',
+  '&.bgm-menu--horizontal': {
+    flexDirection: 'row',
+    height: '60px',
+    lineHeight: '21px',
+    '& > .bgm-menu-item': {
+      marginRight: '20px',
+      height: '60px',
+      lineHeight: '60px',
+      whiteSpace: 'nowrap',
+      '&:last-of-type': {
+        marginRight: '0',
+      },
+    },
+  },
+  '&.bgm-menu--vertical': {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100px',
+    padding: '8px',
+    boxSizing: 'border-box',
+    lineHeight: '14px',
+    '& > .bgm-menu-item': {
+      width: '100%',
+      padding: '5px 0',
+      textAlign: 'center',
+    },
+  },
+});
 
 export type MenuItemType = Omit<MenuItemProps, 'id'> & { key: string };
 
@@ -39,7 +79,7 @@ const Menu: FC<MenuProps> = ({
   activeKey,
   items,
 }) => {
-  const className = classnames('bgm-menu', `bgm-menu--${mode}`, wrapperClass);
+  const className = cx('bgm-menu', `bgm-menu--${mode}`, menu, wrapperClass);
   return (
     <ul className={className} style={style}>
       <MenuContext.Provider value={{ onClick, activeKey, mode }}>

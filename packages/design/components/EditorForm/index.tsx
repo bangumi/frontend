@@ -1,12 +1,47 @@
-import './style';
-
-import classnames from 'classnames';
 import React, { forwardRef } from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
 
 import Button from '../Button';
 import Link from '../Typography/Link';
 import type { EditorProps } from './Editor';
 import Editor from './Editor';
+
+const editorForm = css({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
+  // 允许在窄容器（如移动端）内收缩，避免内容按 max-content 撑开
+  minWidth: '0',
+  '& .bgm-editor__submit': {
+    fontSize: '14px',
+    display: 'flex',
+    marginTop: '12px',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    gap: '10px',
+    // 验证码等额外内容在窄屏放不下时换行，避免横向溢出
+    flexWrap: 'wrap',
+    '& .bgm-editor__bbcode-tip': {
+      color: '#9f9b9b',
+      lineHeight: '24px',
+      '& .bgm-editor__bbcode-tip__left': {
+        '@media (max-width: 640px)': { display: 'none' },
+      },
+    },
+  },
+  '& .bgm-editor__button': { padding: '0 15px' },
+  '.bgm-form--compact > &': {
+    alignItems: 'stretch',
+    width: 'auto',
+    '& .bgm-editor__container': {
+      borderTop: 'none',
+      borderTopLeftRadius: '0',
+      borderTopRightRadius: '0',
+    },
+  },
+});
 
 export interface EditorFormProps extends EditorProps {
   /** 最外层 className */
@@ -46,7 +81,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
     ref,
   ) => {
     return (
-      <div className={classnames('bgm-editor__form', className)} style={style}>
+      <div className={cx('bgm-editor__form', editorForm, className)} style={style}>
         <Editor ref={ref} onConfirm={onConfirm} {...props} />
         <div className='bgm-editor__submit'>
           <Button

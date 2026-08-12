@@ -2,19 +2,19 @@
 
 exports[`should render correctly 1`] = `
 <ul
-  class="bgm-pagination"
+  class="bgm-pagination d_flex"
   data-testid="pagination-wrapper"
 >
   <li
-    class="bgm-pagination-prev bgm-pagination-prev--hide"
+    class="bgm-pagination-prev us_none cursor_pointer h_34px w_80px bdr_17px bd_solid_2px_#e8e3e3 d_flex ai_center jc_center hover:bg-c_#f09199 hover:bd-c_#f09199 hover:[&_.bgm-pagination-icon]:fill_#fff [&.bgm-pagination-prev]:mr_30px [&.bgm-pagination-next]:ml_30px [&.bgm-pagination-prev--hide,_&.bgm-pagination-next--hide]:vis_hidden bgm-pagination-prev--hide"
     data-testid="pagination-prev"
   >
     <div
-      class="bgm-pagination-icon"
+      class="bgm-pagination-icon fill_#9f9b9b"
     />
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--1 bgm-pagination-pager--active"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--1 bgm-pagination-pager--active"
     data-testid="pagination-pager"
     tabindex="0"
     title="1"
@@ -26,7 +26,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--2"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--2"
     data-testid="pagination-pager"
     tabindex="0"
     title="2"
@@ -38,7 +38,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--3"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--3"
     data-testid="pagination-pager"
     tabindex="0"
     title="3"
@@ -50,7 +50,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--4"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--4"
     data-testid="pagination-pager"
     tabindex="0"
     title="4"
@@ -62,7 +62,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--5"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--5"
     data-testid="pagination-pager"
     tabindex="0"
     title="5"
@@ -74,7 +74,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--6"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--6"
     data-testid="pagination-pager"
     tabindex="0"
     title="6"
@@ -86,7 +86,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--7"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--7"
     data-testid="pagination-pager"
     tabindex="0"
     title="7"
@@ -98,7 +98,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--8"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--8"
     data-testid="pagination-pager"
     tabindex="0"
     title="8"
@@ -110,7 +110,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--9"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--9"
     data-testid="pagination-pager"
     tabindex="0"
     title="9"
@@ -122,7 +122,7 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-pager bgm-pagination-pager--10"
+    class="bgm-pagination-pager us_none w_34px h_34px bdr_34px bd_solid_2px_#e8e3e3 c_#9f9b9b cursor_pointer d_flex ai_center jc_center [&_+_&]:ml_10px [&.bgm-pagination-pager--active]:c_#fff [&.bgm-pagination-pager--active]:bg-c_#f09199 [&.bgm-pagination-pager--active]:bd-c_#f09199 [&.bgm-pagination-pager--active]:cursor_default hover:c_#fff hover:bg-c_#f09199 hover:bd-c_#f09199 bgm-pagination-pager--10"
     data-testid="pagination-pager"
     tabindex="0"
     title="10"
@@ -134,11 +134,11 @@ exports[`should render correctly 1`] = `
     </a>
   </li>
   <li
-    class="bgm-pagination-next"
+    class="bgm-pagination-next us_none cursor_pointer h_34px w_80px bdr_17px bd_solid_2px_#e8e3e3 d_flex ai_center jc_center hover:bg-c_#f09199 hover:bd-c_#f09199 hover:[&_.bgm-pagination-icon]:fill_#fff [&.bgm-pagination-prev]:mr_30px [&.bgm-pagination-next]:ml_30px [&.bgm-pagination-prev--hide,_&.bgm-pagination-next--hide]:vis_hidden"
     data-testid="pagination-next"
   >
     <div
-      class="bgm-pagination-icon"
+      class="bgm-pagination-icon fill_#9f9b9b"
     />
   </li>
 </ul>

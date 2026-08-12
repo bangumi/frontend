@@ -1,5 +1,3 @@
-import './style/index.less';
-
 import classNames from 'classnames';
 import React from 'react';
 
@@ -13,11 +11,29 @@ export interface PopoverProps {
 
 // 未 hover 时隐藏弹出内容，避免 absolute 菜单在移动端撑出水平滚动
 const popover = css({
+  display: 'inline-block',
+  '& .bgm-popover__container': {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
   '& .bgm-popover__content': {
+    border: '1px solid #e8e3e3',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.05)',
+    backgroundColor: 'white',
+    borderRadius: '17px',
+    position: 'absolute',
+    visibility: 'hidden',
+    opacity: '0',
+    transition: 'visibility 0s, opacity 0.15s linear',
+    zIndex: '99',
     display: 'none',
   },
   _hover: {
     '& .bgm-popover__content': {
+      visibility: 'visible',
+      opacity: '1',
       display: 'block',
     },
   },

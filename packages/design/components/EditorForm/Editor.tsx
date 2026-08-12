@@ -9,7 +9,76 @@ import React, {
   useState,
 } from 'react';
 
+import { css, cx } from '@bangumi/styled-system/css';
+
 import Toolbox from './Toolbox';
+
+const editorContainer = css({
+  display: 'inline-flex',
+  flexDirection: 'column',
+  minHeight: '162px',
+  border: '2px solid #e8e3e3',
+  borderRadius: '12px',
+  padding: '8px 6px 6px',
+  boxSizing: 'border-box',
+  width: '100%',
+  '& .bgm-editor__toolbar': {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: '10px',
+  },
+  '& .bgm-editor__toolbox': {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: '26px',
+    width: '215px',
+    padding: '0 8px',
+    '& > svg': { cursor: 'pointer' },
+  },
+  '& .bgm-editor__wordcount': {
+    display: 'flex',
+    alignItems: 'center',
+    fontSize: '14px',
+    color: '#9f9b9b',
+    marginRight: '9px',
+    whiteSpace: 'nowrap',
+  },
+  '& .bgm-editor__text': {
+    flex: '1 0 auto',
+    padding: '0 6px',
+    resize: 'vertical',
+    border: 'none',
+    outline: 'none',
+    color: '#1f1c1c',
+    lineHeight: '26px',
+    fontSize: '16px',
+    '&::placeholder': { color: '#9f9b9b' },
+  },
+  // 在 Form 中使用 Editor 而非 EditorForm 的场景
+  '.bgm-form &': {
+    '& .bgm-editor__text': { width: 'auto' },
+  },
+  '.bgm-form--compact > &': {
+    '&:not(:first-child)': {
+      borderTop: 'none',
+      borderTopLeftRadius: '0',
+      borderTopRightRadius: '0',
+    },
+    '&:not(:last-child)': {
+      borderBottom: 'none',
+      borderBottomLeftRadius: '0',
+      borderBottomRightRadius: '0',
+      '&::after': {
+        content: '""',
+        position: 'absolute',
+        bottom: '-1px',
+        width: 'calc(100% - 24px)',
+        borderBottom: '2px dotted #e8e3e3',
+      },
+    },
+  },
+});
 
 export interface EditorProps {
   placeholder?: string;
@@ -186,7 +255,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
     );
 
     return (
-      <div className='bgm-editor__container'>
+      <div className={cx('bgm-editor__container', editorContainer)}>
         <div className='bgm-editor__toolbar'>
           {showToolbox && <Toolbox handleClickEvent={handleToolboxEvent} />}
           {showWordCount && value && (

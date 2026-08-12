@@ -1,12 +1,21 @@
-import './style';
-
-import classnames from 'classnames';
 import { delay } from 'lodash-es';
 import React from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
 
 import Message from '../Message';
 import type { Toast as TToast } from './types';
 import { removeToastEvent } from './utils/event-bus';
+
+const toastItem = css({
+  transition: 'opacity 0.3s ease-in-out',
+  opacity: '0',
+  marginBottom: '5px',
+  maxWidth: '600px',
+  '&.bgm-toast--visible': {
+    opacity: '1',
+  },
+});
 
 interface ToastProps {
   toast: TToast;
@@ -35,11 +44,7 @@ export const Toast: React.FC<ToastProps> = ({ toast }) => {
   }, [toast, timeout]);
 
   return (
-    <div
-      className={classnames('bgm-toast', {
-        'bgm-toast--visible': isVisible,
-      })}
-    >
+    <div className={cx('bgm-toast', toastItem, isVisible && 'bgm-toast--visible')}>
       <Message type={type}>{message}</Message>
     </div>
   );

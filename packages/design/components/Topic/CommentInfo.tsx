@@ -1,8 +1,18 @@
-import './style';
-
 import dayjs from 'dayjs';
 import type { FC } from 'react';
 import React, { memo } from 'react';
+
+import { css, cx } from '@bangumi/styled-system/css';
+
+const commentInfo = css({
+  color: '#9f9b9b',
+  fontSize: '14px',
+  lineHeight: '20px',
+  '& a': {
+    color: '#9f9b9b',
+    textDecoration: 'none',
+  },
+});
 
 export interface CommentInfoProps {
   floor: string | number;
@@ -22,13 +32,13 @@ const CommentInfo: FC<CommentInfoProps> = ({ floor, createdAt, isSpecial = false
   }
 
   return !isSpecial ? (
-    <span className='bgm-topic__commentInfo'>
+    <span className={cx('bgm-topic__commentInfo', commentInfo)}>
       <a href={`#post_${id}`}>#{floor}</a>
       {spaces}|{spaces}
       {date}
     </span>
   ) : (
-    <span className='bgm-topic__commentInfo'>{date}</span>
+    <span className={cx('bgm-topic__commentInfo', commentInfo)}>{date}</span>
   );
 };
 

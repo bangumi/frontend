@@ -3,7 +3,7 @@
 exports[`<Image /> > should render box-shadow properly 1`] = `
 <img
   alt="vanilla"
-  class="bgm-image bgm-image--withBoxShadow bgm-image--rect"
+  class="bgm-image d_inline-block ov_hidden bg_#e8e3e3 obj-f_cover obj-p_top_left hover:ring_2px_solid_rgba(255,_255,_255,_0.4) hover:ring-o_-2px [&.bgm-image--withBoxShadow]:bx-sh_0_5px_10px_3px_rgba(237,_233,_233,_0.8) [&.bgm-image--rect]:bdr_6px [&.bgm-image--circle]:bdr_50% bgm-image--withBoxShadow bgm-image--rect"
   data-testid="img-wrapper"
   src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
 />
@@ -12,7 +12,7 @@ exports[`<Image /> > should render box-shadow properly 1`] = `
 exports[`<Image /> > should render circle shape properly 1`] = `
 <img
   alt="vanilla"
-  class="bgm-image bgm-image--withBoxShadow bgm-image--circle"
+  class="bgm-image d_inline-block ov_hidden bg_#e8e3e3 obj-f_cover obj-p_top_left hover:ring_2px_solid_rgba(255,_255,_255,_0.4) hover:ring-o_-2px [&.bgm-image--withBoxShadow]:bx-sh_0_5px_10px_3px_rgba(237,_233,_233,_0.8) [&.bgm-image--rect]:bdr_6px [&.bgm-image--circle]:bdr_50% bgm-image--withBoxShadow bgm-image--circle"
   data-testid="img-wrapper"
   src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
 />
@@ -21,7 +21,7 @@ exports[`<Image /> > should render circle shape properly 1`] = `
 exports[`<Image /> > should render correctly 1`] = `
 <img
   alt="vanilla"
-  class="bgm-image bgm-image--rect"
+  class="bgm-image d_inline-block ov_hidden bg_#e8e3e3 obj-f_cover obj-p_top_left hover:ring_2px_solid_rgba(255,_255,_255,_0.4) hover:ring-o_-2px [&.bgm-image--withBoxShadow]:bx-sh_0_5px_10px_3px_rgba(237,_233,_233,_0.8) [&.bgm-image--rect]:bdr_6px [&.bgm-image--circle]:bdr_50% bgm-image--rect"
   data-testid="img-wrapper"
   src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
 />
@@ -30,7 +30,7 @@ exports[`<Image /> > should render correctly 1`] = `
 exports[`<Image /> > should render hovering styles properly 1`] = `
 <img
   alt="vanilla"
-  class="bgm-image bgm-image--withBoxShadow bgm-image--rect"
+  class="bgm-image d_inline-block ov_hidden bg_#e8e3e3 obj-f_cover obj-p_top_left hover:ring_2px_solid_rgba(255,_255,_255,_0.4) hover:ring-o_-2px [&.bgm-image--withBoxShadow]:bx-sh_0_5px_10px_3px_rgba(237,_233,_233,_0.8) [&.bgm-image--rect]:bdr_6px [&.bgm-image--circle]:bdr_50% bgm-image--withBoxShadow bgm-image--rect"
   data-testid="img-wrapper"
   src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDEzNiAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjIwMCIgcng9IjYiIGZpbGw9ImFxdWEiLz4NCjwvc3ZnPg0K"
 />

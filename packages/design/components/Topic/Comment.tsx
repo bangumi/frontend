@@ -7,7 +7,7 @@ import { ozaClient } from '@bangumi/client';
 import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
 import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
@@ -40,6 +40,94 @@ const commentBody = css({
   minWidth: '0',
   '& > *': {
     maxWidth: '100%',
+  },
+});
+
+// bgm-comment__* 字符串类样式，从原 Comment.less 迁移，通过 header 后代选择器承载
+const commentHeader = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  padding: '15px 15px 10px',
+  borderBottom: '1px dotted #e8e3e3',
+  '&.bgm-comment__header--main-post': {
+    padding: '10px 5px',
+    borderBottom: 'none',
+    '& .bgm-comment__box': { marginLeft: '12px' },
+  },
+  '&.bgm-comment__header--reply': {
+    marginLeft: '70px',
+    '& .bgm-comment__box': { marginLeft: '13px' },
+  },
+  '&.bgm-comment__header--collapsed': {
+    paddingTop: '12px',
+    minHeight: '22px',
+    '& .bgm-comment__content': { marginTop: '0' },
+  },
+  '&.bgm-comment__header--highlighted': {
+    border: '2px solid #369cf8',
+    borderRadius: '5px',
+  },
+  '@media (max-width: 640px)': {
+    padding: '10px 5px',
+    '& .bgm-comment__box': { marginLeft: '10px' },
+    '&.bgm-comment__header--main-post': {
+      '& .bgm-comment__box': { marginLeft: '12px' },
+    },
+    '&.bgm-comment__header--reply': {
+      marginLeft: '55px',
+      '& .bgm-comment__box': { marginLeft: '13px' },
+    },
+  },
+  '& .bgm-comment__box': {
+    marginLeft: '15px',
+    flex: '1',
+    // this trick is same to EditorForm
+    minWidth: '0',
+  },
+  '& .bgm-comment__main': {
+    minHeight: '60px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  '& .bgm-comment__tip': {
+    fontSize: '16px',
+    lineHeight: '22px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    color: '#9f9b9b',
+    width: '100%',
+    '& .creator-info': {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      '& .bgm-link, & svg': { paddingRight: '12px' },
+    },
+    '& .comment-info': {
+      display: 'flex',
+      fontSize: '14px',
+      lineHeight: '20px',
+    },
+  },
+  '& .bgm-comment__post-actions': {
+    marginTop: '8px',
+    fontSize: '14px',
+    lineHeight: '20px',
+    color: '#9f9b9b',
+  },
+  '& .bgm-comment__opinions': {
+    marginTop: '12px',
+  },
+  '& .bgm-comment__content': {
+    color: '#1f1c1c',
+    lineHeight: '26px',
+    marginTop: '12px',
+  },
+  '& .bgm-comment__content--deleted': {
+    color: '#595555',
   },
 });
 
@@ -126,12 +214,14 @@ const Comment: FC<CommentProps> = ({
   const highlightId = location.hash.slice(1);
   const isHighlighted = highlightId === elementId;
 
-  const headerClassName = classNames('bgm-comment__header', {
-    'bgm-comment__header--reply': isReply,
-    'bgm-comment__header--main-post': isMainPost,
-    'bgm-comment__header--collapsed': collapsed,
-    'bgm-comment__header--highlighted': isHighlighted,
-  });
+  const headerClassName = cx(
+    'bgm-comment__header',
+    commentHeader,
+    isReply && 'bgm-comment__header--reply',
+    isMainPost && 'bgm-comment__header--main-post',
+    collapsed && 'bgm-comment__header--collapsed',
+    isHighlighted && 'bgm-comment__header--highlighted',
+  );
 
   const url = creator ? getUserProfileLink(creator.username) : '';
 
