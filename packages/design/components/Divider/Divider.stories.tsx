@@ -1,7 +1,25 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
+import { css, cx } from '@bangumi/styled-system/css';
+
 import Divider from '.';
+
+const horizontalStyle = css({
+  width: '60%',
+  height: '1px',
+  margin: '0',
+  border: 'none',
+  background: '#e8e3e3',
+});
+
+const verticalStyle = css({
+  width: '1px',
+  height: '100%',
+  margin: '0',
+  border: 'none',
+  background: '#e8e3e3',
+});
 
 const componentMeta: Meta<typeof Divider> = {
   title: 'Grid/Divider',
@@ -25,7 +43,7 @@ const Template: StoryFn<typeof Divider> = (args) => {
         }}
       >
         <li>想看</li>
-        <Divider {...args} />
+        <Divider {...args} className={horizontalStyle} />
         <li>看过</li>
       </ul>
     );
@@ -33,7 +51,10 @@ const Template: StoryFn<typeof Divider> = (args) => {
   return (
     <div style={{ display: orientation === 'vertical' ? 'flex' : undefined }}>
       <span>标题</span>
-      <Divider {...args} />
+      <Divider
+        {...args}
+        className={cx(orientation === 'vertical' ? verticalStyle : horizontalStyle)}
+      />
       <span>文本</span>
     </div>
   );
