@@ -3,17 +3,16 @@ import { expect, test as setup } from '@playwright/test';
 import { userAuthFiles } from '../common/login';
 
 setup('authenticate as treeholechan', async ({ page }) => {
-  await page.goto('/login');
-  await page.getByPlaceholder('你的 Email 地址').fill('treeholechan@gmail.com');
-  await page.getByPlaceholder('你的登录密码').click();
-  await page.getByPlaceholder('你的登录密码').fill('lovemeplease');
-  // NOTE: Cloudflare 网络不好可能载入需要花费一些时间
-  await expect(page.frameLocator('iframe').locator('span#success-text')).toBeVisible({
-    timeout: 60 * 1000,
+  // 直接用 API 登录（测试 turnstile token），避免依赖 Cloudflare turnstile iframe
+  const resp = await page.context().request.post('/p1/login', {
+    data: {
+      email: 'treeholechan@gmail.com',
+      password: 'lovemeplease',
+      // Cloudflare 测试用 turnstile token（server 用测试 secret key 时恒通过）
+      turnstileToken: '10000000-aaaa-bbbb-cccc-000000000001',
+    },
   });
-  await page.getByRole('button', { name: '登录' }).click();
-
-  await page.waitForURL('/', { timeout: 30 * 1000 });
+  expect(resp.status()).toBe(200);
 
   await page.context().storageState({ path: userAuthFiles.treeholechan });
 });
