@@ -25,7 +25,10 @@ try {
 // 其次使用最近的 git tag（本地 / preview 构建），最后 fallback 到 package.json version。
 try {
   VERSION =
-    process.env.VERSION?.trim() || execSync('git describe --tags --abbrev=0').toString().trim();
+    process.env.VERSION?.trim() ||
+    execSync('git describe --tags --abbrev=0', { stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString()
+      .trim();
 } catch {
   console.log('failed to get version from git, fallback to package.json version');
 }
