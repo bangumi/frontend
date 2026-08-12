@@ -1,0 +1,77 @@
+[
+  {
+    "id": 201,
+    "mainID": 123,
+    "creatorID": 1,
+    "relatedID": 0,
+    "createdAt": 1786000100,
+    "content": "第一条主评论",
+    "state": 0,
+    "user": {
+      "id": 1,
+      "username": "sai",
+      "nickname": "Sai",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+      },
+      "sign": "",
+      "group": 1,
+      "joinedAt": 1262304000,
+      "isFriend": false
+    },
+    "reactions": [],
+    "replies": [
+      {
+        "id": 202,
+        "mainID": 123,
+        "creatorID": 2,
+        "relatedID": 201,
+        "createdAt": 1786000200,
+        "content": "回复第一条评论",
+        "state": 0,
+        "user": {
+          "id": 2,
+          "username": "chobits",
+          "nickname": "Chobits",
+          "avatar": {
+            "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+            "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+            "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+          },
+          "sign": "",
+          "group": 1,
+          "joinedAt": 1262304000,
+          "isFriend": false
+        },
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "mainID": 123,
+    "creatorID": 2,
+    "relatedID": 0,
+    "createdAt": 1786000300,
+    "content": "第二条主评论",
+    "state": 0,
+    "user": {
+      "id": 2,
+      "username": "chobits",
+      "nickname": "Chobits",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+      },
+      "sign": "",
+      "group": 1,
+      "joinedAt": 1262304000,
+      "isFriend": false
+    },
+    "reactions": [],
+    "replies": []
+  }
+]

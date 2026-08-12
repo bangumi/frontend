@@ -1,0 +1,23 @@
+[
+  {
+    "id": 501963,
+    "name": "Bangumi 测试条目",
+    "nameCN": "测试条目中文名",
+    "type": 2,
+    "images": {
+      "small": "https://lain.bgm.tv/pic/cover/s/50/19/501963.jpg",
+      "medium": "https://lain.bgm.tv/pic/cover/m/50/19/501963.jpg",
+      "large": "https://lain.bgm.tv/pic/cover/l/50/19/501963.jpg"
+    },
+    "info": "2024年10月",
+    "metaTags": [],
+    "rating": {
+      "rank": 100,
+      "count": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+      "score": 7.5,
+      "total": 100
+    },
+    "locked": false,
+    "nsfw": false
+  }
+]

@@ -43,6 +43,11 @@ export const handlers = [
   mockAPI('/p1/groups/-/posts/:postID/like', 'delete'),
   mockAPI('/p1/users/:username/indexes', 'get'),
   mockAPI('/p1/users/:username/blogs', 'get'),
+  mockAPI('/p1/blogs/:entryID', 'get'),
+  mockAPI('/p1/blogs/:entryID/comments', 'get'),
+  mockAPI('/p1/blogs/:entryID/subjects', 'get'),
+  mockAPI('/p1/blogs/:entryID/comments', 'post'),
+  mockAPI('/p1/blogs/-/comments/:commentID', 'delete'),
   mockAPI('/p1/users/:username/collections/subjects', 'get'),
   mockAPI('/p1/users/:username/timeline', 'get'),
 ];
