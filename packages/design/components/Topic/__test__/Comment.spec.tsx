@@ -13,6 +13,17 @@ import singleComment from './fixtures/singleComment.json';
 import specialComment from './fixtures/specialComment.json';
 import mockedCurrentUser from './fixtures/user.json';
 
+// 测试环境没有 turnstile 脚本，mock 成自动通过的验证码
+vi.mock('@marsidev/react-turnstile', () => {
+  const Turnstile = ({ onSuccess }: { onSuccess?: (token: string) => void }) => {
+    React.useEffect(() => {
+      onSuccess?.('fake-token');
+    });
+    return <div />;
+  };
+  return { Turnstile };
+});
+
 function render(component: React.ReactElement, routerEntries?: string[]) {
   return _render(<MemoryRouter initialEntries={routerEntries}>{component}</MemoryRouter>);
 }

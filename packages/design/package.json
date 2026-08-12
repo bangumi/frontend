@@ -9,7 +9,8 @@
     "eventemitter3": "^5.0.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
-    "reset-css": "^5.0.2"
+    "reset-css": "^5.0.2",
+    "@marsidev/react-turnstile": "^1.5.2"
   },
   "devDependencies": {
     "@bangumi/client": "workspace:0.0.0",
