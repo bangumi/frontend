@@ -201,6 +201,7 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
   const editor = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    let model: monaco.editor.ITextModel | null = null;
     if (editor.current) {
       monaco.languages.register({ id: 'wiki' });
 
@@ -349,11 +350,12 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
       });
 
       const uri = monaco.Uri.parse('inmemory://infobox.wiki');
-      const model = monaco.editor.createModel(defaultValue ?? '', 'wiki', uri);
+      const createdModel = monaco.editor.createModel(defaultValue ?? '', 'wiki', uri);
+      model = createdModel;
 
       instance.current = monaco.editor.create(editor.current, {
         theme: 'wiki',
-        model,
+        model: createdModel,
         language: 'wiki',
         automaticLayout: true,
         wordWrap: 'on',
@@ -362,15 +364,17 @@ const WikiEditor = ({ defaultValue, instanceRef: instance }: WikiEditorProps) =>
           showRegionSectionHeaders: false,
         },
       });
-      validate(model);
-      model.onDidChangeContent(() => {
-        validate(model);
+      validate(createdModel);
+      createdModel.onDidChangeContent(() => {
+        validate(createdModel);
       });
     }
     return () => {
       if (instance.current) {
         instance.current.dispose();
+        instance.current = null;
       }
+      model?.dispose();
     };
   }, [defaultValue, instance]);
 
