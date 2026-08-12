@@ -73,6 +73,7 @@ const navRight = [
   {
     key: 'group',
     label: '小组',
+    href: '/group',
     subMenu: groupSubMenu,
   },
 ];

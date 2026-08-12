@@ -19,9 +19,15 @@ const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
 const Group = lazy(async () => import('./pages/index/group/[name]/index'));
+const GroupChannel = lazy(async () => import('./pages/index/group/index'));
+const GroupAll = lazy(async () => import('./pages/index/group/all'));
+const GroupDiscover = lazy(async () => import('./pages/index/group/discover'));
 const GroupForum = lazy(async () => import('./pages/index/group/[name]/index/forum'));
 const GroupHome = lazy(async () => import('./pages/index/group/[name]/index/index'));
 const GroupMembers = lazy(async () => import('./pages/index/group/[name]/index/members'));
+const GroupMine = lazy(async () => import('./pages/index/group/mine'));
+const GroupMyTopic = lazy(async () => import('./pages/index/group/my-topic'));
+const GroupMyReply = lazy(async () => import('./pages/index/group/my-reply'));
 const GroupNewTopic = lazy(async () => import('./pages/index/group/[name]/new_topic'));
 const GroupReply = lazy(async () => import('./pages/index/group/reply/[id]'));
 const GroupReplyEdit = lazy(async () => import('./pages/index/group/reply/[id]/edit'));
@@ -63,11 +69,6 @@ const legacyPagePaths = [
   ]),
   'blog/:id',
   'calendar',
-  'group/all',
-  'group/discover',
-  'group/mine',
-  'group/my_reply',
-  'group/my_topic',
   'index',
   'index/:id',
   'index/:id/comments',
@@ -120,6 +121,12 @@ export const pageRoutes: RouteObject[] = [
       {
         path: 'group',
         children: [
+          { path: '', element: <GroupChannel /> },
+          { path: 'all', element: <GroupAll /> },
+          { path: 'discover', element: <GroupDiscover /> },
+          { path: 'mine', element: <GroupMine /> },
+          { path: 'my_topic', element: <GroupMyTopic /> },
+          { path: 'my_reply', element: <GroupMyReply /> },
           {
             path: ':name',
             children: [
