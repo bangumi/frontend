@@ -10,56 +10,90 @@ import type {
   TrendingSubject,
 } from '@bangumi/client/client';
 import { useUser } from '@bangumi/website/hooks/use-user';
-import type { ChannelConfig } from '@bangumi/website/pages/index/channel/config';
 
-export interface ChannelData {
-  subjects: TrendingSubject[];
-  topics: ChannelSubjectTopic[];
-  blogs: SlimBlogEntry[];
-  tags: SubjectTag[];
-  friendActivities: FriendSubjectCollectionActivity[];
-  showFriendActivities: boolean;
+/**
+ * 频道页各区块的数据请求相互独立，某个接口较慢或失败时只影响对应区块，
+ * 不会拖慢或拖垮整个页面加载。
+ */
+
+/** 请求失败时返回空数组，区块按空数据降级渲染 */
+async function fetchList<T>(fetch: () => Promise<T[]>): Promise<T[]> {
+  try {
+    return await fetch();
+  } catch {
+    return [];
+  }
 }
 
-export function useChannel(config: ChannelConfig): ChannelData {
-  const { user, isLoading: isUserLoading } = useUser();
+export function useTrendingSubjects(type: number): TrendingSubject[] {
   const { data } = useSWR(
-    ['channel', config.type],
-    async () => {
-      const [subjects, topics, blogs, tags] = await Promise.all([
-        ok(ozaClient.getTrendingSubjects(config.type, { limit: 15, offset: 0 })),
-        ok(
-          ozaClient.getTrendingSubjectTopics({
-            $type: config.type,
-            limit: 20,
-            offset: 0,
-          }),
-        ),
-        ok(ozaClient.getChannelBlogs(config.type, { limit: 6, offset: 0 })),
-        ok(ozaClient.getChannelTags(config.type, { limit: 30, offset: 0 })),
-      ]);
-
-      return {
-        subjects: subjects.data,
-        topics: topics.data,
-        blogs: blogs.data,
-        tags: tags.data,
-      };
-    },
+    ['channel', type, 'trending-subjects'],
+    async () =>
+      fetchList(
+        async () => (await ok(ozaClient.getTrendingSubjects(type, { limit: 15, offset: 0 }))).data,
+      ),
     { suspense: true },
   );
+  return data;
+}
 
-  const { data: friendActivities } = useSWR(
-    user ? ['channel-friend-activities', config.type, user.id] : null,
-    async () => ok(ozaClient.getFriendsSubjectCollections(config.type, { limit: 10, offset: 0 })),
+export function useTrendingSubjectTopics(type: number): ChannelSubjectTopic[] {
+  const { data } = useSWR(
+    ['channel', type, 'trending-topics'],
+    async () =>
+      fetchList(
+        async () =>
+          (
+            await ok(
+              ozaClient.getTrendingSubjectTopics({
+                $type: type,
+                limit: 20,
+                offset: 0,
+              }),
+            )
+          ).data,
+      ),
+    { suspense: true },
   );
+  return data;
+}
 
+export function useChannelBlogs(type: number): SlimBlogEntry[] {
+  const { data } = useSWR(
+    ['channel', type, 'blogs'],
+    async () =>
+      fetchList(
+        async () => (await ok(ozaClient.getChannelBlogs(type, { limit: 6, offset: 0 }))).data,
+      ),
+    { suspense: true },
+  );
+  return data;
+}
+
+export function useChannelTags(type: number): SubjectTag[] {
+  const { data } = useSWR(
+    ['channel', type, 'tags'],
+    async () =>
+      fetchList(
+        async () => (await ok(ozaClient.getChannelTags(type, { limit: 30, offset: 0 }))).data,
+      ),
+    { suspense: true },
+  );
+  return data;
+}
+
+export function useFriendActivities(type: number): {
+  friendActivities: FriendSubjectCollectionActivity[];
+  showFriendActivities: boolean;
+} {
+  const { user, isLoading: isUserLoading } = useUser();
+  const { data } = useSWR(
+    user ? ['channel-friend-activities', type, user.id] : null,
+    async () =>
+      (await ok(ozaClient.getFriendsSubjectCollections(type, { limit: 10, offset: 0 }))).data,
+  );
   return {
-    subjects: data?.subjects ?? [],
-    topics: data?.topics ?? [],
-    blogs: data?.blogs ?? [],
-    tags: data?.tags ?? [],
-    friendActivities: friendActivities?.data ?? [],
-    showFriendActivities: !isUserLoading && Boolean(user) && friendActivities !== undefined,
+    friendActivities: data ?? [],
+    showFriendActivities: !isUserLoading && Boolean(user) && data !== undefined,
   };
 }
