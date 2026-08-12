@@ -25,21 +25,14 @@ import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home';
 import PersonLayout from './components/PersonLayout';
 
 const page = css({
-  padding: '10px 30px 30px',
-  '@media (max-width: 640px)': {
-    padding: '10px 8px 24px',
-  },
+  padding: '10px 15px 24px',
 });
 
 const header = css({ margin: '0' });
 
 const headerInner = css({
-  paddingRight: '30px',
-  paddingLeft: '30px',
-  '@media (max-width: 640px)': {
-    paddingRight: '8px',
-    paddingLeft: '8px',
-  },
+  paddingRight: '15px',
+  paddingLeft: '15px',
 });
 
 const name = css({

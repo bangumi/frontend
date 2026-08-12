@@ -57,6 +57,8 @@ describe('CharacterDetail', () => {
 
     // header 标题（出演区同名条目重复出现）
     expect((await screen.findAllByText('ヤニねこ')).length).toBeGreaterThan(0);
+    expect(document.querySelector('main')?.className).toContain('max-w_1260px');
+    expect(document.querySelector('main')?.className).toContain('p_10px_15px_24px');
     // 信息框
     expect(await screen.findByText(/简体中文名/)).toBeInTheDocument();
     // 推荐目录

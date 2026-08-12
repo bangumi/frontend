@@ -22,6 +22,7 @@ import {
   getSubjectLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import PageContainer from '@bangumi/website/components/PageContainer';
 import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription';
 import type {
   CharacterComment,
@@ -31,41 +32,19 @@ import { useCharacterHome } from '@bangumi/website/hooks/use-character-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 const page = css({
-  width: '100%',
-  maxWidth: '1000px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
-  boxSizing: 'border-box',
   display: 'grid',
-  gridTemplateColumns: '250px minmax(0, 720px)',
+  gridTemplateColumns: '250px minmax(0, 1fr)',
   alignItems: 'flex-start',
-  gap: '15px',
-  paddingBottom: '30px',
-  '@media (max-width: 1000px)': {
-    paddingRight: '15px',
-    paddingLeft: '15px',
-    gridTemplateColumns: 'minmax(200px, 250px) minmax(0, 720px)',
-  },
+  gap: '20px',
+  padding: '10px 15px 24px',
   '@media (max-width: 640px)': {
     display: 'block',
-    padding: '0 5px 24px',
   },
 });
 
 const headerInner = css({
-  width: '100%',
-  maxWidth: '1000px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
-  boxSizing: 'border-box',
-  '@media (max-width: 1000px)': {
-    paddingRight: '15px',
-    paddingLeft: '15px',
-  },
-  '@media (max-width: 640px)': {
-    paddingRight: '10px',
-    paddingLeft: '10px',
-  },
+  paddingRight: '15px',
+  paddingLeft: '15px',
 });
 
 const name = css({
@@ -96,23 +75,12 @@ const tabsBar = css({
 });
 
 const tabsInner = css({
-  width: '100%',
-  maxWidth: '1000px',
-  marginRight: 'auto',
-  marginLeft: 'auto',
-  boxSizing: 'border-box',
+  paddingRight: '15px',
+  paddingLeft: '15px',
   overflowX: 'auto',
   scrollbarWidth: 'none',
   '&::-webkit-scrollbar': {
     display: 'none',
-  },
-  '@media (max-width: 1000px)': {
-    paddingRight: '15px',
-    paddingLeft: '15px',
-  },
-  '@media (max-width: 640px)': {
-    paddingRight: '10px',
-    paddingLeft: '10px',
   },
 });
 
@@ -643,16 +611,16 @@ function CharacterHeader({ character }: { character: Character }) {
 
   return (
     <header>
-      <div className={headerInner}>
+      <PageContainer gutterOnly className={headerInner}>
         <h1 className={name}>
           <Link to={baseLink} title={character.nameCN}>
             {character.name}
           </Link>
           {character.nameCN !== '' && <small>{character.nameCN}</small>}
         </h1>
-      </div>
+      </PageContainer>
       <nav className={tabsBar} aria-label='角色导航'>
-        <div className={tabsInner}>
+        <PageContainer gutterOnly className={tabsInner}>
           <ul className={tabList}>
             {tabs.map((tab) => (
               <li key={tab.to}>
@@ -673,7 +641,7 @@ function CharacterHeader({ character }: { character: Character }) {
               </li>
             )}
           </ul>
-        </div>
+        </PageContainer>
       </nav>
     </header>
   );
@@ -936,7 +904,7 @@ export default function CharacterDetail({ data }: { data: CharacterHomeResponse 
   return (
     <>
       <CharacterHeader character={character} />
-      <main className={page}>
+      <PageContainer as='main' className={page}>
         <aside className={sidebar}>
           <CharacterInfobox character={character} />
           <IndexPanel indexes={data.indexes} total={data.indexTotal} />
@@ -953,7 +921,7 @@ export default function CharacterDetail({ data }: { data: CharacterHomeResponse 
           <RelationsSection relations={data.relations} />
           <CommentsSection comments={data.comments} />
         </div>
-      </main>
+      </PageContainer>
     </>
   );
 }

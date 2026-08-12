@@ -32,15 +32,9 @@ import type { ChannelConfig, ChannelKey } from './config';
 import { CHANNEL_CONFIGS } from './config';
 
 const page = css({
-  maxWidth: '1060px',
-  paddingTop: '15px',
-  paddingBottom: '32px',
-  '@media (max-width: 1024px)': {
-    maxWidth: '820px',
-  },
+  padding: '15px 15px 32px',
   '@media (max-width: 640px)': {
-    paddingTop: '14px',
-    paddingBottom: '24px',
+    padding: '14px 15px 24px',
   },
 });
 
@@ -65,7 +59,7 @@ const pageHeader = css({
 
 const columns = css({
   display: 'grid',
-  gridTemplateColumns: 'minmax(0, 700px) 280px',
+  gridTemplateColumns: 'minmax(0, 1fr) 280px',
   gap: '15px',
   alignItems: 'start',
   '@media (max-width: 1024px)': {

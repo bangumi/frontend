@@ -11,15 +11,16 @@ import { Button, Form, Input, toast, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
+import PageContainer from '@bangumi/website/components/PageContainer';
 
 const page = css({
-  maxWidth: '760px',
-  margin: '0 auto',
-  padding: '32px 30px 48px',
+  padding: '32px 15px 48px',
   '@media (max-width: 768px)': {
     padding: '24px 16px 36px',
   },
 });
+
+const content = css({ maxWidth: '700px', margin: '0 auto' });
 
 const title = css({
   margin: '8px 0 24px',
@@ -159,92 +160,99 @@ function EpisodeEditPage() {
   };
 
   return (
-    <main className={page}>
+    <PageContainer as='main' className={page}>
       <Helmet title={`编辑章节 ${episode.ep} - ${episode.name}`} />
-      <Typography.Text type='secondary'>正在编辑章节 #{episode.id}</Typography.Text>
-      <h1 className={title}>编辑章节</h1>
-      <Form labelWidth={92} className={form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
-        <Form.Item label='原名'>
-          <Input
-            aria-label='原名'
-            wrapperClass={input}
-            {...register('name', { required: '请填写章节原名' })}
-          />
-        </Form.Item>
-        <Form.Item label='中文名'>
-          <Input aria-label='中文名' wrapperClass={input} {...register('nameCN')} />
-        </Form.Item>
-        <Form.Item label='类型'>
-          <select
-            aria-label='类型'
-            className={select}
-            {...register('type', { valueAsNumber: true })}
-          >
-            {episodeTypes.map((type) => (
-              <option key={type.value} value={type.value}>
-                {type.label}
-              </option>
-            ))}
-          </select>
-        </Form.Item>
-        <Form.Item label='章节编号'>
-          <Input
-            type='number'
-            aria-label='章节编号'
-            step='0.1'
-            wrapperClass={numberInput}
-            {...register('ep', { required: '请填写章节编号', valueAsNumber: true })}
-          />
-        </Form.Item>
-        <Form.Item label='碟号'>
-          <Input
-            type='number'
-            aria-label='碟号'
-            min='0'
-            step='1'
-            wrapperClass={numberInput}
-            {...register('disc', {
-              setValueAs: (value) => (value === '' ? undefined : Number(value)),
-            })}
-          />
-        </Form.Item>
-        <Form.Item label='时长'>
-          <Input
-            aria-label='时长'
-            placeholder='例如 24:53'
-            wrapperClass={input}
-            {...register('duration')}
-          />
-        </Form.Item>
-        <Form.Item label='首播日期'>
-          <Input type='date' aria-label='首播日期' wrapperClass={dateInput} {...register('date')} />
-        </Form.Item>
-        <Form.Item label='简介'>
-          <textarea aria-label='简介' className={textarea} rows={8} {...register('summary')} />
-        </Form.Item>
-        <Form.Item label='编辑摘要'>
-          <Input
-            aria-label='编辑摘要'
-            wrapperClass={input}
-            {...register('commitMessage', { required: '请填写编辑摘要' })}
-          />
-        </Form.Item>
-        <div className={actions}>
-          <Button
-            type='plain'
-            onClick={() => {
-              void navigate(`/ep/${episodeID}`);
-            }}
-            disabled={submitting}
-          >
-            取消
-          </Button>
-          <Button htmlType='submit' color='blue' disabled={submitting}>
-            {submitting ? '提交中...' : '提交修改'}
-          </Button>
-        </div>
-      </Form>
-    </main>
+      <div className={content}>
+        <Typography.Text type='secondary'>正在编辑章节 #{episode.id}</Typography.Text>
+        <h1 className={title}>编辑章节</h1>
+        <Form labelWidth={92} className={form} onSubmit={handleSubmit(onSubmit, onInvalid)}>
+          <Form.Item label='原名'>
+            <Input
+              aria-label='原名'
+              wrapperClass={input}
+              {...register('name', { required: '请填写章节原名' })}
+            />
+          </Form.Item>
+          <Form.Item label='中文名'>
+            <Input aria-label='中文名' wrapperClass={input} {...register('nameCN')} />
+          </Form.Item>
+          <Form.Item label='类型'>
+            <select
+              aria-label='类型'
+              className={select}
+              {...register('type', { valueAsNumber: true })}
+            >
+              {episodeTypes.map((type) => (
+                <option key={type.value} value={type.value}>
+                  {type.label}
+                </option>
+              ))}
+            </select>
+          </Form.Item>
+          <Form.Item label='章节编号'>
+            <Input
+              type='number'
+              aria-label='章节编号'
+              step='0.1'
+              wrapperClass={numberInput}
+              {...register('ep', { required: '请填写章节编号', valueAsNumber: true })}
+            />
+          </Form.Item>
+          <Form.Item label='碟号'>
+            <Input
+              type='number'
+              aria-label='碟号'
+              min='0'
+              step='1'
+              wrapperClass={numberInput}
+              {...register('disc', {
+                setValueAs: (value) => (value === '' ? undefined : Number(value)),
+              })}
+            />
+          </Form.Item>
+          <Form.Item label='时长'>
+            <Input
+              aria-label='时长'
+              placeholder='例如 24:53'
+              wrapperClass={input}
+              {...register('duration')}
+            />
+          </Form.Item>
+          <Form.Item label='首播日期'>
+            <Input
+              type='date'
+              aria-label='首播日期'
+              wrapperClass={dateInput}
+              {...register('date')}
+            />
+          </Form.Item>
+          <Form.Item label='简介'>
+            <textarea aria-label='简介' className={textarea} rows={8} {...register('summary')} />
+          </Form.Item>
+          <Form.Item label='编辑摘要'>
+            <Input
+              aria-label='编辑摘要'
+              wrapperClass={input}
+              {...register('commitMessage', { required: '请填写编辑摘要' })}
+            />
+          </Form.Item>
+          <div className={actions}>
+            <Button
+              type='plain'
+              onClick={() => {
+                void navigate(`/ep/${episodeID}`);
+              }}
+              disabled={submitting}
+            >
+              取消
+            </Button>
+            <Button htmlType='submit' color='blue' disabled={submitting}>
+              {submitting ? '提交中...' : '提交修改'}
+            </Button>
+          </div>
+        </Form>
+      </div>
+    </PageContainer>
   );
 }
 
