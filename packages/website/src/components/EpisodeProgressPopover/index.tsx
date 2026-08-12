@@ -5,11 +5,210 @@ import React from 'react';
 import type { Episode, UpdateEpisodeProgress } from '@bangumi/client/client';
 import { EpisodeCollectionStatus, EpisodeType } from '@bangumi/client/client';
 import { Popover, Typography } from '@bangumi/design';
+import { css } from '@bangumi/styled-system/css';
 import { getEpisodeLink } from '@bangumi/utils/pages';
 
-import styles from './style.module.less';
-
 const { Link } = Typography;
+
+const wrapper = css({
+  display: 'inline-block',
+  verticalAlign: 'top',
+});
+
+const popover = css({
+  verticalAlign: 'top',
+  '& .bgm-popover__container': {
+    alignItems: 'flex-start',
+  },
+  '& .bgm-popover__content': {
+    top: '5px',
+    left: '12px',
+    width: 'min(275px, calc(100vw - 20px))',
+    overflow: 'visible',
+    border: '0',
+    borderRadius: '5px',
+    boxShadow: '0 0 10px rgba(80, 80, 80, 0.5)',
+    _before: {
+      position: 'absolute',
+      top: '0',
+      left: '-10px',
+      width: '0',
+      height: '0',
+      borderTop: '11px solid #f09199',
+      borderBottom: '11px solid transparent',
+      borderLeft: '0',
+      borderRight: '11px solid transparent',
+      content: '""',
+    },
+    _after: {
+      position: 'absolute',
+      top: '-5px',
+      left: '-12px',
+      width: '36px',
+      height: '5px',
+      content: '""',
+    },
+  },
+  _focusWithin: {
+    '& .bgm-popover__content': { visibility: 'visible', opacity: '1' },
+  },
+  '@media (max-width: 640px)': {
+    '& .bgm-popover__content': {
+      position: 'fixed',
+      top: '35vh',
+      right: '5vw',
+      left: '5vw',
+      width: 'auto',
+      _before: { display: 'none' },
+      _after: { display: 'none' },
+    },
+  },
+});
+
+// touch 打开/关闭需要胜过 .popover 的 :focus-within 规则，用 &[class] 提升优先级
+const open = css({
+  '&[class] .bgm-popover__content': { visibility: 'visible', opacity: '1' },
+});
+
+const opensLeftStyle = css({
+  '&[class] .bgm-popover__content': {
+    right: '12px',
+    left: 'auto',
+    _before: {
+      right: '-10px',
+      left: 'auto',
+      borderRight: '0',
+      borderLeft: '11px solid transparent',
+    },
+    _after: {
+      right: '-12px',
+      left: 'auto',
+    },
+  },
+});
+
+const dismissedStyle = css({
+  '&[class] .bgm-popover__content': { visibility: 'hidden', opacity: '0' },
+});
+
+const content = css({
+  width: '100%',
+  borderRadius: '5px',
+  background: 'rgba(254, 254, 254, 0.96)',
+  color: '#1f1c1c',
+  fontSize: '12px',
+  lineHeight: '1.5',
+  '@media (max-width: 640px)': {
+    width: 'auto',
+  },
+});
+
+const popoverTitle = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  padding: '8px 10px',
+  borderRadius: '5px 5px 0 0',
+  background: '#f09199',
+  color: '#fff',
+  fontSize: '13px',
+  lineHeight: '18px',
+  '& span': {
+    minWidth: '0',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+  },
+  '& button': {
+    flex: 'none',
+    marginLeft: 'auto',
+    padding: '0',
+    border: '0',
+    background: 'transparent',
+    color: '#fff',
+    cursor: 'pointer',
+    font: 'inherit',
+    lineHeight: 'inherit',
+  },
+});
+
+const body = css({
+  padding: '5px 10px 7px',
+  '& p': { margin: '0' },
+  '& hr': {
+    height: '1px',
+    margin: '5px 0',
+    border: '0',
+    background: '#e8e3e3',
+  },
+});
+
+const actions = css({
+  display: 'flex',
+  flexWrap: 'wrap',
+  alignItems: 'center',
+  minHeight: '31px',
+  margin: '0 0 5px',
+  borderRadius: '5px',
+  background: '#f5f5f5',
+  '& button': {
+    padding: '5px 10px',
+    border: '0',
+    borderRadius: '5px',
+    background: 'transparent',
+    color: '#54b5df',
+    cursor: 'pointer',
+    font: 'inherit',
+    lineHeight: '21px',
+    '&:hover, &:focus-visible': {
+      background: '#f09199',
+      color: '#fff',
+      outline: 'none',
+    },
+    '&:disabled': {
+      cursor: 'wait',
+      opacity: '0.55',
+    },
+  },
+});
+
+const currentStatus = css({
+  alignSelf: 'stretch',
+  marginLeft: 'auto',
+  padding: '5px 10px',
+  borderRadius: '5px',
+  background: '#f09199',
+  color: '#fff',
+  lineHeight: '21px',
+});
+
+const footer = css({
+  display: 'flex',
+  alignItems: 'baseline',
+  justifyContent: 'space-between',
+  gap: '8px',
+});
+
+// 双类选择器原用于胜过 .bgm-link 的默认颜色，用 &[class] 保持同等优先级
+const discussionLink = css({
+  '&[class]': {
+    color: '#54b5df',
+    textDecoration: 'none',
+    '&:hover, &:focus-visible': {
+      textDecoration: 'none',
+    },
+    '& small': {
+      color: '#9f9b9b',
+    },
+  },
+});
+
+const updatedAtStyle = css({
+  overflow: 'hidden',
+  color: '#9f9b9b',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
 
 const EPISODE_STATUS_TEXT: Record<EpisodeCollectionStatus, string> = {
   [EpisodeCollectionStatus.None]: '没看过',
@@ -46,16 +245,16 @@ function EpisodeProgressContent({
   const updatedAtText = updatedAt ? dayjs.unix(updatedAt).format('YYYY-M-D HH:mm') : undefined;
 
   return (
-    <div className={styles.content} data-ep-id={episode.id} role='dialog' aria-label={title}>
-      <div className={styles.title}>
+    <div className={content} data-ep-id={episode.id} role='dialog' aria-label={title}>
+      <div className={popoverTitle}>
         <span>{title}</span>
         <button type='button' onClick={onClose} aria-label='关闭章节信息'>
           X
         </button>
       </div>
-      <div className={styles.body}>
+      <div className={body}>
         {canManage && (
-          <div className={styles.actions}>
+          <div className={actions}>
             {status !== EpisodeCollectionStatus.Done && (
               <>
                 <button
@@ -104,7 +303,7 @@ function EpisodeProgressContent({
               </button>
             )}
             {status !== undefined && (
-              <span className={styles.currentStatus} title={updatedAtText}>
+              <span className={currentStatus} title={updatedAtText}>
                 {EPISODE_STATUS_TEXT[status]}
               </span>
             )}
@@ -126,12 +325,12 @@ function EpisodeProgressContent({
           </p>
         )}
         <hr />
-        <div className={styles.footer}>
-          <Link to={getEpisodeLink(episode.id)} className={styles.discussionLink}>
+        <div className={footer}>
+          <Link to={getEpisodeLink(episode.id)} className={discussionLink}>
             讨论 <small>(+{episode.comment})</small>
           </Link>
           {canManage && updatedAtText && status !== undefined && (
-            <span className={styles.updatedAt}>
+            <span className={updatedAtStyle}>
               {EPISODE_STATUS_TEXT[status]}: {updatedAtText}
             </span>
           )}
@@ -193,7 +392,7 @@ export default function EpisodeProgressPopover({
   return (
     <span
       ref={wrapperRef}
-      className={styles.wrapper}
+      className={wrapper}
       onMouseEnter={alignPopover}
       onMouseLeave={() => setDismissed(false)}
       onBlur={(event) => {
@@ -204,10 +403,10 @@ export default function EpisodeProgressPopover({
     >
       <Popover
         className={classNames(
-          styles.popover,
-          opensLeft && styles.opensLeft,
-          touchOpen && styles.open,
-          dismissed && styles.dismissed,
+          popover,
+          opensLeft && opensLeftStyle,
+          touchOpen && open,
+          dismissed && dismissedStyle,
         )}
         content={
           <EpisodeProgressContent
