@@ -65,7 +65,7 @@ jobs:
         run: |
           docker pull ghcr.io/bangumi/server-private:master
           docker run -d --name server-private --network=host \
-            -e NODE_ENV=development \
+            -e NODE_ENV=test \
             -e REDIS_URI='redis://:redis-pass@127.0.0.1:6379/0' \
             ghcr.io/bangumi/server-private:master dist/index.mjs
 
