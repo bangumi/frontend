@@ -15,7 +15,7 @@ Object {
           <div />
         </button>
         <div
-          class="bgm-popover"
+          class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
         >
           <button
             class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -60,7 +60,7 @@ Object {
         <div />
       </button>
       <div
-        class="bgm-popover"
+        class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
       >
         <button
           class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -162,7 +162,7 @@ Object {
           <div />
         </button>
         <div
-          class="bgm-popover"
+          class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
         >
           <button
             class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -219,7 +219,7 @@ Object {
         <div />
       </button>
       <div
-        class="bgm-popover"
+        class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
       >
         <button
           class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -333,7 +333,7 @@ Object {
           <div />
         </button>
         <div
-          class="bgm-popover"
+          class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
         >
           <button
             class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -383,7 +383,7 @@ Object {
         <div />
       </button>
       <div
-        class="bgm-popover"
+        class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
       >
         <button
           class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -491,7 +491,7 @@ Object {
           回复
         </button>
         <div
-          class="bgm-popover"
+          class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
         >
           <button
             class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -538,7 +538,7 @@ Object {
         回复
       </button>
       <div
-        class="bgm-popover"
+        class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
       >
         <button
           class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
