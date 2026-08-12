@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "id": 1001,
+      "user": {
+        "id": 1272395,
+        "username": "Madeline",
+        "nickname": "Madeline",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/12/72/1272395.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/12/72/1272395.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/12/72/1272395.jpg"
+        }
+      },
+      "type": 2,
+      "rate": 8,
+      "comment": "剧情节奏紧凑，作画稳定，值得一看的宝藏作品。",
+      "updatedAt": 1735689600,
+      "reactions": []
+    },
+    {
+      "id": 1002,
+      "user": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/38/29/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/38/29/382951.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/38/29/382951.jpg"
+        }
+      },
+      "type": 2,
+      "rate": 7,
+      "comment": "中规中矩，但结尾的处理不太满意。",
+      "updatedAt": 1735689600,
+      "reactions": []
+    },
+    {
+      "id": 1003,
+      "user": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        }
+      },
+      "type": 1,
+      "rate": 0,
+      "comment": "先码住，等完结再看。",
+      "updatedAt": 1735689600,
+      "reactions": []
+    }
+  ],
+  "total": 3
+}
