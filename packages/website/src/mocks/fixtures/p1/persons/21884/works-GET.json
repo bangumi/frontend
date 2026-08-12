@@ -1,1 +1,101 @@
-{ "data": [], "total": 0 }
+{
+  "data": [
+    {
+      "subject": {
+        "id": 622206,
+        "name": "ヤニねこ",
+        "nameCN": "尼古喵喵",
+        "type": 2,
+        "info": "2026年7月2日 / 木村拓 / にゃんにゃんファクトリー（講談社「ヤングマガジン」連載） / 松浦力",
+        "metaTags": ["TV", "喜剧", "日常", "日本", "漫画改", "青年向"],
+        "rating": {
+          "rank": 1862,
+          "count": [36, 12, 21, 37, 116, 402, 1255, 981, 177, 119],
+          "score": 7.19,
+          "total": 3156
+        },
+        "locked": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+          "common": "https://lain.bgm.tv/r/400/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/cover/l/6a/b3/622206_dpWcC.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/6a/b3/622206_dpWcC.jpg"
+        }
+      },
+      "positions": [
+        {
+          "type": { "id": 1, "en": "Director", "cn": "导演", "jp": "監督" },
+          "summary": "",
+          "appearEps": ""
+        }
+      ]
+    },
+    {
+      "subject": {
+        "id": 622207,
+        "name": "テストアニメ",
+        "nameCN": "测试动画",
+        "type": 2,
+        "info": "2026年4月1日 / 测试工作室",
+        "metaTags": ["TV", "日本"],
+        "rating": {
+          "rank": 100,
+          "count": [100, 90, 80, 70, 60, 50, 40, 30, 20, 10],
+          "score": 8.1,
+          "total": 4321
+        },
+        "locked": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/622207.jpg",
+          "common": "https://lain.bgm.tv/r/400/pic/cover/l/00/00/622207.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/cover/l/00/00/622207.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/cover/l/00/00/622207.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/00/00/622207.jpg"
+        }
+      },
+      "positions": [
+        {
+          "type": { "id": 5, "en": "Screenplay", "cn": "脚本", "jp": "脚本" },
+          "summary": "",
+          "appearEps": ""
+        }
+      ]
+    },
+    {
+      "subject": {
+        "id": 622208,
+        "name": "声優ラジオ",
+        "nameCN": "声优电台",
+        "type": 6,
+        "info": "2026年1月1日",
+        "metaTags": ["日本"],
+        "rating": {
+          "rank": 500,
+          "count": [10, 8, 6, 5, 4, 3, 2, 1, 1, 1],
+          "score": 7.5,
+          "total": 41
+        },
+        "locked": false,
+        "nsfw": false,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/622208.jpg",
+          "common": "https://lain.bgm.tv/r/400/pic/cover/l/00/00/622208.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/cover/l/00/00/622208.jpg",
+          "small": "https://lain.bgm.tv/r/100/pic/cover/l/00/00/622208.jpg",
+          "grid": "https://lain.bgm.tv/r/100x100/pic/cover/l/00/00/622208.jpg"
+        }
+      },
+      "positions": [
+        {
+          "type": { "id": 12, "en": "Performer", "cn": "主演", "jp": "出演" },
+          "summary": "",
+          "appearEps": ""
+        }
+      ]
+    }
+  ],
+  "total": 3
+}
