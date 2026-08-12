@@ -1,0 +1,30 @@
+{
+  "id": 123,
+  "type": 0,
+  "uid": 1,
+  "user": {
+    "id": 1,
+    "username": "sai",
+    "nickname": "Sai",
+    "avatar": {
+      "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+      "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+      "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+    },
+    "sign": "",
+    "group": 1,
+    "joinedAt": 1262304000,
+    "isFriend": false
+  },
+  "title": "测试日志标题",
+  "icon": "",
+  "content": "这是日志正文，包含 [b]粗体[/b] 和 [url=https://bgm.tv]链接[/url]。\n第二段内容。",
+  "tags": ["吐槽", "测试"],
+  "views": 42,
+  "replies": 2,
+  "createdAt": 1786000000,
+  "updatedAt": 1786000000,
+  "noreply": 0,
+  "related": 0,
+  "public": true
+}

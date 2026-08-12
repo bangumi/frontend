@@ -23,7 +23,7 @@ it('redirects a registered legacy path to the legacy site', async () => {
   });
 });
 
-it.each(['/calendar', '/blog/42', '/subject/12/collections', '/subject/12/stats'])(
+it.each(['/calendar', '/subject/12/collections', '/subject/12/stats'])(
   'registers %s as a legacy route',
   (path) => {
     const matches = matchRoutes(pageRoutes, path);
@@ -35,7 +35,7 @@ it.each(['/calendar', '/blog/42', '/subject/12/collections', '/subject/12/stats'
   },
 );
 
-it.each(['/subject/topic/42', '/subject/ep/42'])(
+it.each(['/subject/topic/42', '/subject/ep/42', '/blog/42'])(
   'forwards %s to the new frontend instead of the legacy site',
   (path) => {
     const matches = matchRoutes(pageRoutes, path);
