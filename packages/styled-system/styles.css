@@ -2573,6 +2573,14 @@
     font-size: 15px;
 }
 
+  .\[\&_\.bgm-popover__content\]\:d_none .bgm-popover__content {
+    display: none;
+}
+
+  .\[\&_\.comment-info\]\:flex-wrap_wrap .comment-info {
+    flex-wrap: wrap;
+}
+
   .disabled\:cursor_default:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     cursor: default;
 }
@@ -2701,6 +2709,18 @@
     width: 72px;
 }
 
+  .\[\&_pre\]\:ov-x_hidden pre {
+    overflow-x: hidden;
+}
+
+  .\[\&_\.creator-info\,_\&_\.comment-info\]\:min-w_0 .creator-info,.\[\&_\.creator-info\,_\&_\.comment-info\]\:min-w_0 .comment-info {
+    min-width: var(--sizes-0);
+}
+
+  .\[\&_\>_\*\]\:max-w_100\% > * {
+    max-width: 100%;
+}
+
   .focus\:bd-c_\#888:is(:focus, [data-focus]) {
     border-color: #888;
 }
@@ -2823,6 +2843,10 @@
 
   .hover\:\[\&_a\]\:c_\#f5a4ab:is(:hover, [data-hover]) a {
     color: #f5a4ab;
+}
+
+  .hover\:\[\&_\.bgm-popover__content\]\:d_block:is(:hover, [data-hover]) .bgm-popover__content {
+    display: block;
 }
 
   .\[\&_h3\]\:\[\&_a\]\:hover\:c_\#54b5df h3 a:is(:hover, [data-hover]) {

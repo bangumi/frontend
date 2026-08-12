@@ -15,13 +15,13 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
         />
       </div>
       <div
-        class="bgm-comment__box"
+        class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
       >
         <div
-          class="bgm-comment__main"
+          class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <span
-            class="bgm-comment__tip"
+            class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
           >
             <div
               class="creator-info"
@@ -57,7 +57,7 @@ exports[`Normal Comment > do not show opinions if not login 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content bgm-comment__content"
+            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
           >
             123456789~~~
           </div>
@@ -83,13 +83,13 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
         />
       </div>
       <div
-        class="bgm-comment__box"
+        class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
       >
         <div
-          class="bgm-comment__main"
+          class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <span
-            class="bgm-comment__tip"
+            class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
           >
             <div
               class="creator-info"
@@ -133,7 +133,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                   <div />
                 </button>
                 <div
-                  class="bgm-popover"
+                  class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
                 >
                   <button
                     class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -168,7 +168,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content bgm-comment__content"
+            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
           >
             123456789~~~
           </div>
@@ -188,13 +188,13 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
           />
         </div>
         <div
-          class="bgm-comment__box"
+          class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <div
-            class="bgm-comment__main"
+            class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
           >
             <span
-              class="bgm-comment__tip"
+              class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
             >
               <div
                 class="creator-info"
@@ -235,7 +235,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
                     <div />
                   </button>
                   <div
-                    class="bgm-popover"
+                    class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
                   >
                     <button
                       class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -270,7 +270,7 @@ exports[`Normal Comment > should highlight comment corresponding to hash 1`] = `
               </div>
             </span>
             <div
-              class="bgm-rich-content bgm-comment__content"
+              class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
             >
               123456789~~~
             </div>
@@ -297,13 +297,13 @@ exports[`Normal Comment > should render 0 1`] = `
         />
       </div>
       <div
-        class="bgm-comment__box"
+        class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
       >
         <div
-          class="bgm-comment__main"
+          class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <span
-            class="bgm-comment__tip"
+            class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
           >
             <div
               class="creator-info"
@@ -347,7 +347,7 @@ exports[`Normal Comment > should render 0 1`] = `
                   <div />
                 </button>
                 <div
-                  class="bgm-popover"
+                  class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
                 >
                   <button
                     class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -382,7 +382,7 @@ exports[`Normal Comment > should render 0 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content bgm-comment__content"
+            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
           >
             123456789~~~
           </div>
@@ -408,13 +408,13 @@ exports[`Normal Comment > should render 6 1`] = `
         />
       </div>
       <div
-        class="bgm-comment__box"
+        class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
       >
         <div
-          class="bgm-comment__main"
+          class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <span
-            class="bgm-comment__tip"
+            class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
           >
             <div
               class="creator-info"
@@ -476,13 +476,13 @@ exports[`Normal Comment > should render 7 1`] = `
         />
       </div>
       <div
-        class="bgm-comment__box"
+        class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
       >
         <div
-          class="bgm-comment__main"
+          class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <span
-            class="bgm-comment__tip"
+            class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
           >
             <div
               class="creator-info"
@@ -552,13 +552,13 @@ exports[`Normal Comment > should render with reply 1`] = `
         />
       </div>
       <div
-        class="bgm-comment__box"
+        class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
       >
         <div
-          class="bgm-comment__main"
+          class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <span
-            class="bgm-comment__tip"
+            class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
           >
             <div
               class="creator-info"
@@ -602,7 +602,7 @@ exports[`Normal Comment > should render with reply 1`] = `
                   <div />
                 </button>
                 <div
-                  class="bgm-popover"
+                  class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
                 >
                   <button
                     class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -637,7 +637,7 @@ exports[`Normal Comment > should render with reply 1`] = `
             </div>
           </span>
           <div
-            class="bgm-rich-content bgm-comment__content"
+            class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
           >
             123456789~~~
           </div>
@@ -657,13 +657,13 @@ exports[`Normal Comment > should render with reply 1`] = `
           />
         </div>
         <div
-          class="bgm-comment__box"
+          class="bgm-comment__box ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
         >
           <div
-            class="bgm-comment__main"
+            class="bgm-comment__main ov-wrap_anywhere min-w_0 [&_>_*]:max-w_100%"
           >
             <span
-              class="bgm-comment__tip"
+              class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
             >
               <div
                 class="creator-info"
@@ -704,7 +704,7 @@ exports[`Normal Comment > should render with reply 1`] = `
                     <div />
                   </button>
                   <div
-                    class="bgm-popover"
+                    class="bgm-popover [&_.bgm-popover__content]:d_none hover:[&_.bgm-popover__content]:d_block"
                   >
                     <button
                       class="bgm-button bgm-comment-actions__more bgm-button--plain bgm-button--size-small"
@@ -739,7 +739,7 @@ exports[`Normal Comment > should render with reply 1`] = `
               </div>
             </span>
             <div
-              class="bgm-rich-content bgm-comment__content"
+              class="bgm-rich-content ov-wrap_anywhere [&_pre]:ov-x_hidden bgm-comment__content"
             >
               123456789~~~
             </div>
@@ -758,7 +758,7 @@ exports[`Special Comment > should render state is 1 1`] = `
     id="post_2056216"
   >
     <span
-      class="bgm-comment__tip"
+      class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
     >
       <div
         class="creator-info"
@@ -794,7 +794,7 @@ exports[`Special Comment > should render state is 2 1`] = `
     id="post_2056216"
   >
     <span
-      class="bgm-comment__tip"
+      class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
     >
       <div
         class="creator-info"
@@ -830,7 +830,7 @@ exports[`Special Comment > should render state is 5 1`] = `
     id="post_2056216"
   >
     <span
-      class="bgm-comment__tip"
+      class="bgm-comment__tip ov-wrap_anywhere [&_.creator-info,_&_.comment-info]:min-w_0 [&_.comment-info]:flex-wrap_wrap"
     >
       <div
         class="creator-info"

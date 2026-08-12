@@ -7,6 +7,7 @@ import { ozaClient } from '@bangumi/client';
 import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic';
 import { State } from '@bangumi/client/topic';
 import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
+import { css } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
@@ -17,6 +18,30 @@ import CommentActions from './CommentActions';
 import CommentInfo from './CommentInfo';
 import Reactions from './Reactions';
 import ReplyForm from './ReplyForm';
+
+// 昵称/签名/内容可能包含长文本或 URL，允许换行避免移动端水平溢出；
+// tip 是 flex 容器，内部 flex 项默认 min-width: auto 不收缩，需显式允许收缩；
+// comment-info 里的操作按钮行在窄屏换行
+const commentTip = css({
+  overflowWrap: 'anywhere',
+  '& .creator-info, & .comment-info': {
+    minWidth: '0',
+  },
+  '& .comment-info': {
+    flexWrap: 'wrap',
+  },
+});
+
+// overflow-wrap 需要在块级容器上生效，这里覆盖评论主体；
+// main 是 flex column + align-items flex-start，子项宽度按内容撑开，
+// 需要限制 max-width 才会在窄屏换行
+const commentBody = css({
+  overflowWrap: 'anywhere',
+  minWidth: '0',
+  '& > *': {
+    maxWidth: '100%',
+  },
+});
 
 export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply: false })) & {
   topicId: number;
@@ -130,7 +155,7 @@ const Comment: FC<CommentProps> = ({
         }
         id={elementId}
       >
-        <span className='bgm-comment__tip'>
+        <span className={classNames('bgm-comment__tip', commentTip)}>
           <div className='creator-info'>
             <SpecialStateIcon state={state} />
             <Link to={url}>{creator?.nickname ?? ''}</Link>
@@ -170,9 +195,9 @@ const Comment: FC<CommentProps> = ({
           src={isReply ? (creator?.avatar.medium ?? '') : (creator?.avatar.large ?? '')}
           size={isReply ? 'xsmall' : isMainPost ? 'post' : 'small'}
         />
-        <div className='bgm-comment__box'>
-          <div className='bgm-comment__main'>
-            <span className='bgm-comment__tip'>
+        <div className={classNames('bgm-comment__box', commentBody)}>
+          <div className={classNames('bgm-comment__main', commentBody)}>
+            <span className={classNames('bgm-comment__tip', commentTip)}>
               <div className='creator-info'>
                 <Link to={url}>{creator?.nickname ?? ''}</Link>
                 {originalPosterId === creator?.id ? <OriginalPoster /> : null}
