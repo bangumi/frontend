@@ -416,13 +416,11 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
     if (!value || submitting) {
       return;
     }
-    if (!turnstileToken) {
-      toast('请先完成验证码验证');
-      return;
-    }
     setSubmitting(true);
     try {
-      await ok(ozaClient.createTimelineSay({ content: value, turnstileToken }));
+      await ok(
+        ozaClient.createTimelineSay({ content: value, turnstileToken: turnstileToken ?? '' }),
+      );
       setContent('');
       await mutate();
     } catch (error) {

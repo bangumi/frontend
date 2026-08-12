@@ -66,13 +66,9 @@ const TopicForm = ({ quickPost = false, groupName, topic }: TopicFormProps) => {
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const postNewTopic = async (data: FormData, groupName: string) => {
-    if (!turnstileToken) {
-      toast('请先完成验证码验证');
-      return;
-    }
     const response = await ozaClient.createGroupTopic(groupName, {
       ...data,
-      turnstileToken,
+      turnstileToken: turnstileToken ?? '',
     });
     if (response.status === 200) {
       navigate(`/group/topic/${response.data.id}`);
