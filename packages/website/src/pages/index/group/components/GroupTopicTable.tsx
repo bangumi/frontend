@@ -9,6 +9,7 @@ import { getUserProfileLink } from '@bangumi/utils/pages';
 const topicTable = css({
   width: '100%',
   color: '#9f9b9b',
+  fontSize: '13px',
   tableLayout: 'fixed',
   '& th, & td': {
     padding: '11px 4px',
@@ -17,8 +18,6 @@ const topicTable = css({
     borderBottom: '1px dotted #e8e3e3',
   },
   '& thead': {
-    fontSize: '18px',
-    lineHeight: '18px',
     textAlign: 'left',
     '& th': {
       fontWeight: 'normal',
@@ -27,32 +26,30 @@ const topicTable = css({
 });
 
 const title = css({
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
+  overflowWrap: 'anywhere',
 });
 
 const group = css({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  width: '130px',
+  width: '110px',
 });
 
 const author = css({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  width: '110px',
+  width: '80px',
   smDown: { display: 'none' },
 });
 
 const replies = css({
-  width: '60px',
+  width: '40px',
 });
 
 const updateTime = css({
-  width: '100px',
+  width: '90px',
   textAlign: 'right',
   smDown: { display: 'none' },
 });

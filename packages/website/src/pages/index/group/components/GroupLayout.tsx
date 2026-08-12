@@ -48,7 +48,7 @@ const pageContainer = css({
 
 const newMembers = css({
   display: 'grid',
-  gridTemplateColumns: 'repeat(5, 1fr)',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(60px, 1fr))',
   columnGap: '30px',
   rowGap: '15px',
 });
