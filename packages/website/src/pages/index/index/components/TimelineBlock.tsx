@@ -15,6 +15,7 @@ import {
 } from '@bangumi/utils/pages';
 import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import styles from './TimelineBlock.module.less';
 
@@ -398,12 +399,20 @@ function timelineDay(timestamp: number): string {
 
 const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
   const { mutate } = useHomePage();
+  const { user } = useUser();
   const [filter, setFilter] = useState<TimelineFilter>('all');
   const [content, setContent] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  // 新发布的吐槽本地立即插入顶部展示；server 的 inbox 缓存由 debezium 异步更新，
+  // 直接重新拉取首页可能还看不到，靠乐观数据保证发帖者即时反馈
+  const [optimisticTimeline, setOptimisticTimeline] = useState<Timeline[]>([]);
 
-  const filtered = timeline.filter((item) => matchesFilter(item, filter));
+  const allTimeline = [
+    ...optimisticTimeline.filter((o) => !timeline.some((t) => t.id === o.id)),
+    ...timeline,
+  ];
+  const filtered = allTimeline.filter((item) => matchesFilter(item, filter));
   const grouped = new Map<string, Timeline[]>();
   for (const item of filtered) {
     const label = timelineDay(item.createdAt);
@@ -413,15 +422,30 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     const value = content.trim();
-    if (!value || submitting) {
+    if (!value || submitting || !user) {
       return;
     }
     setSubmitting(true);
     try {
-      await ok(
+      const resp = await ok(
         ozaClient.createTimelineSay({ content: value, turnstileToken: turnstileToken ?? '' }),
       );
       setContent('');
+      setOptimisticTimeline((prev) => [
+        {
+          id: resp.id,
+          uid: user.id,
+          user: { ...user, isFriend: false },
+          cat: TimelineCat.Status,
+          type: 0,
+          memo: { status: { tsukkomi: value } },
+          batch: false,
+          source: { name: 'Next' },
+          replies: 0,
+          createdAt: Math.floor(Date.now() / 1000),
+        },
+        ...prev,
+      ]);
       await mutate();
     } catch (error) {
       toast(error instanceof Error ? error.message : '发布失败，请稍后再试', { type: 'error' });
