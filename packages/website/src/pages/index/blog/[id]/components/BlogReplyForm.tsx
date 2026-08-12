@@ -40,8 +40,7 @@ const BlogReplyForm = ({
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const sendReply = async () => {
-    if (!content) return; // TODO: show validation message
-    if (sending) return; // TODO: disable button instead
+    if (!content.trim()) return;
     setSending(true);
     try {
       const response = await ozaClient.createBlogComment(entryId, {
@@ -71,6 +70,7 @@ const BlogReplyForm = ({
       value={content}
       // TODO: use loading state
       confirmText={sending ? '...' : undefined}
+      disabled={sending}
       onChange={onChange}
       onConfirm={sendReply}
       submitExtra={

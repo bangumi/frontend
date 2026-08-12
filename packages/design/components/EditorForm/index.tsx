@@ -63,6 +63,11 @@ export interface EditorFormProps extends EditorProps {
    * @default false
    */
   hideCancel?: boolean;
+  /**
+   * 禁用提交（确认按钮与 Ctrl+Enter / Alt+S 快捷键）
+   * @default false
+   */
+  disabled?: boolean;
 }
 
 const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
@@ -76,17 +81,19 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
       onCancel,
       submitExtra,
       hideCancel = false,
+      disabled = false,
       ...props
     },
     ref,
   ) => {
     return (
       <div className={cx('bgm-editor__form', editorForm, className)} style={style}>
-        <Editor ref={ref} onConfirm={onConfirm} {...props} />
+        <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
         <div className='bgm-editor__submit'>
           <Button
             color='blue'
             className='bgm-editor__button bgm-editor__button--confirm'
+            disabled={disabled}
             onClick={() => onConfirm?.(props.value ?? '')}
           >
             {confirmText}
