@@ -2717,6 +2717,10 @@
     min-width: var(--sizes-0);
 }
 
+  .\[\&_\>_\*\]\:max-w_100\% > * {
+    max-width: 100%;
+}
+
   .focus\:bd-c_\#888:is(:focus, [data-focus]) {
     border-color: #888;
 }

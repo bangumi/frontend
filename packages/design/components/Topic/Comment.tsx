@@ -32,10 +32,15 @@ const commentTip = css({
   },
 });
 
-// overflow-wrap 需要在块级容器上生效，这里覆盖评论主体
+// overflow-wrap 需要在块级容器上生效，这里覆盖评论主体；
+// main 是 flex column + align-items flex-start，子项宽度按内容撑开，
+// 需要限制 max-width 才会在窄屏换行
 const commentBody = css({
   overflowWrap: 'anywhere',
   minWidth: '0',
+  '& > *': {
+    maxWidth: '100%',
+  },
 });
 
 export type CommentProps = ((ReplyBase & { isReply: true }) | (Reply & { isReply: false })) & {
