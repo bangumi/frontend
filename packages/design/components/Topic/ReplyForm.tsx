@@ -3,7 +3,6 @@ import React, { memo, useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
 
-import { toast } from '../..';
 import type { EditorFormProps } from '../../components/EditorForm';
 import EditorForm from '../../components/EditorForm';
 
@@ -38,16 +37,12 @@ const ReplyForm = ({
   const sendReply = async () => {
     if (!content) return; // TODO: show validation message
     if (sending) return; // TODO: disable button instead
-    if (!turnstileToken) {
-      toast('请先完成验证码验证');
-      return;
-    }
     setSending(true);
     try {
       const response = await ozaClient.createGroupReply(topicId, {
         content,
         replyTo,
-        turnstileToken,
+        turnstileToken: turnstileToken ?? '',
       });
       if (response.status === 200) {
         // document.getElementById(`post_${res.data.id}`)?.scrollIntoView({ block: 'center' });
