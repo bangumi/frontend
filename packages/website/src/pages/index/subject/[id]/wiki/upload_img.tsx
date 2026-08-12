@@ -4,11 +4,25 @@ import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
 import { Button, Divider, Image, Layout, Message, toast, Typography } from '@bangumi/design';
+import { cx } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 
 import { useWikiContext } from '../wiki';
-import style from './common.module.less';
+import {
+  divider,
+  title,
+  uploadImg,
+  uploadImgBottom,
+  uploadImgBtn,
+  uploadImgCover,
+  uploadImgCoverItem,
+  uploadImgCoverItemImg,
+  uploadImgCoverItemInfo,
+  uploadImgDivider,
+} from './common';
+
+const uploadImgCoverDivider = cx(divider, uploadImgDivider);
 
 interface WikiCoverItemProp {
   id: number;
@@ -60,11 +74,11 @@ const WikiCoverItem: React.FC<WikiCoverItemProp> = ({
   };
 
   return (
-    <div className={style.uploadImgCoverItem}>
-      <div className={style.uploadImgCoverItemImg}>
+    <div className={uploadImgCoverItem}>
+      <div className={uploadImgCoverItemImg}>
         <Image src={thumbnail} alt={`cover-${id}`} />
       </div>
-      <div className={style.uploadImgCoverItemInfo}>
+      <div className={uploadImgCoverItemInfo}>
         <span>by</span>
         <Typography.Link to={url} fontWeight='bold'>
           {creator.nickname}
@@ -198,12 +212,12 @@ const WikiUploadImgPage: React.FC = () => {
     <Layout
       type='alpha'
       leftChildren={
-        <div className={style.uploadImg}>
+        <div className={uploadImg}>
           {currentWithCreator && (
             <>
-              <div className={style.title}>目前得票最高的封面图片</div>
-              <Divider className={style.divider} />
-              <div className={style.uploadImgCoverSelected}>
+              <div className={title}>目前得票最高的封面图片</div>
+              <Divider className={uploadImgCoverDivider} />
+              <div className={uploadImgCover}>
                 <WikiCoverItem
                   id={currentWithCreator.id}
                   creator={currentWithCreator.creator}
@@ -214,9 +228,9 @@ const WikiUploadImgPage: React.FC = () => {
           )}
           {covers.length > 0 && (
             <>
-              <div className={style.title}>已上传的封面图片</div>
-              <Divider className={style.divider} />
-              <div className={style.uploadImgCoverUploaded}>
+              <div className={title}>已上传的封面图片</div>
+              <Divider className={uploadImgCoverDivider} />
+              <div className={uploadImgCover}>
                 {covers.map((cover) => {
                   return (
                     <WikiCoverItem
@@ -233,12 +247,12 @@ const WikiUploadImgPage: React.FC = () => {
               </div>
             </>
           )}
-          <div className={style.title}>从你的电脑上选择新的图片</div>
-          <Divider className={style.divider} />
+          <div className={title}>从你的电脑上选择新的图片</div>
+          <Divider className={uploadImgCoverDivider} />
           <Message type='error'>
             请确保你的图片符合相关规定，任何包含 R18 或敏感内容的图片都会被直接移除
           </Message>
-          <div className={style.uploadImgBottom}>
+          <div className={uploadImgBottom}>
             <label htmlFor='coverUploader'>选择本地文件</label>
             <input
               type='file'
@@ -251,7 +265,7 @@ const WikiUploadImgPage: React.FC = () => {
           </div>
           {uploadContent && (
             <Button
-              className={style.uploadImgBtn}
+              className={uploadImgBtn}
               color='blue'
               onClick={uploadCover}
               type='primary'

@@ -25,7 +25,28 @@ import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared
 
 import WikiBeginnerEditor from '../components/WikiBeginnerEditor';
 import { useWikiContext } from '../wiki';
-import style from './common.module.less';
+import {
+  divider,
+  editorHandbook,
+  editorHandbookContent,
+  form,
+  formButton,
+  formDetailInfo,
+  formInput,
+  formInputGroup,
+  formRadio,
+  formSelect,
+  formTextArea,
+  history,
+  historyCreateAt,
+  historyItem,
+  historyMore,
+  historyMsg,
+  historySuffix,
+  historyUserName,
+  tips,
+  title,
+} from './common';
 
 enum EditorType {
   Beginner,
@@ -215,13 +236,13 @@ function WikiEditDetailDetailPage() {
         type='alpha'
         leftChildren={
           <>
-            <div className={style.title}>修改详细描述</div>
-            <Divider className={style.divider} />
-            <Form labelWidth={120} onSubmit={handleSubmit(onSubmit)} className={style.form}>
+            <div className={title}>修改详细描述</div>
+            <Divider className={divider} />
+            <Form labelWidth={120} onSubmit={handleSubmit(onSubmit)} className={form}>
               <Form.Item label='条目名'>
                 <Input
                   type='text'
-                  wrapperClass={style.formInput}
+                  wrapperClass={formInput}
                   defaultValue={subjectWikiInfo.name}
                   {...register('subject.name', { required: true })}
                 />
@@ -235,7 +256,7 @@ function WikiEditDetailDetailPage() {
                         <Radio
                           id={type.text}
                           data-tpl={type.wiki_tpl}
-                          className={style.formRadio}
+                          className={formRadio}
                           key={type.id}
                           label={type.text}
                           value={type.id}
@@ -247,7 +268,7 @@ function WikiEditDetailDetailPage() {
                         />
                       ))}
                     </Radio.Group>
-                    <div className={style.tips}>
+                    <div className={tips}>
                       注意：切换类型会导致项目顺序发生变化，请先选择好模板再进行排序
                     </div>
                   </div>
@@ -255,11 +276,11 @@ function WikiEditDetailDetailPage() {
               )}
 
               <Form.Item label='描述信息'>
-                <div className={style.formDetailInfo}>
+                <div className={formDetailInfo}>
                   <Radio.Group>
                     {EditorTypeRadio.map((type) => (
                       <Radio
-                        className={style.formRadio}
+                        className={formRadio}
                         key={type.key}
                         name='editor_mode'
                         label={type.label}
@@ -291,14 +312,14 @@ function WikiEditDetailDetailPage() {
 
               <Form.Item label='剧情介绍'>
                 <textarea
-                  className={style.formTextArea}
+                  className={formTextArea}
                   defaultValue={subjectWikiInfo.summary}
                   {...register('subject.summary', { required: true })}
                 />
               </Form.Item>
 
               <Form.Item label='受限内容'>
-                <div className={style.formRadio}>
+                <div className={formRadio}>
                   <Radio
                     id='nsfw'
                     type='checkbox'
@@ -310,23 +331,23 @@ function WikiEditDetailDetailPage() {
               </Form.Item>
 
               <Form.Item label='编辑摘要'>
-                <Input.Group className={style.formInputGroup}>
+                <Input.Group className={formInputGroup}>
                   <Select
                     defaultValue='0'
                     options={BuiltInCommitMessage}
-                    className={style.formSelect}
+                    className={formSelect}
                     onChange={(value) => {
                       setValue('commitMessage', value?.label ?? '');
                     }}
                   />
                   <Input
-                    wrapperClass={style.formInput}
+                    wrapperClass={formInput}
                     {...register('commitMessage', { required: true })}
                   />
                 </Input.Group>
               </Form.Item>
 
-              <Button htmlType='submit' color='blue' className={style.formButton}>
+              <Button htmlType='submit' color='blue' className={formButton}>
                 提交修改
               </Button>
             </Form>
@@ -334,10 +355,10 @@ function WikiEditDetailDetailPage() {
         }
         rightChildren={
           <div className='flex flex-col'>
-            <div className={style.editorHandbook}>
-              <div className={style.title}>编辑说明</div>
-              <Divider className={style.divider} />
-              <div className={style.editorHandbookContent}>
+            <div className={editorHandbook}>
+              <div className={title}>编辑说明</div>
+              <Divider className={divider} />
+              <div className={editorHandbookContent}>
                 <p>切换类型会导致已编辑项目顺序发生变化，请先选择好类型模板再进行排序</p>
                 <p>可拖拽改变行顺序</p>
                 <p>
@@ -354,26 +375,26 @@ function WikiEditDetailDetailPage() {
 
             {/* history */}
             <div className='flex flex-col'>
-              <div className={style.title}>条目修订历史</div>
-              <Divider className={style.divider} />
-              <div className={style.history}>
+              <div className={title}>条目修订历史</div>
+              <Divider className={divider} />
+              <div className={history}>
                 {subjectEditHistory.map((his, idx) => (
-                  <div key={idx} className={style.historyItem}>
-                    <span className={style.historyUserName}>{his.creator.username}</span>
-                    <span className={style.historyMsg} title={his.commitMessage}>
+                  <div key={idx} className={historyItem}>
+                    <span className={historyUserName}>{his.creator.username}</span>
+                    <span className={historyMsg} title={his.commitMessage}>
                       {his.commitMessage}
                     </span>
-                    <span className={cn(style.historySuffix, style.historyCreateAt)}>
+                    <span className={cn(historySuffix, historyCreateAt)}>
                       @ {dayjs.unix(his.createdAt).format('YYYY-MM-DD HH:mm')}
                     </span>
-                    <span className={style.historySuffix}>|</span>
-                    <span className={style.historySuffix}>恢复</span>
+                    <span className={historySuffix}>|</span>
+                    <span className={historySuffix}>恢复</span>
                   </div>
                 ))}
                 <Button.Link
                   type='plain'
                   to={WikiEditTabsItemsByKey.history.to(subjectId.toString())}
-                  className={style.historyMore}
+                  className={historyMore}
                 >
                   更多修改记录
                   <ArrowRightCircle />
