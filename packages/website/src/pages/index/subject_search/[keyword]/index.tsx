@@ -717,8 +717,7 @@ const VIEW_STORAGE_KEY = 'bangumi-subject-search-view';
 type ViewMode = 'compact' | 'full' | 'grid';
 type SubjectCategory = 'all' | `${SubjectType}`;
 type RelatedMono =
-  | { kind: 'character'; item: SlimCharacter }
-  | { kind: 'person'; item: SlimPerson };
+  { kind: 'character'; item: SlimCharacter } | { kind: 'person'; item: SlimPerson };
 
 const SUBJECT_CATEGORIES: { value: SubjectCategory; label: string }[] = [
   { value: 'all', label: '全部' },
