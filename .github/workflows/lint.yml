@@ -36,3 +36,6 @@ jobs:
 
       - run: pnpm lint:style
         name: Lint Style
+
+      - run: pnpm lint:panda
+        name: Check Panda CSS is up to date
