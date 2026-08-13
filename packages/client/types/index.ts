@@ -59,6 +59,45 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/subjects/-/comments/{commentID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 编辑条目的吐槽 */
+    put: operations['updateSubjectComment'];
+    post?: never;
+    /**
+     * 删除条目的吐槽
+     * @description 删除吐槽会清空吐槽内容并保留收藏记录
+     */
+    delete: operations['deleteSubjectComment'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/subjects/-/comments/{commentID}/like': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 给条目的吐槽点赞 */
+    put: operations['likeSubjectComment'];
+    post?: never;
+    /** 取消条目的吐槽点赞 */
+    delete: operations['unlikeSubjectComment'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/turnstile': {
     parameters: {
       query?: never;
@@ -1599,7 +1638,11 @@ export interface paths {
     /** 获取条目的吐槽箱 */
     get: operations['getSubjectComments'];
     put?: never;
-    post?: never;
+    /**
+     * 发表条目的吐槽
+     * @description 吐槽挂在条目收藏上：已收藏则更新吐槽，未收藏需传 type 创建收藏并写吐槽
+     */
+    post: operations['createSubjectComment'];
     delete?: never;
     options?: never;
     head?: never;
@@ -2860,6 +2903,13 @@ export interface components {
      * @enum {integer}
      */
     CollectionType: 1 | 2 | 3 | 4 | 5;
+    CreateSubjectComment: {
+      /** @description 吐槽内容 */
+      comment: string;
+      type?: components['schemas']['CollectionType'];
+      /** @description 评分，0 表示删除评分 */
+      rate?: number;
+    };
     /**
      * @description 章节收藏状态
      *       - 0 = 撤消/删除
@@ -3300,6 +3350,10 @@ export interface components {
     /** UpdateIndexRelated */
     UpdateIndexRelated: {
       order: number;
+      comment: string;
+    };
+    UpdateSubjectComment: {
+      /** @description 吐槽内容 */
       comment: string;
     };
     UpdateSubjectProgress: {
@@ -4874,6 +4928,149 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  updateSubjectComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateSubjectComment'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deleteSubjectComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  likeSubjectComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': {
+          value: number;
+        };
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description default error response type */
+      429: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  unlikeSubjectComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        commentID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -9640,6 +9837,54 @@ export interface operations {
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createSubjectComment: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        subjectID: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateSubjectComment'] &
+          components['schemas']['TurnstileToken'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            /** @description new comment id */
+            id: number;
+          };
+        };
+      };
+      /** @description default error response type */
+      429: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */

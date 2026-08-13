@@ -57,6 +57,26 @@
         "x-enum-varnames": ["Wish", "Collect", "Doing", "OnHold", "Dropped"],
         "description": "条目收藏状态\n  - 1 = 想看\n  - 2 = 看过\n  - 3 = 在看\n  - 4 = 搁置\n  - 5 = 抛弃"
       },
+      "CreateSubjectComment": {
+        "type": "object",
+        "required": ["comment"],
+        "properties": {
+          "comment": {
+            "type": "string",
+            "minLength": 1,
+            "description": "吐槽内容"
+          },
+          "type": {
+            "$ref": "#/components/schemas/CollectionType"
+          },
+          "rate": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "description": "评分，0 表示删除评分"
+          }
+        }
+      },
       "EpisodeCollectionStatus": {
         "type": "integer",
         "enum": [0, 1, 2, 3],
@@ -810,6 +830,17 @@
           }
         },
         "title": "UpdateIndexRelated"
+      },
+      "UpdateSubjectComment": {
+        "type": "object",
+        "required": ["comment"],
+        "properties": {
+          "comment": {
+            "type": "string",
+            "minLength": 1,
+            "description": "吐槽内容"
+          }
+        }
       },
       "UpdateSubjectProgress": {
         "type": "object",
@@ -5066,6 +5097,225 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/subjects/-/comments/{commentID}": {
+      "put": {
+        "operationId": "updateSubjectComment",
+        "summary": "编辑条目的吐槽",
+        "tags": ["subject"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSubjectComment"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "in": "path",
+            "name": "commentID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteSubjectComment",
+        "summary": "删除条目的吐槽",
+        "tags": ["subject"],
+        "description": "删除吐槽会清空吐槽内容并保留收藏记录",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "in": "path",
+            "name": "commentID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/subjects/-/comments/{commentID}/like": {
+      "put": {
+        "operationId": "likeSubjectComment",
+        "summary": "给条目的吐槽点赞",
+        "tags": ["subject"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["value"],
+                "properties": {
+                  "value": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "commentID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "unlikeSubjectComment",
+        "summary": "取消条目的吐槽点赞",
+        "tags": ["subject"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "commentID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
                 }
               }
             }
@@ -13233,6 +13483,84 @@
                       "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
                     }
                   }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSubjectComment",
+        "summary": "发表条目的吐槽",
+        "tags": ["subject"],
+        "description": "吐槽挂在条目收藏上：已收藏则更新吐槽，未收藏需传 type 创建收藏并写吐槽",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateSubjectComment"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TurnstileToken"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "subjectID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["id"],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "new comment id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }

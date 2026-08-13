@@ -38,6 +38,10 @@ export type SlimUser = {
   /** Whether the authenticated user has added this user as a friend; false when the endpoint does not populate viewer friendship */
   isFriend: boolean;
 };
+export type UpdateSubjectComment = {
+  /** 吐槽内容 */
+  comment: string;
+};
 export type BlogEntry = {
   id: number;
   type: number;
@@ -859,6 +863,13 @@ export type SubjectInterestComment = {
   updatedAt: number;
   reactions?: Reaction[];
 };
+export type CreateSubjectComment = {
+  /** 吐槽内容 */
+  comment: string;
+  type?: CollectionType;
+  /** 评分，0 表示删除评分 */
+  rate?: number;
+};
 export type SubjectReview = {
   id: number;
   user: SlimUser;
@@ -1247,6 +1258,100 @@ export function login(loginRequestBody: LoginRequestBody, opts?: Oazapfts.Reques
       body: loginRequestBody,
     }),
   );
+}
+/**
+ * 编辑条目的吐槽
+ */
+export function updateSubjectComment(
+  commentId: number,
+  updateSubjectComment: UpdateSubjectComment,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/comments/${encodeURIComponent(commentId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body: updateSubjectComment,
+    }),
+  );
+}
+/**
+ * 删除条目的吐槽
+ */
+export function deleteSubjectComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/comments/${encodeURIComponent(commentId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 给条目的吐槽点赞
+ */
+export function likeSubjectComment(
+  commentId: number,
+  body: {
+    value: number;
+  },
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/-/comments/${encodeURIComponent(commentId)}/like`,
+    oazapfts.json({
+      ...opts,
+      method: 'PUT',
+      body,
+    }),
+  );
+}
+/**
+ * 取消条目的吐槽点赞
+ */
+export function unlikeSubjectComment(commentId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/subjects/-/comments/${encodeURIComponent(commentId)}/like`, {
+    ...opts,
+    method: 'DELETE',
+  });
 }
 /**
  * 获取 Turnstile 令牌
@@ -4885,6 +4990,39 @@ export function getSubjectComments(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 发表条目的吐槽
+ */
+export function createSubjectComment(
+  subjectId: number,
+  body: CreateSubjectComment & TurnstileToken,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          /** new comment id */
+          id: number;
+        };
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/subjects/${encodeURIComponent(subjectId)}/comments`,
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
   );
 }
 /**
