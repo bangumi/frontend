@@ -90,6 +90,7 @@ const searchCategories = [
   { value: '3', label: '音乐' },
   { value: '4', label: '游戏' },
   { value: '6', label: '三次元' },
+  { value: 'mono', label: '人物' },
 ] as const;
 
 const container = css({
@@ -464,7 +465,24 @@ const Header: FC = () => {
       return;
     }
     setMobilePanel('closed');
-    navigate(`/subject_search/${encodeURIComponent(keyword)}?cat=${searchCategory}`);
+    if (searchCategory === 'mono') {
+      navigate(`/mono_search/${encodeURIComponent(keyword)}?cat=prsn`);
+    } else {
+      navigate(`/subject_search/${encodeURIComponent(keyword)}?cat=${searchCategory}`);
+    }
+  };
+
+  const handleDesktopSearch = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    const keyword = searchValue.trim();
+    if (!keyword) {
+      return;
+    }
+    if (searchCategory === 'mono') {
+      navigate(`/mono_search/${encodeURIComponent(keyword)}?cat=prsn`);
+    } else {
+      navigate(`/subject_search/${encodeURIComponent(keyword)}?cat=${searchCategory}`);
+    }
   };
 
   return (
@@ -511,24 +529,32 @@ const Header: FC = () => {
             <SearchIcon />
           </button>
           <div className={infoBox}>
-            {/* Search Todo */}
-            <Input
-              prefix={
-                <>
-                  <select name='cat' className={searchSelect} defaultValue='value1'>
-                    <option value='value1'>全部条目</option>
-                    <option value='value2'>动画</option>
-                    <option value='value3'>书籍</option>
-                    <option value='value4'>游戏</option>
-                    <option value='value5'>三次元</option>
-                    <option value='value6'>人物</option>
-                  </select>
-                  <Divider orientation='vertical' className={searchDivider} />
-                </>
-              }
-              suffix={<SearchIcon style={{ flexShrink: 0 }} />}
-              wrapperClass={search}
-            />
+            <form onSubmit={handleDesktopSearch}>
+              <Input
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                prefix={
+                  <>
+                    <select
+                      name='cat'
+                      className={searchSelect}
+                      value={searchCategory}
+                      onChange={(event) => setSearchCategory(event.target.value)}
+                    >
+                      <option value='all'>全部条目</option>
+                      <option value='1'>动画</option>
+                      <option value='2'>书籍</option>
+                      <option value='4'>游戏</option>
+                      <option value='6'>三次元</option>
+                      <option value='mono'>人物</option>
+                    </select>
+                    <Divider orientation='vertical' className={searchDivider} />
+                  </>
+                }
+                suffix={<SearchIcon style={{ flexShrink: 0 }} />}
+                wrapperClass={search}
+              />
+            </form>
           </div>
           {/* Avatar */}
           {user ? (
