@@ -1,0 +1,116 @@
+{
+  "conversation": {
+    "id": 101,
+    "title": "你好呀",
+    "other": {
+      "id": 1,
+      "username": "sai",
+      "nickname": "Sai",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+      },
+      "group": 1,
+      "sign": "",
+      "joinedAt": 0,
+      "isFriend": false
+    },
+    "lastMessage": {
+      "id": 103,
+      "sender": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        },
+        "group": 1,
+        "sign": "",
+        "joinedAt": 0,
+        "isFriend": false
+      },
+      "receiverID": 382951,
+      "title": "你好呀",
+      "content": "有任何问题欢迎反馈",
+      "createdAt": 1735689800,
+      "read": false,
+      "related": 101
+    },
+    "unreadCount": 0,
+    "totalCount": 3
+  },
+  "messages": [
+    {
+      "id": 101,
+      "sender": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        },
+        "group": 1,
+        "sign": "",
+        "joinedAt": 0,
+        "isFriend": false
+      },
+      "receiverID": 382951,
+      "title": "你好呀",
+      "content": "欢迎来到新前端，这里是私信功能",
+      "createdAt": 1735689600,
+      "read": false,
+      "related": 101
+    },
+    {
+      "id": 102,
+      "sender": {
+        "id": 382951,
+        "username": "382951",
+        "nickname": "树洞酱",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/382951.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/382951.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/382951.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 0,
+        "isFriend": false
+      },
+      "receiverID": 1,
+      "title": "你好呀",
+      "content": "谢谢！界面很棒",
+      "createdAt": 1735689700,
+      "read": true,
+      "related": 101
+    },
+    {
+      "id": 103,
+      "sender": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        },
+        "group": 1,
+        "sign": "",
+        "joinedAt": 0,
+        "isFriend": false
+      },
+      "receiverID": 382951,
+      "title": "你好呀",
+      "content": "有任何问题欢迎反馈",
+      "createdAt": 1735689800,
+      "read": false,
+      "related": 101
+    }
+  ]
+}

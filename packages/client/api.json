@@ -419,6 +419,46 @@
         },
         "title": "CreateIndexRelated"
       },
+      "CreatePrivateMessage": {
+        "type": "object",
+        "required": ["title", "content"],
+        "properties": {
+          "receivers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "maxItems": 10,
+            "description": "收件人 username 列表，与 receiverIDs 二选一"
+          },
+          "receiverIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "minItems": 1,
+            "maxItems": 10,
+            "description": "收件人 user id 列表，与 receivers 二选一"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 75
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          },
+          "related": {
+            "type": "integer",
+            "description": "回复时传入会话根消息 id，不传则创建新会话"
+          }
+        },
+        "title": "CreatePrivateMessage"
+      },
       "CreateReply": {
         "type": "object",
         "required": ["content"],
@@ -2105,6 +2145,123 @@
           }
         },
         "title": "Post"
+      },
+      "PrivateMessage": {
+        "type": "object",
+        "required": [
+          "id",
+          "sender",
+          "receiverID",
+          "title",
+          "content",
+          "createdAt",
+          "read",
+          "related"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "receiverID": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "integer",
+            "description": "unix timestamp seconds"
+          },
+          "read": {
+            "type": "boolean",
+            "description": "接收者是否已读"
+          },
+          "related": {
+            "type": "integer",
+            "description": "会话根消息 id (msg_related)"
+          }
+        },
+        "title": "PrivateMessage"
+      },
+      "PrivateMessageContact": {
+        "type": "object",
+        "required": ["user", "lastMessageAt"],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "lastMessageAt": {
+            "type": "integer"
+          }
+        },
+        "title": "PrivateMessageContact"
+      },
+      "PrivateMessageConversation": {
+        "type": "object",
+        "required": ["id", "title", "other", "lastMessage", "unreadCount", "totalCount"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "会话根消息 id (msg_related)"
+          },
+          "title": {
+            "type": "string"
+          },
+          "other": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "lastMessage": {
+            "$ref": "#/components/schemas/PrivateMessage"
+          },
+          "unreadCount": {
+            "type": "integer"
+          },
+          "totalCount": {
+            "type": "integer"
+          }
+        },
+        "title": "PrivateMessageConversation"
+      },
+      "PrivateMessageConversationDetail": {
+        "type": "object",
+        "required": ["conversation", "messages"],
+        "properties": {
+          "conversation": {
+            "$ref": "#/components/schemas/PrivateMessageConversation"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PrivateMessage"
+            }
+          }
+        },
+        "title": "PrivateMessageConversationDetail"
+      },
+      "PrivateMessageStatus": {
+        "type": "object",
+        "required": ["inbox", "outbox", "unread"],
+        "properties": {
+          "inbox": {
+            "type": "integer",
+            "description": "收件箱消息条数（注意：会话列表接口的 total 为会话数）"
+          },
+          "outbox": {
+            "type": "integer",
+            "description": "发件箱消息条数（注意：会话列表接口的 total 为会话数）"
+          },
+          "unread": {
+            "type": "integer",
+            "description": "未读私信消息条数"
+          }
+        },
+        "title": "PrivateMessageStatus"
       },
       "Profile": {
         "type": "object",
@@ -11932,6 +12089,549 @@
                 "schema": {
                   "type": "object",
                   "properties": {}
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm": {
+      "get": {
+        "operationId": "getPrivateMessageStatus",
+        "summary": "获取私信邮箱状态",
+        "tags": ["pm"],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrivateMessageStatus"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "createPrivateMessage",
+        "summary": "发送私信",
+        "tags": ["pm"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePrivateMessage"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["messages"],
+                  "properties": {
+                    "messages": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "required": ["receiverID", "msgID"],
+                        "properties": {
+                          "receiverID": {
+                            "type": "integer"
+                          },
+                          "msgID": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm/inbox": {
+      "get": {
+        "operationId": "listPrivateMessageInbox",
+        "summary": "获取收件箱会话列表",
+        "tags": ["pm"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PrivateMessageConversation"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm/outbox": {
+      "get": {
+        "operationId": "listPrivateMessageOutbox",
+        "summary": "获取发件箱会话列表",
+        "tags": ["pm"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/PrivateMessageConversation"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm/contacts": {
+      "get": {
+        "operationId": "listPrivateMessageContacts",
+        "summary": "获取最近私信联系人",
+        "tags": ["pm"],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PrivateMessageContact"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm/conversations/{msgID}": {
+      "get": {
+        "operationId": "getPrivateMessageConversation",
+        "summary": "获取私信会话详情",
+        "tags": ["pm"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "msgID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrivateMessageConversationDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deletePrivateMessageConversation",
+        "summary": "删除私信会话",
+        "tags": ["pm"],
+        "description": "仅对当前用户软删除，不影响会话对方",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "msgID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm/conversations/{msgID}/read": {
+      "put": {
+        "operationId": "markPrivateMessageConversationRead",
+        "summary": "标记私信会话已读",
+        "tags": ["pm"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "msgID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/pm/{msgID}": {
+      "delete": {
+        "operationId": "deletePrivateMessage",
+        "summary": "删除单条私信",
+        "tags": ["pm"],
+        "description": "仅对当前用户软删除，不影响对方",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "msgID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }

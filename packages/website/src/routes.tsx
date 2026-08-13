@@ -19,6 +19,10 @@ const Channel = lazy(async () => import('./pages/index/channel'));
 const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
+const PmInbox = lazy(async () => import('./pages/index/pm'));
+const PmOutbox = lazy(async () => import('./pages/index/pm/outbox'));
+const PmCompose = lazy(async () => import('./pages/index/pm/compose'));
+const PmConversation = lazy(async () => import('./pages/index/pm/conversation/[msgID]'));
 const Group = lazy(async () => import('./pages/index/group/[name]/index'));
 const GroupChannel = lazy(async () => import('./pages/index/group/index'));
 const GroupAll = lazy(async () => import('./pages/index/group/all'));
@@ -133,6 +137,15 @@ export const pageRoutes: RouteObject[] = [
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },
       { path: 'blog/:id', element: <BlogEntry /> },
       { path: 'notifications', element: <Notifications /> },
+      {
+        path: 'pm',
+        children: [
+          { path: '', element: <PmInbox /> },
+          { path: 'outbox', element: <PmOutbox /> },
+          { path: 'compose', element: <PmCompose /> },
+          { path: 'conversation/:msgID', element: <PmConversation /> },
+        ],
+      },
       ...userCollectionTypes.map((type) => ({
         path: type,
         children: [

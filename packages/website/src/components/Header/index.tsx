@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { Avatar, Divider, Input, Menu } from '@bangumi/design';
-import { Notification, Search as SearchIcon } from '@bangumi/icons';
+import { Mail, Notification, Search as SearchIcon } from '@bangumi/icons';
 import { css, cx } from '@bangumi/styled-system/css';
 import { UnreadableCodeError } from '@bangumi/utils';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 import { useNotify } from '@bangumi/website/hooks/use-notify';
+import { usePmStatus } from '@bangumi/website/hooks/use-pm';
 
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
@@ -436,6 +437,7 @@ if (Musume === undefined) {
 const Header: FC = () => {
   const { user } = useUser();
   const { noticeCount } = useNotify();
+  const { data: pmStatus } = usePmStatus();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -537,6 +539,16 @@ const Header: FC = () => {
                 className={cx(icon, notificationIcon, noticeCount > 0 && notificationNotice)}
               >
                 <Notification />
+              </Link>
+              <Link
+                to='/pm'
+                className={cx(
+                  icon,
+                  notificationIcon,
+                  (pmStatus?.unread ?? 0) > 0 && notificationNotice,
+                )}
+              >
+                <Mail />
               </Link>
               <Link to={getUserProfileLink(user.username)}>
                 <Avatar src={user.avatar.large} wrapperClass={avatar} />

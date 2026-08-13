@@ -1343,6 +1343,133 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/pm': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取私信邮箱状态 */
+    get: operations['getPrivateMessageStatus'];
+    put?: never;
+    /** 发送私信 */
+    post: operations['createPrivateMessage'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/pm/inbox': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取收件箱会话列表 */
+    get: operations['listPrivateMessageInbox'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/pm/outbox': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取发件箱会话列表 */
+    get: operations['listPrivateMessageOutbox'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/pm/contacts': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取最近私信联系人 */
+    get: operations['listPrivateMessageContacts'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/pm/conversations/{msgID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取私信会话详情 */
+    get: operations['getPrivateMessageConversation'];
+    put?: never;
+    post?: never;
+    /**
+     * 删除私信会话
+     * @description 仅对当前用户软删除，不影响会话对方
+     */
+    delete: operations['deletePrivateMessageConversation'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/pm/conversations/{msgID}/read': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    /** 标记私信会话已读 */
+    put: operations['markPrivateMessageConversationRead'];
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/p1/pm/{msgID}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    /**
+     * 删除单条私信
+     * @description 仅对当前用户软删除，不影响对方
+     */
+    delete: operations['deletePrivateMessage'];
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/privacy': {
     parameters: {
       query?: never;
@@ -3091,6 +3218,17 @@ export interface components {
       comment?: string;
       award?: string;
     };
+    /** CreatePrivateMessage */
+    CreatePrivateMessage: {
+      /** @description 收件人 username 列表，与 receiverIDs 二选一 */
+      receivers?: string[];
+      /** @description 收件人 user id 列表，与 receivers 二选一 */
+      receiverIDs?: number[];
+      title: string;
+      content: string;
+      /** @description 回复时传入会话根消息 id，不传则创建新会话 */
+      related?: number;
+    };
     CreateReply: {
       content: string;
       /**
@@ -3670,6 +3808,49 @@ export interface components {
       content: string;
       state: number;
       topic: components['schemas']['Topic'];
+    };
+    /** PrivateMessage */
+    PrivateMessage: {
+      id: number;
+      sender: components['schemas']['SlimUser'];
+      receiverID: number;
+      title: string;
+      content: string;
+      /** @description unix timestamp seconds */
+      createdAt: number;
+      /** @description 接收者是否已读 */
+      read: boolean;
+      /** @description 会话根消息 id (msg_related) */
+      related: number;
+    };
+    /** PrivateMessageContact */
+    PrivateMessageContact: {
+      user: components['schemas']['SlimUser'];
+      lastMessageAt: number;
+    };
+    /** PrivateMessageConversation */
+    PrivateMessageConversation: {
+      /** @description 会话根消息 id (msg_related) */
+      id: number;
+      title: string;
+      other: components['schemas']['SlimUser'];
+      lastMessage: components['schemas']['PrivateMessage'];
+      unreadCount: number;
+      totalCount: number;
+    };
+    /** PrivateMessageConversationDetail */
+    PrivateMessageConversationDetail: {
+      conversation: components['schemas']['PrivateMessageConversation'];
+      messages: components['schemas']['PrivateMessage'][];
+    };
+    /** PrivateMessageStatus */
+    PrivateMessageStatus: {
+      /** @description 收件箱消息条数（注意：会话列表接口的 total 为会话数） */
+      inbox: number;
+      /** @description 发件箱消息条数（注意：会话列表接口的 total 为会话数） */
+      outbox: number;
+      /** @description 未读私信消息条数 */
+      unread: number;
     };
     /** Profile */
     Profile: {
@@ -4313,7 +4494,16 @@ export interface components {
      * @enum {string}
      */
     UserHomepageSection:
-      'anime' | 'game' | 'book' | 'music' | 'real' | 'mono' | 'blog' | 'friend' | 'group' | 'index';
+      | 'anime'
+      | 'game'
+      | 'book'
+      | 'music'
+      | 'real'
+      | 'mono'
+      | 'blog'
+      | 'friend'
+      | 'group'
+      | 'index';
     /** UserIndexStats */
     UserIndexStats: {
       create: number;
@@ -8855,6 +9045,374 @@ export interface operations {
         };
         content: {
           'application/json': Record<string, never>;
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getPrivateMessageStatus: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PrivateMessageStatus'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createPrivateMessage: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreatePrivateMessage'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            messages: {
+              receiverID: number;
+              msgID: number;
+            }[];
+          };
+        };
+      };
+      /** @description default error response type */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description default error response type */
+      403: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description default error response type */
+      429: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  listPrivateMessageInbox: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['PrivateMessageConversation'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  listPrivateMessageOutbox: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['PrivateMessageConversation'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  listPrivateMessageContacts: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PrivateMessageContact'][];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getPrivateMessageConversation: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        msgID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['PrivateMessageConversationDetail'];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deletePrivateMessageConversation: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        msgID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  markPrivateMessageConversationRead: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        msgID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  deletePrivateMessage: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        msgID: number;
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
