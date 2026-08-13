@@ -71,7 +71,7 @@ test.describe('main page', () => {
     await expect(
       page
         .locator('div')
-        .filter({ hasText: '全部条目动画书籍游戏三次元人物' })
+        .filter({ hasText: '全部动画书籍音乐游戏三次元人物' })
         .getByRole('img')
         .first(),
     ).toBeVisible();
