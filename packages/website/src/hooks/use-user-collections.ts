@@ -1,4 +1,5 @@
 import { ok } from '@oazapfts/runtime';
+import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
@@ -16,8 +17,12 @@ export function useUserSubjectCollections(
   username: string,
   subjectType: SubjectType,
   { type, limit, offset = 0 }: UserSubjectCollectionsParams,
-): { data: SlimSubject[] | undefined; total: number | undefined } {
-  const { data } = useSWR(
+): {
+  data: SlimSubject[] | undefined;
+  total: number | undefined;
+  mutate: KeyedMutator<{ data: SlimSubject[]; total: number }>;
+} {
+  const { data, mutate } = useSWR(
     `user-subject-collections ${username} ${subjectType} ${type ?? ''} ${limit} ${offset}`,
     async () =>
       ok(
@@ -26,5 +31,5 @@ export function useUserSubjectCollections(
     { suspense: true },
   );
 
-  return data ?? { data: undefined, total: undefined };
+  return { data: data?.data, total: data?.total, mutate };
 }
