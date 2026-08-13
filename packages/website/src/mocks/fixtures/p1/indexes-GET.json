@@ -1,0 +1,63 @@
+{
+  "data": [
+    {
+      "id": 100,
+      "uid": 1,
+      "user": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        },
+        "group": 2,
+        "sign": "测试签名",
+        "joinedAt": 1262304000,
+        "isFriend": false
+      },
+      "type": 1,
+      "title": "我的测试目录",
+      "desc": "这是一个测试目录",
+      "private": false,
+      "total": 2,
+      "replies": 3,
+      "collects": 10,
+      "stats": { "subject": { "anime": 1, "book": 1 } },
+      "award": 0,
+      "createdAt": 1600000000,
+      "updatedAt": 1600000100
+    },
+    {
+      "id": 101,
+      "uid": 2,
+      "user": {
+        "id": 2,
+        "username": "chii",
+        "nickname": "Chii",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+        },
+        "group": 2,
+        "sign": "",
+        "joinedAt": 1262304000,
+        "isFriend": false
+      },
+      "type": 0,
+      "title": "Chii 的私人目录",
+      "desc": "仅供自己查看",
+      "private": true,
+      "total": 0,
+      "replies": 0,
+      "collects": 0,
+      "stats": {},
+      "award": 0,
+      "createdAt": 1600001000,
+      "updatedAt": 1600002000
+    }
+  ],
+  "total": 2
+}
