@@ -4115,6 +4115,10 @@
     padding: 11px 4px;
 }
 
+  .\[\&\[data-active\]\]\:bg_\#f09199[data-active] {
+    background: #f09199;
+}
+
   .disabled\:bg_\#fff:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     background: #fff;
 }
@@ -5367,6 +5371,14 @@
     font-size: 1.125rem;
 }
 
+  .\[\&\[data-active\]\]\:c_\#fff[data-active] {
+    color: #fff;
+}
+
+  .\[\&\[data-active\]\]\:c_\#f09199[data-active] {
+    color: #f09199;
+}
+
   .disabled\:c_\#9f9b9b:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     color: #9f9b9b;
 }
@@ -6550,6 +6562,10 @@
     margin-bottom: 6px;
 }
 
+  .\[\&\[data-active\]\]\:bd-b-c_\#f09199[data-active] {
+    border-bottom-color: #f09199;
+}
+
   .\[\&_\>_li\]\:min-h_58px > li {
     min-height: 58px;
 }
@@ -7484,6 +7500,10 @@
 
   .\[\&_\.bgm-input\]\:\[\&\:\:placeholder\]\:c_\#9f9b9b .bgm-input::placeholder {
     color: #9f9b9b;
+}
+
+  .\[\&\[data-active\]\]\:hover\:c_\#fff[data-active]:is(:hover, [data-hover]) {
+    color: #fff;
 }
 
   .\[\&_\>_li\]\:\[\&_\>_div_\>_a\,_\&_small\]\:d_block > li > div > a,.\[\&_\>_li\]\:\[\&_\>_div_\>_a\,_\&_small\]\:d_block > li small {
