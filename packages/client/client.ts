@@ -3265,6 +3265,50 @@ export function getHome(opts?: Oazapfts.RequestOpts) {
   });
 }
 /**
+ * 获取目录列表
+ */
+export function getIndexes(
+  {
+    order,
+    $type,
+    limit,
+    offset,
+  }: {
+    order?: 'hot' | 'latest';
+    $type?: IndexType;
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: Index[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/indexes${QS.query(
+      QS.explode({
+        order,
+        type: $type,
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
  * 创建目录
  */
 export function createIndex(createIndex: CreateIndex, opts?: Oazapfts.RequestOpts) {

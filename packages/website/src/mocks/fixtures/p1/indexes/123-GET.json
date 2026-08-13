@@ -1,0 +1,29 @@
+{
+  "id": 123,
+  "uid": 1,
+  "user": {
+    "id": 1,
+    "username": "sai",
+    "nickname": "Sai",
+    "avatar": {
+      "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+      "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+      "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+    },
+    "group": 2,
+    "sign": "测试签名",
+    "joinedAt": 1262304000,
+    "isFriend": false
+  },
+  "type": 1,
+  "title": "我的测试目录",
+  "desc": "这是一个[url=https://bgm.tv]测试目录[/url]",
+  "private": false,
+  "total": 2,
+  "replies": 3,
+  "collects": 10,
+  "stats": { "subject": { "anime": 1, "book": 1 }, "character": 1 },
+  "award": 0,
+  "createdAt": 1600000000,
+  "updatedAt": 1600000100
+}

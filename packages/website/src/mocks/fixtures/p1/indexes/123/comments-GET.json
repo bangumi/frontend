@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "mainID": 0,
+    "creatorID": 1,
+    "relatedID": 123,
+    "createdAt": 1600000000,
+    "content": "第一条评论",
+    "state": 0,
+    "user": {
+      "id": 1,
+      "username": "sai",
+      "nickname": "Sai",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+      },
+      "group": 2,
+      "sign": "测试签名",
+      "joinedAt": 1262304000,
+      "isFriend": false
+    },
+    "replies": [
+      {
+        "id": 2,
+        "mainID": 1,
+        "creatorID": 2,
+        "relatedID": 123,
+        "createdAt": 1600000100,
+        "content": "楼中楼回复",
+        "state": 0,
+        "user": {
+          "id": 2,
+          "username": "chii",
+          "nickname": "Chii",
+          "avatar": {
+            "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+            "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+            "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+          },
+          "group": 2,
+          "sign": "",
+          "joinedAt": 1262304000,
+          "isFriend": false
+        }
+      }
+    ]
+  }
+]
