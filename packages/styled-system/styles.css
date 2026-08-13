@@ -880,18 +880,6 @@
     border: 0;
 }
 
-  .m_0_0_0_72px {
-    margin: 0 0 0 72px;
-}
-
-  .p_16px_4px_13px {
-    padding: 16px 4px 13px;
-}
-
-  .p_12px_4px_13px {
-    padding: 12px 4px 13px;
-}
-
   .p_24px_4px {
     padding: 24px 4px;
 }
@@ -1668,14 +1656,6 @@
     gap: 28px;
 }
 
-  .flex_0_0_auto {
-    flex: 0 0 auto;
-}
-
-  .gap_6px {
-    gap: 6px;
-}
-
   .flex_0_0_56px {
     flex: 0 0 56px;
 }
@@ -1764,6 +1744,10 @@
     border-radius: 0 0 2px;
 }
 
+  .gap_6px {
+    gap: 6px;
+}
+
   .gap_3px {
     gap: 3px;
 }
@@ -1806,6 +1790,10 @@
 
   .gap_16px {
     gap: 16px;
+}
+
+  .flex_0_0_auto {
+    flex: 0 0 auto;
 }
 
   .flex_0_1_auto {
@@ -2485,14 +2473,6 @@
     cursor: pointer;
 }
 
-  .lh_1\.65 {
-    line-height: 1.65;
-}
-
-  .font-style_italic {
-    font-style: italic;
-}
-
   .jc_flex-end {
     justify-content: flex-end;
 }
@@ -2616,6 +2596,10 @@
 
   .lh_17px {
     line-height: 17px;
+}
+
+  .lh_1\.65 {
+    line-height: 1.65;
 }
 
   .grid-tc_minmax\(220px\,_1fr\)_minmax\(260px\,_1\.15fr\) {
@@ -3407,14 +3391,6 @@
     height: 28px;
 }
 
-  .min-h_20px {
-    min-height: 20px;
-}
-
-  .mt_7px {
-    margin-top: 7px;
-}
-
   .w_56px {
     width: 56px;
 }
@@ -3753,6 +3729,10 @@
 
   .pt_1px {
     padding-top: 1px;
+}
+
+  .mt_7px {
+    margin-top: 7px;
 }
 
   .top_4px {
@@ -5371,22 +5351,6 @@
     transform: rotate(180deg);
 }
 
-  .\[\&_\>_span\]\:d_inline > span {
-    display: inline;
-}
-
-  .\[\&_\>_span\]\:c_\#9f9b9b > span {
-    color: #9f9b9b;
-}
-
-  .\[\&_\>_span\]\:fs_11px > span {
-    font-size: 11px;
-}
-
-  .\[\&_\.quote\]\:fs_13px .quote {
-    font-size: 13px;
-}
-
   .\[\&_\>_div\]\:d_flex > div {
     display: flex;
 }
@@ -5429,6 +5393,10 @@
 
   .\[\&_\>_span\]\:lh_17px > span {
     line-height: 17px;
+}
+
+  .\[\&_\>_span\]\:c_\#9f9b9b > span {
+    color: #9f9b9b;
 }
 
   .\[\&_thead\]\:ta_left thead {
@@ -6628,10 +6596,6 @@
 
   .\[\&_svg\]\:h_15px svg {
     height: 15px;
-}
-
-  .\[\&_\>_span\]\:ml_8px > span {
-    margin-left: 8px;
 }
 
   .\[\&_\>_div\]\:min-w_0 > div {
@@ -8716,12 +8680,6 @@
     .\[\@media_\(max-width\:_640px\)\]\:pl_2px {
       padding-left: 2px;
 }
-    .\[\@media_\(max-width\:_640px\)\]\:ml_28px {
-      margin-left: 28px;
-}
-    .\[\@media_\(max-width\:_640px\)\]\:mt_2px {
-      margin-top: 2px;
-}
     .\[\@media_\(max-width\:_640px\)\]\:w_100\% {
       width: 100%;
 }
@@ -8775,6 +8733,9 @@
 }
     .\[\@media_\(max-width\:_640px\)\]\:w_96px {
       width: 96px;
+}
+    .\[\@media_\(max-width\:_640px\)\]\:mt_2px {
+      margin-top: 2px;
 }
     .\[\@media_\(max-width\:_640px\)\]\:ml_0 {
       margin-left: var(--spacing-0);

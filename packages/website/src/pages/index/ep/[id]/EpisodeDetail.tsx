@@ -1,11 +1,8 @@
-import { DateTime } from 'luxon';
 import React, { useMemo, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { Episode } from '@bangumi/client/client';
+import type { Episode, Reply } from '@bangumi/client/client';
 import { EpisodeType } from '@bangumi/client/client';
-import { Avatar, Button, EditorForm, RichContent, toast, Typography } from '@bangumi/design';
-import Reactions from '@bangumi/design/components/Topic/Reactions';
+import { Topic, Typography } from '@bangumi/design';
 import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import { ArrowDown } from '@bangumi/icons';
 import { css, cx } from '@bangumi/styled-system/css';
@@ -19,7 +16,6 @@ import {
   getSubjectPersonsLink,
   getSubjectRelationsLink,
   getSubjectReviewsLink,
-  getUserProfileLink,
 } from '@bangumi/utils/pages';
 import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
@@ -27,6 +23,8 @@ import type { EpisodePageData } from '@bangumi/website/hooks/use-episode-page';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { epCommentApi } from './ep-comment-api';
+
+const { Comment } = Topic;
 
 const page = css({
   padding: '10px 15px 24px',
@@ -258,119 +256,6 @@ const sortButtonDescending = css({
   },
 });
 
-const commentList = css({
-  listStyle: 'none',
-  margin: '0',
-  padding: '0',
-});
-
-const replyList = css({
-  listStyle: 'none',
-  margin: '0 0 0 72px',
-  padding: '0',
-  '@media (max-width: 640px)': {
-    marginLeft: '28px',
-  },
-});
-
-const commentItem = css({
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: '12px',
-  padding: '16px 4px 13px',
-  borderBottom: '1px dashed #e8e3e3',
-  '@media (max-width: 640px)': {
-    gap: '8px',
-  },
-});
-
-const replyItem = css({
-  display: 'flex',
-  alignItems: 'flex-start',
-  gap: '12px',
-  padding: '12px 4px 13px',
-  borderBottom: '1px dashed #e8e3e3',
-  '@media (max-width: 640px)': {
-    gap: '8px',
-  },
-});
-
-const avatarLink = css({ flex: '0 0 auto' });
-
-const commentBody = css({
-  minWidth: '0',
-  flex: '1',
-});
-
-const commentHeader = css({
-  display: 'flex',
-  minHeight: '20px',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-  gap: '12px',
-  '@media (max-width: 640px)': {
-    display: 'block',
-  },
-});
-
-const commentAuthor = css({
-  minWidth: '0',
-  color: '#9f9b9b',
-  fontSize: '13px',
-  '& > span': {
-    display: 'inline',
-    marginLeft: '8px',
-    color: '#9f9b9b',
-    fontSize: '11px',
-  },
-  '@media (max-width: 640px)': {
-    '& > span': {
-      display: 'none',
-    },
-  },
-});
-
-const commentTime = css({
-  flex: '0 0 auto',
-  color: '#9f9b9b',
-  fontSize: '10px',
-  textDecoration: 'none',
-  _hover: { color: '#54b5df' },
-  '@media (max-width: 640px)': {
-    display: 'block',
-    marginTop: '2px',
-  },
-});
-
-const commentContent = css({
-  marginTop: '7px',
-  color: '#1f1c1c',
-  fontSize: '14px',
-  lineHeight: '1.65',
-  overflowWrap: 'anywhere',
-  '& .quote': {
-    fontSize: '13px',
-  },
-});
-
-const deletedComment = css({
-  margin: '8px 0 0',
-  color: '#9f9b9b',
-  fontSize: '13px',
-  fontStyle: 'italic',
-});
-
-const commentActions = css({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '6px',
-  marginTop: '6px',
-});
-
-const replyFormBox = css({
-  marginTop: '10px',
-});
-
 const topForm = css({
   marginBottom: '10px',
 });
@@ -507,7 +392,19 @@ const EPISODE_TYPE_PREFIXES: Record<EpisodeType, string> = {
 };
 
 type EpisodeComment = EpisodePageData['comments'][number];
-type EpisodeReply = EpisodeComment['replies'][number];
+
+/** ep 吐槽数据（user 字段）适配为 Topic.Comment 使用的 Reply 结构（creator 字段） */
+function toReplyLike(comment: EpisodeComment): Reply {
+  const { user, replies, ...rest } = comment;
+  return {
+    ...rest,
+    creator: user,
+    replies: replies.map((reply) => {
+      const { user: replyUser, ...replyRest } = reply;
+      return { ...replyRest, creator: replyUser };
+    }),
+  };
+}
 
 function episodeLabel(episode: Episode): string {
   return `${EPISODE_TYPE_PREFIXES[episode.type]}.${episode.sort}`;
@@ -549,173 +446,6 @@ function EpisodeHeader({ episode }: { episode: Episode }) {
         </PageContainer>
       </nav>
     </header>
-  );
-}
-
-function CommentContent({ content, state }: { content: string; state: number }) {
-  if (state === 6) {
-    return <p className={deletedComment}>内容已被用户删除</p>;
-  }
-  if (state === 7) {
-    return <p className={deletedComment}>内容因违反社区指导原则已被删除</p>;
-  }
-  return <RichContent bbcode={content} classname={commentContent} />;
-}
-
-function CommentItem({
-  comment,
-  floor,
-  isReply = false,
-  episodeID,
-  mutate,
-}: {
-  comment: EpisodeComment | EpisodeReply;
-  floor: string;
-  isReply?: boolean;
-  episodeID: number;
-  mutate: () => Promise<unknown>;
-}) {
-  const { user } = useUser();
-  const isAuthor = user?.id === comment.creatorID;
-  const isDeleted = comment.state === 6 || comment.state === 7;
-  const [showReply, setShowReply] = useState(false);
-  const [editing, setEditing] = useState(false);
-  const [editContent, setEditContent] = useState('');
-  const author = comment.user;
-
-  const handleDelete = async () => {
-    if (confirm('确认删除这条吐槽？')) {
-      const res = await ozaClient.deleteEpisodeComment(comment.id);
-      if (res.status === 200) {
-        await mutate();
-      } else {
-        toast(res.data.message);
-      }
-    }
-  };
-
-  const handleEdit = async () => {
-    const res = await ozaClient.updateEpisodeComment(comment.id, { content: editContent });
-    if (res.status === 200) {
-      setEditing(false);
-      await mutate();
-    } else {
-      toast(res.data.message);
-    }
-  };
-
-  return (
-    <article className={isReply ? replyItem : commentItem} id={`post_${comment.id}`}>
-      <Link to={author ? getUserProfileLink(author.username) : ''} noStyle className={avatarLink}>
-        <Avatar src={author?.avatar.medium ?? ''} size={isReply ? 'small' : 'medium'} alt='' />
-      </Link>
-      <div className={commentBody}>
-        <header className={commentHeader}>
-          <div className={commentAuthor}>
-            {author ? (
-              <Link to={getUserProfileLink(author.username)}>{author.nickname}</Link>
-            ) : (
-              '匿名用户'
-            )}
-            {!isReply && author?.sign && <span>{author.sign}</span>}
-          </div>
-          <a className={commentTime} href={`#post_${comment.id}`}>
-            #{floor} · {DateTime.fromSeconds(comment.createdAt).toFormat('yyyy-M-d HH:mm')}
-          </a>
-        </header>
-        {isDeleted || !editing ? (
-          <CommentContent content={comment.content} state={comment.state} />
-        ) : (
-          <EditorForm
-            hideCancel={false}
-            value={editContent}
-            onChange={setEditContent}
-            onConfirm={handleEdit}
-            onCancel={() => setEditing(false)}
-          />
-        )}
-        {user && !isDeleted && !editing && (
-          <div className={commentActions}>
-            <Button type='plain' size='small' onClick={() => setShowReply((value) => !value)}>
-              回复
-            </Button>
-            {isAuthor && (
-              <Button
-                type='plain'
-                size='small'
-                onClick={() => {
-                  setEditContent(comment.content);
-                  setEditing(true);
-                }}
-              >
-                编辑
-              </Button>
-            )}
-            {isAuthor && (
-              <Button type='plain' size='small' onClick={handleDelete}>
-                删除
-              </Button>
-            )}
-          </div>
-        )}
-        <Reactions
-          reactions={comment.reactions}
-          postId={comment.id}
-          user={user}
-          onReacted={mutate}
-          api={epCommentApi}
-        />
-        {showReply && (
-          <div className={replyFormBox}>
-            <ReplyForm
-              autoFocus
-              topicId={episodeID}
-              replyTo={comment.id}
-              api={epCommentApi}
-              placeholder={`回复 @${author?.nickname ?? ''}：`}
-              onSuccess={async () => {
-                setShowReply(false);
-                await mutate();
-              }}
-              onCancel={() => setShowReply(false)}
-            />
-          </div>
-        )}
-      </div>
-    </article>
-  );
-}
-
-function CommentThread({
-  comment,
-  floor,
-  episodeID,
-  mutate,
-}: {
-  comment: EpisodeComment;
-  floor: number;
-  episodeID: number;
-  mutate: () => Promise<unknown>;
-}) {
-  return (
-    <li>
-      <CommentItem comment={comment} floor={String(floor)} episodeID={episodeID} mutate={mutate} />
-      {comment.replies.length > 0 && (
-        <ol className={replyList}>
-          {comment.replies.map((reply, index) => (
-            <li key={reply.id}>
-              <CommentItem
-                comment={reply}
-                floor={`${floor}-${index + 1}`}
-                isReply
-                episodeID={episodeID}
-                mutate={mutate}
-              />
-            </li>
-          ))}
-        </ol>
-      )}
-    </li>
   );
 }
 
@@ -769,17 +499,21 @@ function Comments({
         </div>
       )}
       {sortedComments.length > 0 ? (
-        <ol className={commentList}>
+        <div>
           {sortedComments.map((comment, index) => (
-            <CommentThread
+            <Comment
               key={comment.id}
-              comment={comment}
+              topicId={episodeID}
+              isReply={false}
               floor={ascending ? index + 1 : comments.length - index}
-              episodeID={episodeID}
-              mutate={mutate}
+              originalPosterId={0}
+              user={user}
+              onCommentUpdate={mutate}
+              api={epCommentApi}
+              {...toReplyLike(comment)}
             />
           ))}
-        </ol>
+        </div>
       ) : (
         <p className={emptyComments}>还没有吐槽</p>
       )}

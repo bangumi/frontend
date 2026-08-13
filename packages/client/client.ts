@@ -117,6 +117,9 @@ export type CommentBase = {
   user?: SlimUser;
   reactions?: Reaction[];
 };
+export type Comment = CommentBase & {
+  replies: CommentBase[];
+};
 export type CreateReply = {
   content: string;
   /** 被回复的回复 ID, `0` 代表发送顶层回复 */
@@ -1352,20 +1355,7 @@ export function getBlogComments(entryId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;
@@ -1714,20 +1704,7 @@ export function getCharacterComments(characterId: number, opts?: Oazapfts.Reques
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;
@@ -1893,20 +1870,7 @@ export function getCharacterPhotoComments(
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;
@@ -2491,20 +2455,7 @@ export function getEpisodeComments(episodeId: number, opts?: Oazapfts.RequestOpt
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 500;
@@ -3518,20 +3469,7 @@ export function getIndexComments(indexId: number, opts?: Oazapfts.RequestOpts) {
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;
@@ -3997,20 +3935,7 @@ export function getPersonComments(personId: number, opts?: Oazapfts.RequestOpts)
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;
@@ -4172,20 +4097,7 @@ export function getPersonPhotoComments(
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;
@@ -5558,20 +5470,7 @@ export function getTimelineReplies(timelineId: number, opts?: Oazapfts.RequestOp
   return oazapfts.fetchJson<
     | {
         status: 200;
-        data: ({
-          id: number;
-          mainID: number;
-          creatorID: number;
-          relatedID: number;
-          relatedPhotoID?: number;
-          createdAt: number;
-          content: string;
-          state: number;
-          user?: SlimUser;
-          reactions?: Reaction[];
-        } & {
-          replies: CommentBase[];
-        })[];
+        data: Comment[];
       }
     | {
         status: 404;

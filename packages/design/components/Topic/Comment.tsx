@@ -9,6 +9,7 @@ import { css, cx } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 import Avatar from '../../components/Avatar';
+import EditorForm from '../../components/EditorForm';
 import RichContent from '../../components/RichContent';
 import Typography from '../../components/Typography';
 import { toast } from '../Toast';
@@ -212,6 +213,9 @@ const Comment: FC<CommentProps> = ({
   const [showReplyEditor, setShowReplyEditor] = useState(false);
   const [replyContent, setReplyContent] = useState('');
 
+  const [showEditEditor, setShowEditEditor] = useState(false);
+  const [editContent, setEditContent] = useState(content);
+
   const elementId = `post_${props.id}`;
   const location = useLocation();
   const highlightId = location.hash.slice(1);
@@ -232,6 +236,7 @@ const Comment: FC<CommentProps> = ({
 
   const startReply = useCallback(() => {
     setShowReplyEditor(true);
+    setShowEditEditor(false);
     setReplyContent(isReply ? `[quote]${content.slice(0, 30)}[/quote]\n` : '');
   }, [isReply, content]);
 
@@ -281,6 +286,27 @@ const Comment: FC<CommentProps> = ({
     }
   };
 
+  const startEdit = () => {
+    setShowReplyEditor(false);
+    setEditContent(content);
+    setShowEditEditor(true);
+  };
+
+  const handleEditSubmit = async (editedContent: string) => {
+    if (!api.editPost) {
+      return;
+    }
+    const response = await api.editPost(props.id, editedContent);
+    if (response.status === 200) {
+      setShowEditEditor(false);
+      await onCommentUpdate();
+    } else {
+      // TODO: 统一错误处理方式
+      console.error(response);
+      toast(response.data.message);
+    }
+  };
+
   return (
     <div>
       <div className={headerClassName} id={`post_${props.id}`}>
@@ -305,6 +331,7 @@ const Comment: FC<CommentProps> = ({
                       id={props.id}
                       onReply={startReply}
                       onDelete={handleDeleteReply}
+                      onEdit={api.editPost ? startEdit : undefined}
                       isAuthor={user?.id === creator?.id}
                       editable={!replies?.length}
                       reactions={props.reactions}
@@ -346,6 +373,20 @@ const Comment: FC<CommentProps> = ({
                   setShowReplyEditor(false);
                 }}
                 onSuccess={handleReplySuccess}
+              />
+            </div>
+          )}
+          {showEditEditor && api.editPost && (
+            <div className='bgm-comment__opinions'>
+              <EditorForm
+                autoFocus
+                value={editContent}
+                onChange={setEditContent}
+                confirmText='保存'
+                onCancel={() => {
+                  setShowEditEditor(false);
+                }}
+                onConfirm={handleEditSubmit}
               />
             </div>
           )}
