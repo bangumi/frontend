@@ -8,6 +8,14 @@ import commentsFixture from '../../../../mocks/fixtures/p1/subjects/12/comments-
 import homeFixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
 import SubjectComments from './components/SubjectComments';
 
+// 未登录：不渲染发帖表单与操作按钮，避免干扰展示断言
+vi.mock('@bangumi/website/hooks/use-user', async () => ({
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+    '@bangumi/website/hooks/use-user',
+  )),
+  useUser: () => ({ user: undefined }),
+}));
+
 const homeData = homeFixture as unknown as SubjectHomeResponse;
 const { data: comments, total } = commentsFixture as unknown as {
   data: SubjectInterestComment[];
@@ -19,12 +27,14 @@ describe('SubjectComments', () => {
     renderPage(
       <SubjectComments
         subject={homeData.subject}
+        subjectID={12}
         comments={comments}
         total={total}
         currentPage={1}
         pageSize={20}
         type={undefined}
         onPageChange={() => undefined}
+        mutate={async () => undefined}
         {...props}
       />,
     );

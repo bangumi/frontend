@@ -1348,6 +1348,10 @@
     padding: 0 5px 0 10px;
 }
 
+  .p_0\.25rem_0\.5rem {
+    padding: 0.25rem 0.5rem;
+}
+
   .p_0_18px_0_10px {
     padding: 0 18px 0 10px;
 }
@@ -2780,6 +2784,10 @@
 
   .asp_1 {
     aspect-ratio: 1;
+}
+
+  .fs_0\.9rem {
+    font-size: 0.9rem;
 }
 
   .grid-tc_minmax\(200px\,_2\.5fr\)_minmax\(0\,_7\.5fr\) {
