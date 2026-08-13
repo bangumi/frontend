@@ -1,0 +1,91 @@
+{
+  "total": 2,
+  "data": [
+    {
+      "id": 101,
+      "title": "你好呀",
+      "other": {
+        "id": 1,
+        "username": "sai",
+        "nickname": "Sai",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+        },
+        "group": 1,
+        "sign": "",
+        "joinedAt": 0,
+        "isFriend": false
+      },
+      "lastMessage": {
+        "id": 103,
+        "sender": {
+          "id": 1,
+          "username": "sai",
+          "nickname": "Sai",
+          "avatar": {
+            "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+            "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+            "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+          },
+          "group": 1,
+          "sign": "",
+          "joinedAt": 0,
+          "isFriend": false
+        },
+        "receiverID": 382951,
+        "title": "你好呀",
+        "content": "有任何问题欢迎反馈",
+        "createdAt": 1735689800,
+        "read": false,
+        "related": 101
+      },
+      "unreadCount": 2,
+      "totalCount": 3
+    },
+    {
+      "id": 201,
+      "title": "关于新番",
+      "other": {
+        "id": 2,
+        "username": "chobits",
+        "nickname": "小叽",
+        "avatar": {
+          "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+          "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+        },
+        "group": 10,
+        "sign": "",
+        "joinedAt": 0,
+        "isFriend": false
+      },
+      "lastMessage": {
+        "id": 202,
+        "sender": {
+          "id": 2,
+          "username": "chobits",
+          "nickname": "小叽",
+          "avatar": {
+            "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+            "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+            "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+          },
+          "group": 10,
+          "sign": "",
+          "joinedAt": 0,
+          "isFriend": false
+        },
+        "receiverID": 382951,
+        "title": "关于新番",
+        "content": "你好呀！请问吧",
+        "createdAt": 1735600100,
+        "read": true,
+        "related": 201
+      },
+      "unreadCount": 0,
+      "totalCount": 2
+    }
+  ]
+}

@@ -52,4 +52,13 @@ export const handlers = [
   mockAPI('/p1/blogs/-/comments/:commentID', 'delete'),
   mockAPI('/p1/users/:username/collections/subjects', 'get'),
   mockAPI('/p1/users/:username/timeline', 'get'),
+  mockAPI('/p1/pm', 'get'),
+  mockAPI('/p1/pm', 'post'),
+  mockAPI('/p1/pm/inbox', 'get'),
+  mockAPI('/p1/pm/outbox', 'get'),
+  mockAPI('/p1/pm/contacts', 'get'),
+  mockAPI('/p1/pm/conversations/:msgID', 'get'),
+  mockAPI('/p1/pm/conversations/:msgID', 'delete'),
+  mockAPI('/p1/pm/conversations/:msgID/read', 'put'),
+  mockAPI('/p1/pm/:msgID', 'delete'),
 ];

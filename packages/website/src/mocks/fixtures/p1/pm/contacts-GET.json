@@ -1,0 +1,36 @@
+[
+  {
+    "user": {
+      "id": 1,
+      "username": "sai",
+      "nickname": "Sai",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/1.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/1.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/1.jpg"
+      },
+      "group": 1,
+      "sign": "",
+      "joinedAt": 0,
+      "isFriend": false
+    },
+    "lastMessageAt": 1735689800
+  },
+  {
+    "user": {
+      "id": 2,
+      "username": "chobits",
+      "nickname": "小叽",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+      },
+      "group": 10,
+      "sign": "",
+      "joinedAt": 0,
+      "isFriend": false
+    },
+    "lastMessageAt": 1735600100
+  }
+]

@@ -709,6 +709,54 @@ export type PersonCharacter = {
   character: SlimCharacter;
   relations: CharacterSubjectRelation[];
 };
+export type PrivateMessageStatus = {
+  /** 收件箱消息条数（注意：会话列表接口的 total 为会话数） */
+  inbox: number;
+  /** 发件箱消息条数（注意：会话列表接口的 total 为会话数） */
+  outbox: number;
+  /** 未读私信消息条数 */
+  unread: number;
+};
+export type CreatePrivateMessage = {
+  /** 收件人 username 列表，与 receiverIDs 二选一 */
+  receivers?: string[];
+  /** 收件人 user id 列表，与 receivers 二选一 */
+  receiverIDs?: number[];
+  title: string;
+  content: string;
+  /** 回复时传入会话根消息 id，不传则创建新会话 */
+  related?: number;
+};
+export type PrivateMessage = {
+  id: number;
+  sender: SlimUser;
+  receiverID: number;
+  title: string;
+  content: string;
+  /** unix timestamp seconds */
+  createdAt: number;
+  /** 接收者是否已读 */
+  read: boolean;
+  /** 会话根消息 id (msg_related) */
+  related: number;
+};
+export type PrivateMessageConversation = {
+  /** 会话根消息 id (msg_related) */
+  id: number;
+  title: string;
+  other: SlimUser;
+  lastMessage: PrivateMessage;
+  unreadCount: number;
+  totalCount: number;
+};
+export type PrivateMessageContact = {
+  user: SlimUser;
+  lastMessageAt: number;
+};
+export type PrivateMessageConversationDetail = {
+  conversation: PrivateMessageConversation;
+  messages: PrivateMessage[];
+};
 export type CreateReport = {
   type: ReportType;
   /** 被举报对象的 ID */
@@ -4220,6 +4268,249 @@ export function deletePersonComment(commentId: number, opts?: Oazapfts.RequestOp
   });
 }
 /**
+ * 获取私信邮箱状态
+ */
+export function getPrivateMessageStatus(opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: PrivateMessageStatus;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >('/p1/pm', {
+    ...opts,
+  });
+}
+/**
+ * 发送私信
+ */
+export function createPrivateMessage(
+  createPrivateMessage: CreatePrivateMessage,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          messages: {
+            receiverID: number;
+            msgID: number;
+          }[];
+        };
+      }
+    | {
+        status: 400;
+        data: ErrorResponse;
+      }
+    | {
+        status: 403;
+        data: ErrorResponse;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    '/p1/pm',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body: createPrivateMessage,
+    }),
+  );
+}
+/**
+ * 获取收件箱会话列表
+ */
+export function listPrivateMessageInbox(
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: PrivateMessageConversation[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/pm/inbox${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 获取发件箱会话列表
+ */
+export function listPrivateMessageOutbox(
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: PrivateMessageConversation[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/pm/outbox${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
+}
+/**
+ * 获取最近私信联系人
+ */
+export function listPrivateMessageContacts(opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: PrivateMessageContact[];
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >('/p1/pm/contacts', {
+    ...opts,
+  });
+}
+/**
+ * 获取私信会话详情
+ */
+export function getPrivateMessageConversation(msgId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: PrivateMessageConversationDetail;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/pm/conversations/${encodeURIComponent(msgId)}`, {
+    ...opts,
+  });
+}
+/**
+ * 删除私信会话
+ */
+export function deletePrivateMessageConversation(msgId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/pm/conversations/${encodeURIComponent(msgId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
+ * 标记私信会话已读
+ */
+export function markPrivateMessageConversationRead(msgId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/pm/conversations/${encodeURIComponent(msgId)}/read`, {
+    ...opts,
+    method: 'PUT',
+  });
+}
+/**
+ * 删除单条私信
+ */
+export function deletePrivateMessage(msgId: number, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(`/p1/pm/${encodeURIComponent(msgId)}`, {
+    ...opts,
+    method: 'DELETE',
+  });
+}
+/**
  * Get current user privacy settings
  */
 export function getPrivacy(opts?: Oazapfts.RequestOpts) {
@@ -4228,7 +4519,7 @@ export function getPrivacy(opts?: Oazapfts.RequestOpts) {
         status: 200;
         data: {
           settings: {
-            privateMessage: PrivateMessage;
+            privateMessage: PrivateMessage2;
             timelineReply: TimelineReply;
             timelineCollectReply: TimelineCollectReply;
             follow: Follow;
@@ -4261,7 +4552,7 @@ export function getPrivacy(opts?: Oazapfts.RequestOpts) {
 export function patchPrivacy(
   body: {
     settings?: {
-      privateMessage?: PrivateMessage;
+      privateMessage?: PrivateMessage2;
       timelineReply?: TimelineReply;
       timelineCollectReply?: TimelineCollectReply;
       follow?: Follow;
@@ -4280,7 +4571,7 @@ export function patchPrivacy(
         status: 200;
         data: {
           settings: {
-            privateMessage: PrivateMessage;
+            privateMessage: PrivateMessage2;
             timelineReply: TimelineReply;
             timelineCollectReply: TimelineCollectReply;
             follow: Follow;
@@ -7917,7 +8208,7 @@ export enum IndexRelatedCategory {
 export enum Type {
   PublicKey = 'public-key',
 }
-export enum PrivateMessage {
+export enum PrivateMessage2 {
   All = 'all',
   Friends = 'friends',
   None = 'none',
