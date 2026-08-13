@@ -541,11 +541,12 @@ const Header: FC = () => {
                       value={searchCategory}
                       onChange={(event) => setSearchCategory(event.target.value)}
                     >
-                      {searchCategories.map((category) => (
-                        <option key={category.value} value={category.value}>
-                          {category.label}
-                        </option>
-                      ))}
+                      <option value='all'>全部条目</option>
+                      <option value='1'>动画</option>
+                      <option value='2'>书籍</option>
+                      <option value='4'>游戏</option>
+                      <option value='6'>三次元</option>
+                      <option value='mono'>人物</option>
                     </select>
                     <Divider orientation='vertical' className={searchDivider} />
                   </>
