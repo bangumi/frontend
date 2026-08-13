@@ -941,7 +941,11 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    get?: never;
+    /**
+     * 获取目录列表
+     * @description 全站公开目录列表，支持排序、分页和类型过滤
+     */
+    get: operations['getIndexes'];
     put?: never;
     /** 创建目录 */
     post: operations['createIndex'];
@@ -7610,6 +7614,47 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['HomeResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getIndexes: {
+    parameters: {
+      query?: {
+        /** @description 排序方式：hot=按收藏数，latest=按创建时间 */
+        order?: 'hot' | 'latest';
+        type?: components['schemas']['IndexType'];
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['Index'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */

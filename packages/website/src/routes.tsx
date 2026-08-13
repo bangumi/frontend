@@ -19,6 +19,13 @@ const Channel = lazy(async () => import('./pages/index/channel'));
 const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
+const IndexChannel = lazy(async () => import('./pages/index/indexes'));
+const IndexBrowser = lazy(async () => import('./pages/index/indexes/browser'));
+const IndexCreate = lazy(async () => import('./pages/index/indexes/create'));
+const IndexDetail = lazy(async () => import('./pages/index/indexes/[id]'));
+const IndexCommentsPage = lazy(async () => import('./pages/index/indexes/[id]/comments'));
+const IndexEdit = lazy(async () => import('./pages/index/indexes/[id]/edit'));
+const IndexRelated = lazy(async () => import('./pages/index/indexes/[id]/related'));
 const Rakuen = lazy(async () => import('./pages/index/rakuen'));
 const Group = lazy(async () => import('./pages/index/group/[name]/index'));
 const GroupChannel = lazy(async () => import('./pages/index/group/index'));
@@ -76,9 +83,6 @@ const legacyPagePaths = [
     `${type}/tag/*`,
   ]),
   'calendar',
-  'index',
-  'index/:id',
-  'index/:id/comments',
   'magi',
   'onair',
   'subject/:id/collections',
@@ -130,6 +134,23 @@ export const pageRoutes: RouteObject[] = [
       { path: 'dev/app', element: <DevApp /> },
       { path: 'dollars', element: <Dollars /> },
       { path: 'goodies', element: <Goodies /> },
+      {
+        path: 'index',
+        children: [
+          { path: '', element: <IndexChannel /> },
+          { path: 'browser', element: <IndexBrowser /> },
+          { path: 'create', element: <IndexCreate /> },
+          {
+            path: ':id',
+            children: [
+              { path: '', element: <IndexDetail /> },
+              { path: 'edit', element: <IndexEdit /> },
+              { path: 'comments', element: <IndexCommentsPage /> },
+              { path: 'related', element: <IndexRelated /> },
+            ],
+          },
+        ],
+      },
       { path: 'rakuen', element: <Rakuen /> },
       { path: 'ep/:id', element: <Episode /> },
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },
