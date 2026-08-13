@@ -1440,6 +1440,10 @@
     background: #f88f9b;
 }
 
+  .p_0\.2rem_0\.5rem {
+    padding: 0.2rem 0.5rem;
+}
+
   .bd_2px_transparent_solid {
     border: 2px transparent solid;
 }
@@ -2868,6 +2872,14 @@
 
   .c_\#54b5df\! {
     color: #54b5df !important;
+}
+
+  .grid-tc_repeat\(auto-fill\,_minmax\(110px\,_1fr\)\) {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+}
+
+  .fs_0\.85rem {
+    font-size: 0.85rem;
 }
 
   .us_none {
@@ -4365,10 +4377,6 @@
 
   .\[\&_p\]\:m_0_0_12px p {
     margin: 0 0 12px;
-}
-
-  .\[\&_h3\]\:m_0_0_4px h3 {
-    margin: 0 0 4px;
 }
 
   .\[\&\.bgm-button--size-medium\]\:p_0_13px.bgm-button--size-medium {
@@ -5907,7 +5915,7 @@
     display: inline;
 }
 
-  .\[\&_a\]\:fs_15px a,.\[\&_h3\]\:fs_15px h3 {
+  .\[\&_a\]\:fs_15px a {
     font-size: 15px;
 }
 
@@ -6886,10 +6894,6 @@
     padding-right: 10px;
 }
 
-  .\[\&_img\]\:w_72px img {
-    width: 72px;
-}
-
   .\[\&_img\]\:h_40px img {
     height: 40px;
 }
@@ -7202,6 +7206,10 @@
     cursor: pointer;
 }
 
+  .\[\&\:hover\]\:c_\#54b5df:hover {
+    color: #54b5df;
+}
+
   .hover\:ring-o_-2px:is(:hover, [data-hover]) {
     outline-offset: -2px;
 }
@@ -7384,10 +7392,6 @@
 
   .\[\&\.bgm-input__wrapper\]\:\[\&\:last-child\]\:flex_1.bgm-input__wrapper:last-child {
     flex: 1 1 0%;
-}
-
-  .\[\&_h3\]\:\[\&_a\]\:td_none h3 a {
-    text-decoration: none;
 }
 
   .\[\&\.bgm-button--secondary\]\:\[\&\.bgm-button--color-blue\]\:bd-c_\#54b5df.bgm-button--secondary.bgm-button--color-blue {
@@ -7692,10 +7696,6 @@
 
   .\[\&\[class\]\]\:\[\&_h2\]\:fw_normal[class] h2 {
     font-weight: var(--font-weights-normal);
-}
-
-  .\[\&_h3\]\:\[\&_a\]\:c_\#1f1c1c h3 a {
-    color: #1f1c1c;
 }
 
   .\[\&\.bgm-button--primary\]\:\[\&\.bgm-button--color-blue\]\:bg-c_\#54b5df.bgm-button--primary.bgm-button--color-blue {
@@ -8152,10 +8152,6 @@
 
   .\[\&_li\]\:\[\&_\>_a\]\:\[\&_span\]\:white-space_nowrap li > a span {
     white-space: nowrap;
-}
-
-  .\[\&_h3\]\:\[\&_a\]\:hover\:c_\#54b5df h3 a:is(:hover, [data-hover]) {
-    color: #54b5df;
 }
 
   .\[\&\.bgm-button--secondary\]\:\[\&\.bgm-button--color-blue\]\:hover\:bg-c_\#54b5df.bgm-button--secondary.bgm-button--color-blue:is(:hover, [data-hover]) {
@@ -8678,6 +8674,9 @@
 }
     .\[\@media_\(max-width\:_640px\)\]\:fs_14px {
       font-size: 14px;
+}
+    .\[\@media_\(max-width\:_640px\)\]\:grid-tc_repeat\(3\,_minmax\(0\,_1fr\)\) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
 }
     .\[\@media_\(max-width\:_640px\)\]\:flex-d_column {
       flex-direction: column;
