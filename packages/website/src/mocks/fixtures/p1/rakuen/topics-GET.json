@@ -1,0 +1,149 @@
+{
+  "data": [
+    {
+      "type": "group",
+      "id": 430381,
+      "title": "[投票结果] 关于连载书籍平台子分类的关联问题",
+      "replyCount": 107,
+      "creator": {
+        "id": 21804,
+        "username": "test_user",
+        "nickname": "测试用户",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/00/00/00000.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/00/00/00000.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/00000.jpg"
+        },
+        "group": 2,
+        "sign": "测试",
+        "joinedAt": 1700000000,
+        "isFriend": false
+      },
+      "group": {
+        "id": 128,
+        "name": "wiki",
+        "nsfw": false,
+        "title": "番組WIKI計画",
+        "icon": {
+          "small": "https://lain.bgm.tv/r/100/pic/icon/l/000/00/01/128.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/icon/l/000/00/01/128.jpg",
+          "large": "https://lain.bgm.tv/pic/icon/l/000/00/01/128.jpg"
+        },
+        "creatorID": 271,
+        "members": 8099,
+        "accessible": true,
+        "createdAt": 1233321099
+      },
+      "updatedAt": 1786465803
+    },
+    {
+      "type": "subject",
+      "id": 430381,
+      "title": "新番组 2026 年春季动画讨论帖",
+      "replyCount": 32,
+      "creator": {
+        "id": 21805,
+        "username": "test_user2",
+        "nickname": "测试用户2",
+        "avatar": {
+          "small": "https://lain.bgm.tv/r/100/pic/user/l/000/00/00/00000.jpg",
+          "medium": "https://lain.bgm.tv/r/200/pic/user/l/000/00/00/00000.jpg",
+          "large": "https://lain.bgm.tv/pic/user/l/000/00/00/00000.jpg"
+        },
+        "group": 2,
+        "sign": "",
+        "joinedAt": 1700000000,
+        "isFriend": false
+      },
+      "subject": {
+        "id": 8,
+        "name": "TEST",
+        "nameCN": "测试条目",
+        "type": 2,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/00/8.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/00/8.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/00/8.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/00/8.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/00/8.jpg"
+        },
+        "info": "",
+        "metaTags": [],
+        "rating": {
+          "rank": 0,
+          "count": [],
+          "score": 0,
+          "total": 0
+        },
+        "locked": false,
+        "nsfw": false
+      },
+      "updatedAt": 1786465900
+    },
+    {
+      "type": "episode",
+      "id": 999,
+      "subject": {
+        "id": 8,
+        "name": "TEST",
+        "nameCN": "测试条目",
+        "type": 2,
+        "images": {
+          "large": "https://lain.bgm.tv/pic/cover/l/00/00/00/8.jpg",
+          "common": "https://lain.bgm.tv/pic/cover/c/00/00/00/8.jpg",
+          "medium": "https://lain.bgm.tv/pic/cover/m/00/00/00/8.jpg",
+          "small": "https://lain.bgm.tv/pic/cover/s/00/00/00/8.jpg",
+          "grid": "https://lain.bgm.tv/pic/cover/g/00/00/00/8.jpg"
+        },
+        "info": "",
+        "metaTags": [],
+        "rating": {
+          "rank": 0,
+          "count": [],
+          "score": 0,
+          "total": 0
+        },
+        "locked": false,
+        "nsfw": false
+      },
+      "episode": {
+        "id": 999,
+        "sort": 1,
+        "type": 0,
+        "name": "ep1",
+        "nameCN": "第一话",
+        "comment": 12
+      },
+      "updatedAt": 1786466000
+    },
+    {
+      "type": "character",
+      "id": 1001,
+      "name": "test",
+      "nameCN": "测试角色",
+      "images": {
+        "large": "https://lain.bgm.tv/pic/crt/l/00/00/00/1001.jpg",
+        "medium": "https://lain.bgm.tv/pic/crt/m/00/00/00/1001.jpg",
+        "small": "https://lain.bgm.tv/pic/crt/s/00/00/00/1001.jpg",
+        "grid": "https://lain.bgm.tv/pic/crt/g/00/00/00/1001.jpg"
+      },
+      "comment": 5,
+      "updatedAt": 1786466100
+    },
+    {
+      "type": "person",
+      "id": 1002,
+      "name": "test person",
+      "nameCN": "",
+      "images": {
+        "large": "https://lain.bgm.tv/pic/crt/l/00/00/00/1002.jpg",
+        "medium": "https://lain.bgm.tv/pic/crt/m/00/00/00/1002.jpg",
+        "small": "https://lain.bgm.tv/pic/crt/s/00/00/00/1002.jpg",
+        "grid": "https://lain.bgm.tv/pic/crt/g/00/00/00/1002.jpg"
+      },
+      "comment": 3,
+      "updatedAt": 1786466200
+    }
+  ],
+  "total": 5
+}

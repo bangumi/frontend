@@ -617,6 +617,16 @@
           }
         }
       },
+      "RaKuenTopicType": {
+        "type": "string",
+        "enum": ["all", "group", "my_group", "subject", "episode", "character", "person"],
+        "x-ms-enum": {
+          "name": "RaKuenTopicType",
+          "modelAsString": true
+        },
+        "x-enum-varnames": ["All", "Group", "MyGroup", "Subject", "Episode", "Character", "Person"],
+        "description": "超展开聚合类型\n  - all = 全部\n  - group = 小组话题\n  - my_group = 已加入小组的话题（未登录返回空）\n  - subject = 条目话题\n  - episode = 章节\n  - character = 角色\n  - person = 人物"
+      },
       "SearchCharacter": {
         "type": "object",
         "required": ["keyword"],
@@ -2153,6 +2163,191 @@
           }
         },
         "title": "Profile"
+      },
+      "RaKuenCharacter": {
+        "type": "object",
+        "required": ["type", "id", "name", "nameCN", "comment", "updatedAt"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["character"]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "nameCN": {
+            "type": "string"
+          },
+          "images": {
+            "$ref": "#/components/schemas/PersonImages"
+          },
+          "comment": {
+            "type": "integer"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          }
+        },
+        "title": "RaKuenCharacter"
+      },
+      "RaKuenEpisode": {
+        "type": "object",
+        "required": ["type", "id", "subject", "episode", "updatedAt"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["episode"]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/SlimSubject"
+          },
+          "episode": {
+            "type": "object",
+            "required": ["id", "sort", "type", "name", "nameCN", "comment"],
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "sort": {
+                "type": "number"
+              },
+              "type": {
+                "$ref": "#/components/schemas/EpisodeType"
+              },
+              "name": {
+                "type": "string"
+              },
+              "nameCN": {
+                "type": "string"
+              },
+              "comment": {
+                "type": "integer"
+              }
+            }
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          }
+        },
+        "title": "RaKuenEpisode"
+      },
+      "RaKuenGroupTopic": {
+        "type": "object",
+        "required": ["type", "id", "title", "replyCount", "creator", "group", "updatedAt"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["group"]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "replyCount": {
+            "type": "integer"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "group": {
+            "$ref": "#/components/schemas/SlimGroup"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          }
+        },
+        "title": "RaKuenGroupTopic"
+      },
+      "RaKuenPerson": {
+        "type": "object",
+        "required": ["type", "id", "name", "nameCN", "comment", "updatedAt"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["person"]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "nameCN": {
+            "type": "string"
+          },
+          "images": {
+            "$ref": "#/components/schemas/PersonImages"
+          },
+          "comment": {
+            "type": "integer"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          }
+        },
+        "title": "RaKuenPerson"
+      },
+      "RaKuenSubjectTopic": {
+        "type": "object",
+        "required": ["type", "id", "title", "replyCount", "creator", "subject", "updatedAt"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["subject"]
+          },
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "replyCount": {
+            "type": "integer"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/SlimSubject"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          }
+        },
+        "title": "RaKuenSubjectTopic"
+      },
+      "RaKuenTopic": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/RaKuenGroupTopic"
+          },
+          {
+            "$ref": "#/components/schemas/RaKuenSubjectTopic"
+          },
+          {
+            "$ref": "#/components/schemas/RaKuenEpisode"
+          },
+          {
+            "$ref": "#/components/schemas/RaKuenCharacter"
+          },
+          {
+            "$ref": "#/components/schemas/RaKuenPerson"
+          }
+        ],
+        "title": "RaKuenTopic"
       },
       "Reaction": {
         "type": "object",
@@ -12216,6 +12411,77 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/rakuen/topics": {
+      "get": {
+        "operationId": "getRaKuenTopics",
+        "summary": "获取超展开聚合列表",
+        "tags": ["rakuen"],
+        "description": "按最后回复时间倒序聚合全站讨论（小组话题/条目话题/章节/角色/人物），type=my_group 时仅返回已加入小组的话题，未登录返回空数据。",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/components/schemas/RaKuenTopicType"
+            },
+            "in": "query",
+            "name": "type",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 50,
+              "minimum": 1,
+              "maximum": 200
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "min 1, max 200"
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/RaKuenTopic"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
                 }
               }
             }

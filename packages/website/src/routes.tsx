@@ -19,6 +19,7 @@ const Channel = lazy(async () => import('./pages/index/channel'));
 const Episode = lazy(async () => import('./pages/index/ep/[id]'));
 const EpisodeEdit = lazy(async () => import('./pages/index/ep/[id]/edit'));
 const Notifications = lazy(async () => import('./pages/index/notifications'));
+const Rakuen = lazy(async () => import('./pages/index/rakuen'));
 const Group = lazy(async () => import('./pages/index/group/[name]/index'));
 const GroupChannel = lazy(async () => import('./pages/index/group/index'));
 const GroupAll = lazy(async () => import('./pages/index/group/all'));
@@ -129,6 +130,7 @@ export const pageRoutes: RouteObject[] = [
       { path: 'dev/app', element: <DevApp /> },
       { path: 'dollars', element: <Dollars /> },
       { path: 'goodies', element: <Goodies /> },
+      { path: 'rakuen', element: <Rakuen /> },
       { path: 'ep/:id', element: <Episode /> },
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },
       { path: 'blog/:id', element: <BlogEntry /> },

@@ -709,6 +709,63 @@ export type PersonCharacter = {
   character: SlimCharacter;
   relations: CharacterSubjectRelation[];
 };
+export type RaKuenGroupTopic = {
+  type: Type2;
+  id: number;
+  title: string;
+  replyCount: number;
+  creator: SlimUser;
+  group: SlimGroup;
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+};
+export type RaKuenSubjectTopic = {
+  type: Type3;
+  id: number;
+  title: string;
+  replyCount: number;
+  creator: SlimUser;
+  subject: SlimSubject;
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+};
+export type RaKuenEpisode = {
+  type: Type4;
+  id: number;
+  subject: SlimSubject;
+  episode: {
+    id: number;
+    sort: number;
+    type: EpisodeType;
+    name: string;
+    nameCN: string;
+    comment: number;
+  };
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+};
+export type RaKuenCharacter = {
+  type: Type5;
+  id: number;
+  name: string;
+  nameCN: string;
+  images?: PersonImages;
+  comment: number;
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+};
+export type RaKuenPerson = {
+  type: Type6;
+  id: number;
+  name: string;
+  nameCN: string;
+  images?: PersonImages;
+  comment: number;
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+};
+export type RaKuenTopic =
+  RaKuenGroupTopic | RaKuenSubjectTopic | RaKuenEpisode | RaKuenCharacter | RaKuenPerson;
 export type CreateReport = {
   type: ReportType;
   /** 被举报对象的 ID */
@@ -4318,6 +4375,44 @@ export function patchPrivacy(
       method: 'PATCH',
       body,
     }),
+  );
+}
+/**
+ * 获取超展开聚合列表
+ */
+export function getRaKuenTopics(
+  {
+    $type,
+    limit,
+  }: {
+    $type?: RaKuenTopicType;
+    limit?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: RaKuenTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/rakuen/topics${QS.query(
+      QS.explode({
+        type: $type,
+        limit,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
   );
 }
 /**
@@ -7949,6 +8044,30 @@ export enum CommentNotification {
 export enum FriendNotification {
   All = 'all',
   None = 'none',
+}
+export enum RaKuenTopicType {
+  All = 'all',
+  Group = 'group',
+  MyGroup = 'my_group',
+  Subject = 'subject',
+  Episode = 'episode',
+  Character = 'character',
+  Person = 'person',
+}
+export enum Type2 {
+  Group = 'group',
+}
+export enum Type3 {
+  Subject = 'subject',
+}
+export enum Type4 {
+  Episode = 'episode',
+}
+export enum Type5 {
+  Character = 'character',
+}
+export enum Type6 {
+  Person = 'person',
 }
 export enum ReportType {
   User = 6,
