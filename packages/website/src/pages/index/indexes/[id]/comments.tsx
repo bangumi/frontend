@@ -29,7 +29,7 @@ const mainSection = css({
 const IndexCommentsPage: React.FC = () => {
   const { id } = useParams();
   const indexId = Number(id);
-  const { index, mutate: mutateIndex } = useIndex(indexId);
+  const { index } = useIndex(indexId);
   const { comments, mutate } = useIndexComments(indexId);
 
   return (
@@ -42,7 +42,7 @@ const IndexCommentsPage: React.FC = () => {
               <IndexComments comments={comments} indexId={indexId} mutate={mutate} />
             </Section>
           </div>
-          <IndexSidebar index={index} mutate={mutateIndex} />
+          <IndexSidebar index={index} indexId={indexId} hideComments />
         </div>
       </PageContainer>
     </>

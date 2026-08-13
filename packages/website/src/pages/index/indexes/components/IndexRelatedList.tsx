@@ -1,6 +1,6 @@
 import React from 'react';
 
-import type { IndexRelated } from '@bangumi/client/client';
+import type { IndexRelated, IndexStats } from '@bangumi/client/client';
 import { IndexRelatedCategory, SubjectType } from '@bangumi/client/client';
 import { Image, Pagination, Tab, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
@@ -21,67 +21,120 @@ export interface RelatedFilter {
   subjectType: SubjectType | undefined;
 }
 
-/** Tab 列表：cat/type 组合过滤 */
-export const RELATED_TABS: { key: string; label: string; filter: RelatedFilter }[] = [
-  { key: 'all', label: '全部', filter: { cat: undefined, subjectType: undefined } },
+export interface RelatedTab {
+  key: string;
+  label: string;
+  /** 数量小字，undefined 时不显示 */
+  count?: number;
+  filter: RelatedFilter;
+}
+
+interface TabTemplate {
+  key: string;
+  label: string;
+  statsKey: keyof IndexStats['subject'] | keyof IndexStats;
+  filter: RelatedFilter;
+}
+
+/** 条目分类（cat=subject + type 过滤），按 stats.subject 过滤 */
+const SUBJECT_TABS: TabTemplate[] = [
   {
     key: 'anime',
     label: '动画',
+    statsKey: 'anime',
     filter: { cat: IndexRelatedCategory.Subject, subjectType: SubjectType.Anime },
   },
   {
     key: 'book',
     label: '书籍',
+    statsKey: 'book',
     filter: { cat: IndexRelatedCategory.Subject, subjectType: SubjectType.Book },
   },
   {
     key: 'music',
     label: '音乐',
+    statsKey: 'music',
     filter: { cat: IndexRelatedCategory.Subject, subjectType: SubjectType.Music },
   },
   {
     key: 'game',
     label: '游戏',
+    statsKey: 'game',
     filter: { cat: IndexRelatedCategory.Subject, subjectType: SubjectType.Game },
   },
   {
     key: 'real',
     label: '三次元',
+    statsKey: 'real',
     filter: { cat: IndexRelatedCategory.Subject, subjectType: SubjectType.Real },
   },
+];
+
+/** 其他分类，按 stats 顶层字段过滤 */
+const OTHER_TABS: TabTemplate[] = [
   {
     key: 'character',
     label: '角色',
+    statsKey: 'character',
     filter: { cat: IndexRelatedCategory.Character, subjectType: undefined },
   },
   {
     key: 'person',
     label: '人物',
+    statsKey: 'person',
     filter: { cat: IndexRelatedCategory.Person, subjectType: undefined },
   },
   {
     key: 'episode',
     label: '章节',
+    statsKey: 'episode',
     filter: { cat: IndexRelatedCategory.Episode, subjectType: undefined },
   },
   {
     key: 'blog',
     label: '日志',
+    statsKey: 'blog',
     filter: { cat: IndexRelatedCategory.Blog, subjectType: undefined },
   },
   {
     key: 'groupTopic',
     label: '小组话题',
+    statsKey: 'groupTopic',
     filter: { cat: IndexRelatedCategory.GroupTopic, subjectType: undefined },
   },
   {
     key: 'subjectTopic',
     label: '条目讨论',
+    statsKey: 'subjectTopic',
     filter: { cat: IndexRelatedCategory.SubjectTopic, subjectType: undefined },
   },
 ];
 
-const tabs = css({
+function tabCount(tab: TabTemplate, stats: IndexStats): number {
+  const topValue = stats[tab.statsKey as keyof IndexStats];
+  if (typeof topValue === 'number') {
+    return topValue;
+  }
+  // subject 子分类（动画/书籍等）数量位于 stats.subject 下
+  return stats.subject?.[tab.statsKey as keyof IndexStats['subject']] ?? 0;
+}
+
+/** 按目录统计构建分类 Tab（只有数量 > 0 的分类才显示，对齐旧站） */
+export function buildRelatedTabs(stats: IndexStats, total: number): RelatedTab[] {
+  return [
+    { key: 'all', label: '全部', count: total, filter: { cat: undefined, subjectType: undefined } },
+    ...[...SUBJECT_TABS, ...OTHER_TABS]
+      .filter((tab) => tabCount(tab, stats) > 0)
+      .map((tab) => ({
+        key: tab.key,
+        label: tab.label,
+        count: tabCount(tab, stats),
+        filter: tab.filter,
+      })),
+  ];
+}
+
+const tabsGap = css({
   marginBottom: '10px',
 });
 
@@ -260,6 +313,7 @@ function RelatedCover({ related }: { related: IndexRelated }) {
 
 /** 目录关联内容列表：Tab 分类 + 分页 */
 const IndexRelatedList: React.FC<{
+  tabs: RelatedTab[];
   related: IndexRelated[];
   total: number;
   currentPage: number;
@@ -267,11 +321,11 @@ const IndexRelatedList: React.FC<{
   activeFilter: RelatedFilter;
   onTabChange: (filter: RelatedFilter) => void;
   onPageChange: (page: number) => void;
-}> = ({ related, total, currentPage, pageSize, activeFilter, onTabChange, onPageChange }) => {
+}> = ({ tabs, related, total, currentPage, pageSize, activeFilter, onTabChange, onPageChange }) => {
   return (
     <>
       <Tab.Group type='borderless'>
-        {RELATED_TABS.map((tab) => (
+        {tabs.map((tab) => (
           <Tab.Item
             key={tab.key}
             isActive={
@@ -281,10 +335,11 @@ const IndexRelatedList: React.FC<{
             onClick={() => onTabChange(tab.filter)}
           >
             {tab.label}
+            {tab.count !== undefined && <small>{tab.count}</small>}
           </Tab.Item>
         ))}
       </Tab.Group>
-      <div className={tabs} />
+      <div className={tabsGap} />
       {related.length === 0 && <p className={empty}>暂无关联内容</p>}
       <ul className={list}>
         {related.map((entry) => (

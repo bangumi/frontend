@@ -28,7 +28,7 @@ const mainSection = css({
 const IndexRelatedPage: React.FC = () => {
   const { id } = useParams();
   const indexId = Number(id);
-  const { index, mutate } = useIndex(indexId);
+  const { index } = useIndex(indexId);
 
   return (
     <>
@@ -40,7 +40,7 @@ const IndexRelatedPage: React.FC = () => {
               <RelatedManager indexId={indexId} />
             </Section>
           </div>
-          <IndexSidebar index={index} mutate={mutate} />
+          <IndexSidebar index={index} indexId={indexId} />
         </div>
       </PageContainer>
     </>

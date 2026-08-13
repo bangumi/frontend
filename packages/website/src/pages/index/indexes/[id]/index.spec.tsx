@@ -37,21 +37,22 @@ describe('IndexDetailPage', () => {
   it('渲染标题、描述、统计与关联内容', async () => {
     await renderPage();
 
-    // BBCode 描述渲染为链接
+    // BBCode 描述渲染为链接（信息卡内）
     expect(screen.getByRole('link', { name: '测试目录' })).toHaveAttribute(
       'href',
       'https://bgm.tv',
     );
 
-    // 创建者与统计
+    // 创建者与收藏数（信息卡 meta 行）
     expect(screen.getAllByText('Sai').length).toBeGreaterThan(0);
-    expect(screen.getByText((_, el) => el?.textContent === '10收藏')).toBeInTheDocument();
-    expect(screen.getByText((_, el) => el?.textContent === '3评论')).toBeInTheDocument();
-    expect(screen.getByText((_, el) => el?.textContent === '2关联')).toBeInTheDocument();
+    expect(screen.getByText('/ 10 人收藏')).toBeInTheDocument();
 
     // 关联内容：条目 + 角色
     expect(screen.getByText('测试动画')).toBeInTheDocument();
     expect(screen.getByText('测试角色')).toBeInTheDocument();
+
+    // 侧栏：返回目录频道
+    expect(screen.getByRole('link', { name: '/ 返回目录频道' })).toHaveAttribute('href', '/index');
   });
 
   it('点击 Tab 切换关联分类（cat 参数）', async () => {

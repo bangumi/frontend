@@ -106,7 +106,7 @@ function IndexStatsList({ stats }: { stats: IndexStats }) {
   const entries = SUBJECT_STAT_KEYS.map(({ key, label, backgroundPosition }) => ({
     label,
     backgroundPosition,
-    count: stats.subject[key],
+    count: stats.subject?.[key],
   })).filter((entry) => (entry.count ?? 0) > 0);
 
   if (entries.length === 0) {
