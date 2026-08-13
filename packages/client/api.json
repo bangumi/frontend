@@ -9768,6 +9768,96 @@
       }
     },
     "/p1/indexes": {
+      "get": {
+        "operationId": "getIndexes",
+        "summary": "获取目录列表",
+        "tags": ["index"],
+        "description": "全站公开目录列表，支持排序、分页和类型过滤",
+        "parameters": [
+          {
+            "schema": {
+              "enum": ["hot", "latest"],
+              "default": "latest"
+            },
+            "in": "query",
+            "name": "order",
+            "required": false,
+            "description": "排序方式：hot=按收藏数，latest=按创建时间"
+          },
+          {
+            "schema": {
+              "$ref": "#/components/schemas/IndexType"
+            },
+            "in": "query",
+            "name": "type",
+            "required": false
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Index"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
       "post": {
         "operationId": "createIndex",
         "summary": "创建目录",
