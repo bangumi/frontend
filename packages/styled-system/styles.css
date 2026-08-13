@@ -1668,6 +1668,10 @@
     border-bottom: 2px solid transparent;
 }
 
+  .bdr_true {
+    border-radius: true;
+}
+
   .bd-t_1px_solid_\#fefefe {
     border-top: 1px solid #fefefe;
 }
@@ -1714,10 +1718,6 @@
 
   .grid-c_1 {
     grid-column: 1;
-}
-
-  .bdr_true {
-    border-radius: true;
 }
 
   .gap_40px {
@@ -2301,12 +2301,20 @@
     word-break: break-all;
 }
 
-  .fs_16px {
-    font-size: 16px;
-}
-
   .d_grid {
     display: grid;
+}
+
+  .grid-tc_minmax\(0\,_2fr\)_minmax\(0\,_1fr\) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+  .cg_2\.5rem {
+    column-gap: 2.5rem;
+}
+
+  .fs_16px {
+    font-size: 16px;
 }
 
   .grid-tc_repeat\(auto-fill\,_minmax\(118px\,_1fr\)\) {
@@ -2407,14 +2415,6 @@
 
   .lh_28px {
     line-height: 28px;
-}
-
-  .grid-tc_minmax\(0\,_2fr\)_minmax\(0\,_1fr\) {
-    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-}
-
-  .cg_2\.5rem {
-    column-gap: 2.5rem;
 }
 
   .c_\#e8e3e3 {
@@ -4563,6 +4563,10 @@
     border-bottom: 1px solid #e8e3e3;
 }
 
+  .\[\&_\.bgm-input__wrapper\]\:flex_1 .bgm-input__wrapper {
+    flex: 1 1 0%;
+}
+
   .\[\&_button\]\:bdr_3px button {
     border-radius: 3px;
 }
@@ -4625,10 +4629,6 @@
 
   .\[\&_li\]\:bd-b_1px_dotted_\#e8e3e3 li,.\[\&_tr\]\:bd-b_1px_dotted_\#e8e3e3 tr {
     border-bottom: 1px dotted #e8e3e3;
-}
-
-  .\[\&_\.bgm-input__wrapper\]\:flex_1 .bgm-input__wrapper {
-    flex: 1 1 0%;
 }
 
   .last\:bd-b_none:last-child {
@@ -5271,6 +5271,10 @@
     color: #0084b4;
 }
 
+  .\[\&_\.bgm-input\]\:fs_1\.125rem .bgm-input {
+    font-size: 1.125rem;
+}
+
   .\[\&_a\]\:c_\#1f1c1c a {
     color: #1f1c1c;
 }
@@ -5473,10 +5477,6 @@
 
   .\[\&_thead\]\:ta_left thead {
     text-align: left;
-}
-
-  .\[\&_\.bgm-input\]\:fs_1\.125rem .bgm-input {
-    font-size: 1.125rem;
 }
 
   .\[\&\[data-active\]\]\:c_\#fff[data-active] {
@@ -6598,6 +6598,10 @@
     margin-bottom: 10px;
 }
 
+  .\[\&_\.bgm-editor__container\]\:min-h_240px .bgm-editor__container {
+    min-height: 240px;
+}
+
   .\[\&_small\]\:ml_8px small {
     margin-left: 8px;
 }
@@ -7518,6 +7522,10 @@
     color: #fff;
 }
 
+  .\[\&_\.bgm-input\]\:\[\&\:\:placeholder\]\:c_\#9f9b9b .bgm-input::placeholder {
+    color: #9f9b9b;
+}
+
   .\[\&_button\]\:disabled\:cursor_wait button:is(:disabled, [disabled], [data-disabled], [aria-disabled=true]) {
     cursor: wait;
 }
@@ -7628,10 +7636,6 @@
 
   .\[\&_thead\]\:\[\&_th\]\:fw_normal thead th {
     font-weight: var(--font-weights-normal);
-}
-
-  .\[\&_\.bgm-input\]\:\[\&\:\:placeholder\]\:c_\#9f9b9b .bgm-input::placeholder {
-    color: #9f9b9b;
 }
 
   .\[\&\[data-active\]\]\:hover\:c_\#fff[data-active]:is(:hover, [data-hover]) {

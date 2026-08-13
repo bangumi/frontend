@@ -59,6 +59,16 @@ export type BlogEntry = {
   related: number;
   public: boolean;
 };
+export type UpdateBlog = {
+  /** 日志标题 */
+  title?: string;
+  /** 日志正文（BBCode） */
+  content?: string;
+  tags?: string[];
+  /** 公开（true）或仅好友可见（false） */
+  public?: boolean;
+  subjectIDs?: number[];
+};
 export type SubjectImages = {
   large: string;
   common: string;
@@ -1175,6 +1185,16 @@ export type RecentWikiChange = {
     createdAt: number;
   }[];
 };
+export type CreateBlog = {
+  /** 日志标题 */
+  title: string;
+  /** 日志正文（BBCode） */
+  content: string;
+  tags?: string[];
+  /** 公开（true）或仅好友可见（false），默认公开 */
+  public?: boolean;
+  subjectIDs?: number[];
+};
 /**
  * debug
  */
@@ -1393,6 +1413,40 @@ export function getBlogEntry(entryId: number, opts?: Oazapfts.RequestOpts) {
   >(`/p1/blogs/${encodeURIComponent(entryId)}`, {
     ...opts,
   });
+}
+/**
+ * 编辑日志
+ */
+export function updateBlogEntry(
+  entryId: number,
+  updateBlog: UpdateBlog,
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {};
+      }
+    | {
+        status: 400;
+        data: ErrorResponse;
+      }
+    | {
+        status: 404;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/blogs/${encodeURIComponent(entryId)}`,
+    oazapfts.json({
+      ...opts,
+      method: 'PATCH',
+      body: updateBlog,
+    }),
+  );
 }
 /**
  * 获取日志的关联条目
@@ -8089,6 +8143,39 @@ export function getRecentEpisodeWiki(
     {
       ...opts,
     },
+  );
+}
+/**
+ * 发布日志
+ */
+export function createBlogEntry(body: CreateBlog & TurnstileToken, opts?: Oazapfts.RequestOpts) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          /** new blog entry id */
+          id: number;
+        };
+      }
+    | {
+        status: 400;
+        data: ErrorResponse;
+      }
+    | {
+        status: 429;
+        data: ErrorResponse;
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    '/p1/blogs',
+    oazapfts.json({
+      ...opts,
+      method: 'POST',
+      body,
+    }),
   );
 }
 export enum SubjectType {

@@ -72,6 +72,8 @@ const Login = lazy(async () => import('./pages/login'));
 const UserHome = lazy(async () => import('./pages/index/user/[username]'));
 const UserCollections = lazy(async () => import('./pages/index/user/collections/[username]'));
 const BlogEntry = lazy(async () => import('./pages/index/blog/[id]'));
+const BlogCreate = lazy(async () => import('./pages/index/blog/create'));
+const BlogEdit = lazy(async () => import('./pages/index/blog/[id]/edit'));
 const Calendar = lazy(async () => import('./pages/index/calendar'));
 
 const userCollectionTypes = ['anime', 'book', 'music', 'game', 'real'] as const;
@@ -155,7 +157,9 @@ export const pageRoutes: RouteObject[] = [
       { path: 'rakuen', element: <Rakuen /> },
       { path: 'ep/:id', element: <Episode /> },
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },
+      { path: 'blog/create', element: <BlogCreate /> },
       { path: 'blog/:id', element: <BlogEntry /> },
+      { path: 'blog/:id/edit', element: <BlogEdit /> },
       { path: 'notifications', element: <Notifications /> },
       ...userCollectionTypes.map((type) => ({
         path: type,

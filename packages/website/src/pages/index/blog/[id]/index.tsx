@@ -13,6 +13,7 @@ import useBlogEntry, {
   useBlogComments,
   useBlogRelatedSubjects,
 } from '@bangumi/website/hooks/use-blog';
+import { useUser } from '@bangumi/website/hooks/use-user';
 
 import BlogComments from './components/BlogComments';
 import RelatedSubjects from './components/RelatedSubjects';
@@ -61,6 +62,12 @@ const entryMeta = css({
   color: '#9f9b9b',
 });
 
+const authorActions = css({
+  display: 'flex',
+  gap: '8px',
+  '& .bgm-link': { color: '#0084b4' },
+});
+
 const entryTags = css({
   display: 'flex',
   flexWrap: 'wrap',
@@ -94,6 +101,8 @@ const BlogEntryPage: FC = () => {
   const { data: entry } = useBlogEntry(entryId);
   const { data: comments, mutate: mutateComments } = useBlogComments(entryId);
   const { data: relatedSubjects } = useBlogRelatedSubjects(entryId);
+  const { user } = useUser();
+  const isAuthor = user?.id === entry.user.id;
 
   return (
     <>
@@ -119,6 +128,14 @@ const BlogEntryPage: FC = () => {
                   <span>{entry.views} 次浏览</span>
                   <span>·</span>
                   <span>{entry.replies} 条回复</span>
+                  {isAuthor && (
+                    <>
+                      <span>·</span>
+                      <span className={authorActions}>
+                        <Link to={`/blog/${entry.id}/edit`}>编辑</Link>
+                      </span>
+                    </>
+                  )}
                 </div>
                 {entry.tags.length > 0 && (
                   <div className={entryTags}>

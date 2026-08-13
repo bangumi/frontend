@@ -132,7 +132,11 @@ export interface paths {
     delete?: never;
     options?: never;
     head?: never;
-    patch?: never;
+    /**
+     * 编辑日志
+     * @description 编辑自己的日志，字段全可选；全部不传返回 400
+     */
+    patch: operations['updateBlogEntry'];
     trace?: never;
   };
   '/p1/blogs/{entryID}/subjects': {
@@ -2868,6 +2872,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/blogs': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * 发布日志
+     * @description 发布日志（type 固定为 1 日志），可携带标签、关联条目与已上传图片
+     */
+    post: operations['createBlogEntry'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -4798,6 +4822,26 @@ export interface components {
         createdAt: number;
       }[];
     };
+    CreateBlog: {
+      /** @description 日志标题 */
+      title: string;
+      /** @description 日志正文（BBCode） */
+      content: string;
+      tags?: string[];
+      /** @description 公开（true）或仅好友可见（false），默认公开 */
+      public?: boolean;
+      subjectIDs?: number[];
+    };
+    UpdateBlog: {
+      /** @description 日志标题 */
+      title?: string;
+      /** @description 日志正文（BBCode） */
+      content?: string;
+      tags?: string[];
+      /** @description 公开（true）或仅好友可见（false） */
+      public?: boolean;
+      subjectIDs?: number[];
+    };
   };
   responses: never;
   parameters: never;
@@ -5136,6 +5180,59 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['BlogEntry'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  updateBlogEntry: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path: {
+        entryID: number;
+      };
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['UpdateBlog'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': Record<string, never>;
+        };
+      };
+      /** @description default error response type */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description default error response type */
+      404: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -13991,6 +14088,61 @@ export interface operations {
       };
       /** @description default error response type */
       401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  createBlogEntry: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['CreateBlog'] &
+          components['schemas']['TurnstileToken'];
+      };
+    };
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            /** @description new blog entry id */
+            id: number;
+          };
+        };
+      };
+      /** @description default error response type */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description default error response type */
+      429: {
         headers: {
           [name: string]: unknown;
         };
