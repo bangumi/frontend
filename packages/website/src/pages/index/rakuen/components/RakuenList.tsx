@@ -225,19 +225,21 @@ const RakuenList: React.FC<{ topics: RaKuenTopic[] }> = ({ topics }) => {
   }
 
   return (
-    <ul className={list}>
+    <ul className={list} data-testid='rakuen-list'>
       {topics.map((topic) => {
+        // 5 类话题的 ID 来自独立数据表，all 模式下可能重复，key 需带 type 前缀
+        const key = `${topic.type}:${topic.id}`;
         switch (topic.type) {
           case 'group':
-            return <GroupItem key={topic.id} item={topic} />;
+            return <GroupItem key={key} item={topic} />;
           case 'subject':
-            return <SubjectItem key={topic.id} item={topic} />;
+            return <SubjectItem key={key} item={topic} />;
           case 'episode':
-            return <EpisodeItem key={topic.id} item={topic} />;
+            return <EpisodeItem key={key} item={topic} />;
           case 'character':
-            return <CharacterItem key={topic.id} item={topic} />;
+            return <CharacterItem key={key} item={topic} />;
           case 'person':
-            return <PersonItem key={topic.id} item={topic} />;
+            return <PersonItem key={key} item={topic} />;
         }
       })}
     </ul>

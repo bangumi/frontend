@@ -1,8 +1,9 @@
-import { fireEvent, screen } from '@testing-library/react';
+import { fireEvent, screen, within } from '@testing-library/react';
 import React from 'react';
 
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
+import topicsJson from '../../../mocks/fixtures/p1/rakuen/topics-GET.json';
 import RakuenIndex from '.';
 
 vi.mock('@bangumi/website/hooks/use-rakuen-topics', async () => {
@@ -33,7 +34,7 @@ describe('RakuenIndex', () => {
     ).toHaveAttribute('href', '/group/topic/430381');
     expect(screen.getByRole('link', { name: /新番组 2026 年春季动画讨论帖/ })).toHaveAttribute(
       'href',
-      '/subject/topic/431000',
+      '/subject/topic/430381',
     );
     expect(screen.getByRole('link', { name: /EP\.1 第一话/ })).toHaveAttribute('href', '/ep/999');
     expect(screen.getByRole('link', { name: /测试角色/ })).toHaveAttribute(
@@ -44,6 +45,10 @@ describe('RakuenIndex', () => {
       'href',
       '/person/1002',
     );
+
+    // group 与 subject 话题 ID 相同（不同数据表），仍应渲染为两行，React key 不冲突
+    const listItems = within(screen.getByTestId('rakuen-list')).getAllByRole('listitem');
+    expect(listItems).toHaveLength(topicsJson.data.length);
   });
 
   it('switches list by type query', () => {
