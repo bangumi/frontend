@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "mainID": 9001,
+    "creatorID": 2,
+    "relatedID": 0,
+    "createdAt": 1700000100,
+    "content": "第一条回复",
+    "state": 0,
+    "user": {
+      "id": 2,
+      "username": "chii",
+      "nickname": "Chii",
+      "avatar": {
+        "small": "https://lain.bgm.tv/pic/user/s/000/00/00/2.jpg",
+        "medium": "https://lain.bgm.tv/pic/user/m/000/00/00/2.jpg",
+        "large": "https://lain.bgm.tv/pic/user/l/000/00/00/2.jpg"
+      },
+      "group": 2,
+      "sign": "",
+      "joinedAt": 1262304000,
+      "isFriend": false
+    },
+    "replies": []
+  }
+]
