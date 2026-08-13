@@ -54,6 +54,7 @@ const SubjectBoard = lazy(async () => import('./pages/index/subject/[id]/board')
 const SubjectComments = lazy(async () => import('./pages/index/subject/[id]/comments'));
 const SubjectReviews = lazy(async () => import('./pages/index/subject/[id]/reviews'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]'));
+const MonoSearch = lazy(async () => import('./pages/index/mono_search/[keyword]'));
 const SubjectTopic = lazy(async () => import('./pages/index/subject/topic/[id]'));
 const SubjectTopicEdit = lazy(async () => import('./pages/index/subject/topic/[id]/edit'));
 const SubjectTopicHome = lazy(async () => import('./pages/index/subject/topic/[id]/index'));
@@ -268,6 +269,10 @@ export const pageRoutes: RouteObject[] = [
       {
         path: 'subject_search/:keyword',
         element: <SubjectSearch />,
+      },
+      {
+        path: 'mono_search/:keyword',
+        element: <MonoSearch />,
       },
       {
         path: 'user',
