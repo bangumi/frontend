@@ -21,7 +21,7 @@ function SubjectCommentsPage() {
   const type = rawType ? (Number(rawType) as CollectionType) : undefined;
   const { curPage, pageSize, offset } = usePaginationParams(PAGE_SIZE);
   const subject = useSubject(subjectID);
-  const { data: comments, total } = useSubjectComments(subjectID, pageSize, offset, type);
+  const { data: comments, total, mutate } = useSubjectComments(subjectID, pageSize, offset, type);
   const [, navigate] = useTransitionNavigate();
 
   if (!subject || !comments) {
@@ -37,12 +37,14 @@ function SubjectCommentsPage() {
       <Helmet title={`${subject.nameCN || subject.name} - 吐槽`} />
       <SubjectComments
         subject={subject}
+        subjectID={subjectID}
         comments={comments}
         total={total ?? 0}
         currentPage={curPage}
         pageSize={pageSize}
         type={type}
         onPageChange={handlePageChange}
+        mutate={mutate}
       />
     </>
   );
