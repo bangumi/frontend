@@ -1,4 +1,5 @@
 import { ok } from '@oazapfts/runtime';
+import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
 import { ozaClient } from '@bangumi/client';
@@ -43,8 +44,11 @@ async function fetchSubjectEpisodes(subjectID: number): Promise<Episode[]> {
   return [firstPage, ...remainingPages].flatMap((page) => page.data);
 }
 
-export function useEpisodePage(episodeID: number): { data: EpisodePageData | undefined } {
-  const { data } = useSWR(
+export function useEpisodePage(episodeID: number): {
+  data: EpisodePageData | undefined;
+  mutate: KeyedMutator<EpisodePageData>;
+} {
+  const { data, mutate } = useSWR(
     `episode-page ${episodeID}`,
     async (): Promise<EpisodePageData> => {
       const [episode, comments] = await Promise.all([
@@ -58,5 +62,5 @@ export function useEpisodePage(episodeID: number): { data: EpisodePageData | und
     { suspense: true },
   );
 
-  return { data };
+  return { data, mutate };
 }
