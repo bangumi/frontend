@@ -3,7 +3,7 @@
 ## 项目概览
 
 这是 Bangumi 新前端项目，使用 React、TypeScript、Vite 和 pnpm workspace。
-项目要求 Node.js `>=22`，包管理器固定为 pnpm `11.21.0`（见根 `package.json` 的 `packageManager` 字段）。
+项目要求 Node.js `>=24`，包管理器固定为 pnpm `11.21.0`（见根 `package.json` 的 `packageManager` 字段）。
 
 主要 workspace：
 
