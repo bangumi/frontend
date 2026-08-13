@@ -64,6 +64,22 @@ describe('HomePage', () => {
     expect(document.querySelector('a[href="https://bgm.tv/subject/12"]')).not.toBeInTheDocument();
   });
 
+  it('should mark the active progress tab and timeline filter', async () => {
+    setupHome();
+    await renderHome();
+
+    // 进度管理器默认「全部」tab 激活
+    expect(await screen.findByRole('button', { name: '全部' })).toHaveAttribute('data-active');
+    // 时间线 filter 默认「动态」激活
+    const allFilter = await screen.findByRole('button', { name: '动态' });
+    expect(allFilter).toHaveAttribute('data-active');
+
+    // 切换时间线 filter 后激活态跟随移动
+    fireEvent.click(screen.getByRole('button', { name: '吐槽' }));
+    expect(allFilter).not.toHaveAttribute('data-active');
+    expect(screen.getByRole('button', { name: '吐槽' })).toHaveAttribute('data-active');
+  });
+
   it('should render timeline subject cards and action summaries', async () => {
     const baseTimeline = homeFixture.timeline[0];
     const anime = {

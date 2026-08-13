@@ -58,12 +58,12 @@ const filterBtn = css({
     paddingRight: '10px',
     paddingLeft: '10px',
   },
-});
-
-const filterActive = css({
-  color: '#fff',
-  background: '#f09199',
-  _hover: { color: '#fff' },
+  // 激活态用属性选择器提升特异性，避免与基类原子样式争抢生成顺序
+  '&[data-active]': {
+    color: '#fff',
+    background: '#f09199',
+    _hover: { color: '#fff' },
+  },
 });
 
 const crawl = css({
@@ -746,7 +746,8 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
             <button
               key={item.key}
               type='button'
-              className={`${filterBtn} ${filter === item.key ? filterActive : ''}`}
+              data-active={filter === item.key || undefined}
+              className={filterBtn}
               onClick={() => setFilter(item.key)}
             >
               {item.label}

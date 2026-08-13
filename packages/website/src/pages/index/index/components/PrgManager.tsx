@@ -51,11 +51,11 @@ const tab = css({
     paddingRight: '12px',
     paddingLeft: '12px',
   },
-});
-
-const tabActive = css({
-  color: '#fff',
-  background: '#f09199',
+  // 激活态用属性选择器提升特异性，避免与基类原子样式争抢生成顺序
+  '&[data-active]': {
+    color: '#fff',
+    background: '#f09199',
+  },
 });
 
 const viewSwitch = css({
@@ -79,11 +79,11 @@ const viewBtn = css({
   background: 'none',
   color: '#9f9b9b',
   _hover: { color: '#1f1c1c' },
-});
-
-const viewActive = css({
-  color: '#f09199',
-  borderBottomColor: '#f09199',
+  // 激活态用属性选择器提升特异性，避免与基类原子样式争抢生成顺序
+  '&[data-active]': {
+    color: '#f09199',
+    borderBottomColor: '#f09199',
+  },
 });
 
 const empty = css({
@@ -867,7 +867,8 @@ const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
           <button
             key={cat.type}
             type='button'
-            className={`${tab} ${activeType === cat.type ? tabActive : ''}`}
+            data-active={activeType === cat.type || undefined}
+            className={tab}
             onClick={() => setActiveType(cat.type)}
           >
             {cat.label}
@@ -876,7 +877,8 @@ const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
         <div className={viewSwitch}>
           <button
             type='button'
-            className={`${viewBtn} ${view === 'list' ? viewActive : ''}`}
+            data-active={view === 'list' || undefined}
+            className={viewBtn}
             onClick={() => switchView('list')}
             title='列表视图'
             aria-label='列表视图'
@@ -886,7 +888,8 @@ const PrgManager: React.FC<{ progress: ProgressItem[] }> = ({ progress }) => {
           </button>
           <button
             type='button'
-            className={`${viewBtn} ${view === 'grid' ? viewActive : ''}`}
+            data-active={view === 'grid' || undefined}
+            className={viewBtn}
             onClick={() => switchView('grid')}
             title='网格视图'
             aria-label='网格视图'
