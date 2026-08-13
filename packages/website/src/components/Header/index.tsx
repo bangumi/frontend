@@ -266,9 +266,18 @@ const searchDivider = css({
   background: '#e8e3e3',
 });
 
+const searchSubmitButton = css({
+  display: 'flex',
+  alignItems: 'center',
+  padding: '0',
+  background: 'transparent',
+  border: 'none',
+  cursor: 'pointer',
+});
+
 const mobileSearchButton = css({
   display: 'none',
-  smDown: {
+  '@media (max-width: 1200px)': {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -350,7 +359,7 @@ const userLogin = css({
 
 const mobilePanelStyle = css({
   display: 'none',
-  smDown: {
+  '@media (max-width: 1200px)': {
     position: 'absolute',
     top: '100%',
     left: '0',
@@ -365,7 +374,7 @@ const mobilePanelStyle = css({
 });
 
 const mobilePanelOpen = css({
-  smDown: { display: 'block' },
+  '@media (max-width: 1200px)': { display: 'block' },
 });
 
 const mobileSearch = css({
@@ -458,7 +467,7 @@ const Header: FC = () => {
     setMobilePanel((panel) => (panel === 'menu' ? 'closed' : 'menu'));
   };
 
-  const handleMobileSearch = (event: React.FormEvent<HTMLFormElement>): void => {
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const keyword = searchValue.trim();
     if (!keyword) {
@@ -531,6 +540,7 @@ const Header: FC = () => {
           <div className={infoBox}>
             <form onSubmit={handleDesktopSearch}>
               <Input
+                aria-label='条目搜索'
                 value={searchValue}
                 onChange={(event) => setSearchValue(event.target.value)}
                 prefix={
@@ -538,20 +548,24 @@ const Header: FC = () => {
                     <select
                       name='cat'
                       className={searchSelect}
+                      aria-label='搜索分类'
                       value={searchCategory}
                       onChange={(event) => setSearchCategory(event.target.value)}
                     >
-                      <option value='all'>全部条目</option>
-                      <option value='1'>动画</option>
-                      <option value='2'>书籍</option>
-                      <option value='4'>游戏</option>
-                      <option value='6'>三次元</option>
-                      <option value='mono'>人物</option>
+                      {searchCategories.map((category) => (
+                        <option key={category.value} value={category.value}>
+                          {category.label}
+                        </option>
+                      ))}
                     </select>
                     <Divider orientation='vertical' className={searchDivider} />
                   </>
                 }
-                suffix={<SearchIcon style={{ flexShrink: 0 }} />}
+                suffix={
+                  <button type='submit' className={searchSubmitButton} aria-label='提交搜索'>
+                    <SearchIcon style={{ flexShrink: 0 }} />
+                  </button>
+                }
                 wrapperClass={search}
               />
             </form>
@@ -585,7 +599,7 @@ const Header: FC = () => {
         id='mobile-search-panel'
         className={cx(mobilePanelStyle, showMobilePanel && mobilePanelOpen)}
       >
-        <form className={mobileSearchForm} onSubmit={handleMobileSearch}>
+        <form className={mobileSearchForm} onSubmit={handleSearch}>
           <Input
             ref={searchInputRef}
             aria-label='搜索'
