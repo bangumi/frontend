@@ -1,0 +1,27 @@
+name: 'Setup Playwright'
+description: 'Install Playwright browsers with caching'
+runs:
+  using: 'composite'
+  steps:
+    - name: Get Playwright version
+      id: playwright-version
+      shell: bash
+      run: |
+        echo "version=$(pnpm --filter @bangumi/website exec playwright --version | awk '{print $2}')" >> "$GITHUB_OUTPUT"
+
+    - name: Cache Playwright browsers
+      id: playwright-cache
+      uses: actions/cache@v6
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-${{ runner.os }}-${{ steps.playwright-version.outputs.version }}
+        save-always: true
+
+    - name: Install Playwright browsers
+      shell: bash
+      run: pnpm --filter @bangumi/website exec playwright install chromium
+      if: steps.playwright-cache.outputs.cache-hit != 'true'
+
+    - name: Install Playwright system deps
+      shell: bash
+      run: pnpm --filter @bangumi/website exec playwright install-deps chromium
