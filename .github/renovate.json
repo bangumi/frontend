@@ -13,6 +13,7 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "rebaseWhen": "conflicted",
   "packageRules": [
     {
       "matchManagers": ["npm"],
