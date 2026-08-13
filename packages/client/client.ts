@@ -765,11 +765,7 @@ export type RaKuenPerson = {
   updatedAt: number;
 };
 export type RaKuenTopic =
-  | RaKuenGroupTopic
-  | RaKuenSubjectTopic
-  | RaKuenEpisode
-  | RaKuenCharacter
-  | RaKuenPerson;
+  RaKuenGroupTopic | RaKuenSubjectTopic | RaKuenEpisode | RaKuenCharacter | RaKuenPerson;
 export type CreateReport = {
   type: ReportType;
   /** 被举报对象的 ID */
