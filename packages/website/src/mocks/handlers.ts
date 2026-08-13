@@ -61,7 +61,6 @@ export const handlers = [
   mockAPI('/p1/users/:username/blogs', 'get'),
   mockAPI('/p1/blogs/:entryID', 'get'),
   mockAPI('/p1/blogs/:entryID', 'patch'),
-  mockAPI('/p1/blogs/:entryID', 'delete'),
   mockAPI('/p1/blogs/:entryID/comments', 'get'),
   mockAPI('/p1/blogs/:entryID/subjects', 'get'),
   mockAPI('/p1/blogs/:entryID/comments', 'post'),

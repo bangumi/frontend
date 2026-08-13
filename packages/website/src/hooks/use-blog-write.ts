@@ -9,8 +9,6 @@ export interface BlogFormData {
   public?: boolean;
   /** 关联条目，最多 5 个 */
   subjectIDs?: number[];
-  /** 已上传图片 id（图片上传二期支持，一期不传） */
-  photoIDs?: number[];
 }
 
 interface ErrorPayload {
@@ -19,13 +17,9 @@ interface ErrorPayload {
 
 /**
  * 临时实现：server-private 日志写接口完成并更新 openapi 后，
- * 替换为 ozaClient.createBlog / updateBlog / deleteBlog（届时移除本文件 fetch 逻辑）。
+ * 替换为 ozaClient.createBlog / updateBlog（届时移除本文件 fetch 逻辑）。
  */
-async function request<T>(
-  path: string,
-  method: 'POST' | 'PATCH' | 'DELETE',
-  body?: unknown,
-): Promise<T> {
+async function request<T>(path: string, method: 'POST' | 'PATCH', body?: unknown): Promise<T> {
   const res = await fetch(path, {
     method,
     headers: { 'Content-Type': 'application/json' },
@@ -48,11 +42,6 @@ export async function createBlogEntry(
 /** 编辑日志（临时，待 codegen 替换） */
 export async function updateBlogEntry(entryId: number, body: Partial<BlogFormData>): Promise<void> {
   await request(`/p1/blogs/${entryId}`, 'PATCH', body);
-}
-
-/** 删除日志（临时，待 codegen 替换） */
-export async function deleteBlogEntry(entryId: number): Promise<void> {
-  await request(`/p1/blogs/${entryId}`, 'DELETE');
 }
 
 export type { BlogEntry };

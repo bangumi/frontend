@@ -804,14 +804,6 @@
     margin: 15px 0 10px;
 }
 
-  .bd_0 {
-    border: 0;
-}
-
-  .bg_none {
-    background: none;
-}
-
   .p_10px_0 {
     padding: 10px 0;
 }
@@ -882,6 +874,10 @@
 
   .m_10px_0_0 {
     margin: 10px 0 0;
+}
+
+  .bd_0 {
+    border: 0;
 }
 
   .m_0_0_0_72px {
@@ -1010,6 +1006,10 @@
 
   .p_7px_14px {
     padding: 7px 14px;
+}
+
+  .bg_none {
+    background: none;
 }
 
   .p_3px_8px {
@@ -2433,10 +2433,6 @@
     line-height: 32px;
 }
 
-  .cursor_pointer {
-    cursor: pointer;
-}
-
   .grid-tc_250px_minmax\(0\,_1fr\) {
     grid-template-columns: 250px minmax(0, 1fr);
 }
@@ -2511,6 +2507,10 @@
 
   .white-space_pre-line {
     white-space: pre-line;
+}
+
+  .cursor_pointer {
+    cursor: pointer;
 }
 
   .lh_1\.65 {

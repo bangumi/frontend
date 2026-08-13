@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 import type { FC } from 'react';
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { Avatar, Layout, toast, Typography } from '@bangumi/design';
+import { Avatar, Layout, Typography } from '@bangumi/design';
 import RichContent from '@bangumi/design/components/RichContent';
 import { css } from '@bangumi/styled-system/css';
 import { getUserBlogsPageLink, getUserProfileLink } from '@bangumi/utils/pages';
@@ -13,7 +13,6 @@ import useBlogEntry, {
   useBlogComments,
   useBlogRelatedSubjects,
 } from '@bangumi/website/hooks/use-blog';
-import { deleteBlogEntry } from '@bangumi/website/hooks/use-blog-write';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import BlogComments from './components/BlogComments';
@@ -69,16 +68,6 @@ const authorActions = css({
   '& .bgm-link': { color: '#0084b4' },
 });
 
-const delBtn = css({
-  padding: '0',
-  border: '0',
-  background: 'none',
-  color: '#0084b4',
-  fontSize: '13px',
-  cursor: 'pointer',
-  _hover: { textDecoration: 'underline' },
-});
-
 const entryTags = css({
   display: 'flex',
   flexWrap: 'wrap',
@@ -113,21 +102,7 @@ const BlogEntryPage: FC = () => {
   const { data: comments, mutate: mutateComments } = useBlogComments(entryId);
   const { data: relatedSubjects } = useBlogRelatedSubjects(entryId);
   const { user } = useUser();
-  const navigate = useNavigate();
   const isAuthor = user?.id === entry.user.id;
-
-  const handleDelete = async () => {
-    if (confirm('确认删除这篇日志？删除后不可恢复。')) {
-      try {
-        await deleteBlogEntry(entry.id);
-        navigate(`/user/${entry.user.username}/blog`);
-      } catch (error) {
-        toast(error instanceof Error ? error.message : '删除失败，请稍后再试', {
-          type: 'error',
-        });
-      }
-    }
-  };
 
   return (
     <>
@@ -158,13 +133,6 @@ const BlogEntryPage: FC = () => {
                       <span>·</span>
                       <span className={authorActions}>
                         <Link to={`/blog/${entry.id}/edit`}>编辑</Link>
-                        <button
-                          type='button'
-                          className={delBtn}
-                          onClick={() => void handleDelete()}
-                        >
-                          删除
-                        </button>
                       </span>
                     </>
                   )}
