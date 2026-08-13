@@ -72,6 +72,7 @@ const Login = lazy(async () => import('./pages/login'));
 const UserHome = lazy(async () => import('./pages/index/user/[username]'));
 const UserCollections = lazy(async () => import('./pages/index/user/collections/[username]'));
 const BlogEntry = lazy(async () => import('./pages/index/blog/[id]'));
+const Calendar = lazy(async () => import('./pages/index/calendar'));
 
 const userCollectionTypes = ['anime', 'book', 'music', 'game', 'real'] as const;
 
@@ -82,7 +83,6 @@ const legacyPagePaths = [
     `${type}/chart`,
     `${type}/tag/*`,
   ]),
-  'calendar',
   'magi',
   'onair',
   'subject/:id/collections',
@@ -151,6 +151,7 @@ export const pageRoutes: RouteObject[] = [
           },
         ],
       },
+      { path: 'calendar', element: <Calendar /> },
       { path: 'rakuen', element: <Rakuen /> },
       { path: 'ep/:id', element: <Episode /> },
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },

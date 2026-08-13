@@ -23,7 +23,7 @@ it('redirects a registered legacy path to the legacy site', async () => {
   });
 });
 
-it.each(['/calendar', '/subject/12/collections', '/subject/12/stats'])(
+it.each(['/subject/12/collections', '/subject/12/stats'])(
   'registers %s as a legacy route',
   (path) => {
     const matches = matchRoutes(pageRoutes, path);
