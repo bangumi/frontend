@@ -1,9 +1,9 @@
 import { ok } from '@oazapfts/runtime';
 import { DateTime } from 'luxon';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { ozaClient } from '@bangumi/client';
-import type { SlimSubject, Timeline } from '@bangumi/client/client';
+import type { CommentBase, SlimSubject, Timeline } from '@bangumi/client/client';
 import { SubjectType, TimelineCat } from '@bangumi/client/client';
 import { Avatar, toast, Typography } from '@bangumi/design';
 import { css, cx } from '@bangumi/styled-system/css';
@@ -301,6 +301,109 @@ const time = css({
 });
 
 const sourceLink = css({ fontWeight: 'normal' });
+
+/** 回复入口按钮 */
+const replyToggle = css({
+  marginTop: '4px',
+  padding: '0',
+  border: '0',
+  background: 'none',
+  color: '#9f9b9b',
+  fontSize: '12px',
+  lineHeight: '16px',
+  cursor: 'pointer',
+  _hover: { color: '#54b5df' },
+});
+
+/** 回复区内嵌缩进在时间线内容下方 */
+const replyArea = css({
+  margin: '6px 0 0',
+  padding: '8px 10px',
+  borderLeft: '2px solid #e8e3e3',
+  background: '#fafafa',
+  borderRadius: '0 6px 6px 0',
+});
+
+const replyList = css({
+  listStyle: 'none',
+  margin: '0',
+  padding: '0',
+});
+
+const replyItem = css({
+  display: 'flex',
+  alignItems: 'flex-start',
+  gap: '8px',
+  padding: '6px 0',
+  borderTop: '1px dotted #e8e3e3',
+  '&:first-child': { borderTop: 'none' },
+});
+
+const replyAvatar = css({
+  flex: '0 0 28px',
+  width: '28px',
+  height: '28px',
+  borderRadius: '50%',
+  overflow: 'hidden',
+  '& img': { width: '100%', height: '100%', borderRadius: '50%' },
+});
+
+const replyBody = css({
+  flex: '1 1 auto',
+  minWidth: '0',
+  fontSize: '13px',
+  lineHeight: '18px',
+  color: '#595555',
+  overflowWrap: 'anywhere',
+});
+
+const replyMeta = css({
+  marginBottom: '2px',
+  fontSize: '12px',
+  color: '#9f9b9b',
+  '& a': { color: '#123' },
+});
+
+const replyForm = css({
+  display: 'flex',
+  gap: '8px',
+  marginTop: '8px',
+  alignItems: 'flex-start',
+});
+
+const replyInput = css({
+  flex: '1 1 auto',
+  minWidth: '0',
+  boxSizing: 'border-box',
+  padding: '6px 8px',
+  border: '1px solid #e8e3e3',
+  borderRadius: '5px',
+  outline: '0',
+  background: '#fff',
+  color: '#1f1c1c',
+  fontSize: '13px',
+  lineHeight: '1.4',
+  resize: 'vertical',
+  _focus: { borderColor: '#f09199' },
+  '&::placeholder': { color: '#9f9b9b' },
+});
+
+const replySubmit = css({
+  padding: '5px 14px',
+  border: '0',
+  borderRadius: '15px',
+  background: '#f09199',
+  color: '#fff',
+  fontSize: '13px',
+  cursor: 'pointer',
+  _disabled: { opacity: '0.55', cursor: 'default' },
+});
+
+const replyEmpty = css({
+  margin: '0',
+  color: '#9f9b9b',
+  fontSize: '12px',
+});
 
 const { Link } = Typography;
 
@@ -607,7 +710,13 @@ function renderContent(timeline: Timeline): TimelineContent | null {
   }
 }
 
-function TimelineItem({ timeline }: { timeline: Timeline }) {
+function TimelineItem({
+  timeline,
+  mutate,
+}: {
+  timeline: Timeline;
+  mutate: () => Promise<unknown>;
+}) {
   const user = timeline.user;
   if (!user) {
     return null;
@@ -645,10 +754,139 @@ function TimelineItem({ timeline }: { timeline: Timeline }) {
             </>
           )}
         </div>
+        <TimelineReplies timelineId={timeline.id} replyCount={timeline.replies} mutate={mutate} />
       </div>
     </li>
   );
 }
+
+type TimelineReply = CommentBase & { replies: CommentBase[] };
+
+/** 时间线回复：展开列表 + 登录用户发表回复（内嵌缩进在时间线下） */
+const TimelineReplies: React.FC<{
+  timelineId: number;
+  replyCount: number;
+  mutate: () => Promise<unknown>;
+}> = ({ timelineId, replyCount, mutate }) => {
+  const { user } = useUser();
+  const [expanded, setExpanded] = useState(false);
+  const [replies, setReplies] = useState<TimelineReply[]>([]);
+  const [loaded, setLoaded] = useState(false);
+  const [replyContent, setReplyContent] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!expanded || loaded) {
+      return;
+    }
+    void ok(ozaClient.getTimelineReplies(timelineId))
+      .then((data) => {
+        setReplies(data);
+        setLoaded(true);
+      })
+      .catch((error: unknown) => {
+        toast(error instanceof Error ? error.message : '加载回复失败', { type: 'error' });
+      });
+  }, [expanded, loaded, timelineId]);
+
+  const handleSubmit = async () => {
+    const value = replyContent.trim();
+    if (!value || submitting || !user) {
+      return;
+    }
+    setSubmitting(true);
+    try {
+      const resp = await ok(
+        ozaClient.createTimelineReply(timelineId, {
+          content: value,
+          turnstileToken: turnstileToken ?? '',
+        }),
+      );
+      setReplyContent('');
+      // 乐观追加回复，保证发帖者即时反馈
+      setReplies((prev) => [
+        ...prev,
+        {
+          id: resp.id,
+          mainID: timelineId,
+          creatorID: user.id,
+          relatedID: 0,
+          createdAt: Math.floor(Date.now() / 1000),
+          content: value,
+          state: 0,
+          user: { ...user, isFriend: false },
+          replies: [],
+        },
+      ]);
+      setLoaded(true);
+      await mutate();
+    } catch (error) {
+      toast(error instanceof Error ? error.message : '回复失败，请稍后再试', { type: 'error' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <>
+      <button type='button' className={replyToggle} onClick={() => setExpanded((v) => !v)}>
+        {expanded ? '收起回复' : `回复${replyCount > 0 ? ` (${replyCount})` : ''}`}
+      </button>
+      {expanded && (
+        <div className={replyArea}>
+          {loaded && replies.length === 0 && <p className={replyEmpty}>还没有回复</p>}
+          {replies.length > 0 && (
+            <ul className={replyList}>
+              {replies.map((reply) => (
+                <li key={reply.id} className={replyItem}>
+                  <span className={replyAvatar}>
+                    {reply.user && (
+                      <Avatar src={reply.user.avatar.small ?? ''} size='small' alt='' />
+                    )}
+                  </span>
+                  <div className={replyBody}>
+                    <div className={replyMeta}>
+                      {reply.user && (
+                        <Link to={getUserProfileLink(reply.user.username)}>
+                          {reply.user.nickname}
+                        </Link>
+                      )}{' '}
+                      <span>{makeDescriptiveTime(reply.createdAt)}</span>
+                    </div>
+                    <div>{reply.content}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {user && (
+            <div className={replyForm}>
+              <textarea
+                className={replyInput}
+                value={replyContent}
+                onChange={(event) => setReplyContent(event.target.value)}
+                placeholder='回复这条动态...'
+                rows={2}
+              />
+              <div>
+                <button
+                  type='button'
+                  className={replySubmit}
+                  disabled={!replyContent.trim() || submitting}
+                  onClick={() => void handleSubmit()}
+                >
+                  回复
+                </button>
+                <TurnstileCaptcha action='post_timeline_reply' onToken={setTurnstileToken} />
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </>
+  );
+};
 
 function matchesFilter(timeline: Timeline, filter: TimelineFilter): boolean {
   if (filter === 'all') {
@@ -779,7 +1017,7 @@ const TimelineBlock: React.FC<{ timeline: Timeline[] }> = ({ timeline }) => {
             <h3 className={dayTitle}>{label}</h3>
             <ul className={list}>
               {items.map((item) => (
-                <TimelineItem key={item.id} timeline={item} />
+                <TimelineItem key={item.id} timeline={item} mutate={mutate} />
               ))}
             </ul>
           </div>
