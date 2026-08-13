@@ -22,8 +22,7 @@ jobs:
 
       - uses: ./.github/actions/setup-js-env
 
-      - name: Install Playwright
-        run: pnpm --filter @bangumi/website run install-playwright-deps
+      - uses: ./.github/actions/setup-playwright
 
       - name: Run test
         run: pnpm test:e2e --project=fixtures
@@ -55,8 +54,7 @@ jobs:
 
       - uses: ./.github/actions/setup-js-env
 
-      - name: Install Playwright
-        run: pnpm --filter @bangumi/website run install-playwright-deps
+      - uses: ./.github/actions/setup-playwright
 
       - name: Wait for mysql
         run: bash $HOME/dev-env/wait_mysql_ready.sh
