@@ -758,7 +758,7 @@ function Comments({
           <ReplyForm
             topicId={episodeID}
             api={epCommentApi}
-            placeholder='发一条吐槽…'
+            placeholder='用 [mask] 标签隐藏剧透内容'
             content={replyContent}
             onChange={setReplyContent}
             onSuccess={async () => {

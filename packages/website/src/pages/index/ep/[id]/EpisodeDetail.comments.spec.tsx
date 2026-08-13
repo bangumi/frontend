@@ -110,7 +110,7 @@ describe('EpisodeDetail 评论写操作', () => {
     mockEpisodeAPI([otherComment]);
     await renderPage();
 
-    expect(await screen.findByPlaceholderText('发一条吐槽…')).toBeInTheDocument();
+    expect(await screen.findByPlaceholderText('用 [mask] 标签隐藏剧透内容')).toBeInTheDocument();
   });
 
   it('发帖调用 createEpisodeComment', async () => {
@@ -124,7 +124,7 @@ describe('EpisodeDetail 评论写操作', () => {
     mockEpisodeAPI([otherComment]);
     await renderPage();
 
-    const textarea = await screen.findByPlaceholderText('发一条吐槽…');
+    const textarea = await screen.findByPlaceholderText('用 [mask] 标签隐藏剧透内容');
     await act(async () => {
       fireEvent.input(textarea, { target: { value: '新吐槽内容' } });
     });
