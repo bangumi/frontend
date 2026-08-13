@@ -47,9 +47,8 @@ describe('MonoSearchPage', () => {
 
     const links = await screen.findAllByRole('link');
     expect(links.some((el) => el.getAttribute('href') === '/character/99657')).toBe(true);
-    expect(screen.getByText('找到 40 个角色')).toBeInTheDocument();
-    // 分类侧栏：角色分类高亮
-    expect(screen.getByRole('link', { name: '虚构角色' }).className).toContain('bg_#f09199');
+    expect(screen.getByText('找到 40 个结果')).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: '虚构角色' })).toHaveAttribute('aria-current', 'page');
   });
 
   it('renders person results with career filter when cat=prsn', async () => {
@@ -64,7 +63,7 @@ describe('MonoSearchPage', () => {
 
     const links = await screen.findAllByRole('link');
     expect(links.some((el) => el.getAttribute('href') === '/person/49410')).toBe(true);
-    expect(screen.getByText('找到 3 个现实人物')).toBeInTheDocument();
+    expect(screen.getByText('找到 3 个结果')).toBeInTheDocument();
     expect(screen.getByRole('combobox', { name: '' })).toBeInTheDocument();
   });
 });

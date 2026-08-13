@@ -3,165 +3,23 @@ import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 import type { SlimCharacter, SlimPerson } from '@bangumi/client/client';
 import { Pagination } from '@bangumi/design';
-import { Search } from '@bangumi/icons';
 import { css } from '@bangumi/styled-system/css';
 import { getCharacterLink, getLegacyPageLink, getPersonLink } from '@bangumi/utils/pages';
 import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
 import Helmet from '@bangumi/website/components/Helmet';
+import {
+  SearchCategoryNav,
+  searchEmpty,
+  SearchHeader,
+  searchPage,
+  searchPagination,
+  searchResults,
+  searchResultsHeader,
+} from '@bangumi/website/components/SearchPage';
 import { useCharacterSearch, usePersonSearch } from '@bangumi/website/hooks/use-mono-search';
 import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
 
 const PAGE_SIZE = 15;
-
-const searchBand = css({
-  borderBottom: '1px solid #e8e3e3',
-  background: '#fafafa',
-});
-
-const searchForm = css({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '6px',
-  width: '980px',
-  margin: '0 auto',
-  padding: '10px 0',
-  boxSizing: 'border-box',
-  '& label': {
-    width: '100px',
-    marginRight: '9px',
-    color: '#595555',
-    fontSize: '16px',
-    fontWeight: '600',
-    lineHeight: '35px',
-    textAlign: 'right',
-  },
-  '& input': {
-    width: '375px',
-    height: '34px',
-    padding: '6px 10px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    background: '#fff',
-    color: '#1f1c1c',
-    fontSize: '14px',
-    outline: 'none',
-    boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.08)',
-    _focus: {
-      borderColor: '#f09199',
-      boxShadow: '0 0 0 2px rgba(240, 145, 153, 0.18)',
-    },
-  },
-  '& button': {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '5px',
-    height: '34px',
-    padding: '0 16px',
-    border: '0',
-    borderRadius: '4px',
-    background: '#54b5df',
-    color: '#fff',
-    cursor: 'pointer',
-    _hover: { background: '#3aa4d2' },
-    '& svg': {
-      width: '14px',
-      height: '14px',
-      fill: 'currentcolor',
-    },
-  },
-  '@media (max-width: 1024px)': {
-    width: 'calc(100% - 40px)',
-  },
-  '@media (max-width: 768px)': {
-    width: '100%',
-    paddingRight: '16px',
-    paddingLeft: '16px',
-    '& label': {
-      width: 'auto',
-      marginRight: '4px',
-      fontSize: '13px',
-      whiteSpace: 'nowrap',
-    },
-    '& input': {
-      minWidth: '0',
-      width: 'auto',
-      flex: '1',
-    },
-  },
-  '@media (max-width: 640px)': {
-    '& button': {
-      width: '38px',
-      padding: '0',
-      '& span': {
-        display: 'none',
-      },
-    },
-  },
-});
-
-const page = css({
-  display: 'grid',
-  gridTemplateColumns: '100px minmax(0, 655px) 200px',
-  gap: '10px',
-  width: '980px',
-  margin: '0 auto',
-  padding: '20px 0 40px',
-  boxSizing: 'border-box',
-  '@media (max-width: 1024px)': {
-    width: 'calc(100% - 40px)',
-    gridTemplateColumns: '100px minmax(0, 1fr) 200px',
-  },
-  '@media (max-width: 768px)': {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-    width: '100%',
-    padding: '10px 8px 24px',
-  },
-});
-
-const categories = css({
-  alignSelf: 'start',
-  '& ul': {
-    overflow: 'hidden',
-    margin: '0',
-    padding: '0 2px 5px',
-    border: '1px solid #e8e3e3',
-    borderRadius: '8px',
-    background: '#fff',
-    boxShadow: '0 1px 5px rgba(50, 46, 46, 0.08)',
-    listStyle: 'none',
-  },
-  '& li a': {
-    display: 'block',
-    margin: '5px 0',
-    padding: '3px 12px',
-    borderRadius: '999px',
-    color: '#54b5df',
-    fontSize: '13px',
-    lineHeight: '18px',
-    textDecoration: 'none',
-    _hover: {
-      background: '#fff6f7',
-      color: '#f09199',
-    },
-  },
-  '@media (max-width: 768px)': {
-    '& ul': {
-      padding: '4px 6px',
-      borderRadius: '6px',
-    },
-    '& li': {
-      display: 'inline-block',
-    },
-    '& li a': {
-      margin: '0',
-      padding: '3px 6px',
-      fontSize: '12px',
-    },
-  },
-});
 
 const categorySelected = css({
   '&[class]': {
@@ -170,60 +28,25 @@ const categorySelected = css({
   },
 });
 
-const categoryRoot = css({
-  margin: '0 -2px',
-  padding: '6px 14px 5px',
-  borderBottom: '1px solid #e8e3e3',
-  color: '#9f9b9b',
-  fontSize: '12px',
-  fontWeight: '600',
-  '@media (max-width: 768px)': {
-    margin: '0',
-    padding: '3px 5px',
-    border: '0',
-  },
-});
-
-const results = css({
-  minWidth: '0',
-  '@media (max-width: 768px)': {
-    width: '100%',
-  },
-});
-
-const resultTools = css({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  minHeight: '24px',
-  padding: '0 4px 5px',
-  color: '#9f9b9b',
-  fontSize: '12px',
-  '@media (max-width: 768px)': {
-    paddingRight: '2px',
-    paddingLeft: '2px',
-  },
-  '@media (max-width: 640px)': {
-    justifyContent: 'flex-end',
-    '& > span': {
-      display: 'none',
-    },
-  },
-});
-
 const monoTabs = css({
   display: 'flex',
-  gap: '16px',
-  padding: '10px 0 8px',
+  gap: '6px',
+  marginBottom: '18px',
   '& a': {
-    color: '#9f9b9b',
+    display: 'inline-flex',
+    alignItems: 'center',
+    minHeight: '34px',
+    padding: '0 13px',
+    borderRadius: '5px',
+    color: '#716b6d',
     fontSize: '13px',
     textDecoration: 'none',
     '&[class]': {
-      color: '#f09199',
-      fontWeight: '600',
+      background: '#fff1f2',
+      color: '#d96f79',
+      fontWeight: '650',
     },
-    _hover: { color: '#f09199' },
+    _hover: { color: '#d96f79' },
   },
 });
 
@@ -232,12 +55,16 @@ const careerFilter = css({
   flexWrap: 'wrap',
   alignItems: 'center',
   gap: '10px',
-  padding: '0 4px 8px',
+  marginBottom: '16px',
+  padding: '12px 14px',
+  border: '1px solid #eee9ea',
+  borderRadius: '6px',
+  background: '#faf9f9',
   color: '#9f9b9b',
   fontSize: '12px',
   '& select': {
-    height: '26px',
-    padding: '0 6px',
+    height: '32px',
+    padding: '0 9px',
     border: '1px solid #e8e3e3',
     borderRadius: '4px',
     background: '#fff',
@@ -249,14 +76,20 @@ const careerFilter = css({
 
 const resultsGrid = css({
   display: 'grid',
-  gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-  gap: '18px 12px',
+  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+  gap: '30px 20px',
   margin: '0',
-  padding: '8px 0',
+  padding: '24px 0 4px',
   listStyle: 'none',
-  '@media (max-width: 768px)': {
+  '@media (max-width: 960px)': {
+    gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+  },
+  '@media (max-width: 700px)': {
     gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-    gap: '14px 10px',
+    gap: '24px 12px',
+  },
+  '@media (max-width: 420px)': {
+    gap: '22px 10px',
   },
 });
 
@@ -264,21 +97,21 @@ const cardLink = css({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  color: '#54b5df',
-  fontSize: '13px',
-  lineHeight: '18px',
+  color: '#1f1c1c',
+  fontSize: '14px',
+  lineHeight: '20px',
   textAlign: 'center',
   textDecoration: 'none',
-  _hover: { color: '#f09199' },
+  _hover: { color: '#d96f79' },
 });
 
 const cardCover = css({
   display: 'block',
   width: '100%',
-  aspectRatio: '1 / 1.2',
-  borderRadius: '4px',
+  aspectRatio: '4 / 5',
+  borderRadius: '6px',
   objectFit: 'cover',
-  boxShadow: '0 1px 4px rgba(0, 0, 0, 0.22)',
+  boxShadow: '0 3px 12px rgba(48, 44, 45, 0.14)',
 });
 
 const cardCoverPlaceholder = css({
@@ -286,17 +119,17 @@ const cardCoverPlaceholder = css({
   alignItems: 'center',
   justifyContent: 'center',
   width: '100%',
-  aspectRatio: '1 / 1.2',
-  borderRadius: '4px',
-  background: '#e8e3e3',
-  color: '#9f9b9b',
-  fontSize: '20px',
+  aspectRatio: '4 / 5',
+  borderRadius: '6px',
+  background: '#eee9ea',
+  color: '#8c8587',
+  fontSize: '24px',
 });
 
 const cardName = css({
   overflow: 'hidden',
   maxWidth: '100%',
-  marginTop: '6px',
+  marginTop: '10px',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
@@ -304,8 +137,8 @@ const cardName = css({
 const cardSub = css({
   overflow: 'hidden',
   maxWidth: '100%',
-  color: '#9f9b9b',
-  fontSize: '11px',
+  color: '#8c8587',
+  fontSize: '12px',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
@@ -313,50 +146,21 @@ const cardSub = css({
 const cardInfo = css({
   overflow: 'hidden',
   margin: '4px 0 0',
-  color: '#9f9b9b',
-  fontSize: '11px',
+  color: '#8c8587',
+  fontSize: '12px',
   lineHeight: '16px',
   textAlign: 'center',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
-const empty = css({
-  minHeight: '240px',
-  margin: '0',
-  padding: '50px 20px',
-  borderTop: '1px solid #e8e3e3',
-  color: '#9f9b9b',
-  boxSizing: 'border-box',
-  textAlign: 'center',
-});
-
-const pagination = css({
-  flexWrap: 'wrap',
-  gap: '6px',
-  margin: '20px 0 0',
-  '& .bgm-pagination-prev, & .bgm-pagination-next, & .bgm-pagination-pager': {
-    width: '26px',
-    height: '26px',
-    margin: '0',
-    borderWidth: '1px',
-    borderRadius: '50%',
-    fontSize: '11px',
-  },
-  '& .bgm-pagination-pager + .bgm-pagination-pager': {
-    marginLeft: '0',
-  },
-  '& .bgm-pagination-prev, & .bgm-pagination-next': {
-    width: '34px',
-    borderRadius: '13px',
-  },
-  '& .bgm-pagination-icon': {
-    width: '14px',
-    height: '14px',
-  },
-  '@media (max-width: 768px)': {
-    marginTop: '14px',
-  },
+const legacyLink = css({
+  display: 'inline-block',
+  marginTop: '28px',
+  color: '#8c8587',
+  fontSize: '12px',
+  textDecoration: 'none',
+  _hover: { color: '#d96f79' },
 });
 
 /** 人物职业（旧站 PersonCareer） */
@@ -487,68 +291,52 @@ function MonoSearchPage() {
   return (
     <>
       <Helmet title={`搜索: ${routeKeyword}`} />
-      <div className={searchBand}>
-        <form className={searchForm} onSubmit={handleSearch}>
-          <label htmlFor='mono-search-input'>人物搜索</label>
-          <input
-            id='mono-search-input'
-            name='search_text'
-            type='search'
-            value={searchValue}
-            onChange={(event) => setSearchValue(event.target.value)}
-          />
-          <button type='submit'>
-            <Search />
-            <span>搜索</span>
-          </button>
-        </form>
-      </div>
+      <SearchHeader
+        inputId='mono-search-input'
+        inputLabel='人物搜索'
+        value={searchValue}
+        onChange={setSearchValue}
+        onSubmit={handleSearch}
+      >
+        <SearchCategoryNav
+          groups={[
+            {
+              label: '条目',
+              items: [
+                { label: '全部', to: `/subject_search/${keywordParam}?cat=all` },
+                { label: '动画', to: `/subject_search/${keywordParam}?cat=2` },
+                { label: '书籍', to: `/subject_search/${keywordParam}?cat=1` },
+                { label: '音乐', to: `/subject_search/${keywordParam}?cat=3` },
+                { label: '游戏', to: `/subject_search/${keywordParam}?cat=4` },
+                { label: '三次元', to: `/subject_search/${keywordParam}?cat=6` },
+              ],
+            },
+            {
+              label: '人物',
+              items: [
+                {
+                  label: '全部',
+                  selected: category === 'all',
+                  to: `/mono_search/${keywordParam}?cat=all`,
+                },
+                {
+                  label: '虚构角色',
+                  selected: category === 'crt',
+                  to: `/mono_search/${keywordParam}?cat=crt`,
+                },
+                {
+                  label: '现实人物',
+                  selected: category === 'prsn',
+                  to: `/mono_search/${keywordParam}?cat=prsn`,
+                },
+              ],
+            },
+          ]}
+        />
+      </SearchHeader>
 
-      <main className={page}>
-        <nav className={categories} aria-label='搜索分类'>
-          <ul>
-            <li className={categoryRoot}>条目</li>
-            <li>
-              <Link to={`/subject_search/${keywordParam}?cat=all`}>全部</Link>
-            </li>
-            <li>
-              <Link to={`/subject_search/${keywordParam}?cat=2`}>动画</Link>
-            </li>
-            <li>
-              <Link to={`/subject_search/${keywordParam}?cat=1`}>书籍</Link>
-            </li>
-            <li>
-              <Link to={`/subject_search/${keywordParam}?cat=4`}>游戏</Link>
-            </li>
-            <li className={categoryRoot}>人物</li>
-            <li>
-              <Link
-                className={category === 'crt' ? categorySelected : undefined}
-                to={`/mono_search/${keywordParam}?cat=crt`}
-              >
-                虚构角色
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={category === 'prsn' ? categorySelected : undefined}
-                to={`/mono_search/${keywordParam}?cat=prsn`}
-              >
-                现实人物
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={category === 'all' ? categorySelected : undefined}
-                to={`/mono_search/${keywordParam}?cat=all`}
-              >
-                全部
-              </Link>
-            </li>
-          </ul>
-        </nav>
-
-        <section className={results} aria-label='搜索结果'>
+      <main className={searchPage}>
+        <section className={searchResults} aria-label='搜索结果'>
           <div className={monoTabs}>
             <Link
               className={showCharacters ? categorySelected : undefined}
@@ -591,9 +379,12 @@ function MonoSearchPage() {
           )}
           {showCharacters && (
             <>
-              <div className={resultTools}>
-                <span>找到 {characterTotal} 个角色</span>
-              </div>
+              <header className={searchResultsHeader}>
+                <div>
+                  <h2>“{routeKeyword}”的角色</h2>
+                  <p>找到 {characterTotal} 个结果</p>
+                </div>
+              </header>
               {characters.length > 0 ? (
                 <ul className={resultsGrid}>
                   {characters.map((character) => (
@@ -601,15 +392,18 @@ function MonoSearchPage() {
                   ))}
                 </ul>
               ) : (
-                <p className={empty}>没有找到相关角色</p>
+                <p className={searchEmpty}>没有找到相关角色</p>
               )}
             </>
           )}
           {showPersons && (
             <>
-              <div className={resultTools}>
-                <span>找到 {personTotal} 个现实人物</span>
-              </div>
+              <header className={searchResultsHeader}>
+                <div>
+                  <h2>“{routeKeyword}”的现实人物</h2>
+                  <p>找到 {personTotal} 个结果</p>
+                </div>
+              </header>
               {persons.length > 0 ? (
                 <ul className={resultsGrid}>
                   {persons.map((person) => (
@@ -617,13 +411,13 @@ function MonoSearchPage() {
                   ))}
                 </ul>
               ) : (
-                <p className={empty}>没有找到相关现实人物</p>
+                <p className={searchEmpty}>没有找到相关现实人物</p>
               )}
             </>
           )}
           <Pagination
             key={curPage}
-            wrapperClass={pagination}
+            wrapperClass={searchPagination}
             total={category === 'prsn' ? personTotal : characterTotal}
             pageSize={PAGE_SIZE}
             currentPage={curPage}
@@ -631,16 +425,14 @@ function MonoSearchPage() {
           />
         </section>
 
-        <aside className={css({ '@media (max-width: 768px)': { display: 'none' } })}>
-          <a
-            href={getLegacyPageLink(
-              `/mono_search/${keywordParam}?cat=${category === 'prsn' ? 'prsn' : 'crt'}`,
-            )}
-            style={{ color: '#54b5df', fontSize: '12px', textDecoration: 'none' }}
-          >
-            前往旧版页面
-          </a>
-        </aside>
+        <a
+          className={legacyLink}
+          href={getLegacyPageLink(
+            `/mono_search/${keywordParam}?cat=${category === 'prsn' ? 'prsn' : 'crt'}`,
+          )}
+        >
+          前往旧版页面
+        </a>
       </main>
     </>
   );
