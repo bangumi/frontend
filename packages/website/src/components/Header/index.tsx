@@ -69,6 +69,7 @@ const navRight = [
   {
     key: 'rakuen',
     label: '超展开',
+    href: '/rakuen',
   },
   {
     key: 'group',

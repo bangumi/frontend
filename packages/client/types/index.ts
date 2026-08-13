@@ -1361,6 +1361,26 @@ export interface paths {
     patch: operations['patchPrivacy'];
     trace?: never;
   };
+  '/p1/rakuen/topics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /**
+     * 获取超展开聚合列表
+     * @description 按最后回复时间倒序聚合全站讨论（小组话题/条目话题/章节/角色/人物），type=my_group 时仅返回已加入小组的话题，未登录返回空数据。
+     */
+    get: operations['getRaKuenTopics'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/report': {
     parameters: {
       query?: never;
@@ -3185,6 +3205,18 @@ export interface components {
     PersonSearchFilter: {
       career?: string[];
     };
+    /**
+     * @description 超展开聚合类型
+     *       - all = 全部
+     *       - group = 小组话题
+     *       - my_group = 已加入小组的话题（未登录返回空）
+     *       - subject = 条目话题
+     *       - episode = 章节
+     *       - character = 角色
+     *       - person = 人物
+     * @enum {string}
+     */
+    RaKuenTopicType: 'all' | 'group' | 'my_group' | 'subject' | 'episode' | 'character' | 'person';
     SearchCharacter: {
       /** @description 搜索关键词 */
       keyword: string;
@@ -3684,6 +3716,78 @@ export interface components {
       location: string;
       permissions: components['schemas']['Permissions'];
     };
+    /** RaKuenCharacter */
+    RaKuenCharacter: {
+      /** @enum {string} */
+      type: 'character';
+      id: number;
+      name: string;
+      nameCN: string;
+      images?: components['schemas']['PersonImages'];
+      comment: number;
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+    };
+    /** RaKuenEpisode */
+    RaKuenEpisode: {
+      /** @enum {string} */
+      type: 'episode';
+      id: number;
+      subject: components['schemas']['SlimSubject'];
+      episode: {
+        id: number;
+        sort: number;
+        type: components['schemas']['EpisodeType'];
+        name: string;
+        nameCN: string;
+        comment: number;
+      };
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+    };
+    /** RaKuenGroupTopic */
+    RaKuenGroupTopic: {
+      /** @enum {string} */
+      type: 'group';
+      id: number;
+      title: string;
+      replyCount: number;
+      creator: components['schemas']['SlimUser'];
+      group: components['schemas']['SlimGroup'];
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+    };
+    /** RaKuenPerson */
+    RaKuenPerson: {
+      /** @enum {string} */
+      type: 'person';
+      id: number;
+      name: string;
+      nameCN: string;
+      images?: components['schemas']['PersonImages'];
+      comment: number;
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+    };
+    /** RaKuenSubjectTopic */
+    RaKuenSubjectTopic: {
+      /** @enum {string} */
+      type: 'subject';
+      id: number;
+      title: string;
+      replyCount: number;
+      creator: components['schemas']['SlimUser'];
+      subject: components['schemas']['SlimSubject'];
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+    };
+    /** RaKuenTopic */
+    RaKuenTopic:
+      | components['schemas']['RaKuenGroupTopic']
+      | components['schemas']['RaKuenSubjectTopic']
+      | components['schemas']['RaKuenEpisode']
+      | components['schemas']['RaKuenCharacter']
+      | components['schemas']['RaKuenPerson'];
     /** Reaction */
     Reaction: {
       users: components['schemas']['SimpleUser'][];
@@ -4313,7 +4417,16 @@ export interface components {
      * @enum {string}
      */
     UserHomepageSection:
-      'anime' | 'game' | 'book' | 'music' | 'real' | 'mono' | 'blog' | 'friend' | 'group' | 'index';
+      | 'anime'
+      | 'game'
+      | 'book'
+      | 'music'
+      | 'real'
+      | 'mono'
+      | 'blog'
+      | 'friend'
+      | 'group'
+      | 'index';
     /** UserIndexStats */
     UserIndexStats: {
       create: number;
@@ -9017,6 +9130,43 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getRaKuenTopics: {
+    parameters: {
+      query?: {
+        type?: components['schemas']['RaKuenTopicType'];
+        /** @description min 1, max 200 */
+        limit?: number;
+      };
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['RaKuenTopic'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */

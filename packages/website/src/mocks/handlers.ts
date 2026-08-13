@@ -2,6 +2,7 @@ import { mockAPI } from './utils';
 
 export const handlers = [
   mockAPI('/p1/me', 'get'),
+  mockAPI('/p1/rakuen/topics', 'get'),
   mockAPI('/p1/notify', 'get'),
   mockAPI('/p1/clear-notify', 'post'),
   mockAPI('/p1/home', 'get'),
