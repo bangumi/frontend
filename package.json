@@ -16,6 +16,7 @@
     "lint": "eslint ./ .github/scripts --ext cjs,mjs,js,jsx,ts,mts,cts,tsx",
     "lint:fix": "pnpm lint --fix",
     "lint:style": "stylelint \"./packages/**/*.css\" --ignore-pattern \"packages/styled-system/**\"",
+    "lint:panda": "pnpm panda:cssgen && git diff --exit-code packages/styled-system/styles.css",
     "lint:style-fix": "pnpm lint:style --fix",
     "prettier": "prettier --write --list-different ./",
     "format": "prettier --write --list-different ./",
