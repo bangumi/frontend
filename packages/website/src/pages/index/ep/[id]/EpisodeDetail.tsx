@@ -1,9 +1,12 @@
 import { DateTime } from 'luxon';
 import React, { useMemo, useState } from 'react';
 
-import type { Episode, Reaction } from '@bangumi/client/client';
+import { ozaClient } from '@bangumi/client';
+import type { Episode } from '@bangumi/client/client';
 import { EpisodeType } from '@bangumi/client/client';
-import { Avatar, RichContent, Typography } from '@bangumi/design';
+import { Avatar, Button, EditorForm, RichContent, toast, Typography } from '@bangumi/design';
+import Reactions from '@bangumi/design/components/Topic/Reactions';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
 import { ArrowDown } from '@bangumi/icons';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
@@ -22,6 +25,8 @@ import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import type { EpisodePageData } from '@bangumi/website/hooks/use-episode-page';
 import { useUser } from '@bangumi/website/hooks/use-user';
+
+import { epCommentApi } from './ep-comment-api';
 
 const page = css({
   padding: '10px 15px 24px',
@@ -355,15 +360,19 @@ const deletedComment = css({
   fontStyle: 'italic',
 });
 
-const reactionsBar = css({
+const commentActions = css({
   display: 'flex',
   flexWrap: 'wrap',
-  marginTop: '7px',
-  gap: '5px',
-  '& > span': {
-    color: '#9f9b9b',
-    fontSize: '11px',
-  },
+  gap: '6px',
+  marginTop: '6px',
+});
+
+const replyFormBox = css({
+  marginTop: '10px',
+});
+
+const topForm = css({
+  marginBottom: '10px',
 });
 
 const emptyComments = css({
@@ -543,22 +552,6 @@ function EpisodeHeader({ episode }: { episode: Episode }) {
   );
 }
 
-function ReactionSummary({ reactions }: { reactions?: Reaction[] }) {
-  if (!reactions?.length) {
-    return null;
-  }
-
-  return (
-    <span className={reactionsBar}>
-      {reactions.map((reaction) => (
-        <span key={reaction.value} title={reaction.users.map((user) => user.nickname).join('、')}>
-          {reaction.value} · {reaction.users.length}
-        </span>
-      ))}
-    </span>
-  );
-}
-
 function CommentContent({ content, state }: { content: string; state: number }) {
   if (state === 6) {
     return <p className={deletedComment}>内容已被用户删除</p>;
@@ -573,47 +566,151 @@ function CommentItem({
   comment,
   floor,
   isReply = false,
+  episodeID,
+  mutate,
 }: {
   comment: EpisodeComment | EpisodeReply;
   floor: string;
   isReply?: boolean;
+  episodeID: number;
+  mutate: () => Promise<unknown>;
 }) {
-  const user = comment.user;
+  const { user } = useUser();
+  const isAuthor = user?.id === comment.creatorID;
+  const isDeleted = comment.state === 6 || comment.state === 7;
+  const [showReply, setShowReply] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editContent, setEditContent] = useState('');
+  const author = comment.user;
+
+  const handleDelete = async () => {
+    if (confirm('确认删除这条吐槽？')) {
+      const res = await ozaClient.deleteEpisodeComment(comment.id);
+      if (res.status === 200) {
+        await mutate();
+      } else {
+        toast(res.data.message);
+      }
+    }
+  };
+
+  const handleEdit = async () => {
+    const res = await ozaClient.updateEpisodeComment(comment.id, { content: editContent });
+    if (res.status === 200) {
+      setEditing(false);
+      await mutate();
+    } else {
+      toast(res.data.message);
+    }
+  };
+
   return (
     <article className={isReply ? replyItem : commentItem} id={`post_${comment.id}`}>
-      <Link to={user ? getUserProfileLink(user.username) : ''} noStyle className={avatarLink}>
-        <Avatar src={user?.avatar.medium ?? ''} size={isReply ? 'small' : 'medium'} alt='' />
+      <Link to={author ? getUserProfileLink(author.username) : ''} noStyle className={avatarLink}>
+        <Avatar src={author?.avatar.medium ?? ''} size={isReply ? 'small' : 'medium'} alt='' />
       </Link>
       <div className={commentBody}>
         <header className={commentHeader}>
           <div className={commentAuthor}>
-            {user ? (
-              <Link to={getUserProfileLink(user.username)}>{user.nickname}</Link>
+            {author ? (
+              <Link to={getUserProfileLink(author.username)}>{author.nickname}</Link>
             ) : (
               '匿名用户'
             )}
-            {!isReply && user?.sign && <span>{user.sign}</span>}
+            {!isReply && author?.sign && <span>{author.sign}</span>}
           </div>
           <a className={commentTime} href={`#post_${comment.id}`}>
             #{floor} · {DateTime.fromSeconds(comment.createdAt).toFormat('yyyy-M-d HH:mm')}
           </a>
         </header>
-        <CommentContent content={comment.content} state={comment.state} />
-        <ReactionSummary reactions={comment.reactions} />
+        {isDeleted || !editing ? (
+          <CommentContent content={comment.content} state={comment.state} />
+        ) : (
+          <EditorForm
+            hideCancel={false}
+            value={editContent}
+            onChange={setEditContent}
+            onConfirm={handleEdit}
+            onCancel={() => setEditing(false)}
+          />
+        )}
+        {user && !isDeleted && !editing && (
+          <div className={commentActions}>
+            <Button type='plain' size='small' onClick={() => setShowReply((value) => !value)}>
+              回复
+            </Button>
+            {isAuthor && (
+              <Button
+                type='plain'
+                size='small'
+                onClick={() => {
+                  setEditContent(comment.content);
+                  setEditing(true);
+                }}
+              >
+                编辑
+              </Button>
+            )}
+            {isAuthor && (
+              <Button type='plain' size='small' onClick={handleDelete}>
+                删除
+              </Button>
+            )}
+          </div>
+        )}
+        <Reactions
+          reactions={comment.reactions}
+          postId={comment.id}
+          user={user}
+          onReacted={mutate}
+          api={epCommentApi}
+        />
+        {showReply && (
+          <div className={replyFormBox}>
+            <ReplyForm
+              autoFocus
+              topicId={episodeID}
+              replyTo={comment.id}
+              api={epCommentApi}
+              placeholder={`回复 @${author?.nickname ?? ''}：`}
+              onSuccess={async () => {
+                setShowReply(false);
+                await mutate();
+              }}
+              onCancel={() => setShowReply(false)}
+            />
+          </div>
+        )}
       </div>
     </article>
   );
 }
 
-function CommentThread({ comment, floor }: { comment: EpisodeComment; floor: number }) {
+function CommentThread({
+  comment,
+  floor,
+  episodeID,
+  mutate,
+}: {
+  comment: EpisodeComment;
+  floor: number;
+  episodeID: number;
+  mutate: () => Promise<unknown>;
+}) {
   return (
     <li>
-      <CommentItem comment={comment} floor={String(floor)} />
+      <CommentItem comment={comment} floor={String(floor)} episodeID={episodeID} mutate={mutate} />
       {comment.replies.length > 0 && (
         <ol className={replyList}>
           {comment.replies.map((reply, index) => (
             <li key={reply.id}>
-              <CommentItem comment={reply} floor={`${floor}-${index + 1}`} isReply />
+              <CommentItem
+                comment={reply}
+                floor={`${floor}-${index + 1}`}
+                isReply
+                episodeID={episodeID}
+                mutate={mutate}
+              />
             </li>
           ))}
         </ol>
@@ -622,8 +719,20 @@ function CommentThread({ comment, floor }: { comment: EpisodeComment; floor: num
   );
 }
 
-function Comments({ comments, total }: { comments: EpisodePageData['comments']; total: number }) {
+function Comments({
+  comments,
+  total,
+  episodeID,
+  mutate,
+}: {
+  comments: EpisodePageData['comments'];
+  total: number;
+  episodeID: number;
+  mutate: () => Promise<unknown>;
+}) {
   const [ascending, setAscending] = useState(true);
+  const [replyContent, setReplyContent] = useState('');
+  const { user } = useUser();
   const sortedComments = useMemo(
     () => (ascending ? comments : [...comments].reverse()),
     [ascending, comments],
@@ -644,6 +753,21 @@ function Comments({ comments, total }: { comments: EpisodePageData['comments']; 
           <ArrowDown />
         </button>
       </div>
+      {user && (
+        <div className={topForm}>
+          <ReplyForm
+            topicId={episodeID}
+            api={epCommentApi}
+            placeholder='发一条吐槽…'
+            content={replyContent}
+            onChange={setReplyContent}
+            onSuccess={async () => {
+              setReplyContent('');
+              await mutate();
+            }}
+          />
+        </div>
+      )}
       {sortedComments.length > 0 ? (
         <ol className={commentList}>
           {sortedComments.map((comment, index) => (
@@ -651,6 +775,8 @@ function Comments({ comments, total }: { comments: EpisodePageData['comments']; 
               key={comment.id}
               comment={comment}
               floor={ascending ? index + 1 : comments.length - index}
+              episodeID={episodeID}
+              mutate={mutate}
             />
           ))}
         </ol>
@@ -703,7 +829,13 @@ function EpisodeSidebar({ episode, episodes }: { episode: Episode; episodes: Epi
   );
 }
 
-export default function EpisodeDetail({ data }: { data: EpisodePageData }) {
+export default function EpisodeDetail({
+  data,
+  mutate,
+}: {
+  data: EpisodePageData;
+  mutate: () => Promise<unknown>;
+}) {
   const { episode } = data;
   const { user } = useUser();
   const title = `${episodeLabel(episode)} ${episode.nameCN || episode.name}`;
@@ -744,7 +876,12 @@ export default function EpisodeDetail({ data }: { data: EpisodePageData }) {
                 <p className={emptyDescription}>暂无章节简介</p>
               )}
             </section>
-            <Comments comments={data.comments} total={episode.comment} />
+            <Comments
+              comments={data.comments}
+              total={episode.comment}
+              episodeID={episode.id}
+              mutate={mutate}
+            />
           </div>
           <EpisodeSidebar episode={episode} episodes={data.episodes} />
         </div>

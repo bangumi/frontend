@@ -1668,6 +1668,10 @@
     flex: 0 0 auto;
 }
 
+  .gap_6px {
+    gap: 6px;
+}
+
   .flex_0_0_56px {
     flex: 0 0 56px;
 }
@@ -1758,10 +1762,6 @@
 
   .bdr_0_0_2px {
     border-radius: 0 0 2px;
-}
-
-  .gap_6px {
-    gap: 6px;
 }
 
   .gap_3px {
@@ -3407,6 +3407,10 @@
     margin-top: 7px;
 }
 
+  .mt_6px {
+    margin-top: 6px;
+}
+
   .w_56px {
     width: 56px;
 }
@@ -3653,10 +3657,6 @@
 
   .h_15px {
     height: 15px;
-}
-
-  .mt_6px {
-    margin-top: 6px;
 }
 
   .w_40px {

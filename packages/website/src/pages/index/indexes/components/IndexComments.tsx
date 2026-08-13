@@ -218,6 +218,7 @@ const IndexComments: React.FC<{
   mutate: () => Promise<unknown>;
 }> = ({ comments, indexId, mutate }) => {
   const { user } = useUser();
+  const [replyContent, setReplyContent] = useState('');
 
   return (
     <>
@@ -227,7 +228,12 @@ const IndexComments: React.FC<{
             topicId={indexId}
             api={indexCommentApi}
             placeholder='添加评论…'
-            onSuccess={async () => mutate()}
+            content={replyContent}
+            onChange={setReplyContent}
+            onSuccess={async () => {
+              setReplyContent('');
+              await mutate();
+            }}
           />
         </div>
       )}

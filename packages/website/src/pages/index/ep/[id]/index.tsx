@@ -9,13 +9,13 @@ import EpisodeDetail from './EpisodeDetail';
 function EpisodePage() {
   const { id } = useParams();
   const episodeID = Number(id);
-  const { data } = useEpisodePage(episodeID);
+  const { data, mutate } = useEpisodePage(episodeID);
 
   if (!data) {
     return null;
   }
 
-  return <EpisodeDetail data={data} />;
+  return <EpisodeDetail data={data} mutate={mutate} />;
 }
 
 export default withErrorBoundary(EpisodePage, {
