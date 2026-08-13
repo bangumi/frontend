@@ -2349,6 +2349,10 @@
     flex-shrink: 1;
 }
 
+  .c_\#0084b4 {
+    color: #0084b4;
+}
+
   .lh_32px {
     line-height: 32px;
 }
@@ -2475,10 +2479,6 @@
 
   .tbl_fixed {
     table-layout: fixed;
-}
-
-  .c_\#0084b4 {
-    color: #0084b4;
 }
 
   .fw_normal {
@@ -3271,8 +3271,8 @@
     margin-bottom: -1px;
 }
 
-  .bd-b-c_\#54b5df {
-    border-bottom-color: #54b5df;
+  .bd-b-c_\#0084b4 {
+    border-bottom-color: #0084b4;
 }
 
   .pr_15px {
@@ -5127,8 +5127,12 @@
     font-weight: 600;
 }
 
-  .\[\&_p\]\:c_\#9f9b9b p {
-    color: #9f9b9b;
+  .\[\&_h1\]\:c_\#1f1c1c h1 {
+    color: #1f1c1c;
+}
+
+  .\[\&_p\]\:c_\#595555 p {
+    color: #595555;
 }
 
   .\[\&_p\]\:fs_12px p {
@@ -7056,6 +7060,10 @@
 
   .hover\:c_\#f09199:is(:hover, [data-hover]) {
     color: #f09199;
+}
+
+  .hover\:c_\#0084b4:is(:hover, [data-hover]) {
+    color: #0084b4;
 }
 
   .hover\:c_\#02a3fb:is(:hover, [data-hover]) {

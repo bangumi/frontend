@@ -15,7 +15,7 @@ const pageHeader = css({
   '& h1': {
     display: 'inline',
     margin: '0',
-    color: '#595555',
+    color: '#1f1c1c',
     fontSize: '20px',
     fontWeight: '700',
     lineHeight: '1.4',
@@ -23,7 +23,7 @@ const pageHeader = css({
   },
   '& p': {
     margin: '6px 0 0',
-    color: '#9f9b9b',
+    color: '#595555',
     fontSize: '12px',
   },
 });
@@ -42,17 +42,17 @@ const tab = css({
   display: 'block',
   padding: '8px 12px',
   marginBottom: '-1px',
-  color: '#9f9b9b',
+  color: '#595555',
   fontSize: '13px',
   textDecoration: 'none',
   whiteSpace: 'nowrap',
   borderBottom: '2px solid transparent',
-  _hover: { color: '#54b5df' },
+  _hover: { color: '#0084b4' },
 });
 
 const tabActive = css({
-  color: '#54b5df',
-  borderBottomColor: '#54b5df',
+  color: '#0084b4',
+  borderBottomColor: '#0084b4',
 });
 
 const content = css({

@@ -3,7 +3,7 @@ import React from 'react';
 import type { RaKuenTopic } from '@bangumi/client/client';
 import { EpisodeType } from '@bangumi/client/client';
 import { Avatar, Typography } from '@bangumi/design';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import {
   getCharacterLink,
   getEpisodeLink,
@@ -15,6 +15,8 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription';
+
+import { topicListLink } from '../../group/components/topicListLink';
 
 const listItem = css({
   display: 'flex',
@@ -34,15 +36,12 @@ const inner = css({
 const title = css({
   display: 'block',
   overflow: 'hidden',
-  color: '#54b5df',
   fontSize: '14px',
   fontWeight: '400',
   lineHeight: '1.4',
-  textDecoration: 'none',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
   overflowWrap: 'anywhere',
-  _hover: { color: '#f09199' },
 });
 
 const replies = css({
@@ -57,18 +56,18 @@ const row = css({
   marginTop: '4px',
   fontSize: '12px',
   lineHeight: '1.4',
-  color: '#777',
+  color: '#595555',
 });
 
 const parentLink = css({
-  color: '#54b5df',
+  color: '#0084b4',
   textDecoration: 'none',
-  _hover: { color: '#f09199' },
+  _hover: { color: '#02a3fb', textDecoration: 'underline' },
 });
 
 const time = css({
   marginLeft: '8px',
-  color: '#9f9b9b',
+  color: '#595555',
   fontSize: '11px',
 });
 
@@ -112,7 +111,7 @@ const GroupItem: React.FC<{ item: Extract<RaKuenTopic, { type: 'group' }> }> = (
       <Avatar src={item.creator.avatar.medium} alt={item.creator.nickname} />
     </Typography.Link>
     <div className={inner}>
-      <Typography.Link to={getGroupTopicLink(item.id)} noStyle className={title}>
+      <Typography.Link to={getGroupTopicLink(item.id)} noStyle className={cx(topicListLink, title)}>
         {item.title}
         <span className={replies}>(+{item.replyCount})</span>
       </Typography.Link>
@@ -132,7 +131,11 @@ const SubjectItem: React.FC<{ item: Extract<RaKuenTopic, { type: 'subject' }> }>
       <Avatar src={item.creator.avatar.medium} alt={item.creator.nickname} />
     </Typography.Link>
     <div className={inner}>
-      <Typography.Link to={getSubjectTopicLink(item.id)} noStyle className={title}>
+      <Typography.Link
+        to={getSubjectTopicLink(item.id)}
+        noStyle
+        className={cx(topicListLink, title)}
+      >
         {item.title}
         <span className={replies}>(+{item.replyCount})</span>
       </Typography.Link>
@@ -150,7 +153,7 @@ const EpisodeItem: React.FC<{ item: Extract<RaKuenTopic, { type: 'episode' }> }>
   <li className={listItem}>
     <LinkWithCover to={getEpisodeLink(item.id)} image={item.subject.images?.common} alt='' />
     <div className={inner}>
-      <Typography.Link to={getEpisodeLink(item.id)} noStyle className={title}>
+      <Typography.Link to={getEpisodeLink(item.id)} noStyle className={cx(topicListLink, title)}>
         {episodeDisplayName(item)}
         <span className={replies}>(+{item.episode.comment})</span>
       </Typography.Link>
@@ -170,7 +173,7 @@ const CharacterItem: React.FC<{ item: Extract<RaKuenTopic, { type: 'character' }
   <li className={listItem}>
     <LinkWithCover to={getCharacterLink(item.id)} image={item.images?.medium} alt='' />
     <div className={inner}>
-      <Typography.Link to={getCharacterLink(item.id)} noStyle className={title}>
+      <Typography.Link to={getCharacterLink(item.id)} noStyle className={cx(topicListLink, title)}>
         {item.nameCN || item.name}
         <span className={replies}>(+{item.comment})</span>
       </Typography.Link>
@@ -185,7 +188,7 @@ const PersonItem: React.FC<{ item: Extract<RaKuenTopic, { type: 'person' }> }> =
   <li className={listItem}>
     <LinkWithCover to={getPersonLink(item.id)} image={item.images?.medium} alt='' />
     <div className={inner}>
-      <Typography.Link to={getPersonLink(item.id)} noStyle className={title}>
+      <Typography.Link to={getPersonLink(item.id)} noStyle className={cx(topicListLink, title)}>
         {item.nameCN || item.name}
         <span className={replies}>(+{item.comment})</span>
       </Typography.Link>
