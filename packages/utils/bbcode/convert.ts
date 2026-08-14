@@ -1,6 +1,15 @@
 import { UnreadableCodeError } from '../index';
 import { BGM_STICKER_START_STR, EMOJI_ARRAY, STICKER_DOMAIN_URL } from './constants';
-import type { CodeNodeTypes, CodeVNode, ConverterFn, NodeTypes, VNode } from './types';
+import type {
+  BBCodeConverterContext,
+  BBCodeOptions,
+  BBCodeRenderOptions,
+  CodeNodeTypes,
+  CodeVNode,
+  ConverterFn,
+  NodeTypes,
+  VNode,
+} from './types';
 
 const BGM_HOST_ARR = [
   'chii.in',
@@ -20,8 +29,12 @@ function isExternalLink(url: string): boolean {
   }
 }
 
-function convertImgNode(node: CodeVNode): VNode {
+function convertImgNode(node: CodeVNode, options: BBCodeOptions): VNode {
   const src = node.children![0] as string;
+  if (options.images === 'link') {
+    return convertLink(src, [src]);
+  }
+
   const vnode: VNode = {
     type: 'img',
     props: {
@@ -39,27 +52,21 @@ function convertImgNode(node: CodeVNode): VNode {
   return vnode;
 }
 
-function setVNodeChildren(vnode: VNode, node: CodeVNode): void {
+function setVNodeChildren(vnode: VNode, node: CodeVNode, context: BBCodeConverterContext): void {
   if (node.children) {
-    vnode.children = node.children.map((c) => convert(c));
+    vnode.children = node.children.map(context.convert);
   }
 }
 
-function convertUrlNode(node: CodeVNode): VNode {
-  let href = node.props?.url;
-  if (!href) {
-    href = node.children![0] as string;
-  }
+function convertLink(href: string, children: NodeTypes[]): VNode {
   const vnode: VNode = {
     type: 'a',
     props: {
       href,
     },
     className: 'bgm-link',
+    children,
   };
-  if (node.children) {
-    vnode.children = node.children.map((c) => convert(c));
-  }
   if (isExternalLink(href)) {
     vnode.props = {
       ...vnode.props,
@@ -68,6 +75,12 @@ function convertUrlNode(node: CodeVNode): VNode {
     };
   }
   return vnode;
+}
+
+function convertUrlNode(node: CodeVNode, context: BBCodeConverterContext): VNode {
+  const href = node.props?.url ?? (node.children![0] as string);
+  const children = node.children?.map(context.convert) ?? [];
+  return convertLink(href, children);
 }
 
 function convertStickerNode(node: CodeVNode): VNode | string {
@@ -152,11 +165,11 @@ function convertStickerNode(node: CodeVNode): VNode | string {
   return stickerId;
 }
 
-function convertQuote(node: CodeVNode): VNode {
+function convertQuote(node: CodeVNode, context: BBCodeConverterContext): VNode {
   const q: VNode = {
     type: 'q',
   };
-  setVNodeChildren(q, node);
+  setVNodeChildren(q, node, context);
   return {
     type: 'div',
     className: 'quote',
@@ -182,111 +195,111 @@ function convertUser(node: CodeVNode): VNode {
 function toVNode(
   node: CodeVNode,
   type: string,
+  context: BBCodeConverterContext,
   props: Pick<VNode, 'style' | 'className'> = {},
 ): VNode {
   const vnode: VNode = {
     type,
     ...props,
   };
-  setVNodeChildren(vnode, node);
+  setVNodeChildren(vnode, node, context);
   return vnode;
 }
 
 const CONVERTER_FN_MAP: Record<string, ConverterFn> = {
-  b: (node) => toVNode(node, 'strong'),
-  i: (node) => toVNode(node, 'em'),
-  u: (node) =>
-    toVNode(node, 'span', {
+  b: (node, context) => toVNode(node, 'strong', context),
+  i: (node, context) => toVNode(node, 'em', context),
+  u: (node, context) =>
+    toVNode(node, 'span', context, {
       style: {
         'text-decoration': 'underline',
       },
     }),
-  s: (node) =>
-    toVNode(node, 'span', {
+  s: (node, context) =>
+    toVNode(node, 'span', context, {
       style: {
         'text-decoration': 'line-through',
       },
     }),
-  mask: (node) =>
-    toVNode(node, 'span', {
+  mask: (node, context) =>
+    toVNode(node, 'span', context, {
       className: 'bgm-mask',
     }),
-  color: (node) =>
-    toVNode(node, 'span', {
+  color: (node, context) =>
+    toVNode(node, 'span', context, {
       style: {
         color: node.props!.color!,
       },
     }),
-  size: (node) =>
-    toVNode(node, 'span', {
+  size: (node, context) =>
+    toVNode(node, 'span', context, {
       style: {
         'font-size': node.props!.size! + 'px',
         'line-height': node.props!.size! + 'px',
       },
     }),
   url: convertUrlNode,
-  img: convertImgNode,
+  img: (node, context) => convertImgNode(node, context.options),
   sticker: convertStickerNode,
   quote: convertQuote,
   code: (node) => ({
     type: 'pre',
     children: node.children,
   }),
-  left: (node) =>
-    toVNode(node, 'p', {
+  left: (node, context) =>
+    toVNode(node, 'p', context, {
       style: {
         'text-align': 'left',
       },
     }),
-  right: (node) =>
-    toVNode(node, 'p', {
+  right: (node, context) =>
+    toVNode(node, 'p', context, {
       style: {
         'text-align': 'right',
       },
     }),
-  center: (node) =>
-    toVNode(node, 'p', {
+  center: (node, context) =>
+    toVNode(node, 'p', context, {
       style: {
         'text-align': 'center',
       },
     }),
-  indent: (node) => toVNode(node, 'blockquote', {}),
-  align: (node) =>
-    toVNode(node, 'p', {
+  indent: (node, context) => toVNode(node, 'blockquote', context),
+  align: (node, context) =>
+    toVNode(node, 'p', context, {
       style: {
         'text-align': node.props!.align!,
       },
     }),
-  float: (node) =>
-    toVNode(node, 'span', {
+  float: (node, context) =>
+    toVNode(node, 'span', context, {
       style: {
         float: node.props!.float!,
       },
     }),
-  subject: (node) =>
-    toVNode(node, 'a', {
+  subject: (node, context) =>
+    toVNode(node, 'a', context, {
       className: 'l',
     }),
   user: convertUser,
 };
 
-export function convert(
-  node: CodeNodeTypes,
-  converterMap: Record<string, ConverterFn> = {},
-): NodeTypes {
+export function convert(node: CodeNodeTypes, options: BBCodeRenderOptions = {}): NodeTypes {
   if (typeof node === 'string') {
     return node;
   }
-  let converterFn = converterMap[node.type];
-  if (!converterFn) {
-    converterFn = CONVERTER_FN_MAP[node.type];
-  }
+
+  const context: BBCodeConverterContext = {
+    options,
+    convert: (child) => convert(child, options),
+  };
+  const converterFn = options.converters?.[node.type] ?? CONVERTER_FN_MAP[node.type];
   if (converterFn) {
-    return converterFn(node);
+    return converterFn(node, context);
   }
   const vnode: VNode = {
     type: node.type,
   };
-  setVNodeChildren(vnode, node);
+  setVNodeChildren(vnode, node, context);
   return vnode;
 }

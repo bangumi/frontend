@@ -5,6 +5,7 @@ import { Button, CollapsibleContent, Section } from '@bangumi/design';
 import { ArrowRightCircle } from '@bangumi/icons';
 import { css } from '@bangumi/styled-system/css';
 import { UnreadableCodeError } from '@bangumi/utils';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
 import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 import Helmet from '@bangumi/website/components/Helmet';
 import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics';
@@ -41,7 +42,7 @@ const GroupHome: React.FC = () => {
     groupRet: { group, descriptionCollapsed, setDescriptionCollapsed },
   } = groupContext;
 
-  const parsedDescription = renderBBCode(group.description);
+  const parsedDescription = renderBBCode(group.description, BBCodePreset.groupDescription);
 
   return (
     <>

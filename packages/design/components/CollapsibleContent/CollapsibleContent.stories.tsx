@@ -1,6 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
 import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 
 import type { CollapsibleContentProps } from '.';
@@ -48,5 +49,5 @@ const description = `欢迎加入番组WIKI计划小组！
 `;
 Basic.args = {
   threshold: 192,
-  content: renderBBCode(description),
+  content: renderBBCode(description, BBCodePreset.groupDescription),
 };

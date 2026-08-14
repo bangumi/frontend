@@ -101,10 +101,29 @@ class GroupHomeTest {
   }
 }
 
-it('should match snapshot properly', async () => {
+it('renders the group description with its BBCode capabilities', async () => {
   const test = await GroupHomeTest.create('sandbox');
 
   await test.assertHeader('沙盒');
+  const deleted = test.page.getByText('8.卖萌');
+  expect(deleted).toHaveStyle({ textDecoration: 'line-through' });
+
+  const heading = test.page.getByText('不受理内容：');
+  expect(heading.tagName).toBe('STRONG');
+  expect(heading.parentElement).toHaveStyle({ fontSize: '25px' });
+  expect(heading.parentElement?.parentElement).toHaveStyle({ color: 'rgb(255, 0, 0)' });
+
+  expect(test.page.getByRole('link', { name: '@Sai' })).toHaveAttribute('href', '/user/sai');
+  expect(test.page.getByRole('link', { name: '收录范围' })).toHaveAttribute(
+    'href',
+    'https://bgm.tv/group/topic/312100',
+  );
+  expect(test.page.getByText('(bgm38)')).toBeInTheDocument();
+  expect(test.page.getByRole('link', { name: 'https://example.com/image.png' })).toHaveAttribute(
+    'href',
+    'https://example.com/image.png',
+  );
+  expect(test.page.queryByRole('img', { name: '(bgm38)' })).not.toBeInTheDocument();
 });
 
 // it('should list group members', async () => {

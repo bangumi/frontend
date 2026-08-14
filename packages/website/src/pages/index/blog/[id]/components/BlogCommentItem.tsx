@@ -218,7 +218,11 @@ const BlogCommentItem: FC<BlogCommentItemProps> = ({
                 />
               </div>
             ) : (
-              <RichContent bbcode={comment.content} classname='blog-comment__content' />
+              <RichContent
+                bbcode={comment.content}
+                preset='blogComment'
+                classname='blog-comment__content'
+              />
             )}
             {showReplyEditor && (
               <div className={replyEditor}>

@@ -559,7 +559,7 @@ function CommentContent({ content, state }: { content: string; state: number }) 
   if (state === 7) {
     return <p className={deletedComment}>内容因违反社区指导原则已被删除</p>;
   }
-  return <RichContent bbcode={content} classname={commentContent} />;
+  return <RichContent bbcode={content} preset='episodeComment' classname={commentContent} />;
 }
 
 function CommentItem({

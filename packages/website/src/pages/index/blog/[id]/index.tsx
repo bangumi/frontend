@@ -148,7 +148,7 @@ const BlogEntryPage: FC = () => {
                 )}
               </header>
               <div className={entryContent}>
-                <RichContent bbcode={entry.content} />
+                <RichContent bbcode={entry.content} preset='blog' />
               </div>
               <BlogComments
                 entryId={entry.id}

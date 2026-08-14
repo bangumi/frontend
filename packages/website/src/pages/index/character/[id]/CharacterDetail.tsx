@@ -879,13 +879,21 @@ function CommentsSection({ comments }: { comments: CharacterComment[] }) {
                   {dayjs.unix(comment.createdAt).format('YYYY-M-D HH:mm')}
                 </time>
               </div>
-              <RichContent bbcode={comment.content} classname={commentContent} />
+              <RichContent
+                bbcode={comment.content}
+                preset='characterComment'
+                classname={commentContent}
+              />
               {comment.replies.length > 0 && (
                 <ul className={replyList}>
                   {comment.replies.map((reply) => (
                     <li key={reply.id}>
                       <strong>{reply.user?.nickname ?? '已注销用户'}</strong>
-                      <RichContent bbcode={reply.content} classname={replyContent} />
+                      <RichContent
+                        bbcode={reply.content}
+                        preset='characterComment'
+                        classname={replyContent}
+                      />
                     </li>
                   ))}
                 </ul>

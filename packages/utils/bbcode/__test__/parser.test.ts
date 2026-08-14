@@ -1,4 +1,4 @@
-import { mergeTags, Parser } from '../parser';
+import { Parser } from '../parser';
 import type { CodeNodeTypes } from '../types';
 
 function getNodes(input: string): CodeNodeTypes[] {
@@ -263,6 +263,13 @@ describe('bbcode parser', () => {
     ];
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests));
   });
+  test('reject unsafe url protocols', () => {
+    const input = '[url=javascript:alert(1)]链接[/url][img]data:text/html,unsafe[/img]';
+    expect(getNodes(input)).toEqual([
+      '[url=javascript:alert(1)]链接[/url]',
+      '[img]data:text/html,unsafe[/img]',
+    ]);
+  });
   test('invalid sticker bbcode', () => {
     const input = '(bgmab)(bgm38a';
     const tests: CodeNodeTypes[] = ['(bgm', 'ab)', '(bgm38a'];
@@ -274,7 +281,7 @@ describe('bbcode parser', () => {
   });
   test('custom bbcode', () => {
     const input = '[mybbcode]测试自定义tag[/mybbcode]';
-    const nodes = new Parser(input, ['mybbcode']).parse();
+    const nodes = new Parser(input, { additionalTags: ['mybbcode'] }).parse();
     expect(nodes).toEqual([
       {
         type: 'mybbcode',
@@ -282,43 +289,15 @@ describe('bbcode parser', () => {
       },
     ]);
   });
-  test('merge tags', () => {
-    const fn = (): boolean => true;
-    const tags = mergeTags(
-      [
-        'i',
-        'b',
-        {
-          name: 's',
-          schema: {
-            s: fn,
-          },
-        },
-      ],
-      [
-        {
-          name: 'i',
-          schema: {
-            i: fn,
-          },
-        },
-        's',
-        'mybbcode',
-      ],
-    );
-    expect(tags).toEqual(
-      expect.arrayContaining([
-        'b',
-        's',
-        'mybbcode',
-        {
-          name: 'i',
-          schema: {
-            i: fn,
-          },
-        },
-      ]),
-    );
+  test('exact tag set', () => {
+    const input = '[b]粗体[/b][i]斜体[/i]';
+    const nodes = new Parser(input, { tags: ['b'] }).parse();
+    expect(nodes).toEqual([{ type: 'b', children: ['粗体'] }, '[i]斜体[/i]']);
+  });
+  test('disable bbcode and stickers', () => {
+    const input = '[b]粗体[/b](bgm38)';
+    const nodes = new Parser(input, { bbcode: false, stickers: false }).parse();
+    expect(nodes).toEqual([input]);
   });
   test('subject bbcode', () => {
     const tests: Array<[string, CodeNodeTypes[]]> = [
