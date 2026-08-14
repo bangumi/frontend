@@ -191,6 +191,11 @@ describe('html render bbcode string', () => {
       '存放于其他网络服务器的图片：<br/><img src="http://chii.in/img/ico/bgm88-31.gif" class="code"/>',
     );
   });
+  test('render image as link', () => {
+    expect(render('[img]https://example.com/image.png[/img]', { images: 'link' })).toBe(
+      '<a href="https://example.com/image.png" target="_blank" rel="nofollow external noopener noreferrer" class="bgm-link">https://example.com/image.png</a>',
+    );
+  });
   test('render sticker', () => {
     const input = '(bgm38)(bgm23)(=///=)';
     expect(render(input)).toMatchSnapshot();
@@ -219,16 +224,18 @@ describe('html render bbcode string', () => {
     const input = '[code]ss[b]加粗\n换行了[/b](bgm38) [/fafa [code][/code]';
     expect(
       render(input, {
-        code: (node) => ({
-          type: 'div',
-          className: 'codeHighlight',
-          children: [
-            {
-              type: 'pre',
-              children: node.children,
-            },
-          ],
-        }),
+        converters: {
+          code: (node) => ({
+            type: 'div',
+            className: 'codeHighlight',
+            children: [
+              {
+                type: 'pre',
+                children: node.children,
+              },
+            ],
+          }),
+        },
       }),
     ).toBe(
       '<div class="codeHighlight"><pre>ss[b]加粗\n换行了[/b](bgm38) [/fafa [code]</pre></div>',

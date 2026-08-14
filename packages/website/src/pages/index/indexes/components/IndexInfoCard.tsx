@@ -4,6 +4,7 @@ import React from 'react';
 import type { Index } from '@bangumi/client/client';
 import { Avatar, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
 import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 import { useIndexCollection } from '@bangumi/website/hooks/use-index-collection';
@@ -102,7 +103,7 @@ const IndexInfoCard: React.FC<{
   const { pending, add, remove } = useIndexCollection(index.id);
   const isCollected = index.collectedAt != null;
   const isOwner = user?.id === index.uid;
-  const parsedDescription = renderBBCode(index.desc);
+  const parsedDescription = renderBBCode(index.desc, BBCodePreset.indexDescription);
 
   const handleCollect = async () => {
     const success = isCollected ? await remove() : await add();

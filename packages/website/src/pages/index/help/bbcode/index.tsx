@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 
 import { css } from '@bangumi/styled-system/css';
-import { render } from '@bangumi/utils';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
+import { render } from '@bangumi/utils/bbcode/react';
 import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
 
@@ -213,7 +214,7 @@ const BBCodeHelp: React.FC = () => {
               {value.trim() === '' ? (
                 <p className={previewEmpty}>输入内容后，这里会显示渲染效果。</p>
               ) : (
-                render(value)
+                render(value, BBCodePreset.topic)
               )}
             </div>
           </section>

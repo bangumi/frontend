@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { render, renderNode } from '../react';
 import type { VNode } from '../types';
 
@@ -128,6 +130,30 @@ describe('html render bbcode string', () => {
     const input = `存放于其他网络服务器的图片：
 [img]http://chii.in/img/ico/bgm88-31.gif[/img]`;
     expect(render(input)).toMatchSnapshot();
+  });
+  test('render nested image as link', () => {
+    const output = render('[b][img]https://example.com/image.png[/img][/b]', { images: 'link' });
+    const strong = output[0];
+    expect(React.isValidElement(strong)).toBe(true);
+    if (!React.isValidElement<{ children: React.ReactElement }>(strong)) {
+      throw new Error('Expected a React element');
+    }
+    expect(strong.type).toBe('strong');
+    expect(strong.props.children).toMatchObject({
+      type: 'a',
+      props: expect.objectContaining({ href: 'https://example.com/image.png' }),
+    });
+  });
+  test('preserve stickers when disabled', () => {
+    expect(render('[b]文字[/b](bgm38)', { stickers: false })).toEqual([
+      expect.objectContaining({ type: 'strong' }),
+      '(bgm38)',
+    ]);
+  });
+  test('preserve bbcode when disabled', () => {
+    expect(render('[b]文字[/b](bgm38)', { bbcode: false, stickers: false })).toEqual([
+      '[b]文字[/b](bgm38)',
+    ]);
   });
   test('render sticker', () => {
     const input = '(bgm38)(bgm23)(=///=)';

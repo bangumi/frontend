@@ -1,7 +1,7 @@
 import { UnreadableCodeError } from '../index';
 import { convert } from './convert';
 import { Parser } from './parser';
-import type { CodeNodeTypes, ConverterFn, NodeTypes, VNode } from './types';
+import type { BBCodeRenderOptions, CodeNodeTypes, NodeTypes, VNode } from './types';
 
 const escapeHTML = (str: string): string =>
   str
@@ -83,11 +83,11 @@ export function renderNodes(nodes: NodeTypes[], parentNode?: VNode): string {
   return result;
 }
 
-export function render(rawStr: string, converterMap: Record<string, ConverterFn> = {}): string {
+export function render(rawStr: string, options: BBCodeRenderOptions = {}): string {
   let result = '';
-  const nodes: CodeNodeTypes[] = new Parser(rawStr).parse();
+  const nodes: CodeNodeTypes[] = new Parser(rawStr, options).parse();
   nodes.forEach((node) => {
-    result += renderNode(convert(node, converterMap));
+    result += renderNode(convert(node, options));
   });
   return result;
 }
