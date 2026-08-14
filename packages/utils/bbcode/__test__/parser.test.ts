@@ -9,8 +9,8 @@ function getNodes(input: string): CodeNodeTypes[] {
 describe('bbcode parser', () => {
   test('text', () => {
     const input = '啊aあ\n)[bs][/bs]222';
-    const tests: CodeNodeTypes[] = ['啊aあ\n)', '[bs][/bs]', '222'];
-    expect(getNodes(input)).toEqual(expect.arrayContaining(tests));
+    // 未知标签 [bs] 不作为 bbcode 解析，整体按文本原样保留
+    expect(getNodes(input).join('')).toEqual(input);
   });
   test('bangumi sticker', () => {
     const input = '[(bgm38)[/(=A=)](=///=)(bgm01)';
@@ -292,7 +292,9 @@ describe('bbcode parser', () => {
   test('exact tag set', () => {
     const input = '[b]粗体[/b][i]斜体[/i]';
     const nodes = new Parser(input, { tags: ['b'] }).parse();
-    expect(nodes).toEqual([{ type: 'b', children: ['粗体'] }, '[i]斜体[/i]']);
+    // 只注册 b 时，[b] 正常解析，未注册的 [i] 按文本原样保留
+    expect(nodes[0]).toEqual({ type: 'b', children: ['粗体'] });
+    expect(nodes.slice(1).join('')).toEqual('[i]斜体[/i]');
   });
   test('disable bbcode and stickers', () => {
     const input = '[b]粗体[/b](bgm38)';
@@ -353,5 +355,24 @@ describe('bbcode parser', () => {
       },
     ];
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests));
+  });
+  test('unknown tag inside valid tags is plain text and does not break outer tags', () => {
+    // [WIKI] 不是 bbcode 标签（帖主把标题文本前缀嵌进了链接文字），
+    // 不应让外层 [size]/[url] 因闭标签不匹配而整体回退为文本
+    const input =
+      '[size=20][url=https://bangumi.tv/group/topic/402872][WIKI] 常见编辑错误/注意事项汇总&争议讨论[/url][/size]';
+    expect(getNodes(input)).toEqual([
+      {
+        type: 'size',
+        props: { size: '20' },
+        children: [
+          {
+            type: 'url',
+            props: { url: 'https://bangumi.tv/group/topic/402872' },
+            children: ['[WIKI]', ' 常见编辑错误/注意事项汇总&争议讨论'],
+          },
+        ],
+      },
+    ]);
   });
 });

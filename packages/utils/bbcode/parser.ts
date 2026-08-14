@@ -234,6 +234,7 @@ export class Parser {
 
   // @TODO 暂时只支持 Bangumi 的 bbcode; 不支持 [style size="30px"]Large Text[/style]
   private parseBBCodeNode(): CodeNodeTypes {
+    const startIdx = this.pos; // 指向 '['
     let c = this.consumeChar();
     const openTag = this.parseTagName();
     c = this.consumeChar();
@@ -244,6 +245,11 @@ export class Parser {
     if (c === '=') {
       prop = this.consumeWhile((c) => c !== ']');
       c = this.consumeChar();
+    }
+    // 未知标签不是 bbcode 语法，按纯文本处理；不要进入闭标签配对，
+    // 否则不匹配的 [/xxx] 会导致外层标签连锁回退为文本
+    if (this.findTag(openTag) === -1) {
+      return this.input.slice(startIdx, this.pos);
     }
     if (openTag === 'code') {
       const codeEndTag = '[/code]';
