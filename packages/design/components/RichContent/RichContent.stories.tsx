@@ -27,4 +27,5 @@ const Template: StoryFn<typeof RichContent> = (args) => {
 export const Usage = Template.bind({});
 Usage.args = {
   bbcode: input,
+  preset: 'topic',
 };

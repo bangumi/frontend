@@ -3,10 +3,13 @@ import React from 'react';
 import closeQuote from '@bangumi/icons/assets/close-quote.svg?url';
 import openQuote from '@bangumi/icons/assets/open-quote.svg?url';
 import { css, cx } from '@bangumi/styled-system/css';
+import type { BBCodePresetName } from '@bangumi/utils/bbcode/presets';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
 import { render } from '@bangumi/utils/bbcode/react';
 
 export interface RichContentProps {
   bbcode: string;
+  preset: BBCodePresetName;
   classname?: string;
 }
 
@@ -58,7 +61,7 @@ const content = css({
   },
 });
 
-const RichContent: React.FC<RichContentProps> = ({ bbcode, classname }) => {
+const RichContent: React.FC<RichContentProps> = ({ bbcode, preset, classname }) => {
   return (
     <div
       className={cx('bgm-rich-content', richContent, content, classname)}
@@ -69,7 +72,7 @@ const RichContent: React.FC<RichContentProps> = ({ bbcode, classname }) => {
         } as React.CSSProperties
       }
     >
-      {render(bbcode)}
+      {render(bbcode, BBCodePreset[preset])}
     </div>
   );
 };

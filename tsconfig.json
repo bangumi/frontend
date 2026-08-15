@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
@@ -29,8 +27,8 @@
     ],
     "paths": {
       // 顺序不能打乱，保证 website 复写 *
-      "@bangumi/*": ["packages/*/index.tsx", "packages/*/index.ts"],
-      "@bangumi/website/*": ["packages/website/src/*"]
+      "@bangumi/*": ["./packages/*/index.tsx", "./packages/*/index.ts"],
+      "@bangumi/website/*": ["./packages/website/src/*"]
     }
   },
   "include": [

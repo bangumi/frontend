@@ -4918,6 +4918,75 @@
             }
           }
         }
+      },
+      "CreateBlog": {
+        "type": "object",
+        "required": ["title", "content"],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "日志标题"
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "description": "日志正文（BBCode）"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "标签"
+            }
+          },
+          "public": {
+            "type": "boolean",
+            "description": "公开（true）或仅好友可见（false），默认公开"
+          },
+          "subjectIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "关联条目 id，最多 5 个"
+            }
+          }
+        }
+      },
+      "UpdateBlog": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "日志标题"
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "description": "日志正文（BBCode）"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "标签"
+            }
+          },
+          "public": {
+            "type": "boolean",
+            "description": "公开（true）或仅好友可见（false）"
+          },
+          "subjectIDs": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "description": "关联条目 id，最多 5 个"
+            }
+          }
+        }
       }
     }
   },
@@ -5399,6 +5468,81 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BlogEntry"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "updateBlogEntry",
+        "summary": "编辑日志",
+        "tags": ["blog"],
+        "description": "编辑自己的日志，字段全可选；全部不传返回 400",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateBlog"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer"
+            },
+            "in": "path",
+            "name": "entryID",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -20396,6 +20540,86 @@
             }
           },
           "401": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/blogs": {
+      "post": {
+        "operationId": "createBlogEntry",
+        "summary": "发布日志",
+        "tags": ["blog"],
+        "description": "发布日志（type 固定为 1 日志），可携带标签、关联条目与已上传图片",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "allOf": [
+                  {
+                    "$ref": "#/components/schemas/CreateBlog"
+                  },
+                  {
+                    "$ref": "#/components/schemas/TurnstileToken"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["id"],
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "description": "new blog entry id"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "default error response type",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
             "description": "default error response type",
             "content": {
               "application/json": {

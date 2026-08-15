@@ -151,7 +151,7 @@ const Link = Typography.Link;
 const RenderContent = memo(({ state, content }: { state: State; content: string }) => {
   switch (state) {
     case State.Normal:
-      return <RichContent bbcode={content} classname='bgm-comment__content' />;
+      return <RichContent bbcode={content} preset='topic' classname='bgm-comment__content' />;
     case State.Closed:
       return <div className='bgm-comment__content'>关闭了该主题</div>;
     case State.Reopen:

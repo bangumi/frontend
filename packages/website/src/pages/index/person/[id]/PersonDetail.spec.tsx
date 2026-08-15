@@ -111,6 +111,13 @@ describe('PersonDetail', () => {
     expect(screen.getByRole('heading', { name: /职业: 声优/ })).toBeInTheDocument();
     expect(screen.getByText(/日本の男性俳優/)).toBeInTheDocument();
 
+    // 人物评论支持 BBCode 和表情，但图片降级为链接
+    expect(screen.getByText('人物评论').tagName).toBe('STRONG');
+    expect(screen.getByRole('img', { name: '(bgm38)' })).toBeInTheDocument();
+    expect(
+      screen.getByRole('link', { name: 'https://example.com/person-comment.png' }),
+    ).toHaveAttribute('href', 'https://example.com/person-comment.png');
+
     // 最近演出角色
     expect(screen.getByRole('heading', { name: '最近演出角色' })).toBeInTheDocument();
     expect(screen.getAllByText('柴田').length).toBeGreaterThan(0);

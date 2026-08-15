@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": 1,
+    "mainID": 21884,
+    "creatorID": 287622,
+    "relatedID": 0,
+    "createdAt": 1531631310,
+    "content": "[b]人物评论[/b](bgm38)\n[img]https://example.com/person-comment.png[/img]",
+    "state": 0,
+    "replies": [],
+    "user": {
+      "id": 287622,
+      "username": "trim21",
+      "nickname": "测试用户",
+      "avatar": {
+        "small": "",
+        "medium": "",
+        "large": ""
+      },
+      "group": 10,
+      "sign": "",
+      "joinedAt": 1463075630,
+      "isFriend": false
+    }
+  }
+]

@@ -1,8 +1,9 @@
 import type { FC } from 'react';
 import React, { memo, useState } from 'react';
 
+import { ozaClient } from '@bangumi/client';
 import type { CommentBase, SlimUser } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import { Avatar, EditorForm, toast, Typography } from '@bangumi/design';
 import RichContent from '@bangumi/design/components/RichContent';
 import { css, cx } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
@@ -139,12 +140,24 @@ const BlogCommentItem: FC<BlogCommentItemProps> = ({
   const isAuthor = user?.id === comment.creatorID;
   const [showReplyEditor, setShowReplyEditor] = useState(false);
   const [replyContent, setReplyContent] = useState('');
+  const [editing, setEditing] = useState(false);
+  const [editContent, setEditContent] = useState(comment.content);
 
   const handleReplySuccess = async (id: number) => {
     // 先隐藏回复框避免 scrollIntoView 后布局变化
     setShowReplyEditor(false);
     // 刷新评论列表
     await onCommentUpdate();
+  };
+
+  const handleEdit = async () => {
+    const response = await ozaClient.updateBlogComment(comment.id, { content: editContent });
+    if (response.status === 200) {
+      setEditing(false);
+      await onCommentUpdate();
+    } else {
+      toast(response.data.message, { type: 'error' });
+    }
   };
 
   const replies = 'replies' in comment ? comment.replies : undefined;
@@ -174,6 +187,17 @@ const BlogCommentItem: FC<BlogCommentItemProps> = ({
                       回复
                     </button>
                     {isAuthor && (
+                      <button
+                        type='button'
+                        onClick={() => {
+                          setEditContent(comment.content);
+                          setEditing(true);
+                        }}
+                      >
+                        编辑
+                      </button>
+                    )}
+                    {isAuthor && (
                       <button type='button' onClick={() => onDelete(comment.id)}>
                         删除
                       </button>
@@ -184,8 +208,21 @@ const BlogCommentItem: FC<BlogCommentItemProps> = ({
             </span>
             {isDeleted ? (
               <div className='blog-comment__content--deleted'>内容已被删除</div>
+            ) : editing ? (
+              <div className={replyEditor}>
+                <EditorForm
+                  value={editContent}
+                  onChange={setEditContent}
+                  onConfirm={handleEdit}
+                  onCancel={() => setEditing(false)}
+                />
+              </div>
             ) : (
-              <RichContent bbcode={comment.content} classname='blog-comment__content' />
+              <RichContent
+                bbcode={comment.content}
+                preset='blogComment'
+                classname='blog-comment__content'
+              />
             )}
             {showReplyEditor && (
               <div className={replyEditor}>

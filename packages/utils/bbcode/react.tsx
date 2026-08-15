@@ -2,7 +2,7 @@ import React from 'react';
 
 import { convert } from './convert';
 import { Parser } from './parser';
-import type { CodeNodeTypes, NodeTypes, VNode } from './types';
+import type { BBCodeRenderOptions, CodeNodeTypes, NodeTypes, VNode } from './types';
 
 /* eslint-disable no-useless-escape */
 const toCamelCase = (s: string) => s.replace(/(\-\w)/g, (k) => k[1]?.toUpperCase() ?? '');
@@ -66,8 +66,11 @@ export const renderNode = (node: NodeTypes, key?: React.Key): React.ReactElement
   return React.createElement(type, convertToReactProps(node, key));
 };
 
-export const render = (rawStr: string): Array<React.ReactElement | string> => {
-  const nodes: CodeNodeTypes[] = new Parser(rawStr).parse();
+export const render = (
+  rawStr: string,
+  options: BBCodeRenderOptions = {},
+): Array<React.ReactElement | string> => {
+  const nodes: CodeNodeTypes[] = new Parser(rawStr, options).parse();
 
-  return nodes.map((node, idx) => renderNode(convert(node, {}), idx));
+  return nodes.map((node, idx) => renderNode(convert(node, options), idx));
 };

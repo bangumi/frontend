@@ -9,7 +9,7 @@ import type {
   PersonWork,
   SlimIndex,
 } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import { RichContent, Typography } from '@bangumi/design';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
   getCharacterLink,
@@ -719,7 +719,11 @@ function CommentList({ comments }: { comments: PersonHomeData['comments'] }) {
               )}{' '}
               <span>{dayjs.unix(comment.createdAt).format('YYYY-M-D HH:mm')}</span>
             </p>
-            <p className={commentContent}>{comment.content}</p>
+            <RichContent
+              bbcode={comment.content}
+              preset='personComment'
+              classname={commentContent}
+            />
           </div>
         </li>
       ))}

@@ -37,7 +37,8 @@ const coverList = css({
   padding: '0',
   display: 'grid',
   // minmax(0, 1fr) 允许列收缩到容器宽度，避免封面图固有宽度撑开网格
-  gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+  // 对齐旧站收藏页封面网格（约 10 列小封面），响应式自动收缩列数
+  gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))',
   gap: '10px',
 });
 

@@ -4,6 +4,7 @@ import React from 'react';
 import type { User } from '@bangumi/client/client';
 import { OpenQuote } from '@bangumi/icons';
 import { css } from '@bangumi/styled-system/css';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
 import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
 
 const card = css({
@@ -102,7 +103,7 @@ const UserInfoCard: React.FC<{ user: User }> = ({ user }) => {
       {user.bio && (
         <div className={bio}>
           <OpenQuote className={quoteIcon} />
-          <div className={bioText}>{renderBBCode(user.bio)}</div>
+          <div className={bioText}>{renderBBCode(user.bio, BBCodePreset.userBio)}</div>
         </div>
       )}
       <ul className={services}>

@@ -1,21 +1,13 @@
 import { UnreadableCodeError } from '../index';
 import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants';
-import type { CodeNodeTypes, CodeVNode } from './types';
+import type { BBCodeOptions, BBCodeTag, CodeNodeTypes, CodeVNode } from './types';
 
 const INVALID_NODE_MSG = 'invalid node';
 const INVALID_STICKER_NODE = 'invalid sticker node';
 
 type CheckCharFn = (str: string) => boolean;
-type Validator = (value: string | undefined, node: CodeVNode) => boolean;
 
-// 也许需要引入  Object schema validation
-export interface CustomTag {
-  name: string;
-  // 校验 props
-  schema: Record<string, Validator>;
-}
-
-type ITag = CustomTag | string;
+type ITag = BBCodeTag;
 
 // 只有一个 string child
 function getStringChild(node: CodeVNode): string | undefined {
@@ -31,11 +23,10 @@ function getNodeProp(node: CodeVNode, prop: string): string | undefined {
 
 function isValidUrl(str: string): boolean {
   try {
-    new URL(str);
-  } catch (e: unknown) {
+    return ['http:', 'https:'].includes(new URL(str).protocol);
+  } catch {
     return false;
   }
-  return true;
 }
 
 const DEFAULT_TAGS: ITag[] = [
@@ -122,7 +113,7 @@ const DEFAULT_TAGS: ITag[] = [
 ];
 
 // 合并 tag 配置。新的覆盖旧的
-export function mergeTags(tagList: ITag[], toMergeTags: ITag[]): ITag[] {
+function mergeTags(tagList: readonly ITag[], toMergeTags: readonly ITag[]): ITag[] {
   const results: ITag[] = [...toMergeTags];
   tagList.forEach((tag) => {
     let name = '';
@@ -151,14 +142,19 @@ export class Parser {
   private readonly ctxStack: Array<{ startIdx: number }>;
   private readonly tagStack: string[];
   private readonly validTags: ITag[];
+  private readonly parseBBCode: boolean;
+  private readonly parseStickers: boolean;
 
-  constructor(input: string, tags: ITag[] = []) {
+  constructor(input: string, options: BBCodeOptions = {}) {
     this.input = input;
     this.pos = 0;
     this.ctxStack = [];
     this.tagStack = [];
-    // 解析器支持的 tag; sticker 用来表示 Bangumi 的表情，不是 bbcode
-    this.validTags = mergeTags(DEFAULT_TAGS, tags);
+
+    const baseTags = options.tags ?? DEFAULT_TAGS;
+    this.validTags = mergeTags(baseTags, options.additionalTags ?? []);
+    this.parseBBCode = options.bbcode ?? true;
+    this.parseStickers = options.stickers ?? true;
   }
 
   parse(): CodeNodeTypes[] {
@@ -178,10 +174,10 @@ export class Parser {
     try {
       switch (this.curChar()) {
         case '(':
-          node = this.parseStickerNode();
+          node = this.parseStickers ? this.parseStickerNode() : this.parseText();
           break;
         case '[':
-          node = this.parseBBCodeNode();
+          node = this.parseBBCode ? this.parseBBCodeNode() : this.parseText();
           break;
         default:
           node = this.parseText();
@@ -238,6 +234,7 @@ export class Parser {
 
   // @TODO 暂时只支持 Bangumi 的 bbcode; 不支持 [style size="30px"]Large Text[/style]
   private parseBBCodeNode(): CodeNodeTypes {
+    const startIdx = this.pos; // 指向 '['
     let c = this.consumeChar();
     const openTag = this.parseTagName();
     c = this.consumeChar();
@@ -248,6 +245,11 @@ export class Parser {
     if (c === '=') {
       prop = this.consumeWhile((c) => c !== ']');
       c = this.consumeChar();
+    }
+    // 未知标签不是 bbcode 语法，按纯文本处理；不要进入闭标签配对，
+    // 否则不匹配的 [/xxx] 会导致外层标签连锁回退为文本
+    if (this.findTag(openTag) === -1) {
+      return this.input.slice(startIdx, this.pos);
     }
     if (openTag === 'code') {
       const codeEndTag = '[/code]';
@@ -296,7 +298,15 @@ export class Parser {
   }
 
   private parseText(): string {
-    return this.consumeWhile((c) => !['(', '['].includes(c));
+    return this.consumeWhile((c) => {
+      if (this.parseStickers && c === '(') {
+        return false;
+      }
+      if (this.parseBBCode && c === '[') {
+        return false;
+      }
+      return true;
+    });
   }
 
   private consumeWhile(checkFn: CheckCharFn): string {

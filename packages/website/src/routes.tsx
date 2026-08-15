@@ -54,6 +54,7 @@ const SubjectBoard = lazy(async () => import('./pages/index/subject/[id]/board')
 const SubjectComments = lazy(async () => import('./pages/index/subject/[id]/comments'));
 const SubjectReviews = lazy(async () => import('./pages/index/subject/[id]/reviews'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]'));
+const MonoSearch = lazy(async () => import('./pages/index/mono_search/[keyword]'));
 const SubjectTopic = lazy(async () => import('./pages/index/subject/topic/[id]'));
 const SubjectTopicEdit = lazy(async () => import('./pages/index/subject/topic/[id]/edit'));
 const SubjectTopicHome = lazy(async () => import('./pages/index/subject/topic/[id]/index'));
@@ -72,6 +73,8 @@ const Login = lazy(async () => import('./pages/login'));
 const UserHome = lazy(async () => import('./pages/index/user/[username]'));
 const UserCollections = lazy(async () => import('./pages/index/user/collections/[username]'));
 const BlogEntry = lazy(async () => import('./pages/index/blog/[id]'));
+const BlogCreate = lazy(async () => import('./pages/index/blog/create'));
+const BlogEdit = lazy(async () => import('./pages/index/blog/[id]/edit'));
 const Calendar = lazy(async () => import('./pages/index/calendar'));
 
 const userCollectionTypes = ['anime', 'book', 'music', 'game', 'real'] as const;
@@ -155,7 +158,9 @@ export const pageRoutes: RouteObject[] = [
       { path: 'rakuen', element: <Rakuen /> },
       { path: 'ep/:id', element: <Episode /> },
       { path: 'ep/:id/edit', element: <EpisodeEdit /> },
+      { path: 'blog/create', element: <BlogCreate /> },
       { path: 'blog/:id', element: <BlogEntry /> },
+      { path: 'blog/:id/edit', element: <BlogEdit /> },
       { path: 'notifications', element: <Notifications /> },
       ...userCollectionTypes.map((type) => ({
         path: type,
@@ -264,6 +269,10 @@ export const pageRoutes: RouteObject[] = [
       {
         path: 'subject_search/:keyword',
         element: <SubjectSearch />,
+      },
+      {
+        path: 'mono_search/:keyword',
+        element: <MonoSearch />,
       },
       {
         path: 'user',

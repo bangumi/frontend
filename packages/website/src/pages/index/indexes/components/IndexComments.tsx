@@ -150,7 +150,7 @@ const CommentNode: React.FC<CommentNodeProps> = ({ comment, indexId, floor, muta
               onCancel={() => setEditing(false)}
             />
           ) : (
-            <RichContent bbcode={comment.content} classname={content} />
+            <RichContent bbcode={comment.content} preset='indexComment' classname={content} />
           )}
           {user && !isDeleted && !editing && (
             <div className={actions}>

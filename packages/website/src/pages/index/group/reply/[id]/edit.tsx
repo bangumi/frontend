@@ -1,9 +1,9 @@
-import type { GroupTopic } from 'packages/client/client';
 import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSWRConfig } from 'swr';
 
 import { ozaClient } from '@bangumi/client';
+import type { GroupTopic } from '@bangumi/client/client';
 import { EditorForm, toast, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import Helmet from '@bangumi/website/components/Helmet';
