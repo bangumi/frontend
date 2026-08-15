@@ -18,6 +18,8 @@ interface UserContextType {
   isLoading: boolean;
   redirectToLogin: () => void;
   login: (username: string, password: string, captchaResp: string) => Promise<void>;
+  /** 登出并清空当前用户缓存 */
+  logout: () => Promise<void>;
   /** 使用 Passkey 登录，成功返回 true，用户取消返回 false */
   passkeyLogin: () => Promise<boolean>;
 }
@@ -82,6 +84,10 @@ export const UserProvider: React.FC<PropsWithChildren> = ({ children }) => {
         await mutate();
       }
       return ok;
+    },
+    logout: async () => {
+      await ozaClient.logout({});
+      await mutate(undefined, { revalidate: false });
     },
     user,
     isLoading,

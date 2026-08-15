@@ -15,34 +15,26 @@ const menu = css({
   margin: '0',
   padding: '0',
   listStyle: 'none',
-  color: '#595555',
+  color: 'bgmNavText',
   fontStyle: 'normal',
-  fontWeight: '500',
+  fontWeight: '700',
   '&.bgm-menu--horizontal': {
     flexDirection: 'row',
-    height: '60px',
-    lineHeight: '21px',
     '& > .bgm-menu-item': {
-      marginRight: '20px',
-      height: '60px',
-      lineHeight: '60px',
       whiteSpace: 'nowrap',
-      '&:last-of-type': {
-        marginRight: '0',
-      },
     },
   },
   '&.bgm-menu--vertical': {
     display: 'flex',
     flexDirection: 'column',
-    width: '100px',
-    padding: '8px',
+    alignItems: 'stretch',
+    width: '100%',
     boxSizing: 'border-box',
     lineHeight: '14px',
+    /* 下拉/垂直菜单链接不粗体，对齐原站 a.nav */
+    fontWeight: '400',
     '& > .bgm-menu-item': {
       width: '100%',
-      padding: '5px 0',
-      textAlign: 'center',
     },
   },
 });

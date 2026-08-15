@@ -349,7 +349,7 @@ describe('SubjectDetail', () => {
     // 收藏时间（页面中可能同时出现其他时间文本，取第一个）
     expect(screen.getAllByText(/2026-\d+-\d+ \d+:\d+/)[0]).toBeInTheDocument();
     // 我的评价与吐槽
-    expect(screen.getByText(/我的评价：/)).toBeInTheDocument();
+    expect(screen.getByText(/我的评价/)).toBeInTheDocument();
     expect(screen.getByText('不错')).toBeInTheDocument();
     // 我的完成度
     expect(screen.getByText('我的完成度')).toBeInTheDocument();

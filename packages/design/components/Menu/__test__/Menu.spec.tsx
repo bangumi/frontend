@@ -21,8 +21,8 @@ it('should render all menu', () => {
   expect(container.firstChild).toHaveClass('bgm-menu', 'bgm-menu--horizontal');
   expect(getByText('1')).toBeInTheDocument();
   expect(getByText('2')).toBeInTheDocument();
-  expect(getByText('1')).toHaveClass('bgm-menu-item');
-  expect(getByText('2')).toHaveClass('class-2');
+  expect(getByText('1').closest('li')).toHaveClass('bgm-menu-item');
+  expect(getByText('2').closest('li')).toHaveClass('class-2');
 });
 
 it('should trigger onChange when click menus', () => {
@@ -53,8 +53,8 @@ it('should render subMenu', () => {
     },
   ];
   const { getByText, getByTestId } = render(<Menu items={menuItems} />);
-  expect(getByText('outer1')).toHaveClass('bgm-menu-item');
-  expect(getByText('1')).toHaveClass('class-1');
+  expect(getByText('outer1').closest('li')).toHaveClass('bgm-menu-item');
+  expect(getByText('1').closest('li')).toHaveClass('class-1');
   expect(getByTestId('submenu')).toBeInTheDocument();
 });
 

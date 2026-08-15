@@ -3,17 +3,20 @@ import React from 'react';
 
 import type { Calendar } from '@bangumi/client/client';
 import { Typography } from '@bangumi/design';
-import { css } from '@bangumi/styled-system/css';
+import { css, cx } from '@bangumi/styled-system/css';
 import { getCalendarLink, getSubjectLink } from '@bangumi/utils/pages';
+import Tooltip from '@bangumi/website/components/Tooltip';
 
 import HomeSidePanel from './HomeSidePanel';
 
 const { Link } = Typography;
 
+/* 对齐原站 .sidePanelHome h2 small：继承标题 #555/300，链接 #444 */
 const titleSmall = css({
   fontSize: '12px',
   fontWeight: 'normal',
-  color: '#9f9b9b',
+  color: '#555',
+  '& a': { color: '#444' },
 });
 
 const list = css({
@@ -21,38 +24,60 @@ const list = css({
   margin: 0,
   padding: 0,
   fontSize: '13px',
+  lineHeight: '0.9',
 });
 
+/* 对齐原站 ul.calendarMini：每行左侧星期色带 + 右侧白底封面 */
 const dayItem = css({
-  padding: '8px 10px',
-  borderBottom: '1px solid #e8e3e3',
+  display: 'flex',
+  alignItems: 'stretch',
+  borderBottom: '1px solid #eee',
+  color: '#fff',
 });
 
 const dayTitle = css({
-  fontSize: '13px',
-  fontWeight: 'bold',
-  margin: '0 0 6px',
+  flex: 'none',
+  width: '25px',
+  margin: '0',
+  padding: '5px 0 0 5px',
+  fontSize: '12px',
+  fontWeight: 'normal',
+  '& p': { margin: '0' },
 });
 
 const dayEn = css({
   fontWeight: 'normal',
-  color: '#9f9b9b',
-  marginLeft: '4px',
+  color: '#fff',
+  fontSize: '10px',
 });
 
 const coverList = css({
+  flex: '1',
+  minWidth: '0',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '4px',
+  background: '#fff',
   '& img': {
     display: 'block',
-    borderRadius: '2px',
   },
 });
 
+/* 原站星期色带配色（ul.calendarMini li.<Week>） */
+const dayBackground: Record<number, string> = {
+  1: css({ background: '#ff6600' }),
+  2: css({ background: '#ff9e01' }),
+  3: css({ background: '#b0de09' }),
+  4: css({ background: '#339900' }),
+  5: css({ background: '#0085c8' }),
+  6: css({ background: '#0455a6' }),
+  7: css({ background: '#ff0f00' }),
+};
+
 const tip = css({
-  padding: '8px 10px',
-  color: '#9f9b9b',
+  padding: '6px 5px',
+  color: '#888',
+  fontSize: '12px',
+  textAlign: 'center',
 });
 
 const WEEKDAY_DESC: Record<number, { en: string; cn: string }> = {
@@ -109,20 +134,32 @@ const CalendarBlock: React.FC<{ calendar: Calendar }> = ({ calendar }) => {
             return null;
           }
           return (
-            <li key={day.id} className={dayItem}>
+            <li key={day.id} className={cx(dayItem, dayBackground[day.id])}>
               <h3 className={dayTitle}>
                 {day.label}
-                <small className={dayEn}>{getWeekdayDesc(day.id).en}</small>
+                <p>
+                  <small className={dayEn}>{getWeekdayDesc(day.id).en}</small>
+                </p>
               </h3>
               <div className={coverList}>
                 {items.map((item) => (
-                  <Link
+                  <Tooltip
                     key={item.subject.id}
-                    to={getSubjectLink(item.subject.id)}
-                    title={`${item.subject.name}\n${item.subject.nameCN}`}
+                    content={
+                      <>
+                        {item.subject.name}
+                        <br />
+                        <small>{item.subject.nameCN}</small>
+                      </>
+                    }
                   >
-                    <img src={item.subject.images?.grid} width={48} loading='lazy' alt='' />
-                  </Link>
+                    <Link
+                      to={getSubjectLink(item.subject.id)}
+                      aria-label={`${item.subject.name} ${item.subject.nameCN}`}
+                    >
+                      <img src={item.subject.images?.grid} width={48} loading='lazy' alt='' />
+                    </Link>
+                  </Tooltip>
                 ))}
               </div>
             </li>

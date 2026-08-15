@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 import React from 'react';
 
 import type { SlimSubject, Timeline } from '@bangumi/client/client';
@@ -21,25 +20,57 @@ const statusText = css({
   whiteSpace: 'pre-wrap',
 });
 
-/** 相对时间，对齐 PHP GlobalCore::make_descriptive_time */
+/** 相对时间，对齐 PHP GlobalCore::make_descriptive_time（如「1小时25分钟前」「3天2小时前」） */
 export function makeDescriptiveTime(timestamp: number): string {
-  const now = DateTime.now();
-  const time = DateTime.fromSeconds(timestamp);
-  const diffMin = Math.floor(now.diff(time, 'minutes').minutes);
-  if (diffMin < 1) {
-    return '刚刚';
+  const YEAR = 86400 * 365;
+  const MONTH = 86400 * 30;
+  const DAY = 86400;
+  const HOUR = 3600;
+  const MINUTE = 60;
+
+  const diff = Math.floor(Date.now() / 1000) - timestamp;
+
+  if (diff > YEAR) {
+    const years = Math.floor(diff / YEAR);
+    const rest = diff - years * YEAR;
+    if (rest > MONTH) {
+      return `${years}年${Math.floor(rest / MONTH)}月前`;
+    }
+    return `${years}年前`;
   }
-  if (diffMin < 60) {
-    return `${diffMin} 分钟前`;
+  if (diff > MONTH) {
+    const months = Math.floor(diff / MONTH);
+    const rest = diff - months * MONTH;
+    if (rest > DAY) {
+      return `${months}月${Math.floor(rest / DAY)}天前`;
+    }
+    return `${months}月前`;
   }
-  const diffHour = Math.floor(now.diff(time, 'hours').hours);
-  if (diffHour < 24) {
-    return `${diffHour} 小时前`;
+  if (diff > DAY) {
+    const days = Math.floor(diff / DAY);
+    const rest = diff - days * DAY;
+    if (rest > HOUR) {
+      return `${days}天${Math.floor(rest / HOUR)}小时前`;
+    }
+    return `${days}天前`;
   }
-  if (now.startOf('day').diff(time.startOf('day'), 'days').days === 1) {
-    return '昨天';
+  if (diff > HOUR) {
+    const hours = Math.floor(diff / HOUR);
+    const rest = diff - hours * HOUR;
+    if (rest > MINUTE) {
+      return `${hours}小时${Math.floor(rest / MINUTE)}分钟前`;
+    }
+    return `${hours}小时前`;
   }
-  return time.toFormat('MM-dd');
+  if (diff > MINUTE) {
+    const minutes = Math.floor(diff / MINUTE);
+    const seconds = diff % MINUTE;
+    if (seconds > 0) {
+      return `${minutes}分${seconds}秒前`;
+    }
+    return `${minutes}分钟前`;
+  }
+  return `${diff}秒前`;
 }
 
 function SubjectName({ subject }: { subject: SlimSubject }) {

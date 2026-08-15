@@ -10,26 +10,26 @@
   }
 
   body {
+    /* 与原站 reset.less 完全一致的字体栈 */
     font-family:
-      system-ui,
-      -apple-system,
-      BlinkMacSystemFont,
-      'SF Pro SC',
-      'SF Pro Display',
-      'PingFang SC',
-      'Microsoft YaHei',
-      'Lucida Grande',
-      'Helvetica Neue',
-      'Segoe UI',
-      Helvetica,
-      Arial,
-      Verdana,
-      sans-serif;
+      'SF Pro SC', 'SF Pro Display', 'PingFang SC', 'Lucida Grande', 'Helvetica Neue', Helvetica,
+      Arial, Verdana, sans-serif, 'Hiragino Sans GB';
+
+    /* 与原站 reset.less 一致的基准字号与行高 */
+    font-size: 12px;
+    line-height: 1.5;
+    color: #444;
   }
 
+  /* 全站链接默认样式与原站 reset.less 对齐：默认深灰，hover 亮蓝无下划线 */
   a {
-    color: inherit;
-    text-decoration: inherit;
+    color: #444;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #02a3fb;
+    text-decoration: none;
   }
 
   button {

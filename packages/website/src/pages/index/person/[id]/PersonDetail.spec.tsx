@@ -73,7 +73,7 @@ describe('PersonDetail', () => {
       'href',
       '/person/21884/works',
     );
-    expect(document.querySelector('main')?.className).toContain('max-w_1260px');
+    expect(document.querySelector('main')?.className).toContain('max-w_1200px');
     expect(document.querySelector('main')?.className).toContain('p_10px_15px_24px');
 
     // 左栏：infobox 与收藏者

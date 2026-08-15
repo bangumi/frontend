@@ -16,10 +16,14 @@ import TimelineBlock from './TimelineBlock';
 
 const { Link } = Typography;
 
+/* 对齐原站首页 h1：20px 粗体 #444，margin 15px 0 */
 const greets = css({
-  fontSize: '24px',
-  margin: '0 0 12px',
-  '@media (max-width: 640px)': { fontSize: '20px' },
+  fontSize: '20px',
+  fontWeight: '700',
+  color: '#444',
+  margin: '15px 0',
+  lineHeight: '1.3',
+  '@media (max-width: 640px)': { fontSize: '18px' },
 });
 
 const columns = css({

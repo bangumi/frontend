@@ -47,6 +47,8 @@ Options:
       --timeout <ms>          Navigation and selector timeout (default: 60000)
       --storage-state <path>  Playwright storage-state JSON for authentication
       --local-storage <k=v>   Set local storage before navigation; repeatable
+      --channel <name>        Browser channel passed to chromium.launch (e.g. chrome),
+                              for environments without a Playwright-managed browser
       --use-fixtures          Intercept /p1 API requests with local JSON fixtures from
                               src/mocks/fixtures (fixture named <pathname>-<METHOD>.json);
                               requests without a matching fixture fall through to the
@@ -81,6 +83,7 @@ const { values, positionals } = parseArgs({
     'storage-state': { type: 'string' },
     'local-storage': { type: 'string', multiple: true, default: [] },
     'use-fixtures': { type: 'boolean', default: false },
+    channel: { type: 'string' },
     help: { type: 'boolean', short: 'h', default: false },
   },
 });
@@ -237,7 +240,7 @@ const disposables = [
 let exitCode = 0;
 try {
   await withDisposables(disposables, async () => {
-    const browser = await chromium.launch();
+    const browser = await chromium.launch({ channel: values.channel });
     disposables.push({ [Symbol.asyncDispose]: () => browser.close() });
     const context = await browser.newContext({
       viewport: { width, height },

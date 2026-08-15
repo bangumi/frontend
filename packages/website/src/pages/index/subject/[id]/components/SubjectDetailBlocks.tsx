@@ -33,6 +33,7 @@ import {
   getUserProfileLink,
 } from '@bangumi/utils/pages';
 import EpisodeButton from '@bangumi/website/components/EpisodeButton';
+import Tooltip from '@bangumi/website/components/Tooltip';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
@@ -67,11 +68,13 @@ const summarySection = css({
 
 const tagSection = css({
   '&[class]': {
-    margin: '5px 0 10px',
+    margin: '5px 0',
     padding: '10px',
     border: '0',
     borderRadius: '5px',
-    background: '#f7f7f7',
+    /* 对齐原站 @info-bg-color */
+    background: '#fafafa',
+    fontSize: '12px',
     '& h2': {
       fontSize: '14px',
     },
@@ -175,27 +178,46 @@ const summaryToggle = css({
   lineHeight: '18px',
 });
 
-/* 标签 */
+/* 标签：对齐原站 subject_tag_section——user tag 默认灰边框，meta tag 蓝边框且排最前 */
 const tagList = css({
   listStyle: 'none',
   margin: '0',
   padding: '0',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '2px 4px',
   '& li': {
+    margin: '0 2px 2px 0',
+  },
+  '& li a': {
+    display: 'inline-block',
     padding: '1px 5px',
-    border: '1px solid #e8e3e3',
+    border: '1px solid #eee',
     borderRadius: '20px',
-    background: '#fff',
+    background: '#fefefe',
+    color: '#0084b4',
     fontSize: '12px',
     lineHeight: '1.4',
+    textDecoration: 'none',
+    transition: 'all .3s linear',
+  },
+  '& li a:hover': {
+    background: '#369cf8',
+    color: '#fff',
+    textDecoration: 'none',
+    '& small': { color: '#fff' },
+  },
+});
+
+/* 原站 a.l.meta：蓝色边框的 meta tag；&[class] 提抗压过 tagList 的后代选择器 */
+const tagMeta = css({
+  '&[class]': {
+    borderColor: '#0084b4',
   },
 });
 
 const tagCount = css({
   marginLeft: '2px',
-  color: '#9f9b9b',
+  color: '#999',
   fontSize: '10px',
 });
 
@@ -257,10 +279,20 @@ const characterCover = css({
 const characterCoverTitle = css({ fontSize: '13px' });
 
 const relationGrid = css({
-  gap: '5px 10px',
+  gap: '5px 0',
 });
 
-const relationCoverItem = css({ width: '80px' });
+/* 对齐原站 ul.browserCoverMedium li：85px 宽、左 padding 5px */
+const relationCoverItem = css({
+  width: '85px',
+  paddingLeft: '5px',
+  boxSizing: 'border-box',
+});
+
+/* 原站 li.sep：分组起始项的左侧分隔线 */
+const relationSepItem = css({
+  borderLeft: '1px solid #eee',
+});
 
 const recommendationGrid = css({
   flexWrap: 'nowrap',
@@ -288,7 +320,11 @@ const coverTitle = css({
   overflowWrap: 'break-word',
 });
 
-const subjectCoverTitle = css({ fontSize: '11px' });
+const subjectCoverTitle = css({
+  fontSize: '12px',
+  '& a': { color: '#555' },
+  '& a:hover': { color: '#555', textDecoration: 'underline' },
+});
 
 const coverInfo = css({
   margin: '0',
@@ -299,12 +335,13 @@ const coverInfo = css({
   whiteSpace: 'nowrap',
 });
 
+/* 原站 span.sub：分组标签，即使为空也占位保证同一行封面顶部对齐 */
 const relationSep = css({
   display: 'block',
   width: '100%',
   height: '18px',
   fontSize: '12px',
-  color: '#9f9b9b',
+  color: '#aaa',
   lineHeight: '18px',
 });
 
@@ -532,17 +569,24 @@ function SummarySection({ summary }: { summary: string }) {
   );
 }
 
-/** 标签，对齐 PHP subject_box_tag */
+/** 标签，对齐 PHP subject_box_tag：meta tag 蓝边框且排在最前，user tag 灰边框 */
 function TagsSection({ subject }: { subject: Subject }) {
   if (subject.tags.length === 0) {
     return null;
   }
+  const metaTagNames = new Set(subject.metaTags ?? []);
+  const sortedTags = [...subject.tags].sort(
+    (a, b) => Number(metaTagNames.has(b.name)) - Number(metaTagNames.has(a.name)),
+  );
   return (
     <SubjectSection title={`大家将 ${subject.name} 标注为`} className={tagSection}>
       <ul className={tagList}>
-        {subject.tags.map((tag) => (
+        {sortedTags.map((tag) => (
           <li key={tag.name}>
-            <Link to={getSubjectTagLink(tag.name)}>
+            <Link
+              to={getSubjectTagLink(tag.name)}
+              className={metaTagNames.has(tag.name) ? tagMeta : undefined}
+            >
               {tag.name} <small className={tagCount}>{tag.count}</small>
             </Link>
           </li>
@@ -571,18 +615,16 @@ function CharactersSection({
       <ul className={cx(coverGrid, characterGrid)}>
         {characters.map(({ character, casts }) => (
           <li key={character.id} className={cx(coverItem, characterCoverItem)}>
-            <Link
-              to={getCharacterLink(character.id)}
-              className={coverLink}
-              title={character.nameCN || character.name}
-            >
-              <img
-                src={character.images?.grid}
-                className={cx(cover, characterCover)}
-                loading='lazy'
-                alt=''
-              />
-            </Link>
+            <Tooltip content={character.nameCN || character.name}>
+              <Link to={getCharacterLink(character.id)} className={coverLink}>
+                <img
+                  src={character.images?.grid}
+                  className={cx(cover, characterCover)}
+                  loading='lazy'
+                  alt=''
+                />
+              </Link>
+            </Tooltip>
             <p className={cx(coverTitle, characterCoverTitle)}>
               <Link to={getCharacterLink(character.id)}>{character.nameCN || character.name}</Link>
             </p>
@@ -622,20 +664,21 @@ function RelationsSection({
           const showSep = relation.id !== lastRelationId;
           lastRelationId = relation.id;
           return (
-            <li key={subject.id} className={cx(coverItem, relationCoverItem)}>
-              {showSep && <span className={relationSep}>{relation.cn}</span>}
-              <Link
-                to={getSubjectLink(subject.id)}
-                className={coverLink}
-                title={subject.nameCN || subject.name}
-              >
-                <img
-                  src={subject.images?.grid}
-                  className={cx(cover, subjectCover)}
-                  loading='lazy'
-                  alt=''
-                />
-              </Link>
+            <li
+              key={subject.id}
+              className={cx(coverItem, relationCoverItem, showSep && relationSepItem)}
+            >
+              <span className={relationSep}>{showSep ? relation.cn : ''}</span>
+              <Tooltip content={subject.nameCN || subject.name}>
+                <Link to={getSubjectLink(subject.id)} className={coverLink}>
+                  <img
+                    src={subject.images?.grid}
+                    className={cx(cover, subjectCover)}
+                    loading='lazy'
+                    alt=''
+                  />
+                </Link>
+              </Tooltip>
               <p className={cx(coverTitle, subjectCoverTitle)}>
                 <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
               </p>
@@ -657,18 +700,16 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
       <ul className={cx(coverGrid, recommendationGrid)}>
         {recs.map(({ subject }) => (
           <li key={subject.id} className={cx(coverItem, recommendationCoverItem)}>
-            <Link
-              to={getSubjectLink(subject.id)}
-              className={coverLink}
-              title={subject.nameCN || subject.name}
-            >
-              <img
-                src={subject.images?.grid}
-                className={cx(cover, subjectCover)}
-                loading='lazy'
-                alt=''
-              />
-            </Link>
+            <Tooltip content={subject.nameCN || subject.name}>
+              <Link to={getSubjectLink(subject.id)} className={coverLink}>
+                <img
+                  src={subject.images?.grid}
+                  className={cx(cover, subjectCover)}
+                  loading='lazy'
+                  alt=''
+                />
+              </Link>
+            </Tooltip>
             <p className={cx(coverTitle, subjectCoverTitle)}>
               <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
             </p>

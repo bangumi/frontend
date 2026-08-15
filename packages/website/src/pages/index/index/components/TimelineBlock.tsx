@@ -14,6 +14,8 @@ import {
   getSubjectLink,
   getUserProfileLink,
 } from '@bangumi/utils/pages';
+import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription';
+import Tooltip from '@bangumi/website/components/Tooltip';
 import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -21,8 +23,8 @@ import { useUser } from '@bangumi/website/hooks/use-user';
 const block = css({
   background: '#fff',
   border: '1px solid #eee',
-  borderRadius: '14px',
-  margin: '0 0 20px',
+  borderRadius: '15px',
+  margin: '0 0 15px',
   overflow: 'hidden',
 });
 
@@ -31,7 +33,7 @@ const toolbar = css({
   alignItems: 'center',
   minHeight: '42px',
   padding: '0 8px',
-  borderBottom: '1px solid #e8e3e3',
+  borderBottom: '1px solid #eee',
   '@media (max-width: 640px)': {
     overflowX: 'auto',
   },
@@ -46,14 +48,16 @@ const filters = css({
   },
 });
 
+/* 对齐原站 ul.categoryTab：13px 胶囊，hover 灰底，激活粉底白字 */
 const filterBtn = css({
-  padding: '7px 12px',
+  padding: '4px 15px',
   border: '0',
-  borderRadius: '18px',
+  borderRadius: '50px',
   background: 'transparent',
-  color: '#9f9b9b',
-  fontSize: '14px',
-  _hover: { color: '#1f1c1c' },
+  color: '#555',
+  fontSize: '13px',
+  transition: 'all .2s ease-in-out',
+  _hover: { background: '#eee' },
   '@media (max-width: 640px)': {
     paddingRight: '10px',
     paddingLeft: '10px',
@@ -62,7 +66,7 @@ const filterBtn = css({
   '&[data-active]': {
     color: '#fff',
     background: '#f09199',
-    _hover: { color: '#fff' },
+    _hover: { color: '#fff', background: '#f09199' },
   },
 });
 
@@ -119,6 +123,9 @@ const submitButton = css({
   background: '#f09199',
   color: '#fff',
   fontSize: '14px',
+  cursor: 'pointer',
+  transition: 'all .2s ease-in-out',
+  _hover: { background: '#369cf8' },
   _disabled: {
     opacity: '0.55',
     cursor: 'default',
@@ -312,6 +319,7 @@ const replyToggle = css({
   fontSize: '12px',
   lineHeight: '16px',
   cursor: 'pointer',
+  transition: 'color .2s ease-in-out',
   _hover: { color: '#54b5df' },
 });
 
@@ -445,27 +453,6 @@ const SUBJECT_ACTIONS: Record<number, string> = {
 interface TimelineContent {
   summary: React.ReactNode;
   attachment?: React.ReactNode;
-}
-
-/** 相对时间，对齐 PHP GlobalCore::make_descriptive_time */
-function makeDescriptiveTime(timestamp: number): string {
-  const now = DateTime.now();
-  const time = DateTime.fromSeconds(timestamp);
-  const diffMin = Math.floor(now.diff(time, 'minutes').minutes);
-  if (diffMin < 1) {
-    return '刚刚';
-  }
-  if (diffMin < 60) {
-    return `${diffMin} 分钟前`;
-  }
-  const diffHour = Math.floor(now.diff(time, 'hours').hours);
-  if (diffHour < 24) {
-    return `${diffHour} 小时前`;
-  }
-  if (now.startOf('day').diff(time.startOf('day'), 'days').days === 1) {
-    return '昨天';
-  }
-  return time.toFormat('MM-dd');
 }
 
 function SubjectName({ subject, original = false }: { subject: SlimSubject; original?: boolean }) {
@@ -738,9 +725,10 @@ function TimelineItem({
         </div>
         {content.attachment}
         <div className={time}>
-          <span title={DateTime.fromSeconds(timeline.createdAt).toFormat('yyyy-MM-dd HH:mm')}>
-            {makeDescriptiveTime(timeline.createdAt)}
-          </span>
+          {/* 对齐原站 titleTip：hover 相对时间显示绝对时间气泡 */}
+          <Tooltip content={DateTime.fromSeconds(timeline.createdAt).toFormat('yyyy-MM-dd HH:mm')}>
+            <span>{makeDescriptiveTime(timeline.createdAt)}</span>
+          </Tooltip>
           {timeline.source.name != null && (
             <>
               <span> · </span>
@@ -852,7 +840,11 @@ const TimelineReplies: React.FC<{
                           {reply.user.nickname}
                         </Link>
                       )}{' '}
-                      <span>{makeDescriptiveTime(reply.createdAt)}</span>
+                      <Tooltip
+                        content={DateTime.fromSeconds(reply.createdAt).toFormat('yyyy-MM-dd HH:mm')}
+                      >
+                        <span>{makeDescriptiveTime(reply.createdAt)}</span>
+                      </Tooltip>
                     </div>
                     <div>{reply.content}</div>
                   </div>

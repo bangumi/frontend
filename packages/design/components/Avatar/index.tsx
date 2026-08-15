@@ -19,12 +19,17 @@ export interface AvatarProps {
 const avatar = css({
   display: 'inline-block',
   boxSizing: 'border-box',
-  borderRadius: '6px',
-  border: '1px solid #e8e3e3',
+  /* 对齐原站 avatarNeue：圆形 + inset 阴影 + hover 蓝色光晕 + 0.2s 过渡 */
+  borderRadius: '50%',
+  boxShadow: 'inset #bbb 0 0 2px 0',
+  transition: 'box-shadow linear 0.2s, border linear 0.2s',
+  _hover: {
+    boxShadow: 'inset #0187c5 0 0 4px 0',
+  },
   '& img': {
     objectFit: 'cover',
     verticalAlign: 'middle',
-    borderRadius: '6px',
+    borderRadius: '50%',
   },
 });
 
