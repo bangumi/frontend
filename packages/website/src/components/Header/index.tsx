@@ -147,6 +147,8 @@ const main = css({
   boxSizing: 'border-box',
   padding: '2px 10px 0',
   margin: '0 auto',
+  /* 移动端保留新站既有的 5px 紧凑间距 */
+  smDown: { padding: '0 5px' },
 });
 
 const headerLeft = css({ minWidth: '0', display: 'flex', alignItems: 'center' });
@@ -721,6 +723,7 @@ const Header: FC = () => {
             <>
               <Link
                 to='/notifications'
+                aria-label='通知'
                 className={cx(icon, notificationIcon, noticeCount > 0 && notificationNotice)}
               >
                 <Notification />

@@ -9667,6 +9667,9 @@
     .smDown\:p_10px_10px_0 {
       padding: 10px 10px 0;
 }
+    .smDown\:p_0_5px {
+      padding: 0 5px;
+}
     .smDown\:p_0 {
       padding: var(--spacing-0);
 }

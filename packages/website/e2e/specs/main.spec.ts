@@ -61,7 +61,8 @@ test.describe('main page', () => {
     await expect(actions).toHaveCSS('display', 'flex');
     await expect(actions).toHaveCSS('align-items', 'center');
     await expect(page.getByRole('button', { name: '搜索' })).toBeVisible();
-    await expect(page.locator('a[href="/notifications"]')).toBeVisible();
+    // 通知铃铛与用户面板「提醒」都指向 /notifications，用可访问名区分
+    await expect(page.getByRole('link', { name: '通知' })).toBeVisible();
     await expect(page.locator('header a[href="/user/382951"]')).toBeVisible();
   });
 
