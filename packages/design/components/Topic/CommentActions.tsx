@@ -45,6 +45,8 @@ export interface CommentActionsProps {
   id: number;
   onReply?: () => void;
   onDelete?: () => void;
+  /** 编辑入口，提供时以回调方式打开编辑（如内联表单），否则跳转 replyEditPath 页面 */
+  onEdit?: () => void;
   isAuthor?: boolean;
   editable?: boolean;
   showText?: boolean;
@@ -59,6 +61,7 @@ const CommentActions = ({
   id,
   onReply,
   onDelete,
+  onEdit,
   isAuthor = false,
   editable = true,
   showText = false,
@@ -95,11 +98,16 @@ const CommentActions = ({
           <div className={cx('bgm-comment-actions__popover', commentActionsPopover)}>
             {isAuthor && (
               <>
-                {editable && (
-                  <Button.Link type='text' size='small' to={api.replyEditPath(id)}>
-                    编辑
-                  </Button.Link>
-                )}
+                {editable &&
+                  (onEdit ? (
+                    <Button type='text' size='small' onClick={onEdit}>
+                      编辑
+                    </Button>
+                  ) : (
+                    <Button.Link type='text' size='small' to={api.replyEditPath(id)}>
+                      编辑
+                    </Button.Link>
+                  ))}
                 <Button type='text' size='small' onClick={onDelete}>
                   删除
                 </Button>
