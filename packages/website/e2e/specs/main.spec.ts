@@ -73,7 +73,7 @@ test.describe('main page', () => {
 
     // 展开动画频道下拉，登录用户可见「我看」收藏组
     await page.getByRole('link', { name: '动画' }).first().hover();
-    await expect(page.getByText('我看')).toBeVisible();
-    await expect(page.getByRole('link', { name: '在看' })).toBeVisible();
+    await expect(page.getByText('我看').first()).toBeVisible();
+    await expect(page.getByRole('link', { name: '在看' }).first()).toBeVisible();
   });
 });
