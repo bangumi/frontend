@@ -76,11 +76,16 @@ const groupInline = css({
   flexWrap: 'wrap',
 });
 
-/* 原站 span.root 组标题（我看/我读/我听/我玩） */
+/* 原站 span.root 组标题（我看/我读/我听/我玩）：独占一行置于组内链接上方；
+   字号比链接（14px）小一号，且不是手型（覆盖外层 li 的 cursor:pointer） */
 const groupTitleRoot = css({
   display: 'block',
+  /* 在 flex-wrap 组内强制独占一行，避免与链接并排 */
+  flex: '0 0 100%',
   padding: '0 10px 5px',
   color: '#666',
+  fontSize: '12px',
+  cursor: 'default',
 });
 
 /* 原站 div.sep 分隔标题（人物/小组菜单的「我」） */
@@ -95,6 +100,7 @@ const groupTitleSep = css({
   textAlign: 'left',
   background: '#f1f1f1',
   color: '#555',
+  cursor: 'default',
   borderBottom: '1px solid token(colors.bgmDropBorder)',
 });
 
