@@ -3,7 +3,7 @@
 exports[`should render external link 1`] = `
 <DocumentFragment>
   <a
-    class="bgm-link"
+    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px"
     href="https://test.com"
   />
 </DocumentFragment>
@@ -12,7 +12,7 @@ exports[`should render external link 1`] = `
 exports[`should render internal link 1`] = `
 <DocumentFragment>
   <a
-    class="bgm-link"
+    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px"
     data-discover="true"
     href="/a"
   />

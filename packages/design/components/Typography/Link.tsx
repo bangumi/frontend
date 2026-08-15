@@ -7,10 +7,19 @@ import { css, cx } from '@bangumi/styled-system/css';
 
 const link = css({
   display: 'inline-block',
-  color: '#54b5df',
+  color: 'link',
   cursor: 'pointer',
+  transitionProperty: 'color, text-decoration-color',
+  transitionDuration: 'normal',
+  transitionTimingFunction: 'standard',
   '&:link, &:visited, &:active': { textDecoration: 'none' },
-  _hover: { textDecoration: 'underline' },
+  _hover: { color: 'link.hover', textDecoration: 'underline' },
+  _active: { color: 'link.hover', textDecoration: 'underline' },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
 });
 
 const linkBold = css({ fontWeight: 'bold' });
@@ -34,7 +43,7 @@ export function PureLink({
   ...rest
 }: PropsWithChildren<PureLinkProps & JSX.IntrinsicElements['div']>) {
   return (
-    <div className={cx('bgm-link', fontWeight === 'bold' && linkBold, className)} {...rest}>
+    <div className={cx('bgm-link', link, fontWeight === 'bold' && linkBold, className)} {...rest}>
       {children}
     </div>
   );
@@ -51,7 +60,7 @@ const Link: React.FC<LinkProps> = ({
 }) => {
   const resolvedClassnames = noStyle
     ? className
-    : cx('bgm-link', fontWeight === 'bold' && linkBold, className);
+    : cx('bgm-link', link, fontWeight === 'bold' && linkBold, className);
 
   if (isExternal && typeof to === 'string') {
     return (

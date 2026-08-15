@@ -866,7 +866,7 @@ borderBlockEndStyle?: ConditionalValue<CssVars | CssProperties["borderBlockEndSt
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-end-width
    */
-borderBlockEndWidth?: ConditionalValue<CssProperties["borderBlockEndWidth"] | AnyString>
+borderBlockEndWidth?: ConditionalValue<UtilityValues["borderBlockEndWidth"] | CssVars | CssProperties["borderBlockEndWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -920,7 +920,7 @@ borderBlockStartStyle?: ConditionalValue<CssVars | CssProperties["borderBlockSta
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-start-width
    */
-borderBlockStartWidth?: ConditionalValue<CssProperties["borderBlockStartWidth"] | AnyString>
+borderBlockStartWidth?: ConditionalValue<UtilityValues["borderBlockStartWidth"] | CssVars | CssProperties["borderBlockStartWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -948,7 +948,7 @@ borderBlockStyle?: ConditionalValue<CssVars | CssProperties["borderBlockStyle"] 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
    */
-borderBlockWidth?: ConditionalValue<CssProperties["borderBlockWidth"] | AnyString>
+borderBlockWidth?: ConditionalValue<UtilityValues["borderBlockWidth"] | CssVars | CssProperties["borderBlockWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -1032,7 +1032,7 @@ borderBottomStyle?: ConditionalValue<CssVars | CssProperties["borderBottomStyle"
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-bottom-width
    */
-borderBottomWidth?: ConditionalValue<CssProperties["borderBottomWidth"] | AnyString>
+borderBottomWidth?: ConditionalValue<UtilityValues["borderBottomWidth"] | CssVars | CssProperties["borderBottomWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -1252,7 +1252,7 @@ borderInlineEndStyle?: ConditionalValue<CssVars | CssProperties["borderInlineEnd
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
    */
-borderInlineEndWidth?: ConditionalValue<CssProperties["borderInlineEndWidth"] | AnyString>
+borderInlineEndWidth?: ConditionalValue<UtilityValues["borderInlineEndWidth"] | CssVars | CssProperties["borderInlineEndWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -1308,7 +1308,7 @@ borderInlineStartStyle?: ConditionalValue<CssVars | CssProperties["borderInlineS
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
    */
-borderInlineStartWidth?: ConditionalValue<CssProperties["borderInlineStartWidth"] | AnyString>
+borderInlineStartWidth?: ConditionalValue<UtilityValues["borderInlineStartWidth"] | CssVars | CssProperties["borderInlineStartWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -1336,7 +1336,7 @@ borderInlineStyle?: ConditionalValue<CssVars | CssProperties["borderInlineStyle"
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
    */
-borderInlineWidth?: ConditionalValue<CssProperties["borderInlineWidth"] | AnyString>
+borderInlineWidth?: ConditionalValue<UtilityValues["borderInlineWidth"] | CssVars | CssProperties["borderInlineWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -1390,7 +1390,7 @@ borderLeftStyle?: ConditionalValue<CssVars | CssProperties["borderLeftStyle"] | 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-left-width
    */
-borderLeftWidth?: ConditionalValue<CssProperties["borderLeftWidth"] | AnyString>
+borderLeftWidth?: ConditionalValue<UtilityValues["borderLeftWidth"] | CssVars | CssProperties["borderLeftWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -1457,7 +1457,7 @@ borderRightStyle?: ConditionalValue<CssVars | CssProperties["borderRightStyle"] 
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-right-width
    */
-borderRightWidth?: ConditionalValue<CssProperties["borderRightWidth"] | AnyString>
+borderRightWidth?: ConditionalValue<UtilityValues["borderRightWidth"] | CssVars | CssProperties["borderRightWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -1595,7 +1595,7 @@ borderTopStyle?: ConditionalValue<CssVars | CssProperties["borderTopStyle"] | An
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-top-width
    */
-borderTopWidth?: ConditionalValue<CssProperties["borderTopWidth"] | AnyString>
+borderTopWidth?: ConditionalValue<UtilityValues["borderTopWidth"] | CssVars | CssProperties["borderTopWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -1607,7 +1607,7 @@ borderTopWidth?: ConditionalValue<CssProperties["borderTopWidth"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-width
    */
-borderWidth?: ConditionalValue<CssProperties["borderWidth"] | AnyString>
+borderWidth?: ConditionalValue<UtilityValues["borderWidth"] | CssVars | CssProperties["borderWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -4433,7 +4433,7 @@ outlineStyle?: ConditionalValue<CssVars | CssProperties["outlineStyle"] | AnyStr
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-width
    */
-outlineWidth?: ConditionalValue<CssProperties["outlineWidth"] | AnyString>
+outlineWidth?: ConditionalValue<UtilityValues["outlineWidth"] | CssVars | CssProperties["outlineWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -5809,7 +5809,7 @@ strokeOpacity?: ConditionalValue<CssProperties["strokeOpacity"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/stroke-width
    */
-strokeWidth?: ConditionalValue<CssProperties["strokeWidth"] | AnyString>
+strokeWidth?: ConditionalValue<UtilityValues["strokeWidth"] | CssVars | CssProperties["strokeWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since August 2021.
    *
@@ -7282,7 +7282,7 @@ marginStart?: ConditionalValue<UtilityValues["marginInlineStart"] | CssVars | Cs
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/outline-width
    */
-ringWidth?: ConditionalValue<CssProperties["outlineWidth"] | AnyString>
+ringWidth?: ConditionalValue<UtilityValues["outlineWidth"] | CssVars | CssProperties["outlineWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since July 2015.
    *
@@ -7740,7 +7740,7 @@ borderX?: ConditionalValue<UtilityValues["borderInline"] | CssVars | CssProperti
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-width
    */
-borderXWidth?: ConditionalValue<CssProperties["borderInlineWidth"] | AnyString>
+borderXWidth?: ConditionalValue<UtilityValues["borderInlineWidth"] | CssVars | CssProperties["borderInlineWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -7780,7 +7780,7 @@ borderY?: ConditionalValue<UtilityValues["borderBlock"] | CssVars | CssPropertie
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-block-width
    */
-borderYWidth?: ConditionalValue<CssProperties["borderBlockWidth"] | AnyString>
+borderYWidth?: ConditionalValue<UtilityValues["borderBlockWidth"] | CssVars | CssProperties["borderBlockWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since April 2021.
    *
@@ -7820,7 +7820,7 @@ borderStart?: ConditionalValue<UtilityValues["borderInlineStart"] | CssVars | Cs
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-start-width
    */
-borderStartWidth?: ConditionalValue<CssProperties["borderInlineStartWidth"] | AnyString>
+borderStartWidth?: ConditionalValue<UtilityValues["borderInlineStartWidth"] | CssVars | CssProperties["borderInlineStartWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -7862,7 +7862,7 @@ borderEnd?: ConditionalValue<UtilityValues["borderInlineEnd"] | CssVars | CssPro
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/Reference/Properties/border-inline-end-width
    */
-borderEndWidth?: ConditionalValue<CssProperties["borderInlineEndWidth"] | AnyString>
+borderEndWidth?: ConditionalValue<UtilityValues["borderInlineEndWidth"] | CssVars | CssProperties["borderInlineEndWidth"] | AnyString>
  /**
    * This feature is well established and works across many devices and browser versions. It’s been available across browsers since January 2020.
    *
@@ -7953,8 +7953,8 @@ scrollPaddingX?: ConditionalValue<UtilityValues["scrollPaddingInline"] | CssVars
  focusRingOffset?: ConditionalValue<UtilityValues["focusRingOffset"] | CssVars | AnyString>
  focusRingWidth?: ConditionalValue<UtilityValues["focusRingWidth"] | CssVars | AnyString>
  focusRingStyle?: ConditionalValue<UtilityValues["focusRingStyle"] | CssVars | AnyString>
- divideX?: ConditionalValue<string | number | AnyString>
- divideY?: ConditionalValue<string | number | AnyString>
+ divideX?: ConditionalValue<UtilityValues["divideX"] | CssVars | AnyString>
+ divideY?: ConditionalValue<UtilityValues["divideY"] | CssVars | AnyString>
  divideColor?: ConditionalValue<UtilityValues["divideColor"] | CssVars | AnyString>
  divideStyle?: ConditionalValue<UtilityValues["divideStyle"] | CssVars | AnyString>
  boxSize?: ConditionalValue<UtilityValues["boxSize"] | CssVars | AnyString>
