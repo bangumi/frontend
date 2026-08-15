@@ -915,9 +915,17 @@ const tokens = {
     value: '#C9CBD1',
     variable: 'var(--colors-neutral-300)',
   },
+  'colors.neutral.350': {
+    value: '#C5C7CE',
+    variable: 'var(--colors-neutral-350)',
+  },
   'colors.neutral.400': {
     value: '#9A9CA3',
     variable: 'var(--colors-neutral-400)',
+  },
+  'colors.neutral.425': {
+    value: '#9B9EA8',
+    variable: 'var(--colors-neutral-425)',
   },
   'colors.neutral.450': {
     value: '#979AA3',
@@ -938,6 +946,10 @@ const tokens = {
   'colors.neutral.750': {
     value: '#545761',
     variable: 'var(--colors-neutral-750)',
+  },
+  'colors.neutral.775': {
+    value: '#858994',
+    variable: 'var(--colors-neutral-775)',
   },
   'colors.neutral.800': {
     value: '#34373E',
@@ -2210,6 +2222,14 @@ const tokens = {
     value: 'var(--colors-color-palette-150)',
     variable: 'var(--colors-color-palette-150)',
   },
+  'colors.colorPalette.350': {
+    value: 'var(--colors-color-palette-350)',
+    variable: 'var(--colors-color-palette-350)',
+  },
+  'colors.colorPalette.425': {
+    value: 'var(--colors-color-palette-425)',
+    variable: 'var(--colors-color-palette-425)',
+  },
   'colors.colorPalette.450': {
     value: 'var(--colors-color-palette-450)',
     variable: 'var(--colors-color-palette-450)',
@@ -2217,6 +2237,10 @@ const tokens = {
   'colors.colorPalette.750': {
     value: 'var(--colors-color-palette-750)',
     variable: 'var(--colors-color-palette-750)',
+  },
+  'colors.colorPalette.775': {
+    value: 'var(--colors-color-palette-775)',
+    variable: 'var(--colors-color-palette-775)',
   },
   'colors.colorPalette.850': {
     value: 'var(--colors-color-palette-850)',
