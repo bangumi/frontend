@@ -22,3 +22,19 @@ export const EMOJI_ARRAY = [
 ];
 
 export const STICKER_DOMAIN_URL = 'https://lain.bgm.tv';
+
+// Bangumi 角色贴纸 (musume_XX)/(blake_XX)。id 范围与旧站 smilies_list 一致：
+// musume 缺失 97、98（这两个编号为 blake 专属）
+export const CHARACTER_STICKER_SETS = [
+  {
+    prefix: 'musume',
+    ranges: [
+      { start: 1, end: 96 },
+      { start: 99, end: 118 },
+    ],
+  },
+  {
+    prefix: 'blake',
+    ranges: [{ start: 1, end: 98 }],
+  },
+] as const;

@@ -83,8 +83,34 @@ function convertUrlNode(node: CodeVNode, context: BBCodeConverterContext): VNode
   return convertLink(href, children);
 }
 
+// (musume_03)/(blake_03) 角色贴纸，图片为 240x240 大图，需限制显示宽度
+function convertCharacterStickerNode(stickerId: string): VNode {
+  const m = stickerId.match(/^\((musume|blake)_(\d+)\)$/);
+  if (!m) {
+    throw new UnreadableCodeError('BUG: unexpected sticker id', stickerId);
+  }
+  const [, prefix, id] = m;
+  const code = `${prefix}_${id}`;
+  return {
+    type: 'img',
+    props: {
+      src: `${STICKER_DOMAIN_URL}/img/smiles/${prefix}/${code}.gif`,
+      smileid: code,
+      alt: stickerId,
+    },
+    style: {
+      'max-width': '55px',
+      height: 'auto',
+      'vertical-align': 'bottom',
+    },
+  };
+}
+
 function convertStickerNode(node: CodeVNode): VNode | string {
   const stickerId = node.props!.stickerId!;
+  if (stickerId.startsWith('(musume_') || stickerId.startsWith('(blake_')) {
+    return convertCharacterStickerNode(stickerId);
+  }
   let id = -1;
   if (stickerId.startsWith(BGM_STICKER_START_STR)) {
     const m = stickerId.match(/\d+/)?.[0];

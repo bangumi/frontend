@@ -246,4 +246,12 @@ describe('html render bbcode string', () => {
     expect(render('(bgm38)')).toContain('/img/smiles/tv/15.gif');
     expect(render('(bgm11)')).toContain('/img/smiles/bgm/11.gif');
   });
+  test('should render character sticker', () => {
+    expect(render('(musume_03)')).toBe(
+      '<img src="https://lain.bgm.tv/img/smiles/musume/musume_03.gif" smileid="musume_03" alt="(musume_03)" style="max-width:55px;height:auto;vertical-align:bottom"/>',
+    );
+    expect(render('(blake_03)')).toBe(
+      '<img src="https://lain.bgm.tv/img/smiles/blake/blake_03.gif" smileid="blake_03" alt="(blake_03)" style="max-width:55px;height:auto;vertical-align:bottom"/>',
+    );
+  });
 });

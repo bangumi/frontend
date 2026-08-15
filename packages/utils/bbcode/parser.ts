@@ -1,5 +1,10 @@
 import { UnreadableCodeError } from '../index';
-import { BGM_STICKER_START_STR, EMOJI_ARRAY, MAX_EMOJI_LENGTH } from './constants';
+import {
+  BGM_STICKER_START_STR,
+  CHARACTER_STICKER_SETS,
+  EMOJI_ARRAY,
+  MAX_EMOJI_LENGTH,
+} from './constants';
 import type { BBCodeOptions, BBCodeTag, CodeNodeTypes, CodeVNode } from './types';
 
 const INVALID_NODE_MSG = 'invalid node';
@@ -201,6 +206,10 @@ export class Parser {
 
   private parseStickerNode(): CodeNodeTypes {
     if (!this.startsWith(BGM_STICKER_START_STR)) {
+      const characterSticker = this.parseCharacterStickerNode();
+      if (characterSticker !== undefined) {
+        return characterSticker;
+      }
       const target = this.input.slice(this.pos, this.pos + MAX_EMOJI_LENGTH);
       const emoji = EMOJI_ARRAY.find((s) => target.startsWith(s));
       if (!emoji) {
@@ -230,6 +239,38 @@ export class Parser {
         stickerId: `(bgm${id})`,
       },
     };
+  }
+
+  // (musume_03) 形式的角色贴纸；编号格式与旧站 %02d 一致且必须是有效 id
+  private parseCharacterStickerNode(): CodeNodeTypes | undefined {
+    for (const { prefix, ranges } of CHARACTER_STICKER_SETS) {
+      const startStr = `(${prefix}_`;
+      if (!this.startsWith(startStr)) {
+        continue;
+      }
+      const rest = this.input.slice(this.pos + startStr.length);
+      const m = rest.match(/^(\d{2,3})\)/);
+      if (!m) {
+        continue;
+      }
+      const idStr = m[1]!;
+      const id = parseInt(idStr, 10);
+      // 拒绝前导零（如 musume_031），旧站只识别 %02d 格式的编号
+      if (idStr !== String(id).padStart(2, '0')) {
+        continue;
+      }
+      if (!ranges.some(({ start, end }) => id >= start && id <= end)) {
+        continue;
+      }
+      this.pos += startStr.length + idStr.length + 1; // +1 消费 ')'
+      return {
+        type: 'sticker',
+        props: {
+          stickerId: `(${prefix}_${idStr})`,
+        },
+      };
+    }
+    return undefined;
   }
 
   // @TODO 暂时只支持 Bangumi 的 bbcode; 不支持 [style size="30px"]Large Text[/style]

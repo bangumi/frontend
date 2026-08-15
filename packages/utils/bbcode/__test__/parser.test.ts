@@ -275,6 +275,32 @@ describe('bbcode parser', () => {
     const tests: CodeNodeTypes[] = ['(bgm', 'ab)', '(bgm38a'];
     expect(getNodes(input)).toEqual(expect.arrayContaining(tests));
   });
+  test('character sticker', () => {
+    const input = '(musume_03)(blake_03)(musume_97)(musume_118)';
+    expect(getNodes(input)).toEqual([
+      {
+        type: 'sticker',
+        props: { stickerId: '(musume_03)' },
+      },
+      {
+        type: 'sticker',
+        props: { stickerId: '(blake_03)' },
+      },
+      // musume 缺失 97、98，按文本保留（与无效 sticker 行为一致，拆为两节点）
+      '(',
+      'musume_97)',
+      {
+        type: 'sticker',
+        props: { stickerId: '(musume_118)' },
+      },
+    ]);
+  });
+  test('invalid character sticker', () => {
+    // 前导零 / 个位数编号不被识别
+    const input = '(blake_031)(musume_3)';
+    expect(getNodes(input)).toEqual(['(', 'blake_031)', '(', 'musume_3)']);
+    expect(getNodes(input).join('')).toEqual(input);
+  });
   test('invalid [code] /code] bbcode', () => {
     const input = '[code]测试中/code]';
     expect(getNodes(input).join('')).toEqual(input);
