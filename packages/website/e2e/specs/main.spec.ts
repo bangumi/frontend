@@ -63,18 +63,17 @@ test.describe('main page', () => {
     await expect(page.getByRole('button', { name: '搜索' })).toBeVisible();
     // 通知铃铛与用户面板「提醒」都指向 /notifications，用可访问名区分
     await expect(page.getByRole('link', { name: '通知' })).toBeVisible();
-    await expect(page.locator('header a[href="/user/382951"]')).toBeVisible();
+    // 头像与用户面板「我的时光机」都指向用户主页，用头像 img 区分
+    await expect(page.locator('header a[href="/user/382951"] img')).toBeVisible();
   });
 
   test('登录用户可以看到收藏菜单', async ({ page }) => {
     useFixtures(page);
     await page.goto('/');
-    await expect(
-      page
-        .locator('div')
-        .filter({ hasText: '全部动画书籍音乐游戏三次元人物' })
-        .getByRole('img')
-        .first(),
-    ).toBeVisible();
+
+    // 展开动画频道下拉，登录用户可见「我看」收藏组
+    await page.getByRole('link', { name: '动画' }).first().hover();
+    await expect(page.getByText('我看')).toBeVisible();
+    await expect(page.getByRole('link', { name: '在看' })).toBeVisible();
   });
 });
