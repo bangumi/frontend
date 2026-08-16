@@ -679,7 +679,7 @@ function CharactersSection({
             <p className={cx(coverTitle, characterCoverTitle)}>
               <Link to={getCharacterLink(character.id)}>{character.nameCN || character.name}</Link>
             </p>
-            {casts.map((cast) => (
+            {casts.slice(0, 3).map((cast) => (
               <p key={cast.person.id} className={coverInfo}>
                 <span>{CAST_TYPE_DESC[cast.relation] ?? '出演'}</span>{' '}
                 <Link variant='subtle' to={getPersonLink(cast.person.id)}>
