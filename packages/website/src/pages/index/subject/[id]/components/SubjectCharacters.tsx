@@ -77,7 +77,7 @@ const characterInfo = css({ minWidth: '0' });
 const name = css({
   display: 'block',
   marginBottom: '4px',
-  textStyle: 'label',
+  textStyle: 'bodySm',
   overflowWrap: 'anywhere',
 });
 

@@ -25,7 +25,6 @@ import {
   getSubjectCharactersLink,
   getSubjectCommentsLink,
   getSubjectEpisodesLink,
-  getSubjectLink,
   getSubjectRelationsLink,
   getSubjectReviewsLink,
   getSubjectTagLink,
@@ -37,6 +36,7 @@ import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { CAST_TYPE_DESC, COLLECT_DESC } from './subject-common';
+import SubjectMediaCard from './SubjectMediaCard';
 import SubjectSection from './SubjectSection';
 
 const { Link } = Typography;
@@ -221,7 +221,38 @@ const coverItem = css({
   textAlign: 'left',
 });
 
-const coverLink = css({ display: 'block' });
+const thumbnailMediaLink = css({
+  display: 'block',
+  width: '100%',
+  boxSizing: 'border-box',
+  overflow: 'hidden',
+  borderWidth: '1px',
+  borderColor: 'media.frame.border',
+  borderRadius: 'sm',
+  background: 'media.frame.background',
+  boxShadow: 'raised',
+  transitionProperty: 'border-color, box-shadow',
+  transitionDuration: 'fast',
+  transitionTimingFunction: 'standard',
+  _hover: {
+    borderColor: 'media.frame.borderHover',
+    boxShadow: 'media.frame.hover',
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    boxShadow: 'none',
+  },
+  '& > img': {
+    width: '100%',
+    borderWidth: '0',
+    borderRadius: '0',
+    background: 'transparent',
+  },
+});
 
 const cover = css({
   display: 'block',
@@ -251,24 +282,52 @@ const characterCoverItem = css({
 });
 
 const characterCover = css({
-  width: '85px',
+  width: '100%',
   height: 'auto',
   minHeight: '100px',
   aspectRatio: '3 / 4',
 });
 
-const characterCoverTitle = css({ textStyle: 'label' });
+const characterCoverTitle = css({ textStyle: 'bodySm' });
 
 const relationGrid = css({
+  listStyle: 'none',
+  margin: '0',
+  paddingTop: '5',
+  paddingRight: '0',
+  paddingBottom: '0',
+  paddingLeft: '0',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, 80px)',
   columnGap: '3',
-  rowGap: '1',
+  rowGap: '6',
+});
+
+const relationTypeLabel = css({
+  position: 'absolute',
+  top: 'calc(-1 * var(--spacing-5))',
+  left: '0',
+  textStyle: 'meta',
+  color: 'text.tertiary',
 });
 
 const relationCoverItem = css({ width: '80px' });
 
+const relationGroupEnd = css({
+  '&::after': {
+    position: 'absolute',
+    top: 'calc(-1 * var(--spacing-5))',
+    right: 'calc(-1 * var(--spacing-3) / 2)',
+    bottom: '0',
+    width: '1px',
+    background: 'border.subtle',
+    content: '""',
+  },
+});
+
 const recommendationGrid = css({
   flexWrap: 'nowrap',
-  gap: '2',
+  gap: '3',
   overflowX: 'auto',
 });
 
@@ -277,22 +336,21 @@ const recommendationCoverItem = css({
   width: '80px',
 });
 
-const subjectCover = css({
-  width: '75px',
-  height: '75px',
-  aspectRatio: '1',
-});
-
 const coverTitle = css({
-  maxHeight: '52px',
-  marginTop: '1',
-  textStyle: 'bodySm',
+  marginTop: 'component.media.caption',
   overflow: 'hidden',
+  fontSize: 'bodySm',
+  fontWeight: 'normal',
+  lineHeight: '18px',
   overflowWrap: 'break-word',
+  wordBreak: 'break-all',
 });
 
 const coverInfo = css({
-  margin: '0',
+  marginTop: 'component.media.meta',
+  marginRight: '0',
+  marginBottom: '0',
+  marginLeft: '0',
   textStyle: 'meta',
   color: 'text.tertiary',
   overflow: 'hidden',
@@ -302,8 +360,6 @@ const coverInfo = css({
 
 const relationSep = css({
   display: 'block',
-  width: '100%',
-  height: '18px',
   textStyle: 'meta',
   color: 'text.tertiary',
 });
@@ -609,11 +665,12 @@ function CharactersSection({
           <li key={character.id} className={cx(coverItem, characterCoverItem)}>
             <Link
               to={getCharacterLink(character.id)}
-              className={coverLink}
+              className={thumbnailMediaLink}
+              noStyle
               title={character.nameCN || character.name}
             >
               <img
-                src={character.images?.grid}
+                src={character.images?.medium}
                 className={cx(cover, characterCover)}
                 loading='lazy'
                 alt=''
@@ -648,7 +705,6 @@ function RelationsSection({
   if (relations.length === 0) {
     return null;
   }
-  let lastRelationId: number | null = null;
 
   return (
     <SubjectSection
@@ -659,30 +715,25 @@ function RelationsSection({
         </Link>
       }
     >
-      <ul className={cx(coverGrid, relationGrid)}>
-        {relations.map(({ subject, relation }) => {
-          const showSep = relation.id !== lastRelationId;
-          lastRelationId = relation.id;
+      <ul className={relationGrid} aria-label='关联条目列表'>
+        {relations.map(({ subject, relation }, index) => {
+          const isGroupStart = index === 0 || relations[index - 1]?.relation.id !== relation.id;
+          const isGroupEnd =
+            index === relations.length - 1 || relations[index + 1]?.relation.id !== relation.id;
+          const showGroupDivider = isGroupEnd && index < relations.length - 1;
+
           return (
-            <li key={subject.id} className={cx(coverItem, relationCoverItem)}>
-              {showSep && <span className={relationSep}>{relation.cn}</span>}
-              <Link
-                to={getSubjectLink(subject.id)}
-                className={coverLink}
-                title={subject.nameCN || subject.name}
-              >
-                <img
-                  src={subject.images?.grid}
-                  className={cx(cover, subjectCover)}
-                  loading='lazy'
-                  alt=''
-                />
-              </Link>
-              <p className={coverTitle}>
-                <Link variant='subtle' to={getSubjectLink(subject.id)}>
-                  {subject.name}
-                </Link>
-              </p>
+            <li
+              key={subject.id}
+              className={cx(coverItem, relationCoverItem, showGroupDivider && relationGroupEnd)}
+            >
+              {isGroupStart && <span className={relationTypeLabel}>{relation.cn}</span>}
+              <SubjectMediaCard
+                subjectId={subject.id}
+                name={subject.name}
+                nameCN={subject.nameCN}
+                imageUrl={subject.images?.medium}
+              />
             </li>
           );
         })}
@@ -701,23 +752,12 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
       <ul className={cx(coverGrid, recommendationGrid)}>
         {recs.map(({ subject }) => (
           <li key={subject.id} className={cx(coverItem, recommendationCoverItem)}>
-            <Link
-              to={getSubjectLink(subject.id)}
-              className={coverLink}
-              title={subject.nameCN || subject.name}
-            >
-              <img
-                src={subject.images?.grid}
-                className={cx(cover, subjectCover)}
-                loading='lazy'
-                alt=''
-              />
-            </Link>
-            <p className={coverTitle}>
-              <Link variant='subtle' to={getSubjectLink(subject.id)}>
-                {subject.name}
-              </Link>
-            </p>
+            <SubjectMediaCard
+              subjectId={subject.id}
+              name={subject.name}
+              nameCN={subject.nameCN}
+              imageUrl={subject.images?.medium}
+            />
           </li>
         ))}
       </ul>

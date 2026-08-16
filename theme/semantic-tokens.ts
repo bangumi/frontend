@@ -34,6 +34,13 @@ export const semanticColors = defineSemanticTokens.colors({
     DEFAULT: { value: { base: '{colors.gray.300}', _dark: '{colors.gray.600}' } },
     strong: { value: { base: '{colors.gray.400}', _dark: '{colors.gray.500}' } },
   },
+  media: {
+    frame: {
+      background: { value: { base: '{colors.white}', _dark: '{colors.gray.800}' } },
+      border: { value: { base: '{colors.gray.300}', _dark: '{colors.gray.600}' } },
+      borderHover: { value: { base: '{colors.gray.400}', _dark: '{colors.gray.500}' } },
+    },
+  },
   link: {
     DEFAULT: { value: { base: '{colors.cyan.500}', _dark: '{colors.cyan.500}' } },
     subtle: { value: { base: '{colors.gray.500}', _dark: '{colors.gray.500}' } },
@@ -70,6 +77,26 @@ export const semanticBorders = defineSemanticTokens.borders({
   },
 });
 
+/** 独立表面语义：操作面板的投影可独立于媒体与浮层调整。 */
+export const semanticShadows = defineSemanticTokens.shadows({
+  media: {
+    frame: {
+      hover: {
+        value: {
+          base: '0 4px 12px rgb(0 0 0 / 14%), 0 0 10px color-mix(in srgb, {colors.blue.500} 42%, transparent)',
+          _dark:
+            '0 4px 12px rgb(0 0 0 / 32%), 0 0 12px color-mix(in srgb, {colors.blue.400} 48%, transparent)',
+        },
+      },
+    },
+  },
+  surface: {
+    panel: {
+      shadow: { value: '{shadows.raised}' },
+    },
+  },
+});
+
 /**
  * 布局语义间距：用于稳定的父级布局关系，避免子组件以外边距争夺页面节奏。
  * 组件内部的局部节奏仍直接使用基础 space 刻度。
@@ -85,6 +112,10 @@ export const semanticSpacing = defineSemanticTokens.spacing({
     media: {
       /** 封面等带边框媒体容器的内部留白。 */
       frame: { value: '{spacing.1}' },
+      /** 媒体与其标题之间的垂直节奏。 */
+      caption: { value: '{spacing.2}' },
+      /** 标题与媒体元信息之间的垂直节奏。 */
+      meta: { value: '{spacing.1}' },
     },
   },
   layout: {
