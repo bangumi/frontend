@@ -1763,16 +1763,20 @@
     flex: 0 0 32px;
 }
 
-  .bdr_50\% {
-    border-radius: 50%;
-}
-
-  .ov_hidden {
-    overflow: hidden;
+  .bdr_sm {
+    border-radius: var(--radii-sm);
 }
 
   .flex_1_1_auto {
     flex: 1 1 auto;
+}
+
+  .gap_layout\.inline {
+    gap: var(--spacing-layout-inline);
+}
+
+  .ov_hidden {
+    overflow: hidden;
 }
 
   .bdr_3px {
@@ -2095,6 +2099,10 @@
     flex: 0 0 50px;
 }
 
+  .bdr_50\% {
+    border-radius: 50%;
+}
+
   .bd-b_1px_dotted_\#e8e8e8 {
     border-bottom: 1px dotted #e8e8e8;
 }
@@ -2221,10 +2229,6 @@
 
   .bd-c_border\.default {
     border-color: border.default;
-}
-
-  .bdr_sm {
-    border-radius: var(--radii-sm);
 }
 
   .bd-w_2px {
@@ -2387,12 +2391,20 @@
     display: flex;
 }
 
-  .c_text\.tertiary {
-    color: var(--colors-text-tertiary);
-}
-
   .d_block {
     display: block;
+}
+
+  .d_inline-flex {
+    display: inline-flex;
+}
+
+  .ai_center {
+    align-items: center;
+}
+
+  .c_text\.tertiary {
+    color: var(--colors-text-tertiary);
 }
 
   .tov_ellipsis {
@@ -2477,10 +2489,6 @@
 
   .lh_1\.5 {
     line-height: 1.5;
-}
-
-  .ai_center {
-    align-items: center;
 }
 
   .fs_13px {
@@ -3093,10 +3101,6 @@
     grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
-  .d_inline-flex {
-    display: inline-flex;
-}
-
   .trf_scaleY\(0\.72\) {
     transform: scaleY(0.72);
 }
@@ -3593,24 +3597,12 @@
     padding-right: var(--spacing-1);
 }
 
-  .bd-t-w_1px {
-    border-top-width: 1px;
-}
-
-  .bd-t-c_bg\.raised {
-    border-top-color: var(--colors-bg-raised);
-}
-
-  .w_32px {
-    width: 32px;
-}
-
-  .h_32px {
-    height: 32px;
-}
-
   .min-w_0 {
     min-width: var(--sizes-0);
+}
+
+  .max-w_100\% {
+    max-width: 100%;
 }
 
   .w_100\% {
@@ -3751,6 +3743,10 @@
 
   .w_256px {
     width: 256px;
+}
+
+  .h_32px {
+    height: 32px;
 }
 
   .h_14px {
@@ -3939,10 +3935,6 @@
 
   .ml_4px {
     margin-left: 4px;
-}
-
-  .max-w_100\% {
-    max-width: 100%;
 }
 
   .mt_3px {
@@ -4215,6 +4207,10 @@
 
   .pr_4px {
     padding-right: 4px;
+}
+
+  .w_32px {
+    width: 32px;
 }
 
   .h_280px {
@@ -4547,6 +4543,10 @@
 
   .bd-r-w_0 {
     border-right-width: 0;
+}
+
+  .bd-t-w_1px {
+    border-top-width: 1px;
 }
 
   .bd-t-c_border\.subtle {
@@ -5277,8 +5277,8 @@
     border: 2px solid #369cf8;
 }
 
-  .\[\&\:first-child\]\:bd-t_0_none:first-child {
-    border-top: 0 none;
+  .\[\&_\>_li\:not\(\:last-child\)\]\:bd-b_component\.list\.divider > li:not(:last-child) {
+    border-bottom: var(--borders-component-list-divider);
 }
 
   .\[\&_\.bgm-popover__content\]\:ov_visible .bgm-popover__content {
@@ -5601,6 +5601,10 @@
     border-radius: 0;
 }
 
+  .\[\&_li\]\:gap_layout\.group li {
+    gap: var(--spacing-layout-group);
+}
+
   .\[\&_li\]\:py_component\.list\.rowBlock li {
     padding-block: var(--spacing-component-list-row-block);
 }
@@ -5615,10 +5619,6 @@
 
   .\[\&_\>_li\]\:py_component\.list\.rowBlock > li {
     padding-block: var(--spacing-component-list-row-block);
-}
-
-  .\[\&_\>_li\:not\(\:last-child\)\]\:bd-b_component\.list\.divider > li:not(:last-child) {
-    border-bottom: var(--borders-component-list-divider);
 }
 
   .\[\&\.bgm-input__wrapper\]\:bdr_0.bgm-input__wrapper {
@@ -5679,6 +5679,10 @@
 
   .\[\&_li\]\:gap_6px li {
     gap: 6px;
+}
+
+  .\[\&_img\]\:bdr_inherit img {
+    border-radius: inherit;
 }
 
   .\[\&\.bgm-button--secondary\]\:bd-c_border\.subtle.bgm-button--secondary {
@@ -5793,8 +5797,19 @@
     border-radius: 11px;
 }
 
-  .\[\&_img\]\:obj-f_cover img {
-    object-fit: cover;
+  .\[\&_\.bgm-avatar\]\:trs-prop_border-color\,_box-shadow .bgm-avatar {
+    --transition-prop: border-color, box-shadow;
+    transition-property: border-color, box-shadow;
+}
+
+  .\[\&_\.bgm-avatar\]\:trs-dur_fast .bgm-avatar {
+    --transition-duration: var(--durations-fast);
+    transition-duration: var(--durations-fast);
+}
+
+  .\[\&_\.bgm-avatar\]\:trs-tmf_standard .bgm-avatar {
+    --transition-easing: var(--easings-standard);
+    transition-timing-function: var(--easings-standard);
 }
 
   .\[\&_\.bgm-popover__container\]\:ai_flex-start .bgm-popover__container {
@@ -6143,6 +6158,10 @@
 
   .\[\&_img\]\:d_block img {
     display: block;
+}
+
+  .\[\&_img\]\:obj-f_cover img {
+    object-fit: cover;
 }
 
   .\[\&_div\]\:d_flex div {
@@ -6805,10 +6824,6 @@
     display: inline;
 }
 
-  .\[\&_img\]\:va_middle img {
-    vertical-align: middle;
-}
-
   .\[\&\.bgm-button--primary\]\:bg-c_accent.bgm-button--primary {
     background-color: var(--colors-accent);
 }
@@ -7308,14 +7323,6 @@
     color: var(--colors-link-subtle);
 }
 
-  .\[\&_img\]\:w_100\% img {
-    width: 100%;
-}
-
-  .\[\&_img\]\:h_100\% img {
-    height: 100%;
-}
-
   .\[\&_div\]\:h_78px div {
     height: 78px;
 }
@@ -7650,6 +7657,14 @@
 
   .\[\&\[data-active\]\]\:bd-b-c_\#f09199[data-active] {
     border-bottom-color: #f09199;
+}
+
+  .\[\&_img\]\:w_100\% img {
+    width: 100%;
+}
+
+  .\[\&_img\]\:h_100\% img {
+    height: 100%;
 }
 
   .\[\&_\.bgm-editor__container\]\:min-h_200px .bgm-editor__container {
@@ -8084,7 +8099,15 @@
     width: 70px;
 }
 
-  .\[\&\:link\,_\&\:visited\,_\&\:active\]\:td_none:link,.\[\&\:link\,_\&\:visited\,_\&\:active\]\:td_none:visited,.\[\&\:link\,_\&\:visited\,_\&\:active\]\:td_none:active,.focusVisible\:td_none:is(:focus-visible, [data-focus-visible]) {
+  .\[\&\:link\,_\&\:visited\,_\&\:active\]\:td_none:link,.\[\&\:link\,_\&\:visited\,_\&\:active\]\:td_none:visited,.\[\&\:link\,_\&\:visited\,_\&\:active\]\:td_none:active {
+    text-decoration: none;
+}
+
+  .focusVisible\:ring_2px_solid:is(:focus-visible, [data-focus-visible]) {
+    outline: 2px solid;
+}
+
+  .focusVisible\:td_none:is(:focus-visible, [data-focus-visible]) {
     text-decoration: none;
 }
 
@@ -8094,10 +8117,6 @@
 
   .focus\:bd-c_\#f09199:is(:focus, [data-focus]) {
     border-color: #f09199;
-}
-
-  .focusVisible\:ring_2px_solid:is(:focus-visible, [data-focus-visible]) {
-    outline: 2px solid;
 }
 
   .focus\:ring_none:is(:focus, [data-focus]) {
@@ -9220,12 +9239,20 @@
     opacity: 1;
 }
 
+  .hover\:\[\&_\.bgm-avatar\]\:bd-c_media\.frame\.borderHover:is(:hover, [data-hover]) .bgm-avatar {
+    border-color: var(--colors-media-frame-border-hover);
+}
+
   .hover\:\[\&_a\:first-of-type\]\:bd-r_2px_solid_\#f5a4ab:is(:hover, [data-hover]) a:first-of-type {
     border-right: 2px solid #f5a4ab;
 }
 
   .\[\&\.bgm-menu-item--underline\:hover\]\:\[\&\:\:after\]\:bdr_2px.bgm-menu-item--underline:hover::after {
     border-radius: 2px;
+}
+
+  .hover\:\[\&_\.bgm-avatar\]\:bx-sh_media\.frame\.hover:is(:hover, [data-hover]) .bgm-avatar {
+    box-shadow: var(--shadows-media-frame-hover);
 }
 
   .\[\&_\.bgm-menu-item--underline\:hover\]\:\[\&\:\:after\]\:bg-c_\#f09199 .bgm-menu-item--underline:hover::after {
@@ -9282,6 +9309,10 @@
 
   .\[\&\.bgm-menu-item--underline\:hover\]\:\[\&\:\:after\]\:h_4px.bgm-menu-item--underline:hover::after {
     height: 4px;
+}
+
+  .active\:\[\&_\.bgm-avatar\]\:bx-sh_none:is(:active, [data-active]) .bgm-avatar {
+    box-shadow: none;
 }
 
   .\[\&_li\]\:\[\&_a\]\:hover\:bg_\#fafafa li a:is(:hover, [data-hover]) {

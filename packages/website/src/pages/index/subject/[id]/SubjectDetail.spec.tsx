@@ -108,6 +108,7 @@ describe('SubjectDetail', () => {
     const recommendationImage = within(await screen.findByTitle('推荐动画')).getByAltText('');
     expect(recommendationImage).toHaveClass('w_100%', 'h_100%');
     expect(await screen.findByText('测试动画长评')).toBeInTheDocument();
+    expect(screen.getByText('这是一篇长评')).toBeInTheDocument();
     expect(await screen.findByText('讨论版测试话题')).toBeInTheDocument();
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();
   });

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import React from 'react';
 
 import type { SlimUser } from '@bangumi/client/client';
-import { Rate, Typography } from '@bangumi/design';
+import { Avatar, Rate, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
@@ -25,6 +25,9 @@ const list = css({
   marginLeft: '1',
   padding: '0',
   listStyle: 'none',
+  '& > li:not(:last-child)': {
+    borderBottom: 'component.list.divider',
+  },
 });
 
 const item = css({
@@ -33,24 +36,44 @@ const item = css({
   paddingTop: '1',
   paddingRight: '1',
   paddingBottom: '1',
-  borderTopWidth: '1px',
-  borderTopColor: 'bg.raised',
-  borderBottomWidth: '1px',
-  borderBottomColor: 'border.subtle',
-  '&:first-child': { borderTop: '0 none' },
 });
 
-/** 32px 圆形头像，对齐旧版 avatarSize32 */
+/** 收藏用户头像链接；媒体本体由共享 Avatar 组件维护。 */
 const avatar = css({
   flex: '0 0 32px',
-  width: '32px',
-  height: '32px',
-  borderRadius: '50%',
-  overflow: 'hidden',
-  '& img': { width: '100%', height: '100%', objectFit: 'cover' },
+  display: 'block',
+  borderRadius: 'sm',
+  '& .bgm-avatar': {
+    transitionProperty: 'border-color, box-shadow',
+    transitionDuration: 'fast',
+    transitionTimingFunction: 'standard',
+  },
+  _hover: {
+    '& .bgm-avatar': {
+      borderColor: 'media.frame.borderHover',
+      boxShadow: 'media.frame.hover',
+    },
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    '& .bgm-avatar': {
+      boxShadow: 'none',
+    },
+  },
 });
 
 const body = css({ flex: '1 1 auto', minWidth: '0' });
+
+const userSummary = css({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 'layout.inline',
+  maxWidth: '100%',
+});
 
 const userName = css({
   textStyle: 'bodySm',
@@ -111,13 +134,19 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
                 className={avatar}
                 title={user.nickname}
               >
-                <img src={user.avatar.large} alt={user.nickname} />
+                <Avatar src={user.avatar.large} size='xsmall' alt={user.nickname} />
               </Link>
               <div className={body}>
-                <Link variant='subtle' to={getUserProfileLink(user.username)} className={userName}>
-                  {user.nickname}
-                </Link>
-                {rate != null && rate > 0 && <Rate value={rate} />}
+                <div className={userSummary}>
+                  <Link
+                    variant='subtle'
+                    to={getUserProfileLink(user.username)}
+                    className={userName}
+                  >
+                    {user.nickname}
+                  </Link>
+                  {rate != null && rate > 0 && <Rate value={rate} />}
+                </div>
                 {itemStatus != null && (
                   <>
                     <br />

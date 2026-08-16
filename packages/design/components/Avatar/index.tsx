@@ -19,12 +19,15 @@ export interface AvatarProps {
 const avatar = css({
   display: 'inline-block',
   boxSizing: 'border-box',
-  borderRadius: '6px',
-  border: '1px solid #e8e3e3',
+  overflow: 'hidden',
+  borderWidth: '1px',
+  borderColor: 'media.frame.border',
+  borderRadius: 'sm',
+  background: 'media.frame.background',
   '& img': {
+    display: 'block',
     objectFit: 'cover',
-    verticalAlign: 'middle',
-    borderRadius: '6px',
+    borderRadius: 'inherit',
   },
 });
 

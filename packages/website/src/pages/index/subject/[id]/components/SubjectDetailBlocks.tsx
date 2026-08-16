@@ -370,6 +370,8 @@ const textList = css({
   margin: '0',
   padding: '0',
   '& li': {
+    display: 'flex',
+    gap: 'layout.group',
     paddingBlock: 'component.list.rowBlock',
   },
   '& li:first-child': {
@@ -380,9 +382,21 @@ const textList = css({
   },
 });
 
+const textContent = css({ flex: '1', minWidth: '0' });
+
+const reviewAvatarLink = css({ marginTop: '1' });
+
 const textTitle = css({
   textStyle: 'titleSm',
   wordBreak: 'break-all',
+});
+
+const textSummary = css({
+  marginTop: '1',
+  marginBottom: '0',
+  color: 'text.secondary',
+  textStyle: 'bodySm',
+  overflowWrap: 'break-word',
 });
 
 const textInfo = css({
@@ -461,6 +475,32 @@ const commentList = css({
   },
   '& > li:not(:last-child)': {
     borderBottom: 'component.list.divider',
+  },
+});
+
+const commentAvatarLink = css({
+  display: 'block',
+  borderRadius: 'sm',
+  '& .bgm-avatar': {
+    transitionProperty: 'border-color, box-shadow',
+    transitionDuration: 'fast',
+    transitionTimingFunction: 'standard',
+  },
+  _hover: {
+    '& .bgm-avatar': {
+      borderColor: 'media.frame.borderHover',
+      boxShadow: 'media.frame.hover',
+    },
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    '& .bgm-avatar': {
+      boxShadow: 'none',
+    },
   },
 });
 
@@ -783,18 +823,28 @@ function ReviewsSection({ subjectId, reviews }: { subjectId: number; reviews: Su
         {reviews.map((review) => (
           <li key={review.id}>
             <Link
-              to={getBlogLink(review.entry.id)}
-              className={textTitle}
-              title={review.entry.title}
+              to={getUserProfileLink(review.user.username)}
+              className={cx(commentAvatarLink, reviewAvatarLink)}
+              title={review.user.nickname}
             >
-              {review.entry.title}
+              <Avatar src={review.user.avatar.medium} size='post' alt={review.user.nickname} />
             </Link>
-            <p className={textInfo}>
-              <Link variant='subtle' to={getUserProfileLink(review.user.username)}>
-                {review.user.nickname}
+            <div className={textContent}>
+              <Link
+                to={getBlogLink(review.entry.id)}
+                className={textTitle}
+                title={review.entry.title}
+              >
+                {review.entry.title}
               </Link>
-              <span>{dayjs.unix(review.entry.updatedAt).format('YYYY-M-D')}</span>
-            </p>
+              {review.entry.summary !== '' && <p className={textSummary}>{review.entry.summary}</p>}
+              <p className={textInfo}>
+                <Link variant='subtle' to={getUserProfileLink(review.user.username)}>
+                  {review.user.nickname}
+                </Link>
+                <span>{dayjs.unix(review.entry.updatedAt).format('YYYY-M-D')}</span>
+              </p>
+            </div>
           </li>
         ))}
       </ul>
@@ -863,7 +913,7 @@ function CommentsSection({
       <ul className={commentList}>
         {comments.map((comment) => (
           <li key={comment.id}>
-            <Link to={getUserProfileLink(comment.user.username)}>
+            <Link to={getUserProfileLink(comment.user.username)} className={commentAvatarLink}>
               <Avatar src={comment.user.avatar.medium} size='small' alt='' />
             </Link>
             <div className={commentInfo}>
