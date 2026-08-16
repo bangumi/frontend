@@ -7,29 +7,37 @@ import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages';
 
 const { Link } = Typography;
 
-const panel = css({ margin: '0 0 15px' });
+const panel = css({ marginBottom: '4' });
 
 const panelTitle = css({
   margin: '0',
-  padding: '5px 0',
-  borderBottom: '1px solid #e8e3e3',
-  color: '#595555',
-  fontSize: '15px',
-  fontWeight: '300',
+  paddingTop: '1',
+  paddingBottom: '1',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
+  color: 'text.primary',
+  textStyle: 'titleSm',
+  fontWeight: 'normal',
 });
 
 const list = css({
-  margin: '0 5px 5px',
+  marginRight: '1',
+  marginBottom: '1',
+  marginLeft: '1',
   padding: '0',
   listStyle: 'none',
 });
 
 const item = css({
   display: 'flex',
-  gap: '10px',
-  padding: '5px 5px 5px 0',
-  borderTop: '1px solid #fff',
-  borderBottom: '1px solid #e0e0e0',
+  gap: '3',
+  paddingTop: '1',
+  paddingRight: '1',
+  paddingBottom: '1',
+  borderTopWidth: '1px',
+  borderTopColor: 'bg.raised',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
   '&:first-child': { borderTop: '0 none' },
 });
 
@@ -51,21 +59,22 @@ const indexTitle = css({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  textStyle: 'label',
 });
 
 // 对齐旧版 `<a>标题</a><br /><small>by ...</small>`：by 作者始终换行显示
 const indexBy = css({
   display: 'block',
-  color: '#9f9b9b',
-  fontSize: '10px',
-  '& a': { color: '#9f9b9b' },
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 /** 底部提示行（更多目录等），对齐旧版 tip_i */
 const tips = css({
-  margin: '0 5px',
-  color: '#ccc',
-  fontSize: '12px',
+  marginRight: '1',
+  marginLeft: '1',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 export interface IndexSidePanelProps {
@@ -103,7 +112,7 @@ const IndexSidePanel: React.FC<IndexSidePanelProps> = ({ indexes, moreLink, extr
               {index.user != null && (
                 <small className={indexBy}>
                   by{' '}
-                  <Link to={getUserProfileLink(index.user.username)} noStyle>
+                  <Link variant='subtle' to={getUserProfileLink(index.user.username)}>
                     {index.user.nickname}
                   </Link>
                 </small>
@@ -114,11 +123,17 @@ const IndexSidePanel: React.FC<IndexSidePanelProps> = ({ indexes, moreLink, extr
       </ul>
       <span className={tips}>
         {' '}
-        / <Link to={moreLink}>更多目录</Link>
+        /{' '}
+        <Link variant='subtle' to={moreLink}>
+          更多目录
+        </Link>
         {extraLink != null && (
           <>
             {' '}
-            / <Link to={extraLink.to}>{extraLink.label}</Link>
+            /{' '}
+            <Link variant='subtle' to={extraLink.to}>
+              {extraLink.label}
+            </Link>
           </>
         )}
       </span>

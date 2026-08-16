@@ -8,29 +8,37 @@ import { getUserProfileLink } from '@bangumi/utils/pages';
 
 const { Link } = Typography;
 
-const panel = css({ margin: '0 0 15px' });
+const panel = css({ marginBottom: '4' });
 
 const panelTitle = css({
   margin: '0',
-  padding: '5px 0',
-  borderBottom: '1px solid #e8e3e3',
-  color: '#595555',
-  fontSize: '15px',
-  fontWeight: '300',
+  paddingTop: '1',
+  paddingBottom: '1',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
+  color: 'text.primary',
+  textStyle: 'titleSm',
+  fontWeight: 'normal',
 });
 
 const list = css({
-  margin: '0 5px 5px',
+  marginRight: '1',
+  marginBottom: '1',
+  marginLeft: '1',
   padding: '0',
   listStyle: 'none',
 });
 
 const item = css({
   display: 'flex',
-  gap: '10px',
-  padding: '5px 5px 5px 0',
-  borderTop: '1px solid #fff',
-  borderBottom: '1px solid #e0e0e0',
+  gap: '3',
+  paddingTop: '1',
+  paddingRight: '1',
+  paddingBottom: '1',
+  borderTopWidth: '1px',
+  borderTopColor: 'bg.raised',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
   '&:first-child': { borderTop: '0 none' },
 });
 
@@ -47,21 +55,20 @@ const avatar = css({
 const body = css({ flex: '1 1 auto', minWidth: '0' });
 
 const userName = css({
-  color: '#1f1c1c',
-  fontSize: '13px',
-  _hover: { color: '#1f1c1c', textDecoration: 'underline' },
+  textStyle: 'bodySm',
 });
 
 const status = css({
-  color: '#9f9b9b',
-  fontSize: '10px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 /** 底部提示行（人数统计/更多链接），对齐旧版 tip_i */
 const tips = css({
-  margin: '0 5px',
-  color: '#ccc',
-  fontSize: '12px',
+  marginRight: '1',
+  marginLeft: '1',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 export interface CollectSidePanelItem {
@@ -109,7 +116,7 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
                 <img src={user.avatar.large} alt={user.nickname} />
               </Link>
               <div className={body}>
-                <Link to={getUserProfileLink(user.username)} noStyle className={userName}>
+                <Link variant='subtle' to={getUserProfileLink(user.username)} className={userName}>
                   {user.nickname}
                 </Link>
                 {rate != null && rate > 0 && <Rate value={rate} />}
@@ -129,7 +136,7 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
           {moreLink != null && (
             <>
               {' '}
-              / <Link to={moreLink}>{moreLabel}</Link>
+              / <Link variant='subtle' to={moreLink}>{moreLabel}</Link>
             </>
           )}
           {stats != null && (
