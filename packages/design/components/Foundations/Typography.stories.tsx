@@ -20,6 +20,7 @@ const styleKeys = [
   'bodyLg',
   'label',
   'titleSm',
+  'sectionTitle',
   'title',
   'display',
 ] as const;
@@ -33,6 +34,11 @@ const textStyles: Record<StyleKey, string> = {
   bodyLg: css({ fontSize: 'bodyLg', lineHeight: 'bodyLg', fontWeight: 'normal' }),
   label: css({ fontSize: 'label', lineHeight: 'label', fontWeight: 'medium' }),
   titleSm: css({ fontSize: 'titleSm', lineHeight: 'titleSm', fontWeight: 'semibold' }),
+  sectionTitle: css({
+    fontSize: 'sectionTitle',
+    lineHeight: 'sectionTitle',
+    fontWeight: 'section',
+  }),
   title: css({ fontSize: 'title', lineHeight: 'title', fontWeight: 'title' }),
   display: css({ fontSize: 'display', lineHeight: 'display', fontWeight: 'title' }),
 };
@@ -80,6 +86,41 @@ const truncated = css({
   whiteSpace: 'nowrap',
 });
 
+const tokenGrid = css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+  gap: '3',
+});
+
+const tokenSample = css({
+  padding: '3',
+  border: '1px solid',
+  borderColor: 'border.subtle',
+  backgroundColor: 'bg.raised',
+});
+
+const sampleLabel = css({
+  display: 'block',
+  marginBottom: '2',
+  fontSize: 'meta',
+  lineHeight: 'meta',
+  color: 'text.tertiary',
+  fontFamily: 'mono',
+});
+
+const sansSample = css({ fontFamily: 'bgmSans', fontSize: 'bodyLg', lineHeight: 'bodyLg' });
+const monoSample = css({ fontFamily: 'mono', fontSize: 'bodyLg', lineHeight: 'bodyLg' });
+const sectionWeightSample = css({
+  fontWeight: 'section',
+  fontSize: 'sectionTitle',
+  lineHeight: 'sectionTitle',
+});
+const titleWeightSample = css({
+  fontWeight: 'title',
+  fontSize: 'sectionTitle',
+  lineHeight: 'sectionTitle',
+});
+
 const meta: Meta = {
   title: 'Foundations/Typography',
   parameters: { layout: 'fullscreen' },
@@ -96,6 +137,32 @@ export const Scale: StoryObj = {
           <p className={textStyles[key]}>{samples.zh}</p>
         </div>
       ))}
+    </div>
+  ),
+};
+
+export const FontTokens: StoryObj = {
+  name: '字体与字重',
+  render: () => (
+    <div className={page}>
+      <div className={tokenGrid}>
+        <div className={tokenSample}>
+          <span className={sampleLabel}>fonts.bgmSans</span>
+          <p className={sansSample}>{samples.mixed}</p>
+        </div>
+        <div className={tokenSample}>
+          <span className={sampleLabel}>fonts.mono</span>
+          <p className={monoSample}>{samples.numbers}</p>
+        </div>
+        <div className={tokenSample}>
+          <span className={sampleLabel}>fontWeights.section · 300</span>
+          <p className={sectionWeightSample}>分区标题</p>
+        </div>
+        <div className={tokenSample}>
+          <span className={sampleLabel}>fontWeights.title · 700</span>
+          <p className={titleWeightSample}>页面标题</p>
+        </div>
+      </div>
     </div>
   ),
 };
