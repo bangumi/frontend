@@ -26,6 +26,7 @@ export const fontSizes = defineTokens.fontSizes({
   bodyLg: { value: '16px' },
   label: { value: '14px' },
   titleSm: { value: '16px' },
+  sectionTitle: { value: '18px' },
   title: { value: '20px' },
   display: { value: '28px' },
 });
@@ -37,11 +38,14 @@ export const lineHeights = defineTokens.lineHeights({
   bodyLg: { value: '26px' },
   label: { value: '20px' },
   titleSm: { value: '24px' },
+  sectionTitle: { value: '26px' },
   title: { value: '28px' },
   display: { value: '36px' },
 });
 
 export const fontWeights = defineTokens.fontWeights({
+  /** 资料页分区标题使用的轻字重。 */
+  section: { value: '300' },
   /** 标题专用字重，介于 semibold 与 bold 之间。 */
   title: { value: '700' },
 });

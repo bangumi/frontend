@@ -23,7 +23,7 @@ const sectionBody = css({ minWidth: '0' });
 const sectionTitle = css({
   margin: '0',
   color: 'text.primary',
-  textStyle: 'titleSm',
+  textStyle: 'sectionTitle',
 });
 
 const sectionExtra = css({

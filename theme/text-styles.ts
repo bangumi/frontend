@@ -24,8 +24,16 @@ export const textStyleDefinitions = {
     value: { fontSize: 'label', lineHeight: 'label', fontWeight: 'medium' },
   },
   titleSm: {
-    description: '小节标题、卡片/面板标题、带摘要的独立内容单元标题。',
+    description: '带摘要或作者信息的独立内容单元标题，例如评论文章标题。',
     value: { fontSize: 'titleSm', lineHeight: 'titleSm', fontWeight: 'semibold' },
+  },
+  sectionTitle: {
+    description: '详情页、资料页的内容分区标题；以较大字号和轻字重建立编辑式层级。',
+    value: {
+      fontSize: 'sectionTitle',
+      lineHeight: 'sectionTitle',
+      fontWeight: 'section',
+    },
   },
   title: {
     description: '页面/条目标题',
