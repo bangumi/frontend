@@ -54,3 +54,49 @@ export const semanticColors = defineSemanticTokens.colors({
   danger: { value: { base: '{colors.red.700}', _dark: '{colors.red.400}' } },
   focusRing: { value: { base: '{colors.cyan.700}', _dark: '{colors.cyan.300}' } },
 });
+
+/** 组件边框语义：将宽度、线型与主题色作为不可拆分的视觉角色维护。 */
+export const semanticBorders = defineSemanticTokens.borders({
+  component: {
+    list: {
+      /** 连续数据、事实和列表行之间的低强调分隔线。 */
+      divider: {
+        value: {
+          base: '{borderWidths} solid {colors.gray.200}',
+          _dark: '{borderWidths} solid {colors.gray.700}',
+        },
+      },
+    },
+  },
+});
+
+/**
+ * 布局语义间距：用于稳定的父级布局关系，避免子组件以外边距争夺页面节奏。
+ * 组件内部的局部节奏仍直接使用基础 space 刻度。
+ */
+export const semanticSpacing = defineSemanticTokens.spacing({
+  component: {
+    list: {
+      /** 连续事实和数据行的纵向内距；横向边缘与所在区块对齐。 */
+      rowBlock: { value: '{spacing.2}' },
+      /** Wiki 事实表等高密度连续行的纵向内距。 */
+      rowBlockDense: { value: '{spacing.1}' },
+    },
+    media: {
+      /** 封面等带边框媒体容器的内部留白。 */
+      frame: { value: '{spacing.1}' },
+    },
+  },
+  layout: {
+    inline: { value: '{spacing.1}' },
+    compact: { value: '{spacing.2}' },
+    group: { value: '{spacing.4}' },
+    section: { value: '{spacing.6}' },
+    page: { value: '{spacing.7}' },
+    gutter: {
+      mobile: { value: '{spacing.4}' },
+      tablet: { value: '{spacing.6}' },
+      desktop: { value: '{spacing.7}' },
+    },
+  },
+});

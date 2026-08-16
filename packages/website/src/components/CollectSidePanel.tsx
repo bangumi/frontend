@@ -8,8 +8,6 @@ import { getUserProfileLink } from '@bangumi/utils/pages';
 
 const { Link } = Typography;
 
-const panel = css({ marginBottom: '4' });
-
 const panelTitle = css({
   margin: '0',
   paddingTop: '1',
@@ -101,7 +99,7 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
   listLabel = '收藏用户列表',
 }) => {
   return (
-    <div className={panel}>
+    <div>
       <h2 className={panelTitle}>{title}</h2>
       {items.length > 0 && (
         <ul className={list} aria-label={listLabel}>
@@ -136,7 +134,10 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
           {moreLink != null && (
             <>
               {' '}
-              / <Link variant='subtle' to={moreLink}>{moreLabel}</Link>
+              /{' '}
+              <Link variant='subtle' to={moreLink}>
+                {moreLabel}
+              </Link>
             </>
           )}
           {stats != null && (

@@ -9,10 +9,10 @@ export const spacing = defineTokens.spacing({
   2: { value: '8px' },
   3: { value: '12px' },
   4: { value: '16px' },
-  5: { value: '24px' },
-  6: { value: '32px' },
-  7: { value: '48px' },
-  8: { value: '64px' },
+  5: { value: '20px' },
+  6: { value: '24px' },
+  7: { value: '32px' },
+  8: { value: '48px' },
 });
 
 export const sizes = defineTokens.sizes({
@@ -24,6 +24,8 @@ export const sizes = defineTokens.sizes({
   /** 触屏最小命中面积。 */
   touch: { value: '44px' },
   container: {
+    /** 1200px 内容区加上桌面端 32px 双侧 gutter 的外框上限。 */
+    page: { value: '1264px' },
     reading: { value: 'min(100% - 32px, 720px)' },
     content: { value: 'min(100% - 32px, 1200px)' },
     wide: { value: 'min(100% - 48px, 1440px)' },

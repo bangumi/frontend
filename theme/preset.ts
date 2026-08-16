@@ -1,7 +1,7 @@
 import { defineGlobalStyles, definePreset } from '@pandacss/dev';
 
 import { breakpoints } from './breakpoints';
-import { semanticColors } from './semantic-tokens';
+import { semanticBorders, semanticColors, semanticSpacing } from './semantic-tokens';
 import { textStyles } from './text-styles';
 import { colors } from './tokens/colors';
 import { borderWidths, radii, shadows, sizes, spacing } from './tokens/layout';
@@ -51,7 +51,9 @@ export const bangumiPreset = definePreset({
         easings,
       },
       semanticTokens: {
+        borders: semanticBorders,
         colors: semanticColors,
+        spacing: semanticSpacing,
       },
       textStyles,
     },

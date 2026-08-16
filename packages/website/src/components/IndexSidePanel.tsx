@@ -7,8 +7,6 @@ import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages';
 
 const { Link } = Typography;
 
-const panel = css({ marginBottom: '4' });
-
 const panelTitle = css({
   margin: '0',
   paddingTop: '1',
@@ -90,7 +88,7 @@ const IndexSidePanel: React.FC<IndexSidePanelProps> = ({ indexes, moreLink, extr
     return null;
   }
   return (
-    <div className={panel}>
+    <div>
       <h2 className={panelTitle}>推荐本条目的目录</h2>
       <ul className={list} aria-label='推荐本条目的目录列表'>
         {indexes.slice(0, 5).map((index) => (

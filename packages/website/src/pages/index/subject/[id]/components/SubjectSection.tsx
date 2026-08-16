@@ -4,8 +4,9 @@ import React from 'react';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const section = css({
-  marginBottom: '1',
-  padding: '3',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.compact',
   borderBottomWidth: '1px',
   borderBottomColor: 'border.subtle',
 });
@@ -15,12 +16,12 @@ const header = css({
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '2',
-  marginBottom: '1',
 });
+
+const sectionBody = css({ minWidth: '0' });
 
 const sectionTitle = css({
   margin: '0',
-  paddingRight: '1',
   color: 'text.primary',
   textStyle: 'titleSm',
 });
@@ -39,12 +40,12 @@ const SubjectSection: React.FC<
   return (
     <section className={cx(section, className)}>
       {title != null && (
-        <div className={header}>
+        <div className={header} data-subject-section-header>
           <h2 className={sectionTitle}>{title}</h2>
           {extra != null && <div className={sectionExtra}>{extra}</div>}
         </div>
       )}
-      {children}
+      <div className={sectionBody}>{children}</div>
     </section>
   );
 };

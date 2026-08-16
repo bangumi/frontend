@@ -44,9 +44,9 @@ const { Link } = Typography;
 // &[class] 提升优先级，覆盖 design Section 的默认间距
 const primarySection = css({
   '&[class]': {
-    marginBottom: '3',
-    paddingBottom: '1',
-    '& > div': {
+    margin: '0',
+    paddingBottom: '0',
+    '& > [data-subject-section-header]': {
       justifyContent: 'flex-start',
       gap: '1',
     },
@@ -59,15 +59,14 @@ const primarySection = css({
 const summarySection = css({
   '&[class]': {
     margin: '0',
-    paddingBottom: '1',
+    paddingBottom: '0',
     borderBottom: '0',
   },
 });
 
 const tagSection = css({
   '&[class]': {
-    marginTop: '1',
-    marginBottom: '3',
+    margin: '0',
     padding: '3',
     border: '0',
     borderRadius: 'sm',
@@ -287,13 +286,10 @@ const subjectCover = css({
 const coverTitle = css({
   maxHeight: '52px',
   marginTop: '1',
-  fontWeight: '400',
-  lineHeight: 'bodySm',
+  textStyle: 'bodySm',
   overflow: 'hidden',
   overflowWrap: 'break-word',
 });
-
-const subjectCoverTitle = css({ textStyle: 'label' });
 
 const coverInfo = css({
   margin: '0',
@@ -318,13 +314,13 @@ const textList = css({
   margin: '0',
   padding: '0',
   '& li': {
-    paddingTop: '2',
-    paddingBottom: '2',
-    borderBottomWidth: '1px',
-    borderBottomColor: 'border.subtle',
-    '&:last-child': {
-      borderBottom: 'none',
-    },
+    paddingBlock: 'component.list.rowBlock',
+  },
+  '& li:first-child': {
+    paddingTop: '0',
+  },
+  '& li:not(:last-child)': {
+    borderBottom: 'component.list.divider',
   },
 });
 
@@ -347,17 +343,24 @@ const topicTable = css({
   width: '100%',
   borderCollapse: 'collapse',
   textStyle: 'bodySm',
-  '& tr': {
-    borderBottomWidth: '1px',
-    borderBottomColor: 'border.subtle',
+  '& tr:not(:last-child)': {
+    borderBottom: 'component.list.divider',
+  },
+  '& tr > :first-child': {
+    paddingLeft: '0',
+  },
+  '& tr > :last-child': {
+    paddingRight: '0',
+  },
+  '& tr:first-child > td': {
+    paddingTop: '0',
   },
 });
 
 const topicSubject = css({
-  paddingTop: '2',
-  paddingRight: '1',
-  paddingBottom: '2',
-  paddingLeft: '1',
+  paddingBlock: 'component.list.rowBlock',
+  paddingRight: 'layout.inline',
+  paddingLeft: 'layout.inline',
   textAlign: 'left',
   textStyle: 'label',
   maxWidth: '0',
@@ -370,10 +373,9 @@ const topicSubject = css({
 });
 
 const topicInfo = css({
-  paddingTop: '2',
-  paddingRight: '1',
-  paddingBottom: '2',
-  paddingLeft: '1',
+  paddingBlock: 'component.list.rowBlock',
+  paddingRight: 'layout.inline',
+  paddingLeft: 'layout.inline',
   width: '16%',
   textAlign: 'right',
   color: 'text.tertiary',
@@ -382,10 +384,9 @@ const topicInfo = css({
 });
 
 const topicMore = css({
-  paddingTop: '2',
-  paddingRight: '1',
-  paddingBottom: '2',
-  paddingLeft: '1',
+  paddingBlock: 'component.list.rowBlock',
+  paddingRight: 'layout.inline',
+  paddingLeft: 'layout.inline',
   textAlign: 'right',
 });
 
@@ -397,13 +398,13 @@ const commentList = css({
   '& > li': {
     display: 'flex',
     gap: '2',
-    paddingTop: '2',
-    paddingBottom: '2',
-    borderBottomWidth: '1px',
-    borderBottomColor: 'border.subtle',
-    '&:last-child': {
-      borderBottom: 'none',
-    },
+    paddingBlock: 'component.list.rowBlock',
+  },
+  '& > li:first-child': {
+    paddingTop: '0',
+  },
+  '& > li:not(:last-child)': {
+    borderBottom: 'component.list.divider',
   },
 });
 
@@ -432,6 +433,18 @@ const commentText = css({
   color: '#1f1c1c',
   wordBreak: 'break-all',
   whiteSpace: 'pre-wrap',
+});
+
+const primaryBlocks = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.group',
+});
+
+const secondaryBlocks = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.section',
 });
 
 function getErrorMessage(error: unknown): string {
@@ -665,7 +678,7 @@ function RelationsSection({
                   alt=''
                 />
               </Link>
-              <p className={cx(coverTitle, subjectCoverTitle)}>
+              <p className={coverTitle}>
                 <Link variant='subtle' to={getSubjectLink(subject.id)}>
                   {subject.name}
                 </Link>
@@ -700,7 +713,7 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
                 alt=''
               />
             </Link>
-            <p className={cx(coverTitle, subjectCoverTitle)}>
+            <p className={coverTitle}>
               <Link variant='subtle' to={getSubjectLink(subject.id)}>
                 {subject.name}
               </Link>
@@ -839,27 +852,27 @@ function CommentsSection({
 export const SubjectPrimaryBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
-    <>
+    <div className={primaryBlocks}>
       <EpListSection subject={subject} episodes={data.episodes} />
       {subject.summary != null && subject.summary !== '' && (
         <SummarySection summary={subject.summary} />
       )}
       <TagsSection subject={subject} />
-    </>
+    </div>
   );
 };
 
 export const SubjectSecondaryBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
-    <>
+    <div className={secondaryBlocks}>
       <CharactersSection subjectId={subject.id} characters={data.characters} />
       <RelationsSection subjectId={subject.id} relations={data.relations} />
       <RecsSection recs={data.recs} />
       <ReviewsSection subjectId={subject.id} reviews={data.reviews} />
       <TopicsSection subjectId={subject.id} topics={data.topics} />
       <CommentsSection subjectId={subject.id} comments={data.comments} />
-    </>
+    </div>
   );
 };
 
