@@ -24,6 +24,10 @@ export interface TopicApi {
   deletePost: (postId: number) => Promise<TopicApiResult<{}>>;
   likePost: (postId: number, value: number) => Promise<TopicApiResult<{}>>;
   unlikePost: (postId: number) => Promise<TopicApiResult<{}>>;
+  /**
+   * 编辑回复内容，提供时编辑入口改为内联编辑表单；未提供时使用 replyEditPath 跳转编辑页
+   */
+  editPost?: (postId: number, content: string) => Promise<TopicApiResult<{}>>;
   /** 回复编辑页面路径 */
   replyEditPath: (postId: number) => string;
 }

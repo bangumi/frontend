@@ -148,20 +148,25 @@ describe('EpisodeDetail 评论写操作', () => {
 
     expect(await screen.findByText('我自己的吐槽')).toBeInTheDocument();
 
-    // 自己的评论：编辑/删除按钮
-    const ownItem = screen.getByText('我自己的吐槽').closest('article')!;
-    expect(within(ownItem).getByRole('button', { name: '编辑' })).toBeInTheDocument();
-    expect(within(ownItem).getByRole('button', { name: '删除' })).toBeInTheDocument();
+    // 编辑/删除位于"更多"Popover 内（Topic.Comment 结构），jsdom 下以 hidden 查询
+    const ownItem = screen.getByText('我自己的吐槽').closest('[id="post_3001"]') as HTMLElement;
+    expect(within(ownItem).getByTitle('其他')).toBeInTheDocument();
+    expect(within(ownItem).getByRole('button', { name: '编辑', hidden: true })).toBeInTheDocument();
+    expect(within(ownItem).getByRole('button', { name: '删除', hidden: true })).toBeInTheDocument();
 
-    // 他人的评论：无编辑/删除
-    const otherItem = screen.getByText('别人的吐槽').closest('article')!;
-    expect(within(otherItem).queryByRole('button', { name: '编辑' })).not.toBeInTheDocument();
-    expect(within(otherItem).queryByRole('button', { name: '删除' })).not.toBeInTheDocument();
+    // 他人的评论：更多菜单内无编辑/删除
+    const otherItem = screen.getByText('别人的吐槽').closest('[id="post_3002"]') as HTMLElement;
+    expect(
+      within(otherItem).queryByRole('button', { name: '编辑', hidden: true }),
+    ).not.toBeInTheDocument();
+    expect(
+      within(otherItem).queryByRole('button', { name: '删除', hidden: true }),
+    ).not.toBeInTheDocument();
 
     // 删除确认后调用 DELETE
     const confirmSpy = vi.spyOn(window, 'confirm').mockReturnValue(true);
     await act(async () => {
-      fireEvent.click(within(ownItem).getByRole('button', { name: '删除' }));
+      fireEvent.click(within(ownItem).getByRole('button', { name: '删除', hidden: true }));
     });
     expect(deleteRequested).toBe(true);
     confirmSpy.mockRestore();

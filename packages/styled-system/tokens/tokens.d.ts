@@ -31,7 +31,7 @@ export type RadiusToken = "xs" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "full" | 
 
 export type BorderWidthToken = ""
 
-export type ShadowToken = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "inset-2xs" | "inset-xs" | "inset-sm" | "raised" | "raisedHover" | "overlay" | "media.frame.hover" | "surface.panel.shadow"
+export type ShadowToken = "2xs" | "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "inset-2xs" | "inset-xs" | "inset-sm" | "raised" | "overlay" | "media.frame.hover" | "surface.panel.shadow"
 
 export type DurationToken = "fastest" | "faster" | "slower" | "slowest" | "fast" | "normal" | "slow"
 

@@ -3491,18 +3491,7 @@ export interface components {
       locked: boolean;
       redirect: number;
     };
-    Comment: {
-      id: number;
-      mainID: number;
-      creatorID: number;
-      relatedID: number;
-      relatedPhotoID?: number;
-      createdAt: number;
-      content: string;
-      state: number;
-      user?: components['schemas']['SlimUser'];
-      reactions?: components['schemas']['Reaction'][];
-    } & {
+    Comment: components['schemas']['CommentBase'] & {
       replies: components['schemas']['CommentBase'][];
     };
     CommentBase: {
@@ -5334,20 +5323,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */
@@ -5800,20 +5776,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */
@@ -6039,20 +6002,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */
@@ -6854,20 +6804,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -8258,20 +8195,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */
@@ -8872,20 +8796,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */
@@ -9111,20 +9022,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */
@@ -10872,20 +10770,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': ({
-            id: number;
-            mainID: number;
-            creatorID: number;
-            relatedID: number;
-            relatedPhotoID?: number;
-            createdAt: number;
-            content: string;
-            state: number;
-            user?: components['schemas']['SlimUser'];
-            reactions?: components['schemas']['Reaction'][];
-          } & {
-            replies: components['schemas']['CommentBase'][];
-          })[];
+          'application/json': components['schemas']['Comment'][];
         };
       };
       /** @description default error response type */

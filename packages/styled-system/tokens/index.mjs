@@ -1823,10 +1823,6 @@ const tokens = {
     "value": "0 2px 8px rgb(0 0 0 / 10%)",
     "variable": "var(--shadows-raised)"
   },
-  "shadows.raisedHover": {
-    "value": "0 4px 12px rgb(0 0 0 / 14%)",
-    "variable": "var(--shadows-raised-hover)"
-  },
   "shadows.overlay": {
     "value": "0 12px 32px rgb(0 0 0 / 18%)",
     "variable": "var(--shadows-overlay)"
