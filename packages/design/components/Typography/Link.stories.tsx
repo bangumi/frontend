@@ -36,3 +36,17 @@ BoldLink.args = {
   to: '/group/boring',
   fontWeight: 'bold',
 };
+
+export const TitleLink = Template.bind({});
+TitleLink.args = {
+  to: '/subject/123',
+  variant: 'title',
+  children: '条目标题链接',
+};
+
+export const SubtleLink = Template.bind({});
+SubtleLink.args = {
+  to: '/user/test',
+  variant: 'subtle',
+  children: '次级元信息链接',
+};

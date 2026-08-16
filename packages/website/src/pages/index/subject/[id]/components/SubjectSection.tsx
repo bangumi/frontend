@@ -4,31 +4,30 @@ import React from 'react';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const section = css({
-  margin: '0 0 5px',
-  padding: '10px',
-  borderBottom: '1px solid #e8e3e3',
+  marginBottom: '1',
+  padding: '3',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
 });
 
 const header = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
-  margin: '0 0 5px',
+  gap: '2',
+  marginBottom: '1',
 });
 
 const sectionTitle = css({
   margin: '0',
-  padding: '0 5px 0 0',
-  color: '#595555',
-  fontSize: '18px',
-  fontWeight: '300',
-  lineHeight: '1.4',
+  paddingRight: '1',
+  color: 'text.primary',
+  textStyle: 'titleSm',
 });
 
 const sectionExtra = css({
   flex: 'none',
-  fontSize: '12px',
+  textStyle: 'meta',
 });
 
 /**

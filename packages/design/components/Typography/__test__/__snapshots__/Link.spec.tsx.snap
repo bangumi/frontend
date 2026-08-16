@@ -3,7 +3,7 @@
 exports[`should render external link 1`] = `
 <DocumentFragment>
   <a
-    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px"
+    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px [&.bgm-link--title]:c_inherit [&.bgm-link--title]:textStyle_title [&.bgm-link--title]:hover:c_link.hover [&.bgm-link--title]:hover:td_none [&.bgm-link--title]:active:c_link.hover [&.bgm-link--title]:active:td_none [&.bgm-link--subtle]:c_link.subtle [&.bgm-link--subtle]:hover:c_link [&.bgm-link--subtle]:hover:td_none [&.bgm-link--subtle]:active:c_link [&.bgm-link--subtle]:active:td_none"
     href="https://test.com"
   />
 </DocumentFragment>
@@ -12,7 +12,7 @@ exports[`should render external link 1`] = `
 exports[`should render internal link 1`] = `
 <DocumentFragment>
   <a
-    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px"
+    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px [&.bgm-link--title]:c_inherit [&.bgm-link--title]:textStyle_title [&.bgm-link--title]:hover:c_link.hover [&.bgm-link--title]:hover:td_none [&.bgm-link--title]:active:c_link.hover [&.bgm-link--title]:active:td_none [&.bgm-link--subtle]:c_link.subtle [&.bgm-link--subtle]:hover:c_link [&.bgm-link--subtle]:hover:td_none [&.bgm-link--subtle]:active:c_link [&.bgm-link--subtle]:active:td_none"
     data-discover="true"
     href="/a"
   />
@@ -22,6 +22,26 @@ exports[`should render internal link 1`] = `
 exports[`should render no-style link 1`] = `
 <DocumentFragment>
   <a
+    data-discover="true"
+    href="/a"
+  />
+</DocumentFragment>
+`;
+
+exports[`should render the subtle link variant 1`] = `
+<DocumentFragment>
+  <a
+    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px [&.bgm-link--title]:c_inherit [&.bgm-link--title]:textStyle_title [&.bgm-link--title]:hover:c_link.hover [&.bgm-link--title]:hover:td_none [&.bgm-link--title]:active:c_link.hover [&.bgm-link--title]:active:td_none [&.bgm-link--subtle]:c_link.subtle [&.bgm-link--subtle]:hover:c_link [&.bgm-link--subtle]:hover:td_none [&.bgm-link--subtle]:active:c_link [&.bgm-link--subtle]:active:td_none bgm-link--subtle"
+    data-discover="true"
+    href="/a"
+  />
+</DocumentFragment>
+`;
+
+exports[`should render the title link variant 1`] = `
+<DocumentFragment>
+  <a
+    class="bgm-link d_inline-block c_link cursor_pointer trs-prop_color,_text-decoration-color trs-dur_normal trs-tmf_standard [&:link,_&:visited,_&:active]:td_none hover:c_link.hover hover:td_underline active:c_link.hover active:td_underline focusVisible:ring_2px_solid focusVisible:ring-c_focusRing focusVisible:ring-o_2px [&.bgm-link--title]:c_inherit [&.bgm-link--title]:textStyle_title [&.bgm-link--title]:hover:c_link.hover [&.bgm-link--title]:hover:td_none [&.bgm-link--title]:active:c_link.hover [&.bgm-link--title]:active:td_none [&.bgm-link--subtle]:c_link.subtle [&.bgm-link--subtle]:hover:c_link [&.bgm-link--subtle]:hover:td_none [&.bgm-link--subtle]:active:c_link [&.bgm-link--subtle]:active:td_none bgm-link--title"
     data-discover="true"
     href="/a"
   />

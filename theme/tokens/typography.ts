@@ -43,5 +43,5 @@ export const lineHeights = defineTokens.lineHeights({
 
 export const fontWeights = defineTokens.fontWeights({
   /** 标题专用字重，介于 semibold 与 bold 之间。 */
-  title: { value: '650' },
+  title: { value: '700' },
 });

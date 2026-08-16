@@ -44,15 +44,14 @@ const { Link } = Typography;
 // &[class] 提升优先级，覆盖 design Section 的默认间距
 const primarySection = css({
   '&[class]': {
-    margin: '0 0 10px',
-    padding: '0 0 5px',
+    marginBottom: '3',
+    paddingBottom: '1',
     '& > div': {
       justifyContent: 'flex-start',
-      gap: '4px',
+      gap: '1',
     },
     '& h2': {
-      fontSize: '14px',
-      fontWeight: 'normal',
+      textStyle: 'label',
     },
   },
 });
@@ -60,20 +59,21 @@ const primarySection = css({
 const summarySection = css({
   '&[class]': {
     margin: '0',
-    padding: '0 0 5px',
+    paddingBottom: '1',
     borderBottom: '0',
   },
 });
 
 const tagSection = css({
   '&[class]': {
-    margin: '5px 0 10px',
-    padding: '10px',
+    marginTop: '1',
+    marginBottom: '3',
+    padding: '3',
     border: '0',
-    borderRadius: '5px',
-    background: '#f7f7f7',
+    borderRadius: 'sm',
+    background: 'bg.subtle',
     '& h2': {
-      fontSize: '14px',
+      textStyle: 'label',
     },
   },
 });
@@ -85,11 +85,12 @@ const musicList = css({
   padding: '0',
   '& li': {
     display: 'flex',
-    gap: '8px',
-    padding: '4px 0',
-    fontSize: '13px',
-    lineHeight: '1.6',
-    borderBottom: '1px solid #e8e3e3',
+    gap: '2',
+    paddingTop: '1',
+    paddingBottom: '1',
+    textStyle: 'bodySm',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'border.subtle',
     '&:last-child': {
       borderBottom: 'none',
     },
@@ -97,7 +98,7 @@ const musicList = css({
 });
 
 const musicSort = css({
-  color: '#9f9b9b',
+  color: 'text.tertiary',
   flex: 'none',
 });
 
@@ -110,14 +111,15 @@ const musicName = css({
 });
 
 const musicDuration = css({
-  color: '#9f9b9b',
+  color: 'text.tertiary',
   flex: 'none',
 });
 
 const epSubtitle = css({
-  fontSize: '12px',
-  color: '#9f9b9b',
-  margin: '8px 0 4px',
+  textStyle: 'meta',
+  color: 'text.tertiary',
+  marginTop: '2',
+  marginBottom: '1',
 });
 
 const epGrid = css({
@@ -126,7 +128,7 @@ const epGrid = css({
   padding: '0',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '3px',
+  gap: '1',
 });
 
 const epAllLink = css({
@@ -140,9 +142,8 @@ const epAllLink = css({
 
 /* 简介 */
 const summaryContent = css({
-  color: '#1f1c1c',
-  fontSize: '14px',
-  lineHeight: '1.65',
+  color: 'text.primary',
+  textStyle: 'body',
   whiteSpace: 'pre-wrap',
   wordBreak: 'break-all',
 });
@@ -157,7 +158,7 @@ const summaryCollapsed = css({
     bottom: '0',
     left: '0',
     height: '42px',
-    background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff)',
+    background: 'linear-gradient(to bottom, transparent, var(--colors-bg-canvas))',
     content: '""',
     pointerEvents: 'none',
   },
@@ -169,10 +170,9 @@ const summaryToggle = css({
   padding: '0',
   border: '0',
   background: 'transparent',
-  color: '#54b5df',
+  color: 'link',
   cursor: 'pointer',
-  fontSize: '11px',
-  lineHeight: '18px',
+  textStyle: 'meta',
 });
 
 /* 标签 */
@@ -182,21 +182,24 @@ const tagList = css({
   padding: '0',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '2px 4px',
+  gap: '1',
   '& li': {
-    padding: '1px 5px',
-    border: '1px solid #e8e3e3',
-    borderRadius: '20px',
-    background: '#fff',
-    fontSize: '12px',
-    lineHeight: '1.4',
+    paddingTop: '1',
+    paddingRight: '2',
+    paddingBottom: '1',
+    paddingLeft: '2',
+    borderWidth: '1px',
+    borderColor: 'border.subtle',
+    borderRadius: 'pill',
+    background: 'bg.raised',
+    textStyle: 'meta',
   },
 });
 
 const tagCount = css({
-  marginLeft: '2px',
-  color: '#9f9b9b',
-  fontSize: '10px',
+  marginLeft: '1',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 /* 封面网格（角色/关联/推荐） */
@@ -207,7 +210,7 @@ const coverGrid = css({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'flex-start',
-  gap: '10px',
+  gap: '3',
   '@media (max-width: 640px)': {
     marginRight: '0',
   },
@@ -225,15 +228,16 @@ const cover = css({
   display: 'block',
   objectFit: 'cover',
   objectPosition: 'center top',
-  borderRadius: '8px',
-  background: '#e8e3e3',
-  boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 10px rgba(0, 0, 0, 0.2)',
+  borderWidth: '1px',
+  borderColor: 'border.subtle',
+  borderRadius: 'sm',
+  background: 'bg.muted',
 });
 
 const characterGrid = css({
   flexWrap: 'nowrap',
-  gap: '15px',
-  padding: '5px',
+  gap: '4',
+  padding: '1',
   overflowX: 'auto',
   scrollbarWidth: 'none',
   '&::-webkit-scrollbar': { display: 'none' },
@@ -254,17 +258,18 @@ const characterCover = css({
   aspectRatio: '3 / 4',
 });
 
-const characterCoverTitle = css({ fontSize: '13px' });
+const characterCoverTitle = css({ textStyle: 'label' });
 
 const relationGrid = css({
-  gap: '5px 10px',
+  columnGap: '3',
+  rowGap: '1',
 });
 
 const relationCoverItem = css({ width: '80px' });
 
 const recommendationGrid = css({
   flexWrap: 'nowrap',
-  gap: '9px',
+  gap: '2',
   overflowX: 'auto',
 });
 
@@ -281,19 +286,19 @@ const subjectCover = css({
 
 const coverTitle = css({
   maxHeight: '52px',
-  margin: '5px 0 0',
+  marginTop: '1',
   fontWeight: '400',
-  lineHeight: '1.2',
+  lineHeight: 'bodySm',
   overflow: 'hidden',
   overflowWrap: 'break-word',
 });
 
-const subjectCoverTitle = css({ fontSize: '11px' });
+const subjectCoverTitle = css({ textStyle: 'label' });
 
 const coverInfo = css({
   margin: '0',
-  fontSize: '11px',
-  color: '#9f9b9b',
+  textStyle: 'meta',
+  color: 'text.tertiary',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
@@ -303,9 +308,8 @@ const relationSep = css({
   display: 'block',
   width: '100%',
   height: '18px',
-  fontSize: '12px',
-  color: '#9f9b9b',
-  lineHeight: '18px',
+  textStyle: 'meta',
+  color: 'text.tertiary',
 });
 
 /* 文本列表（评论/日志） */
@@ -314,8 +318,10 @@ const textList = css({
   margin: '0',
   padding: '0',
   '& li': {
-    padding: '6px 0',
-    borderBottom: '1px solid #e8e3e3',
+    paddingTop: '2',
+    paddingBottom: '2',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'border.subtle',
     '&:last-child': {
       borderBottom: 'none',
     },
@@ -323,16 +329,16 @@ const textList = css({
 });
 
 const textTitle = css({
-  fontSize: '13px',
+  textStyle: 'titleSm',
   wordBreak: 'break-all',
 });
 
 const textInfo = css({
-  margin: '4px 0 0',
-  fontSize: '12px',
-  color: '#9f9b9b',
+  marginTop: '1',
+  textStyle: 'meta',
+  color: 'text.tertiary',
   '& span': {
-    marginLeft: '8px',
+    marginLeft: '2',
   },
 });
 
@@ -340,15 +346,20 @@ const textInfo = css({
 const topicTable = css({
   width: '100%',
   borderCollapse: 'collapse',
-  fontSize: '13px',
+  textStyle: 'bodySm',
   '& tr': {
-    borderBottom: '1px solid #e8e3e3',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'border.subtle',
   },
 });
 
 const topicSubject = css({
-  padding: '6px 4px',
+  paddingTop: '2',
+  paddingRight: '1',
+  paddingBottom: '2',
+  paddingLeft: '1',
   textAlign: 'left',
+  textStyle: 'label',
   maxWidth: '0',
   '& a': {
     display: 'block',
@@ -359,16 +370,22 @@ const topicSubject = css({
 });
 
 const topicInfo = css({
-  padding: '6px 4px',
+  paddingTop: '2',
+  paddingRight: '1',
+  paddingBottom: '2',
+  paddingLeft: '1',
   width: '16%',
   textAlign: 'right',
-  color: '#9f9b9b',
-  fontSize: '12px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
   whiteSpace: 'nowrap',
 });
 
 const topicMore = css({
-  padding: '6px 4px',
+  paddingTop: '2',
+  paddingRight: '1',
+  paddingBottom: '2',
+  paddingLeft: '1',
   textAlign: 'right',
 });
 
@@ -379,9 +396,11 @@ const commentList = css({
   padding: '0',
   '& > li': {
     display: 'flex',
-    gap: '8px',
-    padding: '8px 0',
-    borderBottom: '1px solid #e8e3e3',
+    gap: '2',
+    paddingTop: '2',
+    paddingBottom: '2',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'border.subtle',
     '&:last-child': {
       borderBottom: 'none',
     },
@@ -396,14 +415,14 @@ const commentInfo = css({
 const commentHeader = css({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: '2',
   flexWrap: 'wrap',
-  fontSize: '13px',
+  textStyle: 'bodySm',
 });
 
 const commentMeta = css({
-  color: '#9f9b9b',
-  fontSize: '12px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 const commentText = css({
@@ -566,7 +585,11 @@ function CharactersSection({
   return (
     <SubjectSection
       title='角色介绍'
-      extra={<Link to={getSubjectCharactersLink(subjectId)}>更多角色 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectCharactersLink(subjectId)}>
+          更多角色 »
+        </Link>
+      }
     >
       <ul className={cx(coverGrid, characterGrid)}>
         {characters.map(({ character, casts }) => (
@@ -589,7 +612,9 @@ function CharactersSection({
             {casts.map((cast) => (
               <p key={cast.person.id} className={coverInfo}>
                 <span>{CAST_TYPE_DESC[cast.relation] ?? '出演'}</span>{' '}
-                <Link to={getPersonLink(cast.person.id)}>{cast.person.name}</Link>
+                <Link variant='subtle' to={getPersonLink(cast.person.id)}>
+                  {cast.person.name}
+                </Link>
               </p>
             ))}
           </li>
@@ -615,7 +640,11 @@ function RelationsSection({
   return (
     <SubjectSection
       title='关联条目'
-      extra={<Link to={getSubjectRelationsLink(subjectId)}>更多关联 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectRelationsLink(subjectId)}>
+          更多关联 »
+        </Link>
+      }
     >
       <ul className={cx(coverGrid, relationGrid)}>
         {relations.map(({ subject, relation }) => {
@@ -637,7 +666,9 @@ function RelationsSection({
                 />
               </Link>
               <p className={cx(coverTitle, subjectCoverTitle)}>
-                <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
+                <Link variant='subtle' to={getSubjectLink(subject.id)}>
+                  {subject.name}
+                </Link>
               </p>
             </li>
           );
@@ -670,7 +701,9 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
               />
             </Link>
             <p className={cx(coverTitle, subjectCoverTitle)}>
-              <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
+              <Link variant='subtle' to={getSubjectLink(subject.id)}>
+                {subject.name}
+              </Link>
             </p>
           </li>
         ))}
@@ -687,7 +720,11 @@ function ReviewsSection({ subjectId, reviews }: { subjectId: number; reviews: Su
   return (
     <SubjectSection
       title='评论'
-      extra={<Link to={getSubjectReviewsLink(subjectId)}>更多评论 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectReviewsLink(subjectId)}>
+          更多评论 »
+        </Link>
+      }
     >
       <ul className={textList}>
         {reviews.map((review) => (
@@ -700,7 +737,9 @@ function ReviewsSection({ subjectId, reviews }: { subjectId: number; reviews: Su
               {review.entry.title}
             </Link>
             <p className={textInfo}>
-              <Link to={getUserProfileLink(review.user.username)}>{review.user.nickname}</Link>
+              <Link variant='subtle' to={getUserProfileLink(review.user.username)}>
+                {review.user.nickname}
+              </Link>
               <span>{dayjs.unix(review.entry.updatedAt).format('YYYY-M-D')}</span>
             </p>
           </li>
@@ -727,7 +766,7 @@ function TopicsSection({ subjectId, topics }: { subjectId: number; topics: Topic
                 </Link>
               </td>
               <td className={topicInfo}>
-                <Link to={getUserProfileLink(topic.creator?.username ?? '')}>
+                <Link variant='subtle' to={getUserProfileLink(topic.creator?.username ?? '')}>
                   {topic.creator?.nickname ?? ''}
                 </Link>
               </td>
@@ -737,7 +776,9 @@ function TopicsSection({ subjectId, topics }: { subjectId: number; topics: Topic
           ))}
           <tr>
             <td colSpan={4} className={topicMore}>
-              <Link to={getSubjectBoardLink(subjectId)}>更多讨论 »</Link>
+              <Link variant='subtle' to={getSubjectBoardLink(subjectId)}>
+                更多讨论 »
+              </Link>
             </td>
           </tr>
         </tbody>
@@ -760,7 +801,11 @@ function CommentsSection({
   return (
     <SubjectSection
       title='吐槽箱'
-      extra={<Link to={getSubjectCommentsLink(subjectId)}>更多吐槽 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectCommentsLink(subjectId)}>
+          更多吐槽 »
+        </Link>
+      }
     >
       <ul className={commentList}>
         {comments.map((comment) => (
@@ -770,7 +815,7 @@ function CommentsSection({
             </Link>
             <div className={commentInfo}>
               <div className={commentHeader}>
-                <Link to={getUserProfileLink(comment.user.username)} fontWeight='bold'>
+                <Link variant='subtle' to={getUserProfileLink(comment.user.username)}>
                   {comment.user.nickname}
                 </Link>
                 {comment.rate > 0 && <Rate value={comment.rate} />}

@@ -28,3 +28,11 @@ it('should render no-style link', () => {
 
   expect(asFragment()).toMatchSnapshot();
 });
+
+it.each(['title', 'subtle'] as const)('should render the %s link variant', (variant) => {
+  const { asFragment } = render(<Link to='/a' variant={variant} />, {
+    wrapper: LinkTestWrapper,
+  });
+
+  expect(asFragment()).toMatchSnapshot();
+});

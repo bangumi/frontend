@@ -9,14 +9,14 @@ export interface TextProps {
   type?: 'default' | 'secondary';
 }
 
-const text = css({ color: '#1f1c1c' });
+const text = css({ color: 'text.primary' });
 
-const textSecondary = css({ color: '#9f9b9b' });
+const textSecondary = css({ color: 'text.secondary' });
 
 const Text = ({ children, className, style, type = 'default' }: PropsWithChildren<TextProps>) => {
   return (
     <span
-      className={cx('bgm-text', type === 'secondary' && textSecondary, className)}
+      className={cx('bgm-text', text, type === 'secondary' && textSecondary, className)}
       style={style}
     >
       {children}

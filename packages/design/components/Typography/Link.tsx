@@ -20,17 +20,44 @@ const link = css({
     outlineColor: 'focusRing',
     outlineOffset: '2px',
   },
+  '&.bgm-link--title': {
+    color: 'inherit',
+    textStyle: 'title',
+    _hover: { color: 'link.hover', textDecoration: 'none' },
+    _active: { color: 'link.hover', textDecoration: 'none' },
+  },
+  '&.bgm-link--subtle': {
+    color: 'link.subtle',
+    _hover: { color: 'link.hover', textDecoration: 'none' },
+    _active: { color: 'link.hover', textDecoration: 'none' },
+  },
 });
 
 const linkBold = css({ fontWeight: 'bold' });
 
 interface PureLinkProps {
   isExternal?: boolean;
+  /** @deprecated Prefer typography on the link container for structural emphasis. */
   fontWeight?: 'bold';
   noStyle?: boolean;
+  /** Controls link emphasis. Only title applies a text style; other variants inherit typography. */
+  variant?: 'default' | 'title' | 'subtle';
 }
 
 export type LinkProps = PureLinkProps & RouterLinkProps;
+
+const getLinkClassName = (
+  className: string | undefined,
+  fontWeight: PureLinkProps['fontWeight'],
+  variant: NonNullable<PureLinkProps['variant']>,
+) =>
+  cx(
+    'bgm-link',
+    link,
+    fontWeight === 'bold' && linkBold,
+    variant !== 'default' && `bgm-link--${variant}`,
+    className,
+  );
 
 /**
  * 有些场景，to 属性无法覆盖到，比如返回上一页，我们需要 navigate(-1)，可我们又需要 Link 的样式
@@ -40,10 +67,11 @@ export function PureLink({
   children,
   className,
   fontWeight,
+  variant = 'default',
   ...rest
 }: PropsWithChildren<PureLinkProps & JSX.IntrinsicElements['div']>) {
   return (
-    <div className={cx('bgm-link', link, fontWeight === 'bold' && linkBold, className)} {...rest}>
+    <div className={getLinkClassName(className, fontWeight, variant)} {...rest}>
       {children}
     </div>
   );
@@ -56,11 +84,10 @@ const Link: React.FC<LinkProps> = ({
   fontWeight,
   isExternal = false,
   noStyle = false,
+  variant = 'default',
   ...rest
 }) => {
-  const resolvedClassnames = noStyle
-    ? className
-    : cx('bgm-link', link, fontWeight === 'bold' && linkBold, className);
+  const resolvedClassnames = noStyle ? className : getLinkClassName(className, fontWeight, variant);
 
   if (isExternal && typeof to === 'string') {
     return (

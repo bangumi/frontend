@@ -75,8 +75,7 @@ const coverTitle = css({
   maxHeight: '52px',
   margin: '5px 0 0',
   overflow: 'hidden',
-  fontSize: '11px',
-  lineHeight: '1.4',
+  textStyle: 'label',
   overflowWrap: 'anywhere',
 });
 
@@ -158,7 +157,11 @@ export default function SubjectRelations({
                         )}
                       </Link>
                       <p className={coverTitle}>
-                        <Link to={getSubjectLink(related.id)} title={relationTitle(related)}>
+                        <Link
+                          variant='subtle'
+                          to={getSubjectLink(related.id)}
+                          title={relationTitle(related)}
+                        >
                           {relationTitle(related)}
                         </Link>
                       </p>

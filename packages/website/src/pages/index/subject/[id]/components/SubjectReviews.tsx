@@ -66,12 +66,7 @@ const entryBody = css({ flex: '1 1 auto', minWidth: '0' });
 
 const entryTitle = css({
   margin: '0 0 5px',
-  fontSize: '16px',
-  fontWeight: '400',
-  lineHeight: '140%',
-  '& a': {
-    color: '#1f1c1c',
-  },
+  textStyle: 'titleSm',
 });
 
 const entrySummary = css({
@@ -145,10 +140,12 @@ const SubjectReviews: React.FC<{
                         </Link>
                       </h2>
                       <p className={entrySummary}>
-                        <Link to={getBlogLink(review.entry.id)}>{review.entry.summary}</Link>
+                        <Link variant='subtle' to={getBlogLink(review.entry.id)}>
+                          {review.entry.summary}
+                        </Link>
                       </p>
                       <div className={entryMeta}>
-                        <Link to={getUserProfileLink(review.user.username)}>
+                        <Link variant='subtle' to={getUserProfileLink(review.user.username)}>
                           {review.user.nickname}
                         </Link>
                         <span>·</span>
@@ -156,7 +153,9 @@ const SubjectReviews: React.FC<{
                         <span>·</span>
                         <span>{dayjs.unix(review.entry.createdAt).format('YYYY-M-D')}</span>
                         <span>·</span>
-                        <Link to={getBlogLink(review.entry.id)}>{review.entry.replies} 回复</Link>
+                        <Link variant='subtle' to={getBlogLink(review.entry.id)}>
+                          {review.entry.replies} 回复
+                        </Link>
                       </div>
                     </div>
                   </li>
