@@ -419,50 +419,6 @@ const tokens = {
     value: '#082f49',
     variable: 'var(--colors-sky-950)',
   },
-  'colors.cyan.50': {
-    value: '#ecfeff',
-    variable: 'var(--colors-cyan-50)',
-  },
-  'colors.cyan.100': {
-    value: '#cffafe',
-    variable: 'var(--colors-cyan-100)',
-  },
-  'colors.cyan.200': {
-    value: '#a5f3fc',
-    variable: 'var(--colors-cyan-200)',
-  },
-  'colors.cyan.300': {
-    value: '#67e8f9',
-    variable: 'var(--colors-cyan-300)',
-  },
-  'colors.cyan.400': {
-    value: '#22d3ee',
-    variable: 'var(--colors-cyan-400)',
-  },
-  'colors.cyan.500': {
-    value: '#06b6d4',
-    variable: 'var(--colors-cyan-500)',
-  },
-  'colors.cyan.600': {
-    value: '#0891b2',
-    variable: 'var(--colors-cyan-600)',
-  },
-  'colors.cyan.700': {
-    value: '#0e7490',
-    variable: 'var(--colors-cyan-700)',
-  },
-  'colors.cyan.800': {
-    value: '#155e75',
-    variable: 'var(--colors-cyan-800)',
-  },
-  'colors.cyan.900': {
-    value: '#164e63',
-    variable: 'var(--colors-cyan-900)',
-  },
-  'colors.cyan.950': {
-    value: '#083344',
-    variable: 'var(--colors-cyan-950)',
-  },
   'colors.teal.50': {
     value: '#f0fdfa',
     variable: 'var(--colors-teal-50)',
@@ -683,6 +639,50 @@ const tokens = {
     value: '#431407',
     variable: 'var(--colors-orange-950)',
   },
+  'colors.neutral.50': {
+    value: '#fafafa',
+    variable: 'var(--colors-neutral-50)',
+  },
+  'colors.neutral.100': {
+    value: '#f5f5f5',
+    variable: 'var(--colors-neutral-100)',
+  },
+  'colors.neutral.200': {
+    value: '#e5e5e5',
+    variable: 'var(--colors-neutral-200)',
+  },
+  'colors.neutral.300': {
+    value: '#d4d4d4',
+    variable: 'var(--colors-neutral-300)',
+  },
+  'colors.neutral.400': {
+    value: '#a3a3a3',
+    variable: 'var(--colors-neutral-400)',
+  },
+  'colors.neutral.500': {
+    value: '#737373',
+    variable: 'var(--colors-neutral-500)',
+  },
+  'colors.neutral.600': {
+    value: '#525252',
+    variable: 'var(--colors-neutral-600)',
+  },
+  'colors.neutral.700': {
+    value: '#404040',
+    variable: 'var(--colors-neutral-700)',
+  },
+  'colors.neutral.800': {
+    value: '#262626',
+    variable: 'var(--colors-neutral-800)',
+  },
+  'colors.neutral.900': {
+    value: '#171717',
+    variable: 'var(--colors-neutral-900)',
+  },
+  'colors.neutral.950': {
+    value: '#0a0a0a',
+    variable: 'var(--colors-neutral-950)',
+  },
   'colors.stone.50': {
     value: '#fafaf9',
     variable: 'var(--colors-stone-50)',
@@ -891,141 +891,93 @@ const tokens = {
     value: '#2A1117',
     variable: 'var(--colors-brand-950)',
   },
-  'colors.neutral.0': {
-    value: '#FFFFFF',
-    variable: 'var(--colors-neutral-0)',
-  },
-  'colors.neutral.50': {
-    value: '#F7F7F8',
-    variable: 'var(--colors-neutral-50)',
-  },
-  'colors.neutral.100': {
-    value: '#F2F3F5',
-    variable: 'var(--colors-neutral-100)',
-  },
-  'colors.neutral.150': {
-    value: '#EFEFF1',
-    variable: 'var(--colors-neutral-150)',
-  },
-  'colors.neutral.200': {
-    value: '#E4E5E8',
-    variable: 'var(--colors-neutral-200)',
-  },
-  'colors.neutral.300': {
-    value: '#C9CBD1',
-    variable: 'var(--colors-neutral-300)',
-  },
-  'colors.neutral.350': {
-    value: '#C5C7CE',
-    variable: 'var(--colors-neutral-350)',
-  },
-  'colors.neutral.400': {
-    value: '#9A9CA3',
-    variable: 'var(--colors-neutral-400)',
-  },
-  'colors.neutral.425': {
-    value: '#9B9EA8',
-    variable: 'var(--colors-neutral-425)',
-  },
-  'colors.neutral.450': {
-    value: '#979AA3',
-    variable: 'var(--colors-neutral-450)',
-  },
-  'colors.neutral.500': {
-    value: '#777982',
-    variable: 'var(--colors-neutral-500)',
-  },
-  'colors.neutral.600': {
-    value: '#6F727B',
-    variable: 'var(--colors-neutral-600)',
-  },
-  'colors.neutral.700': {
-    value: '#595B63',
-    variable: 'var(--colors-neutral-700)',
-  },
-  'colors.neutral.750': {
-    value: '#545761',
-    variable: 'var(--colors-neutral-750)',
-  },
-  'colors.neutral.775': {
-    value: '#858994',
-    variable: 'var(--colors-neutral-775)',
-  },
-  'colors.neutral.800': {
-    value: '#34373E',
-    variable: 'var(--colors-neutral-800)',
-  },
-  'colors.neutral.850': {
-    value: '#292B31',
-    variable: 'var(--colors-neutral-850)',
-  },
-  'colors.neutral.900': {
-    value: '#24262B',
-    variable: 'var(--colors-neutral-900)',
-  },
-  'colors.neutral.925': {
-    value: '#242428',
-    variable: 'var(--colors-neutral-925)',
-  },
-  'colors.neutral.950': {
-    value: '#1E2024',
-    variable: 'var(--colors-neutral-950)',
-  },
-  'colors.neutral.975': {
-    value: '#16171A',
-    variable: 'var(--colors-neutral-975)',
-  },
-  'colors.neutral.1000': {
-    value: '#111214',
-    variable: 'var(--colors-neutral-1000)',
-  },
   'colors.blue.50': {
-    value: '#eff6ff',
+    value: '#f0faff',
     variable: 'var(--colors-blue-50)',
   },
   'colors.blue.100': {
-    value: '#dbeafe',
+    value: '#dbf3ff',
     variable: 'var(--colors-blue-100)',
   },
   'colors.blue.200': {
-    value: '#bfdbfe',
+    value: '#b3e3ff',
     variable: 'var(--colors-blue-200)',
   },
   'colors.blue.300': {
-    value: '#7DCEFF',
+    value: '#8ad0ff',
     variable: 'var(--colors-blue-300)',
   },
   'colors.blue.400': {
-    value: '#77BDF5',
+    value: '#61baff',
     variable: 'var(--colors-blue-400)',
   },
   'colors.blue.500': {
-    value: '#54B5DF',
+    value: '#369cf8',
     variable: 'var(--colors-blue-500)',
   },
   'colors.blue.600': {
-    value: '#3FA5D2',
+    value: '#247ad1',
     variable: 'var(--colors-blue-600)',
   },
   'colors.blue.700': {
-    value: '#1769AA',
+    value: '#155bab',
     variable: 'var(--colors-blue-700)',
   },
-  'colors.blue.750': {
-    value: '#146EB4',
-    variable: 'var(--colors-blue-750)',
-  },
   'colors.blue.800': {
-    value: '#1e40af',
+    value: '#093f85',
     variable: 'var(--colors-blue-800)',
   },
   'colors.blue.900': {
-    value: '#1e3a8a',
+    value: '#06295e',
     variable: 'var(--colors-blue-900)',
   },
   'colors.blue.950': {
     value: '#172554',
     variable: 'var(--colors-blue-950)',
+  },
+  'colors.cyan.50': {
+    value: '#DCF2F5',
+    variable: 'var(--colors-cyan-50)',
+  },
+  'colors.cyan.100': {
+    value: '#95DDE8',
+    variable: 'var(--colors-cyan-100)',
+  },
+  'colors.cyan.200': {
+    value: '#69C8DB',
+    variable: 'var(--colors-cyan-200)',
+  },
+  'colors.cyan.300': {
+    value: '#42B2CF',
+    variable: 'var(--colors-cyan-300)',
+  },
+  'colors.cyan.400': {
+    value: '#1F9CC2',
+    variable: 'var(--colors-cyan-400)',
+  },
+  'colors.cyan.500': {
+    value: '#0084B4',
+    variable: 'var(--colors-cyan-500)',
+  },
+  'colors.cyan.600': {
+    value: '#00648F',
+    variable: 'var(--colors-cyan-600)',
+  },
+  'colors.cyan.700': {
+    value: '#004669',
+    variable: 'var(--colors-cyan-700)',
+  },
+  'colors.cyan.800': {
+    value: '#002A42',
+    variable: 'var(--colors-cyan-800)',
+  },
+  'colors.cyan.900': {
+    value: '#00111C',
+    variable: 'var(--colors-cyan-900)',
+  },
+  'colors.cyan.950': {
+    value: '#083344',
+    variable: 'var(--colors-cyan-950)',
   },
   'colors.green.50': {
     value: '#f0fdf4',
@@ -1258,6 +1210,10 @@ const tokens = {
     value: '16px',
     variable: 'var(--font-sizes-title-sm)',
   },
+  'fontSizes.sectionTitle': {
+    value: '18px',
+    variable: 'var(--font-sizes-section-title)',
+  },
   'fontSizes.title': {
     value: '20px',
     variable: 'var(--font-sizes-title)',
@@ -1302,8 +1258,12 @@ const tokens = {
     value: '900',
     variable: 'var(--font-weights-black)',
   },
+  'fontWeights.section': {
+    value: '300',
+    variable: 'var(--font-weights-section)',
+  },
   'fontWeights.title': {
-    value: '650',
+    value: '700',
     variable: 'var(--font-weights-title)',
   },
   'lineHeights.none': {
@@ -1354,6 +1314,10 @@ const tokens = {
     value: '24px',
     variable: 'var(--line-heights-title-sm)',
   },
+  'lineHeights.sectionTitle': {
+    value: '26px',
+    variable: 'var(--line-heights-section-title)',
+  },
   'lineHeights.title': {
     value: '28px',
     variable: 'var(--line-heights-title)',
@@ -1383,19 +1347,19 @@ const tokens = {
     variable: 'var(--spacing-4)',
   },
   'spacing.5': {
-    value: '24px',
+    value: '20px',
     variable: 'var(--spacing-5)',
   },
   'spacing.6': {
-    value: '32px',
+    value: '24px',
     variable: 'var(--spacing-6)',
   },
   'spacing.7': {
-    value: '48px',
+    value: '32px',
     variable: 'var(--spacing-7)',
   },
   'spacing.8': {
-    value: '64px',
+    value: '48px',
     variable: 'var(--spacing-8)',
   },
   'spacing.9': {
@@ -1734,6 +1698,10 @@ const tokens = {
     value: '44px',
     variable: 'var(--sizes-touch)',
   },
+  'sizes.container.page': {
+    value: '1264px',
+    variable: 'var(--sizes-container-page)',
+  },
   'sizes.container.reading': {
     value: 'min(100% - 32px, 720px)',
     variable: 'var(--sizes-container-reading)',
@@ -1934,6 +1902,10 @@ const tokens = {
     value: '1600px',
     variable: 'var(--breakpoints-2xl)',
   },
+  'borders.component.list.divider': {
+    value: 'var(--borders-component-list-divider)',
+    variable: 'var(--borders-component-list-divider)',
+  },
   'colors.accent': {
     value: 'var(--colors-accent)',
     variable: 'var(--colors-accent)',
@@ -1998,13 +1970,45 @@ const tokens = {
     value: 'var(--colors-border-strong)',
     variable: 'var(--colors-border-strong)',
   },
+  'colors.media.frame.background': {
+    value: 'var(--colors-media-frame-background)',
+    variable: 'var(--colors-media-frame-background)',
+  },
+  'colors.media.frame.border': {
+    value: 'var(--colors-media-frame-border)',
+    variable: 'var(--colors-media-frame-border)',
+  },
+  'colors.media.frame.borderHover': {
+    value: 'var(--colors-media-frame-border-hover)',
+    variable: 'var(--colors-media-frame-border-hover)',
+  },
   'colors.link': {
     value: 'var(--colors-link)',
     variable: 'var(--colors-link)',
   },
+  'colors.link.subtle': {
+    value: 'var(--colors-link-subtle)',
+    variable: 'var(--colors-link-subtle)',
+  },
   'colors.link.hover': {
     value: 'var(--colors-link-hover)',
     variable: 'var(--colors-link-hover)',
+  },
+  'colors.nav': {
+    value: 'var(--colors-nav)',
+    variable: 'var(--colors-nav)',
+  },
+  'colors.nav.hover': {
+    value: 'var(--colors-nav-hover)',
+    variable: 'var(--colors-nav-hover)',
+  },
+  'colors.nav.active': {
+    value: 'var(--colors-nav-active)',
+    variable: 'var(--colors-nav-active)',
+  },
+  'colors.nav.activeHover': {
+    value: 'var(--colors-nav-active-hover)',
+    variable: 'var(--colors-nav-active-hover)',
   },
   'colors.info': {
     value: 'var(--colors-info)',
@@ -2025,6 +2029,66 @@ const tokens = {
   'colors.focusRing': {
     value: 'var(--colors-focus-ring)',
     variable: 'var(--colors-focus-ring)',
+  },
+  'shadows.media.frame.hover': {
+    value: 'var(--shadows-media-frame-hover)',
+    variable: 'var(--shadows-media-frame-hover)',
+  },
+  'shadows.surface.panel.shadow': {
+    value: 'var(--shadows-raised)',
+    variable: 'var(--shadows-surface-panel-shadow)',
+  },
+  'spacing.component.list.rowBlock': {
+    value: 'var(--spacing-2)',
+    variable: 'var(--spacing-component-list-row-block)',
+  },
+  'spacing.component.list.rowBlockDense': {
+    value: 'var(--spacing-1)',
+    variable: 'var(--spacing-component-list-row-block-dense)',
+  },
+  'spacing.component.media.frame': {
+    value: 'var(--spacing-1)',
+    variable: 'var(--spacing-component-media-frame)',
+  },
+  'spacing.component.media.caption': {
+    value: 'var(--spacing-2)',
+    variable: 'var(--spacing-component-media-caption)',
+  },
+  'spacing.component.media.meta': {
+    value: 'var(--spacing-1)',
+    variable: 'var(--spacing-component-media-meta)',
+  },
+  'spacing.layout.inline': {
+    value: 'var(--spacing-1)',
+    variable: 'var(--spacing-layout-inline)',
+  },
+  'spacing.layout.compact': {
+    value: 'var(--spacing-2)',
+    variable: 'var(--spacing-layout-compact)',
+  },
+  'spacing.layout.group': {
+    value: 'var(--spacing-4)',
+    variable: 'var(--spacing-layout-group)',
+  },
+  'spacing.layout.section': {
+    value: 'var(--spacing-6)',
+    variable: 'var(--spacing-layout-section)',
+  },
+  'spacing.layout.page': {
+    value: 'var(--spacing-7)',
+    variable: 'var(--spacing-layout-page)',
+  },
+  'spacing.layout.gutter.mobile': {
+    value: 'var(--spacing-4)',
+    variable: 'var(--spacing-layout-gutter-mobile)',
+  },
+  'spacing.layout.gutter.tablet': {
+    value: 'var(--spacing-6)',
+    variable: 'var(--spacing-layout-gutter-tablet)',
+  },
+  'spacing.layout.gutter.desktop': {
+    value: 'var(--spacing-7)',
+    variable: 'var(--spacing-layout-gutter-desktop)',
   },
   'spacing.-1': {
     value: 'calc(var(--spacing-1) * -1)',
@@ -2166,6 +2230,58 @@ const tokens = {
     value: 'calc(var(--spacing-5\\.5) * -1)',
     variable: 'var(--spacing-5\\.5)',
   },
+  'spacing.component.list.-rowBlock': {
+    value: 'calc(var(--spacing-component-list-row-block) * -1)',
+    variable: 'var(--spacing-component-list-row-block)',
+  },
+  'spacing.component.list.-rowBlockDense': {
+    value: 'calc(var(--spacing-component-list-row-block-dense) * -1)',
+    variable: 'var(--spacing-component-list-row-block-dense)',
+  },
+  'spacing.component.media.-frame': {
+    value: 'calc(var(--spacing-component-media-frame) * -1)',
+    variable: 'var(--spacing-component-media-frame)',
+  },
+  'spacing.component.media.-caption': {
+    value: 'calc(var(--spacing-component-media-caption) * -1)',
+    variable: 'var(--spacing-component-media-caption)',
+  },
+  'spacing.component.media.-meta': {
+    value: 'calc(var(--spacing-component-media-meta) * -1)',
+    variable: 'var(--spacing-component-media-meta)',
+  },
+  'spacing.layout.-inline': {
+    value: 'calc(var(--spacing-layout-inline) * -1)',
+    variable: 'var(--spacing-layout-inline)',
+  },
+  'spacing.layout.-compact': {
+    value: 'calc(var(--spacing-layout-compact) * -1)',
+    variable: 'var(--spacing-layout-compact)',
+  },
+  'spacing.layout.-group': {
+    value: 'calc(var(--spacing-layout-group) * -1)',
+    variable: 'var(--spacing-layout-group)',
+  },
+  'spacing.layout.-section': {
+    value: 'calc(var(--spacing-layout-section) * -1)',
+    variable: 'var(--spacing-layout-section)',
+  },
+  'spacing.layout.-page': {
+    value: 'calc(var(--spacing-layout-page) * -1)',
+    variable: 'var(--spacing-layout-page)',
+  },
+  'spacing.layout.gutter.-mobile': {
+    value: 'calc(var(--spacing-layout-gutter-mobile) * -1)',
+    variable: 'var(--spacing-layout-gutter-mobile)',
+  },
+  'spacing.layout.gutter.-tablet': {
+    value: 'calc(var(--spacing-layout-gutter-tablet) * -1)',
+    variable: 'var(--spacing-layout-gutter-tablet)',
+  },
+  'spacing.layout.gutter.-desktop': {
+    value: 'calc(var(--spacing-layout-gutter-desktop) * -1)',
+    variable: 'var(--spacing-layout-gutter-desktop)',
+  },
   'colors.colorPalette': {
     value: 'var(--colors-color-palette)',
     variable: 'var(--colors-color-palette)',
@@ -2214,50 +2330,6 @@ const tokens = {
     value: 'var(--colors-color-palette-950)',
     variable: 'var(--colors-color-palette-950)',
   },
-  'colors.colorPalette.0': {
-    value: 'var(--colors-color-palette-0)',
-    variable: 'var(--colors-color-palette-0)',
-  },
-  'colors.colorPalette.150': {
-    value: 'var(--colors-color-palette-150)',
-    variable: 'var(--colors-color-palette-150)',
-  },
-  'colors.colorPalette.350': {
-    value: 'var(--colors-color-palette-350)',
-    variable: 'var(--colors-color-palette-350)',
-  },
-  'colors.colorPalette.425': {
-    value: 'var(--colors-color-palette-425)',
-    variable: 'var(--colors-color-palette-425)',
-  },
-  'colors.colorPalette.450': {
-    value: 'var(--colors-color-palette-450)',
-    variable: 'var(--colors-color-palette-450)',
-  },
-  'colors.colorPalette.750': {
-    value: 'var(--colors-color-palette-750)',
-    variable: 'var(--colors-color-palette-750)',
-  },
-  'colors.colorPalette.775': {
-    value: 'var(--colors-color-palette-775)',
-    variable: 'var(--colors-color-palette-775)',
-  },
-  'colors.colorPalette.850': {
-    value: 'var(--colors-color-palette-850)',
-    variable: 'var(--colors-color-palette-850)',
-  },
-  'colors.colorPalette.925': {
-    value: 'var(--colors-color-palette-925)',
-    variable: 'var(--colors-color-palette-925)',
-  },
-  'colors.colorPalette.975': {
-    value: 'var(--colors-color-palette-975)',
-    variable: 'var(--colors-color-palette-975)',
-  },
-  'colors.colorPalette.1000': {
-    value: 'var(--colors-color-palette-1000)',
-    variable: 'var(--colors-color-palette-1000)',
-  },
   'colors.colorPalette.hover': {
     value: 'var(--colors-color-palette-hover)',
     variable: 'var(--colors-color-palette-hover)',
@@ -2305,6 +2377,38 @@ const tokens = {
   'colors.colorPalette.strong': {
     value: 'var(--colors-color-palette-strong)',
     variable: 'var(--colors-color-palette-strong)',
+  },
+  'colors.colorPalette.frame.background': {
+    value: 'var(--colors-color-palette-frame-background)',
+    variable: 'var(--colors-color-palette-frame-background)',
+  },
+  'colors.colorPalette.background': {
+    value: 'var(--colors-color-palette-background)',
+    variable: 'var(--colors-color-palette-background)',
+  },
+  'colors.colorPalette.frame.border': {
+    value: 'var(--colors-color-palette-frame-border)',
+    variable: 'var(--colors-color-palette-frame-border)',
+  },
+  'colors.colorPalette.border': {
+    value: 'var(--colors-color-palette-border)',
+    variable: 'var(--colors-color-palette-border)',
+  },
+  'colors.colorPalette.frame.borderHover': {
+    value: 'var(--colors-color-palette-frame-border-hover)',
+    variable: 'var(--colors-color-palette-frame-border-hover)',
+  },
+  'colors.colorPalette.borderHover': {
+    value: 'var(--colors-color-palette-border-hover)',
+    variable: 'var(--colors-color-palette-border-hover)',
+  },
+  'colors.colorPalette.active': {
+    value: 'var(--colors-color-palette-active)',
+    variable: 'var(--colors-color-palette-active)',
+  },
+  'colors.colorPalette.activeHover': {
+    value: 'var(--colors-color-palette-active-hover)',
+    variable: 'var(--colors-color-palette-active-hover)',
   },
 };
 

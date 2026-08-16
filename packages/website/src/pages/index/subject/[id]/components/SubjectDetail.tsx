@@ -33,41 +33,37 @@ import { SubjectPrimaryBlocks, SubjectSecondaryBlocks } from './SubjectDetailBlo
 const { Link } = Typography;
 
 const page = css({
-  padding: '10px 15px 24px',
+  paddingTop: '3',
+  paddingBottom: '5',
 });
 
 const header = css({ margin: '0' });
 
 const name = css({
   margin: '15px 0',
-  fontSize: '20px',
-  fontWeight: 'bold',
-  lineHeight: '1.3',
-  '& a': {
-    color: '#1f1c1c',
-    fontWeight: 'bold',
-    _hover: { color: '#54b5df' },
-  },
+  textStyle: 'title',
 });
 
 const headerInner = css({
-  paddingRight: '15px',
-  paddingLeft: '15px',
+  paddingRight: '4',
+  paddingLeft: '4',
 });
 
 const tabsInner = headerInner;
 
 const platform = css({
-  marginLeft: '8px',
-  color: '#9f9b9b',
-  fontSize: '12px',
+  marginLeft: '2',
+  color: 'nav',
+  textStyle: 'meta',
   fontWeight: 'normal',
 });
 
 const tabsStyle = css({
-  borderTop: '1px solid #fefefe',
-  borderBottom: '1px solid #e8e3e3',
-  background: '#fbfbfb',
+  borderTopWidth: '1px',
+  borderTopColor: 'border.subtle',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
+  background: 'bg.subtle',
 });
 
 const tabsScroll = css({
@@ -84,114 +80,170 @@ const tabList = css({
   minWidth: '100%',
   margin: '0',
   padding: '0',
-  gap: '5px',
+  gap: '1',
   listStyle: 'none',
 });
 
 const tabLink = css({
   display: 'block',
-  padding: '10px 10px 9px',
+  paddingTop: '3',
+  paddingRight: '3',
+  paddingBottom: '2',
+  paddingLeft: '3',
   borderBottom: '2px solid transparent',
-  color: '#9f9b9b',
-  fontSize: '14px',
+  color: 'text.tertiary',
+  textStyle: 'label',
   whiteSpace: 'nowrap',
+  transitionProperty: 'color, border-color',
+  transitionDuration: 'fast',
+  transitionTimingFunction: 'standard',
   _hover: {
-    borderBottomColor: '#54b5df',
-    color: '#54b5df',
+    borderBottomColor: 'nav.hover',
+    color: 'nav.hover',
     textDecoration: 'none',
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '-2px',
   },
 });
 
 const tabLinkActive = css({
-  borderBottomColor: '#f09199',
-  color: '#f09199',
+  borderBottomColor: 'nav.active',
+  color: 'nav.active',
+  _hover: {
+    borderBottomColor: 'nav.activeHover',
+    color: 'nav.activeHover',
+  },
 });
 
 const columns = css({
-  display: 'grid',
-  gridTemplateColumns: 'minmax(200px, 2.5fr) minmax(0, 7.5fr)',
-  alignItems: 'flex-start',
-  gap: '10px',
-  '@media (max-width: 640px)': {
-    display: 'block',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.section',
+  md: {
+    display: 'grid',
+    gridTemplateColumns: 'minmax(220px, 260px) minmax(0, 1fr)',
+    alignItems: 'flex-start',
+    gap: 'layout.section',
   },
 });
 
 const columnLeft = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.group',
   minWidth: '0',
-  '@media (max-width: 640px)': {
-    marginBottom: '10px',
-  },
 });
 
-const columnContent = css({ minWidth: '0' });
+const columnContent = css({
+  display: 'flex',
+  minWidth: '0',
+  flexDirection: 'column',
+  gap: 'layout.section',
+});
 
 const columnMain = css({ minWidth: '0' });
 
 const columnRight = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.group',
   minWidth: '0',
-  '@media (max-width: 640px)': {
-    marginTop: '10px',
-  },
 });
 
 const primaryColumns = css({
-  display: 'grid',
-  gridTemplateColumns: 'minmax(0, 6.5fr) minmax(0, 3.5fr)',
-  gap: '20px',
-  padding: '0 18px 0 10px',
-  '@media (max-width: 640px)': {
-    display: 'block',
-    padding: '0',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.group',
+  lg: {
+    display: 'grid',
+    gridTemplateColumns: 'minmax(0, 1fr) minmax(240px, 272px)',
+    gap: 'layout.section',
+  },
+  '@media (min-width: 1260px)': {
+    gridTemplateColumns: 'minmax(0, 720px) 272px',
   },
 });
 
 const infoboxStyle = css({
-  margin: '0 0 15px',
-  padding: '0 0 10px',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.group',
   wordBreak: 'break-all',
 });
 
 const coverWrapper = css({
-  margin: '0 0 12px',
   textAlign: 'center',
 });
 
+const coverLink = css({
+  display: 'inline-block',
+  maxWidth: '100%',
+  boxSizing: 'border-box',
+  padding: 'component.media.frame',
+  borderWidth: '1px',
+  borderColor: 'media.frame.border',
+  borderRadius: 'sm',
+  background: 'media.frame.background',
+  boxShadow: 'raised',
+  transitionProperty: 'border-color, box-shadow',
+  transitionDuration: 'fast',
+  transitionTimingFunction: 'standard',
+  _hover: {
+    borderColor: 'media.frame.borderHover',
+    boxShadow: 'media.frame.hover',
+    textDecoration: 'none',
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    boxShadow: 'none',
+  },
+});
+
 const cover = css({
+  display: 'block',
   width: '255px',
   maxWidth: '100%',
   height: 'auto',
   aspectRatio: '5 / 7',
-  boxSizing: 'border-box',
-  marginBottom: '5px',
-  padding: '2px',
-  border: '1px solid #a9a9ab',
-  borderTopColor: '#c7c7c9',
-  borderBottomColor: '#858486',
-  background: '#fff',
-  boxShadow: '0 1px 5px #aaa',
   objectFit: 'cover',
 });
 
 const infoList = css({
   margin: '0',
   padding: '0',
-  listStyle: 'none',
-  fontSize: '14px',
+  textStyle: 'bodySm',
   wordBreak: 'break-all',
-  '& li': {
-    padding: '5px',
-    borderBottom: '1px solid #e8e3e3',
-    lineHeight: '1.4',
+  '& > div': {
+    paddingBlock: 'component.list.rowBlockDense',
+  },
+  '& > div + div': {
+    borderTop: 'component.list.divider',
+  },
+  '& dt, & dd': {
+    display: 'inline',
+  },
+  '& dt::after': {
+    content: '": "',
+  },
+  '& dd': {
+    margin: '0',
   },
 });
 
 const tip = css({
-  color: '#9f9b9b',
-  fontSize: '14px',
+  color: 'text.secondary',
+  textStyle: 'bodySm',
 });
 
 const shareTools = css({
+  display: 'flex',
   alignItems: 'center',
   gap: '7px',
   padding: '2px 3px',
@@ -291,7 +343,7 @@ export function SubjectHeader({ subject }: { subject: Subject }) {
     <header className={header}>
       <PageContainer gutterOnly className={headerInner}>
         <h1 className={name}>
-          <Link to={getSubjectLink(subject.id)} title={subject.nameCN}>
+          <Link variant='title' to={getSubjectLink(subject.id)} title={subject.nameCN}>
             {subject.name}
           </Link>
           {subject.platform.typeCN != null && subject.platform.typeCN !== '' && (
@@ -330,24 +382,26 @@ function SubjectInfobox({ subject }: { subject: Subject }) {
   const infobox = formatSubjectInfobox(subject.infobox);
   return (
     <div className={infoboxStyle}>
-      {subject.images?.large != null && (
+      {subject.images?.common != null && (
         <div className={coverWrapper}>
           <Link
+            className={coverLink}
             to={subject.images.large}
             isExternal
+            noStyle
             target='_blank'
             rel='noopener noreferrer'
             title={`${subject.name} ${subject.nameCN}`}
           >
-            <img src={subject.images.large} className={cover} alt={subject.name} />
+            <img src={subject.images.common} className={cover} alt={subject.name} />
           </Link>
         </div>
       )}
-      <ul className={infoList}>
+      <dl className={infoList}>
         {infobox.map((item) => (
-          <li key={item.key}>
-            <span className={tip}>{item.key}: </span>
-            <span>
+          <div key={item.key}>
+            <dt className={tip}>{item.key}</dt>
+            <dd>
               {item.values.map((v, i) => (
                 <span key={i}>
                   {v.k != null && v.k !== '' && <span className={tip}>{v.k}</span>}
@@ -355,10 +409,10 @@ function SubjectInfobox({ subject }: { subject: Subject }) {
                   {i < item.values.length - 1 && ' / '}
                 </span>
               ))}
-            </span>
-          </li>
+            </dd>
+          </div>
         ))}
-      </ul>
+      </dl>
     </div>
   );
 }
@@ -414,7 +468,7 @@ function SubjectCollectPanel({ subject }: { subject: Subject }) {
         <React.Fragment key={entry.type}>
           {' '}
           /{' '}
-          <Link to={getSubjectCollectionsLink(subject.id, entry.type)}>
+          <Link variant='subtle' to={getSubjectCollectionsLink(subject.id, entry.type)}>
             {entry.count}人{COLLECT_DESC[entry.type]}
           </Link>
         </React.Fragment>
@@ -437,7 +491,7 @@ function SubjectShare({ subject }: { subject: Subject }) {
         <LinkIcon />
         复制
       </button>
-      <span>分享</span>
+      <span>分享:</span>
       <a
         href={`https://service.weibo.com/share/share.php?url=${encodeURIComponent(
           shareUrl,

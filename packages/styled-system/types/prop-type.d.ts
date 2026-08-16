@@ -219,8 +219,8 @@ export interface UtilityValues {
 	srOnly: boolean;
 	debug: boolean;
 	containerName: CssProperties["containerName"];
-	colorPalette: "current" | "black" | "white" | "transparent" | "rose" | "pink" | "fuchsia" | "purple" | "violet" | "indigo" | "sky" | "cyan" | "teal" | "emerald" | "lime" | "yellow" | "orange" | "stone" | "zinc" | "gray" | "slate" | "brand" | "neutral" | "blue" | "green" | "amber" | "red" | "accent" | "bg" | "text" | "border" | "link" | "info" | "success" | "warning" | "danger" | "focusRing";
-	textStyle: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl" | "meta" | "bodySm" | "body" | "bodyLg" | "label" | "titleSm" | "title" | "display";
+	colorPalette: "current" | "black" | "white" | "transparent" | "rose" | "pink" | "fuchsia" | "purple" | "violet" | "indigo" | "sky" | "teal" | "emerald" | "lime" | "yellow" | "orange" | "neutral" | "stone" | "zinc" | "gray" | "slate" | "brand" | "blue" | "cyan" | "green" | "amber" | "red" | "accent" | "bg" | "text" | "border" | "media" | "media.frame" | "link" | "nav" | "info" | "success" | "warning" | "danger" | "focusRing";
+	textStyle: "xs" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl" | "5xl" | "6xl" | "7xl" | "8xl" | "9xl" | "meta" | "bodySm" | "body" | "bodyLg" | "label" | "titleSm" | "sectionTitle" | "title" | "display";
 }
 
 

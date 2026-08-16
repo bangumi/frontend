@@ -17,74 +17,76 @@ const { Link } = Typography;
 
 const panel = css({
   overflow: 'hidden',
-  margin: '0 0 15px',
   padding: '0',
-  border: '1px solid #e8e3e3',
-  borderRadius: '15px',
-  background: '#fff',
-  boxShadow: '0 5px 10px rgba(0, 0, 0, 0.09)',
-  fontSize: '12px',
+  borderWidth: '1px',
+  borderStyle: 'solid',
+  borderColor: 'border.subtle',
+  borderRadius: 'md',
+  background: 'bg.raised',
+  boxShadow: 'surface.panel.shadow',
+  textStyle: 'meta',
   overflowWrap: 'break-word',
 });
 
 const panelTitle = css({
-  height: '40px',
+  minHeight: 'control.sm',
   margin: '0',
-  padding: '0 10px',
+  paddingRight: '3',
+  paddingLeft: '3',
   border: '0',
-  background: '#f7f7f7',
-  color: '#595555',
-  fontSize: '13px',
-  fontWeight: 'normal',
-  lineHeight: '40px',
+  background: 'bg.subtle',
+  color: 'text.primary',
+  textStyle: 'label',
+  display: 'flex',
+  alignItems: 'center',
 });
 
-const panelBody = css({ padding: '10px' });
+const panelBody = css({ padding: '3' });
 
 const interestDetails = css({
-  marginBottom: '10px',
+  marginBottom: '3',
 });
 
 const interestNow = css({
-  fontSize: '13px',
-  margin: '0 0 4px',
+  textStyle: 'bodySm',
+  marginBottom: '1',
 });
 
-const privateTag = css({ marginLeft: '6px', color: '#9f9b9b' });
+const privateTag = css({ marginLeft: '2', color: 'text.tertiary' });
 
 const interestTime = css({
-  margin: '0 0 8px',
-  color: '#9f9b9b',
-  fontSize: '12px',
+  marginBottom: '2',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 const modifyBtn = css({
   border: 'none',
   background: 'none',
-  color: '#54b5df',
+  color: 'link',
   cursor: 'pointer',
-  fontSize: '12px',
-  marginLeft: '8px',
+  textStyle: 'meta',
+  marginLeft: '2',
   padding: '0',
   _disabled: {
-    color: '#9f9b9b',
+    color: 'text.disabled',
     cursor: 'default',
   },
 });
 
 const myRate = css({
-  fontSize: '12px',
-  color: '#9f9b9b',
-  margin: '0 0 4px',
+  textStyle: 'meta',
+  color: 'text.secondary',
+  marginBottom: '1',
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
+  gap: '2',
 });
 
 const myComment = css({
-  fontSize: '13px',
-  margin: '4px 0 0',
-  color: '#1f1c1c',
+  textStyle: 'bodySm',
+  marginTop: '1',
+  color: 'text.primary',
   wordBreak: 'break-all',
   whiteSpace: 'pre-wrap',
 });
@@ -97,13 +99,15 @@ const collectButtons = css({
 const collectBtn = css({
   minWidth: '0',
   height: '28px',
-  padding: '0 2px',
-  border: '1px solid #54b5df',
+  paddingRight: '1',
+  paddingLeft: '1',
+  borderWidth: '1px',
+  borderColor: 'link',
   borderRightWidth: '0',
-  color: '#54b5df',
-  background: '#fff',
+  color: 'link',
+  background: 'bg.raised',
   cursor: 'pointer',
-  fontSize: '12px',
+  textStyle: 'meta',
   '&:first-child': {
     borderRadius: '4px 0 0 4px',
   },
@@ -112,106 +116,110 @@ const collectBtn = css({
     borderRadius: '0 4px 4px 0',
   },
   _hover: {
-    background: '#edf8fc',
+    background: 'accent.subtle',
   },
   '&.collectBtnActive': {
-    background: '#54b5df',
-    color: '#fff',
+    background: 'accent',
+    color: 'accent.fg',
   },
   _disabled: {
-    borderColor: '#e8e3e3',
-    color: '#9f9b9b',
+    borderColor: 'border.subtle',
+    color: 'text.disabled',
     cursor: 'default',
-    background: '#fff',
+    background: 'bg.raised',
   },
 });
 
 const editForm = css({
   marginTop: '10px',
-  borderTop: '1px solid #e8e3e3',
-  paddingTop: '10px',
+  borderTopWidth: '1px',
+  borderTopColor: 'border.subtle',
+  paddingTop: '3',
 });
 
 const formRow = css({
   display: 'flex',
   alignItems: 'flex-start',
-  gap: '8px',
-  margin: '0 0 8px',
-  fontSize: '13px',
+  gap: '2',
+  marginBottom: '2',
+  textStyle: 'bodySm',
 });
 
 const formLabel = css({
   flex: 'none',
-  color: '#9f9b9b',
-  paddingTop: '2px',
+  color: 'text.secondary',
+  paddingTop: '1',
 });
 
 const typeOptions = css({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '10px',
+  gap: '3',
 });
 
 const typeOption = css({
   display: 'flex',
   alignItems: 'center',
-  gap: '3px',
+  gap: '1',
 });
 
 const rateStars = css({
   display: 'flex',
-  gap: '2px',
+  gap: '1',
 });
 
 const rateStar = css({
   border: 'none',
   background: 'none',
   cursor: 'pointer',
-  fontSize: '18px',
-  color: '#e8e3e3',
+  fontSize: 'titleSm',
+  color: 'border.subtle',
   padding: '0',
   lineHeight: '1',
 });
 
 const rateStarFilled = css({
-  color: '#f68ab1',
+  color: 'accent',
 });
 
 const rateValue = css({
-  color: '#9f9b9b',
-  fontSize: '12px',
-  paddingTop: '2px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
+  paddingTop: '1',
 });
 
 const commentInput = css({
   flex: '1',
   minWidth: '0',
-  padding: '6px',
-  border: '1px solid #e8e3e3',
-  borderRadius: '3px',
-  fontSize: '13px',
+  padding: '2',
+  borderWidth: '1px',
+  borderColor: 'border.default',
+  borderRadius: 'sm',
+  textStyle: 'bodySm',
   resize: 'vertical',
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
 });
 
 const formActions = css({ textAlign: 'right' });
 
 const ratingBlock = css({
-  marginTop: '10px',
-  borderTop: '1px solid #e8e3e3',
-  paddingTop: '10px',
+  borderTopWidth: '1px',
+  borderTopColor: 'border.subtle',
 });
 
-const ratingAnonymous = css({
-  marginTop: '0',
-  paddingTop: '0',
-  borderTop: '0',
+const ratingWithInterest = css({
+  marginTop: '3',
+  paddingTop: '3',
 });
 
 const ratingHeadline = css({
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'flex-start',
-  gap: '6px',
+  gap: '2',
 });
 
 const ratingInfo = css({ minWidth: '0' });
@@ -223,59 +231,78 @@ const rateEmo = css({
   flex: 'none',
   alignItems: 'center',
   justifyContent: 'center',
-  border: '2px solid #f09199',
-  color: '#f09199',
-  fontSize: '9px',
+  borderWidth: '2px',
+  borderStyle: 'solid',
+  borderColor: 'accent',
+  color: 'accent',
+  textStyle: 'meta',
   fontWeight: 'bold',
   lineHeight: '1',
 });
 
 const scoreLink = css({
+  display: 'block',
+  _hover: {
+    '& > :last-child, & > :last-child *': {
+      color: 'link.hover',
+    },
+  },
+});
+
+const scoreLine = css({
   display: 'flex',
-  alignItems: 'baseline',
-  gap: '5px',
+  alignItems: 'bottom',
+  gap: '1',
 });
 
 const score = css({
-  fontSize: '22px',
-  fontWeight: 'bold',
-  color: '#f09199',
+  fontSize: 'title',
+  fontWeight: 'title',
+  color: 'accent',
   lineHeight: '1',
 });
 
 const ratingLabel = css({
-  color: '#595555',
-  fontSize: '13px',
+  color: 'text.primary',
+  textStyle: 'bodySm',
 });
 
 const rankDesc = css({
   display: 'block',
-  marginTop: '2px',
-  fontSize: '10px',
-  color: '#595555',
+  textStyle: 'meta',
+  color: 'text.secondary',
+  whiteSpace: 'nowrap',
   '& strong': {
-    marginLeft: '3px',
-    color: '#1f1c1c',
+    color: 'text.primary',
   },
 });
 
 const votes = css({
-  marginLeft: 'auto',
-  flex: 'none',
-  padding: '2px 5px',
-  background: '#f3f1f1',
-  fontSize: '12px',
-  color: '#9f9b9b',
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  paddingTop: '1',
+  paddingRight: '2',
+  paddingBottom: '1',
+  paddingLeft: '2',
+  background: 'bg.muted',
+  textStyle: 'meta',
+  color: 'text.tertiary',
+});
+
+const chartWrapper = css({
+  position: 'relative',
 });
 
 const chart = css({
   listStyle: 'none',
-  margin: '10px 0 0',
+  marginTop: '3',
   padding: '0',
   display: 'grid',
   gridTemplateColumns: 'repeat(10, minmax(0, 1fr))',
-  gap: '3px',
-  borderBottom: '1px solid #e8e3e3',
+  gap: '1',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
 });
 
 const chartItem = css({
@@ -288,7 +315,7 @@ const chartItem = css({
 const chartBarArea = css({
   display: 'flex',
   width: '100%',
-  height: '62px',
+  height: '72px',
   alignItems: 'flex-end',
   justifyContent: 'center',
 });
@@ -296,26 +323,26 @@ const chartBarArea = css({
 const chartBar = css({
   width: 'min(100%, 13px)',
   minHeight: '1px',
-  background: '#9f9b9b',
+  background: 'text.tertiary',
   borderRadius: '2px 2px 0 0',
 });
 
 const chartLabel = css({
-  fontSize: '10px',
-  lineHeight: '16px',
-  color: '#9f9b9b',
+  textStyle: 'meta',
+  color: 'text.tertiary',
 });
 
 const progressBlock = css({
-  marginTop: '10px',
-  paddingTop: '10px',
-  borderTop: '1px solid #e8e3e3',
+  marginTop: '3',
+  paddingTop: '3',
+  borderTopWidth: '1px',
+  borderTopColor: 'border.subtle',
 });
 
 const progressTitle = css({
-  margin: '0 0 6px',
-  color: '#595555',
-  fontSize: '13px',
+  marginBottom: '2',
+  color: 'text.secondary',
+  textStyle: 'bodySm',
   fontWeight: 'normal',
 });
 
@@ -323,23 +350,24 @@ const progressBar = css({
   position: 'relative',
   height: '18px',
   overflow: 'hidden',
-  border: '1px solid #e8e3e3',
-  borderRadius: '3px',
-  background: '#f4f4f4',
+  borderWidth: '1px',
+  borderColor: 'border.subtle',
+  borderRadius: 'sm',
+  background: 'bg.inset',
 });
 
 const progressInner = css({
   display: 'block',
   height: '100%',
-  background: '#54b5df',
+  background: 'accent',
 });
 
 const progressText = css({
   position: 'absolute',
   top: '0',
-  left: '6px',
-  color: '#fff',
-  fontSize: '11px',
+  left: '2',
+  color: 'accent.fg',
+  textStyle: 'meta',
   lineHeight: '18px',
 });
 
@@ -347,39 +375,57 @@ const progressForm = css({
   display: 'flex',
   alignItems: 'center',
   flexWrap: 'wrap',
-  gap: '8px',
-  marginTop: '8px',
-  color: '#9f9b9b',
-  fontSize: '12px',
+  gap: '2',
+  marginTop: '2',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 const progressLabel = css({
   display: 'flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: '1',
 });
 
 const progressInput = css({
   width: '48px',
-  padding: '2px 4px',
-  border: '1px solid #e8e3e3',
-  borderRadius: '2px',
-  fontSize: '12px',
+  paddingTop: '1',
+  paddingRight: '1',
+  paddingBottom: '1',
+  paddingLeft: '1',
+  borderWidth: '1px',
+  borderColor: 'border.default',
+  borderRadius: 'sm',
+  textStyle: 'meta',
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
 });
 
 const progressUpdate = css({
-  padding: '3px 12px',
-  border: '1px solid #54b5df',
-  borderRadius: '3px',
-  background: '#fff',
-  color: '#54b5df',
+  paddingTop: '1',
+  paddingRight: '3',
+  paddingBottom: '1',
+  paddingLeft: '3',
+  borderWidth: '1px',
+  borderColor: 'link',
+  borderRadius: 'sm',
+  background: 'bg.raised',
+  color: 'link',
   cursor: 'pointer',
-  fontSize: '12px',
-  _hover: { background: '#54b5df', color: '#fff' },
+  textStyle: 'meta',
+  _hover: { background: 'accent', color: 'accent.fg', borderColor: 'accent' },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
   _disabled: {
-    borderColor: '#e8e3e3',
-    background: '#fff',
-    color: '#9f9b9b',
+    borderColor: 'border.subtle',
+    background: 'bg.raised',
+    color: 'text.disabled',
     cursor: 'default',
   },
 });
@@ -711,36 +757,40 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
           </div>
         )}
 
-        <div className={cx(ratingBlock, !user && ratingAnonymous)}>
+        <div className={cx(ratingBlock, user && ratingWithInterest)}>
           <div className={ratingHeadline}>
             <span className={rateEmo} aria-hidden='true'>
               ≥▽≤
             </span>
             <div className={ratingInfo}>
-              <Link to={getSubjectStatsLink(subject.id)} className={scoreLink}>
-                <span className={score}>{rating.score.toFixed(1)}</span>
-                <span className={ratingLabel}>{getRatingLabel(rating.score)}</span>
-              </Link>
-              <Link to={getSubjectStatsLink(subject.id)} className={rankDesc}>
-                Bangumi {RATING_CATEGORY[subject.type]} Ranked:{' '}
-                <strong>{rating.rank === 0 ? '--' : `#${rating.rank}`}</strong>
+              <Link to={getSubjectStatsLink(subject.id)} className={scoreLink} variant='subtle'>
+                <span className={scoreLine}>
+                  <span className={score}>{rating.score.toFixed(1)}</span>
+                  <span className={ratingLabel}>{getRatingLabel(rating.score)}</span>
+                </span>
+                <span className={rankDesc}>
+                  Bangumi {RATING_CATEGORY[subject.type]} Ranked:{' '}
+                  <strong>{rating.rank === 0 ? '--' : `#${rating.rank}`}</strong>
+                </span>
               </Link>
             </div>
-            <div className={votes}>{rating.total} votes</div>
           </div>
-          <ul className={chart} aria-label='评分分布'>
-            {ratingCounts.map(({ count, score }) => (
-              <li key={score} className={chartItem} title={`${score}分: ${count}人`}>
-                <span className={chartBarArea}>
-                  <span
-                    className={chartBar}
-                    style={{ height: `${Math.round((count / maxRateCount) * 100)}%` }}
-                  />
-                </span>
-                <span className={chartLabel}>{score}</span>
-              </li>
-            ))}
-          </ul>
+          <div className={chartWrapper}>
+            <div className={votes}>{rating.total} votes</div>
+            <ul className={chart} aria-label='评分分布'>
+              {ratingCounts.map(({ count, score }) => (
+                <li key={score} className={chartItem} title={`${score}分: ${count}人`}>
+                  <span className={chartBarArea}>
+                    <span
+                      className={chartBar}
+                      style={{ height: `${Math.round((count / maxRateCount) * 100)}%` }}
+                    />
+                  </span>
+                  <span className={chartLabel}>{score}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
