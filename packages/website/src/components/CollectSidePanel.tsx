@@ -2,66 +2,94 @@ import type { ReactNode } from 'react';
 import React from 'react';
 
 import type { SlimUser } from '@bangumi/client/client';
-import { Rate, Typography } from '@bangumi/design';
+import { Avatar, Rate, Typography } from '@bangumi/design';
 import { css } from '@bangumi/styled-system/css';
 import { getUserProfileLink } from '@bangumi/utils/pages';
 
 const { Link } = Typography;
 
-const panel = css({ margin: '0 0 15px' });
-
 const panelTitle = css({
   margin: '0',
-  padding: '5px 0',
-  borderBottom: '1px solid #e8e3e3',
-  color: '#595555',
-  fontSize: '15px',
-  fontWeight: '300',
+  paddingTop: '1',
+  paddingBottom: '1',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
+  color: 'text.primary',
+  textStyle: 'titleSm',
+  fontWeight: 'normal',
 });
 
 const list = css({
-  margin: '0 5px 5px',
+  marginRight: '1',
+  marginBottom: '1',
+  marginLeft: '1',
   padding: '0',
   listStyle: 'none',
+  '& > li:not(:last-child)': {
+    borderBottom: 'component.list.divider',
+  },
 });
 
 const item = css({
   display: 'flex',
-  gap: '10px',
-  padding: '5px 5px 5px 0',
-  borderTop: '1px solid #fff',
-  borderBottom: '1px solid #e0e0e0',
-  '&:first-child': { borderTop: '0 none' },
+  gap: '3',
+  paddingTop: '1',
+  paddingRight: '1',
+  paddingBottom: '1',
 });
 
-/** 32px 圆形头像，对齐旧版 avatarSize32 */
+/** 收藏用户头像链接；媒体本体由共享 Avatar 组件维护。 */
 const avatar = css({
   flex: '0 0 32px',
-  width: '32px',
-  height: '32px',
-  borderRadius: '50%',
-  overflow: 'hidden',
-  '& img': { width: '100%', height: '100%', objectFit: 'cover' },
+  display: 'block',
+  borderRadius: 'sm',
+  '& .bgm-avatar': {
+    transitionProperty: 'border-color, box-shadow',
+    transitionDuration: 'fast',
+    transitionTimingFunction: 'standard',
+  },
+  _hover: {
+    '& .bgm-avatar': {
+      borderColor: 'media.frame.borderHover',
+      boxShadow: 'media.frame.hover',
+    },
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    '& .bgm-avatar': {
+      boxShadow: 'none',
+    },
+  },
 });
 
 const body = css({ flex: '1 1 auto', minWidth: '0' });
 
+const userSummary = css({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: 'layout.inline',
+  maxWidth: '100%',
+});
+
 const userName = css({
-  color: '#1f1c1c',
-  fontSize: '13px',
-  _hover: { color: '#1f1c1c', textDecoration: 'underline' },
+  textStyle: 'bodySm',
 });
 
 const status = css({
-  color: '#9f9b9b',
-  fontSize: '10px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 /** 底部提示行（人数统计/更多链接），对齐旧版 tip_i */
 const tips = css({
-  margin: '0 5px',
-  color: '#ccc',
-  fontSize: '12px',
+  marginRight: '1',
+  marginLeft: '1',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 export interface CollectSidePanelItem {
@@ -94,7 +122,7 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
   listLabel = '收藏用户列表',
 }) => {
   return (
-    <div className={panel}>
+    <div>
       <h2 className={panelTitle}>{title}</h2>
       {items.length > 0 && (
         <ul className={list} aria-label={listLabel}>
@@ -106,13 +134,19 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
                 className={avatar}
                 title={user.nickname}
               >
-                <img src={user.avatar.large} alt={user.nickname} />
+                <Avatar src={user.avatar.large} size='xsmall' alt={user.nickname} />
               </Link>
               <div className={body}>
-                <Link to={getUserProfileLink(user.username)} noStyle className={userName}>
-                  {user.nickname}
-                </Link>
-                {rate != null && rate > 0 && <Rate value={rate} />}
+                <div className={userSummary}>
+                  <Link
+                    variant='subtle'
+                    to={getUserProfileLink(user.username)}
+                    className={userName}
+                  >
+                    {user.nickname}
+                  </Link>
+                  {rate != null && rate > 0 && <Rate value={rate} />}
+                </div>
                 {itemStatus != null && (
                   <>
                     <br />
@@ -129,7 +163,10 @@ const CollectSidePanel: React.FC<CollectSidePanelProps> = ({
           {moreLink != null && (
             <>
               {' '}
-              / <Link to={moreLink}>{moreLabel}</Link>
+              /{' '}
+              <Link variant='subtle' to={moreLink}>
+                {moreLabel}
+              </Link>
             </>
           )}
           {stats != null && (

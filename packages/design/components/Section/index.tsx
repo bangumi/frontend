@@ -5,21 +5,21 @@ import { css, cx } from '@bangumi/styled-system/css';
 
 const section = css({
   '& > * + *': {
-    marginTop: '20px',
+    marginTop: '5',
   },
 });
 
 const sectionTitle = css({
-  fontWeight: '400',
-  color: '#9f9b9b',
-  fontSize: '18px',
-  paddingBottom: '15px',
-  borderBottom: '1px solid #e8e3e3',
+  color: 'text.primary',
+  textStyle: 'titleSm',
+  paddingBottom: '3',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
 });
 
 const sectionFooter = css({
   display: 'flex',
-  justifyContent: 'right',
+  justifyContent: 'flex-end',
 });
 
 export interface SectionProps {

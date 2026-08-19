@@ -140,6 +140,7 @@ const SubjectBoard: React.FC<{
                       </td>
                       <td className={topicAuthor}>
                         <Link
+                          variant='subtle'
                           to={getUserProfileLink(topic.creator?.username ?? '')}
                           title={topic.creator?.nickname}
                         >

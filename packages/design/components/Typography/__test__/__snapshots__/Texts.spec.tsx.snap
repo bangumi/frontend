@@ -2,7 +2,7 @@
 
 exports[`should render default text 1`] = `
 <span
-  class="bgm-text"
+  class="bgm-text c_text.primary"
 >
   hello world
 </span>
@@ -10,7 +10,7 @@ exports[`should render default text 1`] = `
 
 exports[`should render secondary text 1`] = `
 <span
-  class="bgm-text c_#9f9b9b"
+  class="bgm-text c_text.primary c_text.secondary"
 >
   hello world
 </span>
@@ -18,7 +18,7 @@ exports[`should render secondary text 1`] = `
 
 exports[`should render undefined text 1`] = `
 <span
-  class="bgm-text"
+  class="bgm-text c_text.primary"
 >
   hello world
 </span>

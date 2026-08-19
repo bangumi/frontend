@@ -4,31 +4,31 @@ import React from 'react';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const section = css({
-  margin: '0 0 5px',
-  padding: '10px',
-  borderBottom: '1px solid #e8e3e3',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.compact',
+  borderBottomWidth: '1px',
+  borderBottomColor: 'border.subtle',
 });
 
 const header = css({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
-  margin: '0 0 5px',
+  gap: '2',
 });
+
+const sectionBody = css({ minWidth: '0' });
 
 const sectionTitle = css({
   margin: '0',
-  padding: '0 5px 0 0',
-  color: '#595555',
-  fontSize: '18px',
-  fontWeight: '300',
-  lineHeight: '1.4',
+  color: 'text.primary',
+  textStyle: 'sectionTitle',
 });
 
 const sectionExtra = css({
   flex: 'none',
-  fontSize: '12px',
+  textStyle: 'meta',
 });
 
 /**
@@ -40,12 +40,12 @@ const SubjectSection: React.FC<
   return (
     <section className={cx(section, className)}>
       {title != null && (
-        <div className={header}>
+        <div className={header} data-subject-section-header>
           <h2 className={sectionTitle}>{title}</h2>
           {extra != null && <div className={sectionExtra}>{extra}</div>}
         </div>
       )}
-      {children}
+      <div className={sectionBody}>{children}</div>
     </section>
   );
 };

@@ -84,8 +84,7 @@ describe('SubjectDetail', () => {
     // 主栏：ep / 标签
     expect(await screen.findByText('观看进度管理')).toBeInTheDocument();
     expect(screen.getByText('这是一个用于测试的动画条目。')).toHaveClass(
-      'fs_14px',
-      'lh_1.65',
+      'textStyle_body',
       'white-space_pre-wrap',
     );
     expect(
@@ -94,7 +93,7 @@ describe('SubjectDetail', () => {
     // 右栏：收藏盒
     expect(await screen.findByText('收藏盒')).toBeInTheDocument();
     expect(screen.getAllByRole('button', { pressed: false })).toHaveLength(5);
-    expect(screen.getByRole('link', { name: 'Bangumi Anime Ranked: #100' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Bangumi Anime Ranked: #100/ })).toBeInTheDocument();
     expect(
       within(screen.getByRole('list', { name: '评分分布' })).getAllByRole('listitem'),
     ).toHaveLength(10);
@@ -102,21 +101,55 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('角色介绍')).toBeInTheDocument();
     expect(await screen.findByText('关联条目')).toBeInTheDocument();
     expect(await screen.findByText('喜欢这部作品的会员大概会喜欢')).toBeInTheDocument();
-    expect(document.querySelector('img[src$="/crt/g/00/00/05.jpg"]')).toHaveClass(
-      'w_85px',
-      'h_auto',
-    );
-    expect(document.querySelector('img[src$="/cover/g/00/00/13.jpg"]')).toHaveClass(
-      'w_75px',
-      'h_75px',
-    );
-    expect(document.querySelector('img[src$="/cover/g/00/00/14.jpg"]')).toHaveClass(
-      'w_75px',
-      'h_75px',
-    );
+    const characterImage = within(await screen.findByTitle('测试角色')).getByAltText('');
+    expect(characterImage).toHaveClass('w_100%', 'h_auto');
+    const relationImage = within(await screen.findByTitle('测试动画2')).getByAltText('');
+    expect(relationImage).toHaveClass('w_100%', 'h_100%');
+    const recommendationImage = within(await screen.findByTitle('推荐动画')).getByAltText('');
+    expect(recommendationImage).toHaveClass('w_100%', 'h_100%');
     expect(await screen.findByText('测试动画长评')).toBeInTheDocument();
+    expect(screen.getByText('这是一篇长评')).toBeInTheDocument();
     expect(await screen.findByText('讨论版测试话题')).toBeInTheDocument();
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();
+  });
+
+  it('should group relation cards by relation type', async () => {
+    setup();
+    const data = structuredClone(homeData);
+    const firstRelation = data.relations[0];
+    if (firstRelation == null) {
+      throw new Error('Expected a relation fixture');
+    }
+
+    data.relations.push({
+      ...firstRelation,
+      subject: {
+        ...firstRelation.subject,
+        id: 15,
+        name: 'Test Anime 3',
+        nameCN: '测试动画3',
+      },
+    });
+    data.relations.push({
+      ...firstRelation,
+      relation: { ...firstRelation.relation, id: 2, cn: '改编' },
+      subject: {
+        ...firstRelation.subject,
+        id: 16,
+        name: 'Test Anime Adaptation',
+        nameCN: '测试动画改编',
+      },
+    });
+
+    await renderSubjectData(data);
+
+    const relationGrid = await screen.findByRole('list', { name: '关联条目列表' });
+    expect(within(relationGrid).getAllByRole('listitem')).toHaveLength(3);
+    expect(within(relationGrid).getByText('续集')).toBeInTheDocument();
+    expect(within(relationGrid).getByText('改编')).toBeInTheDocument();
+    expect(within(relationGrid).getByTitle('测试动画2')).toBeInTheDocument();
+    expect(within(relationGrid).getByTitle('测试动画3')).toBeInTheDocument();
+    expect(within(relationGrid).getByTitle('测试动画改编')).toBeInTheDocument();
   });
 
   it('should render the subject index panel with avatars and tips', async () => {

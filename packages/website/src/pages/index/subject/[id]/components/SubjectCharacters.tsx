@@ -77,9 +77,7 @@ const characterInfo = css({ minWidth: '0' });
 const name = css({
   display: 'block',
   marginBottom: '4px',
-  color: '#595555',
-  fontSize: '14px',
-  fontWeight: 'bold',
+  textStyle: 'bodySm',
   overflowWrap: 'anywhere',
 });
 
@@ -217,7 +215,9 @@ export default function SubjectCharacters({
                                 <span className={castLabel}>
                                   {CAST_TYPE_DESC[cast.relation] ?? '出演'}:
                                 </span>{' '}
-                                <Link to={getPersonLink(cast.person.id)}>{cast.person.name}</Link>
+                                <Link variant='subtle' to={getPersonLink(cast.person.id)}>
+                                  {cast.person.name}
+                                </Link>
                               </React.Fragment>
                             ))}
                           </p>

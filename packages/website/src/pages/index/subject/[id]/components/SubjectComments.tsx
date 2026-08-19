@@ -258,7 +258,9 @@ const CommentItem: React.FC<{
       </Link>
       <div className={commentBody}>
         <div className={commentMeta}>
-          <Link to={getUserProfileLink(comment.user.username)}>{comment.user.nickname}</Link>
+          <Link variant='subtle' to={getUserProfileLink(comment.user.username)}>
+            {comment.user.nickname}
+          </Link>
           {comment.rate > 0 && <Rate value={comment.rate} />}
           <span>{COLLECT_DESC[comment.type]}</span>
           <span>@{makeDescriptiveTime(comment.updatedAt)}</span>

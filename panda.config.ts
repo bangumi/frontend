@@ -1,7 +1,10 @@
 import { defineConfig } from '@pandacss/dev';
 
+import { bangumiPreset } from './theme/preset';
+
 export default defineConfig({
   preflight: false,
+  presets: ['@pandacss/preset-panda', bangumiPreset],
   include: [
     './packages/website/src/**/*.{js,jsx,ts,tsx}',
     './packages/design/components/**/*.{js,jsx,ts,tsx}',

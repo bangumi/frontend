@@ -25,7 +25,6 @@ import {
   getSubjectCharactersLink,
   getSubjectCommentsLink,
   getSubjectEpisodesLink,
-  getSubjectLink,
   getSubjectRelationsLink,
   getSubjectReviewsLink,
   getSubjectTagLink,
@@ -37,6 +36,7 @@ import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
 import { useUser } from '@bangumi/website/hooks/use-user';
 
 import { CAST_TYPE_DESC, COLLECT_DESC } from './subject-common';
+import SubjectMediaCard from './SubjectMediaCard';
 import SubjectSection from './SubjectSection';
 
 const { Link } = Typography;
@@ -44,15 +44,14 @@ const { Link } = Typography;
 // &[class] 提升优先级，覆盖 design Section 的默认间距
 const primarySection = css({
   '&[class]': {
-    margin: '0 0 10px',
-    padding: '0 0 5px',
-    '& > div': {
+    margin: '0',
+    paddingBottom: '0',
+    '& > [data-subject-section-header]': {
       justifyContent: 'flex-start',
-      gap: '4px',
+      gap: '1',
     },
     '& h2': {
-      fontSize: '14px',
-      fontWeight: 'normal',
+      textStyle: 'label',
     },
   },
 });
@@ -60,20 +59,20 @@ const primarySection = css({
 const summarySection = css({
   '&[class]': {
     margin: '0',
-    padding: '0 0 5px',
+    paddingBottom: '0',
     borderBottom: '0',
   },
 });
 
 const tagSection = css({
   '&[class]': {
-    margin: '5px 0 10px',
-    padding: '10px',
+    margin: '0',
+    padding: '3',
     border: '0',
-    borderRadius: '5px',
-    background: '#f7f7f7',
+    borderRadius: 'sm',
+    background: 'bg.subtle',
     '& h2': {
-      fontSize: '14px',
+      textStyle: 'label',
     },
   },
 });
@@ -85,11 +84,12 @@ const musicList = css({
   padding: '0',
   '& li': {
     display: 'flex',
-    gap: '8px',
-    padding: '4px 0',
-    fontSize: '13px',
-    lineHeight: '1.6',
-    borderBottom: '1px solid #e8e3e3',
+    gap: '2',
+    paddingTop: '1',
+    paddingBottom: '1',
+    textStyle: 'bodySm',
+    borderBottomWidth: '1px',
+    borderBottomColor: 'border.subtle',
     '&:last-child': {
       borderBottom: 'none',
     },
@@ -97,7 +97,7 @@ const musicList = css({
 });
 
 const musicSort = css({
-  color: '#9f9b9b',
+  color: 'text.tertiary',
   flex: 'none',
 });
 
@@ -110,14 +110,15 @@ const musicName = css({
 });
 
 const musicDuration = css({
-  color: '#9f9b9b',
+  color: 'text.tertiary',
   flex: 'none',
 });
 
 const epSubtitle = css({
-  fontSize: '12px',
-  color: '#9f9b9b',
-  margin: '8px 0 4px',
+  textStyle: 'meta',
+  color: 'text.tertiary',
+  marginTop: '2',
+  marginBottom: '1',
 });
 
 const epGrid = css({
@@ -126,7 +127,7 @@ const epGrid = css({
   padding: '0',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '3px',
+  gap: '1',
 });
 
 const epAllLink = css({
@@ -140,9 +141,8 @@ const epAllLink = css({
 
 /* 简介 */
 const summaryContent = css({
-  color: '#1f1c1c',
-  fontSize: '14px',
-  lineHeight: '1.65',
+  color: 'text.primary',
+  textStyle: 'body',
   whiteSpace: 'pre-wrap',
   wordBreak: 'break-all',
 });
@@ -157,7 +157,7 @@ const summaryCollapsed = css({
     bottom: '0',
     left: '0',
     height: '42px',
-    background: 'linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff)',
+    background: 'linear-gradient(to bottom, transparent, var(--colors-bg-canvas))',
     content: '""',
     pointerEvents: 'none',
   },
@@ -169,10 +169,9 @@ const summaryToggle = css({
   padding: '0',
   border: '0',
   background: 'transparent',
-  color: '#54b5df',
+  color: 'link',
   cursor: 'pointer',
-  fontSize: '11px',
-  lineHeight: '18px',
+  textStyle: 'meta',
 });
 
 /* 标签 */
@@ -182,21 +181,24 @@ const tagList = css({
   padding: '0',
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '2px 4px',
+  gap: '1',
   '& li': {
-    padding: '1px 5px',
-    border: '1px solid #e8e3e3',
-    borderRadius: '20px',
-    background: '#fff',
-    fontSize: '12px',
-    lineHeight: '1.4',
+    paddingTop: '1',
+    paddingRight: '2',
+    paddingBottom: '1',
+    paddingLeft: '2',
+    borderWidth: '1px',
+    borderColor: 'border.subtle',
+    borderRadius: 'pill',
+    background: 'bg.raised',
+    textStyle: 'meta',
   },
 });
 
 const tagCount = css({
-  marginLeft: '2px',
-  color: '#9f9b9b',
-  fontSize: '10px',
+  marginLeft: '1',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 /* 封面网格（角色/关联/推荐） */
@@ -207,7 +209,7 @@ const coverGrid = css({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'flex-start',
-  gap: '10px',
+  gap: '3',
   '@media (max-width: 640px)': {
     marginRight: '0',
   },
@@ -219,21 +221,53 @@ const coverItem = css({
   textAlign: 'left',
 });
 
-const coverLink = css({ display: 'block' });
+const thumbnailMediaLink = css({
+  display: 'block',
+  width: '100%',
+  boxSizing: 'border-box',
+  overflow: 'hidden',
+  borderWidth: '1px',
+  borderColor: 'media.frame.border',
+  borderRadius: 'sm',
+  background: 'media.frame.background',
+  boxShadow: 'raised',
+  transitionProperty: 'border-color, box-shadow',
+  transitionDuration: 'fast',
+  transitionTimingFunction: 'standard',
+  _hover: {
+    borderColor: 'media.frame.borderHover',
+    boxShadow: 'media.frame.hover',
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    boxShadow: 'none',
+  },
+  '& > img': {
+    width: '100%',
+    borderWidth: '0',
+    borderRadius: '0',
+    background: 'transparent',
+  },
+});
 
 const cover = css({
   display: 'block',
   objectFit: 'cover',
   objectPosition: 'center top',
-  borderRadius: '8px',
-  background: '#e8e3e3',
-  boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 10px rgba(0, 0, 0, 0.2)',
+  borderWidth: '1px',
+  borderColor: 'border.subtle',
+  borderRadius: 'sm',
+  background: 'bg.muted',
 });
 
 const characterGrid = css({
   flexWrap: 'nowrap',
-  gap: '15px',
-  padding: '5px',
+  gap: '4',
+  padding: '1',
   overflowX: 'auto',
   scrollbarWidth: 'none',
   '&::-webkit-scrollbar': { display: 'none' },
@@ -248,23 +282,52 @@ const characterCoverItem = css({
 });
 
 const characterCover = css({
-  width: '85px',
+  width: '100%',
   height: 'auto',
   minHeight: '100px',
   aspectRatio: '3 / 4',
 });
 
-const characterCoverTitle = css({ fontSize: '13px' });
+const characterCoverTitle = css({ textStyle: 'bodySm' });
 
 const relationGrid = css({
-  gap: '5px 10px',
+  listStyle: 'none',
+  margin: '0',
+  paddingTop: '5',
+  paddingRight: '0',
+  paddingBottom: '0',
+  paddingLeft: '0',
+  display: 'grid',
+  gridTemplateColumns: 'repeat(auto-fill, 80px)',
+  columnGap: '3',
+  rowGap: '6',
+});
+
+const relationTypeLabel = css({
+  position: 'absolute',
+  top: 'calc(-1 * var(--spacing-5))',
+  left: '0',
+  textStyle: 'meta',
+  color: 'text.tertiary',
 });
 
 const relationCoverItem = css({ width: '80px' });
 
+const relationGroupEnd = css({
+  '&::after': {
+    position: 'absolute',
+    top: 'calc(-1 * var(--spacing-5))',
+    right: 'calc(-1 * var(--spacing-3) / 2)',
+    bottom: '0',
+    width: '1px',
+    background: 'border.subtle',
+    content: '""',
+  },
+});
+
 const recommendationGrid = css({
   flexWrap: 'nowrap',
-  gap: '9px',
+  gap: '3',
   overflowX: 'auto',
 });
 
@@ -273,27 +336,23 @@ const recommendationCoverItem = css({
   width: '80px',
 });
 
-const subjectCover = css({
-  width: '75px',
-  height: '75px',
-  aspectRatio: '1',
-});
-
 const coverTitle = css({
-  maxHeight: '52px',
-  margin: '5px 0 0',
-  fontWeight: '400',
-  lineHeight: '1.2',
+  marginTop: 'component.media.caption',
   overflow: 'hidden',
+  fontSize: 'bodySm',
+  fontWeight: 'normal',
+  lineHeight: '18px',
   overflowWrap: 'break-word',
+  wordBreak: 'break-all',
 });
-
-const subjectCoverTitle = css({ fontSize: '11px' });
 
 const coverInfo = css({
-  margin: '0',
-  fontSize: '11px',
-  color: '#9f9b9b',
+  marginTop: 'component.media.meta',
+  marginRight: '0',
+  marginBottom: '0',
+  marginLeft: '0',
+  textStyle: 'meta',
+  color: 'text.tertiary',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
@@ -301,11 +360,8 @@ const coverInfo = css({
 
 const relationSep = css({
   display: 'block',
-  width: '100%',
-  height: '18px',
-  fontSize: '12px',
-  color: '#9f9b9b',
-  lineHeight: '18px',
+  textStyle: 'meta',
+  color: 'text.tertiary',
 });
 
 /* 文本列表（评论/日志） */
@@ -314,25 +370,41 @@ const textList = css({
   margin: '0',
   padding: '0',
   '& li': {
-    padding: '6px 0',
-    borderBottom: '1px solid #e8e3e3',
-    '&:last-child': {
-      borderBottom: 'none',
-    },
+    display: 'flex',
+    gap: 'layout.group',
+    paddingBlock: 'component.list.rowBlock',
+  },
+  '& li:first-child': {
+    paddingTop: '0',
+  },
+  '& li:not(:last-child)': {
+    borderBottom: 'component.list.divider',
   },
 });
 
+const textContent = css({ flex: '1', minWidth: '0' });
+
+const reviewAvatarLink = css({ marginTop: '1' });
+
 const textTitle = css({
-  fontSize: '13px',
+  textStyle: 'titleSm',
   wordBreak: 'break-all',
 });
 
+const textSummary = css({
+  marginTop: '1',
+  marginBottom: '0',
+  color: 'text.secondary',
+  textStyle: 'bodySm',
+  overflowWrap: 'break-word',
+});
+
 const textInfo = css({
-  margin: '4px 0 0',
-  fontSize: '12px',
-  color: '#9f9b9b',
+  marginTop: '1',
+  textStyle: 'meta',
+  color: 'text.tertiary',
   '& span': {
-    marginLeft: '8px',
+    marginLeft: '2',
   },
 });
 
@@ -340,15 +412,27 @@ const textInfo = css({
 const topicTable = css({
   width: '100%',
   borderCollapse: 'collapse',
-  fontSize: '13px',
-  '& tr': {
-    borderBottom: '1px solid #e8e3e3',
+  textStyle: 'bodySm',
+  '& tr:not(:last-child)': {
+    borderBottom: 'component.list.divider',
+  },
+  '& tr > :first-child': {
+    paddingLeft: '0',
+  },
+  '& tr > :last-child': {
+    paddingRight: '0',
+  },
+  '& tr:first-child > td': {
+    paddingTop: '0',
   },
 });
 
 const topicSubject = css({
-  padding: '6px 4px',
+  paddingBlock: 'component.list.rowBlock',
+  paddingRight: 'layout.inline',
+  paddingLeft: 'layout.inline',
   textAlign: 'left',
+  textStyle: 'label',
   maxWidth: '0',
   '& a': {
     display: 'block',
@@ -359,16 +443,20 @@ const topicSubject = css({
 });
 
 const topicInfo = css({
-  padding: '6px 4px',
+  paddingBlock: 'component.list.rowBlock',
+  paddingRight: 'layout.inline',
+  paddingLeft: 'layout.inline',
   width: '16%',
   textAlign: 'right',
-  color: '#9f9b9b',
-  fontSize: '12px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
   whiteSpace: 'nowrap',
 });
 
 const topicMore = css({
-  padding: '6px 4px',
+  paddingBlock: 'component.list.rowBlock',
+  paddingRight: 'layout.inline',
+  paddingLeft: 'layout.inline',
   textAlign: 'right',
 });
 
@@ -379,11 +467,39 @@ const commentList = css({
   padding: '0',
   '& > li': {
     display: 'flex',
-    gap: '8px',
-    padding: '8px 0',
-    borderBottom: '1px solid #e8e3e3',
-    '&:last-child': {
-      borderBottom: 'none',
+    gap: '2',
+    paddingBlock: 'component.list.rowBlock',
+  },
+  '& > li:first-child': {
+    paddingTop: '0',
+  },
+  '& > li:not(:last-child)': {
+    borderBottom: 'component.list.divider',
+  },
+});
+
+const commentAvatarLink = css({
+  display: 'block',
+  borderRadius: 'sm',
+  '& .bgm-avatar': {
+    transitionProperty: 'border-color, box-shadow',
+    transitionDuration: 'fast',
+    transitionTimingFunction: 'standard',
+  },
+  _hover: {
+    '& .bgm-avatar': {
+      borderColor: 'media.frame.borderHover',
+      boxShadow: 'media.frame.hover',
+    },
+  },
+  _focusVisible: {
+    outline: '2px solid',
+    outlineColor: 'focusRing',
+    outlineOffset: '2px',
+  },
+  _active: {
+    '& .bgm-avatar': {
+      boxShadow: 'none',
     },
   },
 });
@@ -396,14 +512,14 @@ const commentInfo = css({
 const commentHeader = css({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: '2',
   flexWrap: 'wrap',
-  fontSize: '13px',
+  textStyle: 'bodySm',
 });
 
 const commentMeta = css({
-  color: '#9f9b9b',
-  fontSize: '12px',
+  color: 'text.tertiary',
+  textStyle: 'meta',
 });
 
 const commentText = css({
@@ -413,6 +529,18 @@ const commentText = css({
   color: '#1f1c1c',
   wordBreak: 'break-all',
   whiteSpace: 'pre-wrap',
+});
+
+const primaryBlocks = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.group',
+});
+
+const secondaryBlocks = css({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 'layout.section',
 });
 
 function getErrorMessage(error: unknown): string {
@@ -566,18 +694,23 @@ function CharactersSection({
   return (
     <SubjectSection
       title='角色介绍'
-      extra={<Link to={getSubjectCharactersLink(subjectId)}>更多角色 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectCharactersLink(subjectId)}>
+          更多角色 »
+        </Link>
+      }
     >
       <ul className={cx(coverGrid, characterGrid)}>
         {characters.map(({ character, casts }) => (
           <li key={character.id} className={cx(coverItem, characterCoverItem)}>
             <Link
               to={getCharacterLink(character.id)}
-              className={coverLink}
+              className={thumbnailMediaLink}
+              noStyle
               title={character.nameCN || character.name}
             >
               <img
-                src={character.images?.grid}
+                src={character.images?.medium}
                 className={cx(cover, characterCover)}
                 loading='lazy'
                 alt=''
@@ -586,10 +719,12 @@ function CharactersSection({
             <p className={cx(coverTitle, characterCoverTitle)}>
               <Link to={getCharacterLink(character.id)}>{character.nameCN || character.name}</Link>
             </p>
-            {casts.map((cast) => (
+            {casts.slice(0, 3).map((cast) => (
               <p key={cast.person.id} className={coverInfo}>
                 <span>{CAST_TYPE_DESC[cast.relation] ?? '出演'}</span>{' '}
-                <Link to={getPersonLink(cast.person.id)}>{cast.person.name}</Link>
+                <Link variant='subtle' to={getPersonLink(cast.person.id)}>
+                  {cast.person.name}
+                </Link>
               </p>
             ))}
           </li>
@@ -610,35 +745,35 @@ function RelationsSection({
   if (relations.length === 0) {
     return null;
   }
-  let lastRelationId: number | null = null;
 
   return (
     <SubjectSection
       title='关联条目'
-      extra={<Link to={getSubjectRelationsLink(subjectId)}>更多关联 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectRelationsLink(subjectId)}>
+          更多关联 »
+        </Link>
+      }
     >
-      <ul className={cx(coverGrid, relationGrid)}>
-        {relations.map(({ subject, relation }) => {
-          const showSep = relation.id !== lastRelationId;
-          lastRelationId = relation.id;
+      <ul className={relationGrid} aria-label='关联条目列表'>
+        {relations.map(({ subject, relation }, index) => {
+          const isGroupStart = index === 0 || relations[index - 1]?.relation.id !== relation.id;
+          const isGroupEnd =
+            index === relations.length - 1 || relations[index + 1]?.relation.id !== relation.id;
+          const showGroupDivider = isGroupEnd && index < relations.length - 1;
+
           return (
-            <li key={subject.id} className={cx(coverItem, relationCoverItem)}>
-              {showSep && <span className={relationSep}>{relation.cn}</span>}
-              <Link
-                to={getSubjectLink(subject.id)}
-                className={coverLink}
-                title={subject.nameCN || subject.name}
-              >
-                <img
-                  src={subject.images?.grid}
-                  className={cx(cover, subjectCover)}
-                  loading='lazy'
-                  alt=''
-                />
-              </Link>
-              <p className={cx(coverTitle, subjectCoverTitle)}>
-                <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
-              </p>
+            <li
+              key={subject.id}
+              className={cx(coverItem, relationCoverItem, showGroupDivider && relationGroupEnd)}
+            >
+              {isGroupStart && <span className={relationTypeLabel}>{relation.cn}</span>}
+              <SubjectMediaCard
+                subjectId={subject.id}
+                name={subject.name}
+                nameCN={subject.nameCN}
+                imageUrl={subject.images?.medium}
+              />
             </li>
           );
         })}
@@ -657,21 +792,12 @@ function RecsSection({ recs }: { recs: SubjectRec[] }) {
       <ul className={cx(coverGrid, recommendationGrid)}>
         {recs.map(({ subject }) => (
           <li key={subject.id} className={cx(coverItem, recommendationCoverItem)}>
-            <Link
-              to={getSubjectLink(subject.id)}
-              className={coverLink}
-              title={subject.nameCN || subject.name}
-            >
-              <img
-                src={subject.images?.grid}
-                className={cx(cover, subjectCover)}
-                loading='lazy'
-                alt=''
-              />
-            </Link>
-            <p className={cx(coverTitle, subjectCoverTitle)}>
-              <Link to={getSubjectLink(subject.id)}>{subject.name}</Link>
-            </p>
+            <SubjectMediaCard
+              subjectId={subject.id}
+              name={subject.name}
+              nameCN={subject.nameCN}
+              imageUrl={subject.images?.medium}
+            />
           </li>
         ))}
       </ul>
@@ -687,22 +813,38 @@ function ReviewsSection({ subjectId, reviews }: { subjectId: number; reviews: Su
   return (
     <SubjectSection
       title='评论'
-      extra={<Link to={getSubjectReviewsLink(subjectId)}>更多评论 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectReviewsLink(subjectId)}>
+          更多评论 »
+        </Link>
+      }
     >
       <ul className={textList}>
         {reviews.map((review) => (
           <li key={review.id}>
             <Link
-              to={getBlogLink(review.entry.id)}
-              className={textTitle}
-              title={review.entry.title}
+              to={getUserProfileLink(review.user.username)}
+              className={cx(commentAvatarLink, reviewAvatarLink)}
+              title={review.user.nickname}
             >
-              {review.entry.title}
+              <Avatar src={review.user.avatar.medium} size='post' alt={review.user.nickname} />
             </Link>
-            <p className={textInfo}>
-              <Link to={getUserProfileLink(review.user.username)}>{review.user.nickname}</Link>
-              <span>{dayjs.unix(review.entry.updatedAt).format('YYYY-M-D')}</span>
-            </p>
+            <div className={textContent}>
+              <Link
+                to={getBlogLink(review.entry.id)}
+                className={textTitle}
+                title={review.entry.title}
+              >
+                {review.entry.title}
+              </Link>
+              {review.entry.summary !== '' && <p className={textSummary}>{review.entry.summary}</p>}
+              <p className={textInfo}>
+                <Link variant='subtle' to={getUserProfileLink(review.user.username)}>
+                  {review.user.nickname}
+                </Link>
+                <span>{dayjs.unix(review.entry.updatedAt).format('YYYY-M-D')}</span>
+              </p>
+            </div>
           </li>
         ))}
       </ul>
@@ -727,7 +869,7 @@ function TopicsSection({ subjectId, topics }: { subjectId: number; topics: Topic
                 </Link>
               </td>
               <td className={topicInfo}>
-                <Link to={getUserProfileLink(topic.creator?.username ?? '')}>
+                <Link variant='subtle' to={getUserProfileLink(topic.creator?.username ?? '')}>
                   {topic.creator?.nickname ?? ''}
                 </Link>
               </td>
@@ -737,7 +879,9 @@ function TopicsSection({ subjectId, topics }: { subjectId: number; topics: Topic
           ))}
           <tr>
             <td colSpan={4} className={topicMore}>
-              <Link to={getSubjectBoardLink(subjectId)}>更多讨论 »</Link>
+              <Link variant='subtle' to={getSubjectBoardLink(subjectId)}>
+                更多讨论 »
+              </Link>
             </td>
           </tr>
         </tbody>
@@ -760,17 +904,21 @@ function CommentsSection({
   return (
     <SubjectSection
       title='吐槽箱'
-      extra={<Link to={getSubjectCommentsLink(subjectId)}>更多吐槽 »</Link>}
+      extra={
+        <Link variant='subtle' to={getSubjectCommentsLink(subjectId)}>
+          更多吐槽 »
+        </Link>
+      }
     >
       <ul className={commentList}>
         {comments.map((comment) => (
           <li key={comment.id}>
-            <Link to={getUserProfileLink(comment.user.username)}>
+            <Link to={getUserProfileLink(comment.user.username)} className={commentAvatarLink}>
               <Avatar src={comment.user.avatar.medium} size='small' alt='' />
             </Link>
             <div className={commentInfo}>
               <div className={commentHeader}>
-                <Link to={getUserProfileLink(comment.user.username)} fontWeight='bold'>
+                <Link variant='subtle' to={getUserProfileLink(comment.user.username)}>
                   {comment.user.nickname}
                 </Link>
                 {comment.rate > 0 && <Rate value={comment.rate} />}
@@ -794,27 +942,27 @@ function CommentsSection({
 export const SubjectPrimaryBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
-    <>
+    <div className={primaryBlocks}>
       <EpListSection subject={subject} episodes={data.episodes} />
       {subject.summary != null && subject.summary !== '' && (
         <SummarySection summary={subject.summary} />
       )}
       <TagsSection subject={subject} />
-    </>
+    </div>
   );
 };
 
 export const SubjectSecondaryBlocks: React.FC<{ data: SubjectHomeResponse }> = ({ data }) => {
   const { subject } = data;
   return (
-    <>
+    <div className={secondaryBlocks}>
       <CharactersSection subjectId={subject.id} characters={data.characters} />
       <RelationsSection subjectId={subject.id} relations={data.relations} />
       <RecsSection recs={data.recs} />
       <ReviewsSection subjectId={subject.id} reviews={data.reviews} />
       <TopicsSection subjectId={subject.id} topics={data.topics} />
       <CommentsSection subjectId={subject.id} comments={data.comments} />
-    </>
+    </div>
   );
 };
 

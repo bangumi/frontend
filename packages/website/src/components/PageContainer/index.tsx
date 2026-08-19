@@ -6,13 +6,16 @@ import { css, cx } from '@bangumi/styled-system/css';
 const container = css({
   position: 'relative',
   width: '100%',
-  maxWidth: '1260px',
+  maxWidth: 'container.page',
   margin: '0 auto',
-  padding: '24px 30px',
+  paddingBlock: '6',
+  paddingInline: 'layout.gutter.mobile',
   boxSizing: 'border-box',
-  '@media (max-width: 640px)': {
-    paddingRight: '16px',
-    paddingLeft: '16px',
+  md: {
+    paddingInline: 'layout.gutter.tablet',
+  },
+  xl: {
+    paddingInline: 'layout.gutter.desktop',
   },
 });
 

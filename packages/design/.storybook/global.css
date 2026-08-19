@@ -1,19 +1,18 @@
 @layer reset, base, tokens, recipes, utilities;
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'SF Pro SC',
-    'SF Pro Display',
-    'PingFang SC',
-    'Microsoft YaHei',
-    'Lucida Grande',
-    'Helvetica Neue',
-    'Segoe UI',
-    Helvetica,
-    Arial,
-    Verdana,
-    sans-serif;
+  font-family: var(--fonts-bgm-sans);
+  color: var(--colors-text-primary);
+  background-color: var(--colors-bg-canvas);
+  line-height: 1.5;
+}
+
+#storybook-root {
+  min-height: 100vh;
+}
+
+.sbdocs-wrapper,
+.sbdocs-content {
+  background: var(--colors-bg-canvas);
+  color: var(--colors-text-primary);
 }
