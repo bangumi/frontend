@@ -238,198 +238,53 @@ describe('convert bbcode to html vnode', () => {
     expect(convert(node)).toEqual(vnode);
   });
   test('sticker', () => {
-    const tests: Array<[CodeNodeTypes, NodeTypes]> = [
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm33)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm33)',
-            smileid: '49',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/10.gif`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm32)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm32)',
-            smileid: '48',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/09.gif`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm24)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm24)',
-            smileid: '40',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/01.gif`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm114)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm114)',
-            smileid: '130',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/91.gif`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm38)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm38)',
-            smileid: '54',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/tv/15.gif`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm23)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm23)',
-            smileid: '39',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm01)',
-          },
-        },
-        {
-          props: {
-            alt: '(bgm01)',
-            smileid: '17',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/01.png`,
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: "(='=)",
-          },
-        },
-        {
-          props: { alt: "(='=)", smileid: '10', src: `${STICKER_DOMAIN_URL}/img/smiles/10.gif` },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(=///=)',
-          },
-        },
-        {
-          props: { alt: '(=///=)', smileid: '13', src: `${STICKER_DOMAIN_URL}/img/smiles/13.gif` },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(musume_03)',
-          },
-        },
-        {
-          props: {
-            alt: '(musume_03)',
-            smileid: 'musume_03',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/musume/musume_03.gif`,
-          },
-          style: {
-            'max-width': '55px',
-            height: 'auto',
-            'vertical-align': 'bottom',
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(blake_03)',
-          },
-        },
-        {
-          props: {
-            alt: '(blake_03)',
-            smileid: 'blake_03',
-            src: `${STICKER_DOMAIN_URL}/img/smiles/blake/blake_03.gif`,
-          },
-          style: {
-            'max-width': '55px',
-            height: 'auto',
-            'vertical-align': 'bottom',
-          },
-          type: 'img',
-        },
-      ],
-      [
-        {
-          type: 'sticker',
-          props: {
-            stickerId: '(bgm233)',
-          },
-        },
-        '(bgm233)',
-      ],
+    const classicCases: Array<
+      [code: string, path: string, smileid: string, width: number, height: number]
+    > = [
+      ['(bgm24)', '/img/smiles/tv/01.gif', '40', 21, 21],
+      ["(='=)", '/img/smiles/10.gif', '10', 26, 14],
+      ['(bgm124)', '/img/smiles/tv/101.gif', '140', 21, 21],
+      ['(bgm125)', '/img/smiles/tv/102.gif', '141', 21, 21],
+      ['(bgm200)', '/img/smiles/tv_vs/bgm_200.png', '216', 21, 21],
+      ['(bgm500)', '/img/smiles/tv_500/bgm_500.gif', '516', 21, 21],
+      ['(bgm1)', '/img/smiles/bgm/01.png', '17', 20, 20],
     ];
-    for (const [input, expected] of tests) {
-      expect(convert(input)).toEqual(expected);
+
+    for (const [code, path, smileid, width, height] of classicCases) {
+      expect(convert({ type: 'sticker', props: { stickerId: code } }), code).toEqual({
+        type: 'img',
+        props: {
+          alt: code,
+          height: String(height),
+          smileid,
+          src: `${STICKER_DOMAIN_URL}${path}`,
+          width: String(width),
+        },
+      });
     }
+
+    for (const prefix of ['musume', 'blake']) {
+      const code = `(${prefix}_03)`;
+      expect(convert({ type: 'sticker', props: { stickerId: code } }), code).toEqual({
+        type: 'img',
+        props: {
+          alt: '喜欢',
+          decoding: 'async',
+          height: '55',
+          loading: 'lazy',
+          smileid: `${prefix}_03`,
+          src: `${STICKER_DOMAIN_URL}/img/smiles/${prefix}/${prefix}_03.gif`,
+          width: '55',
+        },
+        style: {
+          'max-width': '55px',
+          height: 'auto',
+          'vertical-align': 'bottom',
+        },
+      });
+    }
+
+    expect(convert({ type: 'sticker', props: { stickerId: '(bgm999)' } })).toBe('(bgm999)');
   });
   test('unknown bbcode', () => {
     const node: CodeNodeTypes = {

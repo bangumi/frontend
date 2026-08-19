@@ -22,6 +22,7 @@ export { ReactComponent as Cursor } from './assets/cursor.svg';
 export { ReactComponent as Error } from './assets/error.svg';
 export { ReactComponent as ListView } from './assets/list-view.svg';
 export { ReactComponent as GridView } from './assets/grid-view.svg';
+export { ReactComponent as Clock } from './assets/clock.svg';
 // BBCode Editor
 
 export { ReactComponent as Bold } from './assets/bold.svg';
@@ -30,6 +31,7 @@ export { ReactComponent as Underscore } from './assets/underscore.svg';
 export { ReactComponent as Image } from './assets/image.svg';
 export { ReactComponent as Link } from './assets/link.svg';
 export { ReactComponent as Size } from './assets/size.svg';
+export { ReactComponent as Tv } from './assets/tv.svg';
 
 // Topic
 

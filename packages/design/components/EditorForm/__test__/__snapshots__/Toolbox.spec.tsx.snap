@@ -29,6 +29,24 @@ exports[`EditorForm > Toolbox > render with default classNames 1`] = `
       data-testid="size"
       title="文字尺寸 [Ctrl+S]"
     />
+    <span
+      class="bgm-popover d_inline-block pos_relative [&_.bgm-popover__trigger]:d_inline-flex [&_.bgm-popover__trigger]:ai_center [&_.bgm-popover__container]:pos_absolute [&_.bgm-popover__container]:top_calc(100%_+_6px) [&_.bgm-popover__container]:z_100 [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:max-w_calc(100vw_-_24px) [&_.bgm-popover__container]:left_0"
+    >
+      <span
+        class="bgm-popover__trigger"
+      >
+        <button
+          aria-expanded="false"
+          aria-haspopup="dialog"
+          class="bgm-editor__sticker"
+          data-testid="sticker"
+          title="表情"
+          type="button"
+        >
+          <div />
+        </button>
+      </span>
+    </span>
   </div>
 </DocumentFragment>
 `;

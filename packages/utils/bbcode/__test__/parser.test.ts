@@ -295,6 +295,21 @@ describe('bbcode parser', () => {
       },
     ]);
   });
+  test('parses every supported numeric range and preserves gaps', () => {
+    const supported = ['(bgm125)', '(bgm200)', '(bgm238)', '(bgm500)', '(bgm529)'];
+    expect(getNodes(supported.join(''))).toEqual(
+      supported.map((stickerId) => ({ type: 'sticker', props: { stickerId } })),
+    );
+    const unsupported = '(bgm126)(bgm199)(bgm239)(bgm530)';
+    expect(getNodes(unsupported).join('')).toBe(unsupported);
+  });
+  test('parses the blake-only range', () => {
+    const supported = ['(blake_97)', '(blake_98)', '(blake_118)'];
+    expect(getNodes(supported.join(''))).toEqual(
+      supported.map((stickerId) => ({ type: 'sticker', props: { stickerId } })),
+    );
+    expect(getNodes('(blake_119)').join('')).toBe('(blake_119)');
+  });
   test('invalid character sticker', () => {
     // 前导零 / 个位数编号不被识别
     const input = '(blake_031)(musume_3)';

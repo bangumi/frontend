@@ -238,21 +238,27 @@ exports[`html render bbcode string > render sticker 1`] = `
 Array [
   <img
     alt="(bgm38)"
+    height="21"
     smileid="54"
     src="https://lain.bgm.tv/img/smiles/tv/15.gif"
     style={Object {}}
+    width="21"
   />,
   <img
     alt="(bgm23)"
+    height="20"
     smileid="39"
     src="https://lain.bgm.tv/img/smiles/bgm/23.gif"
     style={Object {}}
+    width="20"
   />,
   <img
     alt="(=///=)"
+    height="10"
     smileid="13"
     src="https://lain.bgm.tv/img/smiles/13.gif"
     style={Object {}}
+    width="21"
   />,
 ]
 `;
@@ -299,9 +305,11 @@ Array [
   </React.Fragment>,
   <img
     alt="(bgm38)"
+    height="21"
     smileid="54"
     src="https://lain.bgm.tv/img/smiles/tv/15.gif"
     style={Object {}}
+    width="21"
   />,
   <React.Fragment>
     <br />
@@ -309,9 +317,11 @@ Array [
   </React.Fragment>,
   <img
     alt="(bgm11)"
+    height="20"
     smileid="27"
     src="https://lain.bgm.tv/img/smiles/bgm/11.gif"
     style={Object {}}
+    width="20"
   />,
   <React.Fragment>
     <br />
@@ -319,9 +329,11 @@ Array [
   </React.Fragment>,
   <img
     alt="(bgm12)"
+    height="20"
     smileid="28"
     src="https://lain.bgm.tv/img/smiles/bgm/12.png"
     style={Object {}}
+    width="20"
   />,
   <React.Fragment>
     <br />
@@ -336,9 +348,11 @@ exports[`html render bbcode string > should render sticker 1`] = `
 Array [
   <img
     alt="(bgm01)"
+    height="20"
     smileid="17"
     src="https://lain.bgm.tv/img/smiles/bgm/01.png"
     style={Object {}}
+    width="20"
   />,
 ]
 `;
@@ -347,9 +361,11 @@ exports[`html render bbcode string > should render sticker 2`] = `
 Array [
   <img
     alt="(bgm38)"
+    height="21"
     smileid="54"
     src="https://lain.bgm.tv/img/smiles/tv/15.gif"
     style={Object {}}
+    width="21"
   />,
 ]
 `;
@@ -358,9 +374,11 @@ exports[`html render bbcode string > should render sticker 3`] = `
 Array [
   <img
     alt="(bgm11)"
+    height="20"
     smileid="27"
     src="https://lain.bgm.tv/img/smiles/bgm/11.gif"
     style={Object {}}
+    width="20"
   />,
 ]
 `;

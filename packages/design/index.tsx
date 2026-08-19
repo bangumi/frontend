@@ -19,6 +19,7 @@ export { default as Select } from './components/Select';
 export { default as Radio } from './components/Radio';
 export { default as Message } from './components/Message';
 export { default as Popover } from './components/Popover';
+export { default as StickerPicker } from './components/StickerPicker';
 export { toast } from './components/Toast';
 
 export type { ButtonProps } from './components/Button';
@@ -36,4 +37,5 @@ export type { RichContentProps } from './components/RichContent';
 export type { PaginationProps } from './components/Pagination';
 export type { LayoutProps } from './components/Layout';
 export type { MessageType } from './components/Message';
-export type { PopoverProps } from './components/Popover';
+export type { PopoverAlign, PopoverProps, PopoverTrigger } from './components/Popover';
+export type { StickerPickerProps } from './components/StickerPicker';

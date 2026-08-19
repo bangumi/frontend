@@ -1512,6 +1512,18 @@
     border: solid 2px #e8e3e3;
 }
 
+  .p_4px_5px {
+    padding: 4px 5px;
+}
+
+  .p_10px_0_0_5px {
+    padding: 10px 0 0 5px;
+}
+
+  .p_8px_10px_4px {
+    padding: 8px 10px 4px;
+}
+
   .p_4px_6px {
     padding: 4px 6px;
 }
@@ -2038,6 +2050,14 @@
 
   .bdr_17px {
     border-radius: 17px;
+}
+
+  .ovs-b_contain {
+    overscroll-behavior: contain;
+}
+
+  .trs_background_0\.2s_linear {
+    transition: background 0.2s linear;
 }
 
   .trs_opacity_0\.3s_ease-in-out {
@@ -3031,6 +3051,31 @@
     vertical-align: bottom;
 }
 
+  .pos_sticky {
+    position: sticky;
+}
+
+  .z_2 {
+    z-index: 2;
+}
+
+  .bg-c_rgba\(255\,_255\,_255\,_0\.5\) {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+  .bkdp_blur\(8px\) {
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+  .bg-c_rgba\(54\,_156\,_248\,_0\.14\) {
+    background-color: rgba(54, 156, 248, 0.14);
+}
+
+  .ls_0\.04em {
+    letter-spacing: 0.04em;
+}
+
   .bg-c_\#facdd0 {
     background-color: #facdd0;
 }
@@ -3049,6 +3094,10 @@
 
   .content_bgm {
     content: bgm;
+}
+
+  .content_菜单内容 {
+    content: 菜单内容;
 }
 
   .content_233\+123 {
@@ -4135,6 +4184,34 @@
     padding-bottom: 15px;
 }
 
+  .w_min\(450px\,_calc\(100vw_-_24px\)\) {
+    width: min(450px, calc(100vw - 24px));
+}
+
+  .h_320px {
+    height: 320px;
+}
+
+  .bdr-tl_9px {
+    border-top-left-radius: 9px;
+}
+
+  .bdr-bl_9px {
+    border-bottom-left-radius: 9px;
+}
+
+  .bdr-tr_9px {
+    border-top-right-radius: 9px;
+}
+
+  .bdr-br_9px {
+    border-bottom-right-radius: 9px;
+}
+
+  .scr-mt_40px {
+    scroll-margin-top: 40px;
+}
+
   .max-w_600px {
     max-width: 600px;
 }
@@ -4965,6 +5042,10 @@
 
   .\[\&\.bgm-button--plain\]\:bdr_0.bgm-button--plain {
     border-radius: 0;
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:gap_14px .bgm-editor__toolbox {
+    gap: 14px;
 }
 
   .\[\&_\.bgm-editor__text\]\:flex_1_0_auto .bgm-editor__text {
@@ -6119,10 +6200,6 @@
     display: flex;
 }
 
-  .\[\&_\.bgm-editor__toolbox\]\:jc_space-between .bgm-editor__toolbox {
-    justify-content: space-between;
-}
-
   .\[\&_\.bgm-editor__toolbox\]\:ai_center .bgm-editor__toolbox {
     align-items: center;
 }
@@ -6352,6 +6429,26 @@
     display: none;
 }
 
+  .\[\&_\.bgm-popover__trigger\]\:d_inline-flex .bgm-popover__trigger {
+    display: inline-flex;
+}
+
+  .\[\&_\.bgm-popover__trigger\]\:ai_center .bgm-popover__trigger {
+    align-items: center;
+}
+
+  .\[\&_\.bgm-popover__container\]\:pos_absolute .bgm-popover__container {
+    position: absolute;
+}
+
+  .\[\&_\.bgm-popover__container\]\:z_100 .bgm-popover__container {
+    z-index: 100;
+}
+
+  .\[\&_\.bgm-popover__container\]\:trf_translateX\(-50\%\) .bgm-popover__container {
+    transform: translateX(-50%);
+}
+
   .\[\&_\>_input\]\:ap_none > input {
     appearance: none;
     -webkit-appearance: none;
@@ -6408,6 +6505,10 @@
 
   .\[\&_span\]\:c_\#1f1c1c span {
     color: #1f1c1c;
+}
+
+  .\[\&_img\]\:image-rendering_pixelated img {
+    image-rendering: pixelated;
 }
 
   .\[\&\.bgm-tab--borderless\]\:bg-c_transparent.bgm-tab--borderless {
@@ -7090,10 +7191,6 @@
     height: 26px;
 }
 
-  .\[\&_\.bgm-editor__toolbox\]\:w_215px .bgm-editor__toolbox {
-    width: 215px;
-}
-
   .\[\&_\.bgm-editor__wordcount\]\:mr_9px .bgm-editor__wordcount {
     margin-right: 9px;
 }
@@ -7150,6 +7247,26 @@
     margin-left: 30px;
 }
 
+  .\[\&_\.bgm-popover__container\]\:top_calc\(100\%_\+_6px\) .bgm-popover__container {
+    top: calc(100% + 6px);
+}
+
+  .\[\&_\.bgm-popover__content\]\:max-w_calc\(100vw_-_24px\) .bgm-popover__content {
+    max-width: calc(100vw - 24px);
+}
+
+  .\[\&_\.bgm-popover__container\]\:left_0 .bgm-popover__container {
+    left: var(--spacing-0);
+}
+
+  .\[\&_\.bgm-popover__container\]\:left_50\% .bgm-popover__container {
+    left: 50%;
+}
+
+  .\[\&_\.bgm-popover__container\]\:right_0 .bgm-popover__container {
+    right: var(--spacing-0);
+}
+
   .\[\&_\>_input\]\:h_0\.75rem > input {
     height: 0.75rem;
 }
@@ -7168,6 +7285,10 @@
 
   .\[\&_img\]\:max-w_99\% img {
     max-width: 99%;
+}
+
+  .\[\&_img\]\:h_auto img {
+    height: auto;
 }
 
   .\[\&_pre\]\:ov-x_hidden pre {
@@ -7192,6 +7313,26 @@
 
   .\[\&_select\]\:w_100\% select {
     width: 100%;
+}
+
+  .\[\&_img\]\:max-w_22px img {
+    max-width: 22px;
+}
+
+  .\[\&_img\]\:max-h_22px img {
+    max-height: 22px;
+}
+
+  .\[\&_img\]\:w_auto img {
+    width: auto;
+}
+
+  .\[\&_img\]\:max-w_100\% img {
+    max-width: 100%;
+}
+
+  .\[\&_img\]\:max-h_100\% img {
+    max-height: 100%;
 }
 
   .\[\&\.bgm-comment__header--reply\]\:ml_70px.bgm-comment__header--reply {
@@ -7256,6 +7397,14 @@
 
   .focus\:ring_none:is(:focus, [data-focus]) {
     outline: var(--borders-none);
+}
+
+  .focusVisible\:ring_2px_solid_\#369cf8:is(:focus-visible, [data-focus-visible]) {
+    outline: 2px solid #369cf8;
+}
+
+  .focusVisible\:ring-o_-2px:is(:focus-visible, [data-focus-visible]) {
+    outline-offset: -2px;
 }
 
   .hover\:bg_\#f09199:is(:hover, [data-hover]) {
@@ -7406,6 +7555,10 @@
     background-color: #f09199;
 }
 
+  .hover\:bg-c_rgba\(54\,_156\,_248\,_0\.14\):is(:hover, [data-hover]) {
+    background-color: rgba(54, 156, 248, 0.14);
+}
+
   .hover\:bg-c_\#369cf8:is(:hover, [data-hover]) {
     background-color: #369cf8;
 }
@@ -7452,6 +7605,18 @@
 
   .\[\&_li\]\:\[\&_\>_p\]\:m_0_0_3px li > p {
     margin: 0 0 3px;
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:\[\&_\.bgm-editor__sticker\]\:p_0 .bgm-editor__toolbox .bgm-editor__sticker {
+    padding: var(--spacing-0);
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:\[\&_\.bgm-editor__sticker\]\:bd_none .bgm-editor__toolbox .bgm-editor__sticker {
+    border: var(--borders-none);
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:\[\&_\.bgm-editor__sticker\]\:bg_transparent .bgm-editor__toolbox .bgm-editor__sticker {
+    background: var(--colors-transparent);
 }
 
   .\[\&\.bgm-menu--vertical\]\:\[\&_\>_\.bgm-menu-item\]\:p_5px_0.bgm-menu--vertical > .bgm-menu-item {
@@ -7923,6 +8088,18 @@
 }
 
   .\[\&_\.bgm-editor__toolbox\]\:\[\&_\>_svg\]\:cursor_pointer .bgm-editor__toolbox > svg {
+    cursor: pointer;
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:\[\&_\.bgm-editor__sticker\]\:d_flex .bgm-editor__toolbox .bgm-editor__sticker {
+    display: flex;
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:\[\&_\.bgm-editor__sticker\]\:ai_center .bgm-editor__toolbox .bgm-editor__sticker {
+    align-items: center;
+}
+
+  .\[\&_\.bgm-editor__toolbox\]\:\[\&_\.bgm-editor__sticker\]\:cursor_pointer .bgm-editor__toolbox .bgm-editor__sticker {
     cursor: pointer;
 }
 

@@ -276,4 +276,18 @@ describe('EditorForm > Editor', () => {
     const { getByText } = render(<Editor value='123👍' />);
     expect(getByText('已输入 4 字')).toBeInTheDocument();
   });
+
+  it('插入表情时保留选区并移动光标', () => {
+    window.localStorage.clear();
+    const { textarea, setValue } = initTextareaTest({});
+    setValue('Hello World');
+    textarea.setSelectionRange(6, 11);
+
+    fireEvent.click(screen.getByTestId('sticker'));
+    fireEvent.click(screen.getByRole('button', { name: '(bgm24)' }));
+
+    expect(textarea.value).toBe('Hello World(bgm24)');
+    expect(textarea.selectionStart).toBe(18);
+    expect(textarea.selectionEnd).toBe(18);
+  }, 20_000);
 });

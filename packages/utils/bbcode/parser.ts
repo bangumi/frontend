@@ -1,10 +1,11 @@
 import { UnreadableCodeError } from '../index';
 import {
-  BGM_STICKER_START_STR,
-  CHARACTER_STICKER_SETS,
-  EMOJI_ARRAY,
-  MAX_EMOJI_LENGTH,
-} from './constants';
+  CHARACTER_STICKER_PREFIXES,
+  isStickerCode,
+  KAOMOJI_CODES,
+  MAX_KAOMOJI_LENGTH,
+} from '../stickers';
+import { BGM_STICKER_START_STR } from './constants';
 import type { BBCodeOptions, BBCodeTag, CodeNodeTypes, CodeVNode } from './types';
 
 const INVALID_NODE_MSG = 'invalid node';
@@ -210,8 +211,8 @@ export class Parser {
       if (characterSticker !== undefined) {
         return characterSticker;
       }
-      const target = this.input.slice(this.pos, this.pos + MAX_EMOJI_LENGTH);
-      const emoji = EMOJI_ARRAY.find((s) => target.startsWith(s));
+      const target = this.input.slice(this.pos, this.pos + MAX_KAOMOJI_LENGTH);
+      const emoji = KAOMOJI_CODES.find((s) => target.startsWith(s));
       if (!emoji) {
         this.consumeChar();
         throw new Error(INVALID_STICKER_NODE);
@@ -233,17 +234,22 @@ export class Parser {
     if (c !== ')') {
       throw new Error(INVALID_STICKER_NODE);
     }
+    const stickerId = `(bgm${id})`;
+    // 编号并不连续（1-125、200-238、500-529），交由表情目录判定
+    if (!isStickerCode(stickerId)) {
+      throw new Error(INVALID_STICKER_NODE);
+    }
     return {
       type: 'sticker',
       props: {
-        stickerId: `(bgm${id})`,
+        stickerId,
       },
     };
   }
 
-  // (musume_03) 形式的角色贴纸；编号格式与旧站 %02d 一致且必须是有效 id
+  // (musume_03) 形式的角色贴纸
   private parseCharacterStickerNode(): CodeNodeTypes | undefined {
-    for (const { prefix, ranges } of CHARACTER_STICKER_SETS) {
+    for (const prefix of CHARACTER_STICKER_PREFIXES) {
       const startStr = `(${prefix}_`;
       if (!this.startsWith(startStr)) {
         continue;
@@ -254,19 +260,17 @@ export class Parser {
         continue;
       }
       const idStr = m[1]!;
-      const id = parseInt(idStr, 10);
-      // 拒绝前导零（如 musume_031），旧站只识别 %02d 格式的编号
-      if (idStr !== String(id).padStart(2, '0')) {
-        continue;
-      }
-      if (!ranges.some(({ start, end }) => id >= start && id <= end)) {
+      const stickerId = `(${prefix}_${idStr})`;
+      // 目录中的规范代码同时编码了「两位补零」与「编号有效」两条规则，
+      // 因此 (musume_031)、(musume_97) 都会在这里被拒绝
+      if (!isStickerCode(stickerId)) {
         continue;
       }
       this.pos += startStr.length + idStr.length + 1; // +1 消费 ')'
       return {
         type: 'sticker',
         props: {
-          stickerId: `(${prefix}_${idStr})`,
+          stickerId,
         },
       };
     }

@@ -1,7 +1,10 @@
 import type { FC } from 'react';
 import React, { memo } from 'react';
 
-import { Bold, Image, Italic, Link, Size, Underscore } from '@bangumi/icons';
+import { Bold, Image, Italic, Link, Size, Tv, Underscore } from '@bangumi/icons';
+
+import Popover from '../Popover';
+import StickerPicker from '../StickerPicker';
 
 interface ToolboxProps {
   handleClickEvent: (type: string, payload?: unknown) => void;
@@ -53,6 +56,23 @@ const Toolbox: FC<ToolboxProps> = ({ handleClickEvent, style }) => {
         }}
         title='文字尺寸 [Ctrl+S]'
       />
+      {/* 表情与其它按钮不同：点击展开面板，由面板中的表情触发插入 */}
+      <Popover
+        trigger='click'
+        align='start'
+        label='选择表情'
+        content={
+          <StickerPicker
+            onSelect={(code) => {
+              handleClickEvent('sticker', code);
+            }}
+          />
+        }
+      >
+        <button type='button' data-testid='sticker' title='表情' className='bgm-editor__sticker'>
+          <Tv />
+        </button>
+      </Popover>
     </div>
   );
 };
