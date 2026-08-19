@@ -27,14 +27,22 @@ const editorContainer = css({
     justifyContent: 'space-between',
     marginBottom: '10px',
   },
+  // 用 gap 而非固定宽度 + space-between，使工具栏与按钮数量无关
   '& .bgm-editor__toolbox': {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    gap: '14px',
     height: '26px',
-    width: '215px',
     padding: '0 8px',
     '& > svg': { cursor: 'pointer' },
+    '& .bgm-editor__sticker': {
+      display: 'flex',
+      alignItems: 'center',
+      padding: '0',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+    },
   },
   '& .bgm-editor__wordcount': {
     display: 'flex',
@@ -179,6 +187,22 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
       [updateContent, setSelection],
     );
 
+    /**
+     * 在光标处插入纯文本。
+     *
+     * 与 `insertTag` 不同，这里不会吞掉当前选区：表情是插入而非包裹，
+     * 若沿用 `insertTag` 会静默删除用户已选中的内容。
+     */
+    const insertText = useCallback(
+      (el: HTMLTextAreaElement, text: string): void => {
+        const pos = el.selectionEnd;
+        const preValue = el.value;
+        updateContent(`${preValue.slice(0, pos)}${text}${preValue.slice(pos)}`);
+        setSelection([pos + text.length, pos + text.length]);
+      },
+      [updateContent, setSelection],
+    );
+
     // 使用useCallback避免在内容改变时触发Toolbox的渲染
     const handleToolboxEvent = useCallback(
       (type: string, payload?: unknown): void => {
@@ -228,9 +252,14 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
             insertTag(el, `[size=${value}]`, '[/size]', selected);
             break;
           }
+          case 'sticker': {
+            if (typeof payload !== 'string') break;
+            insertText(el, payload);
+            break;
+          }
         }
       },
-      [innerRef, insertTag, setSelection],
+      [innerRef, insertTag, insertText, setSelection],
     );
 
     const handleKeyDown = useCallback(

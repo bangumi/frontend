@@ -21,7 +21,8 @@ const richContent = css({
     color: '#54b5df',
     textDecoration: 'none',
   },
-  '& img': { maxWidth: '99%' },
+  // 表情等图片带显式宽高属性，窄屏被 maxWidth 夹取时需要 height:auto 才不会变形
+  '& img': { maxWidth: '99%', height: 'auto' },
   '& > .quote': {
     color: '#9f9b9b',
     // 当没有内容时，回复按钮已有上边距，无需额外添加

@@ -82,7 +82,7 @@ exports[`Form Components > render compact layout properly 1`] = `
       class="bgm-editor__form d_flex flex-d_column ai_flex-start jc_flex-start min-w_0 [&_.bgm-editor__submit]:fs_14px [&_.bgm-editor__submit]:d_flex [&_.bgm-editor__submit]:mt_12px [&_.bgm-editor__submit]:ai_center [&_.bgm-editor__submit]:jc_flex-start [&_.bgm-editor__submit]:gap_10px [&_.bgm-editor__submit]:flex-wrap_wrap [&_.bgm-editor__submit]:[&_.bgm-editor__bbcode-tip]:c_#9f9b9b [&_.bgm-editor__submit]:[&_.bgm-editor__bbcode-tip]:lh_24px [&_.bgm-editor__submit]:[&_.bgm-editor__bbcode-tip]:[&_.bgm-editor__bbcode-tip__left]:[@media_(max-width:_640px)]:d_none [&_.bgm-editor__button]:p_0_15px [.bgm-form--compact_>_&]:ai_stretch [.bgm-form--compact_>_&]:w_auto [.bgm-form--compact_>_&]:[&_.bgm-editor__container]:bd-t_none [.bgm-form--compact_>_&]:[&_.bgm-editor__container]:bdr-tl_0 [.bgm-form--compact_>_&]:[&_.bgm-editor__container]:bdr-tr_0"
     >
       <div
-        class="bgm-editor__container d_inline-flex flex-d_column min-h_162px bd_2px_solid_#e8e3e3 bdr_12px p_8px_6px_6px bx-s_border-box w_100% [&_.bgm-editor__toolbar]:d_flex [&_.bgm-editor__toolbar]:jc_space-between [&_.bgm-editor__toolbar]:mb_10px [&_.bgm-editor__toolbox]:d_flex [&_.bgm-editor__toolbox]:jc_space-between [&_.bgm-editor__toolbox]:ai_center [&_.bgm-editor__toolbox]:h_26px [&_.bgm-editor__toolbox]:w_215px [&_.bgm-editor__toolbox]:p_0_8px [&_.bgm-editor__toolbox]:[&_>_svg]:cursor_pointer [&_.bgm-editor__wordcount]:d_flex [&_.bgm-editor__wordcount]:ai_center [&_.bgm-editor__wordcount]:fs_14px [&_.bgm-editor__wordcount]:c_#9f9b9b [&_.bgm-editor__wordcount]:mr_9px [&_.bgm-editor__wordcount]:white-space_nowrap [&_.bgm-editor__text]:flex_1_0_auto [&_.bgm-editor__text]:p_0_6px [&_.bgm-editor__text]:resize_vertical [&_.bgm-editor__text]:bd_none [&_.bgm-editor__text]:ring_none [&_.bgm-editor__text]:c_#1f1c1c [&_.bgm-editor__text]:lh_26px [&_.bgm-editor__text]:fs_16px [&_.bgm-editor__text]:[&::placeholder]:c_#9f9b9b [.bgm-form_&]:[&_.bgm-editor__text]:w_auto [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3"
+        class="bgm-editor__container d_inline-flex flex-d_column min-h_162px bd_2px_solid_#e8e3e3 bdr_12px p_8px_6px_6px bx-s_border-box w_100% [&_.bgm-editor__toolbar]:d_flex [&_.bgm-editor__toolbar]:jc_space-between [&_.bgm-editor__toolbar]:mb_10px [&_.bgm-editor__toolbox]:d_flex [&_.bgm-editor__toolbox]:ai_center [&_.bgm-editor__toolbox]:gap_14px [&_.bgm-editor__toolbox]:h_26px [&_.bgm-editor__toolbox]:p_0_8px [&_.bgm-editor__toolbox]:[&_>_svg]:cursor_pointer [&_.bgm-editor__toolbox]:[&_.bgm-editor__sticker]:d_flex [&_.bgm-editor__toolbox]:[&_.bgm-editor__sticker]:ai_center [&_.bgm-editor__toolbox]:[&_.bgm-editor__sticker]:p_0 [&_.bgm-editor__toolbox]:[&_.bgm-editor__sticker]:bd_none [&_.bgm-editor__toolbox]:[&_.bgm-editor__sticker]:bg_transparent [&_.bgm-editor__toolbox]:[&_.bgm-editor__sticker]:cursor_pointer [&_.bgm-editor__wordcount]:d_flex [&_.bgm-editor__wordcount]:ai_center [&_.bgm-editor__wordcount]:fs_14px [&_.bgm-editor__wordcount]:c_#9f9b9b [&_.bgm-editor__wordcount]:mr_9px [&_.bgm-editor__wordcount]:white-space_nowrap [&_.bgm-editor__text]:flex_1_0_auto [&_.bgm-editor__text]:p_0_6px [&_.bgm-editor__text]:resize_vertical [&_.bgm-editor__text]:bd_none [&_.bgm-editor__text]:ring_none [&_.bgm-editor__text]:c_#1f1c1c [&_.bgm-editor__text]:lh_26px [&_.bgm-editor__text]:fs_16px [&_.bgm-editor__text]:[&::placeholder]:c_#9f9b9b [.bgm-form_&]:[&_.bgm-editor__text]:w_auto [.bgm-form--compact_>_&]:[&:not(:first-child)]:bd-t_none [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tl_0 [.bgm-form--compact_>_&]:[&:not(:first-child)]:bdr-tr_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bd-b_none [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-bl_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:bdr-br_0 [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:content_"" [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:pos_absolute [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bottom_-1px [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:w_calc(100%_-_24px) [.bgm-form--compact_>_&]:[&:not(:last-child)]:[&::after]:bd-b_2px_dotted_#e8e3e3"
       >
         <div
           class="bgm-editor__toolbar"
@@ -114,6 +114,24 @@ exports[`Form Components > render compact layout properly 1`] = `
               data-testid="size"
               title="文字尺寸 [Ctrl+S]"
             />
+            <span
+              class="bgm-popover d_inline-block pos_relative [&_.bgm-popover__trigger]:d_inline-flex [&_.bgm-popover__trigger]:ai_center [&_.bgm-popover__container]:pos_absolute [&_.bgm-popover__container]:top_calc(100%_+_6px) [&_.bgm-popover__container]:z_100 [&_.bgm-popover__content]:bd_1px_solid_#e8e3e3 [&_.bgm-popover__content]:bx-sh_0_10px_25px_rgba(0,_0,_0,_0.05) [&_.bgm-popover__content]:bg-c_white [&_.bgm-popover__content]:bdr_17px [&_.bgm-popover__content]:max-w_calc(100vw_-_24px) [&_.bgm-popover__container]:left_0"
+            >
+              <span
+                class="bgm-popover__trigger"
+              >
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  class="bgm-editor__sticker"
+                  data-testid="sticker"
+                  title="表情"
+                  type="button"
+                >
+                  <div />
+                </button>
+              </span>
+            </span>
           </div>
         </div>
         <textarea

@@ -1,5 +1,4 @@
-import { UnreadableCodeError } from '../index';
-import { BGM_STICKER_START_STR, EMOJI_ARRAY, STICKER_DOMAIN_URL } from './constants';
+import { getSticker } from '../stickers';
 import type {
   BBCodeConverterContext,
   BBCodeOptions,
@@ -83,112 +82,45 @@ function convertUrlNode(node: CodeVNode, context: BBCodeConverterContext): VNode
   return convertLink(href, children);
 }
 
-// (musume_03)/(blake_03) 角色贴纸，图片为 240x240 大图，需限制显示宽度
-function convertCharacterStickerNode(stickerId: string): VNode {
-  const m = stickerId.match(/^\((musume|blake)_(\d+)\)$/);
-  if (!m) {
-    throw new UnreadableCodeError('BUG: unexpected sticker id', stickerId);
-  }
-  const [, prefix, id] = m;
-  const code = `${prefix}_${id}`;
-  return {
-    type: 'img',
-    props: {
-      src: `${STICKER_DOMAIN_URL}/img/smiles/${prefix}/${code}.gif`,
-      smileid: code,
-      alt: stickerId,
-    },
-    style: {
-      'max-width': '55px',
-      height: 'auto',
-      'vertical-align': 'bottom',
-    },
-  };
-}
+/** 角色贴纸原图为 240x240，正文中统一按此宽度显示 */
+const CHARACTER_STICKER_DISPLAY_SIZE = 55;
 
 function convertStickerNode(node: CodeVNode): VNode | string {
   const stickerId = node.props!.stickerId!;
-  if (stickerId.startsWith('(musume_') || stickerId.startsWith('(blake_')) {
-    return convertCharacterStickerNode(stickerId);
+  const sticker = getSticker(stickerId);
+  if (!sticker) {
+    // 未知表情代码按纯文本输出。解析器已经过滤过一轮，这里是防御性分支
+    return stickerId;
   }
-  let id = -1;
-  if (stickerId.startsWith(BGM_STICKER_START_STR)) {
-    const m = stickerId.match(/\d+/)?.[0];
-    if (m) {
-      id = parseInt(m) + EMOJI_ARRAY.length;
-    } else {
-      throw new UnreadableCodeError('BUG: unexpected match result', stickerId);
-    }
-  } else {
-    id = EMOJI_ARRAY.indexOf(stickerId) + 1;
-  }
-
-  if (id >= 1 && id < 17) {
-    return {
-      type: 'img',
-      props: {
-        src: `${STICKER_DOMAIN_URL}/img/smiles/${id}.gif`,
-        smileid: `${id}`,
-        alt: stickerId,
-      },
+  const [width, height] = sticker.large
+    ? [CHARACTER_STICKER_DISPLAY_SIZE, CHARACTER_STICKER_DISPLAY_SIZE]
+    : [sticker.width, sticker.height];
+  const vnode: VNode = {
+    type: 'img',
+    props: {
+      src: sticker.url,
+      smileid: sticker.smileid,
+      // 角色贴纸有官方中文名，经典表情只有代码本身
+      alt: sticker.name ?? stickerId,
+      // 显式宽高让浏览器在图片加载前预留空间，避免布局抖动
+      width: String(width),
+      height: String(height),
+    },
+  };
+  if (sticker.large) {
+    // 单张约 180KB，必须懒加载
+    vnode.props = {
+      ...vnode.props,
+      loading: 'lazy',
+      decoding: 'async',
+    };
+    vnode.style = {
+      'max-width': `${CHARACTER_STICKER_DISPLAY_SIZE}px`,
+      height: 'auto',
+      'vertical-align': 'bottom',
     };
   }
-
-  if (id >= 17 && id < 39) {
-    const m = stickerId.match(/\d+/)?.[0];
-
-    if (m) {
-      if (m === '11') {
-        return {
-          type: 'img',
-          props: {
-            src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/11.gif`,
-            smileid: `${id}`,
-            alt: stickerId,
-          },
-        };
-      }
-
-      return {
-        type: 'img',
-        props: {
-          src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/${m}.png`,
-          smileid: `${id}`,
-          alt: stickerId,
-        },
-      };
-    }
-
-    throw new UnreadableCodeError('BUG: unexpected match result', stickerId);
-  }
-
-  if (id === 39) {
-    return {
-      type: 'img',
-      props: {
-        src: `${STICKER_DOMAIN_URL}/img/smiles/bgm/23.gif`,
-        smileid: '39',
-        alt: '(bgm23)',
-      },
-    };
-  }
-
-  if (id >= 40 && id < 140) {
-    let tvId: string | number = id - 39;
-    if (tvId < 10) {
-      tvId = `0${tvId}`;
-    }
-    return {
-      type: 'img',
-      props: {
-        src: `${STICKER_DOMAIN_URL}/img/smiles/tv/${tvId}.gif`,
-        smileid: `${id}`,
-        alt: stickerId,
-      },
-    };
-  }
-
-  return stickerId;
+  return vnode;
 }
 
 function convertQuote(node: CodeVNode, context: BBCodeConverterContext): VNode {

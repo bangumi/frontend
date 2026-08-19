@@ -248,10 +248,10 @@ describe('html render bbcode string', () => {
   });
   test('should render character sticker', () => {
     expect(render('(musume_03)')).toBe(
-      '<img src="https://lain.bgm.tv/img/smiles/musume/musume_03.gif" smileid="musume_03" alt="(musume_03)" style="max-width:55px;height:auto;vertical-align:bottom"/>',
+      '<img src="https://lain.bgm.tv/img/smiles/musume/musume_03.gif" smileid="musume_03" alt="喜欢" width="55" height="55" loading="lazy" decoding="async" style="max-width:55px;height:auto;vertical-align:bottom"/>',
     );
     expect(render('(blake_03)')).toBe(
-      '<img src="https://lain.bgm.tv/img/smiles/blake/blake_03.gif" smileid="blake_03" alt="(blake_03)" style="max-width:55px;height:auto;vertical-align:bottom"/>',
+      '<img src="https://lain.bgm.tv/img/smiles/blake/blake_03.gif" smileid="blake_03" alt="喜欢" width="55" height="55" loading="lazy" decoding="async" style="max-width:55px;height:auto;vertical-align:bottom"/>',
     );
   });
 });
