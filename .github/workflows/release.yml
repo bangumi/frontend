@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: ./.github/actions/setup-js-env
 
       - name: Get Version
@@ -23,14 +25,24 @@ jobs:
           count=$(git ls-remote --tags origin "${today}.*" | wc -l)
           echo "version=${today}.$((count + 1))" >> "$GITHUB_OUTPUT"
 
+          # 自上一个 release 以来没有新 commit 时跳过本次发布
+          last_tag=$(git tag --list '[0-9]*' --sort=-v:refname | head -1)
+          if [ -n "$last_tag" ] && [ "$(git rev-list --count "$last_tag"..HEAD)" -eq 0 ]; then
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - run: pnpm build
+        if: steps.version.outputs.skip != 'true'
         env:
           # 先构建后打 tag，git describe 拿不到本次版本号，必须显式注入
           VERSION: ${{ steps.version.outputs.version }}
       - run: zip -r bangumi-website.zip ./packages/website/dist
+        if: steps.version.outputs.skip != 'true'
       - run: openssl dgst -sha256 bangumi-website.zip > bangumi-website.zip.sha256
+        if: steps.version.outputs.skip != 'true'
 
       - name: Upload Github Release
+        if: steps.version.outputs.skip != 'true'
         run: gh release create "$VERSION" bangumi-website.zip bangumi-website.zip.sha256 --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
