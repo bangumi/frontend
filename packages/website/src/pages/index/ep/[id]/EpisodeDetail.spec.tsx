@@ -67,7 +67,7 @@ describe('EpisodeDetail', () => {
     const activeTab = screen.getByRole('link', { name: '章节' });
     expect(activeTab.className).toContain('p_10px_10px_9px');
     expect(activeTab.className).toContain('c_#f09199');
-    expect(document.querySelector('main')?.className).toContain('max-w_1260px');
+    expect(document.querySelector('main')?.className).toContain('max-w_1200px');
     expect(document.querySelector('main')?.className).toContain('p_10px_15px_24px');
 
     // 主栏：章节 label、名称与简介

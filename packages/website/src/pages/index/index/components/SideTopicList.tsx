@@ -12,11 +12,14 @@ const list = css({
   padding: 0,
 });
 
+/* 对齐原站 sideTpcList（line_row 斑马纹）：奇数行 #FFF / 偶数行 #F9F9F9 + 点状分隔线 */
 const listItem = css({
   display: 'flex',
   gap: '8px',
-  padding: '8px 5px',
-  borderBottom: '1px dotted #e8e3e3',
+  padding: '5px',
+  borderBottom: '1px dotted #e0e0e0',
+  '&:nth-child(odd)': { background: '#fff' },
+  '&:nth-child(even)': { background: '#f9f9f9' },
   '&:last-child': { borderBottom: 'none' },
 });
 
@@ -31,17 +34,26 @@ const title = css({
   overflowWrap: 'anywhere',
 });
 
+/* 对齐原站 .sideTpcList li small：10px #999 */
 const replies = css({
-  color: '#9f9b9b',
+  color: '#999',
+  fontSize: '10px',
 });
 
+/* 对齐原站 p.info（12px #999）与 a.tip 链接（#666，hover #333） */
 const extra = css({
   margin: '3px 0 0',
-  color: '#595555',
-  fontSize: '13px',
+  color: '#999',
+  fontSize: '12px',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
+  '& a': {
+    color: '#666',
+  },
+  '& a:hover': {
+    color: '#333',
+  },
 });
 
 interface SideTopicItem {
@@ -64,7 +76,8 @@ const SideTopicList: React.FC<{ items: SideTopicItem[] }> = ({ items }) => {
       {items.map((item) => (
         <li key={item.id} className={listItem}>
           <Link to={getUserProfileLink(item.creatorUsername)}>
-            <Avatar src={item.creatorAvatar} size='small' alt='' />
+            {/* 对齐原站 avatarReSize32 */}
+            <Avatar src={item.creatorAvatar} size='xsmall' alt='' />
           </Link>
           <div className={info}>
             <Link to={item.topicLink} className={title} title={item.title}>

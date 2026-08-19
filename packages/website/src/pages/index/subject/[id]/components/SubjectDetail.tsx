@@ -20,6 +20,7 @@ import {
   getSubjectReviewsLink,
   getSubjectWikiEditLink,
 } from '@bangumi/utils/pages';
+import btnShareSprite from '@bangumi/website/assets/btn_share.png';
 import CollectSidePanel from '@bangumi/website/components/CollectSidePanel';
 import IndexSidePanel from '@bangumi/website/components/IndexSidePanel';
 import PageContainer from '@bangumi/website/components/PageContainer';
@@ -44,7 +45,7 @@ const name = css({
   fontWeight: 'bold',
   lineHeight: '1.3',
   '& a': {
-    color: '#1f1c1c',
+    color: '#444',
     fontWeight: 'bold',
     _hover: { color: '#54b5df' },
   },
@@ -57,10 +58,11 @@ const headerInner = css({
 
 const tabsInner = headerInner;
 
+/* 对齐原站 h1.nameSingle small.grey：10px #999 */
 const platform = css({
   marginLeft: '8px',
-  color: '#9f9b9b',
-  fontSize: '12px',
+  color: '#999',
+  fontSize: '10px',
   fontWeight: 'normal',
 });
 
@@ -92,12 +94,15 @@ const tabLink = css({
   display: 'block',
   padding: '10px 10px 9px',
   borderBottom: '2px solid transparent',
-  color: '#9f9b9b',
+  /* 对齐原站 .navTabs li a：#888 */
+  color: '#888',
   fontSize: '14px',
   whiteSpace: 'nowrap',
+  /* 对齐原站条目导航 hover（#369CF8）与统一过渡节奏 */
+  transition: 'all .2s ease-in-out',
   _hover: {
-    borderBottomColor: '#54b5df',
-    color: '#54b5df',
+    borderBottomColor: '#369cf8',
+    color: '#369cf8',
     textDecoration: 'none',
   },
 });
@@ -181,62 +186,71 @@ const infoList = css({
   wordBreak: 'break-all',
   '& li': {
     padding: '5px',
-    borderBottom: '1px solid #e8e3e3',
+    /* 对齐原站 ul#infobox li */
+    borderBottom: '1px solid #eee',
     lineHeight: '1.4',
   },
 });
 
+/* 对齐原站 #infobox li span.tip：#666 */
 const tip = css({
-  color: '#9f9b9b',
+  color: '#666',
   fontSize: '14px',
 });
 
 const shareTools = css({
+  display: 'flex',
   alignItems: 'center',
   gap: '7px',
   padding: '2px 3px',
-  color: '#9f9b9b',
+  color: '#999',
   fontSize: '12px',
 });
 
+/* 对齐原站 a.icon（chii-btn 渐变胶囊） */
 const copyButton = css({
   display: 'inline-flex',
   alignItems: 'center',
   gap: '3px',
-  padding: '0',
-  border: '0',
-  background: 'transparent',
-  color: '#9f9b9b',
+  padding: '2px 12px',
+  border: '1px solid #ddd',
+  borderRadius: '20px',
+  background: 'linear-gradient(#fff, #fafafa)',
+  boxShadow: '0 1px 2px #eee, inset 0 1px 1px #fff',
+  color: '#666',
+  fontSize: '12px',
+  lineHeight: '20px',
   cursor: 'pointer',
-  font: 'inherit',
+  transition: 'all .2s ease-in-out',
   '& svg': {
     width: '15px',
     height: '15px',
   },
-});
-
-const shareIcon = css({
-  display: 'inline-flex',
-  width: '16px',
-  height: '16px',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '2px',
-  color: '#fff',
-  fontSize: '10px',
-  fontWeight: 'bold',
-  lineHeight: '16px',
   _hover: {
     color: '#fff',
+    background: 'linear-gradient(#5fa3db, #72b6e3)',
+    boxShadow: '0 0 3px #eee, inset 0 -1px 5px rgba(0, 0, 0, 0.1)',
+  },
+});
+
+/* 对齐原站 a.share：16x16 sprite 图标（btn_share.png） */
+const shareIcon = css({
+  display: 'inline-block',
+  width: '16px',
+  height: '16px',
+  overflow: 'hidden',
+  textIndent: '-9999px',
+  background: 'var(--share-sprite) no-repeat',
+  _hover: {
     textDecoration: 'none',
   },
 });
 
-const shareWeibo = css({ background: '#e34b4b' });
+const shareWeibo = css({ backgroundPosition: '0 0' });
 
-const shareDouban = css({ background: '#3b8f55' });
+const shareDouban = css({ backgroundPosition: '0 -16px' });
 
-const shareTwitter = css({ background: '#45bde0' });
+const shareTwitter = css({ backgroundPosition: '0 -128px' });
 
 /** 条目标题与导航 tabs，对齐 PHP subject_header */
 export function SubjectHeader({ subject }: { subject: Subject }) {
@@ -428,11 +442,16 @@ function SubjectShare({ subject }: { subject: Subject }) {
   const shareText = `「${subject.name}」`;
 
   return (
-    <div className={shareTools} aria-label='分享条目'>
+    <div
+      className={shareTools}
+      aria-label='分享条目'
+      style={{ '--share-sprite': `url(${btnShareSprite})` } as React.CSSProperties}
+    >
       <button
         type='button'
         className={copyButton}
         onClick={() => void navigator.clipboard.writeText(shareUrl)}
+        title='复制到剪贴板'
       >
         <LinkIcon />
         复制

@@ -6,14 +6,10 @@ import { css, cx } from '@bangumi/styled-system/css';
 const container = css({
   position: 'relative',
   width: '100%',
-  maxWidth: '1260px',
+  maxWidth: '1200px',
   margin: '0 auto',
-  padding: '24px 30px',
+  padding: '10px',
   boxSizing: 'border-box',
-  '@media (max-width: 640px)': {
-    paddingRight: '16px',
-    paddingLeft: '16px',
-  },
 });
 
 const gutterOnlyStyle = css({

@@ -3,7 +3,7 @@
 exports[`should render external link 1`] = `
 <DocumentFragment>
   <a
-    class="bgm-link"
+    class="bgm-link d_inline-block c_#0084b4 cursor_pointer [&:link,_&:visited,_&:active]:td_none hover:c_#02a3fb hover:td_underline"
     href="https://test.com"
   />
 </DocumentFragment>
@@ -12,7 +12,7 @@ exports[`should render external link 1`] = `
 exports[`should render internal link 1`] = `
 <DocumentFragment>
   <a
-    class="bgm-link"
+    class="bgm-link d_inline-block c_#0084b4 cursor_pointer [&:link,_&:visited,_&:active]:td_none hover:c_#02a3fb hover:td_underline"
     data-discover="true"
     href="/a"
   />

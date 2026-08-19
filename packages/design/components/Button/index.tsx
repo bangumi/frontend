@@ -24,6 +24,8 @@ const button = css({
   height: 'var(--height)',
   lineHeight: 'var(--height)',
   borderRadius: 'calc(var(--height) / 2)',
+  /* 与原站统一的交互动效节奏（all .2s ease-in-out） */
+  transition: 'all .2s ease-in-out',
   // 默认大小：large
   '--height': '38px',
   padding: '0 32px',

@@ -292,7 +292,7 @@ describe('HomePage', () => {
 
     // 默认分栏视图展示当前选中条目的集数按钮
     expect(screen.getAllByTitle(/^ep\.\d+ /)).toHaveLength(12);
-    expect(screen.getByText('Test Anime')).toHaveClass('c_#1f1c1c');
+    expect(screen.getByText('Test Anime')).toHaveClass('c_#0084b4');
 
     fireEvent.click(screen.getByRole('button', { name: '网格视图' }));
 

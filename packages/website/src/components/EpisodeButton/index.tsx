@@ -24,6 +24,8 @@ const epBtn = css({
   lineHeight: '22px',
   color: '#1f1c1c',
   textDecoration: 'none',
+  /* 与原站 ul.prg_list a 一致的过渡节奏 */
+  transition: 'background-color .1s linear, border-color .1s linear, box-shadow .1s linear',
   _hover: { textDecoration: 'none' },
   _focusVisible: { textDecoration: 'none' },
   '@media (max-width: 640px)': {
@@ -36,11 +38,12 @@ const epBtn = css({
 // noStyle：章节按钮不依赖 .bgm-link 的全局链接色（如首页容器统一 #0084b4），
 // 也避免非分层 less 覆盖 Panda layer 的优先级问题
 
-/** 已放送且未收藏：浅蓝底蓝字，对齐 PHP epBtnAir */
+/** 已放送且未收藏：浅蓝底蓝字，对齐 PHP epBtnAir（hover 顶部 2px 内阴影） */
 const epAired = css({
   borderColor: '#00a8ff',
   background: '#daeaff',
   color: '#0066cc',
+  _hover: { color: '#333', boxShadow: 'inset 0 2px 0 #00a8ff' },
 });
 
 /** 看过：深蓝实心白字，对齐 PHP epBtnWatched */
@@ -48,6 +51,7 @@ const epDone = css({
   background: '#4897ff',
   borderColor: '#4897ff',
   color: '#fff',
+  _hover: { color: '#efefef', boxShadow: 'inset 0 2px 0 #1175a8' },
 });
 
 /** 想看：粉色底粉字，对齐 PHP epBtnQueue */
@@ -55,6 +59,7 @@ const epQueue = css({
   borderColor: '#ff2293',
   background: '#ffadd1',
   color: '#ff2293',
+  _hover: { color: '#333', boxShadow: 'inset 0 2px 0 #ff2293' },
 });
 
 /** 抛弃：灰底白字 + 删除线，对齐 PHP epBtnDrop */
@@ -63,6 +68,7 @@ const epDrop = css({
   borderColor: '#666',
   color: '#fff',
   textDecoration: 'line-through',
+  _hover: { color: '#666', boxShadow: 'inset 0 2px 0 #999' },
 });
 
 /** 未放送：浅灰底灰字，对齐 PHP epBtnNA */
@@ -70,6 +76,7 @@ const epUpcoming = css({
   borderColor: '#b6b6b6',
   background: '#e0e0e0',
   color: '#909090',
+  _hover: { color: '#666', boxShadow: 'inset 0 2px 0 #999' },
 });
 
 const EPISODE_STATUS_KEYS: Record<EpisodeCollectionStatus, string> = {

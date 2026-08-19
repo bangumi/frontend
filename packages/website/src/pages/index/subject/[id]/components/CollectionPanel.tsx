@@ -19,7 +19,8 @@ const panel = css({
   overflow: 'hidden',
   margin: '0 0 15px',
   padding: '0',
-  border: '1px solid #e8e3e3',
+  /* 对齐原站 SidePanel 边框色 @side-panel-border-color */
+  border: '1px solid #f0f0f0',
   borderRadius: '15px',
   background: '#fff',
   boxShadow: '0 5px 10px rgba(0, 0, 0, 0.09)',
@@ -27,16 +28,18 @@ const panel = css({
   overflowWrap: 'break-word',
 });
 
+/* 对齐原站 SidePanel：三段式渐变顶条 + 文字阴影 */
 const panelTitle = css({
   height: '40px',
   margin: '0',
   padding: '0 10px',
   border: '0',
-  background: '#f7f7f7',
-  color: '#595555',
+  background: 'linear-gradient(#f8f9f9, #f0f1f2 99%, #e4e4e5)',
+  color: '#555',
   fontSize: '13px',
   fontWeight: 'normal',
   lineHeight: '40px',
+  textShadow: '#fff 1px 1px 0px',
 });
 
 const panelBody = css({ padding: '10px' });
@@ -45,9 +48,11 @@ const interestDetails = css({
   marginBottom: '10px',
 });
 
+/* 对齐原站 span.interest_now：#0099CC 13px */
 const interestNow = css({
   fontSize: '13px',
   margin: '0 0 4px',
+  color: '#0099cc',
 });
 
 const privateTag = css({ marginLeft: '6px', color: '#9f9b9b' });
@@ -104,6 +109,7 @@ const collectBtn = css({
   background: '#fff',
   cursor: 'pointer',
   fontSize: '12px',
+  transition: 'all .2s ease-in-out',
   '&:first-child': {
     borderRadius: '4px 0 0 4px',
   },
@@ -163,18 +169,27 @@ const rateStars = css({
   gap: '2px',
 });
 
+/* 对齐原站 star_2x.png sprite：灰 #CFCFCF / 亮 #F06321 / hover #FCAE55 */
 const rateStar = css({
   border: 'none',
   background: 'none',
   cursor: 'pointer',
-  fontSize: '18px',
-  color: '#e8e3e3',
+  fontSize: '15px',
+  color: '#cfcfcf',
   padding: '0',
   lineHeight: '1',
+  transition: 'color .2s ease-in-out',
+  _hover: { color: '#fcae55' },
 });
 
 const rateStarFilled = css({
-  color: '#f68ab1',
+  color: '#f06321',
+});
+
+/* 原站 #rate-tip（span.alarm）红色评价文案 */
+const rateTip = css({
+  color: '#cc0000',
+  fontSize: '12px',
 });
 
 const rateValue = css({
@@ -294,7 +309,8 @@ const chartBarArea = css({
 });
 
 const chartBar = css({
-  width: 'min(100%, 13px)',
+  /* 对齐原站 horizontalChart .count：柱子撑满格子 */
+  width: '100%',
   minHeight: '1px',
   background: '#9f9b9b',
   borderRadius: '2px 2px 0 0',
@@ -417,6 +433,20 @@ function getRatingLabel(score: number): string {
   if (score >= 2) return '很差';
   return '不忍直视';
 }
+
+/** 原站「我的评价」文案（1-10 分） */
+const RATE_LABELS: Record<number, string> = {
+  1: '不忍直视',
+  2: '很差',
+  3: '差',
+  4: '较差',
+  5: '不过不失',
+  6: '还行',
+  7: '推荐',
+  8: '力荐',
+  9: '神作',
+  10: '超神作',
+};
 
 function getErrorMessage(error: unknown): string {
   if (error instanceof Error) {
@@ -655,7 +685,8 @@ const CollectionPanel: React.FC<{ subject: Subject }> = ({ subject }) => {
             </p>
             {!editing && interest.rate > 0 && (
               <p className={myRate}>
-                我的评价：
+                我的评价
+                <span className={rateTip}>{RATE_LABELS[interest.rate]}</span>
                 <ClickableRate value={interest.rate} onChange={() => undefined} />
               </p>
             )}

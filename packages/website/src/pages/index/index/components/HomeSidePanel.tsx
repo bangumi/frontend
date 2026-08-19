@@ -4,16 +4,18 @@ import React from 'react';
 import { css } from '@bangumi/styled-system/css';
 
 const panel = css({
-  margin: '0 0 24px',
+  margin: '0 0 20px',
   background: '#fff',
 });
 
+/* 对齐原站 div.sidePanelHome h2：16px / font-weight 300 / #555 / #EEE 底边框 / 左 padding 10px */
 const panelTitle = css({
   fontSize: '16px',
-  fontWeight: 'normal',
+  fontWeight: '300',
+  color: '#555',
   margin: '0',
-  padding: '3px 5px 8px',
-  borderBottom: '1px solid #e8e3e3',
+  padding: '0 0 5px 10px',
+  borderBottom: '1px solid #eee',
 });
 
 /**

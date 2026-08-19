@@ -7,10 +7,11 @@ import { css, cx } from '@bangumi/styled-system/css';
 
 const link = css({
   display: 'inline-block',
-  color: '#54b5df',
+  /* 对齐原站 a.l：正常 #0084B4，hover 变亮 #02A3FB 加下划线 */
+  color: '#0084b4',
   cursor: 'pointer',
   '&:link, &:visited, &:active': { textDecoration: 'none' },
-  _hover: { textDecoration: 'underline' },
+  _hover: { color: '#02a3fb', textDecoration: 'underline' },
 });
 
 const linkBold = css({ fontWeight: 'bold' });
@@ -34,7 +35,7 @@ export function PureLink({
   ...rest
 }: PropsWithChildren<PureLinkProps & JSX.IntrinsicElements['div']>) {
   return (
-    <div className={cx('bgm-link', fontWeight === 'bold' && linkBold, className)} {...rest}>
+    <div className={cx('bgm-link', link, fontWeight === 'bold' && linkBold, className)} {...rest}>
       {children}
     </div>
   );
@@ -51,7 +52,7 @@ const Link: React.FC<LinkProps> = ({
 }) => {
   const resolvedClassnames = noStyle
     ? className
-    : cx('bgm-link', fontWeight === 'bold' && linkBold, className);
+    : cx('bgm-link', link, fontWeight === 'bold' && linkBold, className);
 
   if (isExternal && typeof to === 'string') {
     return (

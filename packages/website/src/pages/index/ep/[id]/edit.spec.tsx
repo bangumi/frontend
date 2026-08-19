@@ -41,7 +41,7 @@ describe('EpisodeEditPage', () => {
     });
 
     const name = await screen.findByLabelText('原名');
-    expect(document.querySelector('main')?.className).toContain('max-w_1260px');
+    expect(document.querySelector('main')?.className).toContain('max-w_1200px');
     expect(name).toHaveValue('燃えよ狂犬');
     expect(screen.getByLabelText('中文名')).toHaveValue('燃烧吧，狂犬');
 

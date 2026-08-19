@@ -16,13 +16,14 @@ import { getSubjectLink, getSubjectWikiEditLink } from '@bangumi/utils/pages';
 import EpisodeButton from '@bangumi/website/components/EpisodeButton';
 import { useHomePage } from '@bangumi/website/hooks/use-home-page';
 
+/* 对齐原站 #prgManager：15px 圆角、#DFDFDF 边框、外发光阴影 */
 const block = css({
   background: '#fff',
-  border: '1px solid #e8e3e3',
-  borderRadius: '14px',
-  margin: '0 0 20px',
+  border: '1px solid #dfdfdf',
+  borderRadius: '15px',
+  margin: '0 0 15px',
   overflow: 'visible',
-  boxShadow: '0 0 3px rgba(0, 0, 0, 0.1)',
+  boxShadow: '0px 0px 0px 2px rgba(0, 0, 0, 0.04)',
 });
 
 const tabs = css({
@@ -30,22 +31,24 @@ const tabs = css({
   alignItems: 'center',
   minHeight: '42px',
   padding: '0 8px',
-  borderBottom: '1px solid #e8e3e3',
+  borderBottom: '1px solid #eee',
   '@media (max-width: 640px)': {
     overflowX: 'auto',
   },
 });
 
+/* 对齐原站 ul.categoryTab：13px 胶囊，hover 灰底，激活粉底白字 */
 const tab = css({
   minWidth: '62px',
-  padding: '7px 14px',
+  padding: '4px 15px',
   border: 'none',
-  borderRadius: '18px',
+  borderRadius: '50px',
   background: 'none',
   cursor: 'pointer',
-  fontSize: '15px',
-  color: '#9f9b9b',
-  _hover: { color: '#1f1c1c' },
+  fontSize: '13px',
+  color: '#555',
+  transition: 'all .2s ease-in-out',
+  _hover: { background: '#eee' },
   '@media (max-width: 640px)': {
     minWidth: 'auto',
     paddingRight: '12px',
@@ -55,6 +58,7 @@ const tab = css({
   '&[data-active]': {
     color: '#fff',
     background: '#f09199',
+    _hover: { background: '#f09199' },
   },
 });
 
@@ -78,6 +82,7 @@ const viewBtn = css({
   borderRadius: '0',
   background: 'none',
   color: '#9f9b9b',
+  transition: 'all .2s ease-in-out',
   _hover: { color: '#1f1c1c' },
   // 激活态用属性选择器提升特异性，避免与基类原子样式争抢生成顺序
   '&[data-active]': {
@@ -134,7 +139,10 @@ const navButton = css({
   background: '#fff',
   color: '#1f1c1c',
   textAlign: 'left',
-  _hover: { background: '#fafafa' },
+  transition: 'background .2s ease-in-out',
+  _hover: { background: '#f9f9f5' },
+  /* 对齐原站 #prgSubjectList.list li:hover 时进度条变粉 */
+  '&:hover .prg-nav-progress-inner': { background: '#f09199' },
   '@media (max-width: 640px)': {
     height: '44px',
     padding: '4px 6px',
@@ -171,18 +179,21 @@ const navHeader = css({
   minWidth: '0',
 });
 
+/* 对齐原站 #prgSubjectList li a.title span：#444 12px */
 const navName = css({
   minWidth: '0',
   overflow: 'hidden',
-  fontSize: '14px',
+  fontSize: '12px',
+  color: '#444',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
+/* 对齐原站 progress_percent_text：#2774FF 10px */
 const navProgressText = css({
   flex: 'none',
-  color: '#2878e8',
-  fontSize: '12px',
+  color: '#2774ff',
+  fontSize: '10px',
   '@media (max-width: 640px)': {
     display: 'none',
   },
@@ -195,7 +206,8 @@ const navProgressBar = css({
   marginTop: '5px',
   overflow: 'hidden',
   borderRadius: '2px',
-  background: '#e3e7f5',
+  /* 对齐原站 @prg-bar-bg-color */
+  background: '#dfe2ee',
   '@media (max-width: 640px)': {
     display: 'none',
   },
@@ -206,6 +218,7 @@ const navProgressInner = css({
   height: '100%',
   borderRadius: 'inherit',
   background: '#b9c7e9',
+  transition: 'background .2s ease-in-out',
 });
 
 const subjectDetail = css({
@@ -331,11 +344,11 @@ const cardName = css({
   whiteSpace: 'nowrap',
 });
 
-// 原 .subjectDetail .cardName 嵌套规则
+// 原 .subjectDetail .cardName 嵌套规则；详情标题对齐原站 #cloumnSubjectInfo h3 a.l：#0084B4 15px 粗体
 const cardDetailedName = css({
-  color: '#1f1c1c',
-  fontSize: '16px',
-  fontWeight: '600',
+  color: '#0084b4',
+  fontSize: '15px',
+  fontWeight: '700',
 });
 
 // 原 .gridList .cardName 嵌套规则
@@ -364,10 +377,11 @@ const gridEditLink = css({
   fontSize: '15px',
 });
 
+/* 对齐原站 p.tip_j：#999 12px */
 const watchingCount = css({
   margin: '0 0 6px',
-  color: '#9f9b9b',
-  fontSize: '13px',
+  color: '#999',
+  fontSize: '12px',
 });
 
 const detailProgressRow = css({
@@ -426,16 +440,19 @@ const detailProgressInner = css({
   background: 'linear-gradient(#59d5f2, #00adea)',
 });
 
+/* 对齐原站 a.prgCheckIn：#4AA1F9 字 + #F1F1F1 底 + #DDD 边框 + 8px 圆角 */
 const detailCheckInBtn = css({
   marginLeft: 'auto',
-  padding: '5px 9px',
-  border: '1px solid #e8e3e3',
+  padding: '4px 8px',
+  border: '1px solid #ddd',
   borderRadius: '8px',
-  color: '#54b5df',
-  fontSize: '13px',
+  background: '#f1f1f1',
+  color: '#4aa1f9',
+  fontSize: '12px',
   whiteSpace: 'nowrap',
+  transition: 'border linear 0.2s, box-shadow linear 0.1s',
   _hover: {
-    borderColor: '#54b5df',
+    borderColor: '#4aa1f9',
   },
   '@media (max-width: 640px)': {
     padding: '4px',
@@ -624,7 +641,10 @@ function PrgNavItem({
             </small>
           </span>
           <span className={navProgressBar}>
-            <span className={navProgressInner} style={{ width: `${item.percent}%` }} />
+            <span
+              className={cx(navProgressInner, 'prg-nav-progress-inner')}
+              style={{ width: `${item.percent}%` }}
+            />
           </span>
         </span>
       </button>

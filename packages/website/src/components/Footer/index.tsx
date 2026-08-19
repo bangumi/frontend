@@ -4,322 +4,159 @@ import { Link } from 'react-router-dom';
 
 import { css } from '@bangumi/styled-system/css';
 
-import footerCover from '../../assets/footer-cover.png';
-import { ReactComponent as BangumiTextLogo } from '../../assets/logo.svg';
-
+/* 与原站 #footer / #footerLinks 对齐：浅灰链接带 + 灰色版权行 */
 const footerContainer = css({
-  display: 'flex',
-  alignItems: 'center',
-  height: '220px',
-  /* 左右无限延生的纯色 */
-  _before: {
-    content: '""',
-    height: '100%',
-    flex: '1',
-    backgroundColor: '#f29ba3',
-  },
-  _after: {
-    content: '""',
-    height: '100%',
-    flex: '1',
-    backgroundColor: '#f64b51',
-  },
-  '@media screen and (max-width: 768px)': {
-    height: '160px',
-  },
+  margin: '20px 0 15px 0',
+  padding: '0',
+  color: 'bgmFooterText',
 });
 
-const footerMain = css({
-  boxSizing: 'border-box',
-  width: '1260px',
-  height: '100%',
-  backgroundColor: '#f47a81', // Fallback background color
-  backgroundImage: 'var(--footer-cover)',
-  backgroundRepeat: 'no-repeat',
-  backgroundSize: 'cover',
-  backgroundPosition: 'center',
-  position: 'relative',
-  padding: '0 30px',
-  fontSize: '14px',
-  _before: {
-    content: '""',
-    position: 'absolute',
-    width: '116px',
-    height: '100%',
-    left: '0',
-    top: '0',
-    background: 'linear-gradient(270deg, #f29ba3 41.38%, rgba(242, 155, 163, 0) 85.34%)',
-    transform: 'rotate(-180deg)',
-  },
-  _after: {
-    content: '""',
-    position: 'absolute',
-    width: '116px',
-    height: '100%',
-    right: '0',
-    top: '0',
-    background: 'linear-gradient(270deg, #f64b51 0%, rgba(246, 75, 81, 0) 100%)',
-  },
-  '@media screen and (max-width: 768px)': {
-    padding: '0 8px',
-    fontSize: '11px',
-  },
+const footerLinks = css({
+  background: 'bgmFooterBg',
+  borderTop: '1px solid token(colors.bgmBorder)',
+  padding: '15px 10px',
+  smDown: { padding: '10px 0' },
 });
 
-const inner = css({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  height: '100%',
-  width: '100%',
-});
-
-const footerLeft = css({
-  zIndex: '1',
-  '@media screen and (max-width: 768px)': {
-    display: 'none',
-  },
-});
-
-const logo = css({
-  width: '186px',
-  height: '55px',
-  marginBottom: '38px',
-  '& path': {
-    fill: '#fff',
-    stroke: '#fff',
-  },
-  '@media screen and (max-width: 992px)': {
-    marginBottom: '0',
-    width: '160px',
-  },
-});
-
-const copyright = css({
-  fontStyle: 'normal',
-  fontWeight: '400',
-  fontSize: '1em',
-  lineHeight: '16px',
-  color: 'rgba(255, 255, 255, 0.4)',
-  '& p': { margin: '0' },
-  '@media screen and (max-width: 992px)': {
-    display: 'none',
-  },
-});
-
-const footerRight = css({
-  display: 'flex',
-  alignItems: 'center',
-  zIndex: '1',
-  '@media screen and (max-width: 768px)': {
-    justifyContent: 'space-around',
-    width: '100%',
-  },
+const footerLinksInner = css({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(4, 1fr)',
+  maxWidth: '1200px',
+  margin: '0 auto',
 });
 
 const footerBlock = css({
-  textAlign: 'right',
-  width: '160px',
-  flex: 'none',
-  order: '0',
-  alignSelf: 'stretch',
-  flexGrow: '0',
-  margin: '9px 0',
-  '& div': {
-    marginBottom: '9px',
-    '&:last-of-type': { marginBottom: '0' },
-    '& a': {
-      color: '#fff',
-      textDecoration: 'none',
-      fontWeight: '400',
-      fontSize: '1em',
-      lineHeight: '21px',
-      _hover: {
-        textDecoration: 'underline',
-        textUnderlinePosition: 'under',
-      },
-    },
+  '& dt': {
+    margin: '0 15px 3px',
+    paddingBottom: '3px',
+    fontSize: '12px',
+    fontWeight: '700',
+    borderBottom: '1px solid token(colors.bgmBorderMedium)',
   },
-  '@media screen and (max-width: 1200px)': {
-    width: '130px',
+  '& dd': {
+    margin: '0 15px 3px',
   },
-  '@media screen and (max-width: 992px)': {
-    width: '106px',
-  },
-  '@media screen and (max-width: 768px)': {
-    textAlign: 'left',
-    width: 'auto',
-    '& div': { marginBottom: '2px' },
-  },
+  /* 链接继承原站全局 a 样式（#444 / hover #02A3FB 无下划线），不单独覆盖 */
 });
 
-const blockTitle = css({
-  color: '#fff6f7',
-  fontStyle: 'normal',
-  fontWeight: '700',
-  fontSize: '1em',
-  lineHeight: '20px',
-  marginTop: '0',
-  marginBottom: '9px',
+/* copyright 与正文同宽（原站 #footer .copyright 在 1200px 内容区内） */
+const copyright = css({
+  maxWidth: '1200px',
+  margin: '0 auto',
+  padding: '10px 10px 0',
+  fontSize: '10px',
+  color: 'bgmTextTip',
+  '& p': { margin: '0' },
+  smDown: { padding: '10px 10px 0' },
 });
 
-interface IBlockItem {
-  title: string;
-  items: Array<{ key: string; label: string }>;
+interface FooterLink {
+  href: string;
+  label: string;
 }
 
-const FooterBlockItem: FC<{ block: IBlockItem }> = ({ block }) => {
-  return (
-    <div className={footerBlock}>
-      <h2 className={blockTitle}>{block.title}</h2>
-      {block.items.map(({ key, label }) => (
-        <div key={key}>
-          <Link to={key}>{label}</Link>
-        </div>
-      ))}
-    </div>
-  );
-};
+interface FooterBlock {
+  title: string;
+  /** 每个子数组渲染为一行，行内多个链接用「 | 」连接（与原站年鉴链接行一致） */
+  rows: FooterLink[][];
+}
 
-const aboutBlock: IBlockItem = {
-  title: '关于我们',
-  items: [
-    {
-      key: '/about',
-      label: '关于我们',
-    },
-    {
-      key: '/about/guideline',
-      label: '社区指导原则',
-    },
-    {
-      key: '/about/copyright',
-      label: '版权声明',
-    },
-    {
-      key: '/about/link2us',
-      label: '链接我们',
-    },
-  ],
-};
-
-const helpBlock: IBlockItem = {
-  title: '获得帮助',
-  items: [
-    {
-      key: '/help/bbcode',
-      label: 'BBCode',
-    },
-    {
-      key: '/group/forum',
-      label: '站务论坛',
-    },
-    {
-      key: '/group/wiki',
-      label: '番組 WIKI 計画',
-    },
-    {
-      key: '/group/doujin',
-      label: '天窗站务',
-    },
-  ],
-};
-
-const devBlock: IBlockItem = {
-  title: '开发相关',
-  items: [
-    {
-      key: '/group/dev',
-      label: '番组开发',
-    },
-    {
-      key: '/dev/app',
-      label: '开发者平台',
-    },
-    {
-      key: '/group/issues',
-      label: 'BUG 追踪',
-    },
-    {
-      key: '/onair',
-      label: '客户端',
-    },
-  ],
-};
-
-const specialBlock: IBlockItem = {
-  title: '特别推荐',
-  items: [
-    {
-      key: '/award/2021',
-      label: 'Bangumi 年鉴',
-    },
-    {
-      key: '/magi',
-      label: 'MAGI 问答',
-    },
-    {
-      key: '/tokei',
-      label: 'etokei 绘时计',
-    },
-  ],
-};
-
-const moreBlock: IBlockItem = {
-  title: '更多',
-  items: [
-    {
-      key: '/index',
-      label: '目录',
-    },
-    {
-      key: '/wiki',
-      label: '维基人',
-    },
-    {
-      key: '/goodies',
-      label: '周边',
-    },
-    {
-      key: '/dollars',
-      label: 'Dollars',
-    },
-  ],
-};
+const footerBlocks: FooterBlock[] = [
+  {
+    title: '关于我们',
+    rows: [
+      [{ href: '/about', label: '关于我们' }],
+      [{ href: '/about/guideline', label: '社区指导原则' }],
+      [{ href: '/about/copyright', label: '版权声明' }],
+      [{ href: '/about/link2us', label: '链接我们' }],
+    ],
+  },
+  {
+    title: '获取帮助',
+    rows: [
+      [{ href: '/help/bbcode', label: 'BBCode' }],
+      [{ href: '/group/forum', label: '站务论坛' }],
+      [{ href: '/group/dev', label: '番组开发' }],
+      [{ href: '/group/issues', label: 'BUG 追踪' }],
+      [{ href: '/group/doujin', label: '天窗站务' }],
+    ],
+  },
+  {
+    title: '特别推荐',
+    rows: [
+      [
+        { href: '/award/2025', label: '年鉴 2025' },
+        { href: '/award/2024', label: '24' },
+        { href: '/award/2023', label: '23' },
+        { href: '/award/2022', label: '22' },
+        { href: '/award/2021', label: '21' },
+        { href: '/award/2020', label: '20' },
+        { href: '/award/2019', label: '19' },
+        { href: '/award/2018', label: '18' },
+        { href: '/award/2017', label: '17' },
+        { href: '/award/2016', label: '16' },
+        { href: '/award/2015', label: '15' },
+        { href: '/award/2014', label: '14' },
+        { href: '/award/2013', label: '13' },
+        { href: '/award/2012', label: '12' },
+        { href: '/award/2011', label: '11' },
+        { href: '/award/2010', label: '10' },
+      ],
+      [
+        { href: '/award/2025/winner', label: 'TBA 2025' },
+        { href: '/award/2024/winner', label: '24' },
+      ],
+      [{ href: '/group/wiki', label: '番組 WIKI 計画' }],
+      [{ href: '/onair', label: 'onAir 客户端' }],
+      [{ href: '/tokei', label: 'etokei 绘时计' }],
+    ],
+  },
+  {
+    title: '更多',
+    rows: [
+      [{ href: '/dev/app', label: '开发者平台' }],
+      [{ href: '/index', label: '目录' }],
+      [{ href: '/wiki', label: '维基人' }],
+      [{ href: '/magi', label: 'MAGI 问答' }],
+      [{ href: '/goodies', label: '周边' }],
+      [{ href: '/dollars', label: 'Dollars' }],
+    ],
+  },
+];
 
 const getThisYear = (): string => new Date().getFullYear().toString();
 
 const Footer: FC = () => {
   const hash = import.meta.env.__COMMIT_HASH__ as string;
   return (
-    <div className={footerContainer}>
-      <div
-        className={footerMain}
-        style={{ '--footer-cover': `url(${footerCover})` } as React.CSSProperties}
-      >
-        <div className={inner}>
-          <div className={footerLeft}>
-            <BangumiTextLogo className={logo} />
-            <div className={copyright}>
-              <p>© 2008-{getThisYear()} Bangumi (a.k.a.Chobits),</p>
-              <p>
-                some rights reserved | ver. {import.meta.env.__APP_VERSION__}
-                {hash ? ' | ' + hash : ''}
-              </p>
-              <p>build at {import.meta.env.__BUILT_TIME__}</p>
-            </div>
-          </div>
-          <div className={footerRight}>
-            <FooterBlockItem block={aboutBlock} />
-            <FooterBlockItem block={helpBlock} />
-
-            <FooterBlockItem block={devBlock} />
-            <FooterBlockItem block={specialBlock} />
-            <FooterBlockItem block={moreBlock} />
-          </div>
+    <footer className={footerContainer}>
+      <div className={footerLinks}>
+        <div className={footerLinksInner}>
+          {footerBlocks.map((block) => (
+            <dl className={footerBlock} key={block.title}>
+              <dt>{block.title}</dt>
+              {block.rows.map((row, rowIndex) => (
+                <dd key={rowIndex}>
+                  {row.map((link, linkIndex) => (
+                    <React.Fragment key={link.href}>
+                      {linkIndex > 0 && ' | '}
+                      <Link to={link.href}>{link.label}</Link>
+                    </React.Fragment>
+                  ))}
+                </dd>
+              ))}
+            </dl>
+          ))}
         </div>
       </div>
-    </div>
+      <div className={copyright}>
+        <p>
+          © 2008-{getThisYear()} Bangumi (a.k.a.Chobits), some rights reserved | ver.{' '}
+          {import.meta.env.__APP_VERSION__}
+          {hash ? ` | ${hash}` : ''} | build at {import.meta.env.__BUILT_TIME__}
+        </p>
+      </div>
+    </footer>
   );
 };
 

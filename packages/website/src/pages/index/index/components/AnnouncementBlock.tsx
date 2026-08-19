@@ -8,29 +8,42 @@ import HomeSidePanel from './HomeSidePanel';
 
 const { Link } = Typography;
 
+/* 对齐原站 ul.timeline.dots：左侧竖线 + 每行粉色圆点 */
 const list = css({
   listStyle: 'none',
-  margin: 0,
-  padding: 0,
+  margin: '0 5px',
+  padding: '0',
+  position: 'relative',
+  _after: {
+    content: '""',
+    position: 'absolute',
+    width: '2px',
+    background: 'rgba(0, 0, 0, 0.1)',
+    opacity: '0.8',
+    top: '0',
+    bottom: '0',
+    left: '5px',
+  },
 });
 
 const listItem = css({
-  display: 'flex',
-  gap: '8px',
-  padding: '6px 10px',
+  position: 'relative',
+  padding: '10px 10px 10px 20px',
   fontSize: '13px',
-  lineHeight: '1.6',
-});
-
-const date = css({
-  flex: 'none',
-  color: '#9f9b9b',
-  fontSize: '12px',
-});
-
-const content = css({
-  minWidth: 0,
-  wordBreak: 'break-all',
+  lineHeight: '1.2',
+  color: '#555',
+  _after: {
+    content: '""',
+    position: 'absolute',
+    width: '6px',
+    height: '6px',
+    left: '1px',
+    top: '13px',
+    borderRadius: '50%',
+    opacity: '0.9',
+    background: '#f09199',
+    border: '2px solid rgba(255, 255, 255, 0.6)',
+  },
 });
 
 /** 公告为静态内容，内容对齐 PHP home_announcement.htm */
@@ -77,8 +90,7 @@ const AnnouncementBlock: React.FC = () => {
       <ul className={list}>
         {ANNOUNCEMENTS.map((item, i) => (
           <li key={i} className={listItem}>
-            <span className={date}>{item.date}</span>
-            <span className={content}>{item.content}</span>
+            {item.date} {item.content}
           </li>
         ))}
       </ul>
