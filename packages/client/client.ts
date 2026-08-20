@@ -154,6 +154,15 @@ export type Calendar = {
     watchers: number;
   }[];
 };
+export type ChannelSubjectTopic = {
+  id: number;
+  title: string;
+  replyCount: number;
+  /** 最后回复时间，unix time stamp in seconds */
+  updatedAt: number;
+  creator?: SlimUser;
+  subject: SlimSubject;
+};
 export type SlimBlogEntry = {
   id: number;
   type: number;
@@ -908,15 +917,6 @@ export type TrendingSubject = {
   subject: SlimSubject;
   count: number;
 };
-export type ChannelSubjectTopic = {
-  id: number;
-  title: string;
-  replyCount: number;
-  /** 最后回复时间，unix time stamp in seconds */
-  updatedAt: number;
-  creator?: SlimUser;
-  subject: SlimSubject;
-};
 export type UserHomepage = {
   left: UserHomepageSection[];
   right: UserHomepageSection[];
@@ -1621,6 +1621,45 @@ export function getCalendar(opts?: Oazapfts.RequestOpts) {
   >('/p1/calendar', {
     ...opts,
   });
+}
+/**
+ * 获取频道条目讨论
+ */
+export function getChannelSubjectTopics(
+  $type: SubjectType,
+  {
+    limit,
+    offset,
+  }: {
+    limit?: number;
+    offset?: number;
+  } = {},
+  opts?: Oazapfts.RequestOpts,
+) {
+  return oazapfts.fetchJson<
+    | {
+        status: 200;
+        data: {
+          data: ChannelSubjectTopic[];
+          /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+          total: number;
+        };
+      }
+    | {
+        status: 500;
+        data: ErrorResponse;
+      }
+  >(
+    `/p1/channels/${encodeURIComponent($type)}/topics${QS.query(
+      QS.explode({
+        limit,
+        offset,
+      }),
+    )}`,
+    {
+      ...opts,
+    },
+  );
 }
 /**
  * 获取频道日志
@@ -5837,15 +5876,13 @@ export function getTrendingSubjects(
   );
 }
 /**
- * 获取条目讨论
+ * 获取热门条目讨论
  */
 export function getTrendingSubjectTopics(
   {
-    $type,
     limit,
     offset,
   }: {
-    $type?: SubjectType;
     limit?: number;
     offset?: number;
   } = {},
@@ -5855,7 +5892,7 @@ export function getTrendingSubjectTopics(
     | {
         status: 200;
         data: {
-          data: ChannelSubjectTopic[];
+          data: SubjectTopic[];
           /** limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
           total: number;
         };
@@ -5867,7 +5904,6 @@ export function getTrendingSubjectTopics(
   >(
     `/p1/trending/subjects/topics${QS.query(
       QS.explode({
-        type: $type,
         limit,
         offset,
       }),

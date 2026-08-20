@@ -4017,6 +4017,32 @@
           }
         }
       },
+      "ChannelSubjectTopic": {
+        "type": "object",
+        "required": ["id", "title", "replyCount", "updatedAt", "subject"],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "replyCount": {
+            "type": "integer"
+          },
+          "updatedAt": {
+            "type": "integer",
+            "description": "最后回复时间，unix time stamp in seconds"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/SlimUser"
+          },
+          "subject": {
+            "$ref": "#/components/schemas/SlimSubject"
+          }
+        },
+        "title": "ChannelSubjectTopic"
+      },
       "FriendSubjectCollectionActivity": {
         "type": "object",
         "required": ["user", "subject", "collectionType", "updatedAt"],
@@ -4243,32 +4269,6 @@
             "type": "integer"
           }
         }
-      },
-      "ChannelSubjectTopic": {
-        "type": "object",
-        "required": ["id", "title", "replyCount", "updatedAt", "subject"],
-        "properties": {
-          "id": {
-            "type": "integer"
-          },
-          "title": {
-            "type": "string"
-          },
-          "replyCount": {
-            "type": "integer"
-          },
-          "updatedAt": {
-            "type": "integer",
-            "description": "最后回复时间，unix time stamp in seconds"
-          },
-          "creator": {
-            "$ref": "#/components/schemas/SlimUser"
-          },
-          "subject": {
-            "$ref": "#/components/schemas/SlimSubject"
-          }
-        },
-        "title": "ChannelSubjectTopic"
       },
       "SubjectEdit": {
         "type": "object",
@@ -5942,6 +5942,87 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Calendar"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "意料之外的服务器错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/p1/channels/{type}/topics": {
+      "get": {
+        "operationId": "getChannelSubjectTopics",
+        "summary": "获取频道条目讨论",
+        "tags": ["topic"],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            },
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "description": "max 100"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            },
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "description": "min 0"
+          },
+          {
+            "schema": {
+              "$ref": "#/components/schemas/SubjectType"
+            },
+            "in": "path",
+            "name": "type",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "CookiesSession": [],
+            "HTTPBearer": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "total"],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ChannelSubjectTopic"
+                      }
+                    },
+                    "total": {
+                      "type": "integer",
+                      "description": "limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数"
+                    }
+                  }
                 }
               }
             }
@@ -15405,17 +15486,9 @@
     "/p1/trending/subjects/topics": {
       "get": {
         "operationId": "getTrendingSubjectTopics",
-        "summary": "获取条目讨论",
+        "summary": "获取热门条目讨论",
         "tags": ["trending"],
         "parameters": [
-          {
-            "schema": {
-              "$ref": "#/components/schemas/SubjectType"
-            },
-            "in": "query",
-            "name": "type",
-            "required": false
-          },
           {
             "schema": {
               "type": "integer",
@@ -15458,7 +15531,7 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ChannelSubjectTopic"
+                        "$ref": "#/components/schemas/SubjectTopic"
                       }
                     },
                     "total": {
