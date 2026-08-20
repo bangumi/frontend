@@ -11,7 +11,7 @@ import type {
 import { CollectionType } from '@bangumi/client/client';
 import { renderPage } from '@bangumi/website/utils/test-utils';
 
-import topicsJson from '../../../mocks/fixtures/p1/trending/subjects/topics-GET.json';
+import topicsJson from '../../../mocks/fixtures/p1/channels/2/topics-GET.json';
 import subjectsJson from '../../../mocks/fixtures/p1/trending/subjects-GET.json';
 import { ChannelPageContent } from '.';
 import { CHANNEL_CONFIGS } from './config';

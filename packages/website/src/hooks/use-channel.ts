@@ -7,6 +7,7 @@ import type {
   FriendSubjectCollectionActivity,
   SlimBlogEntry,
   SubjectTag,
+  SubjectType,
   TrendingSubject,
 } from '@bangumi/client/client';
 import { useUser } from '@bangumi/website/hooks/use-user';
@@ -25,7 +26,7 @@ async function fetchList<T>(fetch: () => Promise<T[]>): Promise<T[]> {
   }
 }
 
-export function useTrendingSubjects(type: number): TrendingSubject[] {
+export function useTrendingSubjects(type: SubjectType): TrendingSubject[] {
   const { data } = useSWR(
     ['channel', type, 'trending-subjects'],
     async () =>
@@ -37,28 +38,20 @@ export function useTrendingSubjects(type: number): TrendingSubject[] {
   return data;
 }
 
-export function useTrendingSubjectTopics(type: number): ChannelSubjectTopic[] {
+export function useChannelSubjectTopics(type: SubjectType): ChannelSubjectTopic[] {
   const { data } = useSWR(
-    ['channel', type, 'trending-topics'],
+    ['channel', type, 'topics'],
     async () =>
       fetchList(
         async () =>
-          (
-            await ok(
-              ozaClient.getTrendingSubjectTopics({
-                $type: type,
-                limit: 20,
-                offset: 0,
-              }),
-            )
-          ).data,
+          (await ok(ozaClient.getChannelSubjectTopics(type, { limit: 20, offset: 0 }))).data,
       ),
     { suspense: true },
   );
   return data;
 }
 
-export function useChannelBlogs(type: number): SlimBlogEntry[] {
+export function useChannelBlogs(type: SubjectType): SlimBlogEntry[] {
   const { data } = useSWR(
     ['channel', type, 'blogs'],
     async () =>
@@ -70,7 +63,7 @@ export function useChannelBlogs(type: number): SlimBlogEntry[] {
   return data;
 }
 
-export function useChannelTags(type: number): SubjectTag[] {
+export function useChannelTags(type: SubjectType): SubjectTag[] {
   const { data } = useSWR(
     ['channel', type, 'tags'],
     async () =>
@@ -82,7 +75,7 @@ export function useChannelTags(type: number): SubjectTag[] {
   return data;
 }
 
-export function useFriendActivities(type: number): {
+export function useFriendActivities(type: SubjectType): {
   friendActivities: FriendSubjectCollectionActivity[];
   showFriendActivities: boolean;
 } {

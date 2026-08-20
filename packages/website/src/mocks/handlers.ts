@@ -10,7 +10,7 @@ export const handlers = [
   mockAPI('/p1/home', 'get'),
   mockAPI('/p1/calendar', 'get'),
   mockAPI('/p1/trending/subjects', 'get'),
-  mockAPI('/p1/trending/subjects/topics', 'get'),
+  mockAPI('/p1/channels/:type/topics', 'get'),
   mockAPI('/p1/channels/:type/blogs', 'get'),
   mockAPI('/p1/channels/:type/tags', 'get'),
   mockAPI('/p1/me/friends/subject-collections', 'get'),

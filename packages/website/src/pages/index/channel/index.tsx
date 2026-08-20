@@ -22,10 +22,10 @@ import Helmet from '@bangumi/website/components/Helmet';
 import PageContainer from '@bangumi/website/components/PageContainer';
 import {
   useChannelBlogs,
+  useChannelSubjectTopics,
   useChannelTags,
   useFriendActivities,
   useTrendingSubjects,
-  useTrendingSubjectTopics,
 } from '@bangumi/website/hooks/use-channel';
 
 import type { ChannelConfig, ChannelKey } from './config';
@@ -828,7 +828,7 @@ function TrendingSubjectsSection({ config }: { config: ChannelConfig }) {
 }
 
 function TopicListSection({ config }: { config: ChannelConfig }) {
-  const topics = useTrendingSubjectTopics(config.type);
+  const topics = useChannelSubjectTopics(config.type);
   return <TopicList topics={topics} config={config} />;
 }
 

@@ -226,6 +226,23 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/p1/channels/{type}/topics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** 获取频道条目讨论 */
+    get: operations['getChannelSubjectTopics'];
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/p1/channels/{type}/blogs': {
     parameters: {
       query?: never;
@@ -1964,7 +1981,7 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** 获取条目讨论 */
+    /** 获取热门条目讨论 */
     get: operations['getTrendingSubjectTopics'];
     put?: never;
     post?: never;
@@ -4536,6 +4553,16 @@ export interface components {
       subject: components['schemas']['SlimSubject'];
       watchers: number;
     };
+    /** ChannelSubjectTopic */
+    ChannelSubjectTopic: {
+      id: number;
+      title: string;
+      replyCount: number;
+      /** @description 最后回复时间，unix time stamp in seconds */
+      updatedAt: number;
+      creator?: components['schemas']['SlimUser'];
+      subject: components['schemas']['SlimSubject'];
+    };
     /** FriendSubjectCollectionActivity */
     FriendSubjectCollectionActivity: {
       user: components['schemas']['SlimUser'];
@@ -4587,16 +4614,6 @@ export interface components {
     TrendingSubject: {
       subject: components['schemas']['SlimSubject'];
       count: number;
-    };
-    /** ChannelSubjectTopic */
-    ChannelSubjectTopic: {
-      id: number;
-      title: string;
-      replyCount: number;
-      /** @description 最后回复时间，unix time stamp in seconds */
-      updatedAt: number;
-      creator?: components['schemas']['SlimUser'];
-      subject: components['schemas']['SlimSubject'];
     };
     /**
      * @example {
@@ -5476,6 +5493,46 @@ export interface operations {
         };
         content: {
           'application/json': components['schemas']['Calendar'];
+        };
+      };
+      /** @description 意料之外的服务器错误 */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['ErrorResponse'];
+        };
+      };
+    };
+  };
+  getChannelSubjectTopics: {
+    parameters: {
+      query?: {
+        /** @description max 100 */
+        limit?: number;
+        /** @description min 0 */
+        offset?: number;
+      };
+      header?: never;
+      path: {
+        type: components['schemas']['SubjectType'];
+      };
+      cookie?: never;
+    };
+    requestBody?: never;
+    responses: {
+      /** @description Default Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': {
+            data: components['schemas']['ChannelSubjectTopic'][];
+            /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
+            total: number;
+          };
         };
       };
       /** @description 意料之外的服务器错误 */
@@ -10995,7 +11052,6 @@ export interface operations {
   getTrendingSubjectTopics: {
     parameters: {
       query?: {
-        type?: components['schemas']['SubjectType'];
         /** @description max 100 */
         limit?: number;
         /** @description min 0 */
@@ -11014,7 +11070,7 @@ export interface operations {
         };
         content: {
           'application/json': {
-            data: components['schemas']['ChannelSubjectTopic'][];
+            data: components['schemas']['SubjectTopic'][];
             /** @description limit+offset 为参数的请求表示总条数，page 为参数的请求表示总页数 */
             total: number;
           };
