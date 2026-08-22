@@ -166,7 +166,7 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
             <div className='bgm-editor__preview-title'>预览</div>
             <div className='bgm-editor__preview-content'>
               {value.trim() ? (
-                <RichContent bbcode={value} />
+                <RichContent bbcode={value} preset='topic' />
               ) : (
                 <span className='bgm-editor__preview-empty'>输入内容后，这里会显示预览。</span>
               )}
