@@ -16,10 +16,15 @@ function renderEditorForm(element: React.ReactElement) {
 
 describe('<EditorForm />', () => {
   it('render correctly with props', () => {
-    const { asFragment } = renderEditorForm(
+    const { container, getByPlaceholderText, getByRole, getByText } = renderEditorForm(
       <TestEditorForm className='custom class' placeholder='placeholder' confirmText='Confirm' />,
     );
-    expect(asFragment()).toMatchSnapshot();
+
+    expect(container.querySelector('.bgm-editor__form.custom.class')).not.toBeNull();
+    expect(getByPlaceholderText('placeholder')).toBeTruthy();
+    expect(getByText('Confirm')).toBeTruthy();
+    expect(getByRole('button', { name: '预览' })).toBeTruthy();
+    expect(getByText('BBCode指南')).toBeTruthy();
   });
 
   it('onConfirm event', () => {
