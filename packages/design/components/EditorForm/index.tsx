@@ -41,39 +41,29 @@ const editorForm = css({
       borderTopLeftRadius: '0',
       borderTopRightRadius: '0',
     },
-    '& .bgm-editor__layout--preview': {
-      borderTop: 'none',
-      borderTopLeftRadius: '0',
-      borderTopRightRadius: '0',
-    },
   },
 });
 
-const editorLayout = css({
-  width: '100%',
-  minWidth: '0',
-});
-
-const editorPreviewLayout = css({
+const editorPreviewForm = css({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
-  border: '2px solid #e8e3e3',
-  borderRadius: '12px',
-  boxSizing: 'border-box',
-  '& .bgm-editor__container': {
-    border: 'none',
-    borderRadius: '0',
+  '& > .bgm-editor__container': {
+    alignSelf: 'stretch',
+    borderTopRightRadius: '0',
+    borderBottomRightRadius: '0',
   },
-  '& .bgm-editor__preview': {
+  '& > .bgm-editor__preview': {
+    alignSelf: 'stretch',
     minWidth: '0',
     minHeight: '162px',
     padding: '8px 6px 6px',
-    borderLeft: '2px solid #e8e3e3',
+    border: '2px solid #e8e3e3',
+    borderLeft: 'none',
+    borderRadius: '0 12px 12px 0',
     boxSizing: 'border-box',
-    '@media (max-width: 640px)': {
-      borderLeft: 'none',
-      borderTop: '2px solid #e8e3e3',
-    },
+  },
+  '& > .bgm-editor__submit': {
+    gridColumn: '1 / -1',
   },
   '& .bgm-editor__preview-title': {
     height: '26px',
@@ -93,6 +83,22 @@ const editorPreviewLayout = css({
   },
   '@media (max-width: 640px)': {
     gridTemplateColumns: 'minmax(0, 1fr)',
+    '& > .bgm-editor__container': {
+      borderTopRightRadius: '12px',
+      borderBottomLeftRadius: '0',
+      borderBottomRightRadius: '0',
+    },
+    '& > .bgm-editor__preview': {
+      borderLeft: '2px solid #e8e3e3',
+      borderTop: 'none',
+      borderRadius: '0 0 12px 12px',
+    },
+  },
+  '.bgm-form--compact > &': {
+    '& > .bgm-editor__preview': {
+      borderTop: 'none',
+      borderTopRightRadius: '0',
+    },
   },
 });
 
@@ -143,29 +149,29 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
     const value = props.value ?? '';
 
     return (
-      <div className={cx('bgm-editor__form', editorForm, className)} style={style}>
-        <div
-          className={cx(
-            'bgm-editor__layout',
-            editorLayout,
-            showPreview && 'bgm-editor__layout--preview',
-            showPreview && editorPreviewLayout,
-          )}
-        >
-          <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
-          {showPreview && (
-            <div className='bgm-editor__preview' aria-label='BBCode 预览'>
-              <div className='bgm-editor__preview-title'>预览</div>
-              <div className='bgm-editor__preview-content'>
-                {value.trim() ? (
-                  <RichContent bbcode={value} />
-                ) : (
-                  <span className='bgm-editor__preview-empty'>输入内容后，这里会显示预览。</span>
-                )}
-              </div>
+      <div
+        className={cx(
+          'bgm-editor__form',
+          editorForm,
+          showPreview && 'bgm-editor__form--preview',
+          showPreview && editorPreviewForm,
+          className,
+        )}
+        style={style}
+      >
+        <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
+        {showPreview && (
+          <div className='bgm-editor__preview' aria-label='BBCode 预览'>
+            <div className='bgm-editor__preview-title'>预览</div>
+            <div className='bgm-editor__preview-content'>
+              {value.trim() ? (
+                <RichContent bbcode={value} />
+              ) : (
+                <span className='bgm-editor__preview-empty'>输入内容后，这里会显示预览。</span>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
         <div className='bgm-editor__submit'>
           <Button
             color='blue'
