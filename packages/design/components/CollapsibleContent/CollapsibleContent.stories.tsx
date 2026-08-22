@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
 
-import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
-import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets.ts';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react.tsx';
 
-import type { CollapsibleContentProps } from '.';
-import CollapsibleContent from '.';
+import type { CollapsibleContentProps } from './index.tsx';
+import CollapsibleContent from './index.tsx';
 
 const storyMeta: Meta<typeof CollapsibleContent> = {
   title: 'modern/CollapsibleContent',

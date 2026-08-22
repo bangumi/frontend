@@ -1,4 +1,4 @@
-import { CharacterCastType, CollectionType } from '@bangumi/client/client';
+import { CharacterCastType, CollectionType } from '@bangumi/client/client.ts';
 
 export const COLLECT_DESC: Record<CollectionType, string> = {
   [CollectionType.Wish]: '想看',

@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import Button from '../../Button';
-import Popover from '..';
+import Button from '@bangumi/design/components/Button/index.tsx';
+import Popover from '@bangumi/design/components/Popover/index.tsx';
 
 const renderClick = () =>
   render(

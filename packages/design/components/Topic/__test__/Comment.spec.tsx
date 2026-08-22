@@ -4,10 +4,10 @@ import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import type { CommentProps } from '@bangumi/design/components/Topic/Comment.tsx';
+import Comment from '@bangumi/design/components/Topic/Comment.tsx';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import type { CommentProps } from '../Comment';
-import Comment from '../Comment';
 import repliesComment from './fixtures/repliesComment.json';
 import singleComment from './fixtures/singleComment.json';
 import specialComment from './fixtures/specialComment.json';

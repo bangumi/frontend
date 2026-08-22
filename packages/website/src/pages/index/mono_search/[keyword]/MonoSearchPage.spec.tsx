@@ -6,11 +6,11 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import {
   characterSearchFixture,
   personSearchFixture,
-} from '@bangumi/website/mocks/fixtures/p1/search';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+} from '@bangumi/website/mocks/fixtures/p1/search/index.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import MonoSearchPage from '.';
+import MonoSearchPage from './index.tsx';
 
 vi.mock('react-router-dom', async () => ({
   ...(await vi.importActual<typeof import('react-router-dom')>('react-router-dom')),

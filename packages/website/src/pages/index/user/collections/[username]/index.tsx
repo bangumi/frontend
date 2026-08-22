@@ -1,24 +1,24 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { CollectionType } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import { CollectionType } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { UnreadableCodeError } from '@bangumi/utils';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useUserHome } from '@bangumi/website/hooks/use-user-home';
-
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useUserHome } from '@bangumi/website/hooks/use-user-home.ts';
 import {
   COLLECTION_LABELS,
   COLLECTION_STATUS_ALIASES,
   COLLECTION_STATUS_PATHS,
   SUBJECT_BLOCK_LIST,
-} from '../../components/constants';
-import UserHeader from '../../components/UserHeader';
-import UserStatsBlock from '../../components/UserStatsBlock';
-import { CollectionGroup } from './components/CollectionGroup';
-import { CollectionList } from './components/CollectionList';
+} from '@bangumi/website/pages/index/user/components/constants.ts';
+import UserHeader from '@bangumi/website/pages/index/user/components/UserHeader.tsx';
+import UserStatsBlock from '@bangumi/website/pages/index/user/components/UserStatsBlock.tsx';
+
+import { CollectionGroup } from './components/CollectionGroup.tsx';
+import { CollectionList } from './components/CollectionList.tsx';
 
 const { Link } = Typography;
 

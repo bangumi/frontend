@@ -1,4 +1,4 @@
-import type { CharacterHomeResponse } from '@bangumi/website/hooks/use-character-home';
+import type { CharacterHomeResponse } from '@bangumi/website/hooks/use-character-home.ts';
 
 import data from './character-174916.json';
 

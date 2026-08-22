@@ -1,15 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Section } from '@bangumi/design';
+import { Section } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import useIndex from '@bangumi/website/hooks/use-index';
-
-import IndexSidebar from '../components/IndexSidebar';
-import RelatedManager from '../components/RelatedManager';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import useIndex from '@bangumi/website/hooks/use-index.ts';
+import IndexSidebar from '@bangumi/website/pages/index/indexes/components/IndexSidebar.tsx';
+import RelatedManager from '@bangumi/website/pages/index/indexes/components/RelatedManager.tsx';
 
 const columns = css({
   display: 'grid',

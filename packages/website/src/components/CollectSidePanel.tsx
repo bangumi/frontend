@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
-import type { SlimUser } from '@bangumi/client/client';
-import { Rate, Typography } from '@bangumi/design';
+import type { SlimUser } from '@bangumi/client/client.ts';
+import { Rate, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
 
 const { Link } = Typography;
 

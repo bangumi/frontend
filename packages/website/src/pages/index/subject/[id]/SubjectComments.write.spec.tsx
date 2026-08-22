@@ -6,15 +6,19 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import type { SlimUser, SubjectHomeResponse, SubjectInterestComment } from '@bangumi/client/client';
+import type {
+  SlimUser,
+  SubjectHomeResponse,
+  SubjectInterestComment,
+} from '@bangumi/client/client.ts';
 import homeFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import SubjectComments from './components/SubjectComments';
+import SubjectComments from './components/SubjectComments.tsx';
 
 // 登录用户 sai（id=1）
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({

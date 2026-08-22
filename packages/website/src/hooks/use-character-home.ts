@@ -1,7 +1,6 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
 import type {
   Character,
   CharacterRelation,
@@ -9,7 +8,8 @@ import type {
   MonoPhoto,
   PersonCollect,
   SlimIndex,
-} from '@bangumi/client/client';
+} from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 type SuccessData<T extends (...args: never[]) => unknown> =
   Extract<Awaited<ReturnType<T>>, { status: 200 }> extends { data: infer Data } ? Data : never;

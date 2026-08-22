@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
-import BlogForm from './components/BlogForm';
+import BlogForm from './components/BlogForm.tsx';
 
 const page = css({
   display: 'grid',

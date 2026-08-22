@@ -1,6 +1,6 @@
 import timezoneMock from 'timezone-mock';
 
-import { server } from '@bangumi/website/mocks/server';
+import { server } from '@bangumi/website/mocks/server.ts';
 
 beforeAll(() => {
   server.listen();

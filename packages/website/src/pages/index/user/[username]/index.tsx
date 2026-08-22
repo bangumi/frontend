@@ -2,17 +2,17 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import { css } from '@bangumi/styled-system/css';
-import { UnreadableCodeError } from '@bangumi/utils';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useUserHome } from '@bangumi/website/hooks/use-user-home';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useUserHome } from '@bangumi/website/hooks/use-user-home.ts';
+import UserHeader from '@bangumi/website/pages/index/user/components/UserHeader.tsx';
+import UserStatsBlock from '@bangumi/website/pages/index/user/components/UserStatsBlock.tsx';
 
-import UserHeader from '../components/UserHeader';
-import UserStatsBlock from '../components/UserStatsBlock';
-import { HomeLeftBlocks, HomeRightBlocks } from './components/HomeBlocks';
-import UserInfoCard from './components/UserInfoCard';
-import UserTimelineBlock from './components/UserTimelineBlock';
+import { HomeLeftBlocks, HomeRightBlocks } from './components/HomeBlocks.tsx';
+import UserInfoCard from './components/UserInfoCard.tsx';
+import UserTimelineBlock from './components/UserTimelineBlock.tsx';
 
 const columns = css({
   display: 'flex',

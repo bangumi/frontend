@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Rate from '..';
+import Rate from '@bangumi/design/components/Rate/index.tsx';
 
 it.each([
   [0.1, 0, 0, 5],

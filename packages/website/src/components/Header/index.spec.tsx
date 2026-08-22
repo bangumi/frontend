@@ -2,9 +2,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
 
-import Header from '.';
+import Header from './index.tsx';
 
 const renderHeader = () =>
   render(

@@ -3,15 +3,20 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { SlimCharacter, SlimPerson, SlimSubject, SubjectType } from '@bangumi/client/client';
-import { SubjectType as SubjectTypeEnum } from '@bangumi/client/client';
-import { Pagination } from '@bangumi/design';
-import { EmptyStar, FilledStar, GridView, ListView } from '@bangumi/icons';
+import type {
+  SlimCharacter,
+  SlimPerson,
+  SlimSubject,
+  SubjectType,
+} from '@bangumi/client/client.ts';
+import { SubjectType as SubjectTypeEnum } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Pagination } from '@bangumi/design/index.tsx';
+import { EmptyStar, FilledStar, GridView, ListView } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getCharacterLink, getPersonLink, getSubjectLink } from '@bangumi/utils/pages';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
+import { getCharacterLink, getPersonLink, getSubjectLink } from '@bangumi/utils/pages.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
 import {
   SearchCategoryNav,
   searchEmpty,
@@ -23,8 +28,8 @@ import {
   searchResults,
   searchResultsHeader,
   searchSidebar,
-} from '@bangumi/website/components/SearchPage';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+} from '@bangumi/website/components/SearchPage/index.tsx';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
 
 const viewSelector = css({
   display: 'inline-flex',

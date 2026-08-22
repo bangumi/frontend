@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import TopicPage from '@bangumi/website/components/TopicPage';
-import useSubjectTopic from '@bangumi/website/hooks/use-subject-topic';
+import TopicPage from '@bangumi/website/components/TopicPage.tsx';
+import useSubjectTopic from '@bangumi/website/hooks/use-subject-topic.ts';
+import SubjectSummaryCard from '@bangumi/website/pages/index/subject/[id]/components/SubjectSummaryCard.tsx';
+import { subjectTopicApi } from '@bangumi/website/pages/index/subject/topic/topic-api.ts';
 
-import SubjectSummaryCard from '../../[id]/components/SubjectSummaryCard';
-import { subjectTopicApi } from '../topic-api';
-import SubjectTopicHeader from './components/SubjectTopicHeader';
+import SubjectTopicHeader from './components/SubjectTopicHeader.tsx';
 
 const SubjectTopicPage: FC = () => {
   const { id } = useParams();

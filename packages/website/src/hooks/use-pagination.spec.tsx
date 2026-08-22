@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { usePaginationParams } from './use-pagination';
+import { usePaginationParams } from './use-pagination.ts';
 
 const wrapper =
   (entry: string) =>

@@ -2,10 +2,10 @@ import { render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { matchRoutes, MemoryRouter } from 'react-router-dom';
 
-import { redirectTo } from '@bangumi/website/utils/route';
+import { pageRoutes } from '@bangumi/website/routes.tsx';
+import { redirectTo } from '@bangumi/website/utils/route.ts';
 
-import { pageRoutes } from '../../routes';
-import LegacyRedirect from './LegacyRedirect';
+import LegacyRedirect from './LegacyRedirect.tsx';
 
 vi.mock('@bangumi/website/utils/route', () => ({
   redirectTo: vi.fn(),

@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 
-import Pagination from '..';
+import Pagination from '@bangumi/design/components/Pagination/index.tsx';
 
 it('should render correctly', () => {
   const { getByTestId } = render(<Pagination total={3939} />);

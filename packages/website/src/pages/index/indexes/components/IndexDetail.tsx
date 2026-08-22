@@ -1,14 +1,14 @@
 import React from 'react';
 
-import type { Index, IndexRelated } from '@bangumi/client/client';
-import { Section } from '@bangumi/design';
+import type { Index, IndexRelated } from '@bangumi/client/client.ts';
+import { Section } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
-import IndexInfoCard from './IndexInfoCard';
-import type { RelatedFilter } from './IndexRelatedList';
-import IndexRelatedList, { buildRelatedTabs } from './IndexRelatedList';
-import IndexSidebar from './IndexSidebar';
+import IndexInfoCard from './IndexInfoCard.tsx';
+import type { RelatedFilter } from './IndexRelatedList.tsx';
+import IndexRelatedList, { buildRelatedTabs } from './IndexRelatedList.tsx';
+import IndexSidebar from './IndexSidebar.tsx';
 
 const columns = css({
   display: 'grid',

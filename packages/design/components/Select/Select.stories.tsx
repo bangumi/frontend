@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Select from '.';
+import Select from './index.tsx';
 
 const componentMeta: Meta<typeof Select> = {
   title: 'Modern/Select',

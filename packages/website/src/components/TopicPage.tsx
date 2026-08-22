@@ -2,13 +2,13 @@ import type { ReactNode } from 'react';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { Reply } from '@bangumi/client/client';
-import { Avatar, Layout, Topic } from '@bangumi/design';
-import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
-import type { TopicApi } from '@bangumi/design/components/Topic/topic-api';
+import type { Reply } from '@bangumi/client/client.ts';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm.tsx';
+import type { TopicApi } from '@bangumi/design/components/Topic/topic-api.ts';
+import { Avatar, Layout, Topic } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const { Comment } = Topic;
 

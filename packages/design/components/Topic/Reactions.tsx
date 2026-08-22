@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import React, { useCallback, useState } from 'react';
 
-import type { Reaction, SlimUser } from '@bangumi/client/topic';
+import type { Reaction, SlimUser } from '@bangumi/client/topic.ts';
 import { css, cx } from '@bangumi/styled-system/css';
-import { ALLOWED_REACTIONS, getReactionEmojiUrl } from '@bangumi/utils';
+import { ALLOWED_REACTIONS, getReactionEmojiUrl } from '@bangumi/utils/index.ts';
 
-import type { TopicApi } from './topic-api';
-import { groupTopicApi } from './topic-api';
+import type { TopicApi } from './topic-api.ts';
+import { groupTopicApi } from './topic-api.ts';
 
 export interface ReactionsProps {
   reactions?: Reaction[];

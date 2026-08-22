@@ -5,12 +5,12 @@ import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import BlogForm from './components/BlogForm';
+import BlogForm from './components/BlogForm.tsx';
 
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({ user: { id: 1, username: 'sai', nickname: 'Sai' } }),

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Select from '..';
+import Select from '@bangumi/design/components/Select/index.tsx';
 
 describe('Select Component', () => {
   it('render properly', () => {

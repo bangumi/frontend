@@ -1,11 +1,11 @@
-import Link from './Link';
-import Text from './Text';
+import Link from './Link.tsx';
+import Text from './Text.tsx';
 
-export type { LinkProps } from './Link';
+export type { LinkProps } from './Link.tsx';
 
 export default {
   Text,
   Link,
 };
 
-export type { TextProps } from './Text';
+export type { TextProps } from './Text.tsx';

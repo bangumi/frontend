@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { isStickerCode } from '@bangumi/utils/stickers';
+import { isStickerCode } from '@bangumi/utils/stickers.ts';
 
 const RECENT_STICKERS_KEY = 'bangumi-recent-stickers';
 

@@ -1,5 +1,5 @@
-import type { ozaClient } from '@bangumi/client';
-import type { JsonFixture, SuccessfulData } from '@bangumi/website/mocks/utils';
+import type { ozaClient } from '@bangumi/client/index.ts';
+import type { JsonFixture, SuccessfulData } from '@bangumi/website/mocks/utils.ts';
 
 import characterSearchJson from './characters-POST.json';
 import personSearchJson from './persons-POST.json';

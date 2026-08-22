@@ -4,17 +4,17 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import { Button, Pagination, Tab, Typography } from '@bangumi/design';
-import { ArrowPath } from '@bangumi/icons';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Button, Pagination, Tab, Typography } from '@bangumi/design/index.tsx';
+import { ArrowPath } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { PageNeedLoginError } from '@bangumi/website/error';
-import { useUser } from '@bangumi/website/hooks/use-user';
-import { settings } from '@bangumi/website/shared/notifications';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { PageNeedLoginError } from '@bangumi/website/error.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
+import { settings } from '@bangumi/website/shared/notifications.ts';
 
 const pageTitle = css({
   fontWeight: '600',

@@ -1,17 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { GroupMemberRole } from '@bangumi/client/client';
-import { Pagination, Section } from '@bangumi/design';
+import { GroupMemberRole } from '@bangumi/client/client.ts';
+import { Pagination, Section } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { UnreadableCodeError } from '@bangumi/utils';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-
-import { UserCard } from '../../components/UserCard';
-import { useGroupContext } from '..';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useGroupMembers } from '@bangumi/website/hooks/use-group-members.ts';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { useGroupContext } from '@bangumi/website/pages/index/group/[name]/index.tsx';
+import { UserCard } from '@bangumi/website/pages/index/group/components/UserCard.tsx';
 
 const members = css({
   marginBottom: '20px',

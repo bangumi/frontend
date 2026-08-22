@@ -2,13 +2,13 @@ import { defer, uniqueId } from 'lodash-es';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
+import type { MessageType } from '@bangumi/design/components/Message/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
-import type { MessageType } from '../Message';
-import { ToastContainer } from './ToastContainer';
-import { insertToastEvent } from './utils/event-bus';
+import { ToastContainer } from './ToastContainer.tsx';
+import { insertToastEvent } from './utils/event-bus.ts';
 
-export { Toast } from './Toast';
+export { Toast } from './Toast.tsx';
 
 const toastContainer = css({
   position: 'fixed',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
-import GlobalLayout from '../components/GlobalLayout';
+import GlobalLayout from '@bangumi/website/components/GlobalLayout/index.tsx';
 
 // https://github.com/bangumi/frontend/discussions/126
 const RootIndex = () => {

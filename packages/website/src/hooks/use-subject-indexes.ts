@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { SlimIndex } from '@bangumi/client/client';
+import type { SlimIndex } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 获取推荐条目的目录（/subject/:id/index） */
 export function useSubjectIndexes(

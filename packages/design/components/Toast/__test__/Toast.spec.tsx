@@ -1,9 +1,9 @@
 import { act, render } from '@testing-library/react';
 import React from 'react';
 
-import { Toast } from '..';
-import type { Toast as TToast } from '../types';
-import { removeToastEvent } from '../utils/event-bus';
+import { Toast } from '@bangumi/design/components/Toast/index.tsx';
+import type { Toast as TToast } from '@bangumi/design/components/Toast/types.ts';
+import { removeToastEvent } from '@bangumi/design/components/Toast/utils/event-bus.ts';
 
 vi.mock('../utils/event-bus');
 

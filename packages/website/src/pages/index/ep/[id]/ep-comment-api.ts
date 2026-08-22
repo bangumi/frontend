@@ -1,6 +1,6 @@
-import { ozaClient } from '@bangumi/client';
-import type { ErrorResponse } from '@bangumi/client/client';
-import type { TopicApi } from '@bangumi/design/components/Topic/topic-api';
+import type { ErrorResponse } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import type { TopicApi } from '@bangumi/design/components/Topic/topic-api.ts';
 
 type TopicApiResult<T> =
   | {

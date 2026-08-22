@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
-import type { SlimCharacter, SlimPerson } from '@bangumi/client/client';
-import { Pagination } from '@bangumi/design';
+import type { SlimCharacter, SlimPerson } from '@bangumi/client/client.ts';
+import { Pagination } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getCharacterLink, getLegacyPageLink, getPersonLink } from '@bangumi/utils/pages';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
+import { getCharacterLink, getLegacyPageLink, getPersonLink } from '@bangumi/utils/pages.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
 import {
   SearchCategoryNav,
   searchEmpty,
@@ -15,9 +15,9 @@ import {
   searchPagination,
   searchResults,
   searchResultsHeader,
-} from '@bangumi/website/components/SearchPage';
-import { useCharacterSearch, usePersonSearch } from '@bangumi/website/hooks/use-mono-search';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+} from '@bangumi/website/components/SearchPage/index.tsx';
+import { useCharacterSearch, usePersonSearch } from '@bangumi/website/hooks/use-mono-search.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
 
 const PAGE_SIZE = 15;
 

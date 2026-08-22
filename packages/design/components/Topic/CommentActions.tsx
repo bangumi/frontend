@@ -1,14 +1,14 @@
 import React from 'react';
 
-import type { Reaction, SlimUser } from '@bangumi/client/topic';
-import { Comment as CommentIcon, More } from '@bangumi/icons';
+import type { Reaction, SlimUser } from '@bangumi/client/topic.ts';
+import Button from '@bangumi/design/components/Button/index.tsx';
+import Popover from '@bangumi/design/components/Popover/index.tsx';
+import { Comment as CommentIcon, More } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
-import Button from '../../components/Button';
-import Popover from '../Popover';
-import { ReactionMenu } from './Reactions';
-import type { TopicApi } from './topic-api';
-import { groupTopicApi } from './topic-api';
+import { ReactionMenu } from './Reactions.tsx';
+import type { TopicApi } from './topic-api.ts';
+import { groupTopicApi } from './topic-api.ts';
 
 const commentActions = css({
   display: 'flex',

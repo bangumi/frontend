@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { SubjectReview } from '@bangumi/client/client';
+import type { SubjectReview } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 获取条目的评论（/subject/:id/reviews） */
 export function useSubjectReviews(

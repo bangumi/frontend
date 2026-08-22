@@ -3,10 +3,10 @@ import type { FC } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { ArrowRightCircle } from '@bangumi/icons';
+import { ArrowRightCircle } from '@bangumi/icons/index.tsx';
 
-import type { ButtonLinkProps, ButtonProps } from '.';
-import Button from '.';
+import type { ButtonLinkProps, ButtonProps } from './index.tsx';
+import Button from './index.tsx';
 
 const storyMeta: Meta<typeof Button> = {
   title: 'modern/Button',

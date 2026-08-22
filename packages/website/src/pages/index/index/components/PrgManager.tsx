@@ -1,20 +1,20 @@
 import { ok } from '@oazapfts/runtime';
 import React, { useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
 import type {
   Episode,
   ProgressItem,
   UpdateEpisodeProgress,
   UpdateSubjectProgress,
-} from '@bangumi/client/client';
-import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client';
-import { toast, Typography } from '@bangumi/design';
-import { GridView, ListView } from '@bangumi/icons';
+} from '@bangumi/client/client.ts';
+import { EpisodeCollectionStatus, EpisodeType, SubjectType } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { toast, Typography } from '@bangumi/design/index.tsx';
+import { GridView, ListView } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getSubjectLink, getSubjectWikiEditLink } from '@bangumi/utils/pages';
-import EpisodeButton from '@bangumi/website/components/EpisodeButton';
-import { useHomePage } from '@bangumi/website/hooks/use-home-page';
+import { getSubjectLink, getSubjectWikiEditLink } from '@bangumi/utils/pages.ts';
+import EpisodeButton from '@bangumi/website/components/EpisodeButton/index.tsx';
+import { useHomePage } from '@bangumi/website/hooks/use-home-page.ts';
 
 const block = css({
   background: '#fff',

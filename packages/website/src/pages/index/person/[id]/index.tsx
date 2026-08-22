@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { usePersonHome } from '@bangumi/website/hooks/use-person-home';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import { usePersonHome } from '@bangumi/website/hooks/use-person-home.ts';
 
-import PersonDetail from './PersonDetail';
+import PersonDetail from './PersonDetail.tsx';
 
 function PersonPage() {
   const { id } = useParams();

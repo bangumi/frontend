@@ -1,10 +1,10 @@
 import React from 'react';
 
-import type { User } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import type { User } from '@bangumi/client/client.ts';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserFriendsPageLink, getUserProfileLink } from '@bangumi/utils/pages';
-import { useUserFriends } from '@bangumi/website/hooks/use-user-friends';
+import { getUserFriendsPageLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { useUserFriends } from '@bangumi/website/hooks/use-user-friends.ts';
 
 const { Link } = Typography;
 

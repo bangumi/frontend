@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { SubjectStaff } from '@bangumi/client/client';
+import type { SubjectStaff } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 const PAGE_SIZE = 100;
 

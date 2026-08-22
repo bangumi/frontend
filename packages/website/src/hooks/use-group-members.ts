@@ -1,10 +1,10 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { GroupMember } from '@bangumi/client/client';
-import { GroupMemberRole } from '@bangumi/client/client';
-import type { PaginationQuery } from '@bangumi/client/common';
+import type { GroupMember } from '@bangumi/client/client.ts';
+import { GroupMemberRole } from '@bangumi/client/client.ts';
+import type { PaginationQuery } from '@bangumi/client/common.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 interface UseGroupMembersRet {
   data: GroupMember[] | undefined;

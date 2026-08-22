@@ -2,10 +2,10 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import Button from '../../Button';
-import EditorForm from '../../EditorForm';
-import Input from '../../Input';
-import Form from '..';
+import Button from '@bangumi/design/components/Button/index.tsx';
+import EditorForm from '@bangumi/design/components/EditorForm/index.tsx';
+import Form from '@bangumi/design/components/Form/index.tsx';
+import Input from '@bangumi/design/components/Input/index.tsx';
 
 describe('Form Components', () => {
   it('should submit when submit button clicked', async () => {

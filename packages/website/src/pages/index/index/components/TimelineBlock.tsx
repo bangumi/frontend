@@ -2,10 +2,10 @@ import { ok } from '@oazapfts/runtime';
 import { DateTime } from 'luxon';
 import React, { useEffect, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { CommentBase, SlimSubject, Timeline } from '@bangumi/client/client';
-import { SubjectType, TimelineCat } from '@bangumi/client/client';
-import { Avatar, toast, Typography } from '@bangumi/design';
+import type { CommentBase, SlimSubject, Timeline } from '@bangumi/client/client.ts';
+import { SubjectType, TimelineCat } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Avatar, toast, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
   getBlogLink,
@@ -13,10 +13,10 @@ import {
   getIndexLink,
   getSubjectLink,
   getUserProfileLink,
-} from '@bangumi/utils/pages';
-import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
-import { useHomePage } from '@bangumi/website/hooks/use-home-page';
-import { useUser } from '@bangumi/website/hooks/use-user';
+} from '@bangumi/utils/pages.ts';
+import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha.tsx';
+import { useHomePage } from '@bangumi/website/hooks/use-home-page.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const block = css({
   background: '#fff',

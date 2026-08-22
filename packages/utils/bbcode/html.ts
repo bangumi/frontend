@@ -1,7 +1,8 @@
-import { UnreadableCodeError } from '../index';
-import { convert } from './convert';
-import { Parser } from './parser';
-import type { BBCodeRenderOptions, CodeNodeTypes, NodeTypes, VNode } from './types';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+
+import { convert } from './convert.ts';
+import { Parser } from './parser.ts';
+import type { BBCodeRenderOptions, CodeNodeTypes, NodeTypes, VNode } from './types.ts';
 
 const escapeHTML = (str: string): string =>
   str

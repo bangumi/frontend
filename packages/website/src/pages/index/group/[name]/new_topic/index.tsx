@@ -1,14 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useGroup } from '@bangumi/website/hooks/use-group';
-
-import TopicForm from '../../components/TopicForm';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useGroup } from '@bangumi/website/hooks/use-group.ts';
+import TopicForm from '@bangumi/website/pages/index/group/components/TopicForm.tsx';
 
 const grid = css({
   display: 'grid',

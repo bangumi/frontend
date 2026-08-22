@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home.ts';
 
-import SubjectDetail from './components/SubjectDetail';
+import SubjectDetail from './components/SubjectDetail.tsx';
 
 function SubjectPage() {
   const { id } = useParams();

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import CommentInfo from '../CommentInfo';
+import CommentInfo from '@bangumi/design/components/Topic/CommentInfo.tsx';
 
 it('special comment should not render floor', () => {
   const createdAt = Math.trunc(new Date('2022-09-22T06:03:21Z').getTime() / 1000);

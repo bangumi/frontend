@@ -6,14 +6,14 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, useParams } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import type { CommentBase, SlimUser } from '@bangumi/client/client';
+import type { CommentBase, SlimUser } from '@bangumi/client/client.ts';
 import {
   episodeFixture,
   subjectEpisodesFixture,
-} from '@bangumi/website/mocks/fixtures/p1/episodes/1704816';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+} from '@bangumi/website/mocks/fixtures/p1/episodes/1704816/index.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import EpisodePage from '.';
+import EpisodePage from './index.tsx';
 
 vi.mock('react-router-dom', async () => {
   return {
@@ -25,7 +25,7 @@ vi.mock('react-router-dom', async () => {
 
 // 登录用户 sai（id=1），ownComment 的 creatorID 与之匹配
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({

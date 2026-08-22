@@ -2,13 +2,21 @@ import { ok } from '@oazapfts/runtime';
 import React, { useState } from 'react';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import { Button, Divider, Image, Layout, Message, toast, Typography } from '@bangumi/design';
+import { ozaClient } from '@bangumi/client/index.ts';
+import {
+  Button,
+  Divider,
+  Image,
+  Layout,
+  Message,
+  toast,
+  Typography,
+} from '@bangumi/design/index.tsx';
 import { cx } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import { useWikiContext } from '@bangumi/website/pages/index/subject/[id]/wiki.tsx';
 
-import { useWikiContext } from '../wiki';
 import {
   divider,
   title,
@@ -20,7 +28,7 @@ import {
   uploadImgCoverItemImg,
   uploadImgCoverItemInfo,
   uploadImgDivider,
-} from './common';
+} from './common.ts';
 
 const uploadImgCoverDivider = cx(divider, uploadImgDivider);
 

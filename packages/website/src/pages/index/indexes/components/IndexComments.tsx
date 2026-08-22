@@ -1,17 +1,24 @@
 import dayjs from 'dayjs';
 import React, { useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { CommentBase } from '@bangumi/client/client';
-import { State } from '@bangumi/client/topic';
-import { Avatar, Button, EditorForm, RichContent, toast, Typography } from '@bangumi/design';
-import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
+import type { CommentBase } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { State } from '@bangumi/client/topic.ts';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm.tsx';
+import {
+  Avatar,
+  Button,
+  EditorForm,
+  RichContent,
+  toast,
+  Typography,
+} from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
-import type { IndexComment } from '@bangumi/website/hooks/use-index-comments';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import type { IndexComment } from '@bangumi/website/hooks/use-index-comments.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { indexCommentApi } from './index-comment-api';
+import { indexCommentApi } from './index-comment-api.ts';
 
 const { Link } = Typography;
 

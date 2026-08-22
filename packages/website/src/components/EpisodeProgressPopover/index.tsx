@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { Episode, UpdateEpisodeProgress } from '@bangumi/client/client';
-import { EpisodeCollectionStatus, EpisodeType } from '@bangumi/client/client';
-import { Popover, Typography } from '@bangumi/design';
+import type { Episode, UpdateEpisodeProgress } from '@bangumi/client/client.ts';
+import { EpisodeCollectionStatus, EpisodeType } from '@bangumi/client/client.ts';
+import { Popover, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getEpisodeLink } from '@bangumi/utils/pages';
+import { getEpisodeLink } from '@bangumi/utils/pages.ts';
 
 const { Link } = Typography;
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getGroupTopicLink } from '@bangumi/utils/pages';
+import { getGroupTopicLink } from '@bangumi/utils/pages.ts';
 
-import HomeSidePanel from './HomeSidePanel';
+import HomeSidePanel from './HomeSidePanel.tsx';
 
 const { Link } = Typography;
 

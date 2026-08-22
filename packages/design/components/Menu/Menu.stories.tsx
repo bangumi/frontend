@@ -1,8 +1,8 @@
 import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
-import type { MenuItemType, MenuProps } from '.';
-import Menu from '.';
+import type { MenuItemType, MenuProps } from './index.tsx';
+import Menu from './index.tsx';
 
 const items: MenuItemType[] = [
   {

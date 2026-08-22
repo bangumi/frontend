@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { GroupSort } from '@bangumi/client/client';
-import { Button, Layout, Section } from '@bangumi/design';
-import { ArrowRightCircle } from '@bangumi/icons';
+import { GroupSort } from '@bangumi/client/client.ts';
+import { Button, Layout, Section } from '@bangumi/design/index.tsx';
+import { ArrowRightCircle } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useGroups } from '@bangumi/website/hooks/use-groups';
-import { useRecentGroupTopics } from '@bangumi/website/hooks/use-recent-group-topics';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useGroups } from '@bangumi/website/hooks/use-groups.ts';
+import { useRecentGroupTopics } from '@bangumi/website/hooks/use-recent-group-topics.ts';
 
-import GroupChannelSidebar from './components/GroupChannelSidebar';
-import GroupList from './components/GroupList';
-import GroupTopicTable from './components/GroupTopicTable';
+import GroupChannelSidebar from './components/GroupChannelSidebar.tsx';
+import GroupList from './components/GroupList.tsx';
+import GroupTopicTable from './components/GroupTopicTable.tsx';
 
 const pageContainer = css({
   '& > *': {

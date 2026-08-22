@@ -1,4 +1,4 @@
-import type { HomeResponse } from '@bangumi/client/client';
+import type { HomeResponse } from '@bangumi/client/client.ts';
 
 import data from './home-GET.json';
 

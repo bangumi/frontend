@@ -1,7 +1,7 @@
 import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Section from '.';
+import Section from './index.tsx';
 
 export default {
   title: 'modern/Section',

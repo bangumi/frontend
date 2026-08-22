@@ -1,15 +1,15 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 
-import type { Episode, Subject } from '@bangumi/client/client';
-import { EpisodeType, SubjectType } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { Episode, Subject } from '@bangumi/client/client.ts';
+import { EpisodeType, SubjectType } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getEpisodeLink } from '@bangumi/utils/pages';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import { getEpisodeLink } from '@bangumi/utils/pages.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
-import { SubjectHeader } from './SubjectDetail';
-import SubjectSummaryCard from './SubjectSummaryCard';
+import { SubjectHeader } from './SubjectDetail.tsx';
+import SubjectSummaryCard from './SubjectSummaryCard.tsx';
 
 const { Link } = Typography;
 

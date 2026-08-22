@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { Index, IndexStats } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import type { Index, IndexStats } from '@bangumi/client/client.ts';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages';
+import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
 import subjectTypeSprite from '@bangumi/website/assets/subject-type-sprite.png';
 
 const { Link } = Typography;

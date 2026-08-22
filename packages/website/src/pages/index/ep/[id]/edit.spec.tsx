@@ -3,10 +3,10 @@ import { http, HttpResponse } from 'msw';
 import React, { Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import EpisodeEditPage from './edit';
+import EpisodeEditPage from './edit.tsx';
 
 vi.mock('react-router-dom', async () => {
   return {

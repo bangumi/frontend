@@ -7,7 +7,8 @@ import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import { server as mockServer } from '../mocks/server';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+
 import {
   CaptureError,
   LoginErrorCode,
@@ -15,7 +16,7 @@ import {
   UnknownError,
   UserProvider,
   useUser,
-} from './use-user';
+} from './use-user.tsx';
 
 vi.mock('@simplewebauthn/browser', () => ({
   startAuthentication: vi.fn(),

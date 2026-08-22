@@ -1,4 +1,4 @@
-import { SubjectType } from '@bangumi/client/client';
+import { SubjectType } from '@bangumi/client/client.ts';
 
 export type ChannelKey = 'anime' | 'book' | 'music' | 'game' | 'real';
 

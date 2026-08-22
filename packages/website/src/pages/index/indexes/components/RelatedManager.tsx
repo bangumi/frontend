@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { IndexRelated } from '@bangumi/client/client';
-import { IndexRelatedCategory } from '@bangumi/client/client';
-import { Button, Input, Radio, toast } from '@bangumi/design';
+import type { IndexRelated } from '@bangumi/client/client.ts';
+import { IndexRelatedCategory } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Button, Input, Radio, toast } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { useIndexRelated } from '@bangumi/website/hooks/use-index-related';
+import { useIndexRelated } from '@bangumi/website/hooks/use-index-related.ts';
 
 const form = css({
   display: 'flex',

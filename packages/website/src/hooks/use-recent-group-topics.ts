@@ -1,9 +1,9 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { GroupTopic } from '@bangumi/client/client';
-import { GroupTopicFilterMode } from '@bangumi/client/client';
+import type { GroupTopic } from '@bangumi/client/client.ts';
+import { GroupTopicFilterMode } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /**
  * 获取小组话题流。

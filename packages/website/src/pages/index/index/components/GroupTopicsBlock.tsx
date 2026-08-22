@@ -1,12 +1,12 @@
 import React from 'react';
 
-import type { GroupTopic, SlimGroup } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import type { GroupTopic, SlimGroup } from '@bangumi/client/client.ts';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getGroupLink, getGroupListLink, getGroupTopicLink } from '@bangumi/utils/pages';
+import { getGroupLink, getGroupListLink, getGroupTopicLink } from '@bangumi/utils/pages.ts';
 
-import HomeSidePanel from './HomeSidePanel';
-import SideTopicList from './SideTopicList';
+import HomeSidePanel from './HomeSidePanel.tsx';
+import SideTopicList from './SideTopicList.tsx';
 
 const { Link } = Typography;
 

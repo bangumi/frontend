@@ -2,8 +2,8 @@ import { fireEvent, render } from '@testing-library/react';
 import React, { useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import type { EditorFormProps } from '..';
-import EditorForm from '..';
+import type { EditorFormProps } from '@bangumi/design/components/EditorForm/index.tsx';
+import EditorForm from '@bangumi/design/components/EditorForm/index.tsx';
 
 const TestEditorForm = (props: EditorFormProps) => {
   const [value, setValue] = useState('');

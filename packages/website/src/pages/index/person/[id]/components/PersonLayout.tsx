@@ -1,11 +1,16 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home';
-
-import { columnMain, columns, page, PersonHeader, PersonInfobox } from '../PersonDetail';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home.ts';
+import {
+  columnMain,
+  columns,
+  page,
+  PersonHeader,
+  PersonInfobox,
+} from '@bangumi/website/pages/index/person/[id]/PersonDetail.tsx';
 
 /** 人物页面共享布局：Header + 左栏 Infobox + 主栏内容，各 tab 复用 */
 const PersonLayout: React.FC<{

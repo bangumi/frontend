@@ -5,7 +5,7 @@ import {
   MAX_KAOMOJI_LENGTH,
   STICKER_DOMAIN_URL,
   STICKER_SETS,
-} from './stickers';
+} from './stickers.ts';
 
 const allCodes = STICKER_SETS.flatMap((set) => set.codes);
 

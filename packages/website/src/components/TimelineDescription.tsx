@@ -1,16 +1,16 @@
 import { DateTime } from 'luxon';
 import React from 'react';
 
-import type { SlimSubject, Timeline } from '@bangumi/client/client';
-import { TimelineCat } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { SlimSubject, Timeline } from '@bangumi/client/client.ts';
+import { TimelineCat } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 import {
   getBlogLink,
   getIndexLink,
   getSubjectLink,
   getUserProfileLink,
-} from '@bangumi/utils/pages';
+} from '@bangumi/utils/pages.ts';
 
 const { Link } = Typography;
 

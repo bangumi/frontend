@@ -2,9 +2,9 @@ import type { Meta, StoryFn } from '@storybook/react';
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import EditorForm from '.';
-import Editor from './Editor';
-import Toolbox from './Toolbox';
+import Editor from './Editor.tsx';
+import EditorForm from './index.tsx';
+import Toolbox from './Toolbox.tsx';
 
 const componentMeta: Meta<typeof EditorForm> = {
   title: 'Modern/EditorForm',

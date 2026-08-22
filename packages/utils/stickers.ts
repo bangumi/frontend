@@ -7,8 +7,12 @@
  * 集合划分、分类名称与编号范围均取自旧站编辑器 bundle（`emoji_editor_sections`）。
  */
 
-import type { CharacterStickerGroup } from './sticker-names';
-import { BLAKE_ONLY_IDS, CHARACTER_STICKER_GROUPS, CHARACTER_STICKER_NAMES } from './sticker-names';
+import type { CharacterStickerGroup } from './sticker-names.ts';
+import {
+  BLAKE_ONLY_IDS,
+  CHARACTER_STICKER_GROUPS,
+  CHARACTER_STICKER_NAMES,
+} from './sticker-names.ts';
 
 export const STICKER_DOMAIN_URL = 'https://lain.bgm.tv';
 

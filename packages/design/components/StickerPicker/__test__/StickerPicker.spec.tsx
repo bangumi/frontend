@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
 import React from 'react';
 
-import StickerPicker from '..';
+import StickerPicker from '@bangumi/design/components/StickerPicker/index.tsx';
 
 it('支持完整目录、混合尺寸、选择与导航', () => {
   window.localStorage.setItem(

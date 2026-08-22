@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Error } from '@bangumi/icons';
+import { Error } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const message = css({ display: 'flex' });

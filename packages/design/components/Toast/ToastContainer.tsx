@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Toast } from './Toast';
-import type { Toast as TToast } from './types';
-import { insertToastEvent, removeToastEvent } from './utils/event-bus';
+import { Toast } from './Toast.tsx';
+import type { Toast as TToast } from './types.ts';
+import { insertToastEvent, removeToastEvent } from './utils/event-bus.ts';
 
 interface ToastContainerProps {
   onEmpty?: () => void;

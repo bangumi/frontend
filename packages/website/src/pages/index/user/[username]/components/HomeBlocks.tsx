@@ -1,13 +1,13 @@
 import type { JSX } from 'react';
 import React from 'react';
 
-import type { User } from '@bangumi/client/client';
+import type { User } from '@bangumi/client/client.ts';
 
-import BlogBlock from './BlogBlock';
-import FriendBlock from './FriendBlock';
-import GroupBlock from './GroupBlock';
-import IndexBlock from './IndexBlock';
-import SubjectCollectBlock from './SubjectCollectBlock';
+import BlogBlock from './BlogBlock.tsx';
+import FriendBlock from './FriendBlock.tsx';
+import GroupBlock from './GroupBlock.tsx';
+import IndexBlock from './IndexBlock.tsx';
+import SubjectCollectBlock from './SubjectCollectBlock.tsx';
 
 const SUBJECT_COLLECT_BLOCKS = ['anime', 'game', 'book', 'music', 'real'];
 

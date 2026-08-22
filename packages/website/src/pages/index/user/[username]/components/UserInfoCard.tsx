@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { User } from '@bangumi/client/client';
-import { OpenQuote } from '@bangumi/icons';
+import type { User } from '@bangumi/client/client.ts';
+import { OpenQuote } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
-import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets.ts';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react.tsx';
 
 const card = css({
   marginBottom: '38px',

@@ -1,6 +1,6 @@
-import type { components } from './types';
+import type { components } from './types/index.ts';
 
-export type { SlimUser, Profile } from './client';
+export type { SlimUser, Profile } from './client.ts';
 export type Avatar = components['schemas']['Avatar'];
 
 export interface PaginationQuery {

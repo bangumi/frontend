@@ -1,8 +1,8 @@
 import React from 'react';
 
-import type { IndexRelated, IndexStats } from '@bangumi/client/client';
-import { IndexRelatedCategory, SubjectType } from '@bangumi/client/client';
-import { Image, Pagination, Tab, Typography } from '@bangumi/design';
+import type { IndexRelated, IndexStats } from '@bangumi/client/client.ts';
+import { IndexRelatedCategory, SubjectType } from '@bangumi/client/client.ts';
+import { Image, Pagination, Tab, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 import {
   getBlogLink,
@@ -12,7 +12,7 @@ import {
   getPersonLink,
   getSubjectLink,
   getSubjectTopicLink,
-} from '@bangumi/utils/pages';
+} from '@bangumi/utils/pages.ts';
 
 const { Link: TextLink } = Typography;
 

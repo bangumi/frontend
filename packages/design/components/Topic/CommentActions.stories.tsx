@@ -2,8 +2,8 @@ import type { StoryFn } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import type { CommentActionsProps } from './CommentActions';
-import CommentActions from './CommentActions';
+import type { CommentActionsProps } from './CommentActions.tsx';
+import CommentActions from './CommentActions.tsx';
 
 export default {
   title: 'Topic/CommentActions',

@@ -1,7 +1,7 @@
 import type { Meta } from '@storybook/react';
 import React from 'react';
 
-import { Toast, toast } from '.';
+import { Toast, toast } from './index.tsx';
 
 const componentMeta: Meta<typeof Toast> = {
   title: 'modern/Toast',

@@ -1,6 +1,6 @@
 import EventEmitter from 'eventemitter3';
 
-import type { Toast } from '../types';
+import type { Toast } from '@bangumi/design/components/Toast/types.ts';
 
 enum ToastEvent {
   InsertToast = 'INSERT_TOAST',

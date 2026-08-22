@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import { toast } from '@bangumi/design';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { toast } from '@bangumi/design/index.tsx';
 
 /**
  * 目录收藏操作。

@@ -4,6 +4,8 @@ import * as url from 'node:url';
 import { defineConfig } from 'vitest/config';
 import GithubActionsReporter from 'vitest-github-actions-reporter';
 
+import { workspaceAliases } from './workspace-aliases.ts';
+
 const dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
@@ -11,7 +13,7 @@ export default defineConfig({
     alias: [
       // mock *.svg and *.svg?react file
       { find: /.*\.svg(\?react)?$/, replacement: path.resolve(dirname, 'tests/__mocks__/svg.js') },
-      { find: '@bangumi/website', replacement: path.resolve(dirname, './packages/website/src') },
+      ...Object.entries(workspaceAliases).map(([find, replacement]) => ({ find, replacement })),
     ],
   },
   test: {

@@ -1,1 +1,1 @@
-export * from './wiki';
+export * from './wiki.ts';

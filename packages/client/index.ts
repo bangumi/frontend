@@ -1,1 +1,1 @@
-export * as ozaClient from './client';
+export * as ozaClient from './client.ts';

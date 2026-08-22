@@ -1,11 +1,11 @@
 import React from 'react';
 
-import type { SubjectTopic } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
-import { getSubjectLink, getSubjectTopicLink } from '@bangumi/utils/pages';
+import type { SubjectTopic } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
+import { getSubjectLink, getSubjectTopicLink } from '@bangumi/utils/pages.ts';
 
-import HomeSidePanel from './HomeSidePanel';
-import SideTopicList from './SideTopicList';
+import HomeSidePanel from './HomeSidePanel.tsx';
+import SideTopicList from './SideTopicList.tsx';
 
 const { Link } = Typography;
 

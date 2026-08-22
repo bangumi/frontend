@@ -1,10 +1,10 @@
 import React from 'react';
 
-import type { Group } from '@bangumi/client/client';
-import { Section, Typography } from '@bangumi/design';
+import type { Group } from '@bangumi/client/client.ts';
+import { Section, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
-import GroupActions from './GroupActions';
+import GroupActions from './GroupActions.tsx';
 
 const Link = Typography.Link;
 

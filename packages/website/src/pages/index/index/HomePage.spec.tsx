@@ -3,12 +3,12 @@ import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { SWRConfig } from 'swr';
 
-import { SubjectType } from '@bangumi/client/client';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { SubjectType } from '@bangumi/client/client.ts';
+import { homeResponseFixture as homeFixture } from '@bangumi/website/mocks/fixtures/p1/home-GET.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import { homeResponseFixture as homeFixture } from '../../../mocks/fixtures/p1/home-GET';
-import HomePage from './components/HomePage';
+import HomePage from './components/HomePage.tsx';
 
 describe('HomePage', () => {
   const setupHome = () => {

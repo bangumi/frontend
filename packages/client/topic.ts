@@ -1,6 +1,6 @@
-export * from './common';
+export * from './common.ts';
 
-export type { Topic, Reply, ReplyBase, GroupTopic, Reaction } from './client';
+export type { Topic, Reply, ReplyBase, GroupTopic, Reaction } from './client.ts';
 
 // https://github.com/drwpow/openapi-typescript/issues/941
 // https://github.com/oazapfts/oazapfts/pull/349

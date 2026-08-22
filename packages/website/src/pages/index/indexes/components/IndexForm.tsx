@@ -3,9 +3,9 @@ import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import { ozaClient } from '@bangumi/client';
-import type { Index } from '@bangumi/client/client';
-import { Button, EditorForm, Form, Input, Radio, toast } from '@bangumi/design';
+import type { Index } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Button, EditorForm, Form, Input, Radio, toast } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
 interface FormData {

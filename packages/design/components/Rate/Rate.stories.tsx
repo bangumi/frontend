@@ -1,7 +1,7 @@
 import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Rate from '.';
+import Rate from './index.tsx';
 
 export default {
   title: 'modern/Rate',

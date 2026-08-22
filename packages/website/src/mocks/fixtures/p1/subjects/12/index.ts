@@ -1,4 +1,4 @@
-import type { SubjectCollect } from '@bangumi/client/client';
+import type { SubjectCollect } from '@bangumi/client/client.ts';
 
 import data from './collects-GET.json';
 

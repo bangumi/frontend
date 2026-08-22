@@ -9,8 +9,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { Profile } from '@bangumi/client/user';
+import { ozaClient } from '@bangumi/client/index.ts';
+import type { Profile } from '@bangumi/client/user.ts';
 
 interface UserContextType {
   user?: Profile;

@@ -26,9 +26,10 @@
       "vitest/globals"
     ],
     "paths": {
-      // 顺序不能打乱，保证 website 复写 *
-      "@bangumi/*": ["./packages/*/index.tsx", "./packages/*/index.ts"],
-      "@bangumi/website/*": ["./packages/website/src/*"]
+      // 顺序不能打乱：TS 只取第一个匹配的 key，精确前缀（e2e、website/src）放在通配之前
+      "@bangumi/website/e2e/*": ["./packages/website/e2e/*"],
+      "@bangumi/website/*": ["./packages/website/src/*"],
+      "@bangumi/*": ["./packages/*"]
     }
   },
   "include": [

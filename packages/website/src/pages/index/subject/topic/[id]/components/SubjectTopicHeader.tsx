@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import React, { memo } from 'react';
 
-import type { SlimSubject } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import type { SlimSubject } from '@bangumi/client/client.ts';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getSubjectBoardLink, getSubjectLink } from '@bangumi/utils/pages';
+import { getSubjectBoardLink, getSubjectLink } from '@bangumi/utils/pages.ts';
 
 interface Header {
   title: string;

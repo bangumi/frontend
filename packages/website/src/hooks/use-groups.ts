@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { GroupFilterMode, GroupSort, SlimGroup } from '@bangumi/client/client';
+import type { GroupFilterMode, GroupSort, SlimGroup } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 获取小组列表（/group/all 等） */
 export function useGroups(

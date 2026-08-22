@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { PersonCharacter } from '@bangumi/client/client';
+import type { PersonCharacter } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 获取人物的演出角色列表（/person/:id/works/voice） */
 export function usePersonCasts(

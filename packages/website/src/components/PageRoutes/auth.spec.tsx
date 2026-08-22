@@ -3,10 +3,10 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { UserGroup } from '@bangumi/client/user';
+import { UserGroup } from '@bangumi/client/user.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { useUser } from '../../hooks/use-user';
-import { RequireAuth } from './auth';
+import { RequireAuth } from './auth.tsx';
 
 vi.mock('../../hooks/use-user');
 const mockedUseUser = vi.mocked(useUser);

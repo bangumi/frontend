@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Message from '.';
+import Message from './index.tsx';
 
 const componentMeta: Meta<typeof Message> = {
   title: 'modern/Message',

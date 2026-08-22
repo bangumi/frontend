@@ -2,12 +2,12 @@ import type { FC } from 'react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { groupTopicApi } from '@bangumi/design/components/Topic/topic-api';
-import TopicPage from '@bangumi/website/components/TopicPage';
-import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
+import { groupTopicApi } from '@bangumi/design/components/Topic/topic-api.ts';
+import TopicPage from '@bangumi/website/components/TopicPage.tsx';
+import useGroupTopic from '@bangumi/website/hooks/use-group-topic.ts';
+import GroupInfo from '@bangumi/website/pages/index/group/components/GroupInfo.tsx';
 
-import GroupInfo from '../../components/GroupInfo';
-import GroupTopicHeader from './components/GroupTopicHeader';
+import GroupTopicHeader from './components/GroupTopicHeader.tsx';
 
 const GroupTopicPage: FC = () => {
   const { id } = useParams();

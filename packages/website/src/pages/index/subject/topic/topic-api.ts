@@ -1,5 +1,5 @@
-import { ozaClient } from '@bangumi/client';
-import type { TopicApi } from '@bangumi/design/components/Topic/topic-api';
+import { ozaClient } from '@bangumi/client/index.ts';
+import type { TopicApi } from '@bangumi/design/components/Topic/topic-api.ts';
 
 /** 条目讨论话题操作实现 */
 export const subjectTopicApi: TopicApi = {

@@ -4,11 +4,11 @@ import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
-import WikiLayout from './components/WikiLayout';
+import WikiLayout from './components/WikiLayout.tsx';
 
 interface WikiContext {
   subjectId: number;

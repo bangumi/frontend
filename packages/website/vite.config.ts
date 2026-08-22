@@ -1,6 +1,5 @@
 import { execSync } from 'node:child_process';
 import * as crypto from 'node:crypto';
-import path from 'node:path';
 
 import react from '@vitejs/plugin-react';
 import dayjs from 'dayjs';
@@ -10,7 +9,8 @@ import { defineConfig, loadEnv } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
 import { version } from '../../package.json';
-import { pandaDevHmr } from './panda-dev-hmr';
+import { workspaceAliases } from '../../workspace-aliases.ts';
+import { pandaDevHmr } from './panda-dev-hmr.ts';
 
 let COMMIT_HASH = '';
 let VERSION = '';
@@ -77,7 +77,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@bangumi/website': path.resolve(__dirname, './src'),
+        ...workspaceAliases,
       },
     },
     server: {

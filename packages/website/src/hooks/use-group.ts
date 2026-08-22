@@ -2,8 +2,8 @@ import { ok } from '@oazapfts/runtime';
 import { useCallback, useEffect, useState } from 'react';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { Group } from '@bangumi/client/client';
+import type { Group } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 export interface UseGroupRet {
   group: Group;

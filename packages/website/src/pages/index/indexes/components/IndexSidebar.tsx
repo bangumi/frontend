@@ -2,12 +2,12 @@ import { ok } from '@oazapfts/runtime';
 import React from 'react';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { Index, SlimIndex } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { Index, SlimIndex } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const { Link } = Typography;
 

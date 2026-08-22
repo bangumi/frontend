@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-import type { User } from '@bangumi/client/client';
-import { CollectionType, SubjectType } from '@bangumi/client/client';
+import type { User } from '@bangumi/client/client.ts';
+import { CollectionType, SubjectType } from '@bangumi/client/client.ts';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const block = css({

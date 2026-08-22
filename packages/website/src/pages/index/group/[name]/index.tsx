@@ -1,11 +1,10 @@
 import React from 'react';
 import { Outlet, useOutletContext, useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import type { UseGroupRet } from '@bangumi/website/hooks/use-group';
-import { useGroup } from '@bangumi/website/hooks/use-group';
-
-import GroupLayout from '../components/GroupLayout';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import type { UseGroupRet } from '@bangumi/website/hooks/use-group.ts';
+import { useGroup } from '@bangumi/website/hooks/use-group.ts';
+import GroupLayout from '@bangumi/website/pages/index/group/components/GroupLayout.tsx';
 
 interface GroupContext {
   groupRet: UseGroupRet;

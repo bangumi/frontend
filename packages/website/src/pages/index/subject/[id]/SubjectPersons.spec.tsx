@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import type { SubjectHomeResponse, SubjectStaff } from '@bangumi/client/client';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import type { SubjectHomeResponse, SubjectStaff } from '@bangumi/client/client.ts';
+import homeFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
+import staffFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/staffs/persons-GET.json';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import homeFixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
-import staffFixture from '../../../../mocks/fixtures/p1/subjects/12/staffs/persons-GET.json';
-import SubjectPersons from './components/SubjectPersons';
+import SubjectPersons from './components/SubjectPersons.tsx';
 
 const homeData = homeFixture as unknown as SubjectHomeResponse;
 const staffs = staffFixture.data as SubjectStaff[];

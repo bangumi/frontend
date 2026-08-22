@@ -1,4 +1,4 @@
-import { keyBy } from './index';
+import { keyBy } from './index.ts';
 
 describe('keyBy', () => {
   const collection: Array<{

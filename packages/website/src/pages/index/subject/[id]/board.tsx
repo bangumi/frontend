@@ -1,14 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { useSubject } from '@bangumi/website/hooks/use-subject';
-import { useSubjectTopics } from '@bangumi/website/hooks/use-subject-topics';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { useSubject } from '@bangumi/website/hooks/use-subject.ts';
+import { useSubjectTopics } from '@bangumi/website/hooks/use-subject-topics.ts';
 
-import SubjectBoard from './components/SubjectBoard';
+import SubjectBoard from './components/SubjectBoard.tsx';
 
 const PAGE_SIZE = 10;
 

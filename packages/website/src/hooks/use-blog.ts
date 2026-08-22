@@ -2,8 +2,8 @@ import { ok } from '@oazapfts/runtime';
 import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { BlogEntry, CommentBase, SlimSubject } from '@bangumi/client/client';
+import type { BlogEntry, CommentBase, SlimSubject } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 日志吐槽：主评论与其子回复 */
 export type BlogComment = CommentBase & { replies: CommentBase[] };

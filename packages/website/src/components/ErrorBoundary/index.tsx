@@ -2,9 +2,9 @@ import { HttpError } from '@oazapfts/runtime';
 import type { JSX, PropsWithChildren } from 'react';
 import React from 'react';
 
-import type { ErrorResponse as resError } from '@bangumi/client/client';
+import type { ErrorResponse as resError } from '@bangumi/client/client.ts';
 
-import ErrorLayout from './ErrorLayout';
+import ErrorLayout from './ErrorLayout.tsx';
 
 type CatchError = HttpError | Error | null;
 

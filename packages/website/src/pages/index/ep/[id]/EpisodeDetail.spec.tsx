@@ -7,14 +7,14 @@ import {
   episodeCommentsFixture,
   episodeFixture,
   subjectEpisodesFixture,
-} from '@bangumi/website/mocks/fixtures/p1/episodes/1704816';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+} from '@bangumi/website/mocks/fixtures/p1/episodes/1704816/index.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import EpisodePage from '.';
+import EpisodePage from './index.tsx';
 
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({

@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { GroupTopic } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { GroupTopic } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
 
-import { topicListLink } from './topicListLink';
+import { topicListLink } from './topicListLink.ts';
 
 const topicTable = css({
   width: '100%',

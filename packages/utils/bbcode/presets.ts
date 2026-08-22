@@ -1,4 +1,4 @@
-import type { BBCodeOptions } from './types';
+import type { BBCodeOptions } from './types.ts';
 
 const richContent = {
   bbcode: true,

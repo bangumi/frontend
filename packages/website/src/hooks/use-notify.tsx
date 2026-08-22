@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import type { Socket } from 'socket.io-client';
 import { io } from 'socket.io-client';
 
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 let socket: Socket | null;
 

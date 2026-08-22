@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getSubjectLink } from '@bangumi/utils/pages';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useCalendar } from '@bangumi/website/hooks/use-calendar';
+import { getSubjectLink } from '@bangumi/utils/pages.ts';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useCalendar } from '@bangumi/website/hooks/use-calendar.ts';
 
 const { Link } = Typography;
 

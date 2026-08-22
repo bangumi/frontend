@@ -3,10 +3,10 @@ import { http, HttpResponse } from 'msw';
 import React, { Suspense } from 'react';
 
 import calendarFixture from '@bangumi/website/mocks/fixtures/p1/calendar-GET.json';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import CalendarPage from '.';
+import CalendarPage from './index.tsx';
 
 describe('CalendarPage', () => {
   it('渲染页头与周一~周日分组', async () => {

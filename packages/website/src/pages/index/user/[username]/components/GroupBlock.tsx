@@ -1,10 +1,10 @@
 import React from 'react';
 
-import type { User } from '@bangumi/client/client';
-import { Image, Typography } from '@bangumi/design';
+import type { User } from '@bangumi/client/client.ts';
+import { Image, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getGroupLink, getUserGroupsPageLink } from '@bangumi/utils/pages';
-import { useUserGroups } from '@bangumi/website/hooks/use-user-groups';
+import { getGroupLink, getUserGroupsPageLink } from '@bangumi/utils/pages.ts';
+import { useUserGroups } from '@bangumi/website/hooks/use-user-groups.ts';
 
 const { Link } = Typography;
 

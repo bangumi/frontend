@@ -11,7 +11,7 @@ import React, {
 
 import { css, cx } from '@bangumi/styled-system/css';
 
-import Toolbox from './Toolbox';
+import Toolbox from './Toolbox.tsx';
 
 const editorContainer = css({
   display: 'inline-flex',

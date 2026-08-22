@@ -5,7 +5,7 @@ import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 
-import { UserProvider } from '../hooks/use-user';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
 
 HelmetProvider.canUseDOM = false;
 

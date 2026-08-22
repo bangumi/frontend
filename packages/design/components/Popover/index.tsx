@@ -3,7 +3,7 @@ import React, { useCallback, useId, useRef, useState } from 'react';
 
 import { css, cx } from '@bangumi/styled-system/css';
 
-import { usePopoverDismiss } from './usePopoverDismiss';
+import { usePopoverDismiss } from './usePopoverDismiss.ts';
 
 /** 弹出层的触发方式 */
 export type PopoverTrigger = 'hover' | 'click';

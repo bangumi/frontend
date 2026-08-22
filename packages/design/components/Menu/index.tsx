@@ -3,8 +3,8 @@ import React, { createContext, useContext } from 'react';
 
 import { css, cx } from '@bangumi/styled-system/css';
 
-import type { MenuItemProps } from './MenuItem';
-import MenuItem from './MenuItem';
+import type { MenuItemProps } from './MenuItem.tsx';
+import MenuItem from './MenuItem.tsx';
 
 const menu = css({
   display: 'inline-flex',

@@ -3,9 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { css } from '@bangumi/styled-system/css';
-
-import footerCover from '../../assets/footer-cover.png';
-import { ReactComponent as BangumiTextLogo } from '../../assets/logo.svg';
+import footerCover from '@bangumi/website/assets/footer-cover.png';
+import { ReactComponent as BangumiTextLogo } from '@bangumi/website/assets/logo.svg';
 
 const footerContainer = css({
   display: 'flex',

@@ -5,9 +5,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
 
-import IndexCommentsPage from './comments';
+import IndexCommentsPage from './comments.tsx';
 
 describe('IndexCommentsPage', () => {
   const renderPage = async () => {

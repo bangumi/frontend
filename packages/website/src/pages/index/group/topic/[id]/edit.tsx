@@ -1,12 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import useGroupTopic from '@bangumi/website/hooks/use-group-topic';
-
-import TopicForm from '../../components/TopicForm';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import useGroupTopic from '@bangumi/website/hooks/use-group-topic.ts';
+import TopicForm from '@bangumi/website/pages/index/group/components/TopicForm.tsx';
 
 const form = css({
   display: 'flex',

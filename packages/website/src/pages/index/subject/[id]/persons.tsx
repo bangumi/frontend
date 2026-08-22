@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
-import { useSubjectStaffPersons } from '@bangumi/website/hooks/use-subject-staff-persons';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home.ts';
+import { useSubjectStaffPersons } from '@bangumi/website/hooks/use-subject-staff-persons.ts';
 
-import SubjectPersons from './components/SubjectPersons';
+import SubjectPersons from './components/SubjectPersons.tsx';
 
 function SubjectPersonsPage() {
   const { id } = useParams();

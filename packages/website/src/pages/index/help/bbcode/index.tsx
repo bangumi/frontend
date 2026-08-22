@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 import { css } from '@bangumi/styled-system/css';
-import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
-import { render } from '@bangumi/utils/bbcode/react';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets.ts';
+import { render } from '@bangumi/utils/bbcode/react.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
 interface SyntaxItem {
   name: string;

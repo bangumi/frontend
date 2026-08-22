@@ -5,11 +5,11 @@ import React, { Suspense } from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
 import subjectTopicFixture from '@bangumi/website/mocks/fixtures/p1/subjects/-/topics/202-GET.json';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import SubjectTopicPage from './index';
+import SubjectTopicPage from './index.tsx';
 
 describe('SubjectTopicPage', () => {
   const renderPage = async () => {

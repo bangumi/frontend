@@ -1,11 +1,11 @@
 import { delay } from 'lodash-es';
 import React from 'react';
 
+import Message from '@bangumi/design/components/Message/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
-import Message from '../Message';
-import type { Toast as TToast } from './types';
-import { removeToastEvent } from './utils/event-bus';
+import type { Toast as TToast } from './types.ts';
+import { removeToastEvent } from './utils/event-bus.ts';
 
 const toastItem = css({
   transition: 'opacity 0.3s ease-in-out',

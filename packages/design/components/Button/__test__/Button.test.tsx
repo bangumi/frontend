@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import Button from '../index';
+import Button from '@bangumi/design/components/Button/index.tsx';
 
 describe('Primary Button', () => {
   it.each(['large', 'medium', 'small'] as const)('should render button of size %s', (size) => {

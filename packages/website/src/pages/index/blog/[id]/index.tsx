@@ -3,20 +3,20 @@ import type { FC } from 'react';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Avatar, Layout, Typography } from '@bangumi/design';
-import RichContent from '@bangumi/design/components/RichContent';
+import RichContent from '@bangumi/design/components/RichContent/index.tsx';
+import { Avatar, Layout, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserBlogsPageLink, getUserProfileLink } from '@bangumi/utils/pages';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import { getUserBlogsPageLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 import useBlogEntry, {
   useBlogComments,
   useBlogRelatedSubjects,
-} from '@bangumi/website/hooks/use-blog';
-import { useUser } from '@bangumi/website/hooks/use-user';
+} from '@bangumi/website/hooks/use-blog.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import BlogComments from './components/BlogComments';
-import RelatedSubjects from './components/RelatedSubjects';
+import BlogComments from './components/BlogComments.tsx';
+import RelatedSubjects from './components/RelatedSubjects.tsx';
 
 const { Link } = Typography;
 

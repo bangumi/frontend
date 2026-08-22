@@ -2,9 +2,8 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 
 import { css } from '@bangumi/styled-system/css';
-
-import Footer from '../Footer';
-import Header from '../Header';
+import Footer from '@bangumi/website/components/Footer/index.tsx';
+import Header from '@bangumi/website/components/Header/index.tsx';
 
 const container = css({ minHeight: '100vh', display: 'flex', flexDirection: 'column' });
 

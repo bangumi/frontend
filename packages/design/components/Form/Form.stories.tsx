@@ -3,11 +3,12 @@ import React, { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-import Button from '../Button';
-import EditorForm from '../EditorForm';
-import Input from '../Input';
-import Select from '../Select';
-import Form from '.';
+import Button from '@bangumi/design/components/Button/index.tsx';
+import EditorForm from '@bangumi/design/components/EditorForm/index.tsx';
+import Input from '@bangumi/design/components/Input/index.tsx';
+import Select from '@bangumi/design/components/Select/index.tsx';
+
+import Form from './index.tsx';
 
 const componentMeta: Meta<typeof Form> = {
   title: 'Modern/Form',

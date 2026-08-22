@@ -2,8 +2,8 @@ import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import type { LinkProps } from './Link';
-import Link from './Link';
+import type { LinkProps } from './Link.tsx';
+import Link from './Link.tsx';
 
 const componentMeta: Meta<typeof Link> = {
   title: 'modern/Typography/Link',

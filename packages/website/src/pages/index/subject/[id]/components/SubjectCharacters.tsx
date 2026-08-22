@@ -1,14 +1,14 @@
 import React from 'react';
 
-import type { Subject, SubjectCharacter } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { Subject, SubjectCharacter } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getCharacterLink, getPersonLink } from '@bangumi/utils/pages';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import { getCharacterLink, getPersonLink } from '@bangumi/utils/pages.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
-import { CAST_TYPE_DESC } from './subject-common';
-import { SubjectHeader } from './SubjectDetail';
-import SubjectSummaryCard from './SubjectSummaryCard';
+import { CAST_TYPE_DESC } from './subject-common.ts';
+import { SubjectHeader } from './SubjectDetail.tsx';
+import SubjectSummaryCard from './SubjectSummaryCard.tsx';
 
 const { Link } = Typography;
 

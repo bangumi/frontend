@@ -1,10 +1,9 @@
 import type { JSX, MouseEventHandler } from 'react';
 import React from 'react';
 
+import type { LinkProps } from '@bangumi/design/components/Typography/index.tsx';
+import Typography from '@bangumi/design/components/Typography/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-
-import type { LinkProps } from '../Typography';
-import Typography from '../Typography';
 
 const button = css({
   cursor: 'pointer',

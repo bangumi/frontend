@@ -1,6 +1,6 @@
-export { convert } from './convert';
-export { Parser } from './parser';
-export { BBCodePreset } from './presets';
-export type { BBCodePresetName } from './presets';
-export { render } from './react';
-export * from './types';
+export { convert } from './convert.ts';
+export { Parser } from './parser.ts';
+export { BBCodePreset } from './presets.ts';
+export type { BBCodePresetName } from './presets.ts';
+export { render } from './react.tsx';
+export * from './types.ts';

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Avatar from '..';
+import Avatar from '@bangumi/design/components/Avatar/index.tsx';
 
 it('Render a Avatar', () => {
   const { container } = render(<Avatar src='urlLink' />);

@@ -2,9 +2,9 @@ import type { Meta, StoryFn } from '@storybook/react';
 import type { FC } from 'react';
 import React from 'react';
 
-import { UnreadableCodeError } from '@bangumi/utils';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
 
-import * as Icons from '.';
+import * as Icons from './index.tsx';
 
 type IComponent = React.FC<
   React.SVGProps<SVGSVGElement> & {

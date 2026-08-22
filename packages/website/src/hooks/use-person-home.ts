@@ -1,7 +1,6 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
 import type {
   Person,
   PersonCharacter,
@@ -9,7 +8,8 @@ import type {
   PersonRelation,
   PersonWork,
   SlimIndex,
-} from '@bangumi/client/client';
+} from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 type ApiFunction = (...args: never[]) => Promise<unknown>;
 

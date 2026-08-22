@@ -1,4 +1,4 @@
-export * from './common';
+export * from './common.ts';
 
 // https://github.com/drwpow/openapi-typescript/issues/941
 export enum UserGroup {
@@ -13,4 +13,4 @@ export enum UserGroup {
   WikiContributor = 11,
 }
 
-export type { Notice as INotice } from './client';
+export type { Notice as INotice } from './client.ts';

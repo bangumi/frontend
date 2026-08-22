@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import type { SubjectHomeResponse } from '@bangumi/client/client';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import type { SubjectHomeResponse } from '@bangumi/client/client.ts';
+import homeFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
+import reviewsFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/reviews-GET.json';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import homeFixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
-import reviewsFixture from '../../../../mocks/fixtures/p1/subjects/12/reviews-GET.json';
-import SubjectReviews from './components/SubjectReviews';
+import SubjectReviews from './components/SubjectReviews.tsx';
 
 const homeData = homeFixture as unknown as SubjectHomeResponse;
 const { data: reviews, total } = reviewsFixture;

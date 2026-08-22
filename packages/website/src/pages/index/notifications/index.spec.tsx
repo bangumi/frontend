@@ -6,11 +6,11 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
+import notifyFixture from '@bangumi/website/mocks/fixtures/p1/notify-GET.json';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import notifyFixture from '../../../mocks/fixtures/p1/notify-GET.json';
-import NotificationPage from '.';
+import NotificationPage from './index.tsx';
 
 describe('NotificationPage', () => {
   const renderNotifications = async () => {

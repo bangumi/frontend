@@ -2,14 +2,14 @@ import type { StoryFn } from '@storybook/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { State } from '@bangumi/client/topic';
+import { State } from '@bangumi/client/topic.ts';
 
 import repliesComment from './__test__/fixtures/repliesComment.json';
 import singleComment from './__test__/fixtures/singleComment.json';
 import specialComment from './__test__/fixtures/specialComment.json';
 import mockedCurrentUser from './__test__/fixtures/user.json';
-import type { CommentProps } from './Comment';
-import Comment from './Comment';
+import type { CommentProps } from './Comment.tsx';
+import Comment from './Comment.tsx';
 
 export default {
   title: 'Topic/Comment',
