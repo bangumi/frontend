@@ -59,7 +59,6 @@ const editorPreviewLayout = css({
   gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
   border: '2px solid #e8e3e3',
   borderRadius: '12px',
-  overflow: 'hidden',
   boxSizing: 'border-box',
   '& .bgm-editor__container': {
     border: 'none',
