@@ -4,7 +4,7 @@ import { Navigate, useParams } from 'react-router-dom';
 
 import LegacyRedirect from './components/PageRoutes/LegacyRedirect.tsx';
 
-const RootIndex = lazy(async () => import('./pages/index/index.tsx'));
+const RootIndex = lazy(async () => import('./pages/index.tsx'));
 const MatchAll = lazy(async () => import('./pages/index/[...slug].tsx'));
 const HomeIndex = lazy(async () => import('./pages/index/index.tsx'));
 const About = lazy(async () => import('./pages/index/about/index.tsx'));
@@ -27,7 +27,7 @@ const IndexCommentsPage = lazy(async () => import('./pages/index/indexes/[id]/co
 const IndexEdit = lazy(async () => import('./pages/index/indexes/[id]/edit.tsx'));
 const IndexRelated = lazy(async () => import('./pages/index/indexes/[id]/related.tsx'));
 const Rakuen = lazy(async () => import('./pages/index/rakuen/index.tsx'));
-const Group = lazy(async () => import('./pages/index/group/[name]/index/index.tsx'));
+const Group = lazy(async () => import('./pages/index/group/[name]/index.tsx'));
 const GroupChannel = lazy(async () => import('./pages/index/group/index.tsx'));
 const GroupAll = lazy(async () => import('./pages/index/group/all.tsx'));
 const GroupDiscover = lazy(async () => import('./pages/index/group/discover.tsx'));
@@ -38,9 +38,9 @@ const GroupMine = lazy(async () => import('./pages/index/group/mine.tsx'));
 const GroupMyTopic = lazy(async () => import('./pages/index/group/my-topic.tsx'));
 const GroupMyReply = lazy(async () => import('./pages/index/group/my-reply.tsx'));
 const GroupNewTopic = lazy(async () => import('./pages/index/group/[name]/new_topic/index.tsx'));
-const GroupReply = lazy(async () => import('./pages/index/group/reply/[id]'));
+const GroupReply = lazy(async () => import('./pages/index/group/reply/[id].tsx'));
 const GroupReplyEdit = lazy(async () => import('./pages/index/group/reply/[id]/edit.tsx'));
-const GroupTopic = lazy(async () => import('./pages/index/group/topic/[id]/index.tsx'));
+const GroupTopic = lazy(async () => import('./pages/index/group/topic/[id].tsx'));
 const GroupTopicEdit = lazy(async () => import('./pages/index/group/topic/[id]/edit.tsx'));
 const GroupTopicHome = lazy(async () => import('./pages/index/group/topic/[id]/index.tsx'));
 const Character = lazy(async () => import('./pages/index/character/[id]/index.tsx'));
@@ -55,15 +55,15 @@ const SubjectComments = lazy(async () => import('./pages/index/subject/[id]/comm
 const SubjectReviews = lazy(async () => import('./pages/index/subject/[id]/reviews.tsx'));
 const SubjectSearch = lazy(async () => import('./pages/index/subject_search/[keyword]/index.tsx'));
 const MonoSearch = lazy(async () => import('./pages/index/mono_search/[keyword]/index.tsx'));
-const SubjectTopic = lazy(async () => import('./pages/index/subject/topic/[id]/index.tsx'));
+const SubjectTopic = lazy(async () => import('./pages/index/subject/topic/[id].tsx'));
 const SubjectTopicEdit = lazy(async () => import('./pages/index/subject/topic/[id]/edit.tsx'));
 const SubjectTopicHome = lazy(async () => import('./pages/index/subject/topic/[id]/index.tsx'));
-const SubjectReply = lazy(async () => import('./pages/index/subject/reply/[id]'));
+const SubjectReply = lazy(async () => import('./pages/index/subject/reply/[id].tsx'));
 const SubjectReplyEdit = lazy(async () => import('./pages/index/subject/reply/[id]/edit.tsx'));
 const Person = lazy(async () => import('./pages/index/person/[id]/index.tsx'));
 const PersonVoice = lazy(async () => import('./pages/index/person/[id]/voice.tsx'));
 const PersonWorks = lazy(async () => import('./pages/index/person/[id]/works.tsx'));
-const Wiki = lazy(async () => import('./pages/index/subject/[id]/wiki/index.tsx'));
+const Wiki = lazy(async () => import('./pages/index/subject/[id]/wiki.tsx'));
 const WikiEdit = lazy(async () => import('./pages/index/subject/[id]/wiki/edit.tsx'));
 const WikiEditDetail = lazy(async () => import('./pages/index/subject/[id]/wiki/edit_detail.tsx'));
 const WikiHistory = lazy(async () => import('./pages/index/subject/[id]/wiki/history.tsx'));
