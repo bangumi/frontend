@@ -37,14 +37,5 @@ jobs:
       - run: pnpm lint:style
         name: Lint Style
 
-      - name: Generate Panda CSS
-        run: pnpm panda:cssgen
-
-      - name: Upload generated Panda CSS
-        uses: actions/upload-artifact@v4
-        with:
-          name: panda-css
-          path: packages/styled-system/styles.css
-
-      - name: Check Panda CSS is up to date
-        run: git diff --exit-code packages/styled-system/styles.css
+      - run: pnpm lint:panda
+        name: Check Panda CSS is up to date
