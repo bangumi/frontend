@@ -16,14 +16,10 @@ function renderEditorForm(element: React.ReactElement) {
 
 describe('<EditorForm />', () => {
   it('render correctly with props', () => {
-    const { getByPlaceholderText, getByRole, getByText } = renderEditorForm(
+    const { asFragment } = renderEditorForm(
       <TestEditorForm className='custom class' placeholder='placeholder' confirmText='Confirm' />,
     );
-
-    expect(getByPlaceholderText('placeholder')).toBeTruthy();
-    expect(getByText('Confirm')).toBeTruthy();
-    expect(getByRole('button', { name: '预览' })).toBeTruthy();
-    expect(getByText('BBCode指南')).toBeTruthy();
+    expect(asFragment()).toMatchSnapshot();
   });
 
   it('onConfirm event', () => {
