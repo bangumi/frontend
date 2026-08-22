@@ -1,0 +1,32 @@
+name: Update Editor Snapshot
+
+on:
+  push:
+    branches:
+      - feat/editor-bbcode-preview
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: feat/editor-bbcode-preview
+          submodules: recursive
+      - uses: ./.github/actions/setup-js-env
+      - name: Update EditorForm snapshot
+        run: pnpm exec vitest run packages/design/components/EditorForm/__test__/EditorForm.test.tsx -u
+      - name: Commit snapshot
+        run: |
+          if git diff --quiet -- packages/design/components/EditorForm/__test__/__snapshots__/EditorForm.test.tsx.snap; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add packages/design/components/EditorForm/__test__/__snapshots__/EditorForm.test.tsx.snap
+          git commit -m 'test(design): update EditorForm snapshot'
+          git push origin HEAD:feat/editor-bbcode-preview
