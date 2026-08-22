@@ -16,10 +16,14 @@ function renderEditorForm(element: React.ReactElement) {
 
 describe('<EditorForm />', () => {
   it('render correctly with props', () => {
-    const { asFragment } = renderEditorForm(
+    const { getByPlaceholderText, getByRole, getByText } = renderEditorForm(
       <TestEditorForm className='custom class' placeholder='placeholder' confirmText='Confirm' />,
     );
-    expect(asFragment()).toMatchSnapshot();
+
+    expect(getByPlaceholderText('placeholder')).toBeTruthy();
+    expect(getByText('Confirm')).toBeTruthy();
+    expect(getByRole('button', { name: '预览' })).toBeTruthy();
+    expect(getByText('BBCode指南')).toBeTruthy();
   });
 
   it('onConfirm event', () => {
@@ -77,5 +81,24 @@ describe('<EditorForm />', () => {
     fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
     fireEvent.keyDown(textarea, { key: 's', altKey: true });
     expect(onConfirm).not.toHaveBeenCalled();
+  });
+
+  it('toggles a live BBCode preview without losing editor content', () => {
+    const { container, getByPlaceholderText, getByRole } = renderEditorForm(
+      <TestEditorForm placeholder='placeholder' />,
+    );
+    const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
+
+    fireEvent.change(textarea, { target: { value: '[b]hello[/b]' } });
+    fireEvent.click(getByRole('button', { name: '预览' }));
+
+    expect(container.querySelector('.bgm-editor__preview strong')?.textContent).toBe('hello');
+
+    fireEvent.change(textarea, { target: { value: '[i]world[/i]' } });
+    expect(container.querySelector('.bgm-editor__preview em')?.textContent).toBe('world');
+
+    fireEvent.click(getByRole('button', { name: '关闭预览' }));
+    expect(container.querySelector('.bgm-editor__preview')).toBeNull();
+    expect(textarea.value).toBe('[i]world[/i]');
   });
 });

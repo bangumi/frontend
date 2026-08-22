@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import { css, cx } from '@bangumi/styled-system/css';
 
 import Button from '../Button';
+import RichContent from '../RichContent';
 import Link from '../Typography/Link';
 import type { EditorProps } from './Editor';
 import Editor from './Editor';
@@ -40,6 +41,59 @@ const editorForm = css({
       borderTopLeftRadius: '0',
       borderTopRightRadius: '0',
     },
+    '& .bgm-editor__layout--preview': {
+      borderTop: 'none',
+      borderTopLeftRadius: '0',
+      borderTopRightRadius: '0',
+    },
+  },
+});
+
+const editorLayout = css({
+  width: '100%',
+  minWidth: '0',
+});
+
+const editorPreviewLayout = css({
+  display: 'grid',
+  gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
+  border: '2px solid #e8e3e3',
+  borderRadius: '12px',
+  overflow: 'hidden',
+  boxSizing: 'border-box',
+  '& .bgm-editor__container': {
+    border: 'none',
+    borderRadius: '0',
+  },
+  '& .bgm-editor__preview': {
+    minWidth: '0',
+    minHeight: '162px',
+    padding: '8px 6px 6px',
+    borderLeft: '2px solid #e8e3e3',
+    boxSizing: 'border-box',
+    '@media (max-width: 640px)': {
+      borderLeft: 'none',
+      borderTop: '2px solid #e8e3e3',
+    },
+  },
+  '& .bgm-editor__preview-title': {
+    height: '26px',
+    padding: '0 8px',
+    marginBottom: '10px',
+    color: '#9f9b9b',
+    fontSize: '14px',
+    lineHeight: '26px',
+  },
+  '& .bgm-editor__preview-content': {
+    padding: '0 6px',
+  },
+  '& .bgm-editor__preview-empty': {
+    color: '#9f9b9b',
+    fontSize: '16px',
+    lineHeight: '26px',
+  },
+  '@media (max-width: 640px)': {
+    gridTemplateColumns: 'minmax(0, 1fr)',
   },
 });
 
@@ -86,19 +140,51 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
     },
     ref,
   ) => {
+    const [showPreview, setShowPreview] = useState(false);
+    const value = props.value ?? '';
+
     return (
       <div className={cx('bgm-editor__form', editorForm, className)} style={style}>
-        <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
+        <div
+          className={cx(
+            'bgm-editor__layout',
+            editorLayout,
+            showPreview && 'bgm-editor__layout--preview',
+            showPreview && editorPreviewLayout,
+          )}
+        >
+          <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
+          {showPreview && (
+            <div className='bgm-editor__preview' aria-label='BBCode 预览'>
+              <div className='bgm-editor__preview-title'>预览</div>
+              <div className='bgm-editor__preview-content'>
+                {value.trim() ? (
+                  <RichContent bbcode={value} />
+                ) : (
+                  <span className='bgm-editor__preview-empty'>输入内容后，这里会显示预览。</span>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
         <div className='bgm-editor__submit'>
           <Button
             color='blue'
             className='bgm-editor__button bgm-editor__button--confirm'
             disabled={disabled}
-            onClick={() => onConfirm?.(props.value ?? '')}
+            onClick={() => onConfirm?.(value)}
           >
             {confirmText}
           </Button>
           {submitExtra}
+          <Button
+            type='text'
+            className='bgm-editor__button bgm-editor__button--preview'
+            aria-pressed={showPreview}
+            onClick={() => setShowPreview((open) => !open)}
+          >
+            {showPreview ? '关闭预览' : '预览'}
+          </Button>
           {!hideCancel && (
             <Button type='text' className='bgm-editor__button' onClick={onCancel}>
               {cancelText}
