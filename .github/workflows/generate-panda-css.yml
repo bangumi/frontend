@@ -1,0 +1,31 @@
+name: Generate Panda CSS
+
+on:
+  push:
+    branches:
+      - feat/editor-bbcode-preview
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: feat/editor-bbcode-preview
+      - uses: ./.github/actions/setup-js-env
+      - name: Generate Panda CSS
+        run: pnpm panda:cssgen
+      - name: Commit generated CSS
+        run: |
+          if git diff --quiet -- packages/styled-system/styles.css; then
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add packages/styled-system/styles.css
+          git commit -m 'chore: regenerate Panda CSS'
+          git push origin HEAD:feat/editor-bbcode-preview
