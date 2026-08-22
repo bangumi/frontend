@@ -3,3 +3,7 @@
 [[tools.node]]
 version = "24.19.0"
 backend = "core:node"
+
+[[tools."npm:pnpm"]]
+version = "11.21.0"
+backend = "npm:pnpm"
