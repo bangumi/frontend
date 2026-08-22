@@ -8,7 +8,7 @@ import Link from '../Typography/Link';
 import type { EditorProps } from './Editor';
 import Editor from './Editor';
 
-const editorForm = css({
+const editorFormStyle = css.raw({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
@@ -44,22 +44,26 @@ const editorForm = css({
   },
 });
 
-const editorPreviewForm = css({
+const editorForm = css(editorFormStyle);
+
+const editorPreviewForm = css(editorFormStyle, {
   display: 'grid',
-  gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
+  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+  alignItems: 'stretch',
   '& > .bgm-editor__container': {
-    alignSelf: 'stretch',
     borderTopRightRadius: '0',
     borderBottomRightRadius: '0',
   },
   '& > .bgm-editor__preview': {
-    alignSelf: 'stretch',
     minWidth: '0',
     minHeight: '162px',
     padding: '8px 6px 6px',
     border: '2px solid #e8e3e3',
     borderLeft: 'none',
-    borderRadius: '0 12px 12px 0',
+    borderTopLeftRadius: '0',
+    borderBottomLeftRadius: '0',
+    borderTopRightRadius: '12px',
+    borderBottomRightRadius: '12px',
     boxSizing: 'border-box',
   },
   '& > .bgm-editor__submit': {
@@ -82,7 +86,7 @@ const editorPreviewForm = css({
     lineHeight: '26px',
   },
   '@media (max-width: 640px)': {
-    gridTemplateColumns: 'minmax(0, 1fr)',
+    gridTemplateColumns: '1fr',
     '& > .bgm-editor__container': {
       borderTopRightRadius: '12px',
       borderBottomLeftRadius: '0',
@@ -91,7 +95,10 @@ const editorPreviewForm = css({
     '& > .bgm-editor__preview': {
       borderLeft: '2px solid #e8e3e3',
       borderTop: 'none',
-      borderRadius: '0 0 12px 12px',
+      borderTopLeftRadius: '0',
+      borderTopRightRadius: '0',
+      borderBottomLeftRadius: '12px',
+      borderBottomRightRadius: '12px',
     },
   },
   '.bgm-form--compact > &': {
@@ -150,18 +157,12 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
 
     return (
       <div
-        className={cx(
-          'bgm-editor__form',
-          editorForm,
-          showPreview && 'bgm-editor__form--preview',
-          showPreview && editorPreviewForm,
-          className,
-        )}
+        className={cx('bgm-editor__form', showPreview ? editorPreviewForm : editorForm, className)}
         style={style}
       >
         <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
         {showPreview && (
-          <div className='bgm-editor__preview' aria-label='BBCode 预览'>
+          <div className='bgm-editor__preview' role='region' aria-label='BBCode 预览'>
             <div className='bgm-editor__preview-title'>预览</div>
             <div className='bgm-editor__preview-content'>
               {value.trim() ? (
