@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { UnreadableCodeError } from '@bangumi/utils';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { useCharacterHome } from '@bangumi/website/hooks/use-character-home';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import { useCharacterHome } from '@bangumi/website/hooks/use-character-home.ts';
 
-import CharacterDetail from './CharacterDetail';
+import CharacterDetail from './CharacterDetail.tsx';
 
 function CharacterPage() {
   const { id } = useParams();

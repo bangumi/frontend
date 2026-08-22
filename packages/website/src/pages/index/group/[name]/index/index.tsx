@@ -1,19 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Button, CollapsibleContent, Section } from '@bangumi/design';
-import { ArrowRightCircle } from '@bangumi/icons';
+import { Button, CollapsibleContent, Section } from '@bangumi/design/index.tsx';
+import { ArrowRightCircle } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { UnreadableCodeError } from '@bangumi/utils';
-import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
-import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics';
-import { useUser } from '@bangumi/website/hooks/use-user';
-
-import { useGroupContext } from '../../[name]';
-import TopicForm from '../../components/TopicForm';
-import TopicsTable from '../components/TopicsTable';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets.ts';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react.tsx';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
+import TopicsTable from '@bangumi/website/pages/index/group/[name]/components/TopicsTable.tsx';
+import { useGroupContext } from '@bangumi/website/pages/index/group/[name]/index.tsx';
+import TopicForm from '@bangumi/website/pages/index/group/components/TopicForm.tsx';
 
 const recentTopics = css({
   marginTop: '40px',

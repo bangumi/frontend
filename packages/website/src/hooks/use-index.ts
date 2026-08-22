@@ -2,8 +2,8 @@ import { ok } from '@oazapfts/runtime';
 import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { Index } from '@bangumi/client/client';
+import type { Index } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 export interface UseIndexRet {
   index: Index;

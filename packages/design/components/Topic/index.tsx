@@ -1,7 +1,7 @@
-import Comment from './Comment';
-import CommentActions from './CommentActions';
-import CommentInfo from './CommentInfo';
-import Reactions from './Reactions';
+import Comment from './Comment.tsx';
+import CommentActions from './CommentActions.tsx';
+import CommentInfo from './CommentInfo.tsx';
+import Reactions from './Reactions.tsx';
 
 export default {
   Comment,
@@ -10,7 +10,7 @@ export default {
   Reactions,
 };
 
-export type { CommentProps } from './Comment';
-export type { CommentInfoProps } from './CommentInfo';
-export type { CommentActionsProps } from './CommentActions';
-export type { ReactionsProps } from './Reactions';
+export type { CommentProps } from './Comment.tsx';
+export type { CommentInfoProps } from './CommentInfo.tsx';
+export type { CommentActionsProps } from './CommentActions.tsx';
+export type { ReactionsProps } from './Reactions.tsx';

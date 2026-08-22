@@ -2,9 +2,9 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Tab, Typography } from '@bangumi/design';
+import { Tab, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { WikiEditTabsItems } from '@bangumi/website/shared/wiki';
+import { WikiEditTabsItems } from '@bangumi/website/shared/wiki.ts';
 
 type Props = PropsWithChildren<{
   id: string;

@@ -4,10 +4,10 @@ import React, { Suspense } from 'react';
 
 import topicsFixture from '@bangumi/website/mocks/fixtures/p1/groups/-/topics-GET.json';
 import groupsFixture from '@bangumi/website/mocks/fixtures/p1/groups-GET.json';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import GroupChannel from '.';
+import GroupChannel from './index.tsx';
 
 beforeEach(() => {
   mockServer.use(

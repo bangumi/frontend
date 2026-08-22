@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import type { CollectionType, Subject, SubjectHomeResponse } from '@bangumi/client/client';
-import { SubjectType } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
-import { Link as LinkIcon } from '@bangumi/icons';
+import type { CollectionType, Subject, SubjectHomeResponse } from '@bangumi/client/client.ts';
+import { SubjectType } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
+import { Link as LinkIcon } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { formatSubjectInfobox } from '@bangumi/utils';
+import { formatSubjectInfobox } from '@bangumi/utils/index.ts';
 import {
   getLegacyPageLink,
   getSubjectBoardLink,
@@ -19,16 +19,16 @@ import {
   getSubjectRelationsLink,
   getSubjectReviewsLink,
   getSubjectWikiEditLink,
-} from '@bangumi/utils/pages';
-import CollectSidePanel from '@bangumi/website/components/CollectSidePanel';
-import IndexSidePanel from '@bangumi/website/components/IndexSidePanel';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useSubjectCollects } from '@bangumi/website/hooks/use-subject-collects';
-import { useUser } from '@bangumi/website/hooks/use-user';
+} from '@bangumi/utils/pages.ts';
+import CollectSidePanel from '@bangumi/website/components/CollectSidePanel.tsx';
+import IndexSidePanel from '@bangumi/website/components/IndexSidePanel.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useSubjectCollects } from '@bangumi/website/hooks/use-subject-collects.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import CollectionPanel from './CollectionPanel';
-import { COLLECT_DESC, collectVerb, makeDescriptiveTime } from './subject-common';
-import { SubjectPrimaryBlocks, SubjectSecondaryBlocks } from './SubjectDetailBlocks';
+import CollectionPanel from './CollectionPanel.tsx';
+import { COLLECT_DESC, collectVerb, makeDescriptiveTime } from './subject-common.ts';
+import { SubjectPrimaryBlocks, SubjectSecondaryBlocks } from './SubjectDetailBlocks.tsx';
 
 const { Link } = Typography;
 

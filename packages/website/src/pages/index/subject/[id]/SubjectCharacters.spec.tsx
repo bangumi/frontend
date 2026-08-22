@@ -1,12 +1,12 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import type { SubjectCharacter, SubjectHomeResponse } from '@bangumi/client/client';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import type { SubjectCharacter, SubjectHomeResponse } from '@bangumi/client/client.ts';
+import charactersFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/characters-GET.json';
+import homeFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import charactersFixture from '../../../../mocks/fixtures/p1/subjects/12/characters-GET.json';
-import homeFixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
-import SubjectCharacters from './components/SubjectCharacters';
+import SubjectCharacters from './components/SubjectCharacters.tsx';
 
 const homeData = homeFixture as unknown as SubjectHomeResponse;
 const characters = charactersFixture.data as SubjectCharacter[];

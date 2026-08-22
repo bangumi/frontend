@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { ArrowDownCircle, ArrowUpCircle } from '@bangumi/icons';
+import Button from '@bangumi/design/components/Button/index.tsx';
+import { ArrowDownCircle, ArrowUpCircle } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-
-import Button from '../Button';
 
 const collapsibleContent = css({
   display: 'flex',

@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React from 'react';
 
-import type { MenuItemType } from '@bangumi/design';
-import { Divider, Menu } from '@bangumi/design';
+import type { MenuItemType } from '@bangumi/design/index.tsx';
+import { Divider, Menu } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
 const subMenu = css({

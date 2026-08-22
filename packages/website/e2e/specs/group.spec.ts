@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { testAsUser } from '../common/login';
+import { testAsUser } from '@bangumi/website/e2e/common/login.ts';
 
 test.describe('未登录用户', () => {
   test('未登录用户', async ({ page }) => {

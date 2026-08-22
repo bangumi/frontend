@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { Calendar } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { Calendar } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getCalendarLink, getSubjectLink } from '@bangumi/utils/pages';
+import { getCalendarLink, getSubjectLink } from '@bangumi/utils/pages.ts';
 
-import HomeSidePanel from './HomeSidePanel';
+import HomeSidePanel from './HomeSidePanel.tsx';
 
 const { Link } = Typography;
 

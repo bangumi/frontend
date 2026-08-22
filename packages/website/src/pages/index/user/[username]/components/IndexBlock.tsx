@@ -1,10 +1,10 @@
 import React from 'react';
 
-import type { User } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { User } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getIndexLink, getUserIndexesPageLink } from '@bangumi/utils/pages';
-import { useUserIndexes } from '@bangumi/website/hooks/use-user-indexes';
+import { getIndexLink, getUserIndexesPageLink } from '@bangumi/utils/pages.ts';
+import { useUserIndexes } from '@bangumi/website/hooks/use-user-indexes.ts';
 
 const { Link } = Typography;
 

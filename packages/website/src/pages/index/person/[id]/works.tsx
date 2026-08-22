@@ -1,15 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Pagination } from '@bangumi/design';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { usePersonHome } from '@bangumi/website/hooks/use-person-home';
-import { usePersonWorks } from '@bangumi/website/hooks/use-person-works';
+import { Pagination } from '@bangumi/design/index.tsx';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { usePersonHome } from '@bangumi/website/hooks/use-person-home.ts';
+import { usePersonWorks } from '@bangumi/website/hooks/use-person-works.ts';
 
-import PersonLayout from './components/PersonLayout';
-import { sectionHeader, WorkList } from './PersonDetail';
+import PersonLayout from './components/PersonLayout.tsx';
+import { sectionHeader, WorkList } from './PersonDetail.tsx';
 
 const PAGE_SIZE = 20;
 

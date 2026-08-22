@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { useFixtures } from '../common/fixtures';
+import { useFixtures } from '@bangumi/website/e2e/common/fixtures.ts';
 
 test.describe('main page', () => {
   test('has title', async ({ page }) => {

@@ -4,7 +4,7 @@ import React, { useLayoutEffect, useRef, useState, useTransition } from 'react';
 import type { BrowserRouterProps } from 'react-router-dom';
 import { Router } from 'react-router-dom';
 
-import { TransitionContext } from '../hooks/use-transition-context';
+import { TransitionContext } from '@bangumi/website/hooks/use-transition-context.ts';
 
 /**
  * 一个将react-router与useTransition结合的定制Router，以避免页面跳转时的白屏闪烁

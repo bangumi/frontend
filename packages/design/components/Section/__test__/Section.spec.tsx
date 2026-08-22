@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Section from '..';
+import Section from '@bangumi/design/components/Section/index.tsx';
 
 it('should render title and content', () => {
   const { getByText } = render(<Section title='标题'>内容</Section>);

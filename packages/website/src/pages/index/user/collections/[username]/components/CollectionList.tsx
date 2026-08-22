@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { CollectionType, SlimSubject, SubjectType } from '@bangumi/client/client';
-import { Image, Pagination, Select, toast, Typography } from '@bangumi/design';
+import type { CollectionType, SlimSubject, SubjectType } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Image, Pagination, Select, toast, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getSubjectLink } from '@bangumi/utils/pages';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { useUser } from '@bangumi/website/hooks/use-user';
-import { useUserSubjectCollections } from '@bangumi/website/hooks/use-user-collections';
-
-import { COLLECTION_LABELS } from '../../../components/constants';
+import { getSubjectLink } from '@bangumi/utils/pages.ts';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
+import { useUserSubjectCollections } from '@bangumi/website/hooks/use-user-collections.ts';
+import { COLLECTION_LABELS } from '@bangumi/website/pages/index/user/components/constants.ts';
 
 const { Link } = Typography;
 

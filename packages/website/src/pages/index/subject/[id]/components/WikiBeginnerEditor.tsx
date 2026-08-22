@@ -5,11 +5,11 @@ import { nanoid } from 'nanoid';
 import type { JSX } from 'react';
 import React, { createContext, useContext } from 'react';
 
-import { Input } from '@bangumi/design';
-import { Cursor, Minus, Plus, VerticalLeft, VerticalRight } from '@bangumi/icons';
+import { Input } from '@bangumi/design/index.tsx';
+import { Cursor, Minus, Plus, VerticalLeft, VerticalRight } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { WikiElement } from '@bangumi/utils';
-import { reorder } from '@bangumi/website/utils';
+import { WikiElement } from '@bangumi/utils/index.ts';
+import { reorder } from '@bangumi/website/utils/index.ts';
 
 const splitPath = (path: string) =>
   path.split('.').map((v) => {

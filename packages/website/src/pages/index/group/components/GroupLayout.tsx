@@ -2,18 +2,18 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import type { Group } from '@bangumi/client/client';
-import { Button, Layout, Section, Tab } from '@bangumi/design';
-import { ArrowRightCircle } from '@bangumi/icons';
+import type { Group } from '@bangumi/client/client.ts';
+import { Button, Layout, Section, Tab } from '@bangumi/design/index.tsx';
+import { ArrowRightCircle } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { keyBy } from '@bangumi/utils';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useGroupMembers } from '@bangumi/website/hooks/use-group-members';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { keyBy } from '@bangumi/utils/index.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useGroupMembers } from '@bangumi/website/hooks/use-group-members.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { GroupHeader } from './GroupHeader';
-import GroupNavigation from './GroupNavigation';
-import { UserCard } from './UserCard';
+import { GroupHeader } from './GroupHeader.tsx';
+import GroupNavigation from './GroupNavigation.tsx';
+import { UserCard } from './UserCard.tsx';
 
 export enum GroupTabs {
   Index = 'index',

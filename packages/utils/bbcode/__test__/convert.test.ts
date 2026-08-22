@@ -1,6 +1,6 @@
-import { STICKER_DOMAIN_URL } from '../constants';
-import { convert } from '../convert';
-import type { CodeNodeTypes, NodeTypes, VNode } from '../types';
+import { STICKER_DOMAIN_URL } from '@bangumi/utils/bbcode/constants.ts';
+import { convert } from '@bangumi/utils/bbcode/convert.ts';
+import type { CodeNodeTypes, NodeTypes, VNode } from '@bangumi/utils/bbcode/types.ts';
 
 describe('convert bbcode to html vnode', () => {
   test('basic bbcode', () => {

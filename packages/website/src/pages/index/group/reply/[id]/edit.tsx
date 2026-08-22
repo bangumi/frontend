@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSWRConfig } from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { GroupTopic } from '@bangumi/client/client';
-import { EditorForm, toast, Typography } from '@bangumi/design';
+import type { GroupTopic } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { EditorForm, toast, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import { OperationNeedLoginError } from '@bangumi/website/error';
-import useGroupPost from '@bangumi/website/hooks/use-group-post';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { OperationNeedLoginError } from '@bangumi/website/error.ts';
+import useGroupPost from '@bangumi/website/hooks/use-group-post.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const form = css({
   display: 'flex',

@@ -1,17 +1,17 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { Layout, Pagination, Section, Tab } from '@bangumi/design';
+import { Layout, Pagination, Section, Tab } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import type { IndexOrder } from '@bangumi/website/hooks/use-indexes';
-import { useIndexes } from '@bangumi/website/hooks/use-indexes';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import type { IndexOrder } from '@bangumi/website/hooks/use-indexes.ts';
+import { useIndexes } from '@bangumi/website/hooks/use-indexes.ts';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
 
-import IndexCard from './components/IndexCard';
-import IndexChannelSidebar from './components/IndexChannelSidebar';
+import IndexCard from './components/IndexCard.tsx';
+import IndexChannelSidebar from './components/IndexChannelSidebar.tsx';
 
 const PAGE_SIZE = 20;
 

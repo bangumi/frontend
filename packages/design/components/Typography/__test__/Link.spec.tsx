@@ -3,7 +3,7 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import Link from '../Link';
+import Link from '@bangumi/design/components/Typography/Link.tsx';
 
 const LinkTestWrapper: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   return <MemoryRouter>{children}</MemoryRouter>;

@@ -1,18 +1,17 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Pagination } from '@bangumi/design';
+import { Pagination } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { useUser } from '@bangumi/website/hooks/use-user';
-
-import TopicForm from '../../components/TopicForm';
-import { useGroupContext } from '..';
-import TopicsTable from '../components/TopicsTable';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useGroupTopics } from '@bangumi/website/hooks/use-group-topics.ts';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
+import TopicsTable from '@bangumi/website/pages/index/group/[name]/components/TopicsTable.tsx';
+import { useGroupContext } from '@bangumi/website/pages/index/group/[name]/index.tsx';
+import TopicForm from '@bangumi/website/pages/index/group/components/TopicForm.tsx';
 
 const pagination = css({
   marginTop: '20px',

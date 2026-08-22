@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { Topic } from '@bangumi/client/topic';
+import { ozaClient } from '@bangumi/client/index.ts';
+import type { Topic } from '@bangumi/client/topic.ts';
 
 interface UseGroupTopicsRet {
   data: Topic[] | undefined;

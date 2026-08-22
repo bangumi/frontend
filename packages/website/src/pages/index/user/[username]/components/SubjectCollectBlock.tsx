@@ -1,13 +1,15 @@
 import React from 'react';
 
-import type { SlimSubject, User } from '@bangumi/client/client';
-import { CollectionType } from '@bangumi/client/client';
-import { Image, Typography } from '@bangumi/design';
+import type { SlimSubject, User } from '@bangumi/client/client.ts';
+import { CollectionType } from '@bangumi/client/client.ts';
+import { Image, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getSubjectLink, getUserCollectionsLink } from '@bangumi/utils/pages';
-import { useUserSubjectCollections } from '@bangumi/website/hooks/use-user-collections';
-
-import { COLLECTION_LABELS, SUBJECT_BLOCKS } from '../../components/constants';
+import { getSubjectLink, getUserCollectionsLink } from '@bangumi/utils/pages.ts';
+import { useUserSubjectCollections } from '@bangumi/website/hooks/use-user-collections.ts';
+import {
+  COLLECTION_LABELS,
+  SUBJECT_BLOCKS,
+} from '@bangumi/website/pages/index/user/components/constants.ts';
 
 const { Link } = Typography;
 

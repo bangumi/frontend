@@ -2,16 +2,16 @@ import { ok } from '@oazapfts/runtime';
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { Subject, SubjectInterest, UpdateSubjectProgress } from '@bangumi/client/client';
-import { CollectionType, SubjectType } from '@bangumi/client/client';
-import { Button, toast, Typography } from '@bangumi/design';
+import type { Subject, SubjectInterest, UpdateSubjectProgress } from '@bangumi/client/client.ts';
+import { CollectionType, SubjectType } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Button, toast, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getSubjectStatsLink } from '@bangumi/utils/pages';
-import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { getSubjectStatsLink } from '@bangumi/utils/pages.ts';
+import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { COLLECT_DESC, makeDescriptiveTime } from './subject-common';
+import { COLLECT_DESC, makeDescriptiveTime } from './subject-common.ts';
 
 const { Link } = Typography;
 

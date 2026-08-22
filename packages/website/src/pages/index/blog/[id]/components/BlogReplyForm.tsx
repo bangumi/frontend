@@ -1,8 +1,8 @@
 import { Turnstile } from '@marsidev/react-turnstile';
 import React, { memo, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import EditorForm from '@bangumi/design/components/EditorForm';
+import { ozaClient } from '@bangumi/client/index.ts';
+import EditorForm from '@bangumi/design/components/EditorForm/index.tsx';
 
 interface BlogReplyFormProps {
   entryId: number;

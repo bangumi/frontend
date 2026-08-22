@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import React, { memo } from 'react';
 
-import { Bold, Image, Italic, Link, Size, Tv, Underscore } from '@bangumi/icons';
-
-import Popover from '../Popover';
-import StickerPicker from '../StickerPicker';
+import Popover from '@bangumi/design/components/Popover/index.tsx';
+import StickerPicker from '@bangumi/design/components/StickerPicker/index.tsx';
+import { Bold, Image, Italic, Link, Size, Tv, Underscore } from '@bangumi/icons/index.tsx';
 
 interface ToolboxProps {
   handleClickEvent: (type: string, payload?: unknown) => void;

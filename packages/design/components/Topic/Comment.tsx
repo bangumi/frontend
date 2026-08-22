@@ -2,23 +2,23 @@ import type { FC } from 'react';
 import React, { memo, useCallback, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic';
-import { State } from '@bangumi/client/topic';
-import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons';
+import type { Reply, ReplyBase, SlimUser } from '@bangumi/client/topic.ts';
+import { State } from '@bangumi/client/topic.ts';
+import Avatar from '@bangumi/design/components/Avatar/index.tsx';
+import EditorForm from '@bangumi/design/components/EditorForm/index.tsx';
+import RichContent from '@bangumi/design/components/RichContent/index.tsx';
+import { toast } from '@bangumi/design/components/Toast/index.tsx';
+import Typography from '@bangumi/design/components/Typography/index.tsx';
+import { OriginalPoster, TopicClosed, TopicReopen, TopicSilent } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
 
-import Avatar from '../../components/Avatar';
-import EditorForm from '../../components/EditorForm';
-import RichContent from '../../components/RichContent';
-import Typography from '../../components/Typography';
-import { toast } from '../Toast';
-import CommentActions from './CommentActions';
-import CommentInfo from './CommentInfo';
-import Reactions from './Reactions';
-import ReplyForm from './ReplyForm';
-import type { TopicApi } from './topic-api';
-import { groupTopicApi } from './topic-api';
+import CommentActions from './CommentActions.tsx';
+import CommentInfo from './CommentInfo.tsx';
+import Reactions from './Reactions.tsx';
+import ReplyForm from './ReplyForm.tsx';
+import type { TopicApi } from './topic-api.ts';
+import { groupTopicApi } from './topic-api.ts';
 
 // 昵称/签名/内容可能包含长文本或 URL，允许换行避免移动端水平溢出；
 // tip 是 flex 容器，内部 flex 项默认 min-width: auto 不收缩，需显式允许收缩；

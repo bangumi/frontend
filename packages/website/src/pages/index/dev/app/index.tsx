@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
 const page = css({ paddingTop: '8px' });
 

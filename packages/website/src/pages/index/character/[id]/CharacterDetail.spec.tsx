@@ -3,11 +3,11 @@ import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { SWRConfig } from 'swr';
 
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import CharacterDetail from './CharacterDetail';
-import { character174916Fixture as fixture } from './fixtures/character-174916';
+import CharacterDetail from './CharacterDetail.tsx';
+import { character174916Fixture as fixture } from './fixtures/character-174916.ts';
 
 describe('CharacterDetail', () => {
   const characterID = fixture.character.id;

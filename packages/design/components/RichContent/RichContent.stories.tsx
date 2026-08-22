@@ -1,7 +1,7 @@
 import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
-import RichContent from '.';
+import RichContent from './index.tsx';
 
 const input = `
 又名：CUP人生茶话会

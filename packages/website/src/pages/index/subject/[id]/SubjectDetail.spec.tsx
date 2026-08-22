@@ -6,14 +6,14 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import type { SubjectHomeResponse } from '@bangumi/client/client';
-import { CollectionType, EpisodeCollectionStatus } from '@bangumi/client/client';
-import { UserProvider } from '@bangumi/website/hooks/use-user';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import type { SubjectHomeResponse } from '@bangumi/client/client.ts';
+import { CollectionType, EpisodeCollectionStatus } from '@bangumi/client/client.ts';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
+import fixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import fixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
-import SubjectDetail from './components/SubjectDetail';
+import SubjectDetail from './components/SubjectDetail.tsx';
 
 const homeData = fixture as unknown as SubjectHomeResponse;
 

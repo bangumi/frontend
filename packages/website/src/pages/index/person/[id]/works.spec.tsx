@@ -11,11 +11,11 @@ import {
   personIndexesFixture,
   personRelationsFixture,
   personWorksFixture,
-} from '@bangumi/website/mocks/fixtures/p1/persons/21884';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+} from '@bangumi/website/mocks/fixtures/p1/persons/21884/index.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import PersonWorksPage from './works';
+import PersonWorksPage from './works.tsx';
 
 vi.mock('react-router-dom', async () => {
   return {

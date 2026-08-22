@@ -5,12 +5,12 @@ export {
   WikiArrayItem,
   stringify as stringifyWiki,
 } from '@bgm38/wiki';
-export { toWikiElement, fromWikiElement, WikiElement, mergeWiki, WikiTemplate } from './wiki';
+export { toWikiElement, fromWikiElement, WikiElement, mergeWiki, WikiTemplate } from './wiki.ts';
 export type { Wiki } from '@bgm38/wiki';
-export { formatSubjectInfobox } from './infobox';
-export type { Infobox, InfoboxItem, InfoboxValue } from './infobox';
-export * from './bbcode';
-export { ALLOWED_REACTIONS, getReactionEmojiUrl } from './reactions';
+export { formatSubjectInfobox } from './infobox.ts';
+export type { Infobox, InfoboxItem, InfoboxValue } from './infobox.ts';
+export * from './bbcode/index.ts';
+export { ALLOWED_REACTIONS, getReactionEmojiUrl } from './reactions.ts';
 
 /**
  * 输入一个对象数组，提取对象中的某个值作为新对象中的键，值为对象本身

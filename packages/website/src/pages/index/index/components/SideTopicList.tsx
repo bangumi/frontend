@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Avatar, Typography } from '@bangumi/design';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
 
 const { Link } = Typography;
 

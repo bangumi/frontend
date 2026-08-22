@@ -10,7 +10,7 @@ import {
   stringifyWiki,
   toWikiElement,
   WikiTemplate,
-} from './index';
+} from './index.ts';
 
 const dirname = import.meta.dirname;
 

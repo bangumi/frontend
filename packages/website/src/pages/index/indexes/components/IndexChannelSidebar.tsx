@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Button, Section } from '@bangumi/design';
+import { Button, Section } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const actions = css({
   display: 'flex',

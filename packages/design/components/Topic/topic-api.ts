@@ -1,5 +1,5 @@
-import { ozaClient } from '@bangumi/client';
-import type { CreateReply, ErrorResponse, TurnstileToken } from '@bangumi/client/client';
+import type { CreateReply, ErrorResponse, TurnstileToken } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 话题相关操作的统一返回，客户端只关心 200 与错误信息 */
 type TopicApiResult<T> =

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-import { useFixtures } from '../common/fixtures';
+import { useFixtures } from '@bangumi/website/e2e/common/fixtures.ts';
 
 test.describe('404', () => {
   test('返回首页', async ({ page }) => {

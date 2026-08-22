@@ -3,11 +3,11 @@ import type { SubmitErrorHandler, SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 
-import type { BlogEntry } from '@bangumi/client/client';
-import { EditorForm, Form, Input, Radio, toast } from '@bangumi/design';
+import type { BlogEntry } from '@bangumi/client/client.ts';
+import { EditorForm, Form, Input, Radio, toast } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
-import { createBlogEntry, updateBlogEntry } from '@bangumi/website/hooks/use-blog-write';
+import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha.tsx';
+import { createBlogEntry, updateBlogEntry } from '@bangumi/website/hooks/use-blog-write.ts';
 
 interface FormData {
   title: string;

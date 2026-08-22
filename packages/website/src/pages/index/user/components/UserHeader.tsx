@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import type { User } from '@bangumi/client/client';
-import { Avatar } from '@bangumi/design';
+import type { User } from '@bangumi/client/client.ts';
+import { Avatar } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserCollectionsLink, getUserProfileLink } from '@bangumi/utils/pages';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { getUserCollectionsLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const header = css({
   position: 'relative',

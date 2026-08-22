@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { ozaClient } from '@bangumi/client';
-import type { CollectionType, Subject, SubjectInterestComment } from '@bangumi/client/client';
+import type { CollectionType, Subject, SubjectInterestComment } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import Reactions from '@bangumi/design/components/Topic/Reactions.tsx';
 import {
   Button,
   EditorForm,
@@ -13,18 +14,17 @@ import {
   Tab,
   toast,
   Typography,
-} from '@bangumi/design';
-import Reactions from '@bangumi/design/components/Topic/Reactions';
+} from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getSubjectCommentsLink, getUserProfileLink } from '@bangumi/utils/pages';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { getSubjectCommentsLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import TurnstileCaptcha from '@bangumi/website/components/TurnstileCaptcha.tsx';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { subjectCommentApi } from './subject-comment-api';
-import { COLLECT_DESC, makeDescriptiveTime } from './subject-common';
-import { SubjectHeader } from './SubjectDetail';
-import SubjectSummaryCard from './SubjectSummaryCard';
+import { subjectCommentApi } from './subject-comment-api.ts';
+import { COLLECT_DESC, makeDescriptiveTime } from './subject-common.ts';
+import { SubjectHeader } from './SubjectDetail.tsx';
+import SubjectSummaryCard from './SubjectSummaryCard.tsx';
 
 const { Link } = Typography;
 

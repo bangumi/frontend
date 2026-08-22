@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Message from '..';
+import Message from '@bangumi/design/components/Message/index.tsx';
 
 describe('<Message />', () => {
   it('should be render a Message', () => {

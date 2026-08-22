@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 
-import type { SlimGroup } from '@bangumi/client/client';
-import type { ButtonProps } from '@bangumi/design';
-import { Button } from '@bangumi/design';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import type { SlimGroup } from '@bangumi/client/client.ts';
+import type { ButtonProps } from '@bangumi/design/index.tsx';
+import { Button } from '@bangumi/design/index.tsx';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 export interface GroupActionsProps {
   group: SlimGroup;

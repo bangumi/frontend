@@ -1,5 +1,5 @@
-import { render, renderNode, renderNodes } from '../html';
-import type { VNode } from '../types';
+import { render, renderNode, renderNodes } from '@bangumi/utils/bbcode/html.ts';
+import type { VNode } from '@bangumi/utils/bbcode/types.ts';
 
 describe('html render vnode', () => {
   test('render multi style', () => {

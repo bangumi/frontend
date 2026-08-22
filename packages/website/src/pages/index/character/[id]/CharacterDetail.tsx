@@ -3,7 +3,6 @@ import dayjs from 'dayjs';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { ozaClient } from '@bangumi/client';
 import type {
   Character,
   CharacterRelation,
@@ -12,8 +11,9 @@ import type {
   MonoPhoto,
   PersonCollect,
   SlimIndex,
-} from '@bangumi/client/client';
-import { Avatar, RichContent, toast, Typography } from '@bangumi/design';
+} from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Avatar, RichContent, toast, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
   getCharacterLink,
@@ -21,15 +21,15 @@ import {
   getPersonLink,
   getSubjectLink,
   getUserProfileLink,
-} from '@bangumi/utils/pages';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription';
+} from '@bangumi/utils/pages.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription.tsx';
 import type {
   CharacterComment,
   CharacterHomeResponse,
-} from '@bangumi/website/hooks/use-character-home';
-import { useCharacterHome } from '@bangumi/website/hooks/use-character-home';
-import { useUser } from '@bangumi/website/hooks/use-user';
+} from '@bangumi/website/hooks/use-character-home.ts';
+import { useCharacterHome } from '@bangumi/website/hooks/use-character-home.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const page = css({
   display: 'grid',

@@ -8,21 +8,21 @@ import type {
   PersonRelation,
   PersonWork,
   SlimIndex,
-} from '@bangumi/client/client';
-import { RichContent, Typography } from '@bangumi/design';
+} from '@bangumi/client/client.ts';
+import { RichContent, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
   getCharacterLink,
   getPersonLink,
   getSubjectLink,
   getUserProfileLink,
-} from '@bangumi/utils/pages';
-import CollectSidePanel from '@bangumi/website/components/CollectSidePanel';
-import IndexSidePanel from '@bangumi/website/components/IndexSidePanel';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home';
+} from '@bangumi/utils/pages.ts';
+import CollectSidePanel from '@bangumi/website/components/CollectSidePanel.tsx';
+import IndexSidePanel from '@bangumi/website/components/IndexSidePanel.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import type { PersonHomeData } from '@bangumi/website/hooks/use-person-home.ts';
 
-import PersonLayout from './components/PersonLayout';
+import PersonLayout from './components/PersonLayout.tsx';
 
 const page = css({
   padding: '10px 15px 24px',

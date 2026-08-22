@@ -1,10 +1,10 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import { useEpisodePage } from '@bangumi/website/hooks/use-episode-page';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import { useEpisodePage } from '@bangumi/website/hooks/use-episode-page.ts';
 
-import EpisodeDetail from './EpisodeDetail';
+import EpisodeDetail from './EpisodeDetail.tsx';
 
 function EpisodePage() {
   const { id } = useParams();

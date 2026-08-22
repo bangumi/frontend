@@ -1,6 +1,8 @@
 import type { StorybookConfig } from '@storybook/react-vite';
 import svgr from 'vite-plugin-svgr';
 
+import { workspaceAliases } from '../../../workspace-aliases.ts';
+
 export default {
   stories: ['../components/**/*.stories.@(js|jsx|ts|tsx)', '../../icons/index.stories.tsx'],
   addons: ['@storybook/addon-links', '@storybook/addon-themes'],
@@ -56,6 +58,12 @@ export default {
         },
       }),
     );
+    viteConfig.resolve ??= {};
+    viteConfig.resolve.alias = {
+      ...viteConfig.resolve.alias,
+      ...workspaceAliases,
+    };
+
     return viteConfig;
   },
 } satisfies StorybookConfig;

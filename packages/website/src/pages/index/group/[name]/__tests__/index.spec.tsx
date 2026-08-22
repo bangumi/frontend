@@ -4,11 +4,11 @@ import { http, HttpResponse } from 'msw';
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
 
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import GroupPage from '@bangumi/website/pages/index/group/[name]';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import GroupPage from '@bangumi/website/pages/index/group/[name]/index.tsx';
+import GroupHome from '@bangumi/website/pages/index/group/[name]/index/index.tsx';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import GroupHome from '../index/index';
 import RecentTopics from './fixtures/recent-topics.json';
 import Sandbox from './fixtures/sandbox.json';
 import sandboxMembers from './fixtures/sandbox-members.json';

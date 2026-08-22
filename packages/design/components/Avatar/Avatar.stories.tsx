@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Avatar from '.';
+import Avatar from './index.tsx';
 
 const componentMeta: Meta<typeof Avatar> = {
   title: 'modern/Avatar',

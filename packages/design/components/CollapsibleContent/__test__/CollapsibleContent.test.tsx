@@ -1,8 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
 import React, { useState } from 'react';
 
-import type { CollapsibleContentProps } from '../index';
-import CollapsibleContent from '../index';
+import type { CollapsibleContentProps } from '@bangumi/design/components/CollapsibleContent/index.tsx';
+import CollapsibleContent from '@bangumi/design/components/CollapsibleContent/index.tsx';
 
 const Template = (args: CollapsibleContentProps) => {
   const [collapsed, setCollapsed] = useState(args.collapsed);

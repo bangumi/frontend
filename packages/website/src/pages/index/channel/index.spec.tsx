@@ -7,14 +7,14 @@ import type {
   SlimBlogEntry,
   SubjectTag,
   TrendingSubject,
-} from '@bangumi/client/client';
-import { CollectionType } from '@bangumi/client/client';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+} from '@bangumi/client/client.ts';
+import { CollectionType } from '@bangumi/client/client.ts';
+import topicsJson from '@bangumi/website/mocks/fixtures/p1/channels/2/topics-GET.json';
+import subjectsJson from '@bangumi/website/mocks/fixtures/p1/trending/subjects-GET.json';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import topicsJson from '../../../mocks/fixtures/p1/channels/2/topics-GET.json';
-import subjectsJson from '../../../mocks/fixtures/p1/trending/subjects-GET.json';
-import { ChannelPageContent } from '.';
-import { CHANNEL_CONFIGS } from './config';
+import { CHANNEL_CONFIGS } from './config.ts';
+import { ChannelPageContent } from './index.tsx';
 
 const subjects = subjectsJson.data.slice(0, 3) as unknown as TrendingSubject[];
 const topics = topicsJson.data

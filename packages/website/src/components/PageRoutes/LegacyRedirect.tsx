@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { getLegacyPageLink } from '@bangumi/utils/pages';
-import { redirectTo } from '@bangumi/website/utils/route';
+import { getLegacyPageLink } from '@bangumi/utils/pages.ts';
+import { redirectTo } from '@bangumi/website/utils/route.ts';
 
 const LegacyRedirect = () => {
   const { pathname, search, hash } = useLocation();

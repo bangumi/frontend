@@ -1,10 +1,10 @@
 import React from 'react';
 
-import type { User } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { User } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getBlogLink, getUserBlogsPageLink } from '@bangumi/utils/pages';
-import { useUserBlogs } from '@bangumi/website/hooks/use-user-blogs';
+import { getBlogLink, getUserBlogsPageLink } from '@bangumi/utils/pages.ts';
+import { useUserBlogs } from '@bangumi/website/hooks/use-user-blogs.ts';
 
 const { Link } = Typography;
 

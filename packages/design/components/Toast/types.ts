@@ -1,4 +1,4 @@
-import type { MessageType } from '../Message';
+import type { MessageType } from '@bangumi/design/components/Message/index.tsx';
 
 export interface Toast {
   message: string;

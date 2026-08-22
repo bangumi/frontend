@@ -1,9 +1,9 @@
 import React from 'react';
 
-import type { SlimSubject } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { SlimSubject } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getSubjectLink } from '@bangumi/utils/pages';
+import { getSubjectLink } from '@bangumi/utils/pages.ts';
 
 const { Link } = Typography;
 

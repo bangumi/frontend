@@ -2,7 +2,7 @@ import { ok } from '@oazapfts/runtime';
 import type { KeyedMutator } from 'swr';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 export interface UseSubjectPostRet {
   data: ozaClient.Post;

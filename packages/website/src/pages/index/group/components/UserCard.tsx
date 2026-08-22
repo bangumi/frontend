@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { Image, Typography } from '@bangumi/design';
+import { Image, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
 
 // TODO: 重写 Link
 const { Link } = Typography;

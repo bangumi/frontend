@@ -1,11 +1,11 @@
 import React, { forwardRef } from 'react';
 
+import Button from '@bangumi/design/components/Button/index.tsx';
+import Link from '@bangumi/design/components/Typography/Link.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
-import Button from '../Button';
-import Link from '../Typography/Link';
-import type { EditorProps } from './Editor';
-import Editor from './Editor';
+import type { EditorProps } from './Editor.tsx';
+import Editor from './Editor.tsx';
 
 const editorForm = css({
   display: 'flex',

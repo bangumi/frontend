@@ -3,7 +3,7 @@ import { WikiArrayItem, WikiItem } from '@bgm38/wiki';
 import { isArray, isEmpty, isEqual, keyBy, merge, omitBy } from 'lodash-es';
 import { nanoid } from 'nanoid';
 
-// import { keyBy } from '.';
+// import { keyBy } from './index.ts';
 
 type Value = string | WikiElement[];
 

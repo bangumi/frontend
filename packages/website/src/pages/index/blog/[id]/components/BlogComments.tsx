@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import { Avatar, toast } from '@bangumi/design';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Avatar, toast } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import type { BlogComment } from '@bangumi/website/hooks/use-blog';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import type { BlogComment } from '@bangumi/website/hooks/use-blog.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import BlogCommentItem from './BlogCommentItem';
-import BlogReplyForm from './BlogReplyForm';
+import BlogCommentItem from './BlogCommentItem.tsx';
+import BlogReplyForm from './BlogReplyForm.tsx';
 
 const commentList = css({
   borderTop: '1px solid #e8e3e3',

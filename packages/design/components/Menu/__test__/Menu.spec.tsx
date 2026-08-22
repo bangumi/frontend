@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Menu from '..';
+import Menu from '@bangumi/design/components/Menu/index.tsx';
 
 const items = [
   {

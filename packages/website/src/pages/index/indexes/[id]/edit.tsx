@@ -1,14 +1,13 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import useIndex from '@bangumi/website/hooks/use-index';
-
-import IndexForm from '../components/IndexForm';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import useIndex from '@bangumi/website/hooks/use-index.ts';
+import IndexForm from '@bangumi/website/pages/index/indexes/components/IndexForm.tsx';
 
 const page = css({
   display: 'grid',

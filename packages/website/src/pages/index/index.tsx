@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import { PageNeedLoginError } from '@bangumi/website/error';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { PageNeedLoginError } from '@bangumi/website/error.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import HomePage from './index/components/HomePage';
+import HomePage from './index/components/HomePage.tsx';
 
 function HomeIndex() {
   const { user, isLoading } = useUser();

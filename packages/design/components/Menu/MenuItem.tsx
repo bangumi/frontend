@@ -3,7 +3,7 @@ import React from 'react';
 
 import { css, cx } from '@bangumi/styled-system/css';
 
-import { useMenuContext } from '.';
+import { useMenuContext } from './index.tsx';
 
 const menuItem = css({
   cursor: 'pointer',

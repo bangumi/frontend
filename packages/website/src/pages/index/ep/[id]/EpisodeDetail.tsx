@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 
-import type { Episode, Reply } from '@bangumi/client/client';
-import { EpisodeType } from '@bangumi/client/client';
-import { Topic, Typography } from '@bangumi/design';
-import ReplyForm from '@bangumi/design/components/Topic/ReplyForm';
-import { ArrowDown } from '@bangumi/icons';
+import type { Episode, Reply } from '@bangumi/client/client.ts';
+import { EpisodeType } from '@bangumi/client/client.ts';
+import ReplyForm from '@bangumi/design/components/Topic/ReplyForm.tsx';
+import { Topic, Typography } from '@bangumi/design/index.tsx';
+import { ArrowDown } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
   getEpisodeLink,
@@ -16,13 +16,13 @@ import {
   getSubjectPersonsLink,
   getSubjectRelationsLink,
   getSubjectReviewsLink,
-} from '@bangumi/utils/pages';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import type { EpisodePageData } from '@bangumi/website/hooks/use-episode-page';
-import { useUser } from '@bangumi/website/hooks/use-user';
+} from '@bangumi/utils/pages.ts';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import type { EpisodePageData } from '@bangumi/website/hooks/use-episode-page.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { epCommentApi } from './ep-comment-api';
+import { epCommentApi } from './ep-comment-api.ts';
 
 const { Comment } = Topic;
 

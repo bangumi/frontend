@@ -12,6 +12,8 @@ import unusedImportsPlugin from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+import noRelativeParentImport from './eslint/no-relative-parent-import.mjs';
+
 const tsconfigRootDir = path.dirname(fileURLToPath(import.meta.url));
 
 const allLintFiles = ['**/*.{js,cjs,mjs,jsx,ts,mts,cts,tsx}'];
@@ -56,6 +58,11 @@ export default [
       },
     },
     plugins: {
+      'first-part': {
+        rules: {
+          'no-relative-parent-import': noRelativeParentImport,
+        },
+      },
       import: importPlugin,
       'simple-import-sort': simpleImportSortPlugin,
       unicorn: unicornPlugin,
@@ -78,6 +85,7 @@ export default [
     },
     rules: {
       curly: 'error',
+      'first-part/no-relative-parent-import': 'error',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       'no-else-return': ['error', { allowElseIf: false }],

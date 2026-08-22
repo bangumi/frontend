@@ -5,13 +5,13 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import { EpisodeType } from '@bangumi/client/client';
-import { Button, Form, Input, toast, Typography } from '@bangumi/design';
+import { EpisodeType } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { Button, Form, Input, toast, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
 const page = css({
   padding: '32px 15px 48px',

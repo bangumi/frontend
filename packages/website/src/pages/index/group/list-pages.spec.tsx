@@ -4,14 +4,14 @@ import React, { Suspense } from 'react';
 
 import topicsFixture from '@bangumi/website/mocks/fixtures/p1/groups/-/topics-GET.json';
 import groupsFixture from '@bangumi/website/mocks/fixtures/p1/groups-GET.json';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import GroupAll from './all';
-import GroupDiscover from './discover';
-import GroupMine from './mine';
-import GroupMyReply from './my-reply';
-import GroupMyTopic from './my-topic';
+import GroupAll from './all.tsx';
+import GroupDiscover from './discover.tsx';
+import GroupMine from './mine.tsx';
+import GroupMyReply from './my-reply.tsx';
+import GroupMyTopic from './my-topic.tsx';
 
 function mockGroupAPI() {
   mockServer.use(

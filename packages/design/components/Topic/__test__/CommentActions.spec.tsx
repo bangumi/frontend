@@ -2,8 +2,8 @@ import { render as _render } from '@testing-library/react';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import type { CommentActionsProps } from '../CommentActions';
-import CommentActions from '../CommentActions';
+import type { CommentActionsProps } from '@bangumi/design/components/Topic/CommentActions.tsx';
+import CommentActions from '@bangumi/design/components/Topic/CommentActions.tsx';
 
 const render = (props: CommentActionsProps) =>
   _render(

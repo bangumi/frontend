@@ -1,9 +1,10 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Button from '../Button';
-import type { PopoverProps } from '.';
-import Popover from '.';
+import Button from '@bangumi/design/components/Button/index.tsx';
+
+import type { PopoverProps } from './index.tsx';
+import Popover from './index.tsx';
 
 const storyMeta: Meta<typeof Popover> = {
   title: 'modern/Popover',

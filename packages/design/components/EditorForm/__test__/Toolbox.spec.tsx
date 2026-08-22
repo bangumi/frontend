@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import Toolbox from '../Toolbox';
+import Toolbox from '@bangumi/design/components/EditorForm/Toolbox.tsx';
 
 describe('EditorForm > Toolbox', () => {
   it('render with default classNames', () => {

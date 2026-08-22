@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ErrorLayout from './ErrorBoundary/ErrorLayout';
+import ErrorLayout from './ErrorBoundary/ErrorLayout.tsx';
 
 function NotFound() {
   return <ErrorLayout>没有找到页面</ErrorLayout>;

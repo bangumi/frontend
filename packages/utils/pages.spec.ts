@@ -13,7 +13,7 @@ import {
   getUserIndexesPageLink,
   getUserMonoPageLink,
   getUserProfileLink,
-} from './pages';
+} from './pages.ts';
 
 describe('page links', () => {
   test('generates an internal subject link', () => {

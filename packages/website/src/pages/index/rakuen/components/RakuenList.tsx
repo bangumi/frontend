@@ -1,8 +1,8 @@
 import React from 'react';
 
-import type { RaKuenTopic } from '@bangumi/client/client';
-import { EpisodeType } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import type { RaKuenTopic } from '@bangumi/client/client.ts';
+import { EpisodeType } from '@bangumi/client/client.ts';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 import {
   getCharacterLink,
@@ -13,10 +13,9 @@ import {
   getSubjectLink,
   getSubjectTopicLink,
   getUserProfileLink,
-} from '@bangumi/utils/pages';
-import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription';
-
-import { topicListLink } from '../../group/components/topicListLink';
+} from '@bangumi/utils/pages.ts';
+import { makeDescriptiveTime } from '@bangumi/website/components/TimelineDescription.tsx';
+import { topicListLink } from '@bangumi/website/pages/index/group/components/topicListLink.ts';
 
 const listItem = css({
   display: 'flex',

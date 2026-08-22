@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { render, renderNode } from '../react';
-import type { VNode } from '../types';
+import { render, renderNode } from '@bangumi/utils/bbcode/react.tsx';
+import type { VNode } from '@bangumi/utils/bbcode/types.ts';
 
 describe('react render vnode', () => {
   test('render multi style', () => {

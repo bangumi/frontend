@@ -2,8 +2,8 @@ import type { PropsWithChildren } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Typography } from '@bangumi/design';
-import { PureLink } from '@bangumi/design/components/Typography/Link';
+import { PureLink } from '@bangumi/design/components/Typography/Link.tsx';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
 const errorContainer = css({

@@ -2,13 +2,13 @@ import { DateTime } from 'luxon';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import type { User } from '@bangumi/client/client';
+import type { User } from '@bangumi/client/client.ts';
 import { css } from '@bangumi/styled-system/css';
 import {
   makeDescriptiveTime,
   renderTimelineDescription,
-} from '@bangumi/website/components/TimelineDescription';
-import { useUserTimeline } from '@bangumi/website/hooks/use-user-timeline';
+} from '@bangumi/website/components/TimelineDescription.tsx';
+import { useUserTimeline } from '@bangumi/website/hooks/use-user-timeline.ts';
 
 const block = css({
   overflow: 'hidden',

@@ -2,19 +2,19 @@ import type { FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Avatar, Divider, Input, Menu } from '@bangumi/design';
-import { Notification, Search as SearchIcon } from '@bangumi/icons';
+import { Avatar, Divider, Input, Menu } from '@bangumi/design/index.tsx';
+import { Notification, Search as SearchIcon } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { UnreadableCodeError } from '@bangumi/utils';
-import { getUserProfileLink } from '@bangumi/utils/pages';
-import { useNotify } from '@bangumi/website/hooks/use-notify';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { ReactComponent as Logo } from '@bangumi/website/assets/logo.svg';
+import { ReactComponent as Musume1 } from '@bangumi/website/assets/musume_1.svg';
+import { ReactComponent as Musume2 } from '@bangumi/website/assets/musume_2.svg';
+import { ReactComponent as Musume3 } from '@bangumi/website/assets/musume_3.svg';
+import { ReactComponent as Musume4 } from '@bangumi/website/assets/musume_4.svg';
+import { useNotify } from '@bangumi/website/hooks/use-notify.tsx';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { ReactComponent as Logo } from '../../assets/logo.svg';
-import { ReactComponent as Musume1 } from '../../assets/musume_1.svg';
-import { ReactComponent as Musume2 } from '../../assets/musume_2.svg';
-import { ReactComponent as Musume3 } from '../../assets/musume_3.svg';
-import { ReactComponent as Musume4 } from '../../assets/musume_4.svg';
-import { useUser } from '../../hooks/use-user';
 import {
   animeSubMenu,
   bookSubMenu,
@@ -23,7 +23,7 @@ import {
   monoSubMenu,
   musicSubMenu,
   realSubMenu,
-} from './SubMenu';
+} from './SubMenu.tsx';
 
 // todo: SVG Sprites
 

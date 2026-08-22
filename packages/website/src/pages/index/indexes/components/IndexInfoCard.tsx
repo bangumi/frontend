@@ -1,14 +1,14 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { Index } from '@bangumi/client/client';
-import { Avatar, Typography } from '@bangumi/design';
+import type { Index } from '@bangumi/client/client.ts';
+import { Avatar, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
-import { render as renderBBCode } from '@bangumi/utils/bbcode/react';
-import { getUserProfileLink } from '@bangumi/utils/pages';
-import { useIndexCollection } from '@bangumi/website/hooks/use-index-collection';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets.ts';
+import { render as renderBBCode } from '@bangumi/utils/bbcode/react.tsx';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { useIndexCollection } from '@bangumi/website/hooks/use-index-collection.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 const { Link } = Typography;
 

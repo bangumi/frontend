@@ -5,14 +5,14 @@ import React, { Suspense } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import type { SlimSubject } from '@bangumi/client/client';
-import { CollectionType, SubjectType } from '@bangumi/client/client';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import type { SlimSubject } from '@bangumi/client/client.ts';
+import { CollectionType, SubjectType } from '@bangumi/client/client.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import { CollectionList } from './components/CollectionList';
+import { CollectionList } from './components/CollectionList.tsx';
 
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({ user: { id: 1, username: 'sai', nickname: 'Sai' } }),

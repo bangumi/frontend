@@ -1,5 +1,5 @@
-import { Parser } from '../parser';
-import type { CodeNodeTypes } from '../types';
+import { Parser } from '@bangumi/utils/bbcode/parser.ts';
+import type { CodeNodeTypes } from '@bangumi/utils/bbcode/types.ts';
 
 function getNodes(input: string): CodeNodeTypes[] {
   const p = new Parser(input);

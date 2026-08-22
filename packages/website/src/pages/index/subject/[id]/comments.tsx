@@ -1,15 +1,15 @@
 import React from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import type { CollectionType } from '@bangumi/client/client';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { useSubject } from '@bangumi/website/hooks/use-subject';
-import { useSubjectComments } from '@bangumi/website/hooks/use-subject-comments';
+import type { CollectionType } from '@bangumi/client/client.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { useSubject } from '@bangumi/website/hooks/use-subject.ts';
+import { useSubjectComments } from '@bangumi/website/hooks/use-subject-comments.ts';
 
-import SubjectComments from './components/SubjectComments';
+import SubjectComments from './components/SubjectComments.tsx';
 
 const PAGE_SIZE = 20;
 

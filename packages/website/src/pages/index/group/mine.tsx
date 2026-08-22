@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { GroupFilterMode, GroupSort } from '@bangumi/client/client';
-import { Layout, Pagination, Section } from '@bangumi/design';
+import { GroupFilterMode, GroupSort } from '@bangumi/client/client.ts';
+import { Layout, Pagination, Section } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useGroups } from '@bangumi/website/hooks/use-groups';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useGroups } from '@bangumi/website/hooks/use-groups.ts';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
 
-import GroupChannelSidebar from './components/GroupChannelSidebar';
-import GroupList from './components/GroupList';
+import GroupChannelSidebar from './components/GroupChannelSidebar.tsx';
+import GroupList from './components/GroupList.tsx';
 
 const PAGE_SIZE = 24;
 

@@ -5,6 +5,6 @@
  * 并再导出 `STICKER_DOMAIN_URL` 以兼容既有引用。
  */
 
-export { STICKER_DOMAIN_URL } from '../stickers';
+export { STICKER_DOMAIN_URL } from '@bangumi/utils/stickers.ts';
 
 export const BGM_STICKER_START_STR = '(bgm';

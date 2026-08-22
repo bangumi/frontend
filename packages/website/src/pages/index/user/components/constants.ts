@@ -1,4 +1,4 @@
-import { CollectionType, SubjectType } from '@bangumi/client/client';
+import { CollectionType, SubjectType } from '@bangumi/client/client.ts';
 
 /** 用户主页可展示的条目收藏模块（homepage 配置中的 block 名） */
 export const SUBJECT_BLOCK_LIST = [

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import type { SlimIndex } from '@bangumi/client/client';
-import { Typography } from '@bangumi/design';
+import type { SlimIndex } from '@bangumi/client/client.ts';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages';
+import { getIndexLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
 
 const { Link } = Typography;
 

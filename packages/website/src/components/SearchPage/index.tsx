@@ -1,7 +1,7 @@
 import type { FormEvent, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Search } from '@bangumi/icons';
+import { Search } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
 const searchArea = css({

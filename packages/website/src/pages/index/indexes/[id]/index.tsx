@@ -1,16 +1,15 @@
 import React from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 
-import { IndexRelatedCategory, SubjectType } from '@bangumi/client/client';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import useIndex from '@bangumi/website/hooks/use-index';
-import { useIndexRelated } from '@bangumi/website/hooks/use-index-related';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-
-import IndexDetail from '../components/IndexDetail';
-import type { RelatedFilter } from '../components/IndexRelatedList';
+import { IndexRelatedCategory, SubjectType } from '@bangumi/client/client.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import useIndex from '@bangumi/website/hooks/use-index.ts';
+import { useIndexRelated } from '@bangumi/website/hooks/use-index-related.ts';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import IndexDetail from '@bangumi/website/pages/index/indexes/components/IndexDetail.tsx';
+import type { RelatedFilter } from '@bangumi/website/pages/index/indexes/components/IndexRelatedList.tsx';
 
 const PAGE_SIZE = 20;
 

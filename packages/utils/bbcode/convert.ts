@@ -1,4 +1,5 @@
-import { getSticker } from '../stickers';
+import { getSticker } from '@bangumi/utils/stickers.ts';
+
 import type {
   BBCodeConverterContext,
   BBCodeOptions,
@@ -8,7 +9,7 @@ import type {
   ConverterFn,
   NodeTypes,
   VNode,
-} from './types';
+} from './types.ts';
 
 const BGM_HOST_ARR = [
   'chii.in',

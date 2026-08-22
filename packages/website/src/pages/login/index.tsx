@@ -4,19 +4,19 @@ import React, { useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useInput } from 'rooks';
 
-import { Button, Input, Message } from '@bangumi/design';
-import { Password, UserLogin } from '@bangumi/icons';
+import { Button, Input, Message } from '@bangumi/design/index.tsx';
+import { Password, UserLogin } from '@bangumi/icons/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import { redirectTo } from '@bangumi/website/utils/route';
-
+import Helmet from '@bangumi/website/components/Helmet.tsx';
 import {
   CaptureError,
   LoginErrorCode,
   PasswordUnMatchError,
   UnknownError,
   useUser,
-} from '../../hooks/use-user';
+} from '@bangumi/website/hooks/use-user.tsx';
+import { redirectTo } from '@bangumi/website/utils/route.ts';
+
 import { ReactComponent as LoginLogo } from './assets/login-logo.svg';
 
 const wrapper = css({

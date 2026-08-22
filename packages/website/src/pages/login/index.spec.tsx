@@ -6,11 +6,11 @@ import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
-import { redirectTo } from '@bangumi/website/utils/route';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { redirectTo } from '@bangumi/website/utils/route.ts';
 
-import { server as mockServer } from '../../mocks/server';
-import LoginPage from '.';
+import LoginPage from './index.tsx';
 
 vi.mock('@simplewebauthn/browser', () => ({
   startAuthentication: vi.fn(),

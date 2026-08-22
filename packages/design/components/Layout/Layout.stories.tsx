@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Layout from '.';
+import Layout from './index.tsx';
 
 const componentMeta: Meta<typeof Layout> = {
   title: 'Grid/Layout',

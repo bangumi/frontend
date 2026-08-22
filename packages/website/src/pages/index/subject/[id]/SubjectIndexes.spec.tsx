@@ -6,13 +6,13 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
+import { subject602059IndexesFixture } from '@bangumi/website/mocks/fixtures/p1/subjects/602059/indexes-GET.ts';
+import { subject602059Fixture } from '@bangumi/website/mocks/fixtures/p1/subjects/602059-GET.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import { subject602059IndexesFixture } from '../../../../mocks/fixtures/p1/subjects/602059/indexes-GET';
-import { subject602059Fixture } from '../../../../mocks/fixtures/p1/subjects/602059-GET';
-import SubjectIndexes from './components/SubjectIndexes';
+import SubjectIndexes from './components/SubjectIndexes.tsx';
 
 const subject = subject602059Fixture;
 const { data: indexes, total } = subject602059IndexesFixture;

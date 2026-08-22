@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
 import {
   aboutContent,
@@ -13,7 +13,7 @@ import {
   aboutSectionTitle,
   aboutTitle,
   inlineLink,
-} from './index';
+} from './index.tsx';
 
 const Link2Us: React.FC = () => (
   <>

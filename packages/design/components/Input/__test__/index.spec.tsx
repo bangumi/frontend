@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Input from '../index';
+import Input from '@bangumi/design/components/Input/index.tsx';
 
 describe('Input', () => {
   it('placeholder', () => {

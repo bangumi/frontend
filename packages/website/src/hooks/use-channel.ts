@@ -1,7 +1,6 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
 import type {
   ChannelSubjectTopic,
   FriendSubjectCollectionActivity,
@@ -9,8 +8,9 @@ import type {
   SubjectTag,
   SubjectType,
   TrendingSubject,
-} from '@bangumi/client/client';
-import { useUser } from '@bangumi/website/hooks/use-user';
+} from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 /**
  * 频道页各区块的数据请求相互独立，某个接口较慢或失败时只影响对应区块，

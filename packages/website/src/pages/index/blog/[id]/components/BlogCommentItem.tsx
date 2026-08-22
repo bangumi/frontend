@@ -1,15 +1,15 @@
 import type { FC } from 'react';
 import React, { memo, useState } from 'react';
 
-import { ozaClient } from '@bangumi/client';
-import type { CommentBase, SlimUser } from '@bangumi/client/client';
-import { Avatar, EditorForm, toast, Typography } from '@bangumi/design';
-import RichContent from '@bangumi/design/components/RichContent';
+import type { CommentBase, SlimUser } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
+import RichContent from '@bangumi/design/components/RichContent/index.tsx';
+import { Avatar, EditorForm, toast, Typography } from '@bangumi/design/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import { makeDescriptiveTime } from '@bangumi/website/pages/index/subject/[id]/components/subject-common.ts';
 
-import { makeDescriptiveTime } from '../../../subject/[id]/components/subject-common';
-import BlogReplyForm from './BlogReplyForm';
+import BlogReplyForm from './BlogReplyForm.tsx';
 
 const { Link } = Typography;
 

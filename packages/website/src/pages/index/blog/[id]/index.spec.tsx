@@ -6,10 +6,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import { UserProvider } from '@bangumi/website/hooks/use-user';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import BlogEntryPage from '.';
+import BlogEntryPage from './index.tsx';
 
 describe('BlogEntryPage', () => {
   const renderPage = async () => {

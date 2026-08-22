@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
-import { RaKuenTopicType } from '@bangumi/client/client';
+import { RaKuenTopicType } from '@bangumi/client/client.ts';
 import { css, cx } from '@bangumi/styled-system/css';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useRakuenTopics } from '@bangumi/website/hooks/use-rakuen-topics';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useRakuenTopics } from '@bangumi/website/hooks/use-rakuen-topics.ts';
 
-import RakuenList from './components/RakuenList';
+import RakuenList from './components/RakuenList.tsx';
 
 const pageHeader = css({
   padding: '0 0 12px',

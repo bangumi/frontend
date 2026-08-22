@@ -1,10 +1,11 @@
 import { Turnstile } from '@marsidev/react-turnstile';
 import React, { memo, useState } from 'react';
 
-import type { EditorFormProps } from '../../components/EditorForm';
-import EditorForm from '../../components/EditorForm';
-import type { TopicApi } from './topic-api';
-import { groupTopicApi } from './topic-api';
+import type { EditorFormProps } from '@bangumi/design/components/EditorForm/index.tsx';
+import EditorForm from '@bangumi/design/components/EditorForm/index.tsx';
+
+import type { TopicApi } from './topic-api.ts';
+import { groupTopicApi } from './topic-api.ts';
 
 interface ReplyFormProps extends EditorFormProps {
   topicId: number;

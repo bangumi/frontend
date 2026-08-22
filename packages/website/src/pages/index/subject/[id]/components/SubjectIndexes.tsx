@@ -1,16 +1,16 @@
 import dayjs from 'dayjs';
 import React from 'react';
 
-import type { IndexStats, SlimIndex, Subject } from '@bangumi/client/client';
-import { Avatar, Pagination, Typography } from '@bangumi/design';
+import type { IndexStats, SlimIndex, Subject } from '@bangumi/client/client.ts';
+import { Avatar, Pagination, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getIndexLink, getLegacyPageLink, getUserProfileLink } from '@bangumi/utils/pages';
+import { getIndexLink, getLegacyPageLink, getUserProfileLink } from '@bangumi/utils/pages.ts';
 import subjectTypeSprite from '@bangumi/website/assets/subject-type-sprite.png';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { SubjectHeader } from './SubjectDetail';
-import SubjectSummaryCard from './SubjectSummaryCard';
+import { SubjectHeader } from './SubjectDetail.tsx';
+import SubjectSummaryCard from './SubjectSummaryCard.tsx';
 
 const { Link } = Typography;
 

@@ -5,9 +5,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import userFixture from '@bangumi/website/mocks/fixtures/p1/users/sai-GET.json';
-import { server as mockServer } from '@bangumi/website/mocks/server';
-import UserCollectionsPage from '@bangumi/website/pages/index/user/collections/[username]';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
+import UserCollectionsPage from '@bangumi/website/pages/index/user/collections/[username]/index.tsx';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
 vi.mock('react-router-dom', async () => {
   return {

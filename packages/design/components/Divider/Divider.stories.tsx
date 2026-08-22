@@ -3,7 +3,7 @@ import React from 'react';
 
 import { css, cx } from '@bangumi/styled-system/css';
 
-import Divider from '.';
+import Divider from './index.tsx';
 
 const horizontalStyle = css({
   width: '60%',

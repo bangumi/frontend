@@ -1,13 +1,13 @@
 import { fireEvent, screen, within } from '@testing-library/react';
 import React from 'react';
 
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import topicsJson from '@bangumi/website/mocks/fixtures/p1/rakuen/topics-GET.json';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import topicsJson from '../../../mocks/fixtures/p1/rakuen/topics-GET.json';
-import RakuenIndex from '.';
+import RakuenIndex from './index.tsx';
 
 vi.mock('@bangumi/website/hooks/use-rakuen-topics', async () => {
-  const { data } = await import('../../../mocks/fixtures/p1/rakuen/topics-GET.json');
+  const { data } = await import('@bangumi/website/mocks/fixtures/p1/rakuen/topics-GET.json');
   return {
     useRakuenTopics: (type: string) => ({
       data: type === 'episode' ? data.filter((topic) => topic.type === 'episode') : data,

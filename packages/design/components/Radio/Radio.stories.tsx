@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/react';
 import React from 'react';
 
-import Radio from '.';
+import Radio from './index.tsx';
 
 const componentMeta: Meta<typeof Radio> = {
   title: 'Modern/Radio',

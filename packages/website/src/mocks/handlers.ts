@@ -1,4 +1,4 @@
-import { mockAPI } from './utils';
+import { mockAPI } from './utils.ts';
 
 export const handlers = [
   mockAPI('/p1/me', 'get'),

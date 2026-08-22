@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React, { useState } from 'react';
 
-import type { EditorProps } from '../Editor';
-import Editor from '../Editor';
+import type { EditorProps } from '@bangumi/design/components/EditorForm/Editor.tsx';
+import Editor from '@bangumi/design/components/EditorForm/Editor.tsx';
 
 const TestEditor = (props: EditorProps) => {
   const [value, setValue] = useState('');

@@ -1,8 +1,8 @@
 import { ok } from '@oazapfts/runtime';
 import useSWR from 'swr';
 
-import { ozaClient } from '@bangumi/client';
-import type { PersonWork } from '@bangumi/client/client';
+import type { PersonWork } from '@bangumi/client/client.ts';
+import { ozaClient } from '@bangumi/client/index.ts';
 
 /** 获取人物的作品列表（/person/:id/works） */
 export function usePersonWorks(

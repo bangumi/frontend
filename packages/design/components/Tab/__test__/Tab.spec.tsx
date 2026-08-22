@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Tab from '..';
+import Tab from '@bangumi/design/components/Tab/index.tsx';
 
 it('should render all tab', () => {
   const items = [

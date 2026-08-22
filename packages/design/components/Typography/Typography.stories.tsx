@@ -1,8 +1,8 @@
 import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
-import type { TextProps } from './Text';
-import Text from './Text';
+import type { TextProps } from './Text.tsx';
+import Text from './Text.tsx';
 
 export default {
   title: 'modern/Typography/Text',

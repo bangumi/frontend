@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { EmptyStar, FilledStar, HalfStar } from '@bangumi/icons';
+import { EmptyStar, FilledStar, HalfStar } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const rate = css({

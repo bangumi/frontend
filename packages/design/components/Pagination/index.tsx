@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
 
-import { VerticalLeft, VerticalRight } from '@bangumi/icons';
+import { VerticalLeft, VerticalRight } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
-import Pager from './Pager';
+import Pager from './Pager.tsx';
 
 const pagination = css({
   display: 'flex',

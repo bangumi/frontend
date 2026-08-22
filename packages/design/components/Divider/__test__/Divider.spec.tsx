@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import Divider from '..';
+import Divider from '@bangumi/design/components/Divider/index.tsx';
 
 describe('<Divider />', () => {
   it('should be horizontal', () => {

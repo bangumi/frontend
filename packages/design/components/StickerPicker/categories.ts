@@ -1,4 +1,4 @@
-import type { StickerSetId } from '@bangumi/utils/stickers';
+import type { StickerSetId } from '@bangumi/utils/stickers.ts';
 
 /** 导航项的标识。表情集合之外多一个「最近使用」 */
 export type StickerNavId = StickerSetId | 'recent';

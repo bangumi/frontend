@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
-import { Clock } from '@bangumi/icons';
+import { Clock } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import type { Sticker, StickerSet } from '@bangumi/utils/stickers';
-import { getSticker, STICKER_SETS } from '@bangumi/utils/stickers';
+import type { Sticker, StickerSet } from '@bangumi/utils/stickers.ts';
+import { getSticker, STICKER_SETS } from '@bangumi/utils/stickers.ts';
 
-import type { StickerNavId } from './categories';
+import type { StickerNavId } from './categories.ts';
 import {
   CHARACTER_CELL_SIZE,
   CLASSIC_CELL_SIZE,
@@ -13,8 +13,8 @@ import {
   RECENT_NAV_ID,
   RECENT_NAV_LABEL,
   SET_NAV_ICON,
-} from './categories';
-import { useRecentStickers } from './useRecentStickers';
+} from './categories.ts';
+import { useRecentStickers } from './useRecentStickers.ts';
 
 export interface StickerPickerProps {
   /** 选中表情后的回调，参数为表情代码，如 `(bgm38)` */

@@ -1,12 +1,13 @@
-import { UnreadableCodeError } from '../index';
+import { UnreadableCodeError } from '@bangumi/utils/index.ts';
 import {
   CHARACTER_STICKER_PREFIXES,
   isStickerCode,
   KAOMOJI_CODES,
   MAX_KAOMOJI_LENGTH,
-} from '../stickers';
-import { BGM_STICKER_START_STR } from './constants';
-import type { BBCodeOptions, BBCodeTag, CodeNodeTypes, CodeVNode } from './types';
+} from '@bangumi/utils/stickers.ts';
+
+import { BGM_STICKER_START_STR } from './constants.ts';
+import type { BBCodeOptions, BBCodeTag, CodeNodeTypes, CodeVNode } from './types.ts';
 
 const INVALID_NODE_MSG = 'invalid node';
 const INVALID_STICKER_NODE = 'invalid sticker node';

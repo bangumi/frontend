@@ -1,9 +1,9 @@
 import { render } from '@testing-library/react';
 import React from 'react';
 
-import { WikiElement } from '@bangumi/utils';
+import { WikiElement } from '@bangumi/utils/index.ts';
 
-import WikiBeginnerEditor from './WikiBeginnerEditor';
+import WikiBeginnerEditor from './WikiBeginnerEditor.tsx';
 
 it('should match snapshot', () => {
   const els: WikiElement[] = [{ _id: 'yufi' }, { _id: 'anisu' }];

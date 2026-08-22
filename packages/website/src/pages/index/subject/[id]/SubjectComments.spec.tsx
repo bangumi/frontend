@@ -1,16 +1,16 @@
 import { screen } from '@testing-library/react';
 import React from 'react';
 
-import type { SubjectHomeResponse, SubjectInterestComment } from '@bangumi/client/client';
-import { renderPage } from '@bangumi/website/utils/test-utils';
+import type { SubjectHomeResponse, SubjectInterestComment } from '@bangumi/client/client.ts';
+import commentsFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/comments-GET.json';
+import homeFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
+import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
-import commentsFixture from '../../../../mocks/fixtures/p1/subjects/12/comments-GET.json';
-import homeFixture from '../../../../mocks/fixtures/p1/subjects/12/home-GET.json';
-import SubjectComments from './components/SubjectComments';
+import SubjectComments from './components/SubjectComments.tsx';
 
 // 未登录：不渲染发帖表单与操作按钮，避免干扰展示断言
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({ user: undefined }),

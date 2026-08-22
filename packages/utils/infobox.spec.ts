@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatSubjectInfobox } from './infobox';
+import { formatSubjectInfobox } from './infobox.ts';
 
 describe('formatSubjectInfobox', () => {
   it('应隐藏 values 为空数组的项', () => {

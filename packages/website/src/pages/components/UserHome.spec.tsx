@@ -3,8 +3,9 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
-import { useUser } from '../../hooks/use-user';
-import UserHome from './UserHome';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
+
+import UserHome from './UserHome.tsx';
 
 vi.mock('../../hooks/use-user');
 

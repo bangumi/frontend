@@ -2,11 +2,11 @@ import type { Meta, StoryFn } from '@storybook/react';
 import type { FC } from 'react';
 import React from 'react';
 
-import { Search as SearchIcon, UserLogin } from '@bangumi/icons';
+import Select from '@bangumi/design/components/Select/index.tsx';
+import { Search as SearchIcon, UserLogin } from '@bangumi/icons/index.tsx';
 
-import Select from '../Select';
-import type { InputGroupProps, InputProps } from '.';
-import Input from '.';
+import type { InputGroupProps, InputProps } from './index.tsx';
+import Input from './index.tsx';
 
 const componentMeta: Meta<typeof Input> = {
   title: 'modern/Input',

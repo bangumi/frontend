@@ -1,4 +1,4 @@
-import type { SlimIndex } from '@bangumi/client/client';
+import type { SlimIndex } from '@bangumi/client/client.ts';
 
 import data from './indexes-GET.json';
 

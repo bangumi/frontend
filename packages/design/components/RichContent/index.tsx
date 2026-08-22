@@ -3,9 +3,9 @@ import React from 'react';
 import closeQuote from '@bangumi/icons/assets/close-quote.svg?url';
 import openQuote from '@bangumi/icons/assets/open-quote.svg?url';
 import { css, cx } from '@bangumi/styled-system/css';
-import type { BBCodePresetName } from '@bangumi/utils/bbcode/presets';
-import { BBCodePreset } from '@bangumi/utils/bbcode/presets';
-import { render } from '@bangumi/utils/bbcode/react';
+import type { BBCodePresetName } from '@bangumi/utils/bbcode/presets.ts';
+import { BBCodePreset } from '@bangumi/utils/bbcode/presets.ts';
+import { render } from '@bangumi/utils/bbcode/react.tsx';
 
 export interface RichContentProps {
   bbcode: string;

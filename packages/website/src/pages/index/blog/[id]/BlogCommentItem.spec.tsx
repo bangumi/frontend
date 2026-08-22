@@ -5,13 +5,13 @@ import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 
-import type { CommentBase } from '@bangumi/client/client';
-import { server as mockServer } from '@bangumi/website/mocks/server';
+import type { CommentBase } from '@bangumi/client/client.ts';
+import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 
-import BlogComments from './components/BlogComments';
+import BlogComments from './components/BlogComments.tsx';
 
 vi.mock('@bangumi/website/hooks/use-user', async () => ({
-  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user')>(
+  ...(await vi.importActual<typeof import('@bangumi/website/hooks/use-user.tsx')>(
     '@bangumi/website/hooks/use-user',
   )),
   useUser: () => ({

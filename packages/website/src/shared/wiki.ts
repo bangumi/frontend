@@ -1,5 +1,5 @@
-import { SubjectType } from '@bangumi/client/client';
-import { keyBy, WikiTemplate } from '@bangumi/utils';
+import { SubjectType } from '@bangumi/client/client.ts';
+import { keyBy, WikiTemplate } from '@bangumi/utils/index.ts';
 
 export enum WikiEditTabs {
   Index = 'edit',

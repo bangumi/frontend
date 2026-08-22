@@ -1,16 +1,16 @@
 import React from 'react';
 
-import type { GroupTopicFilterMode } from '@bangumi/client/client';
-import { Layout, Pagination, Section } from '@bangumi/design';
+import type { GroupTopicFilterMode } from '@bangumi/client/client.ts';
+import { Layout, Pagination, Section } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate';
-import { usePaginationParams } from '@bangumi/website/hooks/use-pagination';
-import { useRecentGroupTopics } from '@bangumi/website/hooks/use-recent-group-topics';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useTransitionNavigate } from '@bangumi/website/hooks/use-navigate.ts';
+import { usePaginationParams } from '@bangumi/website/hooks/use-pagination.ts';
+import { useRecentGroupTopics } from '@bangumi/website/hooks/use-recent-group-topics.ts';
 
-import GroupChannelSidebar from './GroupChannelSidebar';
-import GroupTopicTable from './GroupTopicTable';
+import GroupChannelSidebar from './GroupChannelSidebar.tsx';
+import GroupTopicTable from './GroupTopicTable.tsx';
 
 const PAGE_SIZE = 20;
 

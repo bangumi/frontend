@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Divider, Layout } from '@bangumi/design';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
+import { Divider, Layout } from '@bangumi/design/index.tsx';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
 
-import { divider, title } from './common';
+import { divider, title } from './common.ts';
 
 const WikiEditPage = () => {
   return (

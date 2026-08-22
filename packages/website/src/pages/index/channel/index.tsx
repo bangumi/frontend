@@ -8,28 +8,28 @@ import type {
   SlimBlogEntry,
   SubjectTag,
   TrendingSubject,
-} from '@bangumi/client/client';
-import { CollectionType as CollectionTypeEnum } from '@bangumi/client/client';
+} from '@bangumi/client/client.ts';
+import { CollectionType as CollectionTypeEnum } from '@bangumi/client/client.ts';
 import { css } from '@bangumi/styled-system/css';
 import {
   getBlogLink,
   getSubjectLink,
   getSubjectTopicLink,
   getUserProfileLink,
-} from '@bangumi/utils/pages';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import PageContainer from '@bangumi/website/components/PageContainer';
+} from '@bangumi/utils/pages.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 import {
   useChannelBlogs,
   useChannelSubjectTopics,
   useChannelTags,
   useFriendActivities,
   useTrendingSubjects,
-} from '@bangumi/website/hooks/use-channel';
+} from '@bangumi/website/hooks/use-channel.ts';
 
-import type { ChannelConfig, ChannelKey } from './config';
-import { CHANNEL_CONFIGS } from './config';
+import type { ChannelConfig, ChannelKey } from './config.ts';
+import { CHANNEL_CONFIGS } from './config.ts';
 
 const page = css({
   padding: '15px 15px 32px',

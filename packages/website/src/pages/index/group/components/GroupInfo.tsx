@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 
-import type { SlimGroup } from '@bangumi/client/client';
-import { Avatar, Button, Typography } from '@bangumi/design';
+import type { SlimGroup } from '@bangumi/client/client.ts';
+import { Avatar, Button, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
-import GroupActions from './GroupActions';
+import GroupActions from './GroupActions.tsx';
 
 const { Link } = Typography;
 

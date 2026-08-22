@@ -1,7 +1,7 @@
-import type { ozaClient } from '@bangumi/client';
-import type { JsonFixture, SuccessfulData } from '@bangumi/website/mocks/utils';
+import type { ozaClient } from '@bangumi/client/index.ts';
+import personJson from '@bangumi/website/mocks/fixtures/p1/persons/21884-GET.json';
+import type { JsonFixture, SuccessfulData } from '@bangumi/website/mocks/utils.ts';
 
-import personJson from '../21884-GET.json';
 import castsJson from './casts-GET.json';
 import collectsJson from './collects-GET.json';
 import commentsJson from './comments-GET.json';

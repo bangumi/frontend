@@ -1,8 +1,8 @@
 import type { StoryFn } from '@storybook/react';
 import React from 'react';
 
-import type { TabProps } from '.';
-import Tab from '.';
+import type { TabProps } from './index.tsx';
+import Tab from './index.tsx';
 
 export default {
   title: 'modern/Tab',

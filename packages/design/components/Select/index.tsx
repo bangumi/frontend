@@ -1,7 +1,7 @@
 import { keyBy } from 'lodash-es';
 import React, { useMemo, useState } from 'react';
 
-import { ArrowDown } from '@bangumi/icons';
+import { ArrowDown } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
 
 const bgmSelect = css({

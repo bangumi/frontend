@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Section, Typography } from '@bangumi/design';
+import { Section, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
 const { Link } = Typography;

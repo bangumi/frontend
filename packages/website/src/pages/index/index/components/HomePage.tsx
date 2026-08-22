@@ -1,18 +1,18 @@
 import React from 'react';
 
-import { Typography } from '@bangumi/design';
+import { Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
-import { getUserProfileLink } from '@bangumi/utils/pages';
-import PageContainer from '@bangumi/website/components/PageContainer';
-import { useHomePage } from '@bangumi/website/hooks/use-home-page';
-import { useUser } from '@bangumi/website/hooks/use-user';
+import { getUserProfileLink } from '@bangumi/utils/pages.ts';
+import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
+import { useHomePage } from '@bangumi/website/hooks/use-home-page.ts';
+import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import AnnouncementBlock from './AnnouncementBlock';
-import CalendarBlock from './CalendarBlock';
-import GroupTopicsBlock from './GroupTopicsBlock';
-import HotSubjectTopicsBlock from './HotSubjectTopicsBlock';
-import PrgManager from './PrgManager';
-import TimelineBlock from './TimelineBlock';
+import AnnouncementBlock from './AnnouncementBlock.tsx';
+import CalendarBlock from './CalendarBlock.tsx';
+import GroupTopicsBlock from './GroupTopicsBlock.tsx';
+import HotSubjectTopicsBlock from './HotSubjectTopicsBlock.tsx';
+import PrgManager from './PrgManager.tsx';
+import TimelineBlock from './TimelineBlock.tsx';
 
 const { Link } = Typography;
 

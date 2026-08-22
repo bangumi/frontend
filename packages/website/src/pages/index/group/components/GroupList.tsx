@@ -1,7 +1,7 @@
 import React from 'react';
 
-import type { SlimGroup } from '@bangumi/client/client';
-import { Image, Typography } from '@bangumi/design';
+import type { SlimGroup } from '@bangumi/client/client.ts';
+import { Image, Typography } from '@bangumi/design/index.tsx';
 import { css } from '@bangumi/styled-system/css';
 
 const { Link } = Typography;

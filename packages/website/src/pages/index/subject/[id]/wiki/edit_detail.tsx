@@ -5,11 +5,20 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useLocalstorageState } from 'rooks';
 
-import { ozaClient } from '@bangumi/client';
-import { Button, Divider, Form, Input, Layout, Radio, Select, toast } from '@bangumi/design';
-import { ArrowRightCircle } from '@bangumi/icons';
+import { ozaClient } from '@bangumi/client/index.ts';
+import {
+  Button,
+  Divider,
+  Form,
+  Input,
+  Layout,
+  Radio,
+  Select,
+  toast,
+} from '@bangumi/design/index.tsx';
+import { ArrowRightCircle } from '@bangumi/icons/index.tsx';
 import { css, cx } from '@bangumi/styled-system/css';
-import type { Wiki, WikiElement } from '@bangumi/utils';
+import type { Wiki, WikiElement } from '@bangumi/utils/index.ts';
 import {
   fromWikiElement,
   mergeWiki,
@@ -17,14 +26,14 @@ import {
   stringifyWiki,
   toWikiElement,
   WikiSyntaxError,
-} from '@bangumi/utils';
-import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary';
-import Helmet from '@bangumi/website/components/Helmet';
-import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor';
-import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki';
+} from '@bangumi/utils/index.ts';
+import { withErrorBoundary } from '@bangumi/website/components/ErrorBoundary/index.tsx';
+import Helmet from '@bangumi/website/components/Helmet.tsx';
+import WikiEditor from '@bangumi/website/components/WikiEditor/WikiEditor.tsx';
+import WikiBeginnerEditor from '@bangumi/website/pages/index/subject/[id]/components/WikiBeginnerEditor.tsx';
+import { useWikiContext } from '@bangumi/website/pages/index/subject/[id]/wiki.tsx';
+import { getWikiTemplate, WikiEditTabsItemsByKey } from '@bangumi/website/shared/wiki.ts';
 
-import WikiBeginnerEditor from '../components/WikiBeginnerEditor';
-import { useWikiContext } from '../wiki';
 import {
   divider,
   editorHandbook,
@@ -46,7 +55,7 @@ import {
   historyUserName,
   tips,
   title,
-} from './common';
+} from './common.ts';
 
 enum EditorType {
   Beginner,

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { convert } from './convert';
-import { Parser } from './parser';
-import type { BBCodeRenderOptions, CodeNodeTypes, NodeTypes, VNode } from './types';
+import { convert } from './convert.ts';
+import { Parser } from './parser.ts';
+import type { BBCodeRenderOptions, CodeNodeTypes, NodeTypes, VNode } from './types.ts';
 
 /* eslint-disable no-useless-escape */
 const toCamelCase = (s: string) => s.replace(/(\-\w)/g, (k) => k[1]?.toUpperCase() ?? '');
