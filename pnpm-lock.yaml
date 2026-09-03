@@ -163,8 +163,8 @@ importers:
         specifier: ^5.4.4
         version: 5.4.4
       js-yaml:
-        specifier: ^4.2.0
-        version: 4.3.1
+        specifier: ^4.3.2
+        version: 4.3.2
       msw:
         specifier: ~2.14.6
         version: 2.14.7(@types/node@22.20.1)(typescript@5.9.3)
@@ -324,8 +324,8 @@ importers:
         specifier: ^19.2.16
         version: 19.2.18
       js-yaml:
-        specifier: ^4.2.0
-        version: 4.3.1
+        specifier: ^4.3.2
+        version: 4.3.2
       typescript:
         specifier: npm:@typescript/typescript6@^6.0.0
         version: '@typescript/typescript6@6.0.2'
@@ -3864,6 +3864,10 @@ packages:
     resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
     hasBin: true
 
+  js-yaml@4.3.2:
+    resolution: {integrity: sha512-SFNOvSJ+Dgf/9An904Yx+CgSlIPCkIpao4qo51lpee25TIRejdH3rhR4EZMGoNx3/TP3O+wzWuiTFl4sqbltzA==}
+    hasBin: true
+
   js-yaml@5.3.0:
     resolution: {integrity: sha512-muutsYr+e2+d3rTgUGslq5rxbBlUy3cJ61IsHag2QNDQV+7zXWjkUpmALIajhrlLlrgRUiymj6U3zUr/TMK84Q==}
     hasBin: true
@@ -5628,7 +5632,7 @@ snapshots:
   '@apidevtools/json-schema-ref-parser@14.0.1':
     dependencies:
       '@types/json-schema': 7.0.15
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
 
   '@apidevtools/json-schema-ref-parser@15.5.2(@types/json-schema@7.0.15)':
     dependencies:
@@ -7809,7 +7813,7 @@ snapshots:
   cosmiconfig@8.3.6(@typescript/typescript6@6.0.2):
     dependencies:
       import-fresh: 3.3.1
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
       parse-json: 5.2.0
       path-type: 4.0.0
     optionalDependencies:
@@ -7819,7 +7823,7 @@ snapshots:
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
-      js-yaml: 4.3.1
+      js-yaml: 4.3.2
       parse-json: 5.2.0
     optionalDependencies:
       typescript: '@typescript/typescript6@6.0.2'
@@ -8963,6 +8967,10 @@ snapshots:
   js-tokens@4.0.0: {}
 
   js-yaml@4.3.1:
+    dependencies:
+      argparse: 2.0.1
+
+  js-yaml@4.3.2:
     dependencies:
       argparse: 2.0.1
 
