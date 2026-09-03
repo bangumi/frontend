@@ -193,7 +193,7 @@ importers:
         specifier: ^1.5.2
         version: 1.6.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       dayjs:
-        specifier: ^1.11.21
+        specifier: ^1.11.23
         version: 1.11.23
       eventemitter3:
         specifier: ^5.0.4
@@ -351,7 +351,7 @@ importers:
         specifier: ^13.3.0
         version: 13.3.0
       dayjs:
-        specifier: ^1.11.21
+        specifier: ^1.11.23
         version: 1.11.23
       lodash-es:
         specifier: ^4.18.1
