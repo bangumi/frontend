@@ -345,7 +345,7 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       '@remix-run/router':
-        specifier: ^1.23.3
+        specifier: ^1.23.4
         version: 1.23.4
       '@simplewebauthn/browser':
         specifier: ^13.3.0
