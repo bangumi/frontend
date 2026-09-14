@@ -67,8 +67,7 @@ const ReplyForm = ({
         onCancel={onCancel}
         placeholder={placeholder}
         value={content}
-        // TODO: use loading state
-        confirmText={sending ? '...' : undefined}
+        loading={sending}
         onChange={onChange}
         onConfirm={sendReply}
         submitExtra={

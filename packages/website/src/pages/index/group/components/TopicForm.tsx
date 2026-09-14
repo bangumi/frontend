@@ -140,8 +140,8 @@ const TopicForm = <T extends EditableTopic = EditableTopic>({
           placeholder={quickPost ? '想聊点什么的呢…' : '话题正文…'}
           hideCancel
           onConfirm={async () => handleSubmit(onSubmit, showErrors)()}
-          // TODO: use loading state
-          confirmText={sending ? '...' : quickPost ? '快速发帖' : undefined}
+          confirmText={quickPost ? '快速发帖' : undefined}
+          loading={sending}
           submitExtra={<TurnstileCaptcha action='post_topic' onToken={setTurnstileToken} />}
           rows={!quickPost ? 15 : undefined}
           {...field}

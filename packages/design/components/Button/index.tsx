@@ -87,6 +87,19 @@ const button = css({
   },
 });
 
+const loadingIndicator = css({
+  width: '1em',
+  height: '1em',
+  flex: '0 0 auto',
+  border: '2px solid currentColor',
+  borderRightColor: 'transparent',
+  borderRadius: '50%',
+  animation: 'spin',
+  '@media (prefers-reduced-motion: reduce)': {
+    animation: 'none',
+  },
+});
+
 export interface ButtonCommonProps {
   type?: 'primary' | 'secondary' | 'text' | 'plain';
   shape?: 'square' | 'rounded';
@@ -99,6 +112,8 @@ export type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'type' | 'onClic
   ButtonCommonProps & {
     onClick?: MouseEventHandler; // desserts for story book
     htmlType?: JSX.IntrinsicElements['button']['type'];
+    /** 显示加载状态并禁用按钮 */
+    loading?: boolean;
   };
 
 const Button = ({
@@ -110,24 +125,32 @@ const Button = ({
   color = 'default',
   children,
   htmlType,
+  loading = false,
   ...rest
 }: ButtonProps) => {
+  const actualDisabled = disabled || loading;
+
   return (
     <button
       className={cx(
         'bgm-button',
         button,
         className,
-        disabled && 'bgm-button--disabled',
+        actualDisabled && 'bgm-button--disabled',
+        loading && 'bgm-button--loading',
         `bgm-button--${type}`,
         shape !== 'rounded' && `bgm-button--shape-${shape}`,
         size !== 'large' && `bgm-button--size-${size}`,
         color !== 'default' && `bgm-button--color-${color}`,
       )}
       type={htmlType}
-      disabled={disabled}
       {...rest}
+      disabled={actualDisabled}
+      aria-busy={loading || undefined}
     >
+      {loading && (
+        <span className={cx('bgm-button__loading', loadingIndicator)} aria-hidden='true' />
+      )}
       {children}
     </button>
   );

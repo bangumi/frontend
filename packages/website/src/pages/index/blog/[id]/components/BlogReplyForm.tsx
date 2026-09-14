@@ -68,9 +68,7 @@ const BlogReplyForm = ({
       onCancel={onCancel}
       placeholder={placeholder}
       value={content}
-      // TODO: use loading state
-      confirmText={sending ? '...' : undefined}
-      disabled={sending}
+      loading={sending}
       onChange={onChange}
       onConfirm={sendReply}
       submitExtra={
