@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 import React, { useState } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ describe('<EditorForm />', () => {
     );
     const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
     fireEvent.change(textarea, { target: { value: 'test' } });
-    getByText('Confirm').click();
+    fireEvent.click(getByText('Confirm'));
     expect(onConfirm).toHaveBeenLastCalledWith('test');
   });
 
@@ -76,6 +76,61 @@ describe('<EditorForm />', () => {
 
     fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
     fireEvent.keyDown(textarea, { key: 's', altKey: true });
+    expect(onConfirm).not.toHaveBeenCalled();
+  });
+
+  it('should only submit once while an async confirmation is pending', async () => {
+    let resolveSubmit: (() => void) | undefined;
+    const onConfirm = vi.fn(async () => {
+      await new Promise<void>((resolve) => {
+        resolveSubmit = resolve;
+      });
+    });
+    const { getByText, getByPlaceholderText } = renderEditorForm(
+      <TestEditorForm onConfirm={onConfirm} confirmText='Confirm' placeholder='placeholder' />,
+    );
+    const button = getByText('Confirm') as HTMLButtonElement;
+    const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
+
+    fireEvent.change(textarea, { target: { value: 'test' } });
+    act(() => {
+      button.click();
+      button.click();
+      fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
+    });
+
+    expect(onConfirm).toHaveBeenCalledTimes(1);
+    expect(onConfirm).toHaveBeenLastCalledWith('test');
+    expect(button.disabled).toBe(true);
+    expect(button).toHaveAttribute('aria-busy', 'true');
+
+    await act(async () => {
+      resolveSubmit?.();
+    });
+
+    expect(button.disabled).toBe(false);
+    expect(button).not.toHaveAttribute('aria-busy');
+    fireEvent.click(button);
+    expect(onConfirm).toHaveBeenCalledTimes(2);
+  });
+
+  it('controlled loading should prevent confirmation', () => {
+    const onConfirm = vi.fn();
+    const { getByText, getByPlaceholderText } = renderEditorForm(
+      <TestEditorForm
+        onConfirm={onConfirm}
+        confirmText='Confirm'
+        placeholder='placeholder'
+        loading
+      />,
+    );
+    const button = getByText('Confirm') as HTMLButtonElement;
+    const textarea = getByPlaceholderText('placeholder') as HTMLTextAreaElement;
+
+    expect(button).toBeDisabled();
+    expect(button).toHaveAttribute('aria-busy', 'true');
+    fireEvent.click(button);
+    fireEvent.keyDown(textarea, { key: 'Enter', ctrlKey: true });
     expect(onConfirm).not.toHaveBeenCalled();
   });
 });
