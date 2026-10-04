@@ -6,10 +6,11 @@ import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-import type { SubjectHomeResponse } from '@bangumi/client/client.ts';
-import { CollectionType, EpisodeCollectionStatus } from '@bangumi/client/client.ts';
+import type { SubjectHomeResponse, SubjectRelation } from '@bangumi/client/client.ts';
+import { CollectionType, EpisodeCollectionStatus, SubjectType } from '@bangumi/client/client.ts';
 import { UserProvider } from '@bangumi/website/hooks/use-user.tsx';
 import fixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/home-GET.json';
+import relationsFixture from '@bangumi/website/mocks/fixtures/p1/subjects/12/relations-GET.json';
 import { server as mockServer } from '@bangumi/website/mocks/server.ts';
 import { renderPage } from '@bangumi/website/utils/test-utils.tsx';
 
@@ -117,6 +118,59 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('测试动画长评')).toBeInTheDocument();
     expect(await screen.findByText('讨论版测试话题')).toBeInTheDocument();
     expect(await screen.findByText('这部动画很好看！')).toBeInTheDocument();
+  });
+
+  it('should render offprints for a book series', async () => {
+    const seriesData = {
+      ...homeData,
+      subject: { ...homeData.subject, type: SubjectType.Book, series: true },
+    };
+    const offprints = (relationsFixture.data as SubjectRelation[]).map((item, index) => ({
+      ...item,
+      relation: { id: 1003, en: 'Offprint', cn: '单行本', jp: '', desc: '' },
+      order: index,
+    }));
+    let offprintQuery: string | null = null;
+    mockServer.use(
+      http.get('http://localhost:3000/p1/subjects/12/home', () => HttpResponse.json(seriesData)),
+      http.get('http://localhost:3000/p1/subjects/12/relations', ({ request }) => {
+        offprintQuery = new URL(request.url).searchParams.get('offprint');
+        return HttpResponse.json({ data: offprints, total: 17 });
+      }),
+    );
+
+    await renderSubjectData(seriesData);
+
+    expect(await screen.findByRole('heading', { name: '单行本 · 17' })).toBeInTheDocument();
+    expect(offprintQuery).toBe('true');
+    const offprintSection = screen.getByRole('heading', { name: '单行本 · 17' }).closest('section');
+    const links = within(offprintSection!).getAllByRole('link');
+    expect(links).toHaveLength(offprints.length);
+    expect(within(offprintSection!).getByRole('link', { name: '测试动画2' })).toHaveAttribute(
+      'href',
+      '/subject/13',
+    );
+    expect(within(offprintSection!).getByAltText('测试动画2')).toHaveAttribute(
+      'src',
+      'https://lain.bgm.tv/pic/cover/m/00/00/13.jpg',
+    );
+  });
+
+  it('should not request offprints for non-series subjects', async () => {
+    setup();
+    let requested = false;
+    mockServer.use(
+      http.get('http://localhost:3000/p1/subjects/12/relations', () => {
+        requested = true;
+        return HttpResponse.json({ data: [], total: 0 });
+      }),
+    );
+
+    await renderSubject();
+
+    expect(await screen.findByText('关联条目')).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /^单行本/ })).not.toBeInTheDocument();
+    expect(requested).toBe(false);
   });
 
   it('should render the subject index panel with avatars and tips', async () => {

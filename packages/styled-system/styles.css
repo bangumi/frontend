@@ -1988,12 +1988,12 @@
     flex: 0 0 85px;
 }
 
-  .gap_5px_10px {
-    gap: 5px 10px;
-}
-
   .flex_0_0_80px {
     flex: 0 0 80px;
+}
+
+  .gap_5px_10px {
+    gap: 5px 10px;
 }
 
   .bdr_12px {
