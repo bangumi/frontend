@@ -6,7 +6,7 @@ import { css } from '@bangumi/styled-system/css';
 import { getCharacterLink, getPersonLink } from '@bangumi/utils/pages.ts';
 import PageContainer from '@bangumi/website/components/PageContainer/index.tsx';
 
-import { CAST_TYPE_DESC } from './subject-common.ts';
+import { CAST_TYPE_DESC, characterPortrait } from './subject-common.ts';
 import { SubjectHeader } from './SubjectDetail.tsx';
 import SubjectSummaryCard from './SubjectSummaryCard.tsx';
 
@@ -58,6 +58,7 @@ const avatar = css({
   borderRadius: '4px',
   aspectRatio: '1',
   objectFit: 'cover',
+  objectPosition: 'center top',
 });
 
 const avatarFallback = css({
@@ -176,9 +177,9 @@ export default function SubjectCharacters({
                         className={avatarLink}
                         title={characterTitle(character)}
                       >
-                        {character.images?.grid ? (
+                        {characterPortrait(character.images) ? (
                           <img
-                            src={character.images.grid}
+                            src={characterPortrait(character.images)}
                             className={avatar}
                             loading='lazy'
                             alt=''
