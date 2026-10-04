@@ -125,7 +125,12 @@ describe('SubjectDetail', () => {
       ...homeData,
       subject: { ...homeData.subject, type: SubjectType.Book, series: true },
     };
-    const offprints = (relationsFixture.data as SubjectRelation[]).map((item, index) => ({
+    const fixtures = relationsFixture.data as SubjectRelation[];
+    const noCover = {
+      ...fixtures[0]!,
+      subject: { ...fixtures[0]!.subject, id: 99, nameCN: '无封面', images: undefined },
+    };
+    const offprints = [...fixtures, noCover].map((item, index) => ({
       ...item,
       relation: { id: 1003, en: 'Offprint', cn: '单行本', jp: '', desc: '' },
       order: index,
@@ -153,6 +158,11 @@ describe('SubjectDetail', () => {
     expect(within(offprintSection!).getByAltText('测试动画2')).toHaveAttribute(
       'src',
       'https://lain.bgm.tv/pic/cover/m/00/00/13.jpg',
+    );
+    expect(within(offprintSection!).getAllByRole('img')).toHaveLength(offprints.length - 1);
+    expect(within(offprintSection!).getByRole('link', { name: '无封面' })).toHaveAttribute(
+      'href',
+      '/subject/99',
     );
   });
 

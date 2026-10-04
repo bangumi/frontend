@@ -257,19 +257,18 @@ const characterCover = css({
 
 const characterCoverTitle = css({ fontSize: '13px' });
 
-const offprintGrid = css({
-  flexWrap: 'nowrap',
-  gap: '10px',
-  padding: '5px',
-  overflowX: 'auto',
-});
-
-const offprintCoverItem = css({ flex: '0 0 80px', width: '80px' });
+const offprintCoverItem = css({ width: '80px' });
 
 const offprintCover = css({
   width: '80px',
   height: 'auto',
   aspectRatio: '3 / 4',
+});
+
+const offprintCoverEmpty = css({
+  border: '1px solid #e8e3e3',
+  background: 'transparent',
+  boxShadow: 'none',
 });
 
 const relationGrid = css({
@@ -625,7 +624,7 @@ function OffprintsSection({ subject }: { subject: Subject }) {
   }
   return (
     <SubjectSection title={`单行本 · ${total}`}>
-      <ul className={cx(coverGrid, offprintGrid)}>
+      <ul className={coverGrid}>
         {offprints.map(({ subject: offprint }) => (
           <li key={offprint.id} className={cx(coverItem, offprintCoverItem)}>
             <Link
@@ -633,12 +632,16 @@ function OffprintsSection({ subject }: { subject: Subject }) {
               className={coverLink}
               title={offprint.nameCN || offprint.name}
             >
-              <img
-                src={offprint.images?.medium}
-                className={cx(cover, offprintCover)}
-                loading='lazy'
-                alt={offprint.nameCN || offprint.name}
-              />
+              {offprint.images?.medium ? (
+                <img
+                  src={offprint.images.medium}
+                  className={cx(cover, offprintCover)}
+                  loading='lazy'
+                  alt={offprint.nameCN || offprint.name}
+                />
+              ) : (
+                <span className={cx(cover, offprintCover, offprintCoverEmpty)} />
+              )}
             </Link>
           </li>
         ))}
