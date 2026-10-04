@@ -1,3 +1,4 @@
+import type { PersonImages } from '@bangumi/client/client.ts';
 import { CharacterCastType, CollectionType } from '@bangumi/client/client.ts';
 
 export const COLLECT_DESC: Record<CollectionType, string> = {
@@ -17,6 +18,11 @@ export const CAST_TYPE_DESC: Partial<Record<CharacterCastType, string>> = {
   [CharacterCastType.EnglishDub]: '英语配音',
   [CharacterCastType.KoreanDub]: '韩语配音',
 };
+
+/** grid 是居中裁剪的正方形，全身立绘只剩腿，优先用 medium */
+export function characterPortrait(images: PersonImages | undefined): string | undefined {
+  return images?.medium || images?.grid || undefined;
+}
 
 /** 收藏动词：看/读/听/玩 */
 export function collectVerb(subjectType: number): string {

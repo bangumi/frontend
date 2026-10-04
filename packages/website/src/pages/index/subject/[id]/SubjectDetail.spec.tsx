@@ -102,9 +102,11 @@ describe('SubjectDetail', () => {
     expect(await screen.findByText('角色介绍')).toBeInTheDocument();
     expect(await screen.findByText('关联条目')).toBeInTheDocument();
     expect(await screen.findByText('喜欢这部作品的会员大概会喜欢')).toBeInTheDocument();
-    expect(document.querySelector('img[src$="/crt/g/00/00/05.jpg"]')).toHaveClass(
+    expect(document.querySelector('img[src$="/crt/g/00/00/05.jpg"]')).not.toBeInTheDocument();
+    expect(document.querySelector('img[src$="/crt/m/00/00/05.jpg"]')).toHaveClass(
       'w_85px',
       'h_auto',
+      'obj-p_center_top',
     );
     expect(document.querySelector('img[src$="/cover/g/00/00/13.jpg"]')).toHaveClass(
       'w_75px',

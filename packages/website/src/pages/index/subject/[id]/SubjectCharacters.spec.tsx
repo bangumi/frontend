@@ -39,6 +39,11 @@ describe('SubjectCharacters', () => {
     expect(screen.getByText('CV:')).toBeInTheDocument();
     expect(screen.getByText('中文配音:')).toBeInTheDocument();
 
+    expect(document.querySelector('img[src$="/crt/g/00/00/05.jpg"]')).not.toBeInTheDocument();
+    expect(document.querySelector('img[src$="/crt/m/00/00/05.jpg"]')).toHaveClass(
+      'obj-p_center_top',
+    );
+
     expect(screen.getByRole('link', { name: '返回条目' })).toHaveAttribute('href', '/subject/12');
   });
 
