@@ -2946,6 +2946,10 @@
     flex-wrap: nowrap;
 }
 
+  .bx-sh_none {
+    box-shadow: none;
+}
+
   .lh_19px {
     line-height: 19px;
 }
