@@ -37,7 +37,7 @@ import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home.ts';
 import { useSubjectOffprints } from '@bangumi/website/hooks/use-subject-offprints.ts';
 import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
-import { CAST_TYPE_DESC, COLLECT_DESC } from './subject-common.ts';
+import { CAST_TYPE_DESC, characterPortrait, COLLECT_DESC } from './subject-common.ts';
 import SubjectSection from './SubjectSection.tsx';
 
 const { Link } = Typography;
@@ -592,7 +592,7 @@ function CharactersSection({
               title={character.nameCN || character.name}
             >
               <img
-                src={character.images?.grid}
+                src={characterPortrait(character.images)}
                 className={cx(cover, characterCover)}
                 loading='lazy'
                 alt=''
