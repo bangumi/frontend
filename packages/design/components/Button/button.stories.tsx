@@ -14,6 +14,7 @@ const storyMeta: Meta<typeof Button> = {
   subcomponents: { 'Button.Link': Button.Link as FC<unknown> },
   argTypes: {
     disabled: { control: 'boolean' },
+    loading: { control: 'boolean' },
     color: { control: 'select', options: ['default', 'blue', 'gray'] },
   },
   parameters: {
@@ -105,6 +106,13 @@ Disabled.args = {
   type: 'primary',
   disabled: true,
   children: 'Disabled',
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  type: 'primary',
+  loading: true,
+  children: '提交中',
 };
 
 const ButtonLinkTemplate: StoryFn<ButtonLinkProps> = (args) => {
