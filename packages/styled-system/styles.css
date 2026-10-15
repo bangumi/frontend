@@ -1496,6 +1496,14 @@
     padding: 0 32px;
 }
 
+  .bd_2px_solid_currentColor {
+    border: 2px solid currentColor;
+}
+
+  .anim_spin {
+    animation: var(--animations-spin);
+}
+
   .p_8px_6px_6px {
     padding: 8px 6px 6px;
 }
@@ -4166,6 +4174,18 @@
 
   .h_var\(--height\) {
     height: var(--height);
+}
+
+  .w_1em {
+    width: 1em;
+}
+
+  .h_1em {
+    height: 1em;
+}
+
+  .bd-r-c_transparent {
+    border-right-color: var(--colors-transparent);
 }
 
   .w_60\% {
@@ -9450,6 +9470,12 @@
   @media (max-width: 420px) {
     .\[\@media_\(max-width\:_420px\)\]\:gap_22px_10px {
       gap: 22px 10px;
+}
+}
+
+  @media (prefers-reduced-motion: reduce) {
+    .\[\@media_\(prefers-reduced-motion\:_reduce\)\]\:anim_none {
+      animation: none;
 }
 }
 }

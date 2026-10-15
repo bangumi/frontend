@@ -135,7 +135,8 @@ const BlogForm: React.FC<{ entry?: BlogEntry }> = ({ entry }) => {
               placeholder='日志正文，支持 BBCode…'
               hideCancel
               rows={15}
-              confirmText={sending ? '...' : entry ? '保存修改' : '发表日志'}
+              confirmText={entry ? '保存修改' : '发表日志'}
+              loading={sending}
               onConfirm={async () => handleSubmit(onSubmit, showErrors)()}
               submitExtra={<TurnstileCaptcha action='post_blog' onToken={setTurnstileToken} />}
               {...field}
