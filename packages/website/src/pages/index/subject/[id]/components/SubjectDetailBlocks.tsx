@@ -34,6 +34,7 @@ import {
 } from '@bangumi/utils/pages.ts';
 import EpisodeButton from '@bangumi/website/components/EpisodeButton/index.tsx';
 import { useSubjectHome } from '@bangumi/website/hooks/use-subject-home.ts';
+import { useSubjectOffprints } from '@bangumi/website/hooks/use-subject-offprints.ts';
 import { useUser } from '@bangumi/website/hooks/use-user.tsx';
 
 import { CAST_TYPE_DESC, characterPortrait, COLLECT_DESC } from './subject-common.ts';
@@ -255,6 +256,20 @@ const characterCover = css({
 });
 
 const characterCoverTitle = css({ fontSize: '13px' });
+
+const offprintCoverItem = css({ width: '80px' });
+
+const offprintCover = css({
+  width: '80px',
+  height: 'auto',
+  aspectRatio: '3 / 4',
+});
+
+const offprintCoverEmpty = css({
+  border: '1px solid #e8e3e3',
+  background: 'transparent',
+  boxShadow: 'none',
+});
 
 const relationGrid = css({
   gap: '5px 10px',
@@ -599,6 +614,42 @@ function CharactersSection({
   );
 }
 
+/** 单行本，仅书籍系列显示 */
+function OffprintsSection({ subject }: { subject: Subject }) {
+  const isSeries = subject.type === SubjectType.Book && subject.series;
+  const { offprints, total } = useSubjectOffprints(isSeries ? subject.id : null);
+
+  if (offprints.length === 0) {
+    return null;
+  }
+  return (
+    <SubjectSection title={`单行本 · ${total}`}>
+      <ul className={coverGrid}>
+        {offprints.map(({ subject: offprint }) => (
+          <li key={offprint.id} className={cx(coverItem, offprintCoverItem)}>
+            <Link
+              to={getSubjectLink(offprint.id)}
+              className={coverLink}
+              title={offprint.nameCN || offprint.name}
+            >
+              {offprint.images?.medium ? (
+                <img
+                  src={offprint.images.medium}
+                  className={cx(cover, offprintCover)}
+                  loading='lazy'
+                  alt={offprint.nameCN || offprint.name}
+                />
+              ) : (
+                <span className={cx(cover, offprintCover, offprintCoverEmpty)} />
+              )}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </SubjectSection>
+  );
+}
+
 /** 关联条目，对齐 PHP block_relation */
 function RelationsSection({
   subjectId,
@@ -809,6 +860,7 @@ export const SubjectSecondaryBlocks: React.FC<{ data: SubjectHomeResponse }> = (
   return (
     <>
       <CharactersSection subjectId={subject.id} characters={data.characters} />
+      <OffprintsSection subject={subject} />
       <RelationsSection subjectId={subject.id} relations={data.relations} />
       <RecsSection recs={data.recs} />
       <ReviewsSection subjectId={subject.id} reviews={data.reviews} />
