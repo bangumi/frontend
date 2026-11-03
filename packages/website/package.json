@@ -46,7 +46,7 @@
     "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
-    "autoprefixer": "^10.5.4",
+    "autoprefixer": "^10.6.2",
     "babel-plugin-jsx-remove-data-test-id": "^3.0.0",
     "msw": "~2.14.6",
     "openapi-types": "^12.1.3",
