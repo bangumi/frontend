@@ -58,7 +58,7 @@
     "@actions/github": "^9.1.1",
     "@eslint/js": "^10.0.1",
     "@octokit/openapi-types": "^27.0.0",
-    "@pandacss/dev": "^1.12.0",
+    "@pandacss/dev": "^1.12.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@typescript-eslint/utils": "^8.60.1",
