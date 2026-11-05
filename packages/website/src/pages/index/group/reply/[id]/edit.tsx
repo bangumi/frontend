@@ -100,8 +100,7 @@ const EditReplyPage = () => {
           value={content}
           onChange={setContent}
           onConfirm={handleSubmit}
-          // TODO: use loading state
-          confirmText={sending ? '...' : undefined}
+          loading={sending}
           rows={15}
         />
       </div>

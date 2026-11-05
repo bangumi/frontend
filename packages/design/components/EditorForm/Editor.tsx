@@ -95,7 +95,7 @@ export interface EditorProps {
   /** 是否显示字数统计 */
   showWordCount?: boolean;
   /** textarea 通过键盘按下提交触发事件 */
-  onConfirm?: (value: string) => void;
+  onConfirm?: (value: string) => void | Promise<unknown>;
   /**
    * @default empty string
    */
@@ -270,7 +270,7 @@ const Editor = forwardRef<HTMLTextAreaElement, EditorProps>(
           (((e.ctrlKey || e.metaKey) && e.key === 'Enter') ||
             (e.altKey && e.key.toLowerCase() === 's'))
         ) {
-          onConfirm?.(innerRef.current!.value);
+          void onConfirm?.(innerRef.current!.value);
           e.preventDefault();
           return;
         }
