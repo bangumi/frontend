@@ -83,7 +83,7 @@
     "jsdom": "^28.1.0",
     "lint-staged": "^16.4.0",
     "postcss": "^8.5.32",
-    "prettier": "^3.8.3",
+    "prettier": "^3.9.10",
     "proxy-agent": "^8.0.2",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

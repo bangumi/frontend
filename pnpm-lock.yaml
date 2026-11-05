@@ -99,7 +99,7 @@ importers:
         specifier: ^8.5.32
         version: 8.5.32
       prettier:
-        specifier: ^3.8.3
+        specifier: ^3.9.10
         version: 3.9.10
       proxy-agent:
         specifier: ^8.0.2
