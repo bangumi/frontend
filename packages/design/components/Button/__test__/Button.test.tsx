@@ -101,3 +101,20 @@ it('should disable the button if disabled is true', () => {
   );
   expect(getByText('hello world')).toBeDisabled();
 });
+
+it('should show a loading state and prevent clicks', () => {
+  const onClick = vi.fn();
+  const { getByRole, container } = render(
+    <Button type='primary' loading onClick={onClick}>
+      hello world
+    </Button>,
+  );
+  const button = getByRole('button', { name: 'hello world' });
+
+  expect(button).toBeDisabled();
+  expect(button).toHaveAttribute('aria-busy', 'true');
+  expect(container.querySelector('.bgm-button__loading')).toBeInTheDocument();
+
+  fireEvent.click(button);
+  expect(onClick).not.toHaveBeenCalled();
+});

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback, useRef, useState } from 'react';
 
 import Button from '@bangumi/design/components/Button/index.tsx';
 import Link from '@bangumi/design/components/Typography/Link.tsx';
@@ -50,8 +50,6 @@ export interface EditorFormProps extends EditorProps {
   style?: React.CSSProperties;
   /** 确认按钮的文本 */
   confirmText?: string;
-  /** 确认按钮后的回调 */
-  onConfirm?: (content: string) => void;
   /** 取消按钮的文本 */
   cancelText?: string;
   /** 取消按钮的回调 */
@@ -68,6 +66,11 @@ export interface EditorFormProps extends EditorProps {
    * @default false
    */
   disabled?: boolean;
+  /**
+   * 显示提交加载状态并禁用提交
+   * @default false
+   */
+  loading?: boolean;
 }
 
 const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
@@ -82,19 +85,54 @@ const EditorForm = forwardRef<HTMLTextAreaElement, EditorFormProps>(
       submitExtra,
       hideCancel = false,
       disabled = false,
+      loading = false,
       ...props
     },
     ref,
   ) => {
+    const submitLocked = useRef(false); // ref锁，第一次提交开始前上锁
+    const [submitting, setSubmitting] = useState(false);
+    const submitLoading = loading || submitting;
+    const submitDisabled = disabled || submitLoading;
+
+    const releaseSubmit = useCallback(() => {
+      submitLocked.current = false;
+      setSubmitting(false);
+    }, []);
+
+    const handleConfirm = useCallback(
+      (content: string) => {
+        if (!onConfirm || disabled || loading || submitLocked.current) {
+          return;
+        }
+
+        submitLocked.current = true;
+        setSubmitting(true);
+        try {
+          const result = onConfirm(content);
+          if (result) {
+            void result.then(releaseSubmit, releaseSubmit);
+          } else {
+            releaseSubmit();
+          }
+        } catch (error) {
+          releaseSubmit();
+          throw error;
+        }
+      },
+      [disabled, loading, onConfirm, releaseSubmit],
+    );
+
     return (
       <div className={cx('bgm-editor__form', editorForm, className)} style={style}>
-        <Editor ref={ref} onConfirm={onConfirm} disabled={disabled} {...props} />
+        <Editor ref={ref} onConfirm={handleConfirm} disabled={submitDisabled} {...props} />
         <div className='bgm-editor__submit'>
           <Button
             color='blue'
             className='bgm-editor__button bgm-editor__button--confirm'
-            disabled={disabled}
-            onClick={() => onConfirm?.(props.value ?? '')}
+            disabled={submitDisabled}
+            loading={submitLoading}
+            onClick={() => handleConfirm(props.value ?? '')}
           >
             {confirmText}
           </Button>
