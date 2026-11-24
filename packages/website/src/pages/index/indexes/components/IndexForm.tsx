@@ -127,7 +127,8 @@ const IndexForm: React.FC<{ index?: Index }> = ({ index }) => {
               placeholder='目录描述，支持 BBCode…'
               hideCancel
               rows={10}
-              confirmText={sending ? '...' : index ? '保存修改' : '创建目录'}
+              confirmText={index ? '保存修改' : '创建目录'}
+              loading={sending}
               onConfirm={async () => handleSubmit(onSubmit, showErrors)()}
               {...field}
             />
